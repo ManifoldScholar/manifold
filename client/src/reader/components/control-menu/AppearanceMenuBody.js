@@ -320,7 +320,7 @@ class AppearanceMenuBody extends Component {
     );
 
     return (
-      <li className="appearance-menu__section">
+      <div className="appearance-menu__section">
         <fieldset>
           <legend className="control-menu__legend">
             {this.props.t("reader.menus.appearance.font")}
@@ -394,15 +394,15 @@ class AppearanceMenuBody extends Component {
             </div>
           </div>
         </fieldset>
-      </li>
+      </div>
     );
   }
 
   renderColorSchemeControls() {
     return (
-      <li className="appearance-menu__section">
+      <div className="appearance-menu__section">
         {this.renderColorSchemeControl()}
-      </li>
+      </div>
     );
   }
 
@@ -414,7 +414,7 @@ class AppearanceMenuBody extends Component {
     );
 
     return (
-      <li className="appearance-menu__section">
+      <div className="appearance-menu__section">
         <div
           role="group"
           aria-label={this.props.t("reader.menus.appearance.adjust_margin")}
@@ -450,7 +450,7 @@ class AppearanceMenuBody extends Component {
             </span>
           </button>
         </div>
-      </li>
+      </div>
     );
   }
 
@@ -467,11 +467,11 @@ class AppearanceMenuBody extends Component {
             {this.props.t("reader.menus.appearance.adjust_appearance") + ":"}
           </h2>
         </div>
-        <ul className="appearance-menu__list">
+        <div className="appearance-menu__list">
           {this.renderFontControls()}
           {this.renderColorSchemeControls()}
           {this.renderMarginControls()}
-        </ul>
+        </div>
         <div>
           <button
             className="control-menu__button"
