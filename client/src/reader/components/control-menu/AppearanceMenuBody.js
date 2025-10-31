@@ -267,10 +267,10 @@ class AppearanceMenuBody extends Component {
       });
 
     return (
-      <div className="appearance-menu__radio-group" role="group">
-        <div className="control-menu__legend">
+      <fieldset className="appearance-menu__radio-group">
+        <legend className="control-menu__legend">
           {this.props.t("reader.menus.appearance.color_scheme")}
-        </div>
+        </legend>
         <div>
           {this.colorSchemeOptions.map(option => (
             <button
@@ -293,7 +293,7 @@ class AppearanceMenuBody extends Component {
           ))}
         </div>
         {this.renderHighContrastControl()}
-      </div>
+      </fieldset>
     );
   }
 
@@ -415,14 +415,13 @@ class AppearanceMenuBody extends Component {
 
     return (
       <div className="appearance-menu__section">
-        <div
-          role="group"
+        <fieldset
           aria-label={this.props.t("reader.menus.appearance.adjust_margin")}
           className="appearance-menu__control-margins"
         >
-          <div className="control-menu__legend">
+          <legend className="control-menu__legend">
             {this.props.t("reader.menus.appearance.margins")}
-          </div>
+          </legend>
           <button
             className={buttonClass}
             aria-disabled={!this.marginIncreaseable}
@@ -449,7 +448,7 @@ class AppearanceMenuBody extends Component {
               {this.props.t("reader.menus.appearance.decrease_margin")}
             </span>
           </button>
-        </div>
+        </fieldset>
       </div>
     );
   }
