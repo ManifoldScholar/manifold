@@ -10,10 +10,11 @@ import {
   fluidScale
 } from "theme/styles/mixins";
 
-export const Cover = styled(Link, transientOptions)`
+export const Cover = styled("div", transientOptions)`
   --hover-color: var(--color-interaction-light);
 
   ${panelRounded}
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
@@ -40,11 +41,31 @@ export const Cover = styled(Link, transientOptions)`
 
   ${respond(`padding-top: 160px;`, 80)}
 
-  &[href]:hover,
-  &[href]:focus-visible {
+  &:hover,
+  &:focus-within {
     color: var(--hover-color);
-    outline: 0;
     box-shadow: 0 20px 30px 2px ${rgba("neutralBlack", 0.13)};
+  }
+`;
+
+export const TitleLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 0;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    display: block;
+    inset: 0;
+    border-radius: var(--box-border-radius);
+  }
+
+  &:focus-visible::after {
+    outline: solid 2px var(--focus-color);
+    outline-offset: 2px;
   }
 `;
 

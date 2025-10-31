@@ -12,11 +12,13 @@ const getStylesForType = type => {
 
       &:hover,
       &:focus-visible {
-        outline: 0;
-
         .icon-thumbnail-primary {
           --Thumbnail-color: var(--hover-color);
         }
+      }
+
+      &:focus-visible {
+        outline-offset: 2px;
       }
       `;
     case "slide":
@@ -26,8 +28,7 @@ const getStylesForType = type => {
 
       &:focus-visible {
         border: 0;
-        outline: 0;
-
+        
         > * {
           color: var(--color-base-neutral95);
           background-color: var(--focus-color, var(--color-accent-primary));
