@@ -294,7 +294,7 @@ class VisibilityMenuBody extends PureComponent {
 
   renderFooterButtons(filters) {
     return (
-      <li className="visibility-menu__footer">
+      <div className="visibility-menu__footer">
         <button
           onClick={this.showAll}
           className="control-menu__button"
@@ -309,7 +309,7 @@ class VisibilityMenuBody extends PureComponent {
         >
           {this.props.t("actions.hide_all")}
         </button>
-      </li>
+      </div>
     );
   }
 
