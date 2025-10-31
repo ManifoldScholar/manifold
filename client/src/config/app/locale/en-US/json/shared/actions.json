@@ -94,6 +94,8 @@
     "view_resource": "$t(actions.view) $t(glossary.resource_one)",
     "visit": "Visit",
     "zoom": "Zoom",
+    "expand_passage": "Expand <0>passage</0>",
+    "collapse_passage": "Collapse <0>passage</0>",
     "dnd": {
       "move_up_position": "Move up one position",
       "move_down_position": "Move down one position",
