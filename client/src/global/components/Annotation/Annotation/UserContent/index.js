@@ -46,6 +46,11 @@ export default function AnnotationDetail({
   const editUID = useUID();
   const editDialog = useDialog({ modal: false, dismissalMode: "explicit" });
 
+  const handleEditKeyDown = e => {
+    // Prevent the event from bubbling up to the main dialog
+    e.stopPropagation();
+  };
+
   const startReply = () => {
     setAction("replying");
   };
@@ -199,6 +204,7 @@ export default function AnnotationDetail({
           <Styled.EditDialog
             ref={editDialog.dialogRef}
             id={editUID}
+            onKeyDown={handleEditKeyDown}
             {...(editDialog.open ? {} : { inert: "" })}
           >
             <Editor
