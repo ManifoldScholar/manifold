@@ -31,12 +31,11 @@ class ResourceCollectionCover extends Component {
       : collectionsBackground;
 
     return (
-      <Styled.Cover
-        to={this.props.urlCreator(resourceCollection)}
-        style={{ backgroundImage: "url(" + bgImage + ")" }}
-      >
+      <Styled.Cover style={{ backgroundImage: "url(" + bgImage + ")" }}>
         <Styled.TitleOverlay>
-          <Styled.Title as={this.titleTag}>{attr.title}</Styled.Title>
+          <Styled.TitleLink to={this.props.urlCreator(resourceCollection)}>
+            <Styled.Title as={this.titleTag}>{attr.title}</Styled.Title>
+          </Styled.TitleLink>
           <Styled.IconWrapper>
             <Utility.IconComposer size={48} icon="resourceCollection64" />
             <Styled.IconText>
