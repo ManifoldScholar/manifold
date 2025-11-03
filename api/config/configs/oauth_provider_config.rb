@@ -2,7 +2,6 @@
 
 class OauthProviderConfig < ApplicationConfig
   class << self
-
     private
 
     def coerced_endpoints
@@ -15,8 +14,6 @@ class OauthProviderConfig < ApplicationConfig
   end
 
   attr_config(
-    :app_id,
-    :app_secret,
     :client_id,
     :client_secret,
     :descriptive_name,
@@ -37,6 +34,12 @@ class OauthProviderConfig < ApplicationConfig
 
   coerce_types endpoints: coerced_endpoints
 
+  on_load :ensure_credentials
+
+  def ensure_credentials
+    rails_validation_error("configuration must include client_id and client_secret") if credentials.blank?
+  end
+
   def full_strategy_options
     {}.merge(strategy_options || {}).tap do |h|
       h[:strategy_class] = custom.strategy_class if custom?
@@ -52,6 +55,6 @@ class OauthProviderConfig < ApplicationConfig
   end
 
   def credentials
-    [client_secret]
+    [client_id, client_secret]
   end
 end

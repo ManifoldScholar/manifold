@@ -1,16 +1,14 @@
 # frozen_string_literal: true
+
 require "anyway_config"
-
-
+require "hashie"
 # Base class for application config classes
 class ApplicationConfig < Anyway::Config
-
-  class ConfigMash < Hashie::Mash
+  class ConfigMash < ::Hashie::Mash
     disable_warnings
   end
 
   class << self
-
     def config_mash
       lambda do |raw|
         ConfigMash.new(raw)
