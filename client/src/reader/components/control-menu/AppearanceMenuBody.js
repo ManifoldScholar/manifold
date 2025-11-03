@@ -261,9 +261,7 @@ class AppearanceMenuBody extends Component {
       classNames({
         "appearance-menu__button-base": true,
         "appearance-menu__color-scheme": true,
-        [`appearance-menu__color-scheme--${option.value}`]: true,
-        "appearance-menu__color-scheme--active":
-          this.colorScheme === option.value
+        [`appearance-menu__color-scheme--${option.value}`]: true
       });
 
     return (
@@ -275,10 +273,9 @@ class AppearanceMenuBody extends Component {
           {this.colorSchemeOptions.map(option => (
             <button
               type="button"
-              role="switch"
               key={option.value}
               className={labelClassName(option)}
-              aria-checked={option.value === this.colorScheme}
+              aria-pressed={option.value === this.colorScheme}
               data-value={option.value}
               onClick={this.handleColorSchemeControl}
             >
