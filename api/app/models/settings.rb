@@ -33,8 +33,6 @@ class Settings < ApplicationRecord
 
   delegate :default_restricted_access_heading, :default_restricted_access_body, :public_reading_groups_disabled?, to: :general
 
-  after_update :update_oauth_providers!
-
   # @!group Derived Settings
 
   # @return [Boolean]
@@ -97,12 +95,6 @@ class Settings < ApplicationRecord
   # @return [void]
   def update_from_environment!
     SettingsService::UpdateFromEnv.run! settings: self
-  end
-
-  # @see [SettingsService::UpdateOauthProviders]
-  # @return [void]
-  def update_oauth_providers!
-    SettingsService::UpdateOauthProviders.run!
   end
 
   # @param [User, nil] current_user

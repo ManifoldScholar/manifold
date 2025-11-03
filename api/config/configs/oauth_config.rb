@@ -3,42 +3,13 @@
 class OauthConfig < ApplicationConfig
   include Enumerable
   class << self
-
     private
-
-    def default_facebook
-      OauthProviderConfig.new(
-        strategy_options: {
-          scope: "email",
-          display: "popup",
-          info_fields: %w(name email first_name last_name).join(",")
-        }
-      )
-    end
-
-    def default_google
-      OauthProviderConfig.new(
-        strategy_name: :google_oauth2,
-        strategy_options: {
-          prompt: "select_account"
-        }
-      )
-    end
-
-    def default_twitter
-      OauthProviderConfig.new
-    end
 
     def coerced_providers
       lambda do |providers_hash|
-        hash = providers_hash.transform_values do |value|
+        providers_hash.transform_values do |value|
           OauthProviderConfig.new(**value)
         end
-
-        hash[:facebook] ||= default_facebook
-        hash[:google] ||= default_google
-        hash[:twitter] ||= default_twitter
-        hash
       end
     end
   end
