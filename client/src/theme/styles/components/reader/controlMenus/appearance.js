@@ -203,13 +203,13 @@ export default `
         background-color: var(--color-neutral-ui-extra-dark);
       }
 
-      &--active {
+      &[aria-pressed="true"] {
         > svg {
           opacity: 1;
         }
       }
 
-      &:not(.appearance-menu__color-scheme--active) {
+      &:not(.appearance-menu__color-scheme[aria-pressed="true"]) {
         > svg {
           opacity: 0;
         }
