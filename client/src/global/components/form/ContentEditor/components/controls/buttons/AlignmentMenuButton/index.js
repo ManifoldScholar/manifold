@@ -5,7 +5,6 @@ import Utility from "global/components/utility";
 import { MenuButton as ReakitMenuButton, useMenuState } from "reakit/Menu";
 import AlignmentSubmenu from "./Submenu";
 import { getCommonBlock } from "../../../../utils/slate/getters";
-import { alignableElements } from "../../../../utils/elements";
 import { getActiveAlignment } from "./helpers";
 import capitalize from "lodash/capitalize";
 import * as SharedStyled from "../styles";
@@ -24,8 +23,7 @@ const AlignmentMenuButton = ({ size, ...rest }, ref) => {
     gutter: 7
   });
 
-  const condition = node => [...alignableElements].includes(node?.type);
-
+  const condition = node => node.type !== "list-sibling";
   const [block, path] = selection
     ? getCommonBlock(editor, condition) ?? []
     : [];
