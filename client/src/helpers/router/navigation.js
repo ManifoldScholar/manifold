@@ -24,10 +24,6 @@ class Navigation {
           {
             label: "titles.projects_all",
             route: "frontendProjectsAll"
-          },
-          {
-            label: "titles.project_collections",
-            route: "frontendProjectCollections"
           }
         ]
       },
