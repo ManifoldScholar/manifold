@@ -53,6 +53,7 @@ export default function IngestContainer({ sectionIngest, refresh }) {
 
     if (!errors) {
       setLog("Ready to ingest...");
+      setAction(null);
     } else {
       setErrorNotification(errors);
     }
