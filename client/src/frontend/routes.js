@@ -22,8 +22,8 @@ const routes = {
           isLibrary: true,
           helper: (params = {}) => {
             const query = queryString.stringify(params);
-            if (!query) return "/projects/all";
-            return `/projects/all?${query}`;
+            if (!query) return "/projects";
+            return `/projects?${query}`;
           }
         },
         {
