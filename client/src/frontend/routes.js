@@ -27,9 +27,9 @@ const routes = {
           }
         },
         {
-          name: "frontendProjectCollections",
+          name: "frontendProjectCollectionsRedirect",
           exact: true,
-          component: "ProjectCollections",
+          component: "ProjectCollectionsRedirect",
           path: "/projects/project-collections",
           isLibrary: true,
           helper: (params = {}) => {
@@ -39,9 +39,9 @@ const routes = {
           }
         },
         {
-          name: "frontendProjectCollection",
+          name: "frontendProjectCollectionRedirect",
           exact: true,
-          component: "ProjectCollectionDetail",
+          component: "ProjectCollectionsRedirect",
           path: "/projects/project-collection/:id",
           isLibrary: true,
           helper: (pc, params = {}) => {
@@ -149,6 +149,40 @@ const routes = {
       ]
     },
     {
+      name: "frontendProjectCollections",
+      exact: false,
+      component: "ProjectCollectionsWrapper",
+      path: "/project-collections",
+      isLibrary: true,
+      helper: () => "/project-collections",
+      routes: [
+        {
+          name: "frontendProjectCollectionsAll",
+          exact: true,
+          component: "ProjectCollections",
+          path: "/project-collections",
+          isLibrary: true,
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return "/project-collections";
+            return `/project-collections?${query}`;
+          }
+        },
+        {
+          name: "frontendProjectCollection",
+          exact: true,
+          component: "ProjectCollectionDetail",
+          path: "/project-collections/:id",
+          isLibrary: true,
+          helper: (pc, params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return `/project-collections/${pc}`;
+            return `/project-collections/${pc}?${query}`;
+          }
+        }
+      ]
+    },
+    {
       name: "frontendJournals",
       exact: false,
       component: "JournalsWrapper",
@@ -164,8 +198,8 @@ const routes = {
           isLibrary: true,
           helper: (params = {}) => {
             const query = queryString.stringify(params);
-            if (!query) return "/journals/all";
-            return `/journals/all?${query}`;
+            if (!query) return "/journals";
+            return `/journals?${query}`;
           }
         },
         {
