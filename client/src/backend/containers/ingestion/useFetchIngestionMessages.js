@@ -7,6 +7,8 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
   const [loading, setLoading] = useState(false);
   const logIds = useRef([]);
 
+  const startTime = useRef(null);
+
   const endPolling = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -24,6 +26,16 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
     [setLog]
   );
 
+  const checkForEnd = useCallback(
+    message => {
+      if (message[1]?.includes("Complete")) {
+        endPolling();
+        setAction("end");
+      }
+    },
+    [endPolling, setAction]
+  );
+
   const processMessage = useCallback(
     message => {
       if (!message.id || !message.payload) return;
@@ -32,17 +44,11 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
       logIds.current = [...logIds.current, message.id];
 
       if (message.kind === "log") {
-        return appendToLog(message.payload);
-      }
-
-      if (message.kind === "message") {
-        if (message.payload === "END_ACTION") {
-          endPolling();
-          return setAction("end");
-        }
+        appendToLog(message.payload);
+        checkForEnd(message.payload);
       }
     },
-    [endPolling, appendToLog, setAction, logIds]
+    [appendToLog, logIds, checkForEnd]
   );
 
   const fetchMessages = useApiCallback(ingestionsAPI.messages, {
@@ -51,12 +57,16 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
 
   const startPolling = useCallback(() => {
     if (intervalRef.current) return;
+
     setLoading(true);
+
+    const now = new Date();
+    now.setSeconds(now.getSeconds() - 5);
+    startTime.current = now.toISOString();
+
     intervalRef.current = setInterval(async () => {
       try {
-        const time = new Date();
-        time.setSeconds(time.getSeconds() - 5);
-        const { data, errors } = await fetchMessages(id, time.toISOString());
+        const { data, errors } = await fetchMessages(id, startTime.current);
 
         if (!errors) {
           data.forEach(m => processMessage(m.attributes));
