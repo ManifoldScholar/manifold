@@ -20,11 +20,15 @@ export const getSelectionIndices = (selection, parentPath) => {
 };
 
 const gatherNodesForAlignmentCheck = block => {
-  if (!block) return false;
+  if (!block) return [];
+
+  if (block.type === "list-sibling") return [];
 
   const hasInlineChildren = Object.hasOwn(block.children?.[0], "text");
 
   if (hasInlineChildren && !block.slateOnly) return block;
+
+  // if (isRangeEnd && block.type === "li") return block;
 
   if (block.children?.length)
     return block.children.map(c => gatherNodesForAlignmentCheck(c));
@@ -35,8 +39,7 @@ export const getActiveAlignment = (selection, block, path) => {
 
   // If selection only spans a single block, just check that block's classes.
   const hasInlineChildren = Object.hasOwn(block.children?.[0], "text");
-  const isList = block.type === "ul" || block.type === "ol";
-  if (Range.isCollapsed(selection) || hasInlineChildren || isList)
+  if (Range.isCollapsed(selection) || hasInlineChildren)
     return block.htmlAttrs?.class
       ?.split(" ")
       .find(c => c.includes("manifold-rte"));
@@ -56,23 +59,30 @@ export const getActiveAlignment = (selection, block, path) => {
   const { class: classes } = firstChildAttrs ?? {};
   const target = classes?.split(" ").find(c => c.includes("manifold-rte"));
 
-  return nodesToCheck.every(c => c.htmlAttrs?.class?.includes(target))
+  return [...nodesToCheck, ...(block.type === "li" ? [block] : [])].every(c =>
+    c.htmlAttrs?.class?.includes(target)
+  )
     ? target
     : null;
 };
 
 export const maybeApplyNestedBlockClassName = (editor, block, path, style) => {
-  if (!block) return false;
+  if (!block) return;
 
-  const hasInlineChildren = Object.hasOwn(block.children?.[0], "text");
+  const hasInlineChildren = block.children?.[0]
+    ? Object.hasOwn(block.children?.[0], "text")
+    : false;
 
-  if (hasInlineChildren && !block.slateOnly)
-    return setBlockClassName({
+  if ((hasInlineChildren && !block.slateOnly) || block.type === "li") {
+    setBlockClassName({
       editor,
       block,
       path,
       className: getClassNameWithAlign(block, style)
     });
+
+    if (block.type !== "li") return;
+  }
 
   if (block.children?.length)
     block.children.map((childBlock, i) =>

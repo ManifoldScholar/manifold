@@ -20,10 +20,9 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
     if (!block) return;
 
     const hasInlineChildren = Object.hasOwn(block.children?.[0], "text");
-    const isList = block.type === "ul" || block.type === "ol";
 
     if (
-      (Range.isCollapsed(selection) || hasInlineChildren || isList) &&
+      (Range.isCollapsed(selection) || hasInlineChildren) &&
       !block.slateOnly
     ) {
       setBlockClassName({
@@ -41,6 +40,15 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
         maybeApplyNestedBlockClassName(editor, childBlock, childPath, style);
       }
 
+      if (block.type === "li") {
+        setBlockClassName({
+          editor,
+          block,
+          path,
+          className: getClassNameWithAlign(block, style)
+        });
+      }
+
       menu.hide();
       ReactEditor.focus(editor);
     }
@@ -51,9 +59,7 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
       <ReakitMenuItem
         as={Styled.InnerButton}
         onClick={onClick("left")}
-        data-active={
-          activeAlignment === "manifold-rte-left" || !activeAlignment
-        }
+        data-active={activeAlignment === "manifold-rte-left"}
         {...menu}
       >
         <Utility.IconComposer icon="RTEAlignLeft32" size={24} />
