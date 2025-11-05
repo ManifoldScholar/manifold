@@ -15,7 +15,8 @@ function FiltersGroup(props) {
     onReset,
     showReset,
     setScreenReaderStatus,
-    className
+    className,
+    containerWrapPoint
   } = props;
 
   const searchInput = useRef(null);
@@ -49,6 +50,7 @@ function FiltersGroup(props) {
       onSubmit={onSubmit}
       $count={filters?.length || 0}
       $searchCount={hideSearch ? 0 : 1}
+      $containerWrapPoint={containerWrapPoint}
       className={className}
     >
       {!hideSearch && <Search inputRef={searchInput} />}
@@ -77,7 +79,8 @@ FiltersGroup.propTypes = {
   updateFilterState: PropTypes.func,
   hideSearch: PropTypes.bool,
   setScreenReaderStatus: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  containerWrapPoint: PropTypes.string
 };
 
 export default withScreenReaderStatus(FiltersGroup);

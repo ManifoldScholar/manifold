@@ -6,15 +6,31 @@ import { entityFilterForm } from "theme/styles/variables/crossComponent";
 const { gap, selectMinWidth } = entityFilterForm;
 
 export const Wrapper = styled("div", transientOptions)`
-  flex-basis: ${({ $count, $searchCount }) =>
-    entityFilterForm.flexBasis($count, $searchCount)};
-  flex-grow: 1;
-  align-self: center;
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: ${gap}px;
-  margin: 0;
+  ${({ $count, $searchCount, $containerWrapPoint }) => `
+    flex-basis:
+      ${entityFilterForm.flexBasis($count, $searchCount)};
+    flex-grow: 1;
+    align-self: center;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: ${gap}px;
+    margin: 0;
+
+    &:has(:where(select)) {
+      /* adjust for filter label height so filters align with other elements */
+      transform: translateY(-13px);
+    }
+
+    ${($count || $searchCount) &&
+      `
+      @container (max-inline-size: ${$containerWrapPoint ||
+        entityFilterForm.flexBasis($count, $searchCount)}) {
+        transform: translateY(0);
+      }
+    `}
+  `};
 `;
 
 export const SelectGroup = styled("div", transientOptions)`

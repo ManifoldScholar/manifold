@@ -50,7 +50,7 @@ export default function GroupsTable(props) {
       pagination={pagination}
       unit={t("glossary.group", { count: groups.length })}
       linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
-      filters={<ListFilters {...listFilterProps} />}
+      filters={<ListFilters {...listFilterProps} containerWrapPoint="603px" />}
       filterCount={listFilterProps.filters?.length}
     >
       <Column

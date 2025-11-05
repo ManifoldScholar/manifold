@@ -18,8 +18,6 @@ export const Wrapper = styled.div`
 
 export const Label = styled.label`
   ${utilityPrimary}
-  position: absolute;
-  inset-block-end: 100%;
   font-size: 12px;
   display: block;
   margin-block-end: 8px;
