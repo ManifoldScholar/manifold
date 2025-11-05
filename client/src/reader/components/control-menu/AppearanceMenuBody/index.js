@@ -87,8 +87,8 @@ function AppearanceMenuBody({
       resetOptionMessage(
         t("reader.menus.appearance.high_contrast"),
         value
-          ? t("reader.menus.appearance.high_contrast_on")
-          : t("reader.menus.appearance.high_contrast_off")
+          ? t("reader.menus.appearance.high_contrast_true")
+          : t("reader.menus.appearance.high_contrast_false")
       )
     );
   };

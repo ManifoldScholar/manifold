@@ -5,8 +5,7 @@ import Section from "./Section";
 
 const BUTTON_CLASS = classNames(
   "appearance-menu__margin-button",
-  "appearance-menu__button-base",
-  "appearance-menu__primary-hover-button"
+  "appearance-menu__button-base"
 );
 
 export default function MarginControls({
@@ -25,7 +24,9 @@ export default function MarginControls({
       <button
         className={BUTTON_CLASS}
         aria-disabled={!marginIncreaseable}
-        onClick={incrementMarginsHandler}
+        onClick={event =>
+          !marginIncreaseable ? {} : incrementMarginsHandler(event)
+        }
       >
         <Utility.IconComposer
           icon="MarginIncreaseUnique"
@@ -38,7 +39,9 @@ export default function MarginControls({
       <button
         className={BUTTON_CLASS}
         aria-disabled={!marginDecreasable}
-        onClick={decrementMarginsHandler}
+        onClick={event =>
+          !marginDecreasable ? {} : decrementMarginsHandler(event)
+        }
       >
         <Utility.IconComposer
           icon="MarginDecreaseUnique"
