@@ -44,7 +44,7 @@ module Search
     # @param [ActiveRecord::Relation<PgSearch::Document>] results
     # @return [void]
     def eager_load_text_node_hits_within!(results)
-      text_section_ids = results.records.map(&:text_section_id).compact_blank
+      text_section_ids = results.records.map(&:text_section_id).compact_blank.uniq
 
       text_node_hits = TextSectionNode.hit_search_for(keyword, text_section_ids:)
 

@@ -83,6 +83,8 @@ class TextSection < ApplicationRecord
   scope :in_texts, ->(texts) { where(text: texts) }
   scope :ordered, -> { order(position: :asc) }
 
+  scope :with_unindexed_nodes, -> { where(id: TextSectionNode.sans_search_indexed.select(:text_section_id).distinct) }
+
   multisearches! :body_text
 
   alias_attribute :title, :name
@@ -217,13 +219,18 @@ class TextSection < ApplicationRecord
   end
 
   # @return [void]
-  def index_contained_content!
-    ManifoldApi::Container["text_sections.index_contained_content"].(self).value!
+  def index_contained_content!(**options)
+    ManifoldApi::Container["text_sections.index_contained_content"].(self, **options).value!
   end
 
   # @return [void]
   def index_nodes!
     ManifoldApi::Container["text_sections.index_nodes"].(self).value!
+  end
+
+  # @return [void]
+  def maintain_current_nodes!
+    ManifoldApi::Container["text_sections.maintain_current_nodes"].(self).value!
   end
 
   private

@@ -18,6 +18,7 @@ module TextSections
         pn.text_section_id = %<text_section_id>s
         AND
         pn.body_hash = %<body_hash>s
+        %<search_indexed_filter>s
         GROUP BY pn.id
     )
     UPDATE text_section_nodes tsn SET
@@ -25,17 +26,23 @@ module TextSections
       contained_content = CASE WHEN char_length(d.contained_content) <= 4096 THEN d.contained_content ELSE '' END,
       search_indexed = TRUE
       FROM derived d
-      WHERE tsn.id = d.text_section_node_id
+      WHERE tsn.text_section_id = %<text_section_id>s AND tsn.id = d.text_section_node_id
     ;
     SQL
 
     # @param [TextSection] text_section
     # @return [Dry::Monads::Result]
-    def call(text_section)
+    def call(text_section, unindexed_only: true)
       params = {
         text_section_id: text_section.quoted_id,
         body_hash: text_section.body_hash,
       }
+
+      if unindexed_only
+        params[:search_indexed_filter] = "AND pn.search_indexed = FALSE"
+      else
+        params[:search_indexed_filter] = ""
+      end
 
       query = QUERY % params
 

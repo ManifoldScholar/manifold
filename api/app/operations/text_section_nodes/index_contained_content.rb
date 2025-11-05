@@ -19,7 +19,7 @@ module TextSectionNodes
         string_agg(cn.content, ' ' ORDER BY cn.node_indices) FILTER (WHERE cn.content IS NOT NULL AND cn.content ~ '[^[:space:]]+') AS contained_content
         FROM text_section_nodes pn
         INNER JOIN text_section_nodes cn ON cn.text_section_id = %<text_section_id>s AND cn.body_hash = %<body_hash>s AND pn.node_path @> cn.node_path
-        WHERE pn.id = %<text_section_node_id>s
+        WHERE pn.text_section_id = %<text_section_id>s AND pn.id = %<text_section_node_id>s
         GROUP BY pn.id
     )
     UPDATE text_section_nodes tsn SET
@@ -27,7 +27,7 @@ module TextSectionNodes
       contained_content = CASE WHEN char_length(d.contained_content) <= 4096 THEN d.contained_content ELSE '' END,
       search_indexed = TRUE
       FROM derived d
-      WHERE tsn.id = %<text_section_node_id>s
+      WHERE tsn.text_section_id = %<text_section_id>s AND tsn.id = %<text_section_node_id>s
     ;
     SQL
 

@@ -566,7 +566,8 @@ CREATE TABLE public.text_section_nodes (
     contained_content text,
     tsv_contained_content tsvector GENERATED ALWAYS AS (public.to_unaccented_weighted_tsv(contained_content, 'A'::"char")) STORED NOT NULL,
     search_indexed_at timestamp(6) without time zone,
-    search_indexed boolean DEFAULT false NOT NULL
+    search_indexed boolean DEFAULT false NOT NULL,
+    current boolean DEFAULT false NOT NULL
 );
 
 
@@ -4364,13 +4365,6 @@ CREATE UNIQUE INDEX index_analytics_visits_on_visit_token ON public.analytics_vi
 
 
 --
--- Name: index_analytics_visits_on_visitor_token_and_started_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_analytics_visits_on_visitor_token_and_started_at ON public.analytics_visits USING btree (visitor_token, started_at);
-
-
---
 -- Name: index_annotations_for_membership_counts; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6096,14 +6090,14 @@ CREATE INDEX index_text_section_nodes_child_ordering ON public.text_section_node
 -- Name: index_text_section_nodes_contained_content_indexing; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_text_section_nodes_contained_content_indexing ON public.text_section_nodes USING gist (text_section_id, body_hash, node_path public.gist_ltree_ops (siglen='24'), id);
+CREATE INDEX index_text_section_nodes_contained_content_indexing ON public.text_section_nodes USING gist (text_section_id, body_hash, node_path public.gist_ltree_ops (siglen='24'), id) WITH (fillfactor='90');
 
 
 --
 -- Name: index_text_section_nodes_currency; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_text_section_nodes_currency ON public.text_section_nodes USING btree (text_section_id, body_hash);
+CREATE INDEX index_text_section_nodes_currency ON public.text_section_nodes USING btree (text_section_id, body_hash, current);
 
 
 --
@@ -6131,7 +6125,7 @@ CREATE INDEX index_text_section_nodes_on_text_section_id ON public.text_section_
 -- Name: index_text_section_nodes_searching; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_text_section_nodes_searching ON public.text_section_nodes USING gin (id, body_hash, text_section_id, public.immutable_unaccent(COALESCE(contained_content, ''::text)) public.gin_trgm_ops, tsv_contained_content) WITH (fastupdate=off);
+CREATE INDEX index_text_section_nodes_searching ON public.text_section_nodes USING gin (id, text_section_id, public.immutable_unaccent(COALESCE(contained_content, ''::text)) public.gin_trgm_ops, tsv_contained_content) WITH (fastupdate='on') WHERE current;
 
 
 --
@@ -7842,6 +7836,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20251016204352'),
 ('20251017174417'),
 ('20251017211501'),
-('20251020225421');
+('20251020225421'),
+('20251103175506'),
+('20251103175949'),
+('20251103180007'),
+('20251105165521');
 
 

@@ -77,7 +77,7 @@ module TextSections
         (#{TAG_IS_INTERMEDIATE}) AS intermediate,
         CURRENT_TIMESTAMP AS extrapolated_at,
         CURRENT_TIMESTAMP AS search_indexed_at,
-        TRUE AS search_indexed
+        TRUE AS current
       FROM nodes
     )
     SQL
@@ -95,7 +95,7 @@ module TextSections
       intermediate,
       extrapolated_at,
       search_indexed_at,
-      search_indexed
+      current
     ) SELECT
       text_section_id, body_hash,
       node_root, node_path, path,
@@ -108,7 +108,7 @@ module TextSections
       intermediate,
       extrapolated_at,
       search_indexed_at,
-      search_indexed
+      current
       FROM finalized
     ON CONFLICT (node_path) DO UPDATE SET
       "text_section_id" = EXCLUDED."text_section_id",
@@ -128,6 +128,7 @@ module TextSections
       "children_count" = EXCLUDED."children_count",
       "intermediate" = EXCLUDED."intermediate",
       "extrapolated_at" = EXCLUDED."extrapolated_at",
+      "current" = TRUE,
       "updated_at" =
       CASE
       WHEN EXCLUDED."text_section_id" IS DISTINCT FROM text_section_nodes."text_section_id"
