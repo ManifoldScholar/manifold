@@ -9,6 +9,7 @@ module TextSections
     include Dry::Monads[:result, :do]
     include ManifoldApi::Deps[
       extrapolate_nodes: "text_sections.extrapolate_nodes",
+      maintain_current_nodes: "text_sections.maintain_current_nodes",
       prune_nodes: "text_sections.prune_nodes",
     ]
 
@@ -19,11 +20,15 @@ module TextSections
 
       results => { upserted:, }
 
+      maintained = yield maintain_current_nodes.(text_section)
+
+      maintained => { corrected:, orphaned: }
+
       pruned = yield prune_nodes.(text_section)
 
       text_section.asynchronously_index_current_node_content!
 
-      counts = { upserted:, pruned:, }
+      counts = { upserted:, corrected:, orphaned:, pruned:, }
 
       Success counts
     end

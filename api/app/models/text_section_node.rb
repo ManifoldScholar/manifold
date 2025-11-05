@@ -34,8 +34,10 @@ class TextSectionNode < ApplicationRecord
   scope :terminal, -> { where(intermediate: false) }
   scope :with_intermediate_tag, -> { where(tag: INTERMEDIATE_TAGS) }
 
-  scope :current, -> { joins(:text_section).where(TextSection.arel_table[:body_hash].eq(arel_table[:body_hash])) }
-  scope :orphaned, -> { joins(:text_section).where(TextSection.arel_table[:body_hash].not_eq(arel_table[:body_hash])) }
+  scope :current, -> { where(current: true) }
+  scope :orphaned, -> { where(current: false) }
+
+  scope :mismatched_current, -> { joins(:text_section).where(arel_mismatched_current) }
 
   scope :sans_search_indexed, -> { where(search_indexed: false) }
 
@@ -119,7 +121,9 @@ class TextSectionNode < ApplicationRecord
     # @param [<String>] text_section_ids
     # @return [<Hash>]
     def hit_search_for(keyword, text_section_ids: [])
+      # :nocov:
       return {} if text_section_ids.blank?
+      # :nocov:
 
       query = build_hit_query_for(keyword, text_section_ids:)
 
@@ -127,7 +131,7 @@ class TextSectionNode < ApplicationRecord
 
       hit_results = text_section_ids.index_with { [] }.merge(nil => Dry::Core::Constants::EMPTY_ARRAY)
 
-      query.each_with_object(hit_results) do |node, hits|
+      TextSectionNode.find_by_sql(query).each_with_object(hit_results) do |node, hits|
         hit_filter = hit_filters.fetch(node.text_section_id)
 
         next unless hit_filter.allow?(node)
@@ -136,89 +140,22 @@ class TextSectionNode < ApplicationRecord
       end
     end
 
-    private
-
-    def arel_content_highlighted_for(keyword, node_hits:)
-      q = unscoped.keyword_search(keyword)
-
-      tsearch = q.__send__(:tsearch)
-
-      Arel::Nodes::NamedFunction.new(
-        "ts_headline",
-        [
-          tsearch.__send__(:dictionary),
-          node_hits[:contained_content],
-          tsearch.__send__(:arel_wrap, tsearch.__send__(:tsquery)),
-          Arel::Nodes.build_quoted(tsearch.__send__(:ts_headline_options))
-        ]
-      )
-    end
-
-    # @param [String] keyword
-    # @param [<String>] text_section_ids
-    # @return [ActiveRecord::Relation<TextSectionNode>]
+    # @api private
+    # @return [String]
     def build_hit_query_for(keyword, text_section_ids:)
-      inner_query = build_hit_inner_query_for(keyword, text_section_ids:)
-
-      node_hits = Arel::Table.new("node_hits")
-
-      TextSectionNode.from(inner_query.to_sql, "node_hits")
-        .reselect(?*)
-        .select(arel_content_highlighted_for(keyword, node_hits:).as("content_highlighted"))
-        .where(node_hits[:hit_number].lteq(MAX_HIT_COUNT))
-        .order(node_hits[:text_section_id].asc)
-        .order(node_hits[:pg_search_rank].desc)
-        .order(node_hits[:hit_number].asc)
+      ManifoldApi::Container["text_section_nodes.build_hits_query"].(keyword:, text_section_ids:).value!
     end
 
-    # @param [String] keyword
-    # @param [<String>] text_section_ids
-    # @return [Arel::Nodes::Grouping]
-    def build_hit_inner_query_for(keyword, text_section_ids:)
-      base_query = all
-        .keyword_search(keyword)
-        .current
-        .where(text_section_id: text_section_ids)
-        .with_pg_search_rank
+    # @api private
+    # @return [Arel::Nodes::Inequality]
+    def arel_mismatched_current
+      text_sections = TextSection.arel_table
+      text_section_nodes = TextSectionNode.arel_table
 
-      hit_number = hit_number_for(base_query)
+      body_hash_matches = arel_grouping(text_sections[:body_hash].eq(text_section_nodes[:body_hash]))
+      current = text_section_nodes[:current]
 
-      hit_inner_query = base_query.select(hit_number.as("hit_number")).to_sql
-
-      in_text_sections = arel_table[:text_section_id].in(text_section_ids).to_sql
-
-      # We need to move this condition inside the pg_search subquery
-      # or else we fetch way too much
-      hit_inner_query = hit_inner_query.sub(
-        /(WHERE\s+)(.+?)(\) AS #{base_query.pg_search_rank_table_alias} ON)/i,
-        %[\\1 #{in_text_sections} AND (\\2)\\3]
-      )
-
-      arel_grouping(
-        arel_literal(
-          hit_inner_query
-        )
-      ).as("node_hits")
-    end
-
-    # @param [ActiveRecord::Relation<TextSectionNode>] query
-    # @return [Arel::Nodes::NamedFunction]
-    def hit_number_for(query)
-      window = search_window_for query
-
-      arel_named_fn("row_number").over(window)
-    end
-
-    # @param [ActiveRecord::Relation<TextSectionNode>] query
-    # @return [Arel::Nodes::Window]
-    def search_window_for(query)
-      rank_table = Arel::Table.new(query.pg_search_rank_table_alias)
-
-      Arel::Nodes::Window.new
-        .partition(arel_table[:text_section_id])
-        .order(rank_table[:rank].desc)
-        .order(arel_table[:node_indices].desc)
-        .order(arel_table[:id].asc)
+      body_hash_matches.not_eq(current)
     end
   end
 end

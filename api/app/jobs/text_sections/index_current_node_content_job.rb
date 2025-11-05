@@ -24,9 +24,9 @@ module TextSections
     end
 
     # @param [TextSectionNode] text_section_node
-    # @param [Project] _project
+    # @param [TextSection] _text_section
     # @return [void]
-    def each_iteration(text_section_node, _project)
+    def each_iteration(text_section_node, _text_section)
       text_section_node.index_contained_content!
     end
   end

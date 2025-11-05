@@ -567,6 +567,7 @@ GEM
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
     prism (1.4.0)
+    progressbar (1.13.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -950,6 +951,7 @@ DEPENDENCIES
   pg (~> 1.2)
   pg_search (~> 2.3.6)
   premailer-rails (~> 1.0)
+  progressbar (~> 1.13.0)
   pry-byebug
   pry-rails (~> 0.3.9)
   puma (~> 6.4)
