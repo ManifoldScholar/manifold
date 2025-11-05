@@ -206,7 +206,7 @@ class Project < ApplicationRecord
 
   scope :by_standalone_mode_enforced, ->(enforced) { to_boolean(enforced) ? standalone_enforced : standalone_unforced }
 
-  scope :with_creator_role, ->(user = nil) { where(creator: user) if user.present? }
+  scope :with_creator_role, ->(user = nil) { where(creator: user) if authorized_user?(user) }
   scope :with_read_ability, ->(user = nil) { build_read_ability_scope_for user }
   scope :with_full_read_ability, ->(user = nil) { build_full_read_ability_scope_for user }
 
@@ -426,7 +426,7 @@ class Project < ApplicationRecord
     # @param [User, nil] user
     # @return [ActiveRecord::Relation<Project>]
     def build_read_ability_scope_for(user = nil)
-      return published unless user.present?
+      return published unless authorized_user?(user)
 
       where(arel_build_read_case_statement_for(user, full: false))
     end
@@ -435,7 +435,7 @@ class Project < ApplicationRecord
     # @param [User, nil] user
     # @return [ActiveRecord::Relation<Project>]
     def build_full_read_ability_scope_for(user = nil)
-      return published.unrestricted unless user.present?
+      return published.unrestricted unless authorized_user?(user)
 
       where(arel_build_read_case_statement_for(user, full: true))
     end
@@ -443,7 +443,7 @@ class Project < ApplicationRecord
     # @param [User, nil] user
     # @return [ActiveRecord::Relation<Project>]
     def build_update_ability_scope_for(user = nil)
-      return none if user.blank?
+      return none unless authorized_user?(user)
 
       where arel_with_roles_for(user, **RoleName.for_project_update)
     end

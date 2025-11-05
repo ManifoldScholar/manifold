@@ -142,7 +142,7 @@ class Journal < ApplicationRecord
 
   class << self
     def build_read_ability_scope_for(user = nil)
-      return published unless user.present?
+      return published unless authorized_user?(user)
 
       where(arel_build_read_case_statement_for(user))
     end
@@ -150,13 +150,13 @@ class Journal < ApplicationRecord
     # @param [User, nil] user
     # @return [ActiveRecord::Relation<Project>]
     def build_update_ability_scope_for(user = nil)
-      return none if user.blank?
+      return none unless authorized_user?(user)
 
       where arel_with_roles_for(user, **RoleName.for_journal_update)
     end
 
     def build_update_or_issue_update_ability_for(user = nil)
-      return none if user.blank?
+      return none unless authorized_user?(user)
 
       include_journals = Journal
         .joins(journal_issues: :project)
@@ -169,13 +169,12 @@ class Journal < ApplicationRecord
       where(arel_with_roles_for(user, **RoleName.for_journal_update)).or(where(id: include_journals))
     end
 
-    private
-
     # This creates a case statement to be supplied to `where`.
     #
     # * If the journal is a draft, only show for users with draft access roles
     #   access to it
     #
+    # @api private
     # @param [User, nil] user
     def arel_build_read_case_statement_for(user)
       arel_case.tap do |stmt|
@@ -184,6 +183,7 @@ class Journal < ApplicationRecord
       end
     end
 
+    # @api private
     # @see .arel_with_draft_access_from_issues
     # @see .arel_with_roles_for
     # @param [User] user
@@ -194,6 +194,7 @@ class Journal < ApplicationRecord
       )
     end
 
+    # @api private
     # @see RoleName.for_access
     # @param [User] user
     # @param [<Symbol, String>] global role names

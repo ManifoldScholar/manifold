@@ -27,6 +27,11 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   class << self
+    # @param [AnonymousUser, User, nil] user
+    def authorized_user?(user = nil)
+      user.present? && user.try(:persisted?).present?
+    end
+
     # @see SoftDeletable
     # @return [ActiveRecord::Relation]
     def existing
