@@ -9,6 +9,8 @@ import { uiPanelMenu } from "../uiPanelMenu";
 
 export default `
   .appearance-menu {
+    --control-menu-button-bg-color: var(--box-bg-color);
+
     ${uiPanelMenu}
 
     &__list {
@@ -16,7 +18,7 @@ export default `
     }
 
     &__section {
-      padding: 24px 30px 28px 28px;
+      padding: 24px 30px 24px 28px;
 
       &:nth-child(even) {
         background-color: var(--box-medium-bg-color);
@@ -56,6 +58,7 @@ export default `
     }
 
     &__radio-label {
+      color: var(--reader-color);
       border-bottom: 2px solid transparent;
       transition: color var(--transition-duration-fast)
           var(--transition-timing-function),
@@ -63,8 +66,7 @@ export default `
           var(--transition-timing-function);
 
       .appearance-menu__font-style--active & {
-        color: var(--strong-color);
-        border-color: var(--strong-color);
+        border-color: currentColor;
       }
 
       .appearance-menu__font-style:hover &,
@@ -87,6 +89,22 @@ export default `
       }
     }
 
+    &__button-group {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+
+      & + & {
+        margin-left: 20px;
+      }
+    }
+
+    &__button-label {
+      font-size: 16px;
+      font-family: var(--font-family-heading);
+    }
+
     &__primary-hover-button {
       transition: color ${defaultTransitionProps},
         background-color ${defaultTransitionProps},
@@ -103,10 +121,8 @@ export default `
       grid-template:
         "font-style size-serif" auto
         "font-style size-sans" auto / 1fr auto;
-      grid-row-gap: 23px;
+      grid-row-gap: 20px;
       padding-top: 16px;
-
-      ${respond(`grid-row-gap: 29px;`, 50)}
     }
 
     &__font-style-control {
@@ -130,7 +146,7 @@ export default `
     &__font-style {
       position: relative;
       display: block;
-      padding-bottom: 3px;
+      padding-bottom: 5px;
       margin-top: 3px;
       margin-bottom: 3px;
 
@@ -140,16 +156,12 @@ export default `
 
       &--serif {
         font-family: var(--font-family-copy);
-        font-size: 25px;
-
-        ${respond(`font-size: 22px;`, 50)}
+        font-size: 21px;
       }
 
       &--sans-serif {
         font-family: var(--font-family-heading);
-        font-size: 24px;
-
-        ${respond(`font-size: 21px;`, 50)}
+        font-size: 19px;
       }
     }
 
@@ -180,17 +192,26 @@ export default `
       }
     }
 
-    &__color-scheme {
+    &__color-scheme,
+    &__high-contrast,
+    &__margin-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      aspect-ratio: 96 / 50;
       width: calc(50% - 10px);
-      height: 39px;
       border: 3px solid transparent;
-      transition: border-color ${defaultTransitionProps};
+      transition: background-color ${defaultTransitionProps}, border-color ${defaultTransitionProps};
 
       ${respond(`width: 96px;`, 50)}
 
+      &:is(:hover, :focus-within, [aria-pressed="true"]):not([aria-disabled="true"]) {
+        border-color: var(--hover-color);
+        outline: 0;
+      }
+    }
+
+    &__color-scheme {
       &--light {
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--color-base-neutral-white);
@@ -214,11 +235,29 @@ export default `
           opacity: 0;
         }
       }
+    }
 
-      &:hover,
-      &:focus-within {
-        border-color: var(--hover-color);
-        outline: 0;
+    &__high-contrast {
+      background-color: var(--background-color);
+    }
+
+    &__high-contrast-visual {
+      padding-inline: 0.5ch;
+      font-family: var(--font-family-copy);
+      font-size: 24px;
+      font-weight: medium;
+      transition: background-color ${defaultTransitionProps};
+
+      &--low {
+        color: var(--reader-color);
+        background-color: var(--color-annotation-primary-pale);
+        background-color: light-dark(var(--color-annotation-primary-pale), var(--color-annotation-primary-pale-low-contrast));
+      }
+
+      &--high {
+        color: var(--background-color);
+        background-color: var(--color-annotation-primary-dark-high-contrast);
+        background-color: light-dark(var(--color-annotation-primary-dark-high-contrast), var(--color-annotation-primary-light-high-contrast));
       }
     }
 
@@ -239,23 +278,8 @@ export default `
     }
 
     &__margin-button {
-      width: 96px;
-      height: 46px;
-      background-color: var(--background-color);
-
-      > svg path {
-        transition: fill ${defaultTransitionProps};
-      }
-
-      &:hover {
-        &:not([aria-disabled="true"]) {
-          outline: 0;
-
-          > svg path {
-            fill: var(--color-neutral-text-extra-dark);
-          }
-        }
-      }
+      background-color: var(--box-bg-color);
+      background-color: light-dark(var(--background-color), var(--box-bg-color));
 
       &[aria-disabled="true"] {
         cursor: default;

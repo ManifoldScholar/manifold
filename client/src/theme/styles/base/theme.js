@@ -62,6 +62,7 @@ export default `
     --placeholder-icon-color: var(--strong-color);
 
     color: var(--color);
+    color-scheme: light;
   }
 
   .backend,
@@ -111,6 +112,7 @@ export default `
     --placeholder-icon-color: var(--highlight-color);
 
     color: var(--color);
+    color-scheme: dark;
 
     input[type="text"],
     input[type="number"],

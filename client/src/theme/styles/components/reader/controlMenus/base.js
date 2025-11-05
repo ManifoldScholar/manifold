@@ -44,7 +44,7 @@ export default `
       min-height: 48px;
       padding: 12px 10px 10px;
       font-size: 13px;
-      background-color: var(--box-medium-bg-color);
+      background-color: var(--control-menu-button-bg-color, var(--box-medium-bg-color));
       transition: color ${defaultTransitionProps},
         background-color ${defaultTransitionProps};
 
