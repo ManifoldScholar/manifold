@@ -33,6 +33,12 @@ class Subject < ApplicationRecord
     joins(:project_subjects).where.not(project_subjects: { id: nil }).group(:id)
   }
 
+  scope :by_used_journal, ->(used = nil) {
+    return all unless used.present?
+
+    joins(:journal_subjects).where.not(journal_subjects: { id: nil }).group(:id)
+  }
+
   validates :name, presence: true, uniqueness: true
 
   alias_attribute :title, :name
