@@ -19,6 +19,20 @@ export const getSelectionIndices = (selection, parentPath) => {
   return sorted;
 };
 
+const gatherListForAlignmentCheck = block => {
+  if (block.type === "li") {
+    const listChildren = block.children?.filter(
+      child => child.type === "ul" || child.type === "ol"
+    );
+    return listChildren?.length
+      ? [block, ...listChildren.map(gatherListForAlignmentCheck)]
+      : block;
+  }
+  if (block.type === "ul" || block.type === "ol") {
+    return block.children?.map(gatherListForAlignmentCheck) ?? [];
+  }
+};
+
 const gatherNodesForAlignmentCheck = block => {
   if (!block) return [];
 
@@ -28,7 +42,7 @@ const gatherNodesForAlignmentCheck = block => {
 
   if (hasInlineChildren && !block.slateOnly) return block;
 
-  // if (isRangeEnd && block.type === "li") return block;
+  if (block.type === "li") return gatherListForAlignmentCheck(block);
 
   if (block.children?.length)
     return block.children.map(c => gatherNodesForAlignmentCheck(c));
@@ -66,22 +80,45 @@ export const getActiveAlignment = (selection, block, path) => {
     : null;
 };
 
-export const maybeApplyNestedBlockClassName = (editor, block, path, style) => {
-  if (!block) return;
-
-  const hasInlineChildren = block.children?.[0]
-    ? Object.hasOwn(block.children?.[0], "text")
-    : false;
-
-  if ((hasInlineChildren && !block.slateOnly) || block.type === "li") {
+const applyClassNameToNestedList = (editor, block, path, style) => {
+  if (block.type === "li") {
     setBlockClassName({
       editor,
       block,
       path,
       className: getClassNameWithAlign(block, style)
     });
+  }
 
-    if (block.type !== "li") return;
+  const hasInlineChildren = block.children?.[0]
+    ? Object.hasOwn(block.children?.[0], "text")
+    : false;
+
+  if (hasInlineChildren) return;
+
+  if (block.children?.length)
+    block.children.map((childBlock, i) =>
+      applyClassNameToNestedList(editor, childBlock, [...path, i], style)
+    );
+};
+
+export const maybeApplyNestedBlockClassName = (editor, block, path, style) => {
+  if (!block) return;
+
+  if (block.type === "li")
+    return applyClassNameToNestedList(editor, block, path, style);
+
+  const hasInlineChildren = block.children?.[0]
+    ? Object.hasOwn(block.children?.[0], "text")
+    : false;
+
+  if (hasInlineChildren && !block.slateOnly) {
+    return setBlockClassName({
+      editor,
+      block,
+      path,
+      className: getClassNameWithAlign(block, style)
+    });
   }
 
   if (block.children?.length)
