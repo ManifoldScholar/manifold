@@ -235,5 +235,6 @@ export default `
   /* Remove mark tag styles */
   mark {
     background-color: initial;
+    color: inherit;
   }
 `;
