@@ -25,6 +25,7 @@ function ProjectResourcesEntityCollection({
       title={t("pages.resources_all")}
       icon="resources64"
       filterProps={showFilters ? filterProps : null}
+      containerWrapPoint="1120px"
       BodyComponent={props => (
         <ResourceList.Cards
           project={project}
