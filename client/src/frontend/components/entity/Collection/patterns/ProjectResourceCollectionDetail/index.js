@@ -65,6 +65,7 @@ function ProjectResourceCollectionDetail({
         </>
       )}
       filterProps={filterProps}
+      containerWrapPoint="1200px"
       countProps={
         isEmpty(meta)
           ? {}

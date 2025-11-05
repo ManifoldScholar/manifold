@@ -52,6 +52,7 @@ export const Wrapper = styled("section", transientOptions)`
 `;
 
 export const Inner = styled.div`
+  container-type: inline-size;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;

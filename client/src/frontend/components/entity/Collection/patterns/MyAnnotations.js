@@ -27,6 +27,7 @@ function MyAnnotationsEntityCollection({
       title={t("pages.my_notes")}
       icon="NotesUnique"
       filterProps={hasAnnotations || isFiltered ? filterProps : null}
+      containerWrapPoint="926px"
       countProps={
         isEmpty(annotationsMeta)
           ? {}
