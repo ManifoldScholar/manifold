@@ -52,7 +52,7 @@ class JournalIssue < ApplicationRecord
   end
 
   scope :with_read_ability, ->(user = nil) do
-    where(project: Project.with_read_ability(user)).or(where(journal: Journal.with_read_ability(user)))
+    build_read_ability_scope_for(user)
   end
 
   scope :for_nav, ->(user = nil) do
@@ -152,7 +152,54 @@ class JournalIssue < ApplicationRecord
     # @see Journal.arel_with_draft_access_from_issues
     # @return [ActiveRecord::Relation<JournalIssue>] `SELECT DISTINCT journal_id FROM journal_issues`
     def accessible_journal_ids_for(user)
-      where(project: Project.with_update_ability(user)).distinct.select(:journal_id)
+      reorder(nil).where(project: Project.with_update_ability(user)).distinct.select(:journal_id)
+    end
+
+    def build_read_ability_scope_for(user)
+      left_outer_joins(:project).joins(:journal).where(arel_build_read_case_statement_for(user))
+    end
+
+    # This creates a case statement to be supplied to `where`.
+    #
+    # * If the journal issue's project OR journal is a draft, only show for users
+    #   with draft access roles access to it
+    #
+    # @param [User, nil] user
+    # @return [Arel::Nodes::Case]
+    def arel_build_read_case_statement_for(user)
+      arel_case.tap do |stmt|
+        stmt.when(arel_draft_access).then(arel_with_draft_roles_for(user))
+        stmt.else(arel_published_access_for(user))
+      end
+    end
+
+    def arel_draft_access
+      project_draft = arel_grouping(Project.arel_table[:draft].then { _1.not_eq(nil).and(_1.eq(true)) })
+      journal_draft = arel_grouping(Journal.arel_table[:draft].then { _1.not_eq(nil).and(_1.eq(true)) })
+
+      project_draft.or(journal_draft)
+    end
+
+    def arel_published_access_for(user)
+      project_ids = Project.with_read_ability(user).select(:id)
+      journal_ids = Journal.with_read_ability(user).select(:id)
+
+      project_access = arel_attr_in_query(Project.arel_table[:id], project_ids)
+      journal_access = arel_attr_in_query(arel_table[:journal_id], journal_ids)
+
+      project_access.or(journal_access)
+    end
+
+    # @see .arel_with_draft_access_from_issues
+    # @see .arel_with_roles_for
+    # @param [User] user
+    # @return [Arel::Nodes::Or]
+    def arel_with_draft_roles_for(user)
+      # :nocov:
+      return arel_quote(false) unless authorized_user?(user)
+      # :nocov:
+
+      Journal.arel_with_draft_roles_for(user)
     end
   end
 end
