@@ -1,7 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useId } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
-import { useUID } from "react-uid";
 import { useTranslation } from "react-i18next";
 import { Unwrapped } from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
@@ -23,8 +22,8 @@ export default function FlagAnnotationModal({
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const uid = useUID();
-  const errorId = `${uid}-error`;
+  const messageId = useId();
+  const errorId = `${messageId}-error`;
 
   const flagAnnotation = useApiCallback(annotationsAPI.flag);
   const flagComment = useApiCallback(commentsAPI.flag, {
@@ -74,7 +73,7 @@ export default function FlagAnnotationModal({
             rows={5}
             value={message}
             onChange={e => setMessage(e.target.value)}
-            id={uid}
+            id={messageId}
             placeholder={t("reader.report_annotation.placeholder")}
             aria-describedby={errorId}
             name="message"
