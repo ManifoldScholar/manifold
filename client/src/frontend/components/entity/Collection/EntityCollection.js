@@ -32,7 +32,8 @@ function EntityCollection({
   nested,
   boxed,
   className,
-  filterProps
+  filterProps,
+  containerWrapPoint
 }) {
   return (
     <Styled.Wrapper
@@ -60,7 +61,12 @@ function EntityCollection({
           headerLink={headerLink}
           collectingProps={collectingProps}
         />
-        {filterProps && <ListFilters {...filterProps} />}
+        {filterProps && (
+          <ListFilters
+            {...filterProps}
+            containerWrapPoint={containerWrapPoint}
+          />
+        )}
         {UtilityComponent && <UtilityComponent />}
         {!isEmpty(countProps) && (
           <Styled.CountWrapper $hasHeader={!!title}>
@@ -94,6 +100,7 @@ EntityCollection.propTypes = {
   nested: PropTypes.bool,
   boxed: PropTypes.bool,
   className: PropTypes.string,
+  containerWrapPoint: PropTypes.bool,
   ...headerProps
 };
 
