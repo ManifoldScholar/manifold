@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     mount GoodJob::Engine => '/api/good_job'
   end
 
+  get "up" => "health#show", as: :health_check
+
   get "auth/:provider/callback", to: "oauth#authorize"
 
   namespace :api do
