@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SamlConfig < Anyway::Config
+class SamlConfig < ApplicationConfig
   PROVIDER_NAME_FORMAT = /\A[a-z](?:[a-z]_?)?[a-z]\z/
 
   attr_config provider_names: [], disable_password_auth: false
@@ -32,9 +32,7 @@ class SamlConfig < Anyway::Config
 
   # @return [void]
   def validate_provider_names!
-    problematic_names = provider_names.reject do |provider_name|
-      provider_name.match?(PROVIDER_NAME_FORMAT)
-    end
+    problematic_names = provider_names.grep_v(PROVIDER_NAME_FORMAT)
 
     raise_validation_error("Invalid SAML provider names: #{problematic_names.join(', ')}") if problematic_names.any?
   end
