@@ -31,7 +31,7 @@ class FormUploadImagePreview extends PureComponent {
     const Image = this.props.isBuilder ? Styled.ImageBuilder : Styled.Image;
     return (
       <Preview data-id="preview">
-        <Message>
+        <Message className={this.props.isBuilder ? undefined : "bg-neutral95"}>
           <Styled.SecondaryText>
             <Trans
               i18nKey="forms.upload.image_preview"

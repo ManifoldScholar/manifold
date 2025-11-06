@@ -3,11 +3,14 @@ import { defaultFocusStyle, setHoverStyle } from "theme/styles/mixins";
 import BaseInput from "../../BaseInput";
 
 const BaseDropzone = styled.div`
+  --Dropzone-aspect-ratio: 350 / 220;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  min-height: 200px;
+  inline-size: 100%;
+  aspect-ratio: var(--Dropzone-aspect-ratio);
+  overflow: hidden;
 
   a,
   .fake-link {
@@ -41,6 +44,8 @@ export const Dropzone = styled(BaseDropzone)`
 `;
 
 export const AvatarBuilderDropzone = styled(BaseDropzone)`
+  --Dropzone-aspect-ratio: 275 / 200;
+
   position: relative;
   width: 100%;
 `;
