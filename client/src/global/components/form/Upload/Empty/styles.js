@@ -43,7 +43,7 @@ export const PrimaryText = styled.p`
   text-align: center;
 
   .reader & {
-    color: var(--color);
+    color: var(--reader-color);
   }
 `;
 
