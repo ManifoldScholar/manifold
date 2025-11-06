@@ -13,10 +13,13 @@ class AddSearchIndexedToTextSectionNodes < ActiveRecord::Migration[7.0]
     reversible do |dir|
       dir.up do
         if !Rails.env.test? && defined?(::TextSectionNodes::BackportSearchIndexJob)
-          begin
-            ::TextSectionNodes::BackportSearchIndexJob.set(wait: 10.minutes).perform_later
-          rescue StandardError
-            # Intentionally left blank
+          # If this is our first migration, good_jobs won't exist yet, but the db is empty anyway
+          if connection.table_exists?("good_jobs")
+            begin
+              ::TextSectionNodes::BackportSearchIndexJob.set(wait: 10.minutes).perform_later
+            rescue StandardError
+              # Intentionally left blank
+            end
           end
         end
       end
