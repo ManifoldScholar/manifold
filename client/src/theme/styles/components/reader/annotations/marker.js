@@ -38,6 +38,18 @@ export default `
   .annotation-underline {
     ${linkUnstyled}
 
+    @media (forced-colors: active) {
+      forced-color-adjust: none;
+    }
+
+    @media (forced-colors: active) and (prefers-color-scheme: dark) {
+      --reader-color: var(--color-neutral-text-extra-light);
+    }
+
+    @media (forced-colors: active) and (prefers-color-scheme: light) {
+      --reader-color: var(--color-neutral-text-extra-dark);
+    }
+
     .text-section & {
       color: var(--reader-color);
     }
@@ -47,7 +59,9 @@ export default `
     }
 
     &:hover {
-      color: inherit;
+      @media not (forced-colors: active) {
+        color: inherit;
+      }
     }
 
     &.primary {
@@ -100,6 +114,10 @@ export default `
   }
 
   .annotation-highlight {
+    @media (forced-colors: active) {
+      forced-color-adjust: none;
+    }
+
     &:not(.inert) {
       cursor: pointer;
     }
