@@ -31,7 +31,7 @@ export default function HeroCalloutList({
       {buttons.length > 0 && (
         <Styled.List $inline={inline} as={buttons.length > 1 ? "ul" : "div"}>
           {buttons.map(callout => (
-            <ButtonTag>
+            <ButtonTag key={callout.id}>
               <Callout
                 showErrors={showErrors}
                 key={callout.id}
@@ -47,7 +47,7 @@ export default function HeroCalloutList({
       {links.length > 0 && (
         <Styled.List $inline={inline} as={links.length > 1 ? "ul" : "div"}>
           {links.map(callout => (
-            <LinkTag>
+            <LinkTag key={callout.id}>
               <Callout
                 showErrors={showErrors}
                 key={callout.id}
