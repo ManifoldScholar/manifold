@@ -58,6 +58,7 @@ export default `
     font-size: 13px;
     border-color: var(--select-border-color);
     width: 100%;
+    margin-block-end: 13px;
 
     ${respond(`width: auto;`, 40)}
     ${respond(`width: 100%;`, 65)}

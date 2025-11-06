@@ -79,6 +79,7 @@ export const EditDialog = styled.dialog`
   padding: 0;
   margin: 0;
   border: 0;
+  background-color: transparent;
 
   &[open] {
     position: relative;
