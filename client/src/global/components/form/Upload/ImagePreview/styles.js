@@ -4,12 +4,11 @@ import {
   buttonUnstyled,
   defaultFocusStyle
 } from "theme/styles/mixins";
-import { Prompt } from "../Base/styles";
 
 export const Preview = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 100%;
   align-items: center;
   width: 100%;
   padding: 10px;
@@ -33,15 +32,10 @@ export const Message = styled.div`
   padding: 5px 20px 15px;
   margin-bottom: 20px;
   text-align: center;
-  background: var(--color-base-neutral95);
   opacity: 0.9;
 
   .reader & {
-    color: var(--color-base-neutral10);
-
-    ${Prompt} {
-      color: var(--colo-base-neutral10);
-    }
+    color: var(--reader-color);
   }
 `;
 
@@ -77,15 +71,13 @@ export const Button = styled.button`
 export const Image = styled.img`
   grid-column: 1 / -1;
   grid-row: 1 / -1;
-  justify-self: center;
-  max-width: 100%;
-  max-height: 200px;
-  background: var(--color-base-neutral20);
+  inline-size: 100%;
+  aspect-ratio: var(--Dropzone-aspect-ratio);
+  object-fit: contain;
 `;
 
 export const ImageBuilder = styled.img`
   width: 120px;
-  height: 120px;
-  background: var(--color-base-neutral20);
+  aspect-ratio: 1 / 1;
   object-fit: cover;
 `;
