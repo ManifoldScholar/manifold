@@ -1,5 +1,4 @@
 import { useFromStore } from "hooks";
-import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
 export default function ThumbnailMobile({
@@ -64,10 +63,17 @@ export default function ThumbnailMobile({
           )}
         </Styled.ImageWrapper>
         <Styled.Title>{title}</Styled.Title>
-        {/* Remove from tab order since clicking the resource marker also opens the detail modal */}
-        <Styled.ViewButton tabIndex={-1} aria-hidden onClick={handleClick}>
-          <IconComposer size={20} icon="eyeOpen32" />
-        </Styled.ViewButton>
+        <Styled.ViewButton
+          label="View"
+          size="sm"
+          shape="lozenge"
+          background="neutral"
+          preIcon="eyeOpen32"
+          lowercase
+          tabIndex={-1}
+          aria-hidden
+          onClick={handleClick}
+        />
       </Styled.Content>
     </Styled.Wrapper>
   ) : null;
