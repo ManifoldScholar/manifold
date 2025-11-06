@@ -13,10 +13,9 @@ import CommentContainer from "global/containers/comment";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import Authorize from "hoc/Authorize";
-import { useCurrentUser } from "hooks";
+import { useCurrentUser, useDialog } from "hooks";
 import * as Styled from "./styles";
 import { useUID } from "react-uid";
-import useDialog from "@castiron/hooks/useDialog";
 
 const { request } = entityStoreActions;
 
