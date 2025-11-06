@@ -7,6 +7,10 @@ export const Content = styled.div`
   line-height: 1.4;
   color: var(--strong-color);
 
+  p {
+    text-indent: 0;
+  }
+
   p + p {
     margin-top: 1em;
   }
