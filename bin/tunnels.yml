@@ -4,13 +4,13 @@ region: us
 tunnels:
   manifold_client:
     proto: http
-    addr: 3010
+    addr: 13100
     hostname: manifold-dev.ngrok.io
   manifold_api:
     proto: http
-    addr: 3020
+    addr: 13110
     hostname: manifold-api.ngrok.io
   manifold_cable:
     proto: http
-    addr: 3021
+    addr: 13120
     hostname: manifold-cable.ngrok.io
