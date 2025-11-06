@@ -15,9 +15,20 @@ export default `
       font-size: ${fluidScale("18px", "16px")};
       font-family: var(--font-family-sans);
       line-height: 1.3;
-      color: var(--strong-color);
       word-wrap: break-word;
       transition: background-color ${defaultTransitionProps};
+
+      @media (forced-colors: active) and (prefers-color-scheme: dark) {
+        --strong-color: var(--color-neutral-text-extra-light);
+      }
+
+      @media (forced-colors: active) and (prefers-color-scheme: light) {
+        --strong-color: var(--color-neutral-text-extra-dark);
+      }
+      
+      @media not (forced-colors: active) {
+        color: var(--strong-color);
+      }
 
       & * + p,
       & * + div[data-mathml="true"] {

@@ -248,6 +248,10 @@ export default `
       font-weight: medium;
       transition: background-color ${defaultTransitionProps};
 
+      @media (forced-colors: active) {
+        forced-color-adjust: none;
+      }
+
       &--low {
         color: var(--reader-color);
         background-color: var(--color-annotation-primary-pale);
