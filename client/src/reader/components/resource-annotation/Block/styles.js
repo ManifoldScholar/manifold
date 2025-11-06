@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { unselectable } from "../Marker/Sidebar/styles";
+import { thumbnailBreakpoints } from "../Marker/styles";
 
 export const Block = styled.aside`
   // looks a bit magical, but basically, a value between 0 and ~60px
@@ -25,4 +26,19 @@ export const Block = styled.aside`
     light-dark(var(--color-base-neutral40), var(--color-base-neutral75));
   border-radius: 20px;
   ${unselectable}
+
+  /* prevent overlap with inline annotation thumbs at certain breakpoint/margin setting combos */
+  @media (min-width: ${thumbnailBreakpoints[0]}) and (max-width: 1730px) {
+    .container-width-0 & {
+      inline-size: 100cqi;
+      margin-inline: 0;
+    }
+  }
+
+  @media (min-width: ${thumbnailBreakpoints[1]}) and (max-width: 1560px) {
+    .container-width-1 & {
+      inline-size: 100cqi;
+      margin-inline: 0;
+    }
+  }
 `;
