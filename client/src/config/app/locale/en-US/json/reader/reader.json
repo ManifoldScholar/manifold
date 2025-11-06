@@ -9,7 +9,7 @@
       "return_to_reader": "Return to Reader",
       "manage_highlight": "Begin highlight; {{chunk}}; end highlight.",
       "view_annotations": "Begin annotation; {{chunk}}; end annotation.",
-      "open_resource_modal": "Open resource detail modal for {{title}}"
+      "open_resource_modal": "Details for resource “{{title}}”"
     },
     "menus": {
       "appearance": {
