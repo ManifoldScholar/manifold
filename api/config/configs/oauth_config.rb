@@ -33,9 +33,4 @@ class OauthConfig < ApplicationConfig
     # returns list of all strategies on providers
     oauth.values.map { |p| p.strategy_name.to_s if p.strategy_name.present? }.compact_blank
   end
-
-  def enabled
-    # returns enumerable list of enabled providers
-    oauth.values.select(&:enabled?)
-  end
 end

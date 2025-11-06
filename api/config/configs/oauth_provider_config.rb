@@ -50,10 +50,6 @@ class OauthProviderConfig < ApplicationConfig
     [strategy_name, *credentials, strategy_options].compact
   end
 
-  def enabled?
-    false
-  end
-
   def credentials
     [client_id, client_secret]
   end

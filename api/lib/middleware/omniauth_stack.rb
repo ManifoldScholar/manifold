@@ -43,7 +43,7 @@ class OmniauthStack
           config.full_host = ManifoldConfig.api_url
         end
 
-        OauthConfig.enabled.each do |enabled_provider|
+        OauthConfig.each do |enabled_provider|
           provider(*enabled_provider.provider_args)
         end
       end
