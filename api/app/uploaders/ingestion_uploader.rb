@@ -18,7 +18,7 @@ class IngestionUploader < TusUploader
   end
 
   Attacher.validate do
-    validations = Rails.configuration.manifold.attachments.validations
+    validations = ManifoldConfig.attachments.validations
 
     validate_extension_inclusion validations.ingestion.allowed_ext
   end

@@ -16,5 +16,5 @@ ActiveJob::TrafficControl.singleton_class.prepend(
   Patches::MakeTrafficControlSupportRedisNamespace
 )
 ActiveJob::TrafficControl.client =
-  ManifoldEnv.redis.build_connection_pool "traffic-control", size: 25
+  RedisConfig.build_connection_pool "traffic-control", size: 25
 ActiveJob::TrafficControl.cache_client = Rails.cache

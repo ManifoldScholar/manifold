@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require "anyway_config"
+
 Rails.application.configure do
+  Anyway::Loaders::YAML.permitted_classes << Symbol
+  Anyway::Loaders::YAML.permitted_classes << Regexp
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -34,7 +38,7 @@ Rails.application.configure do
     config.hosts << "manifold.lvh"
     config.hosts << "manifold-api.ngrok.io"
     config.hosts << "manifold-dev.ngrok.io"
-    config.hosts << ENV["DOMAIN"]
+    config.hosts << ManifoldConfig.domain
   end
 
   # Raises error for missing translations.
@@ -42,5 +46,5 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ENV["DISABLE_SPRING"].present? ? ActiveSupport::FileUpdateChecker : ActiveSupport::EventedFileUpdateChecker
+  config.file_watcher = ManifoldConfig.disable_spring.present? ? ActiveSupport::FileUpdateChecker : ActiveSupport::EventedFileUpdateChecker
 end

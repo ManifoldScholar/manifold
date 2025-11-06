@@ -1,4 +1,17 @@
 oauth:
+  facebook:
+    strategy_options:
+      scope: 'email'
+      display: 'popup'
+      info_fields:
+        - name
+        - email
+        - first_name
+        - last_name
+  google:
+    strategy_name: :google_oauth2
+    strategy_options:
+      prompt: 'select_account'
   custom_provider:
     client_id: AAABBBCCCDDDEEEFFF
     client_secret: AAABBBCCCDDDEEEFFF

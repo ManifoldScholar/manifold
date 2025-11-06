@@ -26,8 +26,8 @@ module Factory
 
       client_x509_cert_url = nil
 
-      if Rails.configuration.manifold.google.client_x509_cert_url && db_config["google_client_email"]
-        client_x509_cert_url = Rails.configuration.manifold.google.client_x509_cert_url +
+      if ManifoldConfig.google.client_x509_cert_url && db_config["google_client_email"]
+        client_x509_cert_url = ManifoldConfig.google.client_x509_cert_url +
                                (env_config.dig(:integrations, :google_client_email) || db_config["google_client_email"])
       end
       {
@@ -37,9 +37,9 @@ module Factory
         private_key: env_config.dig(:secrets, :google_private_key) || db_config["google_private_key"],
         client_email: env_config.dig(:integrations, :google_client_email) || db_config["google_client_email"],
         client_id: env_config.dig(:integrations, :google_client_id) || db_config["google_client_id"],
-        auth_uri: Rails.configuration.manifold.google.auth_uri,
-        token_uri: Rails.configuration.manifold.google.token_uri,
-        auth_provider_x509_cert_url: Rails.configuration.manifold.google.auth_provider_x509_cert_url,
+        auth_uri: ManifoldConfig.google.auth_uri,
+        token_uri: ManifoldConfig.google.token_uri,
+        auth_provider_x509_cert_url: ManifoldConfig.google.auth_provider_x509_cert_url,
         client_x509_cert_url: client_x509_cert_url
       }
     end

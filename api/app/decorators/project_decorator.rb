@@ -9,7 +9,7 @@ class ProjectDecorator < ApplicationDecorator
   decorates_association :annotations
 
   def client_url
-    Rails.configuration.manifold.url
+    ManifoldConfig.url
   end
 
   def url

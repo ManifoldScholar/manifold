@@ -1,17 +1,17 @@
 <%
-  user = ENV["RAILS_DB_USER"]
-  pass = ENV["RAILS_DB_PASS"]
-  host = ENV["RAILS_DB_HOST"] || 'localhost'
-  port = ENV["RAILS_DB_PORT"] || 5432
-  db   = ENV["RAILS_DB_NAME"] || 'manifold_development'
-  test_db   = ENV["RAILS_TEST_DB_NAME"] || 'manifold_test'
+  user = RailsConfig.db_user
+  pass = RailsConfig.db_pass
+  host = RailsConfig.db_host
+  port = RailsConfig.db_port
+  db   = RailsConfig.db_name
+  test_db   = RailsConfig.test_db_name
 %>
 
 common: &common
   adapter: postgresql
   host: <%= host %>
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 50 } %>
+  pool: <%= RailsConfig.max_threads %>
   port: <%= port %>
   user: <%= user %>
   database: <%= db %>
@@ -31,4 +31,4 @@ development:
 
 test:
   <<: *common
-  database: <%= test_db %><%= ENV["TEST_ENV_NUMBER"] %>
+  database: <%= test_db %><%= ManifoldConfig.test_env_number %>

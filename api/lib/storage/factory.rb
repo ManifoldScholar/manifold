@@ -15,12 +15,6 @@ require_relative "tus_gcs"
 module Storage
   class Factory
     class << self
-      DEFAULT_PATH = "public"
-      DEFAULT_TUS_PATH = "data"
-      PRIMARY_PREFIX = "system"
-      MIRROR_PREFIX = "mirror"
-      CACHE_PREFIX = "system/cache"
-      TUS_PREFIX = "tus"
 
       def primary_store
         @primary_store ||= ::Storage::Strategy.primary
@@ -55,51 +49,51 @@ module Storage
       end
 
       def mirror_storage_path
-        ENV["MANIFOLD_SETTINGS_STORAGE_MIRROR_PATH"] || DEFAULT_PATH
+        ManifoldSettingsStorageConfig.mirror_path
       end
 
       def primary_storage_path
-        ENV["MANIFOLD_SETTINGS_STORAGE_PRIMARY_PATH"] || DEFAULT_PATH
+        ManifoldSettingsStorageConfig.primary_path
       end
 
       def tus_storage_path
-        ENV["MANIFOLD_SETTINGS_STORAGE_TUS_PATH"] || DEFAULT_TUS_PATH
+        ManifoldSettingsStorageConfig.tus_path
       end
 
       def cache_storage_path
-        ENV["MANIFOLD_SETTINGS_STORAGE_CACHE_PATH"] || DEFAULT_PATH
+        ManifoldSettingsStorageConfig.cache_path
       end
 
       def primary_bucket
-        ENV["MANIFOLD_SETTINGS_STORAGE_PRIMARY_BUCKET"].presence || UploadConfig.bucket
+        ManifoldSettingsStorageConfig.primary_bucket.presence || UploadConfig.bucket
       end
 
       def mirror_bucket
-        ENV["MANIFOLD_SETTINGS_STORAGE_MIRROR_BUCKET"].presence || UploadConfig.mirror_bucket || UploadConfig.bucket
+        ManifoldSettingsStorageConfig.mirror_bucket.presence || UploadConfig.mirror_bucket || UploadConfig.bucket
       end
 
       def cache_bucket
-        ENV["MANIFOLD_SETTINGS_STORAGE_CACHE_BUCKET"] || primary_bucket
+        ManifoldSettingsStorageConfig.cache_bucket || primary_bucket
       end
 
       def tus_bucket
-        ENV["MANIFOLD_SETTINGS_STORAGE_TUS_BUCKET"] || primary_bucket
+        ManifoldSettingsStorageConfig.tus_bucket || primary_bucket
       end
 
       def primary_prefix
-        ENV["MANIFOLD_SETTINGS_STORAGE_PRIMARY_PREFIX"] || PRIMARY_PREFIX
+        ManifoldSettingsStorageConfig.primary_prefix
       end
 
       def mirror_prefix
-        ENV["MANIFOLD_SETTINGS_STORAGE_MIRROR_PREFIX"] || MIRROR_PREFIX
+        ManifoldSettingsStorageConfig.mirror_prefix
       end
 
       def cache_prefix
-        ENV["MANIFOLD_SETTINGS_STORAGE_CACHE_PREFIX"] || CACHE_PREFIX
+        ManifoldSettingsStorageConfig.cache_prefix
       end
 
       def tus_prefix
-        ENV["MANIFOLD_SETTINGS_STORAGE_TUS_PREFIX"] || TUS_PREFIX
+        ManifoldSettingsStorageConfig.tus_prefix
       end
 
       def mirror_store_enabled?
@@ -217,7 +211,7 @@ module Storage
 
       def asset_host
         if primary_store.file?
-          Rails.configuration.manifold.api_url&.sub(%r{/\z}, "") || ""
+          ManifoldConfig.api_url&.sub(%r{/\z}, "") || ""
         else
           UploadConfig.asset_host || S3Config.endpoint
         end

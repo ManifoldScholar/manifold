@@ -113,6 +113,6 @@ module ManifoldApi
 
     config.active_record.schema_format = :sql
 
-    config.cache_store = :redis_cache_store, ManifoldEnv.redis.cache_options
+    config.cache_store = :redis_cache_store, RedisConfig.cache_options
   end
 end
