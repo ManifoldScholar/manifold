@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # @abstract
-class AbstractSamlProviderConfig < Anyway::Config
+class AbstractSamlProviderConfig < ApplicationConfig
   extend Dry::Core::ClassAttributes
 
   include ActiveModel::Validations
