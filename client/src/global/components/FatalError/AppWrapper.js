@@ -19,6 +19,8 @@ export default function FatalErrorAppWrapper(props) {
 
   const isAuthorizationError = error.status === 403 || error.status === 401;
 
+  if (isAuthorizationError && redirectPath === "/login") return null;
+
   const redirectOrNotify = () => {
     if (!currentUser?.id) {
       return history.push({
