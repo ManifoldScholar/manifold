@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import { respond, buttonUnstyled } from "theme/styles/mixins";
+import { respond } from "theme/styles/mixins";
 import { readerContainerWidths } from "theme/styles/utility/layout";
 import { thumbnailBreakpoints } from "../../styles";
 import { unselectable } from "../../Sidebar/styles";
 import IconComposer from "global/components/utility/IconComposer";
+import Button from "global/components/atomic/Button";
 
 const mediaQueries = thumbnailBreakpoints
   .map(
@@ -72,7 +73,6 @@ export const ImageWrapper = styled.span`
   display: block;
   width: 70px;
   height: 47px;
-  padding-block-start: 3px;
   border-radius: 4px;
   flex-shrink: 0;
   background-color: var(--box-medium-bg-color);
@@ -89,14 +89,13 @@ export const Image = styled.img`
 `;
 
 export const Title = styled.span`
-  font-size: 13px;
+  font-size: clamp(13px, 2.9vw, 16px);
   line-height: 17px;
   font-weight: 400;
-  font-variant: none;
   text-align: left;
   margin-block: 0;
   font-family: var(--font-family-sans);
-  ⁨⁨⁨display: -webkit-box;
+  display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   text-overflow: ellipsis;
@@ -105,33 +104,16 @@ export const Title = styled.span`
   align-self: stretch;
 `;
 
-export const ViewButton = styled.button`
-  ${buttonUnstyled};
-  height: 28px;
-  width: 28px;
-  padding: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  background-color: var(--color-base-neutral10);
-  color: var(--color-base-neutral75);
-  cursor: pointer;
+export const ViewButton = styled(Button)`
   flex-shrink: 0;
 
-  .scheme-dark & {
-    background-color: var(--color-base-neutral100);
-    color: var(--color-base-neutral50);
-
-    &:hover {
-      background-color: var(--color-accent-primary);
-      color: var(--color-base-neutral90);
-    }
-  }
-
-  &:hover {
-    background-color: var(--color-accent-primary);
-    color: var(--color-base-neutral90);
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
   }
 `;
 
