@@ -9,10 +9,18 @@ import {
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
+  --_Wrapper-bg-color: var(--color-header-background);
+  --_Wrapper-border-color: var(--color-base-neutral20);
+
+  .backend & {
+    --_Wrapper-bg-color: var(--color-base-neutral100);
+    --_Wrapper-border-color: var(--color-base-neutral90);
+  }
+
   padding: 18px 24px 18px 20px;
   border-radius: 8px;
-  background-color: var(--color-base-neutral100);
-  border: 1px solid var(--color-base-neutral90);
+  background-color: var(--_Wrapper-bg-color);
+  border: 1px solid var(--_Wrapper-border-color);
   box-shadow: 0px 12px 32px 3px rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 60px;
@@ -61,11 +69,17 @@ export const Link = styled(NavLink)`
 export const LinkIcon = styled(IconComposer)``;
 
 export const LinkText = styled.span`
+  --_LinkText-color: inherit;
+
+  .backend & {
+    --_LinkText-color: var(--color-base-neutral-white);
+  }
+
   font-family: var(--font-family-sans);
   position: relative;
   font-size: 16px;
   text-decoration: none;
-  color: var(--color-base-neutral20);
+  color: var(--_LinkText-color);
 `;
 
 export const Button = styled.button`
@@ -85,5 +99,33 @@ export const ButtonText = styled.div`
 
   & svg {
     margin-top: 4px;
+  }
+
+  body:not(.backend) & {
+    ${({ $active }) =>
+      $active && `color: var(--color-header-foreground-active);`}
+
+    span {
+      display: inline-block;
+      position: relative;
+
+      &::before {
+        ${({ $active }) =>
+          $active &&
+          ` {
+          position: absolute;
+          bottom: -5.25px;
+          left: 0;
+          width: 100%;
+          display: block;
+          height: 1.5px;
+          content: "";
+          background-color: currentColor;
+
+          .site-nav--backend & {
+            display: none;
+          }`}
+      }
+    }
   }
 `;
