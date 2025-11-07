@@ -43,6 +43,10 @@ class OmniauthStack
           config.full_host = Rails.configuration.manifold.api_url
         end
 
+        SamlConfig.providers.each do |saml_provider|
+          provider(*saml_provider.provider_args)
+        end
+
         ManifoldEnv.oauth.enabled.each do |enabled_provider|
           provider(*enabled_provider.provider_args)
         end
