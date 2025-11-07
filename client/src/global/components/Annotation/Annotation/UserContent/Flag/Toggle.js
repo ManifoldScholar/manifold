@@ -1,7 +1,8 @@
 import { useId } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useApiCallback, useDialog } from "hooks";
+import useDialog from "@castiron/hooks/useDialog";
+import { useApiCallback } from "hooks";
 import { annotationsAPI, commentsAPI } from "api";
 import Modal from "./Modal";
 import * as Styled from "../styles";
