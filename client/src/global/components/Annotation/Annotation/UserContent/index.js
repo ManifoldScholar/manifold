@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import Helper from "global/components/helper";
+import useDialog from "@castiron/hooks/useDialog";
 import Utility from "frontend/components/utility";
 import Editor from "../../Editor";
 import Meta from "./Meta";
@@ -13,7 +14,7 @@ import CommentContainer from "global/containers/comment";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import Authorize from "hoc/Authorize";
-import { useCurrentUser, useDialog } from "hooks";
+import { useCurrentUser } from "hooks";
 import * as Styled from "./styles";
 import { useUID } from "react-uid";
 
