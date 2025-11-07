@@ -52,6 +52,9 @@ export default function NavigationMobile({
         }
       }
     });
+    if (location.pathname === "/project-collections") {
+      active.push("frontendProjects");
+    }
     return active;
   };
 
