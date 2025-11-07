@@ -61,9 +61,13 @@ module V1
       limit = object.homepage_count.to_i.positive? ? object.homepage_count : HOMEPAGE_PROJECT_LIMIT_DEFAULT
       scope.limit(limit)
     end
+    typed_attribute :available_projects_count, Types::Integer.meta(read_only: true) do |object, params|
+      object.collection_projects.projects_with_read_ability(params[:current_user]).count
+    end
 
     when_full do
       typed_has_many :subjects, serializer: SubjectSerializer
+      typed_has_many :project_subjects, serializer: SubjectSerializer
     end
   end
 end

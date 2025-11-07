@@ -90,7 +90,7 @@ export const Button = styled("button", transientOptions)`
   ${({ $background }) => getColorStyles($background)}
 
   ${buttonUnstyled}
-  min-inline-size: var(--_Button-min-inline-size);
+  min-inline-size: var(--Button-min-inline-size);
   vertical-align: middle;
   display: inline-flex;
   gap: 8px;
