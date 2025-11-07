@@ -18,18 +18,18 @@ const routes = {
           name: "frontendProjectsAll",
           exact: true,
           component: "Projects",
-          path: "/projects/all",
+          path: "/projects",
           isLibrary: true,
           helper: (params = {}) => {
             const query = queryString.stringify(params);
-            if (!query) return "/projects/all";
-            return `/projects/all?${query}`;
+            if (!query) return "/projects";
+            return `/projects?${query}`;
           }
         },
         {
-          name: "frontendProjectCollections",
+          name: "frontendProjectCollectionsRedirect",
           exact: true,
-          component: "ProjectCollections",
+          component: "ProjectCollectionsRedirect",
           path: "/projects/project-collections",
           isLibrary: true,
           helper: (params = {}) => {
@@ -39,9 +39,9 @@ const routes = {
           }
         },
         {
-          name: "frontendProjectCollection",
+          name: "frontendProjectCollectionRedirect",
           exact: true,
-          component: "ProjectCollectionDetail",
+          component: "ProjectCollectionsRedirect",
           path: "/projects/project-collection/:id",
           isLibrary: true,
           helper: (pc, params = {}) => {
@@ -149,6 +149,40 @@ const routes = {
       ]
     },
     {
+      name: "frontendProjectCollections",
+      exact: false,
+      component: "ProjectCollectionsWrapper",
+      path: "/project-collections",
+      isLibrary: true,
+      helper: () => "/project-collections",
+      routes: [
+        {
+          name: "frontendProjectCollectionsAll",
+          exact: true,
+          component: "ProjectCollections",
+          path: "/project-collections",
+          isLibrary: true,
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return "/project-collections";
+            return `/project-collections?${query}`;
+          }
+        },
+        {
+          name: "frontendProjectCollection",
+          exact: true,
+          component: "ProjectCollectionDetail",
+          path: "/project-collections/:id",
+          isLibrary: true,
+          helper: (pc, params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return `/project-collections/${pc}`;
+            return `/project-collections/${pc}?${query}`;
+          }
+        }
+      ]
+    },
+    {
       name: "frontendJournals",
       exact: false,
       component: "JournalsWrapper",
@@ -159,13 +193,13 @@ const routes = {
         {
           name: "frontendJournalsList",
           exact: true,
-          component: "JournalsList",
-          path: "/journals/all",
+          component: "Journals",
+          path: "/journals",
           isLibrary: true,
           helper: (params = {}) => {
             const query = queryString.stringify(params);
-            if (!query) return "/journals/all";
-            return `/journals/all?${query}`;
+            if (!query) return "/journals";
+            return `/journals?${query}`;
           }
         },
         {

@@ -20,6 +20,7 @@ class JournalIssue < ApplicationRecord
   belongs_to :journal_volume, optional: true, counter_cache: true, inverse_of: :journal_issues
 
   has_one :project, required: true, inverse_of: :journal_issue, dependent: :destroy
+  has_many :project_subjects, through: :project
 
   validates :number, presence: true
 
@@ -62,6 +63,33 @@ class JournalIssue < ApplicationRecord
   scope :with_attached_project, -> do
     includes(:project).where(id: Project.select(:journal_issue_id))
   end
+
+  scope :with_order, ->(by = nil) do
+    case by
+    when "updated_at ASC"
+      reorder(updated_at: :asc)
+    when "updated_at DESC"
+      reorder(updated_at: :desc)
+    when "created_at ASC"
+      reorder(created_at: :asc)
+    when "created_at DESC"
+      reorder(created_at: :desc)
+    when "sort_title ASC"
+      reorder(sort_title: :asc)
+    when "sort_title DESC"
+      reorder(sort_title: :desc)
+    else
+      in_order
+    end
+  end
+
+  scope :by_subject, ->(subject = nil) {
+    next all unless subject.present?
+
+    joins(:project_subjects)
+    .merge(ProjectSubject.by_subject(subject))
+    .distinct
+  }
 
   delegate :avatar, to: :project
   delegate :avatar_color, to: :project
