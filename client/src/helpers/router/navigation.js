@@ -20,12 +20,13 @@ class Navigation {
       {
         label: "titles.projects",
         route: "frontendProjects",
+        dropdown: true,
         children: [
           {
             label: "titles.projects_all",
             route: "frontendProjectsAll"
           },
-          {
+          settings.attributes.calculated?.hasProjectCollections && {
             label: "titles.project_collections",
             route: "frontendProjectCollections"
           }

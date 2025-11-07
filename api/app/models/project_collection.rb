@@ -12,6 +12,7 @@ class ProjectCollection < ApplicationRecord
   include TrackedCreator
   include Taggable
   include WithProjectCollectionLayout
+  include HasKeywordSearch
 
   # Attachments
   manifold_has_attached_file :hero, :image
@@ -29,8 +30,10 @@ class ProjectCollection < ApplicationRecord
 
   # Relationships
   has_many :collection_projects, -> { ranked }, dependent: :destroy, inverse_of: :project_collection
+  has_many :unranked_collection_projects, class_name: "CollectionProject", dependent: :destroy, inverse_of: :project_collection
 
   has_many :projects, -> { ranked_by_collection }, through: :collection_projects
+  has_many :project_subjects, -> { distinct }, through: :unranked_collection_projects, source: "subjects"
   has_many :project_collection_subjects, dependent: :destroy
   has_many :subjects, through: :project_collection_subjects
 
@@ -61,6 +64,10 @@ class ProjectCollection < ApplicationRecord
   scope :by_visible_on_homepage, lambda { |_args = nil|
     by_visible.by_show_on_homepage.by_homepage_date_range(Time.zone.today)
   }
+
+  has_keyword_search!(
+    against: %i[title description short_description]
+  )
 
   # Callbacks
   before_save :reset_sort_order!

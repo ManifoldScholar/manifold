@@ -558,7 +558,7 @@ module Validation
   end
 
   def project_collection_filter_params
-    params.permit(filter: [:visible, :show_on_homepage, :projects, :order,
+    params.permit(filter: [:keyword, :visible, :show_on_homepage, :projects, :order,
                            :visible_on_homepage])[:filter]
   end
 
@@ -607,7 +607,7 @@ module Validation
   end
 
   def subject_filter_params
-    params.permit(filter: [:featured, :keyword, :typeahead, :used])[:filter] || {}
+    params.permit(filter: [:featured, :keyword, :typeahead, :used, :used_journal])[:filter] || {}
   end
 
   def collaborator_filter_params
@@ -629,13 +629,13 @@ module Validation
   def journal_issue_filter_params
     params.permit(
       filter: [:keyword, :order, :typeahead, :journal_id, :journal_volume_id,
-               :volume_is_nil, :with_update_ability]
+               :volume_is_nil, :with_update_ability, :subject]
     )[:filter]
   end
 
   def journal_filter_params
     params.permit(
-      filter: [:draft, :keyword, :order, :typeahead, :show_on_homepage, :with_update_ability, :with_update_or_issue_update_ability]
+      filter: [:draft, :keyword, :order, :typeahead, :show_on_homepage, :with_update_ability, :with_update_or_issue_update_ability, :subject]
     )[:filter]
   end
 

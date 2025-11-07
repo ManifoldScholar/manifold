@@ -16,7 +16,8 @@ import EventTracker, { EVENTS } from "global/components/EventTracker";
 export default function JournalWrapper({ route }) {
   const { id } = useParams();
   const { data: journal, response } = useFetch({
-    request: [journalsAPI.show, id]
+    request: [journalsAPI.show, id],
+    condition: id !== "all"
   });
   const { path } = useRouteMatch();
   const location = useLocation();
@@ -32,7 +33,7 @@ export default function JournalWrapper({ route }) {
     ]
   });
 
-  if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
+  if (id === "all") return <Redirect to={lh.link("frontendJournalsList")} />;
 
   if (!journal) return null;
 

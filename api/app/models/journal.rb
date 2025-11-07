@@ -87,6 +87,14 @@ class Journal < ApplicationRecord
   scope :with_update_ability, ->(user = nil) { build_update_ability_scope_for user }
   scope :with_update_or_issue_update_ability, ->(user = nil) { build_update_or_issue_update_ability_for user }
 
+  scope :by_subject, ->(subject = nil) {
+    next all unless subject.present?
+
+    joins(:journal_subjects)
+    .merge(JournalSubject.by_subject(subject))
+    .distinct
+  }
+
   multisearches! :description_plaintext
 
   has_keyword_search!(
