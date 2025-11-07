@@ -16,17 +16,22 @@ export default function MobileBreadcrumb({ links, journalIsActive }) {
     return lh.link(route, ...args);
   };
 
-  const match = linksToMatch => {
+  const match = (linksToMatch, exact = false) => {
     if (!linksToMatch) return null;
     return linksToMatch.find(link => {
-      if (link.matchType === "link" || link.externalUrl) {
+      if (link.matchType === "link" || link.externalUrl || exact) {
         return location.pathname === pathForLink(link);
       }
-      // Check if this route matches using matchPath
-      const route = lh.routeFromName(link.route);
-      if (route && matchPath(location.pathname, route) !== null) {
+
+      if (
+        location.pathname === "/project-collections" &&
+        link.route === "frontendProjects"
+      )
         return true;
-      }
+
+      // Check if this route is in the current matches by route name
+      const routeMatch = matchPath(location.pathname, link);
+      if (routeMatch) return true;
 
       // Fallback: check if pathname starts with the link path
       const linkPath = pathForLink(link);
@@ -52,7 +57,7 @@ export default function MobileBreadcrumb({ links, journalIsActive }) {
 
     if (first) {
       segments.push(first);
-      const second = match(first.children);
+      const second = match(first.children, true);
       if (second) {
         segments.push(second);
       }
