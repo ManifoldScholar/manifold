@@ -5,6 +5,7 @@ import EntityAvatar from "global/components/atomic/EntityAvatar";
 import EntityMetadata from "./EntityMetadata";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
+import ProjectCollectionAvatar from "../EntityAvatar/patterns/ProjectCollectionAvatar";
 
 export default function EntityThumbnail({
   entity,
@@ -16,20 +17,30 @@ export default function EntityThumbnail({
   parentView = false,
   isListItem = false
 }) {
+  let routeName = "frontendProjectDetail";
+
+  if (entity.type === "journals") {
+    routeName = "frontendJournalDetail";
+  } else if (entity.type === "projectCollections") {
+    routeName = "frontendProjectCollection";
+  }
+
   const urlParam =
     entity.type === "journalIssues"
       ? entity.attributes.projectSlug
       : entity.attributes.slug;
+
   const as = isListItem ? "li" : "div";
 
   return (
     <Styled.Wrapper as={as}>
-      <Styled.ItemLink
-        $stack={stack}
-        to={lh.link("frontendProjectDetail", urlParam)}
-      >
+      <Styled.ItemLink $stack={stack} to={lh.link(routeName, urlParam)}>
         <Styled.Cover $stack={stack}>
-          <EntityAvatar entity={entity} />
+          {entity.type === "projectCollections" ? (
+            <ProjectCollectionAvatar entity={entity} />
+          ) : (
+            <EntityAvatar entity={entity} />
+          )}
         </Styled.Cover>
         {!hideMeta && (
           <EntityMetadata.Wrapper
@@ -41,12 +52,14 @@ export default function EntityThumbnail({
           />
         )}
       </Styled.ItemLink>
-      <Collecting.Toggle
-        collectable={entity}
-        onUncollect={onUncollect}
-        inline={false}
-        outlined={false}
-      />
+      {entity.type !== "projectCollections" && (
+        <Collecting.Toggle
+          collectable={entity}
+          onUncollect={onUncollect}
+          inline={false}
+          outlined={false}
+        />
+      )}
     </Styled.Wrapper>
   );
 }
