@@ -14,7 +14,7 @@ export default function Panel({ children, className, id }) {
     <Styled.Panel
       className={className}
       {...panelProps}
-      inert={!visible}
+      inert={!visible ? "" : undefined}
       $visible={visible}
     >
       {children}
