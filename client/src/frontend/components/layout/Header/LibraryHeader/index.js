@@ -11,6 +11,8 @@ import Breadcrumbs, {
   BreadcrumbsContext
 } from "global/components/atomic/Breadcrumbs";
 import { useShowJournalsActive } from "hooks";
+import ProjectsToggle from "global/components/navigation/projects-dropdown/Toggle";
+import ProjectsDropdown from "global/components/navigation/projects-dropdown";
 
 export default function LibraryHeader({
   settings,
@@ -34,13 +36,31 @@ export default function LibraryHeader({
   });
   const links = () => {
     const routes = navigation.frontend(authentication, settings);
-    if (!pages) {
-      return routes;
+
+    let routesWithDropdown;
+
+    if (settings.attributes.calculated?.hasProjectCollections) {
+      const projectsLink = routes.find(l => l.route === "frontendProjects");
+      projectsLink.dropdownContent = (
+        <ProjectsDropdown links={projectsLink.children} />
+      );
+      projectsLink.toggle = ProjectsToggle;
+      routesWithDropdown = routes.filter(
+        l => l.route !== "frontendProjects" && l.route !== "frontendProjectsAll"
+      );
+      routesWithDropdown.splice(1, 0, projectsLink);
+    } else {
+      routesWithDropdown = routes.filter(l => l.route !== "frontendProjects");
     }
+
+    if (!pages) {
+      return routesWithDropdown;
+    }
+
     const pageLinks = pages
       .filter(page => page.attributes.showInHeader)
       .map(pageToLinkAttrs);
-    return [...routes, ...pageLinks];
+    return [...routesWithDropdown, ...pageLinks];
   };
 
   const { libraryDisabled, homeRedirectUrl } = settings.attributes.general;

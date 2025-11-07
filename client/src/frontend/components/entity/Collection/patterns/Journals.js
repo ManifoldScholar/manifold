@@ -8,8 +8,8 @@ import ThumbnailGrid from "global/components/entity/ThumbnailGrid";
 import EntityCollection from "../EntityCollection";
 import * as shapes from "../shapes";
 
-function ProjectsEntityCollection({
-  projects,
+function JournalsEntityCollection({
+  journals,
   meta,
   filterProps,
   paginationProps,
@@ -20,18 +20,18 @@ function ProjectsEntityCollection({
   const showFilters = !isEmpty(meta) && !isEmpty(filterProps);
   return (
     <EntityCollection
-      title={t("titles.projects")}
-      icon="projects64"
+      title={t("titles.journals")}
+      icon="journals64"
       filterProps={showFilters ? filterProps : null}
       BodyComponent={props => (
-        <ThumbnailGrid isList={projects.length > 1} {...props}>
+        <ThumbnailGrid isList={journals.length > 1} {...props}>
           {({ stack }) =>
-            projects.map(item => (
+            journals.map(item => (
               <EntityThumbnail
                 key={item.id}
                 entity={item}
                 stack={stack}
-                isListItem={projects.length > 1}
+                isListItem={journals.length > 1}
               />
             ))
           }
@@ -42,7 +42,7 @@ function ProjectsEntityCollection({
           ? {}
           : {
               pagination: get(meta, "pagination"),
-              unit: t("glossary.project", {
+              unit: t("glossary.journal", {
                 count: meta?.pagination?.totalCount || 0
               })
             }
@@ -60,13 +60,13 @@ function ProjectsEntityCollection({
   );
 }
 
-ProjectsEntityCollection.displayName = "Frontend.Entity.Collection.Projects";
+JournalsEntityCollection.displayName = "Frontend.Entity.Collection.Journals";
 
-ProjectsEntityCollection.propTypes = {
-  projects: PropTypes.arrayOf(PropTypes.object).isRequired,
+JournalsEntityCollection.propTypes = {
+  journals: PropTypes.arrayOf(PropTypes.object).isRequired,
   meta: PropTypes.object,
   filterProps: shapes.filters,
   paginationProps: shapes.pagination
 };
 
-export default ProjectsEntityCollection;
+export default JournalsEntityCollection;

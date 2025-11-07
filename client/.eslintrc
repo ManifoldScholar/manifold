@@ -38,7 +38,7 @@
     "prefer-promise-reject-errors": 0,
     "no-else-return": 0,
     "no-console": ["error", { "allow": ["warn", "error"] }],
-
+    "no-nested-ternary": ["warn"],
     "jsx-a11y/label-has-associated-control": 0,
     "jsx-a11y/control-has-associated-label": 0,
 

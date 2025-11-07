@@ -75,5 +75,29 @@ export default `
         stroke: var(--color-base-neutral50);
       }
     }
+
+    &__icon {
+      position: absolute;
+      inline-size: 32px;
+      block-size: auto;
+      top: calc((var(--Avatar-width) - 6px) * .5);
+      left: calc((var(--Avatar-width) - 6px) * .5);
+      fill: var(--color-base-neutral75);
+      transform: translate(-50%, -50%);
+      
+      ${respond(
+        `
+        top: 58px;
+        left: 58px;
+        inline-size: 60px;
+        transform: translate(-50%, -50%);
+      `,
+        75
+      )}
+
+      .project-hero--dark & {
+        fill: var(--color-base-neutral90);
+      }
+    }
   }
 `;
