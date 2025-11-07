@@ -11,8 +11,9 @@ export const Avatar = styled.img`
 
 export const Placeholder = styled(UniqueIcons.ProjectPlaceholderUnique)`
   width: var(--Avatar-width);
-  height: var(--Avatar-height);
+  margin-inline-end: -1px;
   max-height: 130px;
   transition: fill var(--transition-duration-default)
     var(--transition-timing-function);
+  overflow: visible;
 `;

@@ -15,7 +15,9 @@ export default function EntityMetadata(props) {
     prefix,
     recentlyUpdated,
     description,
-    stack
+    stack,
+    hideDate,
+    hideDescription
   } = props;
 
   const { t } = useTranslation();
@@ -42,12 +44,14 @@ export default function EntityMetadata(props) {
       {draft && bumpDraftDown && (
         <Styled.Tag $stack={stack}>{t("glossary.draft_one")}</Styled.Tag>
       )}
-      {date && (
+      {!hideDate && date && (
         <Styled.Date $recentlyUpdated={recentlyUpdated}>
           <FormattedDate prefix={prefix} format="MMMM, yyyy" date={date} />
         </Styled.Date>
       )}
-      {description && <Styled.Description>{description}</Styled.Description>}
+      {!hideDescription && description && (
+        <Styled.Description>{description}</Styled.Description>
+      )}
     </Styled.MetadataWrapper>
   );
 }

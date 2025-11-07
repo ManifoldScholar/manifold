@@ -33,7 +33,7 @@ ResourceList.propTypes = {
   resources: PropTypes.arrayOf(PropTypes.object),
   resourceCollection: PropTypes.object,
   project: PropTypes.object,
-  active: PropTypes.bool,
+  active: PropTypes.string,
   setActive: PropTypes.func,
   itemHeadingLevel: PropTypes.oneOf([2, 3]),
   renderAsLink: PropTypes.bool
