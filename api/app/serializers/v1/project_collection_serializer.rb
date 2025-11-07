@@ -55,6 +55,7 @@ module V1
 
     when_full do
       typed_has_many :subjects, serializer: SubjectSerializer
+      typed_has_many :project_subjects, serializer: SubjectSerializer
     end
   end
 end
