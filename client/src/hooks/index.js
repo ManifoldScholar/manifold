@@ -33,4 +33,3 @@ export { default as useRedirectToFirstMatch } from "./useRedirectToFirstMatch";
 
 export { default as useShare } from "./useShare";
 export { default as useCopyLinkToSelection } from "./useCopyLinkToSelection";
-export { default as useDialog } from "./useDialog";
