@@ -20,7 +20,7 @@ function NavigationStatic({
   commonActions,
   backendButton,
   mode,
-  exact = false,
+  exact: exactProp = false,
   style,
   darkTheme,
   journalIsActive,
@@ -99,11 +99,11 @@ function NavigationStatic({
 
   const renderManifoldLink = link => {
     const path = pathForLink(link);
-    const linkEnd = path === "/" ? true : exact;
+    const exact = path === "/" ? true : exactProp;
     return (
       <NavLink
         to={path}
-        exact={linkEnd}
+        exact={exact}
         target={link.newTab ? "_blank" : null}
         {...getClassNameForLink(link)}
       >
