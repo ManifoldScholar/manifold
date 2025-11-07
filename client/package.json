@@ -50,6 +50,7 @@
     "@atlaskit/pragmatic-drag-and-drop-live-region": "^1.3.0",
     "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration": "^2.0.4",
     "@atlaskit/tree": "^9.0.1",
+    "@castiron/hooks": "^3.1.0",
     "@castiron/style-mixins": "^2.0.0",
     "@emotion/babel-plugin": "^11.13.5",
     "@emotion/cache": "^11.14.0",
