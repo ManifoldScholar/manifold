@@ -78,21 +78,6 @@ export class Annotatable extends Component {
       return this.setState({ renderedAnnotations: this.props.annotations });
     }
 
-    // if the user just removed a highlight, restore focus to the previous selection
-    const lastAnnotation = this.state.renderedAnnotations[
-      this.state.renderedAnnotations.length - 1
-    ];
-    const wasRemoved = lastAnnotation?.attributes.removed;
-    const prevLastAnnotation =
-      prevState.renderedAnnotations[this.state.renderedAnnotations.length - 1];
-    const prevWasRemoved = prevLastAnnotation?.attributes.removed;
-    if (wasRemoved !== prevWasRemoved) {
-      this.restoreFocusAndSelection({
-        restoreFocusTo: "selection",
-        restoreSelectionTo: "selection"
-      });
-    }
-
     const { selection } = this.state.selectionState ?? {};
     const { range, ...selectionData } = selection ?? {};
     const { selection: prevSelection } = prevState.selectionState ?? {};

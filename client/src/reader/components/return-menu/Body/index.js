@@ -94,8 +94,8 @@ export default function ReturnMenuBody({
 ReturnMenuBody.displayName = "ReturnMenuBody";
 
 ReturnMenuBody.propTypes = {
-  returnUrl: PropTypes.string.isRequired,
-  projectTitle: PropTypes.string.isRequired,
+  returnUrl: PropTypes.string,
+  projectTitle: PropTypes.string,
   toggleSignInUpOverlay: PropTypes.func.isRequired,
   moreLink: PropTypes.string,
   settings: PropTypes.object,

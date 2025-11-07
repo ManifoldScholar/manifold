@@ -1,6 +1,11 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
-import { useLocation, useParams, useRouteMatch } from "react-router-dom";
+import {
+  useLocation,
+  useParams,
+  useRouteMatch,
+  Redirect
+} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetch, useFromStore, useRedirectToFirstMatch } from "hooks";
 import { projectsAPI } from "api";
@@ -8,11 +13,13 @@ import { childRoutes } from "helpers/router";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import { getJournalBreadcrumbs } from "./helpers";
+import lh from "helpers/linkHandler";
 
 export default function ProjectWrapper({ route }) {
   const { id } = useParams();
   const { data: project, response } = useFetch({
-    request: [projectsAPI.show, id]
+    request: [projectsAPI.show, id],
+    condition: id !== "all"
   });
   const { path } = useRouteMatch();
   const location = useLocation();
@@ -40,6 +47,8 @@ export default function ProjectWrapper({ route }) {
   const journalBreadcrumbs = project?.attributes?.isJournalIssue
     ? breadcrumbsCallback()
     : null;
+
+  if (id === "all") return <Redirect to={lh.link("frontendProjectsAll")} />;
 
   return (
     <>
