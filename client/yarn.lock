@@ -1862,6 +1862,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@castiron/hooks@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@castiron/hooks@npm:3.1.0"
+  dependencies:
+    focus-trap: "npm:^6.6.0"
+  peerDependencies:
+    react: ">= 18.x"
+    react-dom: ">= 18.x"
+  checksum: 10c0/709389a9d678f3f917d490d172eef1a33ec4486160c166fe5fb051762aa56d7647e0eaacad57c33dd8ae2d63cdd19e903a9c9beea6d9862343ad8f6874ac5473
+  languageName: node
+  linkType: hard
+
 "@castiron/style-mixins@npm:^2.0.0":
   version: 2.0.0
   resolution: "@castiron/style-mixins@npm:2.0.0"
@@ -7361,6 +7373,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"focus-trap@npm:^6.6.0":
+  version: 6.9.4
+  resolution: "focus-trap@npm:6.9.4"
+  dependencies:
+    tabbable: "npm:^5.3.3"
+  checksum: 10c0/f01986dac9f21b1091444b75125cf98e230c4263f5e8900b5264f68a1b6d7e35910fb42bbfa70cc9a7d98d7f9fd9d9303f4cb37bd09f35e076a82f51236807d1
+  languageName: node
+  linkType: hard
+
 "focus-trap@npm:^7.6.4":
   version: 7.6.4
   resolution: "focus-trap@npm:7.6.4"
@@ -9741,6 +9762,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.28.0"
     "@babel/preset-react": "npm:^7.27.1"
     "@babel/register": "npm:^7.27.1"
+    "@castiron/hooks": "npm:^3.1.0"
     "@castiron/style-mixins": "npm:^2.0.0"
     "@emotion/babel-plugin": "npm:^11.13.5"
     "@emotion/cache": "npm:^11.14.0"
@@ -14225,6 +14247,13 @@ __metadata:
     xml-but-prettier: "npm:^1.0.1"
     zenscroll: "npm:^4.0.2"
   checksum: 10c0/c9c8e52f3f48556bfb25de9e378c064272e2a6c8a6c71e4ebb09f4b20cf3a124a16821d713af3ddb2e0a60130adc9a2e3e500c6d864cbb81478999a45d1e4bc1
+  languageName: node
+  linkType: hard
+
+"tabbable@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "tabbable@npm:5.3.3"
+  checksum: 10c0/c6cb54be76ecff7d0132fed77ff11cedf76a2ce320f55e350f70d8f68998227e72bc3f8b1ee5e7b02dbe4b4c2ef7b6fa43c3aea7cfa82ef06e7d23746df97a35
   languageName: node
   linkType: hard
 
