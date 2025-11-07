@@ -13,6 +13,7 @@ class CollectionProject < ApplicationRecord
 
   has_many :creators, through: :project, source: "makers"
   has_many :contributors, through: :project, source: "makers"
+  has_many :subjects, through: :project
 
   # Ordering
   acts_as_list scope: :project_collection
