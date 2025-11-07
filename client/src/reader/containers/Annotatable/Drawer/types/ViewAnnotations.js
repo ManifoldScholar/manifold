@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import { useFetch } from "hooks";
 import { annotationsAPI, requests } from "api";
 import Annotation from "global/components/Annotation";
@@ -26,6 +27,8 @@ export default function ViewAnnotations({
     options: { requestKey: requests.rDrawerAnnotations }
   });
 
+  const dispatch = useDispatch();
+
   const saveAnnotation = (model, group) => {
     const attributes = { ...group.selection, ...model.attributes };
     const newModel = { ...model, attributes };
@@ -39,6 +42,7 @@ export default function ViewAnnotations({
       loginHandler={actions.showLogin}
       focusHandler={actions.focusHandler}
       closeDrawer={closeDrawer}
+      dispatch={dispatch}
     />
   );
 }
