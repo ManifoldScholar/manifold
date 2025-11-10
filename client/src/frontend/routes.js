@@ -193,7 +193,7 @@ const routes = {
         {
           name: "frontendJournalsList",
           exact: true,
-          component: "JournalsList",
+          component: "Journals",
           path: "/journals",
           isLibrary: true,
           helper: (params = {}) => {
