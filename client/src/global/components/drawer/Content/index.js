@@ -25,7 +25,8 @@ function DrawerContent(props, ref) {
     lockScroll = false,
     hasConfirm,
     showNotifications,
-    open
+    open,
+    additionalDrawerProps = {}
   } = props;
 
   const connected = useFromStore("websocket.connected");
@@ -104,7 +105,8 @@ function DrawerContent(props, ref) {
     "aria-labelledby": headerId,
     onBlur: handleBlur,
     $fullHeight: focusTrap,
-    inert: !open ? "" : undefined
+    inert: !open ? "" : undefined,
+    ...additionalDrawerProps
   };
 
   const inner = (
@@ -166,5 +168,6 @@ DrawerContent.propTypes = {
   handleLeaveEvent: PropTypes.func.isRequired,
   lockScroll: PropTypes.bool,
   hasConfirm: PropTypes.bool,
-  open: PropTypes.bool
+  open: PropTypes.bool,
+  additionalDrawerProps: PropTypes.object
 };
