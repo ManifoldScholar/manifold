@@ -5,6 +5,7 @@ import EntityAvatar from "global/components/atomic/EntityAvatar";
 import EntityMetadata from "./EntityMetadata";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
+import ProjectCollectionAvatar from "../EntityAvatar/ProjectCollectionAvatar";
 
 export default function EntityThumbnail({
   entity,
@@ -36,7 +37,7 @@ export default function EntityThumbnail({
       <Styled.ItemLink $stack={stack} to={lh.link(routeName, urlParam)}>
         <Styled.Cover $stack={stack}>
           {entity.type === "projectCollections" ? (
-            <></>
+            <ProjectCollectionAvatar entity={entity} />
           ) : (
             <EntityAvatar entity={entity} />
           )}
