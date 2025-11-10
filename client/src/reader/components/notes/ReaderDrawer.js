@@ -36,7 +36,8 @@ class ReaderDrawer extends PureComponent {
       includeDrawerFrontMatter: true,
       focusTrap: false,
       title: this.props.t("glossary.note_title_case_other"),
-      closeCallback: this.props.closeCallback
+      closeCallback: this.props.closeCallback,
+      additionalDrawerProps: { "aria-modal": true }
     };
 
     return (
