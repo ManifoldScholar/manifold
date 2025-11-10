@@ -148,6 +148,7 @@ export default {
   feEvents: "frontend-events",
   feSubjects: "frontend-subjects",
   feSubjectsFeatured: "frontend-subjects-featured",
+  feJournalSubjects: "frontend-journal-subjects",
   feResources: "frontend-resources",
   feResource: "frontend-resource",
   feSlideshow: "frontend-slideshow",
