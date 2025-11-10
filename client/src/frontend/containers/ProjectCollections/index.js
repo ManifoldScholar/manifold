@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import GlobalUtility from "global/components/utility";
-import { projectCollectionsAPI } from "api";
+import { projectCollectionsAPI, requests } from "api";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import HeadContent from "global/components/HeadContent";
-import { useFetch, useListQueryParams } from "hooks";
+import {
+  useFetch,
+  useListQueryParams,
+  useFromStore,
+  useListFilters
+} from "hooks";
 
 export default function ProjectCollectionsContainer() {
-  const { pagination, filters } = useListQueryParams({
+  const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
+
+  const { pagination, filters, setFilters } = useListQueryParams({
     initSize: 8,
     initFilters: { visible: true, order: "position ASC" },
     collectionPagination: {
@@ -23,42 +29,44 @@ export default function ProjectCollectionsContainer() {
   const { data: projectCollections, meta } = useFetch({
     request: [projectCollectionsAPI.index, filters, pagination]
   });
+
+  const filterProps = useListFilters({
+    onFilterChange: param => setFilters(param),
+    initialState: filters,
+    resetState: filterReset,
+    options: {
+      entityType: "projectCollection",
+      sort: true
+    }
+  });
+
   const { t } = useTranslation();
 
-  const showPagination = () => {
-    const { totalPages } = meta?.pagination ?? {};
-    if (!totalPages || totalPages === 1) return false;
-    return true;
-  };
+  if (!projectCollections || !meta) return null;
 
-  const renderProjectCollections = () => {
-    if (!projectCollections.length)
-      return <EntityCollectionPlaceholder.ProjectCollectionsFrontend />;
-
-    return projectCollections.map((projectCollection, index) => (
-      <EntityCollection.ProjectCollectionSummary
-        key={projectCollection.id}
-        projectCollection={projectCollection}
-        limit={4}
-        bgColor={index % 2 === 1 ? "neutral05" : "white"}
-      />
-    ));
-  };
+  const showPlaceholder =
+    "keyword" in filters ? false : !projectCollections.length;
 
   return projectCollections ? (
     <>
-      <HeadContent title={t("titles.project_collections")} appendDefaultTitle />
+      <HeadContent
+        title={t("pages.project_collections_all")}
+        appendDefaultTitle
+      />
       <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
       <h1 className="screen-reader-text">
         {t("glossary.project_collection_other")}
       </h1>
-      {renderProjectCollections()}
-      {showPagination && (
-        <section>
-          <div className="container">
-            <GlobalUtility.Pagination pagination={meta.pagination} />
-          </div>
-        </section>
+      {showPlaceholder ? (
+        <EntityCollectionPlaceholder.ProjectCollectionsFrontend />
+      ) : (
+        <EntityCollection.ProjectCollections
+          projectCollections={projectCollections}
+          meta={meta}
+          filterProps={filterProps}
+          bgColor="neutral05"
+          className="flex-grow"
+        />
       )}
       <CollectionNavigation />
     </>
