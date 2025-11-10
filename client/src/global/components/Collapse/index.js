@@ -6,7 +6,7 @@ import { CollapseContext } from "helpers/contexts";
 import Toggle from "./Toggle";
 import Content from "./Content";
 
-function Collapse({ initialVisible, children, stubHeight }) {
+function Collapse({ initialVisible, children, stubHeight, label }) {
   const [visible, setVisible] = useState(initialVisible);
   const toggleVisible = () => setVisible(!visible);
   const idSeed = useUIDSeed();
@@ -23,8 +23,9 @@ function Collapse({ initialVisible, children, stubHeight }) {
   const contentProps = {
     id: idSeed("content"),
     role: "region",
-    "aria-labelledby": idSeed("label"),
-    inert: !visible && stubHeight < height ? "" : undefined,
+    "aria-label": label,
+    "aria-labelledby": !label ? idSeed("label") : undefined,
+    inert: !visible && (!stubHeight || stubHeight < height) ? "" : undefined,
     resizeRef
   };
 
@@ -57,6 +58,7 @@ Collapse.displayName = "Global.Collapse";
 Collapse.propTypes = {
   initialVisible: PropTypes.bool,
   stubHeight: PropTypes.number,
+  label: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 
