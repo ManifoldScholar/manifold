@@ -52,7 +52,9 @@
       "alphabetical": "A-Z",
       "reverse_alpha": "Z-A",
       "published_asc": "Date Published (Oldest First)",
-      "published_desc": "Date Published (Newest First)"
+      "published_desc": "Date Published (Newest First)",
+      "modified_asc": "Date Modified (Oldest First)",
+      "modified_desc": "Date Modified (Newest First)"
     },
     "group_sort_options": {
       "newest_first": "Newest groups first",

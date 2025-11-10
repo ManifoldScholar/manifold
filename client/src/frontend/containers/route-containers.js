@@ -41,6 +41,7 @@ import JournalVolumesList from "frontend/containers/JournalVolumesList";
 import JournalIssuesList from "frontend/containers/JournalIssuesList";
 import PrivacySettings from "frontend/containers/PrivacySettings";
 import DataUse from "frontend/containers/DataUse";
+import Journals from "frontend/containers/Journals";
 
 export default {
   NotFound,
@@ -93,5 +94,6 @@ export default {
   MyStarred,
   MyAnnotations,
   PrivacySettings,
-  DataUse
+  DataUse,
+  Journals
 };
