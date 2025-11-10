@@ -199,11 +199,9 @@ export default `
       align-items: center;
       justify-content: center;
       aspect-ratio: 96 / 50;
-      width: calc(50% - 10px);
+      inline-size: 96px;
       border: 3px solid transparent;
       transition: background-color ${defaultTransitionProps}, border-color ${defaultTransitionProps};
-
-      ${respond(`width: 96px;`, 50)}
 
       &:is(:hover, :focus-within, [aria-pressed="true"]):not([aria-disabled="true"]) {
         border-color: var(--hover-color);
@@ -245,7 +243,6 @@ export default `
       padding-inline: 0.5ch;
       font-family: var(--font-family-copy);
       font-size: 24px;
-      font-weight: medium;
       transition: background-color ${defaultTransitionProps};
 
       @media (forced-colors: active) {
