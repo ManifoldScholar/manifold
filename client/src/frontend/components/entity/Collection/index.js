@@ -16,6 +16,7 @@ import ProjectResourceCollectionDetail from "./patterns/ProjectResourceCollectio
 import ProjectResourceCollections from "./patterns/ProjectResourceCollections";
 import ReaderFullNotes from "./patterns/ReaderFullNotes";
 import Journals from "./patterns/Journals";
+import ProjectCollections from "./patterns/ProjectCollections";
 
 export default {
   Events,
@@ -35,5 +36,6 @@ export default {
   ProjectResourceCollectionDetail,
   ProjectResourceCollections,
   ReaderFullNotes,
-  Journals
+  Journals,
+  ProjectCollections
 };
