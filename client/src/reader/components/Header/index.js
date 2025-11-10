@@ -153,7 +153,7 @@ export default function Header(props) {
     );
   };
 
-  const renderOptionsNav = () => {
+  const renderOptionsNav = variant => {
     return (
       <ul
         aria-label={t("reader.header.reader_settings_search")}
@@ -186,6 +186,7 @@ export default function Header(props) {
                 className="panel"
                 filter={visibility.visibilityFilters}
                 filterChangeHandler={handleVisibilityFilterChange}
+                variant={variant}
               />
             </ControlMenu.DisclosurePanel>
           </DisclosureNavigationMenu>
@@ -282,7 +283,7 @@ export default function Header(props) {
         )}
         {/* Options menu */}
         <div className="reader-header__menu-group reader-header__menu-group--right">
-          {renderOptionsNav()}
+          {renderOptionsNav("desktop")}
         </div>
         {/* Options menu, mobile */}
         <div
@@ -298,7 +299,7 @@ export default function Header(props) {
             }
           }}
         >
-          {renderOptionsNav()}
+          {renderOptionsNav("mobile")}
         </div>
       </nav>
       {!!text && (
