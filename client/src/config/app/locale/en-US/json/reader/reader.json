@@ -104,6 +104,7 @@
       "instructions": "Administrators of this instance will be notified.",
       "placeholder": "Optionally, include a message about why you are reporting this content.",
       "message_input_label": "Message"
-    }
+    },
+    "annotated_passage": "Annotated passage"
   }
 }
