@@ -29,11 +29,18 @@ export class FrontendContainer extends Component {
         requests.feSubjects,
         { oneTime: true }
       );
+      const journalSubjects = request(
+        subjectsAPI.index({ journalUsed: true }, {}, true),
+        requests.feJournalSubjects,
+        { oneTime: true }
+      );
       const promises = [];
       const pagesRes = dispatch(pages);
       const subjectsRes = dispatch(subjects);
+      const journalSubjectsRes = dispatch(journalSubjects);
       if (pagesRes) promises.push(pagesRes.promise);
       if (subjectsRes) promises.push(subjectsRes.promise);
+      if (journalSubjectsRes) promises.push(journalSubjectsRes.promise);
       return Promise.all(promises);
     }
   };

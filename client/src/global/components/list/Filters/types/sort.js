@@ -1,5 +1,6 @@
 export const sortFilter = (filters, updateFilters, params, t) => {
   const includePublished = params?.entityType === "project";
+  const includeModified = params?.entityType === "journal";
 
   return {
     label: t("filters.labels.sort_results"),
@@ -31,6 +32,18 @@ export const sortFilter = (filters, updateFilters, params, t) => {
             {
               label: t("filters.sort_options.published_desc"),
               value: "publication_date DESC"
+            }
+          ]
+        : []),
+      ...(includeModified
+        ? [
+            {
+              label: t("filters.sort_options.modified_asc"),
+              value: "updated_at ASC"
+            },
+            {
+              label: t("filters.sort_options.modified_desc"),
+              value: "updated_at DESC"
             }
           ]
         : [])

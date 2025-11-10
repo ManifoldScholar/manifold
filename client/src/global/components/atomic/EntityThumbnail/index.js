@@ -16,6 +16,10 @@ export default function EntityThumbnail({
   parentView = false,
   isListItem = false
 }) {
+  const routeName =
+    entity.type === "journals"
+      ? "frontendJournalDetail"
+      : "frontendProjectDetail";
   const urlParam =
     entity.type === "journalIssues"
       ? entity.attributes.projectSlug
@@ -24,10 +28,7 @@ export default function EntityThumbnail({
 
   return (
     <Styled.Wrapper as={as}>
-      <Styled.ItemLink
-        $stack={stack}
-        to={lh.link("frontendProjectDetail", urlParam)}
-      >
+      <Styled.ItemLink $stack={stack} to={lh.link(routeName, urlParam)}>
         <Styled.Cover $stack={stack}>
           <EntityAvatar entity={entity} />
         </Styled.Cover>
