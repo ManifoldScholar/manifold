@@ -1,5 +1,4 @@
-import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
+import { forwardRef } from "react";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 
@@ -24,14 +23,6 @@ const ControlMenuDisclosureButton = (props, ref) => {
       <span className="screen-reader-text">{label}</span>
     </button>
   );
-};
-
-ControlMenuDisclosureButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  icon: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  ariaControls: PropTypes.string,
-  visible: PropTypes.bool
 };
 
 ControlMenuDisclosureButton.displayName = "ControlMenu.Button";
