@@ -1,6 +1,10 @@
 export const sortFilter = (filters, updateFilters, params, t) => {
   const includePublished = params?.entityType === "project";
-  const includeModified = params?.entityType === "journal";
+  const includeModified =
+    params?.entityType === "journal" ||
+    params?.entityType === "projectCollection";
+  const alphaSort =
+    params?.entityType === "projectCollection" ? "title" : "sort_title";
 
   return {
     label: t("filters.labels.sort_results"),
@@ -9,11 +13,11 @@ export const sortFilter = (filters, updateFilters, params, t) => {
     options: [
       {
         label: t("filters.sort_options.alphabetical"),
-        value: "sort_title ASC"
+        value: `${alphaSort} ASC`
       },
       {
         label: t("filters.sort_options.reverse_alpha"),
-        value: "sort_title DESC"
+        value: `${alphaSort} DESC`
       },
       {
         label: t("filters.collection_sort_options.created_at_asc"),
