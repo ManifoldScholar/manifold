@@ -1,18 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { readingGroupsAPI } from "api";
-import { useNavigate } from "react-router-dom-v5-compat";
-import { childRoutes } from "helpers/router";
+import { Outlet, useOutletContext } from "react-router-dom";
 import { useFetch } from "hooks";
 import * as Styled from "../styles";
 
-function ReadingGroupHomepageFetchContainer({
-  readingGroup,
-  route,
-  refresh,
-  fetchVersion
-}) {
-  const navigate = useNavigate();
+function ReadingGroupHomepageFetchContainer() {
+  const { readingGroup, refresh, fetchVersion } = useOutletContext() || {};
 
   const { data: projects } = useFetch({
     request: [readingGroupsAPI.collected, readingGroup.id, "projects"],
@@ -59,24 +51,16 @@ function ReadingGroupHomepageFetchContainer({
 
   return (
     <Styled.Body>
-      {childRoutes(route, {
-        childProps: {
+      <Outlet
+        context={{
           readingGroup,
           categories,
           responses,
-          navigate,
           refresh
-        }
-      })}
+        }}
+      />
     </Styled.Body>
   );
 }
-
-ReadingGroupHomepageFetchContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired,
-  fetchVersion: PropTypes.number.isRequired
-};
 
 export default ReadingGroupHomepageFetchContainer;

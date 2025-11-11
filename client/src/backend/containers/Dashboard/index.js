@@ -1,7 +1,6 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import Dashboards from "backend/containers/dashboards";
+import AdminDashboard from "backend/containers/dashboards/Admin";
 import Authorize from "hoc/Authorize";
 import HeadContent from "global/components/HeadContent";
 
@@ -24,7 +23,7 @@ export default function DashboardContainer() {
         title={`${t("titles.dashboard")} | ${t("common.admin")}`}
         appendDefaultTitle
       />
-      <Dashboards.Admin />
+      <AdminDashboard />
     </Authorize>
   );
 }
