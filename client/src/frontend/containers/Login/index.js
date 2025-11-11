@@ -4,15 +4,14 @@ import { useTranslation } from "react-i18next";
 import withProjectContext from "hoc/withProjectContext";
 import SignInUp from "global/components/sign-in-up";
 import HeadContent from "global/components/HeadContent";
-import { useRouteMatch, useLocation, useHistory } from "react-router-dom";
+import { useMatch, useLocation } from "react-router-dom";
 import { useNotification, useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 function LoginContainer({ projectBackLink }) {
   const { t } = useTranslation();
-  const isSignUp = useRouteMatch("/signup");
   const location = useLocation();
-  const history = useHistory();
+  const isSignUp = useMatch("/signup");
   const notifications = useFromStore({ path: "notifications.notifications" });
 
   const notifyUnauthorized = useNotification(() => ({
@@ -36,7 +35,7 @@ function LoginContainer({ projectBackLink }) {
     if (shouldNotify) {
       notifyUnauthorized();
     }
-  }, [location, history, notifyUnauthorized, notifications]);
+  }, [location, notifyUnauthorized, notifications]);
 
   return (
     <>

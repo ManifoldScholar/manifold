@@ -1,5 +1,6 @@
-import { Children, cloneElement, useEffect, useState } from "react";
+import { Children, cloneElement, useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
+import { useLocation, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import Body from "./Body";
 import Annotatable from "reader/containers/Annotatable";
@@ -8,33 +9,46 @@ import filterAnnotations from "./helpers/filter-annotations";
 import HtmlClass from "hoc/HtmlClass";
 import isEqual from "lodash/isEqual";
 import useDialog from "@castiron/hooks/useDialog";
+import { useFromStore } from "hooks";
 
 export default function Text({
   children,
-  appearance,
   text,
-  authentication,
-  location,
-  history,
   section,
   resources,
   resourceCollections,
-  annotations,
-  visibility
+  annotations
 }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const authentication = useFromStore({ path: "authentication" });
+  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const appearance = useFromStore({ path: "ui.persistent.reader" });
+
+  // Create v5-compatible history object for Annotatable
+  const history = useMemo(
+    () => ({
+      push: (path, state) => navigate(path, { state }),
+      replace: (path, state) => navigate(path, { replace: true, state }),
+      goBack: () => navigate(-1)
+    }),
+    [navigate]
+  );
+
   const [filteredAnnotations, setFilteredAnnotations] = useState(
-    filterAnnotations(annotations, visibility.visibilityFilters)
+    filterAnnotations(annotations, visibility?.visibilityFilters)
   );
 
   useEffect(() => {
     const newState = filterAnnotations(
       annotations,
-      visibility.visibilityFilters
+      visibility?.visibilityFilters
     );
 
     if (!isEqual(newState, filteredAnnotations))
       setFilteredAnnotations(newState);
-  }, [filteredAnnotations, annotations, visibility.visibilityFilters]);
+  }, [filteredAnnotations, annotations, visibility?.visibilityFilters]);
 
   useEffect(() => {
     const el = document.getElementById("text-section-interactive-region");
@@ -70,9 +84,9 @@ export default function Text({
     scrollLockClassName: "no-scroll"
   });
 
-  const typography = appearance.typography;
-  const colorScheme = appearance.colors.colorScheme;
-  const highContrast = appearance.colors.highContrast;
+  const typography = appearance?.typography;
+  const colorScheme = appearance?.colors?.colorScheme;
+  const highContrast = appearance?.colors?.highContrast;
 
   const readerAppearanceClass = classNames({
     "reader-window": true,
@@ -85,33 +99,33 @@ export default function Text({
   // on class names
   let textSectionClass = classNames({
     "manifold-text-section text-section": true,
-    "font-serif": typography.font === "serif",
-    "font-sans-serif": typography.font === "sans-serif"
+    "font-serif": typography?.font === "serif",
+    "font-sans-serif": typography?.font === "sans-serif"
   });
 
   // Apply a font-size class to the text-section
   // This maps to a numbered class with responsive font declarations
-  const fontSizeClass = `font-size-${typography.fontSize.current}`;
+  const fontSizeClass = `font-size-${typography?.fontSize?.current}`;
   textSectionClass += " " + fontSizeClass;
 
   // Apply a conditional container class that maps to a size in CSS
-  const containerClass = `container-focus container-width-${typography.margins.current}`;
+  const containerClass = `container-focus container-width-${typography?.margins?.current}`;
 
   // Page used to generate key for transitions
-  const page = location.pathname.substr(1);
+  const page = location.pathname.slice(1);
 
   return (
     <HtmlClass className={fontSizeClass}>
       <div className="main-content" style={{ flexGrow: 1 }}>
         <section className={readerAppearanceClass}>
           <Annotatable
-            currentUser={authentication.currentUser}
+            currentUser={authentication?.currentUser}
             projectId={text.relationships.project.id}
             textId={text.id}
             sectionId={section.id}
             notations={[...(resources ?? []), ...(resourceCollections ?? [])]}
             annotations={filteredAnnotations}
-            containerSize={typography.margins.current}
+            containerSize={typography?.margins?.current}
             bodySelector='[data-id="body"]'
             text={text}
             location={location}
@@ -149,15 +163,9 @@ export default function Text({
 
 Text.propTypes = {
   text: PropTypes.object,
-  authentication: PropTypes.object,
   section: PropTypes.object,
   resources: PropTypes.array,
   resourceCollections: PropTypes.array,
   annotations: PropTypes.array,
-  appearance: PropTypes.object,
-  location: PropTypes.object,
-  match: PropTypes.object,
-  children: PropTypes.object,
-  visibility: PropTypes.object,
-  history: PropTypes.object.isRequired
+  children: PropTypes.object
 };

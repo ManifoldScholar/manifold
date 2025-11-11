@@ -1,132 +1,87 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import truncate from "lodash/truncate";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 
-class IngestionHeader extends Component {
-  static displayName = "Ingestion.Header";
+const Property = ({ label, value }) => (
+  <div className="ingestion-output__item">
+    <p className="ingestion-output__label">{label}</p>
+    <p className="ingestion-output__value">{value}</p>
+  </div>
+);
 
-  static propTypes = {
-    ingestion: PropTypes.object,
-    reingestion: PropTypes.bool,
-    sectionIngest: PropTypes.bool,
-    loading: PropTypes.bool,
-    t: PropTypes.func
-  };
+export default function IngestionHeader({ ingestion, sectionIngest, loading }) {
+  const { t } = useTranslation();
 
-  get ingestion() {
-    return this.props.ingestion;
-  }
+  if (!ingestion) return null;
 
-  get title() {
-    const title =
-      this.ingestion.attributes.sourceFileName ||
-      this.ingestion.attributes.externalSourceUrl;
-    if (!title) return "";
-    return truncate(title, { length: 30 });
-  }
+  const rawTitle =
+    ingestion.attributes.sourceFileName ||
+    ingestion.attributes.externalSourceUrl;
+  const title = rawTitle ? truncate(rawTitle, { length: 30 }) : "";
 
-  get currentState() {
-    if (this.props.loading)
-      return this.props.t("texts.ingestion.states.processing");
-    return this.props.t(
-      `texts.ingestion.states.${this.ingestion.attributes.state}`
-    );
-  }
+  const currentState = loading
+    ? t("texts.ingestion.states.processing")
+    : t(`texts.ingestion.states.${ingestion.attributes.state}`);
 
-  get strategy() {
-    return (
-      this.ingestion.attributes.strategyLabel ||
-      this.props.t("texts.ingestion.no_strategy")
-    );
-  }
+  const strategy =
+    ingestion.attributes.strategyLabel || t("texts.ingestion.no_strategy");
 
-  get entityId() {
-    const { textId, textSectionId } = this.ingestion.attributes ?? {};
+  const { textId, textSectionId } = ingestion.attributes ?? {};
+  const entityId = sectionIngest
+    ? textSectionId ?? t("texts.section.ingest_id_placeholder")
+    : textId ?? t("texts.ingestion.id_placeholder");
 
-    if (this.props.sectionIngest)
-      return (
-        textSectionId ?? this.props.t("texts.section.ingest_id_placeholder")
-      );
+  const idLabelKey = sectionIngest
+    ? "texts.section.ingest_id_label"
+    : "texts.ingestion.id_label";
 
-    return textId ?? this.props.t("texts.ingestion.id_placeholder");
-  }
-
-  titleBlock() {
-    return (
-      <div className="ingest-header__title-block">
-        <h1 className="ingest-header__title">{this.title}</h1>
-      </div>
-    );
-  }
-
-  figureBlock() {
-    return (
-      <figure
-        className={classNames(
-          "ingest-header__figure-block",
-          "ingest-header__figure-block--shift-left"
-        )}
-      >
-        <div className="ingest-header__figure">
-          <IconComposer
-            icon="textsBook64"
-            size={56}
-            className="ingest-header__type-icon"
-          />
-        </div>
-      </figure>
-    );
-  }
-
-  render() {
-    if (!this.props.ingestion) return null;
-
-    const idLabelKey = this.props.sectionIngest
-      ? "texts.section.ingest_id_label"
-      : "texts.ingestion.id_label";
-
-    const Property = props => (
-      <div className="ingestion-output__item">
-        <p className="ingestion-output__label">{props.label}</p>
-        <p className="ingestion-output__value">{props.value}</p>
-      </div>
-    );
-
-    return (
-      <div className="ingest-header">
-        <div className="ingest-header__inner">
-          <header
+  return (
+    <div className="ingest-header">
+      <div className="ingest-header__inner">
+        <header
+          className={classNames(
+            "ingest-header__content-flex-wrapper",
+            "ingest-header__content-flex-wrapper--aib",
+            "ingest-header__content-flex-wrapper--tight"
+          )}
+        >
+          <figure
             className={classNames(
-              "ingest-header__content-flex-wrapper",
-              "ingest-header__content-flex-wrapper--aib",
-              "ingest-header__content-flex-wrapper--tight"
+              "ingest-header__figure-block",
+              "ingest-header__figure-block--shift-left"
             )}
           >
-            {this.figureBlock()}
-            {this.titleBlock()}
-          </header>
-          <div
-            aria-live="polite"
-            aria-atomic
-            className="ingest-header__body ingestion-output__properties"
-          >
-            <Property
-              label={this.props.t("texts.ingestion.current_state_label")}
-              value={this.currentState}
-            />
-            <Property
-              label={this.props.t("texts.ingestion.strategy_label")}
-              value={this.strategy}
-            />
-            <Property label={this.props.t(idLabelKey)} value={this.entityId} />
+            <div className="ingest-header__figure">
+              <IconComposer
+                icon="textsBook64"
+                size={56}
+                className="ingest-header__type-icon"
+              />
+            </div>
+          </figure>
+          <div className="ingest-header__title-block">
+            <h1 className="ingest-header__title">{title}</h1>
           </div>
+        </header>
+        <div
+          aria-live="polite"
+          aria-atomic
+          className="ingest-header__body ingestion-output__properties"
+        >
+          <Property
+            label={t("texts.ingestion.current_state_label")}
+            value={currentState}
+          />
+          <Property
+            label={t("texts.ingestion.strategy_label")}
+            value={strategy}
+          />
+          <Property label={t(idLabelKey)} value={entityId} />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default withTranslation()(IngestionHeader);
+IngestionHeader.displayName = "Ingestion.Header";

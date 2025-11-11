@@ -49,7 +49,7 @@ export class PickerComponent extends PureComponent {
     listRowEditUrlGenerator: PropTypes.func,
     /* The path to the attribute on the model that's being updated in bracket   */
     /* notation. For example: "attributes[tagList]"                             */
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     /* The options that should appear in the picker. These will be passed on to */
     /* the withFormOptions HOC, which is responsible for managing options and */
     /* the current value. You may pass a function to this component. The        */

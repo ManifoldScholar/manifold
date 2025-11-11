@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import PropTypes from "prop-types";
+import { useCallback } from "react";
+import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import Issue from "backend/components/issue";
 import Layout from "backend/components/layout";
 import { journalIssuesAPI } from "api";
@@ -9,16 +9,14 @@ import lh from "helpers/linkHandler";
 
 // Not localized for v7, since we are no longer using. -LD
 
-function JournalIssueEdit({
-  refreshIssues,
-  confirm,
-  closeUrl,
-  match,
-  journal,
-  history
-}) {
+function JournalIssueEdit({ confirm }) {
+  const { issueId } = useParams();
+  const navigate = useNavigate();
+  const { refreshIssues, closeUrl, journal } = useOutletContext() || {};
+
   const { data: journalIssue } = useFetch({
-    request: [journalIssuesAPI.show, match.params.iId]
+    request: [journalIssuesAPI.show, issueId],
+    condition: !!issueId
   });
 
   const destroy = useApiCallback(journalIssuesAPI.destroy, {
@@ -34,13 +32,13 @@ function JournalIssueEdit({
   }));
 
   const refreshAndRedirect = useCallback(() => {
-    refreshIssues();
-    history.push(closeUrl, { keepNotifications: false });
-  }, [history, closeUrl, refreshIssues]);
+    if (refreshIssues) refreshIssues();
+    navigate(closeUrl, { state: { keepNotifications: false } });
+  }, [navigate, closeUrl, refreshIssues]);
 
   const destroyAndRedirect = useCallback(() => {
     const redirect = () =>
-      history.push(lh.link("backendJournalIssues", journal?.id));
+      navigate(lh.link("backendJournalIssues", journal?.id));
     destroy(journalIssue.id).then(
       () => {
         notifyDestroy(journalIssue);
@@ -48,13 +46,17 @@ function JournalIssueEdit({
       },
       () => redirect()
     );
-  }, [destroy, history, journal?.id, journalIssue, notifyDestroy]);
+  }, [destroy, navigate, journal?.id, journalIssue, notifyDestroy]);
 
   const onDelete = useCallback(() => {
     const heading = "Are you sure you want to delete this issue?";
     const message = "This action cannot be undone.";
-    confirm(heading, message, destroyAndRedirect);
+    if (confirm) {
+      confirm(heading, message, destroyAndRedirect);
+    }
   }, [destroyAndRedirect, confirm]);
+
+  if (!journalIssue || !journal) return null;
 
   const buttons = [
     {
@@ -76,12 +78,5 @@ function JournalIssueEdit({
     </div>
   );
 }
-
-JournalIssueEdit.propTypes = {
-  journal: PropTypes.object.isRequired,
-  closeUrl: PropTypes.string.isRequired,
-  history: PropTypes.object.isRequired,
-  refreshIssues: PropTypes.func.isRequired
-};
 
 export default withConfirmation(JournalIssueEdit);
