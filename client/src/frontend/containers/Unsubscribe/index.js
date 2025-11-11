@@ -1,41 +1,28 @@
-import { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import { requests, notificationPreferencesAPI } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
-export class UnsubscribeContainer extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
-  };
+export default function UnsubscribeContainer() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { token } = useParams();
 
-  componentDidMount() {
-    this.unsubscribeUser(this.props);
-    this.redirectToHome(this.props);
-  }
+  useEffect(() => {
+    if (token) {
+      const action = notificationPreferencesAPI.unsubscribe(token);
+      const unsubscribeRequest = request(action, requests.feUnsubscribe);
+      dispatch(unsubscribeRequest);
+    }
 
-  redirectToHome(props) {
     const url = lh.link("frontend");
-    props.history.push(url);
-  }
+    navigate(url);
+  }, [dispatch, navigate, token]);
 
-  unsubscribeUser(props) {
-    const token = props.match.params.token;
-    if (!token) return null;
-    const action = notificationPreferencesAPI.unsubscribe(token);
-    const unsubscribeRequest = request(action, requests.feUnsubscribe);
-    this.props.dispatch(unsubscribeRequest);
-  }
-
-  render() {
-    return null;
-  }
+  return null;
 }
-
-export default connect(UnsubscribeContainer.mapStateToProps)(
-  UnsubscribeContainer
-);

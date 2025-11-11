@@ -1,11 +1,9 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { GroupSettingsForm } from "frontend/components/reading-group/forms";
-import connectAndFetch from "utils/connectAndFetch";
 import Layout from "backend/components/layout";
 
-function ReadingGroupsNewContainer({ onSuccess }) {
+export default function ReadingGroupsNewContainer({ onSuccess }) {
   const { t } = useTranslation();
   return (
     <section>
@@ -14,8 +12,6 @@ function ReadingGroupsNewContainer({ onSuccess }) {
     </section>
   );
 }
-
-export default connectAndFetch(ReadingGroupsNewContainer);
 
 ReadingGroupsNewContainer.displayName = "Frontend.Containers.ReadingGroupsNew";
 

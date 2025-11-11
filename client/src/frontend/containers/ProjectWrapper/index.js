@@ -1,11 +1,6 @@
 import { useCallback } from "react";
 import PropTypes from "prop-types";
-import {
-  useLocation,
-  useParams,
-  useRouteMatch,
-  Redirect
-} from "react-router-dom";
+import { useLocation, useParams, Redirect } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetch, useFromStore, useRedirectToFirstMatch } from "hooks";
 import { projectsAPI } from "api";
@@ -21,9 +16,8 @@ export default function ProjectWrapper({ route }) {
     request: [projectsAPI.show, id],
     condition: id !== "all"
   });
-  const { path } = useRouteMatch();
   const location = useLocation();
-  const isHomePage = location.pathname === path;
+  const isHomePage = location.pathname === `/projects/${id}`;
   const settings = useFromStore({ requestKey: "settings", action: "select" });
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
