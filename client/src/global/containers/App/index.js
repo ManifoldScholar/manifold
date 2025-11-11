@@ -68,13 +68,6 @@ class App extends Component {
     return get(this.props.store.getState(), "authentication.authToken");
   }
 
-  get settings() {
-    return get(
-      this.props.store.getState(),
-      "entityStore.entities.settings.0.attributes"
-    );
-  }
-
   resolveRouterConfirm = answer => {
     this.state.routerConfirmCallback(answer);
     this.setState({
@@ -103,10 +96,7 @@ class App extends Component {
         <UIDReset prefix="uid_">
           <Router {...routerProps}>
             <CompatRouter>
-              <Analytics
-                dispatch={this.props.store.dispatch}
-                settings={this.settings}
-              >
+              <Analytics>
                 <HelmetProvider context={this.props.helmetContext}>
                   <GlobalStyles styles={styles} />
                   <Manifold confirm={this.renderConfirm()} />
