@@ -29,7 +29,6 @@ LayoutHeader.displayName = "Layout.Header";
 
 LayoutHeader.propTypes = {
   visibility: PropTypes.object,
-  location: PropTypes.object,
   authentication: PropTypes.object,
   notifications: PropTypes.object,
   commonActions: PropTypes.object,
