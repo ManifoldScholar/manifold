@@ -10,7 +10,7 @@ export const List = styled.ul`
   list-style-type: none;
 
   @container (max-inline-size: 500px) {
-    --_Button-min-inline-size: 100%;
+    --Button-min-inline-size: 100%;
 
     flex-grow: 1;
 
