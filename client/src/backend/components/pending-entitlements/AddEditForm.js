@@ -1,11 +1,11 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { pendingEntitlementsAPI, projectsAPI, journalsAPI } from "api";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 
 export default function AddEditEntitlementForm({ refresh, entitlement }) {
   const { t } = useTranslation();
@@ -114,4 +114,7 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
 
 AddEditEntitlementForm.displayName = "Records.Entitlements.AddEdit.Form";
 
-AddEditEntitlementForm.propTypes = {};
+AddEditEntitlementForm.propTypes = {
+  refresh: PropTypes.func.isRequired,
+  entitlement: PropTypes.object
+};

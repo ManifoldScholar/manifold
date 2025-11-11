@@ -30,7 +30,7 @@ export default function ResourceCollectionList({
 ResourceCollectionList.propTypes = {
   collections: PropTypes.arrayOf(PropTypes.object),
   project: PropTypes.object,
-  active: PropTypes.bool,
+  active: PropTypes.string,
   setActive: PropTypes.func,
   itemHeadingLevel: PropTypes.oneOf([2, 3]),
   renderAsLink: PropTypes.bool

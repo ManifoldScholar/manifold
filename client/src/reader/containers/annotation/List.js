@@ -1,91 +1,72 @@
-import React, { PureComponent } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { annotationsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
-import { select } from "utils/entityUtils";
+import { useDispatch } from "react-redux";
+import { annotationsAPI } from "api";
 import Annotation from "global/components/Annotation";
+import { useFetch, useFromStore } from "hooks";
 
-const { request } = entityStoreActions;
+export default function AnnotationList({
+  annotationIds,
+  createHandler,
+  loginHandler,
+  focusHandler,
+  closeDrawer,
+  sectionId,
+  textId
+}) {
+  const dispatch = useDispatch();
 
-export class AnnotationList extends PureComponent {
-  static mapStateToProps = (state, ownProps) => {
-    const newState = {
-      annotations: select(requests.rDrawerAnnotations, state.entityStore) || [],
-      authentication: state.authentication
-    };
-    return { ...newState, ...ownProps };
-  };
+  const { data: annotations = [] } = useFetch({
+    request: [
+      annotationsAPI.forSection,
+      sectionId,
+      textId,
+      { ids: annotationIds }
+    ],
+    condition: !!sectionId && !!textId && annotationIds?.length > 0
+  });
 
-  static displayName = "Annotation.List";
+  const authentication = useFromStore({ path: "authentication" });
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    loginHandler: PropTypes.func.isRequired,
-    annotationIds: PropTypes.array.isRequired,
-    createHandler: PropTypes.func.isRequired,
-    focusHandler: PropTypes.func,
-    annotations: PropTypes.array,
-    closeDrawer: PropTypes.func,
-    sectionId: PropTypes.string,
-    textId: PropTypes.string
-  };
-
-  static defaultProps = {
-    annotations: []
-  };
-
-  componentDidMount() {
-    this.fetchAnnotations(this.props);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.annotations.length === 0 &&
-      prevProps.annotations.length > 0
-    ) {
-      this.props.closeDrawer();
+  useEffect(() => {
+    if (annotations.length === 0 && closeDrawer) {
+      closeDrawer();
     }
-  }
+  }, [annotations.length, closeDrawer]);
 
-  fetchAnnotations(props) {
-    const { sectionId, textId } = this.props ?? {};
-    const annotationsCall = annotationsAPI.forSection(sectionId, textId, {
-      ids: this.props.annotationIds
-    });
-    props.dispatch(request(annotationsCall, requests.rDrawerAnnotations));
-  }
-
-  saveAnnotation = (model, group) => {
+  const saveAnnotation = (model, group) => {
     const attributes = { ...group.selection, ...model.attributes };
     const newModel = { ...model, attributes };
-    return this.props.createHandler(newModel);
+    return createHandler(newModel);
   };
 
-  showUnverifiedWarning = () => {
-    const { authentication } = this.props;
+  const showUnverifiedWarning = () => {
     if (!authentication?.authenticated) return false;
-
     const { currentUser } = authentication;
     const { trusted, established } = currentUser.attributes;
-    if (!trusted && !established) return true;
-    return false;
+    return !trusted && !established;
   };
 
-  render() {
-    const { annotations } = this.props;
-
-    return (
-      <Annotation.List.GroupedBySelection
-        saveAnnotation={this.saveAnnotation}
-        annotations={annotations}
-        loginHandler={this.props.loginHandler}
-        focusHandler={this.props.focusHandler}
-        dispatch={this.props.dispatch}
-        showUnverifiedWarning={this.showUnverifiedWarning()}
-      />
-    );
-  }
+  return (
+    <Annotation.List.GroupedBySelection
+      saveAnnotation={saveAnnotation}
+      annotations={annotations}
+      loginHandler={loginHandler}
+      focusHandler={focusHandler}
+      dispatch={dispatch}
+      showUnverifiedWarning={showUnverifiedWarning()}
+    />
+  );
 }
 
-export default connect(AnnotationList.mapStateToProps)(AnnotationList);
+AnnotationList.displayName = "Annotation.List";
+
+AnnotationList.propTypes = {
+  loginHandler: PropTypes.func.isRequired,
+  annotationIds: PropTypes.array.isRequired,
+  createHandler: PropTypes.func.isRequired,
+  focusHandler: PropTypes.func,
+  closeDrawer: PropTypes.func,
+  sectionId: PropTypes.string,
+  textId: PropTypes.string
+};

@@ -27,4 +27,11 @@ export const Flex = styled.div`
 export const CreateButton = styled(NavLink)`
   margin-block-start: ${textGap};
   margin-inline-start: ${textGap};
+
+  &.active {
+    color: var(--color-neutral-text-extra-dark);
+    background-color: var(--button-tertiary-bg-hover-color);
+    border-color: var(--button-tertiary-bg-hover-color);
+    outline: 0;
+  }
 `;
