@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
@@ -24,7 +22,3 @@ export default function IssueDetailContainer({ project, breadcrumbs }) {
     </>
   );
 }
-
-IssueDetailContainer.propTypes = {
-  issue: PropTypes.object
-};

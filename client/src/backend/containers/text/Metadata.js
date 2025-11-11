@@ -1,24 +1,21 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Metadata from "backend/components/metadata";
 import { textsAPI } from "api";
 
-export default class TextMetadataContainer extends PureComponent {
-  static displayName = "Text.Metadata";
+export default function TextMetadataContainer() {
+  const { text } = useOutletContext() || {};
 
-  static propTypes = {
-    text: PropTypes.object
-  };
+  if (!text) return null;
 
-  render() {
-    return (
-      <Metadata.Form
-        model={this.props.text}
-        name="backend-project-general"
-        update={textsAPI.update}
-        create={textsAPI.create}
-        className="form-secondary"
-      />
-    );
-  }
+  return (
+    <Metadata.Form
+      model={text}
+      name="backend-project-general"
+      update={textsAPI.update}
+      create={textsAPI.create}
+      className="form-secondary"
+    />
+  );
 }
+
+TextMetadataContainer.displayName = "Text.Metadata";

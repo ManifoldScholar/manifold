@@ -1,16 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { readingGroupsAPI } from "api";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext, useNavigate } from "react-router-dom";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useListFilters, useListQueryParams } from "hooks";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
-function ReadingGroupAnnotationsContainer({
-  readingGroup,
-  refresh,
-  fetchVersion
-}) {
+export default function ReadingGroupAnnotationsContainer() {
+  const { readingGroup, refresh, fetchVersion } = useOutletContext() || {};
   const { pagination, filters, setFilters } = useListQueryParams({
     initFilters: {
       formats: ["annotation"]
@@ -18,6 +15,7 @@ function ReadingGroupAnnotationsContainer({
   });
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { data: annotations, meta, refresh: refreshAnnotations } = useFetch({
     request: [readingGroupsAPI.annotations, id, filters, pagination],
@@ -34,8 +32,28 @@ function ReadingGroupAnnotationsContainer({
     options: { sortChron: true, memberships, texts }
   });
 
+  const closeUrl = lh.link("frontendReadingGroupAnnotations", readingGroup.id);
+  const closeDrawer = () => navigate(closeUrl);
+
   return readingGroup ? (
     <Styled.Body>
+      <OutletWithDrawer
+        context={{
+          readingGroup,
+          closeDrawer,
+          onArchive: () => {
+            refresh();
+            closeDrawer();
+          }
+        }}
+        drawerProps={{
+          context: "frontend",
+          size: "wide",
+          position: "overlay",
+          lockScroll: "always",
+          closeUrl
+        }}
+      />
       <EntityCollection.GroupAnnotations
         readingGroup={readingGroup}
         annotations={annotations}
@@ -50,10 +68,5 @@ function ReadingGroupAnnotationsContainer({
   ) : null;
 }
 
-ReadingGroupAnnotationsContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired,
-  fetchVersion: PropTypes.number.isRequired
-};
-
-export default ReadingGroupAnnotationsContainer;
+ReadingGroupAnnotationsContainer.displayName =
+  "Frontend.ReadingGroup.Annotations";

@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
 import HeaderNotifications from "global/components/HeaderNotifications";
@@ -11,15 +9,11 @@ import { useTranslation } from "react-i18next";
 import ProjectsToggle from "global/components/navigation/projects-dropdown/Toggle";
 import ProjectsDropdown from "global/components/navigation/projects-dropdown";
 import Authorization from "helpers/authorization";
-import { useShowJournalsActive } from "hooks";
+import { useFromStore } from "hooks";
 
-export default function LayoutHeader({
-  commonActions,
-  authentication,
-  visibility
-}) {
+export default function LayoutHeader() {
   const { t } = useTranslation();
-  const journalIsActive = useShowJournalsActive();
+  const authentication = useFromStore({ path: "authentication" });
 
   const authorization = new Authorization();
   const canUpdateProjectCollections = authorization.authorizeAbility({
@@ -75,10 +69,6 @@ export default function LayoutHeader({
             </HeaderLogo>
             <Navigation.Primary
               links={hasAnyAdminAccess ? links : []}
-              journalIsActive={journalIsActive}
-              commonActions={commonActions}
-              authentication={authentication}
-              visibility={visibility}
               mode="backend"
               darkTheme
             />
@@ -92,9 +82,3 @@ export default function LayoutHeader({
 }
 
 LayoutHeader.displayName = "Layout.Header";
-
-LayoutHeader.propTypes = {
-  visibility: PropTypes.object,
-  authentication: PropTypes.object,
-  commonActions: PropTypes.object
-};

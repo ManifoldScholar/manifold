@@ -1,4 +1,3 @@
-import React from "react";
 import lh from "helpers/linkHandler";
 import compact from "lodash/compact";
 

@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import textTracksAPI from "api/resources/textTracks";
 import EntitiesList, {
   Button,
@@ -9,14 +9,14 @@ import EntitiesList, {
 import { useFetch, useApiCallback } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import withConfirmation from "hoc/withConfirmation";
 
-function TextTracksListContainer({ resource, route, confirm }) {
+function TextTracksListContainer({ confirm }) {
   const { t } = useTranslation();
+  const { resource } = useOutletContext();
 
-  /* eslint-disable-next-line no-unused-vars */
-  const { data: tracks, meta, refresh } = useFetch({
+  const { data: tracks, refresh } = useFetch({
     request: [textTracksAPI.index, resource.id]
   });
 
@@ -24,7 +24,7 @@ function TextTracksListContainer({ resource, route, confirm }) {
     return textTracksAPI.destroy(resource.id, id);
   });
 
-  const onDelete = id => {
+  const onDelete = async id => {
     const heading = t("modals.delete_track");
     const message = t("modals.confirm_body");
     if (confirm) {
@@ -35,22 +35,18 @@ function TextTracksListContainer({ resource, route, confirm }) {
     }
   };
 
-  const renderChildRoutes = () => {
-    const closeUrl = lh.link("backendResourceTracks", resource.id);
+  const closeUrl = lh.link("backendResourceTracks", resource.id);
 
-    return childRoutes(route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        closeUrl
-      },
-      childProps: { resource, refresh }
-    });
+  const drawerProps = {
+    lockScroll: "always",
+    closeUrl
   };
+
+  const context = { resource, refresh };
 
   return (
     <>
-      {renderChildRoutes()}
+      <OutletWithDrawer drawerProps={drawerProps} context={context} />
       <PageHeader type="list" title={t("titles.tracks")} hideBreadcrumbs />
       {!!tracks && (
         <EntitiesList
@@ -74,8 +70,6 @@ function TextTracksListContainer({ resource, route, confirm }) {
 
 TextTracksListContainer.displayName = "Resource.Tracks";
 TextTracksListContainer.propTypes = {
-  resource: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired,
   confirm: PropTypes.func
 };
 

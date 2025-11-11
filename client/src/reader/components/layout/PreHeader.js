@@ -1,13 +1,10 @@
-import React, { PureComponent } from "react";
 import withPluginReplacement from "hoc/withPluginReplacement";
 
-class LayoutPreHeader extends PureComponent {
-  static displayName = "Reader.Layout.PreHeader";
-
-  render() {
-    return null;
-  }
+function LayoutPreHeader() {
+  return null;
 }
+
+LayoutPreHeader.displayName = "Reader.Layout.PreHeader";
 
 export default withPluginReplacement(
   LayoutPreHeader,

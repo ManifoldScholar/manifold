@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import Helper from "global/components/helper";
 import useDialog from "@castiron/hooks/useDialog";
 import Utility from "frontend/components/utility";
@@ -12,13 +11,11 @@ import InlineToggle from "./InlineToggle";
 import FlagToggle from "./Flag/Toggle";
 import CommentContainer from "global/containers/comment";
 import { annotationsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
 import Authorize from "hoc/Authorize";
 import { useCurrentUser } from "hooks";
+import useApiCallback from "hooks/api/useApiCallback";
 import * as Styled from "./styles";
 import { useUID } from "react-uid";
-
-const { request } = entityStoreActions;
 
 export default function AnnotationDetail({
   includeComments = true,
@@ -30,7 +27,6 @@ export default function AnnotationDetail({
   refresh,
   closeDrawer
 }) {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const currentUser = useCurrentUser();
 
@@ -70,20 +66,23 @@ export default function AnnotationDetail({
     editDialog.onCloseClick();
   };
 
-  const saveAnnotation = data => {
-    const call = annotationsAPI.update(data.id, data.attributes);
-    const res = dispatch(request(call, requests.rAnnotationUpdate));
-    return res.promise;
+  const updateAnnotation = useApiCallback(annotationsAPI.update, {
+    requestKey: requests.rAnnotationUpdate
+  });
+
+  const saveAnnotation = async data => {
+    return updateAnnotation(data.id, data.attributes);
   };
 
-  const deleteAnnotation = () => {
-    const call = annotationsAPI.destroy(annotation.id);
-    const options = { removes: { type: "annotations", id: annotation.id } };
-    const res = dispatch(request(call, requests.rAnnotationDestroy, options));
-    return res.promise.then(() => {
-      if (closeDrawer) closeDrawer();
-    });
-  };
+  const destroyAnnotation = useApiCallback(annotationsAPI.destroy, {
+    requestKey: requests.rAnnotationDestroy,
+    removes: { type: "annotations", id: annotation.id }
+  });
+
+  const deleteAnnotation = useCallback(async () => {
+    await destroyAnnotation(annotation.id);
+    if (closeDrawer) closeDrawer();
+  }, [annotation.id, destroyAnnotation, closeDrawer]);
 
   const toggleComments = () => {
     setShowComments(!showComments);
