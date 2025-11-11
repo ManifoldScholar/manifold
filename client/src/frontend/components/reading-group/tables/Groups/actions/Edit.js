@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Action from "global/components/table/Action";
@@ -11,12 +10,11 @@ function EditGroup({ readingGroup }) {
 
   if (!canEdit) return null;
 
-  const baseLink = lh.link(
-    "frontendReadingGroupHomepageStatic",
-    readingGroup.id
+  return (
+    <Action to={lh.link("frontendReadingGroupDetailSettings", readingGroup.id)}>
+      {t("actions.edit")}
+    </Action>
   );
-  const hash = "settings";
-  return <Action to={`${baseLink}#${hash}`}>{t("actions.edit")}</Action>;
 }
 
 EditGroup.displayName = "GroupsTable.Group.Edit";

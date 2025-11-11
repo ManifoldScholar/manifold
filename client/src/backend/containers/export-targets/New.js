@@ -1,51 +1,42 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useMemo } from "react";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 import Form from "./Form";
 
-export class ExportTargetsNewContainer extends PureComponent {
-  static displayName = "ExportTargets.New";
+export default function ExportTargetsNewContainer() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-    t: PropTypes.func
-  };
-
-  constructor(props) {
-    super(props);
-    this.defaultExportTarget = {
+  const defaultExportTarget = useMemo(
+    () => ({
       attributes: {
         strategy: "sftp_key",
         configuration: {
           targetNameFormat: "%s.%e"
         }
       }
-    };
-  }
+    }),
+    []
+  );
 
-  redirectToExportTarget(exportTarget) {
+  const redirectToExportTarget = exportTarget => {
     const path = lh.link("backendSettingsExportTargets", exportTarget.id);
-    this.props.history.push(path, { keepNotifications: true });
-  }
+    navigate(path, { state: { keepNotifications: true } });
+  };
 
-  render() {
-    return (
-      <section>
-        <Layout.DrawerHeader
-          title={this.props.t("settings.export_targets.form_header")}
-        />
-        <Form
-          model={this.defaultExportTarget}
-          onSuccess={exportTarget => this.redirectToExportTarget(exportTarget)}
-          options={{ adds: requests.beExportTargets }}
-        />
-      </section>
-    );
-  }
+  return (
+    <section>
+      <Layout.DrawerHeader title={t("settings.export_targets.form_header")} />
+      <Form
+        model={defaultExportTarget}
+        onSuccess={redirectToExportTarget}
+        options={{ adds: requests.beExportTargets }}
+      />
+    </section>
+  );
 }
 
-export default withTranslation()(connectAndFetch(ExportTargetsNewContainer));
+ExportTargetsNewContainer.displayName = "ExportTargets.New";

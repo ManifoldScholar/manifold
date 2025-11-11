@@ -1,7 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { childRoutes } from "helpers/router";
+import { useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import EntitlementsContainer from "backend/containers/entitlements";
 import Authorize from "hoc/Authorize";
 import Authorization from "helpers/authorization";
@@ -9,8 +8,10 @@ import Layout from "backend/components/layout";
 import { useFromStore } from "hooks";
 import Permissions from "./Permissions";
 
-export default function JournalAccessWrapper({ journal, route }) {
-  const closeUrl = lh.link("backendJournalAccess", journal.id);
+export default function JournalAccessWrapper() {
+  const { journal } = useOutletContext() || {};
+
+  const closeUrl = lh.link("backendJournalAccess", journal?.id);
 
   const authorization = new Authorization();
   const authentication = useFromStore({ path: "authentication" });
@@ -21,7 +22,9 @@ export default function JournalAccessWrapper({ journal, route }) {
     ability: "managePermissions"
   });
 
-  return journal ? (
+  if (!journal) return null;
+
+  return (
     <>
       <Authorize
         entity={journal}
@@ -34,21 +37,15 @@ export default function JournalAccessWrapper({ journal, route }) {
           <EntitlementsContainer.List entity={journal} />
         </Layout.BackendPanel>
       </Authorize>
-      {childRoutes(route, {
-        drawer: true,
-        drawerProps: { closeUrl, lockScroll: "always" },
-        childProps: {
+      <OutletWithDrawer
+        drawerProps={{ closeUrl, lockScroll: "always" }}
+        context={{
           entity: journal,
           closeUrl
-        }
-      })}
+        }}
+      />
     </>
-  ) : null;
+  );
 }
 
 JournalAccessWrapper.displayName = "Journal.Access.Wrapper";
-
-JournalAccessWrapper.propTypes = {
-  journal: PropTypes.object,
-  route: PropTypes.object
-};
