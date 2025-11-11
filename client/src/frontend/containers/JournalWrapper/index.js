@@ -2,12 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { journalsAPI } from "api";
-import {
-  Redirect,
-  useLocation,
-  useParams,
-  useRouteMatch
-} from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom-v5-compat";
 import { useFetch, useRedirectToFirstMatch } from "hooks";
 import { childRoutes } from "helpers/router";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -18,9 +14,8 @@ export default function JournalWrapper({ route }) {
   const { data: journal, response } = useFetch({
     request: [journalsAPI.show, id]
   });
-  const { path } = useRouteMatch();
   const location = useLocation();
-  const isHomePage = location.pathname === path;
+  const isHomePage = location.pathname === `/journals/${id}`;
 
   useRedirectToFirstMatch({
     route: "frontendJournal",
