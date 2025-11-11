@@ -4,13 +4,17 @@ import { respond } from "theme/styles/mixins";
 
 export const List = styled("ul", transientOptions)`
   --gap: 18px;
+  --Button-min-inline-size: 100%;
 
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap);
   margin: 0;
 
-  ${({ $count }) => respond(`justify-content: center;`, $count > 3 ? 120 : 75)}
+  ${({ $count }) => `
+    ${respond(`justify-content: center;`, $count > 3 ? 120 : 75)}
+    ${$count >= 5 ? `${respond(`margin-inline: -26px;`, 120)}` : ``}
+  `}
 
   > * {
     flex-basis: 100%;
