@@ -1,26 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { textsAPI } from "api";
 
-export default function TextPropertiesContainer({ text }) {
-  const { t } = useTranslation();
+const formatData = data => {
+  const { coverAltText, cover, ...rest } = data?.attributes ?? {};
 
-  const formatData = data => {
-    const { coverAltText, cover, ...rest } = data?.attributes ?? {};
+  const finalCoverData =
+    typeof coverAltText === "string"
+      ? { ...cover, altText: coverAltText }
+      : cover;
 
-    const finalCoverData =
-      typeof coverAltText === "string"
-        ? { ...cover, altText: coverAltText }
-        : cover;
-
-    return {
-      ...data,
-      attributes: { cover: finalCoverData, ...rest }
-    };
+  return {
+    ...data,
+    attributes: { cover: finalCoverData, ...rest }
   };
+};
+
+export default function TextPropertiesContainer() {
+  const { t } = useTranslation();
+  const { text } = useOutletContext() || {};
+
+  if (!text) return null;
 
   return (
     <section>
@@ -133,7 +135,3 @@ export default function TextPropertiesContainer({ text }) {
 }
 
 TextPropertiesContainer.displayName = "Text.Properties";
-
-TextPropertiesContainer.propTypes = {
-  text: PropTypes.object
-};

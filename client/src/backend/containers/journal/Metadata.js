@@ -1,11 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Metadata from "backend/components/metadata";
 import { journalsAPI } from "api";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 
-export function JournalMetadataContainer({ journal }) {
+export default function JournalMetadataContainer() {
+  const { journal } = useOutletContext() || {};
+
+  if (!journal) return null;
+
   return (
     <Authorize
       entity={journal}
@@ -23,9 +26,3 @@ export function JournalMetadataContainer({ journal }) {
     </Authorize>
   );
 }
-
-JournalMetadataContainer.propTypes = {
-  journal: PropTypes.object
-};
-
-export default JournalMetadataContainer;

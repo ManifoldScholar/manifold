@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { entitlementImportsAPI } from "api";
 import EntitiesList, {
@@ -48,8 +46,3 @@ export default function EntitlementImportsList() {
 }
 
 EntitlementImportsList.displayName = "EntitlementImports.List";
-
-EntitlementImportsList.propTypes = {
-  entitiesListSearchProps: PropTypes.func,
-  entitiesListSearchParams: PropTypes.object
-};

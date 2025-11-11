@@ -1,36 +1,31 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Metadata from "backend/components/metadata";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
-
 import Authorize from "hoc/Authorize";
 
-export default class ProjectMetadataContainer extends PureComponent {
-  static displayName = "Project.Metadata";
+export default function ProjectMetadataContainer() {
+  const outletContext = useOutletContext() || {};
+  const { project } = outletContext;
 
-  static propTypes = {
-    project: PropTypes.object
-  };
+  if (!project) return null;
 
-  render() {
-    const project = this.props.project;
-
-    return (
-      <Authorize
-        entity={project}
-        ability="update"
-        failureNotification
-        failureRedirect={lh.link("backendProject", project.id)}
-      >
-        <Metadata.Form
-          model={project}
-          name="backend-project-general"
-          update={projectsAPI.update}
-          create={projectsAPI.create}
-          className="form-secondary"
-        />
-      </Authorize>
-    );
-  }
+  return (
+    <Authorize
+      entity={project}
+      ability="update"
+      failureNotification
+      failureRedirect={lh.link("backendProjects")}
+    >
+      <Metadata.Form
+        model={project}
+        name="backend-project-general"
+        update={projectsAPI.update}
+        create={projectsAPI.create}
+        className="form-secondary"
+      />
+    </Authorize>
+  );
 }
+
+ProjectMetadataContainer.displayName = "Project.Metadata";

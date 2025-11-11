@@ -36,25 +36,11 @@ function withFormOptions(WrappedComponent) {
 
     /* See the Form.Picker component for documentation of most of these props */
     static propTypes = {
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string,
       set: PropTypes.func.isRequired,
       updateOptions: PropTypes.func,
-      options: PropTypes.oneOfType([
-        PropTypes.arrayOf(
-          PropTypes.oneOfType([
-            PropTypes.shape({
-              label: PropTypes.string.isRequired,
-              instructions: PropTypes.string,
-              value: PropTypes.any.isRequired
-            }),
-            PropTypes.shape({
-              id: PropTypes.string.isRequired,
-              attributes: PropTypes.object
-            })
-          ])
-        ),
-        PropTypes.func
-      ]).isRequired,
+      options: PropTypes.oneOfType([PropTypes.array, PropTypes.func])
+        .isRequired,
       value: PropTypes.any,
       predictive: PropTypes.bool,
       optionToLabel: PropTypes.func,

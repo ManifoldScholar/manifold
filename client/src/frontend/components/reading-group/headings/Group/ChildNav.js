@@ -33,12 +33,8 @@ function ChildNav({ readingGroup }) {
       to: homePaths.static,
       text: t("navigation.reading_group.home"),
       icon: "star24",
-      exact: false,
-      isActive: (match, location) => {
-        if (!match) return false;
-        const isHomePath = Object.values(homePaths).includes(location.pathname);
-        return isHomePath;
-      }
+      exact: true,
+      isActive: location => Object.values(homePaths).includes(location.pathname)
     });
   }
 

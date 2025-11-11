@@ -1,10 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import Layout from "backend/components/layout";
 import { CSVImport } from "backend/components/pending-entitlements";
 
-export default function EntitlementImportContainer({ refresh }) {
+export default function EntitlementImportContainer() {
+  const outletContext = useOutletContext() || {};
+  const { refresh } = outletContext;
   const { t } = useTranslation();
 
   return (
@@ -16,5 +17,3 @@ export default function EntitlementImportContainer({ refresh }) {
 }
 
 EntitlementImportContainer.displayName = "PendingEntitlements.Import";
-
-EntitlementImportContainer.propTypes = {};

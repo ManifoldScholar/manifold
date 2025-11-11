@@ -1,2 +1,7 @@
-export Add from "./Add";
-export List from "./List";
+import Add from "./Add";
+import List from "./List";
+
+export default {
+  Add,
+  List
+};

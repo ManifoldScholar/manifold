@@ -1,123 +1,58 @@
-import React, { Component } from "react";
+import { useMemo } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import { BrowserRouter, StaticRouter } from "react-router-dom";
-import { CompatRouter } from "react-router-dom-v5-compat";
-import Dialog from "global/components/dialog";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { StaticRouterProvider } from "react-router";
 import { Provider } from "react-redux";
-import Manifold from "global/containers/Manifold";
-import get from "lodash/get";
-import Analytics from "hoc/analytics";
 import { HelmetProvider } from "react-helmet-async";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
 import "utils/i18n";
 import { UIDReset } from "react-uid";
+import createRouter from "routes/createRouter";
+import { setStore } from "store/storeInstance";
 
-class App extends Component {
-  static propTypes = {
-    store: PropTypes.object,
-    staticContext: PropTypes.object,
-    staticRequest: PropTypes.object,
-    helmetContext: PropTypes.object,
-    t: PropTypes.func
-  };
-
-  static defaultProps = {
-    helmetContext: {}
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      bootstrapped: false,
-      store: null,
-      routerConfirm: false,
-      routerConfirmCallback: null,
-      routerConfirmMessage: null
-    };
-  }
-
-  getConfirmation = (message, callback) => {
-    this.setState({
-      routerConfirm: true,
-      routerConfirmMessage: message,
-      routerConfirmCallback: callback
-    });
-  };
-
-  getRouter() {
-    if (this.props.staticRequest) {
-      return {
-        Router: StaticRouter,
-        routerProps: {
-          context: this.props.staticContext,
-          location: this.props.staticRequest.url
-        }
-      };
+export default function App({
+  store,
+  staticContext,
+  staticRequest,
+  helmetContext = {},
+  staticRouter
+}) {
+  // Create router for client-side (only if not SSR)
+  const browserRouter = useMemo(() => {
+    if (!staticRequest) {
+      setStore(store);
+      const routes = createRouter();
+      return createBrowserRouter(routes);
     }
-    return {
-      Router: BrowserRouter,
-      routerProps: {
-        getUserConfirmation: this.getConfirmation
-      }
-    };
-  }
+    return null;
+  }, [staticRequest, store]);
 
-  get authToken() {
-    return get(this.props.store.getState(), "authentication.authToken");
-  }
-
-  get settings() {
-    return get(
-      this.props.store.getState(),
-      "entityStore.entities.settings.0.attributes"
+  // Router provider - SSR uses StaticRouterProvider, client uses RouterProvider
+  // Both render the matched route directly (no children)
+  const routerProvider =
+    staticRequest && staticRouter ? (
+      <StaticRouterProvider router={staticRouter} context={staticContext} />
+    ) : (
+      <RouterProvider router={browserRouter} />
     );
-  }
 
-  resolveRouterConfirm = answer => {
-    this.state.routerConfirmCallback(answer);
-    this.setState({
-      routerConfirm: false,
-      routerConfirmMessage: null,
-      routerConfirmCallback: null
-    });
-  };
-
-  renderConfirm() {
-    if (!this.state.routerConfirm) return null;
-    return (
-      <Dialog.Confirm
-        message={this.state.routerConfirmMessage}
-        heading={this.props.t("messages.confirm")}
-        resolve={() => this.resolveRouterConfirm(true)}
-        reject={() => this.resolveRouterConfirm(false)}
-      />
-    );
-  }
-
-  render() {
-    const { routerProps, Router } = this.getRouter();
-    return (
-      <Provider store={this.props.store} key="provider">
-        <UIDReset prefix="uid_">
-          <Router {...routerProps}>
-            <CompatRouter>
-              <Analytics
-                dispatch={this.props.store.dispatch}
-                settings={this.settings}
-              >
-                <HelmetProvider context={this.props.helmetContext}>
-                  <GlobalStyles styles={styles} />
-                  <Manifold confirm={this.renderConfirm()} />
-                </HelmetProvider>
-              </Analytics>
-            </CompatRouter>
-          </Router>
-        </UIDReset>
-      </Provider>
-    );
-  }
+  return (
+    <Provider store={store} key="provider">
+      <UIDReset prefix="uid_">
+        <HelmetProvider context={helmetContext}>
+          <GlobalStyles styles={styles} />
+          {routerProvider}
+        </HelmetProvider>
+      </UIDReset>
+    </Provider>
+  );
 }
 
-export default withTranslation()(App);
+App.propTypes = {
+  store: PropTypes.object,
+  staticContext: PropTypes.object,
+  staticRequest: PropTypes.object,
+  helmetContext: PropTypes.object,
+  staticRouter: PropTypes.object
+};

@@ -1,13 +1,14 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { usersAPI } from "api";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import * as Styled from "./styles";
 
-export default function UserProperties({ user, saveLabel }) {
+export default function UserProperties({ saveLabel }) {
+  const outletContext = useOutletContext() || {};
+  const { user } = outletContext;
   const { t } = useTranslation();
   const navigate = useNavigate();
 

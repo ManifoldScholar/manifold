@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import {
   useFetch,
@@ -12,19 +11,19 @@ import CollectionNavigation from "frontend/components/CollectionNavigation";
 import HeadContent from "global/components/HeadContent";
 import { journalIssuesAPI, requests } from "api";
 
+const FILTERS_RESET = {
+  standaloneModeEnforced: false,
+  order: "sort_title DESC"
+};
+
 export default function IssuesListContainer() {
   const subjects = useFromStore({
     requestKey: requests.feSubjects,
     action: "select"
   });
 
-  const filtersReset = useMemo(
-    () => ({ standaloneModeEnforced: false, order: "sort_title DESC" }),
-    []
-  );
-
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filtersReset
+    initFilters: FILTERS_RESET
   });
 
   const { data: issues, meta, loaded } = useFetch({
@@ -34,7 +33,7 @@ export default function IssuesListContainer() {
   const filterProps = useListFilters({
     onFilterChange: state => setFilters(state),
     initialState: filters,
-    resetState: filtersReset,
+    resetState: FILTERS_RESET,
     options: {
       entityType: "journalIssue",
       sort: true,

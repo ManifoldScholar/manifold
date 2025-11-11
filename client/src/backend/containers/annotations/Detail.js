@@ -1,9 +1,9 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import Layout from "backend/components/layout";
-import { useNavigate } from "react-router-dom-v5-compat";
-import { useParams } from "react-router-dom";
 import { useFetch, useApiCallback } from "hooks";
 import { annotationsAPI } from "api";
 import lh from "helpers/linkHandler";
@@ -15,18 +15,28 @@ import {
 import withConfirmation from "hoc/withConfirmation";
 
 function AnnotationDetailContainer({
-  refresh,
   confirm,
-  readingGroup,
-  refreshAnnotations
+  refresh,
+  refreshAnnotations,
+  readingGroup: readingGroupProp
 }) {
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { annotationId, id } = useParams();
   const navigate = useNavigate();
+  const outletContext = useOutletContext() || {};
+
+  // Get readingGroup from outlet context if available, otherwise use prop
+  const readingGroup = outletContext.readingGroup || readingGroupProp;
+  // Get refresh functions from outlet context if available, otherwise use props
+  const refreshFromContext = outletContext.refresh;
+  const refreshAnnotationsFromContext = outletContext.refreshAnnotations;
+
+  // Use annotationId from route if available (v6 route), otherwise fall back to id (for other routes)
+  const annotationIdParam = annotationId || id;
 
   const { data: annotation, refresh: refreshAnnotation } = useFetch({
-    request: [annotationsAPI.show, id],
-    condition: !!id
+    request: [annotationsAPI.show, annotationIdParam],
+    condition: !!annotationIdParam
   });
 
   const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
@@ -36,24 +46,28 @@ function AnnotationDetailContainer({
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
-        await deleteAnnotation(id);
+        await deleteAnnotation(annotationIdParam);
 
         if (readingGroup) {
-          refreshAnnotations();
+          const refreshFn = refreshAnnotationsFromContext || refreshAnnotations;
+          if (refreshFn) refreshFn();
           navigate(lh.link("backendReadingGroupAnnotations", readingGroup.id));
         } else {
-          refresh();
+          const refreshFn = refreshFromContext || refresh;
+          if (refreshFn) refreshFn();
           navigate(lh.link("backendRecordsAnnotations"));
         }
       });
   }, [
-    id,
+    annotationIdParam,
     confirm,
     deleteAnnotation,
     t,
     navigate,
+    refreshFromContext,
     refresh,
     readingGroup,
+    refreshAnnotationsFromContext,
     refreshAnnotations
   ]);
 
@@ -87,17 +101,21 @@ function AnnotationDetailContainer({
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
-        await resolveFlags(id);
+        await resolveFlags(annotationIdParam);
         refreshAnnotation();
       });
-  }, [id, confirm, resolveFlags, t, refreshAnnotation]);
+  }, [annotationIdParam, confirm, resolveFlags, t, refreshAnnotation]);
 
   const viewButton =
     !!textSlug && !!textSectionId
       ? {
           label: "actions.view",
           route: "readerSection",
-          routeParams: [textSlug, textSectionId, `#annotation-${id}`],
+          routeParams: [
+            textSlug,
+            textSectionId,
+            `#annotation-${annotationIdParam}`
+          ],
           icon: "eyeOpen32"
         }
       : {
@@ -106,7 +124,7 @@ function AnnotationDetailContainer({
           disabled: true
         };
 
-  return id ? (
+  return annotationIdParam ? (
     <section>
       <Layout.DrawerHeader
         title={t("records.annotations.detail_header")}
@@ -150,7 +168,7 @@ export default withConfirmation(AnnotationDetailContainer);
 AnnotationDetailContainer.displayName = "Annotations.AnnotationDetail";
 
 AnnotationDetailContainer.propTypes = {
-  refresh: PropTypes.func.isRequired,
+  refresh: PropTypes.func,
   refreshAnnotations: PropTypes.func,
   confirm: PropTypes.func.isRequired,
   readingGroup: PropTypes.object

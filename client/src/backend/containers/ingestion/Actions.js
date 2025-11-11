@@ -1,9 +1,7 @@
 import { useRef, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { useParams, useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
 
@@ -116,10 +114,3 @@ export default function IngestionActions({
 }
 
 IngestionActions.displayName = "Ingestion.Actions";
-
-IngestionActions.propTypes = {
-  ingestion: PropTypes.object,
-  isSection: PropTypes.bool.isRequired,
-  onStart: PropTypes.func.isRequired,
-  loading: PropTypes.bool
-};

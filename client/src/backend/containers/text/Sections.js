@@ -1,100 +1,70 @@
-import React from "react";
 import Form from "global/components/form";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext, useMatches } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import SectionsList from "backend/components/authoring/SectionsList";
 import * as Styled from "./styles";
 
-export default function TextSectionsContainer({
-  text,
-  route: baseRoute,
-  refresh
-}) {
+export default function TextSectionsContainer() {
   const { t } = useTranslation();
+  const { text, refresh } = useOutletContext() || {};
+  const matches = useMatches();
 
-  const renderChildRoutes = () => {
-    const closeUrl = lh.link("backendTextSections", text.id);
+  if (!text) return null;
 
-    const { routes, ...route } = baseRoute;
-    const drawerRoutes = {
-      ...route,
-      routes: routes.filter(r => !r.editor && !r.ingest)
+  const closeUrl = lh.link("backendTextSections", text.id);
+  const currentMatch = matches[matches.length - 1];
+  const isEditorRoute = currentMatch?.handle?.editor;
+  const isIngestRoute = currentMatch?.handle?.ingest;
+
+  const appliesToAllStylesheets = text.relationships.stylesheets
+    ?.filter(s => s.attributes.appliesToAllTextSections)
+    .map(s => s.id);
+
+  const getDrawerProps = () => {
+    if (isEditorRoute) {
+      return {
+        lockScroll: "always",
+        wide: true,
+        closeUrl,
+        padding: "xl",
+        context: "editor",
+        entrySide: "top",
+        fullScreenTitle: t("texts.edit_section"),
+        icon: "annotate32"
+      };
+    }
+    if (isIngestRoute) {
+      return {
+        lockScroll: "always",
+        closeUrl,
+        size: "default",
+        padding: "default",
+        context: "ingestion"
+      };
+    }
+    return {
+      lockScroll: "always",
+      closeUrl,
+      size: "default",
+      padding: "default"
     };
-    const editorRoute = { ...route, routes: [routes.find(r => r.editor)] };
-    const ingestRoute = { ...route, routes: [routes.find(r => r.ingest)] };
+  };
 
-    const appliesToAllStylesheets = text.relationships.stylesheets
-      ?.filter(s => s.attributes.appliesToAllTextSections)
-      .map(s => s.id);
-
-    return (
-      <>
-        {childRoutes(editorRoute, {
-          drawer: true,
-          drawerProps: {
-            lockScroll: "always",
-            lockScrollClickCloses: false,
-            wide: true,
-            closeUrl,
-            padding: "xl",
-            context: "editor",
-            entrySide: "top",
-            fullScreenTitle: t("texts.edit_section"),
-            icon: "annotate32"
-          },
-          childProps: {
-            textId: text.id,
-            appliesToAllStylesheets,
-            nextPosition: text.attributes?.sectionsMap?.length + 1,
-            refresh
-          }
-        })}
-        {childRoutes(ingestRoute, {
-          drawer: true,
-          drawerProps: {
-            lockScroll: "always",
-            lockScrollClickCloses: false,
-            closeUrl,
-            size: "default",
-            padding: "default",
-            context: "ingestion"
-          },
-          childProps: {
-            textId: text.id,
-            sectionIngest: true,
-            nextPosition: text.attributes?.sectionsMap?.length + 1,
-            startSectionId: text?.attributes?.startTextSectionId,
-            refresh
-          }
-        })}
-        {childRoutes(drawerRoutes, {
-          drawer: true,
-          drawerProps: {
-            lockScroll: "always",
-            lockScrollClickCloses: false,
-            closeUrl,
-            size: "default",
-            padding: "default"
-          },
-          childProps: {
-            textId: text.id,
-            sectionIngest: true,
-            nextPosition: text.attributes?.sectionsMap?.length + 1,
-            startSectionId: text?.attributes?.startTextSectionId,
-            refresh
-          }
-        })}
-      </>
-    );
+  const context = {
+    textId: text.id,
+    appliesToAllStylesheets,
+    nextPosition: text.attributes?.sectionsMap?.length + 1,
+    startSectionId: text?.attributes?.startTextSectionId,
+    sectionIngest: true,
+    refresh
   };
 
   return (
     <section>
-      {renderChildRoutes()}
+      <OutletWithDrawer drawerProps={getDrawerProps()} context={context} />
       <Styled.Form
         className="form-secondary"
         doNotWarn
@@ -152,8 +122,3 @@ export default function TextSectionsContainer({
 }
 
 TextSectionsContainer.displayName = "Text.Sections";
-
-TextSectionsContainer.propTypes = {
-  text: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired
-};

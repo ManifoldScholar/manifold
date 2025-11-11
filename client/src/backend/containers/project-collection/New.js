@@ -1,65 +1,47 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import ProjectCollection from "backend/components/project-collection";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
+import { projectCollectionsAPI } from "api";
 import lh from "helpers/linkHandler";
-
 import Authorize from "hoc/Authorize";
 
-class ProjectCollectionNew extends PureComponent {
-  static displayName = "ProjectCollection.New";
-
-  static propTypes = {
-    buildUpdateProjectCollection: PropTypes.func.isRequired,
-    buildCreateProjectCollection: PropTypes.func.isRequired,
-    handleNewSuccess: PropTypes.func.isRequired,
-    t: PropTypes.func
-  };
-
-  constructor(props) {
-    super(props);
-    this.model = this.defaultModel;
+const DEFAULT_MODEL = {
+  attributes: {
+    numberOfProjects: 8
+  },
+  relationships: {
+    subjects: []
   }
+};
 
-  get defaultModel() {
-    return {
-      attributes: {
-        numberOfProjects: 8
-      },
-      relationships: {
-        subjects: []
-      }
-    };
-  }
+export default function ProjectCollectionNew() {
+  const { t } = useTranslation();
+  const { handleNewSuccess } = useOutletContext() || {};
 
-  render() {
-    return (
-      <Authorize
-        entity="projectCollection"
-        ability="create"
-        failureNotification
-        failureRedirect={lh.link("backendProjectCollections")}
-      >
-        <section>
-          <FormContainer.Form
-            model={this.model}
-            name="backend-project-collection-create"
-            update={this.props.buildUpdateProjectCollection}
-            create={this.props.buildCreateProjectCollection}
-            onSuccess={this.props.handleNewSuccess}
-            className="form-secondary project-collection-form"
-          >
-            <ProjectCollection.Form.Fields {...this.props} />
-            <Form.Save
-              text={this.props.t("project_collections.save_button_label")}
-            />
-          </FormContainer.Form>
-        </section>
-      </Authorize>
-    );
-  }
+  return (
+    <Authorize
+      entity="projectCollection"
+      ability="create"
+      failureNotification
+      failureRedirect={lh.link("backendProjectCollections")}
+    >
+      <section>
+        <FormContainer.Form
+          model={DEFAULT_MODEL}
+          name="backend-project-collection-create"
+          update={projectCollectionsAPI.update}
+          create={projectCollectionsAPI.create}
+          onSuccess={handleNewSuccess}
+          className="form-secondary project-collection-form"
+        >
+          <ProjectCollection.Form.Fields />
+          <Form.Save text={t("project_collections.save_button_label")} />
+        </FormContainer.Form>
+      </section>
+    </Authorize>
+  );
 }
 
-export default withTranslation()(ProjectCollectionNew);
+ProjectCollectionNew.displayName = "ProjectCollection.New";
