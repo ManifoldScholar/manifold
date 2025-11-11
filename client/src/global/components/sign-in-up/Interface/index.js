@@ -6,7 +6,7 @@ import Update from "../EditProfileForm";
 import Create from "../CreateUserForm";
 import Terms from "../AcceptTerms";
 import { useFromStore } from "hooks";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom-v5-compat";
 import PropTypes from "prop-types";
 
 const VIEW_COMPONENT = {

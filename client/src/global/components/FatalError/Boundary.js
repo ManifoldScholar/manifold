@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import AppFatalError from "./AppWrapper";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
 import locationHelper from "helpers/location";
 
 class FatalErrorBoundary extends Component {
@@ -71,4 +70,4 @@ class FatalErrorBoundary extends Component {
   }
 }
 
-export default withRouter(FatalErrorBoundary);
+export default FatalErrorBoundary;
