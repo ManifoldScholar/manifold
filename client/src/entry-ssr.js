@@ -107,11 +107,16 @@ const render = async (req, res, store) => {
     if (req.method === "GET" && renderError.status === 401)
       routingContext.url = `/login?redirect_uri=${req.url}`;
   } finally {
+    const state = store.getState();
+
     // Redirect if the routing context has a url prop.
     if (routingContext.url) {
       respondWithRedirect(res, routingContext.url);
+    }
+    // After migrating global/containers/Manifold to functional component we no longer hit the catch
+    else if (req.method === "GET" && state.fatalError?.error?.status === 401) {
+      respondWithRedirect(res, `/login?redirect_uri=${req.url}`);
     } else {
-      const state = store.getState();
       if (has(state, "fatalError.error.status")) {
         res.statusCode = state.fatalError.error.status;
         if (res.statusCode !== 403) {
