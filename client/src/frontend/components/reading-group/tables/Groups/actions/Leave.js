@@ -1,30 +1,21 @@
-import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Action from "global/components/table/Action";
-import { useDispatch } from "react-redux";
 import { readingGroupMembershipsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
+import { useApiCallback } from "hooks";
 
 function LeaveGroup({ membership, readingGroup, onLeave }) {
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
-  const { request } = entityStoreActions;
+  const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy, {
+    requestKey: requests.feReadingGroupMembershipDestroy,
+    removes: membership
+  });
 
-  const destroyMembership = useCallback(
-    rgMembership => {
-      const call = readingGroupMembershipsAPI.destroy(rgMembership.id);
-      const options = { removes: rgMembership };
-      const readingGroupMembershipRequest = request(
-        call,
-        requests.feReadingGroupMembershipDestroy,
-        options
-      );
-      dispatch(readingGroupMembershipRequest).promise.then(onLeave);
-    },
-    [dispatch, request, onLeave]
-  );
+  const destroyMembership = async rgMembership => {
+    await deleteMembership(rgMembership.id);
+    onLeave();
+  };
 
   const isCreator =
     membership.relationships.user.id === readingGroup.attributes.creatorId;

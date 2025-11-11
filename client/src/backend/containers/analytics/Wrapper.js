@@ -1,10 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { childRoutes } from "helpers/router";
+import { Outlet } from "react-router-dom";
 import HeadContent from "global/components/HeadContent";
 
-export default function AnalyticsWrapperContainer({ route }) {
+export default function AnalyticsWrapperContainer() {
   const { t } = useTranslation();
 
   return (
@@ -16,13 +14,11 @@ export default function AnalyticsWrapperContainer({ route }) {
       <main id="skip-to-main" tabIndex={-1}>
         <h1 className="screen-reader-text">{t("dashboard.title")}</h1>
         <section>
-          <div className="container">{childRoutes(route)}</div>
+          <div className="container">
+            <Outlet />
+          </div>
         </section>
       </main>
     </>
   );
 }
-
-AnalyticsWrapperContainer.propTypes = {
-  route: PropTypes.object
-};

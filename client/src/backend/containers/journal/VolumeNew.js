@@ -1,16 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Volume from "backend/components/volume";
 import Layout from "backend/components/layout";
 
-function JournalVolumeNew({ refreshVolumes, closeUrl, journal, history }) {
+export default function JournalVolumeNew() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { refreshVolumes, closeUrl, journal } = useOutletContext() || {};
 
   const refreshAndRedirect = () => {
-    refreshVolumes();
-    history.push(closeUrl, { keepNotifications: false });
+    if (refreshVolumes) refreshVolumes();
+    navigate(closeUrl, { state: { keepNotifications: false } });
   };
+
+  if (!journal) return null;
 
   return (
     <div>
@@ -19,12 +23,3 @@ function JournalVolumeNew({ refreshVolumes, closeUrl, journal, history }) {
     </div>
   );
 }
-
-JournalVolumeNew.propTypes = {
-  journal: PropTypes.object.isRequired,
-  closeUrl: PropTypes.string.isRequired,
-  history: PropTypes.object.isRequired,
-  refreshVolumes: PropTypes.func.isRequired
-};
-
-export default JournalVolumeNew;

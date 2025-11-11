@@ -1,23 +1,23 @@
-import React, { forwardRef, useMemo } from "react";
-import PropTypes from "prop-types";
+import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import withSearch from "hoc/withSearch";
+import { useSearchContext } from "hooks/useSearch/context";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import * as Styled from "./styles";
 
 const ProjectSearch = forwardRef((props, ref) => {
+  const { project } = useOutletContext() || {};
   const {
     results,
     resultsMeta,
     searchQueryState,
     setQueryState,
-    setPage,
-    project
-  } = props;
+    setPage
+  } = useSearchContext();
 
   const { t } = useTranslation();
 
@@ -28,15 +28,12 @@ const ProjectSearch = forwardRef((props, ref) => {
     { label: t("glossary.full_text_one"), value: "TextSection" }
   ];
 
-  const breadcrumbs = useMemo(
-    () => [
-      {
-        to: lh.link("frontendProjectDetail", project?.attributes?.slug),
-        label: project?.attributes?.titlePlaintext
-      }
-    ],
-    [project?.attributes?.titlePlaintext, project?.attributes?.slug]
-  );
+  const breadcrumbs = [
+    {
+      to: lh.link("frontendProjectDetail", project?.attributes?.slug),
+      label: project?.attributes?.titlePlaintext
+    }
+  ];
 
   return project ? (
     <div ref={ref}>
@@ -47,10 +44,6 @@ const ProjectSearch = forwardRef((props, ref) => {
         <Styled.Inner>
           <h2 className="screen-reader-text">{t("search.form")}</h2>
           <SearchQuery.Form
-            initialState={{
-              keyword: "",
-              scope: "project"
-            }}
             projectId={project.id}
             searchQueryState={searchQueryState}
             setQueryState={setQueryState}
@@ -78,13 +71,4 @@ const ProjectSearch = forwardRef((props, ref) => {
 
 ProjectSearch.displayName = "Frontend.ProjectSearchContainer";
 
-ProjectSearch.propTypes = {
-  project: PropTypes.object.isRequired,
-  results: PropTypes.array,
-  resultsMeta: PropTypes.object,
-  searchQueryState: PropTypes.object.isRequired,
-  setQueryState: PropTypes.func.isRequired,
-  setPage: PropTypes.func.isRequired
-};
-
-export default withSearch(ProjectSearch);
+export default ProjectSearch;

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -11,14 +11,14 @@ import * as Styled from "./styles";
 
 const { flush } = entityStoreActions;
 
+const ANNOTATION_FILTERS = { orphaned: false };
+
 function ResourceDetailAnnotations() {
   const { t } = useTranslation();
 
   const { resourceId } = useParams();
 
   const [annotationsPagination, setAnnotationsPage] = usePaginationState(1, 5);
-
-  const filters = useMemo(() => ({ orphaned: false }), []);
 
   const {
     data: annotations,
@@ -28,7 +28,7 @@ function ResourceDetailAnnotations() {
     request: [
       resourcesAPI.annotations,
       resourceId,
-      filters,
+      ANNOTATION_FILTERS,
       annotationsPagination
     ],
     options: {

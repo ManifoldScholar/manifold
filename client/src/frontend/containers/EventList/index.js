@@ -1,7 +1,5 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { Redirect, useParams } from "react-router-dom";
+import { useParams, useOutletContext, Navigate } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
@@ -10,7 +8,8 @@ import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
 import { useFetch, useListQueryParams } from "hooks";
 
-export default function EventList({ project, journalBreadcrumbs }) {
+export default function EventList() {
+  const { project, journalBreadcrumbs } = useOutletContext() || {};
   const { id } = useParams();
 
   // API does not send meta for this list
@@ -23,22 +22,35 @@ export default function EventList({ project, journalBreadcrumbs }) {
   const { titlePlaintext, slug, hideActivity, description, avatarStyles } =
     project?.attributes ?? {};
 
-  const breadcrumbs = useMemo(() => {
-    const projectCrumb = {
-      to: lh.link("frontendProject", slug),
-      label: titlePlaintext
-    };
-    const eventsCrumb = {
-      to: lh.link("frontendProjectEvents", slug),
-      label: t("glossary.event_other")
-    };
-    return journalBreadcrumbs
-      ? [...journalBreadcrumbs, eventsCrumb].filter(Boolean)
-      : [projectCrumb, eventsCrumb].filter(Boolean);
-  }, [journalBreadcrumbs, slug, titlePlaintext, t]);
+  const projectCrumb = {
+    to: lh.link("frontendProject", slug),
+    label: titlePlaintext
+  };
+  const eventsCrumb = {
+    to: lh.link("frontendProjectEvents", slug),
+    label: t("glossary.event_other")
+  };
+  const breadcrumbs = journalBreadcrumbs
+    ? [...journalBreadcrumbs, eventsCrumb].filter(Boolean)
+    : [projectCrumb, eventsCrumb].filter(Boolean);
 
   if (!project || !events) return null;
-  if (hideActivity) return <Redirect to={"/"} />;
+
+  if (hideActivity) {
+    const redirectUrl = lh.link(
+      "frontendProjectDetail",
+      project.attributes.slug
+    );
+
+    if (__SERVER__) {
+      throw new Response(null, {
+        status: 302,
+        headers: { Location: redirectUrl }
+      });
+    }
+
+    return <Navigate to={redirectUrl} replace />;
+  }
 
   return (
     <>
@@ -60,8 +72,3 @@ export default function EventList({ project, journalBreadcrumbs }) {
 }
 
 EventList.displayName = "Frontend.Containers.EventList";
-
-EventList.propTypes = {
-  project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
-};

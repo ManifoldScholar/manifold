@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useLocation, NavLink, matchPath } from "react-router-dom";
+import { useLocation, NavLink, useMatches } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
@@ -7,6 +7,7 @@ import IconComposer from "global/components/utility/IconComposer";
 
 export default function MobileBreadcrumb({ links, journalIsActive }) {
   const location = useLocation();
+  const matches = useMatches();
   const { t } = useTranslation();
 
   const pathForLink = link => {
@@ -30,7 +31,7 @@ export default function MobileBreadcrumb({ links, journalIsActive }) {
         return true;
 
       // Check if this route is in the current matches by route name
-      const routeMatch = matchPath(location.pathname, link);
+      const routeMatch = matches.find(m => m.handle?.name === link.route);
       if (routeMatch) return true;
 
       // Fallback: check if pathname starts with the link path

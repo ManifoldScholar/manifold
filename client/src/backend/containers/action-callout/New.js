@@ -1,52 +1,40 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
+import { useState } from "react";
+import { useOutletContext, useLocation } from "react-router-dom";
 import Form from "./Form";
 
-export class CallToActionNew extends PureComponent {
-  static displayName = "CallToAction.New";
+export default function CallToActionNew() {
+  const outletContext = useOutletContext() || {};
+  const { refreshActionCallouts, calloutable, closeRoute } = outletContext;
+  const location = useLocation();
 
-  static propTypes = {
-    location: PropTypes.object,
-    refreshActionCallouts: PropTypes.func,
-    calloutable: PropTypes.object,
-    closeRoute: PropTypes.string.isRequired
-  };
-
-  constructor(props) {
-    super(props);
-
-    let attributes = {
+  const [attributes] = useState(() => {
+    const defaultAttributes = {
       kind: "link",
       location: "left",
       position: "top",
       button: true
     };
 
-    if (props.location.state && props.location.state.actionCallout) {
-      attributes = Object.assign(
-        attributes,
-        props.location.state.actionCallout.attributes
+    if (location.state?.actionCallout) {
+      return Object.assign(
+        defaultAttributes,
+        location.state.actionCallout.attributes
       );
     }
 
-    this.state = { attributes };
-  }
+    return defaultAttributes;
+  });
 
-  get calloutable() {
-    return this.props.calloutable;
-  }
+  const actionCallout = { attributes };
 
-  render() {
-    return (
-      <Form
-        refreshActionCallouts={this.props.refreshActionCallouts}
-        actionCallout={this.state}
-        closeRoute={this.props.closeRoute}
-        calloutable={this.calloutable}
-      />
-    );
-  }
+  return (
+    <Form
+      refreshActionCallouts={refreshActionCallouts}
+      actionCallout={actionCallout}
+      closeRoute={closeRoute}
+      calloutable={calloutable}
+    />
+  );
 }
 
-export default connectAndFetch(CallToActionNew);
+CallToActionNew.displayName = "CallToAction.New";

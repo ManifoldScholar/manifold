@@ -1,9 +1,8 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import PropTypes from "prop-types";
-import withSearch from "hoc/withSearch";
+import { useSearchContext } from "hooks/useSearch/context";
 import * as Styled from "./styles";
 
 const SearchContainer = forwardRef((props, ref) => {
@@ -13,7 +12,7 @@ const SearchContainer = forwardRef((props, ref) => {
     searchQueryState,
     setQueryState,
     setPage
-  } = props;
+  } = useSearchContext();
 
   const { t } = useTranslation();
 
@@ -33,9 +32,6 @@ const SearchContainer = forwardRef((props, ref) => {
         <Styled.Inner>
           <h2 className="screen-reader-text">{t("search.form")}</h2>
           <SearchQuery.Form
-            initialState={{
-              keyword: ""
-            }}
             searchQueryState={searchQueryState}
             setQueryState={setQueryState}
             facets={facets}
@@ -61,12 +57,4 @@ const SearchContainer = forwardRef((props, ref) => {
 
 SearchContainer.displayName = "Frontend.SearchContainer";
 
-SearchContainer.propTypes = {
-  results: PropTypes.array,
-  resultsMeta: PropTypes.object,
-  searchQueryState: PropTypes.object.isRequired,
-  setQueryState: PropTypes.func.isRequired,
-  setPage: PropTypes.func.isRequired
-};
-
-export default withSearch(SearchContainer);
+export default SearchContainer;

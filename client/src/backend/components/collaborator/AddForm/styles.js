@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom-v5-compat";
+import { Link } from "react-router-dom";
 
 export const RoleButton = styled.button`
   display: flex;

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
@@ -7,7 +7,7 @@ import SectionsList from "./SectionsList";
 import { useUIDSeed } from "react-uid";
 import { textsAPI } from "api";
 import lh from "helpers/linkHandler";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 function CreateTextForm({

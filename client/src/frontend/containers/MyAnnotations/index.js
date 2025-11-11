@@ -1,5 +1,3 @@
-import React, { useCallback } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
 import HeadContent from "global/components/HeadContent";
@@ -38,17 +36,14 @@ export default function MyAnnotationsContainer() {
     condition: !allRGsDisabled
   });
 
-  const setFiltersWithHighlights = useCallback(
-    state => {
-      if (!state.privacy) return setFilters({ ...state, ...INIT_FILTER_STATE });
-      if (state.privacy === "highlight") {
-        const { privacy, ...rest } = state;
-        return setFilters({ ...rest, formats: ["highlight"] });
-      }
-      return setFilters({ ...state, formats: ["annotation"] });
-    },
-    [setFilters]
-  );
+  const setFiltersWithHighlights = state => {
+    if (!state.privacy) return setFilters({ ...state, ...INIT_FILTER_STATE });
+    if (state.privacy === "highlight") {
+      const { privacy, ...rest } = state;
+      return setFilters({ ...rest, formats: ["highlight"] });
+    }
+    return setFilters({ ...state, formats: ["annotation"] });
+  };
 
   const filterProps = useListFilters({
     onFilterChange: setFiltersWithHighlights,

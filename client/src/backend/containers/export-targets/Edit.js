@@ -1,109 +1,72 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import withConfirmation from "hoc/withConfirmation";
 import { entityStoreActions } from "actions";
-import { select } from "utils/entityUtils";
 import { exportTargetsAPI, requests } from "api";
+import { useFetch, useApiCallback } from "hooks";
 import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 import Form from "./Form";
 
-const { request, flush } = entityStoreActions;
+const { flush } = entityStoreActions;
 
-export class ExportTargetsEditContainer extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      exportTarget: select(requests.beExportTarget, state.entityStore)
+function ExportTargetsEditContainer({ confirm }) {
+  const { t } = useTranslation();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { data: exportTarget } = useFetch({
+    request: [exportTargetsAPI.show, id],
+    condition: !!id,
+    options: { requestKey: requests.beExportTarget }
+  });
+
+  useEffect(() => {
+    return () => {
+      dispatch(flush([requests.beExportTarget]));
     };
-  };
+  }, [dispatch]);
 
-  static displayName = "ExportTargets.Edit";
+  const destroyExportTarget = useApiCallback(exportTargetsAPI.destroy, {
+    removes: exportTarget
+  });
 
-  static propTypes = {
-    exportTarget: PropTypes.object,
-    match: PropTypes.object.isRequired,
-    confirm: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
-    t: PropTypes.func
-  };
+  const handleExportTargetDestroy = () => {
+    const heading = t("modals.delete_export_target");
+    const message = t("modals.confirm_body");
 
-  componentDidMount() {
-    this.fetchExportTarget(this.exportTargetID);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.params.id !== this.exportTargetID) {
-      this.fetchExportTarget(this.exportTargetID);
+    if (confirm) {
+      confirm(heading, message, async () => {
+        await destroyExportTarget(id);
+        navigate(lh.link("backendSettingsExportTargets"));
+      });
     }
-  }
-
-  componentWillUnmount() {
-    this.props.dispatch(flush([requests.beExportTarget]));
-  }
-
-  get exportTarget() {
-    return this.props.exportTarget;
-  }
-
-  get exportTargetID() {
-    return this.props.match.params.id;
-  }
-
-  destroyExportTarget = () => {
-    const { dispatch, history } = this.props;
-    const call = exportTargetsAPI.destroy(this.exportTargetID);
-    const options = { removes: this.exportTarget };
-    const exportTargetRequest = request(
-      call,
-      requests.beExportTargetDestroy,
-      options
-    );
-
-    dispatch(exportTargetRequest).promise.then(() => {
-      history.push(lh.link("backendSettingsExportTargets"));
-    });
   };
 
-  handleExportTargetDestroy = () => {
-    const heading = this.props.t("modals.delete_export_target");
-    const message = this.props.t("modals.confirm_body");
+  if (!exportTarget) return null;
+  const attr = exportTarget.attributes;
 
-    this.props.confirm(heading, message, this.destroyExportTarget);
-  };
-
-  fetchExportTarget(id) {
-    const call = exportTargetsAPI.show(id);
-    const exportTargetRequest = request(call, requests.beExportTarget);
-
-    this.props.dispatch(exportTargetRequest);
-  }
-
-  render() {
-    if (!this.exportTarget) return null;
-    const attr = this.exportTarget.attributes;
-
-    return (
-      <section>
-        <Layout.DrawerHeader
-          title={attr.name}
-          buttons={[
-            {
-              onClick: this.handleExportTargetDestroy,
-              icon: "delete32",
-              label: this.props.t("actions.delete"),
-              className: "utility-button__icon--notice"
-            }
-          ]}
-        />
-        <Form model={this.exportTarget} />
-      </section>
-    );
-  }
+  return (
+    <section>
+      <Layout.DrawerHeader
+        title={attr.name}
+        buttons={[
+          {
+            onClick: handleExportTargetDestroy,
+            icon: "delete32",
+            label: t("actions.delete"),
+            className: "utility-button__icon--notice"
+          }
+        ]}
+      />
+      <Form model={exportTarget} />
+    </section>
+  );
 }
 
-export default withTranslation()(
-  withConfirmation(connectAndFetch(ExportTargetsEditContainer))
-);
+ExportTargetsEditContainer.displayName = "ExportTargets.Edit";
+
+export default withConfirmation(ExportTargetsEditContainer);

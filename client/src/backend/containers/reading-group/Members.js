@@ -1,31 +1,26 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
+import { useOutletContext } from "react-router-dom";
 import Authorize from "hoc/Authorize";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
-import { withRouter } from "react-router-dom";
 import { useFetch, usePaginationState, useApiCallback } from "hooks";
 import EntitiesList, {
   ReadingGroupMemberRow
 } from "backend/components/list/EntitiesList";
 import withConfirmation from "hoc/withConfirmation";
 
-function ReadingGroupMembersContainer({
-  refresh,
-  readingGroup,
-  route,
-  confirm
-}) {
-  const closeUrl = lh.link("backendReadingGroupMembers", readingGroup.id);
+function ReadingGroupMembersContainer({ confirm }) {
+  const { readingGroup } = useOutletContext() || {};
 
   const [pagination, setPageNumber] = usePaginationState();
 
   const filters = useMemo(() => ({ withUpdateAbility: true }), []);
 
   const { data, refresh: refreshMembers, meta } = useFetch({
-    request: [readingGroupsAPI.members, readingGroup.id, filters, pagination]
+    request: [readingGroupsAPI.members, readingGroup?.id, filters, pagination],
+    condition: !!readingGroup?.id
   });
 
   const { t } = useTranslation();
@@ -67,30 +62,12 @@ function ReadingGroupMembersContainer({
           onPageClick: page => () => setPageNumber(page)
         }}
       />
-      {childRoutes(route, {
-        drawer: true,
-        drawerProps: {
-          lockScroll: "always",
-          wide: true,
-          lockScrollClickCloses: false,
-          closeUrl
-        },
-        childProps: {
-          refresh,
-          refreshMembers,
-          readingGroup,
-          closeUrl: lh.link("backendReadingGroupMembers", readingGroup.id)
-        }
-      })}
     </Authorize>
   );
 }
 
 ReadingGroupMembersContainer.propTypes = {
-  readingGroup: PropTypes.object,
-  refresh: PropTypes.func,
-  route: PropTypes.object,
   confirm: PropTypes.func
 };
 
-export default withRouter(withConfirmation(ReadingGroupMembersContainer));
+export default withConfirmation(ReadingGroupMembersContainer);

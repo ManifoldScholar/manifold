@@ -1,13 +1,14 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useParams, useOutletContext } from "react-router-dom";
 import Layout from "backend/components/layout";
 import { AddEditForm } from "backend/components/pending-entitlements";
-import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
 import { pendingEntitlementsAPI } from "api";
 
-export default function EntitlementAddEditContainer({ refresh }) {
+export default function EntitlementAddEditContainer() {
+  const outletContext = useOutletContext() || {};
+  const { refresh } = outletContext;
   const { t } = useTranslation();
   const { id } = useParams();
 
@@ -32,7 +33,3 @@ export default function EntitlementAddEditContainer({ refresh }) {
 }
 
 EntitlementAddEditContainer.displayName = "PendingEntitlements.CreateEdit";
-
-EntitlementAddEditContainer.propTypes = {
-  refresh: PropTypes.func.isRequired
-};

@@ -1,9 +1,16 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import {
+  useState,
+  useEffect,
+  useContext,
+  useMemo,
+  useCallback,
+  useRef
+} from "react";
 import PropTypes from "prop-types";
-import { useLocation, NavLink, matchPath } from "react-router-dom";
+import { useLocation, NavLink, useMatches } from "react-router-dom";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
-import { useFromStore } from "hooks";
+import { useFromStore, useShowJournalsActive } from "hooks";
 import lh from "helpers/linkHandler";
 import UserLinks from "./mobile-components/UserLinks";
 import MobileSearch from "./mobile-components/Search";
@@ -13,21 +20,26 @@ import IconComposer from "global/components/utility/IconComposer";
 import { FrontendModeContext } from "helpers/contexts";
 import Authorize from "hoc/Authorize";
 import BodyClass from "hoc/BodyClass";
+import { useDispatch } from "react-redux";
+import { commonActions } from "actions/helpers";
 
-export default function NavigationMobile({
-  links,
-  commonActions,
-  backendButton,
-  mode,
-  journalIsActive
-}) {
+export default function NavigationMobile({ links, backendButton, mode }) {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const location = useLocation();
+  const matches = useMatches();
   const context = useContext(FrontendModeContext);
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
+  const journalIsActive = useShowJournalsActive();
 
-  const [expanded, setExpanded] = useState([]);
-  const [open, setOpen] = useState(false);
+  const commonActionsHelper = commonActions(dispatch);
+
+  const initialState = {
+    expanded: [],
+    open: false
+  };
+
+  const [state, setState] = useState(initialState);
 
   const hasLinks = links && links.length > 0;
   const isStandalone = context.isStandalone;
@@ -37,12 +49,13 @@ export default function NavigationMobile({
     return lh.link(link.route, ...args);
   };
 
-  const getActiveRoutes = () => {
-    if (!links) return [];
+  const activeRoutes = useMemo(() => {
+    if (!links) return null;
     const active = [];
     links.forEach(link => {
-      const route = lh.routeFromName(link.route);
-      if (route && matchPath(location.pathname, route) !== null) {
+      // Check if this route is in the current matches by route name
+      const routeMatch = matches.find(m => m.handle?.name === link.route);
+      if (routeMatch) {
         if (link.route === "frontendProjects" && journalIsActive) {
           active.push("frontendJournals");
         } else if (link.route === "backendProjects" && journalIsActive) {
@@ -56,54 +69,81 @@ export default function NavigationMobile({
       active.push("frontendProjects");
     }
     return active;
-  };
+  }, [links, matches, journalIsActive, location]);
 
   const prevLocationRef = useRef(location);
 
   useEffect(() => {
-    if (!open) {
+    if (!state.open) {
       prevLocationRef.current = location;
       return;
     }
     if (prevLocationRef.current.pathname !== location.pathname) {
-      setExpanded([]);
-      setOpen(false);
+      setState({ expanded: [], open: false });
     }
     prevLocationRef.current = location;
-  }, [location, open]);
+  }, [location, state.open]);
 
-  const toggleExpanded = key => {
-    setExpanded(prevExpanded => {
-      if (prevExpanded.includes(key)) {
-        return prevExpanded.filter(k => k !== key);
+  const expand = useCallback(
+    key => {
+      if (state.expanded.includes(key)) return;
+      setState(prevState => ({
+        ...prevState,
+        expanded: [...prevState.expanded, key]
+      }));
+    },
+    [state.expanded]
+  );
+
+  const collapse = useCallback(
+    key => {
+      if (!state.expanded.includes(key)) return;
+      setState(prevState => ({
+        ...prevState,
+        expanded: prevState.expanded.filter(k => k !== key)
+      }));
+    },
+    [state.expanded]
+  );
+
+  const toggleExpanded = useCallback(
+    key => {
+      if (state.expanded.includes(key)) {
+        collapse(key);
       } else {
-        return [...prevExpanded, key];
+        expand(key);
       }
-    });
-  };
+    },
+    [state.expanded, expand, collapse]
+  );
 
-  const createExpandToggleHandler = key => {
-    return event => {
-      event.preventDefault();
-      toggleExpanded(key);
-    };
-  };
+  const createExpandToggleHandler = useMemo(
+    () => key => {
+      return event => {
+        event.preventDefault();
+        toggleExpanded(key);
+      };
+    },
+    [toggleExpanded]
+  );
 
-  const closeNavigation = () => {
-    setOpen(false);
-    setExpanded([]);
-  };
+  const closeNavigation = useCallback(() => {
+    setState({ open: false, expanded: [] });
+  }, []);
 
-  const toggleOpen = () => {
-    if (open) {
+  const openNavigation = useCallback(() => {
+    setState({ open: true, expanded: activeRoutes || [] });
+  }, [activeRoutes]);
+
+  const toggleOpen = useCallback(() => {
+    if (state.open) {
       closeNavigation();
     } else {
-      setOpen(true);
-      setExpanded(getActiveRoutes());
+      openNavigation();
     }
-  };
+  }, [state.open, closeNavigation, openNavigation]);
 
-  const triggerIcon = open ? "close32" : "menu32";
+  const triggerIcon = state.open ? "close32" : "menu32";
 
   const renderStandaloneHeading = () => {
     if (!isStandalone || !context.project) return null;
@@ -145,12 +185,12 @@ export default function NavigationMobile({
 
   const renderManifoldLink = link => {
     const path = pathForLink(link);
-    const exact = path === "/";
+    const end = path === "/";
 
     return (
       <NavLink
         to={path}
-        exact={exact}
+        end={end}
         onClick={closeNavigation}
         target={link.newTab ? "_blank" : null}
         className={({ isActive }) =>
@@ -168,12 +208,12 @@ export default function NavigationMobile({
     if (link.hideInNav) return null;
     const children = link.children || [];
     const hasChildren = children && children.length > 0;
-    const isExpanded = expanded.includes(link.route);
+    const expanded = state.expanded.includes(link.route);
     const wrapperClasses = classnames({
       "nested-nav__item": true,
       "nested-nav__grid-item": true,
       "nested-nav__item--nested": hasChildren,
-      "nested-nav__item--open": isExpanded
+      "nested-nav__item--open": expanded
     });
 
     return (
@@ -184,10 +224,10 @@ export default function NavigationMobile({
             onClick={createExpandToggleHandler(link.route)}
             className="nested-nav__disclosure-button"
             aria-haspopup="true"
-            aria-expanded={isExpanded}
+            aria-expanded={expanded}
           >
             <span className="screen-reader-text">
-              {isExpanded
+              {expanded
                 ? t("navigation.mobile.close_submenu")
                 : t("navigation.mobile.open_submenu")}
             </span>
@@ -245,7 +285,7 @@ export default function NavigationMobile({
             </ul>
             <UserLinks
               authentication={authentication}
-              commonActions={commonActions}
+              commonActions={commonActionsHelper}
               backendButton={backendButton}
               mode={mode}
               closeNavigation={closeNavigation}
@@ -260,7 +300,7 @@ export default function NavigationMobile({
     "hide-82": mode === "frontend",
     "hide-100": mode === "backend",
     "nested-nav": true,
-    "nested-nav--open": open,
+    "nested-nav--open": state.open,
     "nested-nav--dark": mode === "backend"
   });
 
@@ -273,16 +313,16 @@ export default function NavigationMobile({
         className={navClasses}
         aria-label={t("navigation.mobile.aria_label")}
       >
-        {open && renderNavigationMenu()}
+        {state.open && renderNavigationMenu()}
       </nav>
       <button
         onClick={toggleOpen}
         className="mobile-nav-toggle"
         aria-haspopup
-        aria-expanded={open}
+        aria-expanded={state.open}
       >
         <span className="screen-reader-text">
-          {open
+          {state.open
             ? t("navigation.mobile.toggle_closed")
             : t("navigation.mobile.toggle_open")}
         </span>
@@ -300,8 +340,6 @@ NavigationMobile.displayName = "Navigation.Mobile";
 
 NavigationMobile.propTypes = {
   links: PropTypes.array,
-  commonActions: PropTypes.object.isRequired,
   backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-  mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
-  journalIsActive: PropTypes.bool
+  mode: PropTypes.oneOf(["backend", "frontend"]).isRequired
 };

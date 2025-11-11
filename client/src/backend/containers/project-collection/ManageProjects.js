@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -13,17 +12,18 @@ import EntitiesList, {
 import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import IconComposer from "global/components/utility/IconComposer";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useListQueryParams, useFetch, useApiCallback } from "hooks";
 
 function ProjectCollectionManageProjects({
-  projectCollection,
   entitiesListSearchProps,
   entitiesListSearchParams,
   setScreenReaderStatus
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { projectCollection } = useOutletContext() || {};
 
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 12,
@@ -206,7 +206,6 @@ ProjectCollectionManageProjects.displayName =
   "ProjectCollection.ManageProjects";
 
 ProjectCollectionManageProjects.propTypes = {
-  projectCollection: PropTypes.object.isRequired,
   entitiesListSearchProps: PropTypes.func.isRequired,
   entitiesListSearchParams: PropTypes.object.isRequired
 };

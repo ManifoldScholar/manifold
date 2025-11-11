@@ -5,7 +5,7 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { ingestionSourcesAPI } from "api";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import * as Styled from "./styles";
 
 export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
