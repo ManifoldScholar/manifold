@@ -18,7 +18,7 @@ function LoadableChart({
   lineProps
 }) {
   return (
-    <ResponsiveContainer>
+    <ResponsiveContainer initialDimension={{ height: 170, width: 700 }}>
       <LineChart data={data} {...chartProps}>
         <CartesianGrid {...gridProps} />
         <XAxis dataKey="x" {...xAxisProps} />

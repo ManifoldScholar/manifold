@@ -1,29 +1,30 @@
-import React from "react";
+import { useOutletContext } from "react-router-dom";
 import Authorize from "hoc/Authorize";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import { journalVolumesAPI } from "api";
-import { withRouter } from "react-router-dom";
 import { useFetch, useListQueryParams } from "hooks";
 import EntitiesList, {
   Button,
   JournalVolumeRow
 } from "backend/components/list/EntitiesList";
 
-function JournalVolumesContainer({ refresh, journal, route }) {
-  const closeUrl = lh.link("backendJournalVolumes", journal.id);
+export default function JournalVolumesContainer() {
+  const { journal, refresh } = useOutletContext() || {};
+
+  const closeUrl = lh.link("backendJournalVolumes", journal?.id);
 
   const { pagination } = useListQueryParams({ initSize: 10 });
 
   const { data, refresh: refreshVolumes, meta } = useFetch({
-    request: [journalVolumesAPI.index, journal.id, pagination]
+    request: [journalVolumesAPI.index, journal?.id, pagination],
+    condition: !!journal?.id
   });
 
   const { t } = useTranslation();
 
-  if (!data) return null;
+  if (!data || !journal) return null;
 
   return (
     <Authorize
@@ -53,27 +54,20 @@ function JournalVolumesContainer({ refresh, journal, route }) {
           />
         ]}
       />
-      {childRoutes(route, {
-        drawer: true,
-        drawerProps: {
+      <OutletWithDrawer
+        drawerProps={{
           lockScroll: "always",
           wide: true,
           lockScrollClickCloses: false,
           closeUrl
-        },
-        childProps: {
+        }}
+        context={{
           refresh,
           refreshVolumes,
           journal,
           closeUrl: lh.link("backendJournalVolumes", journal.id)
-        }
-      })}
+        }}
+      />
     </Authorize>
   );
 }
-
-JournalVolumesContainer.propTypes = {
-  journal: PropTypes.object
-};
-
-export default withRouter(JournalVolumesContainer);

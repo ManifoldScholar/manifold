@@ -1,32 +1,26 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Resource from "./resource";
 import lh from "helpers/linkHandler";
-
 import Authorize from "hoc/Authorize";
 
-export default class ProjectResourcesCollectionsContainer extends PureComponent {
-  static displayName = "Project.ResourceCollectionsContainer";
+export default function ProjectResourceCollectionsContainer() {
+  const { project } = useOutletContext() || {};
 
-  static propTypes = {
-    project: PropTypes.object
-  };
+  if (!project) return null;
 
-  render() {
-    const project = this.props.project;
-    if (!project) return null;
-
-    return (
-      <Authorize
-        entity={project}
-        ability="manageResourceCollections"
-        failureNotification
-        failureRedirect={lh.link("backendProject", project.id)}
-      >
-        <section>
-          <Resource.ResourceCollectionsList project={project} />
-        </section>
-      </Authorize>
-    );
-  }
+  return (
+    <Authorize
+      entity={project}
+      ability="manageResourceCollections"
+      failureNotification
+      failureRedirect={lh.link("backendProject", project.id)}
+    >
+      <section>
+        <Resource.ResourceCollectionsList project={project} />
+      </section>
+    </Authorize>
+  );
 }
+
+ProjectResourceCollectionsContainer.displayName =
+  "Project.ResourceCollectionsContainer";

@@ -1,15 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext, useParams } from "react-router-dom";
 import textTracksAPI from "api/resources/textTracks";
 import Layout from "backend/components/layout";
 import AddEditForm from "backend/components/resource/tracks/AddEditForm";
-import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
 
-export default function ResourceTrackAddEdit({ resource, refresh }) {
+function ResourceTrackAddEdit() {
   const { t } = useTranslation();
   const { trackId: id } = useParams();
+  const { resource, refresh } = useOutletContext();
 
   const { data: track } = useFetch({
     request: [textTracksAPI.show, resource.id, id],
@@ -37,9 +36,6 @@ export default function ResourceTrackAddEdit({ resource, refresh }) {
   );
 }
 
-ResourceTrackAddEdit.propTypes = {
-  resource: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object,
-  refresh: PropTypes.func
-};
+ResourceTrackAddEdit.displayName = "Resource.Tracks.AddEdit";
+
+export default ResourceTrackAddEdit;

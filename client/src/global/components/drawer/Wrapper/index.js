@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { notificationActions } from "actions";
 import Content from "../Content";
 import * as Styled from "./styles";
@@ -8,22 +10,22 @@ import * as Styled from "./styles";
 export default function DrawerWrapper({
   lockScroll = "always",
   open = false,
-  dispatch,
-  history,
   identifier,
   ...props
 }) {
   const { closeCallback, closeUrl } = props;
   const uid = useUID();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (open) {
-      if (dispatch) dispatch(notificationActions.removeNotifications("global"));
+      dispatch(notificationActions.removeNotifications("global"));
     }
   }, [open, dispatch]);
 
   const clearDrawerNotifications = () => {
-    if (dispatch) dispatch(notificationActions.removeNotifications("drawer"));
+    dispatch(notificationActions.removeNotifications("drawer"));
   };
 
   const handleLeaveEvent = e => {
@@ -34,7 +36,7 @@ export default function DrawerWrapper({
     }
 
     if (closeUrl) {
-      history.push(closeUrl, { noScroll: true });
+      navigate(closeUrl, { state: { noScroll: true } });
     }
   };
 
@@ -73,9 +75,8 @@ export default function DrawerWrapper({
 DrawerWrapper.displayName = "Drawer.Wrapper";
 
 DrawerWrapper.propTypes = {
-  dispatch: PropTypes.func,
   open: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   icon: PropTypes.string,
   identifier: PropTypes.string,
@@ -93,7 +94,6 @@ DrawerWrapper.propTypes = {
   size: PropTypes.oneOf(["default", "wide", "flexible", "fixed"]),
   position: PropTypes.oneOf(["default", "overlay"]),
   padding: PropTypes.oneOf(["none", "default", "large", "xl"]),
-  history: PropTypes.object,
   includeDrawerFrontMatter: PropTypes.bool,
   returnFocusOnDeactivate: PropTypes.bool,
   focusTrap: PropTypes.bool,

@@ -5,7 +5,7 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { textsAPI } from "api";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import {
   formatTreeData,
   formatTOCData

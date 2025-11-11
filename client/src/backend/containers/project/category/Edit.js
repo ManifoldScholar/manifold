@@ -1,59 +1,37 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
+import { useOutletContext, useParams, useNavigate } from "react-router-dom";
 import Category from "backend/components/category";
-import { entityStoreActions } from "actions";
-import { select } from "utils/entityUtils";
 import { textCategoriesAPI, requests } from "api";
 import Layout from "backend/components/layout";
+import { useFetch } from "hooks";
+import lh from "helpers/linkHandler";
 
-const { request } = entityStoreActions;
+export default function ProjectCategoryEditContainer() {
+  const { t } = useTranslation();
+  const { catId } = useParams();
+  const navigate = useNavigate();
+  const { refresh, project } = useOutletContext() || {};
 
-export class ProjectCategoryEditContainer extends Component {
-  static mapStateToProps = state => {
-    return {
-      category: select(requests.beTextCategory, state.entityStore)
-    };
+  const { data: category } = useFetch({
+    request: [textCategoriesAPI.show, catId],
+    options: { requestKey: requests.beTextCategory },
+    condition: !!catId
+  });
+
+  const onSuccess = () => {
+    if (refresh) refresh();
+    const url = lh.link("backendProjectTexts", project?.id);
+    navigate(url);
   };
 
-  static displayName = "Project.Category.Edit";
+  if (!category) return null;
 
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    refresh: PropTypes.func.isRequired,
-    category: PropTypes.object,
-    triggerClose: PropTypes.func,
-    t: PropTypes.func
-  };
-
-  componentDidMount() {
-    this.fetchCategory();
-  }
-
-  onSuccess = () => {
-    this.props.refresh();
-  };
-
-  fetchCategory() {
-    const call = textCategoriesAPI.show(this.props.match.params.catId);
-    const categoryRequest = request(call, requests.beTextCategory);
-    this.props.dispatch(categoryRequest);
-  }
-
-  render() {
-    if (!this.props.category) return null;
-
-    return (
-      <div>
-        <Layout.DrawerHeader
-          title={this.props.t("texts.category_edit_header")}
-        />
-        <Category.Form model={this.props.category} onSuccess={this.onSuccess} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Layout.DrawerHeader title={t("texts.category_edit_header")} />
+      <Category.Form model={category} onSuccess={onSuccess} />
+    </div>
+  );
 }
 
-export default withTranslation()(connectAndFetch(ProjectCategoryEditContainer));
+ProjectCategoryEditContainer.displayName = "Project.Category.Edit";

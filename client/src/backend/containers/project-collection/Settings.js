@@ -1,96 +1,89 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import withConfirmation from "hoc/withConfirmation";
 import ProjectCollection from "backend/components/project-collection";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { projectCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-
 import Authorize from "hoc/Authorize";
+import { useApiCallback } from "hooks";
 
-export class ProjectCollectionSettings extends PureComponent {
-  static displayName = "ProjectCollection.Settings";
+const formatData = data => {
+  const { heroAltText, hero, ...rest } = data?.attributes ?? {};
 
-  static propTypes = {
-    projectCollection: PropTypes.object,
-    projectCollectionMeta: PropTypes.object,
-    confirm: PropTypes.func.isRequired,
-    buildUpdateProjectCollection: PropTypes.func.isRequired
+  const finalHeroData =
+    typeof heroAltText === "string" ? { ...hero, altText: heroAltText } : hero;
+
+  const relationships = data.relationships?.subjects
+    ? { subjects: { data: data.relationships?.subjects } }
+    : {};
+
+  return {
+    relationships,
+    attributes: { hero: finalHeroData, ...rest }
   };
+};
 
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
-  };
+function ProjectCollectionSettings({ confirm }) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { projectCollection } = useOutletContext() || {};
 
-  handleDestroy = () => {
-    const t = this.props.t;
+  const destroyProjectCollection = useApiCallback(
+    projectCollectionsAPI.destroy,
+    {
+      requestKey: requests.beProjectCollectionDestroy,
+      removes: projectCollection
+    }
+  );
+
+  const handleDestroy = () => {
+    if (!projectCollection) return;
     const heading = t("modals.delete_project_collection");
     const message = t("modals.confirm_body");
-    this.props.confirm(heading, message, this.props.destroyProjectCollection);
+    confirm(heading, message, async () => {
+      await destroyProjectCollection(projectCollection.id);
+      navigate(lh.link("backendProjectCollections"));
+    });
   };
 
-  onSuccess = () => {
-    this.props.refreshCollectionProjects();
-    this.props.history.push(
-      lh.link("backendProjectCollection", this.props.projectCollection.id)
-    );
+  const onSuccess = () => {
+    if (!projectCollection) return;
+    navigate(lh.link("backendProjectCollection", projectCollection.id));
   };
 
-  render() {
-    const { projectCollection, t } = this.props;
-    if (!projectCollection) return null;
+  if (!projectCollection) return null;
 
-    const formatData = data => {
-      const { heroAltText, hero, ...rest } = data?.attributes ?? {};
-
-      const finalHeroData =
-        typeof heroAltText === "string"
-          ? { ...hero, altText: heroAltText }
-          : hero;
-
-      const relationships = data.relationships?.subjects
-        ? { subjects: { data: data.relationships?.subjects } }
-        : {};
-
-      return {
-        relationships,
-        attributes: { hero: finalHeroData, ...rest }
-      };
-    };
-
-    return (
-      <Authorize
-        entity={projectCollection}
-        ability="update"
-        failureNotification
-        failureRedirect={lh.link(
-          "backendProjectCollection",
-          projectCollection.id
-        )}
-      >
-        <section>
-          <FormContainer.Form
-            model={projectCollection}
-            name={requests.beProjectCollectionUpdate}
-            update={this.props.buildUpdateProjectCollection}
-            create={projectCollectionsAPI.create}
-            onSuccess={this.onSuccess}
-            className="form-secondary project-collection-form"
-            flushOnUnmount={false}
-            formatData={formatData}
-          >
-            <ProjectCollection.Form.Fields
-              handleDestroy={this.handleDestroy}
-              {...this.props}
-            />
-            <Form.Save text={t("project_collections.save_button_label")} />
-          </FormContainer.Form>
-        </section>
-      </Authorize>
-    );
-  }
+  return (
+    <Authorize
+      entity={projectCollection}
+      ability="update"
+      failureNotification
+      failureRedirect={lh.link(
+        "backendProjectCollection",
+        projectCollection.id
+      )}
+    >
+      <section>
+        <FormContainer.Form
+          model={projectCollection}
+          name={requests.beProjectCollectionUpdate}
+          update={projectCollectionsAPI.update}
+          create={projectCollectionsAPI.create}
+          onSuccess={onSuccess}
+          className="form-secondary project-collection-form"
+          flushOnUnmount={false}
+          formatData={formatData}
+        >
+          <ProjectCollection.Form.Fields handleDestroy={handleDestroy} />
+          <Form.Save text={t("project_collections.save_button_label")} />
+        </FormContainer.Form>
+      </section>
+    </Authorize>
+  );
 }
 
-export default withTranslation()(withConfirmation(ProjectCollectionSettings));
+ProjectCollectionSettings.displayName = "ProjectCollection.Settings";
+
+export default withConfirmation(ProjectCollectionSettings);

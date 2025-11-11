@@ -1,15 +1,17 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import * as Styled from "./styles";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 
 function HeadingManageGroup({ readingGroup, location, refresh }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const currentLocation = useLocation();
+
+  const settingsPath = `${currentLocation.pathname}/settings`;
 
   const homepageStaticPath = lh.link(
     "frontendReadingGroupHomepageStatic",
@@ -55,12 +57,12 @@ function HeadingManageGroup({ readingGroup, location, refresh }) {
           >
             {t("forms.manage_group.edit_homepage_sr")}
           </Link>
-          <a
-            href="#settings"
+          <Link
+            to={settingsPath}
             className="button-tertiary button-tertiary--neutral"
           >
             {t("forms.manage_group.edit_settings")}
-          </a>
+          </Link>
         </Styled.ManageGroupContainer>
       }
     />
