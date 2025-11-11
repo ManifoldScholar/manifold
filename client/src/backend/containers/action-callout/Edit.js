@@ -1,67 +1,37 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
+import { useEffect, useRef } from "react";
+import { useOutletContext, useParams } from "react-router-dom";
 import { actionCalloutsAPI, requests } from "api";
-import { select } from "utils/entityUtils";
+import { useFetch } from "hooks";
 import Form from "./Form";
-import { entityStoreActions } from "actions";
 
-const { request } = entityStoreActions;
+export default function CallToActionEdit() {
+  const outletContext = useOutletContext() || {};
+  const { refreshActionCallouts, calloutable, closeRoute } = outletContext;
+  const { calloutId } = useParams();
+  const prevIdRef = useRef(calloutId);
 
-export class CallToActionEdit extends Component {
-  static displayName = "CallToAction.Edit";
+  const { data: actionCallout } = useFetch({
+    request: [actionCalloutsAPI.show, calloutId],
+    options: { requestKey: requests.beActionCallout },
+    condition: !!calloutId
+  });
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    match: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    calloutable: PropTypes.object.isRequired,
-    closeRoute: PropTypes.string.isRequired,
-    refreshActionCallouts: PropTypes.func,
-    actionCallout: PropTypes.object
-  };
-
-  static mapStateToProps = (state, ownPropsIgnored) => {
-    return {
-      actionCallout: select(requests.beActionCallout, state.entityStore)
-    };
-  };
-
-  componentDidMount() {
-    this.fetchActionCallout(this.props.match.params.id);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.params.id !== this.props.match.params.id) {
-      this.fetchActionCallout(this.props.match.params.id);
+  useEffect(() => {
+    if (calloutId && prevIdRef.current && calloutId !== prevIdRef.current) {
+      prevIdRef.current = calloutId;
     }
-  }
+  }, [calloutId]);
 
-  get calloutable() {
-    return this.props.calloutable;
-  }
+  if (!actionCallout) return null;
 
-  get actionCallout() {
-    return this.props.actionCallout;
-  }
-
-  fetchActionCallout(id) {
-    const call = actionCalloutsAPI.show(id);
-    const actionCalloutRequest = request(call, requests.beActionCallout);
-    this.props.dispatch(actionCalloutRequest);
-  }
-
-  render() {
-    if (!this.actionCallout) return null;
-    return (
-      <Form
-        refreshActionCallouts={this.props.refreshActionCallouts}
-        actionCallout={this.actionCallout}
-        closeRoute={this.props.closeRoute}
-        calloutable={this.calloutable}
-      />
-    );
-  }
+  return (
+    <Form
+      refreshActionCallouts={refreshActionCallouts}
+      actionCallout={actionCallout}
+      closeRoute={closeRoute}
+      calloutable={calloutable}
+    />
+  );
 }
 
-export default connectAndFetch(CallToActionEdit);
+CallToActionEdit.displayName = "CallToAction.Edit";

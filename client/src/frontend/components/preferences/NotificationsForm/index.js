@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
@@ -20,26 +19,21 @@ export default function NotificationsForm({
 
   const digestOpen = preferences?.digest !== "never";
 
-  const otherActivityOptions = useMemo(() => {
-    const authorization = new Authorization();
+  const authorization = new Authorization();
+  const items = ["repliesToMe"];
+  const isAdmin = authorization.authorizeKind({
+    authentication,
+    kind: "admin"
+  });
+  const isProjectCreator = authorization.authorizeKind({
+    authentication,
+    kind: "project_creator"
+  });
 
-    const items = ["repliesToMe"];
+  if (isAdmin || isProjectCreator) items.push("projectCommentsAndAnnotations");
+  if (isAdmin) items.push("flaggedResources");
 
-    const isAdmin = authorization.authorizeKind({
-      authentication,
-      kind: "admin"
-    });
-    const isProjectCreator = authorization.authorizeKind({
-      authentication,
-      kind: "project_creator"
-    });
-
-    if (isAdmin || isProjectCreator)
-      items.push("projectCommentsAndAnnotations");
-    if (isAdmin) items.push("flaggedResources");
-
-    return items;
-  }, [authentication]);
+  const otherActivityOptions = items;
 
   const unsubscribeAll = () => {
     const otherActivity = otherActivityOptions.reduce(

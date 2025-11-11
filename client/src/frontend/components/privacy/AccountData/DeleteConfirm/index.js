@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useApiCallback, useNotification, useFromStore } from "hooks";
 import { meAPI } from "api";
@@ -28,12 +28,12 @@ export default function DeleteConfirm() {
     expiration: 5000
   }));
 
-  const deleteAndRedirect = useCallback(async () => {
+  const deleteAndRedirect = async () => {
     const res = await deleteAccount();
     if (res?.errors) return setErrors(res.errors);
     notifyDestroy(currentUser);
     dispatch(currentUserActions.logout());
-  }, [currentUser, deleteAccount, notifyDestroy, dispatch]);
+  };
 
   const handleDelete = e => {
     e.preventDefault();

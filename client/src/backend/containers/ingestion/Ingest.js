@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { Prompt, useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
+import NavigationBlocker from "global/components/router/NavigationBlocker";
 import Heading from "./Heading";
 import Actions from "./Actions";
 import Log from "./Log";
@@ -9,9 +9,10 @@ import { useFetch, useApiCallback, useNotification } from "hooks";
 import { ingestionsAPI } from "api";
 import useFetchIngestionMessages from "./useFetchIngestionMessages";
 
-export default function IngestContainer({ sectionIngest, refresh }) {
+export default function IngestContainer() {
   const { ingestionId } = useParams();
   const { t } = useTranslation();
+  const { sectionIngest, refresh } = useOutletContext() || {};
 
   useEffect(() => {
     return () => {
@@ -80,7 +81,10 @@ export default function IngestContainer({ sectionIngest, refresh }) {
 
   return (
     <>
-      <Prompt message={t("messages.unsaved_changes")} when={loading} />
+      <NavigationBlocker
+        message={t("messages.unsaved_changes")}
+        when={loading}
+      />
       <div className="ingestion-output">
         <Heading
           ingestion={ingestion}
@@ -105,9 +109,3 @@ export default function IngestContainer({ sectionIngest, refresh }) {
 }
 
 IngestContainer.displayName = "Ingestion.Container";
-
-IngestContainer.propTypes = {
-  text: PropTypes.object,
-  sectionIngestion: PropTypes.bool,
-  refresh: PropTypes.func
-};

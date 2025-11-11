@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { useCurrentUser } from "hooks";
 import FatalErrorRender from ".";
 
@@ -11,24 +11,16 @@ export default function FatalErrorAppWrapper(props) {
   } = props;
 
   const { t } = useTranslation();
-  const history = useHistory();
   const location = useLocation();
   const currentUser = useCurrentUser();
 
-  if (!error) return null;
-
   const isAuthorizationError = error.status === 403 || error.status === 401;
+
+  if (!error) return null;
 
   if (isAuthorizationError && redirectPath === "/login") return null;
 
-  const redirectOrNotify = () => {
-    if (!currentUser?.id) {
-      return history.push({
-        pathname: "/login",
-        search: redirectPath ? `?redirect_uri=${redirectPath}` : undefined
-      });
-    }
-
+  const renderAccessDenied = () => {
     const title =
       error.body
         ?.replace("You are not authorized to read ", "")
@@ -59,6 +51,23 @@ export default function FatalErrorAppWrapper(props) {
         {...props}
       />
     );
+  };
+
+  const redirectOrNotify = () => {
+    if (currentUser?.id) return renderAccessDenied();
+
+    const loginPath = redirectPath
+      ? `/login?redirect_uri=${redirectPath}`
+      : "/login";
+
+    if (__SERVER__) {
+      throw new Response(null, {
+        status: 302,
+        headers: { Location: loginPath }
+      });
+    }
+
+    return <Navigate to={loginPath} replace />;
   };
 
   if (isAuthorizationError) return redirectOrNotify();

@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import { journalsAPI, requests } from "api";
 import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -13,16 +12,16 @@ import {
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import HeadContent from "global/components/HeadContent";
 
-export default function JournalsListContainer() {
-  const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
+const FILTER_RESET = { standaloneModeEnforced: "false" };
 
+export default function JournalsListContainer() {
   const subjects = useFromStore({
     requestKey: requests.feJournalSubjects,
     action: "select"
   });
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filterReset
+    initFilters: FILTER_RESET
   });
 
   const { data: journals, meta } = useFetch({
@@ -34,7 +33,7 @@ export default function JournalsListContainer() {
   const filterProps = useListFilters({
     onFilterChange: param => setFilters(param),
     initialState: filters,
-    resetState: filterReset,
+    resetState: FILTER_RESET,
     options: {
       entityType: "journal",
       sort: true,
