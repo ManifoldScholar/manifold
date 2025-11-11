@@ -1,13 +1,11 @@
-import React, { PureComponent } from "react";
+import { useEffect, useRef, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { withRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom-v5-compat";
 import ColorScheme from "global/components/ColorScheme";
 import LoadingBar from "global/components/LoadingBar";
 import AppFatalError from "global/components/FatalError/AppWrapper";
 import SignInUp from "global/components/sign-in-up";
-import has from "lodash/has";
 import get from "lodash/get";
 import {
   uiVisibilityActions,
@@ -15,7 +13,7 @@ import {
   notificationActions
 } from "actions";
 import { meAPI, requests } from "api";
-import { select, loaded } from "utils/entityUtils";
+import { loaded } from "utils/entityUtils";
 import { renderRoutes } from "react-router-config";
 import getRoutes from "routes";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
@@ -24,113 +22,66 @@ import { entityStoreActions } from "actions";
 import CookiesBanner from "global/components/CookiesBanner";
 import Utility from "global/components/utility";
 import { Helmet } from "react-helmet-async";
+import { useFromStore } from "hooks";
 import notifications from "./notifications";
 
 const { request } = entityStoreActions;
 const routes = getRoutes();
 const { visibilityHide } = uiVisibilityActions;
 
-class ManifoldContainer extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      authentication: state.authentication,
-      visibility: state.ui.transitory.visibility,
-      frontendMode: state.ui.transitory.frontendMode,
-      language: state.ui.persistent.locale.language,
-      loading: state.ui.transitory.loading.active,
-      fatalError: state.fatalError,
-      routing: state.routing,
-      settings: select(requests.settings, state.entityStore),
-      readingGroups: select(requests.feMyReadingGroups, state.entityStore),
-      readingGroupsLoaded: loaded(requests.feMyReadingGroups, state.entityStore)
-    };
-  };
+export default function ManifoldContainer({ confirm }) {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  static propTypes = {
-    dispatch: PropTypes.func,
-    language: PropTypes.string,
-    loading: PropTypes.bool,
-    visibility: PropTypes.object,
-    authentication: PropTypes.object,
-    fatalError: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
-    settings: PropTypes.object,
-    location: PropTypes.object,
-    history: PropTypes.object,
-    confirm: PropTypes.element,
-    gaInitCallback: PropTypes.func
-  };
+  const authentication = useFromStore({ path: "authentication" });
+  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const frontendMode = useFromStore({ path: "ui.transitory.frontendMode" });
+  const loading = useFromStore({ path: "ui.transitory.loading.active" });
+  const fatalError = useFromStore({ path: "fatalError" });
+  const settings = useFromStore({
+    requestKey: requests.settings,
+    action: "select"
+  });
+  const readingGroupsLoaded = useSelector(state =>
+    loaded(requests.feMyReadingGroups, state.entityStore)
+  );
 
-  constructor(props) {
-    super(props);
-    this.gaInitialized = false;
-  }
+  const prevLocationRef = useRef(location);
+  const prevAuthRef = useRef(authentication);
+  const isFirstMountRef = useRef(true);
 
-  componentDidUpdate(prevProps, prevStateIgnored) {
-    if (this.routeChanged(prevProps.location, this.props.location)) {
-      const activeEl = document.activeElement;
-      if (activeEl) activeEl.blur();
-      this.dispatchRouteUpdate();
-      if (this.routeStateRequestsLogin) this.maybeShowLogin();
-      if (this.routeNotificationParam) this.doNotify();
+  const routeStateRequestsLogin = useMemo(() => {
+    if (location.state) return Boolean(location.state.showLogin);
+    return false;
+  }, [location.state]);
+
+  const routeStateRequestsPostLoginRedirect = useMemo(() => {
+    if (location.state) return Boolean(location.state.postLoginRedirect);
+    return false;
+  }, [location.state]);
+
+  const routeNotificationParam = useMemo(() => {
+    if (location.search) {
+      const searchParams = new URLSearchParams(location.search);
+      return searchParams.get("notification");
     }
+    return null;
+  }, [location.search]);
 
-    if (
-      this.userJustLoggedOut(
-        prevProps.authentication,
-        this.props.authentication
-      )
-    )
-      this.doPostLogout();
-
-    if (
-      this.userJustLoggedIn(prevProps.authentication, this.props.authentication)
-    )
-      this.doPostLogin();
-  }
-
-  componentDidMount() {
-    this.maybeFetchReadingGroups();
-    if (this.routeNotificationParam) this.doNotify();
-  }
-
-  get routeStateRequestsLogin() {
-    if (this.props.location.state)
-      return Boolean(this.props.location.state.showLogin);
-  }
-
-  get routeStateRequestsPostLoginRedirect() {
-    if (this.props.location.state)
-      return Boolean(this.props.location.state.postLoginRedirect);
-  }
-
-  get routeNotificationParam() {
-    if (this.props.location.search) {
-      const searchParams = new URLSearchParams(this.props.location?.search);
-      const notificationId = searchParams.get("notification");
-      return notificationId;
+  const routeRedirectUriParam = useMemo(() => {
+    if (location.search) {
+      const searchParams = new URLSearchParams(location.search);
+      return searchParams.get("redirect_uri");
     }
-  }
+    return null;
+  }, [location.search]);
 
-  get routeRedirectUriParam() {
-    if (this.props.location.search) {
-      const searchParams = new URLSearchParams(this.props.location?.search);
-      const redirectUri = searchParams.get("redirect_uri");
-      return redirectUri;
-    }
-  }
+  const maybeShowLogin = useCallback(() => {
+    dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
+  }, [dispatch]);
 
-  maybeShowLogin() {
-    this.props.dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
-  }
-
-  maybeFetchReadingGroups() {
-    const {
-      authentication,
-      readingGroupsLoaded,
-      settings,
-      dispatch
-    } = this.props;
+  const maybeFetchReadingGroups = useCallback(() => {
     const { authenticated } = authentication;
     if (!authenticated) return;
     if (!settings) return;
@@ -138,70 +89,60 @@ class ManifoldContainer extends PureComponent {
     if (settings?.attributes?.general?.disableReadingGroups !== false) return;
 
     dispatch(request(meAPI.readingGroups(), requests.feMyReadingGroups));
-  }
+  }, [authentication, readingGroupsLoaded, settings, dispatch]);
 
-  dispatchRouteUpdate() {
-    this.props.dispatch(routingActions.update(this.props.location.state));
-  }
+  const dispatchRouteUpdate = useCallback(() => {
+    dispatch(routingActions.update(location.state));
+  }, [dispatch, location.state]);
 
-  doNotify() {
+  const doNotify = useCallback(() => {
     const key = Object.keys(notifications).find(
-      n => notifications[n].id === this.routeNotificationParam
+      n => notifications[n].id === routeNotificationParam
     );
     let notification = key ? notifications[key] : null;
     if (!notification) return;
 
-    if (this.props.location.state?.notificationBody)
+    if (location.state?.notificationBody)
       notification = {
         ...notification,
-        body: this.props.location.state.notificationBody
+        body: location.state.notificationBody
       };
 
-    this.props.dispatch(notificationActions.addNotification(notification));
-  }
+    dispatch(notificationActions.addNotification(notification));
+  }, [routeNotificationParam, location.state, dispatch]);
 
-  routeChanged(prevLocation, location) {
-    return prevLocation.pathname !== location.pathname;
-  }
+  const redirectToHome = useCallback(() => {
+    navigate("/");
+  }, [navigate]);
 
-  receivedGaTrackingId(settings) {
-    const path = "attributes.integrations.gaFourTrackingId";
-    return has(settings, path) && get(settings, path) !== "";
-  }
+  const reload = useCallback(() => {
+    redirectToHome();
+  }, [redirectToHome]);
 
-  userJustLoggedOut(prevAuth, auth) {
-    return auth.authenticated === false && prevAuth.authenticated === true;
-  }
+  const doPostLogout = useCallback(() => {
+    reload();
+  }, [reload]);
 
-  userJustLoggedIn(prevAuth, auth) {
-    return auth.authenticated === true && prevAuth.authenticated === false;
-  }
-
-  doPostLogout() {
-    this.reload();
-  }
-
-  doPostLogin() {
-    this.maybeFetchReadingGroups();
-    if (this.routeStateRequestsPostLoginRedirect) {
-      this.props.dispatch(notificationActions.removeAllNotifications());
-      this.props.history.push(this.props.location.state.postLoginRedirect);
-    } else if (this.routeRedirectUriParam) {
-      this.props.dispatch(notificationActions.removeAllNotifications());
-      this.props.history.push(this.routeRedirectUriParam);
+  const doPostLogin = useCallback(() => {
+    maybeFetchReadingGroups();
+    if (routeStateRequestsPostLoginRedirect) {
+      dispatch(notificationActions.removeAllNotifications());
+      navigate(location.state.postLoginRedirect);
+    } else if (routeRedirectUriParam) {
+      dispatch(notificationActions.removeAllNotifications());
+      navigate(routeRedirectUriParam);
     }
-  }
+  }, [
+    maybeFetchReadingGroups,
+    routeStateRequestsPostLoginRedirect,
+    routeRedirectUriParam,
+    location.state,
+    dispatch,
+    navigate
+  ]);
 
-  reload() {
-    this.redirectToHome();
-  }
-
-  redirectToHome() {
-    this.props.history.push("/");
-  }
-
-  renderTypekit() {
-    const tkId = get(this.props.settings, "attributes.theme.typekitId");
+  const renderTypekit = useMemo(() => {
+    const tkId = get(settings, "attributes.theme.typekitId");
     const tkEnabled = !!tkId;
     if (!tkEnabled) return null;
     return (
@@ -211,52 +152,90 @@ class ManifoldContainer extends PureComponent {
         <link rel="stylesheet" href={`https://use.typekit.net/${tkId}.css`} />
       </Helmet>
     );
-  }
+  }, [settings]);
 
-  render() {
-    const fatalError = this.props.fatalError;
+  const hideOverlay = useCallback(() => {
+    dispatch(visibilityHide("signInUpOverlay"));
+  }, [dispatch]);
 
-    const hideOverlay = bindActionCreators(
-      () => visibilityHide("signInUpOverlay"),
-      this.props.dispatch
-    );
+  useEffect(() => {
+    if (isFirstMountRef.current) {
+      isFirstMountRef.current = false;
+      maybeFetchReadingGroups();
+      if (routeNotificationParam) doNotify();
+    }
+  }, [maybeFetchReadingGroups, routeNotificationParam, doNotify]);
 
-    return (
-      <div role="presentation" className="global-container">
-        <Utility.SkipLink />
-        <div id="global-notification-container" />
-        <div id="global-overlay-container" />
-        <FrontendModeContext.Provider value={this.props.frontendMode}>
-          {this.renderTypekit()}
-          {this.props.confirm}
-          <LoadingBar loading={this.props.loading} />
-          <ColorScheme settings={this.props.settings} />
-          <SignInUp.Overlay
-            active={this.props.visibility.signInUpOverlay}
-            hideOverlay={hideOverlay}
-          />
-          {/* Allow 403's through, so we can render the appropriate header/footer with the error message. We now catch these in the Frontend/Backend/Reader containers. */}
-          {fatalError.error && fatalError.error.status !== 403 ? (
-            <div className="global-container">
-              <AppFatalError
-                fatalError={fatalError}
-                redirectPath={this.props.location.pathname}
-              />
-            </div>
-          ) : (
-            <FatalErrorBoundary location={this.props.location}>
-              {renderRoutes(routes)}
-            </FatalErrorBoundary>
-          )}
-          <CookiesBanner />
-        </FrontendModeContext.Provider>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const prevLocation = prevLocationRef.current;
+    if (prevLocation.pathname !== location.pathname) {
+      const activeEl = document.activeElement;
+      if (activeEl) activeEl.blur();
+      dispatchRouteUpdate();
+      if (routeStateRequestsLogin) maybeShowLogin();
+      if (routeNotificationParam) doNotify();
+    }
+    prevLocationRef.current = location;
+  }, [
+    location,
+    dispatchRouteUpdate,
+    routeStateRequestsLogin,
+    routeNotificationParam,
+    maybeShowLogin,
+    doNotify
+  ]);
+
+  useEffect(() => {
+    const prevAuth = prevAuthRef.current;
+    if (
+      authentication.authenticated === false &&
+      prevAuth.authenticated === true
+    ) {
+      doPostLogout();
+    }
+    if (
+      authentication.authenticated === true &&
+      prevAuth.authenticated === false
+    ) {
+      doPostLogin();
+    }
+    prevAuthRef.current = authentication;
+  }, [authentication, doPostLogout, doPostLogin]);
+
+  return (
+    <div role="presentation" className="global-container">
+      <Utility.SkipLink />
+      <div id="global-notification-container" />
+      <div id="global-overlay-container" />
+      <FrontendModeContext.Provider value={frontendMode}>
+        {renderTypekit}
+        {confirm}
+        <LoadingBar loading={loading} />
+        <ColorScheme settings={settings} />
+        <SignInUp.Overlay
+          active={visibility.signInUpOverlay}
+          hideOverlay={hideOverlay}
+        />
+        {fatalError.error && fatalError.error.status !== 403 ? (
+          <div className="global-container">
+            <AppFatalError
+              fatalError={fatalError}
+              redirectPath={location.pathname}
+            />
+          </div>
+        ) : (
+          <FatalErrorBoundary location={location}>
+            {renderRoutes(routes)}
+          </FatalErrorBoundary>
+        )}
+        <CookiesBanner />
+      </FrontendModeContext.Provider>
+    </div>
+  );
 }
 
-const Manifold = withRouter(
-  connect(ManifoldContainer.mapStateToProps)(ManifoldContainer)
-);
+ManifoldContainer.displayName = "Manifold.Container";
 
-export default Manifold;
+ManifoldContainer.propTypes = {
+  confirm: PropTypes.element
+};
