@@ -1,19 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import {
   CollectionCategory,
   CollectionPlaceholder
 } from "frontend/components/collecting/reading-group";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import lh from "helpers/linkHandler";
 
-function ReadingGroupHomepageStaticContainer({
-  readingGroup,
-  categories,
-  responses,
-  refresh
-}) {
+function ReadingGroupHomepageStaticContainer() {
+  const { readingGroup, categories, responses, refresh } =
+    useOutletContext() || {};
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const closeUrl = lh.link(
+    "frontendReadingGroupHomepageStatic",
+    readingGroup.id
+  );
+  const closeDrawer = () => navigate(closeUrl);
 
   function handleUncollect(collection) {
     if (collection.id === readingGroup.id) refresh();
@@ -27,8 +32,6 @@ function ReadingGroupHomepageStaticContainer({
   const hasUncategorized = !!uncategorizedMappings;
   const showPlaceholder = !hasPopulatedCategories && !hasUncategorized;
 
-  if (showPlaceholder) return <CollectionPlaceholder />;
-
   const uncategorized = {
     id: "$uncategorized$",
     attributes: {
@@ -38,37 +41,52 @@ function ReadingGroupHomepageStaticContainer({
 
   return (
     <>
-      {hasPopulatedCategories &&
-        categories.map(category => (
-          <CollectionCategory
-            key={category.id}
-            category={category}
-            mappings={collection.attributes.categoryMappings}
-            responses={responses}
-            onUncollect={handleUncollect}
-          />
-        ))}
-      {hasUncategorized && (
-        <CollectionCategory
-          category={uncategorized}
-          mappings={collection.attributes.categoryMappings}
-          responses={responses}
-          onUncollect={handleUncollect}
-        />
+      {showPlaceholder ? (
+        <CollectionPlaceholder readingGroup={readingGroup} />
+      ) : (
+        <>
+          {hasPopulatedCategories &&
+            categories.map(category => (
+              <CollectionCategory
+                key={category.id}
+                category={category}
+                mappings={collection.attributes.categoryMappings}
+                responses={responses}
+                onUncollect={handleUncollect}
+              />
+            ))}
+          {hasUncategorized && (
+            <CollectionCategory
+              category={uncategorized}
+              mappings={collection.attributes.categoryMappings}
+              responses={responses}
+              onUncollect={handleUncollect}
+            />
+          )}
+        </>
       )}
+      <OutletWithDrawer
+        context={{
+          readingGroup,
+          closeDrawer,
+          onArchive: () => {
+            refresh();
+            closeDrawer();
+          }
+        }}
+        drawerProps={{
+          context: "frontend",
+          size: "wide",
+          position: "overlay",
+          lockScroll: "always",
+          closeUrl
+        }}
+      />
     </>
   );
 }
 
 ReadingGroupHomepageStaticContainer.displayName =
   "ReadingGroup.HomepageStaticContainer";
-
-ReadingGroupHomepageStaticContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  categories: PropTypes.array,
-  responses: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired
-};
 
 export default ReadingGroupHomepageStaticContainer;

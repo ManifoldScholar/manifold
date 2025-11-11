@@ -1,17 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useParams, useOutletContext } from "react-router-dom";
 import Layout from "backend/components/layout";
-import { useParams } from "react-router-dom";
 import AddCollaboratorForm from "backend/components/collaborator/AddForm";
 import lh from "helpers/linkHandler";
 import { useFromStore } from "hooks";
 
-export default function AddCollaboratorContainer({ textId, refresh }) {
+export default function AddCollaboratorContainer() {
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { collaboratorId } = useParams();
+  const { textId, refresh } = useOutletContext() || {};
+
   const collaborator = useFromStore({
-    path: `entityStore.entities.flattenedCollaborators.${id}`
+    path: `entityStore.entities.flattenedCollaborators.${collaboratorId}`
   });
 
   return (
@@ -35,8 +35,3 @@ export default function AddCollaboratorContainer({ textId, refresh }) {
 }
 
 AddCollaboratorContainer.displayName = "Text.Collaborators.AddEdit";
-
-AddCollaboratorContainer.propTypes = {
-  textId: PropTypes.string.isRequired,
-  refresh: PropTypes.func
-};

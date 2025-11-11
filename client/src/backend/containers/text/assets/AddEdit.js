@@ -1,15 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useParams, useOutletContext } from "react-router-dom";
 import Layout from "backend/components/layout";
-import { useParams } from "react-router-dom";
 import { useFetch } from "hooks";
 import { ingestionSourcesAPI } from "api";
 import AddEditAssetForm from "backend/components/authoring/AddEditAssetForm";
 
-export default function AddEditAssetContainer({ textId, refresh }) {
+export default function AddEditAssetContainer() {
   const { t } = useTranslation();
   const { assetId } = useParams();
+  const { textId, refresh } = useOutletContext() || {};
 
   const { data: asset } = useFetch({
     request: [ingestionSourcesAPI.show, assetId],
@@ -34,7 +33,3 @@ export default function AddEditAssetContainer({ textId, refresh }) {
 }
 
 AddEditAssetContainer.displayName = "Text.Assets.AddEdit";
-
-AddEditAssetContainer.propTypes = {
-  textId: PropTypes.string.isRequired
-};

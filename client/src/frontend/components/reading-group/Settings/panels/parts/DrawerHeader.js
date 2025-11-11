@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
 import { useArchiveOrActivateGroup } from "frontend/components/reading-group/hooks";

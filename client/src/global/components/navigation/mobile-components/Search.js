@@ -23,7 +23,7 @@ class MobileSearch extends PureComponent {
 
     return (
       <SearchMenu.Body
-        onSubmit={this.props.closeNavigation}
+        afterSubmit={this.props.closeNavigation}
         searchType={scopeToProject ? "project" : "library"}
         projectId={projectId}
         visibility={{ search: true }}

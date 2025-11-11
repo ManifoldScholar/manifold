@@ -72,11 +72,15 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
         ...data,
         attributes: {
           ...attrs,
-          attachment: attachmentData,
-          variantThumbnail: {
-            ...thumbnailData,
-            altText: variantThumbnailAltText
-          }
+          ...(attachmentData ? { attachment: attachmentData } : {}),
+          ...(thumbnailData
+            ? {
+                variantThumbnail: {
+                  ...thumbnailData,
+                  altText: variantThumbnailAltText
+                }
+              }
+            : {})
         }
       };
 
@@ -84,11 +88,14 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
       ...data,
       attributes: {
         ...attrs,
-        attachment: {
-          ...attachmentData,
-          altText: attachmentAltText
-        },
-        variantThumbnail: null
+        ...(attachmentData
+          ? {
+              attachment: {
+                ...attachmentData,
+                altText: attachmentAltText
+              }
+            }
+          : {})
       }
     };
   };

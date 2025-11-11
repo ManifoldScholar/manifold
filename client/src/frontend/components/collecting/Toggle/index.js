@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { collectingAPI, requests } from "api";
@@ -55,10 +55,9 @@ function CollectingToggle({
   const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
-  const myCollectableReadingGroups = useMemo(() => {
-    if (!Array.isArray(myReadingGroups)) return [];
-    return myReadingGroups.filter(rg => rg?.attributes?.abilities?.update);
-  }, [myReadingGroups]);
+  const myCollectableReadingGroups = !Array.isArray(myReadingGroups)
+    ? []
+    : myReadingGroups.filter(rg => rg?.attributes?.abilities?.update);
 
   useEffect(() => {
     if (!dialogVisible || (!onDialogOpen && !onDialogClose)) return;

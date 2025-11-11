@@ -1,44 +1,30 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import Resource from "backend/components/resource";
 import { resourcesAPI } from "api";
-import { connect } from "react-redux";
 
-export class ResourceVariantsContainer extends PureComponent {
-  static displayName = "Resource.Variants";
+function ResourceVariantsContainer() {
+  const { t } = useTranslation();
+  const { resource } = useOutletContext();
 
-  static propTypes = {
-    resource: PropTypes.object,
-    params: PropTypes.object,
-    t: PropTypes.func
-  };
-
-  render() {
-    return (
-      <section>
-        <FormContainer.Form
-          model={this.props.resource}
-          name="backend-resource-update"
-          update={resourcesAPI.update}
-          create={model =>
-            resourcesAPI.create(this.props.params.projectId, model)
-          }
-          className="form-secondary"
-        >
-          <Resource.Form.Kind.Variants
-            kind={this.props.resource.attributes.kind}
-            {...this.props}
-          />
-          <Form.Save text={this.props.t("resources.properties.save")} />
-        </FormContainer.Form>
-      </section>
-    );
-  }
+  return (
+    <section>
+      <FormContainer.Form
+        model={resource}
+        name="backend-resource-update"
+        update={resourcesAPI.update}
+        create={resourcesAPI.create}
+        className="form-secondary"
+      >
+        <Resource.Form.Kind.Variants kind={resource.attributes.kind} />
+        <Form.Save text={t("resources.properties.save")} />
+      </FormContainer.Form>
+    </section>
+  );
 }
 
-export default withTranslation()(
-  connect(ResourceVariantsContainer.mapStateToProps)(ResourceVariantsContainer)
-);
+ResourceVariantsContainer.displayName = "Resource.Variants";
+
+export default ResourceVariantsContainer;

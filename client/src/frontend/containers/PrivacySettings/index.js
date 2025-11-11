@@ -1,7 +1,5 @@
-import React from "react";
-import Authorize from "hoc/Authorize";
-import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
+import lh from "helpers/linkHandler";
 import AccountData from "frontend/components/privacy/AccountData";
 import CookiesForm from "frontend/components/privacy/CookiesForm";
 import Form from "global/components/form";
@@ -12,15 +10,7 @@ export default function PrivacySettingsContainer() {
   const { t } = useTranslation();
 
   return (
-    <Authorize
-      kind="any"
-      failureRedirect={lh.link("frontendLogin")}
-      failureNotification={{
-        heading: t("errors.unauthorized.heading"),
-        body: t("errors.unauthorized.privacy_body"),
-        level: 2
-      }}
-    >
+    <>
       <HeadContent title={t("titles.privacy")} appendDefaultTitle />
       <section className="bg-neutral05">
         <div className="container">
@@ -40,7 +30,7 @@ export default function PrivacySettingsContainer() {
           </Styled.FormWrapper>
         </div>
       </section>
-    </Authorize>
+    </>
   );
 }
 

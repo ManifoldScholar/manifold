@@ -1,106 +1,109 @@
-import React, { PureComponent } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import useApiCallback from "hooks/api/useApiCallback";
 import TextAnnotation from "./TextAnnotation";
 import HighlightAnnotation from "./HighlightAnnotation";
 import ResourceAnnotation from "./ResourceAnnotation";
-import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { annotationsAPI, requests } from "api";
 
-const { request } = entityStoreActions;
+export default function Annotation({
+  annotation,
+  visitHandler,
+  showCommentsToggleAsBlock,
+  showMarkers,
+  markerIcons,
+  compact,
+  refresh
+}) {
+  const navigate = useNavigate();
 
-class Annotation extends PureComponent {
-  static displayName = "Annotation.Annotation";
+  const deleteAnnotation = useApiCallback(annotationsAPI.destroy, {
+    requestKey: requests.rAnnotationDestroy,
+    removes: { type: "annotations", id: annotation.id }
+  });
 
-  static propTypes = {
-    annotation: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    visitHandler: PropTypes.func,
-    showCommentsToggleAsBlock: PropTypes.bool,
-    showMarkers: PropTypes.bool,
-    markerIcons: PropTypes.bool,
-    compact: PropTypes.bool,
-    refresh: PropTypes.func
-  };
+  const deleteHandler = useCallback(async () => {
+    await deleteAnnotation(annotation.id);
+    if (refresh) refresh();
+  }, [annotation.id, deleteAnnotation, refresh]);
 
-  deleteHandler = () => {
-    const { annotation } = this.props;
-    const call = annotationsAPI.destroy(annotation.id);
-    const options = { removes: { type: "annotations", id: annotation.id } };
-    const res = this.props.dispatch(
-      request(call, requests.rAnnotationDestroy, options)
-    );
-    res.promise.then(() => {
-      if (this.props.refresh) this.props.refresh();
-    });
-  };
+  const handleVisit = useCallback(
+    event => {
+      event.preventDefault();
+      if (visitHandler) return visitHandler(annotation);
+      const {
+        attributes: { textSlug, textSectionId }
+      } = annotation;
+      return navigate(
+        lh.link(
+          "readerSection",
+          textSlug,
+          textSectionId,
+          `#annotation-${annotation.id}`
+        )
+      );
+    },
+    [annotation, visitHandler, navigate]
+  );
 
-  visitHandler = event => {
-    event.preventDefault();
-    const { annotation, visitHandler } = this.props;
-    if (visitHandler) return visitHandler(annotation);
-    return this.props.history.push(this.linkFor(annotation));
-  };
+  const isTextAnnotation = annotation.attributes.format === "annotation";
+  const isResourceAnnotation =
+    annotation.attributes.format === "resource" ||
+    annotation.attributes.format === "resource_collection";
 
-  linkFor(annotation) {
-    const {
-      attributes: { textSlug, textSectionId }
-    } = annotation;
-    return lh.link(
-      "readerSection",
-      textSlug,
-      textSectionId,
-      `#annotation-${annotation.id}`
-    );
-  }
-
-  get showCommentsToggleAsBlock() {
-    return this.props.showCommentsToggleAsBlock;
-  }
-
-  get highlightAnnotation() {
-    return <HighlightAnnotation {...this.props} {...this.injectedProps} />;
-  }
-
-  get textAnnotation() {
-    return <TextAnnotation {...this.props} {...this.injectedProps} />;
-  }
-
-  get resourceAnnotation() {
-    return <ResourceAnnotation {...this.props} {...this.injectedProps} />;
-  }
-
-  get injectedProps() {
-    return {
-      deleteHandler: this.deleteHandler,
-      visitHandler: this.visitHandler,
-      showCommentsToggleAsBlock: this.showCommentsToggleAsBlock
-    };
-  }
-
-  get isTextAnnotation() {
-    const { annotation } = this.props;
-    return annotation.attributes.format === "annotation";
-  }
-
-  get isResourceAnnotation() {
-    const { annotation } = this.props;
+  if (isTextAnnotation) {
     return (
-      annotation.attributes.format === "resource" ||
-      annotation.attributes.format === "resource_collection"
+      <TextAnnotation
+        annotation={annotation}
+        visitHandler={handleVisit}
+        showCommentsToggleAsBlock={showCommentsToggleAsBlock}
+        showMarkers={showMarkers}
+        markerIcons={markerIcons}
+        compact={compact}
+        refresh={refresh}
+      />
     );
   }
 
-  render() {
-    /* eslint-disable no-nested-ternary */
-    return this.isTextAnnotation
-      ? this.textAnnotation
-      : this.isResourceAnnotation
-      ? this.resourceAnnotation
-      : this.highlightAnnotation;
+  if (isResourceAnnotation) {
+    return (
+      <ResourceAnnotation
+        annotation={annotation}
+        visitHandler={visitHandler}
+        showCommentsToggleAsBlock={showCommentsToggleAsBlock}
+        showMarkers={showMarkers}
+        markerIcons={markerIcons}
+        compact={compact}
+        refresh={refresh}
+        deleteHandler={deleteHandler}
+      />
+    );
   }
+
+  return (
+    <HighlightAnnotation
+      annotation={annotation}
+      visitHandler={visitHandler}
+      showCommentsToggleAsBlock={showCommentsToggleAsBlock}
+      showMarkers={showMarkers}
+      markerIcons={markerIcons}
+      compact={compact}
+      refresh={refresh}
+      deleteHandler={deleteHandler}
+    />
+  );
 }
 
-export default connect()(withRouter(Annotation));
+Annotation.displayName = "Annotation.Annotation";
+
+Annotation.propTypes = {
+  annotation: PropTypes.object.isRequired,
+  visitHandler: PropTypes.func,
+  showCommentsToggleAsBlock: PropTypes.bool,
+  showMarkers: PropTypes.bool,
+  markerIcons: PropTypes.bool,
+  compact: PropTypes.bool,
+  refresh: PropTypes.func
+};

@@ -1,17 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import Authorize from "hoc/Authorize";
 import lh from "helpers/linkHandler";
 import { journalsAPI } from "api";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import Hero from "backend/components/hero";
 import { useFetch } from "hooks";
 import { useDispatch } from "react-redux";
-import { withRouter } from "react-router-dom";
 
-function JournalLayoutContainer({ journal, refresh, history, route }) {
+export default function JournalLayoutContainer() {
+  const { journal, refresh } = useOutletContext() || {};
+
   const { data: actionCallouts, refresh: refreshActionCallouts } = useFetch({
-    request: [journalsAPI.actionCallouts, journal.id]
+    request: [journalsAPI.actionCallouts, journal?.id],
+    condition: !!journal?.id
   });
 
   const dispatch = useDispatch();
@@ -20,7 +21,8 @@ function JournalLayoutContainer({ journal, refresh, history, route }) {
 
   const drawerProps = {
     closeUrl: lh.link("backendJournalLayout", journal?.id),
-    lockScroll: "always"
+    lockScroll: "always",
+    wide: true
   };
 
   if (!journal) return null;
@@ -35,7 +37,6 @@ function JournalLayoutContainer({ journal, refresh, history, route }) {
       <Hero.Builder
         include={["journalDescription", "actionCallouts"]}
         dispatch={dispatch}
-        history={history}
         actionCallouts={actionCallouts}
         refreshActionCallouts={refreshActionCallouts}
         refresh={refresh}
@@ -48,25 +49,14 @@ function JournalLayoutContainer({ journal, refresh, history, route }) {
         api={journalsAPI}
         withDarkMode={false}
       />
-      {childRoutes(route, {
-        childProps: {
+      <OutletWithDrawer
+        drawerProps={drawerProps}
+        context={{
           calloutable: journal,
           refreshActionCallouts,
           closeRoute: "backendJournalLayout"
-        },
-        drawer: true,
-        drawerProps: { wide: true, ...drawerProps }
-      })}
+        }}
+      />
     </Authorize>
   );
 }
-
-JournalLayoutContainer.propTypes = {
-  journal: PropTypes.object,
-  location: PropTypes.object,
-  history: PropTypes.object,
-  route: PropTypes.object,
-  refresh: PropTypes.func
-};
-
-export default withRouter(JournalLayoutContainer);

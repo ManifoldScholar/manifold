@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import { FocusTrap } from "focus-trap-react";
 import { useUID } from "react-uid";
 import Header from "./Header";
@@ -16,7 +17,6 @@ function Overlay({
   contentWidth,
   closeCallback,
   closeUrl,
-  history,
   triggerScrollToTop,
   id,
   children,
@@ -24,6 +24,7 @@ function Overlay({
 }) {
   const overlayRef = useRef(null);
   const headerId = useUID();
+  const navigate = useNavigate();
 
   function handleCloseEvent(event) {
     const dialog = helpers.closest(event.target, "dialog");
@@ -34,7 +35,7 @@ function Overlay({
     }
     if (closeUrl) {
       setTimeout(() => {
-        history.push(closeUrl);
+        navigate(closeUrl);
       }, 200);
     }
   }
@@ -85,7 +86,6 @@ Overlay.displayName = "Global.Overlay";
 
 Overlay.propTypes = {
   open: PropTypes.bool,
-  history: PropTypes.object,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   title: PropTypes.string,
   subtitle: PropTypes.string,

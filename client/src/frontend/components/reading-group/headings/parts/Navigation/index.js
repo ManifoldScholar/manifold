@@ -1,34 +1,38 @@
-import React from "react";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
-import { ClassNames } from "@emotion/react";
 import * as Styled from "./styles";
 
-function ChildNavigation({ ariaLabel, links, layout = "grid", padLinks }) {
+export default function ChildNavigation({
+  ariaLabel,
+  links,
+  layout = "grid",
+  padLinks
+}) {
+  const location = useLocation();
+
   return (
     <Styled.ChildNav
       aria-label={ariaLabel}
       $layout={layout}
       $count={links.length}
     >
-      {links.map(({ to, exact, isActive, text, icon }) => (
-        <ClassNames key={text}>
-          {({ css }) => (
-            <Styled.Link
-              to={to}
-              exact={exact}
-              isActive={isActive}
-              $padded={padLinks}
-              activeClassName={css(
-                `--box-bg-color: var(--color-base-neutral10); color: var(--strong-color);`
-              )}
-            >
-              {icon && <IconComposer icon={icon} size="default" />}
-              <Styled.LinkText>{text}</Styled.LinkText>
-            </Styled.Link>
-          )}
-        </ClassNames>
-      ))}
+      {links.map(({ to, exact, isActive, text, icon }) => {
+        const customActive =
+          typeof isActive === "function" ? isActive(location) : false;
+        return (
+          <Styled.Link
+            key={text}
+            to={to}
+            end={exact}
+            $padded={padLinks}
+            className={customActive ? "active" : undefined}
+          >
+            {icon && <IconComposer icon={icon} size="default" />}
+            <Styled.LinkText>{text}</Styled.LinkText>
+          </Styled.Link>
+        );
+      })}
     </Styled.ChildNav>
   );
 }
@@ -49,5 +53,3 @@ ChildNavigation.propTypes = {
   layout: PropTypes.oneOf(["flex", "grid"]),
   padLinks: PropTypes.bool
 };
-
-export default ChildNavigation;

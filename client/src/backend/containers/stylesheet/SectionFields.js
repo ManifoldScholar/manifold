@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
 import Form from "global/components/form";

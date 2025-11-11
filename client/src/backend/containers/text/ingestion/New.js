@@ -1,64 +1,45 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { useOutletContext, useNavigate, useLocation } from "react-router-dom";
 import Ingestion from "backend/components/ingestion";
 import { requests } from "api";
-import { select } from "utils/entityUtils";
 import lh from "helpers/linkHandler";
+import { useFromStore } from "hooks";
 
-export class IngestionNewContainer extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      ingestion: select(requests.beIngestionCreate, state.entityStore)
-    };
-  };
+export default function IngestionNewContainer() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { text } = useOutletContext() || {};
 
-  static displayName = "Text.Ingestion.New";
+  const ingestion = useFromStore({
+    requestKey: requests.beIngestionCreate,
+    action: "select"
+  });
 
-  static propTypes = {
-    project: PropTypes.object,
-    text: PropTypes.object,
-    history: PropTypes.object,
-    ingestion: PropTypes.object,
-    match: PropTypes.object,
-    location: PropTypes.object,
-    t: PropTypes.func
-  };
+  const prevIngestionRef = useRef(ingestion);
 
-  componentDidUpdate(prevProps) {
-    if (this.props.ingestion !== prevProps.ingestion) {
-      this.redirectToIngestion(this.props.ingestion.id);
+  useEffect(() => {
+    if (ingestion && ingestion !== prevIngestionRef.current && text) {
+      const path = lh.link("backendTextIngestionIngest", text.id, ingestion.id);
+      navigate(path, { state: { back: location.pathname } });
     }
-  }
+    prevIngestionRef.current = ingestion;
+  }, [ingestion, text, navigate, location.pathname]);
 
-  get textId() {
-    return this.props.text.id;
-  }
+  if (!text) return null;
 
-  redirectToIngestion(ingestionId) {
-    const path = lh.link(
-      "backendTextIngestionIngest",
-      this.textId,
-      ingestionId
-    );
-    this.props.history.push(path, { back: this.props.match.url });
-  }
-
-  render() {
-    return (
-      <div>
-        <Ingestion.Form.Wrapper
-          location={this.props.location}
-          history={this.props.history}
-          name={requests.beIngestionCreate}
-          project={this.props.text.relationships.project}
-          text={this.props.text}
-          header={this.props.t("texts.reingest")}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Ingestion.Form.Wrapper
+        location={location}
+        name={requests.beIngestionCreate}
+        project={text.relationships.project}
+        text={text}
+        header={t("texts.reingest")}
+      />
+    </div>
+  );
 }
 
-export default withTranslation()(connectAndFetch(IngestionNewContainer));
+IngestionNewContainer.displayName = "Text.Ingestion.New";

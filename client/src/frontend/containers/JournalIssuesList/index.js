@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import {
   useFetch,
   useListQueryParams,
@@ -14,12 +15,13 @@ import EntityCollection from "frontend/components/entity/Collection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 
-export default function JournalIssuesList({ journal }) {
+export default function JournalIssuesList() {
+  const { journal } = useOutletContext() || {};
+
   const initFilters = useMemo(
     () => ({ journal_id: journal.id, order: "sort_title DESC" }),
     [journal.id]
   );
-
   const { pagination, filters, setFilters } = useListQueryParams({
     initFilters
   });
@@ -37,27 +39,25 @@ export default function JournalIssuesList({ journal }) {
     "glossary.issue_truncated_title_case_other"
   )}`;
 
-  const breadcrumbs = useMemo(() => {
-    const nestedCrumbs = [
-      {
-        to: lh.link("frontendJournalDetail", slug),
-        label: titlePlaintext
-      },
-      {
-        to: lh.link("frontendJournalAllIssues", slug),
-        label: t("navigation.breadcrumbs.issues")
-      }
-    ];
-    return libraryDisabled
-      ? nestedCrumbs
-      : [
-          {
-            to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
-          },
-          ...nestedCrumbs
-        ];
-  }, [slug, t, titlePlaintext, libraryDisabled]);
+  const nestedCrumbs = [
+    {
+      to: lh.link("frontendJournalDetail", slug),
+      label: titlePlaintext
+    },
+    {
+      to: lh.link("frontendJournalAllIssues", slug),
+      label: t("navigation.breadcrumbs.issues")
+    }
+  ];
+  const breadcrumbs = libraryDisabled
+    ? nestedCrumbs
+    : [
+        {
+          to: lh.link("frontendJournalsList"),
+          label: t("navigation.breadcrumbs.all_journals")
+        },
+        ...nestedCrumbs
+      ];
 
   const headContentProps = useEntityHeadContent(journal);
 

@@ -70,9 +70,9 @@ class PressHeader extends PureComponent {
   get url() {
     return (
       this.props.url ||
-      (this.context.project &&
+      (this.context?.project &&
         this.context.project.standaloneModePressBarUrl) ||
-      this.props.settings.attributes.theme.topBarUrl
+      this.props.settings?.attributes?.theme?.topBarUrl
     );
   }
 
@@ -110,12 +110,12 @@ class PressHeader extends PureComponent {
 
   get projectLabel() {
     return (
-      this.context.project && this.context.project.standaloneModePressBarText
+      this.context?.project && this.context.project.standaloneModePressBarText
     );
   }
 
   get settingsLabel() {
-    return this.props.settings.attributes.theme.topBarText;
+    return this.props.settings?.attributes?.theme?.topBarText;
   }
 
   get pressHeaderMode() {
@@ -137,11 +137,11 @@ class PressHeader extends PureComponent {
   }
 
   get isProjectPage() {
-    return this.context.isProject;
+    return this.context?.isProject;
   }
 
   get isStandaloneMode() {
-    return this.context.isStandalone;
+    return this.context?.isStandalone;
   }
 
   get linked() {

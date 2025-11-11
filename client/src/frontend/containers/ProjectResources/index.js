@@ -1,8 +1,7 @@
-import React, { useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { uiFrontendModeActions } from "actions";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
@@ -13,10 +12,8 @@ import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useListFilters, useListQueryParams } from "hooks";
 import { RESOURCE_DEFAULT_ORDER } from "frontend/components/resource/constants";
 
-export default function ProjectResourcesContainer({
-  project,
-  journalBreadcrumbs
-}) {
+export default function ProjectResourcesContainer() {
+  const { project, journalBreadcrumbs } = useOutletContext() || {};
   const { id } = useParams();
 
   const { pagination, filters, setFilters } = useListQueryParams({
@@ -49,19 +46,17 @@ export default function ProjectResourcesContainer({
     }
   });
 
-  const breadcrumbs = useMemo(() => {
-    const projectCrumb = {
-      to: lh.link("frontendProject", slug),
-      label: titlePlaintext
-    };
-    const resourcesCrumb = {
-      to: lh.link("frontendProjectResources", slug),
-      label: t("glossary.resource_other")
-    };
-    return journalBreadcrumbs
-      ? [...journalBreadcrumbs, resourcesCrumb].filter(Boolean)
-      : [projectCrumb, resourcesCrumb].filter(Boolean);
-  }, [journalBreadcrumbs, slug, titlePlaintext, t]);
+  const projectCrumb = {
+    to: lh.link("frontendProject", slug),
+    label: titlePlaintext
+  };
+  const resourcesCrumb = {
+    to: lh.link("frontendProjectResources", slug),
+    label: t("glossary.resource_other")
+  };
+  const breadcrumbs = journalBreadcrumbs
+    ? [...journalBreadcrumbs, resourcesCrumb].filter(Boolean)
+    : [projectCrumb, resourcesCrumb].filter(Boolean);
 
   const headContentProps = useEntityHeadContent(
     project,
@@ -88,8 +83,3 @@ export default function ProjectResourcesContainer({
 
 ProjectResourcesContainer.displayName =
   "Frontend.Containers.ProjectResourcesContainer";
-
-ProjectResourcesContainer.propTypes = {
-  project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
-};

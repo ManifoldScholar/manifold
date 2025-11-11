@@ -1,73 +1,56 @@
-import React, { Component } from "react";
-import connectAndFetch from "utils/connectAndFetch";
+import { useState, useEffect } from "react";
 import ApiDocs from "frontend/components/ApiDocs";
 import config from "config";
 import EntityCollection from "frontend/components/entity/Collection/EntityCollection";
+import { useFromStore } from "hooks";
 
-class Api extends Component {
-  static mapStateToProps = (state, ownPropsIgnored) => {
-    return {
-      authentication: state.authentication
-    };
-  };
+const API_DOCS_URL = `${config.services.api}/api/static/docs/v1/swagger.json`;
 
-  constructor(props) {
-    super(props);
-    this.state = { schema: null };
-  }
+const adjustedSchema = schema => {
+  const newSchema = { ...schema };
+  delete newSchema.host;
+  return newSchema;
+};
 
-  componentDidMount() {
-    this.fetchSchema();
-  }
+const getEndpointCounts = schema => {
+  if (!schema) return 0;
+  let count = 0;
+  Object.keys(schema.paths).forEach(path => {
+    count += Object.keys(schema.paths[path]).length;
+  });
+  return count;
+};
 
-  get url() {
-    return `${config.services.api}/api/static/docs/v1/swagger.json`;
-  }
+export default function Api() {
+  const [schema, setSchema] = useState(null);
+  const authentication = useFromStore({ path: "authentication" });
 
-  fetchSchema() {
-    fetch(this.url).then(response => {
-      response.json().then(schema => {
-        this.setState({ schema: this.adjustedSchema(schema) });
+  useEffect(() => {
+    fetch(API_DOCS_URL).then(response => {
+      response.json().then(data => {
+        setSchema(adjustedSchema(data));
       });
     });
-  }
+  }, []);
 
-  get endpointCounts() {
-    if (!this.state.schema) return 0;
-    let count = 0;
-    Object.keys(this.state.schema.paths).forEach(path => {
-      count += Object.keys(this.state.schema.paths[path]).length;
-    });
-    return count;
-  }
+  if (!schema) return null;
 
-  /* eslint-disable no-param-reassign */
-  adjustedSchema(schema) {
-    delete schema.host;
-    return schema;
-  }
-  /* eslint-enable no-param-reassign */
+  const endpointCounts = getEndpointCounts(schema);
 
-  render() {
-    if (!this.state.schema) return null;
-    const { authentication } = this.props;
-
-    return (
-      <EntityCollection
-        title={`Manifold API ${this.state.schema.info.version} Documentation`}
-        icon="settings32"
-        description={`
+  return (
+    <EntityCollection
+      title={`Manifold API ${schema.info.version} Documentation`}
+      icon="settings32"
+      description={`
             <p className="description">
               Nearly all changes to data stored in a Manifold installation occur over
               Manifold's API with a base URL of <em>${config.services.api}${
-          this.state.schema.basePath
-        }</em>.
+        schema.basePath
+      }</em>.
               The API is a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">
                 REST API
               </a>
-              with ${
-                this.endpointCounts
-              } distinct endpoints. It strives to conform to the
+              with ${endpointCounts} distinct endpoints. It strives to conform to the
               <a href="https://jsonapi.org/">JSON:API</a> specification.
             </p>
             <p className="description">
@@ -79,29 +62,23 @@ class Api extends Component {
               Any requests you send to this instance using the documentation below
               will be sent with your current authorization token and will operate on the current data for
               <a href="${config.services.api}">${
-          config.services.api
-        }</a> so proceed with caution.
+        config.services.api
+      }</a> so proceed with caution.
             </p>
             <p className="description">
               Manifold's API documentation follows the <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md">
-                OpenAPI ${this.state.schema.swagger}
+                OpenAPI ${schema.swagger}
               </a>
               specification. The JSON schema file for Manifold's API is available at
-              <a target="top" href=${this.url}>
-                ${this.url}
+              <a target="top" href=${API_DOCS_URL}>
+                ${API_DOCS_URL}
               </a>
             </p>
           `}
-        headerLayout="title_description"
-        BodyComponent={() => (
-          <ApiDocs
-            schema={this.state.schema}
-            authToken={authentication.authToken}
-          />
-        )}
-      />
-    );
-  }
+      headerLayout="title_description"
+      BodyComponent={() => (
+        <ApiDocs schema={schema} authToken={authentication.authToken} />
+      )}
+    />
+  );
 }
-
-export default connectAndFetch(Api);

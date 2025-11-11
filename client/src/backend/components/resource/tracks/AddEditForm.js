@@ -5,7 +5,7 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import textTracksAPI from "api/resources/textTracks";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import Upload from "global/components/form/Upload";
 
 export default function AddEditForm({ resource, track, refresh }) {
