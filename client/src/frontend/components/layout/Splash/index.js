@@ -43,22 +43,45 @@ export default function Splash(props) {
     return bodyFormatted || body;
   };
 
+  const showSignUp = () => {
+    if (preview) return previewAttrs?.includeSignUp;
+    return !!includeSignUp && !authenticated;
+  };
+
+  const getLinkAttrs = () => {
+    if (preview) {
+      const text = previewAttrs?.linkText ?? linkText;
+      const url = previewAttrs?.linkUrl ?? linkUrl;
+      return {
+        linkText: text,
+        linkUrl: url,
+        visible: !!text && !!url
+      };
+    }
+
+    return {
+      linkText,
+      linkUrl,
+      visible: !!linkText && !!linkUrl
+    };
+  };
+
   return (
     <Styled.Wrapper
       $preview={preview}
       $lightMode={mode === "light"}
-      $bgColor={backgroundColor}
+      $bgColor={previewAttrs?.backgroundColor ?? backgroundColor}
       $bgImage={backgroundStyles?.original}
     >
       <Styled.Container>
         <Styled.Left>
           <Styled.Heading
-            $color={headerColor}
+            $color={previewAttrs?.headerColor ?? headerColor}
             dangerouslySetInnerHTML={{
               __html: renderedHeader()
             }}
           />
-          {(subheaderFormatted || subheader) && (
+          {renderedSubheader() && (
             <Styled.Subheading
               $color={headerColor}
               dangerouslySetInnerHTML={{
@@ -67,22 +90,26 @@ export default function Splash(props) {
             />
           )}
           <Styled.Body
-            $color={foregroundColor}
+            $color={previewAttrs?.foregroundColor ?? foregroundColor}
             dangerouslySetInnerHTML={{ __html: renderedBody() }}
           />
           <Styled.Buttons>
-            {linkText && linkUrl ? (
-              <a href={linkUrl} target="blank" className="utility-button">
+            {getLinkAttrs().visible ? (
+              <a
+                href={getLinkAttrs().linkUrl}
+                target="blank"
+                className="utility-button"
+              >
                 <Styled.Button
                   className={classNames({
                     "utility-button__text--dark-green": mode === "light"
                   })}
                 >
-                  {linkText}
+                  {getLinkAttrs().linkText}
                 </Styled.Button>
               </a>
             ) : null}
-            {includeSignUp && !authenticated ? (
+            {showSignUp() ? (
               <Link
                 className="utility-button"
                 role="button"

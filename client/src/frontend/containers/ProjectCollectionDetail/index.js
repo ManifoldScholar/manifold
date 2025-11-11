@@ -1,12 +1,9 @@
-import React, { useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
+import { useMemo } from "react";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { entityStoreActions as store } from "actions";
+import { useParams, Navigate } from "react-router-dom";
 import { projectCollectionsAPI, projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
@@ -22,8 +19,9 @@ import {
 
 export default function ProjectCollectionDetailContainer() {
   const { id } = useParams();
-  const { data: projectCollection, uid } = useFetch({
-    request: [projectCollectionsAPI.show, id]
+  const { data: projectCollection } = useFetch({
+    request: [projectCollectionsAPI.show, id],
+    condition: id !== "all"
   });
 
   const allSubjects = useFromStore({
@@ -51,15 +49,11 @@ export default function ProjectCollectionDetailContainer() {
   });
 
   const { data: projects, meta } = useFetch({
-    request: [projectsAPI.index, filters, pagination]
+    request: [projectsAPI.index, filters, pagination],
+    condition: id !== "all"
   });
 
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    return () => dispatch(store.flush(uid));
-  }, [dispatch, uid]);
 
   const filterProps = useListFilters({
     onFilterChange: state => setFilters(state),
@@ -72,17 +66,17 @@ export default function ProjectCollectionDetailContainer() {
     }
   });
 
-  const breadcrumbs = useMemo(
-    () => [
-      {
-        to: lh.link("frontendProjectCollections"),
-        label: t("navigation.breadcrumbs.all_project_collections")
-      }
-    ],
-    [t]
-  );
+  const breadcrumbs = [
+    {
+      to: lh.link("frontendProjectCollections"),
+      label: t("navigation.breadcrumbs.all_project_collections")
+    }
+  ];
 
   const headContentProps = useEntityHeadContent(projectCollection);
+
+  if (id === "all")
+    return <Navigate to={lh.link("frontendProjectCollectionsAll")} />;
 
   if (!projectCollection) return null;
 

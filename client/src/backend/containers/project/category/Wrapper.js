@@ -1,22 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-import { childRoutes } from "helpers/router";
+import { useOutletContext, Outlet } from "react-router-dom";
 
-class ProjectCategoryWrapperContainer extends Component {
-  static displayName = "Project.Category.Wrapper";
+export default function ProjectCategoryWrapperContainer() {
+  const { project, refresh } = useOutletContext() || {};
 
-  static propTypes = {
-    project: PropTypes.object,
-    history: PropTypes.object,
-    route: PropTypes.object
-  };
-
-  render() {
-    return (
-      <div>{childRoutes(this.props.route, { childProps: this.props })}</div>
-    );
-  }
+  return <Outlet context={{ project, refresh }} />;
 }
 
-export default withRouter(ProjectCategoryWrapperContainer);
+ProjectCategoryWrapperContainer.displayName = "Project.Category.Wrapper";

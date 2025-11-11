@@ -1,9 +1,8 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { makersAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import withFilteredLists, { makerFilters } from "hoc/withFilteredLists";
 import { useParams } from "react-router-dom";
 import { useFetch, useListQueryParams } from "hooks";
@@ -17,8 +16,7 @@ import EntitiesList, {
 
 function MakersListContainer({
   entitiesListSearchProps,
-  entitiesListSearchParams,
-  route
+  entitiesListSearchParams
 }) {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -52,11 +50,10 @@ function MakersListContainer({
       }}
       failureRedirect
     >
-      {childRoutes(route, {
-        drawer: true,
-        drawerProps,
-        childProps: { refetch: refresh }
-      })}
+      <OutletWithDrawer
+        drawerProps={drawerProps}
+        context={{ refetch: refresh }}
+      />
       {makers && (
         <EntitiesList
           title={t("records.makers.header")}
@@ -88,8 +85,7 @@ MakersListContainer.displayName = "Makers.List";
 
 MakersListContainer.propTypes = {
   entitiesListSearchProps: PropTypes.func.isRequired,
-  entitiesListSearchParams: PropTypes.object.isRequired,
-  route: PropTypes.object
+  entitiesListSearchParams: PropTypes.object.isRequired
 };
 
 export default withFilteredLists(MakersListContainer, {

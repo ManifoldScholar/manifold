@@ -1,87 +1,35 @@
-import React, { Component } from "react";
+import { useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { actionCalloutsAPI, requests } from "api";
+import { useApiCallback } from "hooks";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
-import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 
-const { request } = entityStoreActions;
+function ActionCalloutForm({
+  calloutable,
+  closeRoute,
+  confirm,
+  actionCallout,
+  refreshActionCallouts
+}) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-export class ActionCalloutForm extends Component {
-  static displayName = "ActionCallout.Form";
+  const requestName = actionCallout?.id
+    ? requests.beActionCalloutUpdate
+    : requests.beActionCalloutCreate;
 
-  static propTypes = {
-    calloutable: PropTypes.object.isRequired,
-    closeRoute: PropTypes.string.isRequired,
-    confirm: PropTypes.func.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
-    actionCallout: PropTypes.object.isRequired,
-    refreshActionCallouts: PropTypes.func,
-    t: PropTypes.func
-  };
+  const drawerTitle = actionCallout?.id
+    ? t("call_to_action.edit_drawer_title")
+    : t("call_to_action.create_drawer_title");
 
-  onDelete = () => {
-    const t = this.props.t;
-    const heading = t("modals.delete_cta");
-    const message = t("modals.confirm_body");
-    this.props.confirm(heading, message, () => this.onConfirmedDelete());
-  };
-
-  onConfirmedDelete = () => {
-    const call = actionCalloutsAPI.destroy(this.actionCallout.id);
-    const options = {
-      removes: { type: "actionCallout", id: this.actionCallout.id }
-    };
-    const destroyRequest = request(
-      call,
-      requests.beActionCalloutDestroy,
-      options
-    );
-    this.props.dispatch(destroyRequest).promise.then(() => {
-      this.closeDrawer();
-    });
-  };
-
-  get calloutable() {
-    return this.props.calloutable;
-  }
-
-  get requestName() {
-    return this.actionCallout.id
-      ? requests.beActionCalloutCreate
-      : requests.beActionCalloutUpdate;
-  }
-
-  get actionCallout() {
-    return this.props.actionCallout;
-  }
-
-  get drawerTitle() {
-    const t = this.props.t;
-    if (this.actionCallout.id) return t("call_to_action.edit_drawer_title");
-    return t("call_to_action.create_drawer_title");
-  }
-
-  get buttons() {
-    return [
-      {
-        onClick: this.onDelete,
-        label: this.props.t("actions.delete"),
-        icon: "delete32",
-        className: "utility-button__icon--notice"
-      }
-    ];
-  }
-
-  get kindOptions() {
-    const t = this.props.t;
-    if (this.calloutable.type === "journals") {
+  const kindOptions = useMemo(() => {
+    if (calloutable?.type === "journals") {
       return [
         { label: t("glossary.link_title_case_one"), value: "link" },
         { label: t("actions.download"), value: "download" }
@@ -93,11 +41,10 @@ export class ActionCalloutForm extends Component {
       { label: t("glossary.table_of_contents_title_case"), value: "toc" },
       { label: t("actions.download"), value: "download" }
     ];
-  }
+  }, [calloutable?.type, t]);
 
-  get visibilityOptions() {
-    const t = this.props.t;
-    return [
+  const visibilityOptions = useMemo(
+    () => [
       {
         label: t("layout.visibility_options.always"),
         value: "always"
@@ -110,133 +57,166 @@ export class ActionCalloutForm extends Component {
         label: t("layout.visibility_options.unauthorized"),
         value: "unauthorized"
       }
-    ];
-  }
+    ],
+    [t]
+  );
 
-  get textOptions() {
+  const textOptions = useMemo(() => {
     const options = [
       {
-        label: this.props.t("call_to_action.text_select_placeholder"),
+        label: t("call_to_action.text_select_placeholder"),
         value: ""
       }
     ];
-    if (!this.calloutable.relationships.texts) return [];
-    const texts = this.calloutable.relationships.texts.map(text => {
+    if (!calloutable?.relationships?.texts) return options;
+    const texts = calloutable.relationships.texts.map(text => {
       return { label: text.attributes.title, value: text };
     });
     return options.concat(texts);
-  }
+  }, [calloutable?.relationships?.texts, t]);
 
-  closeDrawer = () => {
-    const { closeRoute, refreshActionCallouts } = this.props;
+  const deleteActionCallout = useApiCallback(actionCalloutsAPI.destroy, {
+    requestKey: requests.beActionCalloutDestroy,
+    removes: { type: "actionCallout", id: actionCallout?.id }
+  });
+
+  const closeDrawer = useCallback(() => {
     if (refreshActionCallouts) refreshActionCallouts();
-    return this.props.history.push(lh.link(closeRoute, this.calloutable.id), {
-      noScroll: true
+    navigate(lh.link(closeRoute, calloutable?.id), {
+      state: { noScroll: true }
     });
-  };
+  }, [refreshActionCallouts, navigate, closeRoute, calloutable?.id]);
 
-  shouldShowTextsForKind(kind) {
+  const onConfirmedDelete = useCallback(async () => {
+    if (!actionCallout?.id) return;
+    await deleteActionCallout(actionCallout.id);
+    closeDrawer();
+  }, [actionCallout?.id, deleteActionCallout, closeDrawer]);
+
+  const onDelete = useCallback(() => {
+    const heading = t("modals.delete_cta");
+    const message = t("modals.confirm_body");
+    confirm(heading, message, onConfirmedDelete);
+  }, [confirm, t, onConfirmedDelete]);
+
+  const buttons = useMemo(() => {
+    if (!actionCallout?.id) return [];
+    return [
+      {
+        onClick: onDelete,
+        label: t("actions.delete"),
+        icon: "delete32",
+        className: "utility-button__icon--notice"
+      }
+    ];
+  }, [actionCallout?.id, onDelete, t]);
+
+  const shouldShowTextsForKind = kind => {
     return kind === "read" || kind === "toc";
-  }
-
-  shouldShowVisibilityForKind(kind) {
-    return kind === "link" || kind === "download";
-  }
-
-  shouldShowUrlForKind(kind) {
-    return kind === "link";
-  }
-
-  shouldShowAttachmentForKind(kind) {
-    return kind === "download";
-  }
-
-  create = model => {
-    const adjusted = { ...model };
-    const createFunc =
-      this.calloutable.type === "journals"
-        ? actionCalloutsAPI.createForJournal
-        : actionCalloutsAPI.createForProject;
-    return createFunc(this.calloutable.id, adjusted);
   };
 
-  render() {
-    const t = this.props.t;
-    return (
-      <>
-        <Layout.DrawerHeader
-          icon="touch64"
-          title={this.drawerTitle}
-          buttons={this.buttons}
-        />
-        <FormContainer.Form
-          model={this.actionCallout}
-          name={this.requestName}
-          update={actionCalloutsAPI.update}
-          create={this.create}
-          onSuccess={this.closeDrawer}
-          className="form-secondary"
-          notificationScope="drawer"
-        >
-          {getModelValue => (
-            <>
-              <Form.TextInput
-                label={t("call_to_action.input_labels.title")}
-                name="attributes[title]"
-                focusOnMount
-              />
+  const shouldShowVisibilityForKind = kind => {
+    return kind === "link" || kind === "download";
+  };
+
+  const shouldShowUrlForKind = kind => {
+    return kind === "link";
+  };
+
+  const shouldShowAttachmentForKind = kind => {
+    return kind === "download";
+  };
+
+  const create = useCallback(
+    model => {
+      const adjusted = { ...model };
+      const createFunc =
+        calloutable?.type === "journals"
+          ? actionCalloutsAPI.createForJournal
+          : actionCalloutsAPI.createForProject;
+      return createFunc(calloutable.id, adjusted);
+    },
+    [calloutable]
+  );
+
+  if (!actionCallout || !calloutable) return null;
+
+  return (
+    <>
+      <Layout.DrawerHeader
+        icon="touch64"
+        title={drawerTitle}
+        buttons={buttons}
+      />
+      <FormContainer.Form
+        model={actionCallout}
+        name={requestName}
+        update={actionCalloutsAPI.update}
+        create={create}
+        onSuccess={closeDrawer}
+        className="form-secondary"
+        notificationScope="drawer"
+      >
+        {getModelValue => (
+          <>
+            <Form.TextInput
+              label={t("call_to_action.input_labels.title")}
+              name="attributes[title]"
+              focusOnMount
+            />
+            <Form.Select
+              label={t("call_to_action.input_labels.type")}
+              options={kindOptions}
+              name="attributes[kind]"
+            />
+            {shouldShowVisibilityForKind(getModelValue("attributes[kind]")) && (
               <Form.Select
-                label={t("call_to_action.input_labels.type")}
-                options={this.kindOptions}
-                name="attributes[kind]"
+                label={t("call_to_action.input_labels.visibility")}
+                options={visibilityOptions}
+                name="attributes[visibility]"
               />
-              {this.shouldShowVisibilityForKind(
-                getModelValue("attributes[kind]")
-              ) && (
-                <Form.Select
-                  label={t("call_to_action.input_labels.visibility")}
-                  options={this.visibilityOptions}
-                  name="attributes[visibility]"
-                />
-              )}
-              {this.shouldShowTextsForKind(
-                getModelValue("attributes[kind]")
-              ) && (
-                <Form.Select
-                  label={t("call_to_action.input_labels.text")}
-                  placeholder={t("call_to_action.text_select_placeholder")}
-                  name="relationships[text]"
-                  options={this.textOptions}
-                  entityLabelAttribute={"title"}
-                />
-              )}
-              {this.shouldShowUrlForKind(getModelValue("attributes[kind]")) && (
-                <Form.TextInput
-                  label={t("call_to_action.input_labels.url")}
-                  name="attributes[url]"
-                />
-              )}
-              {this.shouldShowAttachmentForKind(
-                getModelValue("attributes[kind]")
-              ) && (
-                <Form.Upload
-                  layout="portrait"
-                  label={t("call_to_action.input_labels.download")}
-                  accepts="files"
-                  readFrom="attributes[attachmentStyles][original]"
-                  name="attributes[attachment]"
-                  remove="attributes[removeAttachment]"
-                />
-              )}
-              <Form.Save text={t("call_to_action.input_labels.save")} />
-            </>
-          )}
-        </FormContainer.Form>
-      </>
-    );
-  }
+            )}
+            {shouldShowTextsForKind(getModelValue("attributes[kind]")) && (
+              <Form.Select
+                label={t("call_to_action.input_labels.text")}
+                placeholder={t("call_to_action.text_select_placeholder")}
+                name="relationships[text]"
+                options={textOptions}
+                entityLabelAttribute="title"
+              />
+            )}
+            {shouldShowUrlForKind(getModelValue("attributes[kind]")) && (
+              <Form.TextInput
+                label={t("call_to_action.input_labels.url")}
+                name="attributes[url]"
+              />
+            )}
+            {shouldShowAttachmentForKind(getModelValue("attributes[kind]")) && (
+              <Form.Upload
+                layout="portrait"
+                label={t("call_to_action.input_labels.download")}
+                accepts="files"
+                readFrom="attributes[attachmentStyles][original]"
+                name="attributes[attachment]"
+                remove="attributes[removeAttachment]"
+              />
+            )}
+            <Form.Save text={t("call_to_action.input_labels.save")} />
+          </>
+        )}
+      </FormContainer.Form>
+    </>
+  );
 }
 
-export default withTranslation()(
-  withConfirmation(connectAndFetch(ActionCalloutForm))
-);
+ActionCalloutForm.displayName = "ActionCallout.Form";
+
+ActionCalloutForm.propTypes = {
+  calloutable: PropTypes.object.isRequired,
+  closeRoute: PropTypes.string.isRequired,
+  confirm: PropTypes.func.isRequired,
+  actionCallout: PropTypes.object.isRequired,
+  refreshActionCallouts: PropTypes.func
+};
+
+export default withConfirmation(ActionCalloutForm);

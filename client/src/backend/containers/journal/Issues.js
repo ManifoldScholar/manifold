@@ -1,19 +1,19 @@
-import React from "react";
+import { useOutletContext } from "react-router-dom";
 import Authorize from "hoc/Authorize";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import { journalsAPI } from "api";
-import { withRouter } from "react-router-dom";
 import { useFetch, useListQueryParams } from "hooks";
 import EntitiesList, {
   Button,
   JournalIssueRow
 } from "backend/components/list/EntitiesList";
 
-function JournalIssuesContainer({ refresh, journal, route }) {
-  const closeUrl = lh.link("backendJournalIssues", journal.id);
+export default function JournalIssuesContainer() {
+  const { journal, refresh } = useOutletContext() || {};
+
+  const closeUrl = lh.link("backendJournalIssues", journal?.id);
 
   const { pagination, filters } = useListQueryParams({
     initSize: 10,
@@ -21,12 +21,13 @@ function JournalIssuesContainer({ refresh, journal, route }) {
   });
 
   const { data, refresh: refreshIssues, meta } = useFetch({
-    request: [journalsAPI.journalIssues, journal.id, pagination, filters]
+    request: [journalsAPI.journalIssues, journal?.id, pagination, filters],
+    condition: !!journal?.id
   });
 
   const { t } = useTranslation();
 
-  if (!data) return null;
+  if (!data || !journal) return null;
 
   return (
     <Authorize
@@ -58,27 +59,20 @@ function JournalIssuesContainer({ refresh, journal, route }) {
           />
         ]}
       />
-      {childRoutes(route, {
-        drawer: true,
-        drawerProps: {
+      <OutletWithDrawer
+        drawerProps={{
           lockScroll: "always",
           wide: true,
           lockScrollClickCloses: false,
           closeUrl
-        },
-        childProps: {
+        }}
+        context={{
           refresh,
           refreshIssues,
           journal,
-          closeUrl: lh.link("backendJournalIssues", journal.id)
-        }
-      })}
+          closeUrl
+        }}
+      />
     </Authorize>
   );
 }
-
-JournalIssuesContainer.propTypes = {
-  journal: PropTypes.object
-};
-
-export default withRouter(JournalIssuesContainer);

@@ -4,7 +4,7 @@ import { FormContext } from "helpers/contexts";
 import Form, { Unwrapped } from "global/components/form";
 import InputError from "global/components/form/InputError";
 import { useTranslation, Trans } from "react-i18next";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import { makersAPI, collaboratorsAPI } from "api";
 import { useApiCallback } from "hooks";
 import capitalize from "lodash/capitalize";
