@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useNavigate, useLocation } from "react-router-dom-v5-compat";
@@ -15,19 +16,23 @@ export default function FatalErrorAppWrapper(props) {
   const location = useLocation();
   const currentUser = useCurrentUser();
 
-  if (!error) return null;
-
   const isAuthorizationError = error.status === 403 || error.status === 401;
 
-  if (isAuthorizationError && redirectPath === "/login") return null;
-
-  const redirectOrNotify = () => {
-    if (!currentUser?.id) {
+  useEffect(() => {
+    if (isAuthorizationError && !currentUser?.id) {
       const loginPath = redirectPath
         ? `/login?redirect_uri=${redirectPath}`
         : "/login";
-      return navigate(loginPath);
+      navigate(loginPath);
     }
+  }, [isAuthorizationError, currentUser?.id, redirectPath, navigate]);
+
+  if (!error) return null;
+
+  if (isAuthorizationError && redirectPath === "/login") return null;
+
+  const maybeNotify = () => {
+    if (!currentUser?.id) return null;
 
     const title =
       error.body
@@ -61,7 +66,7 @@ export default function FatalErrorAppWrapper(props) {
     );
   };
 
-  if (isAuthorizationError) return redirectOrNotify();
+  if (isAuthorizationError) return maybeNotify();
 
   return <FatalErrorRender {...props} />;
 }
