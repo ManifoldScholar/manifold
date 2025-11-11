@@ -1,12 +1,13 @@
-import React from "react";
+import { useMemo } from "react";
 import hoistStatics from "../hoist-non-react-statics";
-import withSettings from "hoc/withSettings";
 import { Route } from "react-router-dom";
 import frontendRoutes from "frontend/routes";
 import { matchRoutes } from "react-router-config";
-import { withRouter } from "react-router-dom";
+import { useLocation } from "react-router-dom-v5-compat";
+import { useDispatch } from "react-redux";
+import { useFromStore } from "hooks";
+import { requests } from "api";
 import { fatalErrorActions } from "actions";
-import withDispatch from "hoc/withDispatch";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -17,64 +18,61 @@ export default function redirectIfLibraryDisabled(WrappedComponent) {
     WrappedComponent
   )})`;
 
-  class RedirectIfLibraryDisabled extends React.PureComponent {
-    static WrappedComponent = WrappedComponent;
+  function RedirectIfLibraryDisabled(props) {
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const settings = useFromStore({
+      requestKey: requests.settings,
+      action: "select"
+    });
 
-    static displayName = displayName;
+    const libraryModeDisabled = useMemo(() => {
+      if (!settings) return false;
+      return settings.attributes.general.libraryDisabled;
+    }, [settings]);
 
-    get settings() {
-      return this.props.settings;
-    }
+    const isHome = useMemo(() => {
+      return location && location.pathname === "/";
+    }, [location]);
 
-    get libraryModeDisabled() {
-      if (!this.settings) return false;
-      return this.settings.attributes.general.libraryDisabled;
-    }
+    const redirectUrl = useMemo(() => {
+      if (!settings) return null;
+      const { general } = settings.attributes;
+      if (isHome && general.homeRedirectUrl) return general.homeRedirectUrl;
+      return general.libraryRedirectUrl;
+    }, [settings, isHome]);
 
-    get isHome() {
-      return this.props.location && this.props.location.pathname === "/";
-    }
-
-    get redirectUrl() {
-      const { general } = this.settings.attributes;
-      if (this.isHome && general.homeRedirectUrl)
-        return general.homeRedirectUrl;
-      return this.settings.attributes.general.libraryRedirectUrl;
-    }
-
-    get currentRouteIsLibraryRoute() {
-      const pathname = this.props.location.pathname;
+    const currentRouteIsLibraryRoute = useMemo(() => {
+      const pathname = location.pathname;
       const branch = matchRoutes([frontendRoutes], pathname);
       return branch.every(leaf => {
         return leaf.route.isLibrary === true;
       });
+    }, [location.pathname]);
+
+    if (libraryModeDisabled && currentRouteIsLibraryRoute) {
+      if (redirectUrl) {
+        return (
+          <Route
+            render={({ staticContext }) => {
+              if (__SERVER__) {
+                staticContext.url = redirectUrl;
+              } else {
+                window.location = redirectUrl;
+              }
+              return null;
+            }}
+          />
+        );
+      }
+      dispatch(fatalErrorActions.trigger404());
     }
 
-    render() {
-      if (this.libraryModeDisabled && this.currentRouteIsLibraryRoute) {
-        if (this.redirectUrl)
-          return (
-            <Route
-              render={({ staticContext }) => {
-                if (__SERVER__) {
-                  staticContext.url = this.redirectUrl;
-                } else {
-                  window.location = this.redirectUrl;
-                }
-                return null;
-              }}
-            />
-          );
-        this.props.dispatch(fatalErrorActions.trigger404());
-      }
-      const props = { ...this.props };
-      return React.createElement(WrappedComponent, props);
-    }
+    return <WrappedComponent {...props} />;
   }
 
-  const Decorated = withSettings(
-    withRouter(withDispatch(RedirectIfLibraryDisabled))
-  );
+  RedirectIfLibraryDisabled.WrappedComponent = WrappedComponent;
+  RedirectIfLibraryDisabled.displayName = displayName;
 
-  return hoistStatics(Decorated, WrappedComponent);
+  return hoistStatics(RedirectIfLibraryDisabled, WrappedComponent);
 }
