@@ -3,8 +3,10 @@ import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
 import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
 import Projects from "frontend/containers/Projects";
+import ProjectCollectionsWrapper from "frontend/containers/ProjectCollectionsWrapper";
 import ProjectCollections from "frontend/containers/ProjectCollections";
 import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail";
+import ProjectCollectionsRedirect from "frontend/containers/ProjectCollectionsRedirect";
 import ProjectWrapper from "frontend/containers/ProjectWrapper";
 import ProjectDetail from "frontend/containers/ProjectDetail";
 import ProjectSearch from "frontend/containers/ProjectSearch";
@@ -39,6 +41,7 @@ import JournalVolumesList from "frontend/containers/JournalVolumesList";
 import JournalIssuesList from "frontend/containers/JournalIssuesList";
 import PrivacySettings from "frontend/containers/PrivacySettings";
 import DataUse from "frontend/containers/DataUse";
+import Journals from "frontend/containers/Journals";
 
 export default {
   NotFound,
@@ -54,8 +57,10 @@ export default {
   IssuesList,
   ProjectsWrapper,
   Projects,
+  ProjectCollectionsWrapper,
   ProjectCollections,
   ProjectCollectionDetail,
+  ProjectCollectionsRedirect,
   ProjectWrapper,
   ProjectDetail,
   ProjectSearch,
@@ -89,5 +94,6 @@ export default {
   MyStarred,
   MyAnnotations,
   PrivacySettings,
-  DataUse
+  DataUse,
+  Journals
 };
