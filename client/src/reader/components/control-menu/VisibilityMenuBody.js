@@ -19,8 +19,7 @@ class VisibilityMenuBody extends PureComponent {
     filter: PropTypes.object,
     filterChangeHandler: PropTypes.func,
     t: PropTypes.func,
-    className: PropTypes.string,
-    variant: PropTypes.string
+    className: PropTypes.string
   };
 
   static contextType = ReaderContext;
@@ -238,8 +237,7 @@ class VisibilityMenuBody extends PureComponent {
   }
 
   renderCheckbox(key, label, filterState, format, index, flex) {
-    const variant = this.props.variant;
-    const checkboxId = format + "-checkbox-" + variant + "-" + index;
+    const checkboxId = format + "-checkbox-" + index;
     /* eslint-disable no-nested-ternary */
     const adjustedLabel =
       key === "all"

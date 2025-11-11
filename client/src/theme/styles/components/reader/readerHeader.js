@@ -8,6 +8,7 @@ import {
 } from "theme/styles/mixins";
 
 export const ZOOM_BREAKPOINT = "290px";
+const BREAKPOINT = "505px";
 
 export default `
 .reader-header {
@@ -25,21 +26,15 @@ export default `
     display: grid;
     grid-template: "menu-group-left" 46px
                     "menu-group-right" 46px / 100%;
-    width: 100vw;
+    width: 100%;
     background-color: var(--box-bg-color);
     transition: transform var(--transition-duration-default) ease-out;
 
     ${respond(
       `grid-template: "menu-group-left title-bar menu-group-right" 46px / max-content 1fr max-content;
-      width: 200vw;
-
-      &--shifted {
-        transform: translateX(-100vw);
-      }
       `,
-      ZOOM_BREAKPOINT
+      BREAKPOINT
     )}
-    ${respond(`width: 100%;`, 50)}
   }
 
   &__menu-group {
@@ -49,7 +44,7 @@ export default `
       grid-area: menu-group-left;
       width: 100vw;
 
-      ${respond(`width: auto;`, 50)}
+      ${respond(`width: auto;`, BREAKPOINT)}
     }
 
     &--right {
@@ -57,18 +52,7 @@ export default `
       width: 100vw;
       display: block;
 
-      ${respond(`width: auto;`, 50)}
-      ${respond(`display: none;`, 50, "max")}
-      ${respond(`display: block;`, 20, "max")}
-    }
-
-    &--dialog {
-      grid-area: menu-group-right;
-      width: 100vw;
-      display: none;
-
-      ${respond(`display: block;`, 50, "max")}
-      ${respond(`display: none;`, 20, "max")}
+      ${respond(`width: auto;`, BREAKPOINT)}
     }
   }
 
@@ -125,6 +109,8 @@ export default `
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     height: 100%;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -192,50 +178,14 @@ export default `
     }
   }
 
-  &__options-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: none;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-    width: fit-content;
-    padding-inline: 12px;
-
-    ${respond(`display: inline-flex;`, ZOOM_BREAKPOINT)}
-    ${respond(`display: none;`, 50)}
-
-    > span {
-      display: none;
-      ${respond(`display: inline-flex;`, 20)}
-    }
-  }
-
-  &__options-button-icon {
-    &--options {
-      ${respond(`display: none;`, 20)}
-    }
-
-    &--close {
-      ${respond(
-        `
-        inline-size: 24px;
-        block-size: 24px;
-      `,
-        20
-      )}
-    }
-  }
-
   &__nav-list {
     position: relative;
-    display: block;
+    display: flex;
     height: 100%;
     ${listUnstyled}
 
     > li {
-      display: inline-block;
+      flex-grow: 1;
     }
   }
 
@@ -253,6 +203,13 @@ export default `
       height: 32px;`,
         50
       )}
+    }
+
+    > button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 

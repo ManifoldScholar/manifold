@@ -12,6 +12,7 @@ const ControlMenuDisclosurePanel = forwardRef((props, ref) => {
       className={`reader-header__panels ${
         direction ? `reader-header__panels--${direction}` : ""
       }`}
+      tabIndex={-1}
       {...rest}
     >
       {children}

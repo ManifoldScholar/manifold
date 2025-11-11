@@ -1,4 +1,3 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import ControlMenu from "reader/components/control-menu";
@@ -39,9 +38,6 @@ export default function Header(props) {
     resetTypography
   } = props;
   const { t } = useTranslation();
-  const [mobileOptionsExpanded, setExpanded] = useState(false);
-  const breakpoint = useRef(560);
-  const resizeId = useRef(null);
 
   const projectId = text?.relationships?.project?.id;
   const textId = text?.id;
@@ -61,60 +57,6 @@ export default function Header(props) {
       commonActions.panelToggle(panel);
     };
   });
-
-  const handleOptionsToggleClick = () => {
-    // make sure to fire after options menu focusleave callback
-    setTimeout(() => setExpanded(prevState => !prevState));
-  };
-
-  const handleResize = useCallback(() => {
-    if (resizeId.current) {
-      window.cancelAnimationFrame(resizeId.current);
-    }
-
-    resizeId.current = window.requestAnimationFrame(() => {
-      if (window.innerWidth < breakpoint.current || !mobileOptionsExpanded)
-        return null;
-
-      setExpanded(false);
-    });
-  }, [mobileOptionsExpanded]);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, [handleResize]);
-
-  // produces a visual effect only, so don't use a <button> here
-  const renderOptionsToggle = () => {
-    return (
-      <div
-        onClick={handleOptionsToggleClick}
-        aria-hidden
-        className="reader-header__button reader-header__options-button"
-      >
-        <span>
-          {mobileOptionsExpanded
-            ? t("actions.close")
-            : t("glossary.option_title_case_other")}
-        </span>
-        {mobileOptionsExpanded ? (
-          <Utility.IconComposer
-            icon="close24"
-            size="default"
-            className="reader-header__options-button-icon reader-header__options-button-icon--close"
-          />
-        ) : (
-          <Utility.IconComposer
-            icon="menu32"
-            size="default"
-            className="reader-header__options-button-icon reader-header__options-button-icon--options"
-          />
-        )}
-      </div>
-    );
-  };
 
   const renderContentsButton = textAttrs => {
     if (textAttrs?.toc.length <= 0 && isEmpty(textAttrs?.metadata)) {
@@ -153,7 +95,7 @@ export default function Header(props) {
     );
   };
 
-  const renderOptionsNav = variant => {
+  const renderOptionsNav = () => {
     return (
       <ul
         aria-label={t("reader.header.reader_settings_search")}
@@ -186,7 +128,6 @@ export default function Header(props) {
                 className="panel"
                 filter={visibility.visibilityFilters}
                 filterChangeHandler={handleVisibilityFilterChange}
-                variant={variant}
               />
             </ControlMenu.DisclosurePanel>
           </DisclosureNavigationMenu>
@@ -259,14 +200,10 @@ export default function Header(props) {
     );
   };
 
-  const innerClassName = classNames({
-    "reader-header__inner": true,
-    "reader-header__inner--shifted": mobileOptionsExpanded
-  });
   return (
     <header className="reader-header">
       <Layout.PreHeader />
-      <nav className={innerClassName}>
+      <nav className="reader-header__inner">
         <div className="reader-header__menu-group reader-header__menu-group--left">
           <ReturnMenu.Button
             toggleReaderMenu={panelToggleHandler("readerReturn")}
@@ -283,23 +220,7 @@ export default function Header(props) {
         )}
         {/* Options menu */}
         <div className="reader-header__menu-group reader-header__menu-group--right">
-          {renderOptionsNav("desktop")}
-        </div>
-        {/* Options menu, mobile */}
-        <div
-          className="reader-header__menu-group reader-header__menu-group--dialog"
-          onFocus={e => {
-            if (!e.currentTarget.contains(e.relatedTarget)) {
-              setExpanded(true);
-            }
-          }}
-          onBlur={e => {
-            if (!e.currentTarget.contains(e.relatedTarget)) {
-              setExpanded(false);
-            }
-          }}
-        >
-          {renderOptionsNav("mobile")}
+          {renderOptionsNav()}
         </div>
       </nav>
       {!!text && (
@@ -340,7 +261,6 @@ export default function Header(props) {
           </div>
         </>
       )}
-      {renderOptionsToggle()}
       <HeaderNotifications />
     </header>
   );
