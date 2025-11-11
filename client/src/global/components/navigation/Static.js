@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import classNames from "classnames";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom-v5-compat";
 import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
 import UserMenuBody from "global/components/UserMenuBody";
@@ -19,7 +19,7 @@ function NavigationStatic({
   commonActions,
   backendButton,
   mode,
-  exact: exactProp = false,
+  exact = false,
   style,
   darkTheme,
   journalIsActive,
@@ -88,12 +88,11 @@ function NavigationStatic({
   };
 
   const renderManifoldLink = link => {
-    const path = pathForLink(link);
-    const exact = path === "/" ? true : exactProp;
+    const linkExact = pathForLink(link) === "/" ? true : exact;
     return (
       <NavLink
-        to={path}
-        exact={exact}
+        to={pathForLink(link)}
+        exact={linkExact}
         target={link.newTab ? "_blank" : null}
         {...getClassNameForLink(link)}
       >
@@ -148,6 +147,7 @@ function NavigationStatic({
         />
         <UIPanel
           id="search"
+          toggleVisibility={commonActions.toggleSearchPanel}
           visibility={visibility.uiPanels}
           bodyComponent={SearchMenu.Body}
           bodyClassName="search-menu"

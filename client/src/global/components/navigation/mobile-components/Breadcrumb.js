@@ -19,6 +19,8 @@ export default function MobileBreadcrumb({ links, journalIsActive }) {
   const match = (linksToMatch, exact = false) => {
     if (!linksToMatch) return null;
     return linksToMatch.find(link => {
+      const route = lh.routeFromName(link.route);
+
       if (link.matchType === "link" || link.externalUrl || exact) {
         return location.pathname === pathForLink(link);
       }
@@ -29,13 +31,10 @@ export default function MobileBreadcrumb({ links, journalIsActive }) {
       )
         return true;
 
-      // Check if this route is in the current matches by route name
-      const routeMatch = matchPath(location.pathname, link);
-      if (routeMatch) return true;
-
-      // Fallback: check if pathname starts with the link path
-      const linkPath = pathForLink(link);
-      return location.pathname.startsWith(linkPath);
+      return (
+        matchPath(location.pathname, route) !== null ||
+        location.pathname.startsWith(route.path)
+      );
     });
   };
 
