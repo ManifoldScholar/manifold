@@ -713,6 +713,7 @@ When converting a class component, follow this checklist:
 - [ ] Replace `this.props.history` with `useNavigate()` hook
 - [ ] Replace `this.props.location` with `useLocation()` hook
 - [ ] Replace `this.props.match.params` with `useParams()` hook
+- [ ] Ensure `navigate()` is called in `useEffect`, not during render (see Common Pitfalls)
 - [ ] Remove `withRouter` HOC from export
 - [ ] Remove `connectAndFetch` wrapper if present (replaces both `connect` and `withRouter`)
 - [ ] Replace `connect(mapStateToProps)` with `useSelector`/`useFromStore` and `useDispatch` hooks
@@ -761,6 +762,78 @@ dispatch(action).promise.then(res => {
   postUpdate(res.data);
 });
 ```
+
+### Calling navigate() During Render
+
+React Router v6 (and the compat package) will warn if `navigate()` is called during render. Always call `navigate()` inside a `useEffect` hook, not directly in the component body or during render.
+
+**Problem:**
+
+```javascript
+function MyComponent() {
+  const navigate = useNavigate();
+  const { isAuthorized } = useAuth();
+
+  // ❌ BAD: Called during render
+  if (!isAuthorized) {
+    navigate("/login");
+    return null;
+  }
+
+  return <div>Content</div>;
+}
+```
+
+**Solution:**
+
+```javascript
+function MyComponent() {
+  const navigate = useNavigate();
+  const { isAuthorized } = useAuth();
+
+  useEffect(() => {
+    if (!isAuthorized) {
+      navigate("/login");
+    }
+  }, [isAuthorized, navigate]);
+
+  if (!isAuthorized) return null;
+
+  return <div>Content</div>;
+}
+```
+
+**For SSR Redirects:**
+
+If you need to support SSR redirects (using `react-router-config`), use the `Route` render prop pattern with `staticContext`:
+
+```javascript
+import { Route } from "react-router-dom";
+
+function MyComponent() {
+  const { isAuthorized } = useAuth();
+
+  if (!isAuthorized) {
+    const loginPath = "/login";
+    return (
+      <Route
+        render={({ staticContext }) => {
+          if (__SERVER__) {
+            staticContext.url = loginPath;
+          } else {
+            window.location = loginPath;
+          }
+          return null;
+        }}
+      />
+    );
+  }
+
+  return <div>Content</div>;
+}
+```
+
+This pattern works for both SSR (sets `staticContext.url`) and client-side (uses `window.location`) redirects.
 
 ### Multiple State Fields
 
