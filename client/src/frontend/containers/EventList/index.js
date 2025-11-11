@@ -38,7 +38,7 @@ export default function EventList({ project, journalBreadcrumbs }) {
   }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
   if (!project || !events) return null;
-  if (hideActivity) return <Redirect to={"/"} />;
+  if (hideActivity) return <Redirect to="/" />;
 
   return (
     <>
