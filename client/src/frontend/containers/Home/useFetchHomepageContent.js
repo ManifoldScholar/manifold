@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useFetch, useAuthentication } from "hooks";
 import {
   projectCollectionsAPI,
@@ -7,54 +6,45 @@ import {
   featuresAPI
 } from "api";
 
+const COLLECTION_FILTERS = {
+  visibleOnHomepage: true,
+  order: "position ASC"
+};
+
+const PROJECT_FILTERS = {
+  standaloneModeEnforced: false,
+  order: "sort_title, title"
+};
+
+const PROJECT_PAGINATION = { number: 1, size: 20 };
+
+const JOURNAL_FILTERS = {
+  showOnHomepage: true
+};
+
+const FEATURES_FILTERS = { home: true };
+
 export default function useFetchHomepageContent(fetchProjects) {
   const authentication = useAuthentication();
 
-  const collectionFilters = useMemo(
-    () => ({
-      visibleOnHomepage: true,
-      order: "position ASC"
-    }),
-    []
-  );
-
-  const projectFilters = useMemo(
-    () => ({
-      standaloneModeEnforced: false,
-      order: "sort_title, title"
-    }),
-    []
-  );
-
-  const projectPagination = useMemo(() => ({ number: 1, size: 20 }), []);
-
-  const journalFilters = useMemo(
-    () => ({
-      showOnHomepage: true
-    }),
-    []
-  );
-
-  const featuresFilters = useMemo(() => ({ home: true }), []);
-
   const { data: projectsData, loaded: projectsLoaded } = useFetch({
-    request: [projectsAPI.index, projectFilters, projectPagination],
+    request: [projectsAPI.index, PROJECT_FILTERS, PROJECT_PAGINATION],
     condition: fetchProjects
   });
 
   const { data: collectionsData, loaded: collectionsLoaded } = useFetch({
-    request: [projectCollectionsAPI.index, collectionFilters],
+    request: [projectCollectionsAPI.index, COLLECTION_FILTERS],
     dependencies: [authentication.authenticated],
     condition: !fetchProjects
   });
 
   const { data: journalsData, loaded: journalsLoaded } = useFetch({
-    request: [journalsAPI.index, journalFilters],
+    request: [journalsAPI.index, JOURNAL_FILTERS],
     dependencies: [authentication.authenticated]
   });
 
   const { data: features, loaded: featuresLoaded } = useFetch({
-    request: [featuresAPI.index, featuresFilters],
+    request: [featuresAPI.index, FEATURES_FILTERS],
     dependencies: [authentication.authenticated]
   });
 

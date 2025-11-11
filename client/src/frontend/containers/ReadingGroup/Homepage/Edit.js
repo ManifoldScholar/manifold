@@ -1,20 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import { CollectionEditor } from "frontend/components/collecting/reading-group";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import * as Styled from "./styles";
 
 import Authorize from "hoc/Authorize";
 
-function ReadingGroupHomepageEditContainer({
-  readingGroup,
-  categories,
-  responses,
-  refresh
-}) {
+function ReadingGroupHomepageEditContainer() {
+  const { readingGroup, categories, responses, refresh } =
+    useOutletContext() || {};
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const editRoute = lh.link(
+    "frontendReadingGroupHomepageEdit",
+    readingGroup.id
+  );
+  const closeDrawer = () => navigate(editRoute);
 
   return (
     <Authorize
@@ -24,6 +28,9 @@ function ReadingGroupHomepageEditContainer({
         "frontendReadingGroupHomepageStatic",
         readingGroup.id
       )}
+      failureNotification={{
+        body: t("errors.access_denied.authorization_reading_group_edit")
+      }}
     >
       <Styled.EditContainer>
         <Styled.Heading>
@@ -51,6 +58,23 @@ function ReadingGroupHomepageEditContainer({
             refresh={refresh}
           />
         </Styled.Body>
+        <OutletWithDrawer
+          context={{
+            readingGroup,
+            closeDrawer,
+            onArchive: () => {
+              refresh();
+              closeDrawer();
+            }
+          }}
+          drawerProps={{
+            context: "frontend",
+            size: "wide",
+            position: "overlay",
+            lockScroll: "always",
+            closeUrl: editRoute
+          }}
+        />
       </Styled.EditContainer>
     </Authorize>
   );
@@ -58,12 +82,5 @@ function ReadingGroupHomepageEditContainer({
 
 ReadingGroupHomepageEditContainer.displayName =
   "ReadingGroup.HomepageEditContainer";
-
-ReadingGroupHomepageEditContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  responses: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired,
-  categories: PropTypes.array
-};
 
 export default ReadingGroupHomepageEditContainer;

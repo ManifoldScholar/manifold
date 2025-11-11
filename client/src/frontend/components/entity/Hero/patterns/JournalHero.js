@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
 import { CalloutList, Meta, Title, Credits } from "../parts";
 import EntityMasthead from "frontend/components/entity/Masthead";
@@ -21,10 +21,8 @@ export default function JournalHero({ entity, mock }) {
 
   const trackEvent = useEventTracker();
 
-  const trackJournalEvent = useCallback(
-    eventType => trackEvent(eventType, entity.type, entity.id),
-    [entity, trackEvent]
-  );
+  const trackJournalEvent = eventType =>
+    trackEvent(eventType, entity.type, entity.id);
 
   return (
     <>

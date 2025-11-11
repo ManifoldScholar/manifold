@@ -1,108 +1,101 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useRef } from "react";
+import { useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import {
   AnalyticsFactory,
   Grid,
   RangePicker
 } from "backend/components/analytics";
-
-import withAnalyticsReport from "hoc/analytics/withAnalyticsReport";
+import useAnalyticsReport from "hooks/useAnalyticsReport";
 import Authorize from "hoc/Authorize";
 
-export class AnalyticsContainer extends PureComponent {
-  static displayName = "Text.Analytics";
+export default function AnalyticsContainer() {
+  const { text } = useOutletContext() || {};
 
-  static propTypes = {
-    text: PropTypes.object.isRequired,
-    analytics: PropTypes.object,
-    fetchStats: PropTypes.func.isRequired,
-    fetchAnalytics: PropTypes.func.isRequired,
-    updateAnalyticsRange: PropTypes.func.isRequired,
-    analyticsStartDate: PropTypes.instanceOf(Date),
-    analyticsEndDate: PropTypes.instanceOf(Date)
-  };
+  const {
+    analytics,
+    fetchAnalytics,
+    updateAnalyticsRange,
+    analyticsStartDate,
+    analyticsEndDate
+  } = useAnalyticsReport();
 
-  componentDidMount() {
-    const { text } = this.props;
-    this.props.fetchAnalytics("text", {
-      record_type: "Text",
-      record_id: text.id
-    });
-  }
+  const prevTextIdRef = useRef(text?.id);
 
-  componentDidUpdate(prevProps) {
-    const prevId = prevProps.text?.id;
-    const nextId = this.props.text?.id;
-    if (nextId && prevId && nextId !== prevId)
-      this.props.fetchAnalytics("text", {
+  useEffect(() => {
+    if (text?.id) {
+      fetchAnalytics("text", {
         record_type: "Text",
-        record_id: nextId
+        record_id: text.id
       });
-  }
+    }
+  }, [text?.id, fetchAnalytics]);
 
-  render() {
-    const {
-      text,
-      analytics,
-      updateAnalyticsRange,
-      analyticsStartDate,
-      analyticsEndDate
-    } = this.props;
+  useEffect(() => {
+    const prevId = prevTextIdRef.current;
+    if (text?.id && prevId && text.id !== prevId) {
+      fetchAnalytics("text", {
+        record_type: "Text",
+        record_id: text.id
+      });
+      prevTextIdRef.current = text.id;
+    }
+  }, [text?.id, fetchAnalytics]);
 
-    return (
-      <Authorize
-        entity={text}
-        ability="update"
-        failureNotification
-        failureRedirect={lh.link("backendText", text.id)}
-      >
-        <Grid columns={3}>
-          {analytics && (
-            <>
-              <RangePicker
-                onNewRangeSelected={updateAnalyticsRange}
-                initialStart={analyticsStartDate}
-                initialEnd={analyticsEndDate}
-                className="analytics-grid__item--100"
-              />
-              <AnalyticsFactory
-                view="Visitors"
-                report="daily_visitors"
-                data={analytics}
-              />
-              <AnalyticsFactory
-                view="Annotations"
-                report="annotations"
-                data={analytics}
-              />
-              <AnalyticsFactory
-                view="Highlights"
-                report="annotations"
-                data={analytics}
-              />
-              <AnalyticsFactory
-                view="ShareClicks"
-                report="shares"
-                data={analytics}
-              />
-              <AnalyticsFactory
-                view="Citations"
-                report="citations"
-                data={analytics}
-              />
-              <AnalyticsFactory
-                view="TextSectionViews"
-                report="text_section_views"
-                text={text}
-                data={analytics}
-              />
-            </>
-          )}
-        </Grid>
-      </Authorize>
-    );
-  }
+  if (!text) return null;
+
+  return (
+    <Authorize
+      entity={text}
+      ability="update"
+      failureNotification
+      failureRedirect={lh.link("backendText", text.id)}
+    >
+      <Grid columns={3}>
+        {analytics && (
+          <>
+            <RangePicker
+              onNewRangeSelected={updateAnalyticsRange}
+              initialStart={analyticsStartDate}
+              initialEnd={analyticsEndDate}
+              className="analytics-grid__item--100"
+            />
+            <AnalyticsFactory
+              view="Visitors"
+              report="daily_visitors"
+              data={analytics}
+            />
+            <AnalyticsFactory
+              view="Annotations"
+              report="annotations"
+              data={analytics}
+            />
+            <AnalyticsFactory
+              view="Highlights"
+              report="annotations"
+              data={analytics}
+            />
+            <AnalyticsFactory
+              view="ShareClicks"
+              report="shares"
+              data={analytics}
+            />
+            <AnalyticsFactory
+              view="Citations"
+              report="citations"
+              data={analytics}
+            />
+            <AnalyticsFactory
+              view="TextSectionViews"
+              report="text_section_views"
+              text={text}
+              data={analytics}
+            />
+          </>
+        )}
+      </Grid>
+    </Authorize>
+  );
 }
 
-export default withAnalyticsReport(AnalyticsContainer);
+AnalyticsContainer.displayName = "Text.Analytics";
