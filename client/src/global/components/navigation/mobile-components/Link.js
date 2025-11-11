@@ -1,10 +1,16 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom-v5-compat";
 import { useUID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 
-function UserLink({ as = "a", to, title, srTitle, icon, onClick }) {
+export default function UserLink({
+  as = "a",
+  to,
+  title,
+  srTitle,
+  icon,
+  onClick
+}) {
   const Tag = as === "a" ? NavLink : "button";
   const uid = useUID();
   return (
@@ -43,5 +49,3 @@ UserLink.propTypes = {
   icon: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired
 };
-
-export default withRouter(UserLink);
