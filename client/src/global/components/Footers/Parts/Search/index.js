@@ -1,70 +1,64 @@
-import React, { PureComponent } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom-v5-compat";
 import * as Styled from "./styles";
 
-class Search extends PureComponent {
-  static displayName = "Global.Footers.Parts.Search";
+export default function Search({ withTopMargin }) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [keyword, setKeyword] = useState("");
 
-  static propTypes = {
-    push: PropTypes.func.isRequired
+  const updateSearchWord = event => {
+    setKeyword(event.target.value);
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      keyword: ""
-    };
-  }
-
-  updateSearchWord = event => {
-    this.setState({ keyword: event.target.value });
-  };
-
-  doSearch = event => {
+  const doSearch = event => {
     event.preventDefault();
     const path = lh.link("frontendSearch");
-    this.props.push(path, {
-      searchQueryState: { keyword: this.state.keyword }
+    navigate(path, {
+      state: {
+        searchQueryState: { keyword }
+      }
     });
-    this.setState({ keyword: "" });
+    setKeyword("");
   };
 
-  render() {
-    const { t } = this.props;
-
-    return (
-      <Styled.Form
-        role="search"
-        className="search-form"
-        $withTopMargin={this.props.withTopMargin}
-        onSubmit={this.doSearch}
-      >
-        <Styled.SearchButton>
-          <label htmlFor="app-footer-search" className="screen-reader-text">
-            {t("search.global_label")}
-          </label>
-          <input
-            type="text"
-            id="app-footer-search"
-            placeholder={t("search.title")}
-            value={this.state.keyword}
-            onChange={this.updateSearchWord}
+  return (
+    <Styled.Form
+      role="search"
+      className="search-form"
+      $withTopMargin={withTopMargin}
+      onSubmit={doSearch}
+    >
+      <Styled.SearchButton>
+        <label htmlFor="app-footer-search" className="screen-reader-text">
+          {t("search.global_label")}
+        </label>
+        <input
+          type="text"
+          id="app-footer-search"
+          placeholder={t("search.title")}
+          value={keyword}
+          onChange={updateSearchWord}
+        />
+        <button className="icon">
+          <Utility.IconComposer
+            className="search-icon"
+            icon="search16"
+            size={20}
           />
-          <button className="icon">
-            <Utility.IconComposer
-              className="search-icon"
-              icon="search16"
-              size={20}
-            />
-            <span className="screen-reader-text">{t("search.title")}</span>
-          </button>
-        </Styled.SearchButton>
-      </Styled.Form>
-    );
-  }
+          <span className="screen-reader-text">{t("search.title")}</span>
+        </button>
+      </Styled.SearchButton>
+    </Styled.Form>
+  );
 }
 
-export default withTranslation()(Search);
+Search.displayName = "Global.Footers.Parts.Search";
+
+Search.propTypes = {
+  withTopMargin: PropTypes.bool
+};

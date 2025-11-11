@@ -1,50 +1,43 @@
-import React, { Component } from "react";
+import PropTypes from "prop-types";
 import FooterParts from "./Parts";
-import { withRouter } from "react-router-dom";
+import { useFromStore } from "hooks";
 import withPluginReplacement from "hoc/withPluginReplacement";
 import links from "./Parts/helpers/links";
 // import LanguageSelect from "global/components/LanguageSelect";
 import * as Styled from "./styles";
 
-class BrandedFooter extends Component {
-  get authenticated() {
-    return this.props.authentication.authenticated;
-  }
+function BrandedFooter({ ...props }) {
+  const authentication = useFromStore({ path: "authentication" });
+  const settings = useFromStore({
+    requestKey: "settings",
+    action: "select"
+  });
 
-  get settings() {
-    return this.props.settings;
-  }
-
-  render() {
-    return (
-      <Styled.BrandedFooter className="bg-neutral95">
-        <FooterParts.Columns>
-          <FooterParts.Column position="right" footerType="branded">
-            <FooterParts.PressLogo settings={this.settings} />
-          </FooterParts.Column>
-          <FooterParts.Column position="left">
-            <FooterParts.Navigation>{links(this.props)}</FooterParts.Navigation>
-            <Styled.Actions>
-              <FooterParts.Search
-                withTopMargin
-                push={this.props.history.push}
-              />
-              {/* <LanguageSelect /> */}
-            </Styled.Actions>
-          </FooterParts.Column>
-        </FooterParts.Columns>
-        <FooterParts.Columns>
-          <FooterParts.Copyright settings={this.props.settings} />
-        </FooterParts.Columns>
-        <FooterParts.PoweredBy dull />
-      </Styled.BrandedFooter>
-    );
-  }
+  return (
+    <Styled.BrandedFooter className="bg-neutral95">
+      <FooterParts.Columns>
+        <FooterParts.Column position="right" footerType="branded">
+          <FooterParts.PressLogo settings={settings} />
+        </FooterParts.Column>
+        <FooterParts.Column position="left">
+          <FooterParts.Navigation>
+            {links({ authentication, settings, ...props })}
+          </FooterParts.Navigation>
+          <Styled.Actions>
+            <FooterParts.Search withTopMargin />
+            {/* <LanguageSelect /> */}
+          </Styled.Actions>
+        </FooterParts.Column>
+      </FooterParts.Columns>
+      <FooterParts.Columns>
+        <FooterParts.Copyright settings={settings} />
+      </FooterParts.Columns>
+      <FooterParts.PoweredBy dull />
+    </Styled.BrandedFooter>
+  );
 }
 
-export default withRouter(
-  withPluginReplacement(
-    BrandedFooter,
-    "Global.Components.Footers.BrandedFooter"
-  )
+export default withPluginReplacement(
+  BrandedFooter,
+  "Global.Components.Footers.BrandedFooter"
 );
