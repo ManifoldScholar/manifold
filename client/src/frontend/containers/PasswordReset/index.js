@@ -1,7 +1,9 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
+import { useFromStore } from "hooks";
 import { passwordsAPI, requests } from "api";
 import Form, { Unwrapped } from "global/components/form";
 import { entityStoreActions, currentUserActions } from "actions";
@@ -9,124 +11,110 @@ import { get } from "lodash";
 
 const { request, flush } = entityStoreActions;
 
-export class PasswordResetContainer extends Component {
-  static mapStateToProps = state => {
-    return {
-      response: get(state.entityStore.responses, requests.gPasswordReset)
-    };
-  };
+export default function PasswordResetContainer() {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { resetToken } = useParams();
+  const response = useFromStore({
+    path: `entityStore.responses.${requests.gPasswordReset}`
+  });
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  static propTypes = {
-    dispatch: PropTypes.func,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        resetToken: PropTypes.string
+  useEffect(() => {
+    return () => {
+      dispatch(flush([requests.gPasswordReset]));
+    };
+  }, [dispatch]);
+
+  const loginUser = user => {
+    dispatch(
+      currentUserActions.login({
+        email: user.attributes.email,
+        password
       })
-    }).isRequired,
-    history: PropTypes.object.isRequired,
-    response: PropTypes.object,
-    t: PropTypes.func
+    );
   };
 
-  constructor() {
-    super();
-    this.state = {
-      password: "",
-      passwordConfirmation: ""
-    };
-  }
+  const redirectToHome = () => {
+    navigate("/");
+  };
 
-  componentWillUnmount() {
-    this.props.dispatch(flush([requests.gPasswordReset]));
-  }
+  const postUpdate = data => {
+    loginUser(data);
+    redirectToHome();
+  };
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault(event.target);
     const action = passwordsAPI.update(
-      this.state.password,
-      this.state.passwordConfirmation,
-      this.props.match.params.resetToken
+      password,
+      passwordConfirmation,
+      resetToken
     );
     const changeRequest = request(action, requests.gPasswordReset);
-    this.props.dispatch(changeRequest).promise.then(response => {
-      this.postUpdate(response.data);
+    dispatch(changeRequest).promise.then(res => {
+      postUpdate(res.data);
     });
   };
 
-  postUpdate(data) {
-    this.loginUser(data);
-    this.redirectToHome();
-  }
-
-  loginUser(user) {
-    this.props.dispatch(
-      currentUserActions.login({
-        email: user.attributes.email,
-        password: this.state.password
-      })
-    );
-  }
-
-  redirectToHome() {
-    this.props.history.push("/");
-  }
-
-  handleInputChange = event => {
+  const handleInputChange = event => {
     const name = event.target.name.replace("attributes[", "").replace("]", "");
-    this.setState({ [name]: event.target.value });
+    if (name === "password") {
+      setPassword(event.target.value);
+    } else if (name === "passwordConfirmation") {
+      setPasswordConfirmation(event.target.value);
+    }
   };
 
-  render() {
-    const errors = get(this.props.response, "errors") || [];
-    const t = this.props.t;
-    return (
-      <section>
-        <div className="container">
-          <form method="post" onSubmit={event => this.handleSubmit(event)}>
-            <Form.Header
-              styleType="primary"
-              label={t("forms.password_reset.title")}
-            />
-            <Form.FieldGroup>
-              <Unwrapped.Input
-                value={this.state.password}
-                type="password"
-                name="attributes[password]"
-                id="reset-password"
-                onChange={this.handleInputChange}
-                placeholder={t("forms.password_reset.new_placeholder")}
-                aria-describedby="reset-password-error"
-                errors={errors}
-                idForError="reset-password-error"
-                label={t("forms.password_reset.new")}
-                wide
-              />
-              <Unwrapped.Input
-                value={this.state.passwordConfirmation}
-                type="password"
-                id="reset-password-confirmation"
-                onChange={this.handleInputChange}
-                placeholder={t("forms.password_reset.confirm_placeholder")}
-                aria-describedby="reset-password-confirmation-error"
-                name="attributes[passwordConfirmation]"
-                errors={errors}
-                idForError="reset-password-confirmation-error"
-                label={t("forms.password_reset.confirm")}
-                wide
-              />
-              <Form.Errorable name="attributes[resetToken]" errors={errors}>
-                <input
-                  className="button-secondary"
-                  type="submit"
-                  value={t("forms.password_reset.submit_reset")}
-                />
-              </Form.Errorable>
-            </Form.FieldGroup>
-          </form>
-        </div>
-      </section>
-    );
-  }
-}
+  const errors = get(response, "errors") || [];
 
-export default withTranslation()(connectAndFetch(PasswordResetContainer));
+  return (
+    <section>
+      <div className="container">
+        <form method="post" onSubmit={handleSubmit}>
+          <Form.Header
+            styleType="primary"
+            label={t("forms.password_reset.title")}
+          />
+          <Form.FieldGroup>
+            <Unwrapped.Input
+              value={password}
+              type="password"
+              name="attributes[password]"
+              id="reset-password"
+              onChange={handleInputChange}
+              placeholder={t("forms.password_reset.new_placeholder")}
+              aria-describedby="reset-password-error"
+              errors={errors}
+              idForError="reset-password-error"
+              label={t("forms.password_reset.new")}
+              wide
+            />
+            <Unwrapped.Input
+              value={passwordConfirmation}
+              type="password"
+              id="reset-password-confirmation"
+              onChange={handleInputChange}
+              placeholder={t("forms.password_reset.confirm_placeholder")}
+              aria-describedby="reset-password-confirmation-error"
+              name="attributes[passwordConfirmation]"
+              errors={errors}
+              idForError="reset-password-confirmation-error"
+              label={t("forms.password_reset.confirm")}
+              wide
+            />
+            <Form.Errorable name="attributes[resetToken]" errors={errors}>
+              <input
+                className="button-secondary"
+                type="submit"
+                value={t("forms.password_reset.submit_reset")}
+              />
+            </Form.Errorable>
+          </Form.FieldGroup>
+        </form>
+      </div>
+    </section>
+  );
+}
