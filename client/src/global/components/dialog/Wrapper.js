@@ -1,167 +1,161 @@
-import React, { PureComponent } from "react";
+import { useState, useCallback, useMemo, Children, cloneElement } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import { withRouter } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom-v5-compat";
 import classnames from "classnames";
 import { FocusTrap } from "focus-trap-react";
 import isString from "lodash/isString";
 import IconComposer from "global/components/utility/IconComposer";
 import BodyClass from "hoc/BodyClass";
 
-class DialogWrapper extends PureComponent {
-  static displayName = "Dialog.Wrapper";
+export default function DialogWrapper({
+  closeUrl,
+  closeCallback,
+  showCloseButton = true,
+  closeOnOverlayClick = true,
+  maxWidth,
+  className,
+  children,
+  labelledBy,
+  describedBy,
+  onEsc
+}) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [additionalClassNames, setAdditionalClassNames] = useState("");
 
-  static propTypes = {
-    closeUrl: PropTypes.string,
-    closeCallback: PropTypes.func,
-    showCloseButton: PropTypes.bool,
-    closeOnOverlayClick: PropTypes.bool,
-    maxWidth: PropTypes.number,
-    className: PropTypes.string,
-    history: PropTypes.object,
-    closeHandler: PropTypes.func,
-    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-    labelledBy: PropTypes.string,
-    describedBy: PropTypes.string,
-    onEsc: PropTypes.func,
-    t: PropTypes.func
-  };
+  const overlayRole = useMemo(() => (closeOnOverlayClick ? "button" : null), [
+    closeOnOverlayClick
+  ]);
 
-  static defaultProps = {
-    showCloseButton: true,
-    closeOnOverlayClick: true
-  };
+  const style = useMemo(() => {
+    const styleObj = {};
+    if (maxWidth) styleObj.maxWidth = maxWidth;
+    return styleObj;
+  }, [maxWidth]);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      leaving: false,
-      additionaClassNames: ""
-    };
-  }
+  const setDialogClassName = useCallback(additionalClassNamesValue => {
+    setAdditionalClassNames(additionalClassNamesValue);
+  }, []);
 
-  get overlayRole() {
-    return this.props.closeOnOverlayClick ? "button" : null;
-  }
-
-  get style() {
-    const style = {};
-    if (this.props.maxWidth) style.maxWidth = this.props.maxWidth;
-    return style;
-  }
-
-  setDialogClassName = additionalClassNames => {
-    this.setState({ additionalClassNames });
-  };
-
-  leave(callback) {
-    this.setState({ leaving: true });
+  const leave = useCallback(callback => {
     setTimeout(callback, 200);
-  }
+  }, []);
 
-  closeWithUrlChange() {
-    this.leave(() => {
-      this.props.history.push(this.props.closeUrl);
+  const closeWithUrlChange = useCallback(() => {
+    leave(() => {
+      navigate(closeUrl);
     });
-  }
+  }, [leave, navigate, closeUrl]);
 
-  closeWithNoAction() {
-    this.leave(() => {});
-  }
+  const closeWithNoAction = useCallback(() => {
+    leave(() => {});
+  }, [leave]);
 
-  closeWithCallback() {
-    this.leave(this.props.closeCallback);
-  }
+  const closeWithCallback = useCallback(() => {
+    leave(closeCallback);
+  }, [leave, closeCallback]);
 
-  doClose() {
-    if (this.props.closeUrl) return this.closeWithUrlChange();
-    if (this.props.closeCallback) return this.closeWithCallback();
-    return this.closeWithNoAction();
-  }
+  const doClose = useCallback(() => {
+    if (closeUrl) return closeWithUrlChange();
+    if (closeCallback) return closeWithCallback();
+    return closeWithNoAction();
+  }, [
+    closeUrl,
+    closeCallback,
+    closeWithUrlChange,
+    closeWithCallback,
+    closeWithNoAction
+  ]);
 
-  handleOverlayClick = event => {
-    event.stopPropagation();
-    if (this.props.closeOnOverlayClick) this.doClose();
-  };
+  const handleOverlayClick = useCallback(
+    event => {
+      event.stopPropagation();
+      if (closeOnOverlayClick) doClose();
+    },
+    [closeOnOverlayClick, doClose]
+  );
 
-  handleCloseClick = event => {
-    event.stopPropagation();
-    this.doClose();
-  };
+  const handleCloseClick = useCallback(
+    event => {
+      event.stopPropagation();
+      doClose();
+    },
+    [doClose]
+  );
 
-  handleEscape = e => {
-    e.stopPropagation();
-    if (this.props.onEsc) return this.props.onEsc(e);
-    return this.doClose();
-  };
+  const handleEscape = useCallback(
+    e => {
+      e.stopPropagation();
+      if (onEsc) return onEsc(e);
+      return doClose();
+    },
+    [onEsc, doClose]
+  );
 
-  renderChildren() {
-    if (isString(this.props.children.type)) return this.props.children;
-    if (React.Children.count(this.props.children) !== 1)
-      return this.props.children;
-    return React.cloneElement(this.props.children, {
-      triggerClose: this.handleCloseClick,
-      setDialogClassName: this.setDialogClassName
+  const renderChildren = useCallback(() => {
+    if (isString(children.type)) return children;
+    if (Children.count(children) !== 1) return children;
+    return cloneElement(children, {
+      triggerClose: handleCloseClick,
+      setDialogClassName
     });
-  }
+  }, [children, handleCloseClick, setDialogClassName]);
 
-  render() {
-    const output = (
-      <BodyClass className={"no-scroll"}>
-        <FocusTrap
-          focusTrapOptions={{
-            escapeDeactivates: this.handleEscape
-          }}
-        >
-          <div className="dialog-wrapper">
-            {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
-            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-            <div
-              className="dialog-overlay"
-              onClick={this.handleOverlayClick}
-              role={this.overlayRole}
-            />
-            <div
-              role="dialog"
-              aria-modal
-              aria-labelledby={this.props.labelledBy}
-              aria-describedby={this.props.describedBy}
-              className={classnames(
-                "dialog",
-                this.props.className,
-                this.state.additionalClassNames
-              )}
-              style={this.style}
-            >
-              {this.props.showCloseButton ? (
-                <button
-                  onClick={this.handleCloseClick}
-                  className="dialog__close"
-                >
-                  <IconComposer icon="close16" size={24} />
-                  <span className="screen-reader-text">
-                    {this.props.t("modals.close")}
-                  </span>
-                </button>
-              ) : null}
-              {this.renderChildren()}
-            </div>
+  const output = (
+    <BodyClass className={"no-scroll"}>
+      <FocusTrap
+        focusTrapOptions={{
+          escapeDeactivates: handleEscape
+        }}
+      >
+        <div className="dialog-wrapper">
+          {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+          <div
+            className="dialog-overlay"
+            onClick={handleOverlayClick}
+            role={overlayRole}
+          />
+          <div
+            role="dialog"
+            aria-modal
+            aria-labelledby={labelledBy}
+            aria-describedby={describedBy}
+            className={classnames("dialog", className, additionalClassNames)}
+            style={style}
+          >
+            {showCloseButton ? (
+              <button onClick={handleCloseClick} className="dialog__close">
+                <IconComposer icon="close16" size={24} />
+                <span className="screen-reader-text">{t("modals.close")}</span>
+              </button>
+            ) : null}
+            {renderChildren()}
           </div>
-        </FocusTrap>
-      </BodyClass>
-    );
+        </div>
+      </FocusTrap>
+    </BodyClass>
+  );
 
-    // Because this renders in a portal, it cannot render on the server. We probably never
-    // render a dialog in a SSR render, but we do render it in tests. Not rendering in a
-    // portal on the server makes it easier to test this component.
-    if (__SERVER__) return output;
+  if (__SERVER__) return output;
 
-    // If we're in the client, render it into a portal so we can keep it at the top of the
-    // z-index stack.
-    const domTarget = document.getElementById("global-overlay-container");
-    return ReactDOM.createPortal(output, domTarget);
-  }
+  const domTarget = document.getElementById("global-overlay-container");
+  return ReactDOM.createPortal(output, domTarget);
 }
 
-export default withTranslation()(withRouter(DialogWrapper));
+DialogWrapper.displayName = "Dialog.Wrapper";
+
+DialogWrapper.propTypes = {
+  closeUrl: PropTypes.string,
+  closeCallback: PropTypes.func,
+  showCloseButton: PropTypes.bool,
+  closeOnOverlayClick: PropTypes.bool,
+  maxWidth: PropTypes.number,
+  className: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  labelledBy: PropTypes.string,
+  describedBy: PropTypes.string,
+  onEsc: PropTypes.func
+};

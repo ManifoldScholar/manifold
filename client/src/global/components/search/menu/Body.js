@@ -1,99 +1,128 @@
-import React, { PureComponent } from "react";
+import { useState, useCallback } from "react";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import Query from "../query";
 import lh from "helpers/linkHandler";
-import { withRouter } from "react-router-dom";
 
-export class SearchMenuBody extends PureComponent {
-  static propTypes = {
-    toggleVisibility: PropTypes.func.isRequired,
-    match: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    searchType: PropTypes.string.isRequired,
-    onSubmit: PropTypes.func,
-    facets: PropTypes.array,
-    scopes: PropTypes.array,
-    initialState: PropTypes.object,
-    description: PropTypes.string,
-    projectId: PropTypes.string,
-    textId: PropTypes.string,
-    sectionId: PropTypes.string,
-    className: PropTypes.string
-  };
+export default function SearchMenuBody({
+  toggleVisibility = () => {},
+  searchType,
+  onSubmit,
+  facets,
+  scopes,
+  initialState,
+  description,
+  projectId,
+  textId,
+  sectionId,
+  className
+}) {
+  const navigate = useNavigate();
+  const { sectionId: sectionIdParam, textId: textIdParam } = useParams();
+  const [queryState, setQueryState] = useState({});
 
-  static defaultProps = {
-    toggleVisibility: () => {}
-  };
-
-  setQueryState = queryParams => {
-    this.setState(queryParams, this.doSearch);
-  };
-
-  doSearch = () => {
-    if (this.props.searchType === "reader") return this.doReaderSearch();
-    if (this.props.searchType === "project") return this.doProjectSearch();
-    if (this.props.onSubmit) this.props.onSubmit();
-    return this.doFrontendSearch();
-  };
-
-  doFrontendSearch = () => {
-    this.props.toggleVisibility();
+  const doFrontendSearch = useCallback(() => {
+    toggleVisibility();
     setTimeout(() => {
       const path = lh.link("frontendSearch");
-      this.props.history.push(path, {
-        searchQueryState: this.state,
-        noScroll: true,
-        fromMenu: true
+      navigate(path, {
+        state: {
+          searchQueryState: queryState,
+          noScroll: true,
+          fromMenu: true
+        }
       });
     }, 250);
-  };
+  }, [toggleVisibility, navigate, queryState]);
 
-  doProjectSearch = () => {
-    this.props.toggleVisibility();
+  const doProjectSearch = useCallback(() => {
+    toggleVisibility();
     setTimeout(() => {
-      const path = lh.link("frontendProjectSearch", this.props.projectId);
-      this.props.history.push(path, {
-        searchQueryState: this.state,
-        noScroll: true,
-        fromMenu: true
+      const path = lh.link("frontendProjectSearch", projectId);
+      navigate(path, {
+        state: {
+          searchQueryState: queryState,
+          noScroll: true,
+          fromMenu: true
+        }
       });
     }, 250);
-  };
+  }, [toggleVisibility, navigate, projectId, queryState]);
 
-  doReaderSearch = () => {
-    this.props.toggleVisibility();
+  const doReaderSearch = useCallback(() => {
+    toggleVisibility();
     setTimeout(() => {
-      const { sectionId, textId } = this.props.match.params;
-      const path = lh.link("readerSectionSearchResults", textId, sectionId);
-      this.props.history.push(path, {
-        searchQueryState: this.state,
-        noScroll: true,
-        fromMenu: true
+      const finalSectionId = sectionId || sectionIdParam;
+      const finalTextId = textId || textIdParam;
+      const path = lh.link(
+        "readerSectionSearchResults",
+        finalTextId,
+        finalSectionId
+      );
+      navigate(path, {
+        state: {
+          searchQueryState: queryState,
+          noScroll: true,
+          fromMenu: true
+        }
       });
     }, 250);
-  };
+  }, [
+    toggleVisibility,
+    navigate,
+    sectionId,
+    sectionIdParam,
+    textId,
+    textIdParam,
+    queryState
+  ]);
 
-  render() {
-    const { className } = this.props;
+  const handleSetQueryState = useCallback(
+    queryParams => {
+      setQueryState(queryParams);
+      // Trigger search after state update
+      setTimeout(() => {
+        if (searchType === "reader") doReaderSearch();
+        else if (searchType === "project") doProjectSearch();
+        else if (onSubmit) onSubmit();
+        else doFrontendSearch();
+      }, 0);
+    },
+    [searchType, onSubmit, doReaderSearch, doProjectSearch, doFrontendSearch]
+  );
 
-    return (
-      <div className={className}>
-        <Query.Form
-          projectId={this.props.projectId}
-          sectionId={this.props.sectionId}
-          textId={this.props.textId}
-          facets={this.props.facets}
-          initialState={this.props.initialState}
-          scopes={this.props.scopes}
-          searchType={this.props.searchType}
-          description={this.props.description}
-          searchOnScopeChange={false}
-          setQueryState={this.setQueryState}
-          autoFocus
-        />
-      </div>
-    );
-  }
+  return (
+    <div className={className}>
+      <Query.Form
+        projectId={projectId}
+        sectionId={sectionId}
+        textId={textId}
+        facets={facets}
+        initialState={initialState}
+        scopes={scopes}
+        searchType={searchType}
+        description={description}
+        searchOnScopeChange={false}
+        setQueryState={handleSetQueryState}
+        autoFocus
+      />
+    </div>
+  );
 }
 
-export default withRouter(SearchMenuBody);
+SearchMenuBody.displayName = "Search.Menu.Body";
+
+SearchMenuBody.propTypes = {
+  toggleVisibility: PropTypes.func,
+  searchType: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func,
+  facets: PropTypes.array,
+  scopes: PropTypes.array,
+  initialState: PropTypes.object,
+  description: PropTypes.string,
+  projectId: PropTypes.string,
+  textId: PropTypes.string,
+  sectionId: PropTypes.string,
+  className: PropTypes.string
+};

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { entityEditorActions, entityStoreActions } from "actions";
 import GlobalForm from "global/components/form";
 import Developer from "global/components/developer";
@@ -22,14 +22,6 @@ const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
 
 export class FormContainer extends PureComponent {
-  static mapStateToProps = (state, ownProps) => {
-    return {
-      session: get(state.entityEditor.sessions, ownProps.name),
-      response: get(state.entityStore.responses, ownProps.name),
-      errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
-    };
-  };
-
   static displayName = "Form.Form";
 
   static propTypes = {
@@ -353,4 +345,27 @@ export class FormContainer extends PureComponent {
   }
 }
 
-export default withTranslation()(connectAndFetch(FormContainer));
+function FormContainerWrapper(props) {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const { name } = props;
+
+  const session = useSelector(state => get(state.entityEditor.sessions, name));
+  const response = useSelector(state => get(state.entityStore.responses, name));
+  const errors = useSelector(state =>
+    get(state.entityStore.responses, `${name}.errors`)
+  );
+
+  return (
+    <FormContainer
+      {...props}
+      dispatch={dispatch}
+      t={t}
+      session={session}
+      response={response}
+      errors={errors}
+    />
+  );
+}
+
+export default FormContainerWrapper;

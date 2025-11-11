@@ -244,7 +244,9 @@ class ManifoldContainer extends PureComponent {
               />
             </div>
           ) : (
-            <FatalErrorBoundary>{renderRoutes(routes)}</FatalErrorBoundary>
+            <FatalErrorBoundary location={this.props.location}>
+              {renderRoutes(routes)}
+            </FatalErrorBoundary>
           )}
           <CookiesBanner />
         </FrontendModeContext.Provider>

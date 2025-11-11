@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Static from "global/components/navigation/Static";
 import Mobile from "global/components/navigation/Mobile";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom-v5-compat";
 import { getAdminModeLabel, getDestinationPath } from "./helpers";
 import { useFromStore } from "hooks";
 import Authorization from "helpers/authorization";
@@ -55,14 +56,10 @@ export default function NavigationPrimary(props) {
     <>
       <Static
         backendButton={adminModeButton}
-        {...props}
         style={props.desktopStyle}
-      />
-      <Mobile
-        backendButton={adminModeButton}
         {...props}
-        style={props.mobileStyle}
       />
+      <Mobile backendButton={adminModeButton} {...props} />
     </>
   );
 }
