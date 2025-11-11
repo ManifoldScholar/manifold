@@ -1,8 +1,8 @@
-import React, { useCallback } from "react";
-import PropTypes from "prop-types";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import { collaboratorsAPI, projectsAPI } from "api";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
@@ -11,16 +11,17 @@ import EntitiesList, {
 import Authorization from "helpers/authorization";
 import { useApiCallback } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
-import { useHistory } from "react-router-dom";
 
-function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
+const authorization = new Authorization();
+
+function ProjectCollaboratorsContainer({ confirm }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
+  const { project, refresh } = useOutletContext() || {};
 
-  const closeUrl = lh.link("backendProjectCollaborators", project.id);
+  const closeUrl = lh.link("backendProjectCollaborators", project?.id);
 
-  const auth = new Authorization();
-  const canUpdate = auth.authorizeAbility({
+  const canUpdate = authorization.authorizeAbility({
     entity: project,
     ability: "updateMakers"
   });
@@ -36,7 +37,7 @@ function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
           refresh();
         });
     },
-    [project.id, confirm, destroyCollaborator, t, refresh]
+    [project?.id, confirm, destroyCollaborator, t, refresh]
   );
 
   const updateProject = useApiCallback(projectsAPI.update);
@@ -62,16 +63,20 @@ function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
   };
 
   const onEdit = id => {
-    history.push(lh.link("backendProjectCollaboratorEdit", project.id, id));
+    navigate(lh.link("backendProjectCollaboratorEdit", project.id, id));
   };
+
+  if (!project) return null;
 
   return (
     <section>
-      {childRoutes(route, {
-        drawer: true,
-        drawerProps: { closeUrl },
-        childProps: { refresh, projectId: project.id }
-      })}
+      <OutletWithDrawer
+        drawerProps={{ closeUrl }}
+        context={{
+          refresh,
+          projectId: project?.id
+        }}
+      />
       <EntitiesList
         className="full-width"
         title={t("projects.contributors_header")}
@@ -101,10 +106,3 @@ function ProjectCollaboratorsContainer({ project, refresh, route, confirm }) {
 export default withConfirmation(ProjectCollaboratorsContainer);
 
 ProjectCollaboratorsContainer.displayName = "Project.Collaborators";
-
-ProjectCollaboratorsContainer.propTypes = {
-  project: PropTypes.object,
-  refresh: PropTypes.func.isRequired,
-  route: PropTypes.object,
-  confirm: PropTypes.func.isRequired
-};

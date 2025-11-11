@@ -1,10 +1,7 @@
 import Properties from "./Properties";
 import Metadata from "./Metadata";
 import Wrapper from "./Wrapper";
-import {
-  List as CollaboratorsList,
-  Add as AddCollaborator
-} from "./collaborators";
+import Collaborators from "./collaborators";
 import Ingestion from "./ingestion";
 import Styles from "./Stylesheets";
 import Analytics from "./Analytics";
@@ -18,8 +15,7 @@ export default {
   Properties,
   Metadata,
   Wrapper,
-  CollaboratorsList,
-  AddCollaborator,
+  Collaborators,
   Ingestion,
   Styles,
   Analytics,

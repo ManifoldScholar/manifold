@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import classnames from "classnames";
@@ -18,7 +17,10 @@ export default function NavigationSecondary(props) {
   const renderItem = link => {
     return (
       <li key={link.route}>
-        <NavLink to={pathForLink(link)} activeClassName="active">
+        <NavLink
+          to={pathForLink(link)}
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+        >
           {t(link.label)}
         </NavLink>
       </li>

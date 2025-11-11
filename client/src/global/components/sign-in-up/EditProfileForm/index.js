@@ -4,7 +4,7 @@ import { meAPI } from "api";
 import lh from "helpers/linkHandler";
 import ProfileFormFields from "./ProfileFormFields";
 import Greeting from "./Greeting";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import { useFromStore, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "frontend/components/privacy/CookiesForm/CookiesFormFields";

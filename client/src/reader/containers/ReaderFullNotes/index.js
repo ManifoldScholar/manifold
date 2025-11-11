@@ -1,10 +1,10 @@
-import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
 import groupBy from "lodash/groupBy";
 import isEqual from "lodash/isEqual";
 import { meAPI, readingGroupsAPI, requests } from "api";
-import { commonActions as commonActionsHelper } from "actions/helpers";
+import { commonActions } from "actions/helpers";
 import lh from "helpers/linkHandler";
 import Overlay from "global/components/Overlay";
 import {
@@ -35,32 +35,30 @@ function ReaderFullNotesContainer({
   currentAnnotationOverlayReadingGroup: currentGroupId,
   readingGroups,
   text,
-  match,
-  history,
-  dispatch,
   closeCallback,
   readingGroupsLoaded
 }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { textId } = useParams();
+  const navigate = useNavigate();
 
-  const initialFilters = useMemo(() => {
-    return {
-      orphaned: !!(currentGroupId === "orphaned"),
-      text: text?.id,
-      formats: [...INITIAL_FORMATS],
-      ...INITIAL_VISIBLE_FILTER_STATE
-    };
-  }, [text, currentGroupId]);
+  const initialFilters = {
+    orphaned: currentGroupId === "orphaned",
+    text: text?.id,
+    formats: [...INITIAL_FORMATS],
+    ...INITIAL_VISIBLE_FILTER_STATE
+  };
 
   const [pagination, setPageNumber] = usePaginationState();
   const [filters, setFilters] = useFilterState(initialFilters);
 
-  const me = currentGroupId === "me" || currentGroupId === "orphaned";
-  const endpoint = me ? meAPI.annotations : readingGroupsAPI.annotations;
-  const fetchKey = me
+  const isMe = currentGroupId === "me" || currentGroupId === "orphaned";
+  const endpoint = isMe ? meAPI.annotations : readingGroupsAPI.annotations;
+  const fetchKey = isMe
     ? requests.rMyFilteredAnnotationsForText
     : requests.rReadingGroupFilteredAnnotationsForText;
-  const args = me
+  const args = isMe
     ? [filters, pagination]
     : [currentGroupId, filters, pagination];
   const { data: annotations, meta, refresh } = useFetch({
@@ -68,83 +66,61 @@ function ReaderFullNotesContainer({
     options: { fetchKey }
   });
 
-  const commonActions = commonActionsHelper(dispatch);
+  const actions = commonActions(dispatch);
   const readingGroup =
     readingGroups.find(group => group.id === currentGroupId) || currentGroupId;
-
-  function mapAnnotationsToSections() {
-    const annotationGroups = groupBy(annotations, "attributes.textSectionId");
-    const out = [];
-
-    text.attributes.spine.map(sectionId => {
-      if (!annotationGroups[sectionId]) return null;
-      return out.push({
-        sectionId,
-        name: getSectionName(text, sectionId),
-        annotations: annotationGroups[sectionId]
-      });
-    });
-
-    return out;
-  }
 
   const visibilityFilters = useFromStore({
     path: "ui.transitory.visibility.visibilityFilters"
   });
 
-  function handleVisitAnnotation(annotation) {
+  const mapAnnotationsToSections = () => {
+    const annotationGroups = groupBy(annotations, "attributes.textSectionId");
+    return text.attributes.spine
+      .filter(sectionId => annotationGroups[sectionId])
+      .map(sectionId => ({
+        sectionId,
+        name: getSectionName(text, sectionId),
+        annotations: annotationGroups[sectionId]
+      }));
+  };
+
+  const handleVisitAnnotation = annotation => {
     const { textSectionId, currentUserIsCreator } = annotation.attributes;
     const url = lh.link(
       "readerSection",
-      match.params.textId,
+      textId,
       textSectionId,
       `#annotation-${annotation.id}`
     );
-
-    commonActions.panelToggle("notes");
+    actions.panelToggle("notes");
     const annotationFilter = currentUserIsCreator
       ? { annotation: { ...visibilityFilters.annotation, yours: true } }
       : { annotation: { ...visibilityFilters.annotation, others: true } };
-    commonActions.visibilityChange({
-      visibilityFilters: {
-        ...visibilityFilters,
-        ...annotationFilter
-      }
+    actions.visibilityChange({
+      visibilityFilters: { ...visibilityFilters, ...annotationFilter }
     });
-    history.push(url);
-  }
+    navigate(url);
+  };
 
-  function getMemberships() {
-    if (readingGroup === "me" || readingGroup === "orphaned") return [];
-    const rgms = readingGroup?.relationships?.readingGroupMemberships;
-    return rgms?.length ? rgms : [];
-  }
+  const memberships =
+    readingGroup === "me" || readingGroup === "orphaned"
+      ? []
+      : readingGroup?.relationships?.readingGroupMemberships || [];
+
+  const sections = text.attributes.sectionsMap || [];
 
   /* eslint-disable no-nested-ternary */
-  function getOverlayPropsForGroup() {
-    return {
-      title:
-        readingGroup === "me"
-          ? t("reader.menus.notes.my_notes")
-          : readingGroup === "orphaned"
-          ? t("reader.menus.notes.orphaned_notes")
-          : readingGroup?.attributes.name,
-      subtitle:
-        readingGroup === "me" || readingGroup === "orphaned"
-          ? null
-          : t("reader.menus.notes.all_notes"),
-      icon:
-        readingGroup === "me" || readingGroup === "orphaned"
-          ? "notes24"
-          : "readingGroup24"
-    };
-  }
+  const overlayProps = {
+    title: isMe
+      ? currentGroupId === "orphaned"
+        ? t("reader.menus.notes.orphaned_notes")
+        : t("reader.menus.notes.my_notes")
+      : readingGroup?.attributes?.name,
+    subtitle: isMe ? null : t("reader.menus.notes.all_notes"),
+    icon: isMe ? "notes24" : "readingGroup24"
+  };
   /* eslint-enable no-nested-ternary */
-
-  const memberships = getMemberships();
-  const sections = text.attributes.sectionsMap?.length
-    ? text.attributes.sectionsMap
-    : [];
 
   const filterProps = useListFilters({
     onFilterChange: param => setFilters({ newState: param }),
@@ -162,7 +138,7 @@ function ReaderFullNotesContainer({
       open
       closeCallback={closeCallback}
       contentWidth={950}
-      {...getOverlayPropsForGroup()}
+      {...overlayProps}
     >
       <EntityCollection.ReaderFullNotes
         handleVisitAnnotation={handleVisitAnnotation}
@@ -181,14 +157,6 @@ function ReaderFullNotesContainer({
   );
 }
 
-ReaderFullNotesContainer.propTypes = {
-  text: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  closeCallback: PropTypes.func.isRequired,
-  readingGroups: PropTypes.array,
-  currentAnnotationOverlayReadingGroup: PropTypes.string
-};
+ReaderFullNotesContainer.displayName = "Reader.FullNotes";
 
 export default withReadingGroups(ReaderFullNotesContainer);

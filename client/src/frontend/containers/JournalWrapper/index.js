@@ -1,39 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import { journalsAPI } from "api";
-import {
-  Redirect,
-  useLocation,
-  useParams,
-  useRouteMatch
-} from "react-router-dom";
-import { useFetch, useRedirectToFirstMatch } from "hooks";
-import { childRoutes } from "helpers/router";
+import { useParams, Outlet, Navigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useFetch } from "hooks";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
+import lh from "helpers/linkHandler";
 
-export default function JournalWrapper({ route }) {
+export default function JournalWrapper() {
   const { id } = useParams();
   const { data: journal, response } = useFetch({
     request: [journalsAPI.show, id],
     condition: id !== "all"
   });
-  const { path } = useRouteMatch();
   const location = useLocation();
-  const isHomePage = location.pathname === path;
+  const isHomePage = location.pathname === `/journals/${id}`;
 
-  useRedirectToFirstMatch({
-    route: "frontendJournal",
-    candidates: [
-      {
-        label: "All Journals",
-        route: "frontendJournalsAll"
-      }
-    ]
-  });
-
-  if (id === "all") return <Redirect to={lh.link("frontendJournalsList")} />;
+  if (id === "all") return <Navigate to={lh.link("frontendJournalsList")} />;
 
   if (!journal) return null;
 
@@ -45,18 +27,14 @@ export default function JournalWrapper({ route }) {
         project={journal}
         isProjectHomePage={isHomePage}
       />
-      {childRoutes(route, {
-        childProps: {
+      <Outlet
+        context={{
           journal,
           response
-        }
-      })}
+        }}
+      />
     </>
   );
 }
 
 JournalWrapper.displayName = "Frontend.Containers.JournalWrapper";
-
-JournalWrapper.propTypes = {
-  route: PropTypes.object
-};
