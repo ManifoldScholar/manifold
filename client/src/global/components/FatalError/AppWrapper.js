@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { useCurrentUser } from "hooks";
 import FatalErrorRender from ".";
 
@@ -11,7 +11,7 @@ export default function FatalErrorAppWrapper(props) {
   } = props;
 
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const currentUser = useCurrentUser();
 
@@ -23,10 +23,10 @@ export default function FatalErrorAppWrapper(props) {
 
   const redirectOrNotify = () => {
     if (!currentUser?.id) {
-      return history.push({
-        pathname: "/login",
-        search: redirectPath ? `?redirect_uri=${redirectPath}` : undefined
-      });
+      const loginPath = redirectPath
+        ? `/login?redirect_uri=${redirectPath}`
+        : "/login";
+      return navigate(loginPath);
     }
 
     const title =
