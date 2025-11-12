@@ -50,9 +50,9 @@ export default function JournalsListContainer() {
 
   return (
     <>
-      <HeadContent title={t("titles.journals_all")} appendDefaultTitle />
+      <HeadContent title={t("titles.journals")} appendDefaultTitle />
       <CheckFrontendMode debugLabel="JournalsList" />
-      <h1 className="screen-reader-text">{t("glossary.journal_other")}</h1>
+      <h1 className="screen-reader-text">{t("titles.journals")}</h1>
       {showPlaceholder ? (
         <EntityCollectionPlaceholder.Journals />
       ) : (
