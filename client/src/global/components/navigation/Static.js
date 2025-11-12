@@ -147,7 +147,6 @@ function NavigationStatic({
         />
         <UIPanel
           id="search"
-          toggleVisibility={commonActions.toggleSearchPanel}
           visibility={visibility.uiPanels}
           bodyComponent={SearchMenu.Body}
           bodyClassName="search-menu"
