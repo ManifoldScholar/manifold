@@ -5,7 +5,6 @@ import {
   getHeroImage,
   getHeaderLayout
 } from "frontend/components/entity/Collection/helpers";
-import UniqueIcons from "global/components/icon/unique";
 
 const ProjectCollectionAvatar = ({ entity }) => {
   const headerLayout = getHeaderLayout(entity);

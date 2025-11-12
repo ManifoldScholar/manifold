@@ -52,12 +52,14 @@ export default function EntityThumbnail({
           />
         )}
       </Styled.ItemLink>
-      <Collecting.Toggle
-        collectable={entity}
-        onUncollect={onUncollect}
-        inline={false}
-        outlined={false}
-      />
+      {entity.type !== "projectCollections" && (
+        <Collecting.Toggle
+          collectable={entity}
+          onUncollect={onUncollect}
+          inline={false}
+          outlined={false}
+        />
+      )}
     </Styled.Wrapper>
   );
 }

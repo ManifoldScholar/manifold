@@ -1,18 +1,12 @@
 import React, { useMemo } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import { projectCollectionsAPI, requests } from "api";
+import { projectCollectionsAPI } from "api";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import HeadContent from "global/components/HeadContent";
-import {
-  useFetch,
-  useListQueryParams,
-  useFromStore,
-  useListFilters
-} from "hooks";
+import { useFetch, useListQueryParams, useListFilters } from "hooks";
 
 export default function ProjectCollectionsContainer() {
   const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
