@@ -7,7 +7,7 @@ import { useFromStore } from "hooks";
 import CreateFormFields from "./CreateFormFields";
 import Form from "global/components/form";
 import { useDispatch } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom-v5-compat";
+import { useNavigate, useLocation } from "react-router-dom";
 import * as SharedStyles from "../styles";
 
 export default function CreateUserForm({

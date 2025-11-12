@@ -1,10 +1,9 @@
-import PropTypes from "prop-types";
-import { childRoutes } from "helpers/router";
+import { Outlet } from "react-router-dom";
 import { useFromStore } from "hooks";
-import { useNavigate, useLocation } from "react-router-dom-v5-compat";
+import { useNavigate, useLocation } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
-function PublicReadingGroupsContainer({ route }) {
+function PublicReadingGroupsContainer() {
   const {
     attributes: {
       general: { disablePublicReadingGroups }
@@ -17,11 +16,7 @@ function PublicReadingGroupsContainer({ route }) {
   if (disablePublicReadingGroups && pathname === "/groups")
     navigate(lh.link("frontendMyReadingGroups"));
 
-  return childRoutes(route);
+  return <Outlet />;
 }
-
-PublicReadingGroupsContainer.propTypes = {
-  route: PropTypes.object.isRequired
-};
 
 export default PublicReadingGroupsContainer;
