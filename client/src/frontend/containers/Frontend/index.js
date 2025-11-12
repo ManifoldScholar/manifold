@@ -14,6 +14,7 @@ import get from "lodash/get";
 import BodyClass from "hoc/BodyClass";
 import AppFatalError from "global/components/FatalError/AppWrapper";
 import redirectIfLibraryDisabled from "hoc/redirectIfLibraryDisabled";
+import { SearchProvider } from "hooks/useSearch/context";
 
 function FrontendContainer({ route }) {
   const dispatch = useDispatch();
@@ -67,27 +68,29 @@ function FrontendContainer({ route }) {
     <BodyClass className="browse">
       <BreadcrumbsProvider>
         <Utility.ScrollToTop />
-        <Layout.Header
-          pages={pages}
-          visibility={visibility}
-          authentication={authentication}
-          notifications={notifications}
-          commonActions={commonActionsMemo}
-          settings={settings}
-        />
-        <main id="skip-to-main" tabIndex={-1} className={mainClassName}>
-          {fatalError.error ? (
-            <AppFatalError fatalError={fatalError} />
-          ) : (
-            renderRoutes(route.routes)
-          )}
-        </main>
-        <Footers.FrontendFooter
-          pages={pages}
-          authentication={authentication}
-          commonActions={commonActionsMemo}
-          settings={settings}
-        />
+        <SearchProvider>
+          <Layout.Header
+            pages={pages}
+            visibility={visibility}
+            authentication={authentication}
+            notifications={notifications}
+            commonActions={commonActionsMemo}
+            settings={settings}
+          />
+          <main id="skip-to-main" tabIndex={-1} className={mainClassName}>
+            {fatalError.error ? (
+              <AppFatalError fatalError={fatalError} />
+            ) : (
+              renderRoutes(route.routes)
+            )}
+          </main>
+          <Footers.FrontendFooter
+            pages={pages}
+            authentication={authentication}
+            commonActions={commonActionsMemo}
+            settings={settings}
+          />
+        </SearchProvider>
       </BreadcrumbsProvider>
     </BodyClass>
   );
