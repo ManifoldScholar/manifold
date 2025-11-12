@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetch, useListQueryParams, useFromStore } from "hooks";
 import { journalVolumesAPI } from "api";
@@ -10,7 +10,8 @@ import EntityCollection from "frontend/components/entity/Collection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 
-export default function JournalVolumesList({ journal }) {
+export default function JournalVolumesList() {
+  const { journal } = useOutletContext() || {};
   const { id } = useParams();
 
   const { pagination } = useListQueryParams({ initSize: 5 });

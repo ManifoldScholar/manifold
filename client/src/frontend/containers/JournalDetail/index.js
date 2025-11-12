@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
@@ -15,7 +16,8 @@ import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import Schema from "global/components/schema";
 
-function JournalDetailContainer({ journal }) {
+function JournalDetailContainer() {
+  const { journal } = useOutletContext() || {};
   const [issuesPagination] = usePaginationState(1, 8);
   const [volumesPagination] = usePaginationState(1, 5);
 
@@ -128,10 +130,5 @@ function JournalDetailContainer({ journal }) {
 }
 
 JournalDetailContainer.displayName = "Frontend.Containers.JournalDetail";
-
-JournalDetailContainer.propTypes = {
-  journal: PropTypes.object,
-  response: PropTypes.object
-};
 
 export default JournalDetailContainer;

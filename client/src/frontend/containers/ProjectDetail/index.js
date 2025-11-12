@@ -1,7 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
 import Project from "frontend/components/project";
-import { Redirect } from "react-router-dom";
+import { Redirect, useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import Schema from "global/components/schema";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -9,7 +8,8 @@ import useEntityHeadContent from "frontend/components/entity/useEntityHeadConten
 import HeadContent from "global/components/HeadContent";
 import IssueDetail from "frontend/containers/IssueDetail";
 
-function ProjectDetailContainer({ project, response, journalBreadcrumbs }) {
+function ProjectDetailContainer() {
+  const { project, response, journalBreadcrumbs } = useOutletContext() || {};
   const headContentProps = useEntityHeadContent(project);
 
   if (response?.status === 401) return <Redirect to={lh.link("frontend")} />;
@@ -30,11 +30,5 @@ function ProjectDetailContainer({ project, response, journalBreadcrumbs }) {
 }
 
 ProjectDetailContainer.displayName = "Frontend.Containers.ProjectDetail";
-
-ProjectDetailContainer.propTypes = {
-  project: PropTypes.object,
-  response: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
-};
 
 export default ProjectDetailContainer;

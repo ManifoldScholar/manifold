@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import Collapse from "global/components/Collapse";
 import { GroupSettingsForm } from "frontend/components/reading-group/forms";
 import withConfirmation from "hoc/withConfirmation";
