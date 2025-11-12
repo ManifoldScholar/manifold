@@ -1,15 +1,13 @@
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
-import { useLocation } from "react-router-dom-v5-compat";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import Option from "global/components/form/Radio/Option";
 import CheckboxMixed from "./CheckboxMixed";
 
 export default function SearchQueryForm({
-  initialState,
   searchQueryState,
   setQueryState = state => {
     /* eslint-disable no-console */
@@ -28,13 +26,10 @@ export default function SearchQueryForm({
   autoFocus = false
 }) {
   const { t } = useTranslation();
-  const location = useLocation();
   const handlersRef = useRef({
     facets: {},
     scopes: {}
   });
-  const shouldTriggerSearchRef = useRef(false);
-  const isInitialMountRef = useRef(true);
 
   const availableScopes = useMemo(() => {
     const scopesList = [];
@@ -87,37 +82,17 @@ export default function SearchQueryForm({
         } else {
           scopeValue = availableScopes[availableScopes.length - 1].value;
         }
-        return { ...state, scope: scopeValue };
+        return {
+          ...state,
+          ...setScopeIdFromScopeString({ ...state, scope: scopeValue })
+        };
       }
       return state;
     },
-    [availableScopes]
+    [availableScopes, setScopeIdFromScopeString]
   );
 
-  const internalStateFromIncomingState = useCallback(
-    incomingState => {
-      let newState = {
-        facets: [],
-        scope: null,
-        keyword: "",
-        ...incomingState
-      };
-      newState = setDefaultScope(newState);
-      newState = setScopeIdFromScopeString(newState);
-      return newState;
-    },
-    [setDefaultScope, setScopeIdFromScopeString]
-  );
-
-  const [state, setState] = useState(() =>
-    internalStateFromIncomingState(initialState)
-  );
-
-  useEffect(() => {
-    if (searchQueryState && searchQueryState !== initialState) {
-      setState(internalStateFromIncomingState(searchQueryState));
-    }
-  }, [searchQueryState, internalStateFromIncomingState, initialState]);
+  const [state, setState] = useState(() => setDefaultScope(searchQueryState));
 
   const searchIdPrefix = "query-search";
   const typeIsReader = searchType === "reader";
@@ -127,23 +102,10 @@ export default function SearchQueryForm({
       if (event && event.preventDefault) {
         event.preventDefault();
       }
-      if (!state.keyword) return null;
       setQueryState(state);
     },
     [state, setQueryState]
   );
-
-  useEffect(() => {
-    if (isInitialMountRef.current) {
-      isInitialMountRef.current = false;
-      return;
-    }
-
-    if (shouldTriggerSearchRef.current && state.keyword) {
-      setQueryState(state);
-      shouldTriggerSearchRef.current = false;
-    }
-  }, [state, setQueryState]);
 
   const setScope = useCallback(
     scopeValue => {
@@ -154,33 +116,44 @@ export default function SearchQueryForm({
           scope: scopeValue
         });
         if (searchOnScopeChange) {
-          shouldTriggerSearchRef.current = true;
+          setQueryState(newState);
         }
         return newState;
       });
     },
-    [state.scope, setScopeIdFromScopeString, searchOnScopeChange]
+    [state.scope, setScopeIdFromScopeString, searchOnScopeChange, setQueryState]
   );
 
   const setKeyword = useCallback(event => {
     if (!event || !event.target) return;
     const target = event.target;
     const value = target.value;
-    setState(prevState => ({ ...prevState, keyword: value }));
+    setState(prevState => {
+      const newState = { ...prevState, keyword: value };
+      return newState;
+    });
   }, []);
+
+  // Handle edge case where header/footer search is used on search route
+  useEffect(() => {
+    if (searchQueryState?.keyword && searchQueryState.keyword !== state.keyword)
+      setState(prevState => ({
+        ...prevState,
+        keyword: searchQueryState.keyword
+      }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQueryState.keyword]);
 
   const setFacets = useCallback(
     facetsList => {
       const sortedFacets = [...facetsList].sort();
       setState(prevState => {
         const newState = { ...prevState, facets: sortedFacets };
-        if (!location?.state?.fromMenu) {
-          shouldTriggerSearchRef.current = true;
-        }
+        setQueryState(newState);
         return newState;
       });
     },
-    [location]
+    [setQueryState]
   );
 
   const makeScopeHandler = useCallback(

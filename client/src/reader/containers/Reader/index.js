@@ -31,6 +31,7 @@ import Authorize from "hoc/Authorize";
 import { ReaderContext } from "helpers/contexts";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import AppFatalError from "global/components/FatalError/AppWrapper";
+import { SearchProvider } from "hooks/useSearch/context";
 
 const {
   selectFont,
@@ -271,43 +272,45 @@ export class ReaderContainer extends Component {
             debugLabel="ReaderWrapper"
             project={this.props.text?.relationships.project}
           />
-          <ScrollAware>
-            <Header
-              // Props required by body component
+          <SearchProvider>
+            <ScrollAware>
+              <Header
+                // Props required by body component
+                text={this.props.text}
+                section={this.props.section}
+                authentication={this.props.authentication}
+                visibility={this.props.visibility}
+                location={this.props.location}
+                appearance={this.props.appearance}
+                notifications={this.props.notifications}
+                commonActions={this.commonActions}
+                history={this.props.history}
+                match={this.props.match}
+                {...this.readerActions}
+              />
+            </ScrollAware>
+            <Toc
               text={this.props.text}
               section={this.props.section}
-              authentication={this.props.authentication}
-              visibility={this.props.visibility}
-              location={this.props.location}
-              appearance={this.props.appearance}
-              notifications={this.props.notifications}
-              commonActions={this.commonActions}
-              history={this.props.history}
-              match={this.props.match}
-              {...this.readerActions}
+              tocDrawerVisible={this.props.visibility.uiPanels.tocDrawer}
+              hideTocDrawer={this.hideTocDrawer}
+              showMeta={this.toggleMeta}
             />
-          </ScrollAware>
-          <Toc
-            text={this.props.text}
-            section={this.props.section}
-            tocDrawerVisible={this.props.visibility.uiPanels.tocDrawer}
-            hideTocDrawer={this.hideTocDrawer}
-            showMeta={this.toggleMeta}
-          />
-          <main
-            id="skip-to-main"
-            tabIndex={-1}
-            className="main-content flex-viewport"
-          >
-            {this.props.fatalError.error ? (
-              <AppFatalError fatalError={this.props.fatalError} />
-            ) : (
-              <>
-                {this.maybeRenderOverlay(this.props)}
-                {this.renderRoutes()}
-              </>
-            )}
-          </main>
+            <main
+              id="skip-to-main"
+              tabIndex={-1}
+              className="main-content flex-viewport"
+            >
+              {this.props.fatalError.error ? (
+                <AppFatalError fatalError={this.props.fatalError} />
+              ) : (
+                <>
+                  {this.maybeRenderOverlay(this.props)}
+                  {this.renderRoutes()}
+                </>
+              )}
+            </main>
+          </SearchProvider>
           <Footers.ReaderFooter text={this.props.text} />
           <Layout.PostFooter />
         </ReaderContext.Provider>

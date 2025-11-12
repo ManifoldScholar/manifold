@@ -10,11 +10,16 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
   const allChecked = checked.length === checkboxes.length;
 
   const inputRef = useRef(null);
+  const initializedRef = useRef(false);
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    onChange(checked);
+    if (initializedRef.current) {
+      onChange(checked);
+    } else {
+      initializedRef.current = true;
+    }
 
     if (inputRef.current) {
       const isIndeterminate =

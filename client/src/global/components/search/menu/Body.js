@@ -1,14 +1,13 @@
-import { useState, useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useSearchContext } from "hooks/useSearch/context";
 import Query from "../query";
 import lh from "helpers/linkHandler";
 
 export default function SearchMenuBody({
-  toggleVisibility = () => {},
+  afterSubmit = () => {},
   searchType,
-  onSubmit,
   facets,
   scopes,
   initialState,
@@ -18,78 +17,31 @@ export default function SearchMenuBody({
   sectionId,
   className
 }) {
-  const navigate = useNavigate();
   const { sectionId: sectionIdParam, textId: textIdParam } = useParams();
-  const [queryState, setQueryState] = useState({});
 
-  const doFrontendSearch = useCallback(() => {
-    toggleVisibility();
-    setTimeout(() => {
-      const path = lh.link("frontendSearch");
-      navigate(path, {
-        state: {
-          searchQueryState: queryState,
-          noScroll: true,
-          fromMenu: true
-        }
-      });
-    }, 250);
-  }, [toggleVisibility, navigate, queryState]);
+  const { searchQueryState, setQueryState } = useSearchContext();
 
-  const doProjectSearch = useCallback(() => {
-    toggleVisibility();
-    setTimeout(() => {
-      const path = lh.link("frontendProjectSearch", projectId);
-      navigate(path, {
-        state: {
-          searchQueryState: queryState,
-          noScroll: true,
-          fromMenu: true
-        }
-      });
-    }, 250);
-  }, [toggleVisibility, navigate, projectId, queryState]);
-
-  const doReaderSearch = useCallback(() => {
-    toggleVisibility();
-    setTimeout(() => {
-      const finalSectionId = sectionId || sectionIdParam;
-      const finalTextId = textId || textIdParam;
-      const path = lh.link(
-        "readerSectionSearchResults",
-        finalTextId,
-        finalSectionId
-      );
-      navigate(path, {
-        state: {
-          searchQueryState: queryState,
-          noScroll: true,
-          fromMenu: true
-        }
-      });
-    }, 250);
-  }, [
-    toggleVisibility,
-    navigate,
-    sectionId,
-    sectionIdParam,
-    textId,
-    textIdParam,
-    queryState
-  ]);
+  const searchPath = useMemo(() => {
+    switch (searchType) {
+      case "reader":
+        return lh.link(
+          "readerSectionSearchResults",
+          textId || textIdParam,
+          sectionId || sectionIdParam
+        );
+      case "project":
+        return lh.link("frontendProjectSearch", projectId);
+      default:
+        return lh.link("frontendSearch");
+    }
+  }, [searchType, projectId, textId, sectionId, textIdParam, sectionIdParam]);
 
   const handleSetQueryState = useCallback(
-    queryParams => {
-      setQueryState(queryParams);
-      // Trigger search after state update
-      setTimeout(() => {
-        if (searchType === "reader") doReaderSearch();
-        else if (searchType === "project") doProjectSearch();
-        else if (onSubmit) onSubmit();
-        else doFrontendSearch();
-      }, 0);
+    state => {
+      afterSubmit();
+      setQueryState(state, searchPath);
     },
-    [searchType, onSubmit, doReaderSearch, doProjectSearch, doFrontendSearch]
+    [searchPath, afterSubmit, setQueryState]
   );
 
   return (
@@ -99,12 +51,13 @@ export default function SearchMenuBody({
         sectionId={sectionId}
         textId={textId}
         facets={facets}
-        initialState={initialState}
         scopes={scopes}
         searchType={searchType}
+        initialState={initialState}
+        searchQueryState={searchQueryState}
+        setQueryState={handleSetQueryState}
         description={description}
         searchOnScopeChange={false}
-        setQueryState={handleSetQueryState}
         autoFocus
       />
     </div>
@@ -114,9 +67,8 @@ export default function SearchMenuBody({
 SearchMenuBody.displayName = "Search.Menu.Body";
 
 SearchMenuBody.propTypes = {
-  toggleVisibility: PropTypes.func,
+  afterSubmit: PropTypes.func,
   searchType: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func,
   facets: PropTypes.array,
   scopes: PropTypes.array,
   initialState: PropTypes.object,

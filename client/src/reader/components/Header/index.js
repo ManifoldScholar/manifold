@@ -171,7 +171,7 @@ export default function Header(props) {
           >
             <ControlMenu.DisclosurePanel direction="right">
               <SearchMenu.Body
-                toggleVisibility={panelToggleHandler("search")}
+                afterSubmit={panelToggleHandler("search")}
                 initialState={{
                   keyword: "",
                   scope: "text"
