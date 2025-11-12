@@ -20,7 +20,7 @@ function JournalsEntityCollection({
   const showFilters = !isEmpty(meta) && !isEmpty(filterProps);
   return (
     <EntityCollection
-      title={t("titles.journals_all")}
+      title={t("titles.journals")}
       icon="journals64"
       filterProps={showFilters ? filterProps : null}
       BodyComponent={props => (
