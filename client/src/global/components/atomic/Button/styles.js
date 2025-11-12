@@ -24,11 +24,10 @@ const aSecondaryButtonDark = `
   &:focus-visible {
     color: var(--color-base-neutral95);
     background-color: var(--color-base-neutral30);
-    border-color: var(--color-base-neutral30);
   }
 
-  &:focus-visible {
-    border-color: var(--color-base-neutral75);
+  &:hover {
+    border-color: var(--color-base-neutral30);
   }
 `;
 
@@ -70,6 +69,11 @@ export const Button = styled("button", transientOptions)`
   &:focus-visible {
     color: var(--color-base-neutral90);
     background-color: var(--color-accent-primary-dull);
+  }
+
+  &:focus-visible {
+    border-color: transparent;
+    outline-offset: 3px;
   }
 
   ${({ $secondary, $darkMode }) => {
