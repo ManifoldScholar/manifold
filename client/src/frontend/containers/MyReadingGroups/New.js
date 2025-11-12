@@ -1,9 +1,10 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import { GroupSettingsForm } from "frontend/components/reading-group/forms";
 import Layout from "backend/components/layout";
 
-export default function ReadingGroupsNewContainer({ onSuccess }) {
+export default function ReadingGroupsNewContainer() {
+  const { onSuccess } = useOutletContext() || {};
   const { t } = useTranslation();
   return (
     <section>
@@ -14,7 +15,3 @@ export default function ReadingGroupsNewContainer({ onSuccess }) {
 }
 
 ReadingGroupsNewContainer.displayName = "Frontend.Containers.ReadingGroupsNew";
-
-ReadingGroupsNewContainer.propTypes = {
-  onSuccess: PropTypes.func.isRequired
-};

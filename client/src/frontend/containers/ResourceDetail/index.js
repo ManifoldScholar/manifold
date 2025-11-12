@@ -1,9 +1,7 @@
 import { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom-v5-compat";
+import { useParams, useLocation, useOutletContext } from "react-router-dom";
 import ResourceDetail from "frontend/components/resource/Detail";
 import { fatalErrorActions } from "actions";
 import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
@@ -16,10 +14,8 @@ import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import { useFetch } from "hooks";
 
-export default function ResourceDetailContainer({
-  project,
-  journalBreadcrumbs
-}) {
+export default function ResourceDetailContainer() {
+  const { project, journalBreadcrumbs } = useOutletContext() || {};
   const { resourceId, resourceCollectionId } = useParams();
   const { data: resource } = useFetch({
     request: [resourcesAPI.show, resourceId],
@@ -77,10 +73,5 @@ export default function ResourceDetailContainer({
     </>
   );
 }
-
-ResourceDetailContainer.propTypes = {
-  project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
-};
 
 ResourceDetailContainer.displayName = "Frontend.Containers.ResourceDetail";

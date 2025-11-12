@@ -1,18 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useParams, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "frontend/components/OutletWithDrawer";
 import MembersTable from "frontend/components/reading-group/tables/Members";
 import * as Styled from "../styles";
 
 import withConfirmation from "hoc/withConfirmation";
 
-function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
+function MembersListContainer() {
+  const { dispatch, confirm, readingGroup } = useOutletContext() || {};
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -36,26 +37,6 @@ function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
       });
   };
 
-  const renderRoutes = () => {
-    return childRoutes(route, {
-      drawer: true,
-      drawerProps: {
-        closeUrl: membersRoute,
-        context: "frontend",
-        size: "wide",
-        position: "overlay",
-        lockScroll: "always"
-      },
-      childProps: {
-        confirm,
-        dispatch,
-        readingGroup,
-        onRemoveClick: removeMember,
-        onEditSuccess: () => navigate(membersRoute)
-      }
-    });
-  };
-
   if (!members) return null;
 
   return (
@@ -68,18 +49,26 @@ function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
           onRemoveMember={removeMember}
         />
       </Styled.Body>
-      {renderRoutes()}
+      <OutletWithDrawer
+        drawerProps={{
+          closeUrl: membersRoute,
+          context: "frontend",
+          size: "wide",
+          position: "overlay",
+          lockScroll: "always"
+        }}
+        context={{
+          confirm,
+          dispatch,
+          readingGroup,
+          onRemoveClick: removeMember,
+          onEditSuccess: () => navigate(membersRoute)
+        }}
+      />
     </>
   );
 }
 
 MembersListContainer.displayName = "ReadingGroup.MembersList.Container";
-
-MembersListContainer.propTypes = {
-  route: PropTypes.object,
-  dispatch: PropTypes.func,
-  confirm: PropTypes.func,
-  readingGroup: PropTypes.object
-};
 
 export default withConfirmation(MembersListContainer);

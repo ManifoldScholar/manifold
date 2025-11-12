@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, useOutletContext } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
@@ -10,7 +9,8 @@ import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
 import { useFetch, useListQueryParams } from "hooks";
 
-export default function EventList({ project, journalBreadcrumbs }) {
+export default function EventList() {
+  const { project, journalBreadcrumbs } = useOutletContext() || {};
   const { id } = useParams();
 
   // API does not send meta for this list
@@ -60,8 +60,3 @@ export default function EventList({ project, journalBreadcrumbs }) {
 }
 
 EventList.displayName = "Frontend.Containers.EventList";
-
-EventList.propTypes = {
-  project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
-};
