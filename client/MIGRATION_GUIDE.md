@@ -1132,6 +1132,65 @@ export default function ContainerComponent() {
 
 6. **Testing:** Always test navigation, route parameters, and state management after migration.
 
+## Component Organization
+
+### Directory Structure
+
+When creating new components, follow this directory structure convention:
+
+**Component Location:**
+
+- Place components in the appropriate section based on their usage:
+  - `src/frontend/` - Frontend/library route components
+  - `src/backend/` - Backend/admin route components
+  - `src/reader/` - Reader route components
+  - `src/global/` - Shared components used across multiple sections
+
+**Directory Pattern:**
+
+- Each component should be in its own directory with an `index.js` file
+- The component file should be named `index.js` and placed in a directory named after the component
+
+**Example Structure:**
+
+```
+src/
+  global/
+    components/
+      router/
+        OutletWithDrawer/
+          index.js
+        NavigationBlocker.js  (single file is also acceptable for simple components)
+  frontend/
+    components/
+      reading-group/
+        tables/
+          Groups/
+            index.js
+          Members/
+            index.js
+  backend/
+    components/
+      layout/
+        DrawerHeader/
+          index.js
+```
+
+**Benefits:**
+
+- Consistent organization across the codebase
+- Easy to locate components by their usage context
+- Supports future expansion (can add styles, tests, etc. in the same directory)
+- Clear separation between frontend, backend, reader, and global components
+
+**Import Pattern:**
+
+```javascript
+// Import from component directory (index.js is implied)
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import GroupsTable from "frontend/components/reading-group/tables/Groups";
+```
+
 ## File Structure After Migration
 
 **Before:**
