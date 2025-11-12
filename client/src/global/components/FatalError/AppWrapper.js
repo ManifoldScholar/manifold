@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { useNavigate, useLocation } from "react-router-dom-v5-compat";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useCurrentUser } from "hooks";
 import FatalErrorRender from ".";
 

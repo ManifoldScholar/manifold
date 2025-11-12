@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom-v5-compat";
+import { useLocation } from "react-router-dom";
 import { useCurrentUser } from "hooks";
 import Link from "./Link";
 import * as Styled from "./styles";

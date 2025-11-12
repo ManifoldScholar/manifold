@@ -3,15 +3,14 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import withProjectContext from "hoc/withProjectContext";
 import SignInUp from "global/components/sign-in-up";
-import { useRouteMatch } from "react-router-dom";
-import { useLocation } from "react-router-dom-v5-compat";
+import { useMatch, useLocation } from "react-router-dom";
 import { useNotification, useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 function LoginContainer({ projectBackLink }) {
   const { t } = useTranslation();
-  const isSignUp = useRouteMatch("/signup");
   const location = useLocation();
+  const isSignUp = useMatch("/signup");
   const notifications = useFromStore({ path: "notifications.notifications" });
 
   const notifyUnauthorized = useNotification(() => ({

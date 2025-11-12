@@ -4,7 +4,7 @@ import queryString from "query-string";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import * as Styled from "./styles";
 
 export default function Search({ withTopMargin }) {

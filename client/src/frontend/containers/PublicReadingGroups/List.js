@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { readingGroupsAPI, requests } from "api";
-import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
@@ -13,7 +12,7 @@ import * as Styled from "./styles";
 
 const DEFAULT_SORT_ORDER = "created_at_asc";
 
-function PublicReadingGroupsListContainer({ route }) {
+function PublicReadingGroupsListContainer() {
   const filtersReset = {
     sort_order: DEFAULT_SORT_ORDER
   };
@@ -30,19 +29,6 @@ function PublicReadingGroupsListContainer({ route }) {
 
   const currentUser = useCurrentUser();
   const { t } = useTranslation();
-
-  const childRouteProps = {
-    drawer: true,
-    drawerProps: {
-      context: "frontend",
-      size: "wide",
-      position: "overlay",
-      lockScroll: "always"
-    },
-    childProps: {
-      onSuccess: refresh
-    }
-  };
 
   return readingGroups ? (
     <>
@@ -70,13 +56,8 @@ function PublicReadingGroupsListContainer({ route }) {
           {currentUser && <JoinBox onJoin={refresh} />}
         </Styled.Container>
       </section>
-      {childRoutes(route, childRouteProps)}
     </>
   ) : null;
 }
-
-PublicReadingGroupsListContainer.propTypes = {
-  route: PropTypes.object.isRequired
-};
 
 export default PublicReadingGroupsListContainer;

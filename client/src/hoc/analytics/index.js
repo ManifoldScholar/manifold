@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom-v5-compat";
+import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useFromStore } from "hooks";
 import { requests } from "api";

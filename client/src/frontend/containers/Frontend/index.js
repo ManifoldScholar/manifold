@@ -9,14 +9,14 @@ import Layout from "frontend/components/layout";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, subjectsAPI, requests } from "api";
 import { useFetch, useFromStore } from "hooks";
-import { renderRoutes } from "react-router-config";
+import { Outlet } from "react-router-dom";
 import get from "lodash/get";
 import BodyClass from "hoc/BodyClass";
 import AppFatalError from "global/components/FatalError/AppWrapper";
 import redirectIfLibraryDisabled from "hoc/redirectIfLibraryDisabled";
 import { SearchProvider } from "hooks/useSearch/context";
 
-function FrontendContainer({ route }) {
+function FrontendContainer() {
   const dispatch = useDispatch();
 
   const authentication = useFromStore({ path: "authentication" });
@@ -81,7 +81,7 @@ function FrontendContainer({ route }) {
             {fatalError.error ? (
               <AppFatalError fatalError={fatalError} />
             ) : (
-              renderRoutes(route.routes)
+              <Outlet />
             )}
           </main>
           <Footers.FrontendFooter
@@ -96,8 +96,6 @@ function FrontendContainer({ route }) {
   );
 }
 
-FrontendContainer.propTypes = {
-  route: PropTypes.object.isRequired
-};
+FrontendContainer.propTypes = {};
 
 export default redirectIfLibraryDisabled(FrontendContainer);

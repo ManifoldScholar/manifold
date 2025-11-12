@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import useApiCallback from "hooks/api/useApiCallback";
 import TextAnnotation from "./TextAnnotation";
 import HighlightAnnotation from "./HighlightAnnotation";

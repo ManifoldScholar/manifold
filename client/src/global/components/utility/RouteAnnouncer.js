@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom-v5-compat";
+import { useLocation } from "react-router-dom";
 
 export default function RouteAnnouncer({ title }) {
   const { pathname } = useLocation();

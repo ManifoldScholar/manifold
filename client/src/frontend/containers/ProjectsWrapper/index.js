@@ -1,6 +1,5 @@
-import PropTypes from "prop-types";
-import { renderRoutes } from "react-router-config";
+import { Outlet } from "react-router-dom";
 
-export default function ProjectsWrapper({ route }) {
-  return renderRoutes(route.routes);
+export default function ProjectsWrapper() {
+  return <Outlet />;
 }

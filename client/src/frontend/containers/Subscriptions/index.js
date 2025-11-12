@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { meAPI } from "api";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import lh from "helpers/linkHandler";
+import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import Authorize from "hoc/Authorize";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import { useFromStore, useNotification } from "hooks";
@@ -28,16 +28,16 @@ export default function SubscriptionsContainer() {
     return { notificationPreferencesByKind: preferences };
   };
 
+  if (!currentUser)
+    return (
+      <Navigate
+        to={lh.link("frontendLogin")}
+        search={{ redirect_uri: "/subscriptions" }}
+      />
+    );
+
   return (
-    <Authorize
-      kind="any"
-      failureRedirect={lh.link("frontendLogin")}
-      failureNotification={{
-        heading: t("errors.unauthorized.heading"),
-        body: t("errors.unauthorized.body"),
-        level: 2
-      }}
-    >
+    <>
       <HeadContent title={t("titles.notifications")} appendDefaultTitle />
       <section className="bg-neutral05">
         <div className="container">
@@ -65,7 +65,7 @@ export default function SubscriptionsContainer() {
           </Styled.Form>
         </div>
       </section>
-    </Authorize>
+    </>
   );
 }
 

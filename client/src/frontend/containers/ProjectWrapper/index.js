@@ -1,16 +1,15 @@
 import { useCallback } from "react";
 import PropTypes from "prop-types";
-import { useLocation, useParams, Redirect } from "react-router-dom";
+import { useLocation, useParams, Redirect, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useFetch, useFromStore, useRedirectToFirstMatch } from "hooks";
+import { useFetch, useFromStore } from "hooks";
 import { projectsAPI } from "api";
-import { childRoutes } from "helpers/router";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import { getJournalBreadcrumbs } from "./helpers";
 import lh from "helpers/linkHandler";
 
-export default function ProjectWrapper({ route }) {
+export default function ProjectWrapper() {
   const { id } = useParams();
   const { data: project, response } = useFetch({
     request: [projectsAPI.show, id],
@@ -20,16 +19,6 @@ export default function ProjectWrapper({ route }) {
   const isHomePage = location.pathname === `/projects/${id}`;
   const settings = useFromStore({ requestKey: "settings", action: "select" });
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
-
-  useRedirectToFirstMatch({
-    route: "frontendProject",
-    candidates: [
-      {
-        label: "All Projects",
-        route: "frontendProjectsAll"
-      }
-    ]
-  });
 
   const { t } = useTranslation();
 
@@ -54,20 +43,16 @@ export default function ProjectWrapper({ route }) {
         project={project}
         isProjectHomePage={isHomePage}
       />
-      {childRoutes(route, {
-        childProps: {
+      <Outlet
+        context={{
           project,
           response,
           settings,
           journalBreadcrumbs
-        }
-      })}
+        }}
+      />
     </>
   );
 }
 
 ProjectWrapper.displayName = "Frontend.Containers.ProjectWrapper";
-
-ProjectWrapper.propTypes = {
-  route: PropTypes.object
-};

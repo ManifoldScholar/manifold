@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { UIDConsumer } from "react-uid";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom-v5-compat";
+import { useLocation } from "react-router-dom";
 import { useCurrentUser } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import { readingGroupsAPI, readingGroupMembershipsAPI, requests } from "api";

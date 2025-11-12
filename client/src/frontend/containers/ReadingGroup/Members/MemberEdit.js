@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { readingGroupMembershipsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -10,14 +10,10 @@ import { useFetch } from "hooks";
 
 const { flush } = entityStoreActions;
 
-function ReadingGroupMemberEditContainer({
-  readingGroup,
-  confirm,
-  dispatch,
-  onRemoveClick,
-  onEditSuccess
-}) {
+function ReadingGroupMemberEditContainer() {
   const { membershipId } = useParams();
+  const { readingGroup, confirm, dispatch, onRemoveClick, onEditSuccess } =
+    useOutletContext() || {};
   const { t } = useTranslation();
 
   const { data: membership } = useFetch({
@@ -52,13 +48,5 @@ function ReadingGroupMemberEditContainer({
     </section>
   ) : null;
 }
-
-ReadingGroupMemberEditContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  confirm: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  onRemoveClick: PropTypes.func.isRequired,
-  onEditSuccess: PropTypes.func.isRequired
-};
 
 export default ReadingGroupMemberEditContainer;

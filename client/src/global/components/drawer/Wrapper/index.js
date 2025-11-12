@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import { notificationActions } from "actions";
 import Content from "../Content";
 import * as Styled from "./styles";

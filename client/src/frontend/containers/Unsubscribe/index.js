@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import { requests, notificationPreferencesAPI } from "api";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";

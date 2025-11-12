@@ -1,9 +1,6 @@
 import { useMemo } from "react";
 import hoistStatics from "../hoist-non-react-statics";
-import { Route } from "react-router-dom";
-import frontendRoutes from "frontend/routes";
-import { matchRoutes } from "react-router-config";
-import { useLocation } from "react-router-dom-v5-compat";
+import { Navigate, useLocation, useMatches } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useFromStore } from "hooks";
 import { requests } from "api";
@@ -20,6 +17,7 @@ export default function redirectIfLibraryDisabled(WrappedComponent) {
 
   function RedirectIfLibraryDisabled(props) {
     const location = useLocation();
+    const matches = useMatches();
     const dispatch = useDispatch();
     const settings = useFromStore({
       requestKey: requests.settings,
@@ -43,27 +41,25 @@ export default function redirectIfLibraryDisabled(WrappedComponent) {
     }, [settings, isHome]);
 
     const currentRouteIsLibraryRoute = useMemo(() => {
-      const pathname = location.pathname;
-      const branch = matchRoutes([frontendRoutes], pathname);
-      return branch.every(leaf => {
-        return leaf.route.isLibrary === true;
+      // useMatches() returns all matched routes from root to current
+      // Check if all matched routes have isLibrary: true in their handle
+      // Skip the root Manifold route (index 0) as it's not a frontend route
+      return matches.slice(1).every(match => {
+        return match.handle?.isLibrary === true;
       });
-    }, [location.pathname]);
+    }, [matches]);
 
     if (libraryModeDisabled && currentRouteIsLibraryRoute) {
       if (redirectUrl) {
-        return (
-          <Route
-            render={({ staticContext }) => {
-              if (__SERVER__) {
-                staticContext.url = redirectUrl;
-              } else {
-                window.location = redirectUrl;
-              }
-              return null;
-            }}
-          />
-        );
+        // For SSR, we'd need to throw a Response object, but since SSR is disabled,
+        // we can use Navigate for client-side redirects
+        // TODO: Update for SSR when migrating SSR to v6
+        if (__SERVER__) {
+          // SSR redirect handling will be updated when SSR is migrated
+          // For now, just return null since SSR is disabled
+          return null;
+        }
+        return <Navigate to={redirectUrl} replace />;
       }
       dispatch(fatalErrorActions.trigger404());
     }

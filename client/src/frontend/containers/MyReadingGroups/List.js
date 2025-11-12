@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { meAPI } from "api";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom-v5-compat";
-import { childRoutes } from "helpers/router";
+import { useNavigate } from "react-router-dom";
+import OutletWithDrawer from "frontend/components/OutletWithDrawer";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
@@ -15,7 +15,7 @@ import * as Styled from "./styles";
 
 const DEFAULT_SORT_ORDER = "created_at_asc";
 
-function MyReadingGroupsListContainer({ route }) {
+function MyReadingGroupsListContainer() {
   const filtersReset = {
     sort_order: DEFAULT_SORT_ORDER,
     archived: "false"
@@ -40,20 +40,6 @@ function MyReadingGroupsListContainer({ route }) {
     refresh();
   }
 
-  const childRouteProps = {
-    drawer: true,
-    drawerProps: {
-      context: "frontend",
-      size: "wide",
-      position: "overlay",
-      lockScroll: "always",
-      closeUrl: lh.link("frontendMyReadingGroups")
-    },
-    childProps: {
-      onSuccess: handleNewGroupSuccess
-    }
-  };
-
   return readingGroups ? (
     <>
       <HeadContent title={t("pages.my_groups")} appendDefaultTitle />
@@ -77,13 +63,20 @@ function MyReadingGroupsListContainer({ route }) {
           <JoinBox onJoin={refresh} />
         </Styled.Container>
       </section>
-      {childRoutes(route, childRouteProps)}
+      <OutletWithDrawer
+        drawerProps={{
+          context: "frontend",
+          size: "wide",
+          position: "overlay",
+          lockScroll: "always",
+          closeUrl: lh.link("frontendMyReadingGroups")
+        }}
+        context={{
+          onSuccess: handleNewGroupSuccess
+        }}
+      />
     </>
   ) : null;
 }
-
-MyReadingGroupsListContainer.propTypes = {
-  route: PropTypes.object.isRequired
-};
 
 export default MyReadingGroupsListContainer;

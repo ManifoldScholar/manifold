@@ -1,7 +1,7 @@
 import { useEffect, useRef, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom-v5-compat";
+import { useLocation, useNavigate } from "react-router-dom";
 import ColorScheme from "global/components/ColorScheme";
 import LoadingBar from "global/components/LoadingBar";
 import AppFatalError from "global/components/FatalError/AppWrapper";
@@ -14,19 +14,18 @@ import {
 } from "actions";
 import { meAPI, requests } from "api";
 import { loaded } from "utils/entityUtils";
-import { renderRoutes } from "react-router-config";
-import getRoutes from "routes";
+import { Outlet } from "react-router-dom";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
 import { FrontendModeContext } from "helpers/contexts";
 import { entityStoreActions } from "actions";
 import CookiesBanner from "global/components/CookiesBanner";
 import Utility from "global/components/utility";
+import Analytics from "hoc/analytics";
 import { Helmet } from "react-helmet-async";
 import { useFromStore } from "hooks";
 import notifications from "./notifications";
 
 const { request } = entityStoreActions;
-const routes = getRoutes();
 const { visibilityHide } = uiVisibilityActions;
 
 export default function ManifoldContainer({ confirm }) {
@@ -203,34 +202,36 @@ export default function ManifoldContainer({ confirm }) {
   }, [authentication, doPostLogout, doPostLogin]);
 
   return (
-    <div role="presentation" className="global-container">
-      <Utility.SkipLink />
-      <div id="global-notification-container" />
-      <div id="global-overlay-container" />
-      <FrontendModeContext.Provider value={frontendMode}>
-        {renderTypekit}
-        {confirm}
-        <LoadingBar loading={loading} />
-        <ColorScheme settings={settings} />
-        <SignInUp.Overlay
-          active={visibility.signInUpOverlay}
-          hideOverlay={hideOverlay}
-        />
-        {fatalError.error && fatalError.error.status !== 403 ? (
-          <div className="global-container">
-            <AppFatalError
-              fatalError={fatalError}
-              redirectPath={location.pathname}
-            />
-          </div>
-        ) : (
-          <FatalErrorBoundary location={location}>
-            {renderRoutes(routes)}
-          </FatalErrorBoundary>
-        )}
-        <CookiesBanner />
-      </FrontendModeContext.Provider>
-    </div>
+    <Analytics>
+      <div role="presentation" className="global-container">
+        <Utility.SkipLink />
+        <div id="global-notification-container" />
+        <div id="global-overlay-container" />
+        <FrontendModeContext.Provider value={frontendMode}>
+          {renderTypekit}
+          {confirm}
+          <LoadingBar loading={loading} />
+          <ColorScheme settings={settings} />
+          <SignInUp.Overlay
+            active={visibility.signInUpOverlay}
+            hideOverlay={hideOverlay}
+          />
+          {fatalError.error && fatalError.error.status !== 403 ? (
+            <div className="global-container">
+              <AppFatalError
+                fatalError={fatalError}
+                redirectPath={location.pathname}
+              />
+            </div>
+          ) : (
+            <FatalErrorBoundary location={location}>
+              <Outlet />
+            </FatalErrorBoundary>
+          )}
+          <CookiesBanner />
+        </FrontendModeContext.Provider>
+      </div>
+    </Analytics>
   );
 }
 
