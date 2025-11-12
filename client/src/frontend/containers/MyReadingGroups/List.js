@@ -1,10 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useImperativeHandle, forwardRef, useMemo } from "react";
 import { meAPI } from "api";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import OutletWithDrawer from "frontend/components/OutletWithDrawer";
-import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
@@ -15,11 +11,14 @@ import * as Styled from "./styles";
 
 const DEFAULT_SORT_ORDER = "created_at_asc";
 
-function MyReadingGroupsListContainer() {
-  const filtersReset = {
-    sort_order: DEFAULT_SORT_ORDER,
-    archived: "false"
-  };
+const MyReadingGroupsListContainer = forwardRef((props, ref) => {
+  const filtersReset = useMemo(
+    () => ({
+      sort_order: DEFAULT_SORT_ORDER,
+      archived: "false"
+    }),
+    []
+  );
 
   const { pagination, filters, setFilters } = useListQueryParams({
     initFilters: filtersReset
@@ -32,13 +31,12 @@ function MyReadingGroupsListContainer() {
   const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
 
   const currentUser = useCurrentUser();
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
-  function handleNewGroupSuccess() {
-    navigate(lh.link("frontendMyReadingGroups"));
-    refresh();
-  }
+  // Expose refresh function to parent via ref
+  useImperativeHandle(ref, () => ({
+    refresh
+  }));
 
   return readingGroups ? (
     <>
@@ -63,20 +61,11 @@ function MyReadingGroupsListContainer() {
           <JoinBox onJoin={refresh} />
         </Styled.Container>
       </section>
-      <OutletWithDrawer
-        drawerProps={{
-          context: "frontend",
-          size: "wide",
-          position: "overlay",
-          lockScroll: "always",
-          closeUrl: lh.link("frontendMyReadingGroups")
-        }}
-        context={{
-          onSuccess: handleNewGroupSuccess
-        }}
-      />
     </>
   ) : null;
-}
+});
+
+MyReadingGroupsListContainer.displayName =
+  "Frontend.Containers.MyReadingGroups.List";
 
 export default MyReadingGroupsListContainer;
