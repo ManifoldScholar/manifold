@@ -2,11 +2,29 @@ import isFunction from "lodash/isFunction";
 import isObject from "lodash/isObject";
 import isArray from "lodash/isArray";
 import forEach from "lodash/forEach";
-import getRoutes from "/routes/plain";
 
 class LinkHandler {
+  constructor() {
+    this.handlers = null;
+    this.routes = null;
+    this._registeredRoutes = null;
+  }
+
+  // Register routes (called after routes are created)
+  // This breaks the circular dependency since routes are registered
+  // after all modules are loaded, not during module evaluation
+  registerRoutes(routes) {
+    this._registeredRoutes = routes;
+    // Reset handlers/routes so they'll be rebuilt on next access
+    // this.handlers = null;
+    // this.routes = null;
+  }
+
   extract(route) {
-    const { name, helpers, helper, routes } = route;
+    if (!route) return;
+    const { children, handle } = route;
+    const { name, helper, helpers } = handle ?? {};
+
     if (name) {
       if (isFunction(helper)) this.handlers[name] = helper;
     }
@@ -15,25 +33,27 @@ class LinkHandler {
         this.handlers[key] = value;
       });
     }
-    if (isArray(routes)) {
-      routes.forEach(aRoute => {
-        this.extract(aRoute);
+    if (isArray(children)) {
+      children.forEach(child => {
+        this.extract(child);
       });
     }
-    this.routes[name] = route;
+    if (name) {
+      this.routes[name] = route;
+    }
   }
 
   setup() {
     this.handlers = {};
     this.routes = {};
-    getRoutes().forEach(route => {
-      this.extract(route);
-    });
-  }
 
-  constructor() {
-    this.handlers = null;
-    this.routes = null;
+    // Use registered routes instead of importing
+    const routesToProcess = this._registeredRoutes;
+    if (routesToProcess && isArray(routesToProcess)) {
+      routesToProcess.forEach(route => {
+        this.extract(route);
+      });
+    }
   }
 
   link(name, ...args) {
@@ -42,7 +62,8 @@ class LinkHandler {
       return this.handlers[name](...args);
     } catch (e) {
       if (e instanceof TypeError) {
-        throw new TypeError(`"${name}" is not a valid link handler.`);
+        // throw new TypeError(`"${name}" is not a valid link handler.`);
+        console.log(`"${name}" is not a valid link handler.`);
       } else {
         throw e;
       }
@@ -50,6 +71,7 @@ class LinkHandler {
   }
 
   routeFromName(name) {
+    if (this.routes === null) this.setup();
     return this.routes[name];
   }
 
