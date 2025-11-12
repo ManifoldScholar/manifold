@@ -48,8 +48,8 @@ export default function ProjectsContainer() {
 
   return meta ? (
     <>
-      <HeadContent title={t("titles.projects_all")} appendDefaultTitle />
-      <h1 className="screen-reader-text">{t("pages.projects_all")}</h1>
+      <HeadContent title={t("titles.projects")} appendDefaultTitle />
+      <h1 className="screen-reader-text">{t("titles.projects")}</h1>
       {showPlaceholder ? (
         <EntityCollectionPlaceholder.Projects />
       ) : (
