@@ -339,14 +339,15 @@ const routes = [
                 children: [
                   {
                     index: true,
-                    element: <ReadingGroupMembers.List />
+                    element: null
                   },
                   {
                     element: <ReadingGroupMembers.MemberEdit />,
                     path: ":membershipId",
                     handle: {
                       name: "frontendReadingGroupMember",
-                      helper: (rg, m) => `/groups/${rg}/members/${m}`
+                      helper: (rg, m) => `/groups/${rg}/members/${m}`,
+                      drawer: true
                     }
                   }
                 ]
@@ -398,14 +399,15 @@ const routes = [
         children: [
           {
             index: true,
-            element: <MyReadingGroups.List />
+            element: null
           },
           {
             element: <MyReadingGroups.New />,
             path: "new",
             handle: {
               name: "frontendMyReadingGroupsNew",
-              helper: () => "/my/groups/new"
+              helper: () => "/my/groups/new",
+              drawer: true
             }
           }
         ]
