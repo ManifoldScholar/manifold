@@ -2,7 +2,7 @@ import { useMemo, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import isPlainObject from "lodash/isPlainObject";
-import { useNavigate, useLocation } from "react-router-dom-v5-compat";
+import { useNavigate, useLocation } from "react-router-dom";
 import { notificationActions } from "actions";
 import Authorization from "helpers/authorization";
 import FatalErrorRender from "global/components/FatalError";

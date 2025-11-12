@@ -7,8 +7,7 @@ import {
   useRef
 } from "react";
 import PropTypes from "prop-types";
-import { matchPath } from "react-router-dom";
-import { useLocation, NavLink } from "react-router-dom-v5-compat";
+import { useLocation, NavLink, useMatches } from "react-router-dom";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useFromStore } from "hooks";
@@ -32,6 +31,7 @@ export default function NavigationMobile({
 }) {
   const { t } = useTranslation();
   const location = useLocation();
+  const matches = useMatches();
   const context = useContext(FrontendModeContext);
   const authentication = useFromStore({ path: "authentication" });
 
@@ -54,9 +54,9 @@ export default function NavigationMobile({
     if (!links) return null;
     const active = [];
     links.forEach(link => {
-      const route = lh.routeFromName(link.route);
-      const match = matchPath(location.pathname, route) !== null;
-      if (match) {
+      // Check if this route is in the current matches by route name
+      const routeMatch = matches.find(m => m.handle?.name === link.route);
+      if (routeMatch) {
         if (link.route === "frontendProjects" && journalIsActive) {
           active.push("frontendJournals");
         } else if (link.route === "backendProjects" && journalIsActive) {
@@ -70,7 +70,7 @@ export default function NavigationMobile({
       active.push("frontendProjects");
     }
     return active;
-  }, [links, location.pathname, journalIsActive]);
+  }, [links, matches, journalIsActive]);
 
   const prevLocationRef = useRef(location);
   useEffect(() => {

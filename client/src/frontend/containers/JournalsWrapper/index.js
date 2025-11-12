@@ -1,11 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { renderRoutes } from "react-router-config";
+import { Outlet } from "react-router-dom";
 
-export default function JournalsWrapper({ route }) {
-  return renderRoutes(route.routes);
+export default function JournalsWrapper() {
+  return <Outlet />;
 }
-
-JournalsWrapper.propTypes = {
-  route: PropTypes.object
-};
