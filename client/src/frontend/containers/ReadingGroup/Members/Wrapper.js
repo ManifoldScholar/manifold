@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
-import { childRoutes } from "helpers/router";
+import { Redirect, Outlet, useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
-function ReadingGroupsMembersContainer({ route, readingGroup, ...restProps }) {
-  const { abilities, currentUserRole } = readingGroup.attributes;
-  const canUpdateGroup = abilities.update;
+function ReadingGroupsMembersContainer() {
+  const { readingGroup, ...restProps } = useOutletContext() || {};
+  const { abilities, currentUserRole } = readingGroup?.attributes || {};
+  const canUpdateGroup = abilities?.update;
   const userIsGroupMember = canUpdateGroup || currentUserRole !== "none";
 
   if (!userIsGroupMember) {
@@ -15,17 +15,7 @@ function ReadingGroupsMembersContainer({ route, readingGroup, ...restProps }) {
     );
   }
 
-  return childRoutes(route, {
-    childProps: {
-      readingGroup,
-      ...restProps
-    }
-  });
+  return <Outlet context={{ readingGroup, ...restProps }} />;
 }
-
-ReadingGroupsMembersContainer.propTypes = {
-  route: PropTypes.object.isRequired,
-  readingGroup: PropTypes.object.isRequired
-};
 
 export default ReadingGroupsMembersContainer;

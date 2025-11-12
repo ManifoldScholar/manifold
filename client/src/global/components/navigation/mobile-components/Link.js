@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom-v5-compat";
+import { NavLink } from "react-router-dom";
 import { useUID } from "react-uid";
 import IconComposer from "global/components/utility/IconComposer";
 
