@@ -1,8 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { readingGroupsAPI } from "api";
-import { useParams } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom-v5-compat";
-import { childRoutes } from "helpers/router";
+import { useParams, Outlet } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
@@ -15,7 +14,7 @@ import SearchDialog from "frontend/components/collecting/SearchDialog";
 import { useFetch, useFromStore } from "hooks";
 import Authorize from "hoc/Authorize";
 
-export default function ReadingGroup({ route }) {
+export default function ReadingGroup() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -63,7 +62,6 @@ export default function ReadingGroup({ route }) {
     refresh: () => setFetchVersion(prev => prev + 1),
     fetchVersion,
     navigate,
-    route,
     readingGroup,
     dispatch
   };
@@ -112,7 +110,7 @@ export default function ReadingGroup({ route }) {
               location={location}
               refresh={childProps.refresh}
             />
-            {childRoutes(route, { childProps })}
+            <Outlet context={childProps} />
             {showSearchDialog && (
               <SearchDialog heading={groupName} onClose={onCloseSearch} />
             )}

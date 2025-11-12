@@ -12,7 +12,7 @@ import { ArchiveGroup, EditGroup, JoinGroup, LeaveGroup } from "./actions";
 import { ListFilters } from "global/components/list";
 import lh from "helpers/linkHandler";
 import { useListFilters } from "hooks";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 
 export default function GroupsTable(props) {
   const {

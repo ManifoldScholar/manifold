@@ -1,18 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import {
   CollectionCategory,
   CollectionPlaceholder
 } from "frontend/components/collecting/reading-group";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 
-function ReadingGroupHomepageStaticContainer({
-  readingGroup,
-  categories,
-  responses,
-  refresh
-}) {
+function ReadingGroupHomepageStaticContainer() {
+  const { readingGroup, categories, responses, refresh } =
+    useOutletContext() || {};
   const { t } = useTranslation();
 
   function handleUncollect(collection) {
@@ -62,13 +60,5 @@ function ReadingGroupHomepageStaticContainer({
 
 ReadingGroupHomepageStaticContainer.displayName =
   "ReadingGroup.HomepageStaticContainer";
-
-ReadingGroupHomepageStaticContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  categories: PropTypes.array,
-  responses: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired
-};
 
 export default ReadingGroupHomepageStaticContainer;
