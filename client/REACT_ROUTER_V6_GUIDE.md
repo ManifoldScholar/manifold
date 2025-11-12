@@ -685,7 +685,7 @@ The frontend routes have been successfully migrated to React Router v6:
    - All `childRoutes()` calls replaced with `<Outlet />` or `OutletWithDrawer`
    - Components updated to use `useOutletContext()` for accessing parent data
 
-4. **Drawer Support** (`src/frontend/components/OutletWithDrawer.js`)
+4. **Drawer Support** (`src/global/components/router/OutletWithDrawer/index.js`)
 
    - Created `OutletWithDrawer` component for routes that need drawer functionality
    - Automatically detects child route matches to open/close drawers
@@ -805,6 +805,111 @@ When migrating nested route containers from props to context:
 - `JournalWrapper` passes: `journal`, `response`
 - `ReadingGroupHomepage.Fetch` passes: `readingGroup`, `categories`, `responses`, `navigate`, `refresh`
 - `ReadingGroupMembers.Wrapper` passes: `readingGroup`, plus any props from parent
+
+**Drawer Routes with Persistent List Content**
+
+When you need to render a list that stays visible while drawer routes open on top of it (e.g., a list page with a "new" form in a drawer), use this pattern:
+
+**Route Structure:**
+
+```javascript
+{
+  element: <MyReadingGroups.Wrapper />,
+  path: "my/groups",
+  children: [
+    {
+      index: true,
+      element: null  // Index route renders nothing - list is always visible from wrapper
+    },
+    {
+      element: <MyReadingGroups.New />,
+      path: "new",
+      handle: {
+        name: "frontendMyReadingGroupsNew",
+        helper: () => "/my/groups/new",
+        drawer: true  // Mark as drawer route
+      }
+    }
+  ]
+}
+```
+
+**Wrapper Component Pattern:**
+
+The wrapper component renders the list directly (not as a route) and includes `OutletWithDrawer` to render drawer routes. Note that `OutletWithDrawer` handles the `<Outlet />` internally, so you don't need to pass it as a child:
+
+```javascript
+import { useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import List from "./List";
+
+export default function MyReadingGroupsContainer() {
+  const navigate = useNavigate();
+  const refreshRef = useRef(null);
+
+  const handleNewGroupSuccess = useCallback(() => {
+    navigate(lh.link("frontendMyReadingGroups"));
+    if (refreshRef.current?.refresh) {
+      refreshRef.current.refresh();
+    }
+  }, [navigate]);
+
+  return (
+    <>
+      <List ref={refreshRef} />
+      <OutletWithDrawer
+        drawerProps={{
+          context: "frontend",
+          size: "wide",
+          position: "overlay",
+          lockScroll: "always",
+          closeUrl: lh.link("frontendMyReadingGroups")
+        }}
+        context={{
+          onSuccess: handleNewGroupSuccess
+        }}
+      />
+    </>
+  );
+}
+```
+
+**List Component Pattern:**
+
+The list component uses `forwardRef` and `useImperativeHandle` to expose a `refresh` function to the parent wrapper:
+
+```javascript
+import { useImperativeHandle, forwardRef, useMemo } from "react";
+
+const MyReadingGroupsListContainer = forwardRef((props, ref) => {
+  const { data: readingGroups, meta, refresh } = useFetch({
+    request: [meAPI.readingGroups, filters, pagination]
+  });
+
+  // Expose refresh function to parent via ref
+  useImperativeHandle(ref, () => ({
+    refresh
+  }));
+
+  return (
+    // ... list content
+  );
+});
+```
+
+**How It Works:**
+
+- On `/my/groups`: The wrapper renders the List component, and the index route renders nothing (element: null). The list is visible.
+- On `/my/groups/new`: The wrapper still renders the List component (always visible), and the New component renders inside the drawer via `<Outlet />` in `OutletWithDrawer`. The drawer opens because the route has `drawer: true` in its handle.
+
+**Key Points:**
+
+- The list is rendered directly in the wrapper, not as a route element
+- The index route uses `element: null` so nothing additional renders
+- Drawer routes are marked with `drawer: true` in their handle
+- `OutletWithDrawer` handles the `<Outlet />` internally - you don't need to pass it as a child
+- Use refs to expose refresh functions from list to wrapper for post-action updates
 
 **Removing v5-compat Dependencies**
 
