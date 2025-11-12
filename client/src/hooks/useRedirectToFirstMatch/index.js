@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom-v5-compat";
+import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Authorization from "helpers/authorization";
 import lh from "helpers/linkHandler";

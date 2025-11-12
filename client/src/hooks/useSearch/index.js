@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom-v5-compat";
+import { useLocation, useNavigate } from "react-router-dom";
 import queryString from "query-string";
 import { entityStoreActions } from "actions";
 import { searchResultsAPI, requests } from "api";

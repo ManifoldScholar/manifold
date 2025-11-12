@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { useLocation } from "react-router-dom-v5-compat";
+import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import * as Styled from "./styles";
 

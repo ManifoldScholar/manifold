@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { useLocation } from "react-router-dom-v5-compat";
+import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { uiFrontendModeActions } from "actions";
 import { FrontendModeContext } from "helpers/contexts";
