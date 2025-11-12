@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Dialog from "global/components/dialog";
@@ -11,13 +11,14 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
   const [query, setQuery] = useState(null);
   const [pagination, setPageNumber] = usePaginationState(1, 5);
 
-  const queryAndPagination = useMemo(() => {
-    return { ...query, page: pagination };
-  }, [query, pagination]);
+  const queryWithPagination = useMemo(() => {
+    if (!query) return null;
+    return { ...query, page: { number: pagination.number } };
+  }, [query, pagination.number]);
 
   const { data: results, meta: resultsMeta } = useFetch({
-    request: [searchResultsAPI.index, queryAndPagination],
-    condition: query
+    request: [searchResultsAPI.index, queryWithPagination],
+    condition: !!queryWithPagination
   });
 
   const { t } = useTranslation();
@@ -46,9 +47,6 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
       <div className="search-dialog__form">
         <h2 className="screen-reader-text">{t("search.form")}</h2>
         <SearchQuery.Form
-          initialState={{
-            keyword: ""
-          }}
           searchQueryState={query}
           setQueryState={setQuery}
           facets={facets}
