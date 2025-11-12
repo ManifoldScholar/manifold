@@ -1,6 +1,6 @@
 import { forwardRef, useMemo } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import SearchQuery from "global/components/search/query";
@@ -10,7 +10,7 @@ import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import * as Styled from "./styles";
 
 const ProjectSearch = forwardRef((props, ref) => {
-  const { project } = props;
+  const { project } = useOutletContext() || {};
   const {
     results,
     resultsMeta,
@@ -73,9 +73,5 @@ const ProjectSearch = forwardRef((props, ref) => {
 });
 
 ProjectSearch.displayName = "Frontend.ProjectSearchContainer";
-
-ProjectSearch.propTypes = {
-  project: PropTypes.object.isRequired
-};
 
 export default ProjectSearch;
