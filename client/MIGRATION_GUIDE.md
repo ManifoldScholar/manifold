@@ -733,6 +733,7 @@ When converting a class component, follow this checklist:
 - [ ] Move `displayName` and `propTypes` to the end of the file (after the function definition)
 - [ ] Ensure `import * as Styled from "./styles"` comes last in the import list
 - [ ] Use ALL_CAPS_SNAKE_CASE for constants moved outside components
+- [ ] Prefer destructuring over enumerating each property where possible
 - [ ] Test navigation, routing, and state management
 
 ## Common Pitfalls
