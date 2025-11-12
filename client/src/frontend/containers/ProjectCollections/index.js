@@ -42,14 +42,9 @@ export default function ProjectCollectionsContainer() {
 
   return projectCollections ? (
     <>
-      <HeadContent
-        title={t("pages.project_collections_all")}
-        appendDefaultTitle
-      />
+      <HeadContent title={t("titles.project_collections")} appendDefaultTitle />
       <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
-      <h1 className="screen-reader-text">
-        {t("glossary.project_collection_other")}
-      </h1>
+      <h1 className="screen-reader-text">{t("titles.project_collections")}</h1>
       {showPlaceholder ? (
         <EntityCollectionPlaceholder.ProjectCollectionsFrontend />
       ) : (
