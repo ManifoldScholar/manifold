@@ -22,6 +22,8 @@ import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import { createServerFetchDataContext } from "hooks/api/contexts/InternalContext";
 import { setStoreGetter } from "helpers/ssrRequestContext";
+import reduceAssets from "./helpers/reduceAssets";
+import serialize from "serialize-javascript";
 
 const requestContext = new AsyncLocalStorage();
 setStoreGetter(() => requestContext.getStore());
@@ -59,6 +61,43 @@ const render = async (req, res, store) => {
   const routingContext = {};
   const helmetContext = {};
 
+  const stats = readStats("Client");
+
+  // TEMPORARY: Skip React SSR rendering
+  // Just return empty shell - client will handle all rendering
+  const state = store.getState();
+
+  // Get JavaScript bundles
+  const scripts = reduceAssets(".js", stats);
+  const scriptTags = scripts
+    .map(script => `<script src="/${script}"></script>`)
+    .join("\n");
+
+  // Build body with scripts and store state
+  // wrapHtmlBody inserts this directly, so we need the full <body> tag
+  const bodyContent = `
+    <body>
+      <div id="content"></div>
+      <script>
+        window.__INITIAL_STATE__=${serialize(state)};
+      </script>
+      ${scriptTags}
+    </body>
+  `;
+
+  const htmlOutput = wrapHtmlBody({
+    store,
+    stats,
+    styleTags: "",
+    helmetContext,
+    body: bodyContent
+  });
+
+  res.setHeader("Content-Type", "text/html");
+  res.end("<!doctype html>\n" + htmlOutput);
+  return;
+  // END TEMPORARY SSR DISABLE
+
   const cache = createCache({ key: "emotion" });
   const {
     extractCriticalToChunks,
@@ -87,8 +126,6 @@ const render = async (req, res, store) => {
 
   let renderString = "";
   let isError = false;
-
-  const stats = readStats("Client");
 
   try {
     ch.notice("Rendering application on server.", "floppy_disk");
