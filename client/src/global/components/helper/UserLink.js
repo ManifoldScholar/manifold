@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Url from "url-parse";
 import memoize from "lodash/memoize";
 import config from "config";
-import { Link } from "react-router-dom-v5-compat";
+import { Link } from "react-router-dom";
 
 const urlFactory = memoize(url => new Url(url));
 
