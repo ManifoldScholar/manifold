@@ -12,7 +12,6 @@ export default function ProjectCollectionsContainer() {
   const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initSize: 8,
     initFilters: { visible: true, order: "position ASC" },
     collectionPagination: {
       size: 4,

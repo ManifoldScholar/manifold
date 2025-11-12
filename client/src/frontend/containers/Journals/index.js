@@ -22,7 +22,6 @@ export default function JournalsListContainer() {
   });
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initSize: 8,
     initFilters: filterReset
   });
 
