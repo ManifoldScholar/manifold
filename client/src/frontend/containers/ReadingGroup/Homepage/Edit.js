@@ -24,6 +24,9 @@ function ReadingGroupHomepageEditContainer({
         "frontendReadingGroupHomepageStatic",
         readingGroup.id
       )}
+      failureNotification={{
+        body: t("errors.access_denied.authorization_reading_group_edit")
+      }}
     >
       <Styled.EditContainer>
         <Styled.Heading>
