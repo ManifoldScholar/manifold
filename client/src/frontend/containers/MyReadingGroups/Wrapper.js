@@ -1,23 +1,17 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { childRoutes } from "helpers/router";
-import Authorize from "hoc/Authorize";
+import { Outlet, Navigate } from "react-router-dom";
 import lh from "helpers/linkHandler";
+import { useCurrentUser } from "hooks";
 
-export default class MyReadingGroupsContainer extends Component {
-  static propTypes = {
-    route: PropTypes.object.isRequired
-  };
+export default function MyReadingGroupsContainer() {
+  const currentUser = useCurrentUser();
 
-  render() {
+  if (!currentUser)
     return (
-      <Authorize
-        kind="any"
-        failureRedirect={lh.link("frontendLogin")}
-        failureNotification
-      >
-        {childRoutes(this.props.route)}
-      </Authorize>
+      <Navigate
+        to={lh.link("frontendLogin")}
+        search={{ redirect_uri: "/my/starred" }}
+      />
     );
-  }
+
+  return <Outlet />;
 }

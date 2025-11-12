@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import classNames from "classnames";
-import { NavLink } from "react-router-dom-v5-compat";
+import { NavLink } from "react-router-dom";
 import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
 import UserMenuBody from "global/components/UserMenuBody";

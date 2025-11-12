@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import get from "lodash/get";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import { useFromStore } from "hooks";
 import { contactsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
