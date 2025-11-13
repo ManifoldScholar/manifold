@@ -21,6 +21,7 @@ export default function Authorize(props) {
   const navigate = useNavigate();
   const location = useLocation();
   const authentication = useFromStore({ path: "authentication" });
+  const propsWithAuth = { ...props, authentication };
 
   const authorization = useMemo(() => new Authorization(), []);
 
@@ -150,16 +151,16 @@ export default function Authorize(props) {
   };
 
   const renderHide = () => {
-    if (authorization.authorize(props)) return null;
+    if (authorization.authorize(propsWithAuth)) return null;
     return <>{children}</>;
   };
 
   const renderShow = () => {
-    if (!authorization.authorize(props)) return null;
+    if (!authorization.authorize(propsWithAuth)) return null;
     return <>{children}</>;
   };
 
-  const isAuthorized = authorization.authorize(props);
+  const isAuthorized = authorization.authorize(propsWithAuth);
   if (!isAuthorized && failureRedirect) return maybeRedirect();
 
   if (!children) return null;
