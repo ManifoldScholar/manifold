@@ -109,12 +109,13 @@ export default function Authorize(props) {
       const showLoginOverlay = redirectPath !== "/login";
       if (showLoginOverlay) doNotify(notificationContent);
 
+      const redirectWithSearch = !showLoginOverlay
+        ? `${redirectPath}?redirect_uri=${encodeURIComponent(postLoginUri)}`
+        : redirectPath;
+
       return (
         <Navigate
-          to={redirectPath}
-          search={
-            !showLoginOverlay ? `?redirect_uri=${postLoginUri}` : undefined
-          }
+          to={redirectWithSearch}
           state={{
             showLogin: showLoginOverlay,
             postLoginRedirect: postLoginUri,
