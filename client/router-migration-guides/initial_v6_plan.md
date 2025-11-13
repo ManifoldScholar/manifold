@@ -1,5 +1,7 @@
 # React Router v6 Migration Plan
 
+Note this initial plan is here for reference, the [to_v6](router-migration-guides/to_v6.md) guide contains more updated info on what was actually done.
+
 ## Overview
 
 Migrate frontend routes from `react-router-config` to React Router v6 using `createBrowserRouter`. This will remove the dependency on `react-router-config` and modernize the routing setup while maintaining the existing route structure.
