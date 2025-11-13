@@ -136,7 +136,7 @@ export default function SearchQueryForm({
 
   // Handle edge case where header/footer search is used on search route
   useEffect(() => {
-    if (searchQueryState?.keyword && searchQueryState.keyword !== state.keyword)
+    if (searchQueryState?.keyword !== state.keyword)
       setState(prevState => ({
         ...prevState,
         keyword: searchQueryState.keyword
