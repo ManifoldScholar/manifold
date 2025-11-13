@@ -1,8 +1,6 @@
 import { useState, useCallback } from "react";
 import { meAPI } from "api";
-import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
-import { Navigate } from "react-router-dom";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
@@ -65,14 +63,6 @@ function MyStarredContainer() {
   }, []);
 
   const { t } = useTranslation();
-
-  if (!currentUser)
-    return (
-      <Navigate
-        to={lh.link("frontendLogin")}
-        search={{ redirect_uri: "/my/starred" }}
-      />
-    );
 
   return (
     <>
