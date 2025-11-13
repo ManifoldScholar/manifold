@@ -684,6 +684,158 @@ try {
 
 Both are necessary because they occur at different phases of the SSR lifecycle.
 
+## Error Boundaries
+
+React Router v6 supports error boundaries via the `errorElement` prop on routes. This catches errors from route loaders, actions, and component rendering.
+
+### Route-Level Error Boundaries
+
+Add an `errorElement` to your route configuration to catch errors at the route level:
+
+```javascript
+// routes/createRouter.js
+import RouteError from "global/components/FatalError/RouteError";
+
+const routes = [
+  {
+    element: <Manifold />,
+    path: "/",
+    errorElement: <RouteError />,
+    children: frontendRoutesV6
+  }
+];
+```
+
+The error element component uses `useRouteError()` to access the error:
+
+```javascript
+// RouteError.js
+import { useRouteError, useLocation } from "react-router-dom";
+import { formatError } from "./Boundary";
+import AppFatalError from "./AppWrapper";
+
+export default function RouteError() {
+  const error = useRouteError();
+  const location = useLocation();
+
+  return (
+    <AppFatalError
+      fatalError={formatError(error)}
+      redirectPath={location.pathname}
+    />
+  );
+}
+```
+
+### Component-Level Error Boundaries
+
+For errors that occur outside the route tree (e.g., in global components), use a component-level error boundary:
+
+```javascript
+// Boundary.js
+import { ErrorBoundary } from "react-error-boundary";
+import { useLocation } from "react-router-dom";
+import AppFatalError from "./AppWrapper";
+
+export function FatalErrorDisplay({ error, resetErrorBoundary }) {
+  const location = useLocation();
+  const fatalError = formatError(error);
+
+  return (
+    <AppFatalError
+      dismiss={resetErrorBoundary}
+      fatalError={fatalError}
+      redirectPath={location.pathname}
+    />
+  );
+}
+
+export default function FatalErrorBoundary({ children }) {
+  return (
+    <ErrorBoundary
+      FallbackComponent={({ error, resetErrorBoundary }) => (
+        <FatalErrorDisplay
+          error={error}
+          resetErrorBoundary={resetErrorBoundary}
+        />
+      )}
+    >
+      {children}
+    </ErrorBoundary>
+  );
+}
+```
+
+Usage in components:
+
+```javascript
+// Manifold.js
+import FatalErrorBoundary from "global/components/FatalError/Boundary";
+
+function Manifold() {
+  return (
+    <FatalErrorBoundary>
+      <Outlet />
+    </FatalErrorBoundary>
+  );
+}
+```
+
+### Error Formatting
+
+The `formatError` function handles different error types:
+
+```javascript
+export const formatError = error => {
+  // Handle Response objects (from route loaders/actions)
+  if (error instanceof Response) {
+    return {
+      type: "HTTP_RESPONSE",
+      error: {
+        status: error.status || 500,
+        heading: error.status === 404 ? "Not Found" : "Error",
+        body: error.statusText || "An error occurred"
+      }
+    };
+  }
+
+  // Handle JavaScript Error objects
+  if (error instanceof Error) {
+    return {
+      type: "JS_EXCEPTION",
+      error: {
+        status: 500,
+        heading: "Client Javascript Exception",
+        body:
+          error.name === "Error"
+            ? `"${error.message}"`
+            : `"${error.name}: ${error.message}"`,
+        clientTrace: error.stack,
+        clientTraceTruncate: 5
+      }
+    };
+  }
+
+  // Handle other error types (fallback)
+  return {
+    type: "UNKNOWN_ERROR",
+    error: {
+      status: 500,
+      heading: "Error",
+      body: String(error)
+    }
+  };
+};
+```
+
+### Key Points
+
+- **Route errors**: Use `errorElement` prop on routes, accessed via `useRouteError()` hook
+- **Component errors**: Use `react-error-boundary`'s `ErrorBoundary` component
+- **Error types**: Handle both `Error` objects and `Response` objects (from loaders/actions)
+- **Location**: Components use `useLocation()` hook directly (no need to pass as prop)
+- **Reset**: Route errors reset automatically on location change (v6 behavior), component errors use `resetErrorBoundary` callback
+
 ## Route Helpers
 
 Route helper functions (navigation functions) are stored in `route.handle.helper` or `route.handle.helpers`. These are used by `LinkHandler` to generate URLs programmatically.
