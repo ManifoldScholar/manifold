@@ -65,7 +65,7 @@ function NavigationStatic({
   };
 
   const getClassNameForLink = link => {
-    let className = "site-nav__link";
+    let baseClassName = "site-nav__link";
     let shouldShowActive = true;
 
     if (typeof journalIsActive !== "boolean") {
@@ -76,25 +76,30 @@ function NavigationStatic({
       if (link.label.includes("projects")) {
         shouldShowActive = false;
       } else if (link.label.includes("journals")) {
-        className = "site-nav__link site-nav__link--active";
+        baseClassName = "site-nav__link site-nav__link--active";
         shouldShowActive = false;
       }
     }
 
-    return {
-      className,
-      activeClassName: shouldShowActive ? "site-nav__link--active" : ""
+    return ({ isActive }) => {
+      if (!shouldShowActive) {
+        return baseClassName;
+      }
+      return classNames(baseClassName, {
+        "site-nav__link--active": isActive
+      });
     };
   };
 
   const renderManifoldLink = link => {
-    const linkExact = pathForLink(link) === "/" ? true : exact;
+    const path = pathForLink(link);
+    const linkEnd = path === "/" ? true : exact;
     return (
       <NavLink
-        to={pathForLink(link)}
-        exact={linkExact}
+        to={path}
+        end={linkEnd}
         target={link.newTab ? "_blank" : null}
-        {...getClassNameForLink(link)}
+        className={getClassNameForLink(link)}
       >
         {t(link.label)}
       </NavLink>

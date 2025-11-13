@@ -303,6 +303,128 @@ import { NavLink } from "react-router-dom";
 </NavLink>
 ```
 
+**Migration from v5:**
+
+v6 NavLink has breaking changes from v5:
+
+1. **`exact` prop → `end` prop**: The `exact` prop is replaced with `end`. Both work the same way - when `true`, the link is only active when the path matches exactly.
+
+```javascript
+// v5
+<NavLink to="/" exact>Home</NavLink>
+
+// v6
+<NavLink to="/" end>Home</NavLink>
+```
+
+2. **`activeClassName` prop → `className` function**: The `activeClassName` prop is removed. Use `className` as a function that receives `{ isActive }` instead.
+
+```javascript
+// v5
+<NavLink
+  to="/projects"
+  className="nav-link"
+  activeClassName="nav-link--active"
+>
+  Projects
+</NavLink>
+
+// v6
+<NavLink
+  to="/projects"
+  className={({ isActive }) =>
+    isActive ? "nav-link nav-link--active" : "nav-link"
+  }
+>
+  Projects
+</NavLink>
+```
+
+**With classNames utility:**
+
+```javascript
+import classNames from "classnames";
+
+<NavLink
+  to="/projects"
+  className={({ isActive }) =>
+    classNames("nav-link", {
+      "nav-link--active": isActive
+    })
+  }
+>
+  Projects
+</NavLink>;
+```
+
+**With Emotion Styled Components:**
+
+When using Emotion styled components with NavLink, you cannot return Emotion CSS objects from the `className` function. Instead, add an `&.active` selector to your styled component and return the string `"active"` from the `className` function:
+
+```javascript
+// styles.js
+import styled from "@emotion/styled";
+import { NavLink } from "react-router-dom";
+
+export const Link = styled(NavLink)`
+  color: var(--color-base-neutral80);
+  background-color: var(--box-bg-color);
+
+  &:hover {
+    --box-bg-color: var(--color-base-neutral20);
+    color: var(--strong-color);
+  }
+
+  &.active {
+    --box-bg-color: var(--color-base-neutral10);
+    color: var(--strong-color);
+  }
+`;
+
+// Component
+import { useLocation } from "react-router-dom";
+import * as Styled from "./styles";
+
+function Navigation({ links }) {
+  const location = useLocation();
+
+  return (
+    <nav>
+      {links.map(({ to, exact, isActive, text }) => (
+        <Styled.Link
+          key={text}
+          to={to}
+          end={exact}
+          className={({ isActive: linkIsActive }) => {
+            // Use custom isActive function if provided, otherwise use default
+            const shouldBeActive = isActive
+              ? isActive(null, location)
+              : linkIsActive;
+            return shouldBeActive ? "active" : undefined;
+          }}
+        >
+          {text}
+        </Styled.Link>
+      ))}
+    </nav>
+  );
+}
+```
+
+**Key points:**
+
+- Add `&.active` selector to your styled component for active styles
+- Return the string `"active"` from NavLink's `className` function (not an Emotion CSS object)
+- Handle custom `isActive` logic by checking it separately and using it in the `className` function
+- Use `useLocation()` hook if you need the location for custom `isActive` functions
+
+**Important Notes:**
+
+- `exact` prop will cause a warning in v6 - replace with `end`
+- `activeClassName` prop will cause a warning in v6 - replace with `className` function
+- The `className` function receives an object with `isActive` and `isPending` properties
+- You can still use `isActive` prop for custom matching logic (this is separate from the `activeClassName` migration)
+
 ### Navigate Component
 
 Use for declarative redirects:
