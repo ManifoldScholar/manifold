@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { readingGroupsAPI } from "api";
 import { useNavigate } from "react-router-dom";
 import { Outlet, useOutletContext } from "react-router-dom";
