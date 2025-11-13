@@ -1,6 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { Redirect, Outlet, useOutletContext } from "react-router-dom";
+import { Navigate, Outlet, useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { hasItemsInCollection } from "frontend/components/collecting/helpers";
 
@@ -16,7 +15,7 @@ function ReadingGroupHomepageContainer() {
 
   if (!showHomepage)
     return (
-      <Redirect
+      <Navigate
         to={lh.link("frontendReadingGroupAnnotations", readingGroup.id)}
       />
     );
