@@ -1,12 +1,8 @@
 import { useMemo } from "react";
 import PropTypes from "prop-types";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  StaticRouter
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { StaticRouterProvider } from "react-router-dom/server";
 import { Provider } from "react-redux";
-import Manifold from "global/containers/Manifold";
 import { HelmetProvider } from "react-helmet-async";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
@@ -18,11 +14,12 @@ export default function App({
   store,
   staticContext,
   staticRequest,
-  helmetContext = {}
+  helmetContext = {},
+  staticRouter
 }) {
   // Create v6 router for client-side (only if not SSR)
   // Use useMemo to ensure router is only created once
-  const router = useMemo(() => {
+  const browserRouter = useMemo(() => {
     if (!staticRequest) {
       const routes = createRouter();
       return createBrowserRouter(routes, {
@@ -35,31 +32,21 @@ export default function App({
     return null;
   }, [staticRequest]);
 
-  // SSR still uses v5 StaticRouter for now
-  // Will be migrated to v6 StaticRouterProvider later
-  if (staticRequest) {
-    return (
-      <Provider store={store} key="provider">
-        <UIDReset prefix="uid_">
-          <StaticRouter context={staticContext} location={staticRequest.url}>
-            <HelmetProvider context={helmetContext}>
-              <GlobalStyles styles={styles} />
-              <Manifold />
-            </HelmetProvider>
-          </StaticRouter>
-        </UIDReset>
-      </Provider>
+  // Router provider - SSR uses StaticRouterProvider, client uses RouterProvider
+  // Both render the matched route directly (no children)
+  const routerProvider =
+    staticRequest && staticRouter ? (
+      <StaticRouterProvider router={staticRouter} context={staticContext} />
+    ) : (
+      <RouterProvider router={browserRouter} />
     );
-  }
 
-  // Client-side uses v6 RouterProvider
-  // RouterProvider renders the matched route directly (no children)
   return (
     <Provider store={store} key="provider">
       <UIDReset prefix="uid_">
         <HelmetProvider context={helmetContext}>
           <GlobalStyles styles={styles} />
-          <RouterProvider router={router} />
+          {routerProvider}
         </HelmetProvider>
       </UIDReset>
     </Provider>
@@ -70,5 +57,6 @@ App.propTypes = {
   store: PropTypes.object,
   staticContext: PropTypes.object,
   staticRequest: PropTypes.object,
-  helmetContext: PropTypes.object
+  helmetContext: PropTypes.object,
+  staticRouter: PropTypes.object // v6 static router created with createStaticRouter
 };
