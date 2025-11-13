@@ -438,12 +438,19 @@ function MyComponent() {
 
 ## SSR with v6
 
-v6 uses `createStaticRouter` and `StaticRouterProvider` for SSR instead of `StaticRouter`.
+v6 uses `createStaticHandler`, `createStaticRouter`, and `StaticRouterProvider` for SSR instead of `StaticRouter`.
 
 ### Basic SSR Setup
 
+v6 SSR requires two steps:
+
+1. Create a static handler and query it to get the context
+2. Create a static router from the context
+3. Use `StaticRouterProvider` to render
+
 ```javascript
 import {
+  createStaticHandler,
   createStaticRouter,
   StaticRouterProvider
 } from "react-router-dom/server";
@@ -452,21 +459,76 @@ import { createRoutes } from "./routes";
 const render = async (req, res) => {
   const routes = createRoutes();
 
-  const router = createStaticRouter(routes, {
-    location: req.url
-  });
+  // Step 1: Create handler and query to get context
+  const handler = createStaticHandler(routes);
+  const context = await handler.query(
+    new Request(`http://localhost${req.url}`)
+  );
 
+  // Step 2: Handle redirects from route loaders/actions
+  if (
+    context instanceof Response &&
+    context.status >= 300 &&
+    context.status < 400
+  ) {
+    const redirectUrl = context.headers.get("Location");
+    return res.redirect(redirectUrl);
+  }
+
+  // Step 3: Create static router with context
+  const staticRouter = createStaticRouter(routes, context);
+
+  // Step 4: Render with StaticRouterProvider
   const html = ReactDOM.renderToString(
-    <StaticRouterProvider router={router} />
+    <StaticRouterProvider router={staticRouter} context={context} />
   );
 
   res.send(html);
 };
 ```
 
+**Important Notes:**
+
+- `createStaticRouter` requires a `StaticHandlerContext` object (from `handler.query()`), not an options object
+- The context includes matched routes, loader data, and other route information
+- `StaticRouterProvider` does not accept children - it renders the matched route directly
+
 ### Handling Redirects in SSR
 
-v6 handles redirects differently than v5. For component-level redirects during SSR:
+v6 handles redirects in two places:
+
+**1. Route Loader/Action Redirects** (handled via context):
+
+Route loaders/actions can throw `redirect()` which returns a Response object. This is caught when querying the handler:
+
+```javascript
+// In route loader
+import { redirect } from "react-router-dom";
+
+export async function loader() {
+  if (!isAuthorized) {
+    throw redirect("/login");
+  }
+  return data;
+}
+
+// In SSR render function
+const context = await handler.query(new Request(`http://localhost${req.url}`));
+
+// Context will be a Response object if loader redirected
+if (
+  context instanceof Response &&
+  context.status >= 300 &&
+  context.status < 400
+) {
+  const redirectUrl = context.headers.get("Location");
+  return res.redirect(redirectUrl);
+}
+```
+
+**2. Component-Level Redirects** (handled via try/catch):
+
+Components can throw Response objects during render for SSR redirects:
 
 ```javascript
 // In component
@@ -484,6 +546,7 @@ if (needsRedirect) {
 try {
   const html = ReactDOM.renderToString(app);
 } catch (error) {
+  // Catch redirect Response objects thrown by components
   if (error instanceof Response && error.status >= 300 && error.status < 400) {
     const redirectUrl = error.headers.get("Location");
     return res.redirect(redirectUrl);
@@ -491,6 +554,13 @@ try {
   throw error;
 }
 ```
+
+**Why Two Places?**
+
+- **Context check**: Handles redirects from route loaders/actions (data loading phase)
+- **Catch block**: Handles redirects thrown by components during render (component rendering phase)
+
+Both are necessary because they occur at different phases of the SSR lifecycle.
 
 ## Route Helpers
 
@@ -560,9 +630,43 @@ lh.link("frontendProjectsAll", { page: 2, sort: "name" });
 // → "/projects/all?page=2&sort=name"
 ```
 
+### LinkHandler Registration Pattern
+
+To avoid circular dependencies, routes are registered with `LinkHandler` after they're created, not during module evaluation:
+
+```javascript
+// createRouter.js
+import frontendRoutesV6 from "frontend/routes-v6";
+import linkHandler from "helpers/linkHandler";
+
+export default function createRouter() {
+  const routes = [
+    {
+      element: <Manifold />,
+      path: "/",
+      children: frontendRoutesV6
+    }
+  ];
+
+  // Register routes with linkHandler after they're created
+  // This breaks the circular dependency since routes are already loaded
+  // when this function is called, so there's no import cycle
+  linkHandler.registerRoutes(frontendRoutesV6);
+
+  return routes;
+}
+```
+
+**Why this pattern?**
+
+- `LinkHandler` needs access to routes to extract helper functions
+- Components in routes may import `LinkHandler` (creating a cycle)
+- Registering routes after creation breaks the static import cycle
+- Routes are registered at runtime when `createRouter()` is called
+
 ## Navigation Blocking
 
-v6 handles navigation blocking differently than v5. Instead of requiring router-level configuration, blocking is handled at the component level using the `unstable_useBlocker` hook.
+v6 handles navigation blocking differently than v5. Instead of requiring router-level configuration, blocking is handled at the component level using the `useBlocker` hook.
 
 ### Key Differences from v5
 
@@ -575,20 +679,20 @@ v6 handles navigation blocking differently than v5. Instead of requiring router-
 **v6 Approach:**
 
 - No router-level configuration needed
-- Components use `unstable_useBlocker` hook directly
+- Components use `useBlocker` hook directly
 - Each component manages its own blocking logic
 
-### Using unstable_useBlocker
+### Using useBlocker
 
-The `unstable_useBlocker` hook blocks navigation based on a condition:
+The `useBlocker` hook blocks navigation based on a condition:
 
 ```javascript
-import { unstable_useBlocker } from "react-router-dom";
+import { useBlocker } from "react-router-dom";
 
 function MyComponent() {
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
-  const blocker = unstable_useBlocker(
+  const blocker = useBlocker(
     ({ currentLocation, nextLocation }) =>
       hasUnsavedChanges && currentLocation.pathname !== nextLocation.pathname
   );
@@ -659,7 +763,7 @@ The API is identical - just replace `Prompt` with `NavigationBlocker`.
 - **Component-level**: Each component that needs blocking manages it independently
 - **Blocker state**: The blocker object has a `state` property that can be `"unblocked"` or `"blocked"`
 - **Actions**: Call `blocker.proceed()` to allow navigation, or `blocker.reset()` to cancel it
-- **Unstable API**: The `unstable_` prefix indicates this API may change in future versions
+- **Stable API**: `useBlocker` is the stable API in React Router v6.4+ (previously `unstable_useBlocker`)
 
 ## Implementation Status
 
@@ -715,10 +819,19 @@ The frontend routes have been successfully migrated to React Router v6:
    - Navigation components now check route activation by route name from `handle.name`
 
 9. **Nested Route Container Migration**
+
    - Updated all nested route containers to use `useOutletContext()` instead of props
    - Migrated 9 components: ProjectSearch, ProjectResources, ResourceDetail, ProjectResourceCollections, ResourceCollectionDetail, EventList, JournalIssuesList, JournalVolumesList, VolumeDetail
    - Removed PropTypes definitions for props that are now accessed via context
    - All child components now consistently use `useOutletContext()` to access parent route data
+
+10. **SSR Migration** (`src/entry-ssr.js`, `src/global/containers/App/index.js`)
+
+- Migrated SSR to use `createStaticHandler` and `createStaticRouter`
+- Updated App component to use `StaticRouterProvider` for SSR
+- Implemented redirect handling for route loaders/actions (via context) and component-level redirects (via try/catch)
+- Removed temporary SSR disable code
+- SSR now fully functional with v6 router
 
 ### Key Lessons Learned
 
@@ -1039,16 +1152,375 @@ function NavigationComponent() {
 
 **SSR Status**
 
-- SSR is temporarily disabled to allow testing client-side v6 router
-- SSR migration to `createStaticRouter` is pending
-- See `src/entry-ssr.js` for temporary SSR disable code
+- SSR has been migrated to v6's `createStaticHandler` and `createStaticRouter`
+- App component updated to use `StaticRouterProvider` for SSR
+- Redirect handling implemented for both route loaders/actions and component-level redirects
+- See `src/entry-ssr.js` for implementation
 
 ### Pending
 
-- SSR migration to `createStaticRouter` and `StaticRouterProvider`
-- Update redirect handling in SSR (Authorize, redirectIfLibraryDisabled)
+- Update redirect components (`Authorize`, `RedirectIfLibraryModeDisabled`) to throw Response objects for SSR
+- Migrate backend routes to v6
+- Migrate reader routes to v6
 - Remove `react-router-config` dependency after full migration
 - Remove unused router helpers (childRoutes, ChildSwitch, etc.) after backend/reader routes migrate
+
+## Migration Checklist for Backend/Reader Routes
+
+When migrating backend or reader routes, follow this checklist:
+
+### 1. Create v6 Routes File
+
+- [ ] Create new routes file (e.g., `src/backend/routes-v6.js` or `src/reader/routes-v6.js`)
+- [ ] Convert all routes from `component: "Name"` to `element: <Name />`
+- [ ] Convert `routes` arrays to `children`
+- [ ] Convert `exact: true` routes with same path as parent to `index: true`
+- [ ] Move route metadata (`name`, `helper`, `helpers`, `isLibrary`) to `handle` property
+- [ ] Convert NotFound routes to `path: "*"` (place last in array)
+- [ ] Use relative paths for nested routes
+- [ ] Remove unnecessary optional parameters (use query params or index routes instead)
+
+### 2. Update Router Creation
+
+- [ ] Create or update router creation function (e.g., `src/routes/createRouter.js`)
+- [ ] Import new v6 routes
+- [ ] Wrap routes with root layout component (if needed)
+- [ ] Register routes with `linkHandler.registerRoutes()` after creation
+- [ ] Export router creation function
+
+### 3. Update App Component
+
+- [ ] Ensure App component uses `createBrowserRouter` for client-side
+- [ ] Ensure App component uses `StaticRouterProvider` for SSR
+- [ ] Pass `staticRouter` prop from SSR entry point
+- [ ] Use `useMemo` to create router only once on client
+
+### 4. Update Components
+
+- [ ] Replace `renderRoutes(route.routes)` with `<Outlet />`
+- [ ] Replace `childRoutes()` with `<Outlet context={{ ... }} />` or `OutletWithDrawer`
+- [ ] Update child components to use `useOutletContext()` instead of props
+- [ ] Remove `route` prop from component signatures and PropTypes
+- [ ] Replace `useHistory` with `useNavigate`
+- [ ] Replace `useRouteMatch` with `useMatch` or `useMatches`
+- [ ] Replace `Prompt` with `NavigationBlocker` (if needed)
+- [ ] Update navigation components to use `useMatches()` for route matching
+
+### 5. Update SSR Entry Point
+
+- [ ] Import `createStaticHandler` and `createStaticRouter` from `react-router-dom/server`
+- [ ] Import router creation function
+- [ ] Create handler with `createStaticHandler(routes)`
+- [ ] Query handler with `await handler.query(new Request(...))`
+- [ ] Handle redirects from context (Response objects)
+- [ ] Create static router with `createStaticRouter(routes, context)`
+- [ ] Pass `staticRouter` to App component
+- [ ] Handle component-level redirects in try/catch block
+
+### 6. Update Redirect Components
+
+- [ ] Update `Authorize` HOC to throw Response objects for SSR redirects
+- [ ] Update `redirectIfLibraryDisabled` to use `useMatches()` instead of importing routes
+- [ ] Update any other redirect components to throw Response objects for SSR
+
+### 7. Test
+
+- [ ] Client-side navigation works
+- [ ] SSR works correctly
+- [ ] SSR redirects work (Authorize, redirectIfLibraryDisabled)
+- [ ] Component-level redirects work (both client and SSR)
+- [ ] Route helpers (navigation functions) still work via LinkHandler
+- [ ] Route metadata accessible via `useMatches()`
+- [ ] 404 handling works (NotFound component with catch-all routes)
+- [ ] Context passing works (Outlet context)
+- [ ] Drawer functionality works (if applicable)
+- [ ] Route matching logic works for navigation helpers
+
+### 8. Cleanup
+
+- [ ] Remove old v5 routes file (after confirming v6 works)
+- [ ] Remove `react-router-config` dependency (after all routes migrated)
+- [ ] Remove unused router helpers (childRoutes, ChildSwitch, etc.)
+- [ ] Update any remaining `react-router-dom-v5-compat` imports to `react-router-dom`
+
+## Common Patterns and Examples
+
+### App Component Pattern
+
+The App component handles both client-side and SSR routing:
+
+```javascript
+import { useMemo } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { StaticRouterProvider } from "react-router-dom/server";
+import createRouter from "routes/createRouter";
+
+export default function App({
+  store,
+  staticContext,
+  staticRequest,
+  helmetContext = {},
+  staticRouter
+}) {
+  // Create v6 router for client-side (only if not SSR)
+  const browserRouter = useMemo(() => {
+    if (!staticRequest) {
+      const routes = createRouter();
+      return createBrowserRouter(routes, {
+        future: {
+          v7_startTransition: true,
+          v7_relativeSplatPath: true
+        }
+      });
+    }
+    return null;
+  }, [staticRequest]);
+
+  // Router provider - SSR uses StaticRouterProvider, client uses RouterProvider
+  const routerProvider =
+    staticRequest && staticRouter ? (
+      <StaticRouterProvider router={staticRouter} context={staticContext} />
+    ) : (
+      <RouterProvider router={browserRouter} />
+    );
+
+  return (
+    <Provider store={store}>
+      <HelmetProvider context={helmetContext}>{routerProvider}</HelmetProvider>
+    </Provider>
+  );
+}
+```
+
+**Key points:**
+
+- Use `useMemo` to create router only once on client
+- Conditionally render `StaticRouterProvider` (SSR) or `RouterProvider` (client)
+- Both providers render the matched route directly (no children)
+
+### SSR Entry Point Pattern
+
+```javascript
+import {
+  createStaticHandler,
+  createStaticRouter
+} from "react-router-dom/server";
+import createRouter from "./routes/createRouter";
+
+const render = async (req, res, store) => {
+  // Create routes
+  const routes = createRouter();
+
+  // Create handler and query to get context
+  const handler = createStaticHandler(routes);
+  const context = await handler.query(
+    new Request(`http://localhost${req.url}`)
+  );
+
+  // Handle redirects from route loaders/actions
+  if (
+    context instanceof Response &&
+    context.status >= 300 &&
+    context.status < 400
+  ) {
+    const redirectUrl = context.headers.get("Location");
+    return res.redirect(redirectUrl);
+  }
+
+  // Create static router with context
+  const staticRouter = createStaticRouter(routes, context);
+
+  // Render app with static router
+  const appComponent = (
+    <App
+      staticContext={routingContext}
+      staticRequest={req}
+      staticRouter={staticRouter}
+      store={store}
+    />
+  );
+
+  try {
+    const html = ReactDOM.renderToString(appComponent);
+    res.send(html);
+  } catch (error) {
+    // Handle component-level redirects
+    if (
+      error instanceof Response &&
+      error.status >= 300 &&
+      error.status < 400
+    ) {
+      const redirectUrl = error.headers.get("Location");
+      return res.redirect(redirectUrl);
+    }
+    throw error;
+  }
+};
+```
+
+### Route Simplification Examples
+
+**Before (v5):**
+
+```javascript
+{
+  component: "Events",
+  path: "/projects/:id/events/:page?",
+  helper: (id, page) => `/projects/${id}/events${page ? `/${page}` : ""}`
+}
+```
+
+**After (v6):**
+
+```javascript
+{
+  element: <Events />,
+  path: "events",  // Relative path, no page param
+  handle: {
+    name: "frontendProjectEvents",
+    helper: (id, params = {}) => {
+      const query = queryString.stringify(params);
+      return `/projects/${id}/events${query ? `?${query}` : ""}`;
+    }
+  }
+}
+```
+
+**Rationale:** If the component uses query parameters for pagination, don't include them in the path. Use query strings instead.
+
+**Before (v5):**
+
+```javascript
+{
+  component: "ReadingGroupMembers",
+  path: "/reading-groups/:id/members/:membershipId?",
+  routes: [
+    {
+      component: "ReadingGroupMembers.List",
+      path: "/reading-groups/:id/members"
+    }
+  ]
+}
+```
+
+**After (v6):**
+
+```javascript
+{
+  element: <ReadingGroupMembers.Wrapper />,
+  path: "members",
+  children: [
+    {
+      index: true,  // Matches /reading-groups/:id/members exactly
+      element: <ReadingGroupMembers.List />
+    },
+    {
+      element: <ReadingGroupMembers.MemberEdit />,
+      path: ":membershipId"
+    }
+  ]
+}
+```
+
+**Rationale:** Remove optional parameters from parent routes. Use index routes for list views.
+
+## Troubleshooting
+
+### Circular Dependency Errors
+
+**Problem:** `LinkHandler` imports routes, but routes import components that use `LinkHandler`.
+
+**Solution:** Use the registration pattern:
+
+1. Don't import routes in `LinkHandler`
+2. Create routes in a function (e.g., `createRouter()`)
+3. Call `linkHandler.registerRoutes(routes)` after routes are created
+4. This breaks the static import cycle
+
+### SSR Redirects Not Working
+
+**Problem:** Redirects work on client but not during SSR.
+
+**Solution:** Ensure redirects throw Response objects:
+
+```javascript
+if (needsRedirect) {
+  if (__SERVER__) {
+    throw new Response(null, {
+      status: 302,
+      headers: { Location: "/redirect-path" }
+    });
+  }
+  return <Navigate to="/redirect-path" replace />;
+}
+```
+
+### Index Route Errors
+
+**Problem:** "Cannot specify children on an index route" error.
+
+**Solution:** Index routes cannot have children. Use `path: ""` for layout wrappers:
+
+```javascript
+// ❌ Invalid
+{
+  element: <Wrapper />,
+  index: true,
+  children: [...]
+}
+
+// ✅ Valid
+{
+  element: <Wrapper />,
+  path: "",
+  children: [
+    {
+      index: true,
+      element: <Content />
+    }
+  ]
+}
+```
+
+### Route Metadata Not Accessible
+
+**Problem:** `useMatches()` returns undefined or missing handle data.
+
+**Solution:** Ensure route metadata is in `handle` property, not top-level:
+
+```javascript
+// ❌ Wrong
+{
+  element: <Component />,
+  path: "/path",
+  name: "myRoute"  // Wrong location
+}
+
+// ✅ Correct
+{
+  element: <Component />,
+  path: "/path",
+  handle: {
+    name: "myRoute"  // Correct location
+  }
+}
+```
+
+### Outlet Context Undefined
+
+**Problem:** `useOutletContext()` returns undefined.
+
+**Solution:** Always use optional chaining and provide fallback:
+
+```javascript
+const { project, settings } = useOutletContext() || {};
+```
+
+Also ensure parent component passes context:
+
+```javascript
+<Outlet context={{ project, settings }} />
+```
 
 ## Additional Resources
 
