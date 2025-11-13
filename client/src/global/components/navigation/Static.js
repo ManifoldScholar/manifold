@@ -64,32 +64,42 @@ function NavigationStatic({
     );
   };
 
-  const adjustClassesForJournalIssue = link => {
+  const getClassNameForLink = link => {
+    let baseClassName = "site-nav__link";
+    let shouldShowActive = true;
+
     if (typeof journalIsActive !== "boolean") {
-      if (link.label.includes("projects"))
-        return { className: "site-nav__link", activeClassName: "" };
+      if (link.label.includes("projects")) {
+        shouldShowActive = false;
+      }
+    } else if (journalIsActive) {
+      if (link.label.includes("projects")) {
+        shouldShowActive = false;
+      } else if (link.label.includes("journals")) {
+        baseClassName = "site-nav__link site-nav__link--active";
+        shouldShowActive = false;
+      }
     }
-    if (journalIsActive) {
-      if (link.label.includes("projects"))
-        return { className: "site-nav__link", activeClassName: "" };
-      if (link.label.includes("journals"))
-        return { className: "site-nav__link site-nav__link--active" };
-    }
-    return {
-      className: "site-nav__link",
-      activeClassName: "site-nav__link--active"
+
+    return ({ isActive }) => {
+      if (!shouldShowActive) {
+        return baseClassName;
+      }
+      return classNames(baseClassName, {
+        "site-nav__link--active": isActive
+      });
     };
   };
 
   const renderManifoldLink = link => {
-    const linkExact = pathForLink(link) === "/" ? true : exact;
-    const classes = adjustClassesForJournalIssue(link);
+    const path = pathForLink(link);
+    const linkEnd = path === "/" ? true : exact;
     return (
       <NavLink
-        to={pathForLink(link)}
-        exact={linkExact}
+        to={path}
+        end={linkEnd}
         target={link.newTab ? "_blank" : null}
-        {...classes}
+        className={getClassNameForLink(link)}
       >
         {t(link.label)}
       </NavLink>
