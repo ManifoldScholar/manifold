@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import PropTypes from "prop-types";
 import { useParams, Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
