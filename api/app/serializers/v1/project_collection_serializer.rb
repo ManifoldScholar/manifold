@@ -49,6 +49,9 @@ module V1
     typed_has_many :collection_projects do |object, params|
       object.collection_projects.projects_with_read_ability(params[:current_user]).eager_load(:project_summary)
     end
+    typed_attribute :available_projects_count, Types::Integer.meta(read_only: true) do |object, params|
+      object.collection_projects.projects_with_read_ability(params[:current_user]).count
+    end
 
     when_full do
       typed_has_many :subjects, serializer: SubjectSerializer
