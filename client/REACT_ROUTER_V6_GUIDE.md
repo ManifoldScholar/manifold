@@ -677,6 +677,42 @@ try {
 }
 ```
 
+**Component-Level Redirect Pattern:**
+
+This pattern is used in several components that need to redirect based on component state or props:
+
+- **EventList** - Redirects to project detail if `hideActivity` is enabled
+- **ReadingGroup/Members/Wrapper** - Redirects non-members to reading group detail
+- **ReadingGroup/Homepage/Wrapper** - Redirects to annotations if homepage shouldn't be shown
+- **Authorize HOC** - Redirects unauthenticated users to login
+- **redirectIfLibraryDisabled HOC** - Redirects when library mode is disabled
+
+**Example Implementation:**
+
+```javascript
+// EventList/index.js
+if (hideActivity) {
+  const redirectUrl = lh.link("frontendProjectDetail", project.attributes.slug);
+
+  if (__SERVER__) {
+    throw new Response(null, {
+      status: 302,
+      headers: { Location: redirectUrl }
+    });
+  }
+
+  return <Navigate to={redirectUrl} replace />;
+}
+```
+
+**Key Points:**
+
+- Always check `__SERVER__` before throwing Response (SSR only)
+- Use `Navigate` component for client-side redirects
+- Include `replace` prop on `Navigate` to replace history entry
+- Redirect URL should be calculated before the conditional check
+- This pattern works for both SSR and client-side navigation
+
 **Why Two Places?**
 
 - **Context check**: Handles redirects from route loaders/actions (data loading phase)
@@ -1107,6 +1143,23 @@ The frontend routes have been successfully migrated to React Router v6:
 - Removed temporary SSR disable code
 - SSR now fully functional with v6 router
 
+11. **Error Boundaries** (`src/global/components/FatalError/Boundary.js`, `src/global/components/FatalError/RouteError.js`)
+
+- Refactored `FatalErrorBoundary` from class component to functional components
+- Created `RouteError` component for route-level errors using `errorElement` prop
+- Created `FatalErrorBoundary` wrapper for component-level errors using `react-error-boundary`
+- Added `errorElement: <RouteError />` to root route in `createRouter.js`
+- Both error boundaries use shared `formatError` function to handle Error objects and Response objects
+- Components use `useLocation()` hook directly (no location prop needed)
+
+12. **NavLink Migration** (`src/global/components/navigation/Mobile.js`, `src/frontend/components/reading-group/headings/parts/Navigation/index.js`)
+
+- Updated all NavLink components to use v6 API
+- Replaced `exact` prop with `end` prop
+- Replaced `activeClassName` prop with `className` function
+- Updated Emotion styled NavLinks to use `&.active` selector pattern
+- All navigation components now v6 compatible
+
 ### Key Lessons Learned
 
 **Index Routes Cannot Have Children**
@@ -1433,7 +1486,6 @@ function NavigationComponent() {
 
 ### Pending
 
-- Update redirect components (`Authorize`, `RedirectIfLibraryModeDisabled`) to throw Response objects for SSR
 - Migrate backend routes to v6
 - Migrate reader routes to v6
 - Remove `react-router-config` dependency after full migration
