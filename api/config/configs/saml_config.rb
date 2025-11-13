@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SamlConfig < ApplicationConfig
-  PROVIDER_NAME_FORMAT = /\A[a-z](?:[a-z]_?)?[a-z]\z/
+  PROVIDER_NAME_FORMAT = /[a-z]/
 
   attr_config provider_names: [], disable_password_auth: false
 
@@ -25,7 +25,6 @@ class SamlConfig < ApplicationConfig
   def build_raw_providers
     provider_names.map do |provider_name|
       klass = AbstractSamlProviderConfig.build_for(provider_name)
-
       klass.new
     end
   end
