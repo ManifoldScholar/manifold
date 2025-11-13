@@ -1,6 +1,5 @@
 import { useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import Authorization from "helpers/authorization";
 import lh from "helpers/linkHandler";
 import useAuthentication from "../useAuthentication";
@@ -14,7 +13,6 @@ export default function useRedirectToFirstMatch({
 }) {
   const authentication = useAuthentication();
   const { pathname } = useLocation();
-  const history = useHistory();
 
   const maybeRedirect = useCallback(() => {
     const basePathname = lh.link(route);
@@ -40,17 +38,17 @@ export default function useRedirectToFirstMatch({
         authorization.authorize({ ...candidate, authentication })
       ) {
         if (candidate.path) {
-          history.replace(candidate.path, state);
+          // history.replace(candidate.path, state);
           return false;
         } else if (candidate.hasOwnProperty("route")) {
           const args = candidate.args || [];
-          history.replace(lh.link(candidate.route, ...args), state);
+          // history.replace(lh.link(candidate.route, ...args), state);
           return false;
         }
       }
       return true;
     });
-  }, [route, slug, id, state, candidates, pathname, authentication, history]);
+  }, [route, slug, id, state, candidates, pathname, authentication]);
 
   useEffect(() => {
     if (route) maybeRedirect();

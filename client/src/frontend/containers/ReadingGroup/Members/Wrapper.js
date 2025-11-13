@@ -1,12 +1,12 @@
 import { useRef, useCallback } from "react";
-import { Redirect, useOutletContext, useNavigate } from "react-router-dom";
+import { Navigate, useOutletContext, useNavigate } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import ReadingGroupMembersList from "./List";
 import withConfirmation from "hoc/withConfirmation";
 
-function ReadingGroupsMembersContainer() {
-  const { readingGroup, dispatch, confirm } = useOutletContext() || {};
+function ReadingGroupsMembersContainer({ confirm }) {
+  const { readingGroup, dispatch } = useOutletContext() || {};
   const navigate = useNavigate();
   const refreshRef = useRef(null);
 
@@ -25,7 +25,7 @@ function ReadingGroupsMembersContainer() {
 
   if (!userIsGroupMember) {
     return (
-      <Redirect to={lh.link("frontendReadingGroupDetail", readingGroup.id)} />
+      <Navigate to={lh.link("frontendReadingGroupDetail", readingGroup.id)} />
     );
   }
 

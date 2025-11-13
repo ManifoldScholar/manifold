@@ -11,7 +11,7 @@ import lh from "helpers/linkHandler";
 
 export default function ProjectWrapper() {
   const { id } = useParams();
-  const { data: project, response } = useFetch({
+  const { data: project } = useFetch({
     request: [projectsAPI.show, id],
     condition: id !== "all"
   });
@@ -46,7 +46,6 @@ export default function ProjectWrapper() {
       <Outlet
         context={{
           project,
-          response,
           settings,
           journalBreadcrumbs
         }}
