@@ -43,12 +43,20 @@ module V1
     typed_has_many :recent_journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: "journalVolume"
     typed_has_many :recent_journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: "journalIssue"
 
+    typed_attribute :available_journal_issues_count, Types::Integer.meta(read_only: true) do |object, params|
+      object.journal_issues.with_read_ability(params[:current_user]).count
+    end
+
     when_full do
       metadata(metadata: true, properties: true, formatted: true)
       typed_attribute :hashtag, Types::String.optional
       typed_attribute :image_credits, Types::String.optional
       typed_attribute :image_credits_formatted, Types::String.meta(read_only: true)
       typed_attribute :pending_slug, Types::String
+
+      typed_attribute :available_journal_issues_without_volume_count, Types::Integer.meta(read_only: true) do |object, params|
+        object.journal_issues.where(journal_volume: nil).with_read_ability(params[:current_user]).count
+      end
 
       typed_has_many :collaborators,
                      serializer: FlattenedCollaboratorSerializer,
