@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useParams, Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -11,7 +11,7 @@ import { getJournalBreadcrumbs } from "./helpers";
 
 export default function ProjectWrapper() {
   const { id } = useParams();
-  const { data: project, response } = useFetch({
+  const { data: project } = useFetch({
     request: [projectsAPI.show, id]
   });
   const location = useLocation();
@@ -43,7 +43,6 @@ export default function ProjectWrapper() {
       <Outlet
         context={{
           project,
-          response,
           settings,
           journalBreadcrumbs
         }}
