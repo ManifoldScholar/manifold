@@ -24,9 +24,16 @@ function ReadingGroupsMembersContainer({ confirm }) {
   }, [navigate, membersRoute]);
 
   if (!userIsGroupMember) {
-    return (
-      <Navigate to={lh.link("frontendReadingGroupDetail", readingGroup.id)} />
-    );
+    const redirectUrl = lh.link("frontendReadingGroupDetail", readingGroup.id);
+
+    if (__SERVER__) {
+      throw new Response(null, {
+        status: 302,
+        headers: { Location: redirectUrl }
+      });
+    }
+
+    return <Navigate to={redirectUrl} replace />;
   }
 
   return (
