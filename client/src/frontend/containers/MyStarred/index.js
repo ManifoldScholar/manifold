@@ -1,14 +1,11 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { meAPI } from "api";
-import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import { useFetch, useCurrentUser } from "hooks";
-
-import Authorize from "hoc/Authorize";
 
 function MyStarredContainer() {
   const [fetchVersion, setFetchVersion] = useState({
@@ -68,11 +65,7 @@ function MyStarredContainer() {
   const { t } = useTranslation();
 
   return (
-    <Authorize
-      kind="any"
-      failureRedirect={lh.link("frontendLogin")}
-      failureNotification
-    >
+    <>
       <HeadContent title={t("pages.my_starred")} appendDefaultTitle />
       <EntityCollection.MyStarred
         collection={collection}
@@ -80,7 +73,7 @@ function MyStarredContainer() {
         onUncollect={onUncollect}
       />
       <CollectionNavigation />
-    </Authorize>
+    </>
   );
 }
 

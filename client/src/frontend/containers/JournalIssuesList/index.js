@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import { useFetch, useListQueryParams, useFromStore } from "hooks";
 import { journalIssuesAPI } from "api";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
@@ -9,7 +10,8 @@ import EntityCollection from "frontend/components/entity/Collection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 
-export default function JournalIssuesList({ journal }) {
+export default function JournalIssuesList() {
+  const { journal } = useOutletContext() || {};
   const { pagination, filters } = useListQueryParams({
     initFilters: { journal_id: journal.id, volume_is_nil: true }
   });
