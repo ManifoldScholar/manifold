@@ -186,16 +186,19 @@ export default function NavigationMobile({
 
   const renderManifoldLink = link => {
     const path = pathForLink(link);
-    const exact = path === "/";
+    const end = path === "/";
 
     return (
       <NavLink
         to={path}
-        exact={exact}
+        end={end}
         onClick={closeNavigation}
         target={link.newTab ? "_blank" : null}
-        className="nested-nav__link"
-        activeClassName="active"
+        className={({ isActive }) =>
+          classnames("nested-nav__link", {
+            active: isActive
+          })
+        }
       >
         {t(link.label)}
       </NavLink>
