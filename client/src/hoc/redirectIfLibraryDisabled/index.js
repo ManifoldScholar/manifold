@@ -51,13 +51,12 @@ export default function redirectIfLibraryDisabled(WrappedComponent) {
 
     if (libraryModeDisabled && currentRouteIsLibraryRoute) {
       if (redirectUrl) {
-        // For SSR, we'd need to throw a Response object, but since SSR is disabled,
-        // we can use Navigate for client-side redirects
-        // TODO: Update for SSR when migrating SSR to v6
+        // For SSR, throw a Response object for redirect
         if (__SERVER__) {
-          // SSR redirect handling will be updated when SSR is migrated
-          // For now, just return null since SSR is disabled
-          return null;
+          throw new Response(null, {
+            status: 302,
+            headers: { Location: redirectUrl }
+          });
         }
         return <Navigate to={redirectUrl} replace />;
       }
