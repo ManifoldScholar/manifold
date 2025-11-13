@@ -1,8 +1,8 @@
-import { useMemo, useCallback, useRef } from "react";
+import { useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import isPlainObject from "lodash/isPlainObject";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { notificationActions } from "actions";
 import Authorization from "helpers/authorization";
 import FatalErrorRender from "global/components/FatalError";
@@ -18,7 +18,6 @@ export default function Authorize(props) {
   } = props;
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
   const authentication = useFromStore({ path: "authentication" });
   const propsWithAuth = { ...props, authentication };
@@ -49,6 +48,45 @@ export default function Authorize(props) {
     [location.pathname]
   );
 
+  const renderAccessDenied = useCallback(() => {
+    const fatalError = {
+      error: {
+        status: 403,
+        method: "GET",
+        heading: "Access Denied"
+      }
+    };
+
+    const hasAnyAdminAccess = authorization.authorizeKind({
+      authentication,
+      kind: [
+        "admin",
+        "editor",
+        "marketeer",
+        "project_creator",
+        "project_editor",
+        "project_property_manager",
+        "journal_editor"
+      ]
+    });
+
+    return (
+      <FatalErrorRender
+        fatalError={fatalError}
+        headerLineOne="errors.access_denied.header"
+        headerLineTwo=""
+        userMessage={
+          failureNotification?.body ??
+          (!hasAnyAdminAccess
+            ? "errors.access_denied.no_admin_access"
+            : "errors.access_denied.authorization_admin")
+        }
+        contained
+        hideStatus
+      />
+    );
+  }, [authentication, authorization, failureNotification?.body]);
+
   const doNotify = useCallback(
     failureNotificationParam => {
       let error = {
@@ -66,88 +104,53 @@ export default function Authorize(props) {
     [dispatch]
   );
 
-  const redirectRef = useRef(false);
-
   const redirectAndNotify = useCallback(
     ({ redirectPath, postLoginUri, notificationContent }) => {
-      if (redirectRef.current) return;
-
-      redirectRef.current = true;
-
-      const showLoginOverlay = !isAuthenticated && redirectPath !== "/login";
+      const showLoginOverlay = redirectPath !== "/login";
       if (showLoginOverlay) doNotify(notificationContent);
 
-      navigate(
-        {
-          pathname: redirectPath,
-          // eslint-disable-next-line no-nested-ternary
-          search: isAuthenticated
-            ? "?notification=authorizationError"
-            : !showLoginOverlay
-            ? `?redirect_uri=${postLoginUri}`
-            : undefined
-        },
-        {
-          state: {
+      return (
+        <Navigate
+          to={redirectPath}
+          search={
+            !showLoginOverlay ? `?redirect_uri=${postLoginUri}` : undefined
+          }
+          state={{
             showLogin: showLoginOverlay,
             postLoginRedirect: postLoginUri,
             notificationBody: notificationContent?.body
-          }
-        }
+          }}
+        />
       );
     },
-    [isAuthenticated, doNotify, navigate]
+    [doNotify]
   );
 
   const maybeRedirect = () => {
-    if (isAuthenticated) {
-      const fatalError = {
-        error: {
-          status: 403,
-          method: "GET",
-          heading: "Access Denied"
-        }
-      };
-
-      const hasAnyAdminAccess = authorization.authorizeKind({
-        authentication,
-        kind: [
-          "admin",
-          "editor",
-          "marketeer",
-          "project_creator",
-          "project_editor",
-          "project_property_manager",
-          "journal_editor"
-        ]
-      });
-
-      return (
-        <FatalErrorRender
-          fatalError={fatalError}
-          headerLineOne="errors.access_denied.header"
-          headerLineTwo=""
-          userMessage={
-            failureNotification?.body ??
-            (!hasAnyAdminAccess
-              ? "errors.access_denied.no_admin_access"
-              : "errors.access_denied.authorization_admin")
-          }
-          contained
-          hideStatus
-        />
-      );
-    }
+    if (isAuthenticated) return renderAccessDenied();
 
     const redirectPath = getRedirectPath(failureRedirect);
     const postLoginUri = `${location.pathname}${location.search}`;
 
-    if (redirectPath)
+    if (redirectPath) {
+      // For SSR, throw a Response object for redirect
+      if (__SERVER__) {
+        const redirectUrl = `/login?redirect_uri=${encodeURIComponent(
+          postLoginUri
+        )}`;
+
+        throw new Response(null, {
+          status: 302,
+          headers: { Location: redirectUrl }
+        });
+      }
+
       return redirectAndNotify({
         redirectPath,
         postLoginUri,
         notificationContent: failureNotification
       });
+    }
   };
 
   const renderHide = () => {
