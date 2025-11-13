@@ -38,7 +38,22 @@ export default function EventList() {
   }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
   if (!project || !events) return null;
-  if (hideActivity) return <Navigate to="/" />;
+
+  if (hideActivity) {
+    const redirectUrl = lh.link(
+      "frontendProjectDetail",
+      project.attributes.slug
+    );
+
+    if (__SERVER__) {
+      throw new Response(null, {
+        status: 302,
+        headers: { Location: redirectUrl }
+      });
+    }
+
+    return <Navigate to={redirectUrl} replace />;
+  }
 
   return (
     <>

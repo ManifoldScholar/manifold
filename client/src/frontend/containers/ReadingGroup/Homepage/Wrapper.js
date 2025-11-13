@@ -13,12 +13,21 @@ function ReadingGroupHomepageContainer() {
   const canUpdateGroup = readingGroup?.attributes?.abilities?.update;
   const showHomepage = canUpdateGroup || hasItemsInCollection(readingGroup);
 
-  if (!showHomepage)
-    return (
-      <Navigate
-        to={lh.link("frontendReadingGroupAnnotations", readingGroup.id)}
-      />
+  if (!showHomepage) {
+    const redirectUrl = lh.link(
+      "frontendReadingGroupAnnotations",
+      readingGroup.id
     );
+
+    if (__SERVER__) {
+      throw new Response(null, {
+        status: 302,
+        headers: { Location: redirectUrl }
+      });
+    }
+
+    return <Navigate to={redirectUrl} replace />;
+  }
 
   return <Outlet context={{ readingGroup, ...restProps }} />;
 }
