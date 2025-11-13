@@ -12,7 +12,7 @@ import forEach from "lodash/forEach";
 import isFunction from "lodash/isFunction";
 import pick from "lodash/pick";
 import { brackets2dots } from "utils/string";
-// import NavigationBlocker from "global/components/router/NavigationBlocker";
+import NavigationBlocker from "global/components/router/NavigationBlocker";
 import { FormContext } from "helpers/contexts";
 import isArray from "lodash/isArray";
 import isNil from "lodash/isNil";
@@ -320,10 +320,10 @@ export class FormContainer extends PureComponent {
       <>
         {this.renderDebugger()}
 
-        {/* <NavigationBlocker
+        <NavigationBlocker
           when={this.isBlocking()}
           message={this.props.t("messages.unsaved_changes")}
-        /> */}
+        />
 
         {this.renderGroupedErrors(this.props)}
         <Styled.Form

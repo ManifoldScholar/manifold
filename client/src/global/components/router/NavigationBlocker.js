@@ -1,4 +1,4 @@
-import { unstable_useBlocker } from "react-router-dom";
+import { useBlocker } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, useCallback } from "react";
 import Dialog from "global/components/dialog";
@@ -8,7 +8,7 @@ export default function NavigationBlocker({ when, message }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState(null);
 
-  const blocker = unstable_useBlocker(
+  const blocker = useBlocker(
     ({ currentLocation, nextLocation }) =>
       when && currentLocation.pathname !== nextLocation.pathname
   );
