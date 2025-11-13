@@ -9,6 +9,7 @@ import styles from "theme/styles/globalStyles";
 import "utils/i18n";
 import { UIDReset } from "react-uid";
 import createRouter from "routes/createRouter";
+import { setStore } from "store/storeInstance";
 
 export default function App({
   store,
@@ -18,9 +19,9 @@ export default function App({
   staticRouter
 }) {
   // Create v6 router for client-side (only if not SSR)
-  // Note: Store is set in SSR (entry-ssr.js) and persists for client-side navigation
   const browserRouter = useMemo(() => {
     if (!staticRequest) {
+      setStore(store);
       const routes = createRouter();
       return createBrowserRouter(routes, {
         future: {
@@ -30,7 +31,7 @@ export default function App({
       });
     }
     return null;
-  }, [staticRequest]);
+  }, [staticRequest, store]);
 
   // Router provider - SSR uses StaticRouterProvider, client uses RouterProvider
   // Both render the matched route directly (no children)
