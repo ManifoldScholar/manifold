@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Redirect, useParams, useOutletContext } from "react-router-dom";
+import { useParams, useOutletContext, Navigate } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
@@ -38,7 +38,7 @@ export default function EventList() {
   }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
   if (!project || !events) return null;
-  if (hideActivity) return <Redirect to="/" />;
+  if (hideActivity) return <Navigate to="/" />;
 
   return (
     <>

@@ -24,7 +24,7 @@ const MembersListContainer = forwardRef((props, ref) => {
     const message = t("messages.membership.destroy_message");
     if (confirm)
       confirm(heading, message, () => {
-        deleteMembership(membership.id).then(refresh());
+        deleteMembership(membership.id).then(() => refresh());
       });
   };
 
