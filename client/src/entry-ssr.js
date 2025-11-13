@@ -20,8 +20,11 @@ import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import { createServerFetchDataContext } from "hooks/api/contexts/InternalContext";
-import reduceAssets from "./helpers/reduceAssets";
-import serialize from "serialize-javascript";
+import {
+  createStaticHandler,
+  createStaticRouter
+} from "react-router-dom/server";
+import createRouter from "./routes/createRouter";
 
 const socket = config.services.client.rescueEnabled
   ? null
@@ -58,40 +61,27 @@ const render = async (req, res, store) => {
 
   const stats = readStats("Client");
 
-  // TEMPORARY: Skip React SSR rendering
-  // Just return empty shell - client will handle all rendering
-  const state = store.getState();
+  // Create v6 static router for SSR
+  const routes = createRouter();
+  const handler = createStaticHandler(routes);
 
-  // Get JavaScript bundles
-  const scripts = reduceAssets(".js", stats);
-  const scriptTags = scripts
-    .map(script => `<script src="/${script}"></script>`)
-    .join("\n");
+  // Query the handler to get the context for the current request
+  const context = await handler.query(
+    new Request(`http://localhost${req.url}`)
+  );
 
-  // Build body with scripts and store state
-  // wrapHtmlBody inserts this directly, so we need the full <body> tag
-  const bodyContent = `
-    <body>
-      <div id="content"></div>
-      <script>
-        window.__INITIAL_STATE__=${serialize(state)};
-      </script>
-      ${scriptTags}
-    </body>
-  `;
+  // Handle redirects from context
+  if (
+    context instanceof Response &&
+    context.status >= 300 &&
+    context.status < 400
+  ) {
+    const redirectUrl = context.headers.get("Location");
+    return respondWithRedirect(res, redirectUrl);
+  }
 
-  const htmlOutput = wrapHtmlBody({
-    store,
-    stats,
-    styleTags: "",
-    helmetContext,
-    body: bodyContent
-  });
-
-  res.setHeader("Content-Type", "text/html");
-  res.end("<!doctype html>\n" + htmlOutput);
-  return;
-  // END TEMPORARY SSR DISABLE
+  // Create static router with the context
+  const staticRouter = createStaticRouter(routes, context);
 
   const cache = createCache({ key: "emotion" });
   const {
@@ -111,6 +101,7 @@ const render = async (req, res, store) => {
           helmetContext={helmetContext}
           staticContext={routingContext}
           staticRequest={req}
+          staticRouter={staticRouter}
           store={store}
         />
       </CacheProvider>
@@ -135,6 +126,16 @@ const render = async (req, res, store) => {
       <HtmlBody component={appComponent} stats={stats} store={store} />
     );
   } catch (renderError) {
+    // Handle redirect Response objects thrown by components
+    if (
+      renderError instanceof Response &&
+      renderError.status >= 300 &&
+      renderError.status < 400
+    ) {
+      const redirectUrl = renderError.headers.get("Location");
+      return respondWithRedirect(res, redirectUrl);
+    }
+
     isError = true;
     ch.error("Server-side render failed in server-react.js");
     const errorComponent = exceptionRenderer(renderError);
