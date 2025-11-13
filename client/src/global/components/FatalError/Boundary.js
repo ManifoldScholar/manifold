@@ -1,73 +1,64 @@
-import React, { Component } from "react";
-import AppFatalError from "./AppWrapper";
 import PropTypes from "prop-types";
-import locationHelper from "helpers/location";
+import { useLocation } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
+import AppFatalError from "./AppWrapper";
 
-class FatalErrorBoundary extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    location: PropTypes.object,
-    dispatch: PropTypes.func
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false, error: null, info: null };
+export const formatError = error => {
+  if (error instanceof Response) {
+    return {
+      type: "HTTP_RESPONSE",
+      error: {
+        status: error.status || 500,
+        heading: error.status === 404 ? "Not Found" : "Error",
+        body: error.statusText || "An error occurred"
+      }
+    };
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      locationHelper.unequal(prevProps.location, this.props.location) &&
-      this.state.hasError
-    ) {
-      this.clearError();
-    }
-  }
-
-  // noop, this lifecycle method just needs to be present
-  // to log the component stack to the console in development
-  componentDidCatch(errorIgnored, infoIgnored) {}
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
-
-  get fatalError() {
-    const error = this.state.error;
+  if (error instanceof Error) {
     return {
       type: "JS_EXCEPTION",
       error: {
         status: 500,
         heading: "Client Javascript Exception",
-        body: this.body(error),
+        body:
+          error.name === "Error"
+            ? `"${error.message}"`
+            : `"${error.name}: ${error.message}"`,
         clientTrace: error.stack,
         clientTraceTruncate: 5
       }
     };
   }
 
-  clearError = () => {
-    this.setState({ hasError: false, error: null, info: null });
-  };
-
-  body(error) {
-    if (error.name === "Error") return `"${error.message}"`;
-    return `"${error.name}: ${error.message}"`;
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <AppFatalError
-          dismiss={this.clearError}
-          fatalError={this.fatalError}
-          redirectPath={this.props.location.pathname}
-        />
-      );
+  return {
+    type: "UNKNOWN_ERROR",
+    error: {
+      status: 500,
+      heading: "Error",
+      body: String(error)
     }
+  };
+};
 
-    return this.props.children;
-  }
+export default function FatalErrorBoundary({ children }) {
+  const location = useLocation();
+
+  return (
+    <ErrorBoundary
+      FallbackComponent={({ error, resetErrorBoundary }) => (
+        <AppFatalError
+          fatalError={formatError(error)}
+          dismiss={resetErrorBoundary}
+          redirectPath={location.pathname}
+        />
+      )}
+    >
+      {children}
+    </ErrorBoundary>
+  );
 }
 
-export default FatalErrorBoundary;
+FatalErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired
+};
