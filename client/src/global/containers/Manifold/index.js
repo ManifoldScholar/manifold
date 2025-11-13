@@ -224,7 +224,7 @@ export default function ManifoldContainer({ confirm }) {
               />
             </div>
           ) : (
-            <FatalErrorBoundary location={location}>
+            <FatalErrorBoundary>
               <Outlet />
             </FatalErrorBoundary>
           )}
