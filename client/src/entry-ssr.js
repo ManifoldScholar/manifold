@@ -25,6 +25,7 @@ import {
   createStaticRouter
 } from "react-router-dom/server";
 import createRouter from "./routes/createRouter";
+import { setStore } from "store/storeInstance";
 
 const socket = config.services.client.rescueEnabled
   ? null
@@ -61,11 +62,19 @@ const render = async (req, res, store) => {
 
   const stats = readStats("Client");
 
+  // Set store instance for SSR loaders
+  setStore(store);
+
   // Create v6 static router for SSR
   const routes = createRouter();
-  const handler = createStaticHandler(routes);
+  // Pass store in context so loaders can access it
+  const handler = createStaticHandler(routes, {
+    basename: "/",
+    context: { store }
+  });
 
   // Query the handler to get the context for the current request
+  // Bootstrap has already completed, so authentication state is available
   const context = await handler.query(
     new Request(`http://localhost${req.url}`)
   );
@@ -140,10 +149,6 @@ const render = async (req, res, store) => {
     ch.error("Server-side render failed in server-react.js");
     const errorComponent = exceptionRenderer(renderError);
     renderString = fatalErrorOutput(errorComponent, store);
-
-    /* Handle unauthenticated redirects here since we aren't inside the app <Router> */
-    if (req.method === "GET" && renderError.status === 401)
-      routingContext.url = `/login?redirect_uri=${req.url}`;
   } finally {
     const state = store.getState();
 
@@ -152,6 +157,7 @@ const render = async (req, res, store) => {
       respondWithRedirect(res, routingContext.url);
     }
     // After migrating global/containers/Manifold to functional component we no longer hit the catch
+    // Move 401 check here
     else if (req.method === "GET" && state.fatalError?.error?.status === 401) {
       respondWithRedirect(res, `/login?redirect_uri=${req.url}`);
     } else {
