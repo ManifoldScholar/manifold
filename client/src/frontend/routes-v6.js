@@ -1,6 +1,7 @@
 import queryString from "query-string";
 import NotFound from "global/containers/NotFound";
 import requireAuth from "helpers/router/requireAuth";
+import checkLibraryMode from "helpers/router/checkLibraryMode";
 import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
 import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
@@ -60,6 +61,7 @@ const routes = [
           {
             element: <Projects />,
             index: true,
+            loader: checkLibraryMode,
             handle: {
               name: "frontendProjectsAll",
               isLibrary: true,
@@ -73,6 +75,7 @@ const routes = [
           {
             element: <ProjectCollections />,
             path: "project-collections",
+            loader: checkLibraryMode,
             handle: {
               name: "frontendProjectCollections",
               isLibrary: true,
@@ -86,6 +89,7 @@ const routes = [
           {
             element: <ProjectCollectionDetail />,
             path: "project-collection/:id",
+            loader: checkLibraryMode,
             handle: {
               name: "frontendProjectCollection",
               isLibrary: true,
@@ -211,6 +215,7 @@ const routes = [
           {
             element: <JournalsList />,
             index: true,
+            loader: checkLibraryMode,
             handle: {
               name: "frontendJournalsList",
               isLibrary: true,
@@ -224,6 +229,7 @@ const routes = [
           {
             element: <IssuesList />,
             path: "issues",
+            loader: checkLibraryMode,
             handle: {
               name: "frontendIssuesList",
               isLibrary: true,
@@ -444,6 +450,7 @@ const routes = [
       {
         element: <Search />,
         path: "search",
+        loader: checkLibraryMode,
         handle: {
           name: "frontendSearch",
           isLibrary: true,
@@ -537,6 +544,7 @@ const routes = [
       {
         index: true,
         element: <Home />,
+        loader: checkLibraryMode,
         handle: {
           name: "frontend",
           isLibrary: true,
