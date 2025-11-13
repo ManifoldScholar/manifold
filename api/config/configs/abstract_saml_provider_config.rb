@@ -32,9 +32,6 @@ class AbstractSamlProviderConfig < ApplicationConfig
         last_name_attribute_name: "last_name"
   attr_config :endpoint
 
-  validates :endpoint, url: true, presence: true
-  required :sp_entity_id, :idp_sso_service_url
-
   # This class builder is useful to initialize the `config_name` and `env_prefix`
   # settings. Since some fields for each provider need to be secure, they shouldn't
   # all be stored in a single config. E.G. private keys should be retrieved
