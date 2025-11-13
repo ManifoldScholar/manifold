@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { Navigate, Outlet, useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { hasItemsInCollection } from "frontend/components/collecting/helpers";
