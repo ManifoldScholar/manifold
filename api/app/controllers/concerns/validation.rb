@@ -558,7 +558,7 @@ module Validation
   end
 
   def project_collection_filter_params
-    params.permit(filter: [:visible, :show_on_homepage, :projects, :order,
+    params.permit(filter: [:keyword, :visible, :show_on_homepage, :projects, :order,
                            :visible_on_homepage])[:filter]
   end
 

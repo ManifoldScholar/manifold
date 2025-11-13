@@ -12,6 +12,7 @@ class ProjectCollection < ApplicationRecord
   include TrackedCreator
   include Taggable
   include WithProjectCollectionLayout
+  include HasKeywordSearch
 
   # Attachments
   manifold_has_attached_file :hero, :image
@@ -61,6 +62,10 @@ class ProjectCollection < ApplicationRecord
   scope :by_visible_on_homepage, lambda { |_args = nil|
     by_visible.by_show_on_homepage.by_homepage_date_range(Time.zone.today)
   }
+
+  has_keyword_search!(
+    against: %i[title description short_description]
+  )
 
   # Callbacks
   before_save :reset_sort_order!
