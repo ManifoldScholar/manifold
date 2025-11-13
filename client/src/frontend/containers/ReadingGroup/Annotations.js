@@ -1,16 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { readingGroupsAPI } from "api";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useListFilters, useListQueryParams } from "hooks";
 import * as Styled from "./styles";
 
-function ReadingGroupAnnotationsContainer({
-  readingGroup,
-  refresh,
-  fetchVersion
-}) {
+export default function ReadingGroupAnnotationsContainer() {
+  const { readingGroup, refresh, fetchVersion } = useOutletContext() || {};
   const { pagination, filters, setFilters } = useListQueryParams({
     initFilters: {
       formats: ["annotation"]
@@ -50,10 +45,5 @@ function ReadingGroupAnnotationsContainer({
   ) : null;
 }
 
-ReadingGroupAnnotationsContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired,
-  fetchVersion: PropTypes.number.isRequired
-};
-
-export default ReadingGroupAnnotationsContainer;
+ReadingGroupAnnotationsContainer.displayName =
+  "Frontend.ReadingGroup.Annotations";

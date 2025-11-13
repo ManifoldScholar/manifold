@@ -105,6 +105,11 @@ export const Link = styled(NavLink, transientOptions)`
 
     outline: none;
   }
+
+  &.active {
+    --box-bg-color: var(--color-base-neutral10);
+    color: var(--strong-color);
+  }
 `;
 
 export const LinkText = styled.span`
