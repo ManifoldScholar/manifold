@@ -1,5 +1,6 @@
 import queryString from "query-string";
 import NotFound from "global/containers/NotFound";
+import requireAuth from "helpers/router/requireAuth";
 import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
 import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
@@ -387,6 +388,10 @@ const routes = [
       {
         element: <MyReadingGroups.Wrapper />,
         path: "my/groups",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
         handle: {
           name: "frontendMyReadingGroups",
           helper: (params = {}) => {
@@ -415,6 +420,10 @@ const routes = [
       {
         element: <MyStarred />,
         path: "my/starred",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
         handle: {
           name: "frontendStarred",
           helper: () => "/my/starred"
@@ -423,6 +432,10 @@ const routes = [
       {
         element: <MyAnnotations />,
         path: "my/notes",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
         handle: {
           name: "frontendAnnotations",
           helper: () => "/my/notes"
@@ -476,6 +489,10 @@ const routes = [
       {
         element: <Subscriptions />,
         path: "subscriptions",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
         handle: {
           name: "subscriptions",
           helper: () => "/subscriptions"
@@ -484,6 +501,10 @@ const routes = [
       {
         element: <PrivacySettings />,
         path: "privacy",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
         handle: {
           name: "privacy",
           helper: () => "/privacy"

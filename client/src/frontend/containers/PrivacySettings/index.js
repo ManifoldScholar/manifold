@@ -1,24 +1,13 @@
-import { Navigate } from "react-router-dom";
-import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
+import lh from "helpers/linkHandler";
 import AccountData from "frontend/components/privacy/AccountData";
 import CookiesForm from "frontend/components/privacy/CookiesForm";
 import Form from "global/components/form";
 import HeadContent from "global/components/HeadContent";
-import { useCurrentUser } from "hooks";
 import * as Styled from "./styles";
 
 export default function PrivacySettingsContainer() {
   const { t } = useTranslation();
-  const currentUser = useCurrentUser();
-
-  if (!currentUser)
-    return (
-      <Navigate
-        to={lh.link("frontendLogin")}
-        search={{ redirect_uri: "/privacy" }}
-      />
-    );
 
   return (
     <>

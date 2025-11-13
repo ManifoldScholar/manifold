@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { meAPI } from "api";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
-import lh from "helpers/linkHandler";
-import { Navigate } from "react-router-dom";
-import PropTypes from "prop-types";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import { useFromStore, useNotification } from "hooks";
@@ -27,14 +24,6 @@ export default function SubscriptionsContainer() {
   const formatData = () => {
     return { notificationPreferencesByKind: preferences };
   };
-
-  if (!currentUser)
-    return (
-      <Navigate
-        to={lh.link("frontendLogin")}
-        search={{ redirect_uri: "/subscriptions" }}
-      />
-    );
 
   return (
     <>
