@@ -18,7 +18,7 @@ export default function App({
   staticRouter
 }) {
   // Create v6 router for client-side (only if not SSR)
-  // Use useMemo to ensure router is only created once
+  // Note: Store is set in SSR (entry-ssr.js) and persists for client-side navigation
   const browserRouter = useMemo(() => {
     if (!staticRequest) {
       const routes = createRouter();
@@ -58,5 +58,5 @@ App.propTypes = {
   staticContext: PropTypes.object,
   staticRequest: PropTypes.object,
   helmetContext: PropTypes.object,
-  staticRouter: PropTypes.object // v6 static router created with createStaticRouter
+  staticRouter: PropTypes.object
 };
