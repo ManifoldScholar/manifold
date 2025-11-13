@@ -5,7 +5,7 @@ class Identity < ApplicationRecord
 
   belongs_to :user, optional: false, inverse_of: :identities
 
-  validates :provider, inclusion: { in: ManifoldEnv.oauth.known_strategies }
+  validates :provider, inclusion: { in: ManifoldEnv.oauth.known_strategies + (SamlConfig.providers.map { |p| p.name.to_s }) }
   validates :uid, :provider, presence: true
   validates :uid, uniqueness: { scope: %i(provider) }
 
