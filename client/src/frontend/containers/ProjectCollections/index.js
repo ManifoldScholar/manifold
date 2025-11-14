@@ -9,10 +9,10 @@ import HeadContent from "global/components/HeadContent";
 import { useFetch, useListQueryParams, useListFilters } from "hooks";
 
 export default function ProjectCollectionsContainer() {
-  const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
+  const filterReset = useMemo(() => ({ visible: true, order: "position ASC" }), []);
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: { visible: true, order: "position ASC" },
+    initFilters: filterReset,
     collectionPagination: {
       size: 4,
       number: 1
