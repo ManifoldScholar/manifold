@@ -13,8 +13,9 @@ export default function JournalMetadata({ entity, ...props }) {
 
     const data = entity?.attributes;
 
-    // This shows the number of volumes & issues, including drafts
-    // const additionalData = `${t("counts.volume", { count: data.journalVolumesCount })}, ${t("counts.issue", { count: data.journalIssuesCount })}`;
+    const additionalData = `${t("counts.volume", {
+      count: data.journalVolumesCount
+    })}, ${t("counts.issue", { count: data.availableJournalIssuesCount })}`;
 
     const draft = data.draft;
     const showUpdated = !draft && !!data.updatedAt;
@@ -24,7 +25,7 @@ export default function JournalMetadata({ entity, ...props }) {
     return {
       date,
       prefix,
-      // additionalData,
+      additionalData,
       ...genericMetadata
     };
   };
