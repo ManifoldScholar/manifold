@@ -58,12 +58,12 @@ export default function useListFilters({
 
   const activeTypes = options
     ? Object.keys(options)
-        .filter(option => Object.keys(filterTypes).includes(option))
-        .filter(option =>
-          Array.isArray(options[option])
-            ? options[option].length
-            : options[option]
-        )
+      .filter(option => Object.keys(filterTypes).includes(option))
+      .filter(option =>
+        Array.isArray(options[option])
+          ? options[option].length
+          : options[option]
+      )
     : [];
   const finalTypes =
     options?.featured && !options.subjects
@@ -71,24 +71,24 @@ export default function useListFilters({
       : activeTypes;
   const activeFilters = finalTypes.length
     ? finalTypes.map(type =>
-        filterTypes[type](
-          filters,
-          updateFilterState,
-          {
-            ...options,
-            featuredLabel
-          },
-          t
-        )
+      filterTypes[type](
+        filters,
+        updateFilterState,
+        {
+          ...options,
+          featuredLabel
+        },
+        t
       )
+    )
     : [];
 
   /* eslint-disable no-nested-ternary */
   const showReset = !resetState
     ? false
     : !activeTypes.length
-    ? !!filters?.keyword
-    : !isEqual(resetState, filters);
+      ? !!filters?.keyword
+      : !isEqual(resetState, filters);
   /* eslint-disable no-nested-ternary */
 
   const onReset = useCallback(() => {
