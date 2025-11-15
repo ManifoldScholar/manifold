@@ -154,6 +154,10 @@ class Navigation {
             route: "backendSettingsTheme"
           },
           {
+            label: "titles.content",
+            route: "backendSettingsContent"
+          },
+          {
             label: "titles.ingestion",
             route: "backendSettingsIngestion"
           },
@@ -527,6 +531,12 @@ class Navigation {
       {
         label: "titles.theme",
         route: "backendSettingsTheme",
+        entity: "settings",
+        ability: "update"
+      },
+      {
+        label: "titles.content",
+        route: "backendSettingsContent",
         entity: "settings",
         ability: "update"
       },
