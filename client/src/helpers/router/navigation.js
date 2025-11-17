@@ -24,6 +24,10 @@ class Navigation {
           {
             label: "titles.projects_all",
             route: "frontendProjectsAll"
+          },
+          settings.attributes.calculated?.hasProjectCollections && {
+            label: "titles.project_collections",
+            route: "frontendProjectCollections"
           }
         ]
       },
