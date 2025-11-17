@@ -11,6 +11,7 @@ class AbstractSamlProviderConfig < ApplicationConfig
   config_name :_unused
 
   provider_name :_unused
+
   attr_config enabled: false,
         subdomains: [],
         display_name: "SAML",
@@ -26,11 +27,11 @@ class AbstractSamlProviderConfig < ApplicationConfig
         certificate: nil,
         private_key: nil,
         idp_cert_fingerprint: nil,
-        primary_attribute_name: "uid",
-        email_attribute_name: "email",
-        first_name_attribute_name: "first_name",
-        last_name_attribute_name: "last_name"
+        assertion_consumer_service_binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-REDIRECT",
+        name_identifier_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
   attr_config :endpoint
+
+  delegate :provider_name, to: :class
 
   # This class builder is useful to initialize the `config_name` and `env_prefix`
   # settings. Since some fields for each provider need to be secure, they shouldn't
@@ -51,10 +52,78 @@ class AbstractSamlProviderConfig < ApplicationConfig
     end
   end
 
+  def provider_options
+    to_h
+    .merge(security_options)
+    .merge(derived_attrs)
+    .compact
+  end
+
+  def derived_attrs
+    {
+      name: provider_name,
+      request_attributes: saml_attributes,
+      attribute_statements: attribute_mappings
+    }
+  end
+
+  def security_options
+    {
+      security: {
+        metadata_signed: true,
+        authn_requests_signed: true,
+        want_assertions_signed: true,
+        digest_method: XMLSecurity::Document::SHA256,
+        signature_method: XMLSecurity::Document::RSA_SHA256
+      }
+    }
+  end
+
   def provider_args
     [
-      self.class.provider_name,
-      to_h
+      :saml,
+      provider_options
     ]
+  end
+
+  def saml_attributes
+    [
+      {
+        name: "email",
+        friendly_name: "Email Address",
+        name_format: "urn:oasis:names:tc:SAML:2.0:attrname-format:emailAddress",
+        is_required: true
+      },
+      {
+        name: "first_name",
+        friendly_name: "First Name",
+        name_format: "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+        is_required: true
+      },
+      {
+        name: "last_name",
+        friendly_name: "Last Name",
+        name_format: "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+        is_required: true
+      },
+      {
+        name: "entitlements",
+        friendly_name: "Entitlements",
+        name_format: "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+        is_required: false
+      },
+      {
+        name: "user_groups",
+        friendly_name: "User Groups",
+        name_format: "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+        is_required: false
+      }
+    ]
+  end
+
+  def attribute_mappings
+    saml_attributes.each_with_object({}) do |attr, memo|
+      memo[attr[:name].to_s.downcase.to_sym] = [attr[:name].to_s]
+    end
   end
 end
