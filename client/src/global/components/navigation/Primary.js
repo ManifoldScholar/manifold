@@ -55,14 +55,10 @@ export default function NavigationPrimary(props) {
     <>
       <Static
         backendButton={adminModeButton}
-        {...props}
         style={props.desktopStyle}
-      />
-      <Mobile
-        backendButton={adminModeButton}
         {...props}
-        style={props.mobileStyle}
       />
+      <Mobile backendButton={adminModeButton} {...props} />
     </>
   );
 }

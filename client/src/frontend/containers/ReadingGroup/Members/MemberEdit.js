@@ -1,32 +1,39 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
+import { useEffect, useCallback } from "react";
+import { useParams, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { readingGroupMembershipsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import Layout from "backend/components/layout";
 import { MemberSettingsForm } from "frontend/components/reading-group/forms";
-import { useFetch } from "hooks";
+import { useFetch, useApiCallback } from "hooks";
 
 const { flush } = entityStoreActions;
 
-function ReadingGroupMemberEditContainer({
-  readingGroup,
-  confirm,
-  dispatch,
-  onRemoveClick,
-  onEditSuccess
-}) {
+function ReadingGroupMemberEditContainer() {
   const { membershipId } = useParams();
+  const { readingGroup, confirm, dispatch, onEditSuccess } =
+    useOutletContext() || {};
   const { t } = useTranslation();
 
   const { data: membership } = useFetch({
     request: [readingGroupMembershipsAPI.show, membershipId]
   });
 
+  const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
+
   useEffect(() => {
     return () => dispatch(flush([requests.feReadingGroupMembershipShow]));
   }, [dispatch]);
+
+  const handleRemove = useCallback(() => {
+    const heading = t("messages.membership.destroy_heading");
+    const message = t("messages.membership.destroy_message");
+    if (confirm)
+      confirm(heading, message, async () => {
+        await deleteMembership(membership.id);
+        onEditSuccess();
+      });
+  }, [confirm, deleteMembership, membership?.id, onEditSuccess, t]);
 
   return membership ? (
     <section>
@@ -34,7 +41,7 @@ function ReadingGroupMemberEditContainer({
         title={t("forms.reading_group_member.title")}
         buttons={[
           {
-            onClick: () => onRemoveClick(membership),
+            onClick: handleRemove,
             icon: "delete24",
             label: t("actions.delete"),
             className: "utility-button__icon utility-button__icon--notice"
@@ -52,13 +59,5 @@ function ReadingGroupMemberEditContainer({
     </section>
   ) : null;
 }
-
-ReadingGroupMemberEditContainer.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  confirm: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  onRemoveClick: PropTypes.func.isRequired,
-  onEditSuccess: PropTypes.func.isRequired
-};
 
 export default ReadingGroupMemberEditContainer;

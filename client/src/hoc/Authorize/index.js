@@ -1,189 +1,199 @@
-import React, { PureComponent } from "react";
+import { useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import isPlainObject from "lodash/isPlainObject";
-import { withRouter } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { notificationActions } from "actions";
 import Authorization from "helpers/authorization";
 import FatalErrorRender from "global/components/FatalError";
 import get from "lodash/get";
+import { useFromStore } from "hooks";
 
-export class AuthorizeComponent extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      authentication: state.authentication
-    };
-  };
+export default function Authorize(props) {
+  const {
+    successBehavior = "show",
+    failureRedirect = null,
+    failureNotification = null,
+    children
+  } = props;
 
-  static propTypes = {
-    entity: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
-      PropTypes.array
-    ]),
-    ability: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    kind: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    successBehavior: PropTypes.oneOf(["hide", "show"]).isRequired,
-    failureRedirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    failureNotification: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.shape({
-        heading: PropTypes.string,
-        body: PropTypes.string,
-        level: PropTypes.number
-      })
-    ]),
-    children: PropTypes.node,
-    authentication: PropTypes.object
-  };
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const authentication = useFromStore({ path: "authentication" });
+  const propsWithAuth = { ...props, authentication };
 
-  static defaultProps = {
-    successBehavior: "show",
-    failureRedirect: null,
-    failureNotification: null
-  };
+  const authorization = useMemo(() => new Authorization(), []);
 
-  constructor(props) {
-    super(props);
-    this.authorization = new Authorization();
-  }
+  const isAuthenticated = get(authentication, "authenticated");
 
-  get isAuthenticated() {
-    return get(this.props, "authentication.authenticated");
-  }
-
-  redirectPath(props) {
-    if (props.failureRedirect === true) {
-      const pathKey = this.props.location.pathname.split("/")?.[1];
-      const availableRedirects = [
-        "projects/all",
-        "backend/dashboard",
-        "journals/all",
-        "groups"
-      ];
-      return pathKey
-        ? `/${availableRedirects.find(r => r.startsWith(pathKey))}`
-        : "/";
-    }
-
-    if (typeof props.failureRedirect === "string") return props.failureRedirect;
-
-    return null;
-  }
-
-  doNotify(failureNotification) {
-    let error = {
-      heading: "Access Denied.",
-      body:
-        "Please login to proceed. After logging in, you will be automatically redirected.",
-      level: 2,
-      scope: "authentication"
-    };
-    if (isPlainObject(failureNotification)) {
-      error = Object.assign(error, failureNotification);
-    }
-    this.props.dispatch(notificationActions.addNotification(error));
-  }
-
-  redirectAndNotify({ redirectPath, postLoginUri, notificationContent }) {
-    const showLoginOverlay = !this.isAuthenticated && redirectPath !== "/login";
-    if (showLoginOverlay) this.doNotify(notificationContent);
-
-    this.props.history.push({
-      pathname: redirectPath,
-      // eslint-disable-next-line no-nested-ternary
-      search: this.isAuthenticated
-        ? "?notification=authorizationError"
-        : !showLoginOverlay
-        ? `?redirect_uri=${postLoginUri}`
-        : undefined,
-      state: {
-        showLogin: showLoginOverlay,
-        notificationBody: notificationContent?.body
+  const getRedirectPath = useCallback(
+    redirectProp => {
+      if (redirectProp === true) {
+        const pathKey = location.pathname.split("/")?.[1];
+        const availableRedirects = [
+          "projects/all",
+          "backend/dashboard",
+          "journals/all",
+          "groups"
+        ];
+        return pathKey
+          ? `/${availableRedirects.find(r => r.startsWith(pathKey))}`
+          : "/";
       }
+
+      if (typeof redirectProp === "string") return redirectProp;
+
+      return null;
+    },
+    [location.pathname]
+  );
+
+  const renderAccessDenied = useCallback(() => {
+    const fatalError = {
+      error: {
+        status: 403,
+        method: "GET",
+        heading: "Access Denied"
+      }
+    };
+
+    const hasAnyAdminAccess = authorization.authorizeKind({
+      authentication,
+      kind: [
+        "admin",
+        "editor",
+        "marketeer",
+        "project_creator",
+        "project_editor",
+        "project_property_manager",
+        "journal_editor"
+      ]
     });
-  }
 
-  maybeRedirect(props) {
-    if (this.isAuthenticated) {
-      const fatalError = {
-        error: {
-          status: 403,
-          method: "GET",
-          heading: "Access Denied"
+    return (
+      <FatalErrorRender
+        fatalError={fatalError}
+        headerLineOne="errors.access_denied.header"
+        headerLineTwo=""
+        userMessage={
+          failureNotification?.body ??
+          (!hasAnyAdminAccess
+            ? "errors.access_denied.no_admin_access"
+            : "errors.access_denied.authorization_admin")
         }
-      };
+        contained
+        hideStatus
+      />
+    );
+  }, [authentication, authorization, failureNotification?.body]);
 
-      const hasAnyAdminAccess = this.authorization.authorizeKind({
-        authentication: this.props.authentication,
-        kind: [
-          "admin",
-          "editor",
-          "marketeer",
-          "project_creator",
-          "project_editor",
-          "project_property_manager",
-          "journal_editor"
-        ]
-      });
+  const doNotify = useCallback(
+    failureNotificationParam => {
+      let error = {
+        heading: "Access Denied.",
+        body:
+          "Please login to proceed. After logging in, you will be automatically redirected.",
+        level: 2,
+        scope: "authentication"
+      };
+      if (isPlainObject(failureNotificationParam)) {
+        error = Object.assign(error, failureNotificationParam);
+      }
+      dispatch(notificationActions.addNotification(error));
+    },
+    [dispatch]
+  );
+
+  const redirectAndNotify = useCallback(
+    ({ redirectPath, postLoginUri, notificationContent }) => {
+      const showLoginOverlay = redirectPath !== "/login";
+      if (showLoginOverlay) doNotify(notificationContent);
+
+      const redirectWithSearch = !showLoginOverlay
+        ? `${redirectPath}?redirect_uri=${encodeURIComponent(postLoginUri)}`
+        : redirectPath;
 
       return (
-        <FatalErrorRender
-          fatalError={fatalError}
-          headerLineOne="errors.access_denied.header"
-          headerLineTwo=""
-          userMessage={
-            props.failureNotification?.body ??
-            (!hasAnyAdminAccess
-              ? "errors.access_denied.no_admin_access"
-              : "errors.access_denied.authorization_admin")
-          }
-          contained
-          hideStatus
+        <Navigate
+          to={redirectWithSearch}
+          state={{
+            showLogin: showLoginOverlay,
+            postLoginRedirect: postLoginUri,
+            notificationBody: notificationContent?.body
+          }}
         />
       );
-    }
+    },
+    [doNotify]
+  );
 
-    const redirectPath = this.redirectPath(props);
-    const postLoginUri = `${props.location.pathname}${props.location.search}`;
+  const maybeRedirect = () => {
+    if (isAuthenticated) return renderAccessDenied();
 
-    if (redirectPath)
-      return this.redirectAndNotify({
+    const redirectPath = getRedirectPath(failureRedirect);
+    const postLoginUri = `${location.pathname}${location.search}`;
+
+    if (redirectPath) {
+      // For SSR, throw a Response object for redirect
+      if (__SERVER__) {
+        const redirectUrl = `/login?redirect_uri=${encodeURIComponent(
+          postLoginUri
+        )}`;
+
+        throw new Response(null, {
+          status: 302,
+          headers: { Location: redirectUrl }
+        });
+      }
+
+      return redirectAndNotify({
         redirectPath,
         postLoginUri,
-        notificationContent: props.failureNotification
+        notificationContent: failureNotification
       });
-  }
+    }
+  };
 
-  successBehavior(props) {
-    return props.successBehavior;
-  }
+  const renderHide = () => {
+    if (authorization.authorize(propsWithAuth)) return null;
+    return <>{children}</>;
+  };
 
-  renderHide(props) {
-    if (this.authorization.authorize(props)) return null;
-    return <>{this.props.children}</>;
-  }
+  const renderShow = () => {
+    if (!authorization.authorize(propsWithAuth)) return null;
+    return <>{children}</>;
+  };
 
-  renderShow(props) {
-    if (!this.authorization.authorize(props)) return null;
-    return <>{this.props.children}</>;
-  }
+  const isAuthorized = authorization.authorize(propsWithAuth);
+  if (!isAuthorized && failureRedirect) return maybeRedirect();
 
-  render() {
-    const isAuthorized = this.authorization.authorize(this.props);
-    if (!isAuthorized && this.props.failureRedirect)
-      return this.maybeRedirect(this.props);
+  if (!children) return null;
 
-    if (!this.props.children) return null;
+  if (successBehavior === "hide") return renderHide();
+  if (successBehavior === "show") return renderShow();
 
-    const successBehavior = this.successBehavior(this.props);
-    if (successBehavior === "hide") return this.renderHide(this.props);
-    if (successBehavior === "show") return this.renderShow(this.props);
-
-    return null;
-  }
+  return null;
 }
 
-export default connect(AuthorizeComponent.mapStateToProps)(
-  withRouter(AuthorizeComponent)
-);
+Authorize.displayName = "Authorize";
+
+Authorize.propTypes = {
+  entity: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.array
+  ]),
+  ability: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  kind: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  successBehavior: PropTypes.oneOf(["hide", "show"]),
+  failureRedirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  failureNotification: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      heading: PropTypes.string,
+      body: PropTypes.string,
+      level: PropTypes.number
+    })
+  ]),
+  children: PropTypes.node
+};

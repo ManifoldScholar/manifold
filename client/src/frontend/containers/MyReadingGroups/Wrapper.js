@@ -1,23 +1,38 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { childRoutes } from "helpers/router";
-import Authorize from "hoc/Authorize";
+import { useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import lh from "helpers/linkHandler";
+import List from "./List";
 
-export default class MyReadingGroupsContainer extends Component {
-  static propTypes = {
-    route: PropTypes.object.isRequired
-  };
+export default function MyReadingGroupsContainer() {
+  const navigate = useNavigate();
+  const refreshRef = useRef(null);
 
-  render() {
-    return (
-      <Authorize
-        kind="any"
-        failureRedirect={lh.link("frontendLogin")}
-        failureNotification
-      >
-        {childRoutes(this.props.route)}
-      </Authorize>
-    );
-  }
+  const handleNewGroupSuccess = useCallback(() => {
+    navigate(lh.link("frontendMyReadingGroups"));
+
+    if (refreshRef.current?.refresh) {
+      refreshRef.current.refresh();
+    }
+  }, [navigate]);
+
+  return (
+    <>
+      <List ref={refreshRef} />
+      <OutletWithDrawer
+        drawerProps={{
+          context: "frontend",
+          size: "wide",
+          position: "overlay",
+          lockScroll: "always",
+          closeUrl: lh.link("frontendMyReadingGroups")
+        }}
+        context={{
+          onSuccess: handleNewGroupSuccess
+        }}
+      />
+    </>
+  );
 }
+
+MyReadingGroupsContainer.displayName = "Frontend.Containers.MyReadingGroups";

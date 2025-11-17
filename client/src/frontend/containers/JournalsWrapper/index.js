@@ -1,22 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { renderRoutes } from "react-router-config";
-import { useRedirectToFirstMatch } from "hooks";
+import { Outlet } from "react-router-dom";
 
-export default function JournalsWrapper({ route }) {
-  useRedirectToFirstMatch({
-    route: "frontendJournals",
-    candidates: [
-      {
-        label: "All Journals",
-        route: "frontendJournalsList"
-      }
-    ]
-  });
-
-  return renderRoutes(route.routes);
+export default function JournalsWrapper() {
+  return <Outlet />;
 }
-
-JournalsWrapper.propTypes = {
-  route: PropTypes.object
-};

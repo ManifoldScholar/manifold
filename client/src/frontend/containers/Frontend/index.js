@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import { useMemo } from "react";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import Footers from "global/components/Footers";
@@ -7,145 +8,87 @@ import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
 import { commonActions } from "actions/helpers";
 import { pagesAPI, subjectsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
-import { select, isLoaded } from "utils/entityUtils";
-import connectAndFetch from "utils/connectAndFetch";
-import { renderRoutes } from "react-router-config";
+import { useFetch, useFromStore } from "hooks";
+import { Outlet } from "react-router-dom";
 import get from "lodash/get";
 import BodyClass from "hoc/BodyClass";
 import AppFatalError from "global/components/FatalError/AppWrapper";
 import redirectIfLibraryDisabled from "hoc/redirectIfLibraryDisabled";
+import { SearchProvider } from "hooks/useSearch/context";
 
-const { request } = entityStoreActions;
+function FrontendContainer() {
+  const dispatch = useDispatch();
 
-export class FrontendContainer extends Component {
-  static fetchData = (getState, dispatch) => {
-    if (!isLoaded(requests.gPages, getState())) {
-      const pages = request(pagesAPI.index(), requests.gPages, {
-        oneTime: true
-      });
-      const subjects = request(
-        subjectsAPI.index({ used: true }, {}, true),
-        requests.feSubjects,
-        { oneTime: true }
-      );
-      const promises = [];
-      const pagesRes = dispatch(pages);
-      const subjectsRes = dispatch(subjects);
-      if (pagesRes) promises.push(pagesRes.promise);
-      if (subjectsRes) promises.push(subjectsRes.promise);
-      return Promise.all(promises);
-    }
-  };
+  const authentication = useFromStore({ path: "authentication" });
+  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const notifications = useFromStore({ path: "notifications" });
+  const fatalError = useFromStore({ path: "fatalError" });
 
-  static mapStateToProps = state => {
-    return {
-      authentication: state.authentication,
-      visibility: state.ui.transitory.visibility,
-      loading: state.ui.transitory.loading.active,
-      notifications: state.notifications,
-      frontendMode: state.ui.transitory.frontendMode,
-      pages: select(requests.gPages, state.entityStore),
-      settings: select(requests.settings, state.entityStore),
-      fatalError: state.fatalError
-    };
-  };
+  const settings = useFromStore({
+    requestKey: requests.settings,
+    action: "select"
+  });
 
-  static propTypes = {
-    location: PropTypes.object,
-    dispatch: PropTypes.func,
-    fetchData: PropTypes.func,
-    authentication: PropTypes.object,
-    visibility: PropTypes.object,
-    notifications: PropTypes.object,
-    pages: PropTypes.array,
-    settings: PropTypes.object,
-    route: PropTypes.object,
-    match: PropTypes.object
-  };
+  const userId = authentication.currentUser?.id;
 
-  constructor(props) {
-    super(props);
-    this.commonActions = commonActions(props.dispatch);
-  }
+  const { data: pages } = useFetch({
+    request: [pagesAPI.index],
+    options: { requestKey: requests.gPages },
+    dependencies: [userId]
+  });
 
-  componentDidUpdate(prevProps) {
-    // The store will be cleared if the user has changed. If this happens, reload content.
-    let shouldFetchData = false;
-    if (
-      !this.props.authentication.currentUser &&
-      prevProps.authentication.currentUser
-    )
-      shouldFetchData = true;
-    if (
-      this.props.authentication.currentUser &&
-      !prevProps.authentication.currentUser
-    )
-      shouldFetchData = true;
-    if (
-      this.props.authentication.currentUser &&
-      prevProps.authentication.currentUser &&
-      this.props.authentication.currentUser.id !==
-        prevProps.authentication.currentUser.id
-    )
-      shouldFetchData = true;
+  // Memoize filter objects to prevent infinite fetch loops
+  const subjectFilters = useMemo(() => ({ used: true }), []);
 
-    if (shouldFetchData) {
-      this.props.fetchData(this.props);
-    }
-  }
+  useFetch({
+    request: [subjectsAPI.index, subjectFilters, null, true],
+    options: { requestKey: requests.feSubjects },
+    dependencies: [userId]
+  });
 
-  get mainClassName() {
-    const hasPressLogo = get(
-      this.props.settings,
-      "attributes.pressLogoStyles.small"
-    );
+  const commonActionsMemo = useMemo(() => commonActions(dispatch), [dispatch]);
+
+  const mainClassName = useMemo(() => {
+    const hasPressLogo = get(settings, "attributes.pressLogoStyles.small");
     return classNames({
       "main-content": true,
       "flex-viewport": true,
       "extra-top": hasPressLogo
     });
-  }
+  }, [settings]);
 
-  render() {
-    return (
-      <BodyClass className={"browse"}>
-        <BreadcrumbsProvider>
-          <Utility.ScrollToTop />
+  return (
+    <BodyClass className="browse">
+      <BreadcrumbsProvider>
+        <Utility.ScrollToTop />
+        <SearchProvider>
           <Layout.Header
-            pages={this.props.pages}
-            visibility={this.props.visibility}
-            match={this.props.match}
-            location={this.props.location}
-            authentication={this.props.authentication}
-            notifications={this.props.notifications}
-            commonActions={this.commonActions}
-            settings={this.props.settings}
+            pages={pages}
+            visibility={visibility}
+            authentication={authentication}
+            notifications={notifications}
+            commonActions={commonActionsMemo}
+            settings={settings}
           />
-          <main
-            ref={mainContainer => {
-              this.mainContainer = mainContainer;
-            }}
-            id="skip-to-main"
-            tabIndex={-1}
-            className={this.mainClassName}
-          >
-            {this.props.fatalError.error ? (
-              <AppFatalError fatalError={this.props.fatalError} />
+          <main id="skip-to-main" tabIndex={-1} className={mainClassName}>
+            {fatalError.error ? (
+              <AppFatalError fatalError={fatalError} />
             ) : (
-              renderRoutes(this.props.route.routes)
+              <Outlet />
             )}
           </main>
           <Footers.FrontendFooter
-            pages={this.props.pages}
-            authentication={this.props.authentication}
-            commonActions={this.commonActions}
-            settings={this.props.settings}
+            pages={pages}
+            authentication={authentication}
+            commonActions={commonActionsMemo}
+            settings={settings}
           />
-        </BreadcrumbsProvider>
-      </BodyClass>
-    );
-  }
+        </SearchProvider>
+      </BreadcrumbsProvider>
+    </BodyClass>
+  );
 }
 
-export default connectAndFetch(redirectIfLibraryDisabled(FrontendContainer));
+FrontendContainer.propTypes = {};
+
+export default redirectIfLibraryDisabled(FrontendContainer);
