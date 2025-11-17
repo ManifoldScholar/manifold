@@ -30,7 +30,7 @@ export class FrontendContainer extends Component {
         { oneTime: true }
       );
       const journalSubjects = request(
-        subjectsAPI.index({ journalUsed: true }, {}, true),
+        subjectsAPI.index({ usedJournal: true }, {}, true),
         requests.feJournalSubjects,
         { oneTime: true }
       );
