@@ -5,7 +5,7 @@ import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
-function ProjectsSecondaryNav(props, ref) {
+function ProjectsDropdown(props, ref) {
   const { links, visible, ...dropDownProps } = props;
   const { t } = useTranslation();
 
@@ -15,10 +15,9 @@ function ProjectsSecondaryNav(props, ref) {
   };
 
   const renderItem = link => {
-    const icon =
-      link.route === "backendProjectsAll"
-        ? "BEProject64"
-        : "ProjectCollection32";
+    const icon = link.route.includes("ProjectsAll")
+      ? "BEProject64"
+      : "ProjectCollection32";
 
     return (
       <li key={link.label}>
@@ -55,6 +54,6 @@ function ProjectsSecondaryNav(props, ref) {
   );
 }
 
-ProjectsSecondaryNav.displayName = "Layout.Projects.SecondaryNav";
+ProjectsDropdown.displayName = "Navigation.Projects.Dropdown";
 
-export default forwardRef(ProjectsSecondaryNav);
+export default forwardRef(ProjectsDropdown);
