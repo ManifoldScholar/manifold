@@ -23,7 +23,7 @@ services:
       timeout: 5s
       retries: 5
   redis:
-    image: bitnami/redis:6.2.7-debian-10-r34
+    image: redis:6.2.7
     platform: linux/amd64
     environment:
       - "ALLOW_EMPTY_PASSWORD=yes"
@@ -41,7 +41,7 @@ services:
       timeout: 5s
       retries: 5
   test-redis:
-    image: bitnami/redis:6.2.7-debian-10-r34
+    image: redis:6.2.7
     platform: linux/amd64
     environment:
       - "ALLOW_EMPTY_PASSWORD=yes"
@@ -122,10 +122,10 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      migrations:
-        condition: service_completed_successfully
-      minio-client:
-        condition: service_completed_successfully
+      # migrations:
+      #   condition: service_completed_successfully
+      # minio-client:
+      #   condition: service_completed_successfully
       redis:
         condition: service_healthy
     env_file:
