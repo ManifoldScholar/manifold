@@ -20,6 +20,7 @@ class Navigation {
       {
         label: "titles.projects",
         route: "frontendProjects",
+        dropdown: true,
         children: [
           {
             label: "titles.projects_all",
