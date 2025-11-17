@@ -8,8 +8,8 @@ import navigation from "helpers/router/navigation";
 import Utility from "global/components/utility";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
 import { useTranslation } from "react-i18next";
-import ProjectsNav from "./SecondaryNav/Projects";
-import ProjectsButton from "./SecondaryNav/Projects/Button";
+import ProjectsToggle from "global/components/navigation/projects-dropdown/Toggle";
+import ProjectsDropdown from "global/components/navigation/projects-dropdown";
 import Authorization from "helpers/authorization";
 import { useShowJournalsActive } from "hooks";
 
@@ -48,9 +48,9 @@ export default function LayoutHeader({
   if (canUpdateProjectCollections) {
     const projectsLink = baseLinks.find(l => l.route === "backendProjects");
     projectsLink.dropdownContent = (
-      <ProjectsNav links={projectsLink.children} />
+      <ProjectsDropdown links={projectsLink.children} />
     );
-    projectsLink.toggle = ProjectsButton;
+    projectsLink.toggle = ProjectsToggle;
     links = baseLinks.filter(
       l => l.route !== "backendProjects" && l.route !== "backendProjectsAll"
     );
