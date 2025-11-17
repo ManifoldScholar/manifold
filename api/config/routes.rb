@@ -25,6 +25,9 @@ Rails.application.routes.draw do
 
   get "auth/:provider/callback", to: "oauth#authorize"
 
+  # SAML POST callbacks
+  post "auth/:provider/callback", to: "oauth#authorize"
+
   namespace :api do
     mount Tus::Server => "/files"
 
