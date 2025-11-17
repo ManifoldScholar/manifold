@@ -551,6 +551,9 @@ GEM
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
+    omniauth-rails_csrf_protection (1.0.2)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
     omniauth-saml (2.2.4)
       omniauth (~> 2.1)
       ruby-saml (~> 1.18)
@@ -970,6 +973,7 @@ DEPENDENCIES
   omniauth (~> 2.1.3)
   omniauth-facebook (~> 4.0.0)
   omniauth-google-oauth2 (~> 0.4)
+  omniauth-rails_csrf_protection
   omniauth-saml
   omniauth-twitter (~> 1.4.0)
   paleta (~> 0.3.0)
