@@ -629,7 +629,7 @@ module Validation
   def journal_issue_filter_params
     params.permit(
       filter: [:keyword, :order, :typeahead, :journal_id, :journal_volume_id,
-               :volume_is_nil, :with_update_ability]
+               :volume_is_nil, :with_update_ability, :subject]
     )[:filter]
   end
 
