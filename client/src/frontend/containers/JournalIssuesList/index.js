@@ -1,6 +1,11 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useFetch, useListQueryParams, useFromStore } from "hooks";
+import {
+  useFetch,
+  useListQueryParams,
+  useFromStore,
+  useListFilters
+} from "hooks";
 import { journalIssuesAPI } from "api";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
 import HeadContent from "global/components/HeadContent";
@@ -10,8 +15,13 @@ import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 
 export default function JournalIssuesList({ journal }) {
-  const { pagination, filters } = useListQueryParams({
-    initFilters: { journal_id: journal.id, volume_is_nil: true }
+  const initFilters = useMemo(
+    () => ({ journal_id: journal.id, order: "sort_title DESC" }),
+    [journal.id]
+  );
+
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initFilters
   });
 
   const { data: issues, meta } = useFetch({
@@ -51,6 +61,16 @@ export default function JournalIssuesList({ journal }) {
 
   const headContentProps = useEntityHeadContent(journal);
 
+  const filterProps = useListFilters({
+    onFilterChange: param => setFilters(param),
+    initialState: filters,
+    resetState: initFilters,
+    options: {
+      entityType: "journalIssue",
+      sort: true
+    }
+  });
+
   if (!journal || !issues || !meta) return null;
 
   return (
@@ -65,6 +85,7 @@ export default function JournalIssuesList({ journal }) {
         issues={issues}
         issuesMeta={meta}
         parentView
+        filterProps={filterProps}
       />
     </>
   );
