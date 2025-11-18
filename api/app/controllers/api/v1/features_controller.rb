@@ -25,7 +25,7 @@ module API
 
       def update
         @feature = load_and_authorize_feature
-        ::Updaters::Feature.new(**feature_params).update(@feature)
+        ::Updaters::Feature.new(feature_params).update(@feature)
         render_single_resource(@feature)
       end
 
