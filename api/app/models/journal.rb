@@ -90,8 +90,9 @@ class Journal < ApplicationRecord
   scope :by_subject, ->(subject = nil) {
     next all unless subject.present?
 
-    where(id: unscoped.joins(:journal_subjects)
-                      .merge(JournalSubject.by_subject(subject)).select(:journal_id))
+    joins(:journal_subjects)
+    .merge(JournalSubject.by_subject(subject))
+    .distinct
   }
 
   multisearches! :description_plaintext
