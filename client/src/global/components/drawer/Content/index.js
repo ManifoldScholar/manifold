@@ -5,7 +5,7 @@ import classNames from "classnames";
 import Notifications from "global/containers/Notifications";
 import FrontMatter from "../FrontMatter";
 import { DrawerContext } from "helpers/contexts";
-import { usePreventBodyScroll, useFromStore } from "hooks";
+import { usePreventBodyScroll } from "hooks";
 import * as Styled from "./styles";
 
 function DrawerContent(props, ref) {
@@ -29,7 +29,6 @@ function DrawerContent(props, ref) {
     additionalDrawerProps = {}
   } = props;
 
-  const connected = useFromStore("websocket.connected");
   usePreventBodyScroll(lockScroll && open);
 
   // Waits for animation to finish before focusing in trap.
@@ -112,7 +111,7 @@ function DrawerContent(props, ref) {
   const inner = (
     <Inner>
       <FrontMatter {...props} />
-      {(connected || showNotifications) && (
+      {showNotifications && (
         <Notifications scope="drawer" style="drawer" animate={false} />
       )}
       <DrawerContext.Provider value={{ headerId }}>
