@@ -5,7 +5,7 @@ import EntityAvatar from "global/components/atomic/EntityAvatar";
 import EntityMetadata from "./EntityMetadata";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
-import ProjectCollectionAvatar from "../EntityAvatar/ProjectCollectionAvatar";
+import ProjectCollectionAvatar from "../EntityAvatar/patterns/ProjectCollectionAvatar";
 
 export default function EntityThumbnail({
   entity,

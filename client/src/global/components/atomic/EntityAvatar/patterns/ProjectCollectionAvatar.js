@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as Styled from "./styles";
+import * as Styled from "../styles";
 import {
   getHeroImage,
   getHeaderLayout
 } from "frontend/components/entity/Collection/helpers";
+import IconComputed from "../../../icon-computed";
 
 const ProjectCollectionAvatar = ({ entity }) => {
   const headerLayout = getHeaderLayout(entity);
@@ -12,7 +13,7 @@ const ProjectCollectionAvatar = ({ entity }) => {
   const alt = entity.attributes.heroAltText;
   const width = 320;
   const height = 320;
-  // const icon = entity.attributes.icon;
+  const icon = entity.attributes.icon || "book-stack-vertical";
 
   return src ? (
     <Styled.Avatar
@@ -23,7 +24,12 @@ const ProjectCollectionAvatar = ({ entity }) => {
       loading="lazy"
     />
   ) : (
-    <Styled.Placeholder mode="responsive" color={"primary"} ariaLabel={false} />
+    <Styled.Placeholder
+      mode="responsive"
+      color={"primary"}
+      ariaLabel={false}
+      icon={<IconComputed.ProjectCollection icon={icon} />}
+    />
   );
 };
 
