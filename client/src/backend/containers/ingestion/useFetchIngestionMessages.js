@@ -2,8 +2,13 @@ import { useRef, useCallback, useEffect, useState } from "react";
 import { useApiCallback } from "hooks";
 import { ingestionsAPI } from "api";
 
-export default function useFetchIngestionMessages(id, setLog, setAction) {
+export default function useFetchIngestionMessages(
+  id,
+  setLog,
+  setContainerFetch
+) {
   const intervalRef = useRef(null);
+  const ingestionIntervalRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const logIds = useRef([]);
 
@@ -13,9 +18,9 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
-      setLoading(false);
-      logIds.current = [];
     }
+    setLoading(false);
+    logIds.current = [];
   }, [setLoading, logIds]);
 
   const appendToLog = useCallback(
@@ -24,16 +29,6 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
       setLog(log => log.concat("\n").concat(message[1]));
     },
     [setLog]
-  );
-
-  const checkForEnd = useCallback(
-    message => {
-      if (message[1]?.includes("Complete")) {
-        endPolling();
-        setAction("end");
-      }
-    },
-    [endPolling, setAction]
   );
 
   const processMessage = useCallback(
@@ -45,18 +40,46 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
 
       if (message.kind === "log") {
         appendToLog(message.payload);
-        checkForEnd(message.payload);
       }
     },
-    [appendToLog, logIds, checkForEnd]
+    [appendToLog, logIds]
   );
 
   const fetchMessages = useApiCallback(ingestionsAPI.messages, {
     silent: true
   });
 
+  const fetchIngestion = useApiCallback(ingestionsAPI.show, { silent: true });
+
+  const startPollingIngestion = useCallback(() => {
+    if (ingestionIntervalRef.current) return;
+
+    ingestionIntervalRef.current = setInterval(async () => {
+      try {
+        const { data: ingestion, errors } = await fetchIngestion(id);
+
+        if (!errors) {
+          const { state } = ingestion.attributes ?? {};
+          if (state === "finished") {
+            clearInterval(ingestionIntervalRef.current);
+            ingestionIntervalRef.current = null;
+            setContainerFetch(false);
+            setTimeout(() => {
+              endPolling();
+            }, 8000);
+          }
+        }
+      } catch (error) {
+        /* eslint-disable-next-line no-console */
+        console.debug(error);
+      }
+    }, 3000);
+  }, [fetchIngestion, id, endPolling, setContainerFetch]);
+
   const startPolling = useCallback(() => {
     if (intervalRef.current) return;
+
+    startPollingIngestion();
 
     setLoading(true);
 
@@ -76,7 +99,7 @@ export default function useFetchIngestionMessages(id, setLog, setAction) {
         console.debug(error);
       }
     }, 1000);
-  }, [fetchMessages, processMessage, id]);
+  }, [fetchMessages, processMessage, id, startPollingIngestion]);
 
   useEffect(() => {
     return () => {
