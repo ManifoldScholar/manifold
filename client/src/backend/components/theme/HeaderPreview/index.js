@@ -28,6 +28,7 @@ export default function HeaderPreview({
         "--color-header-foreground": foregroundColor,
         "--color-header-foreground-active": activeColor
       }}
+      inert=""
     >
       <SetCSSProperty
         measurement="height"
