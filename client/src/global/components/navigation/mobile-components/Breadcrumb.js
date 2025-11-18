@@ -1,25 +1,49 @@
-import React, { PureComponent } from "react";
 import classNames from "classnames";
-import { matchPath } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { useLocation, NavLink, matchPath } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
-import { withTranslation } from "react-i18next";
 
-class MobileBreadcrumb extends PureComponent {
-  static propTypes = {
-    links: PropTypes.array.isRequired,
-    location: PropTypes.object.isRequired,
-    t: PropTypes.func
+export default function MobileBreadcrumb({ links, journalIsActive }) {
+  const location = useLocation();
+  const { t } = useTranslation();
+
+  const pathForLink = link => {
+    if (link.externalUrl) return link.externalUrl;
+    const args = link.args || [];
+    const route = link.linksTo || link.route;
+    return lh.link(route, ...args);
   };
 
-  get segments() {
-    const journalIsActive = this.props.journalIsActive;
+  const match = (linksToMatch, exact = false) => {
+    if (!linksToMatch) return null;
+    return linksToMatch.find(link => {
+      if (link.matchType === "link" || link.externalUrl || exact) {
+        return location.pathname === pathForLink(link);
+      }
+
+      if (
+        location.pathname === "/project-collections" &&
+        link.route === "frontendProjects"
+      )
+        return true;
+
+      // Check if this route is in the current matches by route name
+      const routeMatch = matchPath(location.pathname, link);
+      if (routeMatch) return true;
+
+      // Fallback: check if pathname starts with the link path
+      const linkPath = pathForLink(link);
+      return location.pathname.startsWith(linkPath);
+    });
+  };
+
+  const getSegments = () => {
     const segments = [];
     if (typeof journalIsActive !== "boolean") return segments;
 
-    const firstMatch = this.match(this.props.links);
+    const firstMatch = match(links);
     /* eslint-disable no-nested-ternary */
     const first =
       journalIsActive && firstMatch
@@ -33,75 +57,50 @@ class MobileBreadcrumb extends PureComponent {
 
     if (first) {
       segments.push(first);
-      const second = this.match(first.children);
+      const second = match(first.children, true);
       if (second) {
         segments.push(second);
       }
     }
     return segments;
-  }
+  };
 
-  get isBackend() {
-    return this.props.location.pathname.includes("backend");
-  }
+  const isBackend = location.pathname.includes("backend");
+  const segments = getSegments();
+  const size = segments.length;
+  let count = 0;
 
-  match(links) {
-    if (!links) return null;
-    return links.find(link => {
-      const route = lh.routeFromName(link.route);
-
-      if (link.matchType === "link" || link.externalUrl) {
-        return this.props.location.pathname === this.pathForLink(link);
-      }
-      return (
-        matchPath(this.props.location.pathname, route) !== null ||
-        this.props.location.pathname.startsWith(route.path)
-      );
-    });
-  }
-
-  pathForLink(link) {
-    if (link.externalUrl) return link.externalUrl;
-    const args = link.args || [];
-    const route = link.linksTo || link.route;
-    return lh.link(route, ...args);
-  }
-
-  render() {
-    let count = 0;
-    const segments = this.segments;
-    const size = segments.length;
-
-    return (
-      <nav
-        className={classNames("breadcrumb-list", {
-          "hide-100": this.isBackend,
-          "hide-82": !this.isBackend
-        })}
-      >
-        {this.segments.map(link => {
-          count += 1;
-          return (
-            <span key={count}>
-              <NavLink
-                className="breadcrumb-list__link"
-                to={this.pathForLink(link)}
-              >
-                {this.props.t(link.label)}
-              </NavLink>
-              {count < size && (
-                <IconComposer
-                  icon="disclosureDown16"
-                  size="default"
-                  className="breadcrumb-list__icon"
-                />
-              )}
-            </span>
-          );
-        })}
-      </nav>
-    );
-  }
+  return (
+    <nav
+      className={classNames("breadcrumb-list", {
+        "hide-100": isBackend,
+        "hide-82": !isBackend
+      })}
+    >
+      {segments.map(link => {
+        count += 1;
+        return (
+          <span key={count}>
+            <NavLink className="breadcrumb-list__link" to={pathForLink(link)}>
+              {t(link.label)}
+            </NavLink>
+            {count < size && (
+              <IconComposer
+                icon="disclosureDown16"
+                size="default"
+                className="breadcrumb-list__icon"
+              />
+            )}
+          </span>
+        );
+      })}
+    </nav>
+  );
 }
 
-export default withTranslation()(MobileBreadcrumb);
+MobileBreadcrumb.displayName = "Navigation.Mobile.Breadcrumb";
+
+MobileBreadcrumb.propTypes = {
+  links: PropTypes.array.isRequired,
+  journalIsActive: PropTypes.bool
+};

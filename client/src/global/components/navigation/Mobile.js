@@ -142,6 +142,9 @@ export class NavigationMobile extends Component {
         }
       }
     });
+    if (this.props.location.pathname === "/project-collections") {
+      active.push("frontendProjects");
+    }
     return active;
   }
 
