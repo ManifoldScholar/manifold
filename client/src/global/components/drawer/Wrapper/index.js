@@ -83,7 +83,13 @@ DrawerWrapper.propTypes = {
   closeCallback: PropTypes.func,
   lockScroll: PropTypes.string,
   entrySide: PropTypes.oneOf(["right", "left", "top"]),
-  context: PropTypes.oneOf(["backend", "frontend", "reader", "editor"]),
+  context: PropTypes.oneOf([
+    "backend",
+    "frontend",
+    "reader",
+    "editor",
+    "ingestion"
+  ]),
   size: PropTypes.oneOf(["default", "wide", "flexible", "fixed"]),
   position: PropTypes.oneOf(["default", "overlay"]),
   padding: PropTypes.oneOf(["none", "default", "large", "xl"]),
