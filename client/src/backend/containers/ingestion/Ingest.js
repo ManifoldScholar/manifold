@@ -19,11 +19,11 @@ export default function IngestContainer({ sectionIngest, refresh }) {
     };
   }, [refresh]);
 
-  const [action, setAction] = useState(null);
+  const [shouldFetch, setShouldFetch] = useState(true);
 
   const { data: ingestion } = useFetch({
     request: [ingestionsAPI.show, ingestionId],
-    dependencies: [action]
+    condition: shouldFetch
   });
 
   const [log, setLog] = useState("Ready to ingest...");
@@ -31,7 +31,7 @@ export default function IngestContainer({ sectionIngest, refresh }) {
   const { loading, startPolling } = useFetchIngestionMessages(
     ingestionId,
     setLog,
-    setAction
+    setShouldFetch
   );
 
   const doProcess = useApiCallback(ingestionsAPI.process);
@@ -53,7 +53,7 @@ export default function IngestContainer({ sectionIngest, refresh }) {
 
     if (!errors) {
       setLog("Ready to ingest...");
-      setAction(null);
+      setShouldFetch(true);
     } else {
       setErrorNotification(errors);
     }

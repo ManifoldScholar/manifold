@@ -73,7 +73,7 @@ export default function IngestionActions({
 
   return (
     <div className="ingestion-output__buttons buttons-icon-horizontal">
-      {finished ? (
+      {finished && !loading ? (
         <button onClick={onComplete} className={buttonClasses}>
           <IconComposer
             icon="checkmark16"
