@@ -2,7 +2,8 @@ export const sortFilter = (filters, updateFilters, params, t) => {
   const includePublished = params?.entityType === "project";
   const includeModified =
     params?.entityType === "journal" ||
-    params?.entityType === "projectCollection";
+    params?.entityType === "projectCollection" ||
+    params?.entityType === "journalIssue";
   const alphaSort =
     params?.entityType === "projectCollection" ? "title" : "sort_title";
 
