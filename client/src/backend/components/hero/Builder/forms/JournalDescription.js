@@ -124,11 +124,12 @@ function JournalDescription({
             altTextName="attributes[logoAltText]"
             altTextLabel={t("journals.forms.logo_alt_label")}
           />
-          <Form.TextInput
+          <Form.ColorInput
             label={t("hero.background_color")}
             name="attributes[heroBackgroundColor]"
-            placeholder="#52e3ac"
+            defaultValue="#52e3ac"
             instructions={t("hero.background_color_instructions")}
+            container=".drawer--backend"
             wide
           />
           <Form.TextArea
