@@ -1,9 +1,10 @@
 import { useId, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import Coloris from "@melloware/coloris";
 import setter from "../setter";
 import * as Styled from "./styles";
 
-function ColorInput({ defaultValue, ...props }) {
+function ColorInput({ defaultValue, container, ...props }) {
   const id = useId();
   const inputRef = useRef();
   const colorRef = useRef(props.value || defaultValue);
@@ -11,7 +12,7 @@ function ColorInput({ defaultValue, ...props }) {
   const inputId = `color-input-${id}`;
 
   useEffect(() => {
-    Coloris.init();
+    Coloris.init({ parent: container });
 
     const setColor = event => {
       const isTarget = event.detail.currentEl.id === inputId;
@@ -21,7 +22,7 @@ function ColorInput({ defaultValue, ...props }) {
     document.addEventListener("coloris:pick", setColor);
 
     return () => document.removeEventListener("coloris:pick", setColor);
-  }, [inputId, props]);
+  }, [inputId, container, props]);
 
   useEffect(() => {
     const onClose = () => {
@@ -38,14 +39,15 @@ function ColorInput({ defaultValue, ...props }) {
         themeMode: "dark",
         clearButton: true,
         defaultColor: defaultValue,
-        margin: 5
+        margin: 5,
+        parent: container
       });
 
       inputEl.addEventListener("close", onClose);
 
       return () => inputEl.removeEventListener("close", onClose);
     }
-  }, [inputRef, defaultValue, colorRef, props]);
+  }, [inputRef, defaultValue, colorRef, container, props]);
 
   return (
     <Styled.ColorInput
@@ -59,6 +61,14 @@ function ColorInput({ defaultValue, ...props }) {
     />
   );
 }
+
+ColorInput.propTypes = {
+  defaultValue: PropTypes.string.isRequired,
+  // By default the color picker renders as a dialog in <body>.
+  // Pass a selector if rendering in a focus trap.
+  container: PropTypes.string
+  // See BaseInput for remaining propTypes
+};
 
 export default setter(ColorInput);
 
