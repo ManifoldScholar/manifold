@@ -58,6 +58,7 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.14.1",
     "@loadable/component": "^5.16.7",
+    "@melloware/coloris": "^0.25.0",
     "@vidstack/react": "^1.12.13",
     "ace-builds": "^1.x",
     "actioncable": "~5.0.7",
