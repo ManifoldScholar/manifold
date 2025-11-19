@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
@@ -103,7 +103,7 @@ export class SettingsThemeContainer extends PureComponent {
                   <Form.ColorInput
                     label={t("settings.theme.foreground_color_label")}
                     name="attributes[theme][headerForegroundColor]"
-                    defaultValue="#ffffff"
+                    defaultValue="#696969"
                     instructions={t(
                       "settings.theme.foreground_color_instructions"
                     )}
@@ -119,7 +119,7 @@ export class SettingsThemeContainer extends PureComponent {
                   <Form.ColorInput
                     label={t("settings.theme.background_color_label")}
                     name="attributes[theme][headerBackgroundColor]"
-                    defaultValue="#696969"
+                    defaultValue="#ffffff"
                     instructions={t(
                       "settings.theme.background_color_instructions"
                     )}
