@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
-import BaseInput from "../BaseInput";
+import { FormBaseInput } from "../BaseInput";
 
-export const ColorInput = styled(BaseInput)`
+export const ColorInput = styled(FormBaseInput)`
+  --ColorInput-default-color: ${({ $defaultColor }) => $defaultColor};
+
   input[type="color"] {
     width: 24px;
     height: 24px;
