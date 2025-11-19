@@ -2450,6 +2450,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@melloware/coloris@npm:^0.25.0":
+  version: 0.25.0
+  resolution: "@melloware/coloris@npm:0.25.0"
+  checksum: 10c0/15727dc98891ae8cca394c4300e4c7ba5015bdc5e1fb7bc411d6f726207ebb14c60de843ed58ef19dfe5bc001655ed38e45dd1ba7680f0c256ca035a417945da
+  languageName: node
+  linkType: hard
+
 "@npmcli/agent@npm:^3.0.0":
   version: 3.0.0
   resolution: "@npmcli/agent@npm:3.0.0"
@@ -9763,6 +9770,7 @@ __metadata:
     "@emotion/server": "npm:^11.11.0"
     "@emotion/styled": "npm:^11.14.1"
     "@loadable/component": "npm:^5.16.7"
+    "@melloware/coloris": "npm:^0.25.0"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.6.1"
     "@types/react": "npm:^18.x"
     "@types/react-dom": "npm:^18.x"

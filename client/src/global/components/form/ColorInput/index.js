@@ -1,21 +1,7 @@
-import { useId } from "react";
-import PropTypes from "prop-types";
-import * as Styled from "./styles";
+import loadable from "@loadable/component";
 
-export default function ColorInput({ defaultValue, ...props }) {
-  const id = useId();
+const ColorInput = loadable(() =>
+  import(/* webpackChunkName: "coloris" */ "./ColorInput")
+);
 
-  const renderValue = value => value ?? defaultValue;
-  return (
-    <Styled.ColorInput
-      inputType="color"
-      id={`color-input-${id}`}
-      idForError={`color-input-error-${id}`}
-      idForInstructions={`color-input-instructions-${id}`}
-      renderValue={renderValue}
-      {...props}
-    />
-  );
-}
-
-ColorInput.displayName = "Form.ColorInput";
+export default ColorInput;
