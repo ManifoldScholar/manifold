@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import * as Styled from "./styles";
 
 export default function Splash(props) {
-  const { preview, feature, authenticated } = props;
+  const { preview, feature, authenticated, previewAttrs } = props;
   const {
     style: mode,
     backgroundColor,
@@ -28,6 +28,21 @@ export default function Splash(props) {
     includeSignUp
   } = feature.attributes;
 
+  const renderedHeader = () => {
+    if (preview && previewAttrs?.header) return previewAttrs.header;
+    return headerFormatted || header;
+  };
+
+  const renderedSubheader = () => {
+    if (preview && previewAttrs?.subheader) return previewAttrs.subheader;
+    return subheaderFormatted || subheader;
+  };
+
+  const renderedBody = () => {
+    if (preview && previewAttrs?.body) return previewAttrs.body;
+    return bodyFormatted || body;
+  };
+
   return (
     <Styled.Wrapper
       $preview={preview}
@@ -40,20 +55,20 @@ export default function Splash(props) {
           <Styled.Heading
             $color={headerColor}
             dangerouslySetInnerHTML={{
-              __html: headerFormatted || header
+              __html: renderedHeader()
             }}
           />
           {(subheaderFormatted || subheader) && (
             <Styled.Subheading
               $color={headerColor}
               dangerouslySetInnerHTML={{
-                __html: subheaderFormatted || subheader
+                __html: renderedSubheader()
               }}
             />
           )}
           <Styled.Body
             $color={foregroundColor}
-            dangerouslySetInnerHTML={{ __html: bodyFormatted || body }}
+            dangerouslySetInnerHTML={{ __html: renderedBody() }}
           />
           <Styled.Buttons>
             {linkText && linkUrl ? (

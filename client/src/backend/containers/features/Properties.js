@@ -88,20 +88,20 @@ class FeaturesPropertiesContainer extends PureComponent {
                 }
               ]}
             />
-            <Form.TextInput
+            <Form.ColorInput
               label={t("records.features.background_label")}
               name="attributes[backgroundColor]"
-              placeholder="#000000"
+              defaultValue="#000000"
             />
-            <Form.TextInput
+            <Form.ColorInput
               label={t("records.features.foreground_label")}
               name="attributes[foregroundColor]"
-              placeholder="#000000"
+              defaultValue="#000000"
             />
-            <Form.TextInput
+            <Form.ColorInput
               label={t("records.features.header_color_label")}
               name="attributes[headerColor]"
-              placeholder="#000000"
+              defaultValue="#000000"
             />
             <Form.Upload
               layout="landscape"
