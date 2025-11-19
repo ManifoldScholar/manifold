@@ -119,6 +119,7 @@ export class FormBaseInput extends PureComponent {
       <InputComponent
         ref={input => {
           this.inputElement = input;
+          if (this.props.colorRef) this.props.colorRef.current = input;
         }}
         id={id}
         name={this.props.name}
