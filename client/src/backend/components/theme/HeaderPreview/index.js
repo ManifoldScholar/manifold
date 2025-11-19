@@ -5,6 +5,13 @@ import PressLogo from "global/components/PressLogo";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
 import IconComposer from "global/components/utility/IconComposer";
 
+const DEFAULTS = {
+  accentColor: "#52e3ac",
+  foregroundColor: "#696969",
+  backgroundColor: "#ffffff",
+  activeColor: "#363636"
+};
+
 export default function HeaderPreview({
   accentColor,
   foregroundColor,
@@ -22,11 +29,13 @@ export default function HeaderPreview({
     <div
       className="library-header library-header--light"
       style={{
-        "--color-accent-primary": accentColor,
-        "--hover-color": accentColor,
-        "--color-header-background": backgroundColor,
-        "--color-header-foreground": foregroundColor,
-        "--color-header-foreground-active": activeColor
+        "--color-accent-primary": accentColor || DEFAULTS.accentColor,
+        "--hover-color": accentColor || DEFAULTS.accentColor,
+        "--color-header-background":
+          backgroundColor || DEFAULTS.backgroundColor,
+        "--color-header-foreground":
+          foregroundColor || DEFAULTS.foregroundColor,
+        "--color-header-foreground-active": activeColor || DEFAULTS.activeColor
       }}
       inert=""
     >
@@ -54,41 +63,39 @@ export default function HeaderPreview({
           >
             <ul className="site-nav__list">
               <li className="site-nav__item">
-                <a href="#" className="site-nav__link site-nav__link--active">
-                  Home
-                </a>
+                <span className="site-nav__link site-nav__link--active">
+                  {t("titles.home")}
+                </span>
               </li>
               <li className="site-nav__item">
-                <a href="#" className="site-nav__link">
-                  Projects
-                </a>
+                <span className="site-nav__link">
+                  {t("glossary.project_title_case_other")}
+                </span>
               </li>
               <li className="site-nav__item">
-                <a href="#" className="site-nav__link">
-                  Journals
-                </a>
+                <span className="site-nav__link">
+                  {t("glossary.journal_title_case_other")}
+                </span>
               </li>
               <li className="site-nav__item">
-                <a href="#" className="site-nav__link">
-                  Reading Groups
-                </a>
+                <span className="site-nav__link">
+                  {t("glossary.reading_group_title_case_other")}
+                </span>
               </li>
             </ul>
           </nav>
           <nav className="breadcrumb-list hide-82">
             <span>
-              <a className="breadcrumb-list__link" href="#">
-                Home
-              </a>
+              <span className="breadcrumb-list__link">{t("titles.home")}</span>
             </span>
           </nav>
-          <a href="#" className="mobile-nav-toggle hide-82">
+          <span className="mobile-nav-toggle hide-82">
             <IconComposer
               icon="menu32"
               size="default"
               className="mobile-nav-trigger__icon"
             />
-          </a>
+          </span>
         </div>
       </SetCSSProperty>
     </div>
