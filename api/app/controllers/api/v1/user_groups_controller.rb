@@ -1,7 +1,7 @@
 module API
   module V1
     class UserGroupsController < ApplicationController
-      PRELOADS = %w(memberships entitlements).freeze
+      PRELOADS = %w(memberships entitleables).freeze
 
       resourceful! UserGroup do
         UserGroup.preload(PRELOADS).filtered(**with_pagination!(user_filter_params))
