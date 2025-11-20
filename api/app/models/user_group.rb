@@ -1,5 +1,6 @@
 class UserGroup < ApplicationRecord
   include Authority::Abilities
+  include SerializedAbilitiesFor
   include Filterable
   include ExternallyIdentifiable
   include SerializedAbilitiesFor
