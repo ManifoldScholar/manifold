@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Project from "backend/components/project";
@@ -76,6 +76,17 @@ function JournalPropertiesContainer({ journal }) {
                   label={t("journals.forms.properties.slug_label")}
                   name="attributes[pendingSlug]"
                   placeholder={t("journals.forms.properties.slug_placeholder")}
+                />
+                <Form.TextInput
+                  wide
+                  label={t("journals.forms.properties.external_id_label")}
+                  name="attributes[externalId]"
+                  placeholder={t(
+                    "journals.forms.properties.external_id_placeholder"
+                  )}
+                  instructions={t(
+                    "journals.forms.properties.external_id_instructions"
+                  )}
                 />
                 <Project.Form.AvatarBuilder wide />
               </Form.FieldGroup>
