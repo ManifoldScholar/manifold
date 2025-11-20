@@ -1,9 +1,9 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
+import Utility from "global/components/utility";
 import Checkbox from "../List/bulkActions/Checkbox";
 import { useCurrentUser } from "hooks";
 
@@ -13,6 +13,7 @@ function UserRow({
   bulkSelection,
   addItem,
   removeItem,
+  onGroupRemove,
   ...props
 }) {
   const { t } = useTranslation();
@@ -22,6 +23,18 @@ function UserRow({
 
   const isSelected =
     !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
+
+  const utility = (
+    <button
+      className="entity-row__utility-button"
+      title={t("reading_groups.remove_member")}
+      onClick={() =>
+        onGroupRemove(id, `${attributes.firstName} ${attributes.lastName}`)
+      }
+    >
+      <Utility.IconComposer icon="circlePlus24" size={26} />
+    </button>
+  );
 
   const additionalProps = {
     title: `${attributes.firstName} ${attributes.lastName}`,
@@ -43,14 +56,15 @@ function UserRow({
         : [])
     ],
     onRowClick: lh.link("backendRecordsUser", id),
-    rowClickMode: "block",
+    rowClickMode: onGroupRemove ? "inline" : "block",
     prepend: bulkActionsActive && (
       <Checkbox
         checked={isSelected}
         onSelect={() => addItem(id)}
         onClear={() => removeItem(id)}
       />
-    )
+    ),
+    utility: onGroupRemove ? utility : undefined
   };
 
   return <EntityRow {...props} {...additionalProps} />;
