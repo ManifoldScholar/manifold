@@ -122,10 +122,10 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      # migrations:
-      #   condition: service_completed_successfully
-      # minio-client:
-      #   condition: service_completed_successfully
+      migrations:
+        condition: service_completed_successfully
+      minio-client:
+        condition: service_completed_successfully
       redis:
         condition: service_healthy
     env_file:
