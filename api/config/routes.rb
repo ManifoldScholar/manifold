@@ -290,6 +290,8 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :user_groups
+
       namespace :analytics do
         resource :events, only: [:create]
         resource :reports, only: [:show]
