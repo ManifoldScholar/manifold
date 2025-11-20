@@ -168,7 +168,7 @@ function UserWrapper({ match, route, history, confirm, location }) {
             <Layout.SecondaryNav
               links={navigation.user(user)}
               panel
-              ariaLabel={t("users.settings")}
+              ariaLabel={t("records.users.settings")}
             />
           }
         >
