@@ -1,8 +1,3 @@
-\restrict 9fBvIIuKDqLGPH1SeO5WgK54QC1iSksuTHGMENqhW1v4aNEJ0pSRLKPkxSzshyk
-
--- Dumped from database version 13.22
--- Dumped by pg_dump version 13.22 (Debian 13.22-1.pgdg11+1)
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -402,7 +397,7 @@ CREATE TABLE public.action_callouts (
 --
 
 CREATE TABLE public.analytics_events (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     visit_id uuid NOT NULL,
     name character varying NOT NULL,
     properties jsonb DEFAULT '{}'::jsonb NOT NULL,
@@ -415,7 +410,7 @@ CREATE TABLE public.analytics_events (
 --
 
 CREATE TABLE public.analytics_visits (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     visit_token character varying NOT NULL,
     visitor_token character varying NOT NULL,
     ip character varying,
@@ -473,7 +468,8 @@ CREATE TABLE public.annotations (
     marked_for_purge_at timestamp without time zone,
     resolved_flags_count bigint DEFAULT 0 NOT NULL,
     unresolved_flags_count bigint DEFAULT 0 NOT NULL,
-    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
+    reader_display_format text
 );
 
 
@@ -508,7 +504,7 @@ CREATE TABLE public.comments (
 --
 
 CREATE TABLE public.reading_group_memberships (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid,
     reading_group_id uuid,
     created_at timestamp without time zone NOT NULL,
@@ -600,8 +596,8 @@ CREATE TABLE public.text_sections (
     slug text,
     hidden_in_reader boolean DEFAULT false NOT NULL,
     metadata jsonb DEFAULT '{}'::jsonb,
-    body_text text,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    body_text text,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
 );
 
@@ -651,8 +647,8 @@ CREATE VIEW public.annotation_reading_group_memberships AS
 CREATE TABLE public.ar_internal_metadata (
     key character varying NOT NULL,
     value character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
 );
 
 
@@ -661,7 +657,7 @@ CREATE TABLE public.ar_internal_metadata (
 --
 
 CREATE TABLE public.cached_external_source_links (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     cached_external_source_id uuid NOT NULL,
     text_id uuid NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -674,7 +670,7 @@ CREATE TABLE public.cached_external_source_links (
 --
 
 CREATE TABLE public.cached_external_sources (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     url text NOT NULL,
     source_identifier text NOT NULL,
     kind text DEFAULT 'unknown'::text NOT NULL,
@@ -984,7 +980,7 @@ CREATE TABLE public.content_blocks (
 --
 
 CREATE TABLE public.entitlement_roles (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     name text NOT NULL,
     kind text DEFAULT 'unknown'::text NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1054,7 +1050,7 @@ CREATE TABLE public.entitlement_transitions (
 --
 
 CREATE TABLE public.entitlement_user_links (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     entitlement_id uuid NOT NULL,
     user_id uuid NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1067,7 +1063,7 @@ CREATE TABLE public.entitlement_user_links (
 --
 
 CREATE TABLE public.entitlements (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     target_type character varying NOT NULL,
     target_id uuid NOT NULL,
     entitler_id uuid NOT NULL,
@@ -1091,14 +1087,14 @@ CREATE TABLE public.entitlements (
 --
 
 CREATE TABLE public.journal_issues (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     journal_id uuid NOT NULL,
     journal_volume_id uuid,
     creator_id uuid,
-    number character varying DEFAULT ''::character varying NOT NULL,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    number character varying DEFAULT ''::character varying NOT NULL,
     sort_title integer DEFAULT 0 NOT NULL,
     pending_sort_title integer
 );
@@ -1109,9 +1105,9 @@ CREATE TABLE public.journal_issues (
 --
 
 CREATE TABLE public.journal_volumes (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     journal_id uuid NOT NULL,
     creator_id uuid,
     number integer,
@@ -1282,7 +1278,7 @@ CREATE MATERIALIZED VIEW public.entitlement_grant_audits AS
 --
 
 CREATE TABLE public.entitlement_import_row_transitions (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     to_state character varying NOT NULL,
     metadata jsonb DEFAULT '{}'::jsonb,
     sort_key integer NOT NULL,
@@ -1298,7 +1294,7 @@ CREATE TABLE public.entitlement_import_row_transitions (
 --
 
 CREATE TABLE public.entitlement_import_rows (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     entitlement_import_id uuid NOT NULL,
     entitlement_id uuid,
     subject_type character varying,
@@ -1309,8 +1305,8 @@ CREATE TABLE public.entitlement_import_rows (
     email public.citext,
     expires_on date,
     messages text[] DEFAULT '{}'::text[] NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     pending_entitlement_id uuid,
     expiration text,
     first_name text,
@@ -1323,7 +1319,7 @@ CREATE TABLE public.entitlement_import_rows (
 --
 
 CREATE TABLE public.entitlement_import_transitions (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     to_state character varying NOT NULL,
     metadata jsonb DEFAULT '{}'::jsonb,
     sort_key integer NOT NULL,
@@ -1339,14 +1335,14 @@ CREATE TABLE public.entitlement_import_transitions (
 --
 
 CREATE TABLE public.entitlement_imports (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     creator_id uuid,
     name public.citext NOT NULL,
     file_data jsonb,
     entitlement_import_rows_count bigint DEFAULT 0 NOT NULL,
     messages text[] DEFAULT '{}'::text[] NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -1355,7 +1351,7 @@ CREATE TABLE public.entitlement_imports (
 --
 
 CREATE TABLE public.reading_groups (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     name character varying,
     privacy character varying DEFAULT 'private'::character varying,
     invitation_code character varying,
@@ -1463,7 +1459,7 @@ ALTER SEQUENCE public.entitlement_transitions_id_seq OWNED BY public.entitlement
 --
 
 CREATE TABLE public.entitlers (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     entity_type character varying NOT NULL,
     entity_id uuid NOT NULL,
     name text NOT NULL,
@@ -1506,7 +1502,7 @@ CREATE TABLE public.events (
 --
 
 CREATE TABLE public.export_targets (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     strategy text DEFAULT 'unknown'::text NOT NULL,
     name text NOT NULL,
     slug text NOT NULL,
@@ -1521,7 +1517,7 @@ CREATE TABLE public.export_targets (
 --
 
 CREATE TABLE public.user_collected_composite_entries (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     collectable_type character varying NOT NULL,
     collectable_id uuid NOT NULL,
@@ -1665,6 +1661,7 @@ CREATE TABLE public.friendly_id_slugs (
 --
 
 CREATE SEQUENCE public.friendly_id_slugs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1677,107 +1674,6 @@ CREATE SEQUENCE public.friendly_id_slugs_id_seq
 --
 
 ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs.id;
-
-
---
--- Name: good_job_batches; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.good_job_batches (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    description text,
-    serialized_properties jsonb,
-    on_finish text,
-    on_success text,
-    on_discard text,
-    callback_queue_name text,
-    callback_priority integer,
-    enqueued_at timestamp(6) without time zone,
-    discarded_at timestamp(6) without time zone,
-    finished_at timestamp(6) without time zone
-);
-
-
---
--- Name: good_job_executions; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.good_job_executions (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    active_job_id uuid NOT NULL,
-    job_class text,
-    queue_name text,
-    serialized_params jsonb,
-    scheduled_at timestamp(6) without time zone,
-    finished_at timestamp(6) without time zone,
-    error text,
-    error_event smallint,
-    error_backtrace text[],
-    process_id uuid,
-    duration interval
-);
-
-
---
--- Name: good_job_processes; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.good_job_processes (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    state jsonb,
-    lock_type smallint
-);
-
-
---
--- Name: good_job_settings; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.good_job_settings (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    key text,
-    value jsonb
-);
-
-
---
--- Name: good_jobs; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.good_jobs (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    queue_name text,
-    priority integer,
-    serialized_params jsonb,
-    scheduled_at timestamp(6) without time zone,
-    performed_at timestamp(6) without time zone,
-    finished_at timestamp(6) without time zone,
-    error text,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    active_job_id uuid,
-    concurrency_key text,
-    cron_key text,
-    retried_good_job_id uuid,
-    cron_at timestamp(6) without time zone,
-    batch_id uuid,
-    batch_callback_id uuid,
-    is_discrete boolean,
-    executions_count integer,
-    job_class text,
-    error_event smallint,
-    labels text[],
-    locked_by_id uuid,
-    locked_at timestamp(6) without time zone
-);
 
 
 --
@@ -1902,8 +1798,8 @@ CREATE TABLE public.ingestions (
 
 CREATE TABLE public.journal_subjects (
     id bigint NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     journal_id uuid NOT NULL,
     subject_id uuid NOT NULL
 );
@@ -1933,9 +1829,9 @@ ALTER SEQUENCE public.journal_subjects_id_seq OWNED BY public.journal_subjects.i
 --
 
 CREATE TABLE public.journals (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     title character varying,
     subtitle character varying,
     description text,
@@ -2049,6 +1945,7 @@ CREATE TABLE public.pages (
 --
 
 CREATE SEQUENCE public.pages_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2068,14 +1965,14 @@ ALTER SEQUENCE public.pages_id_seq OWNED BY public.pages.id;
 --
 
 CREATE TABLE public.pending_entitlement_transitions (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     pending_entitlement_id uuid NOT NULL,
     most_recent boolean NOT NULL,
     sort_key integer NOT NULL,
     to_state character varying NOT NULL,
     metadata jsonb,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -2084,7 +1981,7 @@ CREATE TABLE public.pending_entitlement_transitions (
 --
 
 CREATE TABLE public.pending_entitlements (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     creator_id uuid,
     entitlement_id uuid,
     user_id uuid,
@@ -2097,8 +1994,8 @@ CREATE TABLE public.pending_entitlements (
     first_name text,
     last_name text,
     messages text[] DEFAULT '{}'::text[] NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -2165,6 +2062,7 @@ CREATE TABLE public.project_collection_subjects (
 --
 
 CREATE SEQUENCE public.project_collection_subjects_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2184,7 +2082,7 @@ ALTER SEQUENCE public.project_collection_subjects_id_seq OWNED BY public.project
 --
 
 CREATE TABLE public.project_exports (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     project_id uuid NOT NULL,
     export_kind text DEFAULT 'unknown'::text NOT NULL,
     fingerprint text NOT NULL,
@@ -2220,7 +2118,7 @@ CREATE VIEW public.project_export_statuses AS
 --
 
 CREATE TABLE public.project_exportation_transitions (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     to_state text NOT NULL,
     metadata jsonb DEFAULT '{}'::jsonb,
     sort_key integer NOT NULL,
@@ -2236,7 +2134,7 @@ CREATE TABLE public.project_exportation_transitions (
 --
 
 CREATE TABLE public.project_exportations (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     project_id uuid NOT NULL,
     export_target_id uuid NOT NULL,
     project_export_id uuid,
@@ -2264,6 +2162,7 @@ CREATE TABLE public.project_subjects (
 --
 
 CREATE SEQUENCE public.project_subjects_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2313,7 +2212,7 @@ CREATE VIEW public.project_summaries AS
 --
 
 CREATE TABLE public.reading_group_categories (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     reading_group_id uuid NOT NULL,
     "position" integer,
     title text NOT NULL,
@@ -2331,7 +2230,7 @@ CREATE TABLE public.reading_group_categories (
 --
 
 CREATE TABLE public.reading_group_composite_entries (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     reading_group_id uuid NOT NULL,
     collectable_type character varying NOT NULL,
     collectable_id uuid NOT NULL,
@@ -2392,7 +2291,7 @@ CREATE VIEW public.reading_group_collections AS
 --
 
 CREATE TABLE public.reading_group_projects (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     reading_group_id uuid NOT NULL,
     project_id uuid NOT NULL,
     reading_group_category_id uuid,
@@ -2407,7 +2306,7 @@ CREATE TABLE public.reading_group_projects (
 --
 
 CREATE TABLE public.reading_group_resource_collections (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     reading_group_id uuid NOT NULL,
     resource_collection_id uuid NOT NULL,
     reading_group_category_id uuid,
@@ -2422,7 +2321,7 @@ CREATE TABLE public.reading_group_resource_collections (
 --
 
 CREATE TABLE public.reading_group_resources (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     reading_group_id uuid NOT NULL,
     resource_id uuid NOT NULL,
     reading_group_category_id uuid,
@@ -2437,7 +2336,7 @@ CREATE TABLE public.reading_group_resources (
 --
 
 CREATE TABLE public.reading_group_texts (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     reading_group_id uuid NOT NULL,
     text_id uuid NOT NULL,
     reading_group_category_id uuid,
@@ -2493,13 +2392,13 @@ CREATE VIEW public.reading_group_counts AS
 --
 
 CREATE TABLE public.reading_group_journal_issues (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     reading_group_id uuid NOT NULL,
     journal_issue_id uuid NOT NULL,
     reading_group_category_id uuid,
     "position" integer,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -2508,11 +2407,11 @@ CREATE TABLE public.reading_group_journal_issues (
 --
 
 CREATE TABLE public.reading_group_kinds (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     name text NOT NULL,
     slug text NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -2539,13 +2438,13 @@ CREATE VIEW public.reading_group_membership_counts AS
 --
 
 CREATE TABLE public.reading_group_text_sections (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     reading_group_id uuid NOT NULL,
     text_section_id uuid NOT NULL,
     reading_group_category_id uuid,
     "position" integer,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -2633,6 +2532,7 @@ CREATE TABLE public.resource_import_row_transitions (
 --
 
 CREATE SEQUENCE public.resource_import_row_transitions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2686,6 +2586,7 @@ CREATE TABLE public.resource_import_transitions (
 --
 
 CREATE SEQUENCE public.resource_import_transitions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2854,6 +2755,7 @@ CREATE TABLE public.settings (
 --
 
 CREATE SEQUENCE public.settings_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2907,7 +2809,7 @@ CREATE TABLE public.subjects (
 --
 
 CREATE TABLE public.system_entitlements (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     kind text NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -2935,6 +2837,7 @@ CREATE TABLE public.taggings (
 --
 
 CREATE SEQUENCE public.taggings_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2965,6 +2868,7 @@ CREATE TABLE public.tags (
 --
 
 CREATE SEQUENCE public.tags_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2984,7 +2888,7 @@ ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
 --
 
 CREATE TABLE public.text_exports (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     text_id uuid NOT NULL,
     export_kind text DEFAULT 'unknown'::text NOT NULL,
     fingerprint text NOT NULL,
@@ -3102,6 +3006,7 @@ CREATE TABLE public.text_section_stylesheets (
 --
 
 CREATE SEQUENCE public.text_section_stylesheets_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3296,11 +3201,11 @@ CREATE TABLE public.upgrade_results (
 --
 
 CREATE TABLE public.user_collected_journal_issues (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     journal_issue_id uuid NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -3309,11 +3214,11 @@ CREATE TABLE public.user_collected_journal_issues (
 --
 
 CREATE TABLE public.user_collected_projects (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     project_id uuid NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -3322,11 +3227,11 @@ CREATE TABLE public.user_collected_projects (
 --
 
 CREATE TABLE public.user_collected_resource_collections (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     resource_collection_id uuid NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -3335,11 +3240,11 @@ CREATE TABLE public.user_collected_resource_collections (
 --
 
 CREATE TABLE public.user_collected_resources (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     resource_id uuid NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -3348,11 +3253,11 @@ CREATE TABLE public.user_collected_resources (
 --
 
 CREATE TABLE public.user_collected_text_sections (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     text_section_id uuid NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -3361,11 +3266,11 @@ CREATE TABLE public.user_collected_text_sections (
 --
 
 CREATE TABLE public.user_collected_texts (
-    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     text_id uuid NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT now() NOT NULL
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -3839,46 +3744,6 @@ ALTER TABLE ONLY public.flags
 
 ALTER TABLE ONLY public.friendly_id_slugs
     ADD CONSTRAINT friendly_id_slugs_pkey PRIMARY KEY (id);
-
-
---
--- Name: good_job_batches good_job_batches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.good_job_batches
-    ADD CONSTRAINT good_job_batches_pkey PRIMARY KEY (id);
-
-
---
--- Name: good_job_executions good_job_executions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.good_job_executions
-    ADD CONSTRAINT good_job_executions_pkey PRIMARY KEY (id);
-
-
---
--- Name: good_job_processes good_job_processes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.good_job_processes
-    ADD CONSTRAINT good_job_processes_pkey PRIMARY KEY (id);
-
-
---
--- Name: good_job_settings good_job_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.good_job_settings
-    ADD CONSTRAINT good_job_settings_pkey PRIMARY KEY (id);
-
-
---
--- Name: good_jobs good_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.good_jobs
-    ADD CONSTRAINT good_jobs_pkey PRIMARY KEY (id);
 
 
 --
@@ -5122,125 +4987,6 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_id ON public.friendly_id_slugs
 --
 
 CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON public.friendly_id_slugs USING btree (sluggable_type);
-
-
---
--- Name: index_good_job_executions_on_active_job_id_and_created_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_job_executions_on_active_job_id_and_created_at ON public.good_job_executions USING btree (active_job_id, created_at);
-
-
---
--- Name: index_good_job_executions_on_process_id_and_created_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_job_executions_on_process_id_and_created_at ON public.good_job_executions USING btree (process_id, created_at);
-
-
---
--- Name: index_good_job_jobs_for_candidate_lookup; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_job_jobs_for_candidate_lookup ON public.good_jobs USING btree (priority, created_at) WHERE (finished_at IS NULL);
-
-
---
--- Name: index_good_job_settings_on_key; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_good_job_settings_on_key ON public.good_job_settings USING btree (key);
-
-
---
--- Name: index_good_jobs_jobs_on_finished_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_jobs_on_finished_at ON public.good_jobs USING btree (finished_at) WHERE ((retried_good_job_id IS NULL) AND (finished_at IS NOT NULL));
-
-
---
--- Name: index_good_jobs_jobs_on_priority_created_at_when_unfinished; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_jobs_on_priority_created_at_when_unfinished ON public.good_jobs USING btree (priority DESC NULLS LAST, created_at) WHERE (finished_at IS NULL);
-
-
---
--- Name: index_good_jobs_on_active_job_id_and_created_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_active_job_id_and_created_at ON public.good_jobs USING btree (active_job_id, created_at);
-
-
---
--- Name: index_good_jobs_on_batch_callback_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_batch_callback_id ON public.good_jobs USING btree (batch_callback_id) WHERE (batch_callback_id IS NOT NULL);
-
-
---
--- Name: index_good_jobs_on_batch_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_batch_id ON public.good_jobs USING btree (batch_id) WHERE (batch_id IS NOT NULL);
-
-
---
--- Name: index_good_jobs_on_concurrency_key_when_unfinished; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_concurrency_key_when_unfinished ON public.good_jobs USING btree (concurrency_key) WHERE (finished_at IS NULL);
-
-
---
--- Name: index_good_jobs_on_cron_key_and_created_at_cond; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_cron_key_and_created_at_cond ON public.good_jobs USING btree (cron_key, created_at) WHERE (cron_key IS NOT NULL);
-
-
---
--- Name: index_good_jobs_on_cron_key_and_cron_at_cond; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_good_jobs_on_cron_key_and_cron_at_cond ON public.good_jobs USING btree (cron_key, cron_at) WHERE (cron_key IS NOT NULL);
-
-
---
--- Name: index_good_jobs_on_labels; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_labels ON public.good_jobs USING gin (labels) WHERE (labels IS NOT NULL);
-
-
---
--- Name: index_good_jobs_on_locked_by_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_locked_by_id ON public.good_jobs USING btree (locked_by_id) WHERE (locked_by_id IS NOT NULL);
-
-
---
--- Name: index_good_jobs_on_priority_scheduled_at_unfinished_unlocked; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_priority_scheduled_at_unfinished_unlocked ON public.good_jobs USING btree (priority, scheduled_at) WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL));
-
-
---
--- Name: index_good_jobs_on_queue_name_and_scheduled_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_queue_name_and_scheduled_at ON public.good_jobs USING btree (queue_name, scheduled_at) WHERE (finished_at IS NULL);
-
-
---
--- Name: index_good_jobs_on_scheduled_at; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_good_jobs_on_scheduled_at ON public.good_jobs USING btree (scheduled_at) WHERE (finished_at IS NULL);
 
 
 --
@@ -7824,8 +7570,6 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 9fBvIIuKDqLGPH1SeO5WgK54QC1iSksuTHGMENqhW1v4aNEJ0pSRLKPkxSzshyk
-
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
@@ -8179,16 +7923,19 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250527180248'),
 ('20250528002025'),
 ('20250530205742'),
-('20250603170620'),
 ('20250603192547'),
 ('20250609191642'),
 ('20250609192241'),
+('20250723210143'),
 ('20251016204352'),
 ('20251017174417'),
 ('20251017211501'),
 ('20251020225421'),
+('20251022183946'),
 ('20251103175506'),
 ('20251103175949'),
 ('20251103180007'),
 ('20251105165521'),
 ('20251117204731');
+
+
