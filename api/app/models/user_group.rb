@@ -1,5 +1,6 @@
 class UserGroup < ApplicationRecord
   include Authority::Abilities
+  include SerializedAbilitiesFor
   include Filterable
 
   has_many :memberships, class_name: "UserGroupMembership", inverse_of: :user_group
