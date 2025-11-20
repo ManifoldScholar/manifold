@@ -13,6 +13,7 @@ import ProjectCollection from "backend/containers/project-collection";
 import Permission from "backend/containers/permission";
 import Records from "backend/containers/Records";
 import Users from "backend/containers/users";
+import UserGroups from "backend/containers/user-groups";
 import Pages from "backend/containers/pages";
 import Features from "backend/containers/features";
 import Settings from "backend/containers/settings";
@@ -28,6 +29,7 @@ import ReadingGroups from "backend/containers/reading-groups";
 import ReadingGroup from "backend/containers/reading-group";
 import Annotations from "backend/containers/annotations";
 import User from "backend/containers/user";
+import UserGroup from "backend/containers/user-group";
 import Comments from "backend/containers/comments";
 import TextTracks from "backend/containers/resource/tracks";
 
@@ -106,6 +108,8 @@ export default {
   ContentBlockEdit: Content.Edit,
   Records,
   UsersList: Users.List,
+  UserGroupsList: UserGroups.List,
+  UserGroupsNew: UserGroups.New,
   MakersList: Makers.List,
   MakersNew: Makers.New,
   MakersEdit: Makers.Edit,
@@ -172,6 +176,10 @@ export default {
   UserWrapper: User.Wrapper,
   UserProperties: User.Properties,
   UserActivity: User.Activity,
+  UserGroupWrapper: UserGroup.Wrapper,
+  UserGroupProperties: UserGroup.Properties,
+  UserGroupUsers: UserGroup.Users,
+  UserGroupEntitlements: UserGroup.Entitlements,
   ResourceTracksList: TextTracks.List,
   ResourceTrackAdd: TextTracks.AddEdit
 };
