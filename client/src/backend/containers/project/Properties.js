@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import Project from "backend/components/project";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -123,6 +123,17 @@ function ProjectPropertiesContainer({ project }) {
               label={t("projects.forms.properties.slug_label")}
               name="attributes[pendingSlug]"
               placeholder={t("projects.forms.properties.slug_placeholder")}
+            />
+            <Form.TextInput
+              wide
+              label={t("projects.forms.properties.external_id_label")}
+              name="attributes[externalId]"
+              placeholder={t(
+                "projects.forms.properties.external_id_placeholder"
+              )}
+              instructions={t(
+                "projects.forms.properties.external_id_instructions"
+              )}
             />
             <Project.Form.AvatarBuilder wide project={project} />
           </Form.FieldGroup>
