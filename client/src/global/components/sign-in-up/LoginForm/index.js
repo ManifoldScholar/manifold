@@ -26,7 +26,7 @@ export default function LoginForm({
   const authentication = useFromStore("authentication");
   const error = authentication?.error?.body;
   const settings = useFromStore("settings", "select");
-  const { hideLocalLogin = true, identityProviders = ["1", "2"] } = settings;
+  const { hideLocalLogin = false, identityProviders = ["1", "2"] } = settings;
 
   const formatData = data => {
     dispatch(actions.loginStart());
