@@ -29,7 +29,7 @@ function UserGroupWrapper({ route, history, confirm, location }) {
     () => ({
       id: "test",
       type: "userGroups",
-      attributes: { name: "test" }
+      attributes: { name: "Test User Group", externalId: "test-group-1" }
     }),
     []
   );
