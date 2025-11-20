@@ -519,6 +519,14 @@ module Validation
     params.permit(param_config)
   end
 
+  def user_group_params
+    params.require(:data)
+    attributes = [:name]
+    relationships = %i[members entitleables]
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def favoritable_params
     structure_params
   end
