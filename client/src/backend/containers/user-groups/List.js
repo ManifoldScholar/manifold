@@ -1,9 +1,13 @@
+import { useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
-import EntitiesList, { Button } from "backend/components/list/EntitiesList";
+import EntitiesList, {
+  Button,
+  UserGroupRow
+} from "backend/components/list/EntitiesList";
 
 function UserGroupsListContainer({ route: baseRoute }) {
   const { t } = useTranslation();
@@ -38,6 +42,15 @@ function UserGroupsListContainer({ route: baseRoute }) {
 
   const showList = !id || id === "new";
 
+  const userGroup = useMemo(
+    () => ({
+      id: "test",
+      type: "userGroups",
+      attributes: { name: "Test User Group", externalId: "test-group-1" }
+    }),
+    []
+  );
+
   return (
     <>
       {renderChildRoutes()}
@@ -45,7 +58,9 @@ function UserGroupsListContainer({ route: baseRoute }) {
         <EntitiesList
           title={t("records.user_groups.header")}
           titleStyle="bar"
-          entities={[]}
+          entities={[userGroup]}
+          entityComponent={UserGroupRow}
+          showCount
           buttons={[
             <Button
               path={lh.link("backendRecordsUserGroupsNew")}
