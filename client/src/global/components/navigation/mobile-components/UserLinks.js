@@ -5,15 +5,16 @@ import get from "lodash/get";
 import lh from "helpers/linkHandler";
 import Avatar from "global/components/avatar";
 import Link from "./Link";
+import withSettings from "hoc/withSettings";
 
 class UserLinks extends PureComponent {
   static propTypes = {
     authentication: PropTypes.object,
     commonActions: PropTypes.object.isRequired,
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-    history: PropTypes.object.isRequired,
     closeNavigation: PropTypes.func.isRequired,
-    t: PropTypes.func
+    t: PropTypes.func,
+    settings: PropTypes.object
   };
 
   get canAccessReadingGroups() {
@@ -49,21 +50,35 @@ class UserLinks extends PureComponent {
       return (
         <ul className="nested-nav__list nested-nav__list--user-links">
           <li className="nested-nav__item">
-            <button
-              className="nested-nav__button"
-              onClick={this.handleLoginClick}
-              aria-describedby="user-menu-login-mobile"
-            >
-              <div className="nested-nav__grid-item">
-                <Avatar />
-                <span className="nested-nav__button-text">
-                  {t("navigation.user.log_in")}
+            {this.props.settings.defaultIdentityProvider ? (
+              <a
+                className="mode-button"
+                href={this.props.settings.defaultIdentityProvider}
+              >
+                {t("forms.signin_overlay.log_in")}
+              </a>
+            ) : (
+              <>
+                <button
+                  className="nested-nav__button"
+                  onClick={this.handleLoginClick}
+                  aria-describedby="user-menu-login-mobile"
+                >
+                  <div className="nested-nav__grid-item">
+                    <Avatar />
+                    <span className="nested-nav__button-text">
+                      {t("navigation.user.log_in")}
+                    </span>
+                  </div>
+                </button>
+                <span
+                  id="user-menu-login-mobile"
+                  className="screen-reader-text"
+                >
+                  {t("navigation.user.log_in_to_manifold")}
                 </span>
-              </div>
-            </button>
-            <span id="user-menu-login-mobile" className="screen-reader-text">
-              {t("navigation.user.log_in_to_manifold")}
-            </span>
+              </>
+            )}
           </li>
         </ul>
       );
@@ -149,4 +164,4 @@ class UserLinks extends PureComponent {
   /* eslint-enable jsx-a11y/anchor-is-valid */
 }
 
-export default withTranslation()(UserLinks);
+export default withTranslation()(withSettings(UserLinks));
