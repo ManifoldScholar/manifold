@@ -290,7 +290,11 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :user_groups
+      resources :user_groups do
+        namespace :relationships do
+          resources :user_group_memberships, only: %i[create destroy]
+        end
+      end
 
       namespace :analytics do
         resource :events, only: [:create]
