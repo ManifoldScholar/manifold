@@ -21,7 +21,18 @@ function ColorInput({ defaultValue, container, ...props }) {
 
     document.addEventListener("coloris:pick", setColor);
 
-    return () => document.removeEventListener("coloris:pick", setColor);
+    const handleEnter = e => {
+      if (e.key !== "Enter") return;
+      e.preventDefault();
+    };
+
+    const picker = document.querySelector("#clr-picker");
+    picker.addEventListener("keydown", handleEnter);
+
+    return () => {
+      document.removeEventListener("coloris:pick", setColor);
+      picker.removeEventListener("keydown", handleEnter);
+    };
   }, [inputId, container, props]);
 
   useEffect(() => {
