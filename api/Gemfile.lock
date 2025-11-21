@@ -169,6 +169,8 @@ GEM
       activerecord (>= 4.2.10)
       with_advisory_lock (>= 4.0.0)
     coderay (1.1.3)
+    composite_primary_keys (14.0.10)
+      activerecord (~> 7.0.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     content_disposition (1.0.0)
@@ -880,6 +882,7 @@ DEPENDENCIES
   classy_enum (~> 4.0.0)
   cleanroom
   closure_tree (~> 7.0)
+  composite_primary_keys (~> 14.0.10)
   crass (~> 1.0.5)
   csl-styles (~> 1.0)
   css_parser (~> 1.0)
