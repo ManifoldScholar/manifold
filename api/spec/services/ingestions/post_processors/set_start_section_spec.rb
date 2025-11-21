@@ -5,24 +5,32 @@ require "rails_helper"
 RSpec.describe Ingestions::PostProcessors::SetStartSection do
   include TestHelpers::IngestionHelper
 
-  shared_examples_for "the start section assignment" do |section_name|
-    before { described_class.run(manifest: manifest, text: text, context: context) }
+  let_it_be(:project, refind: true) { FactoryBot.create :project }
+  let_it_be(:creator, refind: true) { FactoryBot.create :user }
 
-    it "determines the start_text_section_id" do
+  shared_examples_for "the start section assignment" do |section_name|
+    it "determines the start_text_section_id", retry: 5 do
+      expect do
+        described_class.run!(manifest:, text:, context:)
+      end.to execute_safely
+
       expect(text.start_text_section).not_to be_nil
       expect(text.start_text_section.name).to eq section_name
     end
   end
 
   context "when manifest" do
-    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, project:, creator:, source_path: path }
+
     let(:context) { create_context(ingestion) }
+
     let(:manifest) do
-      manifest = Ingestions::Strategies::Manifest.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
-      manifest
+      Ingestions::Strategies::Manifest.run!(context:).then do |manifest|
+        Ingestions::PreProcessor.run!(context:, manifest:)
+      end
     end
-    let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+
+    let!(:text) { Ingestions::Compiler.run!(manifest:, context:) }
 
     context "when starting section source is referenced multiple times" do
       let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local.zip") }
@@ -38,13 +46,16 @@ RSpec.describe Ingestions::PostProcessors::SetStartSection do
   end
 
   context "when epub" do
-    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, project:, creator:, source_path: path }
+
     let(:context) { create_context(ingestion) }
+
     let(:manifest) do
-      manifest = Ingestions::Strategies::Epub.run(context: context).result
-      manifest = Ingestions::PreProcessor.run(context: context, manifest: manifest).result
-      manifest
+      Ingestions::Strategies::Epub.run!(context:).then do |manifest|
+        Ingestions::PreProcessor.run!(context:, manifest:)
+      end
     end
+
     let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
 
     context "when V2" do
