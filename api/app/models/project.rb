@@ -28,6 +28,7 @@ class Project < ApplicationRecord
   include TimestampScopes
   include WithConfigurableAvatar
   include HasKeywordSearch
+  include ExternallyIdentifiable
 
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :restricted_access_body, include_wrap: false

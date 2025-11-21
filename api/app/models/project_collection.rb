@@ -12,6 +12,7 @@ class ProjectCollection < ApplicationRecord
   include TrackedCreator
   include Taggable
   include WithProjectCollectionLayout
+  include ExternallyIdentifiable
 
   # Attachments
   manifold_has_attached_file :hero, :image
