@@ -195,7 +195,7 @@ GEM
     database_cleaner-redis (2.0.0)
       database_cleaner-core (~> 2.0.0)
       redis
-    date (3.3.3)
+    date (3.4.1)
     declarative (0.0.20)
     device_detector (1.0.7)
     diff-lcs (1.5.0)
@@ -491,12 +491,12 @@ GEM
       ruby2_keywords (~> 0.0.1)
     namae (1.1.1)
     naught (1.1.0)
-    net-imap (0.3.7)
+    net-imap (0.3.9)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.1)
+    net-protocol (0.2.2)
       timeout
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
@@ -799,7 +799,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.3.0)
     timecop (0.9.8)
-    timeout (0.4.0)
+    timeout (0.4.3)
     trailblazer-option (0.1.2)
     tus-server (2.3.0)
       content_disposition (~> 1.0)
