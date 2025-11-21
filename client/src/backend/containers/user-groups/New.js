@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
 import Properties from "backend/components/user-group/Properties";
 
-export default function UserGroupsNew() {
+export default function UserGroupsNew({ refresh }) {
   const { t } = useTranslation();
 
   return (
@@ -10,7 +10,7 @@ export default function UserGroupsNew() {
       <Layout.DrawerHeader
         title={t("records.user_groups.properties.new_header")}
       />
-      <Properties />
+      <Properties refresh={refresh} />
     </section>
   );
 }
