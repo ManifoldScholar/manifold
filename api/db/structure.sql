@@ -2977,14 +2977,15 @@ CREATE VIEW public.text_section_aggregations AS
 --
 
 CREATE VIEW public.text_section_node_links AS
- SELECT parent.id AS parent_id,
+ SELECT parent.text_section_id,
+    parent.id AS parent_id,
     child.id AS child_id,
     parent.depth AS parent_depth,
     parent.node_index AS parent_node_index,
     child.depth AS child_depth,
     child.node_index AS child_node_index
    FROM (public.text_section_nodes parent
-     JOIN public.text_section_nodes child ON (((parent.node_path OPERATOR(public.@>) child.node_path) AND (child.depth > parent.depth))));
+     JOIN public.text_section_nodes child ON (((parent.text_section_id = child.text_section_id) AND (parent.node_path OPERATOR(public.@>) child.node_path) AND (child.depth > parent.depth))));
 
 
 --
@@ -7840,6 +7841,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20251103175506'),
 ('20251103175949'),
 ('20251103180007'),
-('20251105165521');
+('20251105165521'),
+('20251121202033');
 
 

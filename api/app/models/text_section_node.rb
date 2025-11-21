@@ -41,10 +41,8 @@ class TextSectionNode < ApplicationRecord
 
   scope :sans_search_indexed, -> { where(search_indexed: false) }
 
-  has_many_readonly :text_section_node_links, -> { in_order }, inverse_of: :parent, foreign_key: :parent_id
-  has_many_readonly :ancestor_links, -> { in_reverse_order }, class_name: "TextSectionNodeLink", inverse_of: :child, foreign_key: :child_id
-
-  has_one_readonly :text_section_node_derivation, inverse_of: :text_section_node
+  has_many_readonly :text_section_node_links, -> { in_order }, inverse_of: :parent, primary_key: %i[text_section_id id], foreign_key: %i[text_section_id parent_id]
+  has_many_readonly :ancestor_links, -> { in_reverse_order }, class_name: "TextSectionNodeLink", inverse_of: :child, primary_key: %i[text_section_id id], foreign_key: %i[text_section_id child_id]
 
   has_many :parents, -> { terminal }, through: :ancestor_links, source: :parent
   has_many :children, through: :text_section_node_links, source: :child
@@ -57,8 +55,6 @@ class TextSectionNode < ApplicationRecord
         tsvector_column: :tsv_contained_content,
       },
     }
-
-  delegate :to_apply, to: :text_section_node_contained_content, allow_nil: true, prefix: :contained_content
 
   def node
     node_extra.with_indifferent_access.merge(

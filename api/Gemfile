@@ -27,6 +27,8 @@ gem "citeproc-ruby", "~> 1.1.0"
 gem "classy_enum", "~> 4.0.0"
 gem "cleanroom"
 gem "closure_tree", "~> 7.0"
+# Until Rails 7.1
+gem "composite_primary_keys", "~> 14.0.10"
 gem "crass", "~> 1.0.5"
 gem "csl-styles", "~> 1.0"
 gem "cssbeautify"
