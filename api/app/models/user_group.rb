@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserGroup < ApplicationRecord
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -6,10 +8,13 @@ class UserGroup < ApplicationRecord
   include SerializedAbilitiesFor
 
   has_many :memberships, class_name: "UserGroupMembership", inverse_of: :user_group
-  has_many :user_group_entitleables, inverse_of: :user_group
+  has_many :entitleables, class_name: "UserGroupEntitleable", inverse_of: :user_group
 
-  has_many :users, through: :user_group_memberships
-  # has_many :entitleables, through: :user_group_entitleables, source_type: Entitleable
+  has_many :users, through: :memberships
 
   validates :name, presence: true, uniqueness: true
+
+  def entitlement_subjects
+    entitleables.includes(:entitleable).map(&:entitleable).compact
+  end
 end
