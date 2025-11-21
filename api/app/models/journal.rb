@@ -25,6 +25,7 @@ class Journal < ApplicationRecord
   include WithProjectCollectionLayout
   include WithConfigurableAvatar
   include HasKeywordSearch
+  include ExternallyIdentifiable
 
   multisearch_draftable true
 
