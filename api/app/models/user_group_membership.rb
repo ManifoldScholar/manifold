@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserGroupMembership < ApplicationRecord
   include ProvidesEntitlements
 
