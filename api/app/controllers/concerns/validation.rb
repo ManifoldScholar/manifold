@@ -69,41 +69,6 @@ module Validation
     params.permit(param_config)
   end
 
-  def project_params
-    params.require(:data)
-    attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
-                  :purchase_price_currency, :facebook_id, :purchase_call_to_action, :twitter_id,
-                  :hide_activity, :instagram_id, :remove_avatar, attachment(:avatar),
-                  attachment(:hero), :download_url, attachment(:cover), :remove_hero, :draft,
-                  :remove_cover, :download_call_to_action, :publication_date, metadata(Project),
-                  :avatar_color, { tag_list: [] }, :dark_mode, :image_credits,
-                  :standalone_mode, :standalone_mode_press_bar_text, :restricted_access,
-                  :standalone_mode_press_bar_url, :finished, :restricted_access_heading,
-                  :restricted_access_body, :open_access, :disable_engagement,
-                  :journal_issue_pending_sort_title, :journal_issue_number, :pending_slug,
-                  :social_title, attachment(:social_image), :remove_social_image,
-                  :social_description]
-    relationships = [:collaborators, :creators, :contributors, :subjects, :journal_volume]
-    param_config = structure_params(attributes: attributes, relationships: relationships)
-    params.permit(param_config)
-  end
-
-  def journal_params
-    params.require(:data)
-    attributes = [:title, :subtitle, :hashtag, :description, :facebook_id, :twitter_id,
-                  :instagram_id, :remove_avatar, attachment(:avatar),
-                  attachment(:hero), attachment(:logo), :remove_hero, :draft,
-                  :remove_logo, metadata(Journal), :avatar_color, :pending_slug,
-                  { tag_list: [] }, :image_credits, :social_description,
-                  attachment(:custom_icon), :hero_layout, :remove_custom_icon,
-                  :social_title, attachment(:social_image), :remove_social_image,
-                  :hero_background_color, :show_on_homepage, :home_page_priority]
-
-    relationships = [:collaborators, :creators, :contributors, :subjects]
-    param_config = structure_params(attributes: attributes, relationships: relationships)
-    params.permit(param_config)
-  end
-
   def journal_volume_params
     params.require(:data)
     attributes = [:number, :pending_slug]
@@ -162,27 +127,6 @@ module Validation
     attributes = [:title, :description, attachment(:thumbnail), :remove_thumbnail,
                   :pending_slug]
     relationships = [:project, :resources]
-    param_config = structure_params(attributes: attributes, relationships: relationships)
-    params.permit(param_config)
-  end
-
-  def project_collection_params
-    params.require(:data)
-    attributes = [:title, :sort_order, :visible, :homepage, :smart, :position, :icon,
-                  { tag_list: [] }, :number_of_projects, :featured_only, :description, :short_description,
-                  :pending_slug, :homepage_start_date, :homepage_end_date,
-                  :homepage_count, :social_description, attachment(:custom_icon),
-                  attachment(:hero), :hero_layout, :remove_hero, :remove_custom_icon,
-                  :social_title, attachment(:social_image), :remove_social_image]
-    relationships = [:projects, :subjects]
-    param_config = structure_params(attributes: attributes, relationships: relationships)
-    params.permit(param_config)
-  end
-
-  def collection_project_params
-    params.require(:data)
-    attributes = [:position]
-    relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
@@ -521,7 +465,7 @@ module Validation
 
   def user_group_params
     params.require(:data)
-    attributes = [:name]
+    attributes = %i[name external_identifier]
     relationships = %i[members entitleables]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
