@@ -27,8 +27,9 @@ function UserGroupsListContainer({
     initSearchProps: entitiesListSearchProps("user_groups")
   });
 
-  const { data: userGroups, meta: userGroupsMeta } = useFetch({
-    request: [userGroupsAPI.index, filters, pagination]
+  const { data: userGroups, meta: userGroupsMeta, refresh } = useFetch({
+    request: [userGroupsAPI.index, filters, pagination],
+    options: { requestKey: "backend-user-groups" }
   });
 
   const drawerProps = {
@@ -51,7 +52,8 @@ function UserGroupsListContainer({
         {childRoutes(detailRoutes)}
         {childRoutes(drawerRoutes, {
           drawer: true,
-          drawerProps
+          drawerProps,
+          childProps: { refresh }
         })}
       </>
     );

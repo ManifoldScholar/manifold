@@ -5,11 +5,12 @@ import { userGroupsAPI } from "api";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 
-export default function UserGroupProperties({ userGroup }) {
+export default function UserGroupProperties({ userGroup, refresh }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const redirectToUserGroup = newGroup => {
+    if (refresh) refresh();
     const path = lh.link("backendRecordsUserGroup", newGroup.id);
     navigate(path, { keepNotifications: true });
   };
