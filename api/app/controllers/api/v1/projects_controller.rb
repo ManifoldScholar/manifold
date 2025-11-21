@@ -68,6 +68,27 @@ module API
 
         Project.existing.all
       end
+
+      private
+
+      def project_params
+        params.require(:data)
+        attributes = [:title, :subtitle, :featured, :hashtag, :description, :purchase_url,
+                      :purchase_price_currency, :facebook_id, :purchase_call_to_action, :twitter_id,
+                      :hide_activity, :instagram_id, :remove_avatar, attachment(:avatar),
+                      attachment(:hero), :download_url, attachment(:cover), :remove_hero, :draft,
+                      :remove_cover, :download_call_to_action, :publication_date, metadata(Project),
+                      :avatar_color, { tag_list: [] }, :dark_mode, :image_credits,
+                      :standalone_mode, :standalone_mode_press_bar_text, :restricted_access,
+                      :standalone_mode_press_bar_url, :finished, :restricted_access_heading,
+                      :restricted_access_body, :open_access, :disable_engagement,
+                      :journal_issue_pending_sort_title, :journal_issue_number, :pending_slug,
+                      :social_title, attachment(:social_image), :remove_social_image,
+                      :social_description, :external_identifier]
+        relationships = [:collaborators, :creators, :contributors, :subjects, :journal_volume]
+        param_config = structure_params(attributes: attributes, relationships: relationships)
+        params.permit(param_config)
+      end
     end
   end
 end

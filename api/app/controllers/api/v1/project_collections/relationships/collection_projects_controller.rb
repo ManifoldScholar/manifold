@@ -56,6 +56,14 @@ module API
           def includes
             %w()
           end
+
+          def collection_project_params
+            params.require(:data)
+            attributes = [:position]
+            relationships = []
+            param_config = structure_params(attributes: attributes, relationships: relationships)
+            params.permit(param_config)
+          end
         end
       end
     end
