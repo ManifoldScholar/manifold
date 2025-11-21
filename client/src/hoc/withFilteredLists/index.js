@@ -12,6 +12,7 @@ import assetFilters from "./assetFilters";
 import readingGroupFilters from "./readingGroupFilters";
 import annotationFilters from "./annotationFilters";
 import commentFilters from "./commentFilters";
+import userGroupFilters from "./userGroupFilters";
 
 export default withFilters;
 
@@ -28,5 +29,6 @@ export {
   assetFilters,
   readingGroupFilters,
   annotationFilters,
-  commentFilters
+  commentFilters,
+  userGroupFilters
 };
