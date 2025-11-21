@@ -1,5 +1,7 @@
 export default `
   .clr-picker {
+    --clr-picker-focus-color: var(--hover-color);
+
     display: none;
     flex-wrap: wrap;
     position: absolute;
@@ -259,7 +261,7 @@ export default `
 
   input.clr-color:focus {
     outline: none;
-    border: 1px solid #1e90ff;
+    border: 1px solid var(--clr-picker-focus-color);
   }
 
   .clr-close,
@@ -419,7 +421,7 @@ export default `
   .clr-keyboard-nav .clr-alpha input:focus + div,
   .clr-keyboard-nav .clr-segmented input:focus + label {
     outline: none;
-    box-shadow: 0 0 0 2px #1e90ff, 0 0 2px 2px #fff;
+    box-shadow: 0 0 0 2px var(--clr-picker-focus-color), 0 0 2px 2px #fff;
   }
 
   .clr-picker[data-alpha="false"] .clr-alpha {
@@ -457,7 +459,7 @@ export default `
   }
 
   .clr-dark input.clr-color:focus {
-    border-color: #1e90ff;
+    border-color: var(--clr-picker-focus-color);
   }
 
   .clr-dark .clr-preview:after {
