@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
@@ -8,10 +8,10 @@ import withConfirmation from "hoc/withConfirmation";
 import { userGroupsAPI } from "api";
 import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
+import Authorize from "hoc/Authorize";
 import navigation from "helpers/router/navigation";
-// import Authorize from "hoc/Authorize";
 import {
-  // useFetch,
+  useFetch,
   useApiCallback,
   useNotification,
   useRedirectToFirstMatch
@@ -21,19 +21,11 @@ function UserGroupWrapper({ route, history, confirm, location }) {
   const { t } = useTranslation();
   const { id } = useParams();
 
-  // const { data: userGroup, refresh } = useFetch({
-  //   request: [userGroupsAPI.show, id]
-  // });
-
-  const userGroup = useMemo(
-    () => ({
-      id: "test",
-      type: "userGroups",
-      attributes: { name: "Test User Group", externalId: "test-group-1" }
-    }),
-    []
-  );
-  const refresh = () => {};
+  const { data: userGroup, refresh } = useFetch({
+    request: [userGroupsAPI.show, id],
+    dependencies: [id],
+    condition: id !== "new"
+  });
 
   const destroy = useApiCallback(userGroupsAPI.destroy, {
     removes: userGroup
@@ -68,7 +60,7 @@ function UserGroupWrapper({ route, history, confirm, location }) {
   const utility = [
     {
       label: "actions.delete",
-      // authorize: "delete",
+      authorize: "delete",
       icon: "delete32",
       onClick: handleUserGroupDestroy
     }
@@ -92,39 +84,39 @@ function UserGroupWrapper({ route, history, confirm, location }) {
 
   return (
     <div>
-      {/* <Authorize
+      <Authorize
         entity={userGroup}
         failureFatalError={{
           detail: t("groups.unauthorized_edit")
         }}
-        ability={["update"]}
-      > */}
-      {subpage && (
-        <HeadContent
-          title={`${t(`titles.${subpage}`)} | ${userGroup.attributes.name ||
-            t("glossary.user_group_title_case_one")} | ${t("common.admin")}`}
-          appendDefaultTitle
-        />
-      )}
-      <PageHeader
-        type="userGroup"
-        icon="Privacy24"
-        title={userGroup.attributes.name || userGroup.id}
-        actions={utility}
-        secondaryLinks={navigation.userGroup(userGroup)}
-      />
-      <Layout.BackendPanel
-        sidebar={
-          <Layout.SecondaryNav
-            links={navigation.userGroup(userGroup)}
-            panel
-            ariaLabel={t("records.user_groups.settings")}
-          />
-        }
+        ability={["read"]}
       >
-        <div>{renderRoutes()}</div>
-      </Layout.BackendPanel>
-      {/* </Authorize> */}
+        {subpage && (
+          <HeadContent
+            title={`${t(`titles.${subpage}`)} | ${userGroup.attributes.name ||
+              t("glossary.user_group_title_case_one")} | ${t("common.admin")}`}
+            appendDefaultTitle
+          />
+        )}
+        <PageHeader
+          type="userGroup"
+          icon="Privacy24"
+          title={userGroup.attributes.name || userGroup.id}
+          actions={utility}
+          secondaryLinks={navigation.userGroup(userGroup)}
+        />
+        <Layout.BackendPanel
+          sidebar={
+            <Layout.SecondaryNav
+              links={navigation.userGroup(userGroup)}
+              panel
+              ariaLabel={t("records.user_groups.settings")}
+            />
+          }
+        >
+          <div>{renderRoutes()}</div>
+        </Layout.BackendPanel>
+      </Authorize>
     </div>
   );
 }
