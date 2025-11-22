@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { useSearchContext } from "hooks/useSearch/context";
@@ -21,20 +21,18 @@ export default function SearchMenuBody({
 
   const { searchQueryState, setQueryState } = useSearchContext();
 
-  const searchPath = useMemo(() => {
-    switch (searchType) {
-      case "reader":
-        return lh.link(
-          "readerSectionSearchResults",
-          textId || textIdParam,
-          sectionId || sectionIdParam
-        );
-      case "project":
-        return lh.link("frontendProjectSearch", projectId);
-      default:
-        return lh.link("frontendSearch");
-    }
-  }, [searchType, projectId, textId, sectionId, textIdParam, sectionIdParam]);
+  let searchPath;
+  if (searchType === "reader") {
+    searchPath = lh.link(
+      "readerSectionSearchResults",
+      textId || textIdParam,
+      sectionId || sectionIdParam
+    );
+  } else if (searchType === "project") {
+    searchPath = lh.link("frontendProjectSearch", projectId);
+  } else {
+    searchPath = lh.link("frontendSearch");
+  }
 
   const handleSetQueryState = useCallback(
     state => {
