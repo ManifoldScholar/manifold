@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import { useState } from "react";
 import { readingGroupsAPI } from "api";
 import { useParams, Outlet } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -30,25 +30,24 @@ export default function ReadingGroup() {
     dependencies: [fetchVersion]
   });
 
-  const breadcrumbProps = useMemo(() => {
-    if (readingGroup?.attributes?.currentUserRole === "none")
-      return {
-        breadcrumbs: [
-          {
-            to: lh.link("frontendPublicReadingGroups"),
-            label: t("pages.public_groups")
-          }
-        ]
-      };
-    return {
-      breadcrumbs: [
-        {
-          to: lh.link("frontendMyReadingGroups"),
-          label: t("pages.my_groups")
+  const breadcrumbProps =
+    readingGroup?.attributes?.currentUserRole === "none"
+      ? {
+          breadcrumbs: [
+            {
+              to: lh.link("frontendPublicReadingGroups"),
+              label: t("pages.public_groups")
+            }
+          ]
         }
-      ]
-    };
-  }, [readingGroup?.attributes?.currentUserRole, t]);
+      : {
+          breadcrumbs: [
+            {
+              to: lh.link("frontendMyReadingGroups"),
+              label: t("pages.my_groups")
+            }
+          ]
+        };
 
   if (!readingGroup) return null;
 

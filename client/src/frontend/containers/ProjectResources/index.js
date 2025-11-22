@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useParams, useOutletContext } from "react-router-dom";
@@ -44,19 +44,17 @@ export default function ProjectResourcesContainer() {
     }
   });
 
-  const breadcrumbs = useMemo(() => {
-    const projectCrumb = {
-      to: lh.link("frontendProject", slug),
-      label: titlePlaintext
-    };
-    const resourcesCrumb = {
-      to: lh.link("frontendProjectResources", slug),
-      label: t("glossary.resource_other")
-    };
-    return journalBreadcrumbs
-      ? [...journalBreadcrumbs, resourcesCrumb].filter(Boolean)
-      : [projectCrumb, resourcesCrumb].filter(Boolean);
-  }, [journalBreadcrumbs, slug, titlePlaintext, t]);
+  const projectCrumb = {
+    to: lh.link("frontendProject", slug),
+    label: titlePlaintext
+  };
+  const resourcesCrumb = {
+    to: lh.link("frontendProjectResources", slug),
+    label: t("glossary.resource_other")
+  };
+  const breadcrumbs = journalBreadcrumbs
+    ? [...journalBreadcrumbs, resourcesCrumb].filter(Boolean)
+    : [projectCrumb, resourcesCrumb].filter(Boolean);
 
   const headContentProps = useEntityHeadContent(
     project,

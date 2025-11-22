@@ -1,4 +1,4 @@
-import { useImperativeHandle, forwardRef, useMemo } from "react";
+import { useImperativeHandle, forwardRef } from "react";
 import { meAPI } from "api";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
@@ -10,18 +10,14 @@ import { useFetch, useCurrentUser, useListQueryParams } from "hooks";
 import * as Styled from "./styles";
 
 const DEFAULT_SORT_ORDER = "created_at_asc";
+const FILTERS_RESET = {
+  sort_order: DEFAULT_SORT_ORDER,
+  archived: "false"
+};
 
 const MyReadingGroupsListContainer = forwardRef((props, ref) => {
-  const filtersReset = useMemo(
-    () => ({
-      sort_order: DEFAULT_SORT_ORDER,
-      archived: "false"
-    }),
-    []
-  );
-
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filtersReset
+    initFilters: FILTERS_RESET
   });
 
   const { data: readingGroups, meta, refresh } = useFetch({
@@ -51,7 +47,7 @@ const MyReadingGroupsListContainer = forwardRef((props, ref) => {
               filterProps={{
                 onFilterChange: state => setFilters(state),
                 initialState: filters,
-                resetState: filtersReset
+                resetState: FILTERS_RESET
               }}
               showStatusFilter
               onArchive={refresh}

@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { projectsAPI, requests } from "api";
@@ -12,16 +11,16 @@ import {
   useListQueryParams
 } from "hooks";
 
+const FILTER_RESET = { standaloneModeEnforced: "false" };
+
 export default function ProjectsContainer() {
   const subjects = useFromStore({
     requestKey: requests.feSubjects,
     action: "select"
   });
 
-  const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
-
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filterReset
+    initFilters: FILTER_RESET
   });
 
   const { data: projects, meta } = useFetch({
@@ -36,7 +35,7 @@ export default function ProjectsContainer() {
   const filterProps = useListFilters({
     onFilterChange: param => setFilters(param),
     initialState: filters,
-    resetState: filterReset,
+    resetState: FILTER_RESET,
     options: {
       entityType: "project",
       sort: true,

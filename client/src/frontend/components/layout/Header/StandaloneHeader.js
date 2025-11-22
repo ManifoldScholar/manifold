@@ -45,39 +45,17 @@ export default function StandaloneHeader({ settings, alwaysVisible = false }) {
     typeof window !== "undefined" ? window.innerWidth <= BREAKPOINT : false
   );
 
-  const commonActionsMemo = useMemo(() => commonActions(dispatch), [dispatch]);
-
-  const darkMode = useMemo(() => context?.project?.darkMode, [
-    context?.project?.darkMode
-  ]);
-
-  const alwaysVisibleComputed = useMemo(() => {
-    if (!context?.isProjectHomepage) return true;
-    return alwaysVisible;
-  }, [context?.isProjectHomepage, alwaysVisible]);
-
-  const lightTheme = useMemo(() => {
-    if (alwaysVisibleComputed && !darkMode) return true;
-    if (!darkMode) return true;
-    return false;
-  }, [alwaysVisibleComputed, darkMode]);
-
-  const title = useMemo(() => context?.project?.titleFormatted, [
-    context?.project?.titleFormatted
-  ]);
-
-  const subtitle = useMemo(() => context?.project?.subtitleFormatted, [
-    context?.project?.subtitleFormatted
-  ]);
-
-  const projectSlug = useMemo(() => context?.project?.slug, [
-    context?.project?.slug
-  ]);
-
-  const projectUrl = useMemo(() => {
-    if (!projectSlug) return null;
-    return lh.link("frontendProjectDetail", projectSlug);
-  }, [projectSlug]);
+  const darkMode = context?.project?.darkMode;
+  const alwaysVisibleComputed = !context?.isProjectHomepage
+    ? true
+    : alwaysVisible;
+  const lightTheme = (alwaysVisibleComputed && !darkMode) || !darkMode;
+  const title = context?.project?.titleFormatted;
+  const subtitle = context?.project?.subtitleFormatted;
+  const projectSlug = context?.project?.slug;
+  const projectUrl = projectSlug
+    ? lh.link("frontendProjectDetail", projectSlug)
+    : null;
 
   const directionRef = useRef("down");
   const logRef = useRef(null);
@@ -193,7 +171,7 @@ export default function StandaloneHeader({ settings, alwaysVisible = false }) {
             </div>
             <Navigation.Primary
               desktopStyle={navStyle}
-              commonActions={commonActionsMemo}
+              commonActions={commonActions(dispatch)}
               authentication={authentication}
               visibility={visibility}
               mode="frontend"
