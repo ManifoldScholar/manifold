@@ -349,14 +349,36 @@ useFetch({
 
 **When to memoize:**
 
-- Object literals: `{ used: true }` → `useMemo(() => ({ used: true }), [])`
-- Array literals: `[1, 2, 3]` → `useMemo(() => [1, 2, 3], [])`
-- Complex objects: `{ filter: { used: true }, sort: "name" }` → `useMemo(() => ({ filter: { used: true }, sort: "name" }), [])`
+- Objects/arrays that depend on props/state: `{ userId, status }` → `useMemo(() => ({ userId, status }), [userId, status])`
+- Complex objects that depend on props/state: `{ filter: { used: true }, sort: sortBy }` → `useMemo(() => ({ filter: { used: true }, sort: sortBy }), [sortBy])`
 
-**When NOT to memoize:**
+**When NOT to memoize (use constants instead):**
+
+- **Static objects/arrays (never change)**: Define as constants outside the component
+
+  ```javascript
+  // ✅ Good - constant outside component has stable reference automatically
+  const FILTER_RESET = { standaloneModeEnforced: "false" };
+  const ANNOTATION_FILTERS = {
+    formats: ["annotation"],
+    order: "created_at DESC"
+  };
+
+  export default function MyComponent() {
+    // Stable reference automatically - perfect for useFetch
+    const { data } = useFetch({
+      request: [api.index, ANNOTATION_FILTERS, pagination]
+    });
+  }
+  ```
 
 - Primitive values: strings, numbers, booleans, null, undefined
 - Variables that already change when you want to refetch (these should be in `dependencies` instead)
+
+**Key Distinction:**
+
+- **Static objects (never change)**: Define as constants outside component → stable reference automatically, no `useMemo` needed
+- **Objects that depend on props/state**: Use `useMemo` with proper dependencies → stable reference that updates when needed
 
 **Important: The `oneTime` Option**
 
@@ -1052,6 +1074,167 @@ const { data: page } = useFetch({
   options: { requestKey: requests.gPage }
 });
 ```
+
+## When to Use useMemo
+
+`useMemo` should only be used when necessary. Overusing it can make code harder to read and maintain without providing performance benefits.
+
+### When to Use useMemo
+
+✅ **Expensive calculations** - Complex transformations, filtering large arrays, or other computationally expensive operations
+
+```javascript
+const sortedItems = useMemo(() => {
+  return largeArray.sort(complexSortFunction).filter(complexFilter);
+}, [largeArray]);
+```
+
+✅ **Memoizing objects/arrays passed to hooks that need stable references** - When passing objects/arrays to hooks like `useFetch` that depend on props/state
+
+```javascript
+const filters = useMemo(
+  () => ({ userId, status, order: "created_at DESC" }),
+  [userId, status] // Updates when userId or status changes
+);
+```
+
+✅ **Preventing unnecessary re-renders of memoized child components** - When passing computed values to components wrapped with `React.memo`
+
+```javascript
+const expensiveValue = useMemo(() => computeExpensiveValue(data), [data]);
+return <MemoizedChild value={expensiveValue} />;
+```
+
+### When NOT to Use useMemo
+
+❌ **Static objects/arrays** - Define as constants outside the component instead
+
+```javascript
+// ❌ Bad
+const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
+
+// ✅ Good
+const FILTER_RESET = { standaloneModeEnforced: "false" };
+```
+
+❌ **Simple calculations** - React is already optimized for these
+
+```javascript
+// ❌ Bad
+const total = useMemo(() => items.length, [items.length]);
+
+// ✅ Good
+const total = items.length;
+```
+
+❌ **Simple array/object construction** - Not expensive enough to warrant memoization
+
+```javascript
+// ❌ Bad
+const breadcrumbs = useMemo(() => [{ to: link, label: title }], [link, title]);
+
+// ✅ Good
+const breadcrumbs = [{ to: link, label: title }];
+```
+
+❌ **Primitive values** - Never needed
+
+```javascript
+// ❌ Bad
+const count = useMemo(() => 5, []);
+
+// ✅ Good
+const count = 5;
+```
+
+## When to Use useCallback
+
+`useCallback` should only be used when the function needs a stable reference. Overusing it can make code harder to read and maintain without providing performance benefits.
+
+### When to Use useCallback
+
+✅ **Function is passed as prop to a memoized child component** - When the child is wrapped with `React.memo` and you want to prevent unnecessary re-renders
+
+```javascript
+const MemoizedChild = React.memo(ChildComponent);
+
+function Parent() {
+  const handleClick = useCallback(() => {
+    // handler logic
+  }, [dependencies]);
+
+  return <MemoizedChild onClick={handleClick} />;
+}
+```
+
+✅ **Function is used as a dependency in other hooks** - When the function is in the dependency array of `useEffect`, `useMemo`, or another `useCallback`
+
+```javascript
+const fetchData = useCallback(() => {
+  // fetch logic
+}, [userId]);
+
+useEffect(() => {
+  fetchData();
+}, [fetchData]); // fetchData needs stable reference
+```
+
+✅ **Function is expensive to recreate** - Rare, usually only for complex closures with many dependencies
+
+### When NOT to Use useCallback
+
+❌ **Function is only called directly in the component** - No need for stable reference
+
+```javascript
+// ❌ Bad
+const handleClick = useCallback(() => {
+  navigate("/path");
+}, [navigate]);
+
+return <button onClick={handleClick}>Click</button>;
+
+// ✅ Good
+const handleClick = () => {
+  navigate("/path");
+};
+
+return <button onClick={handleClick}>Click</button>;
+```
+
+❌ **Function is passed to non-memoized components** - `useCallback` doesn't help if the component isn't memoized
+
+```javascript
+// ❌ Bad - component is not memoized
+const handleEditSuccess = useCallback(() => {
+  navigate(membersRoute);
+}, [navigate, membersRoute]);
+
+return <NonMemoizedChild onSuccess={handleEditSuccess} />;
+
+// ✅ Good
+const handleEditSuccess = () => {
+  navigate(membersRoute);
+};
+
+return <NonMemoizedChild onSuccess={handleEditSuccess} />;
+```
+
+❌ **Simple wrapper functions** - Not expensive to recreate
+
+```javascript
+// ❌ Bad
+const createSubject = useCallback(
+  name => createSubject({ type: "subject", attributes: { name } }),
+  [createSubject]
+);
+
+// ✅ Good
+const createSubject = name => {
+  return createSubject({ type: "subject", attributes: { name } });
+};
+```
+
+❌ **"Just in case" memoization** - React handles function recreation efficiently, don't optimize prematurely
 
 ## Common Patterns
 

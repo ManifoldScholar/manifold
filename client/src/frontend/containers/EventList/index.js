@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams, useOutletContext, Navigate } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -23,19 +22,17 @@ export default function EventList() {
   const { titlePlaintext, slug, hideActivity, description, avatarStyles } =
     project?.attributes ?? {};
 
-  const breadcrumbs = useMemo(() => {
-    const projectCrumb = {
-      to: lh.link("frontendProject", slug),
-      label: titlePlaintext
-    };
-    const eventsCrumb = {
-      to: lh.link("frontendProjectEvents", slug),
-      label: t("glossary.event_other")
-    };
-    return journalBreadcrumbs
-      ? [...journalBreadcrumbs, eventsCrumb].filter(Boolean)
-      : [projectCrumb, eventsCrumb].filter(Boolean);
-  }, [journalBreadcrumbs, slug, titlePlaintext, t]);
+  const projectCrumb = {
+    to: lh.link("frontendProject", slug),
+    label: titlePlaintext
+  };
+  const eventsCrumb = {
+    to: lh.link("frontendProjectEvents", slug),
+    label: t("glossary.event_other")
+  };
+  const breadcrumbs = journalBreadcrumbs
+    ? [...journalBreadcrumbs, eventsCrumb].filter(Boolean)
+    : [projectCrumb, eventsCrumb].filter(Boolean);
 
   if (!project || !events) return null;
 

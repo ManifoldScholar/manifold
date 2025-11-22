@@ -1,4 +1,3 @@
-import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
@@ -24,16 +23,13 @@ function ProjectCollectionSummaryEntityCollection({
     shortDescriptionFormatted: shortDescription
   } = projectCollection.attributes;
 
-  const mapProjects = useCallback(collection => {
-    if (!Array.isArray(collection.relationships.collectionProjects)) return [];
-    return collection.relationships.collectionProjects.map(
-      cp => cp.relationships.project
-    );
-  }, []);
-
   const getProjects = () => {
     const adjustedLimit = limit && limit > 0 ? limit : 100;
-    const projects = mapProjects(projectCollection);
+    if (!Array.isArray(projectCollection.relationships.collectionProjects))
+      return [];
+    const projects = projectCollection.relationships.collectionProjects.map(
+      cp => cp.relationships.project
+    );
     return projects.slice(0, adjustedLimit);
   };
 
