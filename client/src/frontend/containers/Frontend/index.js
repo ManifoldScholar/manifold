@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
 import Utility from "global/components/utility";
@@ -15,6 +13,8 @@ import BodyClass from "hoc/BodyClass";
 import AppFatalError from "global/components/FatalError/AppWrapper";
 import redirectIfLibraryDisabled from "hoc/redirectIfLibraryDisabled";
 import { SearchProvider } from "hooks/useSearch/context";
+
+const SUBJECT_FILTERS = { used: true };
 
 function FrontendContainer() {
   const dispatch = useDispatch();
@@ -37,25 +37,20 @@ function FrontendContainer() {
     dependencies: [userId]
   });
 
-  // Memoize filter objects to prevent infinite fetch loops
-  const subjectFilters = useMemo(() => ({ used: true }), []);
-
   useFetch({
-    request: [subjectsAPI.index, subjectFilters, null, true],
+    request: [subjectsAPI.index, SUBJECT_FILTERS, null, true],
     options: { requestKey: requests.feSubjects },
     dependencies: [userId]
   });
 
-  const commonActionsMemo = useMemo(() => commonActions(dispatch), [dispatch]);
+  const commonActionsMemo = commonActions(dispatch);
 
-  const mainClassName = useMemo(() => {
-    const hasPressLogo = get(settings, "attributes.pressLogoStyles.small");
-    return classNames({
-      "main-content": true,
-      "flex-viewport": true,
-      "extra-top": hasPressLogo
-    });
-  }, [settings]);
+  const hasPressLogo = get(settings, "attributes.pressLogoStyles.small");
+  const mainClassName = classNames({
+    "main-content": true,
+    "flex-viewport": true,
+    "extra-top": hasPressLogo
+  });
 
   return (
     <BodyClass className="browse">

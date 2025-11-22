@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useParams, Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -20,13 +19,8 @@ export default function ProjectWrapper() {
 
   const { t } = useTranslation();
 
-  const breadcrumbsCallback = useCallback(
-    () => getJournalBreadcrumbs(project, t, libraryDisabled),
-    [project, t, libraryDisabled]
-  );
-
   const journalBreadcrumbs = project?.attributes?.isJournalIssue
-    ? breadcrumbsCallback()
+    ? getJournalBreadcrumbs(project, t, libraryDisabled)
     : null;
 
   return (

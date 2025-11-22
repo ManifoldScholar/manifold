@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from "react";
+import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
@@ -28,15 +28,12 @@ const ProjectSearch = forwardRef((props, ref) => {
     { label: t("glossary.full_text_one"), value: "TextSection" }
   ];
 
-  const breadcrumbs = useMemo(
-    () => [
-      {
-        to: lh.link("frontendProjectDetail", project?.attributes?.slug),
-        label: project?.attributes?.titlePlaintext
-      }
-    ],
-    [project?.attributes?.titlePlaintext, project?.attributes?.slug]
-  );
+  const breadcrumbs = [
+    {
+      to: lh.link("frontendProjectDetail", project?.attributes?.slug),
+      label: project?.attributes?.titlePlaintext
+    }
+  ];
 
   return project ? (
     <div ref={ref}>
