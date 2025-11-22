@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import { useParams, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetch, useListQueryParams, useFromStore } from "hooks";
@@ -26,27 +25,25 @@ export default function JournalVolumesList() {
 
   const { titlePlaintext, slug } = journal?.attributes ?? {};
 
-  const breadcrumbs = useMemo(() => {
-    const nestedCrumbs = [
-      {
-        to: lh.link("frontendJournalDetail", slug),
-        label: titlePlaintext
-      },
-      {
-        to: lh.link("frontendJournalAllVolumes", slug),
-        label: t("glossary.volume_other")
-      }
-    ];
-    return libraryDisabled
-      ? nestedCrumbs
-      : [
-          {
-            to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
-          },
-          ...nestedCrumbs
-        ];
-  }, [slug, titlePlaintext, t, libraryDisabled]);
+  const nestedCrumbs = [
+    {
+      to: lh.link("frontendJournalDetail", slug),
+      label: titlePlaintext
+    },
+    {
+      to: lh.link("frontendJournalAllVolumes", slug),
+      label: t("glossary.volume_other")
+    }
+  ];
+  const breadcrumbs = libraryDisabled
+    ? nestedCrumbs
+    : [
+        {
+          to: lh.link("frontendJournalsList"),
+          label: t("navigation.breadcrumbs.all_journals")
+        },
+        ...nestedCrumbs
+      ];
 
   const headContentProps = useEntityHeadContent(journal);
 

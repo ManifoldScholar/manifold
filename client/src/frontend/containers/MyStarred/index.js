@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { meAPI } from "api";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
@@ -53,14 +53,14 @@ function MyStarredContainer() {
   const currentUser = useCurrentUser();
   const collection = getEntityCollection(currentUser);
 
-  const onUncollect = useCallback(type => {
+  const onUncollect = type => {
     setFetchVersion(prevState => {
       return {
         ...prevState,
         [type]: prevState[type] + 1
       };
     });
-  }, []);
+  };
 
   const { t } = useTranslation();
 
