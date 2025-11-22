@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { useParams, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { readingGroupMembershipsAPI, requests } from "api";
@@ -25,7 +25,7 @@ function ReadingGroupMemberEditContainer() {
     return () => dispatch(flush([requests.feReadingGroupMembershipShow]));
   }, [dispatch]);
 
-  const handleRemove = useCallback(() => {
+  const handleRemove = () => {
     const heading = t("messages.membership.destroy_heading");
     const message = t("messages.membership.destroy_message");
     if (confirm)
@@ -33,7 +33,7 @@ function ReadingGroupMemberEditContainer() {
         await deleteMembership(membership.id);
         onEditSuccess();
       });
-  }, [confirm, deleteMembership, membership?.id, onEditSuccess, t]);
+  };
 
   return membership ? (
     <section>

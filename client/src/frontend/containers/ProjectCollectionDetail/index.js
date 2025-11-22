@@ -1,5 +1,4 @@
-import React, { useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
+import { useEffect, useMemo } from "react";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "frontend/components/entity/Collection";
@@ -72,15 +71,12 @@ export default function ProjectCollectionDetailContainer() {
     }
   });
 
-  const breadcrumbs = useMemo(
-    () => [
-      {
-        to: lh.link("frontendProjectCollections"),
-        label: t("navigation.breadcrumbs.all_project_collections")
-      }
-    ],
-    [t]
-  );
+  const breadcrumbs = [
+    {
+      to: lh.link("frontendProjectCollections"),
+      label: t("navigation.breadcrumbs.all_project_collections")
+    }
+  ];
 
   const headContentProps = useEntityHeadContent(projectCollection);
 

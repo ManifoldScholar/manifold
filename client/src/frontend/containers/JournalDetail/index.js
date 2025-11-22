@@ -1,5 +1,4 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
+import { useMemo } from "react";
 import { useOutletContext } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
@@ -39,20 +38,18 @@ function JournalDetailContainer() {
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   const { titlePlaintext, slug } = journal?.attributes || {};
-  const breadcrumbs = useMemo(() => {
-    return libraryDisabled
-      ? null
-      : [
-          {
-            to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
-          },
-          {
-            to: lh.link("frontendJournalDetail", slug),
-            label: titlePlaintext
-          }
-        ];
-  }, [slug, titlePlaintext, t, libraryDisabled]);
+  const breadcrumbs = libraryDisabled
+    ? null
+    : [
+        {
+          to: lh.link("frontendJournalsList"),
+          label: t("navigation.breadcrumbs.all_journals")
+        },
+        {
+          to: lh.link("frontendJournalDetail", slug),
+          label: titlePlaintext
+        }
+      ];
 
   const headContentProps = useEntityHeadContent(journal);
 
