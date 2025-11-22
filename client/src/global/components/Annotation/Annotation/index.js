@@ -19,18 +19,6 @@ export default function Annotation({
 }) {
   const navigate = useNavigate();
 
-  const linkFor = useCallback(ann => {
-    const {
-      attributes: { textSlug, textSectionId }
-    } = ann;
-    return lh.link(
-      "readerSection",
-      textSlug,
-      textSectionId,
-      `#annotation-${ann.id}`
-    );
-  }, []);
-
   const deleteAnnotation = useApiCallback(annotationsAPI.destroy, {
     requestKey: requests.rAnnotationDestroy,
     removes: { type: "annotations", id: annotation.id }
@@ -45,9 +33,19 @@ export default function Annotation({
     event => {
       event.preventDefault();
       if (visitHandler) return visitHandler(annotation);
-      return navigate(linkFor(annotation));
+      const {
+        attributes: { textSlug, textSectionId }
+      } = annotation;
+      return navigate(
+        lh.link(
+          "readerSection",
+          textSlug,
+          textSectionId,
+          `#annotation-${annotation.id}`
+        )
+      );
     },
-    [annotation, visitHandler, navigate, linkFor]
+    [annotation, visitHandler, navigate]
   );
 
   const isTextAnnotation = annotation.attributes.format === "annotation";
