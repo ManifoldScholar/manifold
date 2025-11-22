@@ -1,4 +1,4 @@
-import { useState, useContext, useMemo, useCallback, Children } from "react";
+import { useState, useContext, useMemo, Children } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
@@ -12,22 +12,9 @@ export default function TableRow({ linkCreator, model, children }) {
   const context = useContext(TableHeaderContext);
   const [hovering, setHovering] = useState(false);
 
-  const isTable = useMemo(() => context.markup === "table", [context.markup]);
-
-  const hasRowLink = useMemo(
-    () => isFunction(linkCreator) && isPlainObject(model),
-    [linkCreator, model]
-  );
-
-  const link = useMemo(() => {
-    if (!hasRowLink) return null;
-    return linkCreator(model);
-  }, [hasRowLink, linkCreator, model]);
-
-  const cellProps = useCallback(child => {
-    const { _children, ...childProps } = child.props;
-    return childProps;
-  }, []);
+  const isTable = context.markup === "table";
+  const hasRowLink = isFunction(linkCreator) && isPlainObject(model);
+  const link = hasRowLink ? linkCreator(model) : null;
 
   const rowProps = useMemo(() => {
     const rowClassNames = classNames({
@@ -55,16 +42,20 @@ export default function TableRow({ linkCreator, model, children }) {
   }, [hasRowLink, hovering, isTable, link, navigate]);
 
   const cells = useMemo(() => {
+    const getCellProps = child => {
+      const { _children, ...childProps } = child.props;
+      return childProps;
+    };
     return Children.map(children.filter(Boolean), child => {
       return (
-        <Cell {...cellProps(child)}>
+        <Cell {...getCellProps(child)}>
           {isFunction(child.props.children)
             ? child.props.children({ model, hovering })
             : null}
         </Cell>
       );
     });
-  }, [children, cellProps, model, hovering]);
+  }, [children, model, hovering]);
 
   if (isTable) return <tr {...rowProps}>{cells}</tr>;
 

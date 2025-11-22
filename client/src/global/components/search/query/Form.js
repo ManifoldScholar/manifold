@@ -124,7 +124,7 @@ export default function SearchQueryForm({
     [state.scope, setScopeIdFromScopeString, searchOnScopeChange, setQueryState]
   );
 
-  const setKeyword = useCallback(event => {
+  const setKeyword = event => {
     if (!event || !event.target) return;
     const target = event.target;
     const value = target.value;
@@ -132,7 +132,7 @@ export default function SearchQueryForm({
       const newState = { ...prevState, keyword: value };
       return newState;
     });
-  }, []);
+  };
 
   // Handle edge case where header/footer search is used on search route
   useEffect(() => {
