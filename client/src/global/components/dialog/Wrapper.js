@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, Children, cloneElement } from "react";
+import { useState, useCallback, Children, cloneElement } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -25,15 +25,8 @@ export default function DialogWrapper({
   const navigate = useNavigate();
   const [additionalClassNames, setAdditionalClassNames] = useState("");
 
-  const overlayRole = useMemo(() => (closeOnOverlayClick ? "button" : null), [
-    closeOnOverlayClick
-  ]);
-
-  const style = useMemo(() => {
-    const styleObj = {};
-    if (maxWidth) styleObj.maxWidth = maxWidth;
-    return styleObj;
-  }, [maxWidth]);
+  const overlayRole = closeOnOverlayClick ? "button" : null;
+  const style = maxWidth ? { maxWidth } : {};
 
   const setDialogClassName = useCallback(additionalClassNamesValue => {
     setAdditionalClassNames(additionalClassNamesValue);
