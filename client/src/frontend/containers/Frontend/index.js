@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
 import Utility from "global/components/utility";
@@ -15,6 +13,9 @@ import BodyClass from "hoc/BodyClass";
 import AppFatalError from "global/components/FatalError/AppWrapper";
 import redirectIfLibraryDisabled from "hoc/redirectIfLibraryDisabled";
 import { SearchProvider } from "hooks/useSearch/context";
+
+const SUBJECT_FILTERS = { used: true };
+const JOURNAL_SUBJECT_FILTERS = { usedJournal: true };
 
 function FrontendContainer() {
   const dispatch = useDispatch();
@@ -37,32 +38,24 @@ function FrontendContainer() {
     dependencies: [userId]
   });
 
-  // Memoize filter objects to prevent infinite fetch loops
-  const subjectFilters = useMemo(() => ({ used: true }), []);
-  const journalSubjectFilters = useMemo(() => ({ usedJournal: true }), []);
-
   useFetch({
-    request: [subjectsAPI.index, subjectFilters, null, true],
+    request: [subjectsAPI.index, SUBJECT_FILTERS, null, true],
     options: { requestKey: requests.feSubjects },
     dependencies: [userId]
   });
 
   useFetch({
-    request: [subjectsAPI.index, journalSubjectFilters, null, true],
+    request: [subjectsAPI.index, JOURNAL_SUBJECT_FILTERS, null, true],
     options: { requestKey: requests.feJournalSubjects },
     dependencies: [userId]
   });
 
-  const commonActionsMemo = useMemo(() => commonActions(dispatch), [dispatch]);
-
-  const mainClassName = useMemo(() => {
-    const hasPressLogo = get(settings, "attributes.pressLogoStyles.small");
-    return classNames({
-      "main-content": true,
-      "flex-viewport": true,
-      "extra-top": hasPressLogo
-    });
-  }, [settings]);
+  const hasPressLogo = get(settings, "attributes.pressLogoStyles.small");
+  const mainClassName = classNames({
+    "main-content": true,
+    "flex-viewport": true,
+    "extra-top": hasPressLogo
+  });
 
   return (
     <BodyClass className="browse">
@@ -74,7 +67,7 @@ function FrontendContainer() {
             visibility={visibility}
             authentication={authentication}
             notifications={notifications}
-            commonActions={commonActionsMemo}
+            commonActions={commonActions(dispatch)}
             settings={settings}
           />
           <main id="skip-to-main" tabIndex={-1} className={mainClassName}>
@@ -87,7 +80,7 @@ function FrontendContainer() {
           <Footers.FrontendFooter
             pages={pages}
             authentication={authentication}
-            commonActions={commonActionsMemo}
+            commonActions={commonActions(dispatch)}
             settings={settings}
           />
         </SearchProvider>

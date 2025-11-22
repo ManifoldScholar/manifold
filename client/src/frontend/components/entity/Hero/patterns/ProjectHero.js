@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
 import { CalloutList, Cover, Credits, Image, Meta, Title } from "../parts";
 import EntityHero from "../EntityHero";
@@ -25,10 +25,8 @@ export default function ProjectHero({ entity, mock }) {
 
   const trackEvent = useEventTracker();
 
-  const trackProjectEvent = useCallback(
-    eventType => trackEvent(eventType, entity.type, entity.id),
-    [entity, trackEvent]
-  );
+  const trackProjectEvent = eventType =>
+    trackEvent(eventType, entity.type, entity.id);
 
   return (
     <EntityHero

@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import { useParams, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -23,34 +22,25 @@ function VolumeDetailContainer() {
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   const { titlePlaintext, slug: journalSlug } = journal?.attributes ?? {};
-  const breadcrumbs = useMemo(() => {
-    const nestedCrumbs = [
-      {
-        to: lh.link("frontendJournalDetail", journalSlug),
-        label: titlePlaintext
-      },
-      {
-        to: lh.link("frontendVolumeDetail", journalSlug, slug),
-        label: `${t("glossary.volume_one")} ${volume?.attributes?.number}`
-      }
-    ];
-    return libraryDisabled
-      ? nestedCrumbs
-      : [
-          {
-            to: lh.link("frontendJournalsList"),
-            label: t("navigation.breadcrumbs.all_journals")
-          },
-          ...nestedCrumbs
-        ];
-  }, [
-    t,
-    journalSlug,
-    titlePlaintext,
-    volume?.attributes?.number,
-    slug,
-    libraryDisabled
-  ]);
+  const nestedCrumbs = [
+    {
+      to: lh.link("frontendJournalDetail", journalSlug),
+      label: titlePlaintext
+    },
+    {
+      to: lh.link("frontendVolumeDetail", journalSlug, slug),
+      label: `${t("glossary.volume_one")} ${volume?.attributes?.number}`
+    }
+  ];
+  const breadcrumbs = libraryDisabled
+    ? nestedCrumbs
+    : [
+        {
+          to: lh.link("frontendJournalsList"),
+          label: t("navigation.breadcrumbs.all_journals")
+        },
+        ...nestedCrumbs
+      ];
 
   const headContentProps = useEntityHeadContent(
     volume,
