@@ -1,5 +1,3 @@
-import { useCallback } from "react";
-import PropTypes from "prop-types";
 import { useLocation, useParams, Redirect, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetch, useFromStore } from "hooks";
@@ -22,13 +20,8 @@ export default function ProjectWrapper() {
 
   const { t } = useTranslation();
 
-  const breadcrumbsCallback = useCallback(
-    () => getJournalBreadcrumbs(project, t, libraryDisabled),
-    [project, t, libraryDisabled]
-  );
-
   const journalBreadcrumbs = project?.attributes?.isJournalIssue
-    ? breadcrumbsCallback()
+    ? getJournalBreadcrumbs(project, t, libraryDisabled)
     : null;
 
   if (id === "all") return <Redirect to={lh.link("frontendProjectsAll")} />;

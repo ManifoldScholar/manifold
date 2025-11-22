@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import { useRef } from "react";
 import { Navigate, useOutletContext, useNavigate } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
@@ -16,12 +16,12 @@ function ReadingGroupsMembersContainer({ confirm }) {
 
   const membersRoute = lh.link("frontendReadingGroupMembers", readingGroup.id);
 
-  const handleEditSuccess = useCallback(() => {
+  const handleEditSuccess = () => {
     navigate(membersRoute);
     if (refreshRef.current?.refresh) {
       refreshRef.current.refresh();
     }
-  }, [navigate, membersRoute]);
+  };
 
   if (!userIsGroupMember) {
     const redirectUrl = lh.link("frontendReadingGroupDetail", readingGroup.id);
