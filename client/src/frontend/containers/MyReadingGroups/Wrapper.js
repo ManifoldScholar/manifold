@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import lh from "helpers/linkHandler";
@@ -8,13 +8,13 @@ export default function MyReadingGroupsContainer() {
   const navigate = useNavigate();
   const refreshRef = useRef(null);
 
-  const handleNewGroupSuccess = useCallback(() => {
+  const handleNewGroupSuccess = () => {
     navigate(lh.link("frontendMyReadingGroups"));
 
     if (refreshRef.current?.refresh) {
       refreshRef.current.refresh();
     }
-  }, [navigate]);
+  };
 
   return (
     <>
