@@ -1,11 +1,10 @@
-import React from "react";
+import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import Authorize from "hoc/Authorize";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import { readingGroupsAPI, bulkDeleteAPI, annotationsAPI } from "api";
-import { withRouter } from "react-router-dom";
 import {
   useFetch,
   useApiCallback,
@@ -26,14 +25,12 @@ import {
 } from "backend/components/list/EntitiesList/List/bulkActions";
 
 function ReadingGroupAnnotationsContainer({
-  refresh,
-  readingGroup,
-  route,
   confirm,
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
   const { t } = useTranslation();
+  const { refresh, readingGroup } = useOutletContext() || {};
 
   const { pagination, filters, searchProps } = useListQueryParams({
     initSize: 20,
@@ -47,10 +44,11 @@ function ReadingGroupAnnotationsContainer({
   const { data, refresh: refreshAnnotations, meta } = useFetch({
     request: [
       readingGroupsAPI.annotations,
-      readingGroup.id,
+      readingGroup?.id,
       filters,
       pagination
-    ]
+    ],
+    condition: !!readingGroup?.id
   });
 
   const {
@@ -112,7 +110,6 @@ function ReadingGroupAnnotationsContainer({
         const params = bulkSelection.filters
           ? { filters: bulkSelection.filters, ids: [] }
           : { filters: {}, ids: bulkSelection.ids };
-        await bulkDelete(params);
         const res = await bulkDelete(params);
         notifyBulkDelete(res.bulk_deletions.total);
         refresh();
@@ -120,7 +117,7 @@ function ReadingGroupAnnotationsContainer({
       });
   };
 
-  const closeUrl = lh.link("backendReadingGroupAnnotations", readingGroup.id);
+  const closeUrl = lh.link("backendReadingGroupAnnotations", readingGroup?.id);
 
   const currentPageIds = data?.map(a => a.id);
 
@@ -144,7 +141,7 @@ function ReadingGroupAnnotationsContainer({
             linkOverride: id =>
               lh.link(
                 "backendReadingGroupAnnotationDetail",
-                readingGroup.id,
+                readingGroup?.id,
                 id
               )
           }}
@@ -182,38 +179,33 @@ function ReadingGroupAnnotationsContainer({
           ]}
         />
       )}
-      {childRoutes(route, {
-        drawer: true,
-        drawerProps: {
+      <OutletWithDrawer
+        drawerProps={{
           lockScroll: "always",
-          wide: true,
+          size: "wide",
+          position: "overlay",
           lockScrollClickCloses: false,
           closeUrl
-        },
-        childProps: {
+        }}
+        context={{
           refresh,
           refreshAnnotations,
           readingGroup,
           closeUrl
-        }
-      })}
+        }}
+      />
     </Authorize>
   );
 }
 
 ReadingGroupAnnotationsContainer.propTypes = {
-  readingGroup: PropTypes.object,
-  refresh: PropTypes.func,
-  route: PropTypes.object,
   confirm: PropTypes.func,
   entitiesListSearchProps: PropTypes.func,
   entitiesListSearchParams: PropTypes.object
 };
 
-export default withRouter(
-  withConfirmation(
-    withFilteredLists(ReadingGroupAnnotationsContainer, {
-      annotations: annotationFilters({ includePrivacy: false })
-    })
-  )
+export default withConfirmation(
+  withFilteredLists(ReadingGroupAnnotationsContainer, {
+    annotations: annotationFilters({ includePrivacy: false })
+  })
 );
