@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Authorization from "helpers/authorization";
 import lh from "helpers/linkHandler";
 import useAuthentication from "../useAuthentication";
@@ -13,6 +13,7 @@ export default function useRedirectToFirstMatch({
 }) {
   const authentication = useAuthentication();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const maybeRedirect = useCallback(() => {
     const basePathname = lh.link(route);
@@ -32,23 +33,30 @@ export default function useRedirectToFirstMatch({
 
     const authorization = new Authorization();
 
-    candidates.every(candidate => {
+    // Find first matching candidate (don't navigate yet)
+    const matchingCandidate = candidates.find(candidate => {
       if (
         !candidate.ability ||
         authorization.authorize({ ...candidate, authentication })
       ) {
-        if (candidate.path) {
-          // history.replace(candidate.path, state);
-          return false;
-        } else if (candidate.hasOwnProperty("route")) {
-          const args = candidate.args || [];
-          // history.replace(lh.link(candidate.route, ...args), state);
-          return false;
-        }
+        return true; // Found a match
       }
-      return true;
+      return false;
     });
-  }, [route, slug, id, state, candidates, pathname, authentication]);
+
+    // Navigate once if we found a match
+    if (matchingCandidate) {
+      if (matchingCandidate.path) {
+        navigate(matchingCandidate.path, { replace: true, state });
+      } else if (matchingCandidate.hasOwnProperty("route")) {
+        const args = matchingCandidate.args || [];
+        navigate(lh.link(matchingCandidate.route, ...args), {
+          replace: true,
+          state
+        });
+      }
+    }
+  }, [route, slug, id, state, candidates, pathname, authentication, navigate]);
 
   useEffect(() => {
     if (route) maybeRedirect();
