@@ -1,5 +1,4 @@
-import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
+import { forwardRef } from "react";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
@@ -23,7 +22,7 @@ function ProjectsDropdown(props, ref) {
       <li key={link.label}>
         <Styled.Link
           to={pathForLink(link)}
-          activeClassName="active"
+          className={({ isActive }) => (isActive ? "active" : undefined)}
           onClick={dropDownProps.toggleVisible}
         >
           <Styled.LinkIcon icon={icon} size={24} />
