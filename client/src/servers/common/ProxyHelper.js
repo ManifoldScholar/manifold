@@ -30,17 +30,23 @@ class ProxyHelper {
     this.defineStaticProxy(
       app,
       "/browser.config.js",
-      `${this.wwwTarget}/browser.config.js`
+      `${this.wwwTarget}/browser.config.js`,
+      { maxAge: "1h" }
     );
-    this.defineStaticProxy(app, "/build", `${this.wwwTarget}/build`);
-    this.defineStaticProxy(app, "/static", `${this.wwwTarget}/static`);
+    this.defineStaticProxy(app, "/build", `${this.wwwTarget}/build`, {
+      maxAge: "1y",
+      immutable: true
+    });
+    this.defineStaticProxy(app, "/static", `${this.wwwTarget}/static`, {
+      maxAge: "1h"
+    });
   }
 
-  defineStaticProxy(app, proxyPath, target) {
+  defineStaticProxy(app, proxyPath, target, serveStaticOptions = {}) {
     ch.background(
       `${this.name} server will proxy ${proxyPath} requests to ${target}.`
     );
-    app.use(proxyPath, serveStatic(target));
+    app.use(proxyPath, serveStatic(target, serveStaticOptions));
   }
 
   defineProxy(app, proxyPath, target, logLevel = "silent") {
