@@ -872,6 +872,88 @@ export const formatError = error => {
 - **Location**: Components use `useLocation()` hook directly (no need to pass as prop)
 - **Reset**: Route errors reset automatically on location change (v6 behavior), component errors use `resetErrorBoundary` callback
 
+## useRedirectToFirstMatch Hook
+
+The `useRedirectToFirstMatch` hook is used to redirect users to the first authorized route from a list of candidates. However, in many cases it may be redundant when using v6 route structure.
+
+### When useRedirectToFirstMatch is Redundant
+
+If your route structure already includes an index route with `<Navigate>`, the hook is likely unnecessary:
+
+```javascript
+// Route structure already handles redirect
+{
+  element: <ProjectsWrapper />,
+  path: "projects",
+  children: [
+    {
+      index: true,
+      element: <Navigate to="all" replace />
+    },
+    {
+      element: <ProjectsList />,
+      path: "all"
+    }
+  ]
+}
+
+// ProjectsWrapper - hook is redundant
+export default function ProjectsWrapper() {
+  // ❌ Not needed - route structure already redirects
+  useRedirectToFirstMatch({
+    route: "backendProjects",
+    candidates: secondaryLinks
+  });
+  
+  return <Outlet />;
+}
+```
+
+**Why it's redundant:**
+- The index route redirects `/backend/projects` → `/backend/projects/all` before the component renders
+- By the time the component mounts, the pathname is already `/backend/projects/all`
+- The hook checks if pathname matches the base route, which it no longer does
+- The `Authorize` HOC already handles authorization checks
+
+### When useRedirectToFirstMatch is Needed
+
+The hook is useful when you need **authorization-based redirects** to different routes based on user permissions:
+
+```javascript
+// Example: User might be authorized for "collections" but not "all"
+useRedirectToFirstMatch({
+  route: "backendProjects",
+  candidates: [
+    { route: "backendProjectsAll", ability: "update", entity: "project" },
+    { route: "backendProjectCollections", ability: "update", entity: "projectCollection" }
+  ]
+});
+```
+
+**When to use:**
+- Multiple child routes with different authorization requirements
+- Need to redirect to first authorized route based on user permissions
+- Authorization logic is more complex than a simple index redirect
+
+**When to remove:**
+- Route structure already has index route with `<Navigate>`
+- Only one child route exists
+- All child routes have the same authorization requirements (handled by parent `Authorize` HOC)
+- The hook would never execute because pathname doesn't match base route after redirect
+
+### Migration Pattern
+
+1. **Check route structure**: Does it already have an index route with `<Navigate>`?
+2. **Check authorization**: Are all child routes protected by the same `Authorize` HOC?
+3. **Check candidates**: Are there multiple routes with different authorization requirements?
+4. **Remove if redundant**: If route structure handles redirect and authorization is uniform, remove the hook
+
+**Example migration (ProjectsWrapper):**
+- Route structure: Has index route redirecting to "all"
+- Authorization: Single `Authorize` HOC protects all routes
+- Candidates: Only one active candidate (`backendProjectsAll`)
+- **Result**: Hook removed as redundant
+
 ## Route Helpers
 
 Route helper functions (navigation functions) are stored in `route.handle.helper` or `route.handle.helpers`. These are used by `LinkHandler` to generate URLs programmatically.
