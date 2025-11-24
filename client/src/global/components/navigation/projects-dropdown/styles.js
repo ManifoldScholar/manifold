@@ -59,15 +59,6 @@ export const List = styled.ul`
   }
 `;
 
-export const Link = styled(NavLink)`
-  display: flex !important;
-  gap: 10px;
-  align-items: center;
-  text-decoration: none;
-`;
-
-export const LinkIcon = styled(IconComposer)``;
-
 export const LinkText = styled.span`
   --_LinkText-color: inherit;
 
@@ -81,6 +72,19 @@ export const LinkText = styled.span`
   text-decoration: none;
   color: var(--_LinkText-color);
 `;
+
+export const Link = styled(NavLink)`
+  display: flex !important;
+  gap: 10px;
+  align-items: center;
+  text-decoration: none;
+
+  &.active ${LinkText} {
+    color: var(--color-neutral-text-extra-light);
+  }
+`;
+
+export const LinkIcon = styled(IconComposer)``;
 
 export const Button = styled.button`
   ${buttonUnstyled}
