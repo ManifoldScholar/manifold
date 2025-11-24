@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import { useLocation, NavLink, useMatches } from "react-router-dom";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
-import { useFromStore } from "hooks";
+import { useFromStore, useShowJournalsActive } from "hooks";
 import lh from "helpers/linkHandler";
 import memoize from "lodash/memoize";
 import UserLinks from "./mobile-components/UserLinks";
@@ -21,19 +21,19 @@ import IconComposer from "global/components/utility/IconComposer";
 import { FrontendModeContext } from "helpers/contexts";
 import Authorize from "hoc/Authorize";
 import BodyClass from "hoc/BodyClass";
+import { useDispatch } from "react-redux";
+import { commonActions } from "actions/helpers";
 
-export default function NavigationMobile({
-  links,
-  commonActions,
-  backendButton,
-  mode,
-  journalIsActive
-}) {
+export default function NavigationMobile({ links, backendButton, mode }) {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const location = useLocation();
   const matches = useMatches();
   const context = useContext(FrontendModeContext);
   const authentication = useFromStore({ path: "authentication" });
+  const journalIsActive = useShowJournalsActive();
+
+  const commonActionsHelper = commonActions(dispatch);
 
   const initialState = {
     expanded: [],
@@ -286,7 +286,7 @@ export default function NavigationMobile({
             </ul>
             <UserLinks
               authentication={authentication}
-              commonActions={commonActions}
+              commonActions={commonActionsHelper}
               backendButton={backendButton}
               mode={mode}
               closeNavigation={closeNavigation}
@@ -341,8 +341,6 @@ NavigationMobile.displayName = "Navigation.Mobile";
 
 NavigationMobile.propTypes = {
   links: PropTypes.array,
-  commonActions: PropTypes.object.isRequired,
   backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-  mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
-  journalIsActive: PropTypes.bool
+  mode: PropTypes.oneOf(["backend", "frontend"]).isRequired
 };

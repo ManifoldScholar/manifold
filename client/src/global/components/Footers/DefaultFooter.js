@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { commonActions } from "actions/helpers";
+import { requests } from "api";
 import PropTypes from "prop-types";
 import FooterParts from "./Parts";
 import { useFromStore } from "hooks";
@@ -7,9 +10,14 @@ import links from "./Parts/helpers/links";
 import * as Styled from "./styles";
 
 function DefaultFooter({ withVersion, ...props }) {
+  const dispatch = useDispatch();
   const authentication = useFromStore({ path: "authentication" });
   const settings = useFromStore({
     requestKey: "settings",
+    action: "select"
+  });
+  const pages = useFromStore({
+    requestKey: requests.gPages,
     action: "select"
   });
 
@@ -24,7 +32,13 @@ function DefaultFooter({ withVersion, ...props }) {
         </FooterParts.Column>
         <FooterParts.Column position="left">
           <FooterParts.Navigation>
-            {links({ authentication, settings, ...props })}
+            {links({
+              authentication,
+              settings,
+              pages,
+              commonActions: commonActions(dispatch),
+              ...props
+            })}
           </FooterParts.Navigation>
         </FooterParts.Column>
       </FooterParts.Columns>

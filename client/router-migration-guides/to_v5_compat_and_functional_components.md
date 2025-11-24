@@ -677,6 +677,70 @@ function MyComponent({ ...props }) {
 
 **Note:** Make sure to remove the props from `propTypes` and update parent components to stop passing them down.
 
+### Replacing useSelector with useFromStore
+
+When refactoring components, prefer `useFromStore` over `useSelector` for accessing Redux state, especially for entity data. This provides a consistent API and handles paths safely.
+
+**Before:**
+
+```javascript
+const authentication = useSelector(state => state.authentication);
+const visibility = useSelector(state => state.ui.transitory.visibility);
+```
+
+**After:**
+
+```javascript
+const authentication = useFromStore({ path: "authentication" });
+const visibility = useFromStore({ path: "ui.transitory.visibility" });
+```
+
+### Reducing Prop Drilling
+
+When migrating container components (like `BackendContainer` or `FrontendContainer`) and their children (like Headers and Footers), avoid passing data props down the tree if the child components can fetch the data themselves using hooks.
+
+**Pattern:**
+
+1.  **Identify props** passed from parent to child that come from the store or API.
+2.  **Remove props** from the parent's render method.
+3.  **Update child component** to use hooks (`useFromStore`, `useFetch`, `useDispatch`) to get the data or actions it needs directly.
+4.  **Remove props** from the child component's arguments and `propTypes`.
+
+**Example:**
+
+**Before (Parent passes props):**
+
+```javascript
+// Parent
+function Parent() {
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  return <Child settings={settings} />;
+}
+
+// Child
+function Child({ settings }) {
+  return <div>{settings.siteName}</div>;
+}
+```
+
+**After (Child fetches data):**
+
+```javascript
+// Parent
+function Parent() {
+  return <Child />;
+}
+
+// Child
+function Child() {
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  return <div>{settings.siteName}</div>;
+}
+```
+
+This makes components more self-contained and easier to refactor or move.
+
+
 ## Translation Migration
 
 ### withTranslation HOC → useTranslation Hook

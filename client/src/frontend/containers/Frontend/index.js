@@ -1,11 +1,9 @@
-import { useDispatch } from "react-redux";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import Footers from "global/components/Footers";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
-import { commonActions } from "actions/helpers";
-import { pagesAPI, subjectsAPI, requests } from "api";
+import { subjectsAPI, requests } from "api";
 import { useFetch, useFromStore } from "hooks";
 import { Outlet } from "react-router-dom";
 import get from "lodash/get";
@@ -18,11 +16,6 @@ const SUBJECT_FILTERS = { used: true };
 const JOURNAL_SUBJECT_FILTERS = { usedJournal: true };
 
 function FrontendContainer() {
-  const dispatch = useDispatch();
-
-  const authentication = useFromStore({ path: "authentication" });
-  const visibility = useFromStore({ path: "ui.transitory.visibility" });
-  const notifications = useFromStore({ path: "notifications" });
   const fatalError = useFromStore({ path: "fatalError" });
 
   const settings = useFromStore({
@@ -30,59 +23,40 @@ function FrontendContainer() {
     action: "select"
   });
 
-  const userId = authentication.currentUser?.id;
-
-  const { data: pages } = useFetch({
-    request: [pagesAPI.index],
-    options: { requestKey: requests.gPages },
-    dependencies: [userId]
-  });
-
   useFetch({
     request: [subjectsAPI.index, SUBJECT_FILTERS, null, true],
-    options: { requestKey: requests.feSubjects },
-    dependencies: [userId]
+    options: { requestKey: requests.feSubjects }
   });
 
   useFetch({
     request: [subjectsAPI.index, JOURNAL_SUBJECT_FILTERS, null, true],
-    options: { requestKey: requests.feJournalSubjects },
-    dependencies: [userId]
+    options: { requestKey: requests.feJournalSubjects }
   });
 
   const hasPressLogo = get(settings, "attributes.pressLogoStyles.small");
-  const mainClassName = classNames({
-    "main-content": true,
-    "flex-viewport": true,
-    "extra-top": hasPressLogo
-  });
 
   return (
     <BodyClass className="browse">
       <BreadcrumbsProvider>
         <Utility.ScrollToTop />
         <SearchProvider>
-          <Layout.Header
-            pages={pages}
-            visibility={visibility}
-            authentication={authentication}
-            notifications={notifications}
-            commonActions={commonActions(dispatch)}
-            settings={settings}
-          />
-          <main id="skip-to-main" tabIndex={-1} className={mainClassName}>
+          <Layout.Header />
+          <main
+            id="skip-to-main"
+            tabIndex={-1}
+            className={classNames({
+              "main-content": true,
+              "flex-viewport": true,
+              "extra-top": hasPressLogo
+            })}
+          >
             {fatalError.error ? (
               <AppFatalError fatalError={fatalError} />
             ) : (
               <Outlet />
             )}
           </main>
-          <Footers.FrontendFooter
-            pages={pages}
-            authentication={authentication}
-            commonActions={commonActions(dispatch)}
-            settings={settings}
-          />
+          <Footers.FrontendFooter />
         </SearchProvider>
       </BreadcrumbsProvider>
     </BodyClass>

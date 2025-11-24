@@ -9,8 +9,7 @@ import {
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import get from "lodash/get";
-import { useDispatch } from "react-redux";
-import { commonActions } from "actions/helpers";
+import { requests } from "api";
 import Navigation from "global/components/navigation";
 import HeaderNotifications from "global/components/HeaderNotifications";
 import { FrontendModeContext } from "helpers/contexts";
@@ -30,11 +29,12 @@ const getScrollTop = () => {
     .scrollTop;
 };
 
-export default function StandaloneHeader({ settings, alwaysVisible = false }) {
-  const dispatch = useDispatch();
+export default function StandaloneHeader({ alwaysVisible = false }) {
   const context = useContext(FrontendModeContext);
-  const authentication = useFromStore({ path: "authentication" });
-  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const settings = useFromStore({
+    requestKey: requests.settings,
+    action: "select"
+  });
 
   const shimRef = useRef(null);
   const fixedRef = useRef(null);
@@ -171,9 +171,6 @@ export default function StandaloneHeader({ settings, alwaysVisible = false }) {
             </div>
             <Navigation.Primary
               desktopStyle={navStyle}
-              commonActions={commonActions(dispatch)}
-              authentication={authentication}
-              visibility={visibility}
               mode="frontend"
               standaloneMode
               darkTheme={!lightTheme}
@@ -192,6 +189,5 @@ export default function StandaloneHeader({ settings, alwaysVisible = false }) {
 StandaloneHeader.displayName = "Layout.StandaloneHeader";
 
 StandaloneHeader.propTypes = {
-  settings: PropTypes.object,
   alwaysVisible: PropTypes.bool
 };
