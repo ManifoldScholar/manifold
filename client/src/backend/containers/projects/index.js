@@ -1,7 +1,7 @@
-import ProjectsList from "./ProjectsList";
+import List from "./ProjectsList";
 import Wrapper from "./Wrapper";
 
 export default {
-  ProjectsList,
+  List,
   Wrapper
 };

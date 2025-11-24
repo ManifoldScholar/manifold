@@ -1,4 +1,5 @@
 <!-- f7bb0b8f-660c-46e8-8e60-1eb35210feeb 0bca181e-51c0-4b91-a92a-ad3265636474 -->
+
 # Plan: Backend Routes React Router v6 Migration
 
 ## Overview
@@ -93,6 +94,27 @@ Follow the same incremental approach used for frontend:
 
 - **Dashboard**: Use `path: "dashboard"` for the Dashboard component and add an `index` route with `<Navigate to="dashboard" replace />` to preserve existing URL structure (`/backend/dashboard`).
 - **Redirects**: Where `RedirectToFirstMatch` was used (e.g. `ProjectsWrapper`), prefer adding an `index` route with `<Navigate to="first-child" replace />` directly in the route config.
+
+**useRedirectToFirstMatch Hook - When to Remove:**
+
+The `useRedirectToFirstMatch` hook is often redundant when migrating to v6 route structure. Remove it if:
+
+1. **Route structure already handles redirect**: If you've added an index route with `<Navigate to="..." replace />`, the redirect happens before the component renders
+2. **Single authorization level**: If all child routes are protected by the same `Authorize` HOC on the parent wrapper
+3. **Single candidate route**: If there's only one active candidate route (others are commented out or not yet implemented)
+
+**Example - ProjectsWrapper:**
+
+- Route structure has: `{ index: true, element: <Navigate to="all" replace /> }`
+- All routes protected by: `<Authorize ability="update" entity={["project"]}>`
+- Only one active candidate: `backendProjectsAll` (collections route commented out)
+- **Result**: Hook removed - route structure handles redirect, Authorize handles authorization
+
+**Keep the hook if:**
+
+- Multiple child routes with different authorization requirements
+- Need dynamic redirect based on user permissions across multiple routes
+- Authorization logic is more complex than parent-level `Authorize` HOC
 
 **Tasks**:
 
@@ -231,7 +253,7 @@ Follow the same incremental approach used for frontend:
     path: "/backend",
     children: backendRoutesV6
   }
-]
+];
 ```
 
 **Tasks**:
@@ -257,6 +279,7 @@ Follow the same incremental approach used for frontend:
 - `this.props.location` → `useLocation()` hook
 - Route metadata → `useMatches()[index].handle`
 - `RedirectToFirstMatch` → Prefer declarative `index` routes with `<Navigate to="..." />` in `routes-v6.js`. Use `Navigate` component in code only if dynamic logic is required.
+- **Remove `useRedirectToFirstMatch` hook** if route structure already has index redirect and authorization is uniform (see "useRedirectToFirstMatch Hook - When to Remove" section above)
 
 **Tasks**:
 
