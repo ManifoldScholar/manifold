@@ -1,5 +1,8 @@
-import React, { PureComponent } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import AvailableSection from "./sections/Available";
 import CurrentSection from "./sections/Current";
 import DraggableEventHelper from "../helpers/draggableEvent";
@@ -11,152 +14,112 @@ import { entityStoreActions } from "actions";
 import configHelper from "../helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";
 import { UIDConsumer } from "react-uid";
-import { withTranslation } from "react-i18next";
 
 const { request } = entityStoreActions;
 
-export class ProjectContent extends PureComponent {
-  static displayName = "ContentBlock.Builder";
+const cloneBlocks = contentBlocks => {
+  const blocks = contentBlocks || [];
+  return cloneDeep(blocks);
+};
 
-  static propTypes = {
-    project: PropTypes.object,
-    contentBlocks: PropTypes.array,
-    contentBlocksResponse: PropTypes.object,
-    confirm: PropTypes.func.isRequired,
-    refresh: PropTypes.func.isRequired,
-    history: PropTypes.object,
-    children: PropTypes.func,
-    dispatch: PropTypes.func.isRequired,
-    t: PropTypes.func
-  };
+function ProjectContent({
+  project,
+  contentBlocks,
+  contentBlocksResponse,
+  confirm,
+  refresh,
+  children
+}) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  static cloneBlocks(props) {
-    const blocks = props.contentBlocks || [];
-    return cloneDeep(blocks);
-  }
+  const [blocks, setBlocks] = useState(() => cloneBlocks(contentBlocks));
+  const [activeDraggableType, setActiveDraggableType] = useState(null);
+  const [response, setResponse] = useState(contentBlocksResponse);
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.contentBlocksResponse === state.response) return null;
+  useEffect(() => {
+    if (contentBlocksResponse !== response) {
+      setBlocks(cloneBlocks(contentBlocks));
+      setResponse(contentBlocksResponse);
+    }
+  }, [contentBlocksResponse, response, contentBlocks]);
 
-    const blocks = ProjectContent.cloneBlocks(props);
-    return { blocks, response: props.contentBlocksResponse };
-  }
+  const projectId = project.id;
+  const currentBlocks = blocks;
+  const pendingBlock = blocks.find(block => block.id === "pending");
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      blocks: ProjectContent.cloneBlocks(props),
-      activeDraggableType: null,
-      response: props.contentBlocksResponse
-    };
-  }
-
-  onDragStart = ({ type }) => {
-    this.setState({ activeDraggableType: type });
-  };
-
-  onDragEnd = draggable => {
-    this.setState({ activeDraggableType: null });
-    const draggableHelper = new DraggableEventHelper(
-      draggable,
-      this.currentBlocks
-    );
-    if (!draggableHelper.actionable) return;
-    const action = draggableHelper.action;
-    let callback;
-    if (action === "move")
-      callback = () => this.updateBlock(draggableHelper.block);
-    if (action === "insert") callback = this.newBlock;
-    this.setState({ blocks: draggableHelper.blocks }, callback);
-  };
-
-  onKeyboardMove = (block, addtlParams) => {
-    const { index, direction, callback } = addtlParams;
-    const newIndex = direction === "down" ? index + 1 : index - 1;
-
-    const filteredBlocks = this.currentBlocks.filter(b => b.id !== block.id);
-    const updatedBlocks = filteredBlocks.toSpliced(newIndex, 0, block);
-
-    const clonedBlock = cloneDeep(block);
-    clonedBlock.attributes.position = newIndex + 1; // position starts from 1, index from 0
-
-    this.setState(
-      { blocks: updatedBlocks },
-      this.updateBlock(clonedBlock, callback)
-    );
-  };
-
-  get projectId() {
-    return this.props.project.id;
-  }
-
-  get currentBlocks() {
-    return this.state.blocks;
-  }
-
-  get entityCallbacks() {
-    return {
-      showBlock: this.showBlock,
-      hideBlock: this.hideBlock,
-      deleteBlock: this.handleDeleteBlock,
-      saveBlockPosition: this.updateBlock,
-      editBlock: this.editBlock,
-      onKeyboardMove: this.onKeyboardMove
-    };
-  }
-
-  get drawerCloseCallback() {
-    if (!this.pendingBlock) return null;
-    return this.resetState;
-  }
-
-  get pendingBlock() {
-    return this.state.blocks.find(block => block.id === "pending");
-  }
-
-  resetState = () => {
-    this.setState({ blocks: this.constructor.cloneBlocks(this.props) });
-  };
-
-  editBlock = block => {
-    this.props.history.push(
-      lh.link("backendProjectContentBlock", this.projectId, block.id),
-      { noScroll: true }
-    );
-  };
-
-  newBlock = () => {
-    configHelper.isConfigurable(this.pendingBlock.attributes.type)
-      ? this.props.history.push(
-          lh.link("backendProjectContentBlockNew", this.projectId)
-        )
-      : this.createBlock();
-  };
-
-  createBlock() {
-    const call = contentBlocksAPI.create(this.projectId, this.pendingBlock);
+  const createBlock = () => {
+    const call = contentBlocksAPI.create(projectId, pendingBlock);
     const createRequest = request(call, requests.beContentBlockCreate);
-    this.props.dispatch(createRequest).promise.then(() => {
-      this.props.refresh();
+    dispatch(createRequest).promise.then(() => {
+      refresh();
     });
-  }
+  };
 
-  updateBlock = (block, callback) => {
+  const updateBlock = (block, callback) => {
     const call = contentBlocksAPI.update(block.id, {
       attributes: block.attributes
     });
     const options = { noTouch: true, notificationScope: "none" };
     const updateRequest = request(call, requests.beContentBlockUpdate, options);
-    this.props.dispatch(updateRequest).promise.then(() => {
-      this.props.refresh();
+    dispatch(updateRequest).promise.then(() => {
+      refresh();
       if (callback && typeof callback === "function") {
         callback();
       }
     });
   };
 
-  deleteBlock = block => {
+  const newBlock = () => {
+    if (configHelper.isConfigurable(pendingBlock.attributes.type)) {
+      navigate(lh.link("backendProjectContentBlockNew", projectId));
+    } else {
+      createBlock();
+    }
+  };
+
+  const onDragStart = ({ type }) => {
+    setActiveDraggableType(type);
+  };
+
+  const onDragEnd = draggable => {
+    setActiveDraggableType(null);
+    const draggableHelper = new DraggableEventHelper(draggable, currentBlocks);
+    if (!draggableHelper.actionable) return;
+    const action = draggableHelper.action;
+    let callback;
+    if (action === "move") callback = () => updateBlock(draggableHelper.block);
+    if (action === "insert") callback = newBlock;
+    setBlocks(draggableHelper.blocks);
+    if (callback) callback();
+  };
+
+  const onKeyboardMove = (block, addtlParams) => {
+    const { index, direction, callback } = addtlParams;
+    const newIndex = direction === "down" ? index + 1 : index - 1;
+
+    const filteredBlocks = currentBlocks.filter(b => b.id !== block.id);
+    const updatedBlocks = filteredBlocks.toSpliced(newIndex, 0, block);
+
+    const clonedBlock = cloneDeep(block);
+    clonedBlock.attributes.position = newIndex + 1; // position starts from 1, index from 0
+
+    setBlocks(updatedBlocks);
+    updateBlock(clonedBlock, callback);
+  };
+
+  const resetState = () => {
+    setBlocks(cloneBlocks(contentBlocks));
+  };
+
+  const editBlock = block => {
+    navigate(lh.link("backendProjectContentBlock", projectId, block.id), {
+      state: { noScroll: true }
+    });
+  };
+
+  const deleteBlock = block => {
     const call = contentBlocksAPI.destroy(block.id);
     const options = { removes: { type: "contentBlocks", id: block.id } };
     const destroyRequest = request(
@@ -164,74 +127,91 @@ export class ProjectContent extends PureComponent {
       requests.beContentBlockDestroy,
       options
     );
-    this.props.dispatch(destroyRequest).promise.then(() => {
-      this.props.refresh();
+    dispatch(destroyRequest).promise.then(() => {
+      refresh();
     });
   };
 
-  toggleBlockVisibility(block, visible) {
+  const toggleBlockVisibility = (block, visible) => {
     const adjusted = { ...block };
     adjusted.attributes.visible = visible;
-
-    this.updateBlock(adjusted);
-  }
-
-  showBlock = block => {
-    this.toggleBlockVisibility(block, true);
+    updateBlock(adjusted);
   };
 
-  hideBlock = block => {
-    this.toggleBlockVisibility(block, false);
+  const showBlock = block => {
+    toggleBlockVisibility(block, true);
   };
 
-  handleAddEntity = type => {
+  const hideBlock = block => {
+    toggleBlockVisibility(block, false);
+  };
+
+  const handleAddEntity = type => {
     const draggableHelper = new DraggableEventHelper(
       DraggableEventHelper.syntheticDraggable(type),
-      this.currentBlocks
+      currentBlocks
     );
-    this.setState({ blocks: draggableHelper.blocks }, this.newBlock);
+    setBlocks(draggableHelper.blocks);
+    newBlock();
   };
 
-  handleDeleteBlock = block => {
-    const heading = this.props.t("modals.delete_block");
-    const message = this.props.t("modals.confirm_body");
-    this.props.confirm(heading, message, () => this.deleteBlock(block));
+  const handleDeleteBlock = block => {
+    const heading = t("modals.delete_block");
+    const message = t("modals.confirm_body");
+    confirm(heading, message, () => deleteBlock(block));
   };
 
-  render() {
-    return (
-      <section className="backend-project-content rbd-migration-resets">
-        <UIDConsumer name={id => `content-block-builder-${id}`}>
-          {id => (
-            <div
-              className="form-secondary"
-              role="group"
-              aria-labelledby={`${id}-header`}
-              aria-describedby={`${id}-instructions`}
-            >
-              <DragDropContext
-                onDragStart={this.onDragStart}
-                onDragEnd={this.onDragEnd}
-              >
-                <AvailableSection
-                  onClickAdd={this.handleAddEntity}
-                  currentBlocks={this.currentBlocks}
-                  headerId={`${id}-header`}
-                  instructionsId={`${id}-instructions`}
-                />
-                <CurrentSection
-                  activeDraggableType={this.state.activeDraggableType}
-                  entityCallbacks={this.entityCallbacks}
-                  currentBlocks={this.currentBlocks}
-                />
-              </DragDropContext>
-              {this.props.children(this.drawerCloseCallback, this.pendingBlock)}
-            </div>
-          )}
-        </UIDConsumer>
-      </section>
-    );
-  }
+  const entityCallbacks = {
+    showBlock,
+    hideBlock,
+    deleteBlock: handleDeleteBlock,
+    saveBlockPosition: updateBlock,
+    editBlock,
+    onKeyboardMove
+  };
+
+  const drawerCloseCallback = pendingBlock ? resetState : null;
+
+  return (
+    <section className="backend-project-content rbd-migration-resets">
+      <UIDConsumer name={id => `content-block-builder-${id}`}>
+        {id => (
+          <div
+            className="form-secondary"
+            role="group"
+            aria-labelledby={`${id}-header`}
+            aria-describedby={`${id}-instructions`}
+          >
+            <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+              <AvailableSection
+                onClickAdd={handleAddEntity}
+                currentBlocks={currentBlocks}
+                headerId={`${id}-header`}
+                instructionsId={`${id}-instructions`}
+              />
+              <CurrentSection
+                activeDraggableType={activeDraggableType}
+                entityCallbacks={entityCallbacks}
+                currentBlocks={currentBlocks}
+              />
+            </DragDropContext>
+            {children(drawerCloseCallback, pendingBlock)}
+          </div>
+        )}
+      </UIDConsumer>
+    </section>
+  );
 }
 
-export default withTranslation()(withConfirmation(ProjectContent));
+ProjectContent.displayName = "ContentBlock.Builder";
+
+ProjectContent.propTypes = {
+  project: PropTypes.object,
+  contentBlocks: PropTypes.array,
+  contentBlocksResponse: PropTypes.object,
+  confirm: PropTypes.func.isRequired,
+  refresh: PropTypes.func.isRequired,
+  children: PropTypes.func
+};
+
+export default withConfirmation(ProjectContent);
