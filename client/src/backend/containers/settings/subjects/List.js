@@ -1,17 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import { subjectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
 import EntitiesList, {
   Button,
   SubjectRow
 } from "backend/components/list/EntitiesList";
 import { useListQueryParams, useFetch } from "hooks";
-import { useParams } from "react-router-dom";
 
-export default function SettingsSubjectsListContainer({ route }) {
+export default function SettingsSubjectsListContainer() {
   const { t } = useTranslation();
   const { id } = useParams();
 
@@ -31,7 +29,7 @@ export default function SettingsSubjectsListContainer({ route }) {
 
   return (
     <>
-      {childRoutes(route, { drawer: true, drawerProps })}
+      <OutletWithDrawer drawerProps={drawerProps} />
       {subjects && (
         <EntitiesList
           entityComponent={SubjectRow}
@@ -59,7 +57,3 @@ export default function SettingsSubjectsListContainer({ route }) {
 }
 
 SettingsSubjectsListContainer.displayName = "Settings.Subjects.List";
-
-SettingsSubjectsListContainer.propTypes = {
-  route: PropTypes.object
-};
