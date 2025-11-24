@@ -107,6 +107,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # @param [Hash] options
   def entitlements_creatable_by?(user, options = {})
     return false if resource.draft? && !has_any_role?(user, :admin, :editor)
+
     options ||= {}
 
     options[:for] = resource
@@ -119,6 +120,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # @param [Hash] options
   def entitlements_manageable_by?(user, options = {})
     return false if resource.draft? && !has_any_role?(user, :admin, :editor)
+
     options ||= {}
 
     options[:for] = resource
@@ -140,7 +142,7 @@ class ProjectAuthorizer < ApplicationAuthorizer
   # @param [User] user
   # @param [Hash] _options
   def drafts_readable_by?(user, options = {})
-    has_any_role?(user, *RoleName.draft_access) || with_journal { |j| j.readable_by? user, options }
+    has_any_role?(user, *RoleName.draft_access) || with_journal { |j| j.drafts_readable_by? user, options }
   end
 
   def publicly_engageable_by?(user, _options = {})

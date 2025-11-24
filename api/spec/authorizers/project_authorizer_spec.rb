@@ -113,6 +113,27 @@ RSpec.describe "Project Abilities", :authorizer do
       include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
       include_examples "unauthorized to manage project permissions"
+
+      context "when the project is part of a journal which is NOT a draft" do
+        let!(:journal) { FactoryBot.create :journal }
+        let!(:journal_issue) { FactoryBot.create(:journal_issue, journal:, project:) }
+
+        before do
+          journal.update(draft: false)
+          project.reload
+        end
+
+        specify "still has no access to the draft project" do
+          expect(project).not_to be_readable_by(user)
+          expect(project).not_to be_readable_by(nil)
+        end
+
+        include_examples "no access"
+        include_examples "unauthorized to manage project children"
+        include_examples "unauthorized to manage project entitlements"
+        include_examples "unauthorized to manage project exportations"
+        include_examples "unauthorized to manage project permissions"
+      end
     end
 
     context "when the project is published" do
@@ -176,8 +197,8 @@ RSpec.describe "Project Abilities", :authorizer do
     context "and the project is a draft" do
       let(:draft) { true }
 
-      it("can only read and update a project") do
-        is_expected.to be_able_to(:read, :update).on(project).and be_unable_to(:create, :delete).on(project)
+      it("can only read, create, and update a project") do
+        is_expected.to be_able_to(:read, :create, :update).on(project).and be_unable_to(:delete).on(project)
       end
 
       include_examples "authorized to manage project children"
@@ -204,7 +225,7 @@ RSpec.describe "Project Abilities", :authorizer do
     include_examples "unauthorized to manage project permissions"
   end
 
-  context "when the user is a reader and a project resource editor for a specific draft project" do
+  context "when the user is a reader and a project property manager for a specific draft project" do
     let(:draft) { true }
 
     before do
@@ -213,10 +234,12 @@ RSpec.describe "Project Abilities", :authorizer do
 
     include_examples "read only"
 
-    it "can only manage a project's resources" do
-      other_actions = project_children_abilities.without(:manage_resources)
+    it "can only manage a project's properties" do
+      allowed_actions = %i[manage_resources create_resources manage_resource_collections create_resource_collections manage_texts create_texts].freeze
 
-      expect(user).to be_able_to(:manage_resources).on(project).and be_unable_to(*other_actions).on(project)
+      other_actions = project_children_abilities.without(*allowed_actions)
+
+      expect(user).to be_able_to(*allowed_actions).on(project).and be_unable_to(*other_actions).on(project)
     end
 
     include_examples "unauthorized to manage project entitlements"
@@ -232,7 +255,7 @@ RSpec.describe "Project Abilities", :authorizer do
     context "that is a draft" do
       let(:draft) { true }
 
-      include_examples "no access"
+      include_examples "read only"
       include_examples "unauthorized to manage project children"
       include_examples "unauthorized to manage project entitlements"
       include_examples "unauthorized to manage project exportations"
@@ -252,6 +275,8 @@ RSpec.describe "Project Abilities", :authorizer do
     let(:user_traits) { [:reader] }
 
     context "for a draft project" do
+      let(:draft) { true }
+
       include_examples "no access"
       include_examples "unauthorized to manage project children"
       include_examples "unauthorized to manage project entitlements"
