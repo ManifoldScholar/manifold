@@ -1,10 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { childRoutes } from "helpers/router";
+import { Outlet } from "react-router-dom";
 import Authorize from "hoc/Authorize";
 
-export default function JournalsWrapper({ route }) {
+export default function JournalsWrapper() {
   const { t } = useTranslation();
   return (
     <Authorize
@@ -17,13 +15,9 @@ export default function JournalsWrapper({ route }) {
     >
       <div>
         <main id="skip-to-main" tabIndex={-1} className="backend-detail">
-          {childRoutes(route)}
+          <Outlet />
         </main>
       </div>
     </Authorize>
   );
 }
-
-JournalsWrapper.propTypes = {
-  route: PropTypes.object
-};
