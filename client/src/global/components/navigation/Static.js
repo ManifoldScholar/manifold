@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 import SearchMenu from "global/components/search/menu";
@@ -10,23 +11,31 @@ import UIPanel from "global/components/UIPanel";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
-import withSettings from "hoc/withSettings";
 import Authorize from "hoc/Authorize";
+import { useFromStore, useShowJournalsActive } from "hooks";
+import { commonActions } from "actions/helpers";
+import { requests } from "api";
 
-function NavigationStatic({
+export default function NavigationStatic({
   links,
-  visibility,
-  commonActions,
   backendButton,
   mode,
   exact = false,
   style,
-  darkTheme,
-  journalIsActive,
-  settings
+  darkTheme
 }) {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const context = useContext(FrontendModeContext);
+  const journalIsActive = useShowJournalsActive();
+
+  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const settings = useFromStore({
+    requestKey: requests.settings,
+    action: "select"
+  });
+
+  const commonActionsHelper = commonActions(dispatch);
 
   const userMenuClasses = classNames({
     "user-nav": true,
@@ -146,7 +155,7 @@ function NavigationStatic({
     return (
       <li className="user-nav__item">
         <SearchMenu.Button
-          toggleSearchMenu={commonActions.toggleSearchPanel}
+          toggleSearchMenu={commonActionsHelper.toggleSearchPanel}
           active={visibility.uiPanels.search}
           className="user-nav__button user-nav__button--search"
         />
@@ -161,8 +170,8 @@ function NavigationStatic({
             keyword: ""
           }}
           description={description}
-          hidePanel={commonActions.hideSearchPanel}
-          afterSubmit={commonActions.hideSearchPanel}
+          hidePanel={commonActionsHelper.hideSearchPanel}
+          afterSubmit={commonActionsHelper.hideSearchPanel}
         />
       </li>
     );
@@ -186,8 +195,8 @@ function NavigationStatic({
             <DisclosureNavigationMenu
               visible={visibility.uiPanels.user}
               disclosure={<UserMenuButton />}
-              callbacks={commonActions}
-              onBlur={commonActions.hideUserPanel}
+              callbacks={commonActionsHelper}
+              onBlur={commonActionsHelper.hideUserPanel}
               context={mode}
             >
               <UserMenuBody />
@@ -237,15 +246,9 @@ NavigationStatic.displayName = "Navigation.Static";
 
 NavigationStatic.propTypes = {
   links: PropTypes.array,
-  visibility: PropTypes.object,
-  commonActions: PropTypes.object.isRequired,
   backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
   mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
   exact: PropTypes.bool,
   style: PropTypes.object,
-  darkTheme: PropTypes.bool,
-  journalIsActive: PropTypes.bool,
-  settings: PropTypes.object.isRequired
+  darkTheme: PropTypes.bool
 };
-
-export default withSettings(NavigationStatic);
