@@ -7,11 +7,11 @@ export default `
     position: absolute;
     width: 200px;
     z-index: 1000;
-    border-radius: 10px;
+    border-radius: 4px;
     background-color: #fff;
     justify-content: flex-end;
     direction: ltr;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05), 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 12px 32px 3px rgba(0, 0, 0, 0.3);
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
@@ -32,7 +32,7 @@ export default `
     width: 100%;
     height: 100px;
     margin-bottom: 15px;
-    border-radius: 3px 3px 0 0;
+    border-radius: 4px 4px 0 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0), #000),
       linear-gradient(90deg, #fff, currentColor);
     cursor: pointer;
@@ -181,12 +181,15 @@ export default `
   .clr-segmented label {
     flex-grow: 1;
     margin: 0;
-    padding: 4px 0;
+    padding: 4px 0 6px;
     font-size: inherit;
     font-weight: normal;
     line-height: initial;
     text-align: center;
     cursor: pointer;
+    color: var(--strong-color);
+    background-color: var(--color-base-neutral100);
+    transition: color 0.2s, background-color 0.2s;
   }
 
   .clr-segmented label:first-of-type {
@@ -197,9 +200,13 @@ export default `
     border-radius: 0 10px 10px 0;
   }
 
+  .clr-segmented input:not(:checked) + label:hover {
+    color: var(--color-neutral-text-extra-dark);
+    background-color: var(--color-accent-primary);
+  }
+
   .clr-segmented input:checked + label {
-    color: #fff;
-    background-color: #666;
+    background-color: var(--color-base-neutral80);
   }
 
   .clr-swatches {
@@ -249,7 +256,7 @@ export default `
     height: 32px;
     margin: 15px 20px 20px auto;
     padding: 0 10px;
-    border: 1px solid #ddd;
+    border: none;
     border-radius: 16px;
     color: #444;
     background-color: #fff;
@@ -261,7 +268,7 @@ export default `
 
   input.clr-color:focus {
     outline: none;
-    border: 1px solid var(--clr-picker-focus-color);
+    border: 1px solid var(--highlight-color);
   }
 
   .clr-close,
@@ -269,16 +276,22 @@ export default `
     display: block;
     order: 2;
     margin: 0 20px 20px;
-    padding: 5px 20px 8px;
+    padding: 5.5px 20px 8.5px;
     border: 0;
     border-radius: 12px;
-    color: #fff;
-    background-color: #666;
+    color: var(--strong-color);
+    background-color: var(--button-bg-color);
     font-family: inherit;
     font-size: 12px;
     font-weight: 400;
     line-height: 1;
     cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+  }
+
+  .clr-clear:hover {
+    color: var(--color-neutral-text-extra-dark);
+    background-color: var(--color-accent-primary);
   }
 
   .clr-close {
@@ -441,11 +454,11 @@ export default `
   }
 
   .clr-dark {
-    background-color: #444;
+    background-color: var(--color-base-neutral90);
   }
 
   .clr-dark .clr-segmented {
-    border-color: #777;
+    border: none;
   }
 
   .clr-dark .clr-swatches button:after {
@@ -453,13 +466,8 @@ export default `
   }
 
   .clr-dark input.clr-color {
-    color: #fff;
-    border-color: #777;
-    background-color: #555;
-  }
-
-  .clr-dark input.clr-color:focus {
-    border-color: var(--clr-picker-focus-color);
+    color: var(--strong-color);
+    background-color: var(--color-base-neutral80);
   }
 
   .clr-dark .clr-preview:after {
