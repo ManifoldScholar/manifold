@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Static from "global/components/navigation/Static";
@@ -12,7 +11,8 @@ export default function NavigationPrimary(props) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
 
-  const currentUser = props.authentication.currentUser;
+  const authentication = useFromStore({ path: "authentication" });
+  const currentUser = authentication.currentUser;
 
   const label = getAdminModeLabel({ currentUser, mode: props.mode, t });
 
@@ -33,7 +33,7 @@ export default function NavigationPrimary(props) {
 
   const authorization = new Authorization();
   const canAccessAdmin = authorization.authorizeKind({
-    authentication: props.authentication,
+    authentication,
     kind: [
       "admin",
       "editor",
@@ -67,9 +67,6 @@ NavigationPrimary.displayName = "Navigation.Primary";
 
 NavigationPrimary.propTypes = {
   links: PropTypes.array,
-  authentication: PropTypes.object,
-  visibility: PropTypes.object,
-  commonActions: PropTypes.object.isRequired,
   mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
   exact: PropTypes.bool,
   desktopStyle: PropTypes.object,
