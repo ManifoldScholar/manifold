@@ -14,6 +14,12 @@ class EntitlementAuthorizer < ApplicationAuthorizer
       provided_by?(user) || provides_to?(user)
   end
 
+  def creatable_by?(user, options = {})
+    return false if resource.persisted?
+
+    default(:create, user, options)
+  end
+
   def updatable_by?(_user, _options = {})
     false
   end

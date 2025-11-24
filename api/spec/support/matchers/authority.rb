@@ -87,6 +87,18 @@ RSpec::Matchers.define :be_able_to do |*verbs|
     @disallowed.none?
   end
 
+  match_when_negated do |user|
+    validate_resource! resource
+
+    @actions = validate_verbs! verbs
+
+    @allowed, @disallowed = @actions.partition do |action|
+      Authority.action_authorized?(action, resource, user, options)
+    end
+
+    @allowed.none?
+  end
+
   chain :on, :resource
   chain :with, :options
 

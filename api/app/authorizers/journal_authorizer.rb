@@ -84,7 +84,10 @@ class JournalAuthorizer < ApplicationAuthorizer
 
   private
 
+  # @param [User, nil]
   def issues_editable_by?(user)
+    return false if user.blank? || user.anonymous?
+
     resource.journal_issues.includes(:project).any? do |journal_issue|
       user.has_cached_role?(:project_editor, journal_issue.project)
     end

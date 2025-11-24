@@ -88,14 +88,13 @@ RSpec.describe "Journal Abilities", :authorizer do
 
   shared_examples_for "unauthorized to manage journal issues" do
     it "is unable to manage journal issues" do
-      is_expected.to be_unable_to(
+      is_expected.to be_able_to(:read).on(journal_issue).and(be_unable_to(
         :manage_permissions,
         :create_permissions,
         :create,
-        :read,
         :update,
         :delete
-      ).on(journal_issue)
+      ).on(journal_issue))
     end
   end
 
@@ -152,7 +151,7 @@ RSpec.describe "Journal Abilities", :authorizer do
   context "when unauthenticated" do
     let(:user) { anonymous_user }
 
-    include_examples "no access"
+    include_examples "read only"
   end
 
   context "when the user is a regular reader" do
