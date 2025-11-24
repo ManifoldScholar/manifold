@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import FormContainer from "global/containers/form";
@@ -6,7 +6,7 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { sectionsAPI } from "api";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import * as Styled from "./styles";
 
 export default function AddSectionForm({ textId, nextPosition, refresh }) {
