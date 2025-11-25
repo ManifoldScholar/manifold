@@ -12,6 +12,7 @@ class TextSection < ApplicationRecord
   include HasKeywordSearch
   include SearchIndexable
   include SerializedAbilitiesFor
+  include SoftDeletionSupport
 
   KIND_COVER_IMAGE = "cover_image"
   KIND_NAVIGATION = "navigation"
@@ -47,7 +48,7 @@ class TextSection < ApplicationRecord
   has_many :annotations, dependent: :nullify
   has_many :resources, through: :annotations
   has_many :resource_collections, through: :annotations
-  has_many :text_section_nodes, inverse_of: :text_section, dependent: :destroy
+  has_many :text_section_nodes, inverse_of: :text_section, dependent: :delete_all
   has_many :text_section_stylesheets, dependent: :destroy
   has_many :stylesheets,
            -> { order(position: :asc) },
@@ -76,7 +77,7 @@ class TextSection < ApplicationRecord
   validates :slug, presence: true, allow_nil: true
 
   before_validation :update_body_json
-  after_destroy :remove_linked_toc_entries
+  after_destroy :remove_linked_toc_entries, unless: :skip_removal_of_toc_entries?
   after_save_commit :asynchronously_index_nodes!
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
 
@@ -117,6 +118,10 @@ class TextSection < ApplicationRecord
   # @return [String]
   def packaging_identifier
     has_unique_source_identifier? ? source_identifier : slug
+  end
+
+  def skip_removal_of_toc_entries?
+    destroyed_by_association || soft_deleting?
   end
 
   def slug_candidates
