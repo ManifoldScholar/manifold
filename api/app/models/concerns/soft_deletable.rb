@@ -6,6 +6,7 @@ module SoftDeletable
   SOFT_DELETABLE_DEPENDENTS = %i[destroy delete_all].freeze
 
   include Filterable
+  include SoftDeletionSupport
 
   included do
     define_model_callbacks :mark_for_purge, :soft_delete
@@ -76,6 +77,13 @@ module SoftDeletable
   # @return [SoftDeletable]
   def soft_delete!
     soft_delete or raise ActiveRecord::RecordNotDestroyed.new("Failed to destroy the record", self)
+  end
+
+  # @see SoftDeletions::Purge
+  # @see SoftDeletions::Purger
+  # @return [void]
+  def soft_deletion_purge!
+    ManifoldApi::Container["soft_deletions.purge"].call(self).value!
   end
 
   private
