@@ -321,6 +321,46 @@ export default function MyComponent() {
 - `condition` - Boolean condition to control when fetching occurs
 - `afterFetch` - Callback function to run after fetch completes
 
+**Important: Use `condition` Instead of Conditionals in Request Array**
+
+When you need to conditionally fetch data, use the `condition` option instead of conditionals in the `request` array. This is cleaner and follows the hook's intended API.
+
+**❌ Bad - Conditional in request array:**
+
+```javascript
+useFetch({
+  request: project?.id ? [projectsAPI.contentBlocks, project.id] : null,
+  options: { requestKey: requests.beProjectContentBlocks }
+});
+```
+
+**✅ Good - Use condition option:**
+
+```javascript
+useFetch({
+  request: [projectsAPI.contentBlocks, project?.id],
+  options: { requestKey: requests.beProjectContentBlocks },
+  condition: !!project?.id
+});
+```
+
+**Why this is better:**
+
+- The `request` array always has a consistent structure
+- The `condition` option clearly indicates when fetching should occur
+- Avoids passing `null` as the request, which can cause issues
+- More readable and maintainable
+
+**Pattern:**
+
+```javascript
+// Always structure the request array with all arguments (use optional chaining if needed)
+request: [apiFunction, arg1, arg2];
+
+// Use condition to control when fetching happens
+condition: !!arg1 && !!arg2;
+```
+
 **Important: Memoize Object Arguments**
 
 When passing objects or arrays as arguments to the API function in the `request` array, you **must** memoize them using `useMemo`. Otherwise, they will be recreated on every render, causing the `request` array to change, which triggers infinite fetch loops.
@@ -413,7 +453,58 @@ If you need to prevent refetching, use the `condition` option or manage dependen
 - `uid` - Unique identifier for the fetch
 - `refresh` - Function to manually trigger refetch
 
-**Note:** When using `useFetch`, you typically don't need a separate `useFromStore` call for the same data. The `useFetch` hook automatically stores the data in the entity store and returns it via the `data` property. Only use `useFromStore` if you need to access data that was fetched elsewhere or if you're not fetching it in the current component.
+**Important: Use Data Returned from useFetch, Not useSelector**
+
+When using `useFetch`, always use the data returned directly from the hook instead of selecting it from the store with `useSelector`. The `useFetch` hook automatically stores the data in the entity store and returns it via the `data` property.
+
+**❌ Bad - Selecting from store separately:**
+
+```javascript
+import { useSelector } from "react-redux";
+import { select } from "utils/entityUtils";
+import { useFetch } from "hooks";
+
+function MyComponent() {
+  const contentBlocks = useSelector(state =>
+    select(requests.beProjectContentBlocks, state.entityStore)
+  );
+  const contentBlocksResponse = useSelector(state =>
+    get(state.entityStore.responses, requests.beProjectContentBlocks)
+  );
+
+  useFetch({
+    request: [projectsAPI.contentBlocks, projectId],
+    options: { requestKey: requests.beProjectContentBlocks }
+  });
+
+  // Using contentBlocks from useSelector
+}
+```
+
+**✅ Good - Use data from useFetch:**
+
+```javascript
+import { useFetch } from "hooks";
+
+function MyComponent() {
+  const { data: contentBlocks, response: contentBlocksResponse } = useFetch({
+    request: [projectsAPI.contentBlocks, projectId],
+    options: { requestKey: requests.beProjectContentBlocks }
+  });
+
+  // Using contentBlocks from useFetch
+}
+```
+
+**Why this is better:**
+
+- Single source of truth - data comes directly from the hook
+- No need for `useSelector` or `select` utilities
+- Cleaner code with fewer imports
+- The hook manages the store automatically
+- Response object is also available directly from the hook
+
+**Note:** Only use `useSelector` or `useFromStore` if you need to access data that was fetched elsewhere (in a different component) or if you're not fetching it in the current component.
 
 ### Simplifying API Calls with useApiCallback
 
@@ -740,7 +831,6 @@ function Child() {
 
 This makes components more self-contained and easier to refactor or move.
 
-
 ## Translation Migration
 
 ### withTranslation HOC → useTranslation Hook
@@ -770,6 +860,78 @@ export default function MyComponent() {
   return <div>{t("key")}</div>;
 }
 ```
+
+## Form HOC Migration
+
+### withFormSession HOC → Render Prop Pattern
+
+The `withFormSession` HOC provides a `form` prop with `getModelValue()` for accessing live form values. When converting to functional components, replace it with the render prop pattern from `FormContainer.Form`, which provides `getModelValue` as a function parameter.
+
+**Before:**
+
+```javascript
+import withFormSession from "hoc/withFormSession";
+
+class MyComponent extends Component {
+  render() {
+    const { form } = this.props;
+    const deliveryMethod = form.getModelValue(
+      "attributes[email][deliveryMethod]"
+    );
+
+    return (
+      <FormContainer.Form model={settings} name="backend-settings">
+        {deliveryMethod === "smtp" ? (
+          <Form.FieldGroup>...</Form.FieldGroup>
+        ) : null}
+      </FormContainer.Form>
+    );
+  }
+}
+
+export default withFormSession(MyComponent, "backend-settings");
+```
+
+**After:**
+
+```javascript
+export default function MyComponent() {
+  return (
+    <FormContainer.Form model={settings} name="backend-settings">
+      {getModelValue => {
+        const deliveryMethod = getModelValue(
+          "attributes[email][deliveryMethod]"
+        );
+
+        return (
+          <>
+            {deliveryMethod === "smtp" ? (
+              <Form.FieldGroup>...</Form.FieldGroup>
+            ) : null}
+          </>
+        );
+      }}
+    </FormContainer.Form>
+  );
+}
+```
+
+**Key Changes:**
+
+- Remove `withFormSession` HOC wrapper
+- Remove `form` prop from component signature
+- Wrap form content in a render prop function: `{getModelValue => { ... }}`
+- Use `getModelValue()` directly from the render prop instead of `form.getModelValue()`
+- Return JSX from the render prop function (wrap multiple elements in `<>...</>` if needed)
+
+**Benefits:**
+
+- Provides live form values as the user types (not just saved values)
+- Removes dependency on HOC
+- More explicit and easier to understand
+- Works seamlessly with `FormContainer.Form`
+
+**Note:** If the component doesn't use `form.getModelValue()` at all, you can simply remove `withFormSession` without using the render prop pattern.
 
 ## React 18 Updates
 
