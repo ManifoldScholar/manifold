@@ -75,6 +75,8 @@ class Text < ApplicationRecord
   has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text, autosave: true
   has_one_readonly :text_section_aggregation, inverse_of: :text
+  has_many :text_section_nodes, -> { reorder(nil) }, through: :text_sections
+  has_many :text_section_stylesheets, -> { reorder(nil) }, through: :text_sections
   has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text
   has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable

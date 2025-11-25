@@ -12,6 +12,8 @@ class Stylesheet < ApplicationRecord
   include SerializedAbilitiesFor
   self.authorizer_name = "ProjectChildAuthorizer"
 
+  self.filter_attributes = [/\Araw_styles\z/, /\Astyles\z/].freeze
+
   # Associations
   belongs_to :text
   has_one :project, through: :text
