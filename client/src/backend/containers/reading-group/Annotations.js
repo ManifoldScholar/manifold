@@ -182,7 +182,7 @@ function ReadingGroupAnnotationsContainer({
       <OutletWithDrawer
         drawerProps={{
           lockScroll: "always",
-          size: "wide",
+          size: "default",
           position: "overlay",
           lockScrollClickCloses: false,
           closeUrl
