@@ -126,8 +126,8 @@ function ProjectTextsContainer({
     };
 
     // Optimistic update
-    const newTexts = texts.filter(t => t.id !== text.id);
-    const clone = cloneDeep(texts.find(t => t.id === text.id));
+    const newTexts = texts.filter(tx => tx.id !== text.id);
+    const clone = cloneDeep(texts.find(tx => tx.id === text.id));
     clone.attributes = Object.assign(clone.attributes, changes.attributes);
     clone.relationships.category = changes.relationships.category.data;
     newTexts.splice(clone.attributes.position - 1, 0, clone);
