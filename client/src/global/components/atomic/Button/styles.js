@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { defaultTransitionProps, buttonUnstyled } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
-import IconComposer from "global/components/utility/IconComposer";
 
 function getSizeStyles(size) {
   switch (size) {
@@ -68,6 +67,7 @@ function getColorStyles(background) {
       `;
     case "outline":
       return `
+        --_color: var(--outline-button-color);
         --_background-color: transparent;
         --_hover-background-color: var(--color-accent-primary);
         --_border-color: currentColor;
@@ -78,6 +78,13 @@ function getColorStyles(background) {
         --_background-color: transparent;
         --_hover-background-color: var(--color-accent-primary);
         --_border-color: var(--highlight-color);
+      `;
+    case "outline-red":
+      return `
+        --_color: var(--error-color);
+        --_background-color: transparent;
+        --_hover-background-color: var(--color-base-red45);
+        --_border-color: var(--error-color);
       `;
     default:
       return ``;
@@ -135,9 +142,4 @@ export const Button = styled("button", transientOptions)`
     align-items: center;
     transform: translateY(var(--_inner-text-translateY, -5%));
   }
-`;
-
-export const ButtonIcon = styled(IconComposer)`
-  // inline-size: 1.667em;
-  // block-size: 1.667em;
 `;

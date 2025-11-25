@@ -16,18 +16,16 @@ export const Form = styled.form`
 
 export const ButtonGroup = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
-  gap: 20px;
+  column-gap: 20px;
+  row-gap: 12px;
   margin-inline-start: auto;
 
   > button {
     flex-grow: 0;
-    flex-basis: 50%;
+    flex-basis: calc(50% - 10px);
 
     ${respond(`flex-basis: max-content`, 65)}
-`;
-
-export const Heading = styled.h2`
-  color: ${$dark => ($dark ? `var(--strong-color)` : `var(--box-color)`)};
 `;

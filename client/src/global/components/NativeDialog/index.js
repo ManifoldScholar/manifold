@@ -1,15 +1,22 @@
 import { useId } from "react";
 import Header from "./Header";
 import * as Styled from "./styles";
+import PropTypes from "prop-types";
 
-export default function Dialog({ title, children, className, ...dialog }) {
+export default function Dialog({
+  title,
+  showTitle,
+  size = "lg",
+  children,
+  ...dialog
+}) {
   const headingId = useId();
 
   return (
     <Styled.Dialog
       ref={dialog.dialogRef}
       aria-labelledby={headingId}
-      className={className}
+      $size={size}
     >
       <Header
         onClose={dialog.onCloseClick}
@@ -22,3 +29,9 @@ export default function Dialog({ title, children, className, ...dialog }) {
     </Styled.Dialog>
   );
 }
+
+Dialog.propTypes = {
+  title: PropTypes.string.isRequired,
+  showTitle: PropTypes.bool,
+  size: PropTypes.oneOf(["sm", "lg"])
+};

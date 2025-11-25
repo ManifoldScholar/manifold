@@ -7,11 +7,7 @@ export default function Header({ title, headingId, onClose }) {
 
   return (
     <Styled.Header>
-      {title && (
-        <h2 id={headingId} className="screen-reader-text">
-          {title}
-        </h2>
-      )}
+      <h2 id={headingId}>{title}</h2>
       <Styled.CloseButton onClick={onClose}>
         <Styled.CloseText className="overlay-close__text">
           {t("actions.close")}

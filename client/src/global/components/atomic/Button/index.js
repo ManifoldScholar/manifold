@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
+import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
 const Button = forwardRef(
@@ -13,12 +14,13 @@ const Button = forwardRef(
       lowercase = false,
       preIcon,
       postIcon,
+      iconSize = "inferred",
       ...props
     },
     ref
   ) => {
     /* eslint-disable-next-line no-nested-ternary */
-    const iconSize = size === "lg" ? 32 : size === "md" ? 24 : 20;
+    const iconDisplaySize = size === "lg" ? 32 : size === "md" ? 24 : 20;
 
     return (
       <Styled.Button
@@ -29,19 +31,39 @@ const Button = forwardRef(
         $lowercase={lowercase}
         {...props}
       >
-        {preIcon && <Styled.ButtonIcon icon={preIcon} size={iconSize} />}
+        {preIcon && (
+          <IconComposer
+            icon={preIcon}
+            size={iconSize === "intrinsic" ? "default" : iconDisplaySize}
+            svgProps={
+              iconSize === "intrinsic"
+                ? { style: { blockSize: iconDisplaySize } }
+                : undefined
+            }
+          />
+        )}
         {label && (
           <span
             aria-hidden={srLabel ? true : undefined}
             style={{
-              "--_min-block-size": `${iconSize}px`
+              "--_min-block-size": `${iconDisplaySize}px`
             }}
           >
             {label}
           </span>
         )}
         {srLabel && <span className="screen-reader-text">{srLabel}</span>}
-        {postIcon && <Styled.ButtonIcon icon={postIcon} size={iconSize} />}
+        {postIcon && (
+          <IconComposer
+            icon={postIcon}
+            size={iconSize === "intrinsic" ? "default" : iconDisplaySize}
+            svgProps={
+              iconSize === "intrinsic"
+                ? { style: { blockSize: iconDisplaySize } }
+                : undefined
+            }
+          />
+        )}
       </Styled.Button>
     );
   }
@@ -54,7 +76,8 @@ export const stylePropTypes = {
     "neutral",
     "accent",
     "outline",
-    "outline-accent"
+    "outline-accent",
+    "outline-red"
   ]),
   lowercase: PropTypes.bool
 };
@@ -64,6 +87,8 @@ Button.propTypes = {
   srLabel: PropTypes.string,
   preIcon: PropTypes.string,
   postIcon: PropTypes.string,
+  // use the icon's default size or infer it from the Button's `size` prop
+  iconSize: PropTypes.oneOf(["intrinsic", "inferred"]),
   ...stylePropTypes
 };
 

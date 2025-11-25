@@ -5,13 +5,34 @@ import {
   defaultFocusStyle
 } from "theme/styles/mixins";
 
+function getSizeStyles(size) {
+  switch (size) {
+    case "lg":
+      return `
+        --_block-size: 85dvh;
+        --_max-inline-size: 1440px;
+        --_content-max-inline-size: var(--container-width-inner);
+      `;
+    case "sm":
+      return `
+        --_block-size: fit-content;
+        --_max-inline-size: 600px;
+      `;
+    default:
+      return ``;
+  }
+}
+
 export const Dialog = styled.dialog`
-  block-size: var(--Dialog-block-size);
+  --_padding: min(4.5cqi, 40px);
+  ${({ $size }) => getSizeStyles($size)}
+
+  block-size: var(--_block-size);
   // fallback if dvh units not supported
   max-block-size: 85vh;
   max-block-size: 85dvh;
   inline-size: 88vi;
-  max-inline-size: 1440px;
+  max-inline-size: var(--_max-inline-size);
   flex-direction: column;
   padding: 0;
   border-radius: 20px;
@@ -25,6 +46,7 @@ export const Dialog = styled.dialog`
     var(--color-base-neutral-white),
     var(--color-base-neutral90)
   );
+  font-family: var(--font-family-sans);
 
   &[open] {
     display: flex;
@@ -32,21 +54,34 @@ export const Dialog = styled.dialog`
 `;
 
 export const Header = styled.header`
+  container-type: inline-size;
   position: sticky;
   inset-block-start: 0;
   z-index: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  gap: 1rem;
+  padding-inline-start: 0;
+  padding-inline-end: 12px;
   color: var(--strong-color);
   background-color: light-dark(
     var(--color-base-neutral10),
     var(--color-base-neutral95)
   );
+  font-family: var(--font-family-sans);
+  font-size: 16px;
 
   & + * {
     flex-grow: 1;
+  }
+
+  h2 {
+    padding-inline-start: var(--_padding);
+    font: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -55,11 +90,7 @@ export const HeaderButton = styled.button`
   display: flex;
   gap: 8px;
   align-items: center;
-  // color: var(--color-base-neutral90);
-  font-family: var(--font-family-sans);
   padding-inline: 12px;
-  font-size: 16px;
-  cursor: pointer;
 
   > svg {
     margin-block-start: 2px;
@@ -85,10 +116,8 @@ export const CloseText = styled.span`
 `;
 
 export const Inner = styled.div`
-  --_padding: min(4.5cqi, 40px);
-
   max-inline-size: calc(
-    var(--Dialog-content-max-inline-size, 880px) + 2 * var(--_padding)
+    var(--_content-max-inline-size, 880px) + 2 * var(--_padding)
   );
   block-size: 100%;
   padding: var(--_padding) var(--_padding) calc(1.2 * var(--_padding));

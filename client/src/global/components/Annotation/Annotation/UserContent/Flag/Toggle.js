@@ -1,4 +1,3 @@
-import { useId } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import useDialog from "@castiron/hooks/useDialog";
@@ -18,8 +17,6 @@ export default function FlagModalToggle({ record, annotationId }) {
   const handleUnflag =
     record.type === "annotations" ? unflagAnnotation : unflagComment;
 
-  const dialogId = useId();
-
   return (
     <>
       {record?.attributes?.flagged ? (
@@ -30,7 +27,6 @@ export default function FlagModalToggle({ record, annotationId }) {
         <Styled.SecondaryButton
           ref={dialog.toggleRef}
           onClick={dialog.onToggleClick}
-          aria-controls={dialogId}
         >
           {t("actions.report")}
         </Styled.SecondaryButton>
@@ -40,7 +36,6 @@ export default function FlagModalToggle({ record, annotationId }) {
         annotationId={annotationId}
         type={record.type}
         dialog={dialog}
-        dialogId={dialogId}
       />
     </>
   );

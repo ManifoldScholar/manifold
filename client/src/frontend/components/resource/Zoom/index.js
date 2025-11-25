@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import useDialog from "@castiron/hooks/useDialog";
+import NativeDialog from "global/components/NativeDialog";
 import getKindComponent from "../media/getKindComponent";
 import * as Styled from "./styles";
 
@@ -26,11 +27,11 @@ export default function ResourceListSlideZoom({ resource, label }) {
         label={label ?? t("actions.zoom")}
         postIcon="zoomIn16"
       />
-      <Styled.Dialog title={resource.attributes.title} {...dialog}>
+      <NativeDialog title={resource.attributes.title} size="lg" {...dialog}>
         <Styled.DialogInner>
           <KindComponent resource={resource} fixedAspectRatio={false} />
         </Styled.DialogInner>
-      </Styled.Dialog>
+      </NativeDialog>
     </>
   );
 }
