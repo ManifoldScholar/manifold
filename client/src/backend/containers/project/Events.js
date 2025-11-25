@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useCallback } from "react";
+import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import withConfirmation from "hoc/withConfirmation";
 import { projectsAPI, eventsAPI, requests } from "api";
@@ -10,15 +10,15 @@ import EntitiesList, {
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { eventFilters } from "hoc/withFilteredLists";
 import { useListQueryParams, useFetch, useApiCallback } from "hooks";
-
 import Authorize from "hoc/Authorize";
 
 function ProjectEventsContainer({
-  project,
   entitiesListSearchParams,
   entitiesListSearchProps,
   confirm
 }) {
+  const outletContext = useOutletContext() || {};
+  const { project } = outletContext;
   const { t } = useTranslation();
 
   const { pagination, filters, searchProps } = useListQueryParams({
@@ -34,23 +34,26 @@ function ProjectEventsContainer({
 
   const destroyEvent = useApiCallback(eventsAPI.destroy);
 
-  const handleEventDestroy = event => {
-    const heading = t("modals.delete_event");
-    const message = t("modals.confirm_body");
-    confirm(heading, message, async () => {
-      await destroyEvent(event.id);
-      refresh();
-    });
-  };
+  const handleEventDestroy = useCallback(
+    event => {
+      const heading = t("modals.delete_event");
+      const message = t("modals.confirm_body");
+      confirm(heading, message, async () => {
+        await destroyEvent(event.id);
+        refresh();
+      });
+    },
+    [confirm, destroyEvent, refresh, t]
+  );
 
-  if (!events || !eventsMeta) return null;
+  if (!project || !events || !eventsMeta) return null;
 
   return (
     <Authorize
       entity={project}
       ability="manageEvents"
       failureNotification
-      failureRedirect={lh.link("backendProject", project.id)}
+      failureRedirect={lh.link("backendProjects")}
     >
       <section>
         <EntitiesList
@@ -77,14 +80,6 @@ function ProjectEventsContainer({
 }
 
 ProjectEventsContainer.displayName = "Project.Events";
-
-ProjectEventsContainer.propTypes = {
-  project: PropTypes.object,
-  confirm: PropTypes.func.isRequired,
-  refresh: PropTypes.func,
-  entitiesListSearchProps: PropTypes.func.isRequired,
-  entitiesListSearchParams: PropTypes.object.isRequired
-};
 
 export default withConfirmation(
   withFilteredLists(ProjectEventsContainer, {
