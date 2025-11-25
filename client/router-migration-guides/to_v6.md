@@ -524,6 +524,108 @@ function ProjectDetail() {
 }
 ```
 
+### Nested Route Parameter Naming
+
+**Important**: When you have nested routes that use the same parameter name (e.g., `:id`), `useParams()` will return the **last matching parameter** in the path. This can cause bugs when parent components also use the same parameter name.
+
+**Problem Example:**
+
+```javascript
+// Route structure
+{
+  element: <ProjectWrapper />,
+  path: "/projects/:id",
+  children: [
+    {
+      element: <ActionCalloutEdit />,
+      path: "layout/action-callout/:id"  // ❌ Same parameter name
+    }
+  ]
+}
+
+// ProjectWrapper uses useParams() to get project id
+function ProjectWrapper() {
+  const { id } = useParams();  // ❌ Gets callout id, not project id!
+  // This causes the wrapper to refetch with the wrong id
+}
+```
+
+**Solution: Use Unique Parameter Names**
+
+Use descriptive, unique parameter names for nested routes:
+
+```javascript
+// Route structure
+{
+  element: <ProjectWrapper />,
+  path: "/projects/:id",
+  children: [
+    {
+      element: <ActionCalloutEdit />,
+      path: "layout/action-callout/:calloutId"  // ✅ Unique name
+    },
+    {
+      element: <ContentBlockEdit />,
+      path: "layout/content-blocks/:blockId"  // ✅ Unique name
+    }
+  ]
+}
+
+// Components use the specific parameter name
+function ActionCalloutEdit() {
+  const { calloutId } = useParams();  // ✅ Gets the correct id
+}
+
+function ContentBlockEdit() {
+  const { blockId } = useParams();  // ✅ Gets the correct id
+}
+
+// Parent wrapper still uses :id
+function ProjectWrapper() {
+  const { id } = useParams();  // ✅ Gets project id (not overridden)
+}
+```
+
+**Naming Conventions:**
+
+- Parent route: Use generic names like `:id`, `:slug`
+- Nested routes: Use descriptive names like `:calloutId`, `:blockId`, `:textId`, `:resourceId`
+- Pattern: `:entityTypeId` where `entityType` is the entity being accessed
+
+**Example Route Structure:**
+
+```javascript
+{
+  element: <ProjectWrapper />,
+  path: "/projects/:id",
+  children: [
+    {
+      element: <ProjectTexts />,
+      path: "texts/:textId",  // ✅ Unique: textId
+      children: [
+        {
+          element: <TextSectionEdit />,
+          path: "sections/:sectionId"  // ✅ Unique: sectionId
+        }
+      ]
+    },
+    {
+      element: <ProjectResources />,
+      path: "resources/:resourceId"  // ✅ Unique: resourceId
+    }
+  ]
+}
+```
+
+**Migration Checklist:**
+
+- [ ] Identify nested routes that use `:id` parameter
+- [ ] Rename nested route parameters to be unique (e.g., `:calloutId`, `:blockId`)
+- [ ] Update route path definitions in routes-v6.js
+- [ ] Update components to use the new parameter names in `useParams()`
+- [ ] Update helper functions if they reference the old parameter names
+- [ ] Test that parent components still get the correct parent parameter
+
 ### useSearchParams Hook
 
 Access and update URL search parameters:
@@ -876,6 +978,8 @@ export const formatError = error => {
 
 The `useRedirectToFirstMatch` hook is used to redirect users to the first authorized route from a list of candidates. However, in many cases it may be redundant when using v6 route structure.
 
+**Migration Policy:** Remove `useRedirectToFirstMatch` from all migrated components. Authorization and redirects should be handled through route structure (index routes with `<Navigate>`) and the `Authorize` HOC.
+
 ### When useRedirectToFirstMatch is Redundant
 
 If your route structure already includes an index route with `<Navigate>`, the hook is likely unnecessary:
@@ -904,12 +1008,13 @@ export default function ProjectsWrapper() {
     route: "backendProjects",
     candidates: secondaryLinks
   });
-  
+
   return <Outlet />;
 }
 ```
 
 **Why it's redundant:**
+
 - The index route redirects `/backend/projects` → `/backend/projects/all` before the component renders
 - By the time the component mounts, the pathname is already `/backend/projects/all`
 - The hook checks if pathname matches the base route, which it no longer does
@@ -925,17 +1030,23 @@ useRedirectToFirstMatch({
   route: "backendProjects",
   candidates: [
     { route: "backendProjectsAll", ability: "update", entity: "project" },
-    { route: "backendProjectCollections", ability: "update", entity: "projectCollection" }
+    {
+      route: "backendProjectCollections",
+      ability: "update",
+      entity: "projectCollection"
+    }
   ]
 });
 ```
 
 **When to use:**
+
 - Multiple child routes with different authorization requirements
 - Need to redirect to first authorized route based on user permissions
 - Authorization logic is more complex than a simple index redirect
 
 **When to remove:**
+
 - Route structure already has index route with `<Navigate>`
 - Only one child route exists
 - All child routes have the same authorization requirements (handled by parent `Authorize` HOC)
@@ -949,6 +1060,7 @@ useRedirectToFirstMatch({
 4. **Remove if redundant**: If route structure handles redirect and authorization is uniform, remove the hook
 
 **Example migration (ProjectsWrapper):**
+
 - Route structure: Has index route redirecting to "all"
 - Authorization: Single `Authorize` HOC protects all routes
 - Candidates: Only one active candidate (`backendProjectsAll`)
@@ -1832,6 +1944,256 @@ const render = async (req, res, store) => {
 
 **Rationale:** Remove optional parameters from parent routes. Use index routes for list views.
 
+### List/Detail Route Pattern with "New" Route
+
+When you have a list route with detail routes and a "new" route, structure them so that "new" is a sibling of `:id`, not a child. This avoids route conflicts and removes the need for conditional logic in wrapper components.
+
+**Problem Pattern (Avoid):**
+
+```javascript
+// ❌ Problematic: "new" is a child of :id
+{
+  element: <Pages.List />,
+  path: "pages"
+},
+{
+  element: <Pages.Wrapper />,
+  path: "pages/:id",
+  children: [
+    {
+      element: <Pages.New />,
+      path: "new"  // ❌ Can't match /pages/new because :id captures "new"
+    },
+    {
+      element: <Pages.Detail />,
+      path: "properties"
+    }
+  ]
+}
+
+// Wrapper component needs conditional logic
+function PagesWrapper() {
+  const { id } = useParams();
+
+  if (id === "new") return <Pages.New />;  // ❌ Conditional needed
+
+  // ... rest of component
+}
+```
+
+**Solution Pattern (Recommended):**
+
+```javascript
+// ✅ Correct: "new" is a sibling of :id
+{
+  element: <Outlet />,  // Simple wrapper or just Outlet
+  path: "pages",
+  children: [
+    {
+      index: true,
+      element: <Pages.List />
+    },
+    {
+      element: <Pages.New />,
+      path: "new"  // ✅ Sibling of :id, no conflict
+    },
+    {
+      element: <Pages.Wrapper />,
+      path: ":id",
+      children: [
+        {
+          index: true,
+          element: <Navigate to="properties" replace />
+        },
+        {
+          element: <Pages.Detail />,
+          path: "properties"
+        },
+        {
+          element: <Pages.Body />,
+          path: "body"
+        }
+      ]
+    }
+  ]
+}
+
+// Wrapper component - no conditionals needed
+function PagesWrapper() {
+  const { id } = useParams();
+  // ✅ No conditional - id is always a real ID, never "new"
+
+  const { data: page } = useFetch({
+    request: [pagesAPI.show, id],
+    condition: !!id  // ✅ Simple condition
+  });
+
+  // ... rest of component
+}
+```
+
+**Component Structure:**
+
+1. **Root Component** (e.g., `Pages.Root` or just `<Outlet />`):
+
+   - Simple wrapper that renders `<Outlet />`
+   - No logic needed, just passes through to children
+
+2. **List Component** (e.g., `Pages.List`):
+
+   - Renders as index route
+   - Shows the list of items
+
+3. **New Component** (e.g., `Pages.New`):
+
+   - Renders at `path: "new"`
+   - Handles its own authorization and layout
+   - Navigates to detail route after creation
+
+4. **Wrapper Component** (e.g., `Pages.Wrapper`):
+
+   - Renders at `path: ":id"`
+   - Fetches the item data
+   - Renders header/layout
+   - Passes data via `<Outlet context={{ ... }} />`
+   - No conditional logic for "new" case
+
+5. **Detail Components** (e.g., `Pages.Detail`, `Pages.Body`):
+   - Render as children of `:id` route
+   - Use `useOutletContext()` to access data from wrapper
+   - Don't fetch their own data (wrapper handles it)
+
+**Example: Pages Routes**
+
+```javascript
+// routes-v6.js
+{
+  element: <Outlet />,
+  path: "pages",
+  handle: {
+    name: "backendRecordsPages",
+    helper: () => "/backend/records/pages"
+  },
+  children: [
+    {
+      index: true,
+      element: <Pages.List />
+    },
+    {
+      element: <Pages.New />,
+      path: "new",
+      handle: {
+        name: "backendRecordsPageNew",
+        helper: () => "/backend/records/pages/new"
+      }
+    },
+    {
+      element: <Pages.Wrapper />,
+      path: ":id",
+      handle: {
+        name: "backendRecordsPage",
+        helper: p => `/backend/records/pages/${p}`
+      },
+      children: [
+        {
+          index: true,
+          element: <Navigate to="properties" replace />
+        },
+        {
+          element: <Pages.Detail />,
+          path: "properties",
+          handle: {
+            name: "backendRecordsPageProperties",
+            helper: p => `/backend/records/pages/${p}/properties`
+          }
+        },
+        {
+          element: <Pages.Body />,
+          path: "body",
+          handle: {
+            name: "backendRecordsPageBody",
+            helper: p => `/backend/records/pages/${p}/body`
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Wrapper Component Example:**
+
+```javascript
+// Pages.Wrapper.js
+import { Navigate, Outlet, useParams } from "react-router-dom";
+import { useFetch } from "hooks";
+
+export default function PagesWrapper() {
+  const { id } = useParams();
+
+  const { data: page, refresh } = useFetch({
+    request: [pagesAPI.show, id],
+    condition: !!id // ✅ Simple condition, no "new" check needed
+  });
+
+  if (!page) return null;
+
+  return (
+    <Authorize entity={page} ability="update">
+      <PageHeader title={page.attributes.title} />
+      <Layout.BackendPanel>
+        <Outlet context={{ page, refresh }} />
+      </Layout.BackendPanel>
+    </Authorize>
+  );
+}
+```
+
+**Detail Component Example:**
+
+```javascript
+// Pages.Detail.js
+import { useOutletContext } from "react-router-dom";
+import Properties from "./Properties";
+
+export default function PagesDetail() {
+  const { page, refresh } = useOutletContext() || {};
+
+  if (!page) return null;
+
+  return <Properties page={page} refresh={refresh} />;
+}
+```
+
+**Benefits:**
+
+1. **No Route Conflicts**: `/pages/new` matches the "new" route, not `:id`
+2. **No Conditionals**: Wrapper components don't need `if (id === "new")` checks
+3. **Clear Separation**: Each component has a single responsibility
+4. **Consistent Pattern**: Same structure for pages, features, users, etc.
+5. **Explicit Routes**: All routes are listed in config, no index route handling "new"
+
+**Migration Steps:**
+
+1. Restructure routes so "new" is a sibling of `:id`
+2. Add index route that redirects to default detail route (e.g., "properties")
+3. Remove conditional logic from wrapper components
+4. Update wrapper to only handle `:id` case
+5. Update detail components to use `useOutletContext()` instead of props
+6. Ensure "new" component handles its own authorization and layout
+
+**When to Use This Pattern:**
+
+- List routes with detail routes
+- Routes that have a "new" form
+- Routes where detail routes have sub-routes (e.g., properties, body, activity)
+- When you want to avoid conditional logic in wrapper components
+
+**When NOT to Use:**
+
+- Simple list/detail routes without a "new" route
+- Routes where "new" should be handled differently (e.g., modal/drawer only)
+
 ## Troubleshooting
 
 ### Circular Dependency Errors
@@ -1929,6 +2291,47 @@ Also ensure parent component passes context:
 ```javascript
 <Outlet context={{ project, settings }} />
 ```
+
+### Parent Component Getting Wrong Route Parameter
+
+**Problem:** Parent component using `useParams()` gets the wrong `id` when nested routes also use `:id`.
+
+**Example:**
+
+```javascript
+// Route: /projects/:id/layout/action-callout/:id
+function ProjectWrapper() {
+  const { id } = useParams(); // Gets callout id, not project id!
+}
+```
+
+**Solution:** Use unique parameter names for nested routes:
+
+```javascript
+// Route: /projects/:id/layout/action-callout/:calloutId
+{
+  element: <ProjectWrapper />,
+  path: "/projects/:id",
+  children: [
+    {
+      element: <ActionCalloutEdit />,
+      path: "layout/action-callout/:calloutId"  // Unique name
+    }
+  ]
+}
+
+// Parent component
+function ProjectWrapper() {
+  const { id } = useParams();  // ✅ Gets project id
+}
+
+// Child component
+function ActionCalloutEdit() {
+  const { calloutId } = useParams();  // ✅ Gets callout id
+}
+```
+
+**Key Point:** `useParams()` returns the **last matching parameter** when multiple routes use the same parameter name. Always use unique, descriptive parameter names for nested routes.
 
 ## Additional Resources
 
