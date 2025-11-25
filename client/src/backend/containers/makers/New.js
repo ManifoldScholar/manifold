@@ -1,42 +1,28 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import Form from "./Form";
 import { requests } from "api";
 import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 
-export class MakersNewContainer extends PureComponent {
-  static displayName = "Makers.New";
+export default function MakersNew() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-    t: PropTypes.func
-  };
-
-  redirectToMaker(maker) {
+  const handleSuccess = maker => {
     const path = lh.link("backendRecordsMaker", maker.id);
-    this.props.history.push(path, { keepNotifications: true });
-  }
-
-  handleSuccess = maker => {
-    this.redirectToMaker(maker);
+    navigate(path, { keepNotifications: true });
   };
 
-  render() {
-    return (
-      <section>
-        <Layout.DrawerHeader
-          title={this.props.t("records.makers.new_header")}
-        />
-        <Form
-          successHandler={this.handleSuccess}
-          options={{ adds: requests.beMakers }}
-        />
-      </section>
-    );
-  }
+  return (
+    <section>
+      <Layout.DrawerHeader title={t("records.makers.new_header")} />
+      <Form
+        successHandler={handleSuccess}
+        options={{ adds: requests.beMakers }}
+      />
+    </section>
+  );
 }
 
-export default withTranslation()(connectAndFetch(MakersNewContainer));
+MakersNew.displayName = "Makers.New";

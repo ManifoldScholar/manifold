@@ -1,5 +1,6 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import { usersAPI, readingGroupMembershipsAPI, annotationsAPI } from "api";
 import { useFetch, usePaginationState, useApiCallback } from "hooks";
 import Layout from "backend/components/layout";
@@ -9,7 +10,9 @@ import EntitiesList, {
 } from "backend/components/list/EntitiesList";
 import withConfirmation from "hoc/withConfirmation";
 
-function UserActivityContainer({ user, confirm }) {
+function UserActivityContainer({ confirm }) {
+  const outletContext = useOutletContext() || {};
+  const { user } = outletContext;
   const { t } = useTranslation();
 
   const [annotationsPagination, setAnnotationsPageNumber] = usePaginationState(
