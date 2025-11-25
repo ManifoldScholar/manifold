@@ -1,76 +1,54 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import {
+  useOutletContext,
+  useNavigate,
+  useLocation,
+  useParams
+} from "react-router-dom";
 import Ingestion from "backend/components/ingestion";
 import Layout from "backend/components/layout";
-import { entityStoreActions } from "actions";
 import { ingestionsAPI, requests } from "api";
-import { select, isLoaded } from "utils/entityUtils";
-
-const { request } = entityStoreActions;
 import lh from "helpers/linkHandler";
+import { useFetch } from "hooks";
 
-export class IngestionEditContainer extends PureComponent {
-  static fetchData = (getState, dispatch, location, match) => {
-    if (isLoaded(requests.beIngestionShow, getState())) return;
-    const call = ingestionsAPI.show(match.params.ingestionId);
-    const ingestion = request(call, requests.beIngestionShow);
-    return dispatch(ingestion);
-  };
+export default function IngestionEditContainer() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { ingestionId } = useParams();
+  const { project } = useOutletContext() || {};
 
-  static mapStateToProps = state => {
-    return {
-      ingestion: select(requests.beIngestionShow, state.entityStore)
-    };
-  };
+  const { data: ingestion } = useFetch({
+    request: [ingestionsAPI.show, ingestionId],
+    options: { requestKey: requests.beIngestionShow },
+    condition: !!ingestionId
+  });
 
-  static displayName = "Project.Text.Ingestion.Edit";
-
-  static propTypes = {
-    project: PropTypes.object.isRequired,
-    ingestion: PropTypes.object,
-    history: PropTypes.object,
-    location: PropTypes.object
-  };
-
-  get projectId() {
-    return this.props.project.id;
-  }
-
-  handleSuccess = () => {
-    this.redirectToIngestion(this.props.ingestion.id);
-  };
-
-  redirectToIngestion(ingestionId) {
+  const handleSuccess = () => {
+    if (!project || !ingestion) return;
     const path = lh.link(
       "backendProjectTextsIngestionIngest",
-      this.projectId,
-      ingestionId
+      project.id,
+      ingestion.id
     );
-    this.props.history.push(path);
-  }
+    navigate(path);
+  };
 
-  render() {
-    return this.props.ingestion ? (
-      <section>
-        <>
-          <Layout.DrawerHeader
-            title={this.props.t("texts.ingest_button_label")}
-          />
-          <Ingestion.Form.Wrapper
-            cancelUrl={lh.link("backendProjectTexts", this.projectId)}
-            ingestion={this.props.ingestion}
-            location={this.props.location}
-            history={this.props.history}
-            name={requests.beIngestionCreate}
-            project={this.props.project}
-            onSuccess={this.handleSuccess}
-          />
-        </>
-      </section>
-    ) : null;
-  }
+  if (!project) return null;
+
+  return ingestion ? (
+    <section>
+      <Layout.DrawerHeader title={t("texts.ingest_button_label")} />
+      <Ingestion.Form.Wrapper
+        cancelUrl={lh.link("backendProjectTexts", project.id)}
+        ingestion={ingestion}
+        location={location}
+        name={requests.beIngestionCreate}
+        project={project}
+        onSuccess={handleSuccess}
+      />
+    </section>
+  ) : null;
 }
 
-export default withTranslation()(connectAndFetch(IngestionEditContainer));
+IngestionEditContainer.displayName = "Project.Text.Ingestion.Edit";
