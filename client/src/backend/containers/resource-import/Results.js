@@ -1,88 +1,81 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
+import { useEffect, useRef } from "react";
+import { useOutletContext, useParams } from "react-router-dom";
 import ResourceImport from "backend/components/resource-import";
 
-export class ResourceImportResults extends PureComponent {
-  static displayName = "ResourceImport.Results";
+function ResourceImportResults() {
+  const { resourceImport, fetch, executeUpdate } = useOutletContext();
+  const { projectId, id } = useParams();
+  const intervalRef = useRef(null);
 
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    fetch: PropTypes.func.isRequired,
-    executeUpdate: PropTypes.func.isRequired,
-    resourceImport: PropTypes.object.isRequired
+  const stopMonitoring = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
   };
 
-  componentDidMount() {
-    this.maybeStartMonitoring(this.props.resourceImport);
-  }
-
-  componentDidUpdate() {
-    this.maybeStartMonitoring(this.props.resourceImport);
-    this.maybeStopMonitoring(this.props.resourceImport);
-  }
-
-  componentWillUnmount() {
-    this.stopMonitoring();
-  }
-
-  maybeStopMonitoring(resourceImport) {
+  const maybeStartMonitoring = () => {
     const { state } = resourceImport.attributes;
-    if (state !== "importing" && this.resourceImportRefresh) {
-      this.stopMonitoring();
-    }
-  }
-
-  stopMonitoring() {
-    clearInterval(this.resourceImportRefresh);
-    this.resourceImportRefresh = null;
-  }
-
-  maybeStartMonitoring(resourceImport) {
-    const { state } = resourceImport.attributes;
-    if (state === "importing" && !this.resourceImportRefresh) {
-      this.resourceImportRefresh = setInterval(() => {
-        this.props.fetch();
+    if (state === "importing" && !intervalRef.current) {
+      intervalRef.current = setInterval(() => {
+        fetch();
       }, 5000);
     }
-  }
-
-  updateImportState = state => {
-    this.props.executeUpdate({ attributes: { state } });
   };
 
-  render() {
-    const { resourceImport } = this.props;
-    const { importResults } = this.props.resourceImport.attributes;
+  const maybeStopMonitoring = () => {
+    const { state } = resourceImport.attributes;
+    if (state !== "importing" && intervalRef.current) {
+      stopMonitoring();
+    }
+  };
 
-    return (
-      <div>
-        <div className="form-secondary">
-          <ResourceImport.Control
-            resourceImport={resourceImport}
-            updateImportState={this.updateImportState}
-            fetch={this.props.fetch}
-            match={this.props.match}
-          />
-          <div>
-            <nav className="results-list">
-              <ul>
-                {importResults.map(r => {
-                  return (
-                    <ResourceImport.Result
-                      resourceImportRow={r}
-                      key={r.lineNumber}
-                    />
-                  );
-                })}
-              </ul>
-            </nav>
-          </div>
+  useEffect(() => {
+    maybeStartMonitoring();
+    maybeStopMonitoring();
+
+    return () => {
+      stopMonitoring();
+    };
+  });
+
+  const updateImportState = async state => {
+    await executeUpdate({ attributes: { state } });
+  };
+
+  const { importResults } = resourceImport.attributes;
+
+  // Construct match object for Control component compatibility
+  const match = { params: { projectId, id } };
+
+  return (
+    <div>
+      <div className="form-secondary">
+        <ResourceImport.Control
+          resourceImport={resourceImport}
+          updateImportState={updateImportState}
+          fetch={fetch}
+          match={match}
+        />
+        <div>
+          <nav className="results-list">
+            <ul>
+              {importResults.map(r => {
+                return (
+                  <ResourceImport.Result
+                    resourceImportRow={r}
+                    key={r.lineNumber}
+                  />
+                );
+              })}
+            </ul>
+          </nav>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default connectAndFetch(ResourceImportResults);
+ResourceImportResults.displayName = "ResourceImport.Results";
+
+export default ResourceImportResults;
