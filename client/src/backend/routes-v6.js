@@ -1433,6 +1433,14 @@ const routes = [
             }
           },
           {
+            element: <Settings.Content />,
+            path: "content",
+            handle: {
+              name: "backendSettingsContent",
+              helper: () => "/backend/settings/content"
+            }
+          },
+          {
             element: <Settings.Integrations />,
             path: "integrations",
             handle: {
