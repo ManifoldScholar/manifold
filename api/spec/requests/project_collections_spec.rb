@@ -76,6 +76,21 @@ RSpec.describe "Project Collections API", type: :request do
       post path, headers: admin_headers, params: valid_params
       expect(response).to have_http_status(:created)
     end
+
+    context "when the user submits an external identifier" do
+      let(:headers) { admin_headers }
+
+      it "creates an external identifier" do
+        params = build_json_payload(
+          attributes: { title: "foo", external_identifier: "SKU123" },
+          relationships: relationships
+        )
+
+        expect do
+          post path, headers: headers, params: params
+        end.to change(ExternalIdentifier, :count).by 1
+      end
+    end
   end
 
   describe "updates a collection" do
