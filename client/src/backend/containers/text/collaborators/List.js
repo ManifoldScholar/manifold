@@ -1,8 +1,7 @@
-import React, { useCallback } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import { collaboratorsAPI, textsAPI } from "api";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
@@ -11,35 +10,32 @@ import EntitiesList, {
 import Authorization from "helpers/authorization";
 import { useApiCallback } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
-import { useHistory } from "react-router-dom";
 
-function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
+const authorization = new Authorization();
+
+function TextCollaboratorsContainer({ confirm }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
+  const { text, refresh } = useOutletContext() || {};
 
-  const closeUrl = lh.link("backendTextCollaborators", text.id);
+  const closeUrl = lh.link("backendTextCollaborators", text?.id);
 
-  const auth = new Authorization();
-  const canUpdate = auth.authorizeAbility({
-    entity: text.relationships.project,
+  const canUpdate = authorization.authorizeAbility({
+    entity: text?.relationships?.project,
     ability: "updateMakers"
   });
 
   const destroyCollaborator = useApiCallback(collaboratorsAPI.destroy);
-
-  const onDelete = useCallback(
-    makerId => {
-      const heading = t("modals.remove_contributor");
-      if (confirm)
-        confirm(heading, null, async () => {
-          await destroyCollaborator("texts", text.id, { maker: makerId });
-          refresh();
-        });
-    },
-    [text.id, confirm, destroyCollaborator, t, refresh]
-  );
-
   const updateText = useApiCallback(textsAPI.update);
+
+  const onDelete = makerId => {
+    const heading = t("modals.remove_contributor");
+    if (confirm)
+      confirm(heading, null, async () => {
+        await destroyCollaborator("texts", text.id, { maker: makerId });
+        if (refresh) refresh();
+      });
+  };
 
   const onReorder = async (_change, flattenedCollaborators) => {
     const data = flattenedCollaborators
@@ -62,16 +58,17 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
   };
 
   const onEdit = id => {
-    history.push(lh.link("backendTextCollaboratorEdit", text.id, id));
+    navigate(lh.link("backendTextCollaboratorEdit", text.id, id));
   };
+
+  if (!text) return null;
 
   return (
     <section>
-      {childRoutes(route, {
-        drawer: true,
-        drawerProps: { closeUrl },
-        childProps: { refresh, textId: text.id }
-      })}
+      <OutletWithDrawer
+        drawerProps={{ closeUrl }}
+        context={{ refresh, textId: text.id }}
+      />
       <EntitiesList
         className="full-width"
         title={t("projects.contributors_header")}
@@ -98,13 +95,6 @@ function TextCollaboratorsContainer({ text, refresh, route, confirm }) {
   );
 }
 
-export default withConfirmation(TextCollaboratorsContainer);
-
 TextCollaboratorsContainer.displayName = "Text.Collaborators";
 
-TextCollaboratorsContainer.propTypes = {
-  text: PropTypes.object,
-  refresh: PropTypes.func.isRequired,
-  route: PropTypes.object,
-  confirm: PropTypes.func.isRequired
-};
+export default withConfirmation(TextCollaboratorsContainer);
