@@ -66,11 +66,11 @@ export default function NavigationMobile({ links, backendButton, mode }) {
         }
       }
     });
-    if (this.props.location.pathname === "/project-collections") {
+    if (location.pathname === "/project-collections") {
       active.push("frontendProjects");
     }
     return active;
-  }, [links, matches, journalIsActive]);
+  }, [links, matches, journalIsActive, location]);
 
   const prevLocationRef = useRef(location);
   useEffect(() => {
