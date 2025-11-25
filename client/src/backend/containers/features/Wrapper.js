@@ -1,6 +1,5 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import { useNavigate, Outlet, useParams } from "react-router-dom";
 import { featuresAPI, requests } from "api";
 import lh from "helpers/linkHandler";
@@ -11,25 +10,16 @@ import withConfirmation from "hoc/withConfirmation";
 import { useFetch, useApiCallback, useNotification, useFromStore } from "hooks";
 import Form from "global/components/form";
 import Authorize from "hoc/Authorize";
-import { entityStoreActions } from "actions";
-
-const { flush } = entityStoreActions;
 
 function FeatureDetailWrapper({ confirm }) {
   const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const { data: feature } = useFetch({
     request: [featuresAPI.show, id],
-    options: { requestKey: requests.beFeature },
     condition: !!id
   });
-
-  useEffect(() => {
-    return () => dispatch(flush(requests.beFeature));
-  }, [dispatch]);
 
   const session = useFromStore({
     path: "entityEditor.sessions.backend-feature-update"

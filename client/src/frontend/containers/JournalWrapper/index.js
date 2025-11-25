@@ -1,6 +1,5 @@
-import PropTypes from "prop-types";
 import { journalsAPI } from "api";
-import { useParams, Outlet, Redirect } from "react-router-dom";
+import { useParams, Outlet, Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useFetch } from "hooks";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -16,7 +15,7 @@ export default function JournalWrapper() {
   const location = useLocation();
   const isHomePage = location.pathname === `/journals/${id}`;
 
-  if (id === "all") return <Redirect to={lh.link("frontendJournalsList")} />;
+  if (id === "all") return <Navigate to={lh.link("frontendJournalsList")} />;
 
   if (!journal) return null;
 

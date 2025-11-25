@@ -1,4 +1,4 @@
-import { useLocation, useParams, Redirect, Outlet } from "react-router-dom";
+import { useLocation, useParams, Navigate, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetch, useFromStore } from "hooks";
 import { projectsAPI } from "api";
@@ -24,7 +24,7 @@ export default function ProjectWrapper() {
     ? getJournalBreadcrumbs(project, t, libraryDisabled)
     : null;
 
-  if (id === "all") return <Redirect to={lh.link("frontendProjectsAll")} />;
+  if (id === "all") return <Navigate to={lh.link("frontendProjectsAll")} />;
 
   return (
     <>
