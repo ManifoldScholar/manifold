@@ -1,4 +1,5 @@
 import frontendRoutesV6 from "frontend/routes-v6";
+import backendRoutesV6 from "backend/routes-v6";
 import Manifold from "global/containers/Manifold";
 import linkHandler from "helpers/linkHandler";
 import RouteError from "global/components/FatalError/RouteError";
@@ -9,13 +10,13 @@ export default function createRouter() {
       element: <Manifold />,
       path: "/",
       errorElement: <RouteError />,
-      children: frontendRoutesV6
+      children: [...frontendRoutesV6, ...backendRoutesV6]
     }
   ];
 
   // Register routes with linkHandler after they're created
   // This breaks the circular dependency since routes are already loaded
-  linkHandler.registerRoutes(frontendRoutesV6);
+  linkHandler.registerRoutes([...frontendRoutesV6, ...backendRoutesV6]);
 
   return routes;
 }
