@@ -1,11 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Form from "./Form";
 import Layout from "backend/components/layout";
 
-export default function EntitlementNew({ entity, closeUrl }) {
+export default function EntitlementNew() {
   const { t } = useTranslation();
+  const { entity, closeUrl } = useOutletContext() || {};
+
+  if (!entity) return null;
 
   return (
     <section>
@@ -16,8 +18,3 @@ export default function EntitlementNew({ entity, closeUrl }) {
 }
 
 EntitlementNew.displayName = "Entitlements.New";
-
-EntitlementNew.propTypes = {
-  entity: PropTypes.object,
-  closeUrl: PropTypes.string
-};

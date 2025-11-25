@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import PropTypes from "prop-types";
+import { useCallback } from "react";
+import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Project from "backend/components/project";
 import Form from "global/components/form";
@@ -9,7 +9,8 @@ import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useApiCallback } from "hooks";
 
-function JournalPropertiesContainer({ journal }) {
+function JournalPropertiesContainer() {
+  const { journal } = useOutletContext() || {};
   const { t } = useTranslation();
   const createSubject = useApiCallback(subjectsAPI.create);
 
@@ -37,6 +38,8 @@ function JournalPropertiesContainer({ journal }) {
       attributes: { avatar: finalAvatarData, ...rest }
     };
   };
+
+  if (!journal) return null;
 
   return (
     <Authorize
@@ -186,9 +189,5 @@ function JournalPropertiesContainer({ journal }) {
     </Authorize>
   );
 }
-
-JournalPropertiesContainer.propTypes = {
-  journal: PropTypes.object
-};
 
 export default JournalPropertiesContainer;
