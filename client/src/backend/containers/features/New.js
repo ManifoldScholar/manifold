@@ -1,35 +1,42 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import Properties from "./Properties";
+import PageHeader from "backend/components/layout/PageHeader";
+import Layout from "backend/components/layout";
+import Authorize from "hoc/Authorize";
+import Properties from "backend/components/feature/Properties";
 
-class FeaturesNewContainer extends PureComponent {
-  static displayName = "Features.New";
+export default function FeaturesNew() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
-    sessionName: PropTypes.string.isRequired
+  const handleSuccess = feature => {
+    const path = lh.link("backendRecordsFeature", feature.id);
+    navigate(path);
   };
 
-  redirectToFeature(feature) {
-    const path = lh.link("backendRecordsFeatureProperties", feature.id);
-    this.props.history.push(path);
-  }
-
-  handleSuccess = feature => {
-    this.redirectToFeature(feature);
-  };
-
-  render() {
-    return (
-      <Properties
-        onSuccess={this.handleSuccess}
-        sessionName={this.props.sessionName}
+  return (
+    <Authorize
+      failureNotification={{
+        body: t("records.features.preview.unauthorized_create")
+      }}
+      failureRedirect
+      entity="feature"
+      ability="create"
+    >
+      <PageHeader
+        type="feature"
+        backUrl={lh.link("backendRecordsFeatures")}
+        backLabel={t("records.features.back_label")}
+        title={t("records.features.new_header")}
+        note={t("records.features.new_instructions")}
+        icon="Lamp64"
       />
-    );
-  }
+      <Layout.BackendPanel>
+        <Properties onSuccess={handleSuccess} />
+      </Layout.BackendPanel>
+    </Authorize>
+  );
 }
 
-export default connectAndFetch(FeaturesNewContainer);
+FeaturesNew.displayName = "Features.New";
