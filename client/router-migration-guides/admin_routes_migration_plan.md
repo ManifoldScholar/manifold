@@ -90,6 +90,56 @@ Follow the same incremental approach used for frontend:
 - Child routes: Remove `/backend` prefix, use relative paths
 - Index routes: Use `index: true` when child path matches parent exactly
 
+**Nested Route Parameter Naming**:
+
+When migrating nested routes, ensure parameter names are unique to avoid conflicts. If a parent route uses `:id`, nested routes should use descriptive names like `:calloutId`, `:blockId`, `:textId`, etc.
+
+**Problem**: If nested routes use the same parameter name (e.g., `:id`), `useParams()` in parent components will return the last matching parameter, causing bugs:
+
+```javascript
+// ❌ Problem: Both use :id
+{
+  element: <ProjectWrapper />,
+  path: "/projects/:id",
+  children: [
+    {
+      element: <ActionCalloutEdit />,
+      path: "layout/action-callout/:id"  // Parent wrapper gets callout id, not project id!
+    }
+  ]
+}
+```
+
+**Solution**: Use unique parameter names for nested routes:
+
+```javascript
+// ✅ Solution: Unique parameter names
+{
+  element: <ProjectWrapper />,
+  path: "/projects/:id",
+  children: [
+    {
+      element: <ActionCalloutEdit />,
+      path: "layout/action-callout/:calloutId"  // Unique name
+    },
+    {
+      element: <ContentBlockEdit />,
+      path: "layout/content-blocks/:blockId"  // Unique name
+    }
+  ]
+}
+```
+
+**Naming Pattern**: Use `:entityTypeId` format (e.g., `:calloutId`, `:blockId`, `:textId`, `:resourceId`)
+
+**Migration Steps**:
+
+1. Identify nested routes with `:id` parameters
+2. Rename to descriptive names in route definitions
+3. Update components to use new parameter names in `useParams()`
+4. Update helper functions if needed
+5. Test that parent components still access correct parent parameters
+
 **Refinements**:
 
 - **Dashboard**: Use `path: "dashboard"` for the Dashboard component and add an `index` route with `<Navigate to="dashboard" replace />` to preserve existing URL structure (`/backend/dashboard`).
