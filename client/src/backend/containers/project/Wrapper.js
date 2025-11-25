@@ -20,8 +20,7 @@ function ProjectWrapperContainer({ confirm }) {
   const navigate = useNavigate();
 
   const { data: project, response: projectResponse, refresh } = useFetch({
-    request: [projectsAPI.show, id],
-    options: { requestKey: requests.beProject, force: true }
+    request: [projectsAPI.show, id]
   });
 
   const destroy = useApiCallback(projectsAPI.destroy, {
