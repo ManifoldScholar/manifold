@@ -600,6 +600,7 @@ RSpec/DuplicatedMetadata:
 
 RSpec/EmptyExampleGroup:
   Exclude:
+    - spec/authorizers/**/*.rb
     - spec/policies/**/*.rb
 
 RSpec/EmptyLineAfterFinalLet:

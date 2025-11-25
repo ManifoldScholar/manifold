@@ -43,6 +43,8 @@ RSpec.shared_examples_for "class abilities" do |klass, abilities|
       it "the subject #{verb} #{ability} any #{klass.to_s.pluralize}" do
         skip("Not testing class-level #{ability} within this context") unless test_ability_for?(ability, abilities)
 
+        matcher = __send__(matcher_for_ability(ability), subject)
+
         case assertion
         in :to_not
           expect(klass).not_to matcher
