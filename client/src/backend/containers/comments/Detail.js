@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useFetch, useApiCallback } from "hooks";
 import { commentsAPI } from "api";
