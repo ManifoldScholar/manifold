@@ -1,14 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useParams, useOutletContext } from "react-router-dom";
 import Layout from "backend/components/layout";
 import Ingestion from "backend/components/ingestion";
-import { useParams } from "react-router-dom";
 import { useFetch, useFromStore } from "hooks";
 import { sectionsAPI, ingestionsAPI } from "api";
 import lh from "helpers/linkHandler";
 
-export default function IngestSectionContainer({ textId }) {
+export default function IngestSectionContainer() {
+  const { textId } = useOutletContext() || {};
   const { t } = useTranslation();
   const { sectionId, ingestionId } = useParams();
 
@@ -54,8 +53,3 @@ export default function IngestSectionContainer({ textId }) {
 }
 
 IngestSectionContainer.displayName = "Text.Sections.Ingest";
-
-IngestSectionContainer.propTypes = {
-  textId: PropTypes.string.isRequired,
-  nextPosition: PropTypes.number
-};
