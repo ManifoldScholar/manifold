@@ -1,148 +1,38 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import NotFound from "../global/containers/NotFound";
-import routeContainers from "backend/containers/route-containers";
 
-const {
-  Backend,
-  Dashboard,
-  ProjectsWrapper,
-  ProjectsList,
-  ResourceNew,
-  ResourceImportWrapper,
-  ResourceImportNew,
-  ResourceImportMap,
-  ResourceImportResults,
-  ResourceCollectionNew,
-  ProjectNew,
-  ResourceWrapper,
-  ResourceVariants,
-  ResourceMetadata,
-  ResourceProperties,
-  ResourceTracksList,
-  ResourceTrackAdd,
-  ResourceCollectionWrapper,
-  ResourceCollectionProperties,
-  ResourceCollectionResources,
-  TextWrapper,
-  TextAnalytics,
-  TextStyles,
-  StylesheetEdit,
-  TextMetadata,
-  TextCollaborators,
-  TextAddCollaborator,
-  TextIngestionNew,
-  TextIngestionEdit,
-  TextProperties,
-  TextSections,
-  TextSectionNew,
-  TextSectionEdit,
-  TextSectionIngest,
-  TextSectionIngestEdit,
-  TextSectionIngestIngest,
-  TextSectionProperties,
-  TextTOC,
-  TextTOCEntryNew,
-  TextTOCEntryEdit,
-  TextAssets,
-  TextAssetAddEdit,
-  ProjectCollectionWrapper,
-  ProjectCollectionDetail,
-  ProjectCollectionManageProjects,
-  ProjectCollectionSettings,
-  ProjectCollectionNew,
-  ProjectWrapper,
-  ProjectTexts,
-  ProjectTextIngestionNew,
-  ProjectTextIngestionEdit,
-  IngestionIngest,
-  ProjectTextCreate,
-  ProjectCategoryWrapper,
-  ProjectCategoryNew,
-  ProjectCategoryEdit,
-  ProjectResources,
-  ProjectResourceCollections,
-  ProjectAccessWrapper,
-  PermissionNew,
-  PermissionEdit,
-  ProjectCollaborators,
-  ProjectAddCollaborator,
-  ProjectEvents,
-  ProjectMetadata,
-  ProjectExportations,
-  ProjectLayout,
-  ContentBlockNew,
-  ContentBlockEdit,
-  ProjectLog,
-  ProjectAnalytics,
-  ProjectProperties,
-  JournalsWrapper,
-  JournalsList,
-  JournalsNew,
-  JournalWrapper,
-  JournalProperties,
-  JournalMetadata,
-  JournalLayout,
-  JournalIssues,
-  JournalIssueEdit,
-  JournalIssueNew,
-  JournalIssueWrapper,
-  JournalVolumes,
-  JournalVolumeEdit,
-  JournalVolumeNew,
-  JournalVolumeWrapper,
-  JournalAccessWrapper,
-  ReadingGroupsWrapper,
-  ReadingGroupsList,
-  ReadingGroupWrapper,
-  ReadingGroupMembers,
-  ReadingGroupAnnotations,
-  ReadingGroupDetails,
-  Records,
-  UsersList,
-  UserWrapper,
-  UserProperties,
-  UserActivity,
-  MakersList,
-  MakersNew,
-  MakersEdit,
-  PagesDetail,
-  PagesNew,
-  PagesBody,
-  PagesProperties,
-  FeaturesDetail,
-  FeaturesNew,
-  FeaturesProperties,
-  PagesList,
-  FeaturesList,
-  EntitlementsPending,
-  EntitlementsPendingNew,
-  EntitlementsPendingEdit,
-  EntitlementsPendingImport,
-  CSVEntitlementImports,
-  AnnotationsList,
-  AnnotationDetail,
-  CommentsList,
-  CommentDetail,
-  AnalyticsWrapper,
-  AnalyticsGlobal,
-  AnalyticsTopProjects,
-  AnalyticsTopSearches,
-  SettingsWrapper,
-  SettingsTheme,
-  SettingsIntegrations,
-  SettingsSubjectsList,
-  SettingsSubjectsNew,
-  SettingsSubjectsEdit,
-  SettingsEmail,
-  SettingsIngestion,
-  SettingsProperties,
-  ExportTargetsList,
-  ExportTargetsNew,
-  ExportTargetsEdit,
-  ActionCalloutNew,
-  ActionCalloutEdit,
-  EntitlementsNew
-} = routeContainers;
+import Backend from "backend/containers/Backend";
+import Dashboard from "backend/containers/Dashboard";
+import Projects from "backend/containers/projects";
+import Project from "backend/containers/project";
+import ContentBlock from "backend/containers/content-block";
+import ActionCallout from "backend/containers/action-callout";
+import Text from "backend/containers/text";
+import Stylesheet from "backend/containers/stylesheet";
+import Journals from "backend/containers/journals";
+import Journal from "backend/containers/journal";
+import Analytics from "backend/containers/analytics";
+import ReadingGroups from "backend/containers/reading-groups";
+import ReadingGroup from "backend/containers/reading-group";
+import Annotations from "backend/containers/annotations";
+import Settings from "backend/containers/settings";
+import ExportTargets from "backend/containers/export-targets";
+import Records from "backend/containers/Records";
+import Users from "backend/containers/users";
+import Pages from "backend/containers/pages";
+import Features from "backend/containers/features";
+import Makers from "backend/containers/makers";
+import Entitlements from "backend/containers/entitlements";
+import EntitlementsPending from "backend/containers/entitlements-pending";
+import User from "backend/containers/user";
+import Comments from "backend/containers/comments";
+import ProjectCollection from "backend/containers/project-collection";
+import Permission from "backend/containers/permission";
+import Ingestion from "backend/containers/ingestion";
+import Resource from "backend/containers/resource";
+import ResourceImport from "backend/containers/resource-import";
+import ResourceCollection from "backend/containers/resource-collection";
+import TextTracks from "backend/containers/resource/tracks";
 
 const routes = [
   {
@@ -157,6 +47,9 @@ const routes = [
         index: true,
         element: <Navigate to="dashboard" replace />
       },
+      // ==========================================
+      // Dashboard
+      // ==========================================
       {
         element: <Dashboard />,
         path: "dashboard",
@@ -165,20 +58,26 @@ const routes = [
           helper: () => "/backend/dashboard"
         }
       },
+      // ==========================================
+      // Projects
+      // ==========================================
       {
-        element: <ProjectsWrapper />,
+        element: <Projects.Wrapper />,
         path: "projects",
         handle: {
           name: "backendProjects",
           helper: () => "/backend/projects"
         },
         children: [
+          // ------------------------------------------
+          // Project List & New
+          // ------------------------------------------
           {
             index: true,
             element: <Navigate to="all" replace />
           },
           {
-            element: <ProjectsList />,
+            element: <Projects.List />,
             path: "all",
             handle: {
               name: "backendProjectsAll",
@@ -186,175 +85,295 @@ const routes = [
             }
           },
           {
-            element: <ResourceNew />,
-            path: ":projectId/resources/new",
-            handle: {
-              name: "backendProjectResourcesNew",
-              helper: p => `/backend/projects/${p}/resources/new`
-            }
-          },
-          {
-            element: <ResourceImportWrapper />,
-            path: ":projectId/resource-import",
-            handle: {
-              name: "backendResourceImport",
-              helper: p => `/backend/projects/${p}/resource-import`
-            },
-            children: [
-              {
-                element: <ResourceImportNew />,
-                index: true,
-                handle: {
-                  name: "backendResourceImportNew",
-                  helper: p => `/backend/projects/${p}/resource-import`
-                }
-              },
-              {
-                element: <ResourceImportNew />,
-                path: ":id",
-                handle: {
-                  name: "backendResourceImportEdit",
-                  helper: (p, id) =>
-                    `/backend/projects/${p}/resource-import/${id}`
-                }
-              },
-              {
-                element: <ResourceImportMap />,
-                path: ":id/map",
-                handle: {
-                  name: "backendResourceImportMap",
-                  helper: (p, id) =>
-                    `/backend/projects/${p}/resource-import/${id}/map`
-                }
-              },
-              {
-                element: <ResourceImportResults />,
-                path: ":id/results",
-                handle: {
-                  name: "backendResourceImportResults",
-                  helper: (p, id) =>
-                    `/backend/projects/${p}/resource-import/${id}/results`
-                }
-              }
-            ]
-          },
-          {
-            element: <ResourceCollectionNew />,
-            path: ":projectId/resource-collections/new",
-            handle: {
-              name: "backendProjectResourceCollectionsNew",
-              helper: p => `/backend/projects/${p}/resource-collections/new`
-            }
-          },
-          {
-            element: <ProjectNew />,
+            element: <Project.New />,
             path: "new",
             handle: {
               name: "backendProjectsNew",
               helper: () => "/backend/projects/new"
             }
           },
+          // ------------------------------------------
+          // Project Detail (/projects/:id/*)
+          // ------------------------------------------
           {
-            element: <ResourceWrapper />,
-            path: "resource/:id",
+            element: <Project.Wrapper />,
+            path: ":id",
             handle: {
-              name: "backendResource",
-              helper: r => `/backend/projects/resource/${r}`
+              name: "backendProject",
+              helper: p => `/backend/projects/${p}`
             },
             children: [
               {
                 index: true,
-                element: <Navigate to="properties" replace />
+                element: <Navigate to="analytics" replace />
               },
               {
-                element: <ResourceVariants />,
-                path: "variants",
+                element: <Project.Texts />,
+                path: "texts",
                 handle: {
-                  name: "backendResourceVariants",
-                  helper: r => `/backend/projects/resource/${r}/variants`
-                }
-              },
-              {
-                element: <ResourceMetadata />,
-                path: "metadata",
-                handle: {
-                  name: "backendResourceMetadata",
-                  helper: r => `/backend/projects/resource/${r}/metadata`
-                }
-              },
-              {
-                element: <ResourceProperties />,
-                path: "properties",
-                handle: {
-                  name: "backendResourceProperties",
-                  helper: r => `/backend/projects/resource/${r}/properties`
-                }
-              },
-              {
-                element: <ResourceTracksList />,
-                path: "tracks",
-                handle: {
-                  name: "backendResourceTracks",
-                  helper: r => `/backend/projects/resource/${r}/tracks`
+                  name: "backendProjectTexts",
+                  helper: p => `/backend/projects/${p}/texts`
                 },
                 children: [
                   {
-                    element: <ResourceTrackAdd />,
-                    path: "new",
+                    element: <Project.Text.Create />,
+                    path: "create",
                     handle: {
-                      name: "backendResourceTrackNew",
-                      helper: r => `/backend/projects/resource/${r}/tracks/new`,
+                      name: "backendProjectTextsCreate",
+                      helper: p => `/backend/projects/${p}/texts/create`,
                       drawer: true
                     }
                   },
                   {
-                    element: <ResourceTrackAdd />,
-                    path: ":trackId",
+                    element: <Project.Text.Ingestion.New />,
+                    path: "ingestions/new",
                     handle: {
-                      name: "backendResourceTrackEdit",
-                      helper: (r, trackId) =>
-                        `/backend/projects/resource/${r}/tracks/${trackId}`,
+                      name: "backendProjectTextsIngestionsNew",
+                      helper: p =>
+                        `/backend/projects/${p}/texts/ingestions/new`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <Project.Text.Ingestion.Edit />,
+                    path: "ingestion/:ingestionId/edit",
+                    handle: {
+                      name: "backendProjectTextsIngestionEdit",
+                      helper: (p, i) =>
+                        `/backend/projects/${p}/texts/ingestion/${i}/edit`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <Ingestion.Ingest />,
+                    path: "ingestion/:ingestionId/ingest",
+                    handle: {
+                      name: "backendProjectTextsIngestionIngest",
+                      helper: (p, i) =>
+                        `/backend/projects/${p}/texts/ingestion/${i}/ingest`,
+                      drawer: true,
+                      ingest: true
+                    }
+                  },
+                  {
+                    element: <Project.Category.Wrapper />,
+                    path: "category",
+                    children: [
+                      {
+                        element: <Project.Category.New />,
+                        path: "new",
+                        handle: {
+                          name: "backendProjectCategoriesNew",
+                          helper: p =>
+                            `/backend/projects/${p}/texts/category/new`,
+                          drawer: true
+                        }
+                      },
+                      {
+                        element: <Project.Category.Edit />,
+                        path: ":catId/edit",
+                        handle: {
+                          name: "backendProjectCategory",
+                          helper: (p, c) =>
+                            `/backend/projects/${p}/texts/category/${c}/edit`,
+                          drawer: true
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                element: <Project.Resources />,
+                path: "resources",
+                handle: {
+                  name: "backendProjectResources",
+                  helper: p => `/backend/projects/${p}/resources`
+                }
+              },
+              {
+                element: <Project.ResourceCollections />,
+                path: "resource-collections",
+                handle: {
+                  name: "backendProjectResourceCollections",
+                  helper: p => `/backend/projects/${p}/resource-collections`
+                }
+              },
+              {
+                element: <Project.Access.Wrapper />,
+                path: "access",
+                handle: {
+                  name: "backendProjectAccess",
+                  helper: p => `/backend/projects/${p}/access`
+                },
+                children: [
+                  {
+                    element: <Permission.New />,
+                    path: "permissions/new",
+                    handle: {
+                      name: "backendProjectPermissionsNew",
+                      helper: pId =>
+                        `/backend/projects/${pId}/access/permissions/new`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <Permission.Edit />,
+                    path: "permissions/:permissionId",
+                    handle: {
+                      name: "backendProjectPermission",
+                      helper: (pId, id) =>
+                        `/backend/projects/${pId}/access/permissions/${id}`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <Entitlements.New />,
+                    path: "entitlements/new",
+                    handle: {
+                      name: "backendProjectEntitlementsNew",
+                      helper: projectId =>
+                        `/backend/projects/${projectId}/access/entitlements/new`,
                       drawer: true
                     }
                   }
                 ]
-              }
-            ]
-          },
-          {
-            element: <ResourceCollectionWrapper />,
-            path: "resource-collection/:id",
-            handle: {
-              name: "backendResourceCollection",
-              helper: r => `/backend/projects/resource-collection/${r}`
-            },
-            children: [
-              {
-                index: true,
-                element: <Navigate to="properties" replace />
               },
               {
-                element: <ResourceCollectionProperties />,
+                element: <Project.Collaborators.List />,
+                path: "collaborators",
+                handle: {
+                  name: "backendProjectCollaborators",
+                  helper: p => `/backend/projects/${p}/collaborators`
+                },
+                children: [
+                  {
+                    element: <Project.Collaborators.Add />,
+                    path: "new",
+                    handle: {
+                      name: "backendProjectCollaboratorNew",
+                      helper: projectId =>
+                        `/backend/projects/${projectId}/collaborators/new`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <Project.Collaborators.Add />,
+                    path: ":collaboratorId",
+                    handle: {
+                      name: "backendProjectCollaboratorEdit",
+                      helper: (projectId, id) =>
+                        `/backend/projects/${projectId}/collaborators/${id}`,
+                      drawer: true
+                    }
+                  }
+                ]
+              },
+              {
+                element: <Project.Events />,
+                path: "events",
+                handle: {
+                  name: "backendProjectEvents",
+                  helper: p => `/backend/projects/${p}/events`
+                }
+              },
+              {
+                element: <Project.Metadata />,
+                path: "metadata",
+                handle: {
+                  name: "backendProjectMetadata",
+                  helper: p => `/backend/projects/${p}/metadata`
+                }
+              },
+              {
+                element: <Project.Exportations />,
+                path: "exports",
+                handle: {
+                  name: "backendProjectExportations",
+                  helper: p => `/backend/projects/${p}/exports`
+                }
+              },
+              {
+                element: <Project.Layout />,
+                path: "layout",
+                handle: {
+                  name: "backendProjectLayout",
+                  helper: p => `/backend/projects/${p}/layout`
+                },
+                children: [
+                  {
+                    element: <ActionCallout.New />,
+                    path: "action-callout/new",
+                    handle: {
+                      name: "backendProjectActionCalloutNew",
+                      helper: p =>
+                        `/backend/projects/${p}/layout/action-callout/new`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <ActionCallout.Edit />,
+                    path: "action-callout/:calloutId",
+                    handle: {
+                      name: "backendProjectActionCalloutEdit",
+                      helper: (p, id) =>
+                        `/backend/projects/${p}/layout/action-callout/${id}`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <ContentBlock.New />,
+                    path: "content-blocks/new",
+                    handle: {
+                      name: "backendProjectContentBlockNew",
+                      helper: p =>
+                        `/backend/projects/${p}/layout/content-blocks/new`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <ContentBlock.Edit />,
+                    path: "content-blocks/:blockId",
+                    handle: {
+                      name: "backendProjectContentBlock",
+                      helper: (p, id) =>
+                        `/backend/projects/${p}/layout/content-blocks/${id}`,
+                      drawer: true
+                    }
+                  }
+                ]
+              },
+              {
+                element: <Project.Log />,
+                path: "log",
+                handle: {
+                  name: "backendProjectLog",
+                  helper: p => `/backend/projects/${p}/log`
+                }
+              },
+              {
+                element: <Project.Analytics />,
+                path: "analytics",
+                handle: {
+                  name: "backendProjectAnalytics",
+                  helper: p => `/backend/projects/${p}/analytics`
+                }
+              },
+              {
+                element: <Project.Properties />,
                 path: "properties",
                 handle: {
-                  name: "backendResourceCollectionProperties",
-                  helper: r =>
-                    `/backend/projects/resource-collection/${r}/properties`
-                }
-              },
-              {
-                element: <ResourceCollectionResources />,
-                path: "resources",
-                handle: {
-                  name: "backendResourceCollectionResources",
-                  helper: r =>
-                    `/backend/projects/resource-collection/${r}/resources`
+                  name: "backendProjectProperties",
+                  helper: p => `/backend/projects/${p}/properties`
                 }
               }
             ]
           },
+          // ------------------------------------------
+          // Text Detail (/projects/text/:id/*)
+          // ------------------------------------------
           {
-            element: <TextWrapper />,
+            element: <Text.Wrapper />,
             path: "text/:id",
             handle: {
               name: "backendText",
@@ -366,31 +385,34 @@ const routes = [
                 element: <Navigate to="analytics" replace />
               },
               {
-                element: <TextStyles />,
+                element: <Text.Styles />,
                 path: "styles",
                 handle: {
                   name: "backendTextStyles",
                   helper: t => `/backend/projects/text/${t}/styles`
-                }
+                },
+                children: [
+                  {
+                    element: <Stylesheet.Edit />,
+                    path: "new",
+                    handle: {
+                      name: "BackendTextStylesheetNew",
+                      helper: t => `/backend/projects/text/${t}/styles/new`
+                    }
+                  },
+                  {
+                    element: <Stylesheet.Edit />,
+                    path: ":stylesheet",
+                    handle: {
+                      name: "BackendTextStylesheetEdit",
+                      helper: (t, ss) =>
+                        `/backend/projects/text/${t}/styles/${ss}`
+                    }
+                  }
+                ]
               },
               {
-                element: <StylesheetEdit />,
-                path: "styles/new",
-                handle: {
-                  name: "BackendTextStylesheetNew",
-                  helper: t => `/backend/projects/text/${t}/styles/new`
-                }
-              },
-              {
-                element: <StylesheetEdit />,
-                path: "styles/:stylesheet",
-                handle: {
-                  name: "BackendTextStylesheetEdit",
-                  helper: (t, ss) => `/backend/projects/text/${t}/styles/${ss}`
-                }
-              },
-              {
-                element: <TextAnalytics />,
+                element: <Text.Analytics />,
                 path: "analytics",
                 handle: {
                   name: "backendTextAnalytics",
@@ -398,7 +420,7 @@ const routes = [
                 }
               },
               {
-                element: <TextMetadata />,
+                element: <Text.Metadata />,
                 path: "metadata",
                 handle: {
                   name: "backendTextMetadata",
@@ -406,7 +428,7 @@ const routes = [
                 }
               },
               {
-                element: <TextCollaborators />,
+                element: <Text.Collaborators.List />,
                 path: "collaborators",
                 handle: {
                   name: "backendTextCollaborators",
@@ -414,7 +436,7 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <TextAddCollaborator />,
+                    element: <Text.Collaborators.Add />,
                     path: "new",
                     handle: {
                       name: "backendTextCollaboratorNew",
@@ -424,8 +446,8 @@ const routes = [
                     }
                   },
                   {
-                    element: <TextAddCollaborator />,
-                    path: ":id",
+                    element: <Text.Collaborators.Add />,
+                    path: ":collaboratorId",
                     handle: {
                       name: "backendTextCollaboratorEdit",
                       helper: (tId, id) =>
@@ -436,7 +458,7 @@ const routes = [
                 ]
               },
               {
-                element: <TextIngestionNew />,
+                element: <Text.Ingestion.New />,
                 path: "ingestions/new",
                 handle: {
                   name: "backendTextIngestionsNew",
@@ -444,7 +466,7 @@ const routes = [
                 }
               },
               {
-                element: <TextIngestionEdit />,
+                element: <Text.Ingestion.Edit />,
                 path: "ingestion/:ingestionId/edit",
                 handle: {
                   name: "backendTextIngestionEdit",
@@ -453,7 +475,7 @@ const routes = [
                 }
               },
               {
-                element: <IngestionIngest />,
+                element: <Ingestion.Ingest />,
                 path: "ingestion/:ingestionId/ingest",
                 handle: {
                   name: "backendTextIngestionIngest",
@@ -463,7 +485,7 @@ const routes = [
                 }
               },
               {
-                element: <TextProperties />,
+                element: <Text.Properties />,
                 path: "properties",
                 handle: {
                   name: "backendTextProperties",
@@ -471,7 +493,7 @@ const routes = [
                 }
               },
               {
-                element: <TextSections />,
+                element: <Text.Sections />,
                 path: "sections",
                 handle: {
                   name: "backendTextSections",
@@ -479,7 +501,7 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <TextSectionNew />,
+                    element: <Text.Section.Author />,
                     path: "new",
                     handle: {
                       name: "backendTextSectionNew",
@@ -488,7 +510,7 @@ const routes = [
                     }
                   },
                   {
-                    element: <TextSectionEdit />,
+                    element: <Text.Section.Author />,
                     path: ":sectionId/edit",
                     handle: {
                       name: "backendTextSectionEdit",
@@ -499,34 +521,40 @@ const routes = [
                     }
                   },
                   {
-                    element: <TextSectionIngest />,
+                    element: <Text.Section.Ingest />,
                     path: "ingestions/new",
                     handle: {
                       name: "backendTextSectionIngest",
                       helper: t =>
-                        `/backend/projects/text/${t}/sections/ingestions/new`
+                        `/backend/projects/text/${t}/sections/ingestions/new`,
+                      drawer: true,
+                      ingest: true
                     }
                   },
                   {
-                    element: <TextSectionIngest />,
+                    element: <Text.Section.Ingest />,
                     path: "ingestions/:ingestionId/edit",
                     handle: {
                       name: "backendTextSectionIngestNewEdit",
                       helper: (t, i) =>
-                        `/backend/projects/text/${t}/sections/ingestions/${i}/edit`
+                        `/backend/projects/text/${t}/sections/ingestions/${i}/edit`,
+                      drawer: true,
+                      ingest: true
                     }
                   },
                   {
-                    element: <TextSectionIngestEdit />,
+                    element: <Text.Section.Ingest />,
                     path: ":sectionId/ingestion",
                     handle: {
                       name: "backendTextSectionIngestEdit",
                       helper: (t, s) =>
-                        `/backend/projects/text/${t}/sections/${s}/ingestion`
+                        `/backend/projects/text/${t}/sections/${s}/ingestion`,
+                      drawer: true,
+                      ingest: true
                     }
                   },
                   {
-                    element: <TextSectionIngestIngest />,
+                    element: <Ingestion.Ingest />,
                     path: "ingestion/:ingestionId/ingest",
                     handle: {
                       name: "backendTextSectionIngestIngest",
@@ -536,18 +564,19 @@ const routes = [
                     }
                   },
                   {
-                    element: <TextSectionProperties />,
+                    element: <Text.Section.Properties />,
                     path: ":sectionId/properties",
                     handle: {
                       name: "backendTextSectionProperties",
                       helper: (t, s) =>
-                        `/backend/projects/text/${t}/sections/${s}/properties`
+                        `/backend/projects/text/${t}/sections/${s}/properties`,
+                      drawer: true
                     }
                   }
                 ]
               },
               {
-                element: <TextTOC />,
+                element: <Text.TableOfContents />,
                 path: "contents",
                 handle: {
                   name: "backendTextTOC",
@@ -555,7 +584,7 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <TextTOCEntryNew />,
+                    element: <Text.TOCEntry />,
                     path: "new",
                     handle: {
                       name: "backendTextTOCEntryNew",
@@ -564,7 +593,7 @@ const routes = [
                     }
                   },
                   {
-                    element: <TextTOCEntryEdit />,
+                    element: <Text.TOCEntry />,
                     path: ":entryId/edit",
                     handle: {
                       name: "backendTextTOCEntryEdit",
@@ -576,7 +605,7 @@ const routes = [
                 ]
               },
               {
-                element: <TextAssets />,
+                element: <Text.Assets.List />,
                 path: "assets",
                 handle: {
                   name: "backendTextAssets",
@@ -584,7 +613,7 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <TextAssetAddEdit />,
+                    element: <Text.Assets.AddEdit />,
                     path: "new",
                     handle: {
                       name: "backendTextAssetNew",
@@ -593,7 +622,7 @@ const routes = [
                     }
                   },
                   {
-                    element: <TextAssetAddEdit />,
+                    element: <Text.Assets.AddEdit />,
                     path: ":assetId/edit",
                     handle: {
                       name: "backendTextAssetEdit",
@@ -606,8 +635,177 @@ const routes = [
               }
             ]
           },
+          // ------------------------------------------
+          // Resource Routes
+          // ------------------------------------------
           {
-            element: <ProjectCollectionWrapper />,
+            element: <Resource.New />,
+            path: ":projectId/resources/new",
+            handle: {
+              name: "backendProjectResourcesNew",
+              helper: p => `/backend/projects/${p}/resources/new`
+            }
+          },
+          {
+            element: <ResourceImport.Wrapper />,
+            path: ":projectId/resource-import",
+            handle: {
+              name: "backendResourceImport",
+              helper: p => `/backend/projects/${p}/resource-import`
+            },
+            children: [
+              {
+                element: <ResourceImport.New />,
+                index: true,
+                handle: {
+                  name: "backendResourceImportNew",
+                  helper: p => `/backend/projects/${p}/resource-import`
+                }
+              },
+              {
+                element: <ResourceImport.New />,
+                path: ":id",
+                handle: {
+                  name: "backendResourceImportEdit",
+                  helper: (p, id) =>
+                    `/backend/projects/${p}/resource-import/${id}`
+                }
+              },
+              {
+                element: <ResourceImport.Map />,
+                path: ":id/map",
+                handle: {
+                  name: "backendResourceImportMap",
+                  helper: (p, id) =>
+                    `/backend/projects/${p}/resource-import/${id}/map`
+                }
+              },
+              {
+                element: <ResourceImport.Results />,
+                path: ":id/results",
+                handle: {
+                  name: "backendResourceImportResults",
+                  helper: (p, id) =>
+                    `/backend/projects/${p}/resource-import/${id}/results`
+                }
+              }
+            ]
+          },
+          {
+            element: <Resource.Wrapper />,
+            path: "resource/:id",
+            handle: {
+              name: "backendResource",
+              helper: r => `/backend/projects/resource/${r}`
+            },
+            children: [
+              {
+                index: true,
+                element: <Navigate to="properties" replace />
+              },
+              {
+                element: <Resource.Variants />,
+                path: "variants",
+                handle: {
+                  name: "backendResourceVariants",
+                  helper: r => `/backend/projects/resource/${r}/variants`
+                }
+              },
+              {
+                element: <Resource.Metadata />,
+                path: "metadata",
+                handle: {
+                  name: "backendResourceMetadata",
+                  helper: r => `/backend/projects/resource/${r}/metadata`
+                }
+              },
+              {
+                element: <Resource.Properties />,
+                path: "properties",
+                handle: {
+                  name: "backendResourceProperties",
+                  helper: r => `/backend/projects/resource/${r}/properties`
+                }
+              },
+              {
+                element: <TextTracks.List />,
+                path: "tracks",
+                handle: {
+                  name: "backendResourceTracks",
+                  helper: r => `/backend/projects/resource/${r}/tracks`
+                },
+                children: [
+                  {
+                    element: <TextTracks.AddEdit />,
+                    path: "new",
+                    handle: {
+                      name: "backendResourceTrackNew",
+                      helper: r => `/backend/projects/resource/${r}/tracks/new`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <TextTracks.AddEdit />,
+                    path: ":trackId",
+                    handle: {
+                      name: "backendResourceTrackEdit",
+                      helper: (r, trackId) =>
+                        `/backend/projects/resource/${r}/tracks/${trackId}`,
+                      drawer: true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          // ------------------------------------------
+          // Resource Collection Routes
+          // ------------------------------------------
+          {
+            element: <ResourceCollection.New />,
+            path: ":projectId/resource-collections/new",
+            handle: {
+              name: "backendProjectResourceCollectionsNew",
+              helper: p => `/backend/projects/${p}/resource-collections/new`
+            }
+          },
+          {
+            element: <ResourceCollection.Wrapper />,
+            path: "resource-collection/:id",
+            handle: {
+              name: "backendResourceCollection",
+              helper: r => `/backend/projects/resource-collection/${r}`
+            },
+            children: [
+              {
+                index: true,
+                element: <Navigate to="properties" replace />
+              },
+              {
+                element: <ResourceCollection.Properties />,
+                path: "properties",
+                handle: {
+                  name: "backendResourceCollectionProperties",
+                  helper: r =>
+                    `/backend/projects/resource-collection/${r}/properties`
+                }
+              },
+              {
+                element: <ResourceCollection.Resources />,
+                path: "resources",
+                handle: {
+                  name: "backendResourceCollectionResources",
+                  helper: r =>
+                    `/backend/projects/resource-collection/${r}/resources`
+                }
+              }
+            ]
+          },
+          // ------------------------------------------
+          // Project Collection Routes
+          // ------------------------------------------
+          {
+            element: <ProjectCollection.Wrapper />,
             path: "project-collections",
             handle: {
               name: "backendProjectCollections",
@@ -615,7 +813,7 @@ const routes = [
             },
             children: [
               {
-                element: <ProjectCollectionNew />,
+                element: <ProjectCollection.New />,
                 path: "new",
                 handle: {
                   name: "backendProjectCollectionsNew",
@@ -624,7 +822,7 @@ const routes = [
                 }
               },
               {
-                element: <ProjectCollectionDetail />,
+                element: <ProjectCollection.Detail />,
                 path: ":id",
                 handle: {
                   name: "backendProjectCollection",
@@ -632,7 +830,7 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <ProjectCollectionManageProjects />,
+                    element: <ProjectCollection.ManageProjects />,
                     path: "manage-projects",
                     handle: {
                       name: "backendProjectCollectionManageProjects",
@@ -642,7 +840,7 @@ const routes = [
                     }
                   },
                   {
-                    element: <ProjectCollectionSettings />,
+                    element: <ProjectCollection.Settings />,
                     path: "settings",
                     handle: {
                       name: "backendProjectCollectionSettings",
@@ -654,283 +852,14 @@ const routes = [
                 ]
               }
             ]
-          },
-          {
-            element: <ProjectWrapper />,
-            path: ":id",
-            handle: {
-              name: "backendProject",
-              helper: p => `/backend/projects/${p}`
-            },
-            children: [
-              {
-                index: true,
-                element: <Navigate to="analytics" replace />
-              },
-              {
-                element: <ProjectTexts />,
-                path: "texts",
-                handle: {
-                  name: "backendProjectTexts",
-                  helper: p => `/backend/projects/${p}/texts`
-                },
-                children: [
-                  {
-                    element: <ProjectTextCreate />,
-                    path: "create",
-                    handle: {
-                      name: "backendProjectTextsCreate",
-                      helper: p => `/backend/projects/${p}/texts/create`,
-                      drawer: true
-                    }
-                  },
-                  {
-                    element: <ProjectTextIngestionNew />,
-                    path: "ingestions/new",
-                    handle: {
-                      name: "backendProjectTextsIngestionsNew",
-                      helper: p =>
-                        `/backend/projects/${p}/texts/ingestions/new`,
-                      drawer: true
-                    }
-                  },
-                  {
-                    element: <ProjectTextIngestionEdit />,
-                    path: "ingestion/:ingestionId/edit",
-                    handle: {
-                      name: "backendProjectTextsIngestionEdit",
-                      helper: (p, i) =>
-                        `/backend/projects/${p}/texts/ingestion/${i}/edit`,
-                      drawer: true
-                    }
-                  },
-                  {
-                    element: <IngestionIngest />,
-                    path: "ingestion/:ingestionId/ingest",
-                    handle: {
-                      name: "backendProjectTextsIngestionIngest",
-                      helper: (p, i) =>
-                        `/backend/projects/${p}/texts/ingestion/${i}/ingest`,
-                      drawer: true,
-                      ingest: true
-                    }
-                  },
-                  {
-                    element: <ProjectCategoryWrapper />,
-                    path: "category",
-                    children: [
-                      {
-                        element: <ProjectCategoryNew />,
-                        path: "new",
-                        handle: {
-                          name: "backendProjectCategoriesNew",
-                          helper: p =>
-                            `/backend/projects/${p}/texts/category/new`
-                        }
-                      },
-                      {
-                        element: <ProjectCategoryEdit />,
-                        path: ":catId/edit",
-                        handle: {
-                          name: "backendProjectCategory",
-                          helper: (p, c) =>
-                            `/backend/projects/${p}/texts/category/${c}/edit`
-                        }
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                element: <ProjectResources />,
-                path: "resources",
-                handle: {
-                  name: "backendProjectResources",
-                  helper: p => `/backend/projects/${p}/resources`
-                }
-              },
-              {
-                element: <ProjectResourceCollections />,
-                path: "resource-collections",
-                handle: {
-                  name: "backendProjectResourceCollections",
-                  helper: p => `/backend/projects/${p}/resource-collections`
-                }
-              },
-              {
-                element: <ProjectAccessWrapper />,
-                path: "access",
-                handle: {
-                  name: "backendProjectAccess",
-                  helper: p => `/backend/projects/${p}/access`
-                },
-                children: [
-                  {
-                    element: <PermissionNew />,
-                    path: "permissions/new",
-                    handle: {
-                      name: "backendProjectPermissionsNew",
-                      helper: pId =>
-                        `/backend/projects/${pId}/access/permissions/new`,
-                      drawer: true
-                    }
-                  },
-                  {
-                    element: <PermissionEdit />,
-                    path: "permissions/:id",
-                    handle: {
-                      name: "backendProjectPermission",
-                      helper: (pId, id) =>
-                        `/backend/projects/${pId}/access/permissions/${id}`,
-                      drawer: true
-                    }
-                  },
-                  {
-                    element: <EntitlementsNew />,
-                    path: "entitlements/new",
-                    handle: {
-                      name: "backendProjectEntitlementsNew",
-                      helper: projectId =>
-                        `/backend/projects/${projectId}/access/entitlements/new`,
-                      drawer: true
-                    }
-                  }
-                ]
-              },
-              {
-                element: <ProjectCollaborators />,
-                path: "collaborators",
-                handle: {
-                  name: "backendProjectCollaborators",
-                  helper: p => `/backend/projects/${p}/collaborators`
-                },
-                children: [
-                  {
-                    element: <ProjectAddCollaborator />,
-                    path: "new",
-                    handle: {
-                      name: "backendProjectCollaboratorNew",
-                      helper: projectId =>
-                        `/backend/projects/${projectId}/collaborators/new`,
-                      drawer: true
-                    }
-                  },
-                  {
-                    element: <ProjectAddCollaborator />,
-                    path: ":id",
-                    handle: {
-                      name: "backendProjectCollaboratorEdit",
-                      helper: (projectId, id) =>
-                        `/backend/projects/${projectId}/collaborators/${id}`,
-                      drawer: true
-                    }
-                  }
-                ]
-              },
-              {
-                element: <ProjectEvents />,
-                path: "events",
-                handle: {
-                  name: "backendProjectEvents",
-                  helper: p => `/backend/projects/${p}/events`
-                }
-              },
-              {
-                element: <ProjectMetadata />,
-                path: "metadata",
-                handle: {
-                  name: "backendProjectMetadata",
-                  helper: p => `/backend/projects/${p}/metadata`
-                }
-              },
-              {
-                element: <ProjectExportations />,
-                path: "exports",
-                handle: {
-                  name: "backendProjectExportations",
-                  helper: p => `/backend/projects/${p}/exports`
-                }
-              },
-              {
-                element: <ProjectLayout />,
-                path: "layout",
-                handle: {
-                  name: "backendProjectLayout",
-                  helper: p => `/backend/projects/${p}/layout`
-                },
-                children: [
-                  {
-                    element: <ActionCalloutNew />,
-                    path: "action-callout/new",
-                    handle: {
-                      name: "backendProjectActionCalloutNew",
-                      helper: p =>
-                        `/backend/projects/${p}/layout/action-callout/new`,
-                      drawer: true
-                    }
-                  },
-                  {
-                    element: <ActionCalloutEdit />,
-                    path: "action-callout/:id",
-                    handle: {
-                      name: "backendProjectActionCalloutEdit",
-                      helper: (p, id) =>
-                        `/backend/projects/${p}/layout/action-callout/${id}`,
-                      drawer: true
-                    }
-                  },
-                  {
-                    element: <ContentBlockNew />,
-                    path: "content-blocks/new",
-                    handle: {
-                      name: "backendProjectContentBlockNew",
-                      helper: p =>
-                        `/backend/projects/${p}/layout/content-blocks/new`,
-                      drawer: true
-                    }
-                  },
-                  {
-                    element: <ContentBlockEdit />,
-                    path: "content-blocks/:id",
-                    handle: {
-                      name: "backendProjectContentBlock",
-                      helper: (p, id) =>
-                        `/backend/projects/${p}/layout/content-blocks/${id}`,
-                      drawer: true
-                    }
-                  }
-                ]
-              },
-              {
-                element: <ProjectLog />,
-                path: "log",
-                handle: {
-                  name: "backendProjectLog",
-                  helper: p => `/backend/projects/${p}/log`
-                }
-              },
-              {
-                element: <ProjectAnalytics />,
-                path: "analytics",
-                handle: {
-                  name: "backendProjectAnalytics",
-                  helper: p => `/backend/projects/${p}/analytics`
-                }
-              },
-              {
-                element: <ProjectProperties />,
-                path: "properties",
-                handle: {
-                  name: "backendProjectProperties",
-                  helper: p => `/backend/projects/${p}/properties`
-                }
-              }
-            ]
           }
         ]
       },
+      // ==========================================
+      // Journals
+      // ==========================================
       {
-        element: <JournalsWrapper />,
+        element: <Journals.Wrapper />,
         path: "journals",
         handle: {
           name: "backendJournals",
@@ -938,7 +867,7 @@ const routes = [
         },
         children: [
           {
-            element: <JournalsList />,
+            element: <Journals.List />,
             index: true,
             handle: {
               name: "backendJournalsList",
@@ -946,7 +875,7 @@ const routes = [
             }
           },
           {
-            element: <JournalsNew />,
+            element: <Journals.New />,
             path: "new",
             handle: {
               name: "backendJournalsNew",
@@ -954,7 +883,7 @@ const routes = [
             }
           },
           {
-            element: <JournalWrapper />,
+            element: <Journal.Wrapper />,
             path: ":id",
             handle: {
               name: "backendJournal",
@@ -966,7 +895,7 @@ const routes = [
                 element: <Navigate to="properties" replace />
               },
               {
-                element: <JournalProperties />,
+                element: <Journal.Properties />,
                 path: "properties",
                 handle: {
                   name: "backendJournalProperties",
@@ -974,7 +903,7 @@ const routes = [
                 }
               },
               {
-                element: <JournalLayout />,
+                element: <Journal.Layout />,
                 path: "layout",
                 handle: {
                   name: "backendJournalLayout",
@@ -982,7 +911,7 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <ActionCalloutNew />,
+                    element: <ActionCallout.New />,
                     path: "action-callout/new",
                     handle: {
                       name: "backendJournalActionCalloutNew",
@@ -992,19 +921,19 @@ const routes = [
                     }
                   },
                   {
-                    element: <ActionCalloutEdit />,
-                    path: "action-callout/:id",
+                    element: <ActionCallout.Edit />,
+                    path: "action-callout/:calloutId",
                     handle: {
                       name: "backendJournalActionCalloutEdit",
-                      helper: (j, id) =>
-                        `/backend/journals/${j}/layout/action-callout/${id}`,
+                      helper: (j, calloutId) =>
+                        `/backend/journals/${j}/layout/action-callout/${calloutId}`,
                       drawer: true
                     }
                   }
                 ]
               },
               {
-                element: <JournalAccessWrapper />,
+                element: <Journal.AccessWrapper />,
                 path: "access",
                 handle: {
                   name: "backendJournalAccess",
@@ -1012,7 +941,7 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <EntitlementsNew />,
+                    element: <Entitlements.New />,
                     path: "entitlements/new",
                     handle: {
                       name: "backendJournalEntitlementsNew",
@@ -1024,7 +953,7 @@ const routes = [
                 ]
               },
               {
-                element: <JournalVolumes />,
+                element: <Journal.Volumes />,
                 path: "volumes",
                 handle: {
                   name: "backendJournalVolumes",
@@ -1032,20 +961,20 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <JournalVolumeWrapper />,
-                    path: ":vId",
+                    element: <Journal.VolumeNew />,
+                    path: "new",
+                    handle: {
+                      name: "backendJournalVolumeNew",
+                      helper: j => `/backend/journals/${j}/volumes/new`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <Journal.VolumeWrapper />,
+                    path: ":volumeId",
                     children: [
                       {
-                        element: <JournalVolumeNew />,
-                        path: "new",
-                        handle: {
-                          name: "backendJournalVolumeNew",
-                          helper: j => `/backend/journals/${j}/volumes/new`,
-                          drawer: true
-                        }
-                      },
-                      {
-                        element: <JournalVolumeEdit />,
+                        element: <Journal.VolumeEdit />,
                         index: true,
                         handle: {
                           name: "backendJournalVolumeEdit",
@@ -1059,7 +988,7 @@ const routes = [
                 ]
               },
               {
-                element: <JournalIssues />,
+                element: <Journal.Issues />,
                 path: "issues",
                 handle: {
                   name: "backendJournalIssues",
@@ -1067,20 +996,20 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <JournalIssueWrapper />,
-                    path: ":iId",
+                    element: <Journal.IssueNew />,
+                    path: "new",
+                    handle: {
+                      name: "backendJournalIssueNew",
+                      helper: j => `/backend/journals/${j}/issues/new`,
+                      drawer: true
+                    }
+                  },
+                  {
+                    element: <Journal.IssueWrapper />,
+                    path: ":issueId",
                     children: [
                       {
-                        element: <JournalIssueNew />,
-                        path: "new",
-                        handle: {
-                          name: "backendJournalIssueNew",
-                          helper: j => `/backend/journals/${j}/issues/new`,
-                          drawer: true
-                        }
-                      },
-                      {
-                        element: <JournalIssueEdit />,
+                        element: <Journal.IssueEdit />,
                         index: true,
                         handle: {
                           name: "backendJournalIssueEdit",
@@ -1094,7 +1023,7 @@ const routes = [
                 ]
               },
               {
-                element: <JournalMetadata />,
+                element: <Journal.Metadata />,
                 path: "metadata",
                 handle: {
                   name: "backendJournalMetadata",
@@ -1105,8 +1034,11 @@ const routes = [
           }
         ]
       },
+      // ==========================================
+      // Reading Groups
+      // ==========================================
       {
-        element: <ReadingGroupsWrapper />,
+        element: <ReadingGroups.Wrapper />,
         path: "groups",
         handle: {
           name: "backendReadingGroups",
@@ -1114,7 +1046,7 @@ const routes = [
         },
         children: [
           {
-            element: <ReadingGroupsList />,
+            element: <ReadingGroups.List />,
             index: true,
             handle: {
               name: "backendReadingGroupsList",
@@ -1122,7 +1054,7 @@ const routes = [
             }
           },
           {
-            element: <ReadingGroupWrapper />,
+            element: <ReadingGroup.Wrapper />,
             path: ":id",
             handle: {
               name: "backendReadingGroup",
@@ -1130,7 +1062,11 @@ const routes = [
             },
             children: [
               {
-                element: <ReadingGroupDetails />,
+                index: true,
+                element: <Navigate to="details" replace />
+              },
+              {
+                element: <ReadingGroup.Details />,
                 path: "details",
                 handle: {
                   name: "backendReadingGroupDetails",
@@ -1138,7 +1074,7 @@ const routes = [
                 }
               },
               {
-                element: <ReadingGroupMembers />,
+                element: <ReadingGroup.Members />,
                 path: "members",
                 handle: {
                   name: "backendReadingGroupMembers",
@@ -1146,7 +1082,7 @@ const routes = [
                 }
               },
               {
-                element: <ReadingGroupAnnotations />,
+                element: <ReadingGroup.Annotations />,
                 path: "annotations",
                 handle: {
                   name: "backendReadingGroupAnnotations",
@@ -1154,8 +1090,8 @@ const routes = [
                 },
                 children: [
                   {
-                    element: <AnnotationDetail />,
-                    path: ":id",
+                    element: <Annotations.Detail />,
+                    path: ":annotationId",
                     handle: {
                       name: "backendReadingGroupAnnotationDetail",
                       helper: (g, a) => `/backend/groups/${g}/annotations/${a}`,
@@ -1168,6 +1104,9 @@ const routes = [
           }
         ]
       },
+      // ==========================================
+      // Records
+      // ==========================================
       {
         element: <Records />,
         path: "records",
@@ -1181,23 +1120,19 @@ const routes = [
             element: <Navigate to="makers" replace />
           },
           {
-            element: <UsersList />,
+            element: <Outlet />,
             path: "users",
             handle: {
               name: "backendRecordsUsers",
               helper: () => "/backend/records/users"
-            }
-          },
-          {
-            element: <UserWrapper />,
-            path: "users/:id",
-            handle: {
-              name: "backendRecordsUser",
-              helper: u => `/backend/records/users/${u}`
             },
             children: [
               {
-                element: <UserWrapper />,
+                index: true,
+                element: <Users.List />
+              },
+              {
+                element: <User.New />,
                 path: "new",
                 handle: {
                   name: "backendRecordsUserNew",
@@ -1205,25 +1140,39 @@ const routes = [
                 }
               },
               {
-                element: <UserProperties />,
-                path: "properties",
+                element: <User.Wrapper />,
+                path: ":id",
                 handle: {
-                  name: "backendRecordsUserProperties",
-                  helper: u => `/backend/records/users/${u}/properties`
-                }
-              },
-              {
-                element: <UserActivity />,
-                path: "activity",
-                handle: {
-                  name: "backendRecordsUserActivity",
-                  helper: u => `/backend/records/users/${u}/activity`
-                }
+                  name: "backendRecordsUser",
+                  helper: u => `/backend/records/users/${u}`
+                },
+                children: [
+                  {
+                    index: true,
+                    element: <Navigate to="properties" replace />
+                  },
+                  {
+                    element: <User.Properties />,
+                    path: "properties",
+                    handle: {
+                      name: "backendRecordsUserProperties",
+                      helper: u => `/backend/records/users/${u}/properties`
+                    }
+                  },
+                  {
+                    element: <User.Activity />,
+                    path: "activity",
+                    handle: {
+                      name: "backendRecordsUserActivity",
+                      helper: u => `/backend/records/users/${u}/activity`
+                    }
+                  }
+                ]
               }
             ]
           },
           {
-            element: <MakersList />,
+            element: <Makers.List />,
             path: "makers",
             handle: {
               name: "backendRecordsMakers",
@@ -1231,7 +1180,7 @@ const routes = [
             },
             children: [
               {
-                element: <MakersNew />,
+                element: <Makers.New />,
                 path: "new",
                 handle: {
                   name: "backendRecordsMakersNew",
@@ -1240,7 +1189,7 @@ const routes = [
                 }
               },
               {
-                element: <MakersEdit />,
+                element: <Makers.Edit />,
                 path: ":id",
                 handle: {
                   name: "backendRecordsMaker",
@@ -1251,15 +1200,19 @@ const routes = [
             ]
           },
           {
-            element: <PagesDetail />,
-            path: "pages/:id",
+            element: <Outlet />,
+            path: "pages",
             handle: {
-              name: "backendRecordsPage",
-              helper: p => `/backend/records/pages/${p}`
+              name: "backendRecordsPages",
+              helper: () => `/backend/records/pages`
             },
             children: [
               {
-                element: <PagesNew />,
+                index: true,
+                element: <Pages.List />
+              },
+              {
+                element: <Pages.New />,
                 path: "new",
                 handle: {
                   name: "backendRecordsPageNew",
@@ -1267,33 +1220,43 @@ const routes = [
                 }
               },
               {
-                element: <PagesBody />,
-                path: "body",
+                element: <Pages.Wrapper />,
+                path: ":id",
                 handle: {
-                  name: "backendRecordsPageBody",
-                  helper: p => `/backend/records/pages/${p}/body`
-                }
-              },
-              {
-                element: <PagesProperties />,
-                path: "properties",
-                handle: {
-                  name: "backendRecordsPageProperties",
-                  helper: p => `/backend/records/pages/${p}/properties`
-                }
+                  name: "backendRecordsPage",
+                  helper: p => `/backend/records/pages/${p}`
+                },
+                children: [
+                  {
+                    index: true,
+                    element: <Navigate to="properties" replace />
+                  },
+                  {
+                    element: <Pages.Detail />,
+                    path: "properties",
+                    handle: {
+                      name: "backendRecordsPageProperties",
+                      helper: p => `/backend/records/pages/${p}/properties`
+                    }
+                  }
+                ]
               }
             ]
           },
           {
-            element: <FeaturesDetail />,
-            path: "features/:id",
+            element: <Outlet />,
+            path: "features",
             handle: {
-              name: "backendRecordsFeature",
-              helper: f => `/backend/records/features/${f}`
+              name: "backendRecordsFeatures",
+              helper: () => `/backend/records/features`
             },
             children: [
               {
-                element: <FeaturesNew />,
+                index: true,
+                element: <Features.List />
+              },
+              {
+                element: <Features.New />,
                 path: "new",
                 handle: {
                   name: "backendRecordsFeatureNew",
@@ -1301,33 +1264,31 @@ const routes = [
                 }
               },
               {
-                element: <FeaturesProperties />,
-                index: true,
+                element: <Features.Wrapper />,
+                path: ":id",
                 handle: {
-                  name: "backendRecordsFeatureProperties",
-                  helper: p => `/backend/records/features/${p}`
-                }
+                  name: "backendRecordsFeature",
+                  helper: f => `/backend/records/features/${f}`
+                },
+                children: [
+                  {
+                    index: true,
+                    element: <Navigate to="properties" replace />
+                  },
+                  {
+                    element: <Features.Detail />,
+                    path: "properties",
+                    handle: {
+                      name: "backendRecordsFeatureProperties",
+                      helper: f => `/backend/records/features/${f}/properties`
+                    }
+                  }
+                ]
               }
             ]
           },
           {
-            element: <PagesList />,
-            path: "pages",
-            handle: {
-              name: "backendRecordsPages",
-              helper: () => `/backend/records/pages`
-            }
-          },
-          {
-            element: <FeaturesList />,
-            path: "features",
-            handle: {
-              name: "backendRecordsFeatures",
-              helper: () => `/backend/records/features`
-            }
-          },
-          {
-            element: <EntitlementsPending />,
+            element: <EntitlementsPending.List />,
             path: "entitlements",
             handle: {
               name: "backendRecordsEntitlements",
@@ -1335,7 +1296,7 @@ const routes = [
             },
             children: [
               {
-                element: <EntitlementsPendingNew />,
+                element: <EntitlementsPending.AddEdit />,
                 path: "new",
                 handle: {
                   name: "backendRecordsEntitlementsNew",
@@ -1344,7 +1305,7 @@ const routes = [
                 }
               },
               {
-                element: <EntitlementsPendingEdit />,
+                element: <EntitlementsPending.AddEdit />,
                 path: "edit/:id",
                 handle: {
                   name: "backendRecordsEntitlementsEdit",
@@ -1353,7 +1314,7 @@ const routes = [
                 }
               },
               {
-                element: <EntitlementsPendingImport />,
+                element: <EntitlementsPending.Import />,
                 path: "import",
                 handle: {
                   name: "backendRecordsEntitlementsImport",
@@ -1363,7 +1324,7 @@ const routes = [
             ]
           },
           {
-            element: <CSVEntitlementImports />,
+            element: <EntitlementsPending.CSVImports />,
             path: "entitlement-imports",
             handle: {
               name: "backendRecordsEntitlementImports",
@@ -1371,7 +1332,7 @@ const routes = [
             }
           },
           {
-            element: <AnnotationsList />,
+            element: <Annotations.List />,
             path: "annotations",
             handle: {
               name: "backendRecordsAnnotations",
@@ -1379,7 +1340,7 @@ const routes = [
             },
             children: [
               {
-                element: <AnnotationDetail />,
+                element: <Annotations.Detail />,
                 path: ":id",
                 handle: {
                   name: "backendRecordsAnnotationsDetail",
@@ -1390,7 +1351,7 @@ const routes = [
             ]
           },
           {
-            element: <CommentsList />,
+            element: <Comments.List />,
             path: "comments",
             handle: {
               name: "backendRecordsComments",
@@ -1398,7 +1359,7 @@ const routes = [
             },
             children: [
               {
-                element: <CommentDetail />,
+                element: <Comments.Detail />,
                 path: ":id",
                 handle: {
                   name: "backendRecordsCommentsDetail",
@@ -1410,8 +1371,11 @@ const routes = [
           }
         ]
       },
+      // ==========================================
+      // Analytics
+      // ==========================================
       {
-        element: <AnalyticsWrapper />,
+        element: <Analytics.Wrapper />,
         path: "analytics",
         handle: {
           name: "backendAnalytics",
@@ -1419,7 +1383,7 @@ const routes = [
         },
         children: [
           {
-            element: <AnalyticsGlobal />,
+            element: <Analytics.Global />,
             index: true,
             handle: {
               name: "backendAnalyticsGlobal",
@@ -1427,7 +1391,7 @@ const routes = [
             }
           },
           {
-            element: <AnalyticsTopProjects />,
+            element: <Analytics.TopProjects />,
             path: "top-projects",
             handle: {
               name: "backendAnalyticsTopProjects",
@@ -1435,7 +1399,7 @@ const routes = [
             }
           },
           {
-            element: <AnalyticsTopSearches />,
+            element: <Analytics.TopSearches />,
             path: "top-searches",
             handle: {
               name: "backendAnalyticsTopSearches",
@@ -1444,8 +1408,11 @@ const routes = [
           }
         ]
       },
+      // ==========================================
+      // Settings
+      // ==========================================
       {
-        element: <SettingsWrapper />,
+        element: <Settings.Wrapper />,
         path: "settings",
         handle: {
           name: "backendSettings",
@@ -1457,7 +1424,7 @@ const routes = [
             element: <Navigate to="properties" replace />
           },
           {
-            element: <SettingsTheme />,
+            element: <Settings.Theme />,
             path: "theme",
             handle: {
               name: "backendSettingsTheme",
@@ -1465,7 +1432,7 @@ const routes = [
             }
           },
           {
-            element: <SettingsIntegrations />,
+            element: <Settings.Integrations />,
             path: "integrations",
             handle: {
               name: "backendSettingsIntegrations",
@@ -1473,7 +1440,7 @@ const routes = [
             }
           },
           {
-            element: <SettingsSubjectsList />,
+            element: <Settings.Subjects.List />,
             path: "subjects",
             handle: {
               name: "backendSettingsSubjects",
@@ -1481,7 +1448,7 @@ const routes = [
             },
             children: [
               {
-                element: <SettingsSubjectsNew />,
+                element: <Settings.Subjects.New />,
                 path: "new",
                 handle: {
                   name: "backendSettingsSubjectsNew",
@@ -1490,7 +1457,7 @@ const routes = [
                 }
               },
               {
-                element: <SettingsSubjectsEdit />,
+                element: <Settings.Subjects.Edit />,
                 path: ":id",
                 handle: {
                   name: "backendSettingsSubject",
@@ -1501,7 +1468,7 @@ const routes = [
             ]
           },
           {
-            element: <ExportTargetsList />,
+            element: <ExportTargets.List />,
             path: "export-targets",
             handle: {
               name: "backendSettingsExportTargets",
@@ -1509,7 +1476,7 @@ const routes = [
             },
             children: [
               {
-                element: <ExportTargetsNew />,
+                element: <ExportTargets.New />,
                 path: "new",
                 handle: {
                   name: "backendSettingsExportTargetsNew",
@@ -1518,7 +1485,7 @@ const routes = [
                 }
               },
               {
-                element: <ExportTargetsEdit />,
+                element: <ExportTargets.Edit />,
                 path: ":id",
                 handle: {
                   name: "backendSettingsExportTargetEdit",
@@ -1529,7 +1496,7 @@ const routes = [
             ]
           },
           {
-            element: <SettingsIngestion />,
+            element: <Settings.Ingestion />,
             path: "ingestion",
             handle: {
               name: "backendSettingsIngestion",
@@ -1537,7 +1504,7 @@ const routes = [
             }
           },
           {
-            element: <SettingsEmail />,
+            element: <Settings.Email />,
             path: "email",
             handle: {
               name: "backendSettingsEmail",
@@ -1545,7 +1512,7 @@ const routes = [
             }
           },
           {
-            element: <SettingsProperties />,
+            element: <Settings.Properties />,
             path: "properties",
             handle: {
               name: "backendSettingsProperties",
