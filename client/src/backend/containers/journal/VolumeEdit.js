@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import PropTypes from "prop-types";
+import { useCallback } from "react";
+import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Volume from "backend/components/volume";
 import Layout from "backend/components/layout";
@@ -8,23 +8,20 @@ import { useFetch, useApiCallback, useNotification } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import lh from "helpers/linkHandler";
 
-function JournalVolumeEdit({
-  refreshVolumes,
-  closeUrl,
-  match,
-  journal,
-  history,
-  confirm
-}) {
+function JournalVolumeEdit({ confirm }) {
+  const { t } = useTranslation();
+  const { volumeId } = useParams();
+  const navigate = useNavigate();
+  const { refreshVolumes, closeUrl, journal } = useOutletContext() || {};
+
   const { data: journalVolume } = useFetch({
-    request: [journalVolumesAPI.show, match.params.vId]
+    request: [journalVolumesAPI.show, volumeId],
+    condition: !!volumeId
   });
 
   const destroy = useApiCallback(journalVolumesAPI.destroy, {
     removes: journalVolume
   });
-
-  const { t } = useTranslation();
 
   const notifyDestroy = useNotification(v => ({
     level: 0,
@@ -38,7 +35,7 @@ function JournalVolumeEdit({
 
   const destroyAndRedirect = useCallback(() => {
     const redirect = () =>
-      history.push(lh.link("backendJournalVolumes", journal.id));
+      navigate(lh.link("backendJournalVolumes", journal?.id));
     destroy(journalVolume.id).then(
       () => {
         notifyDestroy(journalVolume);
@@ -46,18 +43,22 @@ function JournalVolumeEdit({
       },
       () => redirect()
     );
-  }, [destroy, history, journal?.id, journalVolume, notifyDestroy]);
+  }, [destroy, navigate, journal?.id, journalVolume, notifyDestroy]);
 
   const onDelete = useCallback(() => {
     const heading = t("modals.delete_volume");
     const message = t("modals.confirm_body");
-    confirm(heading, message, destroyAndRedirect);
+    if (confirm) {
+      confirm(heading, message, destroyAndRedirect);
+    }
   }, [destroyAndRedirect, confirm, t]);
 
   const refreshAndRedirect = useCallback(() => {
-    refreshVolumes();
-    history.push(closeUrl, { keepNotifications: false });
-  }, [history, closeUrl, refreshVolumes]);
+    if (refreshVolumes) refreshVolumes();
+    navigate(closeUrl, { state: { keepNotifications: false } });
+  }, [navigate, closeUrl, refreshVolumes]);
+
+  if (!journalVolume || !journal) return null;
 
   const buttons = [
     {
@@ -79,12 +80,5 @@ function JournalVolumeEdit({
     </div>
   );
 }
-
-JournalVolumeEdit.propTypes = {
-  journal: PropTypes.object.isRequired,
-  closeUrl: PropTypes.string.isRequired,
-  history: PropTypes.object.isRequired,
-  refreshVolumes: PropTypes.func.isRequired
-};
 
 export default withConfirmation(JournalVolumeEdit);
