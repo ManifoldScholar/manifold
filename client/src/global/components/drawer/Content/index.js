@@ -1,4 +1,4 @@
-import { forwardRef, useRef } from "react";
+import { forwardRef, useRef, cloneElement } from "react";
 import PropTypes from "prop-types";
 import { FocusTrap } from "focus-trap-react";
 import classNames from "classnames";
@@ -121,7 +121,7 @@ function DrawerContent(props, forwardedRef) {
         {!!children &&
           (typeof children === "string"
             ? children
-            : React.cloneElement(children, {
+            : cloneElement(children, {
                 closeDrawer: handleLeaveEvent
               }))}
       </DrawerContext.Provider>
