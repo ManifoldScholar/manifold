@@ -5,25 +5,20 @@ module API
     module Ingestions
       module Relationships
         class IngestionMessagesController < ApplicationController
-          before_action :set_project
-
-          resourceful! Ingestion do
-            @project.nil? ? Ingestion : @project.ingestions
-          end
+          resourceful! Ingestion, authorize_options: { except: %i[index] }
 
           def index
             @ingestion = load_ingestion
+
+            authorize_action_for @ingestion
+
             permitted = params.permit(:starting_at)
-            time = permitted[:starting_at] ? DateTime.parse(permitted[:starting_at]) : DateTime.new
+
+            time = permitted[:starting_at].present? ? Time.zone.parse(permitted[:starting_at]) : nil
+
             render_multiple_resources @ingestion.ingestion_messages.where(
-              created_at: time..DateTime.now
+              created_at: time..Time.current
             )
-          end
-
-          private
-
-          def set_project
-            @project = Project.friendly.find(params[:project_id]) if params[:project_id]
           end
         end
       end
