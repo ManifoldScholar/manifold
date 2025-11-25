@@ -1,22 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import Category from "backend/components/category";
 import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 
-export default function ProjectCategoryNewContainer({
-  project,
-  refresh,
-  history
-}) {
+export default function ProjectCategoryNewContainer() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { project, refresh } = useOutletContext() || {};
 
-  const onSuccess = categoryIgnored => {
-    refresh();
-    const url = lh.link("backendProjectTexts", project.id);
-    history.push(url, { keepNotifications: false });
+  const onSuccess = () => {
+    if (refresh) refresh();
+    const url = lh.link("backendProjectTexts", project?.id);
+    navigate(url, { state: { keepNotifications: false } });
   };
+
+  if (!project) return null;
 
   return (
     <div>
@@ -27,9 +26,3 @@ export default function ProjectCategoryNewContainer({
 }
 
 ProjectCategoryNewContainer.displayName = "Project.Category.New";
-
-ProjectCategoryNewContainer.propTypes = {
-  project: PropTypes.object.isRequired,
-  refresh: PropTypes.func,
-  history: PropTypes.object
-};
