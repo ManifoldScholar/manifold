@@ -1,12 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import Layout from "backend/components/layout";
 import lh from "helpers/linkHandler";
 import CreateTextForm from "backend/components/authoring/CreateTextForm";
 
-export default function TextCreateContainer({ project, refresh }) {
+export default function TextCreateContainer() {
   const { t } = useTranslation();
+  const { project, refresh } = useOutletContext() || {};
+
+  if (!project) return null;
 
   return (
     <section>
@@ -25,8 +27,3 @@ export default function TextCreateContainer({ project, refresh }) {
 }
 
 TextCreateContainer.displayName = "Project.Text.Create";
-
-TextCreateContainer.propTypes = {
-  project: PropTypes.object.isRequired,
-  refresh: PropTypes.func
-};
