@@ -20,7 +20,6 @@ export default function ProjectCollectionDetail() {
     refresh: refreshCollectionProjects
   } = useFetch({
     request: [collectionProjectsAPI.index, id],
-    options: { requestKey: requests.beCollectionProjects },
     condition: !!id
   });
 
