@@ -1,4 +1,4 @@
-import { useMemo, useCallback } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import isPlainObject from "lodash/isPlainObject";
@@ -8,6 +8,8 @@ import Authorization from "helpers/authorization";
 import FatalErrorRender from "global/components/FatalError";
 import get from "lodash/get";
 import { useFromStore } from "hooks";
+
+const authorization = new Authorization();
 
 export default function Authorize(props) {
   const {
@@ -21,8 +23,6 @@ export default function Authorize(props) {
   const location = useLocation();
   const authentication = useFromStore({ path: "authentication" });
   const propsWithAuth = { ...props, authentication };
-
-  const authorization = useMemo(() => new Authorization(), []);
 
   const isAuthenticated = get(authentication, "authenticated");
 
@@ -85,7 +85,7 @@ export default function Authorize(props) {
         hideStatus
       />
     );
-  }, [authentication, authorization, failureNotification?.body]);
+  }, [authentication, failureNotification?.body]);
 
   const doNotify = useCallback(
     failureNotificationParam => {

@@ -1318,7 +1318,8 @@ const routes = [
                 path: "import",
                 handle: {
                   name: "backendRecordsEntitlementsImport",
-                  helper: () => `/backend/records/entitlements/import`
+                  helper: () => `/backend/records/entitlements/import`,
+                  drawer: true
                 }
               }
             ]

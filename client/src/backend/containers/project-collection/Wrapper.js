@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useParams,
+  useNavigate,
+  useMatches
+} from "react-router-dom";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import classNames from "classnames";
 import { projectCollectionsAPI, requests } from "api";
@@ -26,6 +32,11 @@ function ProjectCollectionWrapperContainer({ setScreenReaderStatus }) {
   const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
+  const matches = useMatches();
+
+  const currentMatch = matches[matches.length - 1];
+  const isNewRoute =
+    currentMatch?.handle?.name === "backendProjectCollectionsNew";
 
   const {
     data: projectCollections,
@@ -188,18 +199,27 @@ function ProjectCollectionWrapperContainer({ setScreenReaderStatus }) {
                 />
               )}
               <div>
-                <OutletWithDrawer
-                  drawerProps={{
-                    size: "flexible",
-                    padding: "default",
-                    lockScroll: "always",
-                    closeUrl: lh.link("backendProjectCollections")
-                  }}
-                  context={{
-                    projectCollection,
-                    handleNewSuccess
-                  }}
-                />
+                {isNewRoute ? (
+                  <OutletWithDrawer
+                    drawerProps={{
+                      size: "flexible",
+                      padding: "default",
+                      lockScroll: "always",
+                      closeUrl: lh.link("backendProjectCollections")
+                    }}
+                    context={{
+                      projectCollection,
+                      handleNewSuccess
+                    }}
+                  />
+                ) : (
+                  <Outlet
+                    context={{
+                      projectCollection,
+                      handleNewSuccess
+                    }}
+                  />
+                )}
               </div>
             </div>
           </div>
