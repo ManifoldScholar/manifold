@@ -1,10 +1,13 @@
+import { Outlet } from "react-router-dom";
+
 import queryString from "query-string";
-import NotFound from "global/containers/NotFound";
 import requireAuth from "helpers/router/requireAuth";
 import checkLibraryMode from "helpers/router/checkLibraryMode";
+
+import NotFound from "global/containers/NotFound";
+
 import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
-import ProjectsWrapper from "frontend/containers/ProjectsWrapper";
 import Projects from "frontend/containers/Projects";
 import ProjectCollections from "frontend/containers/ProjectCollections";
 import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail";
@@ -33,8 +36,7 @@ import Login from "frontend/containers/Login";
 import MyStarred from "frontend/containers/MyStarred";
 import MyAnnotations from "frontend/containers/MyAnnotations";
 import IssuesList from "frontend/containers/IssuesList";
-import JournalsWrapper from "frontend/containers/JournalsWrapper";
-import JournalsList from "frontend/containers/JournalsList";
+import Journals from "frontend/containers/Journals";
 import JournalWrapper from "frontend/containers/JournalWrapper";
 import JournalDetail from "frontend/containers/JournalDetail";
 import VolumeDetail from "frontend/containers/VolumeDetail";
@@ -50,7 +52,7 @@ const routes = [
     handle: { isLibrary: true },
     children: [
       {
-        element: <ProjectsWrapper />,
+        element: <Outlet />,
         path: "projects",
         handle: {
           name: "frontendProjects",
@@ -204,7 +206,7 @@ const routes = [
         ]
       },
       {
-        element: <JournalsWrapper />,
+        element: <Outlet />,
         path: "journals",
         handle: {
           name: "frontendJournals",
@@ -213,7 +215,7 @@ const routes = [
         },
         children: [
           {
-            element: <JournalsList />,
+            element: <Journals />,
             index: true,
             loader: checkLibraryMode,
             handle: {
