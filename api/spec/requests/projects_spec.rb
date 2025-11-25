@@ -81,6 +81,25 @@ RSpec.describe "Projects API", type: :request do
       end
     end
 
+    context "when the user is a project creator" do
+      let(:headers) { project_creator_headers }
+
+      it "creates the project and assigns the creator as an editor on the newly created project" do
+        params = build_json_payload(attributes: { title: "foo" })
+
+        expect do
+          post(path, headers:, params:)
+        end.to change(Project, :count).by(1)
+
+        expect(response).to have_http_status(:created)
+
+        project_id = response.parsed_body.dig("data", "id")
+        created_project = Project.find(project_id)
+
+        expect(project_creator).to have_role(:project_editor, created_project)
+      end
+    end
+
     context "when the user is not logged in" do
       it "has a 401 status code" do
         params = build_json_payload(attributes: { title: "foo" })
