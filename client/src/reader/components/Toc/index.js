@@ -1,84 +1,60 @@
-import React, { PureComponent } from "react";
-import { withTranslation } from "react-i18next";
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useLocation, useParams } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { withRouter } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
+import { useFromStore } from "hooks";
+import { uiVisibilityActions } from "actions";
 import TocNode from "./TocNode";
 import * as Styled from "./styles";
 
-class Toc extends PureComponent {
-  static propTypes = {
-    text: PropTypes.object,
-    section: PropTypes.object,
-    tocDrawerVisible: PropTypes.bool,
-    hideTocDrawer: PropTypes.func,
-    showMeta: PropTypes.func,
-    history: PropTypes.object
-  };
+export default function Toc({ text, showMeta }) {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const { sectionId } = useParams();
+  const [mounted, setMounted] = useState(false);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      mounted: false
-    };
-  }
+  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const tocDrawerVisible = visibility?.uiPanels?.tocDrawer;
 
-  /* eslint-disable react/no-did-mount-set-state */
-  componentDidMount() {
-    this.setState({ mounted: true });
-  }
-  /* eslint-enable react/no-did-mount-set-state */
+  const section = useFromStore({
+    entityType: "textSections",
+    action: "grab",
+    id: sectionId
+  });
 
-  get text() {
-    return this.props.text;
-  }
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  get attributes() {
-    return this.text.attributes;
-  }
+  if (!text) return null;
 
-  get metadata() {
-    return this.attributes.metadata;
-  }
+  const { toc, slug, metadata } = text.attributes;
 
-  get toc() {
-    return this.attributes.toc;
-  }
-
-  get slug() {
-    return this.attributes.slug;
-  }
-
-  get section() {
-    return this.props.section;
-  }
-
-  UIHideTocDrawer = () => {
-    if (this.props.tocDrawerVisible) {
-      this.props.hideTocDrawer();
-
+  const hideTocDrawer = () => {
+    if (tocDrawerVisible) {
+      dispatch(uiVisibilityActions.panelHide("tocDrawer"));
       const toggleEl = document.getElementById("toc-drawer-toggle");
       if (toggleEl) toggleEl.focus();
     }
   };
 
-  hasChildren = array => {
-    let hasChildren = false;
-    array.forEach(object => {
-      if (object.hasOwnProperty("children") && object.children.length > 0) {
-        hasChildren = true;
-      }
-    });
-    return hasChildren;
+  const isNodeActive = node => {
+    if (!section) return false;
+    if (!mounted) return false;
+    const nodeId = node.id;
+    const nodeHash = node.anchor ? `#${node.anchor}` : "";
+    return section.id === nodeId && location.hash === nodeHash;
   };
 
-  visitNode = (node, depth) => {
+  const visitNode = (node, depth) => {
     let children = null;
     if (node.children && node.children.length > 0) {
       children = (
         <Styled.Sublist $level={depth + 1}>
-          {node.children.map(n => this.visitNode(n, depth + 1))}
+          {node.children.map(n => visitNode(n, depth + 1))}
         </Styled.Sublist>
       );
     }
@@ -86,14 +62,14 @@ class Toc extends PureComponent {
     let anchor = "";
     if (node.anchor) anchor = `#${node.anchor}`;
 
-    const active = this.isNodeActive(node);
+    const active = isNodeActive(node);
 
     return (
       <TocNode
         key={node.label}
         node={node}
-        linkTo={lh.link("readerSection", this.slug, node.id, anchor)}
-        onClick={this.UIHideTocDrawer}
+        linkTo={lh.link("readerSection", slug, node.id, anchor)}
+        onClick={hideTocDrawer}
         active={active}
       >
         {children}
@@ -101,70 +77,49 @@ class Toc extends PureComponent {
     );
   };
 
-  isNodeActive(node) {
-    if (!this.section) return false;
-    if (!this.state.mounted) return false;
-    const { location } = this.props.history;
-    const nodeId = node.id;
-    const nodeHash = node.anchor ? `#${node.anchor}` : "";
-    return this.section.id === nodeId && location.hash === nodeHash;
-  }
-
-  showMeta = () => {
-    this.props.showMeta();
-  };
-
-  renderContents() {
+  const renderContents = () => {
     const initialDepth = 0;
-    if (this.toc.length <= 0) return this.renderEmpty();
+    if (toc.length <= 0) {
+      return (
+        <>
+          <Styled.Empty>
+            This text does not have a table of contents.
+          </Styled.Empty>
+          <hr />
+        </>
+      );
+    }
     return (
       <Styled.List>
-        {this.toc.map(node => this.visitNode(node, initialDepth))}
+        {toc.map(node => visitNode(node, initialDepth))}
       </Styled.List>
     );
-  }
+  };
 
-  renderEmpty() {
-    return (
-      <>
-        <Styled.Empty>
-          This text does not have a table of contents.
-        </Styled.Empty>
-        <hr />
-      </>
-    );
-  }
+  const drawerProps = {
+    open: tocDrawerVisible,
+    context: "reader",
+    padding: "none",
+    identifier: "toc-drawer",
+    entrySide: "left",
+    closeCallback: hideTocDrawer,
+    includeDrawerFrontMatter: false,
+    ariaLabel: t("glossary.table_of_contents")
+  };
 
-  render() {
-    if (!this.text) return null;
-
-    const drawerProps = {
-      open: this.props.tocDrawerVisible,
-      context: "reader",
-      padding: "none",
-      identifier: "toc-drawer",
-      entrySide: "left",
-      closeCallback: this.UIHideTocDrawer,
-      includeDrawerFrontMatter: false,
-      ariaLabel: this.props.t("glossary.table_of_contents")
-    };
-
-    return (
-      <Styled.TocDrawer {...drawerProps}>
-        <Styled.Toc>
-          {this.renderContents()}
-          {!isEmpty(this.metadata) ? (
-            <Styled.Footer>
-              <Styled.FooterButton onClick={this.showMeta}>
-                <Styled.FooterIcon icon="info16" size={32} />
-                <Styled.FooterText>About This Text</Styled.FooterText>
-              </Styled.FooterButton>
-            </Styled.Footer>
-          ) : null}
-        </Styled.Toc>
-      </Styled.TocDrawer>
-    );
-  }
+  return (
+    <Styled.TocDrawer {...drawerProps}>
+      <Styled.Toc>
+        {renderContents()}
+        {!isEmpty(metadata) ? (
+          <Styled.Footer>
+            <Styled.FooterButton onClick={showMeta}>
+              <Styled.FooterIcon icon="info16" size={32} />
+              <Styled.FooterText>About This Text</Styled.FooterText>
+            </Styled.FooterButton>
+          </Styled.Footer>
+        ) : null}
+      </Styled.Toc>
+    </Styled.TocDrawer>
+  );
 }
-
-export default withTranslation()(withRouter(Toc));

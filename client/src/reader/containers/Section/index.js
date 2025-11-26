@@ -1,247 +1,98 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import connectAndFetch from "utils/connectAndFetch";
+import { useParams, useOutletContext, Outlet } from "react-router-dom";
 import Section from "reader/components/section";
 import {
   sectionsAPI,
   annotationsAPI,
   resourcesAPI,
-  resourceCollectionsAPI,
-  requests
+  resourceCollectionsAPI
 } from "api";
-import { grab, isEntityLoaded } from "utils/entityUtils";
-import { entityStoreActions } from "actions";
-import uniq from "lodash/uniq";
-import difference from "lodash/difference";
-import get from "lodash/get";
-import some from "lodash/some";
-import isEqual from "lodash/isEqual";
-import { childRoutes } from "helpers/router";
-import HeadContent from "./HeadContent";
-import values from "lodash/values";
+import HeadContent from "global/components/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import withSettings from "hoc/withSettings";
-import { withTranslation } from "react-i18next";
+import { useFetch, useFromStore } from "hooks";
 
-const { request, flush } = entityStoreActions;
+export default function SectionContainer() {
+  const { textId, sectionId } = useParams();
 
-export class SectionContainer extends Component {
-  static fetchData = (getState, dispatch, location, match) => {
-    const state = getState();
-    const promises = [];
-    const { sectionId, textId } = match.params;
-    const sectionLoaded = sectionId
-      ? isEntityLoaded("textSections", sectionId, state)
-      : false;
+  const { text } = useOutletContext() || {};
 
-    if (sectionId && !sectionLoaded) {
-      const sectionCall = sectionsAPI.show(sectionId, textId);
-      const { promise: two } = dispatch(
-        request(sectionCall, requests.rSection)
-      );
-      promises.push(two);
-    }
-    /*  Catch errors here, so project redirects work correctly */
-    return Promise.all(promises).catch(e => console.error(e));
-  };
+  const appearance = useFromStore({ path: "ui.persistent.reader" });
 
-  static mapStateToProps = (state, ownProps) => {
-    return {
-      section: grab(
-        "textSections",
-        ownProps.match.params.sectionId,
-        state.entityStore
-      )
-    };
-  };
+  const { data: section } = useFetch({
+    request: [sectionsAPI.show, sectionId, textId],
+    condition: !!sectionId && !!textId
+  });
 
-  static propTypes = {
-    section: PropTypes.object,
-    route: PropTypes.object.isRequired,
-    match: PropTypes.object.isRequired,
-    settings: PropTypes.object.isRequired,
-    annotations: PropTypes.array,
-    resources: PropTypes.array,
-    resourceCollections: PropTypes.array,
-    dispatch: PropTypes.func.isRequired,
-    text: PropTypes.object,
-    appearance: PropTypes.object.isRequired,
-    authentication: PropTypes.object,
-    t: PropTypes.func
-  };
+  const { data: annotations } = useFetch({
+    request: [annotationsAPI.forSection, sectionId, textId],
+    condition: !!sectionId && !!textId,
+    refetchOnLogin: true
+  });
 
-  componentDidMount() {
-    if (this.props.match.params.sectionId) {
-      this.fetchAnnotations(this.props);
-      this.fetchResources(this.props);
-      this.fetchCollections(this.props);
-    }
-  }
+  const { data: resources } = useFetch({
+    request: [resourcesAPI.forSection, sectionId, textId],
+    condition: !!sectionId && !!textId
+  });
 
-  componentDidUpdate(prevProps) {
-    // Fetch resources and annotations on section change.
-    if (
-      prevProps.match.params.sectionId !== this.props.match.params.sectionId
-    ) {
-      this.fetchAnnotations(this.props);
-      this.fetchResources(this.props);
-      this.fetchCollections(this.props);
-    }
+  const { data: resourceCollections } = useFetch({
+    request: [resourceCollectionsAPI.forSection, sectionId, textId],
+    condition: !!sectionId && !!textId
+  });
 
-    // If the user just logged in, we need to refetch annotations in case they had private
-    // ones. We check authToken here rather than just authentication.currentUser because
-    // the API relies on the authToken, which is set after currentUser,
-    // to be present in the request header to identify the reader.
-    if (
-      !prevProps.authentication.authToken &&
-      this.props.authentication.authToken
-    ) {
-      this.fetchAnnotations(this.props);
-    }
+  const headContentProps = useEntityHeadContent(section, text);
 
-    // Check if we need to fetch more resources when annotations change
-    // Needs to be deep comparison
-    if (!isEqual(prevProps.annotations, this.props.annotations)) {
-      const missing = this.hasMissingResourcesOrCollections(
-        this.props.annotations,
-        this.props.resources,
-        this.props.resourceCollections
-      );
-      if (missing) {
-        if (some(missing, ["type", "resource"])) {
-          this.fetchResources(this.props);
-        }
-        if (some(missing, ["type", "resource_collection"])) {
-          this.fetchCollections(this.props);
-        }
-      }
-    }
-  }
+  if (!section?.attributes || !text) return null;
 
-  componentWillUnmount() {
-    this.props.dispatch(flush(requests.rSection));
-    this.props.dispatch(flush(requests.rSectionResources));
-    this.props.dispatch(flush(requests.rSectionResourceCollections));
-  }
+  const globalStylesheet = text.relationships?.stylesheets?.find(
+    s => s.attributes.appliesToAllTextSections
+  );
+  const sectionStylesheets = Object.values(
+    section.relationships?.stylesheets || {}
+  );
+  const stylesheets = globalStylesheet
+    ? [globalStylesheet, ...sectionStylesheets]
+    : sectionStylesheets;
 
-  fetchAnnotations(props) {
-    const { sectionId, textId } = props.match.params;
+  const categoryTitle = text.relationships?.category?.attributes?.title;
 
-    const annotationsCall = annotationsAPI.forSection(sectionId, textId);
-
-    props.dispatch(request(annotationsCall, requests.rAnnotations));
-  }
-
-  fetchResources(props) {
-    const { sectionId, textId } = props.match.params;
-
-    const resourcesCall = resourcesAPI.forSection(sectionId, textId);
-    props.dispatch(request(resourcesCall, requests.rSectionResources));
-  }
-
-  fetchCollections(props) {
-    const { sectionId, textId } = props.match.params;
-
-    const collectionsCall = resourceCollectionsAPI.forSection(
-      sectionId,
-      textId
-    );
-    props.dispatch(
-      request(collectionsCall, requests.rSectionResourceCollections)
-    );
-  }
-
-  hasMissingResourcesOrCollections(annotations, resourcesIn, collectionsIn) {
-    if (!annotations) return;
-    const resources = resourcesIn || [];
-    const collections = collectionsIn || [];
-    const needed = uniq(
-      annotations
-        .map(a => {
-          return {
-            id: a.attributes.resourceId || a.attributes.resourceCollectionId,
-            type: a.attributes.format
-          };
-        })
-        .filter(id => id !== null)
-    );
-    const has = resources.map(r => r.id);
-    const cHas = collections.map(r => r.id);
-    has.concat(cHas);
-    const diff = difference(needed, has);
-    if (diff.length > 0) return diff;
-    return false;
-  }
-
-  showLabel() {
-    const text = this.props.text;
-    if (text.attributes.published) return false;
-    if (get(text, "relationships.category.attributes.title")) return true;
-    return false;
-  }
-
-  renderStyles = props => {
-    const globalStylesheet = props.text.relationships.stylesheets?.find(
-      s => s.attributes.appliesToAllTextSections
-    );
-    const stylesheets = globalStylesheet
-      ? [globalStylesheet, ...values(props.section.relationships.stylesheets)]
-      : values(props.section.relationships.stylesheets);
-    return stylesheets.map(stylesheet => {
-      return (
+  return (
+    <>
+      <EventTracker event={EVENTS.VIEW_RESOURCE} resource={section} />
+      {stylesheets.map(stylesheet => (
         <style
           key={stylesheet.id}
           dangerouslySetInnerHTML={{
             __html: `@layer custom-styles {${stylesheet.attributes.styles}}`
           }}
         />
-      );
-    });
-  };
-
-  renderRoutes() {
-    const { text, section } = this.props;
-    const childProps = { text, section };
-    return childRoutes(this.props.route, { childProps });
-  }
-
-  render() {
-    if (!this.props.section || !this.props.text) return null;
-    const { text, section } = this.props;
-
-    return (
-      <>
-        <EventTracker
-          event={EVENTS.VIEW_RESOURCE}
-          resource={this.props.section}
+      ))}
+      <HeadContent {...headContentProps} />
+      <Outlet context={{ text, section }} />
+      <Section.Text
+        text={text}
+        section={section}
+        annotations={annotations}
+        resources={resources}
+        resourceCollections={resourceCollections}
+      />
+      <div>
+        <Section.NextSection
+          sectionsMap={text.attributes.sectionsMap}
+          text={text}
+          sectionId={section.id}
+          typography={appearance?.typography}
         />
-        {this.renderStyles(this.props)}
-        <HeadContent section={section} text={text} />
-        {this.renderRoutes()}
-        <Section.Text {...this.props} />
-        <div>
-          <Section.NextSection
-            sectionsMap={text.attributes.sectionsMap}
-            text={text}
-            sectionId={this.props.section.id}
-            typography={this.props.appearance.typography}
-          />
-          <Section.Pagination
-            text={text}
-            sectionId={this.props.section.id}
-            sectionsMap={text.attributes.sectionsMap}
-          />
-        </div>
-        {this.showLabel() && (
-          <Section.Label
-            label={get(text, "relationships.category.attributes.title")}
-          />
-        )}
-      </>
-    );
-  }
+        <Section.Pagination
+          text={text}
+          sectionId={section.id}
+          sectionsMap={text.attributes.sectionsMap}
+        />
+      </div>
+      {!text.attributes.published && categoryTitle && (
+        <Section.Label label={categoryTitle} />
+      )}
+    </>
+  );
 }
 
-export default withTranslation()(
-  connectAndFetch(withSettings(SectionContainer))
-);
+SectionContainer.displayName = "Section.Container";
