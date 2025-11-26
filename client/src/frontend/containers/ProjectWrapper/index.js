@@ -39,7 +39,6 @@ export default function ProjectWrapper() {
       <Outlet
         context={{
           project,
-          settings,
           journalBreadcrumbs
         }}
       />

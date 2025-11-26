@@ -1,14 +1,16 @@
 import { useRef } from "react";
 import { Navigate, useOutletContext, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import lh from "helpers/linkHandler";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import ReadingGroupMembersList from "./List";
 import withConfirmation from "hoc/withConfirmation";
 
 function ReadingGroupsMembersContainer({ confirm }) {
-  const { readingGroup, dispatch } = useOutletContext() || {};
+  const { readingGroup } = useOutletContext() || {};
   const navigate = useNavigate();
   const refreshRef = useRef(null);
+  const dispatch = useDispatch();
 
   const { abilities, currentUserRole } = readingGroup?.attributes || {};
   const canUpdateGroup = abilities?.update;
@@ -55,7 +57,6 @@ function ReadingGroupsMembersContainer({ confirm }) {
         context={{
           readingGroup,
           confirm,
-          dispatch,
           onEditSuccess: handleEditSuccess
         }}
       />

@@ -1,4 +1,3 @@
-import React from "react";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 

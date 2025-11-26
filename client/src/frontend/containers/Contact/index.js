@@ -29,10 +29,6 @@ export default function ContactContainer() {
     };
   }, [dispatch]);
 
-  const redirectToHome = () => {
-    navigate("/");
-  };
-
   const sendMessage = event => {
     event.preventDefault(event.target);
     dispatch(
@@ -41,7 +37,7 @@ export default function ContactContainer() {
         requests.gContactForm
       )
     ).promise.then(() => {
-      redirectToHome();
+      navigate("/");
     });
   };
 

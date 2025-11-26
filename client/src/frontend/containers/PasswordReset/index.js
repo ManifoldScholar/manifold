@@ -1,32 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useFromStore } from "hooks";
-import { passwordsAPI, requests } from "api";
+import { useParams, useNavigate } from "react-router-dom";
+import { useApiCallback } from "hooks";
+import { passwordsAPI } from "api";
 import Form, { Unwrapped } from "global/components/form";
-import { entityStoreActions, currentUserActions } from "actions";
-import { get } from "lodash";
-
-const { request, flush } = entityStoreActions;
+import { currentUserActions } from "actions";
 
 export default function PasswordResetContainer() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { resetToken } = useParams();
-  const response = useFromStore({
-    path: `entityStore.responses.${requests.gPasswordReset}`
-  });
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(flush([requests.gPasswordReset]));
-    };
-  }, [dispatch]);
+  const updatePassword = useApiCallback(passwordsAPI.update);
 
   const loginUser = user => {
     dispatch(
@@ -37,26 +27,22 @@ export default function PasswordResetContainer() {
     );
   };
 
-  const redirectToHome = () => {
-    navigate("/");
-  };
-
-  const postUpdate = data => {
-    loginUser(data);
-    redirectToHome();
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault(event.target);
-    const action = passwordsAPI.update(
-      password,
-      passwordConfirmation,
-      resetToken
-    );
-    const changeRequest = request(action, requests.gPasswordReset);
-    dispatch(changeRequest).promise.then(res => {
-      postUpdate(res.data);
-    });
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setErrors([]);
+    try {
+      const res = await updatePassword(
+        password,
+        passwordConfirmation,
+        resetToken
+      );
+      loginUser(res.data);
+      navigate("/");
+    } catch (error) {
+      if (error?.body?.errors) {
+        setErrors(error.body.errors);
+      }
+    }
   };
 
   const handleInputChange = event => {
@@ -67,8 +53,6 @@ export default function PasswordResetContainer() {
       setPasswordConfirmation(event.target.value);
     }
   };
-
-  const errors = get(response, "errors") || [];
 
   return (
     <section>
