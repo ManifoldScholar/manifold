@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { readingGroupsAPI } from "api";
-import { readingGroupsAPI } from "api";
 import HeadContent from "global/components/HeadContent";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
