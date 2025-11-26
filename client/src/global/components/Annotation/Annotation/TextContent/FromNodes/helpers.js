@@ -46,7 +46,7 @@ const maybeTruncateEnd = ({ node, endChar, limit }) => {
 
 const maybeTruncateText = ({ fromStart, setSplit, target, node, ...args }) => {
   const isTargetNode = node.nodeUuid === target;
-  const hasTargetNodeChild = node.children?.[0].nodeUuid === target;
+  const hasTargetNodeChild = node.children?.[0]?.nodeUuid === target;
 
   if (!isTargetNode && !hasTargetNodeChild) return node;
 
@@ -77,10 +77,11 @@ export const maybeTruncateChildren = ({
   fromStart = true,
   ...args
 }) => {
+  if (!node) return;
   if (node.tag === "table") {
     return node;
   }
-  if (!node.children) {
+  if (!node.children || !node.children?.length) {
     return maybeTruncateText({
       node,
       target,
