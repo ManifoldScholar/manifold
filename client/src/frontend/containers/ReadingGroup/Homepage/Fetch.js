@@ -1,12 +1,10 @@
 import { readingGroupsAPI } from "api";
-import { useNavigate } from "react-router-dom";
 import { Outlet, useOutletContext } from "react-router-dom";
 import { useFetch } from "hooks";
 import * as Styled from "../styles";
 
 function ReadingGroupHomepageFetchContainer() {
   const { readingGroup, refresh, fetchVersion } = useOutletContext() || {};
-  const navigate = useNavigate();
 
   const { data: projects } = useFetch({
     request: [readingGroupsAPI.collected, readingGroup.id, "projects"],
@@ -58,7 +56,6 @@ function ReadingGroupHomepageFetchContainer() {
           readingGroup,
           categories,
           responses,
-          navigate,
           refresh
         }}
       />

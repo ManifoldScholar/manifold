@@ -2,7 +2,6 @@ import { useState } from "react";
 import { readingGroupsAPI } from "api";
 import { useParams, Outlet } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
@@ -11,7 +10,7 @@ import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { GroupHeading } from "frontend/components/reading-group/headings";
 import Settings from "frontend/components/reading-group/Settings";
 import SearchDialog from "frontend/components/collecting/SearchDialog";
-import { useFetch, useFromStore } from "hooks";
+import { useFetch } from "hooks";
 import Authorize from "hoc/Authorize";
 
 export default function ReadingGroup() {
@@ -19,9 +18,6 @@ export default function ReadingGroup() {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   const [fetchVersion, setFetchVersion] = useState(1);
 
@@ -57,12 +53,9 @@ export default function ReadingGroup() {
   const showSearchDialog = location.hash === "#search";
 
   const childProps = {
-    settings,
     refresh: () => setFetchVersion(prev => prev + 1),
     fetchVersion,
-    navigate,
-    readingGroup,
-    dispatch
+    readingGroup
   };
 
   const handleClose = () => {
