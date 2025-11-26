@@ -62,8 +62,7 @@ class LinkHandler {
       return this.handlers[name](...args);
     } catch (e) {
       if (e instanceof TypeError) {
-        // throw new TypeError(`"${name}" is not a valid link handler.`);
-        console.log(`"${name}" is not a valid link handler.`);
+        throw new TypeError(`"${name}" is not a valid link handler.`);
       } else {
         throw e;
       }
