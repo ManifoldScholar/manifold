@@ -974,7 +974,7 @@ DEPENDENCIES
   omniauth (~> 2.1.3)
   omniauth-facebook (~> 4.0.0)
   omniauth-google-oauth2 (~> 0.4)
-  omniauth-rails_csrf_protection
+  omniauth-rails_csrf_protection (~> 1.0)
   omniauth-saml
   omniauth-twitter (~> 1.4.0)
   paleta (~> 0.3.0)
