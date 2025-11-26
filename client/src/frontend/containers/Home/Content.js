@@ -1,4 +1,3 @@
-import React from "react";
 import Feature from "./Feature";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { useFromStore } from "hooks";
