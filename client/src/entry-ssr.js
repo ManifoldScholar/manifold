@@ -20,10 +20,7 @@ import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import { createServerFetchDataContext } from "hooks/api/contexts/InternalContext";
-import {
-  createStaticHandler,
-  createStaticRouter
-} from "react-router-dom/server";
+import { createStaticHandler, createStaticRouter } from "react-router";
 import createRouter from "./routes/createRouter";
 import { setStore } from "store/storeInstance";
 

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import PropTypes from "prop-types";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { StaticRouterProvider } from "react-router-dom/server";
+import { StaticRouterProvider } from "react-router";
 import { Provider } from "react-redux";
 import { HelmetProvider } from "react-helmet-async";
 import { Global as GlobalStyles } from "@emotion/react";
@@ -18,17 +18,12 @@ export default function App({
   helmetContext = {},
   staticRouter
 }) {
-  // Create v6 router for client-side (only if not SSR)
+  // Create router for client-side (only if not SSR)
   const browserRouter = useMemo(() => {
     if (!staticRequest) {
       setStore(store);
       const routes = createRouter();
-      return createBrowserRouter(routes, {
-        future: {
-          v7_startTransition: true,
-          v7_relativeSplatPath: true
-        }
-      });
+      return createBrowserRouter(routes);
     }
     return null;
   }, [staticRequest, store]);
