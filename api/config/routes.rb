@@ -21,9 +21,9 @@ Rails.application.routes.draw do
 
   get "up" => "health#show", as: :health_check
 
-  get "auth/:provider/callback", to: "oauth#authorize"
-
   # SAML POST callbacks
+  # Omniauth
+  get "auth/:provider/redirect", to: "oauth#redirect"
   post "auth/:provider/callback", to: "oauth#authorize"
 
   namespace :api do
