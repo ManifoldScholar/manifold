@@ -1557,7 +1557,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.18, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.24.5, @babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.18, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.24.5, @babel/runtime@npm:^7.25.0, @babel/runtime@npm:^7.9.2":
   version: 7.27.1
   resolution: "@babel/runtime@npm:7.27.1"
   checksum: 10c0/530a7332f86ac5a7442250456823a930906911d895c0b743bf1852efc88a20a016ed4cd26d442d0ca40ae6d5448111e02a08dd638a4f1064b47d080e2875dc05
@@ -2299,13 +2299,6 @@ __metadata:
     react-redux:
       optional: true
   checksum: 10c0/0296a73c8dfbe8b2a14095cfaaf67a8e4c5537b164c021bdb81c43922d10042a2fe733fbdfc956f9233884a6db5491fbc6d950a8883e1cd6137251db392f6a9e
-  languageName: node
-  linkType: hard
-
-"@remix-run/router@npm:1.23.0":
-  version: 1.23.0
-  resolution: "@remix-run/router@npm:1.23.0"
-  checksum: 10c0/eaef5cb46a1e413f7d1019a75990808307e08e53a39d4cf69c339432ddc03143d725decef3d6b9b5071b898da07f72a4a57c4e73f787005fcf10162973d8d7d7
   languageName: node
   linkType: hard
 
@@ -7877,15 +7870,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"history@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "history@npm:5.3.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.7.6"
-  checksum: 10c0/812ec839386222d6437bd78d9f05db32e47d105ada0ad8834b32626919dd2fee7a10001bc489510f93a8069d02f118214bd8d42a82f7cf9daf8e84fbcbbb2016
-  languageName: node
-  linkType: hard
-
 "hoist-non-react-statics@npm:^2.5.0":
   version: 2.5.5
   resolution: "hoist-non-react-statics@npm:2.5.5"
@@ -9748,9 +9732,7 @@ __metadata:
     react-redux: "npm:^9.x"
     react-refresh: "npm:^0.17.0"
     react-router: "npm:6"
-    react-router-config: "npm:^5.x"
     react-router-dom: "npm:6"
-    react-router-dom-v5-compat: "npm:^6.x"
     react-router-redux: "npm:^5.0.0-alpha.9"
     react-side-effect: "npm:2.1.2"
     react-text-mask: "npm:^5.5.0"
@@ -12050,33 +12032,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-config@npm:^5.x":
-  version: 5.1.1
-  resolution: "react-router-config@npm:5.1.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.1.2"
-  peerDependencies:
-    react: ">=15"
-    react-router: ">=5"
-  checksum: 10c0/1f8f4e55ca68b7b012293e663eb0ee4d670a3df929b78928f713ef98cd9d62c7f5c30a098d6668e64bbb11c7d6bb24e9e6b9c985a8b82465a1858dc7ba663f2b
-  languageName: node
-  linkType: hard
-
-"react-router-dom-v5-compat@npm:^6.x":
-  version: 6.30.0
-  resolution: "react-router-dom-v5-compat@npm:6.30.0"
-  dependencies:
-    "@remix-run/router": "npm:1.23.0"
-    history: "npm:^5.3.0"
-    react-router: "npm:6.30.0"
-  peerDependencies:
-    react: ">=16.8"
-    react-dom: ">=16.8"
-    react-router-dom: 4 || 5
-  checksum: 10c0/68ad2e7afd663d3601b3172bc6868d1a3860da8ae88ca796e7383900440fca6fe0982511e6ef861b906194d02f576c790447a027b08fd2361601e9902ed913ff
-  languageName: node
-  linkType: hard
-
 "react-router-dom@npm:6":
   version: 6.30.3
   resolution: "react-router-dom@npm:6.30.3"
@@ -12111,17 +12066,6 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 10c0/a0a74bf5a933cf0abd47e0eac1d3a505cd66b866e3ee8f20d8016885d3b4361ba3ba72dee026248c6125e631b191ba6ad109184c892281cea6cb747c71bf5940
-  languageName: node
-  linkType: hard
-
-"react-router@npm:6.30.0":
-  version: 6.30.0
-  resolution: "react-router@npm:6.30.0"
-  dependencies:
-    "@remix-run/router": "npm:1.23.0"
-  peerDependencies:
-    react: ">=16.8"
-  checksum: 10c0/e6f20cf5c47ec057a057a4cfb9a55983d0a5b4b3314d20e07f0a70e59e004f51778d4dac415aee1e4e64db69cc4cd72e5acf8fd60dcf07d909895b8863b0b023
   languageName: node
   linkType: hard
 
