@@ -23,9 +23,8 @@ Rails.application.routes.draw do
     mount Zhong::Web, at: "/api/zhong"
   end
 
-  get "auth/:provider/callback", to: "oauth#authorize"
-
-  # SAML POST callbacks
+  # Omniauth
+  get "auth/:provider/redirect", to: "oauth#redirect"
   post "auth/:provider/callback", to: "oauth#authorize"
 
   namespace :api do
