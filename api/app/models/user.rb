@@ -53,6 +53,8 @@ class User < ApplicationRecord
            through: :reading_group_visibilities, source: :reading_group
   has_many :entitlement_user_links, inverse_of: :user, dependent: :destroy
   has_many :granted_entitlements, through: :entitlement_user_links, source: :entitlement
+  has_many :user_group_memberships, inverse_of: :user
+  has_many :user_groups, through: :user_group_memberships
   has_many_readonly :permissions
 
   has_one_readonly :user_collection, inverse_of: :user

@@ -30,7 +30,7 @@ module ExternalAuth
 
     def setup!
       @provisioner = ExternalAuth::Provisioners::User.new(
-        inputs.slice(:provider, :auth_hash)
+        **inputs.slice(:provider, :auth_hash)
       )
       @user = identity.user || find_or_initialize_user
       @mode = detect_mode
@@ -48,7 +48,7 @@ module ExternalAuth
     end
 
     def find_or_initialize_user
-      User.where(email: auth_info.email).first_or_initialize do |user|
+      User.where(email: auth_hash.info.email).first_or_initialize do |user|
         @provisioner.call(user)
       end
     end
