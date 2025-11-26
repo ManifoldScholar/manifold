@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectCollectionsAPI } from "api";
@@ -8,14 +7,12 @@ import CollectionNavigation from "frontend/components/CollectionNavigation";
 import HeadContent from "global/components/HeadContent";
 import { useFetch, useListQueryParams, useListFilters } from "hooks";
 
+const FILTER_RESET = { visible: true, order: "position ASC" };
+
 export default function ProjectCollectionsContainer() {
-  const filterReset = useMemo(
-    () => ({ visible: true, order: "position ASC" }),
-    []
-  );
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filterReset,
+    initFilters: FILTER_RESET,
     collectionPagination: {
       size: 4,
       number: 1
@@ -29,7 +26,7 @@ export default function ProjectCollectionsContainer() {
   const filterProps = useListFilters({
     onFilterChange: param => setFilters(param),
     initialState: filters,
-    resetState: filterReset,
+    resetState: FILTER_RESET,
     options: {
       entityType: "projectCollection",
       sort: true

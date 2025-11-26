@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { useParams } from "react-router-dom";
