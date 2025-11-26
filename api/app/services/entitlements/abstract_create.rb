@@ -15,7 +15,8 @@ module Entitlements
       endian_precedence: :middle
     }.freeze
 
-    record :target_url, class: "GlobalID", finder: :new
+    record :target_url, class: "GlobalID", finder: :new, default: -> { }
+    object :target, class: "ReceivesEntitlements", default: -> { }
 
     string :expiration, default: nil
 
@@ -65,7 +66,7 @@ module Entitlements
 
     # @return [void]
     def find_target!
-      @target = target_url.find
+      @target = target.present? ? target : target_url&.find
     rescue ActiveRecord::RecordNotFound => e
       errors.add :target_url, e.message
     else
