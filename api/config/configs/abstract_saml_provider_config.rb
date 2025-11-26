@@ -12,24 +12,23 @@ class AbstractSamlProviderConfig < ApplicationConfig
 
   provider_name :_unused
 
-  attr_config enabled: false,
-        subdomains: [],
-        display_name: "SAML",
-        logo: nil,
-        instructions: nil,
-        sp_entity_id: nil,
-        idp_entity_id: nil,
-        idp_sso_service_url: nil,
-        idp_slo_service_url: nil,
-        idp_cert: nil,
-        idp_signing_cert: nil,
-        idp_encryption_cert: nil,
-        certificate: nil,
-        private_key: nil,
-        idp_cert_fingerprint: nil,
-        assertion_consumer_service_binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-REDIRECT",
-        name_identifier_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
-  attr_config :endpoint
+  attr_config :endpoint,
+              enabled: false,
+              default: false,
+              display_name: "SAML",
+              logo: nil,
+              instructions: nil,
+              sp_entity_id: nil,
+              idp_entity_id: nil,
+              idp_sso_service_url: nil,
+              idp_slo_service_url: nil,
+              idp_cert: nil,
+              idp_signing_cert: nil,
+              idp_encryption_cert: nil,
+              certificate: nil,
+              private_key: nil,
+              idp_cert_fingerprint: nil,
+              name_identifier_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
 
   delegate :provider_name, to: :class
 
