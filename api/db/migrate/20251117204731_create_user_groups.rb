@@ -4,6 +4,8 @@ class CreateUserGroups < ActiveRecord::Migration[7.0]
       t.text :name, null: false
 
       t.timestamps null: false, default: -> { "CURRENT_TIMESTAMP" }
+
+      t.index :name, unique: true
     end
 
     create_table :user_group_entitleables, id: :uuid do |t|
@@ -11,6 +13,8 @@ class CreateUserGroups < ActiveRecord::Migration[7.0]
       t.references :entitleable, type: :uuid, null: false, polymorphic: true
 
       t.timestamps null: false, default: -> { "CURRENT_TIMESTAMP" }
+
+      t.index [:user_group_id, :entitleable_type, :entitleable_id], unique: true
     end
 
     create_table :user_group_memberships, id: :uuid do |t|
@@ -20,6 +24,8 @@ class CreateUserGroups < ActiveRecord::Migration[7.0]
       t.text :source
 
       t.timestamps null: false, default: -> { "CURRENT_TIMESTAMP" }
+
+      t.index [:user_id, :user_group_id], unique: true
     end
   end
 end
