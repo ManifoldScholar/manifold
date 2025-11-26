@@ -1,4 +1,6 @@
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import ControlMenu from "reader/components/control-menu";
 import Notes from "reader/components/notes";
@@ -15,46 +17,37 @@ import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import Utility from "global/components/utility";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
-import { useTranslation } from "react-i18next";
 import Authorize from "hoc/Authorize";
+import { commonActions } from "actions/helpers";
+import { useFromStore } from "hooks";
 
-export default function Header(props) {
-  const {
-    match,
-    history,
-    text,
-    section,
-    commonActions,
-    visibility,
-    scrollAware,
-    appearance,
-    selectFont,
-    setColorScheme,
-    setHighContrast,
-    incrementFontSize,
-    decrementFontSize,
-    incrementMargins,
-    decrementMargins,
-    resetTypography
-  } = props;
+export default function Header({ text, scrollAware }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { sectionId } = useParams();
 
-  const projectId = text?.relationships?.project?.id;
-  const textId = text?.id;
-  const sectionId = section?.id;
+  const section = useFromStore({
+    entityType: "textSections",
+    action: "grab",
+    id: sectionId
+  });
+  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const appearance = useFromStore({ path: "ui.persistent.reader" });
+
+  const actions = commonActions(dispatch);
 
   const handleContentsButtonClick = event => {
     event.stopPropagation();
-    commonActions.panelToggle("tocDrawer");
+    actions.panelToggle("tocDrawer");
   };
 
   const handleVisibilityFilterChange = filters => {
-    commonActions.visibilityChange({ visibilityFilters: filters });
+    actions.visibilityChange({ visibilityFilters: filters });
   };
 
   const panelToggleHandler = memoize(panel => {
     return () => {
-      commonActions.panelToggle(panel);
+      actions.panelToggle(panel);
     };
   });
 
@@ -67,7 +60,7 @@ export default function Header(props) {
       "reader-header__button": true,
       "reader-header__button--gray": true,
       "reader-header__button--pad-default": true,
-      "button-active": visibility.uiPanels.tocDrawer
+      "button-active": visibility?.uiPanels?.tocDrawer
     });
 
     return (
@@ -76,7 +69,7 @@ export default function Header(props) {
         className={buttonClassName}
         onClick={handleContentsButtonClick}
         aria-haspopup
-        aria-expanded={visibility.uiPanels.tocDrawer}
+        aria-expanded={visibility?.uiPanels?.tocDrawer}
       >
         <span className="reader-header__button-text reader-header__button-text--dark">
           {t("reader.header.contents")}
@@ -107,7 +100,7 @@ export default function Header(props) {
               onClick={panelToggleHandler("notes")}
               icon="notes24"
               label={t("glossary.note_title_case_other")}
-              active={visibility.uiPanels.notes}
+              active={visibility?.uiPanels?.notes}
               ariaHasPopup="dialog"
               ariaControls="notes"
             />
@@ -115,7 +108,7 @@ export default function Header(props) {
         </Authorize>
         <li className="reader-header__nav-item">
           <DisclosureNavigationMenu
-            visible={visibility.uiPanels.visibility}
+            visible={visibility?.uiPanels?.visibility}
             disclosure={
               <ControlMenu.DisclosureButton
                 icon="eyeball24"
@@ -126,7 +119,7 @@ export default function Header(props) {
             <ControlMenu.DisclosurePanel direction="right">
               <ControlMenu.VisibilityMenuBody
                 className="panel"
-                filter={visibility.visibilityFilters}
+                filter={visibility?.visibilityFilters}
                 filterChangeHandler={handleVisibilityFilterChange}
               />
             </ControlMenu.DisclosurePanel>
@@ -134,7 +127,7 @@ export default function Header(props) {
         </li>
         <li className="reader-header__nav-item">
           <DisclosureNavigationMenu
-            visible={visibility.uiPanels.appearance}
+            visible={visibility?.uiPanels?.appearance}
             disclosure={
               <ControlMenu.DisclosureButton
                 icon="text24"
@@ -144,16 +137,7 @@ export default function Header(props) {
           >
             <ControlMenu.DisclosurePanel direction="right">
               <ControlMenu.AppearanceMenuBody
-                // Props required by body component
                 appearance={appearance}
-                selectFont={selectFont}
-                setColorScheme={setColorScheme}
-                setHighContrast={setHighContrast}
-                incrementFontSize={incrementFontSize}
-                decrementFontSize={decrementFontSize}
-                incrementMargins={incrementMargins}
-                decrementMargins={decrementMargins}
-                resetTypography={resetTypography}
                 className="panel"
               />
             </ControlMenu.DisclosurePanel>
@@ -161,7 +145,7 @@ export default function Header(props) {
         </li>
         <li className="reader-header__nav-item">
           <DisclosureNavigationMenu
-            visible={visibility.uiPanels.search}
+            visible={visibility?.uiPanels?.search}
             disclosure={
               <ControlMenu.DisclosureButton
                 icon="search24"
@@ -176,9 +160,9 @@ export default function Header(props) {
                   keyword: "",
                   scope: "text"
                 }}
-                projectId={projectId}
-                textId={textId}
-                sectionId={sectionId}
+                projectId={text?.relationships?.project?.id}
+                textId={text?.id}
+                sectionId={section?.id}
                 searchType="reader"
                 className="panel search-menu"
               />
@@ -187,10 +171,10 @@ export default function Header(props) {
         </li>
         <li className="reader-header__nav-item">
           <DisclosureNavigationMenu
-            visible={visibility.uiPanels.user}
+            visible={visibility?.uiPanels?.user}
             disclosure={<UserMenuButton />}
-            callbacks={commonActions}
-            onBlur={commonActions.hideUserPanel}
+            callbacks={actions}
+            onBlur={actions.hideUserPanel}
             context="reader"
           >
             <UserMenuBody />
@@ -207,7 +191,7 @@ export default function Header(props) {
         <div className="reader-header__menu-group reader-header__menu-group--left">
           <ReturnMenu.Button
             toggleReaderMenu={panelToggleHandler("readerReturn")}
-            expanded={visibility.uiPanels.readerReturn}
+            expanded={visibility?.uiPanels?.readerReturn}
           />
           {renderContentsButton(text?.attributes)}
         </div>
@@ -215,10 +199,9 @@ export default function Header(props) {
           <TextTitles
             text={text}
             section={section}
-            showSection={!scrollAware.top}
+            showSection={!scrollAware?.top}
           />
         )}
-        {/* Options menu */}
         <div className="reader-header__menu-group reader-header__menu-group--right">
           {renderOptionsNav()}
         </div>
@@ -228,7 +211,7 @@ export default function Header(props) {
           <div className="reader-header__panels reader-header__panels--left">
             <UIPanel
               id="readerReturn"
-              visibility={visibility.uiPanels}
+              visibility={visibility?.uiPanels}
               bodyComponent={ReturnMenu.Body}
               returnUrl={lh.link(
                 "frontendProjectDetail",
@@ -241,9 +224,8 @@ export default function Header(props) {
               isJournalArticle={
                 text?.relationships.project.attributes.isJournalIssue
               }
-              toggleSignInUpOverlay={commonActions.toggleSignInUpOverlay}
-              hidePanel={commonActions.hideReaderReturnPanel}
-              // TODO: More link (and eventually, the link text) should be pulled from settings
+              toggleSignInUpOverlay={actions.toggleSignInUpOverlay}
+              hidePanel={actions.hideReaderReturnPanel}
               moreLink="https://manifoldapp.org/"
             />
           </div>
@@ -251,12 +233,10 @@ export default function Header(props) {
           <div className="reader-header__panels reader-header__panels--right">
             <UIPanel
               id="notes"
-              visibility={visibility.uiPanels}
-              visible={visibility.uiPanels.notes}
+              visibility={visibility?.uiPanels}
+              visible={visibility?.uiPanels?.notes}
               bodyComponent={Notes.ReaderDrawer}
-              match={match}
-              history={history}
-              hidePanel={commonActions.hideNotesPanel}
+              hidePanel={actions.hideNotesPanel}
             />
           </div>
         </>
@@ -264,7 +244,7 @@ export default function Header(props) {
         <div className="reader-header__panels reader-header__panels--left">
           <UIPanel
             id="readerReturn"
-            visibility={visibility.uiPanels}
+            visibility={visibility?.uiPanels}
             bodyComponent={ReturnMenu.Body}
             toggleSignInUpOverlay={commonActions.toggleSignInUpOverlay}
             hidePanel={commonActions.hideReaderReturnPanel}
@@ -278,21 +258,3 @@ export default function Header(props) {
 }
 
 Header.displayName = "Reader.Header";
-
-Header.propTypes = {
-  text: PropTypes.object,
-  section: PropTypes.object,
-  visibility: PropTypes.object,
-  appearance: PropTypes.object,
-  selectFont: PropTypes.func,
-  incrementFontSize: PropTypes.func,
-  decrementFontSize: PropTypes.func,
-  incrementMargins: PropTypes.func,
-  decrementMargins: PropTypes.func,
-  resetTypography: PropTypes.func,
-  setColorScheme: PropTypes.func,
-  setHighContrast: PropTypes.func,
-  scrollAware: PropTypes.object,
-  commonActions: PropTypes.object,
-  match: PropTypes.object
-};
