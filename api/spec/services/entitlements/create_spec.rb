@@ -16,13 +16,34 @@ RSpec.describe Entitlements::Create, interaction: true do
   let_input!(:target_url) { target_user.to_gid.to_s }
 
   context "for a project" do
+
     context "when providing read_access" do
       let(:read_access) { true }
 
-      it "creates an entitlement" do
-        perform_within_expectation! do |e|
-          e.to change(Entitlement, :count).and change { target_user.reload.has_role?(:read_access, entitled_subject) }
+      shared_examples_for "a successful entitlement" do
+        it "creates an entitlement" do
+          perform_within_expectation! do |e|
+            e.to change(Entitlement, :count).and change { target_user.reload.has_role?(:read_access, entitled_subject) }
+          end
         end
+      end
+
+      context "with subject_url" do
+
+      end
+
+      context "with subject passed as an object" do
+        let_input!(:subject_url) { nil }
+        let_input!(:subject) { entitled_subject }
+
+        include_examples "a successful entitlement"
+      end
+
+      context "with target passed as an object" do
+        let_input!(:target_url) { nil }
+        let_input!(:target) { target_user }
+
+        include_examples "a successful entitlement"
       end
     end
 

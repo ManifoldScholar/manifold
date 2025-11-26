@@ -95,6 +95,17 @@ module V1
       smtp_settings_user_name: Types::String.optional
     )
 
+    typed_attribute :authentication, Types::Hash.schema(
+      identity_providers: Types::Array.of(
+        Types::Hash.schema(
+          name: Types::String,
+          url: Types::Serializer::URL
+        )
+      ),
+      default_identity_provider: Types::String,
+      show_local_login: Types::Bool
+    )
+
     typed_attribute :press_logo_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :press_logo_footer_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :press_logo_mobile_styles, Types::Serializer::Attachment.meta(read_only: true)
