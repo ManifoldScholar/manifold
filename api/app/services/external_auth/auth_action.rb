@@ -7,10 +7,10 @@ module ExternalAuth
     included do
       string :provider
 
-      object :auth_hash, class: "OmniAuth::AuthHash"
+      object :auth_hash, class: "OmniAuth::AuthHash", converter: :new
 
       validates :provider,
-                inclusion: { in: ManifoldEnv.oauth.known_strategies },
+                inclusion: { in: (ManifoldEnv.oauth.known_strategies + SamlConfig.provider_names) },
                 presence: true
 
       delegate :info, to: :auth_hash, prefix: :auth

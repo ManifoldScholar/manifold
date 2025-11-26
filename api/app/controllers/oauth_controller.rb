@@ -17,6 +17,8 @@ class OauthController < ApplicationController
       auth_hash: omniauth_hash
     )
 
+    Identities::HandleExternalAuth.new.call(outcome.identity, omniauth_hash) if outcome.valid?
+
     @oauth_payload = ExternalAuth::Payload.new outcome
     render html: body.html_safe, layout: false
   end
