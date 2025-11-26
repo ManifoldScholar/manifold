@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -50,31 +50,16 @@ export default function ManifoldContainer({ confirm }) {
   const prevAuthRef = useRef(authentication);
   const isFirstMountRef = useRef(true);
 
-  const routeStateRequestsLogin = useMemo(() => {
-    if (location.state) return Boolean(location.state.showLogin);
-    return false;
-  }, [location.state]);
+  const routeStateRequestsLogin = Boolean(location.state?.showLogin);
+  const routeStateRequestsPostLoginRedirect = Boolean(
+    location.state?.postLoginRedirect
+  );
 
-  const routeStateRequestsPostLoginRedirect = useMemo(() => {
-    if (location.state) return Boolean(location.state.postLoginRedirect);
-    return false;
-  }, [location.state]);
-
-  const routeNotificationParam = useMemo(() => {
-    if (location.search) {
-      const searchParams = new URLSearchParams(location.search);
-      return searchParams.get("notification");
-    }
-    return null;
-  }, [location.search]);
-
-  const routeRedirectUriParam = useMemo(() => {
-    if (location.search) {
-      const searchParams = new URLSearchParams(location.search);
-      return searchParams.get("redirect_uri");
-    }
-    return null;
-  }, [location.search]);
+  const searchParams = location.search
+    ? new URLSearchParams(location.search)
+    : null;
+  const routeNotificationParam = searchParams?.get("notification") ?? null;
+  const routeRedirectUriParam = searchParams?.get("redirect_uri") ?? null;
 
   const maybeShowLogin = useCallback(() => {
     dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
@@ -110,17 +95,9 @@ export default function ManifoldContainer({ confirm }) {
     dispatch(notificationActions.addNotification(notification));
   }, [routeNotificationParam, location.state, dispatch]);
 
-  const redirectToHome = useCallback(() => {
+  const doPostLogout = useCallback(() => {
     navigate("/");
   }, [navigate]);
-
-  const reload = useCallback(() => {
-    redirectToHome();
-  }, [redirectToHome]);
-
-  const doPostLogout = useCallback(() => {
-    reload();
-  }, [reload]);
 
   const doPostLogin = useCallback(() => {
     maybeFetchReadingGroups();
@@ -140,18 +117,17 @@ export default function ManifoldContainer({ confirm }) {
     navigate
   ]);
 
-  const renderTypekit = useMemo(() => {
-    const tkId = get(settings, "attributes.theme.typekitId");
-    const tkEnabled = !!tkId;
-    if (!tkEnabled) return null;
-    return (
-      <Helmet>
-        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
-        <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
-        <link rel="stylesheet" href={`https://use.typekit.net/${tkId}.css`} />
-      </Helmet>
-    );
-  }, [settings]);
+  const typekitId = get(settings, "attributes.theme.typekitId");
+  const renderTypekit = typekitId ? (
+    <Helmet>
+      <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
+      <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
+      <link
+        rel="stylesheet"
+        href={`https://use.typekit.net/${typekitId}.css`}
+      />
+    </Helmet>
+  ) : null;
 
   const hideOverlay = useCallback(() => {
     dispatch(visibilityHide("signInUpOverlay"));
