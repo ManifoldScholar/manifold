@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class Identity < ApplicationRecord
+  include ProvidesEntitlements
+
   attribute :provider, Inquiry.new
 
   belongs_to :user, optional: false, inverse_of: :identities
 
-  validates :provider, inclusion: { in: ManifoldEnv.oauth.known_strategies + (SamlConfig.providers.map do |p|
-    p.class.provider_name.to_s
-  end) }
+  has_many :user_group_memberships, inverse_of: :identity
+
+  validates :provider, inclusion: { in: (ManifoldEnv.oauth.known_strategies + SamlConfig.provider_names) }
   validates :uid, :provider, presence: true
   validates :uid, uniqueness: { scope: %i(provider) }
 
