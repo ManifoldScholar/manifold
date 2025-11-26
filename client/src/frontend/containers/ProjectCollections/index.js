@@ -10,7 +10,6 @@ import { useFetch, useListQueryParams, useListFilters } from "hooks";
 const FILTER_RESET = { visible: true, order: "position ASC" };
 
 export default function ProjectCollectionsContainer() {
-
   const { pagination, filters, setFilters } = useListQueryParams({
     initFilters: FILTER_RESET,
     collectionPagination: {
