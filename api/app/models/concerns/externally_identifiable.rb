@@ -5,6 +5,8 @@ module ExternallyIdentifiable
 
   included do
     has_one :external_identifier_record, class_name: "ExternalIdentifier", as: :identifiable, dependent: :destroy
+
+    scope :by_external_identifier, ->(*identifiers) { joins(:external_identifier_record).where(external_identifiers: { identifier: identifiers }) }
   end
 
   def external_identifier
