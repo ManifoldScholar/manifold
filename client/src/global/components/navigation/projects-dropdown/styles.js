@@ -78,10 +78,6 @@ export const Link = styled(NavLink)`
   gap: 10px;
   align-items: center;
   text-decoration: none;
-
-  &.active ${LinkText} {
-    color: var(--color-neutral-text-extra-light);
-  }
 `;
 
 export const LinkIcon = styled(IconComposer)``;
