@@ -1,11 +1,9 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { entityStoreActions as store } from "actions";
 import { projectCollectionsAPI, projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
@@ -21,7 +19,7 @@ import {
 
 export default function ProjectCollectionDetailContainer() {
   const { id } = useParams();
-  const { data: projectCollection, uid } = useFetch({
+  const { data: projectCollection } = useFetch({
     request: [projectCollectionsAPI.show, id]
   });
 
@@ -54,11 +52,6 @@ export default function ProjectCollectionDetailContainer() {
   });
 
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    return () => dispatch(store.flush(uid));
-  }, [dispatch, uid]);
 
   const filterProps = useListFilters({
     onFilterChange: state => setFilters(state),

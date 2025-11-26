@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useParams, useOutletContext } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { readingGroupMembershipsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -11,9 +12,9 @@ const { flush } = entityStoreActions;
 
 function ReadingGroupMemberEditContainer() {
   const { membershipId } = useParams();
-  const { readingGroup, confirm, dispatch, onEditSuccess } =
-    useOutletContext() || {};
+  const { readingGroup, confirm, onEditSuccess } = useOutletContext() || {};
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const { data: membership } = useFetch({
     request: [readingGroupMembershipsAPI.show, membershipId]
