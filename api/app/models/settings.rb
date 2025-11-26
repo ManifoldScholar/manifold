@@ -11,6 +11,7 @@ class Settings < ApplicationRecord
 
   self.filter_attributes = [*SECTIONS.dup, :fa_cache]
 
+  attribute :authentication, SettingSections::Authentication.to_type, default: -> { {} }
   attribute :general, SettingSections::General.to_type, default: -> { {} }
   attribute :email, SettingSections::Email.to_type, default: -> { {} }
   attribute :ingestion, SettingSections::Ingestion.to_type, default: -> { {} }
@@ -50,6 +51,40 @@ class Settings < ApplicationRecord
   end
 
   alias manifold_analytics_enabled? manifold_analytics_enabled
+
+  # @!endgroup
+
+  # @!group authentication
+
+  def authentication
+    {
+      identity_providers:,
+      default_identity_provider:,
+      hide_local_login:
+    }
+  end
+
+  def identity_providers
+    ManifoldEnv.oauth.enabled.map do |oauth|
+      {
+        name: oauth.name,
+        url: "/auth/#{oauth.strategy_name}/redirect"
+      }
+    end + SamlConfig.providers.map do |saml|
+      {
+        name: saml.provider_name,
+        url: "/auth/#{saml.provider_name}/redirect"
+      }
+    end
+  end
+
+  def default_identity_provider
+    SamlConfig.providers.find(&:default)&.provider_name
+  end
+
+  def hide_local_login
+    false
+  end
 
   # @!endgroup
 

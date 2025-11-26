@@ -10,6 +10,7 @@ module SettingSections
   #
   # Each corresponds to a class under this module.
   NAMES = [
+    :authentication,
     :email,
     :general,
     :ingestion,
