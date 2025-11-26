@@ -1,4 +1,4 @@
-import React, { memo, useRef } from "react";
+import { memo, useRef } from "react";
 import { useParams } from "react-router-dom";
 import BodyNodes from "reader/components/section/body-nodes";
 import Wrapper from "./Wrapper";
@@ -6,6 +6,7 @@ import { maybeTruncateChildren } from "./helpers";
 import blacklist from "./elementBlacklist";
 import { useFromStore } from "hooks";
 import { nl2br } from "utils/string";
+import isEmpty from "lodash/isEmpty";
 
 function AnnotationWithNodes({
   annotation,
@@ -44,7 +45,7 @@ function AnnotationWithNodes({
   const subjectInSingleNode = startNodeId === endNodeId;
 
   const siftHaystack = () => {
-    if (!haystack) return null;
+    if (!haystack || isEmpty(haystack)) return null;
     const adjustedStack = maybeTruncateChildren({
       node: haystack,
       target: startNodeId,

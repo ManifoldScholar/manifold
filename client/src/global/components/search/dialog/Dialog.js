@@ -47,7 +47,7 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
       <div className="search-dialog__form">
         <h2 className="screen-reader-text">{t("search.form")}</h2>
         <SearchQuery.Form
-          searchQueryState={query}
+          searchQueryState={query ?? {}}
           setQueryState={setQuery}
           facets={facets}
           autoFocus
