@@ -1,12 +1,11 @@
-import React, { useMemo } from "react";
+import { cloneElement, useMemo } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom-v5-compat";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { readingGroupsAPI, meAPI, requests } from "api";
 import groupBy from "lodash/groupBy";
 import isString from "lodash/isString";
-import { commonActions as commonActionsHelper } from "actions/helpers";
+import { commonActions } from "actions/helpers";
 import lh from "helpers/linkHandler";
 import { useFetch, useFilterState, useFromStore } from "hooks";
 import withReadingGroups from "hoc/withReadingGroups";
@@ -42,31 +41,26 @@ function ReaderNotesContainer({
     path: "ui.transitory.visibility.visibilityFilters"
   });
 
-  const baseFilters = useMemo(
-    () => ({
-      orphaned: !!(currentGroup === "orphaned"),
-      text: text?.id,
-      formats: [...DEFAULT_FORMATS],
-      readingGroup: currentGroup === "orphaned" ? "me" : currentGroup
-    }),
-    [text, currentGroup]
-  );
+  const baseFilters = {
+    orphaned: currentGroup === "orphaned",
+    text: text?.id,
+    formats: [...DEFAULT_FORMATS],
+    readingGroup: currentGroup === "orphaned" ? "me" : currentGroup
+  };
   const [filters, setFilters] = useFilterState(baseFilters);
+  const groupId = filters.readingGroup;
   const fetchFilters = useMemo(() => {
     const { readingGroup, ...rest } = filters;
     return rest;
   }, [filters]);
-  const groupId = useMemo(() => {
-    return filters.readingGroup;
-  }, [filters]);
   const showMyAnnotations = groupId === "me";
 
-  const { data: myAnnotations, meta: myMeta } = useFetch({
+  const { data: myAnnotations, meta: myMeta, loaded: myLoaded } = useFetch({
     request: [meAPI.annotations, fetchFilters],
     condition: showMyAnnotations,
     options: { fetchKey: requests.rMyFilteredAnnotationsForText }
   });
-  const { data: rgAnnotations, meta: rgMeta } = useFetch({
+  const { data: rgAnnotations, meta: rgMeta, loaded: rgLoaded } = useFetch({
     request: [readingGroupsAPI.annotations, groupId, fetchFilters],
     condition: !showMyAnnotations,
     options: { fetchKey: requests.rReadingGroupFilteredAnnotationsForText }
@@ -74,6 +68,7 @@ function ReaderNotesContainer({
 
   const annotations = showMyAnnotations ? myAnnotations : rgAnnotations;
   const meta = showMyAnnotations ? myMeta : rgMeta;
+  const loaded = showMyAnnotations ? myLoaded : rgLoaded;
 
   function mapAnnotationsToSections() {
     const annotationGroups = groupBy(annotations, "attributes.textSectionId");
@@ -91,9 +86,9 @@ function ReaderNotesContainer({
   }
 
   const dispatch = useDispatch();
-  const commonActions = commonActionsHelper(dispatch);
+  const actions = commonActions(dispatch);
 
-  function handleVisitAnnotation(annotation) {
+  const handleVisitAnnotation = annotation => {
     const { textSectionId, currentUserIsCreator } = annotation.attributes;
     const url = lh.link(
       "readerSection",
@@ -101,31 +96,25 @@ function ReaderNotesContainer({
       textSectionId,
       `#annotation-${annotation.id}`
     );
-    commonActions.panelToggle("notes");
+    actions.panelToggle("notes");
     const annotationFilter = currentUserIsCreator
       ? { annotation: { ...visibilityFilters.annotation, yours: true } }
       : { annotation: { ...visibilityFilters.annotation, others: true } };
-    commonActions.visibilityChange({
+    actions.visibilityChange({
       visibilityFilters: {
         ...visibilityFilters,
         ...annotationFilter
       }
     });
     navigate(url);
-  }
+  };
 
-  function handleSeeAllClick(event) {
+  const handleSeeAllClick = event => {
     event.preventDefault();
-    const url = lh.link(
-      "readerSection",
-      textId,
-      sectionId,
-      "#group-annotations"
-    );
-    navigate(url);
-  }
+    navigate(lh.link("readerSection", textId, sectionId, "#group-annotations"));
+  };
 
-  if (!annotations || !meta) return null;
+  if (!annotations || !meta || !loaded) return null;
 
   const sortedAnnotations = mapAnnotationsToSections();
 
@@ -146,7 +135,7 @@ function ReaderNotesContainer({
 
   if (!children) return null;
   if (isString(children.type)) return children;
-  return React.cloneElement(children, childProps);
+  return cloneElement(children, childProps);
 }
 
 ReaderNotesContainer.propTypes = {
