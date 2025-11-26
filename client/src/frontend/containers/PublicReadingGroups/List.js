@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { readingGroupsAPI, requests } from "api";
 import HeadContent from "global/components/HeadContent";
