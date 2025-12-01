@@ -535,6 +535,14 @@ module Validation
     params.permit(param_config)
   end
 
+  def user_group_entitleable_params
+    params.require(:data)
+    attributes = [:target_url]
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
   def favoritable_params
     structure_params
   end
