@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Updaters
-  # Updates a UserGroup model from JSON-API style params
-  class UserGroup
+  # Updates a UserGroupEntitleable model from JSON-API style params
+  class UserGroupEntitleable
     include ::Updaters
 
     def attachment_fields
