@@ -44,6 +44,7 @@ import JournalVolumesList from "frontend/containers/JournalVolumesList";
 import JournalIssuesList from "frontend/containers/JournalIssuesList";
 import PrivacySettings from "frontend/containers/PrivacySettings";
 import DataUse from "frontend/containers/DataUse";
+import ReadingGroupSettings from "frontend/components/reading-group/Settings";
 
 const routes = [
   {
@@ -336,7 +337,22 @@ const routes = [
                     if (!query) return base;
                     return `${base}?${query}`;
                   }
-                }
+                },
+                children: [
+                  {
+                    index: true,
+                    element: null
+                  },
+                  {
+                    element: <ReadingGroupSettings />,
+                    path: "settings",
+                    handle: {
+                      name: "frontendReadingGroupSettings",
+                      helper: rg => `/groups/${rg}/annotations/settings`,
+                      drawer: true
+                    }
+                  }
+                ]
               },
               {
                 element: <ReadingGroupMembers.Wrapper />,
@@ -358,6 +374,15 @@ const routes = [
                       helper: (rg, m) => `/groups/${rg}/members/${m}`,
                       drawer: true
                     }
+                  },
+                  {
+                    element: <ReadingGroupSettings />,
+                    path: "settings",
+                    handle: {
+                      name: "frontendReadingGroupMembersSettings",
+                      helper: rg => `/groups/${rg}/members/settings`,
+                      drawer: true
+                    }
                   }
                 ]
               },
@@ -370,12 +395,27 @@ const routes = [
                     path: "",
                     children: [
                       {
-                        index: true,
                         element: <ReadingGroupHomepage.Static />,
+                        path: "",
                         handle: {
                           name: "frontendReadingGroupHomepageStatic",
                           helper: rg => `/groups/${rg}`
-                        }
+                        },
+                        children: [
+                          {
+                            index: true,
+                            element: null
+                          },
+                          {
+                            element: <ReadingGroupSettings />,
+                            path: "settings",
+                            handle: {
+                              name: "frontendReadingGroupDetailSettings",
+                              helper: rg => `/groups/${rg}/settings`,
+                              drawer: true
+                            }
+                          }
+                        ]
                       },
                       {
                         element: <ReadingGroupHomepage.Edit />,
@@ -383,7 +423,18 @@ const routes = [
                         handle: {
                           name: "frontendReadingGroupHomepageEdit",
                           helper: rg => `/groups/${rg}/edit`
-                        }
+                        },
+                        children: [
+                          {
+                            element: <ReadingGroupSettings />,
+                            path: "settings",
+                            handle: {
+                              name: "frontendReadingGroupEditSettings",
+                              helper: rg => `/groups/${rg}/edit/settings`,
+                              drawer: true
+                            }
+                          }
+                        ]
                       }
                     ]
                   }

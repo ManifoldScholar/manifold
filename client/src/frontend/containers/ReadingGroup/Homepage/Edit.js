@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import { CollectionEditor } from "frontend/components/collecting/reading-group";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import * as Styled from "./styles";
 
 import Authorize from "hoc/Authorize";
@@ -11,6 +12,13 @@ function ReadingGroupHomepageEditContainer() {
   const { readingGroup, categories, responses, refresh } =
     useOutletContext() || {};
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const editRoute = lh.link(
+    "frontendReadingGroupHomepageEdit",
+    readingGroup.id
+  );
+  const closeDrawer = () => navigate(editRoute);
 
   return (
     <Authorize
@@ -50,6 +58,23 @@ function ReadingGroupHomepageEditContainer() {
             refresh={refresh}
           />
         </Styled.Body>
+        <OutletWithDrawer
+          context={{
+            readingGroup,
+            closeDrawer,
+            onArchive: () => {
+              refresh();
+              closeDrawer();
+            }
+          }}
+          drawerProps={{
+            context: "frontend",
+            size: "wide",
+            position: "overlay",
+            lockScroll: "always",
+            closeUrl: editRoute
+          }}
+        />
       </Styled.EditContainer>
     </Authorize>
   );

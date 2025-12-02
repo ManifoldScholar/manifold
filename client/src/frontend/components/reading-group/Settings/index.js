@@ -1,7 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import Collapse from "global/components/Collapse";
 import { GroupSettingsForm } from "frontend/components/reading-group/forms";
 import withConfirmation from "hoc/withConfirmation";
@@ -13,14 +12,10 @@ import DrawerHeader from "./panels/parts/DrawerHeader";
 
 const { request } = entityStoreActions;
 
-function ReadingGroupSettings({
-  readingGroup,
-  closeDrawer,
-  confirm,
-  onArchive
-}) {
+function ReadingGroupSettings({ confirm }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { readingGroup, closeDrawer, onArchive } = useOutletContext() || {};
 
   function doDuplicate({ name, copyAnnotations, archive, openOnProceed }) {
     const options = {
@@ -48,7 +43,7 @@ function ReadingGroupSettings({
     dispatch(duplicateRequest).promise.then(({ data: { id } }) => {
       if (openOnProceed) {
         navigate(lh.link("frontendReadingGroupDetail", id));
-      } else {
+      } else if (closeDrawer) {
         closeDrawer();
       }
     });
@@ -66,7 +61,7 @@ function ReadingGroupSettings({
         <GroupSettingsForm
           mode="edit"
           group={readingGroup}
-          onSuccess={closeDrawer}
+          onSuccess={closeDrawer || (() => {})}
         />
       </section>
     </Collapse>
@@ -76,10 +71,7 @@ function ReadingGroupSettings({
 ReadingGroupSettings.displayName = "ReadingGroup.Settings";
 
 ReadingGroupSettings.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  closeDrawer: PropTypes.func.isRequired,
-  confirm: PropTypes.func.isRequired,
-  onArchive: PropTypes.func
+  confirm: PropTypes.func.isRequired
 };
 
 export default withConfirmation(ReadingGroupSettings);
