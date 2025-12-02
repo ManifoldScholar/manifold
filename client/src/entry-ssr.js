@@ -105,7 +105,7 @@ const render = async (req, res, store) => {
       <CacheProvider value={cache}>
         <App
           helmetContext={helmetContext}
-          staticContext={routingContext}
+          staticContext={context instanceof Response ? routingContext : context}
           staticRequest={req}
           staticRouter={staticRouter}
           store={store}
