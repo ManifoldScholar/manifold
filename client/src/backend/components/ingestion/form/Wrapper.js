@@ -7,8 +7,6 @@ import { ingestionsAPI } from "api";
 export default function IngestionFormWrapper({
   name,
   project,
-  location,
-  history,
   text,
   ingestion = {},
   onSuccess,
@@ -50,8 +48,6 @@ export default function IngestionFormWrapper({
       <Upload
         header={header}
         cancelUrl={cancelUrl}
-        history={history}
-        location={location}
         triggerClose={triggerClose}
       />
     </FormContainer.Form>
@@ -63,8 +59,6 @@ IngestionFormWrapper.displayName = "ProjectDetail.Text.Ingestion.Form.Wrapper";
 IngestionFormWrapper.propTypes = {
   name: PropTypes.string.isRequired,
   project: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   text: PropTypes.object,
   ingestion: PropTypes.object,
   onSuccess: PropTypes.func,

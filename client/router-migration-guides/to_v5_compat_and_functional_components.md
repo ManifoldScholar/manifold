@@ -250,6 +250,40 @@ export default function MyComponent() {
 | `history.goBack()`             | `navigate(-1)`                         |
 | `history.goForward()`          | `navigate(1)`                          |
 
+### Components with history prop
+
+Some components that accept `history` as a prop should be migrated to use `useNavigate` hook internally instead:
+
+**Overlay Component (`src/global/components/Overlay/index.js`):**
+
+```javascript
+// Before
+function Overlay({ history, closeUrl, ... }) {
+  if (closeUrl) {
+    history.push(closeUrl);
+  }
+}
+
+// After
+import { useNavigate } from "react-router-dom";
+
+function Overlay({ closeUrl, ... }) {
+  const navigate = useNavigate();
+  
+  if (closeUrl) {
+    navigate(closeUrl);
+  }
+}
+```
+
+**Migration Checklist:**
+- [ ] Remove `history` from component props
+- [ ] Add `useNavigate` hook import
+- [ ] Call `useNavigate()` inside component
+- [ ] Replace `history.push()` with `navigate()`
+- [ ] Remove `history` from PropTypes
+- [ ] Remove `history` prop from all component usages
+
 ### Route Matching
 
 | v5                       | v6 Compat (Current)      | Notes                        |
