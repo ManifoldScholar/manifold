@@ -56,6 +56,7 @@ export const Link = styled.a`
   gap: 8px;
   padding: ${LINK_PADDING}px;
   text-decoration: none;
+  text-transform: uppercase;
   cursor: pointer;
 
   &[aria-disabled="true"] {
@@ -65,7 +66,12 @@ export const Link = styled.a`
 
   &[aria-current="page"] {
     pointer-events: none;
-    color: var(--color-interaction-light);
+    color: var(--highlight-color);
+
+    .browse &,
+    .scheme-light & {
+      text-decoration-line: underline;
+    }
   }
 `;
 
