@@ -44,9 +44,7 @@ export default function ProjectLayoutContainer() {
       <Hero.Builder
         include={["projectDescription", "actionCallouts"]}
         dispatch={dispatch}
-        history={null}
         actionCallouts={actionCallouts}
-        refresh={null}
         refreshActionCallouts={refreshActionCallouts}
         model={project}
         withDarkMode={!project.attributes.isJournalIssue}
