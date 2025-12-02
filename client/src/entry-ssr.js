@@ -147,41 +147,47 @@ const render = async (req, res, store) => {
     const errorComponent = exceptionRenderer(renderError);
     renderString = fatalErrorOutput(errorComponent, store);
   } finally {
-    const state = store.getState();
+    // Don't send response if headers have already been sent (e.g., redirect)
+    if (!res.headersSent) {
+      const state = store.getState();
 
-    // Redirect if the routing context has a url prop.
-    if (routingContext.url) {
-      respondWithRedirect(res, routingContext.url);
-    }
-    // After migrating global/containers/Manifold to functional component we no longer hit the catch
-    // Move 401 check here
-    else if (req.method === "GET" && state.fatalError?.error?.status === 401) {
-      respondWithRedirect(res, `/login?redirect_uri=${req.url}`);
-    } else {
-      if (has(state, "fatalError.error.status")) {
-        res.statusCode = state.fatalError.error.status;
-        if (res.statusCode !== 403) {
-          const errorComponent = <FatalError fatalError={state.fatalError} />;
-          renderString = fatalErrorOutput(errorComponent, store);
-        }
+      // Redirect if the routing context has a url prop.
+      if (routingContext.url) {
+        respondWithRedirect(res, routingContext.url);
       }
-
-      const chunks = extractCriticalToChunks(renderString);
-      const styleTags = constructStyleTagsFromChunks(chunks);
-      const htmlOutput = wrapHtmlBody({
-        store,
-        stats,
-        styleTags,
-        helmetContext,
-        body: renderString
-      });
-      if (isError) {
-        res.statusCode = 500;
-        res.setHeader("Content-Type", "text/html");
-        res.end(htmlOutput);
+      // After migrating global/containers/Manifold to functional component we no longer hit the catch
+      // Move 401 check here
+      else if (
+        req.method === "GET" &&
+        state.fatalError?.error?.status === 401
+      ) {
+        respondWithRedirect(res, `/login?redirect_uri=${req.url}`);
       } else {
-        res.setHeader("Content-Type", "text/html");
-        res.end("<!doctype html>\n" + htmlOutput);
+        if (has(state, "fatalError.error.status")) {
+          res.statusCode = state.fatalError.error.status;
+          if (res.statusCode !== 403) {
+            const errorComponent = <FatalError fatalError={state.fatalError} />;
+            renderString = fatalErrorOutput(errorComponent, store);
+          }
+        }
+
+        const chunks = extractCriticalToChunks(renderString);
+        const styleTags = constructStyleTagsFromChunks(chunks);
+        const htmlOutput = wrapHtmlBody({
+          store,
+          stats,
+          styleTags,
+          helmetContext,
+          body: renderString
+        });
+        if (isError) {
+          res.statusCode = 500;
+          res.setHeader("Content-Type", "text/html");
+          res.end(htmlOutput);
+        } else {
+          res.setHeader("Content-Type", "text/html");
+          res.end("<!doctype html>\n" + htmlOutput);
+        }
       }
     }
   }
