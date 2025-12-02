@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { readingGroupsAPI } from "api";
-import { useParams, Outlet } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
-import Drawer from "global/containers/drawer";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { GroupHeading } from "frontend/components/reading-group/headings";
-import Settings from "frontend/components/reading-group/Settings";
 import SearchDialog from "frontend/components/collecting/SearchDialog";
+import { Outlet } from "react-router-dom";
 import { useFetch } from "hooks";
 import Authorize from "hoc/Authorize";
 
@@ -49,37 +48,29 @@ export default function ReadingGroup() {
 
   const { name: groupName } = readingGroup.attributes ?? {};
 
-  const showSettingsDrawer = location.hash === "#settings";
   const showSearchDialog = location.hash === "#search";
 
   const childProps = {
     refresh: () => setFetchVersion(prev => prev + 1),
     fetchVersion,
-    readingGroup
+    readingGroup,
+    closeDrawer: () => {
+      const { pathname, search = "" } = location;
+      const url = `${pathname}${search}`;
+      navigate(url);
+    },
+    onArchive: () => {
+      setFetchVersion(prev => prev + 1);
+      const { pathname, search = "" } = location;
+      const url = `${pathname}${search}`;
+      navigate(url);
+    }
   };
 
   const handleClose = () => {
     const { pathname, search = "" } = location;
     const url = `${pathname}${search}`;
     navigate(url);
-  };
-
-  const settingsProps = {
-    readingGroup,
-    closeDrawer: handleClose,
-    onArchive: () => {
-      setFetchVersion(prev => prev + 1);
-      handleClose();
-    }
-  };
-
-  const drawerProps = {
-    open: showSettingsDrawer,
-    context: "frontend",
-    size: "wide",
-    position: "overlay",
-    lockScroll: "always",
-    closeCallback: () => handleClose()
   };
 
   const onCloseSearch = () => {
@@ -90,9 +81,6 @@ export default function ReadingGroup() {
   return (
     <>
       <Authorize entity={readingGroup} ability="read">
-        <Drawer.Wrapper {...drawerProps}>
-          <Settings {...settingsProps} />
-        </Drawer.Wrapper>
         <HeadContent title={groupName} appendDefaultTitle />
         <section>
           <div className="container">

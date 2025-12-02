@@ -17,6 +17,7 @@ function ReadingGroupsMembersContainer({ confirm }) {
   const userIsGroupMember = canUpdateGroup || currentUserRole !== "none";
 
   const membersRoute = lh.link("frontendReadingGroupMembers", readingGroup.id);
+  const closeDrawer = () => navigate(membersRoute);
 
   const handleEditSuccess = () => {
     navigate(membersRoute);
@@ -57,7 +58,14 @@ function ReadingGroupsMembersContainer({ confirm }) {
         context={{
           readingGroup,
           confirm,
-          onEditSuccess: handleEditSuccess
+          onEditSuccess: handleEditSuccess,
+          closeDrawer,
+          onArchive: () => {
+            if (refreshRef.current?.refresh) {
+              refreshRef.current.refresh();
+            }
+            closeDrawer();
+          }
         }}
       />
     </>
