@@ -12,14 +12,14 @@ const { flush } = entityStoreActions;
 
 function PermissionEdit({ confirm }) {
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { permissionId } = useParams();
   const navigate = useNavigate();
   const { entity, closeUrl } = useOutletContext() || {};
 
   const { data: permission } = useFetch({
-    request: [permissionsAPI.show, entity, id],
+    request: [permissionsAPI.show, entity, permissionId],
     options: { requestKey: requests.bePermission },
-    condition: !!entity && !!id
+    condition: !!entity && !!permissionId
   });
 
   const destroyPermission = useApiCallback(permissionsAPI.destroy, {
