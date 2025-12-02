@@ -41,9 +41,8 @@ export default function StandaloneHeader({ alwaysVisible = false }) {
   const resizeIdRef = useRef(null);
 
   const [sticky, setSticky] = useState(false);
-  const [mobile, setMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth <= BREAKPOINT : false
-  );
+  // Initialize mobile as false to match server render, update in useEffect
+  const [mobile, setMobile] = useState(false);
 
   const darkMode = context?.project?.darkMode;
   const alwaysVisibleComputed = !context?.isProjectHomepage
@@ -105,6 +104,8 @@ export default function StandaloneHeader({ alwaysVisible = false }) {
   }, []);
 
   useEffect(() => {
+    setMobile(window.innerWidth <= BREAKPOINT);
+
     window.addEventListener("scroll", throttledScroll);
     window.addEventListener("resize", handleResize);
     setShimHeight();
