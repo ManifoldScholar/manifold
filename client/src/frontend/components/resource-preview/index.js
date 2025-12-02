@@ -75,9 +75,11 @@ export default class ResourcePreview extends Component {
   };
 
   render() {
-    const PreviewComponent = this.getPreviewComponent(this.props.resource);
+    const { resource } = this.props;
 
-    if (!PreviewComponent) return this.renderChildren(this.props.resource);
+    const PreviewComponent = this.getPreviewComponent(resource);
+
+    if (!PreviewComponent) return this.renderChildren(resource);
 
     return (
       <UIDConsumer>
@@ -88,8 +90,10 @@ export default class ResourcePreview extends Component {
               appearance="overlay-full bg-neutral90"
               closeCallback={this.closeOverlay}
               id={id}
+              title={resource.attributes.title}
+              icon="resource24"
             >
-              <PreviewComponent resource={this.props.resource} />
+              <PreviewComponent resource={resource} />
             </GlobalOverlay>
             <Styled.PreviewToggle
               onClick={this.handleOpenPreviewClick}
