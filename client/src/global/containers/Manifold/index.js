@@ -183,7 +183,7 @@ export default function ManifoldContainer({ confirm }) {
         <Utility.SkipLink />
         <div id="global-notification-container" />
         <div id="global-overlay-container" />
-        <FrontendModeContext.Provider value={frontendMode}>
+        <FrontendModeContext.Provider value={frontendMode || {}}>
           {renderTypekit}
           {confirm}
           <LoadingBar loading={loading} />
