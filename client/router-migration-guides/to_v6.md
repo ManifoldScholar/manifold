@@ -1557,6 +1557,53 @@ const MyReadingGroupsListContainer = forwardRef((props, ref) => {
 - Start with homepage route components and work outward
 - The compat package can remain for routes that haven't been migrated yet
 
+**Global Components Migration**
+
+Some global components that were previously passed `history` as a prop should be updated to use `useNavigate` hook internally:
+
+**Overlay Component:**
+
+The `Overlay` component (`src/global/components/Overlay/index.js`) previously accepted a `history` prop for navigation. It has been migrated to use `useNavigate` hook internally:
+
+```javascript
+// Before
+function Overlay({ history, closeUrl, ... }) {
+  function handleCloseEvent(event) {
+    if (closeUrl) {
+      setTimeout(() => {
+        history.push(closeUrl);
+      }, 200);
+    }
+  }
+  // ...
+}
+
+// After
+import { useNavigate } from "react-router-dom";
+
+function Overlay({ closeUrl, ... }) {
+  const navigate = useNavigate();
+
+  function handleCloseEvent(event) {
+    if (closeUrl) {
+      setTimeout(() => {
+        navigate(closeUrl);
+      }, 200);
+    }
+  }
+  // ...
+}
+```
+
+**Migration Steps:**
+
+1. Remove `history` from component props
+2. Add `import { useNavigate } from "react-router-dom";`
+3. Call `const navigate = useNavigate();` inside the component
+4. Replace `history.push(url)` with `navigate(url)`
+5. Remove `history` from PropTypes
+6. Remove `history` prop from all usages of the component (no longer needed)
+
 **useRouteMatch → useMatch Migration:**
 
 In v5, `useRouteMatch()` was used to check if the current route matches a pattern. In v6, this is replaced with `useMatch()`.
