@@ -1,49 +1,43 @@
-import { useBlocker } from "react-router-dom";
+import { useBlocker } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import Dialog from "global/components/dialog";
 
 export default function NavigationBlocker({ when, message }) {
   const { t } = useTranslation();
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [pendingNavigation, setPendingNavigation] = useState(null);
 
-  const blocker = useBlocker(
-    ({ currentLocation, nextLocation }) =>
-      when && currentLocation.pathname !== nextLocation.pathname
-  );
+  const shouldBlock = useCallback(() => {
+    return when;
+  }, [when]);
+
+  const blocker = useBlocker(shouldBlock);
+
+  // Temp fix until Form is refactored. Blocker has stale state after submit.
+  // This allows redirects after submit.
+  useEffect(() => {
+    if (when === false && blocker.state === "blocked") return blocker.proceed();
+  }, [blocker, when]);
 
   useEffect(() => {
-    if (blocker.state === "blocked") {
-      setShowConfirm(true);
-      setPendingNavigation(blocker);
-    }
+    return () => {
+      if (blocker.state === "blocked") blocker.reset();
+    };
   }, [blocker]);
 
-  const handleConfirm = useCallback(() => {
-    if (pendingNavigation) {
-      pendingNavigation.proceed();
-      setPendingNavigation(null);
-    }
-    setShowConfirm(false);
-  }, [pendingNavigation]);
+  const handleConfirm = () => {
+    if (blocker?.proceed) blocker.proceed();
+  };
 
-  const handleCancel = useCallback(() => {
-    if (pendingNavigation) {
-      pendingNavigation.reset();
-      setPendingNavigation(null);
-    }
-    setShowConfirm(false);
-  }, [pendingNavigation]);
+  const handleCancel = () => {
+    if (blocker?.reset) blocker.reset();
+  };
 
-  if (!showConfirm) return null;
-
-  return (
+  return blocker.state === "blocked" ? (
     <Dialog.Confirm
       message={message || t("messages.unsaved_changes")}
       heading={t("messages.confirm")}
       resolve={handleConfirm}
       reject={handleCancel}
     />
-  );
+  ) : null;
 }
