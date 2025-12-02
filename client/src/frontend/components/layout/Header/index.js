@@ -8,7 +8,8 @@ import StandaloneHeader from "./StandaloneHeader";
 import PressHeader from "./PressHeader";
 
 export default function LayoutHeader({ alwaysVisible }) {
-  const { isLibrary, isStandalone } = useContext(FrontendModeContext);
+  const context = useContext(FrontendModeContext);
+  const { isLibrary = false, isStandalone = false } = context || {};
 
   return (
     <>
