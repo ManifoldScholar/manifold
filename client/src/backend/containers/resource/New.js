@@ -25,10 +25,14 @@ const formatData = data => {
     relationships,
     attributes: {
       ...rest,
-      attachment: {
-        ...attachmentData,
-        altText: attributes.kind === "image" ? attachmentAltText : null
-      }
+      ...(attachmentData
+        ? {
+            attachment: {
+              ...attachmentData,
+              altText: attributes.kind === "image" ? attachmentAltText : null
+            }
+          }
+        : {})
     }
   };
 };
@@ -89,7 +93,6 @@ function ResourceNewContainer() {
           <FormContainer.Form
             model={DEFAULT_RESOURCE}
             name="backend-resource-create"
-            update={resourcesAPI.update}
             create={model => resourcesAPI.create(project.id, formatData(model))}
             onSuccess={handleSuccess}
             className="form-secondary"

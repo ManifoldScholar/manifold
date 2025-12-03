@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Outlet, useParams, useNavigate } from "react-router-dom";
+import { Outlet, useParams, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Layout from "backend/components/layout";
 import { notificationActions } from "actions";
@@ -21,6 +21,7 @@ function ResourceWrapperContainer({ confirm }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const { data: resource, refresh } = useFetch({
     request: [resourcesAPI.show, id]
