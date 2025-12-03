@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ContentBlock from "backend/components/content-block";
@@ -10,8 +9,7 @@ import { useFetch } from "hooks";
 import Authorize from "hoc/Authorize";
 
 export default function ProjectLayoutContainer() {
-  const outletContext = useOutletContext() || {};
-  const { project } = outletContext;
+  const { project } = useOutletContext() || {};
   const dispatch = useDispatch();
 
   const { data: actionCallouts, refresh: refreshActionCallouts } = useFetch({
@@ -19,18 +17,6 @@ export default function ProjectLayoutContainer() {
     options: { requestKey: requests.beActionCallouts },
     condition: !!project?.id
   });
-
-  const drawerCloseCallbackRef = useRef(null);
-  const pendingBlockRef = useRef(null);
-
-  const drawerProps = project
-    ? {
-        closeUrl: lh.link("backendProjectLayout", project.id),
-        lockScroll: "always",
-        wide: true,
-        closeCallback: drawerCloseCallbackRef.current
-      }
-    : null;
 
   if (!project) return null;
 
@@ -50,19 +36,22 @@ export default function ProjectLayoutContainer() {
         withDarkMode={!project.attributes.isJournalIssue}
       />
       <ContentBlock.Builder project={project}>
-        {(closeCallback, pendingBlock) => {
-          drawerCloseCallbackRef.current = closeCallback;
-          pendingBlockRef.current = pendingBlock;
-
+        {(closeWithoutSave, onSave, pendingBlock) => {
           return (
             <OutletWithDrawer
-              drawerProps={drawerProps}
+              drawerProps={{
+                closeUrl: lh.link("backendProjectLayout", project.id),
+                lockScroll: "always",
+                wide: true,
+                closeCallback: closeWithoutSave
+              }}
               context={{
                 pendingBlock,
                 project,
                 refreshActionCallouts,
                 calloutable: project,
-                closeRoute: "backendProjectLayout"
+                closeRoute: "backendProjectLayout",
+                closeCallback: onSave
               }}
             />
           );
