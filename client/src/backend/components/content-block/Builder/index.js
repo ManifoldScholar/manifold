@@ -166,7 +166,8 @@ function ProjectContent({ project, confirm, children }) {
     onKeyboardMove
   };
 
-  const drawerCloseCallback = pendingBlock ? resetState : null;
+  const closeWithoutSave = pendingBlock ? resetState : null;
+  const onSave = refresh;
 
   return (
     <section className="backend-project-content rbd-migration-resets">
@@ -191,7 +192,7 @@ function ProjectContent({ project, confirm, children }) {
                 currentBlocks={blocks}
               />
             </DragDropContext>
-            {children(drawerCloseCallback, pendingBlock)}
+            {children(closeWithoutSave, onSave, pendingBlock)}
           </div>
         )}
       </UIDConsumer>
