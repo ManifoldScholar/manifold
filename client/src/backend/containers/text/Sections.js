@@ -27,7 +27,6 @@ export default function TextSectionsContainer() {
     if (isEditorRoute) {
       return {
         lockScroll: "always",
-        lockScrollClickCloses: false,
         wide: true,
         closeUrl,
         padding: "xl",
@@ -40,7 +39,6 @@ export default function TextSectionsContainer() {
     if (isIngestRoute) {
       return {
         lockScroll: "always",
-        lockScrollClickCloses: false,
         closeUrl,
         size: "default",
         padding: "default",
@@ -49,7 +47,6 @@ export default function TextSectionsContainer() {
     }
     return {
       lockScroll: "always",
-      lockScrollClickCloses: false,
       closeUrl,
       size: "default",
       padding: "default"
