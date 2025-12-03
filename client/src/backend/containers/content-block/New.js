@@ -5,8 +5,7 @@ import ContentBlock from "backend/components/content-block";
 import Form from "./Form";
 
 export default function ContentBlockNewContainer() {
-  const outletContext = useOutletContext() || {};
-  const { pendingBlock, project } = outletContext;
+  const { pendingBlock, project, closeCallback } = useOutletContext() || {};
 
   // This container is dependent on a pendingBlock being placed in the layout.  If no pendingBlock is
   // passed, we assumed nothing has changed in the layout and close the drawer.
@@ -19,7 +18,11 @@ export default function ContentBlockNewContainer() {
   return (
     <section>
       <ContentBlock.DrawerHeader contentBlock={pendingBlock} />
-      <Form contentBlock={pendingBlock} project={project} />
+      <Form
+        contentBlock={pendingBlock}
+        project={project}
+        closeCallback={closeCallback}
+      />
     </section>
   );
 }
