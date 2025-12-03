@@ -9,8 +9,7 @@ import lh from "helpers/linkHandler";
 import withConfirmation from "hoc/withConfirmation";
 
 function ContentBlockEditContainer({ confirm }) {
-  const outletContext = useOutletContext() || {};
-  const { project } = outletContext;
+  const { project, closeCallback } = useOutletContext() || {};
   const { blockId } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -64,7 +63,11 @@ function ContentBlockEditContainer({ confirm }) {
         onVisibilityToggle={onVisibilityToggle}
         onDelete={onDelete}
       />
-      <Form contentBlock={contentBlock} project={project} />
+      <Form
+        contentBlock={contentBlock}
+        project={project}
+        closeCallback={closeCallback}
+      />
     </section>
   );
 }
