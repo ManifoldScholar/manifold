@@ -25,11 +25,15 @@ const formatData = (data, resourceKind) => {
       relationships,
       attributes: {
         ...rest,
-        attachment: attachmentData,
-        variantThumbnail: {
-          ...thumbnailData,
-          altText: variantThumbnailAltText
-        },
+        ...(attachmentData ? { attachment: attachmentData } : {}),
+        ...(thumbnailData
+          ? {
+              variantThumbnail: {
+                ...thumbnailData,
+                altText: variantThumbnailAltText
+              }
+            }
+          : {}),
         sortOrder: sortOrder ? 1 : null
       }
     };
@@ -38,11 +42,14 @@ const formatData = (data, resourceKind) => {
     relationships,
     attributes: {
       ...rest,
-      attachment: {
-        ...attachmentData,
-        altText: attachmentAltText
-      },
-      variantThumbnail: null,
+      ...(attachmentData || attachmentAltText
+        ? {
+            attachment: {
+              ...attachmentData,
+              altText: attachmentAltText
+            }
+          }
+        : {}),
       sortOrder: sortOrder ? 1 : null
     }
   };
