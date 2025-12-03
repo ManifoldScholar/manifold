@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
@@ -96,7 +96,7 @@ ReturnMenuBody.displayName = "ReturnMenuBody";
 ReturnMenuBody.propTypes = {
   returnUrl: PropTypes.string,
   projectTitle: PropTypes.string,
-  toggleSignInUpOverlay: PropTypes.func.isRequired,
+  toggleSignInUpOverlay: PropTypes.func,
   moreLink: PropTypes.string,
   settings: PropTypes.object,
   className: PropTypes.string
