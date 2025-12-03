@@ -34,6 +34,8 @@ export const Toggle = styled.div`
 `;
 
 export const ListFilters = styled(ListFiltersComponent)`
+  --input-font-family: var(--font-family-sans);
+
   flex-grow: 0;
   flex-basis: auto;
 `;
