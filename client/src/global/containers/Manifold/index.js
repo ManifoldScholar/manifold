@@ -23,6 +23,7 @@ import Utility from "global/components/utility";
 import Analytics from "hoc/analytics";
 import { Helmet } from "react-helmet-async";
 import { useFromStore } from "hooks";
+import { NavigationBlockerProvider } from "global/components/router/NavigationBlockerContext";
 import notifications from "./notifications";
 
 const { request } = entityStoreActions;
@@ -201,7 +202,9 @@ export default function ManifoldContainer({ confirm }) {
             </div>
           ) : (
             <FatalErrorBoundary>
-              <Outlet />
+              <NavigationBlockerProvider>
+                <Outlet />
+              </NavigationBlockerProvider>
             </FatalErrorBoundary>
           )}
           <CookiesBanner />
