@@ -4,7 +4,8 @@ import {
   sectionsAPI,
   annotationsAPI,
   resourcesAPI,
-  resourceCollectionsAPI
+  resourceCollectionsAPI,
+  requests
 } from "api";
 import HeadContent from "global/components/HeadContent";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
@@ -25,6 +26,7 @@ export default function SectionContainer() {
 
   const { data: annotations } = useFetch({
     request: [annotationsAPI.forSection, sectionId, textId],
+    options: { requestKey: requests.rAnnotations },
     condition: !!sectionId && !!textId,
     refetchOnLogin: true
   });
