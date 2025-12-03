@@ -76,7 +76,7 @@ DrawerWrapper.displayName = "Drawer.Wrapper";
 
 DrawerWrapper.propTypes = {
   open: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   icon: PropTypes.string,
   identifier: PropTypes.string,

@@ -18,7 +18,6 @@ export default function TextCreateContainer() {
       />
       <CreateTextForm
         cancelUrl={lh.link("backendProjectTexts", project.id)}
-        name={"TBD"}
         projectId={project.id}
         refresh={refresh}
       />
