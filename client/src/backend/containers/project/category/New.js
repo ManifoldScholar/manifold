@@ -12,7 +12,7 @@ export default function ProjectCategoryNewContainer() {
   const onSuccess = () => {
     if (refresh) refresh();
     const url = lh.link("backendProjectTexts", project?.id);
-    navigate(url, { state: { keepNotifications: false } });
+    navigate(url);
   };
 
   if (!project) return null;
