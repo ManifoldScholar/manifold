@@ -41,7 +41,7 @@ function ProjectTextsContainer({
     notificationScope: "none"
   });
 
-  const destroyCategoryApi = useApiCallback(textCategoriesAPI.destroy, {
+  const destroyCategory = useApiCallback(textCategoriesAPI.destroy, {
     requestKey: requests.beTextCategoryDestroy
   });
 
@@ -50,7 +50,7 @@ function ProjectTextsContainer({
     noTouch: true
   });
 
-  const destroyTextApi = useApiCallback(textsAPI.destroy, {
+  const destroyText = useApiCallback(textsAPI.destroy, {
     requestKey: requests.beTextDestroy
   });
 
@@ -58,7 +58,7 @@ function ProjectTextsContainer({
     const heading = t("modals.delete_category");
     const message = t("modals.delete_category_body");
     confirm(heading, message, async () => {
-      await destroyCategoryApi(category.id);
+      await destroyCategory(category.id);
       if (refresh) refresh();
     });
   };
@@ -67,7 +67,7 @@ function ProjectTextsContainer({
     const heading = t("modals.delete_text");
     const message = t("modals.delete_text_body");
     confirm(heading, message, async () => {
-      await destroyTextApi(text.id);
+      await destroyText(text.id);
       if (refresh) refresh();
       const notification = {
         level: 0,
