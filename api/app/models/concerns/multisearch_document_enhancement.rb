@@ -1,5 +1,14 @@
 # frozen_string_literal: true
 
+# This concern acts as an enhancement to PgSearch::Document to add
+# additional associations, scopes, and methods necessary for our multisearch
+# implementation.
+#
+# It also adds support for faceted searching based on the `searchable_type`
+# of the multisearch documents.
+#
+# @api private
+# @see Search::Faceter
 module MultisearchDocumentEnhancement
   extend ActiveSupport::Concern
 
@@ -86,10 +95,10 @@ module MultisearchDocumentEnhancement
       belongs_to_readonly :"searchable_#{key}", class_name:, foreign_key: :searchable_id, optional: true
     end
 
-    scope :for_journal, ->(journal) { where(journal: journal) }
-    scope :for_project, ->(project) { where(project: project) }
-    scope :for_text, ->(text) { where(text: text) }
-    scope :for_text_section, ->(text_section) { where(text_section: text_section) }
+    scope :for_journal, ->(journal) { where(journal:) }
+    scope :for_project, ->(project) { where(project:) }
+    scope :for_text, ->(text) { where(text:) }
+    scope :for_text_section, ->(text_section) { where(text_section:) }
 
     scope :sans_draft_projects, -> do
       where(arel_sans_draft_projects)
@@ -102,6 +111,8 @@ module MultisearchDocumentEnhancement
     scope :with_default_associations, -> do
       preload(**DEFAULT_ASSOCIATIONS)
     end
+
+    scope :journal_content, -> { where(journal_content: true) }
 
     has_many_readonly :text_section_nodes, -> { current }, primary_key: :text_section_id, foreign_key: :text_section_id
 
@@ -228,13 +239,13 @@ module MultisearchDocumentEnhancement
       return query
     end
 
+    # @see Search::Faceter
+    # @param [<Search::Types::Facet>] facets
     # @return [ActiveRecord::Relation<PgSearch::Document>]
     def faceted_by(*facets)
-      searchable_type = facets.flatten.compact_blank.presence
+      faceter = Search::Faceter.new(facets.flatten.compact_blank)
 
-      return all if searchable_type.blank?
-
-      where(searchable_type: searchable_type)
+      faceter.(all)
     end
 
     def arel_sans_draft_projects
