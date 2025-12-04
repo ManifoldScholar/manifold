@@ -13,5 +13,9 @@ FactoryBot.define do
     trait :smart do
       smart { true }
     end
+
+    trait :manual do
+      smart { false }
+    end
   end
 end
