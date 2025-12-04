@@ -19,6 +19,7 @@ export default function SlideshowSection({
         collectionResources={slideshowResources}
         pagination={slideshowResourcesMeta.pagination}
         dispatch={dispatch}
+        slideOptions={{ enableZoom: false }}
       />
     </>
   ) : null;
