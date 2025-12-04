@@ -1019,8 +1019,8 @@ DEPENDENCIES
   validate_url (~> 1.0)
   validates_email_format_of (~> 1.0)
   webmock (~> 3.0)
-  with_advisory_lock (~> 4.0)
-  with_model (~> 2.1)
+  with_advisory_lock (~> 5.3.0)
+  with_model (~> 2.2.0)
   zaru (~> 1.0.0)
 
 BUNDLED WITH

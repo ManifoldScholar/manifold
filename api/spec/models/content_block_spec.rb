@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "with_model"
 require "rails_helper"
 
 # :nocov:
