@@ -33,7 +33,7 @@ export default function UserGroupProperties({ userGroup, refresh }) {
       />
       <Form.TextInput
         label={t("records.user_groups.properties.external_id_label")}
-        name="attributes[externalId]"
+        name="attributes[externalIdentifier]"
         placeholder={t(
           "records.user_groups.properties.external_id_placeholder"
         )}
