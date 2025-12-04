@@ -54,11 +54,11 @@ module Filtering
     private
 
     def apply_keyword_search!
-      @results = model.keyword_search(params[:keyword]).page(params[:page]).per(params[:per_page])
+      @results = @filtered_scope.keyword_search(params[:keyword]).page(params[:page]).per(params[:per_page])
 
       return unless exceeds_total_pages?(@results)
 
-      @results = model.keyword_search.page(results.total_pages).per(params[:per_page])
+      @results = @filtered_scope.keyword_search.page(results.total_pages).per(params[:per_page])
     end
 
     # @!group Steps
