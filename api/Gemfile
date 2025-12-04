@@ -132,7 +132,7 @@ gem "unicode", "~> 0.4"
 gem "uuid", "~> 2.3"
 gem "validates_email_format_of", "~> 1.0"
 gem "validate_url", "~> 1.0"
-gem "with_advisory_lock", "~> 4.0"
+gem "with_advisory_lock", "~> 5.3.0"
 gem "zaru", "~> 1.0.0"
 gem "zhong", "~> 0.3"
 
