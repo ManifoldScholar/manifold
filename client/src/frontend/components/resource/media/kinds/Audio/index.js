@@ -11,7 +11,7 @@ function urlToRelativePath(url) {
   return trackUrl.pathname;
 }
 
-function ResourcePlayerAudio({ resource }) {
+function ResourcePlayerAudio({ resource, active = true }) {
   const {
     attachmentStyles,
     title,
@@ -22,7 +22,7 @@ function ResourcePlayerAudio({ resource }) {
 
   const src = attachmentStyles.original;
 
-  if (!src) return null;
+  if (!src || !active) return null;
 
   const tracks =
     resource.relationships?.textTracks
