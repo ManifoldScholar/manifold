@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UserGroupMembership < ApplicationRecord
+  include Authority::Abilities
+  include SerializedAbilitiesFor
   include ProvidesEntitlements
 
   belongs_to :user, inverse_of: :user_group_memberships
