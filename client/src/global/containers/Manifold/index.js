@@ -185,29 +185,29 @@ export default function ManifoldContainer({ confirm }) {
         <div id="global-notification-container" />
         <div id="global-overlay-container" />
         <FrontendModeContext.Provider value={frontendMode || {}}>
-          {renderTypekit}
-          {confirm}
-          <LoadingBar loading={loading} />
-          <ColorScheme settings={settings} />
-          <SignInUp.Overlay
-            active={visibility.signInUpOverlay}
-            hideOverlay={hideOverlay}
-          />
-          {fatalError.error && fatalError.error.status !== 403 ? (
-            <div className="global-container">
-              <AppFatalError
-                fatalError={fatalError}
-                redirectPath={location.pathname}
-              />
-            </div>
-          ) : (
-            <FatalErrorBoundary>
-              <NavigationBlockerProvider>
+          <NavigationBlockerProvider>
+            {renderTypekit}
+            {confirm}
+            <LoadingBar loading={loading} />
+            <ColorScheme settings={settings} />
+            <SignInUp.Overlay
+              active={visibility.signInUpOverlay}
+              hideOverlay={hideOverlay}
+            />
+            {fatalError.error && fatalError.error.status !== 403 ? (
+              <div className="global-container">
+                <AppFatalError
+                  fatalError={fatalError}
+                  redirectPath={location.pathname}
+                />
+              </div>
+            ) : (
+              <FatalErrorBoundary>
                 <Outlet />
-              </NavigationBlockerProvider>
-            </FatalErrorBoundary>
-          )}
-          <CookiesBanner />
+              </FatalErrorBoundary>
+            )}
+            <CookiesBanner />
+          </NavigationBlockerProvider>
         </FrontendModeContext.Provider>
       </div>
     </Analytics>
