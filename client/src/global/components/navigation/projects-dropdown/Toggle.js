@@ -19,14 +19,12 @@ function ProjectsToggle(
     !journalIsActive;
 
   return (
-    <li className="site-nav__item">
-      <Styled.Button ref={ref} tabIndex={0} onClick={toggleVisible} {...props}>
-        <Styled.ButtonText className="site-nav__link" $active={active}>
-          <span>{t(link.label)}</span>
-          <Utility.IconComposer icon="disclosureDown24" size={16} />
-        </Styled.ButtonText>
-      </Styled.Button>
-    </li>
+    <Styled.Button ref={ref} tabIndex={0} onClick={toggleVisible} {...props}>
+      <Styled.ButtonText className="site-nav__link" $active={active}>
+        <span>{t(link.label)}</span>
+        <Utility.IconComposer icon="disclosureDown24" size={16} />
+      </Styled.ButtonText>
+    </Styled.Button>
   );
 }
 

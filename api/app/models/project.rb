@@ -32,6 +32,8 @@ class Project < ApplicationRecord
 
   self.filter_attributes = [:fa_cache]
 
+  self.filter_attributes = [:fa_cache]
+
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :restricted_access_body, include_wrap: false
   has_formatted_attributes :title, include_wrap: false

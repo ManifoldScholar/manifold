@@ -16,7 +16,6 @@ function PageWrapper({ confirm }) {
 
   const { data: page } = useFetch({
     request: [pagesAPI.show, id],
-    options: { requestKey: requests.bePage },
     condition: !!id
   });
 
