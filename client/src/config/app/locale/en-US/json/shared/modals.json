@@ -1,5 +1,7 @@
 {
   "modals": {
+    "add_auth_membership": "Add {{ name }} to {{ group }}?",
+    "add_auth_membership_body": "The user will be granted access to all of the group's projects and journals.",
     "auto_generate_toc": "The auto generated table of contents will replace all current entries.",
     "auto_generate_toc_body": "Are you sure you want to proceed?",
     "bulk_delete": "{{ count }} {{ unit }} will be deleted. Are you sure you want to proceed?",
@@ -8,6 +10,8 @@
     "confirm_body": "This action cannot be undone.",
     "delete_annotation": "Are you sure you want to delete this annotation?",
     "delete_asset": "Are you sure you want to delete this asset?",
+    "delete_auth_membership": "Are you sure you want to remove {{ name }} from the group?",
+    "delete_auth_membership_body": "The user will no longer have access to the group's projects and journals, except where individual entitlements have been granted.",
     "delete_block": "Are you sure you want to delete this content block?",
     "delete_category": "Are you sure you want to delete this category?",
     "delete_category_body": "Any texts belonging to this category will become uncategorized.",
@@ -39,6 +43,7 @@
     "delete_text": "Are you sure you want to delete this text?",
     "delete_text_body": "All annotations and highlights of this text will also be deleted. $t(modals.confirm_body)",
     "delete_user": "Are you sure you want delete this user?",
+    "delete_user_group": "Are you sure you want delete this user group?",
     "delete_volume": "Are you sure you want to delete this volume?",
     "password_reset": "How would you like to reset the user's password?",
     "password_reset_body": "Automatically send the user a new password or set one yourself.",

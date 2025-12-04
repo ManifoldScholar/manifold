@@ -45,13 +45,19 @@ export default {
     };
   },
 
-  members(id, filter = {}, page = {}) {
+  members(id) {
     return {
       endpoint: `/api/v1/user_groups/${id}/relationships/user_group_memberships`,
       method: "GET",
-      options: {
-        params: { filter, page }
-      }
+      options: {}
+    };
+  },
+
+  entitlements(id) {
+    return {
+      endpoint: `/api/v1/user_groups/${id}/relationships/user_group_entitleables`,
+      method: "GET",
+      options: {}
     };
   }
 };
