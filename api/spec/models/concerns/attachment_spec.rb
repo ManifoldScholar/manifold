@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "rails_helper"
-require "with_model"
-
 RSpec.describe Attachments do
   include ActiveJob::TestHelper
 
