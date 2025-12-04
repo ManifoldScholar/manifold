@@ -18,6 +18,12 @@ FactoryBot.define do
     trait :with_restricted_access do
       restricted_access { true }
     end
+
+    trait :with_cover do
+      cover do
+        Rails.root.join("spec", "data", "assets", "images", "publication_resource.png").open("rb+")
+      end
+    end
   end
 
   factory :draft_project, parent: :project do

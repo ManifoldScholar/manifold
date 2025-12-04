@@ -78,6 +78,12 @@ module Attachments
       thumbnail: "#{MED / RATIO}x#{MED}^",
       extent: MED_REL.to_s
     },
+    large: {
+      convert: "jpg",
+      background: "none",
+      gravity: "north",
+      resize: "#{LRG}x>",
+    },
     large_landscape: {
       convert: "jpg",
       background: "none",
