@@ -22,6 +22,7 @@
     "text_delete": "The text has been destroyed.",
     "text_delete_body": "{{title}} has passed into the endless night. However, it may take a minute or two for all traces to disappear from your Manifold library.",
     "user_delete": "{{name}} has been removed.",
+    "user_group_delete": "{{name}} has been removed.",
     "volume_body": "Volume #{{number}} has passed into the endless night.",
     "volume_delete": "The volume has been destroyed."
   }

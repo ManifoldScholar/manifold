@@ -6,29 +6,18 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import EntitiesList, {
   Button,
-  Search,
   UserGroupRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { userGroupFilters } from "hoc/withFilteredLists";
-import { useListQueryParams, useFetch } from "hooks";
+import { useFetch } from "hooks";
 
-function UserGroupsListContainer({
-  route: baseRoute,
-  entitiesListSearchProps,
-  entitiesListSearchParams
-}) {
+function UserGroupsListContainer({ route: baseRoute }) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const id = pathname.split("/")[4];
 
-  const { pagination, filters, searchProps } = useListQueryParams({
-    initSize: 10,
-    initFilters: entitiesListSearchParams.user_groups,
-    initSearchProps: entitiesListSearchProps("user_groups")
-  });
-
   const { data: userGroups, meta: userGroupsMeta, refresh } = useFetch({
-    request: [userGroupsAPI.index, filters, pagination],
+    request: [userGroupsAPI.index],
     options: { requestKey: "backend-user-groups" }
   });
 
@@ -79,7 +68,6 @@ function UserGroupsListContainer({
           unit={unit}
           pagination={userGroupsMeta.pagination}
           showCount
-          search={<Search {...searchProps} />}
           buttons={[
             <Button
               path={lh.link("backendRecordsUserGroupsNew")}
