@@ -179,7 +179,8 @@ export default {
   UserGroupWrapper: UserGroup.Wrapper,
   UserGroupProperties: UserGroup.Properties,
   UserGroupUsers: UserGroup.Users,
-  UserGroupEntitlements: UserGroup.Entitlements,
+  UserGroupEntitlements: UserGroup.Entitlements.List,
+  UserGroupEntitlementsNew: UserGroup.Entitlements.New,
   ResourceTracksList: TextTracks.List,
   ResourceTrackAdd: TextTracks.AddEdit
 };
