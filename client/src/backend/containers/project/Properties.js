@@ -127,7 +127,7 @@ function ProjectPropertiesContainer({ project }) {
             <Form.TextInput
               wide
               label={t("projects.forms.properties.external_id_label")}
-              name="attributes[externalId]"
+              name="attributes[externalIdentifier]"
               placeholder={t(
                 "projects.forms.properties.external_id_placeholder"
               )}
