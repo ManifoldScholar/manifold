@@ -172,5 +172,5 @@ group :test do
   gem "database_cleaner-active_record", "~> 2.1.0"
   gem "database_cleaner-redis", "~> 2.0"
   gem "test-prof", "~> 1.0"
-  gem "with_model", "~> 2.1"
+  gem "with_model", "~> 2.2.0"
 end
