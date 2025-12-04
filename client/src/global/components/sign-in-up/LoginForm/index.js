@@ -26,7 +26,10 @@ export default function LoginForm({
   const authentication = useFromStore("authentication");
   const error = authentication?.error?.body;
   const settings = useFromStore("settings", "select");
-  const { hideLocalLogin = false, identityProviders = ["1", "2"] } = settings;
+  const {
+    hideLocalLogin,
+    identityProviders
+  } = settings?.attributes?.authentication;
 
   const formatData = data => {
     dispatch(actions.loginStart());
@@ -133,8 +136,13 @@ export default function LoginForm({
         )}
         {!!identityProviders?.length && (
           <Styled.OauthWrapper>
-            <OAuthProviderButton provider="Provider 1" icon="Privacy24" />
-            <OAuthProviderButton provider="Provider 2" icon="Privacy24" />
+            {identityProviders.map(provider => (
+              <OAuthProviderButton
+                key={provider.name}
+                provider={provider}
+                icon="Privacy24"
+              />
+            ))}
           </Styled.OauthWrapper>
         )}
         {!hideLocalLogin && (
