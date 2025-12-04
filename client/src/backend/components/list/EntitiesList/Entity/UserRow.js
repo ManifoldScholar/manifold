@@ -13,7 +13,10 @@ function UserRow({
   bulkSelection,
   addItem,
   removeItem,
-  onGroupRemove,
+  groupAction,
+  groupActionIcon,
+  memberIds,
+  membersView,
   ...props
 }) {
   const { t } = useTranslation();
@@ -24,15 +27,17 @@ function UserRow({
   const isSelected =
     !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
 
+  const isMember = memberIds.includes(id);
+
   const utility = (
     <button
       className="entity-row__utility-button"
       title={t("reading_groups.remove_member")}
       onClick={() =>
-        onGroupRemove(id, `${attributes.firstName} ${attributes.lastName}`)
+        groupAction(id, `${attributes.firstName} ${attributes.lastName}`)
       }
     >
-      <Utility.IconComposer icon="circlePlus24" size={26} />
+      <Utility.IconComposer icon={groupActionIcon} size={26} />
     </button>
   );
 
@@ -53,10 +58,18 @@ function UserRow({
               level: "notice"
             }
           ]
+        : []),
+      ...(isMember && !membersView
+        ? [
+            {
+              text: t("member"),
+              level: "notice"
+            }
+          ]
         : [])
     ],
     onRowClick: lh.link("backendRecordsUser", id),
-    rowClickMode: onGroupRemove ? "inline" : "block",
+    rowClickMode: groupAction ? "inline" : "block",
     prepend: bulkActionsActive && (
       <Checkbox
         checked={isSelected}
@@ -64,7 +77,7 @@ function UserRow({
         onClear={() => removeItem(id)}
       />
     ),
-    utility: onGroupRemove ? utility : undefined
+    utility: groupAction && (!isMember || membersView) ? utility : undefined
   };
 
   return <EntityRow {...props} {...additionalProps} />;
