@@ -3,7 +3,7 @@ import CollectionNavigation from "frontend/components/CollectionNavigation";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { projectCollectionsAPI, projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
@@ -20,7 +20,8 @@ import {
 export default function ProjectCollectionDetailContainer() {
   const { id } = useParams();
   const { data: projectCollection } = useFetch({
-    request: [projectCollectionsAPI.show, id]
+    request: [projectCollectionsAPI.show, id],
+    condition: id !== "all"
   });
 
   const allSubjects = useFromStore({
@@ -48,7 +49,8 @@ export default function ProjectCollectionDetailContainer() {
   });
 
   const { data: projects, meta } = useFetch({
-    request: [projectsAPI.index, filters, pagination]
+    request: [projectsAPI.index, filters, pagination],
+    condition: id !== "all"
   });
 
   const { t } = useTranslation();
@@ -72,6 +74,9 @@ export default function ProjectCollectionDetailContainer() {
   ];
 
   const headContentProps = useEntityHeadContent(projectCollection);
+
+  if (id === "all")
+    return <Navigate to={lh.link("frontendProjectCollectionsAll")} />;
 
   if (!projectCollection) return null;
 
