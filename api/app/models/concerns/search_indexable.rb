@@ -161,6 +161,22 @@ module SearchIndexable
   def multisearch_full_text; end
 
   # @abstract
+  # @return [Boolean]
+  def multisearch_journal_content
+    case self
+    when Journal then true
+    when Project then journal_issue?
+    else
+      false
+    end
+  end
+
+  # @see #multisearch_journal_content
+  def multisearch_journal_content?
+    multisearch_journal_content.present?
+  end
+
+  # @abstract
   # @return [<String>]
   def multisearch_keywords
     [].tap do |a|
@@ -206,12 +222,14 @@ module SearchIndexable
 
   def multisearch_base_attributes
     {
-      search_result_type: search_result_type,
+      search_result_type:,
       journal_id: multisearch_journal_id,
+      journal_issue_id: multisearch_journal_issue_id,
       project_id: multisearch_project_id,
       text_id: multisearch_text_id,
       text_section_id: multisearch_text_section_id,
-    }.compact_blank
+      journal_content: multisearch_journal_content?,
+    }
   end
 
   # @return [String, nil]
@@ -221,6 +239,10 @@ module SearchIndexable
     else
       try(:journal_id)
     end
+  end
+
+  def multisearch_journal_issue_id
+    try(:journal_issue_id)
   end
 
   # @return [String, nil]
