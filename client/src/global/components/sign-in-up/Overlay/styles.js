@@ -23,7 +23,7 @@ export const Dialog = styled.div`
     opacity: 0;
   }
 
-  a {
+  a:not(.button-secondary) {
     text-decoration: underline;
   }
 `;
