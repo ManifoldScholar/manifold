@@ -52,3 +52,4 @@ export ingestionSourcesAPI from "./resources/ingestionSources";
 export emailConfirmationsAPI from "./resources/emailConfirmations";
 export bulkDeleteAPI from "./resources/bulkDelete";
 export collaboratorsAPI from "./resources/collaborators";
+export userGroupMembershipsAPI from "./resources/userGroupMemberships";
