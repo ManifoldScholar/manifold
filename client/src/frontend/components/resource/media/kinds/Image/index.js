@@ -1,16 +1,14 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
-const ATTACHMENT_STYLE = "medium";
-
 function ResourceMediaImage({ resource, fixedAspectRatio }) {
   const {
     attachmentAltText,
     attachmentStyles,
     attachmentMeta
   } = resource.attributes;
-  const src = attachmentStyles[ATTACHMENT_STYLE];
-  const { width, height } = attachmentMeta[ATTACHMENT_STYLE];
+  const src = attachmentStyles.large ?? attachmentStyles.medium;
+  const { width, height } = attachmentMeta.large ?? attachmentMeta.medium;
 
   return (
     <Styled.Image

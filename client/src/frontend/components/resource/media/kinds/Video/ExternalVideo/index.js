@@ -22,10 +22,10 @@ function getSrc(resource) {
   }
 }
 
-export default function ExternalVideo({ resource }) {
+export default function ExternalVideo({ resource, active = true }) {
   const src = getSrc(resource);
 
-  if (!src) return null;
+  if (!src || !active) return null;
 
   const { title, externalType } = resource.attributes;
 
