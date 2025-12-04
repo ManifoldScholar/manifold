@@ -76,34 +76,6 @@ const routes = [
             }
           },
           {
-            element: <ProjectCollections />,
-            path: "project-collections",
-            loader: checkLibraryMode,
-            handle: {
-              name: "frontendProjectCollections",
-              isLibrary: true,
-              helper: (params = {}) => {
-                const query = queryString.stringify(params);
-                if (!query) return "/projects/project-collections";
-                return `/projects/project-collections?${query}`;
-              }
-            }
-          },
-          {
-            element: <ProjectCollectionDetail />,
-            path: "project-collection/:id",
-            loader: checkLibraryMode,
-            handle: {
-              name: "frontendProjectCollection",
-              isLibrary: true,
-              helper: (pc, params = {}) => {
-                const query = queryString.stringify(params);
-                if (!query) return `/projects/project-collection/${pc}`;
-                return `/projects/project-collection/${pc}?${query}`;
-              }
-            }
-          },
-          {
             element: <ProjectWrapper />,
             path: ":id",
             handle: {
@@ -203,6 +175,45 @@ const routes = [
                 path: "*"
               }
             ]
+          }
+        ]
+      },
+      {
+        element: <Outlet />,
+        path: "project-collections",
+        handle: {
+          name: "frontendProjectCollections",
+          isLibrary: true,
+          helper: () => "/project-collections"
+        },
+        children: [
+          {
+            element: <ProjectCollections />,
+            index: true,
+            loader: checkLibraryMode,
+            handle: {
+              name: "frontendProjectCollectionsAll",
+              isLibrary: true,
+              helper: (params = {}) => {
+                const query = queryString.stringify(params);
+                if (!query) return "/project-collections";
+                return `/project-collections?${query}`;
+              }
+            }
+          },
+          {
+            element: <ProjectCollectionDetail />,
+            path: ":id",
+            loader: checkLibraryMode,
+            handle: {
+              name: "frontendProjectCollection",
+              isLibrary: true,
+              helper: (pc, params = {}) => {
+                const query = queryString.stringify(params);
+                if (!query) return `/project-collections/${pc}`;
+                return `/project-collections/${pc}?${query}`;
+              }
+            }
           }
         ]
       },
