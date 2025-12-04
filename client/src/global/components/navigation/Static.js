@@ -120,18 +120,20 @@ export default function NavigationStatic({
     if (link.dropdown) {
       const Toggle = link.toggle;
       return (
-        <DisclosureNavigationMenu
-          key={`${link.label}-${index}`}
-          disclosure={
-            <Toggle
-              link={link}
-              index={index}
-              journalIsActive={journalIsActive}
-            />
-          }
-        >
-          {link.dropdownContent}
-        </DisclosureNavigationMenu>
+        <li key={`${link.label}-${index}`} className="site-nav__item">
+          <DisclosureNavigationMenu
+            key={`${link.label}-${index}`}
+            disclosure={
+              <Toggle
+                link={link}
+                index={index}
+                journalIsActive={journalIsActive}
+              />
+            }
+          >
+            {link.dropdownContent}
+          </DisclosureNavigationMenu>
+        </li>
       );
     }
     return (

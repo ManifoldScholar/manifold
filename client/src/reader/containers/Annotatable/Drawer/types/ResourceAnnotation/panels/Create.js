@@ -137,6 +137,7 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
             </fieldset>
             {(kind === "link" || kind === "interactive") && (
               <Form.TextInput
+                inputType="url"
                 label={t("resources.properties.url")}
                 name="attributes[externalUrl]"
                 placeholder={t("resources.properties.url_placeholder")}
