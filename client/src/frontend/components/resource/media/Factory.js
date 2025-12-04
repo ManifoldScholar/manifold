@@ -9,7 +9,8 @@ function ResourceMediaFactory({
   loading = false,
   aspectRatio,
   roundedCorners,
-  enableZoom: enableZoomProp = false
+  enableZoom: enableZoomProp = false,
+  active
 }) {
   if (loading)
     return (
@@ -33,7 +34,11 @@ function ResourceMediaFactory({
   return (
     <Styled.Wrapper $aspectRatio={aspectRatio} $roundedCorners={roundedCorners}>
       {enableZoom && <Zoom resource={resource} />}
-      <KindComponent resource={resource} fixedAspectRatio={!!aspectRatio} />
+      <KindComponent
+        resource={resource}
+        fixedAspectRatio={!!aspectRatio}
+        active={active}
+      />
     </Styled.Wrapper>
   );
 }
@@ -45,7 +50,8 @@ ResourceMediaFactory.propTypes = {
   loading: PropTypes.bool,
   aspectRatio: PropTypes.string,
   roundedCorners: PropTypes.bool,
-  enableZoom: PropTypes.bool
+  enableZoom: PropTypes.bool,
+  active: PropTypes.bool
 };
 
 export default ResourceMediaFactory;
