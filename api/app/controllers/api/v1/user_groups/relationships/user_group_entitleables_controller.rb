@@ -8,15 +8,24 @@ module API
           before_action :set_group
 
           resourceful! UserGroupEntitleable do
-            @user_group.user_group_entitleables
+            @user_group.entitleables
+          end
+
+          def index
+            authorize_action_for @user_group
+            @user_group_entitleables = load_user_group_entitleables
+            render_multiple_resources(
+              @user_group_entitleables,
+              include: [:entitleable],
+            )
           end
 
           def create
-            @user_group_entitleable = ::Updaters::UserGroupEntitelables
+            @user_group_entitleable = ::Updaters::UserGroupEntitleable
                                      .new(user_group_entitleable_params)
-                                     .update(UserGroupEntitleable.new)
+                                     .update(@user_group.entitleables.new)
             render_single_resource @user_group_entitleable,
-                                   include: [:user]
+                                   include: [:entitleable]
           end
 
           def destroy
