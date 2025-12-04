@@ -9,8 +9,6 @@ import { useListQueryParams, useFetch, useApiCallback } from "hooks";
 import withFilteredLists, { userFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 
-const MEMBER_FILTERS = {};
-
 function UserGroupUsers({
   userGroup,
   entitiesListSearchProps,
@@ -27,13 +25,6 @@ function UserGroupUsers({
     initSearchProps: entitiesListSearchProps("users")
   });
 
-  const {
-    pagination: membersPagination,
-    membersSearchProps
-  } = useListQueryParams({
-    initSize: 10
-  });
-
   const { data: users, meta: usersMeta } = useFetch({
     request: [usersAPI.index, filters, pagination],
     condition: allVisible
@@ -44,13 +35,7 @@ function UserGroupUsers({
     meta: membersMeta,
     refresh: refreshMembers
   } = useFetch({
-    request: [
-      userGroupsAPI.members,
-      userGroup.id,
-      MEMBER_FILTERS,
-      membersPagination
-    ],
-    condition: !allVisible
+    request: [userGroupsAPI.members, userGroup.id]
   });
 
   const unit = t("glossary.user", { count: usersMeta?.pagination?.totalCount });
@@ -61,7 +46,10 @@ function UserGroupUsers({
   const toggleLabel = !allVisible ? "Add Members" : "Show Members Only";
 
   const onAddMember = async (id, name) => {
-    const heading = t("modals.add_auth_membership", { name });
+    const heading = t("modals.add_auth_membership", {
+      name,
+      group: userGroup.attributes.name
+    });
     const message = t("modals.add_auth_membership_body");
     if (confirm)
       confirm(heading, message, async () => {
@@ -84,7 +72,10 @@ function UserGroupUsers({
     ? !!users && !!usersMeta
     : !!members && !!membersMeta;
 
-  const memberUsers = members?.map(m => m.relationships?.user);
+  const memberUsers = members?.map(m => ({
+    ...m.relationships?.user,
+    membershipId: m.id
+  }));
 
   return canRender ? (
     <div>
@@ -109,7 +100,7 @@ function UserGroupUsers({
         unit={unit}
         pagination={allVisible ? usersMeta.pagination : membersMeta.pagination}
         showCount={allVisible}
-        search={<Search {...(allVisible ? searchProps : membersSearchProps)} />}
+        search={allVisible ? <Search {...searchProps} /> : undefined}
       />
     </div>
   ) : null;
