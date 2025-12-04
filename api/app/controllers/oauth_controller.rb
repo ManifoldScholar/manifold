@@ -5,9 +5,10 @@ class OauthController < ApplicationController
 
   skip_after_action :set_content_type
 
-  before_action :generate_csrf_token, only: :redirect
-
+  # In order to prevent CSRF,
   def redirect
+    # Sets the CSRF token in session, which sets the cookie in the response
+    real_csrf_token(session)
     render html: redirect_body.html_safe, layout: false
   end
 
