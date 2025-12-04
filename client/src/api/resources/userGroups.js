@@ -43,5 +43,15 @@ export default {
       method: "DELETE",
       options: {}
     };
+  },
+
+  members(id, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/user_groups/${id}/relationships/user_group_memberships`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
   }
 };
