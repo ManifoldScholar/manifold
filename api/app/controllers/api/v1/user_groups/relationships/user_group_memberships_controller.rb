@@ -8,13 +8,22 @@ module API
           before_action :set_group
 
           resourceful! UserGroupMembership do
-            @user_group.user_group_memberships
+            @user_group.memberships
+          end
+
+          def index
+            authorize_action_for @user_group
+            @user_group_memberships = load_user_group_memberships
+            render_multiple_resources(
+              @user_group_memberships,
+              include: [:user],
+            )
           end
 
           def create
-            @user_group_membership = ::Updaters::UserGroupMemberships
+            @user_group_membership = ::Updaters::UserGroupMembership
                                      .new(user_group_membership_params)
-                                     .update(UserGroupMembership.new)
+                                     .update(@user_group.memberships.new)
             render_single_resource @user_group_membership,
                                    include: [:user]
           end
