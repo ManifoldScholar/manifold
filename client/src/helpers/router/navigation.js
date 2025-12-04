@@ -30,7 +30,7 @@ class Navigation {
             label: "titles.project_collections",
             route: "frontendProjectCollections"
           }
-        ]
+        ].filter(Boolean)
       },
       settings.attributes.calculated.hasVisibleJournals && {
         label: "titles.journals",
