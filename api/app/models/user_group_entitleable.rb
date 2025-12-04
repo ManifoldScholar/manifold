@@ -1,10 +1,13 @@
 class UserGroupEntitleable < ApplicationRecord
-  belongs_to :user_group, inverse_of: :user_group_entitleables
+  include Authority::Abilities
+  include SerializedAbilitiesFor
+
+  belongs_to :user_group, inverse_of: :entitleables
   belongs_to :entitleable, polymorphic: true
 
-  attr_reader :target_url
+  attr_accessor :target_url
 
-  before_save :maybe_derive_entitleable
+  before_validation :maybe_derive_entitleable
 
   private
 
