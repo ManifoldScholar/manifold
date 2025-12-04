@@ -80,7 +80,10 @@
         "header": "Manage Users"
       },
       "entitlements": {
-        "header": "Manage Entitlements"
+        "header": "Manage Entitlements",
+        "add_button_label": "Add Entitlement",
+        "add_header": "Add Entitlement",
+        "add_instructions": "Grant an entitlement to a user for this user group."
       }
     },
     "pages": {
