@@ -962,11 +962,21 @@ const routes = {
                 },
                 {
                   name: "backendRecordsUserGroupEntitlements",
-                  exact: true,
+                  exact: false,
                   component: "UserGroupEntitlements",
                   path: "/backend/records/user-groups/:id/entitlements",
                   helper: ug =>
-                    `/backend/records/user-groups/${ug}/entitlements`
+                    `/backend/records/user-groups/${ug}/entitlements`,
+                  routes: [
+                    {
+                      name: "backendRecordsUserGroupEntitlementsNew",
+                      exact: true,
+                      component: "UserGroupEntitlementsNew",
+                      path: "/backend/records/user-groups/:id/entitlements/new",
+                      helper: ug =>
+                        `/backend/records/user-groups/${ug}/entitlements/new`
+                    }
+                  ]
                 }
               ]
             }
