@@ -80,7 +80,7 @@ function JournalPropertiesContainer({ journal }) {
                 <Form.TextInput
                   wide
                   label={t("journals.forms.properties.external_id_label")}
-                  name="attributes[externalId]"
+                  name="attributes[externalIdentifier]"
                   placeholder={t(
                     "journals.forms.properties.external_id_placeholder"
                   )}
