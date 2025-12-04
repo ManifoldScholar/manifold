@@ -3,7 +3,7 @@ import loadable from "@loadable/component";
 
 const LoadablePlayer = loadable(() => import("../../shared/DefaultPlayer"));
 
-function ResourceMediaVideoInternal({ resource }) {
+function ResourceMediaVideoInternal({ resource, active = true }) {
   const {
     variantPosterStyles,
     variantThumbnailStyles,
@@ -14,7 +14,7 @@ function ResourceMediaVideoInternal({ resource }) {
 
   const src = attachmentStyles.original;
 
-  if (!src) return null;
+  if (!src || !active) return null;
 
   const poster =
     variantPosterStyles.mediumLandscape ??

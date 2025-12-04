@@ -12,6 +12,7 @@ export default `
     }
 
     &__item {
+      position: relative;
       margin-right: 18px;
       margin-bottom: ${paddingVerticalMobile};
 
