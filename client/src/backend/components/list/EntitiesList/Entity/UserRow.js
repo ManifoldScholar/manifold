@@ -28,13 +28,14 @@ function UserRow({
     !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
 
   const isMember = memberIds.includes(id);
+  const actionId = isMember ? entity.membershipId : id;
 
   const utility = (
     <button
       className="entity-row__utility-button"
       title={t("reading_groups.remove_member")}
       onClick={() =>
-        groupAction(id, `${attributes.firstName} ${attributes.lastName}`)
+        groupAction(actionId, `${attributes.firstName} ${attributes.lastName}`)
       }
     >
       <Utility.IconComposer icon={groupActionIcon} size={26} />
