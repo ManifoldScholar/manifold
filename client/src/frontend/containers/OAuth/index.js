@@ -58,8 +58,8 @@ export default function OAuth() {
       }
     };
 
-    if (!error) loginUser();
-  }, [dispatch, error, authCode]);
+    if (!errorParam) loginUser();
+  }, [dispatch, errorParam, authCode]);
 
   if (shouldRedirect) return <Redirect to={redirectPath || "/"} />;
 
