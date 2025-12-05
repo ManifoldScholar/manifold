@@ -28,7 +28,7 @@ export const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: ${({ $minHeight }) => $minHeight || `100dvh`};
   padding-inline: var(--container-padding-inline-fluid);
   padding-block-start: var(--container-padding-block-start);
   padding-block-end: var(--container-padding-block-end);
