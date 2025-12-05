@@ -387,6 +387,17 @@ const routes = {
       helper: () => `/signup`
     },
     {
+      name: "oauth",
+      exact: true,
+      component: "OAuth",
+      path: "/oauth",
+      helper: (params = {}) => {
+        const query = queryString.stringify(params);
+        if (!query) return "/oauth";
+        return `/oauth?${query}`;
+      }
+    },
+    {
       name: "frontendContact",
       exact: true,
       component: "Contact",

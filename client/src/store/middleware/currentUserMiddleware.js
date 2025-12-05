@@ -64,7 +64,7 @@ export function handleAuthenticationFailure(
 }
 
 function authenticateWithPassword(email, password, dispatch) {
-  const promise = tokensAPI.createToken(email, password);
+  const promise = tokensAPI.createToken({ email, password });
   promise.then(
     user => {
       const { authToken } = user.meta;
