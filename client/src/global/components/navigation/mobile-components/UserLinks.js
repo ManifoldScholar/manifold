@@ -46,15 +46,20 @@ class UserLinks extends PureComponent {
   render() {
     const t = this.props.t;
 
+    const {
+      defaultIdentityProvider,
+      identityProviders
+    } = this.props.settings?.attributes?.authentication;
+    const defaultIdpUrl = identityProviders.find(
+      idp => idp.name === defaultIdentityProvider
+    )?.url;
+
     if (!this.props.authentication.authenticated)
       return (
         <ul className="nested-nav__list nested-nav__list--user-links">
           <li className="nested-nav__item">
-            {this.props.settings.defaultIdentityProvider ? (
-              <a
-                className="mode-button"
-                href={this.props.settings.defaultIdentityProvider}
-              >
+            {defaultIdpUrl ? (
+              <a className="mode-button" href={defaultIdpUrl}>
                 {t("forms.signin_overlay.log_in")}
               </a>
             ) : (

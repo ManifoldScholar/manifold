@@ -46,6 +46,14 @@ function NavigationStatic({
 
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
 
+  const {
+    defaultIdentityProvider,
+    identityProviders
+  } = settings?.attributes?.authentication;
+  const defaultIdpUrl = identityProviders.find(
+    idp => idp.name === defaultIdentityProvider
+  )?.url;
+
   const pathForLink = link => {
     const args = link.args || [];
     return lh.link(link.route, ...args);
@@ -179,11 +187,8 @@ function NavigationStatic({
           )}
           {renderSearch()}
           <li className="user-nav__item">
-            {settings.defaultIdentityProvider ? (
-              <a
-                className="mode-button"
-                href={settings.defaultIdentityProvider}
-              >
+            {defaultIdpUrl ? (
+              <a className="mode-button" href={defaultIdpUrl}>
                 {t("forms.signin_overlay.log_in")}
               </a>
             ) : (
