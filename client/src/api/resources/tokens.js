@@ -1,10 +1,10 @@
 import LowLevelApiClient from "api/LowLevelApiClient";
 
 export default {
-  createToken(email, password) {
+  createToken({ email, password, authCode }) {
     const lowLevelApiClient = new LowLevelApiClient();
     const results = lowLevelApiClient
-      .call("/api/v1/tokens", "POST", { params: { email, password } })
+      .call("/api/v1/tokens", "POST", { params: { email, password, authCode } })
       .then(response => {
         if (!response.ok) {
           return Promise.reject(response);
