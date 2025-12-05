@@ -3,6 +3,9 @@
 class OauthController < ApplicationController
   include ActionController::RequestForgeryProtection
 
+  POST_AUTH_REDIRECT_PATH = "/oauth"
+  AUTH_ERROR_STRING = "An error has occurred logging you in"
+
   skip_after_action :set_content_type
 
   # In order to prevent CSRF,
@@ -18,13 +21,45 @@ class OauthController < ApplicationController
       auth_hash: omniauth_hash
     )
 
-    Identities::HandleExternalAuth.new.call(outcome.identity, omniauth_hash) if outcome.valid?
+    if outcome.valid?
+      Identities::HandleExternalAuth.new.call(outcome.identity, omniauth_hash)
+      set_auth_code(outcome.user)
+    end
 
-    @oauth_payload = ExternalAuth::Payload.new outcome
-    render html: body.html_safe, layout: false
+    redirect_to post_authorize_redirect_uri(error: outcome.invalid?).to_s
   end
 
   private
+
+  def set_auth_code(user)
+    code = SecureRandom.hex
+    session[:auth_code] = code
+    Rails.cache.set(code, user.id)
+  end
+
+  def post_authorize_redirect_uri(error: false)
+    URI.parse(Rails.configuration.manifold.url).tap do |uri|
+      uri.path = POST_AUTH_REDIRECT_PATH
+      uri.query = error ? "error=#{AUTH_ERROR_STRING}" : redirect_resource_query_string
+    end
+  end
+
+  def redirect_resource
+    relay_state = params[:RelayState] || params[:relay_state]
+    return {} unless relay_state.present?
+
+    resource = ExternalIdentifier.fetch(relay_state)&.identifiable
+    return {} if resource.blank?
+
+    {
+      redirect_type: resource.class.name,
+      redirect_id: resource.try(:slug) || resource.id
+    }
+  end
+
+  def redirect_resource_query_string
+    redirect_resource.map { _1.join("=") }.join("&")
+  end
 
   def redirect_body
     <<~HEREDOC
@@ -41,25 +76,6 @@ class OauthController < ApplicationController
           </form>
           <script type="text/javascript">
             document.getElementById("auth_redirect_form").submit();
-          </script>
-        </body>
-      </html>
-    HEREDOC
-  end
-
-  def body
-    <<~HEREDOC
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Authentication successful!</title>
-          <style></style>
-        </head>
-        <body>
-          <h1>Authorization success!</h1>
-          <script type="text/javascript">
-            window.opener.postMessage(#{@oauth_payload.to_json}, "*");
-            window.close();
           </script>
         </body>
       </html>
