@@ -8,7 +8,6 @@ module ExternalAuth
 
     # @return [User]
     def execute
-      byebug
       @user = find_user
     end
 
