@@ -18,8 +18,8 @@ module Identities
       @identity = identity
       @auth_hash = auth_hash
 
-      to_remove.each { |group| remove_membership.(identity, group) }
-      to_add.each { |group| add_membership.(identity, group) }
+      to_remove.each { |group| remove_member.(group, identity) }
+      to_add.each { |group| add_member.(group, identity) }
 
       return Success()
     end
@@ -33,7 +33,7 @@ module Identities
     end
 
     def desired_user_group_identifiers
-      @desired_identifiers ||= auth_hash.user_groups&.split(/,;/)&.compact || []
+      @desired_identifiers ||= auth_hash.info.user_groups&.split(/,;/)&.compact || []
     end
 
     def existing_user_groups
