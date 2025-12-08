@@ -6,6 +6,7 @@ module Identities
     include Dry::Monads[:result, :do]
 
     ENTITLEABLES = [Project, ProjectCollection, Journal].freeze
+    ROLE = { scoped_roles: { read_access: true } }
 
     attr_reader :auth_hash, :identity, :user
 
@@ -24,7 +25,8 @@ module Identities
         Entitlements::Create.run(
           entitling_entity: identity,
           subject: entitleable,
-          target: identity.user
+          target: identity.user,
+          **ROLE
         )
       end
 
@@ -50,7 +52,7 @@ module Identities
     end
 
     def desired_entitleable_identifiers
-      @desired_identifiers ||= auth_hash.entitlements&.split(/,;/)&.compact || []
+      @desired_identifiers ||= auth_hash.info.entitlements&.split(/,;/)&.compact || []
     end
 
     def existing_entitlements
