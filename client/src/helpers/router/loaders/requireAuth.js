@@ -1,9 +1,9 @@
-import { redirect } from "react-router-dom";
+import { redirect } from "react-router";
 import lh from "helpers/linkHandler";
 import { getStore } from "store/storeInstance";
 
 /**
- * Authentication loader utility for React Router v6 routes.
+ * Authentication loader utility
  * Checks if a user is authenticated and redirects to login if not.
  *
  * @param {Object} loaderContext - Loader context from React Router (contains context.store for SSR)

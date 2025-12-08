@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
 
 import queryString from "query-string";
-import requireAuth from "helpers/router/requireAuth";
-import checkLibraryMode from "helpers/router/checkLibraryMode";
+import requireAuth from "helpers/router/loaders/requireAuth";
+import checkLibraryMode from "helpers/router/loaders/checkLibraryMode";
 
 import NotFound from "global/containers/NotFound";
 
