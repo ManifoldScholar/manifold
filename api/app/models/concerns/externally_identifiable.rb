@@ -4,21 +4,21 @@ module ExternallyIdentifiable
   extend ActiveSupport::Concern
 
   included do
-    has_one :external_identifier_record, class_name: "ExternalIdentifier", as: :identifiable, dependent: :destroy
+    has_one :external_identifier, as: :identifiable, dependent: :destroy
 
-    scope :by_external_identifier, ->(*identifiers) { joins(:external_identifier_record).where(external_identifiers: { identifier: identifiers }) }
+    scope :by_external_identifier, ->(*identifiers) { joins(:external_identifier).where(external_identifiers: { identifier: identifiers }) }
   end
 
-  def external_identifier
-    external_identifier_record&.identifier || nil
-  end
-
-  def external_identifier=(new_id)
-    unless external_identifier
-      build_external_identifier_record(identifier: new_id)
+  def external_identifier=(record_or_identifier)
+    case record_or_identifier.presence
+    when ExternalIdentifier
+      super(record_or_identifier)
+    when String
+      self.external_identifier.update(identifier: record_or_identifier)
+    when nil
+      self.external_identifier.destroy
     else
-      external_identifier_record.identifier = new_id
+      raise ArgumentError, "Invalid external identifier value"
     end
-    external_identifier_record.save
   end
 end
