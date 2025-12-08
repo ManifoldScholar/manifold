@@ -2,6 +2,7 @@ import frontendRoutesV6 from "frontend/routes-v6";
 import backendRoutesV6 from "backend/routes-v6";
 import readerRoutesV6 from "reader/routes-v6";
 import Manifold from "global/containers/Manifold";
+import manifoldLoader from "global/containers/Manifold/loader";
 import linkHandler from "helpers/linkHandler";
 import RouteError from "global/components/FatalError/RouteError";
 
@@ -15,6 +16,7 @@ export default function createRouter() {
   const routes = [
     {
       element: <Manifold />,
+      loader: manifoldLoader,
       path: "/",
       errorElement: <RouteError />,
       children: allRoutes

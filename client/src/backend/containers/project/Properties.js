@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
 import Project from "backend/components/project";
 import Form from "global/components/form";
@@ -10,7 +10,7 @@ import { useApiCallback } from "hooks";
 
 export default function ProjectPropertiesContainer() {
   const { t } = useTranslation();
-  const { project } = useOutletContext() || {};
+  const { project, requestKey } = useOutletContext() || {};
   const createSubject = useApiCallback(subjectsAPI.create);
 
   if (!project) return null;
@@ -70,6 +70,9 @@ export default function ProjectPropertiesContainer() {
           create={projectsAPI.create}
           className="form-secondary"
           formatData={formatData}
+          options={{
+            refreshes: requestKey
+          }}
         >
           <Form.FieldGroup label={t("projects.forms.properties.header")}>
             <Form.TextInput

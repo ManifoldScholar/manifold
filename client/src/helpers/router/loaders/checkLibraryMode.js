@@ -1,12 +1,10 @@
-import { redirect } from "react-router-dom";
+import { redirect } from "react-router";
 import { getStore } from "store/storeInstance";
 import { grab } from "utils/entityUtils";
 
 /**
  * Loader utility to check if library mode is disabled.
  * If disabled, redirects to the appropriate URL (home redirect or library redirect).
- *
- * Works with both SSR (store from context) and client-side (store from storeInstance).
  *
  * @param {Object} loaderArgs - Loader arguments from React Router
  * @param {Object} loaderArgs.request - Request object

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { subjectsAPI, requests } from "api";

@@ -1,17 +1,21 @@
 import { Outlet } from "react-router-dom";
 
 import queryString from "query-string";
-import requireAuth from "helpers/router/requireAuth";
-import checkLibraryMode from "helpers/router/checkLibraryMode";
+import requireAuth from "helpers/router/loaders/requireAuth";
+import checkLibraryMode from "helpers/router/loaders/checkLibraryMode";
 
 import NotFound from "global/containers/NotFound";
 
 import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
+import frontendLoader from "frontend/containers/Frontend/loader";
+import Home from "frontend/containers/Home";
+import homeLoader from "frontend/containers/Home/loader";
 import Projects from "frontend/containers/Projects";
 import ProjectCollections from "frontend/containers/ProjectCollections";
 import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail";
 import ProjectWrapper from "frontend/containers/ProjectWrapper";
+import projectLoader from "frontend/containers/ProjectWrapper/loader";
 import ProjectDetail from "frontend/containers/ProjectDetail";
 import ProjectSearch from "frontend/containers/ProjectSearch";
 import ProjectResources from "frontend/containers/ProjectResources";
@@ -25,7 +29,6 @@ import PasswordReset from "frontend/containers/PasswordReset";
 import Page from "frontend/containers/Page";
 import Subscriptions from "frontend/containers/Subscriptions";
 import Unsubscribe from "frontend/containers/Unsubscribe";
-import Home from "frontend/containers/Home";
 import MyReadingGroups from "frontend/containers/MyReadingGroups";
 import PublicReadingGroups from "frontend/containers/PublicReadingGroups";
 import ReadingGroup from "frontend/containers/ReadingGroup";
@@ -38,6 +41,7 @@ import MyAnnotations from "frontend/containers/MyAnnotations";
 import IssuesList from "frontend/containers/IssuesList";
 import Journals from "frontend/containers/Journals";
 import JournalWrapper from "frontend/containers/JournalWrapper";
+import journalLoader from "frontend/containers/JournalWrapper/loader";
 import JournalDetail from "frontend/containers/JournalDetail";
 import VolumeDetail from "frontend/containers/VolumeDetail";
 import JournalVolumesList from "frontend/containers/JournalVolumesList";
@@ -49,6 +53,7 @@ import ReadingGroupSettings from "frontend/components/reading-group/Settings";
 const routes = [
   {
     element: <Frontend />,
+    loader: frontendLoader,
     path: "",
     handle: { isLibrary: true },
     children: [
@@ -77,6 +82,7 @@ const routes = [
           },
           {
             element: <ProjectWrapper />,
+            loader: projectLoader,
             path: ":id",
             handle: {
               name: "frontendProject",
@@ -256,6 +262,7 @@ const routes = [
           },
           {
             element: <JournalWrapper />,
+            loader: journalLoader,
             path: ":id",
             handle: {
               name: "frontendJournal",
@@ -608,7 +615,7 @@ const routes = [
       {
         index: true,
         element: <Home />,
-        loader: checkLibraryMode,
+        loader: homeLoader,
         handle: {
           name: "frontend",
           isLibrary: true,
