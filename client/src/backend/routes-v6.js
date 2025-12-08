@@ -26,6 +26,7 @@ import Features from "backend/containers/features";
 import Makers from "backend/containers/makers";
 import Entitlements from "backend/containers/entitlements";
 import EntitlementsPending from "backend/containers/entitlements-pending";
+import pendingEntitlementsLoader from "backend/containers/entitlements-pending/loader";
 import User from "backend/containers/user";
 import Comments from "backend/containers/comments";
 import ProjectCollection from "backend/containers/project-collection";
@@ -1292,6 +1293,7 @@ const routes = [
           },
           {
             element: <EntitlementsPending.List />,
+            loader: pendingEntitlementsLoader,
             path: "entitlements",
             handle: {
               name: "backendRecordsEntitlements",
