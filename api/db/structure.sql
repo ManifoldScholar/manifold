@@ -6682,6 +6682,13 @@ CREATE UNIQUE INDEX index_user_groups_on_name ON public.user_groups USING btree 
 
 --
 -- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_user_groups_on_name ON public.user_groups USING btree (name);
+
+
+--
+-- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 CREATE INDEX index_users_on_deleted_at ON public.users USING btree (deleted_at);
 
 
