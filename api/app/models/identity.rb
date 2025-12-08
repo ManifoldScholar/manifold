@@ -7,7 +7,7 @@ class Identity < ApplicationRecord
 
   belongs_to :user, optional: false, inverse_of: :identities
 
-  has_many :user_group_memberships, inverse_of: :identity
+  has_many :user_group_memberships, as: :source
 
   validates :provider, inclusion: { in: (ManifoldEnv.oauth.known_strategies + SamlConfig.provider_names) }
   validates :uid, :provider, presence: true
@@ -28,5 +28,9 @@ class Identity < ApplicationRecord
     def from_omniauth(auth_env)
       provider(auth_env["provider"]).uid(auth_env["uid"]).first_or_initialize
     end
+  end
+
+  def name
+    "#{provider} identity for #{user.name}"
   end
 end
