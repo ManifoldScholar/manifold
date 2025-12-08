@@ -102,7 +102,7 @@ module V1
           url: Types::Serializer::URL
         )
       ),
-      default_identity_provider: Types::String,
+      default_identity_provider: Types::String.optional,
       show_local_login: Types::Bool
     )
 
