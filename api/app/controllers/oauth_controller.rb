@@ -34,7 +34,7 @@ class OauthController < ApplicationController
   def set_auth_code(user)
     code = SecureRandom.hex
     session[:auth_code] = code
-    Rails.cache.set(code, user.id)
+    Rails.cache.write(code, user.id)
   end
 
   def post_authorize_redirect_uri(error: false)

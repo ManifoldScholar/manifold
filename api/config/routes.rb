@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   # Omniauth
   get "auth/:provider/redirect", to: "oauth#redirect"
-  post "auth/:provider/callback", to: "oauth#authorize"
+  get "auth/:provider/callback", to: "oauth#authorize"
 
   namespace :api do
     mount Tus::Server => "/files"
