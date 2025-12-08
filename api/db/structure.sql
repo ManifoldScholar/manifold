@@ -1,4 +1,4 @@
-\restrict 58ua8qikph4IzZUWUTgthmyV2rbnaC8WvSNyrC5ufMd3fOh7wMspSYD00WBuKoQ
+\restrict T4ZKFW8DK53tpQZdlSTCvDBm6KhQLXiApUdhnemGjC8IcfRpKuM5cWUH8kp2pUa
 
 -- Dumped from database version 13.22
 -- Dumped by pg_dump version 13.22 (Debian 13.22-1.pgdg11+1)
@@ -1524,7 +1524,7 @@ CREATE TABLE public.external_identifiers (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     identifier character varying NOT NULL,
     identifiable_type character varying,
-    identifiable_id bigint,
+    identifiable_id uuid,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -3380,7 +3380,8 @@ CREATE TABLE public.user_group_memberships (
     id uuid DEFAULT gen_random_uuid() NOT NULL,
     user_id uuid NOT NULL,
     user_group_id uuid NOT NULL,
-    source text,
+    source_type character varying,
+    source_id uuid,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -6620,10 +6621,24 @@ CREATE INDEX index_user_group_entitleables_on_entitleable ON public.user_group_e
 
 
 --
+-- Name: index_user_group_entitleables_on_user_group_and_entitleable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_user_group_entitleables_on_user_group_and_entitleable ON public.user_group_entitleables USING btree (user_group_id, entitleable_type, entitleable_id);
+
+
+--
 -- Name: index_user_group_entitleables_on_user_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_user_group_entitleables_on_user_group_id ON public.user_group_entitleables USING btree (user_group_id);
+
+
+--
+-- Name: index_user_group_memberships_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_user_group_memberships_on_source ON public.user_group_memberships USING btree (source_type, source_id);
 
 
 --
@@ -6638,6 +6653,20 @@ CREATE INDEX index_user_group_memberships_on_user_group_id ON public.user_group_
 --
 
 CREATE INDEX index_user_group_memberships_on_user_id ON public.user_group_memberships USING btree (user_id);
+
+
+--
+-- Name: index_user_group_memberships_on_user_id_and_user_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_user_group_memberships_on_user_id_and_user_group_id ON public.user_group_memberships USING btree (user_id, user_group_id);
+
+
+--
+-- Name: index_user_groups_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_user_groups_on_name ON public.user_groups USING btree (name);
 
 
 --
@@ -7611,7 +7640,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 58ua8qikph4IzZUWUTgthmyV2rbnaC8WvSNyrC5ufMd3fOh7wMspSYD00WBuKoQ
+\unrestrict T4ZKFW8DK53tpQZdlSTCvDBm6KhQLXiApUdhnemGjC8IcfRpKuM5cWUH8kp2pUa
 
 SET search_path TO "$user", public;
 
