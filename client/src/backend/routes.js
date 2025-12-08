@@ -5,17 +5,20 @@ import Backend from "backend/containers/Backend";
 import Dashboard from "backend/containers/Dashboard";
 import Projects from "backend/containers/projects";
 import Project from "backend/containers/project";
+import projectLoader from "backend/containers/project/loader";
 import ContentBlock from "backend/containers/content-block";
 import ActionCallout from "backend/containers/action-callout";
 import Text from "backend/containers/text";
 import Stylesheet from "backend/containers/stylesheet";
 import Journals from "backend/containers/journals";
 import Journal from "backend/containers/journal";
+import journalIssuesLoader from "backend/containers/journal/issues/loader";
 import Analytics from "backend/containers/analytics";
 import ReadingGroups from "backend/containers/reading-groups";
 import ReadingGroup from "backend/containers/reading-group";
 import Annotations from "backend/containers/annotations";
 import Settings from "backend/containers/settings";
+import subjectsLoader from "backend/containers/settings/subjects/loader";
 import ExportTargets from "backend/containers/export-targets";
 import Records from "backend/containers/Records";
 import Users from "backend/containers/users";
@@ -24,6 +27,7 @@ import Features from "backend/containers/features";
 import Makers from "backend/containers/makers";
 import Entitlements from "backend/containers/entitlements";
 import EntitlementsPending from "backend/containers/entitlements-pending";
+import pendingEntitlementsLoader from "backend/containers/entitlements-pending/loader";
 import User from "backend/containers/user";
 import Comments from "backend/containers/comments";
 import ProjectCollection from "backend/containers/project-collection";
@@ -35,6 +39,7 @@ import ResourceCollection from "backend/containers/resource-collection";
 import TextTracks from "backend/containers/resource/tracks";
 import UserGroups from "backend/containers/user-groups";
 import UserGroup from "backend/containers/user-group";
+import RouteError from "global/components/FatalError/RouteError";
 
 const routes = [
   {
@@ -99,6 +104,8 @@ const routes = [
           // ------------------------------------------
           {
             element: <Project.Wrapper />,
+            loader: projectLoader,
+            errorElement: <RouteError />,
             path: ":id",
             handle: {
               name: "backendProject",
@@ -985,6 +992,7 @@ const routes = [
               },
               {
                 element: <Journal.Issues />,
+                loader: journalIssuesLoader,
                 path: "issues",
                 handle: {
                   name: "backendJournalIssues",
@@ -1285,6 +1293,7 @@ const routes = [
           },
           {
             element: <EntitlementsPending.List />,
+            loader: pendingEntitlementsLoader,
             path: "entitlements",
             handle: {
               name: "backendRecordsEntitlements",
@@ -1516,6 +1525,7 @@ const routes = [
           },
           {
             element: <Settings.Subjects.List />,
+            loader: subjectsLoader,
             path: "subjects",
             handle: {
               name: "backendSettingsSubjects",

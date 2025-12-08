@@ -1,20 +1,21 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
+import { useLoaderData, useRevalidator } from "react-router";
 import lh from "helpers/linkHandler";
-import { pendingEntitlementsAPI } from "api";
 import EntitiesList, {
   Button,
   Search,
   PendingEntitlementRow
 } from "backend/components/list/EntitiesList";
 import {
-  useFetch,
   useApiCallback,
   useListQueryParams,
-  useFocusAfterRemoval
+  useFocusAfterRemoval,
+  useFromStore
 } from "hooks";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import { pendingEntitlementsAPI } from "api";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -29,16 +30,25 @@ function PendingEntitlementsList({
   const location = useLocation();
   const { t } = useTranslation();
 
-  const { pagination, filters, searchProps } = useListQueryParams({
+  const { searchProps } = useListQueryParams({
     initSize: 10,
     initFilters: entitiesListSearchParams.initialentitlements,
     initSearchProps: entitiesListSearchProps("entitlements")
   });
 
-  const { data: entitlements, meta, refresh } = useFetch({
-    request: [pendingEntitlementsAPI.index, filters, pagination],
-    dependencies: [filters]
+  const loaderData = useLoaderData();
+  const requestKey = loaderData?.requestKey;
+
+  const entitlements = useFromStore({
+    requestKey,
+    action: "select"
   });
+  const meta = useFromStore({
+    requestKey,
+    action: "meta"
+  });
+
+  const { revalidate: refresh } = useRevalidator();
 
   const closeUrl = lh.link("backendRecordsEntitlements");
   const drawerProps = {

@@ -1,21 +1,19 @@
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useLocation, useNavigate, Outlet } from "react-router-dom";
+import { useLocation, useNavigate, Outlet, useLoaderData } from "react-router";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import { projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
-import Authorize from "hoc/Authorize";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getBreadcrumbs } from "./breadcrumbs";
 import PageHeader from "backend/components/layout/PageHeader";
-import { useFetch, useApiCallback, useNotification } from "hooks";
+import { useApiCallback, useNotification, useFromStore } from "hooks";
 
 function ProjectWrapperContainer({ confirm }) {
   const { t } = useTranslation();
-  const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,8 +23,16 @@ function ProjectWrapperContainer({ confirm }) {
   // texts list view
   const textRemovedRef = useRef(null);
 
-  const { data: project, response: projectResponse, refresh } = useFetch({
-    request: [projectsAPI.show, id]
+  const loaderData = useLoaderData();
+  const requestKey = loaderData?.requestKey;
+
+  const project = useFromStore({
+    requestKey,
+    action: "select"
+  });
+  const projectResponse = useFromStore({
+    requestKey,
+    action: "response"
   });
 
   const destroy = useApiCallback(projectsAPI.destroy, {
@@ -102,14 +108,7 @@ function ProjectWrapperContainer({ confirm }) {
     : {};
 
   return (
-    <Authorize
-      entity={project}
-      failureNotification={{
-        body: t("projects.unauthorized_edit")
-      }}
-      failureRedirect
-      ability={["update", "manageResources"]}
-    >
+    <>
       {subpage && (
         <HeadContent
           title={`${t(`titles.${subpage}`)} | ${
@@ -140,7 +139,7 @@ function ProjectWrapperContainer({ confirm }) {
         <div>
           <Outlet
             context={{
-              refresh,
+              requestKey,
               updateProject,
               project,
               projectResponse,
@@ -149,7 +148,7 @@ function ProjectWrapperContainer({ confirm }) {
           />
         </div>
       </Layout.BackendPanel>
-    </Authorize>
+    </>
   );
 }
 

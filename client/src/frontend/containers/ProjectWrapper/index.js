@@ -1,20 +1,16 @@
-import { useLocation, useParams, Navigate, Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useFetch, useFromStore } from "hooks";
-import { projectsAPI } from "api";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
+import { useFromStore } from "hooks";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import { getJournalBreadcrumbs } from "./helpers";
-import lh from "helpers/linkHandler";
 
 export default function ProjectWrapper() {
   const { id } = useParams();
-  const { data: project } = useFetch({
-    request: [projectsAPI.show, id],
-    condition: id !== "all"
+  const project = useFromStore({
+    entityType: "projects",
+    id,
+    action: "grab"
   });
-  const location = useLocation();
-  const isHomePage = location.pathname === `/projects/${id}`;
   const settings = useFromStore({ requestKey: "settings", action: "select" });
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
@@ -24,18 +20,11 @@ export default function ProjectWrapper() {
     ? getJournalBreadcrumbs(project, t, libraryDisabled)
     : null;
 
-  if (id === "all") return <Navigate to={lh.link("frontendProjectsAll")} />;
-
   return (
     <>
       {project && (
         <EventTracker event={EVENTS.VIEW_RESOURCE} resource={project} />
       )}
-      <CheckFrontendMode
-        debugLabel="ProjectWrapper"
-        project={project}
-        isProjectHomePage={isHomePage}
-      />
       <Outlet
         context={{
           project,

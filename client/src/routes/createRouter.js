@@ -3,6 +3,7 @@ import backendRoutes from "backend/routes";
 import readerRoutes from "reader/routes";
 import ltiRoutes from "lti/routes";
 import Manifold from "global/containers/Manifold";
+import manifoldLoader from "global/containers/Manifold/loader";
 import linkHandler from "helpers/linkHandler";
 import RouteError from "global/components/FatalError/RouteError";
 
@@ -17,6 +18,7 @@ export default function createRouter() {
   const routes = [
     {
       element: <Manifold />,
+      loader: manifoldLoader,
       path: "/",
       errorElement: <RouteError />,
       children: allRoutes

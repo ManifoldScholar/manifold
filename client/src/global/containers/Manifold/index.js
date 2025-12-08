@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useLoaderData } from "react-router";
 import ColorScheme from "global/components/ColorScheme";
 import LoadingBar from "global/components/LoadingBar";
 import AppFatalError from "global/components/FatalError/AppWrapper";
@@ -14,7 +14,7 @@ import {
 } from "actions";
 import { meAPI, requests } from "api";
 import { loaded } from "utils/entityUtils";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import FatalErrorBoundary from "global/components/FatalError/Boundary";
 import { FrontendModeContext } from "helpers/contexts";
 import { entityStoreActions } from "actions";
@@ -34,13 +34,16 @@ export default function ManifoldContainer({ confirm }) {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const loaderData = useLoaderData();
+  const settingsRequestKey = loaderData?.requestKey;
+
   const authentication = useFromStore({ path: "authentication" });
   const visibility = useFromStore({ path: "ui.transitory.visibility" });
   const frontendMode = useFromStore({ path: "ui.transitory.frontendMode" });
   const loading = useFromStore({ path: "ui.transitory.loading.active" });
   const fatalError = useFromStore({ path: "fatalError" });
   const settings = useFromStore({
-    requestKey: requests.settings,
+    requestKey: settingsRequestKey,
     action: "select"
   });
   const readingGroupsLoaded = useSelector(state =>

@@ -1,32 +1,86 @@
 import Feature from "./Feature";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { useFromStore } from "hooks";
-import useFetchHomepageContent from "./useFetchHomepageContent";
+import { useLoaderData } from "react-router";
 import EntityCollection from "frontend/components/entity/Collection";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
+import { requests } from "api";
 
 export default function Content() {
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const loaderData = useLoaderData();
+  const {
+    journalsRequestKey,
+    featuresRequestKey,
+    projectsRequestKey,
+    collectionsRequestKey
+  } = loaderData || {};
+
+  const settings = useFromStore({
+    requestKey: requests.settings,
+    action: "select"
+  });
 
   const { hasVisibleHomeProjectCollections, hasVisibleProjects } =
     settings?.attributes?.calculated ?? {};
   const showProjects = !hasVisibleHomeProjectCollections;
 
-  const {
-    loaded,
-    projects,
-    collections,
-    journals,
+  const projects = useFromStore({
+    requestKey: projectsRequestKey,
+    action: "select"
+  });
+  const collections = useFromStore({
+    requestKey: collectionsRequestKey,
+    action: "select"
+  });
+  const journals = useFromStore({
+    requestKey: journalsRequestKey,
+    action: "select"
+  });
+  const features = useFromStore({
+    requestKey: featuresRequestKey,
+    action: "select"
+  });
+
+  // Filter data (matching useFetchHomepageContent logic)
+  const filteredProjects = projects?.filter(
+    p => !p?.attributes.markedForPurgeAt
+  );
+  const filteredJournals = journals?.map(j => ({
+    ...j,
+    relationships: {
+      ...j.relationships,
+      recentJournalIssues: j.relationships.recentJournalIssues.filter(
+        i => !i?.attributes.projectMarkedForPurgeAt
+      )
+    }
+  }));
+  const filteredCollections = collections?.map(c => ({
+    ...c,
+    relationships: {
+      ...c.relationships,
+      collectionProjects: c.relationships.collectionProjects.filter(
+        p => !p?.attributes.markedForPurgeAt
+      )
+    }
+  }));
+
+  const loaded = !!(
+    (showProjects ? filteredProjects : filteredCollections) &&
+    filteredJournals &&
     features
-  } = useFetchHomepageContent(showProjects);
+  );
 
   if (!loaded) return null;
 
-  if (!projects?.length && !collections?.length && !journals?.length)
+  if (
+    !filteredProjects?.length &&
+    !filteredCollections?.length &&
+    !filteredJournals?.length
+  )
     return <EntityCollectionPlaceholder.Projects />;
 
-  const renderCollections = collections?.length
-    ? collections.map((projectCollection, i) => (
+  const renderCollections = filteredCollections?.length
+    ? filteredCollections.map((projectCollection, i) => (
         <EntityCollection.ProjectCollectionSummary
           key={projectCollection.id}
           projectCollection={projectCollection}
@@ -36,18 +90,21 @@ export default function Content() {
       ))
     : null;
 
-  const renderProjects = projects?.length ? (
-    <EntityCollection.ProjectsSummary projects={projects} bgColor="neutral05" />
+  const renderProjects = filteredProjects?.length ? (
+    <EntityCollection.ProjectsSummary
+      projects={filteredProjects}
+      bgColor="neutral05"
+    />
   ) : null;
 
-  const count = showProjects ? 1 : collections?.length;
+  const count = showProjects ? 1 : filteredCollections?.length;
 
   return (
     <>
       <Feature features={features} />
       {showProjects ? renderProjects : renderCollections}
-      {!!journals?.length &&
-        journals.map((journal, i) => (
+      {!!filteredJournals?.length &&
+        filteredJournals.map((journal, i) => (
           <EntityCollection.JournalSummary
             key={journal.id}
             journal={journal}
