@@ -11,11 +11,13 @@ import Text from "backend/containers/text";
 import Stylesheet from "backend/containers/stylesheet";
 import Journals from "backend/containers/journals";
 import Journal from "backend/containers/journal";
+import journalIssuesLoader from "backend/containers/journal/issues/loader";
 import Analytics from "backend/containers/analytics";
 import ReadingGroups from "backend/containers/reading-groups";
 import ReadingGroup from "backend/containers/reading-group";
 import Annotations from "backend/containers/annotations";
 import Settings from "backend/containers/settings";
+import subjectsLoader from "backend/containers/settings/subjects/loader";
 import ExportTargets from "backend/containers/export-targets";
 import Records from "backend/containers/Records";
 import Users from "backend/containers/users";
@@ -989,6 +991,7 @@ const routes = [
               },
               {
                 element: <Journal.Issues />,
+                loader: journalIssuesLoader,
                 path: "issues",
                 handle: {
                   name: "backendJournalIssues",
@@ -1450,6 +1453,7 @@ const routes = [
           },
           {
             element: <Settings.Subjects.List />,
+            loader: subjectsLoader,
             path: "subjects",
             handle: {
               name: "backendSettingsSubjects",

@@ -1,28 +1,28 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useLoaderData } from "react-router-dom";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
-import { journalsAPI } from "api";
-import { useFetch, useListQueryParams } from "hooks";
+import { useFromStore } from "hooks";
 import EntitiesList, {
   Button,
   JournalIssueRow
 } from "backend/components/list/EntitiesList";
 
 export default function JournalIssuesContainer() {
-  const { journal, refresh } = useOutletContext() || {};
+  const { journal } = useOutletContext() || {};
 
   const closeUrl = lh.link("backendJournalIssues", journal?.id);
 
-  const { pagination, filters } = useListQueryParams({
-    initSize: 10,
-    initFilters: { withUpdateAbility: true }
-  });
+  const { requestKey } = useLoaderData();
 
-  const { data, refresh: refreshIssues, meta } = useFetch({
-    request: [journalsAPI.journalIssues, journal?.id, pagination, filters],
-    condition: !!journal?.id
+  const data = useFromStore({
+    requestKey,
+    action: "select"
+  });
+  const meta = useFromStore({
+    requestKey,
+    action: "meta"
   });
 
   const { t } = useTranslation();
@@ -67,8 +67,7 @@ export default function JournalIssuesContainer() {
           closeUrl
         }}
         context={{
-          refresh,
-          refreshIssues,
+          requestKey,
           journal,
           closeUrl
         }}

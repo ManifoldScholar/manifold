@@ -9,24 +9,27 @@ import { select } from "utils/entityUtils";
  * @param {Object} options
  * @param {Array} options.request - [apiFunction, ...args]
  * @param {Object} options.context - Loader context (contains context.store for SSR)
- * @param {string} options.requestKey - Request key for entity store
- * @returns {Promise<Object>} Fetched entity data
+ * @param {string} options.requestKey - Request key for entity store (optional, will be generated if not provided)
+ * @returns {Promise<Object>} Object with requestKey: { requestKey: string }
  */
 export default async function dataLoader({ request, context, requestKey }) {
   const store = context?.store || getStore();
   const [apiFunction, ...apiCallArgs] = request;
 
-  const state = store.getState();
-  const existingData = select(requestKey, state.entityStore);
-  if (existingData) {
-    return existingData;
+  // If requestKey is provided, check for existing data
+  if (requestKey) {
+    const state = store.getState();
+    const existingData = select(requestKey, state.entityStore);
+    if (existingData) {
+      return { requestKey };
+    }
   }
 
   const apiCall = apiFunction(...apiCallArgs);
   const action = entityStoreActions.request(apiCall, requestKey);
-  const { promise } = store.dispatch(action);
+  const { promise, meta } = store.dispatch(action);
   await promise;
 
-  const newState = store.getState();
-  return select(requestKey, newState.entityStore);
+  // Return the requestKey (either provided or generated from meta)
+  return { requestKey: requestKey || meta };
 }

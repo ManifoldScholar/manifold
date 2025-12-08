@@ -1,23 +1,25 @@
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
-import { subjectsAPI, requests } from "api";
+import { requests } from "api";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
   SubjectRow
 } from "backend/components/list/EntitiesList";
-import { useListQueryParams, useFetch } from "hooks";
+import { useFromStore } from "hooks";
 
 export default function SettingsSubjectsListContainer() {
   const { t } = useTranslation();
   const { id } = useParams();
 
-  const { pagination, filters } = useListQueryParams({ initSize: 10 });
-
-  const { data: subjects, meta: subjectsMeta } = useFetch({
-    request: [subjectsAPI.index, filters.current, pagination],
-    options: { requestKey: requests.beSubjects }
+  const subjects = useFromStore({
+    requestKey: requests.beSubjects,
+    action: "select"
+  });
+  const subjectsMeta = useFromStore({
+    requestKey: requests.beSubjects,
+    action: "meta"
   });
 
   if (!subjects || !subjectsMeta) return null;

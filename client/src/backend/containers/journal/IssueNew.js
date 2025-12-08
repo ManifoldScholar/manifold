@@ -7,10 +7,9 @@ import Layout from "backend/components/layout";
 export default function JournalIssueNew() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { refreshIssues, closeUrl, journal } = useOutletContext() || {};
+  const { requestKey, closeUrl, journal } = useOutletContext() || {};
 
-  const refreshAndRedirect = () => {
-    if (refreshIssues) refreshIssues();
+  const handleSuccess = () => {
     navigate(closeUrl, { state: { keepNotifications: false } });
   };
 
@@ -19,7 +18,13 @@ export default function JournalIssueNew() {
   return (
     <div>
       <Layout.DrawerHeader title={t("issues.create_header")} />
-      <Issue.Form journalId={journal.id} onSuccess={refreshAndRedirect} />
+      <Issue.Form
+        journalId={journal.id}
+        onSuccess={handleSuccess}
+        options={{
+          refreshes: requestKey
+        }}
+      />
     </div>
   );
 }

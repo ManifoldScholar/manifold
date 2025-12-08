@@ -12,7 +12,7 @@ import lh from "helpers/linkHandler";
 function JournalIssueEdit({ confirm }) {
   const { issueId } = useParams();
   const navigate = useNavigate();
-  const { refreshIssues, closeUrl, journal } = useOutletContext() || {};
+  const { requestKey, closeUrl, journal } = useOutletContext() || {};
 
   const { data: journalIssue } = useFetch({
     request: [journalIssuesAPI.show, issueId],
@@ -31,10 +31,9 @@ function JournalIssueEdit({ confirm }) {
     expiration: 5000
   }));
 
-  const refreshAndRedirect = useCallback(() => {
-    if (refreshIssues) refreshIssues();
+  const handleSuccess = useCallback(() => {
     navigate(closeUrl, { state: { keepNotifications: false } });
-  }, [navigate, closeUrl, refreshIssues]);
+  }, [navigate, closeUrl]);
 
   const destroyAndRedirect = useCallback(() => {
     const redirect = () =>
@@ -73,7 +72,10 @@ function JournalIssueEdit({ confirm }) {
       <Issue.Form
         model={journalIssue}
         journalId={journal.id}
-        onSuccess={refreshAndRedirect}
+        onSuccess={handleSuccess}
+        options={{
+          refreshes: requestKey
+        }}
       />
     </div>
   );
