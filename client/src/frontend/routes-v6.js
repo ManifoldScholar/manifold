@@ -12,6 +12,7 @@ import Projects from "frontend/containers/Projects";
 import ProjectCollections from "frontend/containers/ProjectCollections";
 import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail";
 import ProjectWrapper from "frontend/containers/ProjectWrapper";
+import projectLoader from "frontend/containers/ProjectWrapper/loader";
 import ProjectDetail from "frontend/containers/ProjectDetail";
 import ProjectSearch from "frontend/containers/ProjectSearch";
 import ProjectResources from "frontend/containers/ProjectResources";
@@ -38,6 +39,7 @@ import MyAnnotations from "frontend/containers/MyAnnotations";
 import IssuesList from "frontend/containers/IssuesList";
 import Journals from "frontend/containers/Journals";
 import JournalWrapper from "frontend/containers/JournalWrapper";
+import journalLoader from "frontend/containers/JournalWrapper/loader";
 import JournalDetail from "frontend/containers/JournalDetail";
 import VolumeDetail from "frontend/containers/VolumeDetail";
 import JournalVolumesList from "frontend/containers/JournalVolumesList";
@@ -77,6 +79,7 @@ const routes = [
           },
           {
             element: <ProjectWrapper />,
+            loader: projectLoader,
             path: ":id",
             handle: {
               name: "frontendProject",
@@ -256,6 +259,7 @@ const routes = [
           },
           {
             element: <JournalWrapper />,
+            loader: journalLoader,
             path: ":id",
             handle: {
               name: "frontendJournal",
