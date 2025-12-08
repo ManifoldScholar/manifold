@@ -1,4 +1,4 @@
-import { redirect } from "react-router";
+import { redirect, data } from "react-router";
 import { getStore } from "store/storeInstance";
 import Authorization from "helpers/authorization";
 import lh from "helpers/linkHandler";
@@ -44,6 +44,7 @@ export default async function authorizeLoader({
   kind,
   entity,
   failureRedirect,
+  failureMessage,
   currentPath
 }) {
   const store = context?.store || getStore();
@@ -56,6 +57,38 @@ export default async function authorizeLoader({
     kind,
     entity
   });
+
+  if (!isAuthorized && authentication?.authenticated) {
+    const hasAnyAdminAccess = authorization.authorizeKind({
+      authentication,
+      kind: [
+        "admin",
+        "editor",
+        "marketeer",
+        "project_creator",
+        "project_editor",
+        "project_property_manager",
+        "journal_editor"
+      ]
+    });
+
+    throw data(
+      {
+        method: "GET",
+        heading: "Access Denied",
+        userMessage:
+          failureMessage ??
+          (!hasAnyAdminAccess
+            ? "errors.access_denied.no_admin_access"
+            : "errors.access_denied.authorization_admin"),
+        contained: true,
+        hideStatus: true
+      },
+      {
+        status: 403
+      }
+    );
+  }
 
   if (!isAuthorized && failureRedirect) {
     const loginPath = lh.link("frontendLogin");

@@ -5,6 +5,7 @@ import Backend from "backend/containers/Backend";
 import Dashboard from "backend/containers/Dashboard";
 import Projects from "backend/containers/projects";
 import Project from "backend/containers/project";
+import projectLoader from "backend/containers/project/loader";
 import ContentBlock from "backend/containers/content-block";
 import ActionCallout from "backend/containers/action-callout";
 import Text from "backend/containers/text";
@@ -36,6 +37,7 @@ import Resource from "backend/containers/resource";
 import ResourceImport from "backend/containers/resource-import";
 import ResourceCollection from "backend/containers/resource-collection";
 import TextTracks from "backend/containers/resource/tracks";
+import RouteError from "global/components/FatalError/RouteError";
 
 const routes = [
   {
@@ -100,6 +102,8 @@ const routes = [
           // ------------------------------------------
           {
             element: <Project.Wrapper />,
+            loader: projectLoader,
+            errorElement: <RouteError />,
             path: ":id",
             handle: {
               name: "backendProject",
