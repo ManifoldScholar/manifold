@@ -8,6 +8,9 @@ import NotFound from "global/containers/NotFound";
 
 import ApiDocs from "frontend/containers/Api";
 import Frontend from "frontend/containers/Frontend";
+import frontendLoader from "frontend/containers/Frontend/loader";
+import Home from "frontend/containers/Home";
+import homeLoader from "frontend/containers/Home/loader";
 import Projects from "frontend/containers/Projects";
 import ProjectCollections from "frontend/containers/ProjectCollections";
 import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail";
@@ -26,7 +29,6 @@ import PasswordReset from "frontend/containers/PasswordReset";
 import Page from "frontend/containers/Page";
 import Subscriptions from "frontend/containers/Subscriptions";
 import Unsubscribe from "frontend/containers/Unsubscribe";
-import Home from "frontend/containers/Home";
 import MyReadingGroups from "frontend/containers/MyReadingGroups";
 import PublicReadingGroups from "frontend/containers/PublicReadingGroups";
 import ReadingGroup from "frontend/containers/ReadingGroup";
@@ -51,6 +53,7 @@ import ReadingGroupSettings from "frontend/components/reading-group/Settings";
 const routes = [
   {
     element: <Frontend />,
+    loader: frontendLoader,
     path: "",
     handle: { isLibrary: true },
     children: [
@@ -612,7 +615,7 @@ const routes = [
       {
         index: true,
         element: <Home />,
-        loader: checkLibraryMode,
+        loader: homeLoader,
         handle: {
           name: "frontend",
           isLibrary: true,
