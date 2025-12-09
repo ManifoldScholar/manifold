@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { useLoaderData, useRevalidator } from "react-router";
 import lh from "helpers/linkHandler";
 import EntitiesList, {

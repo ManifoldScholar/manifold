@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import { requests } from "api";
 import lh from "helpers/linkHandler";

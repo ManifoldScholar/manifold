@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router";
 import Layout from "backend/components/layout";
 import { CSVImport } from "backend/components/pending-entitlements";
 

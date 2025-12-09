@@ -1,4 +1,4 @@
-import { useOutletContext, useLoaderData } from "react-router-dom";
+import { useOutletContext, useLoaderData } from "react-router";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";

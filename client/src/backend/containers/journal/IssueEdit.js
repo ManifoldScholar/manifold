@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useParams, useNavigate, useOutletContext } from "react-router-dom";
+import { useParams, useNavigate, useOutletContext } from "react-router";
 import Issue from "backend/components/issue";
 import Layout from "backend/components/layout";
 import { journalIssuesAPI } from "api";

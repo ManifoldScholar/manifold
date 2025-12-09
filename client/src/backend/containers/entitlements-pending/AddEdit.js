@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useParams, useOutletContext } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router";
 import Layout from "backend/components/layout";
 import { AddEditForm } from "backend/components/pending-entitlements";
 import { useFetch } from "hooks";

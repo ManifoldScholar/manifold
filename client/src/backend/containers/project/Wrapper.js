@@ -1,11 +1,6 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  useLocation,
-  useNavigate,
-  Outlet,
-  useLoaderData
-} from "react-router-dom";
+import { useLocation, useNavigate, Outlet, useLoaderData } from "react-router";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import { projectsAPI, requests } from "api";
