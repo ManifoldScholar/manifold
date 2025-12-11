@@ -1,4 +1,4 @@
-\restrict T4ZKFW8DK53tpQZdlSTCvDBm6KhQLXiApUdhnemGjC8IcfRpKuM5cWUH8kp2pUa
+\restrict OYptQYJxvegAXeAZPaSgfLMFsmuo9EgiFwcKbSLpukhXKSgiK1OMgexAaxrGePJ
 
 -- Dumped from database version 13.22
 -- Dumped by pg_dump version 13.22 (Debian 13.22-1.pgdg11+1)
@@ -473,7 +473,8 @@ CREATE TABLE public.annotations (
     marked_for_purge_at timestamp without time zone,
     resolved_flags_count bigint DEFAULT 0 NOT NULL,
     unresolved_flags_count bigint DEFAULT 0 NOT NULL,
-    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
+    reader_display_format text
 );
 
 
@@ -865,7 +866,9 @@ CREATE TABLE public.projects (
     marked_for_purge_at timestamp without time zone,
     social_image_data jsonb,
     social_description text,
-    social_title text
+    social_title text,
+    orphaned_journal_issue_id uuid,
+    orphaned_journal_issue boolean DEFAULT false NOT NULL
 );
 
 
@@ -1695,6 +1698,107 @@ ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs
 
 
 --
+-- Name: good_job_batches; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_batches (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    description text,
+    serialized_properties jsonb,
+    on_finish text,
+    on_success text,
+    on_discard text,
+    callback_queue_name text,
+    callback_priority integer,
+    enqueued_at timestamp(6) without time zone,
+    discarded_at timestamp(6) without time zone,
+    finished_at timestamp(6) without time zone
+);
+
+
+--
+-- Name: good_job_executions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_executions (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    active_job_id uuid NOT NULL,
+    job_class text,
+    queue_name text,
+    serialized_params jsonb,
+    scheduled_at timestamp(6) without time zone,
+    finished_at timestamp(6) without time zone,
+    error text,
+    error_event smallint,
+    error_backtrace text[],
+    process_id uuid,
+    duration interval
+);
+
+
+--
+-- Name: good_job_processes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_processes (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    state jsonb,
+    lock_type smallint
+);
+
+
+--
+-- Name: good_job_settings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_settings (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    key text,
+    value jsonb
+);
+
+
+--
+-- Name: good_jobs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_jobs (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    queue_name text,
+    priority integer,
+    serialized_params jsonb,
+    scheduled_at timestamp(6) without time zone,
+    performed_at timestamp(6) without time zone,
+    finished_at timestamp(6) without time zone,
+    error text,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    active_job_id uuid,
+    concurrency_key text,
+    cron_key text,
+    retried_good_job_id uuid,
+    cron_at timestamp(6) without time zone,
+    batch_id uuid,
+    batch_callback_id uuid,
+    is_discrete boolean,
+    executions_count integer,
+    job_class text,
+    error_event smallint,
+    labels text[],
+    locked_by_id uuid,
+    locked_at timestamp(6) without time zone
+);
+
+
+--
 -- Name: identities; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2058,7 +2162,9 @@ CREATE TABLE public.pg_search_documents (
     metadata jsonb,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    tsv_composite tsvector GENERATED ALWAYS AS ((((((((public.to_unaccented_weighted_tsv(title, 'A'::"char") || public.to_unaccented_weighted_tsv(primary_data, 'A'::"char")) || public.to_unaccented_weighted_tsv(secondary, 'B'::"char")) || public.to_unaccented_weighted_tsv(secondary_data, 'B'::"char")) || public.to_unaccented_weighted_tsv(tertiary, 'C'::"char")) || public.to_unaccented_weighted_tsv(tertiary_data, 'C'::"char")) || public.to_unaccented_weighted_tsv(content, 'D'::"char")) || public.to_unaccented_weighted_tsv(metadata, 'D'::"char"))) STORED NOT NULL
+    tsv_composite tsvector GENERATED ALWAYS AS ((((((((public.to_unaccented_weighted_tsv(title, 'A'::"char") || public.to_unaccented_weighted_tsv(primary_data, 'A'::"char")) || public.to_unaccented_weighted_tsv(secondary, 'B'::"char")) || public.to_unaccented_weighted_tsv(secondary_data, 'B'::"char")) || public.to_unaccented_weighted_tsv(tertiary, 'C'::"char")) || public.to_unaccented_weighted_tsv(tertiary_data, 'C'::"char")) || public.to_unaccented_weighted_tsv(content, 'D'::"char")) || public.to_unaccented_weighted_tsv(metadata, 'D'::"char"))) STORED NOT NULL,
+    journal_issue_id uuid,
+    journal_content boolean DEFAULT false NOT NULL
 );
 
 
@@ -3775,6 +3881,46 @@ ALTER TABLE ONLY public.friendly_id_slugs
 
 
 --
+-- Name: good_job_batches good_job_batches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_batches
+    ADD CONSTRAINT good_job_batches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_executions good_job_executions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_executions
+    ADD CONSTRAINT good_job_executions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_processes good_job_processes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_processes
+    ADD CONSTRAINT good_job_processes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_settings good_job_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_settings
+    ADD CONSTRAINT good_job_settings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_jobs good_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_jobs
+    ADD CONSTRAINT good_jobs_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: identities identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5032,6 +5178,125 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON public.friendly_id_slu
 
 
 --
+-- Name: index_good_job_executions_on_active_job_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_job_executions_on_active_job_id_and_created_at ON public.good_job_executions USING btree (active_job_id, created_at);
+
+
+--
+-- Name: index_good_job_executions_on_process_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_job_executions_on_process_id_and_created_at ON public.good_job_executions USING btree (process_id, created_at);
+
+
+--
+-- Name: index_good_job_jobs_for_candidate_lookup; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_job_jobs_for_candidate_lookup ON public.good_jobs USING btree (priority, created_at) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_job_settings_on_key; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_good_job_settings_on_key ON public.good_job_settings USING btree (key);
+
+
+--
+-- Name: index_good_jobs_jobs_on_finished_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_jobs_on_finished_at ON public.good_jobs USING btree (finished_at) WHERE ((retried_good_job_id IS NULL) AND (finished_at IS NOT NULL));
+
+
+--
+-- Name: index_good_jobs_jobs_on_priority_created_at_when_unfinished; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_jobs_on_priority_created_at_when_unfinished ON public.good_jobs USING btree (priority DESC NULLS LAST, created_at) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_jobs_on_active_job_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_active_job_id_and_created_at ON public.good_jobs USING btree (active_job_id, created_at);
+
+
+--
+-- Name: index_good_jobs_on_batch_callback_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_batch_callback_id ON public.good_jobs USING btree (batch_callback_id) WHERE (batch_callback_id IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_batch_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_batch_id ON public.good_jobs USING btree (batch_id) WHERE (batch_id IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_concurrency_key_when_unfinished; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_concurrency_key_when_unfinished ON public.good_jobs USING btree (concurrency_key) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_jobs_on_cron_key_and_created_at_cond; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_cron_key_and_created_at_cond ON public.good_jobs USING btree (cron_key, created_at) WHERE (cron_key IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_cron_key_and_cron_at_cond; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_good_jobs_on_cron_key_and_cron_at_cond ON public.good_jobs USING btree (cron_key, cron_at) WHERE (cron_key IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_labels; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_labels ON public.good_jobs USING gin (labels) WHERE (labels IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_locked_by_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_locked_by_id ON public.good_jobs USING btree (locked_by_id) WHERE (locked_by_id IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_priority_scheduled_at_unfinished_unlocked; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_priority_scheduled_at_unfinished_unlocked ON public.good_jobs USING btree (priority, scheduled_at) WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL));
+
+
+--
+-- Name: index_good_jobs_on_queue_name_and_scheduled_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_queue_name_and_scheduled_at ON public.good_jobs USING btree (queue_name, scheduled_at) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_jobs_on_scheduled_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_scheduled_at ON public.good_jobs USING btree (scheduled_at) WHERE (finished_at IS NULL);
+
+
+--
 -- Name: index_identities_on_uid_and_provider; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5330,6 +5595,13 @@ CREATE INDEX index_pending_entitlements_on_user_id ON public.pending_entitlement
 --
 
 CREATE INDEX index_pg_search_documents_on_journal_id ON public.pg_search_documents USING btree (journal_id);
+
+
+--
+-- Name: index_pg_search_documents_on_journal_issue_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_journal_issue_id ON public.pg_search_documents USING btree (journal_issue_id);
 
 
 --
@@ -6909,6 +7181,22 @@ ALTER TABLE ONLY public.user_collected_texts
 
 
 --
+-- Name: journal_issues fk_rails_159f2e66d4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.journal_issues
+    ADD CONSTRAINT fk_rails_159f2e66d4 FOREIGN KEY (journal_id) REFERENCES public.journals(id) ON DELETE RESTRICT;
+
+
+--
+-- Name: journal_issues fk_rails_15a20a3530; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.journal_issues
+    ADD CONSTRAINT fk_rails_15a20a3530 FOREIGN KEY (journal_volume_id) REFERENCES public.journal_volumes(id) ON DELETE RESTRICT;
+
+
+--
 -- Name: entitlement_import_transitions fk_rails_19acd61494; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6962,6 +7250,14 @@ ALTER TABLE ONLY public.user_collected_projects
 
 ALTER TABLE ONLY public.pending_entitlement_transitions
     ADD CONSTRAINT fk_rails_292c17a15e FOREIGN KEY (pending_entitlement_id) REFERENCES public.pending_entitlements(id) ON DELETE CASCADE;
+
+
+--
+-- Name: projects fk_rails_2a006842be; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.projects
+    ADD CONSTRAINT fk_rails_2a006842be FOREIGN KEY (journal_issue_id) REFERENCES public.journal_issues(id) ON DELETE RESTRICT;
 
 
 --
@@ -7373,6 +7669,14 @@ ALTER TABLE ONLY public.reading_group_projects
 
 
 --
+-- Name: pg_search_documents fk_rails_b02f365b4d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_b02f365b4d FOREIGN KEY (journal_issue_id) REFERENCES public.journal_issues(id) ON DELETE SET NULL;
+
+
+--
 -- Name: import_selection_matches fk_rails_b3b5d1b78b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7533,6 +7837,14 @@ ALTER TABLE ONLY public.user_collected_composite_entries
 
 
 --
+-- Name: journal_volumes fk_rails_e11de3191d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.journal_volumes
+    ADD CONSTRAINT fk_rails_e11de3191d FOREIGN KEY (journal_id) REFERENCES public.journals(id) ON DELETE RESTRICT;
+
+
+--
 -- Name: user_collected_text_sections fk_rails_e3bf44e760; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7640,7 +7952,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 -- PostgreSQL database dump complete
 --
 
-\unrestrict T4ZKFW8DK53tpQZdlSTCvDBm6KhQLXiApUdhnemGjC8IcfRpKuM5cWUH8kp2pUa
+\unrestrict OYptQYJxvegAXeAZPaSgfLMFsmuo9EgiFwcKbSLpukhXKSgiK1OMgexAaxrGePJ
 
 SET search_path TO "$user", public;
 
@@ -7995,19 +8307,24 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250527180248'),
 ('20250528002025'),
 ('20250530205742'),
+('20250603170620'),
 ('20250603192547'),
 ('20250609191642'),
 ('20250609192241'),
+('20250723210143'),
 ('20251016204352'),
 ('20251017174417'),
 ('20251017211501'),
 ('20251020225421'),
+('20251022183946'),
 ('20251103175506'),
 ('20251103175949'),
 ('20251103180007'),
 ('20251105165521'),
 ('20251117204731'),
 ('20251120233556'),
-('20251121202033');
+('20251121202033'),
+('20251203230443'),
+('20251203231940');
 
 
