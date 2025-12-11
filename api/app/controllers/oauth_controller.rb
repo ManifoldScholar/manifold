@@ -3,6 +3,8 @@
 class OauthController < ApplicationController
   include ActionController::RequestForgeryProtection
 
+  include ManagesOauthCookie
+
   POST_AUTH_REDIRECT_PATH = "/oauth"
   AUTH_ERROR_STRING = "An error has occurred logging you in"
 
@@ -30,12 +32,6 @@ class OauthController < ApplicationController
   end
 
   private
-
-  def set_auth_code(user)
-    code = SecureRandom.hex
-    session[:auth_code] = code
-    Rails.cache.write(code, user.id)
-  end
 
   def post_authorize_redirect_uri(error: false)
     URI.parse(Rails.configuration.manifold.url).tap do |uri|
@@ -70,11 +66,15 @@ class OauthController < ApplicationController
           <style></style>
         </head>
         <body>
-          <h1>Redirecting</h1>
-          <form id="auth_redirect_form" action="/auth/#{params[:provider]}" method="POST">
-            <input type="hidden" name="authenticity_token" value="#{session["_csrf_token"]}" />
-          </form>
+          <div style="margin-top: 100px; text-align: center;">
+            <h1>Redirecting, Please Wait</h1>
+            <form id="auth_redirect_form" action="/auth/#{params[:provider]}" method="POST">
+              <input type="hidden" name="authenticity_token" value="#{session["_csrf_token"]}" />
+              <input type="submit" id="auth_redirect_submit" value="Click here if you're not automatically redirected" />
+            </form>
+          </div>
           <script type="text/javascript">
+            document.getElementById("auth_redirect_submit").style.visibility = "hidden";
             document.getElementById("auth_redirect_form").submit();
           </script>
         </body>
