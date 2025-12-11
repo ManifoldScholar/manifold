@@ -25,7 +25,8 @@ Rails.application.routes.draw do
 
   # Omniauth
   get "auth/:provider/redirect", to: "oauth#redirect"
-  get "auth/:provider/callback", to: "oauth#authorize"
+  post "auth/:provider/callback", to: "oauth#authorize"
+  get "auth/:provider/callback", to: "oauth#authorize" if Rails.env.test?
 
   namespace :api do
     mount Tus::Server => "/files"
@@ -41,7 +42,7 @@ Rails.application.routes.draw do
         resources :resources, only: [:index]
         resources :resource_collections, only: [:index]
         resources :texts, only: [:index]
-        resources :text_sections, only: %[index]
+        resources :text_sections, only: %i[index]
       end
 
       scope as: :bulk_delete, controller: :bulk_deletions, path: "bulk_delete" do
