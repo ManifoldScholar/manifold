@@ -14,9 +14,13 @@ module ExternallyIdentifiable
     when ExternalIdentifier
       super(record_or_identifier)
     when String
-      self.external_identifier.update(identifier: record_or_identifier)
+      if self.external_identifier.present?
+        self.external_identifier.update(identifier: record_or_identifier)
+      else
+        self.build_external_identifier(identifier: record_or_identifier)
+      end
     when nil
-      self.external_identifier.destroy
+      self.external_identifier&.destroy
     else
       raise ArgumentError, "Invalid external identifier value"
     end
