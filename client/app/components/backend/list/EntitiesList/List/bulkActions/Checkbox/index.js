@@ -1,0 +1,41 @@
+import { useId } from "react";
+import IconComposer from "components/global/utility/IconComposer";
+import PropTypes from "prop-types";
+import * as Styled from "./styles";
+
+export default function BulkActionsCheckbox({ onSelect, onClear, checked }) {
+  const uid = useId();
+
+  const handleChange = () => {
+    const isClear = checked;
+    if (isClear && typeof onClear === "function") {
+      onClear();
+    } else if (typeof onSelect === "function") {
+      onSelect();
+    }
+  };
+
+  return (
+    <Styled.Outer>
+      <Styled.Wrapper htmlFor={uid}>
+        <Styled.Input
+          id={uid}
+          type="checkbox"
+          onChange={handleChange}
+          data-checked={checked}
+        />
+        <Styled.Checkbox>
+          <IconComposer icon="checkmark16" size={16} />
+        </Styled.Checkbox>
+      </Styled.Wrapper>
+    </Styled.Outer>
+  );
+}
+
+BulkActionsCheckbox.displayName = "Global.SignInUp.Inputs.AcceptTermsCheckbox";
+
+BulkActionsCheckbox.propTypes = {
+  onSelect: PropTypes.func,
+  onClear: PropTypes.func,
+  checked: PropTypes.bool.isRequired
+};

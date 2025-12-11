@@ -1,0 +1,113 @@
+import { useTranslation } from "react-i18next";
+import { useFetcher, useOutletContext } from "react-router";
+import { journalsAPI } from "api";
+import formAction from "lib/react-router/helpers/formAction";
+import mergeImageAltText from "lib/react-router/helpers/mergeImageAltText";
+import FormContainer from "components/global/form/Container";
+import Form from "components/global/form";
+import Layout from "components/backend/layout";
+
+export const handle = { drawer: true };
+
+export const action = formAction({
+  mutation: ({ data, params }) => journalsAPI.update(params.id, data),
+  redirectTo: ({ params }) => `/backend/journals/${params.id}/layout`
+});
+
+function formatData(dirty, source) {
+  const merged = {
+    attributes: { ...source.attributes, ...dirty.attributes },
+    relationships: { ...dirty.relationships }
+  };
+
+  return {
+    ...merged,
+    attributes: mergeImageAltText(merged.attributes, "logo", "hero")
+  };
+}
+
+export default function JournalHeroEdit() {
+  const { t } = useTranslation();
+  const fetcher = useFetcher();
+  const journal = useOutletContext();
+
+  return (
+    <section>
+      <Layout.DrawerHeader
+        icon="journals64"
+        title={t("layout.description_and_images")}
+      />
+      <FormContainer.Form
+        model={journal}
+        fetcher={fetcher}
+        formatData={formatData}
+        className="form-secondary"
+        notifyOnSuccess
+      >
+        <Form.TextArea
+          wide
+          focusOnMount
+          height={250}
+          label={t("common.description")}
+          name="attributes[description]"
+          placeholder={t("hero.description_placeholder", {
+            entity: "journal"
+          })}
+          instructions={t("hero.description_instructions", {
+            entity: "journal"
+          })}
+        />
+        <Form.Upload
+          layout="landscape"
+          accepts="images"
+          label={t("hero.image_label")}
+          readFrom="attributes[heroStyles][small]"
+          name="attributes[hero]"
+          remove="attributes[removeHero]"
+          instructions={t("hero.image_instructions")}
+          altTextName="attributes[heroAltText]"
+          altTextLabel={t("hero.image_alt_label")}
+        />
+        <Form.Select
+          name="attributes[heroLayout]"
+          label={t("hero.layout")}
+          options={[
+            { label: t("hero.square_inset"), value: "square_inset" },
+            { label: t("hero.wide_inset"), value: "wide_inset" },
+            { label: t("hero.full_bleed"), value: "full_bleed" }
+          ]}
+        />
+        <Form.Upload
+          layout="portrait"
+          label={t("journals.forms.logo")}
+          accepts="images"
+          readFrom="attributes[logoStyles][small]"
+          name="attributes[logo]"
+          remove="attributes[removeLogo]"
+          instructions={t("journals.forms.logo_instructions", {
+            entity: "journal"
+          })}
+          altTextName="attributes[logoAltText]"
+          altTextLabel={t("journals.forms.logo_alt_label")}
+        />
+        <Form.ColorInput
+          label={t("hero.background_color")}
+          name="attributes[heroBackgroundColor]"
+          defaultValue="#52e3ac"
+          instructions={t("hero.background_color_instructions")}
+          container=".drawer--backend"
+          wide
+        />
+        <Form.TextArea
+          label={t("hero.image_credits")}
+          name="attributes[imageCredits]"
+          placeholder={t("hero.image_credits_placeholder")}
+          instructions={t("hero.image_credits_instructions")}
+          height={250}
+          wide
+        />
+        <Form.Save text={t("actions.save")} />
+      </FormContainer.Form>
+    </section>
+  );
+}

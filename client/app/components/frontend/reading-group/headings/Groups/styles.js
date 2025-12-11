@@ -1,0 +1,37 @@
+import styled from "@emotion/styled";
+import { NavLink } from "react-router";
+
+const textGap = "20px";
+const containerGap = "30px";
+
+export const Container = styled.div`
+  &:not(:last-child):not(:empty) {
+    padding-block-end: ${containerGap};
+  }
+`;
+
+export const Flex = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-start: -${textGap};
+  margin-inline-start: -${textGap};
+
+  > * {
+    margin-block-start: ${textGap};
+    margin-inline-start: ${textGap};
+  }
+`;
+
+export const CreateButton = styled(NavLink)`
+  margin-block-start: ${textGap};
+  margin-inline-start: ${textGap};
+
+  &.active {
+    color: var(--color-neutral-text-extra-dark);
+    background-color: var(--button-tertiary-bg-hover-color);
+    border-color: var(--button-tertiary-bg-hover-color);
+    outline: 0;
+  }
+`;

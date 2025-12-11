@@ -1,0 +1,35 @@
+import { useFetcher, useOutletContext } from "react-router";
+import { actionCalloutsAPI } from "api";
+import formAction from "lib/react-router/helpers/formAction";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import ActionCalloutForm from "components/backend/action-callout/Form";
+
+export const handle = { drawer: true };
+
+export const loader = async ({ params, context, request }) => {
+  return loadEntity({
+    context,
+    fetchFn: () => actionCalloutsAPI.show(params.calloutId),
+    request
+  });
+};
+
+export const action = formAction({
+  mutation: ({ data, params }) =>
+    actionCalloutsAPI.update(params.calloutId, data),
+  redirectTo: ({ params }) => `/backend/projects/${params.id}/layout`
+});
+
+export default function ActionCalloutEdit({ loaderData: actionCallout }) {
+  const { project } = useOutletContext() ?? {};
+  const fetcher = useFetcher();
+
+  return (
+    <ActionCalloutForm
+      fetcher={fetcher}
+      actionCallout={actionCallout}
+      closeUrl={`/backend/projects/${project.id}/layout`}
+      calloutable={project}
+    />
+  );
+}

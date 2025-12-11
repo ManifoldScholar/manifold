@@ -18,5 +18,6 @@ tmp/*
 !.yarn/versions
 !.yarn/releases
 
-dist/manifold/www/browser.config.js
-dist/manifold/ssr/ssr.config.js
+build/*
+
+.env.local

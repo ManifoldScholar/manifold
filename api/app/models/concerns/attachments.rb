@@ -164,7 +164,7 @@ module Attachments
   # @param [#to_s] style
   # @return [String]
   def shrine_image_placeholder_for(style)
-    "/static/images/attachment_placeholders/#{style}.png"
+    "/images/attachment_placeholders/#{style}.png"
   end
 
   # @param [String, Symbol] attachment_name

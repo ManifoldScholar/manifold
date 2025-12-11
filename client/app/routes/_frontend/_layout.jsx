@@ -1,0 +1,75 @@
+import { useMemo } from "react";
+import { Outlet } from "react-router";
+import classNames from "classnames";
+import { subjectsAPI } from "api";
+import { FrontendContext } from "app/contexts";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
+import Footers from "components/global/Footers";
+import { BreadcrumbsProvider } from "components/global/atomic/Breadcrumbs";
+import Layout from "components/frontend/layout";
+import { useSettings, useBodyClass, useScrollToTop } from "hooks";
+import { get } from "lodash-es";
+import { SearchProvider } from "hooks/useSearch/context";
+import { ErrorBoundary } from "./ErrorBoundary";
+
+export { shouldRevalidate } from "lib/react-router/loaders/shouldRevalidate";
+
+const SUBJECT_FILTERS = { used: true };
+const JOURNAL_SUBJECT_FILTERS = { usedJournal: true };
+
+// Loader fetches subjects once for all frontend routes
+export const loader = async ({ context }) => {
+  const results = await loadParallelLists({
+    context,
+    fetchFns: {
+      subjects: () => subjectsAPI.index(SUBJECT_FILTERS, null, true),
+      journalSubjects: () =>
+        subjectsAPI.index(JOURNAL_SUBJECT_FILTERS, null, true)
+    }
+  });
+
+  return {
+    subjects: results.subjects ?? [],
+    journalSubjects: results.journalSubjects ?? []
+  };
+};
+
+export { ErrorBoundary };
+
+export default function FrontendLayout({ loaderData }) {
+  useBodyClass("browse");
+  useScrollToTop();
+
+  const settings = useSettings();
+  const hasPressLogo = get(settings, "attributes.pressLogoStyles.small");
+
+  const frontendContextValue = useMemo(
+    () => ({
+      subjects: loaderData?.subjects ?? [],
+      journalSubjects: loaderData?.journalSubjects ?? []
+    }),
+    [loaderData?.subjects, loaderData?.journalSubjects]
+  );
+
+  return (
+    <FrontendContext.Provider value={frontendContextValue}>
+      <BreadcrumbsProvider>
+        <SearchProvider>
+          <Layout.Header />
+          <main
+            id="skip-to-main"
+            tabIndex={-1}
+            className={classNames({
+              "main-content": true,
+              "flex-viewport": true,
+              "extra-top": hasPressLogo
+            })}
+          >
+            <Outlet />
+          </main>
+          <Footers.FrontendFooter />
+        </SearchProvider>
+      </BreadcrumbsProvider>
+    </FrontendContext.Provider>
+  );
+}

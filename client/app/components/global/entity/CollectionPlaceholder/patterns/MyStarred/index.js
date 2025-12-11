@@ -1,0 +1,34 @@
+import React from "react";
+import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
+import Animation from "./Animation";
+import { Actions, Body, Title, Wrapper } from "../../parts";
+
+function MyStarredPlaceholder() {
+  const { t } = useTranslation();
+  return (
+    <Wrapper>
+      <Title>{t("placeholders.my_starred.title")}</Title>
+      <Body>
+        <p>{t("placeholders.my_starred.body")}</p>
+        <Animation />
+      </Body>
+      <Actions
+        actions={[
+          {
+            children: (
+              <Link to="/projects" className="button-tertiary">
+                {t("navigation.browse_projects")}
+              </Link>
+            )
+          }
+        ]}
+      />
+    </Wrapper>
+  );
+}
+
+MyStarredPlaceholder.displayName =
+  "Global.Entity.CollectionPlaceholder.MyStarred";
+
+export default MyStarredPlaceholder;

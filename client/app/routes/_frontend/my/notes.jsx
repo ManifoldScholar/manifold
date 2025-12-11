@@ -1,0 +1,121 @@
+import { useTranslation } from "react-i18next";
+import { meAPI } from "api";
+import requireLogin from "lib/react-router/loaders/requireLogin";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
+import loadList from "lib/react-router/loaders/loadList";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
+import HeadContent from "components/global/HeadContent";
+import MyAnnotationsEntityCollection from "components/frontend/entity/Collection/patterns/MyAnnotations";
+import CollectionNavigation from "components/frontend/CollectionNavigation";
+import { useListFilters, useListSearchParams } from "hooks";
+import { intersection } from "lodash-es";
+
+const INIT_FILTER_STATE = {
+  formats: ["highlight", "annotation"],
+  order: "created_at DESC"
+};
+
+export const loader = async ({ request, context }) => {
+  requireLogin(request, context);
+
+  const annotationsData = await loadList({
+    request,
+    context,
+    fetchFn: (filters, pagination) => meAPI.annotations(filters, pagination),
+    options: {
+      defaultFilters: INIT_FILTER_STATE,
+      initSize: 10,
+      arrayKeys: ["formats"]
+    }
+  });
+
+  const { annotatedTexts, readingGroups } = await loadParallelLists({
+    context,
+    fetchFns: {
+      annotatedTexts: () => meAPI.annotatedTexts(),
+      readingGroups: () => meAPI.readingGroups()
+    }
+  });
+
+  return {
+    ...annotationsData,
+    annotatedTexts: annotatedTexts ?? [],
+    readingGroups: readingGroups ?? []
+  };
+};
+
+export const clientLoader = async ({ request, serverLoader }) => {
+  const serverData = await serverLoader();
+
+  const fetchFn = (filters, pagination) =>
+    meAPI.annotations(filters, pagination);
+
+  const clientLoaderFn = createListClientLoader({
+    hydrateKey: "__myAnnotationsHydrated",
+    fetchFn,
+    options: {
+      defaultFilters: INIT_FILTER_STATE,
+      initSize: 10,
+      arrayKeys: ["formats"]
+    }
+  });
+
+  const listData = await clientLoaderFn({ request, serverLoader });
+
+  return {
+    ...serverData,
+    ...listData
+  };
+};
+
+export default function MyAnnotationsRoute({ loaderData }) {
+  const { t } = useTranslation();
+
+  const { data: annotations, meta, annotatedTexts, readingGroups } = loaderData;
+
+  const { filters, setFilters } = useListSearchParams({
+    defaultFilters: INIT_FILTER_STATE,
+    arrayKeys: ["formats"]
+  });
+
+  const setFiltersWithHighlights = state => {
+    if (!state.privacy) return setFilters({ ...state, ...INIT_FILTER_STATE });
+    if (state.privacy === "highlight") {
+      const { privacy, ...rest } = state;
+      return setFilters({ ...rest, formats: ["highlight"] });
+    }
+    return setFilters({ ...state, formats: ["annotation"] });
+  };
+
+  const filterProps = useListFilters({
+    onFilterChange: setFiltersWithHighlights,
+    initialState: filters,
+    resetState: INIT_FILTER_STATE,
+    options: {
+      texts: annotatedTexts ?? [],
+      readingGroup: readingGroups ?? [],
+      privacy: true
+    }
+  });
+
+  const isFiltered = !!intersection(Object.keys(filters), [
+    "texts",
+    "readingGroup",
+    "privacy"
+  ]).length;
+
+  return (
+    <>
+      <HeadContent title={t("pages.my_notes")} appendDefaultTitle />
+      <MyAnnotationsEntityCollection
+        annotations={annotations ?? []}
+        annotationsMeta={meta}
+        annotatedTexts={annotatedTexts ?? []}
+        readingGroups={readingGroups ?? []}
+        filterProps={filterProps ? { ...filterProps, hideSearch: true } : null}
+        isFiltered={isFiltered}
+      />
+      <CollectionNavigation />
+    </>
+  );
+}

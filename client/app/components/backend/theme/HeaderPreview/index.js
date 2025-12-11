@@ -1,0 +1,102 @@
+import { useTranslation } from "react-i18next";
+import SetCSSProperty from "components/global/utility/SetCSSProperty";
+import PressLogo from "components/global/PressLogo";
+import HeaderLogo from "components/global/atomic/HeaderLogo";
+import IconComposer from "components/global/utility/IconComposer";
+
+const DEFAULTS = {
+  accentColor: "#52e3ac",
+  foregroundColor: "#696969",
+  backgroundColor: "#ffffff",
+  activeColor: "#363636"
+};
+
+export default function HeaderPreview({
+  settings,
+  accentColor,
+  foregroundColor,
+  backgroundColor,
+  activeColor
+}) {
+  const { t } = useTranslation();
+  const offset = settings?.attributes?.theme?.headerOffset;
+  const navStyle = offset
+    ? { position: "relative", top: parseInt(offset, 10) }
+    : {};
+
+  return (
+    <div
+      className="library-header library-header--light"
+      style={{
+        "--color-accent-primary": accentColor || DEFAULTS.accentColor,
+        "--hover-color": accentColor || DEFAULTS.accentColor,
+        "--color-header-background":
+          backgroundColor || DEFAULTS.backgroundColor,
+        "--color-header-foreground":
+          foregroundColor || DEFAULTS.foregroundColor,
+        "--color-header-foreground-active": activeColor || DEFAULTS.activeColor
+      }}
+      inert=""
+    >
+      <SetCSSProperty
+        measurement="height"
+        propertyName="--library-header-height"
+      >
+        <div className="library-header__inner-preview">
+          <HeaderLogo as="span">
+            <>
+              <span className="screen-reader-text">
+                {t("navigation.return_home")}
+              </span>
+              <PressLogo
+                url={settings?.attributes?.pressLogoStyles?.medium}
+                styles={settings?.attributes?.theme?.logoStyles}
+                aria-hidden="true"
+              />
+            </>
+          </HeaderLogo>
+          <nav
+            className="site-nav show-82"
+            aria-label={t("navigation.primary")}
+            style={navStyle}
+          >
+            <ul className="site-nav__list">
+              <li className="site-nav__item">
+                <span className="site-nav__link site-nav__link--active">
+                  {t("titles.home")}
+                </span>
+              </li>
+              <li className="site-nav__item">
+                <span className="site-nav__link">
+                  {t("glossary.project_title_case_other")}
+                </span>
+              </li>
+              <li className="site-nav__item">
+                <span className="site-nav__link">
+                  {t("glossary.journal_title_case_other")}
+                </span>
+              </li>
+              <li className="site-nav__item">
+                <span className="site-nav__link">
+                  {t("glossary.reading_group_title_case_other")}
+                </span>
+              </li>
+            </ul>
+          </nav>
+          <nav className="breadcrumb-list hide-82">
+            <span>
+              <span className="breadcrumb-list__link">{t("titles.home")}</span>
+            </span>
+          </nav>
+          <span className="mobile-nav-toggle hide-82">
+            <IconComposer
+              icon="menu32"
+              size="default"
+              className="mobile-nav-trigger__icon"
+            />
+          </span>
+        </div>
+      </SetCSSProperty>
+    </div>
+  );
+}

@@ -1,0 +1,35 @@
+import PropTypes from "prop-types";
+import Template from "../../Template";
+import Cover from "components/frontend/resource-collection/Cover";
+import * as Styled from "components/frontend/resource-collection-list/Grid/styles";
+
+function CollectedResourceCollections(props) {
+  return (
+    <Template
+      {...props}
+      type="resourceCollections"
+      ListComponent={({ children, ...restProps }) => (
+        <Styled.Grid>{children(restProps)}</Styled.Grid>
+      )}
+      ResponseComponent={({ response }) => (
+        <Cover
+          urlCreator={collection => {
+            return `/projects/${collection.attributes.projectSlug}/resource-collections/${collection.attributes.slug}`;
+          }}
+          resourceCollection={response}
+        />
+      )}
+    />
+  );
+}
+
+CollectedResourceCollections.displayName =
+  "Collecting.CollectedResourceCollections";
+
+CollectedResourceCollections.propTypes = {
+  collectedIds: PropTypes.array.isRequired,
+  responses: PropTypes.array.isRequired,
+  nested: PropTypes.bool
+};
+
+export default CollectedResourceCollections;

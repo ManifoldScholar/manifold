@@ -1,0 +1,69 @@
+import React from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+
+import EntityThumbnail from "components/global/entity-thumbnail";
+import EntityRow from "./Row";
+import Checkbox from "../List/bulkActions/Checkbox";
+import { useAuthentication } from "hooks";
+
+function UserRow({
+  entity,
+  bulkActionsActive,
+  bulkSelection,
+  addItem,
+  removeItem,
+  ...props
+}) {
+  const { t } = useTranslation();
+  const { currentUser } = useAuthentication();
+
+  const { id, attributes } = entity;
+
+  const isSelected =
+    !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
+
+  const additionalProps = {
+    title: `${attributes.firstName} ${attributes.lastName}`,
+    figure: <EntityThumbnail.User entity={entity} />,
+    figureSize: "small",
+    figureShape: "circle",
+    label: [
+      {
+        text: t(`records.users.role_options.${attributes.role}`),
+        level: ""
+      },
+      ...(id === currentUser.id
+        ? [
+            {
+              text: t("common.you"),
+              level: "notice"
+            }
+          ]
+        : [])
+    ],
+    onRowClick: `/backend/records/users/${id}`,
+    rowClickMode: "block",
+    prepend: bulkActionsActive && (
+      <Checkbox
+        checked={isSelected}
+        onSelect={() => addItem(id)}
+        onClear={() => removeItem(id)}
+      />
+    )
+  };
+
+  return <EntityRow {...props} {...additionalProps} />;
+}
+
+UserRow.displayName = "EntitiesList.Entity.UserRow";
+
+UserRow.propTypes = {
+  entity: PropTypes.object,
+  bulkActionsActive: PropTypes.bool,
+  bulkSelection: PropTypes.object,
+  addItem: PropTypes.func,
+  removeItem: PropTypes.func
+};
+
+export default UserRow;

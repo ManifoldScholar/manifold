@@ -1,0 +1,81 @@
+import PropTypes from "prop-types";
+import { NavLink } from "react-router";
+import classnames from "classnames";
+
+import Authorize from "components/hoc/Authorize";
+import { useTranslation } from "react-i18next";
+
+export default function NavigationSecondary(props) {
+  const { ariaLabel, links, panel } = props;
+  const { t } = useTranslation();
+
+  const pathForLink = link => link.path;
+
+  const renderItem = link => {
+    return (
+      <li key={link.path}>
+        <NavLink
+          to={pathForLink(link)}
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+        >
+          {t(link.label)}
+        </NavLink>
+      </li>
+    );
+  };
+
+  const getAriaLabel = () => {
+    if (ariaLabel) {
+      return ariaLabel;
+    } else {
+      return t("navigation.secondary");
+    }
+  };
+
+  const renderContents = () => {
+    const navClasses = classnames({
+      "secondary-nav": true,
+      "panel-nav": panel
+    });
+
+    return (
+      <nav className={navClasses} aria-label={getAriaLabel()}>
+        <ul>
+          {links.map(link => {
+            if (link.ability || link.kind)
+              return (
+                <Authorize
+                  key={`${link.path}-wrapped`}
+                  entity={link.entity}
+                  ability={link.ability}
+                  kind={link.kind}
+                >
+                  {renderItem(link)}
+                </Authorize>
+              );
+            return renderItem(link);
+          })}
+        </ul>
+      </nav>
+    );
+  };
+
+  const renderPanel = () => {
+    return <aside className="aside">{renderContents(props)}</aside>;
+  };
+
+  const renderNav = () => {
+    if (panel) return renderPanel(props);
+    return renderContents(props);
+  };
+
+  return renderNav();
+}
+
+NavigationSecondary.displayName = "Layout.SecondaryNav";
+
+NavigationSecondary.propTypes = {
+  links: PropTypes.array,
+  panel: PropTypes.bool,
+  ariaLabel: PropTypes.string
+};

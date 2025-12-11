@@ -1,0 +1,23 @@
+import { redirect } from "react-router";
+import { Outlet } from "react-router";
+import { journalsAPI } from "api";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import EventTracker, { EVENTS } from "components/global/EventTracker";
+
+export const loader = async ({ params, request, context }) => {
+  if (params.id === "all") {
+    throw redirect("/journals");
+  }
+
+  const fetchFn = () => journalsAPI.show(params.id);
+  return loadEntity({ context, fetchFn, request });
+};
+
+export default function JournalWrapperRoute({ loaderData: journal }) {
+  return (
+    <>
+      <EventTracker event={EVENTS.VIEW_RESOURCE} resource={journal} />
+      <Outlet context={journal} />
+    </>
+  );
+}

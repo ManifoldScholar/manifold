@@ -1,0 +1,77 @@
+import styled from "@emotion/styled";
+import {
+  transparentize,
+  respond,
+  defaultFocusStyle,
+  headerContainerPrimary,
+  containerPrototype
+} from "theme/styles/mixins";
+
+export const Dialog = styled.dialog`
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  font-size: 18px;
+  font-family: var(--font-family-copy);
+  position: relative;
+  background: transparent;
+
+  &::backdrop {
+    background: ${transparentize("neutral90", 0.025)};
+  }
+
+  a {
+    text-decoration: underline;
+  }
+`;
+
+export const Header = styled.div`
+  position: fixed;
+  width: 100%;
+  left: 0;
+  z-index: 1;
+`;
+
+export const HeaderInner = styled.div`
+  ${headerContainerPrimary}
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const Content = styled.div`
+  position: absolute;
+  top: 80px;
+  bottom: 0;
+  width: 100%;
+  overflow: auto;
+
+  ${respond(`top: 0;`, 90)}
+`;
+
+export const LayoutContainer = styled.div`
+  ${containerPrototype}
+  padding-block-start: var(--container-padding-block-start);
+  padding-block-end: 100px;
+`;
+
+export const FormContainer = styled.div`
+  max-width: 340px;
+  margin: 0 auto;
+
+  ${respond(`padding-top: 35px;`, 40)}
+  ${respond(`padding-top: 126px;`, 90)}
+
+  form {
+    &:focus:not(:focus-visible) {
+      outline: 0;
+    }
+
+    &:focus-visible {
+      ${defaultFocusStyle}
+      outline-offset: 5px;
+    }
+  }
+`;

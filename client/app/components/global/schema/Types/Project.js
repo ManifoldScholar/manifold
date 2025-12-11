@@ -1,0 +1,107 @@
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { renderOffer, renderSeries, renderNamesList } from "../helpers";
+import BaseSchema from "../BaseSchema";
+import { partition } from "lodash-es";
+
+export default class Project extends PureComponent {
+  static displayName = "Schema.Project";
+
+  static propTypes = {
+    project: PropTypes.shape({
+      url: PropTypes.string,
+      attributes: PropTypes.shape({
+        title: PropTypes.string,
+        metadata: PropTypes.shape({
+          isbn: PropTypes.string,
+          rightsHolder: PropTypes.string,
+          publisher: PropTypes.string,
+          seriesTitle: PropTypes.string,
+          doi: PropTypes.string,
+          edition: PropTypes.string
+        }),
+        purchaseUrl: PropTypes.string,
+        purchasePrice: PropTypes.number,
+        purchasePriceCurrency: PropTypes.string,
+        avatarStyles: PropTypes.shape({
+          small: PropTypes.string
+        }),
+        publicationDate: PropTypes.string,
+        createdAt: PropTypes.string,
+        updatedAt: PropTypes.string
+      }),
+      relationships: PropTypes.shape({
+        creators: PropTypes.arrayOf(
+          PropTypes.shape({
+            attributes: PropTypes.shape({
+              fullName: PropTypes.string.isRequired
+            }).isRequired
+          })
+        ),
+        contributors: PropTypes.arrayOf(
+          PropTypes.shape({
+            attributes: PropTypes.shape({
+              fullName: PropTypes.string.isRequired
+            }).isRequired
+          })
+        )
+      })
+    }).isRequired
+  };
+
+  get project() {
+    return this.props.project;
+  }
+
+  get attributes() {
+    return this.project.attributes;
+  }
+
+  get relationships() {
+    return this.project.relationships;
+  }
+
+  projectData() {
+    const {
+      slug,
+      title,
+      metadata,
+      publicationDate,
+      createdAt,
+      updatedAt,
+      avatarStyles
+    } = this.attributes;
+    const { creators, flattenedCollaborators } = this.relationships;
+    const hostname = import.meta.env.VITE_CLIENT_URL;
+
+    /* eslint-disable-next-line no-unused-vars */
+    const [authors, others] = partition(flattenedCollaborators, fc =>
+      creators.find(c => c.id === fc.relationships.maker.id)
+    );
+
+    return {
+      "@type": "Book",
+      "@id": metadata.isbn ?? metadata.doi,
+      name: title,
+      url: `${hostname}/projects/${slug}`,
+      isbn: metadata.isbn,
+      doi: metadata.doi,
+      author: renderNamesList(creators),
+      contributor: renderNamesList(others),
+      copyrightHolder: metadata.rightsHolder,
+      dateCreated: createdAt,
+      dateModified: updatedAt,
+      datePublished: publicationDate,
+      publisher: metadata.publisher,
+      bookEdition: metadata.edition,
+      bookFormat: "EBook",
+      isPartOf: renderSeries(metadata),
+      image: avatarStyles && avatarStyles.small,
+      offers: renderOffer(this.attributes)
+    };
+  }
+
+  render() {
+    return <BaseSchema entity={this.projectData()} />;
+  }
+}
