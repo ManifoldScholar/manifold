@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
 import { useMenuState, MenuItem } from "reakit/Menu";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { FrontendModeContext } from "helpers/contexts";
-import { useFromStore } from "hooks";
+import { useSettings, useFrontendModeContext } from "hooks";
 import Authorize from "hoc/Authorize";
 import * as Styled from "./styles";
 
@@ -14,9 +12,9 @@ export default function SiteNav({
   toggleSignInUpOverlay,
   moreLink = "https://manifoldapp.org/"
 }) {
-  const context = useContext(FrontendModeContext);
+  const context = useFrontendModeContext();
   const menu = useMenuState();
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const settings = useSettings();
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
 
   return (

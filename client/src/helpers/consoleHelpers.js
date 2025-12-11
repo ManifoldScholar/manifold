@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-const emoji = require("node-emoji");
-const endsWith = require("lodash/endsWith");
+import * as emoji from "node-emoji";
+import endsWith from "lodash/endsWith";
 
 function baseString(emojiKey) {
   let out = "";
@@ -33,27 +33,27 @@ function log(string, color, bold) {
   }
 }
 
-function header(string, emojiKey = "fist") {
+export function header(string, emojiKey = "fist") {
   const out = baseString(emojiKey) + string;
   log(out, "green", true);
 }
 
-function info(string, emojiKey = "bell") {
+export function info(string, emojiKey = "bell") {
   const out = baseString(emojiKey) + string;
   log(out, "yellow", false);
 }
 
-function error(string, emojiKey = "fire") {
+export function error(string, emojiKey = "fire") {
   const out = baseString(emojiKey) + string;
   log(out, "red", true);
 }
 
-function notice(string, emojiKey = "ok_hand") {
+export function notice(string, emojiKey = "ok_hand") {
   const out = baseString(emojiKey) + string;
   log(out, "gray", true);
 }
 
-function plain(string) {
+export function plain(string) {
   if (__SERVER__) {
     console.log(`[SSR] ${string}`);
   } else {
@@ -61,11 +61,11 @@ function plain(string) {
   }
 }
 
-function background(string) {
+export function background(string) {
   log(string, "gray", false);
 }
 
-module.exports = {
+export default {
   header,
   info,
   notice,

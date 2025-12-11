@@ -1,14 +1,13 @@
-import { useContext } from "react";
 import PropTypes from "prop-types";
 import HeaderNotifications from "global/components/HeaderNotifications";
-import { FrontendModeContext } from "helpers/contexts";
+import { useFrontendModeContext } from "hooks";
 import CustomHeader from "./CustomHeader";
 import LibraryHeader from "./LibraryHeader";
 import StandaloneHeader from "./StandaloneHeader";
 import PressHeader from "./PressHeader";
 
 export default function LayoutHeader({ alwaysVisible }) {
-  const context = useContext(FrontendModeContext);
+  const context = useFrontendModeContext();
   const { isLibrary = false, isStandalone = false } = context || {};
 
   return (

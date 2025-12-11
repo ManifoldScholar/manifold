@@ -1,36 +1,29 @@
-import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import SearchMenu from "global/components/search/menu";
-import { FrontendModeContext } from "helpers/contexts";
-import withSettings from "hoc/withSettings";
+import { useFrontendModeContext, useSettings } from "hooks";
 
-class MobileSearch extends PureComponent {
-  static propTypes = {
-    closeNavigation: PropTypes.func
-  };
+export default function MobileSearch({ closeNavigation }) {
+  const context = useFrontendModeContext();
+  const settings = useSettings();
 
-  static contextType = FrontendModeContext;
+  const isLibraryDisabled = settings?.attributes?.general?.libraryDisabled;
+  const scopeToProject =
+    context.isStandalone || Boolean(isLibraryDisabled && context.project);
+  const projectId = scopeToProject ? context.project?.id : null;
 
-  get isLibraryDisabled() {
-    return this.props.settings.attributes.general.libraryDisabled;
-  }
-
-  render() {
-    const scopeToProject =
-      this.context.isStandalone ||
-      Boolean(this.isLibraryDisabled && this.context.project);
-    const projectId = scopeToProject ? this.context.project.id : null;
-
-    return (
-      <SearchMenu.Body
-        afterSubmit={this.props.closeNavigation}
-        searchType={scopeToProject ? "project" : "library"}
-        projectId={projectId}
-        visibility={{ search: true }}
-        className="nested-nav__search-menu"
-      />
-    );
-  }
+  return (
+    <SearchMenu.Body
+      afterSubmit={closeNavigation}
+      searchType={scopeToProject ? "project" : "library"}
+      projectId={projectId}
+      visibility={{ search: true }}
+      className="nested-nav__search-menu"
+    />
+  );
 }
 
-export default withSettings(MobileSearch);
+MobileSearch.displayName = "Navigation.Mobile.Search";
+
+MobileSearch.propTypes = {
+  closeNavigation: PropTypes.func
+};

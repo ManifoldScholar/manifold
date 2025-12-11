@@ -12,7 +12,7 @@ import entityUtils from "utils/entityUtils";
 import { useUID } from "react-uid";
 import config from "config";
 import ch from "helpers/consoleHelpers";
-import { isFunction } from "lodash";
+import isFunction from "lodash/isFunction";
 
 function log(type, key) {
   if (config.environment.isDevelopment) {

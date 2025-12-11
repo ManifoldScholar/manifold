@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ApiDocs from "frontend/components/ApiDocs";
 import config from "config";
 import EntityCollection from "frontend/components/entity/Collection/EntityCollection";
-import { useFromStore } from "hooks";
+import { useAuthentication } from "hooks";
 
 const API_DOCS_URL = `${config.services.api}/api/static/docs/v1/swagger.json`;
 
@@ -23,7 +23,7 @@ const getEndpointCounts = schema => {
 
 export default function Api() {
   const [schema, setSchema] = useState(null);
-  const authentication = useFromStore({ path: "authentication" });
+  const { authenticated, currentUser, authToken } = useAuthentication();
 
   useEffect(() => {
     fetch(API_DOCS_URL).then(response => {
@@ -55,8 +55,8 @@ export default function Api() {
             </p>
             <p className="description">
               ${
-                authentication.authenticated
-                  ? `You are currently sending API requests as <strong>${authentication.currentUser.attributes.fullName}</strong>.`
+                authenticated
+                  ? `You are currently sending API requests as <strong>${currentUser?.attributes?.fullName}</strong>.`
                   : `<strong>You are not currently logged in.</strong>`
               }
               Any requests you send to this instance using the documentation below
@@ -76,9 +76,7 @@ export default function Api() {
             </p>
           `}
       headerLayout="title_description"
-      BodyComponent={() => (
-        <ApiDocs schema={schema} authToken={authentication.authToken} />
-      )}
+      BodyComponent={() => <ApiDocs schema={schema} authToken={authToken} />}
     />
   );
 }

@@ -1,7 +1,13 @@
-import { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import {
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+  useEffect,
+  useId
+} from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import Option from "global/components/form/Radio/Option";
@@ -26,6 +32,7 @@ export default function SearchQueryForm({
   autoFocus = false
 }) {
   const { t } = useTranslation();
+  const searchInputId = useId();
   const handlersRef = useRef({
     facets: {},
     scopes: {}
@@ -94,7 +101,6 @@ export default function SearchQueryForm({
 
   const [state, setState] = useState(() => setDefaultScope(searchQueryState));
 
-  const searchIdPrefix = "query-search";
   const typeIsReader = searchType === "reader";
 
   const doSearch = useCallback(
@@ -229,24 +235,18 @@ export default function SearchQueryForm({
   return (
     <form role="search" className="search-query" onSubmit={doSearch}>
       <div className="search-query__input-magnify">
-        <UIDConsumer name={id => `${searchIdPrefix}-${id}`}>
-          {id => (
-            <>
-              <label htmlFor={id} className="screen-reader-text">
-                {t("search.instructions")}
-              </label>
-              <input
-                type="text"
-                id={id}
-                autoFocus={autoFocus}
-                onChange={setKeyword}
-                value={state.keyword}
-                placeholder={t("search.placeholder")}
-                className="search-query__input"
-              />
-            </>
-          )}
-        </UIDConsumer>
+        <label htmlFor={searchInputId} className="screen-reader-text">
+          {t("search.instructions")}
+        </label>
+        <input
+          type="text"
+          id={searchInputId}
+          autoFocus={autoFocus}
+          onChange={setKeyword}
+          value={state.keyword}
+          placeholder={t("search.placeholder")}
+          className="search-query__input"
+        />
         <button type="submit" className="search-query__submit">
           <Utility.IconComposer
             className="search-query__search-icon"

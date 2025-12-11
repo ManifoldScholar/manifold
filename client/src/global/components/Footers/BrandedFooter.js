@@ -1,24 +1,21 @@
 import { useDispatch } from "react-redux";
 import { commonActions } from "actions/helpers";
-import { requests } from "api";
 import FooterParts from "./Parts";
-import { useFromStore } from "hooks";
+import { useAuthentication, useSettings, usePages, useLogout } from "hooks";
 import withPluginReplacement from "hoc/withPluginReplacement";
 import links from "./Parts/helpers/links";
 // import LanguageSelect from "global/components/LanguageSelect";
 import * as Styled from "./styles";
 
-function BrandedFooter({ ...props }) {
+function BrandedFooter(props) {
   const dispatch = useDispatch();
-  const authentication = useFromStore({ path: "authentication" });
-  const settings = useFromStore({
-    requestKey: "settings",
-    action: "select"
-  });
-  const pages = useFromStore({
-    requestKey: requests.gPages,
-    action: "select"
-  });
+  const authentication = useAuthentication();
+  const settings = useSettings();
+  const pages = usePages();
+  const logout = useLogout();
+
+  // Override logout to use the hook that triggers revalidation
+  const commonActionsWithLogout = { ...commonActions(dispatch), logout };
 
   return (
     <Styled.BrandedFooter className="bg-neutral95">
@@ -32,7 +29,7 @@ function BrandedFooter({ ...props }) {
               authentication,
               settings,
               pages,
-              commonActions: commonActions(dispatch),
+              commonActions: commonActionsWithLogout,
               ...props
             })}
           </FooterParts.Navigation>

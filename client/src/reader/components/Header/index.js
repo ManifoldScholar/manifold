@@ -19,12 +19,13 @@ import Utility from "global/components/utility";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
 import Authorize from "hoc/Authorize";
 import { commonActions } from "actions/helpers";
-import { useFromStore } from "hooks";
+import { useFromStore, useLogout } from "hooks";
 
 export default function Header({ text, scrollAware }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { sectionId } = useParams();
+  const logout = useLogout();
 
   const section = useFromStore({
     entityType: "textSections",
@@ -34,7 +35,8 @@ export default function Header({ text, scrollAware }) {
   const visibility = useFromStore({ path: "ui.transitory.visibility" });
   const appearance = useFromStore({ path: "ui.persistent.reader" });
 
-  const actions = commonActions(dispatch);
+  // Override logout to use the hook that triggers revalidation
+  const actions = { ...commonActions(dispatch), logout };
 
   const handleContentsButtonClick = event => {
     event.stopPropagation();

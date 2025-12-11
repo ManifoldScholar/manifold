@@ -1,19 +1,14 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
-import { currentUserActions } from "actions";
-import { useDispatch } from "react-redux";
-import { useFromStore } from "hooks";
+import { useAuthentication, useLogout } from "hooks";
 import * as Styled from "./styles";
 
 export default function Logout() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const { authenticated, currentUser } =
-    useFromStore({ path: "authentication" }) ?? {};
+  const logout = useLogout();
+  const { authenticated, currentUser } = useAuthentication();
 
   const handleLogout = () => {
-    const action = currentUserActions.logout();
-    dispatch(action);
+    logout();
   };
 
   return authenticated ? (

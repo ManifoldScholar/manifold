@@ -1,16 +1,14 @@
-import {
-  useState,
-  useEffect,
-  useContext,
-  useMemo,
-  useCallback,
-  useRef
-} from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import { useLocation, NavLink, useMatches } from "react-router-dom";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
-import { useFromStore, useShowJournalsActive } from "hooks";
+import {
+  useShowJournalsActive,
+  useFrontendModeContext,
+  useLogout,
+  useAuthentication
+} from "hooks";
 import lh from "helpers/linkHandler";
 import memoize from "lodash/memoize";
 import UserLinks from "./mobile-components/UserLinks";
@@ -18,7 +16,6 @@ import MobileSearch from "./mobile-components/Search";
 import MobileBreadcrumb from "./mobile-components/Breadcrumb";
 import { FocusTrap } from "focus-trap-react";
 import IconComposer from "global/components/utility/IconComposer";
-import { FrontendModeContext } from "helpers/contexts";
 import Authorize from "hoc/Authorize";
 import BodyClass from "hoc/BodyClass";
 import { useDispatch } from "react-redux";
@@ -29,11 +26,13 @@ export default function NavigationMobile({ links, backendButton, mode }) {
   const { t } = useTranslation();
   const location = useLocation();
   const matches = useMatches();
-  const context = useContext(FrontendModeContext);
-  const authentication = useFromStore({ path: "authentication" });
+  const context = useFrontendModeContext();
+  const authentication = useAuthentication();
   const journalIsActive = useShowJournalsActive();
+  const logout = useLogout();
 
-  const commonActionsHelper = commonActions(dispatch);
+  // Override logout to use the hook that triggers revalidation
+  const commonActionsHelper = { ...commonActions(dispatch), logout };
 
   const initialState = {
     expanded: [],

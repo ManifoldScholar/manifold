@@ -8,7 +8,7 @@ import Toc from "reader/components/Toc";
 import Footers from "global/components/Footers";
 import Header from "reader/components/Header";
 import ReaderFullNotes from "reader/containers/ReaderFullNotes";
-import { textsAPI, requests, meAPI } from "api";
+import { textsAPI, meAPI } from "api";
 import locationHelper from "helpers/location";
 import { setPersistentUI } from "actions/ui/persistentUi";
 import ScrollAware from "hoc/ScrollAware";
@@ -18,7 +18,7 @@ import { ReaderContext } from "helpers/contexts";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import AppFatalError from "global/components/FatalError/AppWrapper";
 import { SearchProvider } from "hooks/useSearch/context";
-import { useFetch, useFromStore } from "hooks";
+import { useFetch, useFromStore, useCurrentUser, useSettings } from "hooks";
 
 export default function ReaderContainer() {
   const { textId } = useParams();
@@ -34,15 +34,12 @@ export default function ReaderContainer() {
     refetchOnLogin: true
   });
 
-  const authentication = useFromStore({ path: "authentication" });
+  const currentUser = useCurrentUser();
   const fatalError = useFromStore({ path: "fatalError" });
-  const settings = useFromStore({
-    requestKey: requests.settings,
-    action: "select"
-  });
+  const settings = useSettings();
   const appearance = useFromStore({ path: "ui.persistent.reader" });
 
-  const currentUserId = authentication?.currentUser?.id;
+  const currentUserId = currentUser?.id;
 
   useFetch({
     request: [meAPI.readingGroups],
@@ -55,12 +52,11 @@ export default function ReaderContainer() {
 
   useEffect(() => {
     if (hasSetPersistentUIRef.current) return;
-    const user = authentication?.currentUser;
-    if (user?.attributes?.persistentUi?.reader) {
-      setPersistentUI(user.attributes.persistentUi.reader);
+    if (currentUser?.attributes?.persistentUi?.reader) {
+      setPersistentUI(currentUser.attributes.persistentUi.reader);
       hasSetPersistentUIRef.current = true;
     }
-  }, [authentication?.currentUser]);
+  }, [currentUser]);
 
   useEffect(() => {
     const prevLocation = prevLocationRef.current;

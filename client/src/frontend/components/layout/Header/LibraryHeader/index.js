@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { requests } from "api";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
 import lh from "helpers/linkHandler";
@@ -12,21 +11,17 @@ import Breadcrumbs, {
 } from "global/components/atomic/Breadcrumbs";
 import ProjectsToggle from "global/components/navigation/projects-dropdown/Toggle";
 import ProjectsDropdown from "global/components/navigation/projects-dropdown";
-import { useFromStore } from "hooks";
+import { useSettings, usePages, useAuthentication } from "hooks";
 
 export default function LibraryHeader() {
   const { t } = useTranslation();
   const { breadcrumbs } = useContext(BreadcrumbsContext);
+  const pages = usePages();
 
-  const authentication = useFromStore({ path: "authentication" });
-  const settings = useFromStore({
-    requestKey: requests.settings,
-    action: "select"
-  });
-  const pages = useFromStore({
-    requestKey: requests.gPages,
-    action: "select"
-  });
+  const authentication = useAuthentication();
+  const settings = useSettings();
+
+  if (!settings) return null;
 
   const pageToLinkAttrs = page => ({
     label: page.attributes.navTitle || page.attributes.title,

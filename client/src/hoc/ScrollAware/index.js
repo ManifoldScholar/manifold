@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { throttle } from "lodash";
+import throttle from "lodash/throttle";
 import classNames from "classnames";
 
 export default class ScrollAware extends Component {

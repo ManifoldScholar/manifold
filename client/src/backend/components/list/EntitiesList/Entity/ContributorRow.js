@@ -5,7 +5,7 @@ import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
-import { useFromStore } from "hooks";
+import { useCurrentUser } from "hooks";
 import Authorization from "helpers/authorization";
 import capitalize from "lodash/capitalize";
 
@@ -18,12 +18,12 @@ function ContributorRow({ entity, onDelete, onEdit, ...props }) {
 
   const { roles } = attributes ?? {};
 
-  const authentication = useFromStore({ path: "authentication" });
+  const currentUser = useCurrentUser();
   const auth = new Authorization();
   const canAccessMakers = auth.authorizeAbility({
     entity: "maker",
     ability: "update",
-    currentUser: authentication.currentUser
+    currentUser
   });
 
   const additionalProps = {

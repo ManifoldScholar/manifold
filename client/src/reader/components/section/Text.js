@@ -9,7 +9,7 @@ import filterAnnotations from "./helpers/filter-annotations";
 import HtmlClass from "hoc/HtmlClass";
 import isEqual from "lodash/isEqual";
 import useDialog from "@castiron/hooks/useDialog";
-import { useFromStore } from "hooks";
+import { useFromStore, useCurrentUser } from "hooks";
 
 export default function Text({
   children,
@@ -22,7 +22,7 @@ export default function Text({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const authentication = useFromStore({ path: "authentication" });
+  const currentUser = useCurrentUser();
   const visibility = useFromStore({ path: "ui.transitory.visibility" });
   const appearance = useFromStore({ path: "ui.persistent.reader" });
 
@@ -119,7 +119,7 @@ export default function Text({
       <div className="main-content" style={{ flexGrow: 1 }}>
         <section className={readerAppearanceClass}>
           <Annotatable
-            currentUser={authentication?.currentUser}
+            currentUser={currentUser}
             projectId={text.relationships.project.id}
             textId={text.id}
             sectionId={section.id}

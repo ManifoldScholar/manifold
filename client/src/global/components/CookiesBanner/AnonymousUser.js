@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import NarrowBanner from "./NarrowBanner";
 import FormEmbedBanner from "./FormEmbedBanner";
-import { useFromStore } from "hooks";
+import { useSettings } from "hooks";
 import CookieHelper from "helpers/cookie/Browser";
 import ReactGA from "react-ga4";
 
@@ -16,7 +16,7 @@ export default function AnonymousUserBanner() {
     setConsentNeeded(!hasConsentCookie);
   }, []);
 
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const settings = useSettings();
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
     settings?.attributes?.calculated ?? {};
 

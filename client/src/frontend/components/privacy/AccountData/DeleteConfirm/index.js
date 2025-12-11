@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useApiCallback, useNotification, useFromStore } from "hooks";
+import {
+  useApiCallback,
+  useNotification,
+  useCurrentUser,
+  useLogout
+} from "hooks";
 import { meAPI } from "api";
-import { currentUserActions } from "actions";
-import { useDispatch } from "react-redux";
 import Form from "global/components/form";
 import * as Styled from "./styles";
 
 export default function DeleteConfirm() {
-  const { currentUser } = useFromStore({ path: "authentication" });
+  const currentUser = useCurrentUser();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const logout = useLogout();
 
   const [emailValue, setEmail] = useState("");
   const [mismatch, setMismatch] = useState(false);
@@ -32,7 +35,7 @@ export default function DeleteConfirm() {
     const res = await deleteAccount();
     if (res?.errors) return setErrors(res.errors);
     notifyDestroy(currentUser);
-    dispatch(currentUserActions.logout());
+    logout();
   };
 
   const handleDelete = e => {

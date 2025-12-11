@@ -1,14 +1,15 @@
-import React, { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { usersAPI, requests } from "api";
-import { currentUserActions } from "actions";
-import { useFromStore } from "hooks";
+import { usersAPI, tokensAPI } from "api";
+import { useCurrentUser, usePages, useRevalidate } from "hooks";
 import CreateFormFields from "./CreateFormFields";
 import Form from "global/components/form";
-import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
+import BrowserCookieHelper from "helpers/cookie/Browser";
 import * as SharedStyles from "../styles";
+
+const cookie = new BrowserCookieHelper();
 
 export default function CreateUserForm({
   handleViewChange,
@@ -16,23 +17,37 @@ export default function CreateUserForm({
   redirectToHomeOnSignup
 }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const authentication = useFromStore({ path: "authentication" });
-  const { currentUser } = authentication ?? {};
+  const currentUser = useCurrentUser();
+  const revalidate = useRevalidate();
+  const pages = usePages();
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const emailRef = useRef();
   const passwordRef = useRef();
 
   const authenticateUser = useCallback(
-    (email, password) => {
-      dispatch(currentUserActions.login({ email, password }));
+    async (email, password) => {
+      setIsAuthenticating(true);
+      try {
+        const response = await tokensAPI.createToken(email, password);
+        const authToken = response?.meta?.authToken;
+        if (authToken) {
+          cookie.write("authToken", authToken);
+          revalidate();
+        }
+      } catch {
+        // If login fails after account creation, still trigger revalidation
+        // The user account was created successfully
+        revalidate();
+      } finally {
+        setIsAuthenticating(false);
+      }
     },
-    [dispatch]
+    [revalidate]
   );
 
-  const pages = useFromStore({ requestKey: requests.gPages, action: "select" });
   const termsPage = pages?.find(
     p => p.attributes.purpose === "terms_and_conditions"
   );
@@ -57,7 +72,7 @@ export default function CreateUserForm({
   }, [authenticateUser]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && !isAuthenticating) {
       if (!willRedirect && !redirectToHomeOnSignup)
         handleViewChange("create-update");
       if (redirectToHomeOnSignup && !location?.state?.postLoginRedirect) {
@@ -73,7 +88,8 @@ export default function CreateUserForm({
     willRedirect,
     redirectToHomeOnSignup,
     navigate,
-    location
+    location,
+    isAuthenticating
   ]);
 
   return (

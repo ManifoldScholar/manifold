@@ -3,9 +3,9 @@ import qs from "qs";
 import humps from "utils/humps";
 
 export default class LowLevelApiClient {
-  constructor() {
+  constructor(authToken = null) {
     this.defaultOptions = {
-      authToken: null,
+      authToken,
       params: {}
     };
   }

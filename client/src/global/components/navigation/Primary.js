@@ -4,15 +4,15 @@ import Static from "global/components/navigation/Static";
 import Mobile from "global/components/navigation/Mobile";
 import { Link, useLocation } from "react-router-dom";
 import { getAdminModeLabel, getDestinationPath } from "./helpers";
-import { useFromStore } from "hooks";
+import { useFromStore, useAuthentication } from "hooks";
 import Authorization from "helpers/authorization";
 
 export default function NavigationPrimary(props) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
 
-  const authentication = useFromStore({ path: "authentication" });
-  const currentUser = authentication.currentUser;
+  const authentication = useAuthentication();
+  const { currentUser } = authentication;
 
   const label = getAdminModeLabel({ currentUser, mode: props.mode, t });
 

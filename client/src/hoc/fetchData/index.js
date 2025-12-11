@@ -1,6 +1,6 @@
 import React from "react";
 import { useDeprecatedFetchData } from "hooks";
-import { isFunction } from "lodash";
+import isFunction from "lodash/isFunction";
 
 export default function fetchData(Component) {
   if (!isFunction(Component.fetchData))

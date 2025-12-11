@@ -1,4 +1,4 @@
-const isString = require("lodash/isString");
+import isString from "lodash/isString";
 
 export function repeat(str, times) {
   return new Array(times + 1).join(str);

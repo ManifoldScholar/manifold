@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import useAuthentication from "../useAuthentication";
 
 export default function useCurrentUser() {
-  return useSelector(state => state.authentication.currentUser);
+  const { currentUser } = useAuthentication();
+  return currentUser;
 }

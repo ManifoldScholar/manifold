@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import { get } from "lodash";
+import get from "lodash/get";
 import { camelize } from "utils/humps";
 import config from "../../config";
 
-export openPopup from "./popup";
+export { default as openPopup } from "./popup";
 
 export function providerSlug(provider) {
   switch (provider) {

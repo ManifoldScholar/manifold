@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
@@ -10,11 +9,15 @@ import UserMenuBody from "global/components/UserMenuBody";
 import UIPanel from "global/components/UIPanel";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
 import lh from "helpers/linkHandler";
-import { FrontendModeContext } from "helpers/contexts";
 import Authorize from "hoc/Authorize";
-import { useFromStore, useShowJournalsActive } from "hooks";
+import {
+  useFromStore,
+  useShowJournalsActive,
+  useSettings,
+  useLogout,
+  useFrontendModeContext
+} from "hooks";
 import { commonActions } from "actions/helpers";
-import { requests } from "api";
 
 export default function NavigationStatic({
   links,
@@ -26,16 +29,15 @@ export default function NavigationStatic({
 }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const context = useContext(FrontendModeContext);
+  const context = useFrontendModeContext();
   const journalIsActive = useShowJournalsActive();
+  const logout = useLogout();
 
   const visibility = useFromStore({ path: "ui.transitory.visibility" });
-  const settings = useFromStore({
-    requestKey: requests.settings,
-    action: "select"
-  });
+  const settings = useSettings();
 
-  const commonActionsHelper = commonActions(dispatch);
+  // Override logout to use the hook that triggers revalidation
+  const commonActionsHelper = { ...commonActions(dispatch), logout };
 
   const userMenuClasses = classNames({
     "user-nav": true,
@@ -52,6 +54,8 @@ export default function NavigationStatic({
   });
 
   const hasLinks = links && links.length > 0;
+
+  if (!settings) return null;
 
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
 

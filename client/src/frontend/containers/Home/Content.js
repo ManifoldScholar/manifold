@@ -1,68 +1,53 @@
 import Feature from "./Feature";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
-import { useFromStore } from "hooks";
 import { useLoaderData } from "react-router";
 import EntityCollection from "frontend/components/entity/Collection";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
-import { requests } from "api";
 
 export default function Content() {
-  const loaderData = useLoaderData();
   const {
-    journalsRequestKey,
-    featuresRequestKey,
-    projectsRequestKey,
-    collectionsRequestKey
-  } = loaderData || {};
-
-  const settings = useFromStore({
-    requestKey: requests.settings,
-    action: "select"
-  });
-
-  const { hasVisibleHomeProjectCollections, hasVisibleProjects } =
-    settings?.attributes?.calculated ?? {};
-  const showProjects = !hasVisibleHomeProjectCollections;
-
-  const projects = useFromStore({
-    requestKey: projectsRequestKey,
-    action: "select"
-  });
-  const collections = useFromStore({
-    requestKey: collectionsRequestKey,
-    action: "select"
-  });
-  const journals = useFromStore({
-    requestKey: journalsRequestKey,
-    action: "select"
-  });
-  const features = useFromStore({
-    requestKey: featuresRequestKey,
-    action: "select"
-  });
+    journals,
+    features,
+    projects,
+    collections,
+    showProjects,
+    hasVisibleProjects
+  } = useLoaderData() || {};
 
   // Filter data (matching useFetchHomepageContent logic)
-  const filteredProjects = projects?.filter(
-    p => !p?.attributes.markedForPurgeAt
-  );
-  const filteredJournals = journals?.map(j => ({
-    ...j,
-    relationships: {
-      ...j.relationships,
-      recentJournalIssues: j.relationships.recentJournalIssues.filter(
-        i => !i?.attributes.projectMarkedForPurgeAt
-      )
-    }
-  }));
-  const filteredCollections = collections?.map(c => ({
-    ...c,
-    relationships: {
-      ...c.relationships,
-      collectionProjects: c.relationships.collectionProjects.filter(
-        p => !p?.attributes.markedForPurgeAt
-      )
-    }
-  }));
+  const filteredProjects = Array.isArray(projects)
+    ? projects.filter(p => !p?.attributes?.markedForPurgeAt)
+    : null;
+
+  const filteredJournals = Array.isArray(journals)
+    ? journals.map(j => ({
+        ...j,
+        relationships: {
+          ...j.relationships,
+          recentJournalIssues: Array.isArray(
+            j.relationships?.recentJournalIssues
+          )
+            ? j.relationships.recentJournalIssues.filter(
+                i => !i?.attributes?.projectMarkedForPurgeAt
+              )
+            : []
+        }
+      }))
+    : null;
+
+  const filteredCollections = Array.isArray(collections)
+    ? collections.map(c => ({
+        ...c,
+        relationships: {
+          ...c.relationships,
+          collectionProjects: Array.isArray(c.relationships?.collectionProjects)
+            ? c.relationships.collectionProjects.filter(
+                p => !p?.attributes?.markedForPurgeAt
+              )
+            : []
+        }
+      }))
+    : null;
 
   const loaded = !!(
     (showProjects ? filteredProjects : filteredCollections) &&

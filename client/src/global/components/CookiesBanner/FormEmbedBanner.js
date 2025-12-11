@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import AcceptTermsCheckbox from "global/components/sign-in-up/AcceptTerms/AcceptTermsCheckbox";
 import PropTypes from "prop-types";
-import { useFromStore } from "hooks";
+import { useSettings } from "hooks";
 import * as Styled from "./styles";
 
 export default function FormEmbedBanner({ declineAll, save, message }) {
@@ -11,7 +11,7 @@ export default function FormEmbedBanner({ declineAll, save, message }) {
   const [prefs, setPrefs] = useState({ manifold: false, google: false });
   const onChange = pref => setPrefs({ ...prefs, [pref]: !prefs[pref] });
 
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const settings = useSettings();
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
     settings?.attributes?.calculated ?? {};
 

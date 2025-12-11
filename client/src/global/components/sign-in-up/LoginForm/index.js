@@ -1,18 +1,25 @@
 import React, { useCallback, useState } from "react";
-import actions from "actions/currentUser";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Notifications from "global/containers/Notifications";
-import { useDispatch } from "react-redux";
-import {
-  handleAuthenticationSuccess,
-  handleAuthenticationFailure
-} from "store/middleware/currentUserMiddleware";
 import Form from "global/components/form";
 import { tokensAPI } from "api";
-import { useFromStore } from "hooks";
+import { useRevalidate } from "hooks";
+import BrowserCookieHelper from "helpers/cookie/Browser";
 import * as Styled from "./styles";
 import * as SharedStyles from "../styles";
+
+const cookie = new BrowserCookieHelper();
+
+const getErrorMessage = status => {
+  switch (status) {
+    case 502:
+    case 500:
+      return "The server was unreachable, or unable to fulfill your request.";
+    default:
+      return "The username or password you entered is incorrect";
+  }
+};
 
 export default function LoginForm({
   handleViewChange,
@@ -20,13 +27,12 @@ export default function LoginForm({
   willRedirect
 }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const revalidate = useRevalidate();
   const [isLoading, setIsLoading] = useState(false);
-  const authentication = useFromStore({ path: "authentication" });
-  const error = authentication?.error?.body;
+  const [error, setError] = useState(null);
 
   const formatData = data => {
-    dispatch(actions.loginStart());
+    setError(null);
     setIsLoading(true);
     return { email: data.email, password: data.password };
   };
@@ -37,33 +43,22 @@ export default function LoginForm({
 
       const { authToken } = res.meta ?? {};
       if (!authToken) {
-        handleAuthenticationFailure(dispatch, {
-          status: 500,
-          destroyCookie: true
-        });
+        setError(getErrorMessage(500));
+        return;
       }
-      handleAuthenticationSuccess(dispatch, {
-        authToken,
-        user: res,
-        setCookie: true
-      }).then(() => {
-        if (hideOverlay) hideOverlay();
-      });
+
+      // Set cookie and trigger revalidation
+      cookie.write("authToken", authToken);
+      revalidate();
+      if (hideOverlay) hideOverlay();
     },
-    [dispatch, hideOverlay, setIsLoading]
+    [hideOverlay, revalidate]
   );
 
-  const onError = useCallback(
-    err => {
-      setIsLoading(false);
-
-      handleAuthenticationFailure(dispatch, {
-        status: err.status,
-        destroyCookie: true
-      });
-    },
-    [dispatch, setIsLoading]
-  );
+  const onError = useCallback(err => {
+    setIsLoading(false);
+    setError(getErrorMessage(err.status));
+  }, []);
 
   return (
     <div>

@@ -3,7 +3,7 @@ import get from "lodash/get";
 import ReactGA from "react-ga4";
 import ch from "helpers/consoleHelpers";
 import config from "config";
-import { useFromStore } from "hooks";
+import { useCurrentUser } from "hooks";
 import CookieHelper from "helpers/cookie/Browser";
 
 const cookie = new CookieHelper();
@@ -21,7 +21,7 @@ function googleAnalyticsEnabled(settings) {
 export default function useGoogleAnalytics(location, settings) {
   const googleAnalyticsId = getGoogleAnalyticsId(settings);
   const [gaInitialized, setGaInitialized] = useState(false);
-  const { currentUser } = useFromStore({ path: "authentication" }) ?? {};
+  const currentUser = useCurrentUser();
   const [consentGoogleAnalytics, setConsentGoogleAnalytics] = useState(
     currentUser?.attributes?.consentGoogleAnalytics || false
   );

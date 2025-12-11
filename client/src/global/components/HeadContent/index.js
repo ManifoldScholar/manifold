@@ -1,110 +1,81 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet-async";
 import Utility from "../utility";
 import unescape from "lodash/unescape";
-
-import config from "config";
 import get from "lodash/get";
+import config from "config";
+import { useSettings } from "hooks";
 
-import withSettings from "hoc/withSettings";
+const addMeta = (meta, key, value, overrideKey = null) => {
+  if (!value) return;
+  meta.push({ name: overrideKey || key, content: value });
+};
 
-export class HeadContentComponent extends Component {
-  static propTypes = {
-    title: PropTypes.string,
-    image: PropTypes.string,
-    siteName: PropTypes.string,
-    imageWidth: PropTypes.string,
-    imageHeight: PropTypes.string,
-    locale: PropTypes.string,
-    charset: PropTypes.string,
-    description: PropTypes.string,
-    appendDefaultTitle: PropTypes.bool,
-    settings: PropTypes.object
-  };
+const addOpenGraph = (meta, key, value, overrideKey = null) => {
+  addMeta(meta, key, value, `og:${overrideKey || key}`);
+};
 
-  static defaultProps = { ...config.app.head.meta };
+export function HeadContentComponent({
+  title: titleProp,
+  image: imageProp,
+  imageWidth,
+  imageHeight,
+  locale,
+  charset = config.app.head.meta.charset,
+  description: descriptionProp,
+  appendDefaultTitle = config.app.head.meta.appendDefaultTitle
+}) {
+  const settings = useSettings();
 
-  get defaultTitle() {
-    return get(this.props.settings, "attributes.general.headTitle");
-  }
+  const defaultTitle = get(settings, "attributes.general.headTitle");
+  const title = unescape(titleProp);
+  const appendedTitle = appendDefaultTitle
+    ? `${title} | ${defaultTitle}`
+    : title;
 
-  get title() {
-    return unescape(this.props.title);
-  }
+  const description =
+    descriptionProp || get(settings, "attributes.general.headDescription");
 
-  get appendedTitle() {
-    if (this.props.appendDefaultTitle)
-      return `${this.title} | ${this.defaultTitle}`;
-    return this.title;
-  }
+  const image =
+    imageProp ||
+    get(settings, "attributes.pressLogoStyles.medium") ||
+    `${config.services.client.url}/static/logo.jpg`;
 
-  get description() {
-    if (this.props.description) return this.props.description;
-    return get(this.props.settings, "attributes.general.headDescription");
-  }
+  const meta = [];
+  meta.push({ charset });
+  addMeta(meta, "description", description);
+  addOpenGraph(meta, "siteName", defaultTitle, "site_name");
+  addOpenGraph(meta, "locale", locale);
+  addOpenGraph(meta, "image", image);
+  addOpenGraph(meta, "title", appendedTitle);
+  addOpenGraph(meta, "description", description);
+  addOpenGraph(meta, "imageWidth", imageWidth, "image:width");
+  addOpenGraph(meta, "imageHeight", imageHeight, "image:height");
 
-  get image() {
-    return (
-      this.props.image ||
-      get(this.props.settings, "attributes.pressLogoStyles.medium") ||
-      `${config.services.client.url}/static/logo.jpg`
-    );
-  }
+  const titleTemplate = appendDefaultTitle ? `%s | ${defaultTitle}` : null;
 
-  readPropValue(key) {
-    return this.props[key];
-  }
-
-  addMeta(meta, key, overrideKey = null, overrideValue = null) {
-    const value = overrideValue || this.readPropValue(key);
-    if (!value) return meta;
-    const adjustedKey = overrideKey || key;
-    meta.push({ name: adjustedKey, content: value });
-    return meta;
-  }
-
-  addOpenGraph(meta, key, overrideKey = null, overrideValue = null) {
-    const adjustedKey = overrideKey || key;
-    return this.addMeta(meta, key, `og:${adjustedKey}`, overrideValue);
-  }
-
-  buildMetaContent() {
-    const meta = [];
-    meta.push({ charset: this.props.charset });
-    this.addMeta(meta, "description", null, this.description);
-    this.addOpenGraph(meta, "siteName", "site_name", this.defaultTitle);
-    this.addOpenGraph(meta, "locale");
-    this.addOpenGraph(meta, "image", null, this.image);
-    this.addOpenGraph(meta, "title", null, this.appendedTitle);
-    this.addOpenGraph(meta, "description", null, this.description);
-    this.addOpenGraph(meta, "imageWidth", "image:width");
-    this.addOpenGraph(meta, "imageHeight", "image:height");
-    return meta;
-  }
-
-  titleTemplate(props) {
-    if (!props.appendDefaultTitle) return null;
-
-    return `%s | ${this.defaultTitle}`;
-  }
-
-  render() {
-    const meta = this.buildMetaContent();
-    const props = {
-      meta,
-      title: this.title
-    };
-    props.titleTemplate = this.titleTemplate(this.props);
-    props.defaultTitle = this.defaultTitle;
-
-    return (
-      <>
-        <Helmet {...props} />
-        <Utility.RouteAnnouncer title={props.title ?? props.defaultTitle} />
-      </>
-    );
-  }
+  return (
+    <>
+      <Helmet
+        meta={meta}
+        title={title}
+        titleTemplate={titleTemplate}
+        defaultTitle={defaultTitle}
+      />
+      <Utility.RouteAnnouncer title={title ?? defaultTitle} />
+    </>
+  );
 }
 
-export default withSettings(HeadContentComponent);
+HeadContentComponent.propTypes = {
+  title: PropTypes.string,
+  image: PropTypes.string,
+  imageWidth: PropTypes.string,
+  imageHeight: PropTypes.string,
+  locale: PropTypes.string,
+  charset: PropTypes.string,
+  description: PropTypes.string,
+  appendDefaultTitle: PropTypes.bool
+};
+
+export default HeadContentComponent;

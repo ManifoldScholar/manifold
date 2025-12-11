@@ -1,11 +1,10 @@
-import { useState, useEffect, useMemo, useRef } from "react";
-import { useUID } from "react-uid";
+import { useState, useEffect, useMemo, useRef, useId } from "react";
 
 export default function useMenuState(initialVisible = false, onBlur) {
   const [visible, setVisible] = useState(initialVisible);
   const toggleVisible = () => setVisible(!visible);
 
-  const id = useUID();
+  const id = useId();
 
   const disclosureRef = useRef();
   const contentRef = useRef();

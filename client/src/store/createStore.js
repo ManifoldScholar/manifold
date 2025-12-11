@@ -14,7 +14,9 @@ import pluginMiddleware from "./middleware/pluginMiddleware";
 import updatePersistentUi from "./subscriptions/updatePersistentUi";
 import updateCurrentUser from "./subscriptions/updateCurrentUser";
 
-import promiseMiddleware from "redux-promise";
+import reduxPromise from "redux-promise";
+// Handle both ESM and CommonJS exports
+const promiseMiddleware = reduxPromise.default || reduxPromise;
 import reducers from "./reducers";
 import pluginInitializer from "services/plugin/initializer";
 

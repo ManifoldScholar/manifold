@@ -1,15 +1,15 @@
 import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
-import { useFromStore, useApiCallback } from "hooks";
+import { useCurrentUser, useSettings, useApiCallback } from "hooks";
 import { meAPI } from "api";
 import NarrowBanner from "./NarrowBanner";
 
 export default function CurrentUserBanner() {
-  const { currentUser } = useFromStore({ path: "authentication" });
+  const currentUser = useCurrentUser();
   const { consentNeededManifoldAnalytics, consentNeededGoogleAnalytics } =
     currentUser?.attributes ?? {};
 
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const settings = useSettings();
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
     settings?.attributes?.calculated ?? {};
 

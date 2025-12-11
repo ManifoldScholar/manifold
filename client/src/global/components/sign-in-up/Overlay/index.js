@@ -1,14 +1,22 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useId, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { FocusTrap } from "focus-trap-react";
-import { useUID } from "react-uid";
 import TrapContent from "./Content";
-import { usePreventBodyScroll } from "hooks";
+import { usePreventBodyScroll, useFromStore } from "hooks";
+import { uiVisibilityActions } from "actions";
 import * as Styled from "./styles";
 
-export default function Overlay({ hideOverlay, active = false }) {
+export default function Overlay() {
+  const dispatch = useDispatch();
+  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const active = visibility?.signInUpOverlay ?? false;
+
+  const hideOverlay = useCallback(() => {
+    dispatch(uiVisibilityActions.visibilityHide("signInUpOverlay"));
+  }, [dispatch]);
+
   usePreventBodyScroll(active);
-  const uid = useUID();
+  const uid = useId();
 
   return (
     <FocusTrap
@@ -31,7 +39,3 @@ export default function Overlay({ hideOverlay, active = false }) {
 }
 
 Overlay.displayName = "Global.SignInUp.Overlay";
-
-Overlay.propTypes = {
-  hideOverlay: PropTypes.func
-};

@@ -1,15 +1,11 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { uiFrontendModeActions } from "actions";
-import { FrontendModeContext } from "helpers/contexts";
-import { useFromStore } from "hooks";
-import withSettings from "hoc/withSettings";
+import { useSettings, useFrontendModeContext } from "hooks";
 import queryString from "query-string";
 
 class CheckFrontendMode extends PureComponent {
-  static contextType = FrontendModeContext;
-
   componentDidMount() {
     this.log("componentDidMount");
     this.checkStandaloneMode(this.props.project);
@@ -159,16 +155,18 @@ class CheckFrontendMode extends PureComponent {
 function CheckFrontendModeWrapper(props) {
   const location = useLocation();
   const dispatch = useDispatch();
-  const frontendMode = useFromStore({ path: "ui.transitory.frontendMode" });
+  const settings = useSettings();
+  const frontendMode = useFrontendModeContext();
 
   return (
     <CheckFrontendMode
       {...props}
       location={location}
       dispatch={dispatch}
+      settings={settings}
       frontendMode={frontendMode}
     />
   );
 }
 
-export default withSettings(CheckFrontendModeWrapper);
+export default CheckFrontendModeWrapper;

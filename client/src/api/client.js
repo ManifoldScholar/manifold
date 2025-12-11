@@ -2,15 +2,29 @@
 import isPlainObject from "lodash/isPlainObject";
 import has from "lodash/has";
 import LowLevelApiClient from "./LowLevelApiClient";
+import denormalize from "helpers/api/denormalize";
 
 export default class ApiClient {
-  constructor() {
-    this.client = new LowLevelApiClient();
+  constructor(
+    authToken = null,
+    { denormalize: shouldDenormalize = false } = {}
+  ) {
+    this.client = new LowLevelApiClient(authToken);
+    this.shouldDenormalize = shouldDenormalize;
   }
 
-  call = (endpoint, method, options) => {
+  // Accepts either a request object { endpoint, method, options } or separate args
+  call = (endpointOrRequest, method, options) => {
+    const isRequestObject =
+      isPlainObject(endpointOrRequest) && endpointOrRequest.endpoint;
+    const endpoint = isRequestObject
+      ? endpointOrRequest.endpoint
+      : endpointOrRequest;
+    const actualMethod = isRequestObject ? endpointOrRequest.method : method;
+    const actualOptions = isRequestObject ? endpointOrRequest.options : options;
+
     return this.client
-      .call(endpoint, method, options)
+      .call(endpoint, actualMethod, actualOptions)
       .then(this._responseToJson, this._fetchNotOK)
       .then(this._cleanJson, this._responseNotOK)
       .then(this._returnResults, this._jsonNotOK)
@@ -78,6 +92,9 @@ export default class ApiClient {
   };
 
   _returnResults = ({ json, responseIgnored }) => {
+    if (this.shouldDenormalize && json) {
+      return denormalize(json);
+    }
     return json;
   };
 

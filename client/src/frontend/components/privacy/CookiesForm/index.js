@@ -3,19 +3,19 @@ import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
 import CookiesFields from "./CookiesFormFields";
 import GlobalForm from "global/containers/form";
-import { useFromStore, useNotification } from "hooks";
+import { useSettings, useCurrentUser, useNotification } from "hooks";
 import * as Styled from "./styles";
 
 export default function CookiesForm() {
   const { t } = useTranslation();
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const settings = useSettings();
 
   const manifoldAnalyticsEnabled = !settings?.attributes?.general
     ?.disableInternalAnalytics;
   const googleAnalyticsEnabled = !!settings?.attributes?.integrations
     ?.gaFourTrackingId;
 
-  const { currentUser } = useFromStore({ path: "authentication" }) ?? {};
+  const currentUser = useCurrentUser();
   const { consentManifoldAnalytics, consentGoogleAnalytics } =
     currentUser.attributes ?? {};
 

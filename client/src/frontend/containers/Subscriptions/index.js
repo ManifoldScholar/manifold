@@ -3,13 +3,13 @@ import { meAPI } from "api";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import { useFromStore, useNotification } from "hooks";
+import { useCurrentUser, useNotification } from "hooks";
 import HeadContent from "global/components/HeadContent";
 import * as Styled from "./styles";
 
 export default function SubscriptionsContainer() {
   const { t } = useTranslation();
-  const { currentUser } = useFromStore({ path: "authentication" }) ?? {};
+  const currentUser = useCurrentUser();
   const [preferences, setPreferences] = useState(
     currentUser?.attributes?.notificationPreferences
   );

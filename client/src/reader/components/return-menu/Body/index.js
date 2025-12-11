@@ -1,10 +1,8 @@
-import { useContext } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import { FrontendModeContext } from "helpers/contexts";
 import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import Authorize from "hoc/Authorize";
-import { useFromStore } from "hooks";
+import { useSettings, useFrontendModeContext } from "hooks";
 import * as Styled from "./styles";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -17,8 +15,8 @@ export default function ReturnMenuBody({
   className,
   hidePanel
 }) {
-  const context = useContext(FrontendModeContext);
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const context = useFrontendModeContext();
+  const settings = useSettings();
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
   const { t } = useTranslation();
 

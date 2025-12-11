@@ -5,7 +5,7 @@ import EntitlementsContainer from "backend/containers/entitlements";
 import Authorize from "hoc/Authorize";
 import Authorization from "helpers/authorization";
 import Layout from "backend/components/layout";
-import { useFromStore } from "hooks";
+import { useAuthentication } from "hooks";
 import Permissions from "./Permissions";
 
 export default function JournalAccessWrapper() {
@@ -14,7 +14,7 @@ export default function JournalAccessWrapper() {
   const closeUrl = lh.link("backendJournalAccess", journal?.id);
 
   const authorization = new Authorization();
-  const authentication = useFromStore({ path: "authentication" });
+  const authentication = useAuthentication();
 
   const canGrantPermissions = authorization.authorizeAbility({
     authentication,

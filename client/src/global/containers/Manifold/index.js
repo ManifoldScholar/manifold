@@ -22,7 +22,7 @@ import CookiesBanner from "global/components/CookiesBanner";
 import Utility from "global/components/utility";
 import Analytics from "hoc/analytics";
 import { Helmet } from "react-helmet-async";
-import { useFromStore } from "hooks";
+import { useFromStore, useAuthentication, useSettings } from "hooks";
 import { NavigationBlockerProvider } from "global/components/router/NavigationBlockerContext";
 import notifications from "./notifications";
 
@@ -35,17 +35,13 @@ export default function ManifoldContainer({ confirm }) {
   const navigate = useNavigate();
 
   const loaderData = useLoaderData();
-  const settingsRequestKey = loaderData?.requestKey;
 
-  const authentication = useFromStore({ path: "authentication" });
+  const { authenticated } = useAuthentication();
+  const settings = useSettings();
   const visibility = useFromStore({ path: "ui.transitory.visibility" });
   const frontendMode = useFromStore({ path: "ui.transitory.frontendMode" });
   const loading = useFromStore({ path: "ui.transitory.loading.active" });
   const fatalError = useFromStore({ path: "fatalError" });
-  const settings = useFromStore({
-    requestKey: settingsRequestKey,
-    action: "select"
-  });
   const readingGroupsLoaded = useSelector(state =>
     loaded(requests.feMyReadingGroups, state.entityStore)
   );

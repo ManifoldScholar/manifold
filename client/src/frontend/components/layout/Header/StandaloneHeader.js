@@ -1,23 +1,14 @@
-import {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  useMemo,
-  useCallback
-} from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import get from "lodash/get";
-import { requests } from "api";
 import Navigation from "global/components/navigation";
 import HeaderNotifications from "global/components/HeaderNotifications";
-import { FrontendModeContext } from "helpers/contexts";
-import { throttle } from "lodash";
+import throttle from "lodash/throttle";
 import lh from "helpers/linkHandler";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
-import { useFromStore } from "hooks";
+import { useSettings, useFrontendModeContext } from "hooks";
 
 const BREAKPOINT = 620;
 
@@ -30,11 +21,8 @@ const getScrollTop = () => {
 };
 
 export default function StandaloneHeader({ alwaysVisible = false }) {
-  const context = useContext(FrontendModeContext);
-  const settings = useFromStore({
-    requestKey: requests.settings,
-    action: "select"
-  });
+  const context = useFrontendModeContext();
+  const settings = useSettings();
 
   const shimRef = useRef(null);
   const fixedRef = useRef(null);

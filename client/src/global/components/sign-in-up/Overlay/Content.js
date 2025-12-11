@@ -3,12 +3,12 @@ import Utility from "global/components/utility";
 import CloseButton from "global/components/Overlay/Close";
 import Interface from "../Interface";
 import { useTranslation } from "react-i18next";
-import { useFromStore } from "hooks";
+import { useAuthentication } from "hooks";
 import * as Styled from "./styles";
 
 const OverlayContent = ({ uid, hideOverlay }, ref) => {
   const { t } = useTranslation();
-  const authentication = useFromStore({ path: "authentication" });
+  const { authenticated } = useAuthentication();
 
   return (
     <div ref={ref}>
@@ -26,7 +26,7 @@ const OverlayContent = ({ uid, hideOverlay }, ref) => {
           <Styled.FormContainer>
             <Interface
               hideOverlay={hideOverlay}
-              defaultView={authentication?.authenticated ? "update" : "login"}
+              defaultView={authenticated ? "update" : "login"}
             />
           </Styled.FormContainer>
         </Styled.LayoutContainer>

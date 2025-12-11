@@ -1,4 +1,4 @@
-import { useRouteError, useLocation } from "react-router-dom";
+import { useRouteError, useLocation } from "react-router";
 import { formatError } from "./Boundary";
 import AppFatalError from "./AppWrapper";
 

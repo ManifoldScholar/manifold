@@ -1,15 +1,15 @@
 import { useMemo } from "react";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-import { useCurrentUser } from "hooks";
+import { useLocation } from "react-router";
+import { useCurrentUser, useSettings } from "hooks";
 import Link from "./Link";
 import * as Styled from "./styles";
-import withSettings from "hoc/withSettings";
 
-function CollectionNavigation({ settings }) {
+function CollectionNavigation() {
   const { t } = useTranslation();
   const currentUser = useCurrentUser();
+  const settings = useSettings();
   const location = useLocation();
 
   const links = useMemo(
@@ -80,4 +80,4 @@ function CollectionNavigation({ settings }) {
 
 CollectionNavigation.displayName = "Frontend.CollectionNavigation";
 
-export default withSettings(CollectionNavigation);
+export default CollectionNavigation;

@@ -10,18 +10,15 @@ import Layout from "backend/components/layout";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import Hero from "backend/components/hero";
-import { useFromStore } from "hooks";
+import { useAuthentication, useSettings } from "hooks";
 
 const authorization = new Authorization();
 
 export default function ProjectAccessWrapper() {
   const { t } = useTranslation();
   const { project, updateProject } = useOutletContext() || {};
-  const authentication = useFromStore({ path: "authentication" });
-  const settings = useFromStore({
-    requestKey: "settings",
-    action: "select"
-  });
+  const authentication = useAuthentication();
+  const settings = useSettings();
 
   if (!project) return null;
 

@@ -6,7 +6,7 @@ import RadioGroup from "../RadioGroup";
 import ProjectPreferences from "../ProjectPreferences";
 import humps from "utils/humps";
 import Authorization from "helpers/authorization";
-import { useFromStore } from "hooks";
+import { useAuthentication } from "hooks";
 import * as Styled from "./styles";
 
 export default function NotificationsForm({
@@ -14,7 +14,7 @@ export default function NotificationsForm({
   preferences,
   setPreferences
 }) {
-  const authentication = useFromStore({ path: "authentication" });
+  const authentication = useAuthentication();
   const { t } = useTranslation();
 
   const digestOpen = preferences?.digest !== "never";

@@ -1,6 +1,5 @@
 import { redirect } from "react-router";
-import { getStore } from "store/storeInstance";
-import { grab } from "utils/entityUtils";
+import { routerContext } from "app/contexts";
 
 /**
  * Loader utility to check if library mode is disabled.
@@ -8,16 +7,13 @@ import { grab } from "utils/entityUtils";
  *
  * @param {Object} loaderArgs - Loader arguments from React Router
  * @param {Object} loaderArgs.request - Request object
- * @param {Object} loaderArgs.context - Loader context (contains context.store for SSR)
+ * @param {Object} loaderArgs.context - Router context (from middleware)
  * @returns {null} Returns null if library mode is enabled (allows route to render)
  * @throws {Response} Throws redirect Response if library mode is disabled
  */
 export default function checkLibraryMode({ request, context }) {
-  const store = context?.store || getStore();
-  const state = store.getState();
-
-  // Get settings from store (loaded during bootstrap)
-  const settings = grab("settings", "0", state.entityStore);
+  // Get settings from middleware context
+  const { settings } = context.get(routerContext) ?? {};
 
   if (!settings) {
     return null; // Settings not loaded yet, let component handle it
@@ -38,7 +34,6 @@ export default function checkLibraryMode({ request, context }) {
       : general.libraryRedirectUrl;
 
   if (!redirectUrl) {
-    // No redirect URL configured, let component handle it
     return null;
   }
 

@@ -6,8 +6,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { notificationActions } from "actions";
 import Authorization from "helpers/authorization";
 import FatalErrorRender from "global/components/FatalError";
-import get from "lodash/get";
-import { useFromStore } from "hooks";
+import { useAuthentication } from "hooks";
 
 const authorization = new Authorization();
 
@@ -21,10 +20,10 @@ export default function Authorize(props) {
 
   const dispatch = useDispatch();
   const location = useLocation();
-  const authentication = useFromStore({ path: "authentication" });
+  const authentication = useAuthentication();
   const propsWithAuth = { ...props, authentication };
 
-  const isAuthenticated = get(authentication, "authenticated");
+  const isAuthenticated = authentication.authenticated;
 
   const getRedirectPath = useCallback(
     redirectProp => {

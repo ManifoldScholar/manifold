@@ -1,7 +1,7 @@
 import { redirect, data } from "react-router";
-import { getStore } from "store/storeInstance";
 import Authorization from "helpers/authorization";
 import lh from "helpers/linkHandler";
+import { routerContext } from "app/contexts";
 
 const authorization = new Authorization();
 
@@ -29,7 +29,7 @@ function getRedirectPath(redirectProp, currentPath) {
  * Throws redirect if unauthorized.
  *
  * @param {Object} options
- * @param {Object} options.context - Loader context (contains context.store for SSR)
+ * @param {Object} options.context - Router context (from middleware)
  * @param {string|Array} options.ability - Ability to check
  * @param {string|Array} options.kind - Kind to check
  * @param {Object|string|Array} options.entity - Entity to check
@@ -47,9 +47,16 @@ export default async function authorizeLoader({
   failureMessage,
   currentPath
 }) {
-  const store = context?.store || getStore();
-  const state = store.getState();
-  const authentication = state.authentication;
+  // Get user from middleware context
+  const { auth } = context.get(routerContext) ?? {};
+  const currentUser = auth?.user;
+  const isAuthenticated = !!currentUser;
+
+  // Build authentication object for Authorization class
+  const authentication = {
+    authenticated: isAuthenticated,
+    currentUser
+  };
 
   const isAuthorized = authorization.authorize({
     authentication,
@@ -58,7 +65,7 @@ export default async function authorizeLoader({
     entity
   });
 
-  if (!isAuthorized && authentication?.authenticated) {
+  if (!isAuthorized && isAuthenticated) {
     const hasAnyAdminAccess = authorization.authorizeKind({
       authentication,
       kind: [
@@ -93,7 +100,6 @@ export default async function authorizeLoader({
   if (!isAuthorized && failureRedirect) {
     const loginPath = lh.link("frontendLogin");
     const redirectPath = getRedirectPath(failureRedirect, currentPath);
-    // If redirectPath is not login, use it as redirect_uri destination
     const redirectUri =
       redirectPath && redirectPath !== loginPath ? redirectPath : currentPath;
     const redirectUrl = redirectUri
@@ -104,7 +110,6 @@ export default async function authorizeLoader({
   }
 
   if (!isAuthorized) {
-    // No redirect specified, throw 403 error
     throw new Response(null, {
       status: 403,
       statusText: "Forbidden"

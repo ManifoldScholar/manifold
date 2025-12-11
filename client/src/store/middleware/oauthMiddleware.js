@@ -1,5 +1,5 @@
 import { oauthActions as O, currentUserActions as U } from "actions";
-import { get } from "lodash";
+import get from "lodash/get";
 
 function tryToSignIn(dispatch, event) {
   const authToken = get(event, "data.authToken");

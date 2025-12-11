@@ -1,6 +1,6 @@
 import React from "react";
 import hoistStatics from "../hoist-non-react-statics";
-import { FrontendModeContext } from "helpers/contexts";
+import { useFrontendModeContext } from "hooks";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 
@@ -13,31 +13,30 @@ export default function withProjectContext(WrappedComponent) {
     WrappedComponent
   )})`;
 
-  class WithProjectContext extends React.PureComponent {
-    static WrappedComponent = WrappedComponent;
+  function WithProjectContext(props) {
+    const context = useFrontendModeContext();
+    const projectContext = context?.project;
 
-    static contextType = FrontendModeContext;
+    const projectBackLink = projectContext ? (
+      <RegisterBreadcrumbs
+        breadcrumbs={[
+          {
+            to: lh.link("frontendProjectDetail", projectContext.slug),
+            label: projectContext.titleFormatted
+          }
+        ]}
+      />
+    ) : null;
 
-    static displayName = displayName;
-
-    render() {
-      const projectContext = this.context.project;
-      const projectBackLink = projectContext ? (
-        <RegisterBreadcrumbs
-          breadcrumbs={[
-            {
-              to: lh.link("frontendProjectDetail", projectContext.slug),
-              label: projectContext.titleFormatted
-            }
-          ]}
-        />
-      ) : null;
-
-      const props = { ...this.props, projectContext, projectBackLink };
-
-      return React.createElement(WrappedComponent, props);
-    }
+    return React.createElement(WrappedComponent, {
+      ...props,
+      projectContext,
+      projectBackLink
+    });
   }
+
+  WithProjectContext.WrappedComponent = WrappedComponent;
+  WithProjectContext.displayName = displayName;
 
   return hoistStatics(WithProjectContext, WrappedComponent);
 }

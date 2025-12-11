@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { get } from "lodash";
+import get from "lodash/get";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Utility from "global/components/utility";
 import EntityRow from "./Row";

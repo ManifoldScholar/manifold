@@ -5,7 +5,7 @@ import lh from "helpers/linkHandler";
 import ProfileFormFields from "./ProfileFormFields";
 import Greeting from "./Greeting";
 import { useNavigate } from "react-router-dom";
-import { useFromStore, useNotification } from "hooks";
+import { useCurrentUser, useSettings, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "frontend/components/privacy/CookiesForm/CookiesFormFields";
 import Form from "global/components/form";
@@ -13,18 +13,16 @@ import * as Styled from "./styles";
 import * as SharedStyles from "../styles";
 
 export default function EditProfileForm({ hideOverlay, mode }) {
-  const authentication = useFromStore({ path: "authentication" });
+  const currentUser = useCurrentUser();
+  const settings = useSettings();
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const { currentUser } = authentication ?? {};
 
   const [cookiePrefs, setCookiePrefs] = useState({
     manifold: "yes",
     google: "yes"
   });
 
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const manifoldAnalyticsEnabled = !settings?.attributes?.general
     ?.disableInternalAnalytics;
   const googleAnalyticsEnabled = !!settings?.attributes?.integrations

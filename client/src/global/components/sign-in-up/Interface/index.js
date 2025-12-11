@@ -5,7 +5,7 @@ import Logout from "../Logout";
 import Update from "../EditProfileForm";
 import Create from "../CreateUserForm";
 import Terms from "../AcceptTerms";
-import { useFromStore } from "hooks";
+import { useAuthentication } from "hooks";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -24,7 +24,7 @@ export default function SignInUpInterface({
   showLogout = false,
   hideOverlay
 }) {
-  const authentication = useFromStore({ path: "authentication" });
+  const { authenticated } = useAuthentication();
   const location = useLocation();
 
   const [view, setView] = useState(defaultView);
@@ -40,7 +40,7 @@ export default function SignInUpInterface({
   };
 
   useEffect(() => {
-    if (authentication.authenticated) {
+    if (authenticated) {
       if (showLogout && view !== "logout") {
         return setView("logout");
       }
@@ -49,13 +49,7 @@ export default function SignInUpInterface({
         if (hideOverlay) hideOverlay();
       }
     }
-  }, [
-    authentication.authenticated,
-    hideOverlay,
-    view,
-    showLogout,
-    willRedirect
-  ]);
+  }, [authenticated, hideOverlay, view, showLogout, willRedirect]);
 
   /* eslint-disable no-nested-ternary */
   const viewProps = {

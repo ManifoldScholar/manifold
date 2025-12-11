@@ -1,50 +1,47 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { useRef, useEffect } from "react";
+import { useNavigation } from "react-router";
+import { useFromStore } from "hooks";
 
-export default class LoadingBar extends Component {
-  static propTypes = {
-    loading: PropTypes.bool
-  };
+export default function LoadingBar() {
+  const navigation = useNavigation();
+  const apiLoading = useFromStore({ path: "ui.transitory.loading.active" });
+  const loading = navigation.state === "loading" || apiLoading;
 
-  constructor(props) {
-    super(props);
-    this.timer = null;
-    this.state = { status: 0 };
-  }
+  const loaderRef = useRef(null);
+  const timerRef = useRef(null);
+  const prevLoadingRef = useRef(loading);
 
-  componentDidUpdate(prevProps) {
-    if (!this.loader) return null;
-    if (prevProps.loading) {
-      if (this.props.loading) return null;
-      this.loader.className = "loading-bar complete";
-      this.timer = setTimeout(() => {
-        this.loader.className = "loading-bar default";
+  useEffect(() => {
+    const loader = loaderRef.current;
+    if (!loader) return;
+
+    const wasLoading = prevLoadingRef.current;
+
+    if (wasLoading && !loading) {
+      // Finished loading
+      loader.className = "loading-bar complete";
+      timerRef.current = setTimeout(() => {
+        loader.className = "loading-bar default";
       }, 800);
-    } else {
-      if (!this.props.loading) return null;
-      this.loader.className = "loading-bar loading";
+    } else if (!wasLoading && loading) {
+      // Started loading
+      loader.className = "loading-bar loading";
     }
-  }
 
-  componentWillUnmount() {
-    if (this.timer) {
-      clearTimeout(this.timer);
-      this.timer = null;
-    }
-  }
+    prevLoadingRef.current = loading;
 
-  render() {
-    return (
-      <div>
-        <div
-          ref={loader => {
-            this.loader = loader;
-          }}
-          className="loading-bar default"
-        >
-          <div className="progress" />
-        </div>
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [loading]);
+
+  return (
+    <div>
+      <div ref={loaderRef} className="loading-bar default">
+        <div className="progress" />
       </div>
-    );
-  }
+    </div>
+  );
 }

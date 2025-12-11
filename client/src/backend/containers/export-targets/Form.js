@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { exportTargetsAPI, requests } from "api";
-import { camelCase } from "lodash";
+import camelCase from "lodash/camelCase";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 

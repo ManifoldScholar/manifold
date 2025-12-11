@@ -9,11 +9,11 @@ import { useTranslation } from "react-i18next";
 import ProjectsToggle from "global/components/navigation/projects-dropdown/Toggle";
 import ProjectsDropdown from "global/components/navigation/projects-dropdown";
 import Authorization from "helpers/authorization";
-import { useFromStore } from "hooks";
+import { useAuthentication } from "hooks";
 
 export default function LayoutHeader() {
   const { t } = useTranslation();
-  const authentication = useFromStore({ path: "authentication" });
+  const authentication = useAuthentication();
 
   const authorization = new Authorization();
   const canUpdateProjectCollections = authorization.authorizeAbility({

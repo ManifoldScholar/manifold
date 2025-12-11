@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { annotationsAPI } from "api";
 import Annotation from "global/components/Annotation";
-import { useFetch, useFromStore } from "hooks";
+import { useFetch, useAuthentication } from "hooks";
 
 export default function AnnotationList({
   annotationIds,
@@ -26,7 +26,7 @@ export default function AnnotationList({
     condition: !!sectionId && !!textId && annotationIds?.length > 0
   });
 
-  const authentication = useFromStore({ path: "authentication" });
+  const { authenticated, currentUser } = useAuthentication();
 
   useEffect(() => {
     if (annotations.length === 0 && closeDrawer) {
@@ -41,9 +41,8 @@ export default function AnnotationList({
   };
 
   const showUnverifiedWarning = () => {
-    if (!authentication?.authenticated) return false;
-    const { currentUser } = authentication;
-    const { trusted, established } = currentUser.attributes;
+    if (!authenticated) return false;
+    const { trusted, established } = currentUser?.attributes ?? {};
     return !trusted && !established;
   };
 

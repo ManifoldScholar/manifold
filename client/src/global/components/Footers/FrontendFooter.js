@@ -1,23 +1,12 @@
-import { useContext } from "react";
 import withPluginReplacement from "hoc/withPluginReplacement";
 import DefaultFooter from "./DefaultFooter";
 import BrandedFooter from "./BrandedFooter";
 import StandaloneFooter from "./StandaloneFooter";
-import { FrontendModeContext } from "helpers/contexts";
-import { useFetch, useFromStore } from "hooks";
-import { pagesAPI, requests } from "api";
+import { useFrontendModeContext, useSettings } from "hooks";
 
 function FrontendFooter(props) {
-  const context = useContext(FrontendModeContext);
-  const settings = useFromStore({
-    requestKey: "settings",
-    action: "select"
-  });
-
-  useFetch({
-    request: [pagesAPI.index],
-    options: { requestKey: requests.gPages }
-  });
+  const context = useFrontendModeContext();
+  const settings = useSettings();
 
   if (!settings) return null;
 

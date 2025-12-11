@@ -9,6 +9,11 @@ export { default as useCurrentUser } from "./useCurrentUser";
 
 export { default as useAuthentication } from "./useAuthentication";
 
+export { default as useSettings } from "./useSettings";
+export { default as usePages } from "./usePages";
+export { default as useRevalidate } from "./useRevalidate";
+export { default as useLogout } from "./useLogout";
+
 export { default as useFromStore } from "./useFromStore";
 
 export { default as useEventTracker } from "./useEventTracker";
@@ -22,6 +27,9 @@ export { default as useNotification } from "./useNotification";
 export { default as useListFilters } from "./useListFilters";
 
 export { default as usePreventBodyScroll } from "./usePreventBodyScroll";
+
+export { default as useBodyClass } from "./useBodyClass";
+export { default as useColorScheme } from "./useColorScheme";
 
 export { default as useBlurOnLocationChange } from "./useBlurOnLocationChange";
 
