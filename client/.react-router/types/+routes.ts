@@ -14,6 +14,18 @@ type Pages = {
   "/": {
     params: {};
   };
+  "/project-collections": {
+    params: {};
+  };
+  "/journals": {
+    params: {};
+  };
+  "/projects": {
+    params: {};
+  };
+  "/issues": {
+    params: {};
+  };
   "/*": {
     params: {
       "*": string;
@@ -24,14 +36,30 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/*";
+    page: "/" | "/project-collections" | "/journals" | "/projects" | "/issues" | "/*";
   };
-  "routes/_frontend.jsx": {
-    id: "routes/_frontend";
-    page: "/";
+  "routes/frontend/_frontend.jsx": {
+    id: "routes/frontend/_frontend";
+    page: "/project-collections" | "/journals" | "/projects" | "/issues" | "/";
   };
-  "routes/_frontend._index.jsx": {
-    id: "routes/_frontend._index";
+  "routes/frontend/_frontend.project-collections._index.jsx": {
+    id: "routes/frontend/_frontend.project-collections._index";
+    page: "/project-collections";
+  };
+  "routes/frontend/_frontend.journals._index.jsx": {
+    id: "routes/frontend/_frontend.journals._index";
+    page: "/journals";
+  };
+  "routes/frontend/_frontend.projects._index.jsx": {
+    id: "routes/frontend/_frontend.projects._index";
+    page: "/projects";
+  };
+  "routes/frontend/_frontend.issues._index.jsx": {
+    id: "routes/frontend/_frontend.issues._index";
+    page: "/issues";
+  };
+  "routes/frontend/_frontend._index.jsx": {
+    id: "routes/frontend/_frontend._index";
     page: "/";
   };
   "routes/$.jsx": {
@@ -42,7 +70,11 @@ type RouteFiles = {
 
 type RouteModules = {
   "root": typeof import("./app/root.jsx");
-  "routes/_frontend": typeof import("./app/routes/_frontend.jsx");
-  "routes/_frontend._index": typeof import("./app/routes/_frontend._index.jsx");
+  "routes/frontend/_frontend": typeof import("./app/routes/frontend/_frontend.jsx");
+  "routes/frontend/_frontend.project-collections._index": typeof import("./app/routes/frontend/_frontend.project-collections._index.jsx");
+  "routes/frontend/_frontend.journals._index": typeof import("./app/routes/frontend/_frontend.journals._index.jsx");
+  "routes/frontend/_frontend.projects._index": typeof import("./app/routes/frontend/_frontend.projects._index.jsx");
+  "routes/frontend/_frontend.issues._index": typeof import("./app/routes/frontend/_frontend.issues._index.jsx");
+  "routes/frontend/_frontend._index": typeof import("./app/routes/frontend/_frontend._index.jsx");
   "routes/$": typeof import("./app/routes/$.jsx");
 };

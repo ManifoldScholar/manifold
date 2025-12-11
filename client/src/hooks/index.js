@@ -11,6 +11,8 @@ export { default as useAuthentication } from "./useAuthentication";
 
 export { default as useSettings } from "./useSettings";
 export { default as usePages } from "./usePages";
+export { default as useSubjects } from "./useSubjects";
+export { default as useJournalSubjects } from "./useJournalSubjects";
 export { default as useRevalidate } from "./useRevalidate";
 export { default as useLogout } from "./useLogout";
 
@@ -25,6 +27,7 @@ export { default as useFrontendModeContext } from "./useFrontendModeContext";
 export { default as useNotification } from "./useNotification";
 
 export { default as useListFilters } from "./useListFilters";
+export { default as useListSearchParams } from "./useListSearchParams";
 
 export { default as usePreventBodyScroll } from "./usePreventBodyScroll";
 

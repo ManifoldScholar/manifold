@@ -1,14 +1,16 @@
 /**
  * Denormalize a JSON:API response.
  * Replaces relationship references with actual entity data from `included`.
+ * Preserves `meta` and `links` on the result for pagination.
  *
- * @param {Object} response - API response with { data, included }
- * @returns {Array|Object} - Denormalized data with hydrated relationships
+ * @param {Object} response - API response with { data, included, meta, links }
+ * @returns {Array|Object} - Denormalized data with hydrated relationships.
+ *                           If data is an array, meta/links are attached as properties.
  */
 export default function denormalize(response) {
   if (!response) return [];
 
-  const { data, included = [] } = response;
+  const { data, included = [], meta, links } = response;
 
   // Build lookup map from included entities
   const entityMap = {};
@@ -54,9 +56,20 @@ export default function denormalize(response) {
   };
 
   // Hydrate all entities in data array
+  let result;
   if (Array.isArray(data)) {
-    return data.map(entity => hydrateEntity(entity));
+    result = data.map(entity => hydrateEntity(entity));
+  } else {
+    result = hydrateEntity(data);
   }
 
-  return hydrateEntity(data);
+  // Attach meta and links to the result for pagination/filtering support
+  if (meta && Array.isArray(result)) {
+    result.meta = meta;
+  }
+  if (links && Array.isArray(result)) {
+    result.links = links;
+  }
+
+  return result;
 }

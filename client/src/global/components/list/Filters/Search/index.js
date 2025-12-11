@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useId } from "react";
 import PropTypes from "prop-types";
-import { useUID } from "react-uid";
 import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
 function Search({ inputRef, onSearch }) {
-  const uid = useUID();
+  const uid = useId();
   const { t } = useTranslation();
 
   const buttonProps = onSearch ? { onClick: onSearch } : { type: "submit" };

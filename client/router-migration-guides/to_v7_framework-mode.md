@@ -500,33 +500,275 @@ Components updated to use `usePages()` instead of receiving pages as props:
 
 ---
 
+## Phase 5: List Routes Migration (December 2024)
+
+### Summary
+
+Migrated all frontend list routes (projects, journals, issues, project-collections) to React Router v7 Framework Mode with a server/client loader pattern optimized for filtering and pagination.
+
+### What Was Done ✅
+
+#### 1. Created Shared Utilities for List Routes
+
+| File                                                   | Purpose                                          |
+| ------------------------------------------------------ | ------------------------------------------------ |
+| `src/helpers/router/loaders/parseListParams.js`        | Parse URL params into filters + pagination       |
+| `src/helpers/router/loaders/createListClientLoader.js` | Factory for clientLoaders with hydration pattern |
+| `src/hooks/useListSearchParams/index.js`               | Hook for reading/updating filters via URL        |
+
+**`parseListParams`** - Extracts filters and pagination from URL:
+
+```javascript
+import parseListParams from "helpers/router/loaders/parseListParams";
+
+const { filters, pagination } = parseListParams(url, {
+  defaultFilters: { standaloneModeEnforced: "false" }
+});
+// filters: { standaloneModeEnforced: "false", keyword: "...", subject: "..." }
+// pagination: { number: 1, size: 20 }
+```
+
+**`createListClientLoader`** - Creates clientLoader with smart revalidation:
+
+```javascript
+import createListClientLoader from "helpers/router/loaders/createListClientLoader";
+
+export const clientLoader = createListClientLoader(
+  "__projectsHydrated", // Unique hydration key
+  async (filters, pagination) => {
+    const client = new ApiClient(null, { denormalize: true });
+    const result = await client.call(projectsAPI.index(filters, pagination));
+    return { projects: result ?? [], projectsMeta: result?.meta ?? null };
+  },
+  parseParams
+);
+```
+
+Key behavior:
+
+- **Initial hydration**: Uses `serverLoader()` to avoid duplicate fetch
+- **Same URL (revalidation)**: Uses `serverLoader()` for fresh auth state (login/logout)
+- **Different URL (filter change)**: Fast client-side fetch
+
+**`useListSearchParams`** - Manages filter state via URL:
+
+```javascript
+import { useListSearchParams } from "hooks";
+
+const { filters, setFilters } = useListSearchParams({
+  defaultFilters: FILTER_RESET
+});
+
+// setFilters updates URL, which triggers clientLoader
+```
+
+#### 2. Created FrontendContext for Subjects
+
+Subjects are fetched once in `_frontend.jsx` layout and provided via context:
+
+```javascript
+// app/contexts.js
+export const FrontendContext = createReactContext({
+  subjects: [],
+  journalSubjects: [],
+  frontendMode: {}
+});
+
+// app/routes/frontend/_frontend.jsx (layout)
+export const loader = async ({ context }) => {
+  const { auth } = context.get(routerContext) ?? {};
+  const client = new ApiClient(auth?.authToken, { denormalize: true });
+
+  const [subjectsResult, journalSubjectsResult] = await Promise.allSettled([
+    client.call(subjectsAPI.index({ used: true }, null, true)),
+    client.call(subjectsAPI.index({ usedJournal: true }, null, true))
+  ]);
+
+  return { subjects: ..., journalSubjects: ... };
+};
+```
+
+New hooks to access subjects:
+
+| Hook                       | Purpose                                        |
+| -------------------------- | ---------------------------------------------- |
+| `useSubjects()`            | Project subjects from FrontendContext          |
+| `useJournalSubjects()`     | Journal subjects from FrontendContext          |
+| `useFrontendModeContext()` | Frontend mode from FrontendContext (was Redux) |
+
+#### 3. Routes Directory Organization
+
+Organized routes into subdirectories using hybrid `flatRoutes` approach:
+
+```
+app/routes/
+├── $.jsx                                    # Catch-all (root level)
+└── frontend/                                # Frontend routes
+    ├── _frontend.jsx                        # Layout with FrontendContext
+    ├── _frontend._index.jsx                 # / (home)
+    ├── _frontend.projects._index.jsx        # /projects
+    ├── _frontend.journals._index.jsx        # /journals
+    ├── _frontend.issues._index.jsx          # /issues
+    └── _frontend.project-collections._index.jsx  # /project-collections
+```
+
+**`app/routes.js`**:
+
+```javascript
+import { flatRoutes } from "@react-router/fs-routes";
+
+export default [
+  // Frontend routes (auto-discovered)
+  ...(await flatRoutes({ rootDirectory: "routes/frontend" })),
+  // Root-level routes (catch-all)
+  ...(await flatRoutes({
+    rootDirectory: "routes",
+    ignoredRouteFiles: ["frontend/**"]
+  }))
+];
+```
+
+#### 4. Fixed Hydration Mismatches
+
+Replaced `react-uid` with React 18's `useId()` in filter components:
+
+| Component        | File                                                 |
+| ---------------- | ---------------------------------------------------- |
+| `Filters/Search` | `src/global/components/list/Filters/Search/index.js` |
+| `Filters/Filter` | `src/global/components/list/Filters/Filter/index.js` |
+
+#### 5. List Route Pattern
+
+Each list route follows this pattern:
+
+```javascript
+// app/routes/frontend/_frontend.projects._index.jsx
+import { useLoaderData } from "react-router";
+import { ApiClient, projectsAPI } from "api";
+import { routerContext } from "app/contexts";
+import parseListParams from "helpers/router/loaders/parseListParams";
+import createListClientLoader from "helpers/router/loaders/createListClientLoader";
+import { useListFilters, useSubjects, useListSearchParams } from "hooks";
+
+export { shouldRevalidate } from "helpers/router/shouldRevalidate";
+
+const FILTER_RESET = { standaloneModeEnforced: "false" };
+const parseParams = url =>
+  parseListParams(url, { defaultFilters: FILTER_RESET });
+
+// Server loader for SSR
+export const loader = async ({ request, context }) => {
+  const { auth } = context.get(routerContext) ?? {};
+  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const { filters, pagination } = parseParams(new URL(request.url));
+  const result = await client.call(projectsAPI.index(filters, pagination));
+  return { projects: result ?? [], projectsMeta: result?.meta ?? null };
+};
+
+// Client loader for filter/pagination changes
+export const clientLoader = createListClientLoader(
+  "__projectsHydrated",
+  async (filters, pagination) => {
+    const client = new ApiClient(null, { denormalize: true });
+    const result = await client.call(projectsAPI.index(filters, pagination));
+    return { projects: result ?? [], projectsMeta: result?.meta ?? null };
+  },
+  parseParams
+);
+
+export default function ProjectsRoute() {
+  const { projects, projectsMeta } = useLoaderData();
+  const subjects = useSubjects(); // From FrontendContext
+  const { filters, setFilters } = useListSearchParams({
+    defaultFilters: FILTER_RESET
+  });
+
+  const filterProps = useListFilters({
+    onFilterChange: setFilters,
+    initialState: filters,
+    resetState: FILTER_RESET,
+    options: { entityType: "project", sort: true, subjects, featured: true }
+  });
+
+  return (
+    <EntityCollection.Projects
+      projects={projects}
+      meta={projectsMeta}
+      filterProps={filterProps}
+    />
+  );
+}
+```
+
+### Files Created
+
+| File                                                           | Purpose                    |
+| -------------------------------------------------------------- | -------------------------- |
+| `src/helpers/router/loaders/parseListParams.js`                | URL → filters + pagination |
+| `src/helpers/router/loaders/createListClientLoader.js`         | ClientLoader factory       |
+| `src/hooks/useListSearchParams/index.js`                       | Filter state via URL       |
+| `src/hooks/useSubjects/index.js`                               | Project subjects hook      |
+| `src/hooks/useJournalSubjects/index.js`                        | Journal subjects hook      |
+| `app/routes/frontend/_frontend.projects._index.jsx`            | Projects list route        |
+| `app/routes/frontend/_frontend.journals._index.jsx`            | Journals list route        |
+| `app/routes/frontend/_frontend.issues._index.jsx`              | Issues list route          |
+| `app/routes/frontend/_frontend.project-collections._index.jsx` | Collections list route     |
+
+### Files Modified
+
+| File                                                 | Changes                                   |
+| ---------------------------------------------------- | ----------------------------------------- |
+| `app/contexts.js`                                    | Added `FrontendContext`                   |
+| `app/routes/frontend/_frontend.jsx`                  | Subjects loader, provides FrontendContext |
+| `src/hooks/index.js`                                 | Exports new hooks                         |
+| `src/hooks/useFrontendModeContext/index.js`          | Reads from FrontendContext                |
+| `src/global/components/list/Filters/Search/index.js` | `useUID` → `useId`                        |
+| `src/global/components/list/Filters/Filter/index.js` | `useUID` → `useId`                        |
+| `app/routes.js`                                      | Hybrid flatRoutes with subdirectories     |
+
+### List Routes Migration Status
+
+| Route               | Path                   | Status      |
+| ------------------- | ---------------------- | ----------- |
+| Projects            | `/projects`            | ✅ Complete |
+| Journals            | `/journals`            | ✅ Complete |
+| Issues              | `/issues`              | ✅ Complete |
+| Project Collections | `/project-collections` | ✅ Complete |
+
+---
+
 ## Next Steps: Migrating Additional Routes
 
 ### Route Migration Pattern
 
-For each new route, follow this pattern:
+For list routes, use the established pattern with shared utilities:
 
-1. **Create route file** in `app/routes/` following naming convention
+1. **Create route file** in `app/routes/frontend/` following naming convention
 2. **Export `shouldRevalidate`** from shared helper
-3. **Create loader** using `ApiClient` with `denormalize: true`
-4. **Update components** to use context hooks instead of `useFromStore`
+3. **Create server `loader`** using `ApiClient` with `denormalize: true`
+4. **Create `clientLoader`** using `createListClientLoader` factory
+5. **Use `useListSearchParams`** for filter state management
+6. **Use context hooks** (`useSubjects`, `useJournalSubjects`) for shared data
 
 ### Routes to Migrate (Priority Order)
 
-| Route          | Path              | Complexity               |
-| -------------- | ----------------- | ------------------------ |
-| Projects List  | `/projects`       | Medium                   |
-| Project Detail | `/projects/:slug` | High (many child routes) |
-| Journals       | `/journals`       | Medium                   |
-| Reading Groups | `/my/groups`      | Medium                   |
-| Backend Routes | `/backend/*`      | High (large subtree)     |
-| Reader Routes  | `/read/*`         | High (specialized UI)    |
+| Route                   | Path                   | Complexity               | Status  |
+| ----------------------- | ---------------------- | ------------------------ | ------- |
+| ~~Projects List~~       | `/projects`            | Medium                   | ✅ Done |
+| ~~Journals List~~       | `/journals`            | Medium                   | ✅ Done |
+| ~~Issues List~~         | `/issues`              | Medium                   | ✅ Done |
+| ~~Project Collections~~ | `/project-collections` | Medium                   | ✅ Done |
+| Project Detail          | `/projects/:slug`      | High (many child routes) | Pending |
+| Journal Detail          | `/journals/:slug`      | High                     | Pending |
+| Reading Groups          | `/my/groups`           | Medium                   | Pending |
+| Backend Routes          | `/backend/*`           | High (large subtree)     | Pending |
+| Reader Routes           | `/read/*`              | High (specialized UI)    | Pending |
 
 ### Remaining Codebase Updates
 
 1. **Replace `withSettings` HOC** in non-homepage components (~4 files remain)
 2. **Replace `useFromStore` for auth/settings/pages** in non-homepage components (~40+ files)
-3. **Replace remaining `react-uid`** with `useId()` (~55 files)
+3. **Replace remaining `react-uid`** with `useId()` (~53 files remain)
 4. **Remove Redux auth/settings reducers** once all components migrated
 5. **Delete old SSR files** (`src/entry-ssr.js`, `src/servers/proxies/renderer.js`) and `ServerCookie` helper
 
@@ -1318,34 +1560,46 @@ export default function NotFound() {
 
 ## Files Created ✅
 
-| File                                     | Purpose                                   |
-| ---------------------------------------- | ----------------------------------------- |
-| `vite.config.js`                         | Vite configuration with aliases + plugins |
-| `react-router.config.js`                 | Framework mode config                     |
-| `app/root.jsx`                           | Root layout with AppContext provider      |
-| `app/entry.server.jsx`                   | Server entry with store setup             |
-| `app/entry.client.jsx`                   | Client entry with hydration               |
-| `app/contexts.js`                        | routerContext + AppContext definitions    |
-| `app/middleware/bootstrap.server.js`     | Fetches settings, auth, pages             |
-| `app/middleware/bootstrap.client.js`     | No-op client middleware                   |
-| `app/routes/_frontend.jsx`               | Frontend layout route                     |
-| `app/routes/_frontend._index.jsx`        | Homepage with pure framework loader       |
-| `app/routes/$.jsx`                       | Catch-all for legacy routes               |
-| `app/routes.js`                          | Route definitions                         |
-| `src/hooks/usePages/index.js`            | Hook for pages from AppContext            |
-| `src/helpers/api/denormalize.js`         | JSON:API relationship hydration           |
-| `src/helpers/router/shouldRevalidate.js` | Shared revalidation logic                 |
+| File                                                           | Purpose                                        |
+| -------------------------------------------------------------- | ---------------------------------------------- |
+| `vite.config.js`                                               | Vite configuration with aliases + plugins      |
+| `react-router.config.js`                                       | Framework mode config                          |
+| `app/root.jsx`                                                 | Root layout with AppContext provider           |
+| `app/entry.server.jsx`                                         | Server entry with store setup                  |
+| `app/entry.client.jsx`                                         | Client entry with hydration                    |
+| `app/contexts.js`                                              | routerContext + AppContext + FrontendContext   |
+| `app/middleware/bootstrap.server.js`                           | Fetches settings, auth, pages                  |
+| `app/middleware/bootstrap.client.js`                           | No-op client middleware                        |
+| `app/routes.js`                                                | Hybrid flatRoutes configuration                |
+| `app/routes/$.jsx`                                             | Catch-all for legacy routes                    |
+| `app/routes/frontend/_frontend.jsx`                            | Frontend layout with FrontendContext           |
+| `app/routes/frontend/_frontend._index.jsx`                     | Homepage with pure framework loader            |
+| `app/routes/frontend/_frontend.projects._index.jsx`            | Projects list route                            |
+| `app/routes/frontend/_frontend.journals._index.jsx`            | Journals list route                            |
+| `app/routes/frontend/_frontend.issues._index.jsx`              | Issues list route                              |
+| `app/routes/frontend/_frontend.project-collections._index.jsx` | Collections list route                         |
+| `src/hooks/usePages/index.js`                                  | Hook for pages from AppContext                 |
+| `src/hooks/useSubjects/index.js`                               | Hook for subjects from FrontendContext         |
+| `src/hooks/useJournalSubjects/index.js`                        | Hook for journal subjects from FrontendContext |
+| `src/hooks/useListSearchParams/index.js`                       | Hook for filter state via URL                  |
+| `src/helpers/api/denormalize.js`                               | JSON:API relationship hydration                |
+| `src/helpers/router/shouldRevalidate.js`                       | Shared revalidation logic                      |
+| `src/helpers/router/loaders/parseListParams.js`                | Parse URL into filters + pagination            |
+| `src/helpers/router/loaders/createListClientLoader.js`         | ClientLoader factory with hydration            |
 
 ## Files Modified ✅
 
-| File                           | Changes                                       |
-| ------------------------------ | --------------------------------------------- |
-| `package.json`                 | Added framework mode dependencies and scripts |
-| `src/api/client.js`            | Added `authToken` param, `denormalize` option |
-| `src/api/LowLevelApiClient.js` | Added `authToken` constructor param           |
-| `src/hooks/index.js`           | Exports new hooks (usePages, etc.)            |
-| `src/helpers/cookie/Server.js` | Simplified to Fetch API only                  |
-| ~20 components                 | Migrated from Redux to context hooks          |
+| File                                                 | Changes                                                              |
+| ---------------------------------------------------- | -------------------------------------------------------------------- |
+| `package.json`                                       | Added framework mode dependencies and scripts                        |
+| `src/api/client.js`                                  | Added `authToken` param, `denormalize` option                        |
+| `src/api/LowLevelApiClient.js`                       | Added `authToken` constructor param                                  |
+| `src/hooks/index.js`                                 | Exports new hooks (usePages, useSubjects, useListSearchParams, etc.) |
+| `src/hooks/useFrontendModeContext/index.js`          | Now reads from FrontendContext                                       |
+| `src/helpers/cookie/Server.js`                       | Simplified to Fetch API only                                         |
+| `src/global/components/list/Filters/Search/index.js` | `useUID` → `useId`                                                   |
+| `src/global/components/list/Filters/Filter/index.js` | `useUID` → `useId`                                                   |
+| ~20 components                                       | Migrated from Redux to context hooks                                 |
 
 ## Files Modified During POC (Originally Marked as "Reused")
 

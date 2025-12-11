@@ -1,9 +1,9 @@
+import { useId } from "react";
 import PropTypes from "prop-types";
-import { useUID } from "react-uid";
 import * as Styled from "./styles";
 
 function Filter({ label, value, options, onChange }) {
-  const uid = useUID();
+  const uid = useId();
 
   return (
     <Styled.Wrapper>

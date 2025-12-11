@@ -1,0 +1,46 @@
+import { useSearchParams } from "react-router";
+import { useCallback, useMemo } from "react";
+
+/**
+ * Hook for managing list filters via URL search params.
+ * Combines filter state reading and updating in one hook.
+ *
+ * @param {Object} options
+ * @param {Object} options.defaultFilters - Default filter values
+ * @param {string[]} options.paginationKeys - Keys to exclude from filters
+ * @returns {{ filters: Object, setFilters: Function, searchParams: URLSearchParams }}
+ */
+export default function useListSearchParams(options = {}) {
+  const { defaultFilters = {}, paginationKeys = ["page", "perPage"] } = options;
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const filters = useMemo(() => {
+    const result = { ...defaultFilters };
+    Array.from(searchParams.entries()).forEach(([key, value]) => {
+      if (!paginationKeys.includes(key)) {
+        result[key] = value;
+      }
+    });
+    return result;
+  }, [searchParams, defaultFilters, paginationKeys]);
+
+  const setFilters = useCallback(
+    newFilters => {
+      setSearchParams(prev => {
+        prev.set("page", "1");
+        Object.entries(newFilters).forEach(([key, value]) => {
+          if (value != null && value !== "") {
+            prev.set(key, String(value));
+          } else {
+            prev.delete(key);
+          }
+        });
+        return prev;
+      });
+    },
+    [setSearchParams]
+  );
+
+  return { filters, setFilters, searchParams };
+}

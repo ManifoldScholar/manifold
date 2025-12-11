@@ -20,9 +20,7 @@ import CookiesBanner from "global/components/CookiesBanner";
 import { NavigationBlockerProvider } from "global/components/router/NavigationBlockerContext";
 import { formatError } from "global/components/FatalError/Boundary";
 import FatalError from "global/components/FatalError";
-
-// Store still used for UI state
-import { useFromStore, useColorScheme } from "hooks";
+import { useColorScheme } from "hooks";
 
 // Middleware and contexts
 import { bootstrapMiddleware } from "./middleware/bootstrap.server";
@@ -62,9 +60,6 @@ export default function Root({ loaderData }) {
   const revalidator = useRevalidator();
   const { auth, settings, pages } = loaderData;
 
-  // UI state still from Redux
-  const frontendMode = useFromStore({ path: "ui.transitory.frontendMode" });
-
   useColorScheme();
 
   const typekitId = get(settings, "attributes.theme.typekitId");
@@ -74,10 +69,9 @@ export default function Root({ loaderData }) {
       settings,
       auth,
       pages,
-      frontendMode: frontendMode || {},
       revalidate: revalidator.revalidate
     }),
-    [settings, auth, pages, frontendMode, revalidator.revalidate]
+    [settings, auth, pages, revalidator.revalidate]
   );
 
   return (

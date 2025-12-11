@@ -10,8 +10,15 @@ export const AppContext = createReactContext({
   settings: null,
   auth: null,
   pages: null,
-  frontendMode: null,
   revalidate: () => {
     console.warn("AppContext not yet initialized");
   }
+});
+
+// Frontend context - provides frontend-specific data to frontend routes only
+// Not available in backend/reader routes
+export const FrontendContext = createReactContext({
+  subjects: [],
+  journalSubjects: [],
+  frontendMode: {}
 });
