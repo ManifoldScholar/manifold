@@ -39,7 +39,9 @@ module V1
 
         when_full do
           metadata(metadata: true, properties: true, formatted: true)
-          typed_attribute :external_identifier, Types::String
+          typed_attribute :external_identifier, Types::String do |object, params|
+            object.external_identifier&.identifier
+          end
           typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
           typed_attribute :hero_alt_text, Types::String.optional
           typed_attribute :cover_styles, Types::Serializer::Attachment.meta(read_only: true)
