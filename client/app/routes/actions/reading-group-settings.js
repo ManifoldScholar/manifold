@@ -1,0 +1,92 @@
+import { redirect } from "react-router";
+import { readingGroupsAPI } from "api";
+import { routerContext } from "app/contexts";
+import { queryApi } from "api";
+import handleActionError from "lib/react-router/helpers/handleActionError";
+import unauthorizedError from "lib/react-router/helpers/unauthorizedError";
+
+/**
+ * Shared action for reading group settings routes.
+ * Handles both update and duplicate operations.
+ *
+ * @param {Object} params
+ * @param {Request} params.request - Form request
+ * @param {Object} params.context - Router context
+ * @param {Object} params.params - Route params
+ * @returns {Promise<Object>} Action result with success/errors or redirect
+ */
+export async function action({ request, context, params }) {
+  const { auth } = context.get(routerContext) ?? {};
+  if (!auth?.authToken) return unauthorizedError();
+
+  const requestData = await request.json();
+  const { intent, ...data } = requestData;
+
+  // The action is mounted at /groups/$id/<section>/settings for each drawer.
+  // Extract <section> to pick the post-submit redirect; unknown sections fall
+  // back to the group root.
+  const url = new URL(request.url);
+  const segmentMatch = url.pathname.match(
+    /\/groups\/[^/]+\/([^/]+)\/settings\/?$/
+  );
+  const section = segmentMatch?.[1];
+  const PARENT_ROUTES = {
+    annotations: `/groups/${params.id}/annotations`,
+    members: `/groups/${params.id}/members`
+  };
+  const parentRoute = PARENT_ROUTES[section] ?? `/groups/${params.id}`;
+
+  try {
+    if (intent === "duplicate") {
+      const { endpoint, method, ...duplicateData } = data;
+
+      const result = await queryApi(
+        {
+          endpoint,
+          method,
+          options: {
+            body: JSON.stringify({
+              type: "readingGroups",
+              data: {
+                attributes: {
+                  name: duplicateData.name,
+                  archive: duplicateData.archive,
+                  cloneOwnedAnnotations: duplicateData.copyAnnotations
+                }
+              }
+            })
+          }
+        },
+        context
+      );
+
+      if (result?.errors) {
+        return { errors: result.errors };
+      }
+
+      const duplicateId = result?.data?.id;
+
+      if (duplicateData.openOnProceed) {
+        throw redirect(`/groups/${duplicateId}`);
+      } else {
+        throw redirect(parentRoute);
+      }
+    } else {
+      // Update intent
+      const { groupId, ...updateData } = data;
+
+      const result = await queryApi(
+        readingGroupsAPI.update(groupId, updateData),
+        context
+      );
+
+      if (result?.errors) {
+        return { errors: result.errors };
+      }
+
+      throw redirect(parentRoute);
+    }
+  } catch (error) {
+    return handleActionError(error, "Failed to save reading group");
+  }
+}

@@ -1,0 +1,46 @@
+import { useTranslation } from "react-i18next";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
+import searchLoader from "lib/react-router/loaders/search";
+import SearchQuery from "components/global/search/query";
+import SearchResults from "components/global/search/results";
+import HeadContent from "components/global/HeadContent";
+import * as Styled from "./styles";
+
+export const loader = async ({ request, context }) => {
+  checkLibraryMode({ request, context });
+  return searchLoader({ request, context });
+};
+
+export default function SearchRoute({ loaderData: { results, meta } }) {
+  const { t } = useTranslation();
+
+  const facets = [
+    { label: t("glossary.project_other"), value: "Project", default: true },
+    { label: t("glossary.journal_other"), value: "Journal", default: true },
+    { label: t("glossary.resource_other"), value: "Resource", default: true },
+    { label: t("glossary.text_other"), value: "Text", default: true },
+    { label: t("glossary.annotation_other"), value: "Annotation" },
+    { label: t("glossary.full_text_other"), value: "TextSection" }
+  ];
+
+  return (
+    <>
+      <HeadContent title={t("search.title")} appendDefaultTitle />
+      <h1 className="screen-reader-text">{t("search.title")}</h1>
+      <SearchQuery.Provider>
+        <Styled.FormWrapper>
+          <Styled.Inner>
+            <h2 className="screen-reader-text">{t("search.form")}</h2>
+            <SearchQuery.Form action="/search" facets={facets} />
+          </Styled.Inner>
+        </Styled.FormWrapper>
+        <Styled.ResultsWrapper>
+          <Styled.Inner>
+            <h2 className="screen-reader-text">{t("search.results")}</h2>
+            <SearchResults.List context="frontend" />
+          </Styled.Inner>
+        </Styled.ResultsWrapper>
+      </SearchQuery.Provider>
+    </>
+  );
+}

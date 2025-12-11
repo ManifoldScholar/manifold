@@ -1,0 +1,150 @@
+import { useOutletContext, useFetcher } from "react-router";
+import { useTranslation } from "react-i18next";
+import { settingsAPI } from "api";
+import formAction from "lib/react-router/helpers/formAction";
+import Layout from "components/backend/layout";
+import Form from "components/global/form";
+import FormContainer from "components/global/form/Container";
+import PageHeader from "components/backend/layout/PageHeader";
+import HeaderPreview from "components/backend/theme/HeaderPreview";
+
+export const action = formAction({
+  mutation: ({ data }) => settingsAPI.update(null, data)
+});
+
+export default function SettingsThemeRoute() {
+  const { t } = useTranslation();
+  const settings = useOutletContext();
+  const fetcher = useFetcher();
+
+  return (
+    <div>
+      <PageHeader title={t("settings.theme.header")} type="settings" />
+      <Layout.BackendPanel>
+        <FormContainer.Form
+          model={settings}
+          className="form-secondary"
+          fetcher={fetcher}
+          notifyOnSuccess={{
+            heading: t("notifications.settings_save_success_heading"),
+            body: t("notifications.settings_save_success_body")
+          }}
+        >
+          {getValue => (
+            <>
+              <Form.FieldGroup label={t("settings.theme.branding_header")}>
+                <Form.TextInput
+                  label={t("settings.theme.url_label")}
+                  name="attributes[general][pressSite]"
+                  placeholder={t("settings.theme.url_placeholder")}
+                  wide
+                  instructions={t("settings.theme.url_instructions")}
+                />
+                <Form.Upload
+                  accepts="images"
+                  label={t("settings.theme.header_logo_label")}
+                  readFrom="attributes[pressLogoStyles][small]"
+                  name="attributes[pressLogo]"
+                  remove="attributes[removePressLogo]"
+                  instructions={t("settings.theme.header_logo_instructions")}
+                />
+                <Form.Upload
+                  accepts="images"
+                  label={t("settings.theme.mobile_logo_label")}
+                  readFrom="attributes[pressLogoMobileStyles][small]"
+                  name="attributes[pressLogoMobile]"
+                  remove="attributes[removePressLogoMobile]"
+                  instructions={t("settings.theme.mobile_logo_instructions")}
+                />
+                <Form.Upload
+                  accepts="images"
+                  label={t("settings.theme.footer_logo_label")}
+                  readFrom="attributes[pressLogoFooterStyles][small]"
+                  name="attributes[pressLogoFooter]"
+                  remove="attributes[removePressLogoFooter]"
+                  instructions={t("settings.theme.footer_logo_instructions")}
+                />
+                <Form.Upload
+                  accepts="images"
+                  label={t("settings.theme.favicon_label")}
+                  readFrom="attributes[faviconStyles][original]"
+                  name="attributes[favicon]"
+                  remove="attributes[removeFavicon]"
+                  instructions={t("settings.theme.favicon_instructions")}
+                />
+                <Form.TextInput
+                  label={t("settings.theme.logo_styles_label")}
+                  name="attributes[theme][logoStyles]"
+                  placeholder={t("settings.theme.logo_styles_placeholder")}
+                  instructions={t("settings.theme.logo_styles_instructions")}
+                />
+                <Form.TextInput
+                  label={t("settings.theme.offset_label")}
+                  name="attributes[theme][headerOffset]"
+                  placeholder="0"
+                  instructions={t("settings.theme.offset_instructions")}
+                />
+              </Form.FieldGroup>
+              <Form.FieldGroup label={t("settings.theme.colors_header")}>
+                <Form.ColorInput
+                  label={t("settings.theme.accent_color_label")}
+                  name="attributes[theme][accentColor]"
+                  defaultValue="#52e3ac"
+                  instructions={t("settings.theme.accent_color_instructions")}
+                />
+                <Form.ColorInput
+                  label={t("settings.theme.foreground_color_label")}
+                  name="attributes[theme][headerForegroundColor]"
+                  defaultValue="#696969"
+                  instructions={t(
+                    "settings.theme.foreground_color_instructions"
+                  )}
+                />
+                <Form.ColorInput
+                  label={t("settings.theme.active_foreground_color_label")}
+                  name="attributes[theme][headerForegroundActiveColor]"
+                  defaultValue="#363636"
+                  instructions={t(
+                    "settings.theme.active_foreground_color_instructions"
+                  )}
+                />
+                <Form.ColorInput
+                  label={t("settings.theme.background_color_label")}
+                  name="attributes[theme][headerBackgroundColor]"
+                  defaultValue="#ffffff"
+                  instructions={t(
+                    "settings.theme.background_color_instructions"
+                  )}
+                />
+                <Form.FieldWrapper>
+                  <Form.Label label="Header Preview" />
+                  <HeaderPreview
+                    settings={settings}
+                    accentColor={getValue("attributes[theme][accentColor]")}
+                    foregroundColor={getValue(
+                      "attributes[theme][headerForegroundColor]"
+                    )}
+                    backgroundColor={getValue(
+                      "attributes[theme][headerBackgroundColor]"
+                    )}
+                    activeColor={getValue(
+                      "attributes[theme][headerForegroundActiveColor]"
+                    )}
+                  />
+                </Form.FieldWrapper>
+              </Form.FieldGroup>
+              <Form.FieldGroup label={t("settings.theme.typography_header")}>
+                <Form.TextInput
+                  label={t("settings.theme.typekit_label")}
+                  name="attributes[theme][typekitId]"
+                  placeholder={t("settings.theme.typekit_placeholder")}
+                />
+              </Form.FieldGroup>
+              <Form.Save text={t("settings.save")} />
+            </>
+          )}
+        </FormContainer.Form>
+      </Layout.BackendPanel>
+    </div>
+  );
+}

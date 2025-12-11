@@ -1,0 +1,80 @@
+import React from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+
+import EntityThumbnail from "components/global/entity-thumbnail";
+import EntityRow from "./Row";
+import Utility from "components/global/utility";
+import { useAuthentication } from "hooks";
+import Authorization from "helpers/authorization";
+import { capitalize } from "lodash-es";
+
+function ContributorRow({ entity, onDelete, onEdit, ...props }) {
+  const { t } = useTranslation();
+
+  const { id, attributes, relationships } = entity;
+
+  const makerId = relationships?.maker?.id;
+
+  const { roles } = attributes ?? {};
+
+  const { currentUser } = useAuthentication();
+  const auth = new Authorization();
+  const canAccessMakers = auth.authorizeAbility({
+    entity: "maker",
+    ability: "update",
+    currentUser
+  });
+
+  const additionalProps = {
+    title: attributes.makerName,
+    subtitle: roles.map(r => capitalize(r).replaceAll("_", " ")).join(", "),
+    figure: <EntityThumbnail.Maker entity={entity} />,
+    figureSize: "small",
+    figureShape: "circle",
+    ...(canAccessMakers
+      ? {
+          onRowClick: `/backend/records/makers/${makerId}`,
+          rowClickMode: "inline"
+        }
+      : {})
+  };
+
+  const utility = (
+    <>
+      <button
+        className="entity-row__utility-button"
+        onClick={e => {
+          e.preventDefault();
+          onEdit(id);
+        }}
+        title={t("actions.edit")}
+      >
+        <Utility.IconComposer icon="annotate24" size={26} />
+      </button>
+      <button
+        data-id="destroy"
+        className="entity-row__utility-button"
+        style={{ marginInline: "4px" }}
+        onClick={e => {
+          e.preventDefault();
+          onDelete(makerId);
+        }}
+        title={t("actions.delete")}
+      >
+        <Utility.IconComposer icon="delete32" size={26} />
+      </button>
+    </>
+  );
+
+  return <EntityRow {...props} {...additionalProps} utility={utility} />;
+}
+
+ContributorRow.displayName = "EntitiesList.Entity.ContributorRow";
+
+ContributorRow.propTypes = {
+  entity: PropTypes.object,
+  onDelete: PropTypes.func
+};
+
+export default ContributorRow;

@@ -1,0 +1,37 @@
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { isEmpty } from "lodash-es";
+import Meta from "components/global/meta";
+
+export default class ProjectContentBlockMetadataBlock extends PureComponent {
+  static displayName = "Project.Content.Block.Metadata";
+
+  static propTypes = {
+    entity: PropTypes.object.isRequired
+  };
+
+  static get title() {
+    return "Metadata";
+  }
+
+  static get icon() {
+    return "metadata64";
+  }
+
+  get entity() {
+    return this.props.entity;
+  }
+
+  render() {
+    const {
+      metadata,
+      metadataFormatted,
+      license,
+      licenseLabel
+    } = this.entity.attributes;
+
+    if ((!metadata || isEmpty(metadata)) && !license) return null;
+
+    return <Meta.List metadata={metadataFormatted} license={licenseLabel} />;
+  }
+}

@@ -1,0 +1,33 @@
+import React, { PureComponent } from "react";
+import Utility from "components/global/utility";
+import PropTypes from "prop-types";
+
+export default class IconComputedSocial extends PureComponent {
+  static displayName = "IconComputed.Social";
+
+  static propTypes = {
+    icon: PropTypes.string.isRequired
+  };
+
+  static defaultProps = {
+    size: 48
+  };
+
+  iconForValue(value) {
+    const map = {
+      email: "socialEmail32",
+      slack: "socialSlack32",
+      linkedIn: "socialLinkedIn32",
+      github: "socialGithub32",
+      google: "socialGoogle32"
+    };
+    return map[value];
+  }
+
+  render() {
+    const { icon, ...childProps } = this.props;
+    return (
+      <Utility.IconComposer icon={this.iconForValue(icon)} {...childProps} />
+    );
+  }
+}

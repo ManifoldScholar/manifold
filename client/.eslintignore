@@ -1,10 +1,6 @@
-webpack/*
-dist
-src/config.js
+// Router utils that are mainly vendor code
+app/lib/react-router/emotion-stream.js
+app/lib/react-router/recursiveFlatRoutes.js
 
-src/utils/plugins
-plugins-off
-plugins.off
-tmp
-!tmp/.gitkeep
-codeshifts
+build
+router-migration-guides

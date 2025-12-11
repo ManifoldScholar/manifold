@@ -32,6 +32,7 @@ module API
         @comment = load_comment
         render_single_resource(
           @comment,
+          include: INCLUDES,
           location: comment_location(@comment)
         )
       end

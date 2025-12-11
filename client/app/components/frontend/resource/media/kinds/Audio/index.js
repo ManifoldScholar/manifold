@@ -1,0 +1,77 @@
+import { lazy, Suspense } from "react";
+import PropTypes from "prop-types";
+import ThumbnailImage from "../shared/ThumbnailImage";
+import PlaceholderGraphic from "../shared/PlaceholderGraphic";
+import * as Styled from "./styles";
+
+const LoadablePlayer = lazy(() => import("../shared/DefaultPlayer"));
+
+function urlToRelativePath(url) {
+  const trackUrl = new URL(url);
+  return trackUrl.pathname;
+}
+
+function ResourcePlayerAudio({ resource, active = true }) {
+  const {
+    attachmentStyles,
+    title,
+    allowDownload,
+    variantThumbnailStyles,
+    variantThumbnailAltText
+  } = resource.attributes;
+
+  const src = attachmentStyles.original;
+
+  if (!src || !active) return null;
+
+  const tracks =
+    resource.relationships?.textTracks
+      ?.map(track => {
+        if (!track.attributes) return null;
+        const { kind, srclang: lang, cuesUrl, label } = track.attributes;
+        return {
+          id: track.id,
+          src: urlToRelativePath(cuesUrl),
+          kind,
+          label,
+          lang,
+          default: kind === "chapters"
+        };
+      })
+      .filter(Boolean) ?? [];
+
+  const imageSrc = variantThumbnailStyles?.largeLandscape;
+
+  return (
+    <Styled.Wrapper>
+      {imageSrc ? (
+        <ThumbnailImage src={imageSrc} alt={variantThumbnailAltText} />
+      ) : (
+        <PlaceholderGraphic resource={resource} />
+      )}
+      <Styled.PlayerWrapper>
+        <Suspense fallback={null}>
+          <LoadablePlayer
+            title={title}
+            src={src}
+            tracks={tracks}
+            download={
+              allowDownload
+                ? urlToRelativePath(attachmentStyles.original)
+                : false
+            }
+            viewType="audio"
+          />
+        </Suspense>
+      </Styled.PlayerWrapper>
+    </Styled.Wrapper>
+  );
+}
+
+ResourcePlayerAudio.displayName = "Resource.Player.Audio";
+
+ResourcePlayerAudio.propTypes = {
+  resource: PropTypes.object.isRequired
+};
+
+export default ResourcePlayerAudio;

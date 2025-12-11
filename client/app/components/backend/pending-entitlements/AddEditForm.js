@@ -1,0 +1,106 @@
+import PropTypes from "prop-types";
+import FormContainer from "components/global/form/Container";
+import Form from "components/global/form";
+import { useTranslation } from "react-i18next";
+
+import { projectsAPI, journalsAPI } from "api";
+
+export default function AddEditEntitlementForm({ fetcher, entitlement }) {
+  const { t } = useTranslation();
+
+  const formatData = data => {
+    const { expiresOn, ...rest } = data.attributes;
+    return {
+      attributes: {
+        expiration: expiresOn,
+        ...rest
+      }
+    };
+  };
+
+  return (
+    <FormContainer.Form
+      fetcher={fetcher}
+      model={entitlement}
+      className="form-secondary"
+      formatData={formatData}
+      notificationScope="drawer"
+    >
+      {getValue => {
+        const type = getValue("entityType");
+        const options =
+          type === "journal" ? journalsAPI.index : projectsAPI.index;
+
+        return (
+          <>
+            <Form.FieldGroup label={t("entitlements.pending.user_group_label")}>
+              <Form.TextInput
+                focusOnMount
+                label={t("entitlements.pending.email")}
+                instructions={t("entitlements.pending.email_instructions")}
+                name="attributes[email]"
+              />
+              <Form.TextInput
+                label={t("entitlements.pending.first_name")}
+                name="attributes[firstName]"
+              />
+              <Form.TextInput
+                label={t("entitlements.pending.last_name")}
+                name="attributes[lastName]"
+              />
+            </Form.FieldGroup>
+            <Form.FieldGroup
+              label={t("entitlements.pending.entitlement_group_label")}
+            >
+              <Form.Select
+                label={t("entitlements.pending.type_label")}
+                instructions={t("entitlements.pending.type_instructions")}
+                name="entityType"
+                options={[
+                  {
+                    label: t("glossary.project_title_case_one"),
+                    value: "project"
+                  },
+                  {
+                    label: t("glossary.journal_title_case_one"),
+                    value: "journal"
+                  }
+                ]}
+                value="project"
+              />
+              <Form.Picker
+                name="attributes[subjectUrl]"
+                label={
+                  type ? t(`glossary.${type}_one`) : t(`glossary.project_one`)
+                }
+                options={options}
+                optionToLabel={entity => entity.attributes.titlePlaintext}
+                optionToValue={entity =>
+                  entity.attributes.entitlementSubjectUrl
+                }
+                listStyle="rows"
+              />
+              <Form.DatePicker
+                label={t("entitlements.pending.expiration")}
+                instructions={t("entitlements.pending.expiration_instructions")}
+                name="attributes[expiresOn]"
+              />
+            </Form.FieldGroup>
+            <Form.DrawerButtons
+              showCancel
+              cancelUrl="/backend/records/entitlements"
+              submitLabel="entitlements.pending.save_label"
+            />
+          </>
+        );
+      }}
+    </FormContainer.Form>
+  );
+}
+
+AddEditEntitlementForm.displayName = "Records.Entitlements.AddEdit.Form";
+
+AddEditEntitlementForm.propTypes = {
+  fetcher: PropTypes.object.isRequired,
+  entitlement: PropTypes.object
+};

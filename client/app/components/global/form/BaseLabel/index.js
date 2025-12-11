@@ -1,0 +1,35 @@
+import * as Styled from "./styles";
+
+export default function BaseLabel({
+  id,
+  labelId,
+  as = "label",
+  label,
+  styleType = "primary",
+  hasInstructions = false,
+  isSelect = false,
+  className
+}) {
+  /* eslint-disable no-nested-ternary */
+  const Label =
+    styleType === "primary"
+      ? Styled.PrimaryLabel
+      : styleType === "secondary"
+      ? Styled.SecondaryLabel
+      : Styled.TertiaryLabel;
+
+  return (
+    <Label
+      as={as}
+      id={labelId}
+      htmlFor={id}
+      $hasInstructions={hasInstructions}
+      $isSelect={isSelect}
+      className={className}
+    >
+      {label}
+    </Label>
+  );
+}
+
+BaseLabel.displayName = "Form.BaseLabel";

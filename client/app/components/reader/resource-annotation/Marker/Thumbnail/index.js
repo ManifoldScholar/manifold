@@ -1,0 +1,182 @@
+import { useCallback, useEffect, useContext, useState, useMemo } from "react";
+import IconComposer from "components/global/utility/IconComposer";
+import { ReaderContext } from "app/contexts";
+import { useWindowSize } from "usehooks-ts";
+import { capitalize } from "lodash-es";
+import { useTranslation } from "react-i18next";
+import { ResourceMarkerContext } from "../context";
+import useLoaderCollection from "hooks/useLoaderCollection";
+import * as Styled from "./styles";
+
+export default function Thumbnail({
+  id,
+  hidden,
+  setsPosition,
+  active,
+  onMouseEnter,
+  onMouseLeave,
+  handleClick
+}) {
+  const { setResourceThumbs, thumbCount } = useContext(ResourceMarkerContext);
+
+  const annotations = useLoaderCollection("annotations");
+  const resources = useLoaderCollection("resources");
+  const resourceCollections = useLoaderCollection("resource_collections");
+
+  const annotation = annotations.find(a => a.id === id);
+
+  const { resourceId, resourceCollectionId } = annotation?.attributes ?? {};
+
+  const resource = resources.find(r => r.id === resourceId);
+  const collection = resourceCollections.find(
+    c => c.id === resourceCollectionId
+  );
+
+  const entity = resource ?? collection;
+
+  const [visible, setVisible] = useState(false);
+  const [el, setEl] = useState(null);
+
+  const ref = useCallback(node => {
+    if (node !== null) {
+      setEl(node);
+    }
+  }, []);
+
+  const callback = useCallback(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting !== visible) setVisible(entry.isIntersecting);
+      });
+    },
+    [visible, setVisible]
+  );
+
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver(callback, {
+        root: null,
+        rootMargin: "-80px 0px -20px 600px",
+        threshold: 0.75
+      }),
+    [callback]
+  );
+
+  useEffect(() => {
+    if (el) {
+      observer.observe(el);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [el, observer]);
+
+  const { typography } = useContext(ReaderContext);
+  const { font, fontSize, margins } = typography ?? {};
+
+  const { width } = useWindowSize();
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (setsPosition && el) {
+      const rect = el.getBoundingClientRect();
+      setResourceThumbs(thumbs => {
+        return {
+          ...thumbs,
+          [id]: {
+            top: rect.y,
+            height: rect.height
+          }
+        };
+      });
+    }
+  }, [
+    el,
+    setsPosition,
+    id,
+    setResourceThumbs,
+    font,
+    fontSize.current,
+    margins.current,
+    width,
+    thumbCount
+  ]);
+  /* eslint-enable react-hooks/exhaustive-deps */
+
+  const { t } = useTranslation();
+
+  const dialogProps = useMemo(
+    () =>
+      resource
+        ? {
+            resource: { id: resourceId, type: "resource" },
+            annotation: { id, type: "annotations" }
+          }
+        : {
+            resource: { id: resourceCollectionId, type: "resourceCollection" },
+            annotation: { id, type: "annotations" }
+          },
+    [resource, resourceId, resourceCollectionId, id]
+  );
+
+  if (!entity) return null;
+
+  const {
+    title,
+    kind,
+    variantThumbnailStyles,
+    thumbnailStyles,
+    attachmentStyles,
+    attachmentAltText,
+    variantThumbnailAltText
+  } = entity.attributes;
+
+  const renderedKind = collection ? t("glossary.collection_one") : kind;
+  /* eslint-disable no-nested-ternary */
+  const imgProps =
+    kind === "image"
+      ? { src: attachmentStyles?.mediumLandscape, alt: attachmentAltText || "" }
+      : variantThumbnailStyles?.mediumLandscape
+      ? {
+          src: variantThumbnailStyles.mediumLandscape,
+          alt: variantThumbnailAltText || ""
+        }
+      : {
+          src:
+            thumbnailStyles?.mediumLandscape ??
+            attachmentStyles?.mediumLandscape,
+          alt: ""
+        };
+
+  const WrapperComponent = hidden ? Styled.PositionerWrapper : Styled.Wrapper;
+  const wrapperProps = hidden
+    ? { "aria-hidden": true }
+    : {
+        $visible: visible,
+        $active: active,
+        onMouseEnter,
+        onMouseLeave,
+        onClick: handleClick(dialogProps)
+      };
+
+  return (
+    <WrapperComponent id={id} ref={ref} {...wrapperProps}>
+      <Styled.Label>
+        <IconComposer
+          icon={`resource${capitalize(renderedKind)}64`}
+          size={20}
+        />
+        <span>{renderedKind}</span>
+      </Styled.Label>
+      <Styled.Content>
+        {!!imgProps.src && (
+          <Styled.ImageWrapper>
+            <Styled.Image {...imgProps} />
+          </Styled.ImageWrapper>
+        )}
+        <Styled.Title>{title}</Styled.Title>
+      </Styled.Content>
+    </WrapperComponent>
+  );
+}

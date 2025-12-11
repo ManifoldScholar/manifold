@@ -1,0 +1,38 @@
+import { Component } from "react";
+import PropTypes from "prop-types";
+import Cover from "components/frontend/resource-collection/Cover";
+import * as Styled from "./styles";
+
+export default class ResourceCollectionGrid extends Component {
+  static displayName = "ResourceCollection.Grid";
+
+  static propTypes = {
+    resourceCollections: PropTypes.array.isRequired,
+    itemHeadingLevel: PropTypes.oneOf([2, 3, 4, 5, 6])
+  };
+
+  urlCreator = collection => {
+    return `/projects/${collection.attributes.projectSlug}/resource-collection/${collection.attributes.slug}`;
+  };
+
+  render() {
+    const { resourceCollections, itemHeadingLevel } = this.props;
+    if (!resourceCollections) return null;
+
+    return (
+      <Styled.Grid>
+        {resourceCollections.map(collection => {
+          return (
+            <li key={collection.id}>
+              <Cover
+                urlCreator={this.urlCreator}
+                resourceCollection={collection}
+                itemHeadingLevel={itemHeadingLevel}
+              />
+            </li>
+          );
+        })}
+      </Styled.Grid>
+    );
+  }
+}

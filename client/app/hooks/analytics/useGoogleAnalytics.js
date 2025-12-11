@@ -1,0 +1,76 @@
+import { useEffect, useState } from "react";
+import { get } from "lodash-es";
+import ReactGA from "react-ga4";
+import ch from "helpers/consoleHelpers";
+import { useAuthentication } from "hooks";
+import CookieHelper from "helpers/cookie/Browser";
+
+const cookie = new CookieHelper();
+
+function nullTracker(trackedEventIgnored) {}
+
+function getGoogleAnalyticsId(settings) {
+  return get(settings, "attributes.integrations.gaFourTrackingId");
+}
+
+function googleAnalyticsEnabled(settings) {
+  return !!getGoogleAnalyticsId(settings);
+}
+
+export default function useGoogleAnalytics(location, settings) {
+  const googleAnalyticsId = getGoogleAnalyticsId(settings);
+  const [gaInitialized, setGaInitialized] = useState(false);
+  const { currentUser } = useAuthentication();
+  const [consentGoogleAnalytics, setConsentGoogleAnalytics] = useState(
+    currentUser?.attributes?.consentGoogleAnalytics || false
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const anonConsent = JSON.parse(cookie.read("anonAnalyticsConsent") ?? "{}");
+    const consent =
+      currentUser?.attributes?.consentGoogleAnalytics ||
+      anonConsent?.consentGoogleAnalytics;
+    setConsentGoogleAnalytics(consent);
+  }, [currentUser]);
+
+  useEffect(() => {
+    const setConsentState = () => {
+      const consentState = consentGoogleAnalytics ? "granted" : "denied";
+
+      ReactGA.gtag("consent", "default", {
+        analytics_storage: consentState
+      });
+    };
+
+    if (!gaInitialized && googleAnalyticsEnabled(settings)) {
+      ReactGA.initialize(googleAnalyticsId, { debug: false });
+      if (import.meta.env.DEV) {
+        ch.notice(
+          `Google Analytics initialized for ${googleAnalyticsId}.`,
+          "chart_with_upwards_trend"
+        );
+      }
+      setGaInitialized(true);
+    }
+
+    if (gaInitialized) {
+      setConsentState();
+    }
+  }, [gaInitialized, googleAnalyticsId, settings, consentGoogleAnalytics]);
+
+  useEffect(() => {
+    if (googleAnalyticsEnabled(settings)) {
+      const path = location.pathname + location.search;
+      ReactGA.send({ hitType: "pageview", path });
+      if (import.meta.env.DEV) {
+        ch.notice(`Tracking GA pageview: ${path}.`, "chart_with_upwards_trend");
+      }
+    }
+  }, [location, settings]);
+
+  // For now, we're not tracking Manifold events in Analytics. However, we could
+  // easily send them as custom events.
+  return { track: nullTracker };
+}

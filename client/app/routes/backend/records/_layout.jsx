@@ -1,0 +1,48 @@
+import { useTranslation } from "react-i18next";
+import { Outlet, useLocation } from "react-router";
+import Layout from "components/backend/layout";
+import navigation from "helpers/navigation";
+import HeadContent from "components/global/HeadContent";
+import authorize from "lib/react-router/loaders/authorize";
+
+export const loader = ({ request, context }) => {
+  return authorize({
+    request,
+    context,
+    ability: "update",
+    entity: ["user", "userGroup", "maker", "page", "feature", "exportTarget"]
+  });
+};
+
+export default function RecordsLayout() {
+  const { t } = useTranslation();
+  const location = useLocation();
+  const secondaryLinks = navigation.records();
+  const subpage = location.pathname.split("/")[3];
+
+  return (
+    <>
+      {subpage && (
+        <HeadContent
+          title={`${t(
+            `titles.${
+              /* eslint-disable-next-line no-nested-ternary */
+              subpage === "reading-groups"
+                ? "groups"
+                : subpage === "user-groups"
+                ? "user_groups"
+                : subpage
+            }`
+          )} | ${t("common.admin")}`}
+          appendDefaultTitle
+        />
+      )}
+      <div>
+        <Layout.SecondaryNav links={secondaryLinks} />
+        <main id="skip-to-main" tabIndex={-1} className="backend-detail">
+          <Outlet />
+        </main>
+      </div>
+    </>
+  );
+}

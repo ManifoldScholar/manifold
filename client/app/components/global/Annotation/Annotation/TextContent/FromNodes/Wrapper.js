@@ -1,0 +1,24 @@
+import Collapse from "components/global/Collapse";
+import * as Styled from "./styles";
+import { useTranslation } from "react-i18next";
+import IconComposer from "components/global/utility/IconComposer";
+
+export default function FromNodesWrapper({ children, overlayLight }) {
+  const { t } = useTranslation();
+
+  return (
+    <Collapse stubHeight={200} label={t("reader.annotated_passage")}>
+      <Styled.Content focusOnVisible>
+        <blockquote>{children}</blockquote>
+        <Styled.Overlay $light={overlayLight} />
+      </Styled.Content>
+      <Styled.Toggle activeClassName="expanded" hideAriaExpanded>
+        <span className="toggle-show-label">{t("actions.expand_passage")}</span>
+        <span className="toggle-hide-label">
+          {t("actions.collapse_passage")}
+        </span>
+        <IconComposer icon="disclosureDown16" size={16} />
+      </Styled.Toggle>
+    </Collapse>
+  );
+}

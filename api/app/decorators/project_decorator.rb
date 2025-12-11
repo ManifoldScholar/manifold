@@ -24,7 +24,7 @@ class ProjectDecorator < ApplicationDecorator
     if avatar.present?
       avatar_styles[:small_portrait]
     else
-      "#{client_url}/static/images/manifold-project-placeholder.jpg"
+      "#{client_url}/images/manifold-project-placeholder.jpg"
     end
   end
 

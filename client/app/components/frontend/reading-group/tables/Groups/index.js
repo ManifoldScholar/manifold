@@ -1,0 +1,189 @@
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { useTranslation } from "react-i18next";
+import Table from "components/global/table";
+import Column from "components/global/table/Column";
+import NestedLink from "components/global/table/NestedLink";
+import LinkedName from "components/global/table/LinkedName";
+import InlineValue from "components/global/table/InlineValue";
+import IconComposer from "components/global/utility/IconComposer";
+import { ArchiveGroup, EditGroup, JoinGroup, LeaveGroup } from "./actions";
+import { ListFilters } from "components/global/list";
+import { useListFilters } from "hooks";
+import { useNavigate } from "react-router";
+
+export default function GroupsTable(props) {
+  const {
+    readingGroups: groups,
+    pagination,
+    filterProps,
+    showStatusFilter = false,
+    currentUser,
+    hideActions,
+    hideTags
+  } = props;
+
+  const { t } = useTranslation();
+
+  const listFilterProps = useListFilters({
+    ...filterProps,
+    options: { groupSort: true, groupStatus: showStatusFilter }
+  });
+
+  const navigate = useNavigate();
+
+  const userCanJoin = group => {
+    if (group.attributes.currentUserRole !== "none") return false;
+    return !!group.links.join?.href;
+  };
+
+  const handleJoinSuccess = group => {
+    navigate(`/groups/${group.id}`);
+  };
+
+  return (
+    <Table
+      models={groups}
+      pagination={pagination}
+      unit={t("glossary.group", { count: groups.length })}
+      linkCreator={group => `/groups/${group.id}`}
+      filters={<ListFilters {...listFilterProps} containerWrapPoint="603px" />}
+      filterCount={listFilterProps.filters?.length}
+    >
+      <Column
+        header={t("tables.reading_groups.headers.name")}
+        textStyle="valueLarge"
+        columnPosition="all"
+      >
+        {({ model, hovering }) => {
+          return (
+            <>
+              <LinkedName
+                name={model.attributes.name}
+                to={`/groups/${model.id}`}
+                tag={!hideTags ? model.attributes.privacy : null}
+              />
+              <IconComposer
+                icon="arrowRight16"
+                size={20}
+                className={classNames({
+                  "table__link-arrow": true,
+                  "table__link-arrow--active": hovering
+                })}
+              />
+            </>
+          );
+        }}
+      </Column>
+      {currentUser && (
+        <Column
+          header={t("tables.reading_groups.headers.role")}
+          columnPosition="left"
+          cellSize="cellFitContent"
+        >
+          {({ model }) => {
+            const showJoin = userCanJoin(model);
+            return showJoin ? (
+              <JoinGroup
+                readingGroup={model}
+                onSuccess={() => handleJoinSuccess(model)}
+                outlined
+              />
+            ) : (
+              model.attributes.currentUserRole
+            );
+          }}
+        </Column>
+      )}
+      <Column
+        header={t("tables.reading_groups.headers.members")}
+        cellSize="cellFitContent"
+      >
+        {({ model }) => {
+          const wrapInLink = !userCanJoin(model);
+          const count = model.attributes.membershipsCount;
+          return wrapInLink ? (
+            <NestedLink link={`/groups/${model.id}/members`}>
+              {count}
+            </NestedLink>
+          ) : (
+            count
+          );
+        }}
+      </Column>
+      <Column
+        header={t("tables.reading_groups.headers.activity")}
+        cellSize={"cellFitContent"}
+      >
+        {({ model }) => (
+          <>
+            <InlineValue
+              label={model.attributes.annotationsCount}
+              icon="interactAnnotate24"
+              srLabel={`${model.attributes.annotationsCount} ${t(
+                "glossary.annotation",
+                {
+                  count: model.attributes.annotationsCount
+                }
+              )}.`}
+            />
+            <InlineValue
+              label={model.attributes.highlightsCount}
+              icon="interactHighlight24"
+              srLabel={`${model.attributes.highlightsCount} ${t(
+                "glossary.highlight",
+                {
+                  count: model.attributes.highlightsCount
+                }
+              )}.`}
+            />
+            <InlineValue
+              label={model.attributes.commentsCount}
+              icon="interactComment24"
+              srLabel={`${model.attributes.commentsCount} ${t(
+                "glossary.comment",
+                {
+                  count: model.attributes.commentsCount
+                }
+              )}.`}
+            />
+          </>
+        )}
+      </Column>
+      {!hideActions && (
+        <Column
+          header={t("tables.reading_groups.headers.actions")}
+          cellSize={"cellFitContent"}
+        >
+          {({ model }) => (
+            <div className="table__actions">
+              <EditGroup readingGroup={model} />
+              <ArchiveGroup
+                membership={
+                  model.relationships.currentUserReadingGroupMembership
+                }
+              />
+              <LeaveGroup
+                readingGroup={model}
+                membership={
+                  model.relationships.currentUserReadingGroupMembership
+                }
+              />
+            </div>
+          )}
+        </Column>
+      )}
+    </Table>
+  );
+}
+
+GroupsTable.displayName = "ReadingGroup.Table.Groups";
+
+GroupsTable.propTypes = {
+  readingGroups: PropTypes.array.isRequired,
+  pagination: PropTypes.object.isRequired,
+  filterProps: PropTypes.object,
+  currentUser: PropTypes.object,
+  hideActions: PropTypes.bool,
+  hideTags: PropTypes.bool
+};

@@ -1,0 +1,48 @@
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import Form from "components/global/form";
+
+export default class ResourceFormKindVariantsVideo extends PureComponent {
+  static displayName = "Resource.Form.Kind.Variants.Video";
+
+  static propTypes = {
+    kind: PropTypes.string,
+    externalVideo: PropTypes.bool.isRequired
+  };
+
+  render() {
+    return (
+      <>
+        <Form.Upload
+          layout="square"
+          label="Variant #1"
+          accepts={this.props.kind}
+          readFrom="attributes[variantFormatOneFileName]"
+          name="attributes[variantFormatOne]"
+          remove="attributes[removeVariantFormatOne]"
+          {...this.props}
+        />
+        <Form.Upload
+          layout="square"
+          label="Variant #2"
+          accepts={this.props.kind}
+          readFrom="attributes[variantFormatTwoFileName]"
+          name="attributes[variantFormatTwo]"
+          remove="attributes[removeVariantFormatTwo]"
+          {...this.props}
+        />
+        {!this.props.externalVideo && (
+          <Form.Upload
+            layout="landscape"
+            label="Poster Image"
+            accepts="images"
+            readFrom="attributes[variantPosterStyles][small]"
+            name="attributes[variantPoster]"
+            remove="attributes[removeVariantPoster]"
+            {...this.props}
+          />
+        )}
+      </>
+    );
+  }
+}

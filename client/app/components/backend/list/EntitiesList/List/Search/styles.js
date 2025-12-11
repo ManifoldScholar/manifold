@@ -1,0 +1,59 @@
+import styled from "@emotion/styled";
+import {
+  utilityPrimary,
+  defaultTransitionProps,
+  unstyledSelect,
+  respond
+} from "theme/styles/mixins";
+import Utility from "components/global/utility";
+
+export const SelectLabel = styled.label`
+  ${utilityPrimary}
+  display: block;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+`;
+
+export const EmptySelectLabel = styled(SelectLabel)`
+  display: none;
+  ${respond(`display: block;`, 60)}
+`;
+
+export const Select = styled.select`
+  ${unstyledSelect}
+  ${utilityPrimary}
+  width: 100%;
+  height: 2.857em;
+  padding-right: 32px;
+  padding-left: 13px;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: var(--font-weight-regular);
+  text-overflow: ellipsis;
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: nowrap;
+  background-color: var(--select-bg-color, inherit);
+  border: 1px solid var(--color-neutral-ui-dull-light);
+  border-radius: 8px;
+  transition: border-color ${defaultTransitionProps};
+
+  &:focus-visible {
+    border-color: var(--highlight-color);
+    outline: 2px solid var(--highlight-color);
+    outline-offset: -2px;
+  }
+`;
+
+export const Icon = styled(Utility.IconComposer)`
+  position: absolute;
+  inset-block-end: calc(0.5 * 2.857em);
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  transform: translateY(50%);
+`;

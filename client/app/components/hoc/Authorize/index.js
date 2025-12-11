@@ -1,0 +1,196 @@
+import { useCallback } from "react";
+import PropTypes from "prop-types";
+import { isPlainObject } from "lodash-es";
+import { Navigate, useLocation } from "react-router";
+import Authorization from "helpers/authorization";
+import FatalErrorRender from "components/global/FatalError";
+import { useAuthentication, useNotifications } from "hooks";
+
+const authorization = new Authorization();
+
+export default function Authorize(props) {
+  const {
+    successBehavior = "show",
+    failureRedirect = null,
+    failureNotification = null,
+    children
+  } = props;
+
+  const { addNotification } = useNotifications();
+  const location = useLocation();
+  const authentication = useAuthentication();
+  const propsWithAuth = { ...props, authentication };
+
+  const isAuthenticated = authentication.authenticated;
+
+  const getRedirectPath = useCallback(
+    redirectProp => {
+      if (redirectProp === true) {
+        const pathKey = location.pathname.split("/")?.[1];
+        const availableRedirects = [
+          "projects/all",
+          "backend/dashboard",
+          "journals/all",
+          "groups"
+        ];
+        return pathKey
+          ? `/${availableRedirects.find(r => r.startsWith(pathKey))}`
+          : "/";
+      }
+
+      if (typeof redirectProp === "string") return redirectProp;
+
+      return null;
+    },
+    [location.pathname]
+  );
+
+  const renderAccessDenied = useCallback(() => {
+    const fatalError = {
+      error: {
+        status: 403,
+        method: "GET",
+        heading: "Access Denied"
+      }
+    };
+
+    const hasAnyAdminAccess = authorization.authorizeKind({
+      authentication,
+      kind: [
+        "admin",
+        "editor",
+        "marketeer",
+        "project_creator",
+        "project_editor",
+        "project_property_manager",
+        "journal_editor"
+      ]
+    });
+
+    return (
+      <FatalErrorRender
+        fatalError={fatalError}
+        headerLineOne="errors.access_denied.header"
+        headerLineTwo=""
+        userMessage={
+          failureNotification?.body ??
+          (!hasAnyAdminAccess
+            ? "errors.access_denied.no_admin_access"
+            : "errors.access_denied.authorization_admin")
+        }
+        contained
+        hideStatus
+      />
+    );
+  }, [authentication, failureNotification?.body]);
+
+  const doNotify = useCallback(
+    failureNotificationParam => {
+      let error = {
+        heading: "Access Denied.",
+        body:
+          "Please login to proceed. After logging in, you will be automatically redirected.",
+        level: 2,
+        scope: "authentication"
+      };
+      if (isPlainObject(failureNotificationParam)) {
+        error = Object.assign(error, failureNotificationParam);
+      }
+      addNotification(error);
+    },
+    [addNotification]
+  );
+
+  const redirectAndNotify = useCallback(
+    ({ redirectPath, postLoginUri, notificationContent }) => {
+      const showLoginOverlay = redirectPath !== "/login";
+      if (showLoginOverlay) doNotify(notificationContent);
+
+      const redirectWithSearch = !showLoginOverlay
+        ? `${redirectPath}?redirect_uri=${encodeURIComponent(postLoginUri)}`
+        : redirectPath;
+
+      return (
+        <Navigate
+          to={redirectWithSearch}
+          state={{
+            showLogin: showLoginOverlay,
+            postLoginRedirect: postLoginUri,
+            notificationBody: notificationContent?.body
+          }}
+        />
+      );
+    },
+    [doNotify]
+  );
+
+  const maybeRedirect = () => {
+    if (isAuthenticated) return renderAccessDenied();
+
+    const redirectPath = getRedirectPath(failureRedirect);
+    const postLoginUri = `${location.pathname}${location.search}`;
+
+    if (redirectPath) {
+      // For SSR, throw a Response object for redirect
+      if (import.meta.env.SSR) {
+        const redirectUrl = `/login?redirect_uri=${encodeURIComponent(
+          postLoginUri
+        )}`;
+
+        throw new Response(null, {
+          status: 302,
+          headers: { Location: redirectUrl }
+        });
+      }
+
+      return redirectAndNotify({
+        redirectPath,
+        postLoginUri,
+        notificationContent: failureNotification
+      });
+    }
+  };
+
+  const renderHide = () => {
+    if (authorization.authorize(propsWithAuth)) return null;
+    return <>{children}</>;
+  };
+
+  const renderShow = () => {
+    if (!authorization.authorize(propsWithAuth)) return null;
+    return <>{children}</>;
+  };
+
+  const isAuthorized = authorization.authorize(propsWithAuth);
+  if (!isAuthorized && failureRedirect) return maybeRedirect();
+
+  if (!children) return null;
+
+  if (successBehavior === "hide") return renderHide();
+  if (successBehavior === "show") return renderShow();
+
+  return null;
+}
+
+Authorize.displayName = "Authorize";
+
+Authorize.propTypes = {
+  entity: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.array
+  ]),
+  ability: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  kind: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  successBehavior: PropTypes.oneOf(["hide", "show"]),
+  failureRedirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  failureNotification: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      heading: PropTypes.string,
+      body: PropTypes.string,
+      level: PropTypes.number
+    })
+  ]),
+  children: PropTypes.node
+};

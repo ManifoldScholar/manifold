@@ -1,0 +1,30 @@
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import Form from "components/global/form";
+import { withTranslation } from "react-i18next";
+
+class ResourceFormKindImage extends PureComponent {
+  static displayName = "Resource.Form.Kind.Image";
+
+  static propTypes = {
+    t: PropTypes.func
+  };
+
+  render() {
+    return (
+      <Form.Upload
+        layout="square"
+        label={this.props.t("resources.new.image_file")}
+        accepts="images"
+        readFrom="attributes[attachmentStyles][small]"
+        name="attributes[attachment]"
+        remove="attributes[removeAttachment]"
+        altTextName={"attributes[attachmentAltText]"}
+        altTextLabel={this.props.t("resources.properties.attachment_alt_label")}
+        {...this.props}
+      />
+    );
+  }
+}
+
+export default withTranslation()(ResourceFormKindImage);

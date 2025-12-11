@@ -1,0 +1,71 @@
+import qs from "qs";
+import humps from "utils/humps";
+import { getClientIp } from "helpers/ssrRequestContext";
+
+export default class LowLevelApiClient {
+  constructor(authToken = null) {
+    this.defaultOptions = {
+      authToken,
+      params: {}
+    };
+  }
+
+  _adjustedOptions(options) {
+    return { ...this.defaultOptions, ...options };
+  }
+
+  _adjustedMethod(method) {
+    return method.toLowerCase();
+  }
+
+  _adjustedEndpoint(endpoint) {
+    const apiUrl = import.meta.env.SSR
+      ? import.meta.env.VITE_SERVER_API_URL
+      : import.meta.env.VITE_API_URL;
+    return apiUrl + endpoint;
+  }
+
+  _endpointWithParams(endpoint, params) {
+    return endpoint + "?" + qs.stringify(humps.decamelizeKeys(params));
+  }
+
+  call(rawEndpoint, rawMethod, rawOptions = {}) {
+    const method = this._adjustedMethod(rawMethod);
+    const options = this._adjustedOptions(rawOptions);
+    const endpoint = this._endpointWithParams(
+      this._adjustedEndpoint(rawEndpoint),
+      options.params
+    );
+
+    const baseHeaders = rawOptions.headers || {};
+    const clientIp = getClientIp();
+    const headers = {
+      ...baseHeaders,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${options.authToken}`,
+      "VISIT-TOKEN": options.visitToken,
+      "VISITOR-TOKEN": options.visitorToken,
+      ...(clientIp && { "X-Forwarded-For": clientIp })
+    };
+
+    const fetchConfig = {
+      method,
+      body: options.body,
+      headers,
+      signal: options.signal
+    };
+
+    const out = fetch(endpoint, fetchConfig).catch(error => {
+      return new Promise((resolve, reject) => {
+        reject({
+          response: {
+            status: 503,
+            statusText: error.name,
+            exception: error.message
+          }
+        });
+      });
+    });
+    return out;
+  }
+}
