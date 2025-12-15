@@ -13,21 +13,21 @@ class AbstractSamlProviderConfig < ApplicationConfig
   provider_name :_unused
 
   attr_config :endpoint,
+              :display_name,
+              :logo,
+              :instructions,
+              :sp_entity_id,
+              :idp_entity_id,
+              :idp_sso_service_url,
+              :idp_slo_service_url,
+              :idp_cert,
+              :idp_signing_cert,
+              :idp_encryption_cert,
+              :certificate,
+              :private_key,
+              :idp_cert_fingerprint,
               enabled: false,
               default: false,
-              display_name: "SAML",
-              logo: nil,
-              instructions: nil,
-              sp_entity_id: nil,
-              idp_entity_id: nil,
-              idp_sso_service_url: nil,
-              idp_slo_service_url: nil,
-              idp_cert: nil,
-              idp_signing_cert: nil,
-              idp_encryption_cert: nil,
-              certificate: nil,
-              private_key: nil,
-              idp_cert_fingerprint: nil,
               name_identifier_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
 
   delegate :provider_name, to: :class
@@ -49,6 +49,10 @@ class AbstractSamlProviderConfig < ApplicationConfig
 
       klass
     end
+  end
+
+  def display_name
+    super || provider_name.titleize
   end
 
   def provider_options
