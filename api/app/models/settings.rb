@@ -64,20 +64,24 @@ class Settings < ApplicationRecord
     }
   end
 
+  # Identity providers are not managed in the settings table, but from ENV
   def identity_providers
     ManifoldEnv.oauth.enabled.map do |oauth|
       {
         name: oauth.name,
+        display_name: oauth.name,
         url: "/auth/#{oauth.strategy_name}/redirect"
       }
     end + SamlConfig.providers.map do |saml|
       {
         name: saml.provider_name,
+        display_name: saml.display_name,
         url: "/auth/#{saml.provider_name}/redirect"
       }
     end
   end
 
+  # Currently only supports SAML providers
   def default_identity_provider
     SamlConfig.providers.find(&:default)&.provider_name
   end
