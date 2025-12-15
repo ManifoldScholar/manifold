@@ -28,18 +28,29 @@ export default function useListSearchParams(options = {}) {
   const setFilters = useCallback(
     newFilters => {
       setSearchParams(prev => {
+        // First, remove all non-pagination params
+        const keysToDelete = [];
+        prev.forEach((_, key) => {
+          if (!paginationKeys.includes(key)) {
+            keysToDelete.push(key);
+          }
+        });
+        keysToDelete.forEach(key => prev.delete(key));
+
+        // Reset page to 1
         prev.set("page", "1");
+
+        // Then set the new filter values
         Object.entries(newFilters).forEach(([key, value]) => {
           if (value != null && value !== "") {
             prev.set(key, String(value));
-          } else {
-            prev.delete(key);
           }
         });
+
         return prev;
       });
     },
-    [setSearchParams]
+    [setSearchParams, paginationKeys]
   );
 
   return { filters, setFilters, searchParams };
