@@ -19,7 +19,7 @@ module ManagesOauthCookie
     cookies[OAUTH_COOKIE_NAME] = {
       value: code,
       expires: 1.minute,
-      domain: :all
+      domain: cookie_domain
     }
     Rails.cache.write(auth_code_cache_key(code), user.id)
   end
@@ -31,6 +31,16 @@ module ManagesOauthCookie
   def clean_up_auth_code!(code = params[:auth_code])
     Rails.cache.delete(auth_code_cache_key(code))
     cookies.delete(OAUTH_COOKIE_NAME, domain: :all)
+  end
+
+  def cookie_domain
+    domain = Rails.application.config.manifold.domain
+
+    if Rails.env.development? && domain.include?(":")
+      domain.split(":")[0]
+    else
+      ".#{domain}"
+    end
   end
 
 end
