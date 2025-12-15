@@ -31,7 +31,7 @@ export default function OAuth() {
   const entityType = params.get("redirect_type");
   const entitySlug = params.get("redirect_id");
   let redirectPath;
-  switch(entityType) {
+  switch (entityType) {
     case "Journal":
       redirectPath = lh.link("frontendJournal", entitySlug);
       break;
