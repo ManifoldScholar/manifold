@@ -12,21 +12,16 @@ import { routerContext } from "app/contexts";
  * @throws {Response} Throws redirect Response if library mode is disabled
  */
 export default function checkLibraryMode({ request, context }) {
-  // Get settings from middleware context
   const { settings } = context.get(routerContext) ?? {};
 
-  if (!settings) {
-    return null; // Settings not loaded yet, let component handle it
-  }
-
-  const libraryDisabled = settings.attributes?.general?.libraryDisabled;
+  const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
   if (!libraryDisabled) {
     return null;
   }
 
   const url = new URL(request.url);
   const isHome = url.pathname === "/";
-  const { general } = settings.attributes;
+  const { general } = settings?.attributes;
 
   const redirectUrl =
     isHome && general.homeRedirectUrl

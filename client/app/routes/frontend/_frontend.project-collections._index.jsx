@@ -2,8 +2,8 @@ import { useLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
 import { ApiClient, projectCollectionsAPI } from "api";
 import { routerContext } from "app/contexts";
-import checkLibraryMode from "helpers/router/loaders/checkLibraryMode";
-import createListClientLoader from "helpers/router/loaders/createListClientLoader";
+import checkLibraryMode from "app/routes/utility/checkLibraryMode";
+import createListClientLoader from "app/routes/utility/createListClientLoader";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
@@ -11,7 +11,7 @@ import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
 import { useListFilters, useListSearchParams } from "hooks";
 
-export { shouldRevalidate } from "helpers/router/shouldRevalidate";
+export { shouldRevalidate } from "app/routes/utility/shouldRevalidate";
 
 const FILTER_RESET = { visible: "true", order: "position ASC" };
 const PAGINATION_KEYS = ["page", "perPage", "collectionPage", "collectionSize"];
@@ -62,29 +62,17 @@ export const loader = async ({ request, context }) => {
     projectCollectionsAPI.index(filters, pagination)
   );
 
-  return {
-    projectCollections: result ?? [],
-    collectionsMeta: result?.meta ?? null
-  };
+  return { data: result ?? [], meta: result?.meta ?? null };
 };
 
 export const clientLoader = createListClientLoader(
   "__projectCollectionsHydrated",
-  async (filters, pagination) => {
-    const client = new ApiClient(null, { denormalize: true });
-    const result = await client.call(
-      projectCollectionsAPI.index(filters, pagination)
-    );
-    return {
-      projectCollections: result ?? [],
-      collectionsMeta: result?.meta ?? null
-    };
-  },
+  projectCollectionsAPI.index,
   parseParams
 );
 
 export default function ProjectCollectionsRoute() {
-  const { projectCollections, collectionsMeta } = useLoaderData();
+  const { data: projectCollections, meta } = useLoaderData();
   const { t } = useTranslation();
 
   const { filters, setFilters } = useListSearchParams({
@@ -115,7 +103,7 @@ export default function ProjectCollectionsRoute() {
       ) : (
         <EntityCollection.ProjectCollections
           projectCollections={projectCollections}
-          meta={collectionsMeta}
+          meta={meta}
           filterProps={filterProps}
           bgColor="neutral05"
           className="flex-grow"

@@ -2,16 +2,16 @@ import { useLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
 import { ApiClient, journalIssuesAPI } from "api";
 import { routerContext } from "app/contexts";
-import checkLibraryMode from "helpers/router/loaders/checkLibraryMode";
-import parseListParams from "helpers/router/loaders/parseListParams";
-import createListClientLoader from "helpers/router/loaders/createListClientLoader";
+import checkLibraryMode from "app/routes/utility/checkLibraryMode";
+import parseListParams from "app/routes/utility/parseListParams";
+import createListClientLoader from "app/routes/utility/createListClientLoader";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
 import { useListFilters, useJournalSubjects, useListSearchParams } from "hooks";
 
-export { shouldRevalidate } from "helpers/router/shouldRevalidate";
+export { shouldRevalidate } from "app/routes/utility/shouldRevalidate";
 
 const FILTER_RESET = {
   standaloneModeEnforced: "false",
@@ -32,26 +32,17 @@ export const loader = async ({ request, context }) => {
 
   const result = await client.call(journalIssuesAPI.index(filters, pagination));
 
-  return {
-    issues: result ?? [],
-    issuesMeta: result?.meta ?? null
-  };
+  return { data: result ?? [], meta: result?.meta ?? null };
 };
 
 export const clientLoader = createListClientLoader(
   "__issuesHydrated",
-  async (filters, pagination) => {
-    const client = new ApiClient(null, { denormalize: true });
-    const result = await client.call(
-      journalIssuesAPI.index(filters, pagination)
-    );
-    return { issues: result ?? [], issuesMeta: result?.meta ?? null };
-  },
+  journalIssuesAPI.index,
   parseParams
 );
 
 export default function IssuesRoute() {
-  const { issues, issuesMeta } = useLoaderData();
+  const { data: issues, meta } = useLoaderData();
   const subjects = useJournalSubjects();
   const { t } = useTranslation();
 
@@ -84,7 +75,7 @@ export default function IssuesRoute() {
         <EntityCollection.Issues
           title={t("pages.issues_all")}
           issues={issues}
-          issuesMeta={issuesMeta}
+          meta={meta}
           filterProps={filterProps}
           bgColor="neutral05"
           className="flex-grow"

@@ -6,7 +6,7 @@ import {
   featuresAPI
 } from "api";
 import { routerContext } from "app/contexts";
-import checkLibraryMode from "helpers/router/loaders/checkLibraryMode";
+import checkLibraryMode from "app/routes/utility/checkLibraryMode";
 import Content from "frontend/containers/Home/Content";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import HeadContent from "global/components/HeadContent";

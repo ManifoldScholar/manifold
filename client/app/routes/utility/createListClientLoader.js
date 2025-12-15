@@ -1,3 +1,6 @@
+import cookie from "js-cookie";
+import { ApiClient } from "api";
+
 /**
  * Creates a clientLoader for list routes with filters and pagination.
  *
@@ -27,8 +30,12 @@ export default function createListClientLoader(
       return serverLoader();
     }
 
+    const authToken = cookie.get("authToken");
+    const client = new ApiClient(authToken, { denormalize: true });
+
     // Client-side fetch for filter/pagination changes
-    return fetchFn(filters, pagination);
+    const result = await client.call(fetchFn(filters, pagination));
+    return { data: result ?? [], meta: result.meta ?? null };
   };
 
   clientLoader.hydrate = true;

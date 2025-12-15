@@ -2,16 +2,16 @@ import { useLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
 import { ApiClient, projectsAPI } from "api";
 import { routerContext } from "app/contexts";
-import checkLibraryMode from "helpers/router/loaders/checkLibraryMode";
-import parseListParams from "helpers/router/loaders/parseListParams";
-import createListClientLoader from "helpers/router/loaders/createListClientLoader";
+import checkLibraryMode from "app/routes/utility/checkLibraryMode";
+import parseListParams from "app/routes/utility/parseListParams";
+import createListClientLoader from "app/routes/utility/createListClientLoader";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
 import { useListFilters, useSubjects, useListSearchParams } from "hooks";
 
-export { shouldRevalidate } from "helpers/router/shouldRevalidate";
+export { shouldRevalidate } from "app/routes/utility/shouldRevalidate";
 
 const FILTER_RESET = { standaloneModeEnforced: "false" };
 
@@ -29,24 +29,17 @@ export const loader = async ({ request, context }) => {
 
   const result = await client.call(projectsAPI.index(filters, pagination));
 
-  return {
-    projects: result ?? [],
-    projectsMeta: result?.meta ?? null
-  };
+  return { data: result ?? [], meta: result?.meta ?? null };
 };
 
 export const clientLoader = createListClientLoader(
   "__projectsHydrated",
-  async (filters, pagination) => {
-    const client = new ApiClient(null, { denormalize: true });
-    const result = await client.call(projectsAPI.index(filters, pagination));
-    return { projects: result ?? [], projectsMeta: result?.meta ?? null };
-  },
+  projectsAPI.index,
   parseParams
 );
 
 export default function ProjectsRoute() {
-  const { projects, projectsMeta } = useLoaderData();
+  const { data: projects, meta } = useLoaderData();
   const subjects = useSubjects();
   const { t } = useTranslation();
 
@@ -79,7 +72,7 @@ export default function ProjectsRoute() {
       ) : (
         <EntityCollection.Projects
           projects={projects}
-          meta={projectsMeta}
+          meta={meta}
           filterProps={filterProps}
           bgColor="neutral05"
           className="flex-grow"
