@@ -19,7 +19,7 @@ class AbstractSamlProviderConfig < ApplicationConfig
               :sp_entity_id,
               :idp_entity_id,
               :idp_sso_service_url,
-              :idp_slo_service_url,
+              :idp_slo_service_url, # Not currently used
               :idp_cert,
               :idp_signing_cert,
               :idp_encryption_cert,
@@ -27,8 +27,14 @@ class AbstractSamlProviderConfig < ApplicationConfig
               :private_key,
               :idp_cert_fingerprint,
               enabled: false,
+              hidden: false,
               default: false,
+              metadata_signed: true,
+              authn_requests_signed: true,
+              want_assertions_signed: true,
               name_identifier_format: "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"
+
+  coerce_types enabled: :boolean, hidden: :boolean, default: :boolean
 
   delegate :provider_name, to: :class
 
@@ -55,6 +61,10 @@ class AbstractSamlProviderConfig < ApplicationConfig
     super || provider_name.titleize
   end
 
+  def show?
+    enabled? && !hidden?
+  end
+
   def provider_options
     to_h
     .merge(security_options)
@@ -73,9 +83,9 @@ class AbstractSamlProviderConfig < ApplicationConfig
   def security_options
     {
       security: {
-        metadata_signed: true,
-        authn_requests_signed: true,
-        want_assertions_signed: true,
+        metadata_signed:,
+        authn_requests_signed:,
+        want_assertions_signed:,
         digest_method: XMLSecurity::Document::SHA256,
         signature_method: XMLSecurity::Document::RSA_SHA256
       }
