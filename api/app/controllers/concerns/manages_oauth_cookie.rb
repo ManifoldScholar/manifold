@@ -42,5 +42,4 @@ module ManagesOauthCookie
       ".#{domain}"
     end
   end
-
 end

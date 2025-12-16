@@ -13,5 +13,4 @@ class UserGroupMembership < ApplicationRecord
   def name
     "#{user_group.name} membership for #{user.name}"
   end
-
 end

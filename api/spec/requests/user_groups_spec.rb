@@ -59,7 +59,6 @@ RSpec.describe "UserGroup API", type: :request do
           end
         end
       end
-
     end
   end
 
@@ -95,7 +94,6 @@ RSpec.describe "UserGroup API", type: :request do
 
         expect(response).to have_http_status :ok
       end
-
     end
 
     describe "DELETE" do

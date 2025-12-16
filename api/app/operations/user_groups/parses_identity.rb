@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UserGroups
   module ParsesIdentity
     extend ActiveSupport::Concern

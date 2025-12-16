@@ -5,8 +5,8 @@ module Entitlements
   class Create < AbstractCreate
     object :entitling_entity, class: "ProvidesEntitlements"
 
-    record :subject_url, class: "GlobalID", finder: :new, default: -> { }
-    object :subject, class: "Entitleable", default: -> { }
+    record :subject_url, class: "GlobalID", finder: :new, default: -> {}
+    object :subject, class: "Entitleable", default: -> {}
 
     validate :find_entitler!
     validate :find_subject!
