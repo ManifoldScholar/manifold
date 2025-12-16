@@ -1,72 +1,51 @@
-import React, { Component } from "react";
+import { useId } from "react";
 import PropTypes from "prop-types";
 import isArray from "lodash/isArray";
-import { UIDConsumer } from "react-uid";
 import BaseInput from "./BaseInput";
 
-export default class FormTextInput extends Component {
-  static displayName = "Form.TextInput";
+export default function FormTextInput({
+  password = false,
+  inputType,
+  join = array => array.join(", "),
+  hideValue,
+  ...rest
+}) {
+  const id = useId();
 
-  static propTypes = {
-    placeholder: PropTypes.string,
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    label: PropTypes.string,
-    name: PropTypes.string,
-    onChange: PropTypes.func,
-    afterChange: PropTypes.func,
-    value: PropTypes.any,
-    focusOnMount: PropTypes.bool,
-    errors: PropTypes.array,
-    password: PropTypes.bool,
-    join: PropTypes.func,
-    wide: PropTypes.bool,
-    disabled: PropTypes.bool,
-    buttons: PropTypes.array,
-    hideValue: PropTypes.func
-  };
-
-  static defaultProps = {
-    focusOnMount: false,
-    password: false,
-    join: array => array.join(", ")
-  };
-
-  get idPrefix() {
-    return "text-input";
-  }
-
-  get idForErrorPrefix() {
-    return "text-input-error";
-  }
-
-  get idForInstructionsPrefix() {
-    return "text-input-instructions";
-  }
-
-  renderValue = value => {
+  const renderValue = value => {
     if (!value) return "";
-    if (this.props.hideValue) return this.props.hideValue(value) ? "" : value;
+    if (hideValue) return hideValue(value) ? "" : value;
     if (!isArray(value)) return value;
-    return this.props.join(value);
+    return join(value);
   };
 
-  render() {
-    const inputType =
-      this.props.inputType ?? (this.props.password ? "password" : "text");
+  const resolvedInputType = inputType ?? (password ? "password" : "text");
 
-    return (
-      <UIDConsumer>
-        {id => (
-          <BaseInput
-            id={`${this.idPrefix}-${id}`}
-            idForError={`${this.idForErrorPrefix}-${id}`}
-            idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
-            inputType={inputType}
-            renderValue={this.renderValue}
-            {...this.props}
-          />
-        )}
-      </UIDConsumer>
-    );
-  }
+  return (
+    <BaseInput
+      id={`text-input-${id}`}
+      idForError={`text-input-error-${id}`}
+      idForInstructions={`text-input-instructions-${id}`}
+      inputType={resolvedInputType}
+      renderValue={renderValue}
+      {...rest}
+    />
+  );
 }
+
+FormTextInput.displayName = "Form.TextInput";
+
+FormTextInput.propTypes = {
+  placeholder: PropTypes.string,
+  instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  label: PropTypes.string,
+  name: PropTypes.string,
+  focusOnMount: PropTypes.bool,
+  password: PropTypes.bool,
+  inputType: PropTypes.string,
+  join: PropTypes.func,
+  wide: PropTypes.bool,
+  disabled: PropTypes.bool,
+  buttons: PropTypes.array,
+  hideValue: PropTypes.func
+};
