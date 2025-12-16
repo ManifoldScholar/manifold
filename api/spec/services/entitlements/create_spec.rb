@@ -16,7 +16,6 @@ RSpec.describe Entitlements::Create, interaction: true do
   let_input!(:target_url) { target_user.to_gid.to_s }
 
   context "for a project" do
-
     context "when providing read_access" do
       let(:read_access) { true }
 
@@ -26,10 +25,6 @@ RSpec.describe Entitlements::Create, interaction: true do
             e.to change(Entitlement, :count).and change { target_user.reload.has_role?(:read_access, entitled_subject) }
           end
         end
-      end
-
-      context "with subject_url" do
-
       end
 
       context "with subject passed as an object" do

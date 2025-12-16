@@ -11,7 +11,7 @@ RSpec.describe "Oauth", type: :request do
   let!(:user_group_external_identifier) { FactoryBot.create(:external_identifier, identifiable: user_group) }
   let!(:entitleable_external_identifier) { FactoryBot.create(:external_identifier, identifiable: entitleable) }
 
-  let(:provider) { }
+  let(:provider) { raise "provider must be defined" }
 
   let(:auth_hash) do
     {
@@ -43,7 +43,6 @@ RSpec.describe "Oauth", type: :request do
     end
 
     describe "/auth/:provider/callback" do
-
       describe "the response" do
         it "responds with a redirect" do
           post "/auth/google_oauth2"
@@ -62,7 +61,6 @@ RSpec.describe "Oauth", type: :request do
       end
 
       context "with entitlements defined" do
-
         it "creates entitlements" do
           expect do
             post "/auth/google_oauth2"
@@ -82,6 +80,7 @@ RSpec.describe "Oauth", type: :request do
             before do
               OmniAuth.config.mock_auth[provider][:info][:user_groups] = nil
             end
+
             it "removes the user group membership" do
               expect do
                 post "/auth/google_oauth2"
@@ -98,13 +97,14 @@ RSpec.describe "Oauth", type: :request do
                               target: user,
                               entitler: identity.to_upsertable_entitler,
                               subject: entitleable
-                              )
+                             )
           end
 
           context "and an OAuth request that does NOT include the entitleable" do
             before do
               OmniAuth.config.mock_auth[provider][:info][:entitlements] = nil
             end
+
             it "removes the entitlement" do
               expect do
                 post "/auth/google_oauth2"
@@ -132,7 +132,7 @@ RSpec.describe "Oauth", type: :request do
       expect do
         post "/auth/saml"
         follow_redirect!
-      end.to change { Identity.count }.by(1)
+      end.to change(Identity, :count).by(1)
     end
   end
 end
