@@ -9,7 +9,6 @@ module UserGroups
 
     include UserGroups::ParsesIdentity
 
-
     # @param [User] user
     # @return [Dry::Monads::Result]
     def call(user_group, user_or_identity)
@@ -18,7 +17,5 @@ module UserGroups
 
       return Success(membership)
     end
-
-
   end
 end
