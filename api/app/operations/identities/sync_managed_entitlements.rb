@@ -61,7 +61,7 @@ module Identities
 
     def existing_identifiers
       @existing_identifiers ||= existing_entitlements.map do |entitlement|
-        entitlement.target.external_identifier
+        entitlement.subject.external_identifier&.identifier
       end.compact
     end
 
