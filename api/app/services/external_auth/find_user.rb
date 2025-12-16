@@ -20,7 +20,7 @@ module ExternalAuth
     # @return [User]
     def find_user
       if identity.new_record?
-        compose ExternalAuth::UpsertUser, **inputs.merge(identity: identity)
+        compose ExternalAuth::UpsertUser, **inputs, identity: identity
       else
         identity.user
       end

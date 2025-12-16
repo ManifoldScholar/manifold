@@ -5,10 +5,8 @@ module SettingSections
   #
   # @see Settings
   class Authentication < Base
-
     attribute :identity_providers, :string
     attribute :default_identity_provider, :string
     attribute :show_local_login, :boolean, default: true
-
   end
 end

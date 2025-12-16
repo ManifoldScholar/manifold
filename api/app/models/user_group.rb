@@ -6,8 +6,8 @@ class UserGroup < ApplicationRecord
   include Filterable
   include ExternallyIdentifiable
 
-  has_many :memberships, class_name: "UserGroupMembership", inverse_of: :user_group
-  has_many :entitleables, class_name: "UserGroupEntitleable", inverse_of: :user_group
+  has_many :memberships, class_name: "UserGroupMembership", inverse_of: :user_group, dependent: :destroy
+  has_many :entitleables, class_name: "UserGroupEntitleable", inverse_of: :user_group, dependent: :destroy
 
   has_many :users, through: :memberships
 
