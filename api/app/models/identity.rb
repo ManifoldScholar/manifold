@@ -7,7 +7,7 @@ class Identity < ApplicationRecord
 
   belongs_to :user, optional: false, inverse_of: :identities
 
-  has_many :user_group_memberships, as: :source
+  has_many :user_group_memberships, as: :source, dependent: :destroy
 
   validates :provider, inclusion: { in: ->(_) { (ManifoldEnv.oauth.known_strategies + SamlConfig.provider_names) } }
   validates :uid, :provider, presence: true
