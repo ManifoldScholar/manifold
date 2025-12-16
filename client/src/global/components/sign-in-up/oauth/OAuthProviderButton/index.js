@@ -10,7 +10,7 @@ export default function OAuthProviderButton({ provider, icon }) {
   return (
     <Styled.Button
       className="button-secondary button-secondary--dark"
-      href={`${config.services.api}${provider.url}`}
+      href={provider.url}
     >
       <IconComposer icon={icon} size={26} className="button-secondary__icon" />
       <span className="button-secondary__text">
