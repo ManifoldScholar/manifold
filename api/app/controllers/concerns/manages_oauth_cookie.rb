@@ -36,7 +36,7 @@ module ManagesOauthCookie
   def cookie_domain
     domain = Rails.application.config.manifold.domain
 
-    if Rails.env.development? && domain.include?(":")
+    if (Rails.env.development? || Rails.env.test?) && domain.include?(":")
       domain.split(":")[0]
     else
       ".#{domain}"
