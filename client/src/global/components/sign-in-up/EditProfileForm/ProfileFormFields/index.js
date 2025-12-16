@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import PropTypes from "prop-types";

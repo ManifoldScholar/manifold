@@ -174,7 +174,7 @@ export default function FormContainer({
         ref={formRef}
         style={style}
         onSubmit={handleSubmit}
-        className={className.replace("form-secondary", "")}
+        className={className}
         data-id="submit"
       >
         <FormContext.Provider value={contextValue}>

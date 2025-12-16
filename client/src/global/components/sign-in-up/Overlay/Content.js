@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import Utility from "global/components/utility";
 import CloseButton from "global/components/Overlay/Close";
 import Interface from "../Interface";

@@ -1,11 +1,15 @@
-import React, { useCallback, useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { meAPI } from "api";
-import lh from "helpers/linkHandler";
+import { useFetcher } from "react-router";
 import ProfileFormFields from "./ProfileFormFields";
 import Greeting from "./Greeting";
-import { useNavigate } from "react-router-dom";
-import { useCurrentUser, useSettings, useNotification } from "hooks";
+import { useNavigate } from "react-router";
+import {
+  useCurrentUser,
+  useSettings,
+  useNotification,
+  useRevalidate
+} from "hooks";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "frontend/components/privacy/CookiesForm/CookiesFormFields";
 import Form from "global/components/form";
@@ -17,6 +21,8 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const settings = useSettings();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const fetcher = useFetcher();
+  const revalidate = useRevalidate();
 
   const [cookiePrefs, setCookiePrefs] = useState({
     manifold: "yes",
@@ -35,49 +41,44 @@ export default function EditProfileForm({ hideOverlay, mode }) {
     expiration: 3000
   }));
 
-  const formatAttributes = useCallback(
-    data => {
-      const consentAttrs =
-        mode === "new"
-          ? {
-              consentManifoldAnalytics: !manifoldAnalyticsEnabled
-                ? null
-                : cookiePrefs.manifold === "yes",
-              consentGoogleAnalytics: !googleAnalyticsEnabled
-                ? null
-                : cookiePrefs.google === "yes"
-            }
-          : {};
-      return {
-        ...consentAttrs,
-        ...data.attributes
-      };
-    },
-    [mode, cookiePrefs, manifoldAnalyticsEnabled, googleAnalyticsEnabled]
-  );
+  const formatAttributes = data => {
+    const consentAttrs =
+      mode === "new"
+        ? {
+            consentManifoldAnalytics: !manifoldAnalyticsEnabled
+              ? null
+              : cookiePrefs.manifold === "yes",
+            consentGoogleAnalytics: !googleAnalyticsEnabled
+              ? null
+              : cookiePrefs.google === "yes"
+          }
+        : {};
+    return {
+      ...consentAttrs,
+      ...data.attributes
+    };
+  };
 
-  const updateUser = useCallback((_, data) => {
-    return meAPI.update(data);
-  }, []);
+  useEffect(() => {
+    if (fetcher.data?.success) {
+      notifyUpdate();
+      revalidate();
+      if (hideOverlay) hideOverlay();
+    }
+  }, [fetcher.data, notifyUpdate, revalidate, hideOverlay]);
 
-  const onSuccess = useCallback(() => {
-    notifyUpdate();
+  const redirect = path => () => {
     if (hideOverlay) hideOverlay();
-  }, [notifyUpdate, hideOverlay]);
-
-  const redirect = route => () => {
-    if (hideOverlay) hideOverlay();
-    navigate(lh.link(route));
+    navigate(path);
   };
 
   return currentUser ? (
     <div>
       <SharedStyles.Form
         model={currentUser}
-        name="global-authenticated-user-update"
-        onSuccess={onSuccess}
+        fetcher={fetcher}
+        action="/actions/update-profile"
         formatData={formatAttributes}
-        update={updateUser}
       >
         <Greeting
           mode={mode}
@@ -89,6 +90,13 @@ export default function EditProfileForm({ hideOverlay, mode }) {
         <h2 className="screen-reader-text">
           {t("forms.signin_overlay.update_sr_title")}
         </h2>
+        <Form.InputError
+          errors={
+            fetcher.data?.errors && fetcher.state !== "loading"
+              ? fetcher.data.errors
+              : []
+          }
+        />
         <Form.FieldGroup>
           <ProfileFormFields mode={mode} />
         </Form.FieldGroup>

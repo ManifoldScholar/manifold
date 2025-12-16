@@ -1,4 +1,3 @@
-import React from "react";
 import OAuthMonitor from "../OAuthMonitor";
 import { useSettings } from "hooks";
 import OAuthProviderButton from "../OAuthProviderButton";

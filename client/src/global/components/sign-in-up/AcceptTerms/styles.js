@@ -12,6 +12,7 @@ export const TextBlock = styled.p`
 
 export const Button = styled.button`
   width: 100%;
+  color: var(--color-neutral-text-extra-dark);
 
   &:disabled {
     color: var(--color-neutral-ui-dull-light);

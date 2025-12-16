@@ -1,15 +1,14 @@
-import React, { useRef, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { passwordsAPI } from "api";
+import { useFetcher } from "react-router";
 import Form from "global/components/form";
 import { useNotification } from "hooks";
 import * as SharedStyles from "../styles";
 
 export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const { t } = useTranslation();
-
-  const emailRef = useRef("");
+  const fetcher = useFetcher();
 
   const notifySuccess = useNotification(email => ({
     level: 0,
@@ -21,21 +20,21 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   }));
 
   const formatData = useCallback(data => {
-    emailRef.current = data.email;
     return data.email;
   }, []);
 
-  const onSuccess = useCallback(() => {
-    notifySuccess(emailRef.current ?? "your email");
-    if (hideOverlay) hideOverlay();
-  }, [hideOverlay, notifySuccess]);
+  useEffect(() => {
+    if (fetcher.data?.success) {
+      notifySuccess(fetcher.data.email || "your email");
+      if (hideOverlay) hideOverlay();
+    }
+  }, [fetcher.data, hideOverlay, notifySuccess]);
 
   return (
     <div>
       <SharedStyles.Form
-        name="global-password-request"
-        create={passwordsAPI.create}
-        onSuccess={onSuccess}
+        fetcher={fetcher}
+        action="/actions/forgot-password"
         formatData={formatData}
       >
         <Form.Header
@@ -51,6 +50,13 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
           aria-describedby="password-forgot-email-error"
           label={t("forms.signin_overlay.email")}
           autoComplete="email"
+        />
+        <Form.InputError
+          errors={
+            fetcher.data?.errors && fetcher.state !== "loading"
+              ? fetcher.data.errors
+              : []
+          }
         />
         <input
           className="button-secondary button-secondary--with-room"

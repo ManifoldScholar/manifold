@@ -26,6 +26,18 @@ type Pages = {
   "/issues": {
     params: {};
   };
+  "/actions/forgot-password": {
+    params: {};
+  };
+  "/actions/update-profile": {
+    params: {};
+  };
+  "/actions/signup": {
+    params: {};
+  };
+  "/actions/login": {
+    params: {};
+  };
   "/*": {
     params: {
       "*": string;
@@ -62,6 +74,22 @@ type RouteFiles = {
     id: "routes/frontend/_frontend._index";
     page: "/";
   };
+  "routes/global/_global.actions.forgot-password.jsx": {
+    id: "routes/global/_global.actions.forgot-password";
+    page: "/actions/forgot-password";
+  };
+  "routes/global/_global.actions.update-profile.jsx": {
+    id: "routes/global/_global.actions.update-profile";
+    page: "/actions/update-profile";
+  };
+  "routes/global/_global.actions.signup.jsx": {
+    id: "routes/global/_global.actions.signup";
+    page: "/actions/signup";
+  };
+  "routes/global/_global.actions.login.jsx": {
+    id: "routes/global/_global.actions.login";
+    page: "/actions/login";
+  };
   "routes/$.jsx": {
     id: "routes/$";
     page: "/*";
@@ -76,5 +104,9 @@ type RouteModules = {
   "routes/frontend/_frontend.projects._index": typeof import("./app/routes/frontend/_frontend.projects._index.jsx");
   "routes/frontend/_frontend.issues._index": typeof import("./app/routes/frontend/_frontend.issues._index.jsx");
   "routes/frontend/_frontend._index": typeof import("./app/routes/frontend/_frontend._index.jsx");
+  "routes/global/_global.actions.forgot-password": typeof import("./app/routes/global/_global.actions.forgot-password.jsx");
+  "routes/global/_global.actions.update-profile": typeof import("./app/routes/global/_global.actions.update-profile.jsx");
+  "routes/global/_global.actions.signup": typeof import("./app/routes/global/_global.actions.signup.jsx");
+  "routes/global/_global.actions.login": typeof import("./app/routes/global/_global.actions.login.jsx");
   "routes/$": typeof import("./app/routes/$.jsx");
 };

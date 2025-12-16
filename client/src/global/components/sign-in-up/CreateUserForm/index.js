@@ -1,11 +1,12 @@
-import { useRef, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { usersAPI, tokensAPI } from "api";
+import { useFetcher } from "react-router";
+import { tokensAPI } from "api";
 import { useCurrentUser, usePages, useRevalidate } from "hooks";
 import CreateFormFields from "./CreateFormFields";
 import Form from "global/components/form";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import BrowserCookieHelper from "helpers/cookie/Browser";
 import * as SharedStyles from "../styles";
 
@@ -17,6 +18,7 @@ export default function CreateUserForm({
   redirectToHomeOnSignup
 }) {
   const { t } = useTranslation();
+  const fetcher = useFetcher();
   const navigate = useNavigate();
   const location = useLocation();
   const currentUser = useCurrentUser();
@@ -24,39 +26,12 @@ export default function CreateUserForm({
   const pages = usePages();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  const emailRef = useRef();
-  const passwordRef = useRef();
-
-  const authenticateUser = useCallback(
-    async (email, password) => {
-      setIsAuthenticating(true);
-      try {
-        const response = await tokensAPI.createToken(email, password);
-        const authToken = response?.meta?.authToken;
-        if (authToken) {
-          cookie.write("authToken", authToken);
-          revalidate();
-        }
-      } catch {
-        // If login fails after account creation, still trigger revalidation
-        // The user account was created successfully
-        revalidate();
-      } finally {
-        setIsAuthenticating(false);
-      }
-    },
-    [revalidate]
-  );
-
   const termsPage = pages?.find(
     p => p.attributes.purpose === "terms_and_conditions"
   );
 
-  const formatAttributes = data => {
+  const formatData = data => {
     const { attributes } = data;
-    emailRef.current = attributes?.email;
-    passwordRef.current = attributes?.password;
-
     return {
       attributes: termsPage
         ? {
@@ -67,9 +42,35 @@ export default function CreateUserForm({
     };
   };
 
-  const onSuccess = useCallback(() => {
-    authenticateUser(emailRef.current, passwordRef.current);
-  }, [authenticateUser]);
+  useEffect(() => {
+    if (
+      fetcher.data?.success &&
+      fetcher.data?.email &&
+      fetcher.data?.password
+    ) {
+      const authenticateUser = async () => {
+        setIsAuthenticating(true);
+        try {
+          const response = await tokensAPI.createToken(
+            fetcher.data.email,
+            fetcher.data.password
+          );
+          const authToken = response?.meta?.authToken;
+          if (authToken) {
+            cookie.write("authToken", authToken);
+            revalidate();
+          }
+        } catch {
+          // If login fails after account creation, still trigger revalidation
+          // The user account was created successfully
+          revalidate();
+        } finally {
+          setIsAuthenticating(false);
+        }
+      };
+      authenticateUser();
+    }
+  }, [fetcher.data, revalidate]);
 
   useEffect(() => {
     if (currentUser && !isAuthenticating) {
@@ -95,16 +96,22 @@ export default function CreateUserForm({
   return (
     <>
       <SharedStyles.Form
-        name="global-create-user"
-        create={usersAPI.create}
-        formatData={formatAttributes}
-        onSuccess={onSuccess}
+        fetcher={fetcher}
+        action="/actions/signup"
+        formatData={formatData}
       >
         <Form.Header
           label={t("forms.signin_overlay.create_account")}
           styleType="primary"
         />
         <CreateFormFields />
+        <Form.InputError
+          errors={
+            fetcher.data?.errors && fetcher.state !== "loading"
+              ? fetcher.data.errors
+              : []
+          }
+        />
         <input
           className="button-secondary"
           type="submit"

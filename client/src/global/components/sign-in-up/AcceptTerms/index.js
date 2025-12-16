@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import AcceptTermsCheckbox from "./AcceptTermsCheckbox";
 import { useSettings, usePages } from "hooks";

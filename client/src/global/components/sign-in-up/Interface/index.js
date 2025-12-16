@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ForgotPassword from "../ForgotPasswordForm";
 import Login from "../LoginForm";
 import Logout from "../Logout";
@@ -6,7 +6,7 @@ import Update from "../EditProfileForm";
 import Create from "../CreateUserForm";
 import Terms from "../AcceptTerms";
 import { useAuthentication } from "hooks";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import PropTypes from "prop-types";
 
 const VIEW_COMPONENT = {

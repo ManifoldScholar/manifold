@@ -1,4 +1,4 @@
-import React, { useId, useCallback } from "react";
+import { useId, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { FocusTrap } from "focus-trap-react";
 import TrapContent from "./Content";

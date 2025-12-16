@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useFetcher } from "react-router";
 import Notifications from "global/containers/Notifications";
 import Form from "global/components/form";
-import { tokensAPI } from "api";
 import { useRevalidate } from "hooks";
 import BrowserCookieHelper from "helpers/cookie/Browser";
 import * as Styled from "./styles";
@@ -11,54 +11,26 @@ import * as SharedStyles from "../styles";
 
 const cookie = new BrowserCookieHelper();
 
-const getErrorMessage = status => {
-  switch (status) {
-    case 502:
-    case 500:
-      return "The server was unreachable, or unable to fulfill your request.";
-    default:
-      return "The username or password you entered is incorrect";
-  }
-};
-
 export default function LoginForm({
   handleViewChange,
   hideOverlay,
   willRedirect
 }) {
   const { t } = useTranslation();
+  const fetcher = useFetcher();
   const revalidate = useRevalidate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const formatData = data => {
-    setError(null);
-    setIsLoading(true);
     return { email: data.email, password: data.password };
   };
 
-  const onSuccess = useCallback(
-    (_, res) => {
-      setIsLoading(false);
-
-      const { authToken } = res.meta ?? {};
-      if (!authToken) {
-        setError(getErrorMessage(500));
-        return;
-      }
-
-      // Set cookie and trigger revalidation
-      cookie.write("authToken", authToken);
+  useEffect(() => {
+    if (fetcher.data?.authToken) {
+      cookie.write("authToken", fetcher.data.authToken);
       revalidate();
       if (hideOverlay) hideOverlay();
-    },
-    [hideOverlay, revalidate]
-  );
-
-  const onError = useCallback(err => {
-    setIsLoading(false);
-    setError(getErrorMessage(err.status));
-  }, []);
+    }
+  }, [fetcher.data, hideOverlay, revalidate]);
 
   return (
     <div>
@@ -74,10 +46,8 @@ export default function LoginForm({
       )}
       <div>
         <SharedStyles.Form
-          name="global-login"
-          create={tokensAPI.loginForm}
-          onSuccess={onSuccess}
-          onError={onError}
+          fetcher={fetcher}
+          action="/actions/login"
           formatData={formatData}
         >
           <>
@@ -108,7 +78,11 @@ export default function LoginForm({
               />
             </Form.FieldGroup>
             <Form.InputError
-              errors={error && !isLoading ? [{ detail: error }] : []}
+              errors={
+                fetcher.data?.error && fetcher.state !== "loading"
+                  ? [{ detail: fetcher.data.error }]
+                  : []
+              }
             />
             <input
               type="submit"

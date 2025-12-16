@@ -1,20 +1,16 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
-import { entityStoreActions } from "actions";
-import { useUID } from "react-uid";
+import { useCallback } from "react";
+import cookie from "js-cookie";
+import { ApiClient } from "api";
 
-export default function useApiCallback(apiMethod, options = {}) {
-  const dispatch = useDispatch();
-  const [requestKey] = useState(`fetch_${useUID()}`);
-
+export default function useApiCallback(apiMethod, ignoredOptions = {}) {
   const triggerCall = useCallback(
     (...args) => {
+      const authToken = cookie.get("authToken");
+      const client = new ApiClient(authToken, { denormalize: true });
       const call = apiMethod(...args);
-      const action = entityStoreActions.request(call, requestKey, options);
-      const { promise } = dispatch(action);
-      return promise;
+      return client.call(call);
     },
-    [apiMethod, dispatch, options, requestKey]
+    [apiMethod]
   );
 
   return triggerCall;
