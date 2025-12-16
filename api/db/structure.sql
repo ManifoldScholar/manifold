@@ -1,4 +1,4 @@
-\restrict VAKNlqGtawRowvnd9h6b28IKcH7r6DvHKKsLPyo8WGJiejpnjjWEQ7yvbGpRls2
+\restrict LcvJA9Y9VwBag7avfhwgM2QpJoUvi5JIl4SoT3kO0Vy4AjcIeYHgFRgAaeagWyd
 
 -- Dumped from database version 13.22
 -- Dumped by pg_dump version 13.22 (Debian 13.22-1.pgdg11+1)
@@ -7952,7 +7952,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 -- PostgreSQL database dump complete
 --
 
-\unrestrict VAKNlqGtawRowvnd9h6b28IKcH7r6DvHKKsLPyo8WGJiejpnjjWEQ7yvbGpRls2
+\unrestrict LcvJA9Y9VwBag7avfhwgM2QpJoUvi5JIl4SoT3kO0Vy4AjcIeYHgFRgAaeagWyd
 
 SET search_path TO "$user", public;
 

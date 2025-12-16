@@ -56,6 +56,8 @@ class Settings < ApplicationRecord
 
   # @!group authentication
 
+  # The following authentication settings are not managed in the database, but from ENV
+  # They are here because they need to be included in the settings response provided to the FE on load
   def authentication
     {
       identity_providers:,
@@ -64,7 +66,6 @@ class Settings < ApplicationRecord
     }
   end
 
-  # Identity providers are not managed in the settings table, but from ENV
   def identity_providers
     ManifoldEnv.oauth.enabled.map do |oauth|
       {
@@ -73,12 +74,14 @@ class Settings < ApplicationRecord
         url: "/auth/#{oauth.strategy_name}/redirect"
       }
     end + SamlConfig.providers.map do |saml|
+      next unless saml.show?
+
       {
         name: saml.provider_name,
         display_name: saml.display_name,
         url: "/auth/#{saml.provider_name}/redirect"
       }
-    end
+    end.compact
   end
 
   # Currently only supports SAML providers
@@ -86,8 +89,9 @@ class Settings < ApplicationRecord
     SamlConfig.providers.find(&:default)&.provider_name
   end
 
+  # @todo Move this into a more generic config, it's not specific to SAML
   def hide_local_login
-    false
+    SamlConfig.disable_password_auth
   end
 
   # @!endgroup

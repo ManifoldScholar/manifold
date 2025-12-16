@@ -11,7 +11,7 @@ class SamlConfig < ApplicationConfig
 
   # @return [Array<AbstractSamlProviderConfig>]
   def providers
-    @providers ||= raw_providers.select(&:valid?)
+    @providers ||= raw_providers.select { _1.valid? && _1.enabled? }
   end
 
   # @return [Array<AbstractSamlProviderConfig>]
