@@ -79,7 +79,7 @@ class Settings < ApplicationRecord
       {
         name: saml.provider_name,
         display_name: saml.display_name,
-        url: "/auth/#{saml.provider_name}/redirect"
+        url: "#{Rails.application.config.manifold.api_url}/auth/#{saml.provider_name}/redirect"
       }
     end.compact
   end
