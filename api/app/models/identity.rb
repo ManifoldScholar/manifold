@@ -9,7 +9,7 @@ class Identity < ApplicationRecord
 
   has_many :user_group_memberships, as: :source
 
-  validates :provider, inclusion: { in: (ManifoldEnv.oauth.known_strategies + SamlConfig.provider_names) }
+  validates :provider, inclusion: { in: ->(_) { (ManifoldEnv.oauth.known_strategies + SamlConfig.provider_names) } }
   validates :uid, :provider, presence: true
   validates :uid, uniqueness: { scope: %i(provider) }
 
