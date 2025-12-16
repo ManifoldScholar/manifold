@@ -2,8 +2,7 @@
 
 FactoryBot.define do
   factory :external_identifier do
-
-    identifiable { create(:project) }
+    identifiable factory: :project
 
     sequence(:identifier) { |n| "identifier-#{n}" }
   end
