@@ -14,7 +14,7 @@ module UserGroups
     def call(user_group, user_or_identity)
       parse_user_or_identity(user_or_identity)
 
-      user_group.memberships.where(user:, identity:).destroy_all
+      user_group.memberships.where(user:, source: identity).destroy_all
 
       Success()
     end
