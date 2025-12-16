@@ -39,7 +39,6 @@ module API
       def token_params
         params.permit(:email, :password)
       end
-
     end
   end
 end

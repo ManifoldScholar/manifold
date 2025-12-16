@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserGroupEntitleable < ApplicationRecord
   include Authority::Abilities
   include SerializedAbilitiesFor
