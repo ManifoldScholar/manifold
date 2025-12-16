@@ -1,5 +1,4 @@
 import { forwardRef } from "react";
-import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -9,14 +8,18 @@ function ProjectsDropdown(props, ref) {
   const { t } = useTranslation();
 
   const pathForLink = link => {
-    const args = link.args || [];
-    return lh.link(link.route, ...args);
+    if (typeof link.path === "function") {
+      return link.path(link.id);
+    }
+    return link.path;
   };
 
   const renderItem = link => {
-    const icon = link.route.includes("ProjectsAll")
-      ? "BEProject64"
-      : "ProjectCollection32";
+    const path = pathForLink(link);
+    const icon =
+      path.includes("/projects/all") || path === "/projects"
+        ? "BEProject64"
+        : "ProjectCollection32";
 
     return (
       <li key={link.label}>

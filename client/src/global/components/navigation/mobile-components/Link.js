@@ -1,6 +1,6 @@
+import { useId } from "react";
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
-import { useUID } from "react-uid";
+import { NavLink } from "react-router";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default function UserLink({
@@ -12,7 +12,7 @@ export default function UserLink({
   onClick
 }) {
   const Tag = as === "a" ? NavLink : "button";
-  const uid = useUID();
+  const uid = useId();
   return (
     <li className="nested-nav__item">
       <Tag

@@ -150,7 +150,7 @@ export default function FormContainer({
       className,
       groupErrors,
       errors,
-      fetcher.state
+      fetcher?.state
     ]
   );
 

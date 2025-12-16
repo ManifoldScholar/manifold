@@ -1,20 +1,19 @@
 import classNames from "classnames";
-import { useLocation, NavLink, useMatches } from "react-router-dom";
+import { useLocation, NavLink } from "react-router";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default function MobileBreadcrumb({ links, journalIsActive }) {
   const location = useLocation();
-  const matches = useMatches();
   const { t } = useTranslation();
 
   const pathForLink = link => {
     if (link.externalUrl) return link.externalUrl;
-    const args = link.args || [];
-    const route = link.linksTo || link.route;
-    return lh.link(route, ...args);
+    if (typeof link.path === "function") {
+      return link.path(link.id);
+    }
+    return link.path;
   };
 
   const match = (linksToMatch, exact = false) => {
@@ -26,16 +25,15 @@ export default function MobileBreadcrumb({ links, journalIsActive }) {
 
       if (
         location.pathname === "/project-collections" &&
-        link.route === "frontendProjects"
+        link.path === "/projects"
       )
         return true;
 
-      // Check if this route is in the current matches by route name
-      const routeMatch = matches.find(m => m.handle?.name === link.route);
-      if (routeMatch) return true;
+      // Check if pathname matches the link path
+      const linkPath = pathForLink(link);
+      if (location.pathname === linkPath) return true;
 
       // Fallback: check if pathname starts with the link path
-      const linkPath = pathForLink(link);
       return location.pathname.startsWith(linkPath);
     });
   };
@@ -48,10 +46,10 @@ export default function MobileBreadcrumb({ links, journalIsActive }) {
     /* eslint-disable no-nested-ternary */
     const first =
       journalIsActive && firstMatch
-        ? firstMatch.route === "frontendProjects"
-          ? { label: "titles.journals", route: "frontendJournals" }
-          : firstMatch.route === "backendProjects"
-          ? { label: "titles.journals", route: "backendJournals" }
+        ? firstMatch.path === "/projects"
+          ? { label: "titles.journals", path: "/journals" }
+          : firstMatch.path === "/backend/projects"
+          ? { label: "titles.journals", path: "/backend/journals" }
           : firstMatch
         : firstMatch;
     /* eslint-enable no-nested-ternary */

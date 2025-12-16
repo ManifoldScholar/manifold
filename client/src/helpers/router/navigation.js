@@ -14,41 +14,41 @@ class Navigation {
     return [
       {
         label: "titles.home",
-        route: "frontend",
+        path: "/",
         matchType: "link"
       },
       {
         label: "titles.projects",
-        route: "frontendProjects",
+        path: "/projects",
         dropdown: true,
         children: [
           {
             label: "titles.projects_all",
-            route: "frontendProjectsAll"
+            path: "/projects"
           },
           settings.attributes.calculated?.hasProjectCollections && {
             label: "titles.project_collections",
-            route: "frontendProjectCollections"
+            path: "/project-collections"
           }
         ]
       },
       settings.attributes.calculated.hasVisibleJournals && {
         label: "titles.journals",
-        route: "frontendJournals",
+        path: "/journals",
         children: [
           {
             label: "titles.journals_all",
-            route: "frontendJournalsList"
+            path: "/journals"
           },
           {
             label: "titles.issues_all",
-            route: "frontendIssuesList"
+            path: "/journals/issues"
           }
         ]
       },
       !hideRGs && {
         label: "titles.groups",
-        route: "frontendPublicReadingGroups"
+        path: "/groups"
       }
     ].filter(x => x);
   }
@@ -57,20 +57,20 @@ class Navigation {
     return [
       {
         label: "titles.dashboard",
-        route: "backendDashboard"
+        path: "/backend/dashboard"
       },
       {
         label: "titles.projects",
-        route: "backendProjects",
+        path: "/backend/projects",
         dropdown: true,
         children: [
           {
             label: "titles.projects_all",
-            route: "backendProjectsAll"
+            path: "/backend/projects/all"
           },
           {
             label: "titles.project_collections",
-            route: "backendProjectCollections",
+            path: "/backend/projects/project-collections",
             entity: "projectCollection",
             ability: "update"
           }
@@ -78,63 +78,63 @@ class Navigation {
       },
       {
         label: "titles.projects",
-        route: "backendProjectsAll"
+        path: "/backend/projects/all"
       },
       {
         label: "titles.journals",
-        route: "backendJournals"
+        path: "/backend/journals"
       },
       {
         label: "titles.groups",
-        route: "backendReadingGroups",
+        path: "/backend/groups",
         entity: "readingGroup",
         kind: "admin"
       },
       {
         label: "titles.records",
-        route: "backendRecords",
+        path: "/backend/records",
         entity: ["user", "maker", "page", "feature"],
         ability: "update",
         children: [
           {
             label: "titles.makers",
-            route: "backendRecordsMakers",
+            path: "/backend/records/makers",
             entity: "maker",
             ability: "update"
           },
           {
             label: "titles.users",
-            route: "backendRecordsUsers",
+            path: "/backend/records/users",
             entity: "user",
             ability: "update"
           },
           {
             label: "titles.pages",
-            route: "backendRecordsPages",
+            path: "/backend/records/pages",
             entity: "page",
             ability: "update"
           },
           {
             label: "titles.features",
-            route: "backendRecordsFeatures",
+            path: "/backend/records/features",
             entity: "feature",
             ability: "update"
           },
           {
             label: "titles.entitlements",
-            route: "backendRecordsEntitlements",
+            path: "/backend/records/entitlements",
             entity: "entitlement",
             ability: "update"
           },
           {
             label: "titles.annotations",
-            route: "backendRecordsAnnotations",
+            path: "/backend/records/annotations",
             entity: "annotation",
             ability: "update"
           },
           {
             label: "titles.comments",
-            route: "backendRecordsComments",
+            path: "/backend/records/comments",
             entity: "comment",
             ability: "update"
           }
@@ -142,41 +142,41 @@ class Navigation {
       },
       {
         label: "titles.settings",
-        route: "backendSettings",
+        path: "/backend/settings",
         entity: "settings",
         ability: "update",
         children: [
           {
             label: "titles.properties",
-            route: "backendSettingsProperties"
+            path: "/backend/settings/properties"
           },
           {
             label: "titles.theme",
-            route: "backendSettingsTheme"
+            path: "/backend/settings/theme"
           },
           {
             label: "titles.content",
-            route: "backendSettingsContent"
+            path: "/backend/settings/content"
           },
           {
             label: "titles.ingestion",
-            route: "backendSettingsIngestion"
+            path: "/backend/settings/ingestion"
           },
           {
             label: "titles.integrations",
-            route: "backendSettingsIntegrations"
+            path: "/backend/settings/integrations"
           },
           {
             label: "titles.subjects",
-            route: "backendSettingsSubjects"
+            path: "/backend/settings/subjects"
           },
           {
             label: "titles.email",
-            route: "backendSettingsEmail"
+            path: "/backend/settings/email"
           },
           {
             label: "titles.export_targets",
-            route: "backendSettingsExportTargets",
+            path: "/backend/settings/export-targets",
             entity: "exportTarget",
             ability: "update"
           }
@@ -184,7 +184,7 @@ class Navigation {
       },
       {
         label: "titles.analytics",
-        route: "backendAnalytics",
+        path: "/backend/analytics",
         entity: "statistics",
         ability: "read",
         children: []
@@ -193,124 +193,121 @@ class Navigation {
   });
 
   static resourceCollection(collection) {
-    const args = [collection.id];
     return [
       {
         label: "titles.properties",
-        route: "backendResourceCollectionProperties",
+        path: id => `/backend/projects/resource-collection/${id}/properties`,
         entity: collection,
         ability: "update",
-        args
+        id: collection.id
       },
       {
         label: "titles.resources",
-        route: "backendResourceCollectionResources",
+        path: id => `/backend/projects/resource-collection/${id}/resources`,
         entity: collection,
         ability: "update",
-        args
+        id: collection.id
       }
     ];
   }
 
   static page = memoize(page => {
-    const args = [page.id];
     return [
       {
         label: "titles.properties",
-        route: "backendRecordsPageProperties",
+        path: id => `/backend/records/pages/${id}/properties`,
         entity: page,
         ability: "update",
-        args
+        id: page.id
       }
     ];
   });
 
   static project = memoize(project => {
-    const args = [project.id];
     return [
       {
         label: "titles.analytics",
-        route: "backendProjectAnalytics",
+        path: id => `/backend/projects/${id}/analytics`,
         entity: project,
         ability: "update",
-        args
+        id: project.id
       },
       {
         label: "titles.properties",
-        route: "backendProjectProperties",
+        path: id => `/backend/projects/${id}/properties`,
         entity: project,
         ability: "update",
-        args
+        id: project.id
       },
       {
         label: "titles.layout",
-        route: "backendProjectLayout",
+        path: id => `/backend/projects/${id}/layout`,
         entity: project,
         ability: "update",
-        args
+        id: project.id
       },
       {
         label: "titles.access",
-        route: "backendProjectAccess",
+        path: id => `/backend/projects/${id}/access`,
         entity: project,
         ability: "update",
-        args
+        id: project.id
       },
       {
         label: "titles.collaborators",
-        route: "backendProjectCollaborators",
+        path: id => `/backend/projects/${id}/collaborators`,
         entity: project,
         ability: "updateMakers",
-        args
+        id: project.id
       },
       {
         label: "titles.texts",
-        route: "backendProjectTexts",
+        path: id => `/backend/projects/${id}/texts`,
         entity: project,
         ability: "manageTexts",
-        args
+        id: project.id
       },
       {
         label: "titles.resources",
-        route: "backendProjectResources",
+        path: id => `/backend/projects/${id}/resources`,
         entity: project,
         ability: "manageResources",
-        args
+        id: project.id
       },
       {
         label: "titles.resource_collections",
-        route: "backendProjectResourceCollections",
+        path: id => `/backend/projects/${id}/resource-collections`,
         entity: project,
         ability: "manageResourceCollections",
-        args
+        id: project.id
       },
       {
         label: "titles.events",
-        route: "backendProjectEvents",
+        path: id => `/backend/projects/${id}/events`,
         entity: project,
         ability: "manageEvents",
-        args
+        id: project.id
       },
       {
         label: "titles.metadata",
-        route: "backendProjectMetadata",
+        path: id => `/backend/projects/${id}/metadata`,
         entity: project,
         ability: "update",
-        args
+        id: project.id
       },
       {
         label: "titles.exports",
-        route: "backendProjectExportations",
+        path: id => `/backend/projects/${id}/exports`,
         entity: project,
         ability: "manageProjectExportations",
-        args
+        id: project.id
       },
       {
         label: "titles.log",
-        route: "backendProjectLog",
+        path: id => `/backend/projects/${id}/log`,
         entity: project,
         ability: "readLog",
-        args
+        id: project.id
       }
     ];
   });
@@ -319,13 +316,13 @@ class Navigation {
     return [
       {
         label: "titles.projects_all",
-        route: "backendProjectsAll",
+        path: "/backend/projects/all",
         entity: "project",
         ability: "update"
       },
       {
         label: "titles.project_collections",
-        route: "backendProjectCollections",
+        path: "/backend/projects/project-collections",
         entity: "projectCollection",
         ability: "update"
       }
@@ -333,76 +330,74 @@ class Navigation {
   });
 
   static journal = memoize(journal => {
-    const args = [journal.id];
     return [
       {
         label: "titles.properties",
-        route: "backendJournalProperties",
+        path: id => `/backend/journals/${id}/properties`,
         entity: journal,
         ability: "update",
-        args
+        id: journal.id
       },
       {
         label: "titles.layout",
-        route: "backendJournalLayout",
+        path: id => `/backend/journals/${id}/layout`,
         entity: journal,
         ability: "update",
-        args
+        id: journal.id
       },
       {
         label: "titles.access",
-        route: "backendJournalAccess",
+        path: id => `/backend/journals/${id}/access`,
         entity: journal,
         ability: "update",
-        args
+        id: journal.id
       },
       {
         label: "titles.metadata",
-        route: "backendJournalMetadata",
+        path: id => `/backend/journals/${id}/metadata`,
         entity: journal,
         ability: "update",
-        args
+        id: journal.id
       },
       {
         label: "titles.issues",
-        route: "backendJournalIssues",
+        path: id => `/backend/journals/${id}/issues`,
         entity: journal,
         ability: "read",
-        args
+        id: journal.id
       },
       {
         label: "titles.volumes",
-        route: "backendJournalVolumes",
+        path: id => `/backend/journals/${id}/volumes`,
         entity: journal,
         ability: "update",
-        args
+        id: journal.id
       }
     ];
   });
 
   static readingGroup = memoize(group => {
-    const args = [group.id];
     return [
       {
         label: "titles.details",
-        route: "backendReadingGroupDetails",
+        path: id => `/backend/groups/${id}/details`,
         entity: group,
         ability: "read",
-        args
+        id: group.id
       },
       {
         label: "titles.members",
-        route: "backendReadingGroupMembers",
+        path: id => `/backend/groups/${id}/members`,
         entity: group,
         ability: "update",
-        args
+        id: group.id
       },
       {
         label: "titles.annotations",
-        route: "backendReadingGroupAnnotations",
+        path: id => `/backend/groups/${id}/annotations`,
         entity: group,
         ability: "update",
-        args
+        id: group.id
       }
     ];
   });
@@ -411,43 +406,43 @@ class Navigation {
     return [
       {
         label: "titles.makers",
-        route: "backendRecordsMakers",
+        path: "/backend/records/makers",
         entity: "maker",
         ability: "update"
       },
       {
         label: "titles.users",
-        route: "backendRecordsUsers",
+        path: "/backend/records/users",
         entity: "user",
         ability: "update"
       },
       {
         label: "titles.pages",
-        route: "backendRecordsPages",
+        path: "/backend/records/pages",
         entity: "page",
         ability: "update"
       },
       {
         label: "titles.features",
-        route: "backendRecordsFeatures",
+        path: "/backend/records/features",
         entity: "feature",
         ability: "update"
       },
       {
         label: "Entitlements",
-        route: "backendRecordsEntitlements",
+        path: "/backend/records/entitlements",
         entity: "entitlementImport",
         ability: "update"
       },
       {
         label: "titles.annotations",
-        route: "backendRecordsAnnotations",
+        path: "/backend/records/annotations",
         entity: "annotation",
         kind: "admin"
       },
       {
         label: "titles.comments",
-        route: "backendRecordsComments",
+        path: "/backend/records/comments",
         entity: "comment",
         kind: "admin"
       }
@@ -455,21 +450,20 @@ class Navigation {
   });
 
   static user = memoize(user => {
-    const args = [user.id];
     return [
       {
         label: "titles.properties",
-        route: "backendRecordsUserProperties",
+        path: id => `/backend/records/users/${id}/properties`,
         entity: user,
         ability: "update",
-        args
+        id: user.id
       },
       {
         label: "titles.activity",
-        route: "backendRecordsUserActivity",
+        path: id => `/backend/records/users/${id}/activity`,
         entity: user,
         ability: "update",
-        args
+        id: user.id
       }
     ];
   });
@@ -478,21 +472,20 @@ class Navigation {
     const externalVideo = !!resource.attributes.externalId;
     const project = resource.relationships.project;
     const kind = resource.attributes.kind;
-    const args = [resource.id];
     const out = [
       {
         label: "titles.properties",
-        route: "backendResourceProperties",
+        path: id => `/backend/projects/resource/${id}/properties`,
         entity: project,
         ability: "update",
-        args
+        id: resource.id
       },
       {
         label: "titles.metadata",
-        route: "backendResourceMetadata",
+        path: id => `/backend/projects/resource/${id}/metadata`,
         entity: project,
         ability: "manageResources",
-        args
+        id: resource.id
       }
     ];
     if (
@@ -503,19 +496,19 @@ class Navigation {
     ) {
       out.splice(1, 0, {
         label: "titles.variants",
-        route: "backendResourceVariants",
+        path: id => `/backend/projects/resource/${id}/variants`,
         entity: project,
         ability: "update",
-        args
+        id: resource.id
       });
     }
     if (kind === "audio" || (kind === "video" && !externalVideo)) {
       out.push({
         label: "titles.tracks",
-        route: "backendResourceTracks",
+        path: id => `/backend/projects/resource/${id}/tracks`,
         entity: project,
         ability: "update",
-        args
+        id: resource.id
       });
     }
     return out;
@@ -525,49 +518,49 @@ class Navigation {
     return [
       {
         label: "titles.properties",
-        route: "backendSettingsProperties",
+        path: "/backend/settings/properties",
         entity: "settings",
         ability: "update"
       },
       {
         label: "titles.theme",
-        route: "backendSettingsTheme",
+        path: "/backend/settings/theme",
         entity: "settings",
         ability: "update"
       },
       {
         label: "titles.content",
-        route: "backendSettingsContent",
+        path: "/backend/settings/content",
         entity: "settings",
         ability: "update"
       },
       {
         label: "titles.integrations",
-        route: "backendSettingsIntegrations",
+        path: "/backend/settings/integrations",
         entity: "settings",
         ability: "update"
       },
       {
         label: "titles.ingestion",
-        route: "backendSettingsIngestion",
+        path: "/backend/settings/ingestion",
         entity: "settings",
         ability: "update"
       },
       {
         label: "titles.subjects",
-        route: "backendSettingsSubjects",
+        path: "/backend/settings/subjects",
         entity: "settings",
         ability: "update"
       },
       {
         label: "titles.email",
-        route: "backendSettingsEmail",
+        path: "/backend/settings/email",
         entity: "settings",
         ability: "update"
       },
       {
         label: "titles.export_targets",
-        route: "backendSettingsExportTargets",
+        path: "/backend/settings/export-targets",
         entity: "exportTarget",
         ability: "update"
       }
@@ -575,70 +568,69 @@ class Navigation {
   });
 
   static text = memoize(text => {
-    const args = [text.id];
     return [
       {
         label: "titles.analytics",
-        route: "backendTextAnalytics",
+        path: id => `/backend/projects/text/${id}/analytics`,
         entity: text,
         ability: "update",
-        args
+        id: text.id
       },
       {
         label: "titles.properties",
-        route: "backendTextProperties",
+        path: id => `/backend/projects/text/${id}/properties`,
         entity: text,
         ability: "update",
-        args
+        id: text.id
       },
       {
         label: "titles.collaborators",
-        route: "backendTextCollaborators",
+        path: id => `/backend/projects/text/${id}/collaborators`,
         entity: text.relationships.project,
         ability: "updateMakers",
-        args
+        id: text.id
       },
       {
         label: "titles.sections",
-        route: "backendTextSections",
+        path: id => `/backend/projects/text/${id}/sections`,
         entity: text,
         ability: "update",
-        args
+        id: text.id
       },
       {
         label: "titles.toc",
-        route: "backendTextTOC",
+        path: id => `/backend/projects/text/${id}/contents`,
         entity: text,
         ability: "update",
-        args
+        id: text.id
       },
       {
         label: "titles.assets",
-        route: "backendTextAssets",
+        path: id => `/backend/projects/text/${id}/assets`,
         entity: text,
         ability: "update",
-        args
+        id: text.id
       },
       {
         label: "titles.metadata",
-        route: "backendTextMetadata",
+        path: id => `/backend/projects/text/${id}/metadata`,
         entity: text,
         ability: "update",
-        args
+        id: text.id
       },
       {
         label: "titles.styles",
-        route: "backendTextStyles",
+        path: id => `/backend/projects/text/${id}/styles`,
         entity: text,
         ability: "update",
-        args
+        id: text.id
       },
       {
         label: "titles.reingest",
-        route: "backendTextIngestionsNew",
+        path: id => `/backend/projects/text/${id}/ingestions/new`,
         entity: text,
         ability: "update",
-        args
+        id: text.id
       }
     ];
   });

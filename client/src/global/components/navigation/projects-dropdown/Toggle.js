@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 

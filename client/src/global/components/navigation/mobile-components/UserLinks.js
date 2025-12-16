@@ -1,8 +1,7 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import get from "lodash/get";
-import lh from "helpers/linkHandler";
 import Avatar from "global/components/avatar";
 import Link from "./Link";
 
@@ -92,7 +91,7 @@ class UserLinks extends PureComponent {
         </li>
         {!!currentUser && (
           <Link
-            to={lh.link("frontendStarred")}
+            to="/my/starred"
             title={t("pages.my_starred")}
             icon="star24"
             onClick={() => this.props.closeNavigation()}
@@ -101,13 +100,13 @@ class UserLinks extends PureComponent {
         {this.canAccessReadingGroups && (
           <>
             <Link
-              to={lh.link("frontendAnnotations")}
+              to="/my/notes"
               title={t("pages.my_notes")}
               icon="notes24"
               onClick={() => this.props.closeNavigation()}
             />
             <Link
-              to={lh.link("frontendMyReadingGroups")}
+              to="/my/groups"
               title={t("pages.my_groups")}
               icon="annotationGroup24"
               onClick={() => this.props.closeNavigation()}
@@ -122,14 +121,14 @@ class UserLinks extends PureComponent {
           onClick={this.handleProfileClick}
         />
         <Link
-          to={lh.link("subscriptions")}
+          to="/subscriptions"
           title={t("navigation.user.notifications")}
           srTitle={t("navigation.user.notifications_sr_title")}
           icon="notifications24"
           onClick={() => this.props.closeNavigation()}
         />
         <Link
-          to={lh.link("privacy")}
+          to="/privacy"
           title={t("navigation.user.privacy")}
           srTitle={t("navigation.user.privacy_sr_title")}
           icon="privacy24"

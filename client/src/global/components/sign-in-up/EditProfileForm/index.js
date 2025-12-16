@@ -119,13 +119,13 @@ export default function EditProfileForm({ hideOverlay, mode }) {
       <Styled.ButtonGroup>
         <button
           className="button-secondary button-secondary--outlined button-secondary--color-white"
-          onClick={redirect("subscriptions")}
+          onClick={redirect("/subscriptions")}
         >
           {t("forms.signin_overlay.notification_settings")}
         </button>
         <button
           className="button-secondary button-secondary--outlined button-secondary--color-white"
-          onClick={redirect("privacy")}
+          onClick={redirect("/privacy")}
         >
           {t("forms.privacy.title")}
         </button>

@@ -5,7 +5,6 @@ import get from "lodash/get";
 import Navigation from "global/components/navigation";
 import HeaderNotifications from "global/components/HeaderNotifications";
 import throttle from "lodash/throttle";
-import lh from "helpers/linkHandler";
 import { Link } from "react-router";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
 import { useSettings, useFrontendModeContext } from "hooks";
@@ -40,9 +39,7 @@ export default function StandaloneHeader({ alwaysVisible = false }) {
   const title = context?.project?.titleFormatted;
   const subtitle = context?.project?.subtitleFormatted;
   const projectSlug = context?.project?.slug;
-  const projectUrl = projectSlug
-    ? lh.link("frontendProjectDetail", projectSlug)
-    : null;
+  const projectUrl = projectSlug ? `/projects/${projectSlug}` : null;
 
   const directionRef = useRef("down");
   const logRef = useRef(null);

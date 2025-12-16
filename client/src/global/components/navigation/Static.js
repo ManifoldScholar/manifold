@@ -2,13 +2,12 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
 import UserMenuBody from "global/components/UserMenuBody";
 import UIPanel from "global/components/UIPanel";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
-import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import {
   useFromStore,
@@ -60,8 +59,10 @@ export default function NavigationStatic({
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
 
   const pathForLink = link => {
-    const args = link.args || [];
-    return lh.link(link.route, ...args);
+    if (typeof link.path === "function") {
+      return link.path(link.id);
+    }
+    return link.path;
   };
 
   const renderExternalLink = link => {
@@ -140,7 +141,7 @@ export default function NavigationStatic({
     }
     return (
       <li key={`${link.label}-${index}`} className="site-nav__item">
-        {link.route ? renderManifoldLink(link) : renderExternalLink(link)}
+        {link.path ? renderManifoldLink(link) : renderExternalLink(link)}
       </li>
     );
   };
@@ -223,7 +224,7 @@ export default function NavigationStatic({
             if (link.ability || link.kind)
               return (
                 <Authorize
-                  key={`${link.route}-wrapped`}
+                  key={`${pathForLink(link)}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
                   kind={link.kind}

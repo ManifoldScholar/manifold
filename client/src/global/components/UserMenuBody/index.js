@@ -1,8 +1,7 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useCurrentUser } from "hooks";
-import lh from "helpers/linkHandler";
 import Item from "./Item";
 import * as Styled from "./styles";
 
@@ -24,7 +23,7 @@ const UserMenuBody = forwardRef(
       >
         {!!currentUser && (
           <Item
-            to={lh.link("frontendStarred")}
+            to="/my/starred"
             title={t("pages.my_starred")}
             icon="star24"
             onClick={() => callbacks.hideUserPanel()}
@@ -33,13 +32,13 @@ const UserMenuBody = forwardRef(
         {currentUser?.attributes.classAbilities.readingGroup.read && (
           <>
             <Item
-              to={lh.link("frontendAnnotations")}
+              to="/my/notes"
               title={t("pages.my_notes")}
               icon="notes24"
               onClick={() => callbacks.hideUserPanel()}
             />
             <Item
-              to={lh.link("frontendMyReadingGroups")}
+              to="/my/groups"
               title={t("pages.my_groups")}
               icon="annotationGroup24"
               onClick={() => callbacks.hideUserPanel()}
@@ -56,13 +55,13 @@ const UserMenuBody = forwardRef(
           }}
         />
         <Item
-          to={lh.link("subscriptions")}
+          to="/subscriptions"
           title={t("navigation.user.notifications")}
           icon="notifications24"
           onClick={() => callbacks.hideUserPanel()}
         />
         <Item
-          to={lh.link("privacy")}
+          to="/privacy"
           title={t("navigation.user.privacy")}
           icon="privacy24"
           onClick={() => callbacks.hideUserPanel()}

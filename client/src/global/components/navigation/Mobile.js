@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
-import { useLocation, NavLink, useMatches } from "react-router-dom";
+import { useLocation, NavLink } from "react-router";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import {
@@ -9,7 +9,6 @@ import {
   useLogout,
   useAuthentication
 } from "hooks";
-import lh from "helpers/linkHandler";
 import memoize from "lodash/memoize";
 import UserLinks from "./mobile-components/UserLinks";
 import MobileSearch from "./mobile-components/Search";
@@ -25,7 +24,6 @@ export default function NavigationMobile({ links, backendButton, mode }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const location = useLocation();
-  const matches = useMatches();
   const context = useFrontendModeContext();
   const authentication = useAuthentication();
   const journalIsActive = useShowJournalsActive();
@@ -45,31 +43,36 @@ export default function NavigationMobile({ links, backendButton, mode }) {
   const isStandalone = context.isStandalone;
 
   const pathForLink = link => {
-    const args = link.args || [];
-    return lh.link(link.route, ...args);
+    if (typeof link.path === "function") {
+      return link.path(link.id);
+    }
+    return link.path;
   };
 
   const activeRoutes = useMemo(() => {
     if (!links) return null;
     const active = [];
     links.forEach(link => {
-      // Check if this route is in the current matches by route name
-      const routeMatch = matches.find(m => m.handle?.name === link.route);
-      if (routeMatch) {
-        if (link.route === "frontendProjects" && journalIsActive) {
-          active.push("frontendJournals");
-        } else if (link.route === "backendProjects" && journalIsActive) {
-          active.push("backendJournals");
+      const linkPath = pathForLink(link);
+      // Check if current pathname matches or starts with link path
+      if (
+        location.pathname === linkPath ||
+        location.pathname.startsWith(linkPath + "/")
+      ) {
+        if (linkPath === "/projects" && journalIsActive) {
+          active.push("/journals");
+        } else if (linkPath === "/backend/projects" && journalIsActive) {
+          active.push("/backend/journals");
         } else {
-          active.push(link.route);
+          active.push(linkPath);
         }
       }
     });
     if (location.pathname === "/project-collections") {
-      active.push("frontendProjects");
+      active.push("/projects");
     }
     return active;
-  }, [links, matches, journalIsActive, location]);
+  }, [links, location, journalIsActive]);
 
   const prevLocationRef = useRef(location);
   useEffect(() => {
@@ -208,7 +211,8 @@ export default function NavigationMobile({ links, backendButton, mode }) {
     if (link.hideInNav) return null;
     const children = link.children || [];
     const hasChildren = children && children.length > 0;
-    const expanded = state.expanded.includes(link.route);
+    const linkPath = pathForLink(link);
+    const expanded = state.expanded.includes(linkPath);
     const wrapperClasses = classnames({
       "nested-nav__item": true,
       "nested-nav__grid-item": true,
@@ -218,10 +222,10 @@ export default function NavigationMobile({ links, backendButton, mode }) {
 
     return (
       <li key={`${link.label}-${index}`} className={wrapperClasses}>
-        {link.route ? renderManifoldLink(link) : renderExternalLink(link)}
+        {link.path ? renderManifoldLink(link) : renderExternalLink(link)}
         {hasChildren && (
           <button
-            onClick={createExpandToggleHandler(link.route)}
+            onClick={createExpandToggleHandler(pathForLink(link))}
             className="nested-nav__disclosure-button"
             aria-haspopup="true"
             aria-expanded={expanded}
@@ -267,7 +271,7 @@ export default function NavigationMobile({ links, backendButton, mode }) {
                   if (link.ability || link.kind)
                     return (
                       <Authorize
-                        key={`${link.route}-wrapped`}
+                        key={`${pathForLink(link)}-wrapped`}
                         entity={link.entity}
                         ability={link.ability}
                         kind={link.kind}

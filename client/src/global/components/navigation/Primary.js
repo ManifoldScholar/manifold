@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Static from "global/components/navigation/Static";
 import Mobile from "global/components/navigation/Mobile";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import { getAdminModeLabel, getDestinationPath } from "./helpers";
 import { useFromStore, useAuthentication } from "hooks";
 import Authorization from "helpers/authorization";

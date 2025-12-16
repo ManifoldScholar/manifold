@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
-import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
@@ -29,9 +28,9 @@ export default function LibraryHeader() {
     externalUrl: page.attributes.isExternalLink
       ? page.attributes.externalLink
       : null,
-    route: !page.attributes.isExternalLink ? "frontendPage" : null,
-    matchType: "link",
-    args: [page.attributes.slug]
+    path: !page.attributes.isExternalLink ? id => `/page/${id}` : null,
+    id: !page.attributes.isExternalLink ? page.attributes.slug : null,
+    matchType: "link"
   });
   const links = () => {
     const routes = navigation.frontend(authentication, settings);
@@ -39,17 +38,15 @@ export default function LibraryHeader() {
     let routesWithDropdown;
 
     if (settings.attributes.calculated?.hasProjectCollections) {
-      const projectsLink = routes.find(l => l.route === "frontendProjects");
+      const projectsLink = routes.find(l => l.path === "/projects");
       projectsLink.dropdownContent = (
         <ProjectsDropdown links={projectsLink.children} />
       );
       projectsLink.toggle = ProjectsToggle;
-      routesWithDropdown = routes.filter(
-        l => l.route !== "frontendProjects" && l.route !== "frontendProjectsAll"
-      );
+      routesWithDropdown = routes.filter(l => l.path !== "/projects");
       routesWithDropdown.splice(1, 0, projectsLink);
     } else {
-      routesWithDropdown = routes.filter(l => l.route !== "frontendProjects");
+      routesWithDropdown = routes.filter(l => l.path !== "/projects");
     }
 
     if (!pages) {
@@ -66,7 +63,7 @@ export default function LibraryHeader() {
   const logoProps =
     libraryDisabled && homeRedirectUrl
       ? { as: "a", href: homeRedirectUrl }
-      : { as: "Link", to: lh.link("frontend") };
+      : { as: "Link", to: "/" };
   const logoUrl = settings.attributes.pressLogoStyles.medium;
   const mobileLogoUrl =
     settings.attributes.pressLogoMobileStyles.small ?? logoUrl;
