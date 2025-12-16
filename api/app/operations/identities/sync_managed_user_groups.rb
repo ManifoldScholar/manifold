@@ -33,7 +33,7 @@ module Identities
     end
 
     def desired_user_group_identifiers
-      @desired_identifiers ||= auth_hash.info.user_groups&.split(/,;/)&.compact || []
+      @desired_identifiers ||= auth_hash.info.user_groups&.split(/[,;]/)&.compact || []
     end
 
     def existing_user_groups
@@ -43,6 +43,5 @@ module Identities
     def existing_identifiers
       @existing_identifiers ||= existing_user_groups.map { _1.external_identifier&.identifier }.compact
     end
-
   end
 end
