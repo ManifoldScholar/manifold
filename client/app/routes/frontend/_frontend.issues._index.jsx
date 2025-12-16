@@ -1,10 +1,9 @@
 import { useLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
-import { ApiClient, journalIssuesAPI } from "api";
-import { routerContext } from "app/contexts";
+import { journalIssuesAPI } from "api";
 import checkLibraryMode from "app/routes/utility/checkLibraryMode";
-import parseListParams from "app/routes/utility/parseListParams";
 import createListClientLoader from "app/routes/utility/createListClientLoader";
+import loadList from "app/routes/utility/loadList";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
@@ -18,28 +17,21 @@ const FILTER_RESET = {
   order: "sort_title DESC"
 };
 
-const parseParams = url =>
-  parseListParams(url, { defaultFilters: FILTER_RESET });
-
 export const loader = async ({ request, context }) => {
   checkLibraryMode({ request, context });
-
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
-
-  const url = new URL(request.url);
-  const { filters, pagination } = parseParams(url);
-
-  const result = await client.call(journalIssuesAPI.index(filters, pagination));
-
-  return { data: result ?? [], meta: result?.meta ?? null };
+  return loadList({
+    request,
+    context,
+    fetchFn: journalIssuesAPI.index,
+    options: { defaultFilters: FILTER_RESET }
+  });
 };
 
-export const clientLoader = createListClientLoader(
-  "__issuesHydrated",
-  journalIssuesAPI.index,
-  parseParams
-);
+export const clientLoader = createListClientLoader({
+  hydrateKey: "__issuesHydrated",
+  fetchFn: journalIssuesAPI.index,
+  options: { defaultFilters: FILTER_RESET }
+});
 
 export default function IssuesRoute() {
   const { data: issues, meta } = useLoaderData();
@@ -75,7 +67,7 @@ export default function IssuesRoute() {
         <EntityCollection.Issues
           title={t("pages.issues_all")}
           issues={issues}
-          meta={meta}
+          issuesMeta={meta}
           filterProps={filterProps}
           bgColor="neutral05"
           className="flex-grow"

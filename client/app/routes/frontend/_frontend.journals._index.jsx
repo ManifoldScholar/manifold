@@ -1,10 +1,9 @@
 import { useLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
-import { ApiClient, journalsAPI } from "api";
-import { routerContext } from "app/contexts";
+import { journalsAPI } from "api";
 import checkLibraryMode from "app/routes/utility/checkLibraryMode";
-import parseListParams from "app/routes/utility/parseListParams";
 import createListClientLoader from "app/routes/utility/createListClientLoader";
+import loadList from "app/routes/utility/loadList";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
@@ -16,28 +15,21 @@ export { shouldRevalidate } from "app/routes/utility/shouldRevalidate";
 
 const FILTER_RESET = { standaloneModeEnforced: "false" };
 
-const parseParams = url =>
-  parseListParams(url, { defaultFilters: FILTER_RESET });
-
 export const loader = async ({ request, context }) => {
   checkLibraryMode({ request, context });
-
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
-
-  const url = new URL(request.url);
-  const { filters, pagination } = parseParams(url);
-
-  const result = await client.call(journalsAPI.index(filters, pagination));
-
-  return { data: result ?? [], meta: result.meta ?? null };
+  return loadList({
+    request,
+    context,
+    fetchFn: journalsAPI.index,
+    options: { defaultFilters: FILTER_RESET }
+  });
 };
 
-export const clientLoader = createListClientLoader(
-  "__journalsHydrated",
-  journalsAPI.index,
-  parseParams
-);
+export const clientLoader = createListClientLoader({
+  hydrateKey: "__journalsHydrated",
+  fetchFn: journalsAPI.index,
+  options: { defaultFilters: FILTER_RESET }
+});
 
 export default function JournalsRoute() {
   const { data: journals, meta } = useLoaderData();

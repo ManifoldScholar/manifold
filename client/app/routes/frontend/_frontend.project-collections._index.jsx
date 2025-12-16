@@ -1,9 +1,9 @@
 import { useLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
-import { ApiClient, projectCollectionsAPI } from "api";
-import { routerContext } from "app/contexts";
+import { projectCollectionsAPI } from "api";
 import checkLibraryMode from "app/routes/utility/checkLibraryMode";
 import createListClientLoader from "app/routes/utility/createListClientLoader";
+import loadList from "app/routes/utility/loadList";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
@@ -16,60 +16,34 @@ export { shouldRevalidate } from "app/routes/utility/shouldRevalidate";
 const FILTER_RESET = { visible: "true", order: "position ASC" };
 const PAGINATION_KEYS = ["page", "perPage", "collectionPage", "collectionSize"];
 
-// Custom parser needed: project collections have nested pagination for collection projects
-const parseParams = url => {
-  const page = parseInt(url.searchParams.get("page") || "1", 10);
-  const perPage = parseInt(url.searchParams.get("perPage") || "20", 10);
-  const collectionPage = parseInt(
-    url.searchParams.get("collectionPage") || "1",
-    10
-  );
-  const collectionSize = parseInt(
-    url.searchParams.get("collectionSize") || "4",
-    10
-  );
-
-  const filters = { ...FILTER_RESET };
-  Array.from(url.searchParams.entries()).forEach(([key, value]) => {
-    if (!PAGINATION_KEYS.includes(key)) {
-      filters[key] = value;
+const OPTIONS = {
+  defaultFilters: FILTER_RESET,
+  paginationKeys: PAGINATION_KEYS,
+  additionalPagination: {
+    collectionProjects: {
+      numberKey: "collectionPage",
+      sizeKey: "collectionSize",
+      defaultNumber: 1,
+      defaultSize: 4
     }
-  });
-
-  return {
-    filters,
-    pagination: {
-      number: page,
-      size: perPage,
-      collectionProjects: {
-        size: collectionSize,
-        number: collectionPage
-      }
-    }
-  };
+  }
 };
 
 export const loader = async ({ request, context }) => {
   checkLibraryMode({ request, context });
-
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
-
-  const url = new URL(request.url);
-  const { filters, pagination } = parseParams(url);
-
-  const result = await client.call(
-    projectCollectionsAPI.index(filters, pagination)
-  );
-
-  return { data: result ?? [], meta: result?.meta ?? null };
+  return loadList({
+    request,
+    context,
+    fetchFn: projectCollectionsAPI.index,
+    options: OPTIONS
+  });
 };
 
-export const clientLoader = createListClientLoader(
-  "__projectCollectionsHydrated",
-  projectCollectionsAPI.index,
-  parseParams
-);
+export const clientLoader = createListClientLoader({
+  hydrateKey: "__projectCollectionsHydrated",
+  fetchFn: projectCollectionsAPI.index,
+  options: OPTIONS
+});
 
 export default function ProjectCollectionsRoute() {
   const { data: projectCollections, meta } = useLoaderData();

@@ -1,10 +1,9 @@
 import { useLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
-import { ApiClient, projectsAPI } from "api";
-import { routerContext } from "app/contexts";
+import { projectsAPI } from "api";
 import checkLibraryMode from "app/routes/utility/checkLibraryMode";
-import parseListParams from "app/routes/utility/parseListParams";
 import createListClientLoader from "app/routes/utility/createListClientLoader";
+import loadList from "app/routes/utility/loadList";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
@@ -15,28 +14,21 @@ export { shouldRevalidate } from "app/routes/utility/shouldRevalidate";
 
 const FILTER_RESET = { standaloneModeEnforced: "false" };
 
-const parseParams = url =>
-  parseListParams(url, { defaultFilters: FILTER_RESET });
-
 export const loader = async ({ request, context }) => {
   checkLibraryMode({ request, context });
-
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
-
-  const url = new URL(request.url);
-  const { filters, pagination } = parseParams(url);
-
-  const result = await client.call(projectsAPI.index(filters, pagination));
-
-  return { data: result ?? [], meta: result?.meta ?? null };
+  return loadList({
+    request,
+    context,
+    fetchFn: projectsAPI.index,
+    options: { defaultFilters: FILTER_RESET }
+  });
 };
 
-export const clientLoader = createListClientLoader(
-  "__projectsHydrated",
-  projectsAPI.index,
-  parseParams
-);
+export const clientLoader = createListClientLoader({
+  hydrateKey: "__projectsHydrated",
+  fetchFn: projectsAPI.index,
+  options: { defaultFilters: FILTER_RESET }
+});
 
 export default function ProjectsRoute() {
   const { data: projects, meta } = useLoaderData();
