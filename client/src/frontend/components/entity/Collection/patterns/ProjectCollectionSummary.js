@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/entity/ThumbnailGrid";
@@ -50,7 +49,7 @@ function ProjectCollectionSummaryEntityCollection({
       imageAlt={imageAlt}
       headerLayout={headerLayout}
       headerWidth="100%"
-      headerLink={lh.link("frontendProjectCollection", slug)}
+      headerLink={`/project-collections/${slug}`}
       BodyComponent={props =>
         !!projects?.length && (
           <ThumbnailGrid isList={projects.length > 1} {...props}>
@@ -70,7 +69,7 @@ function ProjectCollectionSummaryEntityCollection({
       FooterComponent={() =>
         totalprojectCount > limit && (
           <FooterLink
-            to={lh.link("frontendProjectCollection", slug)}
+            to={`/project-collections/${slug}`}
             label={t("navigation.see_full_collection")}
           />
         )

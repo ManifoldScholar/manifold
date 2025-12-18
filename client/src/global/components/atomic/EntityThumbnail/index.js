@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Collecting from "frontend/components/collecting";
 import EntityAvatar from "global/components/atomic/EntityAvatar";
 import EntityMetadata from "./EntityMetadata";
-import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 import ProjectCollectionAvatar from "../EntityAvatar/patterns/ProjectCollectionAvatar";
 
@@ -17,24 +16,23 @@ export default function EntityThumbnail({
   parentView = false,
   isListItem = false
 }) {
-  let routeName = "frontendProjectDetail";
-
-  if (entity.type === "journals") {
-    routeName = "frontendJournalDetail";
-  } else if (entity.type === "projectCollections") {
-    routeName = "frontendProjectCollection";
-  }
-
-  const urlParam =
-    entity.type === "journalIssues"
-      ? entity.attributes.projectSlug
-      : entity.attributes.slug;
+  const getUrl = () => {
+    if (entity.type === "journals") {
+      return `/journals/${entity.attributes.slug}`;
+    } else if (entity.type === "projectCollections") {
+      return `/project-collections/${entity.attributes.slug}`;
+    } else if (entity.type === "journalIssues") {
+      return `/projects/${entity.attributes.projectSlug}`;
+    } else {
+      return `/projects/${entity.attributes.slug}`;
+    }
+  };
 
   const as = isListItem ? "li" : "div";
 
   return (
     <Styled.Wrapper as={as}>
-      <Styled.ItemLink $stack={stack} to={lh.link(routeName, urlParam)}>
+      <Styled.ItemLink $stack={stack} to={getUrl()}>
         <Styled.Cover $stack={stack}>
           {entity.type === "projectCollections" ? (
             <ProjectCollectionAvatar entity={entity} />

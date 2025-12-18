@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 
 export const getCalloutParams = (data, type, isLink, t) => {
   const slug = data.relationships?.text?.attributes?.slug ?? null;
@@ -11,7 +10,7 @@ export const getCalloutParams = (data, type, isLink, t) => {
       return {
         icon: isLink ? "arrowRight24" : "glasses64",
         iconSize: isLink ? 24 : 32,
-        url: lh.link("reader", slug),
+        url: `/read/${slug}`,
         title: data.attributes.title || t("actions.read"),
         as: Link,
         background: "accent"
@@ -38,8 +37,8 @@ export const getCalloutParams = (data, type, isLink, t) => {
         icon: isLink ? "arrowRight24" : "toc64",
         iconSize: isLink ? 24 : 32,
         url: tocSectionId
-          ? lh.link("readerSection", slug, tocSectionId)
-          : lh.link("reader", slug),
+          ? `/read/${slug}/section/${tocSectionId}`
+          : `/read/${slug}`,
         title: data.attributes.title || t("actions.view_contents"),
         as: Link
       };

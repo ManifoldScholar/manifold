@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
 import ThumbnailGrid from "global/components/entity/ThumbnailGrid";
 import { FooterLink, ProjectCollectionIcon } from "../parts";
@@ -36,7 +35,7 @@ function JournalSummaryEntityCollection({
       image={image}
       imageAlt={imageAlt}
       headerLayout={headerLayout}
-      headerLink={lh.link("frontendJournal", slug)}
+      headerLink={`/journals/${slug}`}
       BodyComponent={props =>
         !!issues?.length && (
           <ThumbnailGrid isList={issues.length > 1} {...props}>
@@ -55,7 +54,7 @@ function JournalSummaryEntityCollection({
       }
       FooterComponent={() => (
         <FooterLink
-          to={lh.link("frontendJournal", slug)}
+          to={`/journals/${slug}`}
           label={footerLinkText}
           tabIndex={-1}
         />

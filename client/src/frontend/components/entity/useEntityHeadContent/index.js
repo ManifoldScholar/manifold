@@ -1,4 +1,4 @@
-import { useFromStore } from "hooks";
+import { useSettings } from "hooks";
 import { useTranslation } from "react-i18next";
 
 const appendHeadTitle = (entityTitle, headTitle) => {
@@ -36,7 +36,7 @@ const maybePrepend = (entityTitle, prepend) => {
 
 export const useMetaTitle = (entity, parent, prepend) => {
   const { t } = useTranslation();
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const settings = useSettings();
 
   if (!entity?.attributes) return undefined;
 

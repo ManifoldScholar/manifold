@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import { useCurrentUser, useSettings } from "hooks";
@@ -16,42 +15,42 @@ function CollectionNavigation() {
     () =>
       [
         {
-          to: lh.link("frontendProjectsAll"),
+          to: "/projects",
           label: t("pages.projects"),
           icon: "projects64",
           requiresAuthorization: false,
           show: true
         },
         settings?.attributes?.calculated?.hasVisibleJournals && {
-          to: lh.link("frontendJournalsList"),
+          to: "/journals",
           label: t("pages.journals"),
           icon: "journals64",
           requiresAuthorization: false,
-          show: location.pathname !== lh.link("frontendJournalsList")
+          show: location.pathname !== "/journals"
         },
         {
-          to: lh.link("frontendIssuesList"),
+          to: "/journals/issues",
           label: t("pages.issues"),
           icon: "journals64",
           requiresAuthorization: false,
-          show: location.pathname === lh.link("frontendJournalsList")
+          show: location.pathname === "/journals"
         },
         settings?.attributes?.calculated?.hasProjectCollections && {
-          to: lh.link("frontendProjectCollections"),
+          to: "/project-collections",
           label: t("pages.project_collections"),
           icon: "projectCollections64",
           requiresAuthorization: false,
           show: true
         },
         {
-          to: lh.link("frontendStarred"),
+          to: "/my/starred",
           label: t("pages.my_starred"),
           icon: "star24",
           requiresAuthorization: true,
           show: true
         },
         {
-          to: lh.link("frontendAnnotations"),
+          to: "/my/notes",
           label: t("pages.my_notes_truncated"),
           icon: "notes24",
           requiresAuthorization: true,
