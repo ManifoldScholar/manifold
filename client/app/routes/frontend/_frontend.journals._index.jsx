@@ -1,9 +1,8 @@
-import { useLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
 import { journalsAPI } from "api";
-import checkLibraryMode from "app/routes/utility/checkLibraryMode";
-import createListClientLoader from "app/routes/utility/createListClientLoader";
-import loadList from "app/routes/utility/loadList";
+import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
+import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import loadList from "app/routes/utility/loaders/loadList";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
@@ -11,7 +10,7 @@ import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
 import { useListFilters, useJournalSubjects, useListSearchParams } from "hooks";
 
-export { shouldRevalidate } from "app/routes/utility/shouldRevalidate";
+export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
 
 const FILTER_RESET = { standaloneModeEnforced: "false" };
 
@@ -31,8 +30,8 @@ export const clientLoader = createListClientLoader({
   options: { defaultFilters: FILTER_RESET }
 });
 
-export default function JournalsRoute() {
-  const { data: journals, meta } = useLoaderData();
+export default function JournalsRoute({ loaderData }) {
+  const { data: journals, meta } = loaderData;
   const subjects = useJournalSubjects();
   const { t } = useTranslation();
 

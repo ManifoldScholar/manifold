@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Outlet, useLoaderData } from "react-router";
+import { Outlet } from "react-router";
 import classNames from "classnames";
 import { ApiClient, subjectsAPI } from "api";
 import { routerContext, FrontendContext } from "app/contexts";
@@ -40,8 +40,7 @@ export const loader = async ({ context }) => {
   };
 };
 
-export default function FrontendLayout() {
-  const loaderData = useLoaderData();
+export default function FrontendLayout({ loaderData }) {
   useBodyClass("browse");
 
   const settings = useSettings();

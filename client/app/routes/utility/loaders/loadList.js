@@ -1,6 +1,6 @@
 import { ApiClient } from "api";
 import { routerContext } from "app/contexts";
-import parseListParams from "app/routes/utility/parseListParams";
+import parseListParams from "./parseListParams";
 
 export default async function ListLoader({
   request,

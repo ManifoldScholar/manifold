@@ -27,7 +27,7 @@ import { bootstrapMiddleware } from "./middleware/bootstrap.server";
 import { clientBootstrapMiddleware } from "./middleware/bootstrap.client";
 import { routerContext, AppContext } from "./contexts";
 
-export { shouldRevalidate } from "app/routes/utility/shouldRevalidate";
+export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
 
 // Export middleware
 export const middleware = [bootstrapMiddleware];

@@ -1,6 +1,6 @@
 import cookie from "js-cookie";
 import { ApiClient } from "api";
-import parseListParams from "app/routes/utility/parseListParams";
+import parseListParams from "./parseListParams";
 
 /**
  * Creates a clientLoader for list routes with filters and pagination.

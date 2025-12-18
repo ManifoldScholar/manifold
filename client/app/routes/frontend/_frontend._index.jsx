@@ -6,7 +6,7 @@ import {
   featuresAPI
 } from "api";
 import { routerContext } from "app/contexts";
-import checkLibraryMode from "app/routes/utility/checkLibraryMode";
+import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import Content from "frontend/containers/Home/Content";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import HeadContent from "global/components/HeadContent";
@@ -28,6 +28,8 @@ const JOURNAL_FILTERS = {
 };
 
 const FEATURES_FILTERS = { home: true };
+
+export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
 
 export const loader = async ({ request, context }) => {
   // Check library mode first (may redirect)
