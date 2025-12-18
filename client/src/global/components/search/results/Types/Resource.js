@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Generic from "./Generic";
@@ -38,10 +37,10 @@ function SearchResultsTypeResource({
   const creators = model?.relationships?.creators ?? [];
 
   const resultProps = {
-    url: lh.link("frontendProjectResource", project?.slug, attributes?.slug),
+    url: `/projects/${project?.slug}/resources/${attributes?.slug}`,
     title: highlightedAttribute("title"),
     parent: project?.title,
-    parentUrl: lh.link("frontendProjectDetail", project?.slug),
+    parentUrl: `/projects/${project?.slug}`,
     hideParent,
     attribution: creators.map(c => c.attributes.fullName).join(", "),
     description: highlightedAttribute("fullText"),

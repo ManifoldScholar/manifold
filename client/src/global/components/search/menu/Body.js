@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { useSearchContext } from "hooks/useSearch/context";
 import Query from "../query";
-import lh from "helpers/linkHandler";
 
 export default function SearchMenuBody({
   afterSubmit = () => {},
@@ -23,15 +22,13 @@ export default function SearchMenuBody({
 
   let searchPath;
   if (searchType === "reader") {
-    searchPath = lh.link(
-      "readerSectionSearchResults",
-      textId || textIdParam,
-      sectionId || sectionIdParam
-    );
+    const finalTextId = textId || textIdParam;
+    const finalSectionId = sectionId || sectionIdParam;
+    searchPath = `/read/${finalTextId}/section/${finalSectionId}/search`;
   } else if (searchType === "project") {
-    searchPath = lh.link("frontendProjectSearch", projectId);
+    searchPath = `/projects/${projectId}/search`;
   } else {
-    searchPath = lh.link("frontendSearch");
+    searchPath = "/search";
   }
 
   const handleSetQueryState = useCallback(

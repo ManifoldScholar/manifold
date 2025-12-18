@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
-import lh from "helpers/linkHandler";
 import withSearchResultHelper from "./searchResultHelper";
 import Utility from "global/components/utility";
 import Generic from "./Generic";
@@ -36,7 +35,7 @@ function SearchResultsTypeAnnotation({ result, highlightedAttribute }) {
   const hasValidLink = text?.slug && textSection?.id && searchableId;
 
   const parentUrl = hasValidLink
-    ? lh.link("readerSection", text.slug, textSection.id)
+    ? `/read/${text.slug}/section/${textSection.id}`
     : null;
   const url = parentUrl ? `${parentUrl}#annotation-${searchableId}` : undefined;
 

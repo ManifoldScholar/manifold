@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Generic from "./Generic";
-import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import withSearchResultHelper from "./searchResultHelper";
 import * as Styled from "./styles";
@@ -27,7 +26,7 @@ function SearchResultsTypeJournal({ result, highlightedAttribute }) {
   const creators = model?.relationships?.creators ?? [];
 
   const resultProps = {
-    url: lh.link("frontendJournalDetail", attributes.slug),
+    url: `/journals/${attributes.slug}`,
     title: highlightedAttribute("title"),
     attribution: creators.map(c => c.attributes.fullName).join(", "),
     description: highlightedAttribute("description"),

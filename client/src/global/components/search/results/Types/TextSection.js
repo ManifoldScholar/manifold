@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import Generic from "./Generic";
 import withSearchResultHelper from "./searchResultHelper";
 import EntityThumbnail from "global/components/entity-thumbnail";
@@ -37,15 +36,15 @@ function SearchResultsTypeTextSection({ result, highlightedAttribute }) {
     const { hits } = textNodes;
     return hits.map(h => ({
       ...h,
-      url: lh.link("readerSection", text.slug, model.id, `#node-${h.nodeUuid}`)
+      url: `/read/${text.slug}/section/${model.id}#node-${h.nodeUuid}`
     }));
   })();
 
   const resultProps = {
-    url: lh.link("readerSection", text?.slug, model.id),
+    url: `/read/${text?.slug}/section/${model.id}`,
     title: highlightedAttribute("title"),
     parent: text?.title,
-    parentUrl: lh.link("reader", text?.slug),
+    parentUrl: `/read/${text?.slug}`,
     description: highlightedAttribute("fullText"),
     label: t("glossary.full_text_one"),
     collectable,

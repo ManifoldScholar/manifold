@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import Generic from "./Generic";
 import withSearchResultHelper from "./searchResultHelper";
@@ -32,10 +31,10 @@ function SearchResultsTypeText({ result, highlightedAttribute }) {
   };
 
   const resultProps = {
-    url: lh.link("reader", attributes?.slug),
+    url: `/read/${attributes?.slug}`,
     title: highlightedAttribute("title"),
     parent: project?.title,
-    parentUrl: lh.link("frontendProjectDetail", project?.slug),
+    parentUrl: `/projects/${project?.slug}`,
     description: highlightedAttribute("fullText"),
     label: t("glossary.text_one"),
     collectable
