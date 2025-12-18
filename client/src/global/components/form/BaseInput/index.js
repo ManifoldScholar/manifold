@@ -9,7 +9,7 @@ import BaseLabel from "../BaseLabel";
 import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
-export function FormBaseInput({
+export default function BaseInput({
   name,
   errorName,
   placeholder,
@@ -33,12 +33,20 @@ export function FormBaseInput({
   onKeyDown,
   colorRef,
   reset,
-  resetOnMount
+  resetOnMount,
+  value: valueProp,
+  onChange: onChangeProp,
+  errors: errorsProp
 }) {
   const inputRef = useRef(null);
   const timeoutRef = useRef(null);
   const [notification, setNotification] = useState(null);
-  const { value, onChange, set, errors } = useFormField(name);
+  const { value, onChange, set, errors: errorsFromField } = useFormField(
+    name,
+    valueProp,
+    onChangeProp
+  );
+  const errors = errorsProp ?? errorsFromField;
   const context = useContext(FormContext);
   const styleType = context?.styleType;
 
@@ -112,7 +120,7 @@ export function FormBaseInput({
       onKeyDown={e => {
         if (onKeyDown) onKeyDown(e, inputRef.current);
       }}
-      value={renderValue(value)}
+      value={renderValue(valueProp ?? value)}
       aria-describedby={`${idForError || ""} ${idForInstructions || ""}`}
       autoComplete={autoComplete}
       defaultValue={defaultValue}
@@ -164,9 +172,9 @@ export function FormBaseInput({
   );
 }
 
-FormBaseInput.displayName = "Form.BaseInput";
+BaseInput.displayName = "Form.BaseInput";
 
-FormBaseInput.propTypes = {
+BaseInput.propTypes = {
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   errorName: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   placeholder: PropTypes.string,
@@ -190,7 +198,7 @@ FormBaseInput.propTypes = {
   onKeyDown: PropTypes.func,
   colorRef: PropTypes.object,
   reset: PropTypes.bool,
-  resetOnMount: PropTypes.bool
+  resetOnMount: PropTypes.bool,
+  onChange: PropTypes.func,
+  errors: PropTypes.array
 };
-
-export default FormBaseInput;

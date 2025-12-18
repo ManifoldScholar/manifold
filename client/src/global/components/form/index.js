@@ -1,4 +1,4 @@
-import BaseInput, { FormBaseInput } from "./BaseInput";
+import BaseInput from "./BaseInput";
 import CodeArea from "./CodeArea";
 import AttributeMap from "./AttributeMap";
 import DatePicker from "./DatePicker";
@@ -17,7 +17,7 @@ import setter from "./setter";
 import Switch from "./Switch";
 import { Toggle } from "./Switch/ToggleOnly";
 import SwitchArray from "./SwitchArray";
-import TextArea, { FormTextArea } from "./TextArea";
+import TextArea from "./TextArea";
 import TextInput from "./TextInput";
 import TusUpload from "./TusUpload";
 import Upload from "./Upload";
@@ -39,6 +39,7 @@ export default {
   Errors,
   Errorable,
   BaseInput,
+  Input: BaseInput,
   CodeArea,
   AttributeMap,
   DatePicker,
@@ -71,8 +72,6 @@ export default {
 };
 
 export const Unwrapped = {
-  TextArea: FormTextArea,
-  Input: FormBaseInput,
   Toggle,
   Picker: BasePicker
 };
