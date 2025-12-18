@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import humps from "utils/humps";
 import { useTranslation } from "react-i18next";
 import RadioGroup from "frontend/components/preferences/RadioGroup";
-import { useFromStore } from "hooks";
+import { useSettings } from "hooks";
 import * as Styled from "./styles";
 
 export default function CookiesFormFields({
@@ -13,7 +13,7 @@ export default function CookiesFormFields({
   googleAnalyticsEnabled
 }) {
   const { t } = useTranslation();
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const settings = useSettings();
 
   const installationName = settings?.attributes?.general?.installationName;
 

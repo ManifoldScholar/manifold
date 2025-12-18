@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { meAPI } from "api";
 import CookiesFields from "./CookiesFormFields";
 import GlobalForm from "global/containers/form";
 import { useSettings, useCurrentUser, useNotification } from "hooks";
 import * as Styled from "./styles";
 
-export default function CookiesForm() {
+export default function CookiesForm({ submit, errors = [], actionData }) {
   const { t } = useTranslation();
   const settings = useSettings();
 
@@ -24,15 +24,6 @@ export default function CookiesForm() {
     google: consentGoogleAnalytics ? "yes" : "no"
   });
 
-  const formatAttributes = () => ({
-    consentManifoldAnalytics: !manifoldAnalyticsEnabled
-      ? null
-      : cookiePrefs.manifold === "yes",
-    consentGoogleAnalytics: !googleAnalyticsEnabled
-      ? null
-      : cookiePrefs.google === "yes"
-  });
-
   const notifyUpdate = useNotification(() => ({
     level: 0,
     id: `CURRENT_USER_UPDATED`,
@@ -40,13 +31,33 @@ export default function CookiesForm() {
     expiration: 3000
   }));
 
+  useEffect(() => {
+    if (actionData?.success) {
+      notifyUpdate();
+    }
+  }, [actionData?.success, notifyUpdate]);
+
+  const formatData = () => {
+    return {
+      attributes: {
+        consentManifoldAnalytics: !manifoldAnalyticsEnabled
+          ? null
+          : cookiePrefs.manifold === "yes",
+        consentGoogleAnalytics: !googleAnalyticsEnabled
+          ? null
+          : cookiePrefs.google === "yes"
+      }
+    };
+  };
+
   return (
     <GlobalForm.Form
-      name="global-authenticated-user-update"
-      update={meAPI.update}
-      formatData={formatAttributes}
-      onSuccess={notifyUpdate}
+      submit={submit}
+      errors={errors}
+      model={{ attributes: {} }}
+      formatData={formatData}
       groupErrors
+      className="form-primary"
     >
       <Styled.FieldGroup label={t("forms.privacy.cookies")}>
         <CookiesFields
@@ -66,3 +77,9 @@ export default function CookiesForm() {
 }
 
 CookiesForm.displayName = "Frontend.Privacy.CookiesForm";
+
+CookiesForm.propTypes = {
+  submit: PropTypes.func.isRequired,
+  errors: PropTypes.array,
+  actionData: PropTypes.object
+};

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import DeleteConfirm from "./DeleteConfirm";
 import * as Styled from "./styles";
