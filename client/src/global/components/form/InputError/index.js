@@ -1,43 +1,34 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 import * as Styled from "./styles";
 
-export default class InputError extends Component {
-  static propTypes = {
-    errors: PropTypes.array,
-    name: PropTypes.string,
-    idForError: PropTypes.string,
-    className: PropTypes.string
-  };
-
-  hasErrors = () => {
-    return this.props.errors.length > 0;
-  };
-
-  errorString(error) {
-    if (typeof error.detail === "object") return error.detail;
-    if (error.detail.split(".").length > 1) {
-      return error.detail;
-    }
-    const out = `${capitalize(error.detail)}`;
-    if (out.endsWith(".") || out.endsWith("?")) return out;
-    return `${out}.`;
+const errorString = error => {
+  if (typeof error.detail === "object") return error.detail;
+  if (error.detail.split(".").length > 1) {
+    return error.detail;
   }
+  const out = `${capitalize(error.detail)}`;
+  if (out.endsWith(".") || out.endsWith("?")) return out;
+  return `${out}.`;
+};
 
-  /* eslint-disable react/no-array-index-key */
-  render() {
-    return (
-      <Styled.ErrorList
-        id={this.props.idForError ? this.props.idForError : null}
-        className={this.props.className}
-      >
-        {this.hasErrors()
-          ? this.props.errors.map((e, i) => {
-              return <Styled.Error key={i}>{this.errorString(e)}</Styled.Error>;
-            })
-          : null}
-      </Styled.ErrorList>
-    );
-  }
+export default function InputError({ errors = [], idForError, className }) {
+  const hasErrors = errors.length > 0;
+
+  return (
+    <Styled.ErrorList id={idForError || null} className={className}>
+      {hasErrors
+        ? errors.map(e => {
+            return <Styled.Error key={e}>{errorString(e)}</Styled.Error>;
+          })
+        : null}
+    </Styled.ErrorList>
+  );
 }
+
+InputError.propTypes = {
+  errors: PropTypes.array,
+  name: PropTypes.string,
+  idForError: PropTypes.string,
+  className: PropTypes.string
+};

@@ -8,7 +8,7 @@ import startsWith from "lodash/startsWith";
 import isBoolean from "lodash/isBoolean";
 import isNil from "lodash/isNil";
 import keyBy from "lodash/keyBy";
-import setter from "global/components/form/setter";
+// import setter from "global/components/form/setter";
 import { ApiClient } from "api";
 import { isPromise } from "utils/promise";
 import Authorization from "helpers/authorization";
@@ -501,7 +501,7 @@ function withFormOptions(WrappedComponent) {
     }
   }
 
-  return connect(WithFormOptions.mapStateToProps)(setter(WithFormOptions));
+  return connect(WithFormOptions.mapStateToProps)(WithFormOptions);
 }
 
 export default withFormOptions;

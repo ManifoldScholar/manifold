@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
 import Errorable from "../Errorable";
-import setter from "../setter";
+// import setter from "../setter";
 import Instructions from "../Instructions";
 import Developer from "global/components/developer";
 import IconComposer from "global/components/utility/IconComposer";
@@ -732,5 +732,5 @@ export const BasePicker = withTranslation()(
 );
 
 export default withTranslation()(
-  setter(withScreenReaderStatus(withFormOptions(PickerComponent), false))
+  withScreenReaderStatus(withFormOptions(PickerComponent), false)
 );

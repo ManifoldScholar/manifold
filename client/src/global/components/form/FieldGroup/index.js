@@ -1,95 +1,75 @@
-import React, { PureComponent } from "react";
+import { Children, cloneElement } from "react";
 import PropTypes from "prop-types";
 import isString from "lodash/isString";
-import { UIDConsumer } from "react-uid";
+import { useId } from "react";
 import SectionLabel from "../SectionLabel";
 import Instructions from "../Instructions";
-import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
-export default class FieldGroup extends PureComponent {
-  static propTypes = {
-    disabled: PropTypes.bool,
-    horizontal: PropTypes.bool,
-    wide: PropTypes.bool,
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    label: PropTypes.string,
-    labelTag: PropTypes.oneOf(["h2", "span"]),
-    theme: PropTypes.oneOf(["primary", "secondary"]),
-    className: PropTypes.string
+const getAriaGroupAttributes = (id, label, instructions) => {
+  if (!label && !instructions) return {};
+  return {
+    role: "group",
+    "aria-labelledby": `${id}-header`,
+    "aria-describedby": `${id}-instructions`
   };
+};
 
-  static defaultProps = {
-    disabled: false,
-    horizontal: false,
-    wide: false,
-    instructions: null,
-    labelTag: "h2",
-    theme: "primary"
-  };
+export default function FieldGroup({
+  horizontal = false,
+  instructions = null,
+  label,
+  theme = "primary",
+  className,
+  children,
+  ...restProps
+}) {
+  const id = useId();
 
-  static contextType = FormContext;
-
-  get labelTag() {
-    return this.props.labelTag;
-  }
-
-  getAriaGroupAttributes(id) {
-    if (!this.props.label && !this.props.instructions) return {};
-    return {
-      role: "group",
-      "aria-labelledby": `${id}-header`,
-      "aria-describedby": `${id}-instructions`
-    };
-  }
-
-  renderChildren(props) {
-    return React.Children.map(props.children, child => {
+  const renderChildren = () => {
+    return Children.map(children, child => {
       if (!child) return null;
       if (isString(child.type)) {
         return child;
       }
-      const {
-        horizontal,
-        wide,
-        label,
-        instructions,
-        theme,
-        children,
-        ...childProps
-      } = this.props;
-      return React.cloneElement(child, childProps);
+      return cloneElement(child, restProps);
     });
-  }
+  };
 
-  render() {
-    const GroupComponent =
-      this.props.theme === "secondary"
-        ? Styled.SecondaryGroup
-        : Styled.BaseGroup;
+  const GroupComponent =
+    theme === "secondary" ? Styled.SecondaryGroup : Styled.BaseGroup;
 
-    return (
-      <UIDConsumer name={id => `field-group-${id}`}>
-        {id => (
-          <Styled.Section
-            key="group"
-            {...this.getAriaGroupAttributes(id)}
-            $horizontal={this.props.horizontal}
-            className={this.props.className}
-          >
-            {isString(this.props.label) ? (
-              <SectionLabel label={this.props.label} id={`${id}-header`} />
-            ) : null}
-            {this.props.instructions && (
-              <Instructions
-                id={`${id}-instructions`}
-                instructions={this.props.instructions}
-              />
-            )}
-            <GroupComponent>{this.renderChildren(this.props)}</GroupComponent>
-          </Styled.Section>
-        )}
-      </UIDConsumer>
-    );
-  }
+  const fieldGroupId = `field-group-${id}`;
+
+  return (
+    <Styled.Section
+      key="group"
+      {...getAriaGroupAttributes(fieldGroupId, label, instructions)}
+      $horizontal={horizontal}
+      className={className}
+    >
+      {isString(label) ? (
+        <SectionLabel label={label} id={`${fieldGroupId}-header`} />
+      ) : null}
+      {instructions && (
+        <Instructions
+          id={`${fieldGroupId}-instructions`}
+          instructions={instructions}
+        />
+      )}
+      <GroupComponent>{renderChildren()}</GroupComponent>
+    </Styled.Section>
+  );
 }
+
+FieldGroup.propTypes = {
+  disabled: PropTypes.bool,
+  horizontal: PropTypes.bool,
+  wide: PropTypes.bool,
+  instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  label: PropTypes.string,
+  labelTag: PropTypes.oneOf(["h2", "span"]),
+  theme: PropTypes.oneOf(["primary", "secondary"]),
+  className: PropTypes.string,
+  children: PropTypes.node
+};

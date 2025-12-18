@@ -13,7 +13,6 @@ import Radios from "./Radios";
 import Save from "./Save";
 import SectionLabel from "./SectionLabel";
 import Select from "./Select";
-import setter from "./setter";
 import Switch from "./Switch";
 import { Toggle } from "./Switch/ToggleOnly";
 import SwitchArray from "./SwitchArray";
@@ -54,7 +53,6 @@ export default {
   Save,
   SectionLabel,
   Select,
-  setter,
   Switch,
   SwitchArray,
   TextArea,

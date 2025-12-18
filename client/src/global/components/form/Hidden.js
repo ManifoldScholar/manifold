@@ -1,24 +1,20 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
-import setter from "./setter";
 import isNull from "lodash/isNull";
+import { useFormField } from "hooks";
 
-class FormHiddenInput extends Component {
-  static displayName = "Form.HiddenInput";
+export default function FormHiddenInput({ name }) {
+  const { value, onChange } = useFormField(name);
+  const displayValue = isNull(value) ? "" : value;
 
-  static propTypes = {
-    value: PropTypes.any,
-    onChange: PropTypes.func
-  };
-
-  render() {
-    const value = isNull(this.props.value) ? "" : this.props.value;
-    return (
-      <div>
-        <input type="hidden" value={value} onChange={this.props.onChange} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <input type="hidden" value={displayValue} onChange={onChange} />
+    </div>
+  );
 }
 
-export default setter(FormHiddenInput);
+FormHiddenInput.displayName = "Form.HiddenInput";
+
+FormHiddenInput.propTypes = {
+  name: PropTypes.string.isRequired
+};
