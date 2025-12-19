@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Button from "global/components/atomic/Button";
-import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useFromStore } from "hooks";
 import * as Styled from "frontend/components/resource/Preview/EditorActions/styles";
@@ -39,7 +38,7 @@ function ResourceCollectionPreviewEditorActions({
         <li>
           <Button
             as={Link}
-            to={lh.link("backendResourceCollection", resourceCollection.id)}
+            to={`/backend/resource-collections/${resourceCollection.id}`}
             label={t("actions.edit")}
             preIcon="pencil24"
             {...BUTTON_STYLE_PROPS}

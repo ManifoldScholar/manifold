@@ -1,4 +1,4 @@
-import React from "react";
+import { isValidElement } from "react";
 import PropTypes from "prop-types";
 import { ClassNames } from "@emotion/react";
 import useCollapseContext from "./useCollapseContext";
@@ -17,7 +17,7 @@ function Toggle({ children, className, activeClassName, as }) {
     stubHeight
   } = useCollapseContext();
   const applyLabelPropsToToggle =
-    !React.isValidElement(children) || typeof children === "string";
+    !isValidElement(children) || typeof children === "string";
   const mergedToggleProps = {
     ...toggleProps,
     ...(applyLabelPropsToToggle ? labelProps : {})

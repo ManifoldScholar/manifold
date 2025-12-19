@@ -2,21 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Trans } from "react-i18next";
 import has from "lodash/has";
-import lh from "helpers/linkHandler";
 
 export function generateError(key, block) {
   const type = block.attributes.type;
   const projectId = block.relationships.project.id;
 
-  function getProjectEditLink(linkType) {
-    return lh.link(linkType, projectId, block.id);
-  }
-
-  const blockEditLink = lh.link(
-    "backendProjectContentBlock",
-    projectId,
-    block.id
-  );
+  const blockEditLink = `/backend/projects/${projectId}/layout/content-blocks/${block.id}`;
 
   const availableErrors = {
     "Content::TableOfContentsBlock": {
@@ -43,7 +34,7 @@ export function generateError(key, block) {
         <Trans
           i18nKey="errors.content_block.no_texts"
           components={[
-            <Link to={getProjectEditLink("backendProjectTexts")} />,
+            <Link to={`/backend/projects/${projectId}/texts`} />,
             <Link to={blockEditLink} />
           ]}
         />
@@ -54,10 +45,8 @@ export function generateError(key, block) {
         <Trans
           i18nKey="errors.content_block.no_resources"
           components={[
-            <Link to={getProjectEditLink("backendProjectResources")} />,
-            <Link
-              to={getProjectEditLink("backendProjectResourceCollections")}
-            />
+            <Link to={`/backend/projects/${projectId}/resources`} />,
+            <Link to={`/backend/projects/${projectId}/resource-collections`} />
           ]}
         />
       )
@@ -66,9 +55,7 @@ export function generateError(key, block) {
       has_metadata: (
         <Trans
           i18nKey="errors.content_block.no_metadata"
-          components={[
-            <Link to={getProjectEditLink("backendProjectMetadata")} />
-          ]}
+          components={[<Link to={`/backend/projects/${projectId}/metadata`} />]}
         />
       )
     }
@@ -79,11 +66,8 @@ export function generateError(key, block) {
 }
 
 export function getDefaultError(block) {
-  const blockEditLink = lh.link(
-    "backendProjectContentBlock",
-    block.relationships.project.id,
-    block.id
-  );
+  const projectId = block.relationships.project.id;
+  const blockEditLink = `/backend/projects/${projectId}/layout/content-blocks/${block.id}`;
   return (
     <span key="default-error">
       <Trans

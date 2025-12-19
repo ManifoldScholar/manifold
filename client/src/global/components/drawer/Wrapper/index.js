@@ -1,6 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import { useUID } from "react-uid";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { notificationActions } from "actions";
@@ -14,7 +13,7 @@ export default function DrawerWrapper({
   ...props
 }) {
   const { closeCallback, closeUrl } = props;
-  const uid = useUID();
+  const uid = useId();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

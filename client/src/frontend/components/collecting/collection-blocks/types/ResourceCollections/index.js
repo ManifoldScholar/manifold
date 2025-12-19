@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import Template from "../../Template";
 import Cover from "frontend/components/resource-collection/Cover";
-import lh from "helpers/linkHandler";
 import * as Styled from "frontend/components/resource-collection-list/Grid/styles";
 
 function CollectedResourceCollections(props) {
@@ -15,11 +14,7 @@ function CollectedResourceCollections(props) {
       ResponseComponent={({ response }) => (
         <Cover
           urlCreator={collection => {
-            return lh.link(
-              "frontendProjectResourceCollection",
-              collection.attributes.projectSlug,
-              collection.attributes.slug
-            );
+            return `/projects/${collection.attributes.projectSlug}/resource-collections/${collection.attributes.slug}`;
           }}
           resourceCollection={response}
         />

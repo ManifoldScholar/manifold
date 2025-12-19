@@ -1,6 +1,5 @@
-import React from "react";
+import { useId } from "react";
 import PropTypes from "prop-types";
-import { useUIDSeed } from "react-uid";
 import { useTranslation } from "react-i18next";
 import SectionLabel from "global/components/form/SectionLabel";
 import Checkbox from "./Checkbox";
@@ -15,7 +14,7 @@ function CollectingDialog({
   onChange,
   onClose
 }) {
-  const uidSeed = useUIDSeed();
+  const baseId = useId();
   const { t } = useTranslation();
 
   function inMyCollection() {
@@ -50,15 +49,15 @@ function CollectingDialog({
 
   return (
     <Styled.Wrapper
-      labelledBy={uidSeed("label")}
-      describedBy={uidSeed("description")}
+      labelledBy={`${baseId}-label`}
+      describedBy={`${baseId}-description`}
       closeCallback={onClose}
       maxWidth={550}
       onClick={event => event.stopPropagation()}
     >
       <Styled.Inner>
         <Styled.Header>
-          <Styled.Title id={uidSeed("label")}>{title}</Styled.Title>
+          <Styled.Title id={`${baseId}-label`}>{title}</Styled.Title>
           <Styled.Icon icon="TextsLoosePages64" size={48} />
         </Styled.Header>
         <Styled.Fields>

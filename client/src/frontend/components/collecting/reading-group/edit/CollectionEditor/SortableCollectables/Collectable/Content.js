@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useUID } from "react-uid";
+import { useId } from "react";
 import { useTranslation } from "react-i18next";
 import { getCollectableIcon } from "./helpers";
 import { Title, Remove } from "../parts";
@@ -24,7 +23,7 @@ export default function Content({
   categoryIndex,
   categoryCount
 }) {
-  const groupLabelId = useUID();
+  const groupLabelId = useId();
 
   const { t } = useTranslation();
 

@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useId } from "react";
 import PropTypes from "prop-types";
-import { useUID } from "react-uid";
 import { useTranslation } from "react-i18next";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import Section from "./Section";
@@ -46,7 +45,7 @@ function collectedIdsForCollectionByType(readingGroup) {
 }
 
 function GroupSummaryBox({ readingGroup, isBackend }) {
-  const uid = useUID();
+  const uid = useId();
   const { t } = useTranslation();
   const {
     privacy,

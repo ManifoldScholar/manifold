@@ -6,12 +6,12 @@ import CollectionNavigation from "frontend/components/CollectionNavigation";
 import ContentBlockList from "frontend/components/content-block-list/List";
 import { Warning } from "frontend/components/content-block/parts";
 import Authorize from "hoc/Authorize";
-import { useFromStore, useFrontendModeContext } from "hooks";
+import { useSettings, useFrontendModeContext } from "hooks";
 
 function Detail({ project }) {
   const { isStandalone } = useFrontendModeContext();
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
-  const libraryDisabled = settings.attributes.general.libraryDisabled;
+  const settings = useSettings();
+  const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 
   return (
     <>

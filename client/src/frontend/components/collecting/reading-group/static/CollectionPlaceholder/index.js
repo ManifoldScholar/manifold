@@ -1,6 +1,5 @@
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
-import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 function CollectionPlaceholder() {
@@ -17,7 +16,7 @@ function CollectionPlaceholder() {
           components={[<Styled.Heading />, <p />, <Styled.Heading />, <p />]}
         />
         <Styled.Actions>
-          <Link to={lh.link("frontendProjects")} className="button-tertiary">
+          <Link to="/projects" className="button-tertiary">
             {t("navigation.browse_library")}
           </Link>
           <a href="#search" className="button-tertiary">

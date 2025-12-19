@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Button from "global/components/atomic/Button";
-import lh from "helpers/linkHandler";
 import DownloadOrExternalLink from "../../Link";
 import Share from "../../Share";
 import * as Styled from "./styles";
@@ -32,13 +31,8 @@ function ResourcePreviewUserActions({
   } = resource.attributes;
 
   const detailUrl = resourceCollection
-    ? lh.link(
-        "frontendProjectCollectionResource",
-        projectSlug,
-        resourceCollection.attributes.slug,
-        slug
-      )
-    : lh.link("frontendProjectResource", projectSlug, slug);
+    ? `/projects/${projectSlug}/resource-collections/${resourceCollection.attributes.slug}/resources/${slug}`
+    : `/projects/${projectSlug}/resources/${slug}`;
 
   return (
     <Styled.List>

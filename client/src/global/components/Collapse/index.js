@@ -1,6 +1,5 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import { useUIDSeed } from "react-uid";
 import useResizeObserver from "use-resize-observer";
 import { CollapseContext } from "helpers/contexts";
 import Toggle from "./Toggle";
@@ -9,22 +8,22 @@ import Content from "./Content";
 function Collapse({ initialVisible, children, stubHeight, label }) {
   const [visible, setVisible] = useState(initialVisible);
   const toggleVisible = () => setVisible(!visible);
-  const idSeed = useUIDSeed();
+  const baseId = useId();
   const toggleProps = {
     type: "button",
     "aria-expanded": visible,
-    "aria-controls": idSeed("content"),
+    "aria-controls": `${baseId}-content`,
     onClick: toggleVisible
   };
   const labelProps = {
-    id: idSeed("label")
+    id: `${baseId}-label`
   };
   const { ref: resizeRef, height } = useResizeObserver();
   const contentProps = {
-    id: idSeed("content"),
+    id: `${baseId}-content`,
     role: "region",
     "aria-label": label,
-    "aria-labelledby": !label ? idSeed("label") : undefined,
+    "aria-labelledby": !label ? `${baseId}-label` : undefined,
     inert: !visible && (!stubHeight || stubHeight < height) ? "" : undefined,
     resizeRef
   };
@@ -39,7 +38,7 @@ function Collapse({ initialVisible, children, stubHeight, label }) {
       height,
       stubHeight
     }),
-    [visible, idSeed, height, stubHeight] // eslint-disable-line react-hooks/exhaustive-deps
+    [visible, baseId, height, stubHeight] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   useEffect(() => {

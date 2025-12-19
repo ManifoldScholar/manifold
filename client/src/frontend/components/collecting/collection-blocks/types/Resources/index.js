@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Template from "../../Template";
 import Resource from "frontend/components/resource";
-import lh from "helpers/linkHandler";
 import * as Styled from "frontend/components/resource-list/Thumbnails/styles";
 
 function CollectedResources(props) {
@@ -15,11 +14,7 @@ function CollectedResources(props) {
       )}
       ResponseComponent={({ response }) => (
         <Styled.Link
-          to={lh.link(
-            "frontendProjectResource",
-            response.attributes.projectSlug,
-            response.attributes.slug
-          )}
+          to={`/projects/${response.attributes.projectSlug}/resources/${response.attributes.slug}`}
         >
           <Resource.Thumbnail resource={response} showTitle />
         </Styled.Link>

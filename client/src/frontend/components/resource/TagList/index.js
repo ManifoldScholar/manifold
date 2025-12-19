@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import * as Styled from "./styles";
 
@@ -42,9 +41,7 @@ class ResourceTagList extends Component {
   createTagLink(tag, projectSlug, index) {
     const { disabledLinks } = this.props;
     if (!projectSlug && !disabledLinks) return null;
-    const url = lh.link("frontendProjectResources", projectSlug, {
-      tag: tag.toLowerCase()
-    });
+    const url = `/projects/${projectSlug}/resources?tag=${encodeURIComponent(tag.toLowerCase())}`;
     const tagProps = disabledLinks
       ? { className: "disabled" }
       : { onClick: this.stopPropagation, to: url, as: Link };

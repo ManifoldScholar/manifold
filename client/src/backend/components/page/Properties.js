@@ -3,9 +3,8 @@ import { useOutletContext } from "react-router-dom";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { pagesAPI } from "api";
-import withFormSession from "hoc/withFormSession";
 
-function PagesProperties({ onSuccess, form }) {
+export default function PagesProperties({ onSuccess, form }) {
   const { t } = useTranslation();
   const outletContext = useOutletContext() || {};
   const { page } = outletContext;
@@ -150,5 +149,3 @@ function PagesProperties({ onSuccess, form }) {
 }
 
 PagesProperties.displayName = "Pages.Properties";
-
-export default withFormSession(PagesProperties, "backend-page-update");

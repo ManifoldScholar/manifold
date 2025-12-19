@@ -2,7 +2,7 @@ import { useState, useCallback, useId } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { Unwrapped } from "global/components/form";
+import Form from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
 import { FormContext } from "helpers/contexts";
 import { useApiCallback, useFromStore } from "hooks";
@@ -71,7 +71,7 @@ export default function FlagAnnotationModal({
       <p>{t("reader.report_annotation.instructions")}</p>
       <FormContext.Provider value={{ styleType }}>
         <Styled.Form className="dialog__body">
-          <Unwrapped.TextArea
+          <Form.TextArea
             rows={5}
             value={message}
             onChange={e => setMessage(e.target.value)}

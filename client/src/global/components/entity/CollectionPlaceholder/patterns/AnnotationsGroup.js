@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 import { JoinGroup } from "frontend/components/reading-group/tables/Groups/actions";
 import { useCurrentUser } from "hooks";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
-function GroupAnnotationsPlaceholder({ readingGroup, refresh, style }) {
+function GroupAnnotationsPlaceholder({ readingGroup, style }) {
   const { t } = useTranslation();
   const currentUser = useCurrentUser();
   const loggedIn = !isEmpty(currentUser);
@@ -22,7 +21,7 @@ function GroupAnnotationsPlaceholder({ readingGroup, refresh, style }) {
         actions: [
           {
             children: (
-              <Link to={lh.link("frontendLogin")} className="button-tertiary">
+              <Link to="/login" className="button-tertiary">
                 {t("navigation.user.log_in")}
               </Link>
             )
@@ -73,7 +72,8 @@ GroupAnnotationsPlaceholder.displayName =
   "Global.Entity.CollectionPlaceholder.GroupAnnotations";
 
 GroupAnnotationsPlaceholder.propTypes = {
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
+  style: PropTypes.object
 };
 
 export default GroupAnnotationsPlaceholder;

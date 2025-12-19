@@ -1,7 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import { hasItemsInCollection } from "frontend/components/collecting/helpers";
 import { Navigation } from "../parts";
 
@@ -9,8 +7,8 @@ function ChildNav({ readingGroup }) {
   const { t } = useTranslation();
 
   const homePaths = {
-    static: lh.link("frontendReadingGroupHomepageStatic", readingGroup.id),
-    edit: lh.link("frontendReadingGroupHomepageEdit", readingGroup.id)
+    static: `/groups/${readingGroup.id}`,
+    edit: `/groups/${readingGroup.id}/edit`
   };
   const { abilities, currentUserRole } = readingGroup.attributes;
   const canUpdateGroup = abilities.update;
@@ -20,7 +18,7 @@ function ChildNav({ readingGroup }) {
 
   const links = [
     {
-      to: lh.link("frontendReadingGroupAnnotations", readingGroup.id),
+      to: `/groups/${readingGroup.id}/annotations`,
       text: t("navigation.reading_group.annotations"),
       icon: "notes24",
       exact: true,
@@ -40,7 +38,7 @@ function ChildNav({ readingGroup }) {
 
   if (showMembersLink) {
     links.push({
-      to: lh.link("frontendReadingGroupMembers", readingGroup.id),
+      to: `/groups/${readingGroup.id}/members`,
       text: t("navigation.reading_group.members"),
       icon: "readingGroup24",
       exact: true,

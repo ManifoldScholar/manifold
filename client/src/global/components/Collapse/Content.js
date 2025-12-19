@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useEffect } from "react";
+import { useLayoutEffect, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import useCollapseContext from "./useCollapseContext";

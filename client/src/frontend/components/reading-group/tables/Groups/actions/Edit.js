@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Action from "global/components/table/Action";
-import lh from "helpers/linkHandler";
 
 function EditGroup({ readingGroup }) {
   const { t } = useTranslation();
@@ -11,7 +10,7 @@ function EditGroup({ readingGroup }) {
   if (!canEdit) return null;
 
   return (
-    <Action to={lh.link("frontendReadingGroupDetailSettings", readingGroup.id)}>
+    <Action to={`/groups/${readingGroup.id}/settings`}>
       {t("actions.edit")}
     </Action>
   );

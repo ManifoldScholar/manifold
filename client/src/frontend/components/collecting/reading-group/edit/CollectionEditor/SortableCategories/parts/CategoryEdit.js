@@ -1,7 +1,6 @@
 import { useId, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useUIDSeed } from "react-uid";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import Dialog from "global/components/dialog";
@@ -13,14 +12,14 @@ import * as Styled from "./styles";
 function CategoryEdit({ category, groupId, onError, onClose, confirm, index }) {
   const { t } = useTranslation();
 
-  const seed = useUIDSeed();
+  const baseId = useId();
 
   const isMarkdown = category?.attributes?.markdownOnly;
 
   function doUpdate(categoryId, data) {
     if (isMarkdown && data.attributes.title === "")
       /* eslint-disable-next-line no-param-reassign */
-      data.attributes.title = `markdown_${seed(index)}`;
+      data.attributes.title = `markdown_${baseId}-${index}`;
     return readingGroupsAPI.updateCategory(groupId, categoryId, data);
   }
 

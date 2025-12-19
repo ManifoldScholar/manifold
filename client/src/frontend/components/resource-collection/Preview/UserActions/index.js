@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Button from "global/components/atomic/Button";
-import lh from "helpers/linkHandler";
 import Share from "frontend/components/resource/Share";
 import * as Styled from "frontend/components/resource/Preview/UserActions/styles";
 
@@ -18,11 +17,7 @@ function ResourceCollectionPreviewUserActions({ resourceCollection }) {
 
   const { title, slug, projectSlug } = resourceCollection.attributes;
 
-  const detailUrl = lh.link(
-    "frontendProjectResourceCollection",
-    projectSlug,
-    slug
-  );
+  const detailUrl = `/projects/${projectSlug}/resource-collections/${slug}`;
 
   return (
     <Styled.List>

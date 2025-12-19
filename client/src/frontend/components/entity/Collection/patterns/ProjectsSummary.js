@@ -28,10 +28,7 @@ function ProjectsSummaryEntityCollection({ projects, ...passThroughProps }) {
         </ThumbnailGrid>
       )}
       FooterComponent={() => (
-        <FooterLink
-          to="/projects"
-          label={t("navigation.see_all_projects")}
-        />
+        <FooterLink to="/projects" label={t("navigation.see_all_projects")} />
       )}
       {...passThroughProps}
     />

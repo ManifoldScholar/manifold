@@ -1,7 +1,6 @@
 import { useId, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useUIDSeed } from "react-uid";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import Dialog from "global/components/dialog";
@@ -19,7 +18,7 @@ function NewCategory({
   refresh
 }) {
   const { t } = useTranslation();
-  const seed = useUIDSeed();
+  const baseId = useId();
   const dialogLabelId = useId();
   const [isDirty, setIsDirty] = useState(false);
 
@@ -64,7 +63,7 @@ function NewCategory({
       data.attributes.markdownOnly = true;
 
       if (!data.attributes.title) {
-        data.attributes.title = `markdown_${seed(count)}`;
+        data.attributes.title = `markdown_${baseId}-${count}`;
       }
     }
     return readingGroupsAPI.createCategory(groupId, data);

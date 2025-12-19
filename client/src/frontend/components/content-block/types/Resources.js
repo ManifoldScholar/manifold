@@ -4,7 +4,6 @@ import { withTranslation } from "react-i18next";
 import EntityListTotal from "global/components/entity/ListTotal";
 import ResourceCollectionListGrid from "frontend/components/resource-collection-list/Grid";
 import ResourceList from "frontend/components/resource-list";
-import lh from "helpers/linkHandler";
 
 export class ProjectContentBlockResourcesBlock extends PureComponent {
   static displayName = "Project.Content.Block.Resources";
@@ -94,10 +93,7 @@ export class ProjectContentBlockResourcesBlock extends PureComponent {
               resourceCollections={this.visibleCollections}
             />
             <EntityListTotal
-              linkTo={lh.link(
-                "frontendProjectResourceCollections",
-                this.entity.attributes.slug
-              )}
+              linkTo={`/projects/${this.entity.attributes.slug}/resource-collections`}
               entityName="Collection"
               count={this.countProjectCollections}
               alignLeft={this.isSparse}
@@ -112,10 +108,7 @@ export class ProjectContentBlockResourcesBlock extends PureComponent {
             <ResourceList.Thumbnails resources={this.visibleResources} />
 
             <EntityListTotal
-              linkTo={lh.link(
-                "frontendProjectResources",
-                this.entity.attributes.slug
-              )}
+              linkTo={`/projects/${this.entity.attributes.slug}/resources`}
               entityName="Resource"
               count={this.resourcesTotal}
               alignLeft={this.isSparse}

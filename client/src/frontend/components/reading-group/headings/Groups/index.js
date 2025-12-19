@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import { Navigation, Title } from "../parts";
-import { useFromStore } from "hooks";
+import { useSettings } from "hooks";
 import * as Styled from "./styles";
 
 function GroupsHeading({ currentUser }) {
@@ -10,12 +9,12 @@ function GroupsHeading({ currentUser }) {
 
   const links = [
     {
-      to: lh.link("frontendMyReadingGroups"),
+      to: "/my/groups",
       text: t("navigation.reading_group.my_groups"),
       exact: false
     },
     {
-      to: lh.link("frontendPublicReadingGroups"),
+      to: "/groups",
       text: t("navigation.reading_group.public_groups"),
       exact: true
     }
@@ -25,7 +24,7 @@ function GroupsHeading({ currentUser }) {
     attributes: {
       general: { disablePublicReadingGroups }
     }
-  } = useFromStore({ requestKey: "settings", action: "select" });
+  } = useSettings();
 
   return (
     <header>
@@ -52,7 +51,7 @@ function GroupsHeading({ currentUser }) {
                 />
               )}
               <Styled.CreateButton
-                to={lh.link("frontendMyReadingGroupsNew")}
+                to="/my/groups/new"
                 className="button-tertiary"
               >
                 {t("navigation.reading_group.create")}

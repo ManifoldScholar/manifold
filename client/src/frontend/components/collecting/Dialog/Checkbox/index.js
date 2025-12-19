@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import { useUID } from "react-uid";
 import * as Styled from "./styles";
 
 function CollectingDialogCheckbox({
@@ -10,7 +9,7 @@ function CollectingDialogCheckbox({
   onChange,
   showLock
 }) {
-  const uid = useUID();
+  const uid = useId();
   const [assumeChecked, setAssumeChecked] = useState(checked);
 
   useEffect(() => {

@@ -2,7 +2,6 @@ import capitalize from "lodash/capitalize";
 import { useTranslation } from "react-i18next";
 import FormattedDate from "global/components/FormattedDate";
 import Badge from "frontend/components/resource/Badge";
-import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 export default function ResourceListItem({
@@ -54,17 +53,8 @@ export default function ResourceListItem({
             <Styled.Link
               to={
                 resourceCollection
-                  ? lh.link(
-                      "frontendProjectCollectionResource",
-                      resource.attributes.projectSlug,
-                      resourceCollection.attributes.slug,
-                      resource.attributes.slug
-                    )
-                  : lh.link(
-                      "frontendProjectResource",
-                      project.attributes.slug,
-                      resource.attributes.slug
-                    )
+                  ? `/projects/${resource.attributes.projectSlug}/resource-collections/${resourceCollection.attributes.slug}/resources/${resource.attributes.slug}`
+                  : `/projects/${project.attributes.slug}/resources/${resource.attributes.slug}`
               }
             >
               <Styled.Title as={`h${headingLevel}`}>{title}</Styled.Title>

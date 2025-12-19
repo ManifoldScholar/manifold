@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import Content from "./Content";
 import Meta from "./Meta";
-import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 class Text extends Component {
@@ -83,7 +82,7 @@ class Text extends Component {
 
   get readUrl() {
     const { slug } = this.textAttributes;
-    return lh.link("reader", slug);
+    return `/read/${slug}`;
   }
 
   render() {

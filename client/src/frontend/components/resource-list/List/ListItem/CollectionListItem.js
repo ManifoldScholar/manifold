@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import FormattedDate from "global/components/FormattedDate";
 import Badge from "frontend/components/resource/Badge/Collection";
-import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 export default function ResourceCollectionListItem({
@@ -29,11 +28,7 @@ export default function ResourceCollectionListItem({
         <Styled.TextColumn>
           {renderAsLink ? (
             <Styled.Link
-              to={lh.link(
-                "frontendProjectResourceCollection",
-                project.attributes.slug,
-                collection.attributes.slug
-              )}
+              to={`/projects/${project.attributes.slug}/resource-collections/${collection.attributes.slug}`}
             >
               <Styled.Title as={`h${headingLevel}`}>{title}</Styled.Title>
             </Styled.Link>

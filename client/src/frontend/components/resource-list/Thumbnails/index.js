@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Resource from "frontend/components/resource";
-import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 export default class ResourceListThumbnails extends Component {
@@ -16,16 +15,10 @@ export default class ResourceListThumbnails extends Component {
     return (
       <Styled.Grid>
         {this.props.resources.map(resource => {
-          const { projectSlug } = resource.attributes ?? {};
+          const { projectSlug, slug } = resource.attributes ?? {};
           return (
             <li key={resource.id}>
-              <Styled.Link
-                to={lh.link(
-                  "frontendProjectResource",
-                  projectSlug,
-                  resource.attributes.slug
-                )}
-              >
+              <Styled.Link to={`/projects/${projectSlug}/resources/${slug}`}>
                 <Resource.Thumbnail
                   key={resource.id}
                   resource={resource}

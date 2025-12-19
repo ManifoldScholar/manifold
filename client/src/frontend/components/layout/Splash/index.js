@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import * as Styled from "./styles";
 
@@ -114,7 +113,7 @@ export default function Splash(props) {
                 className="utility-button"
                 role="button"
                 tabIndex="0"
-                to={lh.link("frontendSignUp")}
+                to="/signup"
               >
                 <Styled.Button
                   className={classNames({

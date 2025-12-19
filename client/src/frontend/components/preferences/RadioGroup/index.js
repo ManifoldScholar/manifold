@@ -1,11 +1,10 @@
-import React from "react";
+import { useId } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useUIDSeed } from "react-uid";
 import * as Styled from "./styles";
 
 function RadioGroup({ preference, value, options, onChange, inputProps = {} }) {
-  const uidSeed = useUIDSeed();
+  const baseId = useId();
   const { t } = useTranslation();
 
   if (!preference) return null;
@@ -23,19 +22,17 @@ function RadioGroup({ preference, value, options, onChange, inputProps = {} }) {
       )}
       {Object.keys(localizedOptions).map(option => {
         const checked = value === option;
+        const optionId = `${baseId}-${option}`;
 
         return (
-          <Styled.RadioOption
-            id={uidSeed(option)}
-            key={`${preference.key}-${option}`}
-          >
+          <Styled.RadioOption id={optionId} key={`${preference.key}-${option}`}>
             <Styled.RadioInput
               type="radio"
               name={preference.key}
               value={option}
               checked={onChange ? checked : undefined}
               onChange={onChange}
-              aria-labelledby={uidSeed(option)}
+              aria-labelledby={optionId}
               {...inputProps}
             />
             <Styled.Toggle />

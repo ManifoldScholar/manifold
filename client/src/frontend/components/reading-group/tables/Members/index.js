@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import Table from "global/components/table/index";
@@ -11,7 +11,6 @@ import NoteStyle from "./NoteStyle";
 import { RemoveMember, EditMember } from "./actions";
 import get from "lodash/get";
 import classNames from "classnames";
-import lh from "helpers/linkHandler";
 import Authorization from "helpers/authorization";
 
 class MembersTable extends PureComponent {
@@ -84,12 +83,13 @@ class MembersTable extends PureComponent {
         models={this.members}
         pagination={this.pagination}
         unit={t("glossary.member", { count: this.members.length })}
-        linkCreator={model =>
-          lh.link("frontendReadingGroupAnnotations", readingGroup.id, {
-            page: 1,
+        linkCreator={model => {
+          const params = new URLSearchParams({
+            page: "1",
             readingGroupMembership: model.id
-          })
-        }
+          });
+          return `/groups/${readingGroup.id}/annotations?${params.toString()}`;
+        }}
       >
         <Column
           header={t("tables.reading_group_members.headers.name")}
@@ -110,14 +110,12 @@ class MembersTable extends PureComponent {
                 />
                 <LinkedName
                   name={this.nameFor(model)}
-                  to={lh.link(
-                    "frontendReadingGroupAnnotations",
-                    readingGroup.id,
-                    {
-                      page: 1,
-                      readingGroupMembership: model.id
-                    }
-                  )}
+                  to={`/groups/${
+                    readingGroup.id
+                  }/annotations?${new URLSearchParams({
+                    page: "1",
+                    readingGroupMembership: model.id
+                  }).toString()}`}
                   tag={model.attributes.label}
                   hovering={hovering}
                 />

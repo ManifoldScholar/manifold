@@ -1,7 +1,6 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 import Cover from "frontend/components/resource-collection/Cover";
-import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 export default class ResourceCollectionGrid extends Component {
@@ -13,11 +12,7 @@ export default class ResourceCollectionGrid extends Component {
   };
 
   urlCreator = collection => {
-    return lh.link(
-      "frontendProjectResourceCollection",
-      collection.attributes.projectSlug,
-      collection.attributes.slug
-    );
+    return `/projects/${collection.attributes.projectSlug}/resource-collections/${collection.attributes.slug}`;
   };
 
   render() {
