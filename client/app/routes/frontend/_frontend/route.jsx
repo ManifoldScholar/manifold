@@ -10,13 +10,9 @@ import Layout from "frontend/components/layout";
 import { useSettings, useBodyClass, useFromStore } from "hooks";
 import get from "lodash/get";
 import { SearchProvider } from "hooks/useSearch/context";
+import { ErrorBoundary } from "./ErrorBoundary";
 
-// Only revalidate on form actions, not navigation
-// Subjects don't change during a session
-export const shouldRevalidate = ({ formAction, defaultShouldRevalidate }) => {
-  if (formAction) return defaultShouldRevalidate;
-  return false;
-};
+export const shouldRevalidate = false;
 
 const SUBJECT_FILTERS = { used: true };
 const JOURNAL_SUBJECT_FILTERS = { usedJournal: true };
@@ -39,6 +35,8 @@ export const loader = async ({ context }) => {
         : []
   };
 };
+
+export { ErrorBoundary };
 
 export default function FrontendLayout({ loaderData }) {
   useBodyClass("browse");

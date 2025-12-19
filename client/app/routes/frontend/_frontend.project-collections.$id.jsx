@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { redirect } from "react-router";
+import { redirect, data } from "react-router";
 import { ApiClient, projectCollectionsAPI, projectsAPI } from "api";
 import { routerContext } from "app/contexts";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
@@ -30,27 +30,36 @@ export const loader = async ({ params, request, context }) => {
   const { auth } = context.get(routerContext);
   const client = new ApiClient(auth?.authToken, { denormalize: true });
 
-  const projectCollection = await client.call(
-    projectCollectionsAPI.show(params.id)
-  );
+  try {
+    const projectCollection = await client.call(
+      projectCollectionsAPI.show(params.id)
+    );
 
-  if (!projectCollection) {
-    throw redirect("/project-collections");
-  }
-
-  const projectsData = await loadList({
-    request,
-    context,
-    fetchFn: projectsAPI.index,
-    options: {
-      defaultFilters: { ...PROJECTS_FILTER_RESET, collectionOrder: params.id }
+    if (!projectCollection) {
+      throw data(null, { status: 404 });
     }
-  });
 
-  return {
-    projectCollection,
-    ...projectsData
-  };
+    const projectsData = await loadList({
+      request,
+      context,
+      fetchFn: projectsAPI.index,
+      options: {
+        defaultFilters: { ...PROJECTS_FILTER_RESET, collectionOrder: params.id }
+      }
+    });
+
+    return {
+      projectCollection,
+      ...projectsData
+    };
+  } catch (error) {
+    // If it's already a Response (redirect or data), re-throw it
+    if (error instanceof Response) {
+      throw error;
+    }
+    // Otherwise, treat API errors as 404
+    throw data(null, { status: 404 });
+  }
 };
 
 export const clientLoader = async ({ request, serverLoader, params }) => {
@@ -78,10 +87,10 @@ export const clientLoader = async ({ request, serverLoader, params }) => {
 
 export default function ProjectCollectionDetailRoute({ loaderData }) {
   const { id } = useParams();
-  const { projectCollection, data: projects, meta } = loaderData || {};
+  const { projectCollection, data: projects, meta } = loaderData;
 
   const allSubjects = useSubjects();
-  const collectionSubjects = projectCollection?.relationships?.projectSubjects
+  const collectionSubjects = projectCollection.relationships?.projectSubjects
     ?.length
     ? allSubjects.filter(s =>
         projectCollection.relationships.projectSubjects.find(
@@ -123,20 +132,13 @@ export default function ProjectCollectionDetailRoute({ loaderData }) {
 
   const headContentProps = useEntityHeadContent(projectCollection);
 
-  if (!projectCollection) return null;
-
   return (
     <>
       <CheckFrontendMode
         debugLabel="ProjectCollectionDetail"
         isProjectSubpage
       />
-      {projectCollection && (
-        <EventTracker
-          event={EVENTS.VIEW_RESOURCE}
-          resource={projectCollection}
-        />
-      )}
+      <EventTracker event={EVENTS.VIEW_RESOURCE} resource={projectCollection} />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <HeadContent {...headContentProps} />
       <h1 className="screen-reader-text">
