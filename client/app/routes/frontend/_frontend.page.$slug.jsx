@@ -1,22 +1,13 @@
-import { ApiClient, pagesAPI } from "api";
-import { routerContext } from "app/contexts";
+import { pagesAPI } from "api";
 import HeadContent from "global/components/HeadContent";
-import { data } from "react-router";
+import loadEntity from "app/routes/utility/loaders/loadEntity";
 
 export const loader = async ({ params, context }) => {
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
-
-  try {
-    return await client.call(pagesAPI.show(params.slug));
-  } catch (error) {
-    throw data(null, { status: 404 });
-  }
+  const fetchFn = () => pagesAPI.show(params.slug);
+  return loadEntity({ context, fetchFn });
 };
 
-export default function PageRoute({ loaderData }) {
-  const page = loaderData;
-
+export default function PageRoute({ loaderData: page }) {
   return (
     <section>
       <HeadContent title={page.attributes.title} appendDefaultTitle />

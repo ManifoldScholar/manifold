@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { redirect, data } from "react-router";
-import { ApiClient, projectCollectionsAPI, projectsAPI } from "api";
-import { routerContext } from "app/contexts";
+import { redirect } from "react-router";
+import { projectCollectionsAPI, projectsAPI } from "api";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadList from "app/routes/utility/loaders/loadList";
+import loadEntity from "app/routes/utility/loaders/loadEntity";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -27,61 +27,41 @@ export const loader = async ({ params, request, context }) => {
     throw redirect("/project-collections");
   }
 
-  const { auth } = context.get(routerContext);
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const fetchFn = () => projectCollectionsAPI.show(params.id);
+  const projectCollection = await loadEntity({ context, fetchFn });
 
-  try {
-    const projectCollection = await client.call(
-      projectCollectionsAPI.show(params.id)
-    );
-
-    if (!projectCollection) {
-      throw data(null, { status: 404 });
-    }
-
-    const projectsData = await loadList({
-      request,
-      context,
-      fetchFn: projectsAPI.index,
-      options: {
-        defaultFilters: { ...PROJECTS_FILTER_RESET, collectionOrder: params.id }
-      }
-    });
-
-    return {
-      projectCollection,
-      ...projectsData
-    };
-  } catch (error) {
-    // If it's already a Response (redirect or data), re-throw it
-    if (error instanceof Response) {
-      throw error;
-    }
-    // Otherwise, treat API errors as 404
-    throw data(null, { status: 404 });
-  }
-};
-
-export const clientLoader = async ({ request, serverLoader, params }) => {
-  const fetchFn = (filters, pagination) =>
-    projectsAPI.index(filters, pagination);
-
-  const clientLoaderFn = createListClientLoader({
-    hydrateKey: "__projectCollectionProjectsHydrated",
-    fetchFn,
+  const projectsData = await loadList({
+    request,
+    context,
+    fetchFn: projectsAPI.index,
     options: {
       defaultFilters: { ...PROJECTS_FILTER_RESET, collectionOrder: params.id }
     }
   });
 
-  const listData = await clientLoaderFn({ request, serverLoader });
+  return {
+    projectCollection,
+    ...projectsData
+  };
+};
+
+export const clientLoader = async ({ request, serverLoader, params }) => {
+  const clientFetch = createListClientLoader({
+    hydrateKey: "__projectCollectionProjectsHydrated",
+    fetchFn: projectsAPI.index,
+    options: {
+      defaultFilters: { ...PROJECTS_FILTER_RESET, collectionOrder: params.id }
+    }
+  });
+
+  const projectsData = await clientFetch({ request, serverLoader });
 
   // Get the projectCollection from serverLoader (it doesn't change with filters)
-  const serverData = await serverLoader();
+  const { projectCollection } = await serverLoader();
 
   return {
-    ...serverData,
-    ...listData
+    projectCollection,
+    ...projectsData
   };
 };
 
