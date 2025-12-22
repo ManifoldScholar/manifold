@@ -1,5 +1,4 @@
 import { redirect } from "react-router";
-import lh from "helpers/linkHandler";
 import { routerContext } from "app/contexts";
 
 /**
@@ -10,7 +9,7 @@ export default function requireLogin(request, context) {
 
   if (!auth?.user) {
     const url = new URL(request.url);
-    const loginPath = lh.link("frontendLogin");
+    const loginPath = "/login";
     const redirectUrl = url?.pathname
       ? `${loginPath}?redirect_uri=${encodeURIComponent(url.pathname)}`
       : loginPath;

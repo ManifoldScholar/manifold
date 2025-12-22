@@ -6,7 +6,6 @@ export const routerContext = createRouterContext();
 
 // Entity contexts - used to pass entity from parent to child loaders
 export const readingGroupContext = createRouterContext();
-export const journalContext = createRouterContext();
 export const projectContext = createRouterContext();
 
 // React context - provides settings, auth, pages, and utilities to components

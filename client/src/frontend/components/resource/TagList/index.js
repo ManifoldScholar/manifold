@@ -41,7 +41,9 @@ class ResourceTagList extends Component {
   createTagLink(tag, projectSlug, index) {
     const { disabledLinks } = this.props;
     if (!projectSlug && !disabledLinks) return null;
-    const url = `/projects/${projectSlug}/resources?tag=${encodeURIComponent(tag.toLowerCase())}`;
+    const url = `/projects/${projectSlug}/resources?tag=${encodeURIComponent(
+      tag.toLowerCase()
+    )}`;
     const tagProps = disabledLinks
       ? { className: "disabled" }
       : { onClick: this.stopPropagation, to: url, as: Link };

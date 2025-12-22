@@ -9,6 +9,16 @@ export default {
     };
   },
 
+  journalIndex(jId, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/journals/${jId}/relationships/journal_issues`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   create(jId, journalIssue) {
     return {
       endpoint: `/api/v1/journals/${jId}/relationships/journal_issues`,
