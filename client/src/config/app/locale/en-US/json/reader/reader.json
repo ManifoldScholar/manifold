@@ -6,9 +6,7 @@
       "select_reading_group": "Select $t(glossary.reading_group_one)",
       "annotate_passage": "$t(actions.annotate) this passage",
       "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(glossary.page_title_case_one)",
-      "return_to_reader": "Return to Reader",
-      "manage_highlight": "Begin highlight; {{chunk}}; end highlight.",
-      "view_annotations": "Begin annotation; {{chunk}}; end annotation."
+      "return_to_reader": "Return to Reader"
     },
     "menus": {
       "appearance": {
@@ -105,6 +103,9 @@
       "placeholder": "Optionally, include a message about why you are reporting this content.",
       "message_input_label": "Message"
     },
-    "annotated_passage": "Annotated passage"
+    "annotated_passage": "Annotated passage",
+    "highlight_aria_label": "Begin highlight; {{chunk}}; end highlight.",
+    "annotation_aria_label": "Begin annotation; {{chunk}}; end annotation.",
+    "annotation_highlight_aria_label": "Begin highlight and annotation; {{chunk}}; end highlight and annotation."
   }
 }
