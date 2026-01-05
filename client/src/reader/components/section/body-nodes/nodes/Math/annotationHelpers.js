@@ -79,7 +79,7 @@ export const getAnnotationStyles = (
     ? removableHighlight.id
     : null;
   const isInteractive =
-    (!pending && !isDetail && !!textAnnotationIds.length) || removableHighlight;
+    !pending && !isDetail && (!!textAnnotationIds.length || removableHighlight);
 
   const classes = classNames({
     primary: isCreator,
@@ -100,19 +100,29 @@ export const getAnnotationStyles = (
     previous
   });
 
+  const ariaLabel = () => {
+    if (!!textAnnotationIds.length && highlighted)
+      return this.props.t("reader.annotation_highlight_aria_label", {
+        chunk: "mathematical content"
+      });
+
+    if (highlighted)
+      return this.props.t("reader.highlight_aria_label", {
+        chunk: "mathematical content"
+      });
+
+    return this.props.t("reader.annotation_aria_label", {
+      chunk: "mathematical content"
+    });
+  };
+
   const interactiveAttributes =
     isInteractive && !hasInteractiveAncestor && !previous
       ? {
           tabIndex: 0,
           role: "button",
           "aria-haspopup": removableHighlight ? "menu" : "dialog",
-          "aria-label": removableHighlight
-            ? t("reader.actions.manage_highlight", {
-                chunk: "mathematical content"
-              })
-            : t("reader.actions.view_annotations", {
-                chunk: "mathematical content"
-              })
+          "aria-label": ariaLabel()
         }
       : {};
 

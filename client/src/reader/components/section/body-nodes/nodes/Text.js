@@ -222,9 +222,11 @@ class TextNode extends Component {
               tabIndex: removableHighlight ? 0 : undefined,
               role: removableHighlight ? "button" : undefined,
               "aria-haspopup": removableHighlight ? "menu" : "dialog",
-              "aria-label": removableHighlight
-                ? this.ariaLabelForHighlight(chunk)
-                : this.ariaLabelForAnnotation(chunk)
+              "aria-label": this.ariaLabelForAnnotations(
+                chunk,
+                !!textAnnotationIds.length,
+                highlighted
+              )
             }
           : {};
 
@@ -268,12 +270,14 @@ class TextNode extends Component {
     return Number.isInteger(count) ? count : null;
   }
 
-  ariaLabelForHighlight(chunk) {
-    return this.props.t("reader.actions.manage_highlight", { chunk });
-  }
+  ariaLabelForAnnotations(chunk, annotated, highlighted) {
+    if (annotated && highlighted)
+      return this.props.t("reader.annotation_highlight_aria_label", { chunk });
 
-  ariaLabelForAnnotation(chunk) {
-    return this.props.t("reader.actions.view_annotations", { chunk });
+    if (highlighted)
+      return this.props.t("reader.highlight_aria_label", { chunk });
+
+    return this.props.t("reader.annotation_aria_label", { chunk });
   }
 
   doScroll(withTimeout = false) {
