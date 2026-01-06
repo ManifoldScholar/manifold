@@ -167,6 +167,7 @@ class ApplicationController < ActionController::API
   def render_error_response(error)
     # :nocov:
     raise error if Rails.env.test?
+    Rails.logger.error(["#{error.class.name} - #{error.message}", *error.backtrace].join("\n"))
 
     options = {
       status: 500,
