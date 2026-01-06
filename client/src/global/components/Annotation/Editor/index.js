@@ -319,8 +319,11 @@ class AnnotationEditor extends PureComponent {
             <UIDConsumer name={id => `annotation-textarea-${id}`}>
               {id => (
                 <>
-                  <label htmlFor={id} className="screen-reader-text">
-                    {t("reader.actions.annotate_passage")}
+                  <label
+                    htmlFor={id}
+                    className="annotation-editor__textarea-label"
+                  >
+                    {t("glossary.annotation_title_case_one")}
                   </label>
                   <textarea
                     ref={ci => {
@@ -330,7 +333,7 @@ class AnnotationEditor extends PureComponent {
                     aria-describedby="annotation-textarea-error"
                     aria-required="true"
                     style={{ width: "100%" }}
-                    placeholder={`${t("reader.actions.annotate_passage")}...`}
+                    placeholder={`${t("reader.actions.annotate_passage")}…`}
                     onChange={this.handleBodyChange}
                     value={this.state.body}
                     className="annotation-editor__textarea"

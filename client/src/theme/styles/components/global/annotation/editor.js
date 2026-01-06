@@ -19,7 +19,7 @@ export default `
     ${drawerPadding("padding-left")}
     padding-top: 32px;
 
-    ${respond(`padding-top: 48px;`, 90)}
+    ${respond(`padding-top: 40px;`, 90)}
 
     .annotation-comments &,
     .resource-comments & {
@@ -80,6 +80,13 @@ export default `
       &:focus-visible::placeholder {
         color: var(--strong-color);
       }
+    }
+
+    &__textarea-label {
+      ${utilityPrimary}
+      font-size: 12px;
+      display: block;
+      margin-block-end: 4px;
     }
 
     &__actions {
