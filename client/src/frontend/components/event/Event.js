@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Tile from "./Tile/index";
 
@@ -72,7 +72,7 @@ export default class Event extends PureComponent {
       dateFormat: "MMMM dd, yyyy",
       title: attr.subjectTitle,
       icon: "activityResource64",
-      linkHref: `/projects/${attr.projectSlug}/resources/${attr.subjectSlug}`
+      linkHref: `/projects/${attr.projectSlug}/resource/${attr.subjectSlug}`
     };
   }
 
@@ -84,7 +84,7 @@ export default class Event extends PureComponent {
       dateFormat: "MMMM dd, yyyy",
       title: attr.subjectTitle,
       icon: "activityResource64",
-      linkHref: `/projects/${attr.projectSlug}/resource-collections/${attr.subjectSlug}`
+      linkHref: `/projects/${attr.projectSlug}/resource-collection/${attr.subjectSlug}`
     };
   }
 

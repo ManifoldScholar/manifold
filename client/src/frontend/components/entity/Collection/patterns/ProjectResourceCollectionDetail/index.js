@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import get from "lodash/get";
 import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
-import { requests } from "api";
 import ResourceList from "frontend/components/resource-list/List";
 import SlideShow from "frontend/components/resource-list/SlideShow/Fetcher";
 import Description from "frontend/components/resource-collection/Description";
@@ -48,7 +47,8 @@ function ProjectResourceCollectionDetail({
         <>
           <SlideShow
             resourceCollection={resourceCollection}
-            fetchKey={requests.feSlideshow}
+            initialResources={resources}
+            initialMeta={meta}
           />
           <Styled.SectionHeader id={listHeaderId}>
             {t("pages.subheaders.resource_list")}

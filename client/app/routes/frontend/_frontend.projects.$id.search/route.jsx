@@ -5,7 +5,7 @@ import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
 import { useSearchContext } from "hooks/useSearch/context";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
-import * as Styled from "frontend/containers/ProjectSearch/styles";
+import * as Styled from "./styles";
 
 export default function ProjectSearch() {
   const project = useOutletContext();

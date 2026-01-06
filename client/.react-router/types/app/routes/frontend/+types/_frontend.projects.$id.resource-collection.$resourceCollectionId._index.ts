@@ -2,10 +2,10 @@
 
 import type { GetInfo, GetAnnotations } from "react-router/internal";
 
-type Module = typeof import("../_frontend.projects.$id.search.js")
+type Module = typeof import("../_frontend.projects.$id.resource-collection.$resourceCollectionId._index.js")
 
 type Info = GetInfo<{
-  file: "routes/frontend/_frontend.projects.$id.search.jsx",
+  file: "routes/frontend/_frontend.projects.$id.resource-collection.$resourceCollectionId._index.jsx",
   module: Module
 }>
 
@@ -19,8 +19,11 @@ type Matches = [{
   id: "routes/frontend/_frontend.projects.$id";
   module: typeof import("../_frontend.projects.$id.js");
 }, {
-  id: "routes/frontend/_frontend.projects.$id.search";
-  module: typeof import("../_frontend.projects.$id.search.js");
+  id: "routes/frontend/_frontend.projects.$id.resource-collection.$resourceCollectionId";
+  module: typeof import("../_frontend.projects.$id.resource-collection.$resourceCollectionId.js");
+}, {
+  id: "routes/frontend/_frontend.projects.$id.resource-collection.$resourceCollectionId._index";
+  module: typeof import("../_frontend.projects.$id.resource-collection.$resourceCollectionId._index.js");
 }];
 
 type Annotations = GetAnnotations<Info & { module: Module, matches: Matches }, false>;

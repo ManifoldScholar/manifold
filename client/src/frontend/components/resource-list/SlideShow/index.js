@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import { PureComponent, createRef } from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
 import ResourceMediaFactory from "frontend/components/resource/media/Factory";
@@ -43,7 +43,7 @@ class ResourceSlideshow extends PureComponent {
     );
     this.state.totalCount = props.pagination?.totalCount || 0;
 
-    this.sliderRef = React.createRef(null);
+    this.sliderRef = createRef(null);
     this.debouncedScroll = debounce(this.bindScroll, 100);
   }
 

@@ -12,7 +12,7 @@ export default class ResourceCollectionGrid extends Component {
   };
 
   urlCreator = collection => {
-    return `/projects/${collection.attributes.projectSlug}/resource-collections/${collection.attributes.slug}`;
+    return `/projects/${collection.attributes.projectSlug}/resource-collection/${collection.attributes.slug}`;
   };
 
   render() {
