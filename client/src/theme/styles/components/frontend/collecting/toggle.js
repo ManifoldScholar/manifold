@@ -51,9 +51,17 @@ export default `
     white-space: nowrap;
     cursor: pointer;
 
+    &:focus-visible {
+      outline: none;
+
+      .collecting-toggle__inner {
+        ${defaultFocusStyle}
+      }
+    }
+
     &--inline {
       margin-block-start: 3px;
-      margin-inline-end: 64px; 
+      margin-inline-end: 64px;
     }
 
     &--project-cover {

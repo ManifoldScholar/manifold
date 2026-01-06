@@ -148,6 +148,8 @@ function CollectingToggle({
         onClick={onClick}
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
+        onFocus={onEnter}
+        onBlur={onLeave}
         className={classNames({
           "collecting-toggle": true,
           "collecting-toggle--inline": inline,
