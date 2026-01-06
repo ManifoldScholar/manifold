@@ -9,8 +9,6 @@ import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
 import { useListFilters, useSubjects, useListSearchParams } from "hooks";
 
-export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
-
 const FILTER_RESET = { standaloneModeEnforced: "false" };
 
 export const loader = async ({ request, context }) => {

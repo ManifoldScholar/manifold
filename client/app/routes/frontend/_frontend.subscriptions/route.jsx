@@ -10,8 +10,6 @@ import { useCurrentUser, useNotification } from "hooks";
 import HeadContent from "global/components/HeadContent";
 import * as Styled from "./styles";
 
-export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
-
 export const loader = async ({ request, context }) => {
   requireLogin(request, context);
   return null;

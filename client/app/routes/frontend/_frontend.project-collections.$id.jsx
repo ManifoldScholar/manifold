@@ -16,8 +16,6 @@ import EventTracker, { EVENTS } from "global/components/EventTracker";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { useListFilters, useListSearchParams, useSubjects } from "hooks";
 
-export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
-
 const PROJECTS_FILTER_RESET = { collectionOrder: null };
 
 export const loader = async ({ params, request, context }) => {

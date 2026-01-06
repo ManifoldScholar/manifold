@@ -3,8 +3,6 @@ import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import * as Styled from "./styles";
 
-export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
-
 export const loader = async ({ context }) => {
   const { settings } = context.get(routerContext);
   return { settings };
