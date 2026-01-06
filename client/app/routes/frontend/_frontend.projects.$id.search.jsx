@@ -1,0 +1,68 @@
+import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import SearchQuery from "global/components/search/query";
+import SearchResults from "global/components/search/results";
+import { useSearchContext } from "hooks/useSearch/context";
+import CheckFrontendMode from "global/containers/CheckFrontendMode";
+import * as Styled from "frontend/containers/ProjectSearch/styles";
+
+export default function ProjectSearch() {
+  const project = useOutletContext();
+  const {
+    results,
+    resultsMeta,
+    searchQueryState,
+    setQueryState,
+    setPage
+  } = useSearchContext();
+
+  const { t } = useTranslation();
+
+  const facets = [
+    { label: t("glossary.resource_other"), value: "Resource" },
+    { label: t("glossary.text_other"), value: "Text" },
+    { label: t("glossary.annotation_other"), value: "Annotation" },
+    { label: t("glossary.full_text_one"), value: "TextSection" }
+  ];
+
+  const breadcrumbs = [
+    {
+      to: `/projects/${project?.attributes?.slug}`,
+      label: project?.attributes?.titlePlaintext
+    }
+  ];
+
+  return (
+    <>
+      <CheckFrontendMode debugLabel="ProjectSearch" isProjectSubpage />
+      <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
+      <h1 className="screen-reader-text">{t("search.title")}</h1>
+      <Styled.FormWrapper>
+        <Styled.Inner>
+          <h2 className="screen-reader-text">{t("search.form")}</h2>
+          <SearchQuery.Form
+            projectId={project.id}
+            searchQueryState={searchQueryState}
+            setQueryState={setQueryState}
+            facets={facets}
+          />
+        </Styled.Inner>
+      </Styled.FormWrapper>
+      {results && (
+        <Styled.ResultsWrapper>
+          <Styled.Inner>
+            <h2 className="screen-reader-text">{t("search.results")}</h2>
+            <SearchResults.List
+              pagination={resultsMeta.pagination}
+              paginationClickHandler={setPage}
+              results={results}
+              hideParent
+              context="frontend"
+            />
+          </Styled.Inner>
+        </Styled.ResultsWrapper>
+      )}
+    </>
+  );
+}
