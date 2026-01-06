@@ -8,7 +8,13 @@ export const inertToggleClass = `
   pointer-events: none;
 `;
 
-function Toggle({ children, className, activeClassName, as }) {
+function Toggle({
+  children,
+  className,
+  activeClassName,
+  as,
+  hideAriaExpanded
+}) {
   const {
     visible,
     toggleProps,
@@ -16,10 +22,14 @@ function Toggle({ children, className, activeClassName, as }) {
     height,
     stubHeight
   } = useCollapseContext();
+  const {
+    "aria-expanded": dynamicAriaExpanded,
+    ...restToggleProps
+  } = toggleProps;
   const applyLabelPropsToToggle =
     !React.isValidElement(children) || typeof children === "string";
   const mergedToggleProps = {
-    ...toggleProps,
+    ...restToggleProps,
     ...(applyLabelPropsToToggle ? labelProps : {})
   };
 
@@ -34,6 +44,8 @@ function Toggle({ children, className, activeClassName, as }) {
             [activeClassName]: activeClassName ? visible : false,
             [css(inertToggleClass)]: height <= stubHeight
           })}
+          // if changing the toggle text on expand/collapse, don't use aria-expanded
+          aria-expanded={hideAriaExpanded ? undefined : dynamicAriaExpanded}
           {...mergedToggleProps}
         >
           {typeof children === "function"
@@ -54,7 +66,8 @@ Toggle.propTypes = {
     PropTypes.func
   ]),
   className: PropTypes.string,
-  activeClassName: PropTypes.string
+  activeClassName: PropTypes.string,
+  ariaExpanded: PropTypes.bool
 };
 
 export default Toggle;

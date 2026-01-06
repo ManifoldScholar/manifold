@@ -1,6 +1,6 @@
 import Collapse from "global/components/Collapse";
 import * as Styled from "./styles";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 
 export default function FromNodesWrapper({ children, overlayLight }) {
@@ -12,18 +12,10 @@ export default function FromNodesWrapper({ children, overlayLight }) {
         <blockquote>{children}</blockquote>
         <Styled.Overlay $light={overlayLight} />
       </Styled.Content>
-      <Styled.Toggle>
-        <span className="toggle-show-label">
-          <Trans
-            i18nKey={"actions.expand_passage"}
-            components={[<span className="screen-reader-text" />]}
-          />
-        </span>
+      <Styled.Toggle activeClassName="expanded" hideAriaExpanded>
+        <span className="toggle-show-label">{t("actions.expand_passage")}</span>
         <span className="toggle-hide-label">
-          <Trans
-            i18nKey={"actions.collapse_passage"}
-            components={[<span className="screen-reader-text" />]}
-          />
+          {t("actions.collapse_passage")}
         </span>
         <IconComposer icon="disclosureDown16" size={16} />
       </Styled.Toggle>

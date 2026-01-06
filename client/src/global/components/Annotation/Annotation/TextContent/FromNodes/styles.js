@@ -29,7 +29,7 @@ export const Toggle = styled(Collapse.Toggle)`
     display: none;
   }
 
-  &[aria-expanded="true"] {
+  &.expanded {
     --_toggle-arrow-transform: rotate(180deg);
     margin-block-start: 14px;
 
