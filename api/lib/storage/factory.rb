@@ -219,7 +219,7 @@ module Storage
         if primary_store.file?
           Rails.configuration.manifold.api_url&.sub(%r{/\z}, "") || ""
         else
-          UploadConfig.asset_host || S3Config.endpoint
+          UploadConfig.asset_host
         end
       end
     end
