@@ -1,6 +1,5 @@
 import { ApiClient, settingsAPI, meAPI, pagesAPI } from "api";
 import { routerContext } from "../contexts";
-import denormalize from "helpers/api/denormalize";
 
 const getCookie = (request, name) => {
   const cookieHeader = request.headers.get("cookie") || "";
@@ -10,11 +9,17 @@ const getCookie = (request, name) => {
 
 export const bootstrapMiddleware = async ({ request, context }, next) => {
   const authToken = getCookie(request, "authToken");
-  const client = new ApiClient(authToken);
+  const client = new ApiClient(authToken, { denormalize: true });
 
-  const [settingsResult, userResult, pagesResult] = await Promise.allSettled([
+  const [
+    settingsResult,
+    userResult,
+    collectionResult,
+    pagesResult
+  ] = await Promise.allSettled([
     client.call(settingsAPI.show()),
     authToken ? client.call(meAPI.show()) : Promise.resolve(null),
+    authToken ? client.call(meAPI.myCollection()) : Promise.resolve(null),
     client.call(pagesAPI.index())
   ]);
 
@@ -32,8 +37,20 @@ export const bootstrapMiddleware = async ({ request, context }, next) => {
   }
 
   if (userResult.status === "fulfilled" && userResult.value) {
+    const user = userResult.value?.data;
+
+    if (
+      collectionResult.status === "fulfilled" &&
+      collectionResult.value?.data
+    ) {
+      if (!user.relationships) {
+        user.relationships = {};
+      }
+      user.relationships.collection = collectionResult.value.data;
+    }
+
     auth = {
-      user: userResult.value?.data,
+      user,
       authToken
     };
   } else if (authToken && userResult.status === "rejected") {
@@ -41,7 +58,7 @@ export const bootstrapMiddleware = async ({ request, context }, next) => {
   }
 
   if (pagesResult.status === "fulfilled" && pagesResult.value) {
-    pages = denormalize(pagesResult.value);
+    pages = pagesResult.value?.data ?? [];
   } else if (pagesResult.status === "rejected") {
     console.error("[Middleware] Failed to load pages:", pagesResult.reason);
   }

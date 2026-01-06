@@ -1,19 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { collectingAPI, requests } from "api";
-import { useDispatch } from "react-redux";
-import { entityStoreActions } from "actions";
+import { collectingAPI } from "api";
 import withReadingGroups from "hoc/withReadingGroups";
 import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
-import { useCurrentUser } from "hooks";
+import { useCurrentUser, useApiCallback, useRevalidate } from "hooks";
 
 const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals"];
-
-const { request } = entityStoreActions;
 
 function determineView(collected, hovered, isCollecting) {
   if (collected) {
@@ -65,8 +61,10 @@ function CollectingToggle({
   }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const currentUser = useCurrentUser();
+  const revalidate = useRevalidate();
 
-  const dispatch = useDispatch();
+  const collectCollectable = useApiCallback(collectingAPI.collect);
+  const removeCollectable = useApiCallback(collectingAPI.remove);
 
   const collected = inCollections(collectable, currentUser, ...myReadingGroups);
 
@@ -87,33 +85,47 @@ function CollectingToggle({
     };
   };
 
-  function doCollect(collection = currentUser) {
-    const call = collectingAPI.collect([collectable], collection);
-    const collectRequest = request(call, requests.feCollectCollectable);
-    dispatch(collectRequest);
-    setHovered(false);
-    setIsCollecting(true);
-  }
+  const doCollect = useCallback(
+    async (collection = currentUser) => {
+      try {
+        await collectCollectable([collectable], collection);
+        setHovered(false);
+        setIsCollecting(true);
+        revalidate();
+      } catch (error) {
+        console.error("Failed to collect:", error);
+      }
+    },
+    [collectable, currentUser, collectCollectable, revalidate]
+  );
 
-  function doRemove(collection = currentUser) {
-    const call = collectingAPI.remove([collectable], collection);
-    const collectRequest = request(call, requests.feCollectCollectable);
-    dispatch(collectRequest).promise.then(() => {
-      if (onUncollect) onUncollect(collection);
-    });
-    setHovered(false);
-  }
+  const doRemove = useCallback(
+    async (collection = currentUser) => {
+      try {
+        await removeCollectable([collectable], collection);
+        setHovered(false);
+        revalidate();
+        if (onUncollect) onUncollect(collection);
+      } catch (error) {
+        console.error("Failed to remove from collection:", error);
+      }
+    },
+    [collectable, currentUser, removeCollectable, onUncollect, revalidate]
+  );
 
-  function onClick(event) {
-    event.stopPropagation();
-    // show dialog if user belongs to any RGs
-    if (hasReadingGroups) return setDialogVisible(true);
+  const onClick = useCallback(
+    event => {
+      event.stopPropagation();
+      // show dialog if user belongs to any RGs
+      if (hasReadingGroups) return setDialogVisible(true);
 
-    // user belongs to no RGs;
-    // if collected previously, remove;
-    // otherwise collect
-    collected ? doRemove() : doCollect();
-  }
+      // user belongs to no RGs;
+      // if collected previously, remove;
+      // otherwise collect
+      collected ? doRemove() : doCollect();
+    },
+    [hasReadingGroups, collected, doRemove, doCollect]
+  );
 
   function onEnter() {
     // don't change toggle presentation if user needs to open dialog
@@ -125,10 +137,13 @@ function CollectingToggle({
     setHovered(false);
   }
 
-  function handleDialogChange(isCollected, collection) {
-    if (isCollected) return doRemove(collection);
-    doCollect(collection);
-  }
+  const handleDialogChange = useCallback(
+    (isCollected, collection) => {
+      if (isCollected) return doRemove(collection);
+      doCollect(collection);
+    },
+    [doRemove, doCollect]
+  );
 
   function handleDialogClose() {
     setDialogVisible(false);

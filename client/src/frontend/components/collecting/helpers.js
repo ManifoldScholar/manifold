@@ -5,7 +5,9 @@ import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 
 export function getEntityCollection(entity, relationship = "collection") {
-  return get(entity, `relationships.${relationship}`);
+  const result = get(entity, `relationships.${relationship}`);
+  if (has(result, "data")) return result.data;
+  return result;
 }
 
 function isCollection(possibleCollection) {
