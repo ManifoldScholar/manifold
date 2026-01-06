@@ -1,41 +1,14 @@
-import { useLocation } from "react-router-dom";
-import useFromStore from "../useFromStore";
+import { useMatches } from "react-router";
 
 export default function useShowJournalsActive() {
-  const { pathname } = useLocation();
+  const matches = useMatches();
+  const routeId = "routes/frontend/_frontend.projects.$id";
 
-  let id;
-  let slug;
-  if (
-    pathname.includes("projects") &&
-    !pathname.includes("project-collections")
-  ) {
-    const idRegex = /[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/g;
-    const parts = pathname.split("/");
-    id = parts.find(p => p.match(idRegex));
+  const route = matches.find(m => m.id === routeId);
 
-    if (!id) {
-      slug = parts
-        .filter(Boolean)
-        .find(
-          p =>
-            !(p === "all" || p.startsWith("all?")) &&
-            p !== "backend" &&
-            p !== "projects"
-        );
-    }
-  }
+  if (!route) return false;
 
-  const projects = useFromStore({ path: `entityStore.entities.projects` });
+  const project = route.loaderData;
 
-  if (!id) {
-    id = projects
-      ? Object.keys(projects).find(p => projects[p].attributes.slug === slug)
-      : null;
-  }
-
-  if (!id && !slug) return false;
-
-  // Prevent flash where projects is active on first render by returning undefined rather than false.
-  return id && projects ? projects[id]?.attributes.isJournalIssue : undefined;
+  return project?.attributes.isJournalIssue ?? false;
 }

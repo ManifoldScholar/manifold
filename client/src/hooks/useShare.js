@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { urlWithTextFragment } from "./useCopyLinkToSelection";
-import useFromStore from "./useFromStore";
+import useSettings from "./useSettings";
 
 export default function useShare({
   title,
@@ -26,7 +26,7 @@ export default function useShare({
     }
   }, [copied]);
 
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const settings = useSettings();
 
   const shareIcon = size === "sm" ? "share24" : "share32";
 
