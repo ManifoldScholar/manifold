@@ -37,7 +37,7 @@ export default function createListClientLoader({
 
     // Client-side fetch for filter/pagination changes
     const result = await client.call(fetchFn(filters, pagination));
-    return { data: result ?? [], meta: result.meta ?? null };
+    return { data: result.data ?? [], meta: result.meta ?? null };
   };
 
   clientLoader.hydrate = true;

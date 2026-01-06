@@ -1,5 +1,4 @@
 import {
-  ApiClient,
   projectCollectionsAPI,
   journalsAPI,
   projectsAPI,
@@ -7,6 +6,7 @@ import {
 } from "api";
 import { routerContext } from "app/contexts";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
+import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
 import Content from "frontend/containers/Home/Content";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import HeadContent from "global/components/HeadContent";
@@ -32,49 +32,31 @@ const FEATURES_FILTERS = { home: true };
 export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
 
 export const loader = async ({ request, context }) => {
-  // Check library mode first (may redirect)
   checkLibraryMode({ request, context });
 
-  // Get settings and auth from middleware context
-  const { settings, auth } = context.get(routerContext) ?? {};
+  const { settings } = context.get(routerContext) ?? {};
 
   const { hasVisibleHomeProjectCollections, hasVisibleProjects } =
     settings?.attributes?.calculated ?? {};
   const showProjects = !hasVisibleHomeProjectCollections;
 
-  // Create authenticated API client with auto-denormalization
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
-
-  // Fetch all data in parallel
-  const [
-    journalsResult,
-    featuresResult,
-    projectsOrCollectionsResult
-  ] = await Promise.allSettled([
-    client.call(journalsAPI.index(JOURNAL_FILTERS)),
-    client.call(featuresAPI.index(FEATURES_FILTERS)),
-    client.call(
-      showProjects
-        ? projectsAPI.index(PROJECT_FILTERS, PROJECT_PAGINATION)
-        : projectCollectionsAPI.index(COLLECTION_FILTERS)
-    )
-  ]);
-
-  // Extract data from results (already denormalized by ApiClient)
-  const journals =
-    journalsResult.status === "fulfilled" ? journalsResult.value : [];
-  const features =
-    featuresResult.status === "fulfilled" ? featuresResult.value : [];
-  const projectsOrCollections =
-    projectsOrCollectionsResult.status === "fulfilled"
-      ? projectsOrCollectionsResult.value
-      : [];
+  const results = await loadParallelLists({
+    context,
+    fetchFns: {
+      journals: () => journalsAPI.index(JOURNAL_FILTERS),
+      features: () => featuresAPI.index(FEATURES_FILTERS),
+      projectsOrCollections: () =>
+        showProjects
+          ? projectsAPI.index(PROJECT_FILTERS, PROJECT_PAGINATION)
+          : projectCollectionsAPI.index(COLLECTION_FILTERS)
+    }
+  });
 
   return {
-    journals,
-    features,
-    projects: showProjects ? projectsOrCollections : null,
-    collections: !showProjects ? projectsOrCollections : null,
+    journals: results.journals ?? [],
+    features: results.features ?? [],
+    projects: showProjects ? results.projectsOrCollections ?? null : null,
+    collections: !showProjects ? results.projectsOrCollections ?? null : null,
     showProjects,
     hasVisibleProjects
   };

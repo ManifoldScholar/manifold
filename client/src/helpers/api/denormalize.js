@@ -55,20 +55,16 @@ export default function denormalize(response) {
     return { ...fullEntity, relationships: hydratedRelationships };
   };
 
-  // Hydrate all entities in data array
-  let result;
-  if (Array.isArray(data)) {
-    result = data.map(entity => hydrateEntity(entity));
-  } else {
-    result = hydrateEntity(data);
-  }
+  const result = {};
 
+  // Hydrate all entities in data array
   // Attach meta and links to the result for pagination/filtering support
-  if (meta && Array.isArray(result)) {
-    result.meta = meta;
-  }
-  if (links && Array.isArray(result)) {
-    result.links = links;
+  if (Array.isArray(data)) {
+    result.data = data.map(entity => hydrateEntity(entity));
+    if (meta) result.meta = meta;
+    if (links) result.links = links;
+  } else {
+    result.data = hydrateEntity(data);
   }
 
   return result;

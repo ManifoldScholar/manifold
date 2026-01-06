@@ -9,11 +9,11 @@ export default async function EntityLoader({ context, fetchFn }) {
   try {
     const entity = await client.call(fetchFn());
 
-    if (!entity) {
+    if (!entity?.data) {
       throw data(null, { status: 404 });
     }
 
-    return entity;
+    return entity.data;
   } catch (error) {
     // If it's already a Response (redirect or data), re-throw it
     if (error instanceof Response) {

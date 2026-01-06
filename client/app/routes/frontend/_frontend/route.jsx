@@ -1,8 +1,9 @@
 import { useMemo } from "react";
 import { Outlet } from "react-router";
 import classNames from "classnames";
-import { ApiClient, subjectsAPI } from "api";
-import { routerContext, FrontendContext } from "app/contexts";
+import { subjectsAPI } from "api";
+import { FrontendContext } from "app/contexts";
+import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
 import Utility from "global/components/utility";
 import Footers from "global/components/Footers";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
@@ -19,20 +20,18 @@ const JOURNAL_SUBJECT_FILTERS = { usedJournal: true };
 
 // Loader fetches subjects once for all frontend routes
 export const loader = async ({ context }) => {
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
-
-  const [subjectsResult, journalSubjectsResult] = await Promise.allSettled([
-    client.call(subjectsAPI.index(SUBJECT_FILTERS, null, true)),
-    client.call(subjectsAPI.index(JOURNAL_SUBJECT_FILTERS, null, true))
-  ]);
+  const results = await loadParallelLists({
+    context,
+    fetchFns: {
+      subjects: () => subjectsAPI.index(SUBJECT_FILTERS, null, true),
+      journalSubjects: () =>
+        subjectsAPI.index(JOURNAL_SUBJECT_FILTERS, null, true)
+    }
+  });
 
   return {
-    subjects: subjectsResult.status === "fulfilled" ? subjectsResult.value : [],
-    journalSubjects:
-      journalSubjectsResult.status === "fulfilled"
-        ? journalSubjectsResult.value
-        : []
+    subjects: results.subjects ?? [],
+    journalSubjects: results.journalSubjects ?? []
   };
 };
 
