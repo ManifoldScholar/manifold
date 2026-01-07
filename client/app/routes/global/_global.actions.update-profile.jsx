@@ -1,5 +1,6 @@
-import { ApiClient, meAPI } from "api";
+import { meAPI } from "api";
 import { routerContext } from "app/contexts";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 
 export async function action({ request, context }) {
   const { auth } = context.get(routerContext) ?? {};
@@ -17,7 +18,7 @@ export async function action({ request, context }) {
   const formData = await request.formData();
   const data = JSON.parse(formData.get("data"));
 
-  const client = new ApiClient(auth.authToken);
+  const client = getApiClient(context);
 
   try {
     const result = await client.call(meAPI.update(data));

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
-import { ApiClient, meAPI } from "api";
-import { routerContext } from "app/contexts";
+import { meAPI } from "api";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import Form from "global/components/form";
 import { useCurrentUser, useNotification } from "hooks";
@@ -16,11 +16,9 @@ export const loader = async ({ request, context }) => {
 };
 
 export async function action({ request, context }) {
-  const { auth } = context.get(routerContext) ?? {};
-
   const formData = await request.formData();
   const data = JSON.parse(formData.get("data") ?? "");
-  const client = new ApiClient(auth.authToken, { denormalize: true });
+  const client = getApiClient(context);
 
   try {
     const result = await client.call(meAPI.update(data.attributes));

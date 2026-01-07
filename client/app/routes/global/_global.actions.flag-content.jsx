@@ -1,5 +1,6 @@
-import { ApiClient, annotationsAPI, commentsAPI } from "api";
+import { annotationsAPI, commentsAPI } from "api";
 import { routerContext } from "app/contexts";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 
 /**
  * Shared action for flagging/unflagging annotations and comments.
@@ -33,7 +34,7 @@ export async function action({ request, context }) {
     };
   }
 
-  const client = new ApiClient(auth.authToken, { denormalize: true });
+  const client = getApiClient(context);
 
   try {
     let result;

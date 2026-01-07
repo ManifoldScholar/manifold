@@ -58,14 +58,14 @@ export default function denormalize(response) {
   const result = {};
 
   // Hydrate all entities in data array
-  // Attach meta and links to the result for pagination/filtering support
   if (Array.isArray(data)) {
     result.data = data.map(entity => hydrateEntity(entity));
-    if (meta) result.meta = meta;
-    if (links) result.links = links;
   } else {
     result.data = hydrateEntity(data);
   }
+
+  if (meta) result.meta = meta;
+  if (links) result.links = links;
 
   return result;
 }

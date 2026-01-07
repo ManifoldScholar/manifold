@@ -1,15 +1,14 @@
 import { redirect } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
-import { ApiClient, contactsAPI } from "api";
-import { routerContext } from "app/contexts";
+import { contactsAPI } from "api";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 import GlobalForm from "global/containers/form";
 import Form from "global/components/form";
 import HeadContent from "global/components/HeadContent";
 
 export async function action({ request, context }) {
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const client = getApiClient(context);
   const formData = await request.formData();
 
   const dataString = formData.get("data");

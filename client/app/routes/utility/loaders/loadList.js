@@ -1,5 +1,4 @@
-import { ApiClient } from "api";
-import { routerContext } from "app/contexts";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 import parseListParams from "./parseListParams";
 
 export default async function ListLoader({
@@ -8,8 +7,7 @@ export default async function ListLoader({
   fetchFn,
   options = {}
 }) {
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const client = getApiClient(context);
 
   const url = new URL(request.url);
   const { filters, pagination } = parseListParams(url, options);

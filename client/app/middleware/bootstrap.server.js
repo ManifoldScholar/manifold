@@ -9,7 +9,7 @@ const getCookie = (request, name) => {
 
 export const bootstrapMiddleware = async ({ request, context }, next) => {
   const authToken = getCookie(request, "authToken");
-  const client = new ApiClient(authToken, { denormalize: true });
+  const client = new ApiClient(authToken);
 
   const [
     settingsResult,

@@ -1,9 +1,7 @@
-import { ApiClient } from "api";
-import { routerContext } from "app/contexts";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 
 export default async function loadParallelLists({ context, fetchFns }) {
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const client = getApiClient(context);
 
   const keys = Object.keys(fetchFns);
   const promises = keys.map(key => client.call(fetchFns[key]()));

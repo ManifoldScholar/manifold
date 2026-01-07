@@ -13,12 +13,7 @@ import {
 import { collectedIdsForCollection } from "frontend/components/collecting/helpers";
 import EntityCollection from "../EntityCollection";
 
-function MyStarredEntityCollection({
-  collection,
-  responses,
-  onUncollect,
-  ...passThroughProps
-}) {
+function MyStarredEntityCollection({ collection, responses }) {
   const { t } = useTranslation();
 
   const mapping = collection.attributes?.categoryMappings.$uncategorized$;
@@ -40,7 +35,6 @@ function MyStarredEntityCollection({
     return {
       collectedIds: getCollectedIdsByType(type),
       responses: getResponsesByType(type),
-      onUncollect: () => onUncollect(type),
       boxed: true
     };
   }
@@ -79,7 +73,6 @@ function MyStarredEntityCollection({
           <EntityCollectionPlaceholder.MyStarred />
         )
       }
-      {...passThroughProps}
     />
   );
 }
@@ -88,8 +81,7 @@ MyStarredEntityCollection.displayName = "Frontend.Entity.Collection.MyStarred";
 
 MyStarredEntityCollection.propTypes = {
   collection: PropTypes.object.isRequired,
-  responses: PropTypes.object.isRequired,
-  onUncollect: PropTypes.func.isRequired
+  responses: PropTypes.object.isRequired
 };
 
 export default MyStarredEntityCollection;

@@ -1,10 +1,8 @@
-import { ApiClient } from "api";
 import { data } from "react-router";
-import { routerContext } from "app/contexts";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 
 export default async function EntityLoader({ context, fetchFn }) {
-  const { auth } = context.get(routerContext);
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const client = getApiClient(context);
 
   try {
     const entity = await client.call(fetchFn());

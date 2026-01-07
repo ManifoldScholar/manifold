@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import BrowserCookieHelper from "helpers/cookie/Browser";
-import useRevalidate from "../useRevalidate";
+import { useNavigate, useRevalidator, useLocation } from "react-router";
 
 const cookie = new BrowserCookieHelper();
 
@@ -9,10 +9,15 @@ const cookie = new BrowserCookieHelper();
  * Destroys auth cookie and triggers route revalidation to update auth context.
  */
 export default function useLogout() {
-  const revalidate = useRevalidate();
+  const { revalidate } = useRevalidator();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   return useCallback(() => {
     cookie.remove("authToken");
+
+    if (location.pathname !== "/") return navigate("/");
+
     revalidate();
-  }, [revalidate]);
+  }, [revalidate, navigate, location]);
 }

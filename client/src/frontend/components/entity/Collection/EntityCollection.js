@@ -102,7 +102,7 @@ EntityCollection.propTypes = {
   nested: PropTypes.bool,
   boxed: PropTypes.bool,
   className: PropTypes.string,
-  containerWrapPoint: PropTypes.bool,
+  containerWrapPoint: PropTypes.string,
   ...headerProps
 };
 

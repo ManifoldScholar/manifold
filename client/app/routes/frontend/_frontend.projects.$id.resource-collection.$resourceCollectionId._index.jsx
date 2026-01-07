@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
-import { resourceCollectionsAPI, ApiClient } from "api";
+import { resourceCollectionsAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
@@ -8,10 +8,10 @@ import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
 import ResourceCollectionAnnotations from "frontend/components/resource-collection/Annotations";
 import { useListSearchParams, useListFilters } from "hooks";
-import { routerContext } from "app/contexts";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadList from "app/routes/utility/loaders/loadList";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 import { useSettings } from "hooks";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
 
@@ -41,8 +41,7 @@ export const loader = async ({ params, request, context }) => {
   checkLibraryMode({ request, context });
 
   const { resourceCollectionId } = params;
-  const { auth } = context.get(routerContext);
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const client = getApiClient(context);
 
   const [resourcesResult, annotationsResult] = await Promise.allSettled([
     loadList({

@@ -1,5 +1,4 @@
-import cookie from "js-cookie";
-import { ApiClient } from "api";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 import parseListParams from "./parseListParams";
 
 /**
@@ -26,16 +25,10 @@ export default function createListClientLoader({
       return serverLoader();
     }
 
-    // If URL hasn't changed, this is a revalidation (login/logout)
-    // Use serverLoader to get fresh data with current auth state
-    if (window.location.href === request.url) {
-      return serverLoader();
-    }
+    // After hydration, always fetch client-side (including revalidation)
+    // This avoids refetching server data unnecessarily
+    const client = getApiClient();
 
-    const authToken = cookie.get("authToken");
-    const client = new ApiClient(authToken, { denormalize: true });
-
-    // Client-side fetch for filter/pagination changes
     const result = await client.call(fetchFn(filters, pagination));
     return { data: result.data ?? [], meta: result.meta ?? null };
   };

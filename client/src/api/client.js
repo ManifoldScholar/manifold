@@ -7,7 +7,7 @@ import denormalize from "helpers/api/denormalize";
 export default class ApiClient {
   constructor(
     authToken = null,
-    { denormalize: shouldDenormalize = false } = {}
+    { denormalize: shouldDenormalize = true } = {}
   ) {
     this.client = new LowLevelApiClient(authToken);
     this.shouldDenormalize = shouldDenormalize;

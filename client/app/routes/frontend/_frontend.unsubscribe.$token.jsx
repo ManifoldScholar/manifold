@@ -1,10 +1,9 @@
 import { redirect } from "react-router";
-import { ApiClient, notificationPreferencesAPI } from "api";
-import { routerContext } from "app/contexts";
+import { notificationPreferencesAPI } from "api";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 
 export const loader = async ({ params, context }) => {
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const client = getApiClient(context);
 
   try {
     await client.call(notificationPreferencesAPI.unsubscribe(params.token));

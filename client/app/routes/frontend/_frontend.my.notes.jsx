@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { ApiClient, meAPI } from "api";
-import { routerContext } from "app/contexts";
+import { meAPI } from "api";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
+import { getApiClient } from "app/routes/utility/helpers/getApiClient";
 import HeadContent from "global/components/HeadContent";
 import MyAnnotationsEntityCollection from "frontend/components/entity/Collection/patterns/MyAnnotations";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
@@ -18,8 +18,7 @@ const INIT_FILTER_STATE = {
 export const loader = async ({ request, context }) => {
   requireLogin(request, context);
 
-  const { auth } = context.get(routerContext) ?? {};
-  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const client = getApiClient(context);
 
   const annotationsData = await loadList({
     request,
