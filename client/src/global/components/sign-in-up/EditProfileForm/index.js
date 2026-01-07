@@ -4,11 +4,11 @@ import { useFetcher } from "react-router";
 import ProfileFormFields from "./ProfileFormFields";
 import Greeting from "./Greeting";
 import { useNavigate } from "react-router";
+import { useRevalidator } from "react-router";
 import {
   useCurrentUser,
   useSettings,
-  useNotification,
-  useRevalidate
+  useNotification
 } from "hooks";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "frontend/components/privacy/CookiesForm/CookiesFormFields";
@@ -22,7 +22,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const fetcher = useFetcher();
-  const revalidate = useRevalidate();
+  const { revalidate } = useRevalidator();
 
   const [cookiePrefs, setCookiePrefs] = useState({
     manifold: "yes",

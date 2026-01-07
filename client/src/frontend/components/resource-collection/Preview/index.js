@@ -18,9 +18,7 @@ function ResourceCollectionPreview({
       <Description
         description={resourceCollection.attributes.descriptionFormatted}
       />
-      <Slideshow
-        resourceCollection={resourceCollection}
-      />
+      <Slideshow resourceCollection={resourceCollection} />
       <Styled.Footer>
         <UserActions resourceCollection={resourceCollection} />
         <EditorActions

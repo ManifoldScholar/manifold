@@ -12,7 +12,8 @@ import FlagToggle from "./Flag/Toggle";
 import CommentContainer from "global/containers/comment";
 import { annotationsAPI } from "api";
 import Authorize from "hoc/Authorize";
-import { useCurrentUser, useRevalidate } from "hooks";
+import { useRevalidator } from "react-router";
+import { useCurrentUser } from "hooks";
 import useApiCallback from "hooks/api/useApiCallback";
 import * as Styled from "./styles";
 
@@ -29,7 +30,7 @@ export default function AnnotationDetail({
 }) {
   const { t } = useTranslation();
   const currentUser = useCurrentUser();
-  const revalidate = useRevalidate();
+  const { revalidate } = useRevalidator();
 
   const { readingGroupPrivacy, commentsCount } = annotation?.attributes ?? {};
   const isAnonymous = readingGroupPrivacy === "anonymous";

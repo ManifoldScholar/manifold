@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { tokensAPI } from "api";
-import { useCurrentUser, usePages, useRevalidate } from "hooks";
+import { useRevalidator } from "react-router";
+import { useCurrentUser, usePages } from "hooks";
 import CreateFormFields from "./CreateFormFields";
 import Form from "global/components/form";
 import { useNavigate, useLocation } from "react-router";
@@ -22,7 +23,7 @@ export default function CreateUserForm({
   const navigate = useNavigate();
   const location = useLocation();
   const currentUser = useCurrentUser();
-  const revalidate = useRevalidate();
+  const { revalidate } = useRevalidator();
   const pages = usePages();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 

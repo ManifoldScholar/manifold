@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useFetcher } from "react-router";
+import { useFetcher, useRevalidator } from "react-router";
 import Notifications from "global/containers/Notifications";
 import Form from "global/components/form";
-import { useRevalidate } from "hooks";
 import BrowserCookieHelper from "helpers/cookie/Browser";
 import * as Styled from "./styles";
 import * as SharedStyles from "../styles";
@@ -18,7 +17,7 @@ export default function LoginForm({
 }) {
   const { t } = useTranslation();
   const fetcher = useFetcher();
-  const revalidate = useRevalidate();
+  const { revalidate } = useRevalidator();
 
   const formatData = data => {
     return { email: data.email, password: data.password };

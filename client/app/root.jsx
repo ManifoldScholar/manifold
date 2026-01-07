@@ -5,7 +5,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useRevalidator,
   useRouteError
 } from "react-router";
 import { HelmetProvider } from "react-helmet-async";
@@ -55,7 +54,6 @@ export function ErrorBoundary() {
 }
 
 export default function Root({ loaderData }) {
-  const revalidator = useRevalidator();
   const { auth, settings, pages } = loaderData;
 
   useColorScheme();
@@ -66,10 +64,9 @@ export default function Root({ loaderData }) {
     () => ({
       settings,
       auth,
-      pages,
-      revalidate: revalidator.revalidate
+      pages
     }),
-    [settings, auth, pages, revalidator.revalidate]
+    [settings, auth, pages]
   );
 
   return (

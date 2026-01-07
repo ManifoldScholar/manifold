@@ -7,7 +7,8 @@ import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
-import { useCurrentUser, useApiCallback, useRevalidate } from "hooks";
+import { useRevalidator } from "react-router";
+import { useCurrentUser, useApiCallback } from "hooks";
 
 const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals"];
 
@@ -61,7 +62,7 @@ function CollectingToggle({
   }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const currentUser = useCurrentUser();
-  const revalidate = useRevalidate();
+  const { revalidate } = useRevalidator();
 
   const collectCollectable = useApiCallback(collectingAPI.collect);
   const removeCollectable = useApiCallback(collectingAPI.remove);

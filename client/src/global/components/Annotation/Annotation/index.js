@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { useRevalidator } from "react-router";
 import useApiCallback from "hooks/api/useApiCallback";
-import { useRevalidate } from "hooks";
 import TextAnnotation from "./TextAnnotation";
 import HighlightAnnotation from "./HighlightAnnotation";
 import ResourceAnnotation from "./ResourceAnnotation";
@@ -20,7 +20,7 @@ export default function Annotation({
   ...props
 }) {
   const navigate = useNavigate();
-  const revalidate = useRevalidate();
+  const { revalidate } = useRevalidator();
 
   const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
 

@@ -13,7 +13,6 @@ export { default as useSettings } from "./useSettings";
 export { default as usePages } from "./usePages";
 export { default as useSubjects } from "./useSubjects";
 export { default as useJournalSubjects } from "./useJournalSubjects";
-export { default as useRevalidate } from "./useRevalidate";
 export { default as useLogout } from "./useLogout";
 
 export { default as useFromStore } from "./useFromStore";
