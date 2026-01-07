@@ -1,0 +1,1 @@
+window.process||(window.process={}),window.process.env||(window.process.env={}),process.env.NODE_ENV="production",process.env.DOMAIN="",process.env.CLIENT_BROWSER_API_URL="",process.env.CLIENT_BROWSER_API_CABLE_URL="",process.env.SSL_ENABLED="",process.version="v16.20.2";
