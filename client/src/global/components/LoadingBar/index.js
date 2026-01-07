@@ -1,11 +1,25 @@
 import { useRef, useEffect } from "react";
-import { useNavigation } from "react-router";
-import { useFromStore } from "hooks";
+import { useNavigation, useRevalidator, useFetchers } from "react-router";
 
 export default function LoadingBar() {
   const navigation = useNavigation();
-  const apiLoading = useFromStore({ path: "ui.transitory.loading.active" });
-  const loading = navigation.state === "loading" || apiLoading;
+  const revalidator = useRevalidator();
+  const fetchers = useFetchers();
+
+  // Check if any fetcher is active
+  const hasActiveFetcher = fetchers.some(
+    fetcher => fetcher.state === "submitting" || fetcher.state === "loading"
+  );
+
+  // Show loading bar during:
+  // - Navigation
+  // - Revalidation
+  // - Active fetchers
+  const loading =
+    navigation.state === "loading" ||
+    navigation.state === "submitting" || // Form submissions via useSubmit
+    revalidator.state === "loading" ||
+    hasActiveFetcher;
 
   const loaderRef = useRef(null);
   const timerRef = useRef(null);
