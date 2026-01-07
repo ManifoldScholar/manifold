@@ -13,6 +13,35 @@ class ProxyHelper {
     this.wwwTarget = path.join(__dirname, "..", "www");
   }
 
+  proxyOptions(proxyPath, target, logLevel) {
+    return {
+      target,
+      logLevel,
+      changeOrigin: true,
+      onError: (err, req, res) => {
+        ch.error(
+          `[Proxy Error] ${this.name} | ${proxyPath} -> ${target} | ${req.method} ${req.url}`
+        );
+        ch.error(`[Proxy Error] ${err.message}`);
+        ch.error(err.stack);
+      },
+      onProxyReq: (proxyReq, req) => {
+        ch.info(
+          `[Proxy Req] ${this.name} | ${req.method} ${req.url} -> ${target}${req.url}`
+        );
+        ch.info(`[Proxy Req Headers] Host: ${proxyReq.getHeader("host")}, Cookie: ${req.headers.cookie ? "present" : "absent"}`);
+      },
+      onProxyRes: (proxyRes, req) => {
+        ch.info(
+          `[Proxy Res] ${this.name} | ${req.method} ${req.url} | Status: ${proxyRes.statusCode}`
+        );
+        if (proxyRes.headers.location) {
+          ch.info(`[Proxy Res] Redirect Location: ${proxyRes.headers.location}`);
+        }
+      }
+    };
+  }
+
   proxyAPIPaths(app) {
     this.defineProxy(app, "/system", this.apiAssetTarget);
     this.defineProxy(app, "/api/proxy", this.apiAssetTarget);
@@ -49,17 +78,17 @@ class ProxyHelper {
     app.use(proxyPath, serveStatic(target, serveStaticOptions));
   }
 
-  defineProxy(app, proxyPath, target, logLevel = "silent") {
+  defineProxy(app, proxyPath, target, logLevel = "debug") {
     if (isRegExp(proxyPath))
       return this.defineRegExpProxy(app, proxyPath, target, logLevel);
     ch.background(
       `${this.name} server will proxy ${proxyPath} requests to ${target}.`
     );
-    app.use(proxyPath, proxy({ target, logLevel }));
+    app.use(proxyPath, proxy(this.proxyOptions(proxyPath, target, logLevel)));
   }
 
-  defineRegExpProxy(app, proxyPath, target, logLevel = "silent") {
-    const theProxy = proxy({ target, logLevel });
+  defineRegExpProxy(app, proxyPath, target, logLevel = "debug") {
+    const theProxy = proxy(this.proxyOptions(proxyPath, target, logLevel));
     ch.background(
       `${
         this.name
