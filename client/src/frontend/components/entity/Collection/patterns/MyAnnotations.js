@@ -11,6 +11,7 @@ function MyAnnotationsEntityCollection({
   annotations,
   annotationsMeta,
   annotatedTexts,
+  readingGroups,
   filterProps,
   isFiltered,
   paginationProps,
@@ -43,6 +44,7 @@ function MyAnnotationsEntityCollection({
           {hasAnnotations && (
             <Annotation.List.Default
               annotations={annotations}
+              readingGroups={readingGroups}
               showCommentsToggleAsBlock
               showMarkers
               markerIcons
@@ -76,6 +78,7 @@ MyAnnotationsEntityCollection.propTypes = {
   annotations: PropTypes.array,
   annotationsMeta: PropTypes.object,
   annotatedTexts: PropTypes.array,
+  readingGroups: PropTypes.array,
   filterProps: PropTypes.object,
   isFiltered: PropTypes.bool,
   paginationProps: PropTypes.object

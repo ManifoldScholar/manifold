@@ -1,49 +1,45 @@
-import { useState, useCallback, useId } from "react";
+import { useState, useEffect, useId } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useFetcher } from "react-router";
 import Form from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
 import { FormContext } from "helpers/contexts";
-import { useApiCallback, useFromStore } from "hooks";
-import { annotationsAPI, commentsAPI } from "api";
+import { useFromStore } from "hooks";
 import Modal from "global/components/dialog/Modal";
 import * as Styled from "./styles";
 
-export default function FlagAnnotationModal({
-  id,
-  annotationId,
-  type,
-  dialog,
-  dialogId
-}) {
+export default function FlagAnnotationModal({ id, type, dialog, dialogId }) {
   const { t } = useTranslation();
+  const fetcher = useFetcher();
 
   const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState([]);
-
   const messageId = useId();
   const errorId = `${messageId}-error`;
 
-  const flagAnnotation = useApiCallback(annotationsAPI.flag);
-  const flagComment = useApiCallback(commentsAPI.flag, {
-    refreshes: `comments-for-${annotationId}`
-  });
+  const errors = fetcher.data?.errors || [];
 
-  const handleSubmit = useCallback(
-    async e => {
-      e.preventDefault();
-      try {
-        const handleFlag =
-          type === "annotations" ? flagAnnotation : flagComment;
-        const res = await handleFlag(id, message);
-        if (res?.data) return dialog.onCloseClick();
-      } catch (err) {
-        setErrors(err);
-      }
-    },
-    [id, type, message, flagAnnotation, flagComment, dialog]
-  );
+  useEffect(() => {
+    if (fetcher.data?.success && fetcher.state === "idle") {
+      dialog.onCloseClick();
+    }
+  }, [fetcher.data?.success, fetcher.state, dialog]);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("intent", "flag");
+    formData.append("type", type);
+    formData.append("id", id);
+    if (message) {
+      formData.append("message", message);
+    }
+    fetcher.submit(formData, {
+      method: "post",
+      action: "/actions/flag-content"
+    });
+  };
 
   const buttonClasses = classNames(
     "buttons-icon-horizontal__button",
@@ -70,7 +66,7 @@ export default function FlagAnnotationModal({
       </header>
       <p>{t("reader.report_annotation.instructions")}</p>
       <FormContext.Provider value={{ styleType }}>
-        <Styled.Form className="dialog__body">
+        <Styled.Form className="dialog__body" onSubmit={handleSubmit}>
           <Form.TextArea
             rows={5}
             value={message}
@@ -90,7 +86,7 @@ export default function FlagAnnotationModal({
                 buttonClasses,
                 "button-icon-secondary--red"
               )}
-              onClick={handleSubmit}
+              disabled={fetcher.state !== "idle"}
             >
               <IconComposer
                 icon="checkmark16"
@@ -127,6 +123,5 @@ FlagAnnotationModal.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   dialogId: PropTypes.string.isRequired,
-  dialog: PropTypes.object.isRequired,
-  annotationId: PropTypes.string
+  dialog: PropTypes.object.isRequired
 };

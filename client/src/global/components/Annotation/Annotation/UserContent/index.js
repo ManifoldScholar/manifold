@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useId } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Helper from "global/components/helper";
@@ -10,12 +10,11 @@ import BlockToggle from "./BlockToggle";
 import InlineToggle from "./InlineToggle";
 import FlagToggle from "./Flag/Toggle";
 import CommentContainer from "global/containers/comment";
-import { annotationsAPI, requests } from "api";
+import { annotationsAPI } from "api";
 import Authorize from "hoc/Authorize";
-import { useCurrentUser } from "hooks";
+import { useCurrentUser, useRevalidate } from "hooks";
 import useApiCallback from "hooks/api/useApiCallback";
 import * as Styled from "./styles";
-import { useUID } from "react-uid";
 
 export default function AnnotationDetail({
   includeComments = true,
@@ -25,10 +24,12 @@ export default function AnnotationDetail({
   showCommentsToggleAsBlock,
   showLogin,
   refresh,
-  closeDrawer
+  closeDrawer,
+  readingGroups
 }) {
   const { t } = useTranslation();
   const currentUser = useCurrentUser();
+  const revalidate = useRevalidate();
 
   const { readingGroupPrivacy, commentsCount } = annotation?.attributes ?? {};
   const isAnonymous = readingGroupPrivacy === "anonymous";
@@ -40,7 +41,7 @@ export default function AnnotationDetail({
 
   const threadRef = useRef(null);
   const replyToggleRef = useRef(null);
-  const editUID = useUID();
+  const editUID = useId();
   const editDialog = useDialog({ modal: false, dismissalMode: "explicit" });
 
   const handleEditKeyDown = e => {
@@ -66,23 +67,24 @@ export default function AnnotationDetail({
     editDialog.onCloseClick();
   };
 
-  const updateAnnotation = useApiCallback(annotationsAPI.update, {
-    requestKey: requests.rAnnotationUpdate
-  });
+  const updateAnnotation = useApiCallback(annotationsAPI.update);
 
-  const saveAnnotation = async data => {
-    return updateAnnotation(data.id, data.attributes);
-  };
+  const saveAnnotation = useCallback(
+    async data => {
+      const result = await updateAnnotation(data.id, data.attributes);
+      revalidate();
+      return result;
+    },
+    [updateAnnotation, revalidate]
+  );
 
-  const destroyAnnotation = useApiCallback(annotationsAPI.destroy, {
-    requestKey: requests.rAnnotationDestroy,
-    removes: { type: "annotations", id: annotation.id }
-  });
+  const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
 
   const deleteAnnotation = useCallback(async () => {
     await destroyAnnotation(annotation.id);
+    revalidate();
     if (closeDrawer) closeDrawer();
-  }, [annotation.id, destroyAnnotation, closeDrawer]);
+  }, [annotation.id, destroyAnnotation, closeDrawer, revalidate]);
 
   const toggleComments = () => {
     setShowComments(!showComments);
@@ -211,8 +213,9 @@ export default function AnnotationDetail({
           >
             <Editor
               annotation={annotation}
-              saveAnnotation={saveAnnotation}
               cancel={stopEdit}
+              readingGroups={readingGroups}
+              saveAnnotation={saveAnnotation}
             />
           </Styled.EditDialog>
           <div
@@ -244,5 +247,6 @@ AnnotationDetail.propTypes = {
   includeComments: PropTypes.bool,
   includeMarkers: PropTypes.bool,
   markerIcons: PropTypes.bool,
-  showCommentsToggleAsBlock: PropTypes.bool
+  showCommentsToggleAsBlock: PropTypes.bool,
+  readingGroups: PropTypes.array
 };

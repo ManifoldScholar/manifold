@@ -190,7 +190,7 @@ class CommentDetail extends PureComponent {
                   </li>
                 )}
                 <li>
-                  <FlagToggle record={comment} annotationId={subject?.id} />
+                  <FlagToggle record={comment} />
                 </li>
               </Styled.UtilityList>
             )}

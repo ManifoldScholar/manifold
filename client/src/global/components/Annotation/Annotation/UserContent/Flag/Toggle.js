@@ -1,29 +1,37 @@
 import { useId } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useFetcher } from "react-router";
 import useDialog from "@castiron/hooks/useDialog";
-import { useApiCallback } from "hooks";
-import { annotationsAPI, commentsAPI } from "api";
 import Modal from "./Modal";
 import * as Styled from "../styles";
 
-export default function FlagModalToggle({ record, annotationId }) {
+export default function FlagModalToggle({ record }) {
   const { t } = useTranslation();
+  const fetcher = useFetcher();
 
   const dialog = useDialog({ modal: true, scrollLockClassName: "no-scroll" });
 
-  const unflagAnnotation = useApiCallback(annotationsAPI.unflag);
-  const unflagComment = useApiCallback(commentsAPI.unflag);
-
-  const handleUnflag =
-    record.type === "annotations" ? unflagAnnotation : unflagComment;
+  const handleUnflag = () => {
+    const formData = new FormData();
+    formData.append("intent", "unflag");
+    formData.append("type", record.type);
+    formData.append("id", record.id);
+    fetcher.submit(formData, {
+      method: "post",
+      action: "/actions/flag-content"
+    });
+  };
 
   const dialogId = useId();
 
   return (
     <>
       {record?.attributes?.flagged ? (
-        <Styled.SecondaryButton onClick={() => handleUnflag(record.id)}>
+        <Styled.SecondaryButton
+          onClick={handleUnflag}
+          disabled={fetcher.state === "submitting"}
+        >
           {t("actions.unflag")}
         </Styled.SecondaryButton>
       ) : (
@@ -37,7 +45,6 @@ export default function FlagModalToggle({ record, annotationId }) {
       )}
       <Modal
         id={record.id}
-        annotationId={annotationId}
         type={record.type}
         dialog={dialog}
         dialogId={dialogId}
@@ -49,6 +56,5 @@ export default function FlagModalToggle({ record, annotationId }) {
 FlagModalToggle.displayName = "Annotation.Annotation.UserContent.FlagToggle";
 
 FlagModalToggle.propTypes = {
-  record: PropTypes.object.isRequired,
-  annotationId: PropTypes.string
+  record: PropTypes.object.isRequired
 };

@@ -9,7 +9,8 @@ function AnnotationListDefault({
   refresh,
   showMarkers,
   markerIcons,
-  compact = false
+  compact = false,
+  readingGroups
 }) {
   const className = classNames("notes-list", {
     "notes-list--pad-top": !compact,
@@ -29,6 +30,7 @@ function AnnotationListDefault({
               showMarkers={showMarkers}
               markerIcons={markerIcons}
               compact={compact}
+              readingGroups={readingGroups}
             />
           </li>
         );
@@ -45,7 +47,8 @@ AnnotationListDefault.propTypes = {
   refresh: PropTypes.func,
   showMarkers: PropTypes.bool,
   markerIcons: PropTypes.bool,
-  compact: PropTypes.bool
+  compact: PropTypes.bool,
+  readingGroups: PropTypes.array
 };
 
 export default AnnotationListDefault;

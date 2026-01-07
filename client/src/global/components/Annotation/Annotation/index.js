@@ -2,11 +2,12 @@ import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import useApiCallback from "hooks/api/useApiCallback";
+import { useRevalidate } from "hooks";
 import TextAnnotation from "./TextAnnotation";
 import HighlightAnnotation from "./HighlightAnnotation";
 import ResourceAnnotation from "./ResourceAnnotation";
 import lh from "helpers/linkHandler";
-import { annotationsAPI, requests } from "api";
+import { annotationsAPI } from "api";
 
 export default function Annotation({
   annotation,
@@ -15,19 +16,19 @@ export default function Annotation({
   showMarkers,
   markerIcons,
   compact,
-  refresh
+  refresh,
+  ...props
 }) {
   const navigate = useNavigate();
+  const revalidate = useRevalidate();
 
-  const deleteAnnotation = useApiCallback(annotationsAPI.destroy, {
-    requestKey: requests.rAnnotationDestroy,
-    removes: { type: "annotations", id: annotation.id }
-  });
+  const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
 
   const deleteHandler = useCallback(async () => {
     await deleteAnnotation(annotation.id);
-    if (refresh) refresh();
-  }, [annotation.id, deleteAnnotation, refresh]);
+    revalidate();
+    if (refresh) refresh(annotation.id);
+  }, [annotation.id, deleteAnnotation, refresh, revalidate]);
 
   const handleVisit = useCallback(
     event => {
@@ -63,6 +64,7 @@ export default function Annotation({
         markerIcons={markerIcons}
         compact={compact}
         refresh={refresh}
+        {...props}
       />
     );
   }
@@ -78,6 +80,7 @@ export default function Annotation({
         compact={compact}
         refresh={refresh}
         deleteHandler={deleteHandler}
+        {...props}
       />
     );
   }
@@ -92,6 +95,7 @@ export default function Annotation({
       compact={compact}
       refresh={refresh}
       deleteHandler={deleteHandler}
+      {...props}
     />
   );
 }
