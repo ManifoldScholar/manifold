@@ -190,9 +190,8 @@ class TextNode extends Component {
 
       const isDetail = this.props.openAnnotations.isDetail;
       const isInteractive =
-        !pending &&
-        !isDetail &&
-        (!!textAnnotationIds.length || removableHighlight);
+        removableHighlight ||
+        (!pending && !isDetail && !!textAnnotationIds.length);
 
       const classes = classNames({
         primary: isCreator,

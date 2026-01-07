@@ -79,7 +79,7 @@ export const getAnnotationStyles = (
     ? removableHighlight.id
     : null;
   const isInteractive =
-    !pending && !isDetail && (!!textAnnotationIds.length || removableHighlight);
+    removableHighlight || (!pending && !isDetail && !!textAnnotationIds.length);
 
   const classes = classNames({
     primary: isCreator,
