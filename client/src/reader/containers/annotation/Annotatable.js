@@ -557,7 +557,8 @@ export class Annotatable extends Component {
             annotationHref={this.getAnnotationUrl()}
             clearSelection={() =>
               this.resetState({
-                restoreFocusTo: this.selectableRef,
+                restoreFocusTo:
+                  this.activeAnnotationObject?.id ?? this.selectableRef,
                 restoreSelectionTo: this.pendingAnnotationNode
               })
             }
