@@ -47,7 +47,6 @@ export const loader = async ({ request, context }) => {
 };
 
 export const clientLoader = async ({ request, serverLoader }) => {
-  // Get base data (annotatedTexts, readingGroups) - React Router will cache this
   const serverData = await serverLoader();
 
   const fetchFn = (filters, pagination) =>
@@ -70,12 +69,7 @@ export const clientLoader = async ({ request, serverLoader }) => {
 export default function MyAnnotationsRoute({ loaderData }) {
   const { t } = useTranslation();
 
-  const {
-    data: annotations,
-    meta: annotationsMeta,
-    annotatedTexts,
-    readingGroups
-  } = loaderData;
+  const { data: annotations, meta, annotatedTexts, readingGroups } = loaderData;
 
   const { filters, setFilters } = useListSearchParams({
     defaultFilters: INIT_FILTER_STATE
@@ -112,7 +106,7 @@ export default function MyAnnotationsRoute({ loaderData }) {
       <HeadContent title={t("pages.my_notes")} appendDefaultTitle />
       <MyAnnotationsEntityCollection
         annotations={annotations ?? []}
-        annotationsMeta={annotationsMeta}
+        annotationsMeta={meta}
         annotatedTexts={annotatedTexts ?? []}
         readingGroups={readingGroups ?? []}
         filterProps={filterProps ? { ...filterProps, hideSearch: true } : null}

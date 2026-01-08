@@ -15,8 +15,7 @@ export async function action({ request, context }) {
     };
   }
 
-  const formData = await request.formData();
-  const data = JSON.parse(formData.get("data"));
+  const data = await request.json();
 
   const client = getApiClient(context);
 

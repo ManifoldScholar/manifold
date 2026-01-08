@@ -9,9 +9,7 @@ import HeadContent from "global/components/HeadContent";
 
 export async function action({ request, context, params }) {
   const client = getApiClient(context);
-  const formData = await request.formData();
-
-  const data = JSON.parse(formData.get("data") ?? "");
+  const data = await request.json();
   const { password, passwordConfirmation } = data.attributes || {};
   const resetToken = params.resetToken;
 

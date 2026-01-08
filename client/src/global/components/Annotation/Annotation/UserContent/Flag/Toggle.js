@@ -13,14 +13,18 @@ export default function FlagModalToggle({ record }) {
   const dialog = useDialog({ modal: true, scrollLockClassName: "no-scroll" });
 
   const handleUnflag = () => {
-    const formData = new FormData();
-    formData.append("intent", "unflag");
-    formData.append("type", record.type);
-    formData.append("id", record.id);
-    fetcher.submit(formData, {
-      method: "post",
-      action: "/actions/flag-content"
-    });
+    fetcher.submit(
+      JSON.stringify({
+        intent: "unflag",
+        type: record.type,
+        id: record.id
+      }),
+      {
+        method: "post",
+        action: "/actions/flag-content",
+        encType: "application/json"
+      }
+    );
   };
 
   const dialogId = useId();

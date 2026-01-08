@@ -9,21 +9,7 @@ import HeadContent from "global/components/HeadContent";
 
 export async function action({ request, context }) {
   const client = getApiClient(context);
-  const formData = await request.formData();
-
-  const dataString = formData.get("data");
-  if (!dataString) {
-    return {
-      errors: [
-        {
-          detail: "Invalid form data",
-          source: { pointer: "/data" }
-        }
-      ]
-    };
-  }
-
-  const data = JSON.parse(dataString);
+  const data = await request.json();
   const contact = data.attributes || {};
 
   try {

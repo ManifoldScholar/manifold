@@ -112,16 +112,19 @@ export default function FormContainer({
             relationships: adjustRelationships(dirty.relationships)
           };
 
-      const formData = new FormData();
-      formData.append("data", JSON.stringify(data));
+      const json = JSON.stringify(data);
 
       if (fetcher) {
-        fetcher.submit(formData, {
+        fetcher.submit(json, {
           method: "post",
+          encType: "application/json",
           ...(action ? { action } : {})
         });
       } else if (submit) {
-        submit(formData, { method: "post" });
+        submit(json, {
+          method: "post",
+          encType: "application/json"
+        });
       }
     },
     [dirty, source, formatData, fetcher, submit, action]

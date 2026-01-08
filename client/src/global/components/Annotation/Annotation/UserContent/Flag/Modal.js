@@ -28,17 +28,19 @@ export default function FlagAnnotationModal({ id, type, dialog, dialogId }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("intent", "flag");
-    formData.append("type", type);
-    formData.append("id", id);
-    if (message) {
-      formData.append("message", message);
-    }
-    fetcher.submit(formData, {
-      method: "post",
-      action: "/actions/flag-content"
-    });
+    fetcher.submit(
+      JSON.stringify({
+        intent: "flag",
+        type,
+        id,
+        message: message || undefined
+      }),
+      {
+        method: "post",
+        action: "/actions/flag-content",
+        encType: "application/json"
+      }
+    );
   };
 
   const buttonClasses = classNames(

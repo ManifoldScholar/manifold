@@ -1,8 +1,7 @@
 import { ApiClient, usersAPI } from "api";
 
 export async function action({ request }) {
-  const formData = await request.formData();
-  const data = JSON.parse(formData.get("data"));
+  const data = await request.json();
 
   const client = new ApiClient();
 

@@ -17,11 +17,8 @@ export async function action({ request, context }) {
     return { errors: [{ detail: "Unauthorized" }] };
   }
 
-  const formData = await request.formData();
-  const intent = formData.get("intent");
-  const type = formData.get("type");
-  const id = formData.get("id");
-  const message = formData.get("message") || "";
+  const data = await request.json();
+  const { intent, type, id, message = "" } = data;
 
   if (!intent || !type || !id) {
     return {
