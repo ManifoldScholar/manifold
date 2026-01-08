@@ -5,7 +5,7 @@ INTERNAL_IP_RANGES = [
   "10.244.0.0/16",
   "10.245.0.0/16",
   "10.246.0.0/16"
-]
+].freeze
 
 # :nocov:
 # We want to ensure that the public IP used by the client is never
