@@ -10,9 +10,9 @@ const output = compileEnv(template);
 const writePath = `${paths.build}/www/`;
 
 /* eslint-disable no-console */
-mkdirp(writePath).then(_ => {
+mkdirp(writePath).then(ignored => {
   fs.writeFileSync(`${paths.build}/www/browser.config.js`, output);
-}).catch(_ => {
+}).catch(err => {
   console.error("Unable to mkdir at " + writePath + ": " + err);
 });
 /* eslint-enable no-console */
