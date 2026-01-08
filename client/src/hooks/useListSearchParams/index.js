@@ -8,22 +8,43 @@ import { useCallback, useMemo } from "react";
  * @param {Object} options
  * @param {Object} options.defaultFilters - Default filter values
  * @param {string[]} options.paginationKeys - Keys to exclude from filters
+ * @param {string[]} options.arrayKeys - Keys that should always be treated as arrays (e.g., ["formats"])
  * @returns {{ filters: Object, setFilters: Function, searchParams: URLSearchParams }}
  */
 export default function useListSearchParams(options = {}) {
-  const { defaultFilters = {}, paginationKeys = ["page", "perPage"] } = options;
+  const {
+    defaultFilters = {},
+    paginationKeys = ["page", "perPage"],
+    arrayKeys = []
+  } = options;
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filters = useMemo(() => {
     const result = { ...defaultFilters };
-    Array.from(searchParams.entries()).forEach(([key, value]) => {
+
+    // Get all unique keys from search params
+    const paramKeys = new Set();
+    searchParams.forEach((_, key) => {
       if (!paginationKeys.includes(key)) {
-        result[key] = value;
+        paramKeys.add(key);
       }
     });
+
+    // Process each key
+    paramKeys.forEach(key => {
+      const allValues = searchParams.getAll(key);
+
+      // If key is in arrayKeys or has multiple values, treat as array
+      if (arrayKeys.includes(key) || allValues.length > 1) {
+        result[key] = allValues;
+      } else if (allValues.length === 1) {
+        result[key] = allValues[0];
+      }
+    });
+
     return result;
-  }, [searchParams, defaultFilters, paginationKeys]);
+  }, [searchParams, defaultFilters, paginationKeys, arrayKeys]);
 
   const setFilters = useCallback(
     newFilters => {
@@ -43,7 +64,16 @@ export default function useListSearchParams(options = {}) {
         // Then set the new filter values
         Object.entries(newFilters).forEach(([key, value]) => {
           if (value != null && value !== "") {
-            prev.set(key, String(value));
+            // If value is an array, append each value
+            if (Array.isArray(value)) {
+              value.forEach(v => {
+                if (v != null && v !== "") {
+                  prev.append(key, String(v));
+                }
+              });
+            } else {
+              prev.set(key, String(value));
+            }
           }
         });
 

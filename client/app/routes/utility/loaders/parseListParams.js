@@ -8,6 +8,7 @@
  * @param {Object} options.defaultPagination - Default pagination values
  * @param {Object} options.additionalPagination - Additional nested pagination structures
  *   Format: { nestedKey: { numberKey: "urlParam", sizeKey: "urlParam", defaultNumber: 1, defaultSize: 4 } }
+ * @param {string[]} options.arrayKeys - Keys that should always be treated as arrays (e.g., ["formats"])
  * @returns {{ filters: Object, pagination: Object }}
  */
 export default function parseListParams(url, options = {}) {
@@ -15,7 +16,8 @@ export default function parseListParams(url, options = {}) {
     defaultFilters = {},
     paginationKeys = ["page", "perPage"],
     defaultPagination = { page: 1, perPage: 20 },
-    additionalPagination = {}
+    additionalPagination = {},
+    arrayKeys = []
   } = options;
 
   const page = parseInt(
@@ -28,9 +30,24 @@ export default function parseListParams(url, options = {}) {
   );
 
   const filters = { ...defaultFilters };
-  Array.from(url.searchParams.entries()).forEach(([key, value]) => {
+
+  // Get all unique keys from search params
+  const paramKeys = new Set();
+  url.searchParams.forEach((_, key) => {
     if (!paginationKeys.includes(key)) {
-      filters[key] = value;
+      paramKeys.add(key);
+    }
+  });
+
+  // Process each key
+  paramKeys.forEach(key => {
+    const allValues = url.searchParams.getAll(key);
+
+    // If key is in arrayKeys or has multiple values, treat as array
+    if (arrayKeys.includes(key) || allValues.length > 1) {
+      filters[key] = allValues;
+    } else if (allValues.length === 1) {
+      filters[key] = allValues[0];
     }
   });
 

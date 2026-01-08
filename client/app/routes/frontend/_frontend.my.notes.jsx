@@ -24,7 +24,11 @@ export const loader = async ({ request, context }) => {
     request,
     context,
     fetchFn: (filters, pagination) => meAPI.annotations(filters, pagination),
-    options: { defaultFilters: INIT_FILTER_STATE, initSize: 10 }
+    options: {
+      defaultFilters: INIT_FILTER_STATE,
+      initSize: 10,
+      arrayKeys: ["formats"]
+    }
   });
 
   // Fetch annotated texts and reading groups in parallel (for filters)
@@ -55,7 +59,11 @@ export const clientLoader = async ({ request, serverLoader }) => {
   const clientLoaderFn = createListClientLoader({
     hydrateKey: "__myAnnotationsHydrated",
     fetchFn,
-    options: { defaultFilters: INIT_FILTER_STATE, initSize: 10 }
+    options: {
+      defaultFilters: INIT_FILTER_STATE,
+      initSize: 10,
+      arrayKeys: ["formats"]
+    }
   });
 
   const listData = await clientLoaderFn({ request, serverLoader });
@@ -72,7 +80,8 @@ export default function MyAnnotationsRoute({ loaderData }) {
   const { data: annotations, meta, annotatedTexts, readingGroups } = loaderData;
 
   const { filters, setFilters } = useListSearchParams({
-    defaultFilters: INIT_FILTER_STATE
+    defaultFilters: INIT_FILTER_STATE,
+    arrayKeys: ["formats"]
   });
 
   const setFiltersWithHighlights = state => {
