@@ -41,12 +41,11 @@ export default function BaseInput({
   const inputRef = useRef(null);
   const timeoutRef = useRef(null);
   const [notification, setNotification] = useState(null);
-  const { value, onChange, set, errors: errorsFromField } = useFormField(
-    name,
-    valueProp,
-    onChangeProp
-  );
-  const errors = errorsProp ?? errorsFromField;
+  const { value, onChange, set, errors } = useFormField(name, {
+    controlledValue: valueProp,
+    controlledOnChange: onChangeProp,
+    controlledErrors: errorsProp
+  });
   const context = useContext(FormContext);
   const styleType = context?.styleType;
 

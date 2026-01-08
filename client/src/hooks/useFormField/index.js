@@ -9,8 +9,12 @@ import has from "lodash/has";
  * Replaces the `setter` HOC
  *
  * @param {string} name - Field name (e.g., "attributes[title]" or "attributes.title")
- * @param {any} controlledValue - Field value when using as a controlled component
- * @param {function} controlledOnChange - Change handler when using as controlled
+ * @param {object} options - Optional configuration
+ * @param {any} options.controlledValue - Field value when using as a controlled component
+ * @param {function} options.controlledOnChange - Change handler when using as controlled
+ * @param {function} options.beforeOnChange - Callback called before value change (currentValue, newValue, event) => any|Promise
+ * @param {function} options.transformValue - Optional function to transform the value before setting (newValue) => transformedValue
+ * @param {array} options.controlledErrors - Optional external errors to merge with form errors
  * @returns {object} Form field state and handlers
  *
  * @example
@@ -25,11 +29,14 @@ import has from "lodash/has";
  *   );
  * }
  */
-export default function useFormField(
-  name,
-  controlledValue,
-  controlledOnChange
-) {
+export default function useFormField(name, options = {}) {
+  const {
+    controlledValue,
+    controlledOnChange,
+    controlledErrors,
+    beforeOnChange,
+    transformValue
+  } = options;
   const context = useContext(FormContext);
   const path = useMemo(() => brackets2dots(name), [name]);
 
@@ -54,12 +61,40 @@ export default function useFormField(
     [context, path]
   );
 
-  // onChange handler for native inputs
   const onChange = useCallback(
     event => {
-      set(event.target.value);
+      const newValue = event.target.value === "" ? null : event.target.value;
+      const transformedValue = transformValue
+        ? transformValue(newValue)
+        : newValue;
+
+      const doChange = () => {
+        // Mutate event.target.value with transformed value if needed
+        if (transformValue) {
+          // eslint-disable-next-line no-param-reassign
+          event.target.value = transformedValue;
+        }
+        set(transformedValue);
+      };
+
+      // Handle beforeOnChange callback if provided
+      if (beforeOnChange) {
+        const result = beforeOnChange(value, newValue, event);
+        // If beforeOnChange returns a promise, wait for it
+        if (result && typeof result.then === "function") {
+          result.then(
+            () => {
+              doChange();
+            },
+            () => {}
+          );
+          return;
+        }
+      }
+
+      doChange();
     },
-    [set]
+    [set, value, beforeOnChange, transformValue]
   );
 
   const errors = useMemo(() => {
@@ -71,17 +106,17 @@ export default function useFormField(
     });
   }, [context?.errors, path, name]);
 
-  // Return controlled state if not inside a Form
+  // Pass through controlled state if not inside a Form
   // Replaces previous "Unwrapped" exports
   const controlledState = useMemo(
     () => ({
       value: controlledValue,
       onChange: controlledOnChange,
       set: () => {},
-      errors: [],
+      errors: controlledErrors || [],
       isSubmitting: false
     }),
-    [controlledValue, controlledOnChange]
+    [controlledValue, controlledOnChange, controlledErrors]
   );
 
   if (!context || !name || controlledValue) return controlledState;

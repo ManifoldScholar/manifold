@@ -3,9 +3,11 @@ import { useTranslation } from "react-i18next";
 import Action from "global/components/table/Action";
 import { readingGroupMembershipsAPI, requests } from "api";
 import { useApiCallback } from "hooks";
+import { useRevalidator } from "react-router";
 
-function LeaveGroup({ membership, readingGroup, onLeave }) {
+function LeaveGroup({ membership, readingGroup }) {
   const { t } = useTranslation();
+  const { revalidate } = useRevalidator();
 
   const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy, {
     requestKey: requests.feReadingGroupMembershipDestroy,
@@ -14,7 +16,7 @@ function LeaveGroup({ membership, readingGroup, onLeave }) {
 
   const destroyMembership = async rgMembership => {
     await deleteMembership(rgMembership.id);
-    onLeave();
+    revalidate();
   };
 
   const isCreator =

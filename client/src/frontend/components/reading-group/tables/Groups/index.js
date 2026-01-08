@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -10,9 +9,8 @@ import InlineValue from "global/components/table/InlineValue";
 import IconComposer from "global/components/utility/IconComposer";
 import { ArchiveGroup, EditGroup, JoinGroup, LeaveGroup } from "./actions";
 import { ListFilters } from "global/components/list";
-import lh from "helpers/linkHandler";
 import { useListFilters } from "hooks";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export default function GroupsTable(props) {
   const {
@@ -22,8 +20,7 @@ export default function GroupsTable(props) {
     showStatusFilter = false,
     currentUser,
     hideActions,
-    hideTags,
-    onArchive: refetch
+    hideTags
   } = props;
 
   const { t } = useTranslation();
@@ -41,7 +38,7 @@ export default function GroupsTable(props) {
   };
 
   const handleJoinSuccess = group => {
-    navigate(lh.link("frontendReadingGroupDetail", group.id));
+    navigate(`/groups/${group.id}`);
   };
 
   return (
@@ -49,7 +46,7 @@ export default function GroupsTable(props) {
       models={groups}
       pagination={pagination}
       unit={t("glossary.group", { count: groups.length })}
-      linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
+      linkCreator={group => `/groups/${group.id}`}
       filters={<ListFilters {...listFilterProps} containerWrapPoint="603px" />}
       filterCount={listFilterProps.filters?.length}
     >
@@ -63,7 +60,7 @@ export default function GroupsTable(props) {
             <>
               <LinkedName
                 name={model.attributes.name}
-                to={lh.link("frontendReadingGroupDetail", model.id)}
+                to={`/groups/${model.id}`}
                 tag={!hideTags ? model.attributes.privacy : null}
               />
               <IconComposer
@@ -106,7 +103,7 @@ export default function GroupsTable(props) {
           const wrapInLink = !userCanJoin(model);
           const count = model.attributes.membershipsCount;
           return wrapInLink ? (
-            <NestedLink link={lh.link("frontendReadingGroupMembers", model.id)}>
+            <NestedLink link={`/groups/${model.id}/members`}>
               {count}
             </NestedLink>
           ) : (
@@ -165,14 +162,12 @@ export default function GroupsTable(props) {
                 membership={
                   model.relationships.currentUserReadingGroupMembership
                 }
-                onArchive={refetch}
               />
               <LeaveGroup
                 readingGroup={model}
                 membership={
                   model.relationships.currentUserReadingGroupMembership
                 }
-                onLeave={refetch}
               />
             </div>
           )}

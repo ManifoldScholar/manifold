@@ -5,11 +5,7 @@ import ProfileFormFields from "./ProfileFormFields";
 import Greeting from "./Greeting";
 import { useNavigate } from "react-router";
 import { useRevalidator } from "react-router";
-import {
-  useCurrentUser,
-  useSettings,
-  useNotification
-} from "hooks";
+import { useCurrentUser, useSettings, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "frontend/components/privacy/CookiesForm/CookiesFormFields";
 import Form from "global/components/form";

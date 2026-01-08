@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { transientOptions } from "helpers/emotionHelpers";
-import Switch from "global/components/form/Switch";
 
 const containerGap = "30px";
 
@@ -30,10 +29,6 @@ export const Flex = styled.div`
 
 export const ManageGroupContainer = styled(Flex)`
   justify-content: flex-start;
-`;
-
-export const EditToggle = styled(Switch)`
-  min-inline-size: auto;
 `;
 
 export const NavContainer = styled(Container)`

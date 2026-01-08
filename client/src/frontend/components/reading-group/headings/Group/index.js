@@ -8,7 +8,7 @@ import ManageGroup from "./ManageGroup";
 import GroupSummaryBox from "./GroupSummaryBox";
 import * as Styled from "./styles";
 
-function GroupHeading({ readingGroup, location, refresh }) {
+function GroupHeading({ readingGroup, location }) {
   const { t } = useTranslation();
 
   const {
@@ -56,11 +56,7 @@ function GroupHeading({ readingGroup, location, refresh }) {
       </Collapse>
       {canUpdateGroup && (
         <Styled.Container>
-          <ManageGroup
-            readingGroup={readingGroup}
-            location={location}
-            refresh={refresh}
-          />
+          <ManageGroup readingGroup={readingGroup} location={location} />
         </Styled.Container>
       )}
     </Styled.GroupHeader>
@@ -71,8 +67,7 @@ GroupHeading.displayName = "ReadingGroup.GroupHeading";
 
 GroupHeading.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
-  refresh: PropTypes.func.isRequired
+  location: PropTypes.object.isRequired
 };
 
 export default GroupHeading;

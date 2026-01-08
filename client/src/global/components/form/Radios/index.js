@@ -1,115 +1,129 @@
-import React, { Component } from "react";
+import { useId, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
-import { UIDConsumer } from "react-uid";
 import Errorable from "global/components/form/Errorable";
 import Option from "../Radio/Option";
 import RadioLabel from "../Radio/Label";
 import classnames from "classnames";
-import isString from "lodash/isString";
 import Instructions from "../Instructions";
-import withFormOptions from "hoc/withFormOptions";
+import { useFormField } from "hooks";
 import * as Styled from "./styles";
 
-class FormRadios extends Component {
-  static displayName = "Form.Radios";
+export default function FormRadios({
+  options,
+  label,
+  prompt,
+  inline = false,
+  name,
+  value: valueProp,
+  onChange: onChangeProp,
+  beforeOnChange,
+  inputClasses,
+  instructions,
+  focusOnMount = false,
+  wide,
+  errorName,
+  idForError,
+  errors: errorsProp,
+  defaultValue
+}) {
+  const id = useId();
 
-  static propTypes = {
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.any.isRequired,
-        label: PropTypes.string.isRequired,
-        instructions: PropTypes.string
-      })
-    ).isRequired,
-    label: PropTypes.string,
-    prompt: PropTypes.string,
-    inline: PropTypes.bool,
-    name: PropTypes.string,
-    value: PropTypes.any,
-    set: PropTypes.func,
-    beforeOnChange: PropTypes.func,
-    inputClasses: PropTypes.string,
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    focusOnMount: PropTypes.bool
-  };
-
-  static defaultProps = {
-    focusOnMount: false
-  };
-
-  get focusOnMount() {
-    return this.props.focusOnMount;
-  }
-
-  get options() {
-    return this.props.options;
-  }
-
-  get optionProps() {
-    return {
-      inline: this.props.inline,
-      onChange: this.props.onChange,
-      value: this.props.value
-    };
-  }
-
-  get inputClasses() {
-    return classnames(this.props.inputClasses, {
-      "extra-space-bottom": true,
-      wide: this.props.wide
+  // Create a map of stringified values to original values for type conversion
+  const valueMap = useMemo(() => {
+    const map = new Map();
+    options.forEach(option => {
+      map.set(String(option.value), option.value);
     });
-  }
+    return map;
+  }, [options]);
 
-  get idPrefix() {
-    return "radios";
-  }
+  // Transform function to convert string values back to original types
+  const transformValue = useCallback(
+    stringValue => {
+      return stringValue === null
+        ? null
+        : valueMap.get(stringValue) ?? stringValue;
+    },
+    [valueMap]
+  );
 
-  get idForErrorPrefix() {
-    return "radios-error";
-  }
+  const { value, onChange, errors } = useFormField(name, {
+    controlledValue: valueProp,
+    controlledOnChange: onChangeProp,
+    controlledErrors: errorsProp,
+    beforeOnChange,
+    transformValue
+  });
 
-  get idForInstructionsPrefix() {
-    return "radios-instructions";
-  }
+  const currentValue = value ?? defaultValue;
 
-  render() {
-    return (
-      <UIDConsumer>
-        {id => (
-          <Errorable
-            className={this.inputClasses}
-            name={this.props.name}
-            errors={this.props.errors}
-            label={this.props.label}
-            idForError={`${this.idForErrorPrefix}-${id}`}
-          >
-            <Styled.RadiosWrapper
-              aria-describedby={`${this.idForErrorPrefix}-${id} ${this.idForInstructionsPrefix}-${id}`}
-            >
-              <RadioLabel
-                label={this.props.label}
-                prompt={this.props.prompt}
-                hasInstructions={isString(this.props.instructions)}
-              />
-              <Instructions
-                instructions={this.props.instructions}
-                id={`${this.idForInstructionsPrefix}-${id}`}
-              />
-              {this.options.map((option, index) => (
-                <Option
-                  key={option.key}
-                  option={option}
-                  focusOnMount={this.focusOnMount && index === 0}
-                  groupName={`${this.idPrefix}-${id}`}
-                  {...this.optionProps}
-                />
-              ))}
-            </Styled.RadiosWrapper>
-          </Errorable>
+  const idPrefix = `radios-${id}`;
+  const idForErrorPrefix = idForError || `${idPrefix}-error`;
+  const idForInstructionsPrefix = `${idPrefix}-instructions`;
+
+  const inputClassesResolved = classnames(inputClasses, {
+    "extra-space-bottom": true,
+    wide
+  });
+
+  return (
+    <Errorable
+      className={inputClassesResolved}
+      name={errorName ?? name}
+      errors={errors}
+      label={label}
+      idForError={idForErrorPrefix}
+    >
+      <Styled.RadiosWrapper
+        aria-describedby={`${idForErrorPrefix} ${idForInstructionsPrefix}`}
+      >
+        {(label || prompt) && <RadioLabel label={label} prompt={prompt} />}
+        {instructions && (
+          <Instructions
+            instructions={instructions}
+            id={idForInstructionsPrefix}
+          />
         )}
-      </UIDConsumer>
-    );
-  }
+        {options.map((option, index) => (
+          <Option
+            key={option.key || option.value}
+            option={option}
+            focusOnMount={focusOnMount && index === 0}
+            groupName={name || idPrefix}
+            value={currentValue}
+            onChange={onChange}
+            inline={inline}
+          />
+        ))}
+      </Styled.RadiosWrapper>
+    </Errorable>
+  );
 }
 
-export default withFormOptions(FormRadios);
+FormRadios.displayName = "Form.Radios";
+
+FormRadios.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.any.isRequired,
+      label: PropTypes.string.isRequired,
+      instructions: PropTypes.string,
+      key: PropTypes.any
+    })
+  ).isRequired,
+  label: PropTypes.string,
+  prompt: PropTypes.string,
+  inline: PropTypes.bool,
+  name: PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
+  beforeOnChange: PropTypes.func,
+  inputClasses: PropTypes.string,
+  instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  focusOnMount: PropTypes.bool,
+  wide: PropTypes.bool,
+  errorName: PropTypes.string,
+  idForError: PropTypes.string,
+  errors: PropTypes.array,
+  defaultValue: PropTypes.any
+};
