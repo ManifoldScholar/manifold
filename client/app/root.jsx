@@ -1,12 +1,5 @@
 import { useMemo } from "react";
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useRouteError
-} from "react-router";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { HelmetProvider } from "react-helmet-async";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
@@ -17,9 +10,8 @@ import LoadingBar from "global/components/LoadingBar";
 import SignInUp from "global/components/sign-in-up";
 import CookiesBanner from "global/components/CookiesBanner";
 import { NavigationBlockerProvider } from "global/components/router/NavigationBlockerContext";
-import { formatError } from "global/components/FatalError/Boundary";
-import FatalError from "global/components/FatalError";
 import { useColorScheme } from "hooks";
+import { ErrorBoundary } from "./RootErrorBoundary";
 
 // Middleware and contexts
 import { bootstrapMiddleware } from "./middleware/bootstrap.server";
@@ -35,23 +27,7 @@ export const loader = ({ context }) => {
   return context.get(routerContext);
 };
 
-// Root ErrorBoundary - catches loader errors and uncaught render errors
-export function ErrorBoundary() {
-  const error = useRouteError();
-
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Error</title>
-      </head>
-      <body>
-        <FatalError fatalError={formatError(error)} />
-      </body>
-    </html>
-  );
-}
+export { ErrorBoundary };
 
 export default function Root({ loaderData }) {
   const { auth, settings, pages } = loaderData;
