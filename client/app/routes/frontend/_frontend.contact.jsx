@@ -2,19 +2,20 @@ import { redirect } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
 import { contactsAPI } from "api";
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
+import handleActionError from "app/routes/utility/helpers/handleActionError";
 import GlobalForm from "global/containers/form";
 import Form from "global/components/form";
 import HeadContent from "global/components/HeadContent";
 
 export async function action({ request, context }) {
-  const client = getApiClient(context);
   const data = await request.json();
   const contact = data.attributes || {};
 
   try {
-    const result = await client.call(
-      contactsAPI.create({ attributes: contact })
+    const result = await queryApi(
+      contactsAPI.create({ attributes: contact }),
+      context
     );
 
     if (result?.errors) {
@@ -23,22 +24,7 @@ export async function action({ request, context }) {
 
     throw redirect("/");
   } catch (error) {
-    if (
-      error instanceof Response &&
-      error.status >= 300 &&
-      error.status < 400
-    ) {
-      throw error;
-    }
-
-    return {
-      errors: [
-        {
-          detail: error.message || "Failed to send message",
-          source: { pointer: "/data" }
-        }
-      ]
-    };
+    return handleActionError(error, "Failed to send message");
   }
 }
 

@@ -1,4 +1,5 @@
 import { ApiClient, tokensAPI } from "api";
+import normalizeApiError from "app/routes/utility/helpers/normalizeApiError";
 
 const getErrorMessage = status => {
   switch (status) {
@@ -31,7 +32,13 @@ export async function action({ request }) {
 
     return { authToken };
   } catch (error) {
-    const status = error?.status || error?.body?.status || 401;
+    // Normalize error to get status, then format with custom message
+    const normalized = normalizeApiError(error);
+    const status =
+      normalized.errors?.[0]?.status ||
+      error?.status ||
+      error?.body?.status ||
+      401;
     return {
       error: getErrorMessage(status)
     };

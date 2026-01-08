@@ -1,4 +1,5 @@
 import { ApiClient, usersAPI } from "api";
+import handleActionError from "app/routes/utility/helpers/handleActionError";
 
 export async function action({ request }) {
   const data = await request.json();
@@ -18,13 +19,6 @@ export async function action({ request }) {
       password: data.attributes?.password
     };
   } catch (error) {
-    return {
-      errors: [
-        {
-          detail: error.message || "Failed to create account",
-          source: { pointer: "/data" }
-        }
-      ]
-    };
+    return handleActionError(error, "Failed to create account");
   }
 }

@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import { meAPI } from "api";
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
+import handleActionError from "app/routes/utility/helpers/handleActionError";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import Form from "global/components/form";
 import { useCurrentUser, useNotification } from "hooks";
@@ -17,10 +18,9 @@ export const loader = async ({ request, context }) => {
 
 export async function action({ request, context }) {
   const data = await request.json();
-  const client = getApiClient(context);
 
   try {
-    const result = await client.call(meAPI.update(data.attributes));
+    const result = await queryApi(meAPI.update(data.attributes), context);
 
     if (result?.errors) {
       return { errors: result.errors };
@@ -28,14 +28,7 @@ export async function action({ request, context }) {
 
     return { success: true };
   } catch (error) {
-    return {
-      errors: [
-        {
-          detail: error.message || "Failed to update notification preferences",
-          source: { pointer: "/data" }
-        }
-      ]
-    };
+    return handleActionError(error, "Failed to update notification preferences");
   }
 }
 

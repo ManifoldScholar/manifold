@@ -3,7 +3,7 @@ import { meAPI } from "api";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 import HeadContent from "global/components/HeadContent";
 import MyAnnotationsEntityCollection from "frontend/components/entity/Collection/patterns/MyAnnotations";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
@@ -18,8 +18,6 @@ const INIT_FILTER_STATE = {
 export const loader = async ({ request, context }) => {
   requireLogin(request, context);
 
-  const client = getApiClient(context);
-
   const annotationsData = await loadList({
     request,
     context,
@@ -33,8 +31,8 @@ export const loader = async ({ request, context }) => {
 
   // Fetch annotated texts and reading groups in parallel (for filters)
   const [annotatedTextsResult, readingGroupsResult] = await Promise.allSettled([
-    client.call(meAPI.annotatedTexts()),
-    client.call(meAPI.readingGroups())
+    queryApi(meAPI.annotatedTexts(), context),
+    queryApi(meAPI.readingGroups(), context)
   ]);
 
   return {

@@ -13,10 +13,7 @@ export const projectContext = createRouterContext();
 export const AppContext = createReactContext({
   settings: null,
   auth: null,
-  pages: null,
-  revalidate: () => {
-    console.warn("AppContext not yet initialized");
-  }
+  pages: null
 });
 
 // Frontend context - provides frontend-specific data to frontend routes only

@@ -1,4 +1,5 @@
 import { ApiClient, passwordsAPI } from "api";
+import handleActionError from "app/routes/utility/helpers/handleActionError";
 
 export async function action({ request }) {
   const data = await request.json();
@@ -9,13 +10,6 @@ export async function action({ request }) {
     await client.call(passwordsAPI.create(data));
     return { success: true, email: data };
   } catch (error) {
-    return {
-      errors: [
-        {
-          detail: error.message || "Failed to send password reset",
-          source: { pointer: "/data" }
-        }
-      ]
-    };
+    return handleActionError(error, "Failed to send password reset");
   }
 }

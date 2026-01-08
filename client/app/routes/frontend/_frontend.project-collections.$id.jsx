@@ -16,8 +16,6 @@ import EventTracker, { EVENTS } from "global/components/EventTracker";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { useListFilters, useListSearchParams, useSubjects } from "hooks";
 
-const PROJECTS_FILTER_RESET = { collectionOrder: null };
-
 export const loader = async ({ params, request, context }) => {
   checkLibraryMode({ request, context });
 
@@ -33,7 +31,7 @@ export const loader = async ({ params, request, context }) => {
     context,
     fetchFn: projectsAPI.index,
     options: {
-      defaultFilters: { ...PROJECTS_FILTER_RESET, collectionOrder: params.id }
+      defaultFilters: { collectionOrder: params.id }
     }
   });
 
@@ -48,7 +46,7 @@ export const clientLoader = async ({ request, serverLoader, params }) => {
     hydrateKey: "__projectCollectionProjectsHydrated",
     fetchFn: projectsAPI.index,
     options: {
-      defaultFilters: { ...PROJECTS_FILTER_RESET, collectionOrder: params.id }
+      defaultFilters: { collectionOrder: params.id }
     }
   });
 

@@ -1,6 +1,7 @@
 import { annotationsAPI, commentsAPI } from "api";
 import { routerContext } from "app/contexts";
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
+import handleActionError from "app/routes/utility/helpers/handleActionError";
 
 /**
  * Shared action for flagging/unflagging annotations and comments.
@@ -31,16 +32,14 @@ export async function action({ request, context }) {
     };
   }
 
-  const client = getApiClient(context);
-
   try {
     let result;
 
     if (intent === "flag") {
       if (type === "annotations") {
-        result = await client.call(annotationsAPI.flag(id, message));
+        result = await queryApi(annotationsAPI.flag(id, message), context);
       } else if (type === "comments") {
-        result = await client.call(commentsAPI.flag(id));
+        result = await queryApi(commentsAPI.flag(id), context);
       } else {
         return {
           errors: [
@@ -53,9 +52,9 @@ export async function action({ request, context }) {
       }
     } else if (intent === "unflag") {
       if (type === "annotations") {
-        result = await client.call(annotationsAPI.unflag(id));
+        result = await queryApi(annotationsAPI.unflag(id), context);
       } else if (type === "comments") {
-        result = await client.call(commentsAPI.unflag(id));
+        result = await queryApi(commentsAPI.unflag(id), context);
       } else {
         return {
           errors: [
@@ -83,13 +82,6 @@ export async function action({ request, context }) {
 
     return { success: true, data: result?.data };
   } catch (error) {
-    return {
-      errors: [
-        {
-          detail: error.message || "Failed to flag content",
-          source: { pointer: "/data" }
-        }
-      ]
-    };
+    return handleActionError(error, "Failed to flag content");
   }
 }

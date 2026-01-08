@@ -1,6 +1,7 @@
 import { meAPI } from "api";
 import { routerContext } from "app/contexts";
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
+import handleActionError from "app/routes/utility/helpers/handleActionError";
 
 export async function action({ request, context }) {
   const { auth } = context.get(routerContext) ?? {};
@@ -17,10 +18,8 @@ export async function action({ request, context }) {
 
   const data = await request.json();
 
-  const client = getApiClient(context);
-
   try {
-    const result = await client.call(meAPI.update(data));
+    const result = await queryApi(meAPI.update(data), context);
 
     if (result?.errors) {
       return { errors: result.errors };
@@ -28,13 +27,6 @@ export async function action({ request, context }) {
 
     return { success: true };
   } catch (error) {
-    return {
-      errors: [
-        {
-          detail: error.message || "Failed to update profile",
-          source: { pointer: "/data" }
-        }
-      ]
-    };
+    return handleActionError(error, "Failed to update profile");
   }
 }

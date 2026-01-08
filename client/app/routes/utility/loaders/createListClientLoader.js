@@ -1,4 +1,5 @@
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
+import handleLoaderError from "app/routes/utility/helpers/handleLoaderError";
 import parseListParams from "./parseListParams";
 
 /**
@@ -16,21 +17,23 @@ export default function createListClientLoader({
   options = {}
 }) {
   const clientLoader = async ({ request, serverLoader }) => {
-    const url = new URL(request.url);
-    const { filters, pagination } = parseListParams(url, options);
+    try {
+      const url = new URL(request.url);
+      const { filters, pagination } = parseListParams(url, options);
 
-    // On initial hydration, use server data
-    if (!window[hydrateKey]) {
-      window[hydrateKey] = true;
-      return serverLoader();
+      // On initial hydration, use server data
+      if (!window[hydrateKey]) {
+        window[hydrateKey] = true;
+        return serverLoader();
+      }
+
+      // After hydration, always fetch client-side (including revalidation)
+      // This avoids refetching server data unnecessarily
+      const result = await queryApi(fetchFn(filters, pagination));
+      return { data: result.data ?? [], meta: result.meta ?? null };
+    } catch (error) {
+      handleLoaderError(error);
     }
-
-    // After hydration, always fetch client-side (including revalidation)
-    // This avoids refetching server data unnecessarily
-    const client = getApiClient();
-
-    const result = await client.call(fetchFn(filters, pagination));
-    return { data: result.data ?? [], meta: result.meta ?? null };
   };
 
   clientLoader.hydrate = true;

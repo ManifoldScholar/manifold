@@ -1,6 +1,7 @@
 import { useSubmit, redirect } from "react-router";
 import { readingGroupsAPI } from "api";
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
+import handleActionError from "app/routes/utility/helpers/handleActionError";
 import Layout from "backend/components/layout";
 import { useTranslation } from "react-i18next";
 import { GroupSettingsForm } from "frontend/components/reading-group/forms";
@@ -12,10 +13,8 @@ export const handle = {
 export async function action({ request, context }) {
   const data = await request.json();
 
-  const client = getApiClient(context);
-
   try {
-    const result = await client.call(readingGroupsAPI.create(data));
+    const result = await queryApi(readingGroupsAPI.create(data), context);
 
     if (result?.errors) {
       return { errors: result.errors };
@@ -23,14 +22,7 @@ export async function action({ request, context }) {
 
     return redirect("/my/groups");
   } catch (error) {
-    return {
-      errors: [
-        {
-          detail: error.message || "Failed to create reading group",
-          source: { pointer: "/data" }
-        }
-      ]
-    };
+    return handleActionError(error, "Failed to create reading group");
   }
 }
 

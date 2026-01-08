@@ -11,7 +11,7 @@ import { useListSearchParams, useListFilters } from "hooks";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadList from "app/routes/utility/loaders/loadList";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 import { useSettings } from "hooks";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
 
@@ -41,7 +41,6 @@ export const loader = async ({ params, request, context }) => {
   checkLibraryMode({ request, context });
 
   const { resourceCollectionId } = params;
-  const client = getApiClient(context);
 
   const [resourcesResult, annotationsResult] = await Promise.allSettled([
     loadList({
@@ -57,11 +56,12 @@ export const loader = async ({ params, request, context }) => {
         defaultFilters: DEFAULT_FILTERS
       }
     }),
-    client.call(
+    queryApi(
       resourceCollectionsAPI.annotations(resourceCollectionId, undefined, {
         number: 1,
         size: 5
-      })
+      }),
+      context
     )
   ]);
 

@@ -1,12 +1,13 @@
 import { redirect } from "react-router";
 import { notificationPreferencesAPI } from "api";
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 
 export const loader = async ({ params, context }) => {
-  const client = getApiClient(context);
-
   try {
-    await client.call(notificationPreferencesAPI.unsubscribe(params.token));
+    await queryApi(
+      notificationPreferencesAPI.unsubscribe(params.token),
+      context
+    );
   } catch (error) {
     // Continue even if unsubscribe fails
     console.error("Failed to unsubscribe:", error);

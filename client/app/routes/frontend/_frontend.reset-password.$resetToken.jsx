@@ -2,20 +2,20 @@ import { redirect } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
 import { passwordsAPI } from "api";
-import { getApiClient } from "app/routes/utility/helpers/getApiClient";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 import GlobalForm from "global/containers/form";
 import Form from "global/components/form";
 import HeadContent from "global/components/HeadContent";
 
 export async function action({ request, context, params }) {
-  const client = getApiClient(context);
   const data = await request.json();
   const { password, passwordConfirmation } = data.attributes || {};
   const resetToken = params.resetToken;
 
   try {
-    const result = await client.call(
-      passwordsAPI.update(password, passwordConfirmation, resetToken)
+    const result = await queryApi(
+      passwordsAPI.update(password, passwordConfirmation, resetToken),
+      context
     );
 
     if (result?.errors) {
