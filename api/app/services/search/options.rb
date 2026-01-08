@@ -165,7 +165,8 @@ module Search
         :request_params,
         :per_page,
         page: :page_number,
-        index_name: :search_indexes
+        index_name: :search_indexes,
+        models: :search_indexes
       )
     end
 
