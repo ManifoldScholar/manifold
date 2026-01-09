@@ -1,20 +1,17 @@
-import { useLocation, useNavigate, Outlet } from "react-router";
+import { useLocation, Outlet } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useRevalidator } from "react-router";
+import { redirect } from "react-router";
 import { readingGroupsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import { readingGroupContext } from "app/contexts";
 import authorize from "app/routes/utility/loaders/authorize";
+import { hasItemsInCollection } from "frontend/components/collecting/helpers";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { GroupHeading } from "frontend/components/reading-group/headings";
-import SearchDialog from "frontend/components/collecting/SearchDialog";
 
 export const loader = async ({ params, context, request }) => {
   const fetchFn = () => readingGroupsAPI.show(params.id);
   const readingGroup = await loadEntity({ context, fetchFn });
-
-  context.set(readingGroupContext, readingGroup);
 
   await authorize({
     context,
@@ -24,13 +21,29 @@ export const loader = async ({ params, context, request }) => {
     currentPath: new URL(request.url).pathname
   });
 
+  /*
+  Some RGs may choose to only use annotation features and not do any collecting.
+  In such cases we'll just redirect to the annotations page (except for moderators,
+  who have collecting privileges) rather than show the empty homepage.
+  */
+  const url = new URL(request.url);
+  const isIndexRoute =
+    url.pathname === `/groups/${params.id}` ||
+    url.pathname === `/groups/${params.id}/`;
+  if (isIndexRoute) {
+    const canUpdateGroup = readingGroup?.attributes?.abilities?.update;
+    const showHomepage = canUpdateGroup || hasItemsInCollection(readingGroup);
+
+    if (!showHomepage) {
+      throw redirect(`/groups/${params.id}/annotations`);
+    }
+  }
+
   return readingGroup;
 };
 
 export default function ReadingGroupDetail({ loaderData: readingGroup }) {
   const location = useLocation();
-  const navigate = useNavigate();
-  const { revalidate } = useRevalidator();
   const { t } = useTranslation();
 
   const breadcrumbProps =
@@ -53,18 +66,6 @@ export default function ReadingGroupDetail({ loaderData: readingGroup }) {
         };
 
   const { name: groupName } = readingGroup.attributes ?? {};
-  const showSearchDialog = location.hash === "#search";
-
-  const closeDrawer = () => {
-    const { pathname, search = "" } = location;
-    const url = `${pathname}${search}`;
-    navigate(url);
-  };
-
-  const handleCloseSearch = () => {
-    revalidate();
-    closeDrawer();
-  };
 
   return (
     <>
@@ -73,16 +74,7 @@ export default function ReadingGroupDetail({ loaderData: readingGroup }) {
         <div className="container">
           <RegisterBreadcrumbs {...breadcrumbProps} />
           <GroupHeading readingGroup={readingGroup} location={location} />
-          <Outlet
-            context={{
-              readingGroup,
-              refresh: revalidate,
-              closeDrawer
-            }}
-          />
-          {showSearchDialog && (
-            <SearchDialog heading={groupName} onClose={handleCloseSearch} />
-          )}
+          <Outlet context={readingGroup} />
         </div>
       </section>
     </>
