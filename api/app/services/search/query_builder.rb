@@ -39,7 +39,7 @@ module Search
       search do |s|
         apply_query! s
         apply_highlight! s
-        apply_indices_boost! s
+        # apply_indices_boost! s # Indices boost is incompatible with ES 5.6
         apply_pagination! s
         apply_select! s
       end
