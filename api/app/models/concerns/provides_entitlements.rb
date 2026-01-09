@@ -4,7 +4,7 @@ module ProvidesEntitlements
   extend ActiveSupport::Concern
 
   included do
-    has_one_readonly :entitler, as: :entity
+    has_one :entitler, as: :entity, dependent: :destroy
 
     has_many :provided_entitlements, through: :entitler, source: :entitlements
   end

@@ -182,7 +182,7 @@ module Validator
     # @param declarations [String]
     # @return [CssParser::RuleSet]
     def parse_declarations(declarations)
-      parser = CssParser::RuleSet.new(nil, declarations)
+      parser = CssParser::RuleSet.new(**declarations)
       parser.expand_shorthand!
       parser
     end

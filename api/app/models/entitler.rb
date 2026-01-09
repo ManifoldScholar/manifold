@@ -3,7 +3,7 @@
 # A semantic wrapper around an `entity` who can entitle a {User}
 # with any number of given roles.
 class Entitler < ApplicationRecord
-  ACCEPTED_ENTITY_TYPES = %w[EntitlementImport User].freeze
+  ACCEPTED_ENTITY_TYPES = %w[EntitlementImport Identity User UserGroupMembership].freeze
 
   upsert_keys %i[entity_id entity_type]
 

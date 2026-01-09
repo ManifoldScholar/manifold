@@ -11,6 +11,7 @@ class Settings < ApplicationRecord
 
   self.filter_attributes = [*SECTIONS.dup, :fa_cache]
 
+  attribute :authentication, SettingSections::Authentication.to_type, default: -> { {} }
   attribute :general, SettingSections::General.to_type, default: -> { {} }
   attribute :email, SettingSections::Email.to_type, default: -> { {} }
   attribute :ingestion, SettingSections::Ingestion.to_type, default: -> { {} }
@@ -50,6 +51,48 @@ class Settings < ApplicationRecord
   end
 
   alias manifold_analytics_enabled? manifold_analytics_enabled
+
+  # @!endgroup
+
+  # @!group authentication
+
+  # The following authentication settings are not managed in the database, but from ENV
+  # They are here because they need to be included in the settings response provided to the FE on load
+  def authentication
+    {
+      identity_providers:,
+      default_identity_provider:,
+      hide_local_login:
+    }
+  end
+
+  def identity_providers
+    ManifoldEnv.oauth.enabled.map do |oauth|
+      {
+        name: oauth.name,
+        display_name: oauth.name,
+        url: "/auth/#{oauth.strategy_name}/redirect"
+      }
+    end + SamlConfig.providers.map do |saml|
+      next unless saml.show?
+
+      {
+        name: saml.provider_name,
+        display_name: saml.display_name,
+        url: "#{Rails.application.config.manifold.api_url}/auth/#{saml.provider_name}/redirect"
+      }
+    end.compact
+  end
+
+  # Currently only supports SAML providers
+  def default_identity_provider
+    SamlConfig.providers.find(&:default)&.provider_name
+  end
+
+  # @todo Move this into a more generic config, it's not specific to SAML
+  def hide_local_login
+    SamlConfig.disable_password_auth
+  end
 
   # @!endgroup
 

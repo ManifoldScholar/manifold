@@ -926,6 +926,63 @@ const routes = {
           ]
         },
         {
+          name: "backendRecordsUserGroups",
+          exact: false,
+          component: "UserGroupsList",
+          path: "/backend/records/user-groups",
+          helper: () => "/backend/records/user-groups",
+          routes: [
+            {
+              name: "backendRecordsUserGroupsNew",
+              exact: true,
+              component: "UserGroupsNew",
+              path: "/backend/records/user-groups/new",
+              helper: () => "/backend/records/user-groups/new"
+            },
+            {
+              name: "backendRecordsUserGroup",
+              exact: false,
+              component: "UserGroupWrapper",
+              path: "/backend/records/user-groups/:id",
+              helper: ug => `/backend/records/user-groups/${ug}`,
+              routes: [
+                {
+                  name: "backendRecordsUserGroupProperties",
+                  exact: true,
+                  component: "UserGroupProperties",
+                  path: "/backend/records/user-groups/:id/properties",
+                  helper: ug => `/backend/records/user-groups/${ug}/properties`
+                },
+                {
+                  name: "backendRecordsUserGroupUsers",
+                  exact: true,
+                  component: "UserGroupUsers",
+                  path: "/backend/records/user-groups/:id/users",
+                  helper: ug => `/backend/records/user-groups/${ug}/users`
+                },
+                {
+                  name: "backendRecordsUserGroupEntitlements",
+                  exact: false,
+                  component: "UserGroupEntitlements",
+                  path: "/backend/records/user-groups/:id/entitlements",
+                  helper: ug =>
+                    `/backend/records/user-groups/${ug}/entitlements`,
+                  routes: [
+                    {
+                      name: "backendRecordsUserGroupEntitlementsNew",
+                      exact: true,
+                      component: "UserGroupEntitlementsNew",
+                      path: "/backend/records/user-groups/:id/entitlements/new",
+                      helper: ug =>
+                        `/backend/records/user-groups/${ug}/entitlements/new`
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
           name: "backendRecordsMakers",
           component: "MakersList",
           exact: true,
