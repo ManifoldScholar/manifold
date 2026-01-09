@@ -1,14 +1,5 @@
-import React, {
-  useEffect,
-  useContext,
-  useCallback,
-  useRef,
-  useState
-} from "react";
-import InternalContext from "../contexts/InternalContext";
-import { useSelector, useDispatch, useStore } from "react-redux";
-import { entityStoreActions } from "actions";
-import entityUtils from "utils/entityUtils";
+import { useEffect, useCallback, useState, useRef } from "react";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 import { useUID } from "react-uid";
 import config from "config";
 import ch from "helpers/consoleHelpers";
@@ -25,18 +16,14 @@ export default function useFetch({
   afterFetch,
   options = {},
   dependencies = [],
-  refetchOnLogin = false,
   condition = true
 }) {
-  const firstRun = useRef(true);
   const uid = `fetch_${useUID()}`;
   const [requestKey] = useState(options.requestKey ?? `fetch_${useUID()}`);
-  const [count, setCount] = useState(1);
-  const store = useStore();
-  const getState = store.getState;
-  const dispatch = useDispatch();
-
-  const internalContext = useContext(InternalContext);
+  const countRef = useRef(0);
+  const [result, setResult] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(null);
 
   if (!Array.isArray(request)) {
     throw new Error(
@@ -48,101 +35,57 @@ export default function useFetch({
 
   const [apiCall, ...apiCallArgs] = request;
 
-  if (count > 25)
-    throw new Error(
-      `useFetch tried to fetch data more than 25 times. This suggests that an input to
-      useFetch needs to be memoized.`
-    );
-
   /* eslint-disable react-hooks/exhaustive-deps */
-  const triggerFetchData = useCallback(() => {
-    if (!condition) return Promise.resolve();
-    log("useFetch", requestKey);
-    setCount(count + 1);
-    const apiFetch = apiCall(...apiCallArgs);
-    const action = entityStoreActions.request(apiFetch, requestKey, options);
-    const { promise } = dispatch(action);
-    return promise;
-  }, [apiCall, ...apiCallArgs, dispatch, requestKey, condition]);
-  /* eslint-enable react-hooks/exhaustive-deps */
-
-  // Fetch on the server
-  if (
-    firstRun.current &&
-    !internalContext.resolved &&
-    config.environment.isServer
-  ) {
-    let cancel = Function.prototype;
-
-    if (!internalContext.resolved) {
-      const effectPr = new Promise(resolve => {
-        cancel = () => {
-          resolve(requestKey);
-        };
-
-        return triggerFetchData()
-          .then(res => {
-            return res;
-          })
-          .then(() => {
-            resolve(requestKey);
-          })
-          .catch(() => {
-            resolve(requestKey);
-          });
-      });
-
-      internalContext.requests.push({
-        id: requestKey,
-        promise: effectPr,
-        cancel
-      });
+  const triggerFetchData = useCallback(async () => {
+    if (!condition) {
+      setResult(null);
+      setLoaded(false);
+      return Promise.resolve();
     }
-  }
 
-  const authentication = useSelector(state => state.authentication);
+    countRef.current += 1;
+    if (countRef.current > 25) {
+      throw new Error(
+        `useFetch tried to fetch data more than 25 times. This suggests that an input to
+        useFetch needs to be memoized.`
+      );
+    }
 
-  /* Logging out redirects home, so there's no need to refetch on logout, and it
-     can lead to an auth error after the redirect home has already happened. So,
-     build in the logout check here.
-  */
-  const [authTrigger, setAuthTrigger] = useState(authentication.authenticated);
+    log("useFetch", requestKey);
+    setLoaded(false);
+    setError(null);
 
-  useEffect(() => {
-    if (authentication.authenticated && !authTrigger) setAuthTrigger(true);
-  }, [authentication.authenticated, authTrigger]);
-
-  const refetchDependencies = refetchOnLogin
-    ? [...dependencies, authTrigger]
-    : dependencies;
+    try {
+      const apiFetch = apiCall(...apiCallArgs);
+      const response = await queryApi(apiFetch);
+      setResult(response);
+      setLoaded(true);
+      if (isFunction(afterFetch)) afterFetch();
+      return response;
+    } catch (err) {
+      setError(err);
+      setResult(null);
+      setLoaded(true);
+      throw err;
+    }
+  }, [apiCall, ...apiCallArgs, requestKey, condition, afterFetch]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    triggerFetchData().then(
-      () => {
-        if (isFunction(afterFetch)) afterFetch();
-      },
-      () => {
-        // do nothing
-      }
-    );
-  }, [triggerFetchData, ...refetchDependencies]);
+    triggerFetchData().catch(() => {
+      // Error already handled in triggerFetchData
+    });
+  }, [triggerFetchData, ...dependencies]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-  const data = useSelector(state =>
-    entityUtils.select(requestKey, state.entityStore)
-  );
-
-  const meta = useSelector(state =>
-    entityUtils.meta(requestKey, state.entityStore)
-  );
-
-  const loaded = useSelector(state =>
-    entityUtils.loaded(requestKey, state.entityStore)
-  );
-
-  const response = getState()?.entityStore.responses[requestKey];
-
-  firstRun.current = false;
-  return { data, meta, loaded, uid, response, refresh: triggerFetchData };
+  return {
+    data: result?.data ?? null,
+    meta: result?.meta ?? null,
+    loaded,
+    uid,
+    response: result,
+    refresh: triggerFetchData,
+    error
+  };
 }

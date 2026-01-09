@@ -1,25 +1,21 @@
 import { useTranslation } from "react-i18next";
+import { useLoaderData } from "react-router";
+import { useSearchContext } from "hooks/useSearch/context";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
+import searchLoader from "app/routes/utility/loaders/search";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import { useSearchContext } from "hooks/useSearch/context";
 import HeadContent from "global/components/HeadContent";
 import * as Styled from "./styles";
 
 export const loader = async ({ request, context }) => {
-  checkLibraryMode({ request, context });
-  return null;
+  await checkLibraryMode({ request, context });
+  return searchLoader({ request, context });
 };
 
 export default function SearchRoute() {
-  const {
-    results,
-    resultsMeta,
-    searchQueryState,
-    setQueryState,
-    setPage
-  } = useSearchContext();
-
+  const { results, meta } = useLoaderData();
+  const { searchQueryState, setQueryState, setPage } = useSearchContext();
   const { t } = useTranslation();
 
   const facets = [
@@ -50,7 +46,7 @@ export default function SearchRoute() {
           <Styled.Inner>
             <h2 className="screen-reader-text">{t("search.results")}</h2>
             <SearchResults.List
-              pagination={resultsMeta.pagination}
+              pagination={meta?.pagination}
               paginationClickHandler={setPage}
               results={results}
               context="frontend"

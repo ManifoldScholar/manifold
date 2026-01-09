@@ -1,22 +1,34 @@
 import { useTranslation } from "react-i18next";
-import { useOutletContext } from "react-router";
+import { useLoaderData, useOutletContext } from "react-router";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import { projectsAPI } from "api";
+import loadEntity from "app/routes/utility/loaders/loadEntity";
+import searchLoader from "app/routes/utility/loaders/search";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
 import { useSearchContext } from "hooks/useSearch/context";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import * as Styled from "./styles";
 
-export default function ProjectSearch() {
-  const project = useOutletContext();
-  const {
-    results,
-    resultsMeta,
-    searchQueryState,
-    setQueryState,
-    setPage
-  } = useSearchContext();
+export const loader = async ({ params, request, context }) => {
+  // Load project to get its UUID (API expects UUID, not slug)
+  const fetchFn = () => projectsAPI.show(params.id);
+  const project = await loadEntity({ context, fetchFn });
 
+  return searchLoader({
+    request,
+    context,
+    beforeQuery: searchQueryState => {
+      /* eslint-disable no-param-reassign */
+      searchQueryState.project = project.id;
+    }
+  });
+};
+
+export default function ProjectSearch() {
+  const { results, meta } = useLoaderData();
+  const project = useOutletContext();
+  const { searchQueryState, setQueryState, setPage } = useSearchContext();
   const { t } = useTranslation();
 
   const facets = [
@@ -54,7 +66,7 @@ export default function ProjectSearch() {
           <Styled.Inner>
             <h2 className="screen-reader-text">{t("search.results")}</h2>
             <SearchResults.List
-              pagination={resultsMeta.pagination}
+              pagination={meta?.pagination}
               paginationClickHandler={setPage}
               results={results}
               hideParent
