@@ -68,10 +68,11 @@ class LinkHandler {
 
       // Reading groups
       frontendPublicReadingGroups: () => "/reading-groups",
-      frontendMyReadingGroups: () => "/my-reading-groups",
-      frontendMyReadingGroupsNew: () => "/my-reading-groups/new",
+      frontendMyReadingGroups: () => "/my/groups",
+      frontendMyReadingGroupsNew: () => "/my/groups/new",
       frontendReadingGroup: id => `/reading-groups/${id}`,
       frontendReadingGroupDetail: id => `/reading-groups/${id}`,
+      frontendReadingGroupDetailSettings: id => `/reading-groups/${id}`,
       frontendReadingGroupMembers: id => `/reading-groups/${id}/members`,
       frontendReadingGroupAnnotations: (id, params = {}) => {
         const query = queryString.stringify(params);
@@ -112,6 +113,7 @@ class LinkHandler {
       backendProjectNew: () => "/backend/projects/new",
       backendProjectsNew: () => "/backend/projects/new",
       backendProjectCollections: () => "/backend/project-collections",
+      backendJournalsNew: () => "/backend/journals/new",
 
       // Backend settings
       backendSettings: () => "/backend/settings",

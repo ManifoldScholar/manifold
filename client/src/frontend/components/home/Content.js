@@ -14,7 +14,6 @@ export default function Content() {
     hasVisibleProjects
   } = useLoaderData() || {};
 
-  // Filter data (matching useFetchHomepageContent logic)
   const filteredProjects = Array.isArray(projects)
     ? projects.filter(p => !p?.attributes?.markedForPurgeAt)
     : null;

@@ -737,6 +737,573 @@ export default function ProjectsRoute() {
 
 ---
 
+## Phase 6: Reading Groups Migration (December 2024)
+
+### Summary
+
+Migrated all reading group routes (`/groups`, `/my/groups`, `/groups/:id/*`) to React Router v7 Framework Mode. Completed full migration of reading group components off Redux, replaced `withConfirmation` HOC with `useConfirmation` hook, and fixed hydration warnings by replacing `react-uid` with React's `useId`.
+
+### What Was Done ✅
+
+#### 1. Route Structure
+
+**Index Routes Restriction**: React Router v7 index routes cannot have child routes. Restructured routes to make `edit` and `settings` siblings of the index route:
+
+```
+app/routes/frontend/
+├── _frontend.groups.jsx                    # /groups (wrapper)
+├── _frontend.groups._index.jsx             # /groups (list)
+├── _frontend.groups.$id.jsx                # /groups/:id (wrapper)
+├── _frontend.groups.$id._index.jsx         # /groups/:id (homepage)
+├── _frontend.groups.$id.edit.jsx          # /groups/:id/edit (sibling, not child)
+├── _frontend.groups.$id.settings.jsx      # /groups/:id/settings (sibling)
+├── _frontend.groups.$id.edit.settings.jsx # /groups/:id/edit/settings (child of edit)
+├── _frontend.groups.$id.annotations.jsx
+├── _frontend.groups.$id.annotations.settings.jsx
+├── _frontend.groups.$id.members.jsx
+├── _frontend.groups.$id.members.settings.jsx
+└── _frontend.groups.$id.members.$membershipId.jsx
+```
+
+#### 2. Redux Migration: Reading Group Components
+
+Migrated all reading group components from Redux to React Router patterns:
+
+| Component                   | Changes                                                          |
+| --------------------------- | ---------------------------------------------------------------- |
+| `JoinBox`                   | Redux → `useApiCallback`, `withConfirmation` → `useConfirmation` |
+| `JoinGroup`                 | `withConfirmation` → `useConfirmation`                           |
+| `ArchiveGroup`              | Removed `withConfirmation`, renders confirmation from hook       |
+| `ReadingGroupSettings`      | Removed unnecessary `withConfirmation` HOC                       |
+| `useArchiveOrActivateGroup` | Already migrated, uses `useApiCallback` + `useConfirmation`      |
+
+**Pattern for API calls**:
+
+```javascript
+// Before (Redux)
+const dispatch = useDispatch();
+const fetch = request(apiCall, requestKey, options);
+const result = dispatch(fetch);
+result.promise.then(...);
+
+// After (Framework Mode)
+const apiCall = useApiCallback(readingGroupsAPI.show);
+const result = await apiCall(params);
+```
+
+**Pattern for confirmations**:
+
+```javascript
+// Before (HOC)
+import withConfirmation from "hoc/withConfirmation";
+function Component({ confirm }) {
+  confirm(heading, message, callback);
+}
+export default withConfirmation(Component);
+
+// After (Hook)
+import { useConfirmation } from "hooks";
+import Dialog from "global/components/dialog";
+function Component() {
+  const { confirm, confirmation } = useConfirmation();
+  confirm({ heading, message, callback: closeDialog => {...} });
+  return (
+    <>
+      {confirmation && <Dialog.Confirm {...confirmation} />}
+      {/* component content */}
+    </>
+  );
+}
+```
+
+#### 3. Removed Revalidate/Refresh Props
+
+Components now use `useRevalidator` hook directly instead of receiving refresh callbacks:
+
+```javascript
+// Before
+function Component({ refresh, onSuccess }) {
+  // ...
+  onSuccess(); // or refresh()
+}
+
+// After
+import { useRevalidator } from "react-router";
+function Component() {
+  const { revalidate } = useRevalidator();
+  // ...
+  revalidate();
+}
+```
+
+**Components updated**:
+
+- `GroupAnnotations` - Uses `useRevalidator` directly
+- `JoinBox` - Removed `onJoin` prop
+- `JoinGroup` - Removed `onSuccess` prop
+- `ArchiveGroup` - Removed `onArchive` prop (hook handles internally)
+- `GroupsTable` - Removed `onArchive` prop
+- `ReadingGroupsList` - Removed `onArchive` prop
+
+#### 4. Fixed Hydration Warnings
+
+Replaced `react-uid` with React's `useId` to fix server/client ID mismatches:
+
+| Component         | File                                                                            | Change                                    |
+| ----------------- | ------------------------------------------------------------------------------- | ----------------------------------------- |
+| `Collapse`        | `src/global/components/Collapse/index.js`                                       | `useUIDSeed` → `useId`                    |
+| `Collapse/Toggle` | `src/global/components/Collapse/Toggle.js`                                      | `React.isValidElement` → `isValidElement` |
+| `GroupSummaryBox` | `src/frontend/components/reading-group/headings/Group/GroupSummaryBox/index.js` | `useUID` → `useId`                        |
+| `DuplicatePanel`  | `src/frontend/components/reading-group/Settings/panels/composed/Duplicate.js`   | `useUIDSeed` → `useId`                    |
+
+**Pattern**:
+
+```javascript
+// Before
+import { useUIDSeed } from "react-uid";
+const idSeed = useUIDSeed();
+const id = idSeed("content");
+
+// After
+import { useId } from "react";
+const baseId = useId();
+const id = `${baseId}-content`;
+```
+
+#### 5. Removed React Imports
+
+Removed unnecessary React imports from components (React 17+ doesn't require them for JSX):
+
+```javascript
+// Before
+import React, { useState, useId } from "react";
+
+// After
+import { useState, useId } from "react";
+```
+
+#### 6. LinkHandler Replacement
+
+Replaced `lh.link()` calls with direct React Router paths:
+
+```javascript
+// Before
+import lh from "helpers/linkHandler";
+<Link to={lh.link("frontendLogin")}>
+
+// After
+<Link to="/login">
+```
+
+#### 7. Shared Action for Settings
+
+Created shared `readingGroupSettings` action for all settings routes:
+
+**`app/routes/utility/actions/readingGroupSettings.js`**:
+
+- Handles both `update` and `duplicate` intents
+- Determines parent route from URL for redirects
+- Uses `throw redirect()` for navigation (no client-side `useEffect` needed)
+
+#### 8. Context-Based Data Sharing
+
+Used router context to share `readingGroup` from parent to child loaders:
+
+```javascript
+// Parent route (_frontend.groups.$id.jsx)
+export const loader = async ({ params, context }) => {
+  const readingGroup = await fetchReadingGroup(params.id);
+  context.set(readingGroupContext, readingGroup);
+  return { readingGroup };
+};
+
+// Child route (_frontend.groups.$id.members.jsx)
+export const loader = async ({ params, context }) => {
+  let readingGroup;
+  try {
+    readingGroup = context.get(readingGroupContext);
+  } catch {
+    // Fallback: fetch directly if context not available
+    const { auth } = context.get(routerContext) ?? {};
+    const client = new ApiClient(auth?.authToken, { denormalize: true });
+    readingGroup = await client.call(readingGroupsAPI.show(params.id));
+  }
+  // ...
+};
+```
+
+### Files Created
+
+| File                                                                 | Purpose                     |
+| -------------------------------------------------------------------- | --------------------------- |
+| `app/routes/frontend/_frontend.groups.jsx`                           | Public groups wrapper       |
+| `app/routes/frontend/_frontend.groups._index.jsx`                    | Public groups list          |
+| `app/routes/frontend/_frontend.groups.$id.jsx`                       | Group detail wrapper        |
+| `app/routes/frontend/_frontend.groups.$id._index.jsx`                | Group homepage              |
+| `app/routes/frontend/_frontend.groups.$id.edit.jsx`                  | Group homepage edit         |
+| `app/routes/frontend/_frontend.groups.$id.settings.jsx`              | Homepage settings drawer    |
+| `app/routes/frontend/_frontend.groups.$id.edit.settings.jsx`         | Edit settings drawer        |
+| `app/routes/frontend/_frontend.groups.$id.annotations.jsx`           | Annotations route           |
+| `app/routes/frontend/_frontend.groups.$id.annotations.settings.jsx`  | Annotations settings drawer |
+| `app/routes/frontend/_frontend.groups.$id.members.jsx`               | Members route               |
+| `app/routes/frontend/_frontend.groups.$id.members.settings.jsx`      | Members settings drawer     |
+| `app/routes/frontend/_frontend.groups.$id.members.$membershipId.jsx` | Member edit drawer          |
+| `app/routes/utility/actions/readingGroupSettings.js`                 | Shared settings action      |
+| `app/routes/utility/loaders/authorize.js`                            | Authorization helper        |
+| `app/routes/utility/loaders/loadList.js`                             | List loading helper         |
+| `app/routes/utility/loaders/createListClientLoader.js`               | ClientLoader factory        |
+
+### Files Modified
+
+| File                                                                              | Changes                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------- |
+| `src/frontend/components/reading-group/JoinBox/index.js`                          | Redux → `useApiCallback`, HOC → hook          |
+| `src/frontend/components/reading-group/tables/Groups/actions/Join.js`             | HOC → hook, removed `onSuccess` prop          |
+| `src/frontend/components/reading-group/tables/Groups/actions/Archive.js`          | Removed HOC, renders confirmation from hook   |
+| `src/frontend/components/reading-group/tables/Groups/index.js`                    | Removed `onArchive` prop                      |
+| `src/frontend/components/reading-group/Settings/index.js`                         | Removed unnecessary `withConfirmation` HOC    |
+| `src/frontend/components/reading-group/hooks/useArchiveOrActivateGroup.js`        | Already migrated, uses hooks internally       |
+| `src/global/components/entity/CollectionPlaceholder/patterns/AnnotationsGroup.js` | Replaced `lh.link` with `/login`              |
+| `src/frontend/components/entity/Collection/patterns/GroupAnnotations.js`          | Uses `useRevalidator` directly                |
+| `src/frontend/components/reading-group-list/List/index.js`                        | Removed `onArchive` and `onJoin` props        |
+| `src/global/components/Collapse/index.js`                                         | `react-uid` → `useId`                         |
+| `src/global/components/Collapse/Toggle.js`                                        | Removed React import, direct `isValidElement` |
+| `src/global/components/Collapse/Content.js`                                       | Removed React import                          |
+| `src/frontend/components/reading-group/headings/Group/GroupSummaryBox/index.js`   | `react-uid` → `useId`, removed React import   |
+| `src/frontend/components/reading-group/Settings/panels/composed/Duplicate.js`     | `react-uid` → `useId`                         |
+
+### Reading Groups Migration Status
+
+| Route                   | Path                                | Status      |
+| ----------------------- | ----------------------------------- | ----------- |
+| Public Groups List      | `/groups`                           | ✅ Complete |
+| My Groups List          | `/my/groups`                        | ✅ Complete |
+| Group Detail (Homepage) | `/groups/:id`                       | ✅ Complete |
+| Group Homepage Edit     | `/groups/:id/edit`                  | ✅ Complete |
+| Group Annotations       | `/groups/:id/annotations`           | ✅ Complete |
+| Group Members           | `/groups/:id/members`               | ✅ Complete |
+| Member Edit             | `/groups/:id/members/:membershipId` | ✅ Complete |
+| All Settings Drawers    | `*/settings`                        | ✅ Complete |
+
+### Key Patterns Established
+
+1. **Index routes cannot have children** - Make siblings instead
+2. **Use `useRevalidator` directly** - Don't pass refresh props
+3. **Replace `react-uid` with `useId`** - Fixes hydration warnings
+4. **Remove React imports** - Not needed in React 17+
+5. **Use router context for parent data** - Avoid re-fetching in child loaders
+6. **Shared actions for similar routes** - DRY principle
+7. **`useApiCallback` for client-side API calls** - Replaces Redux
+8. **`useConfirmation` hook instead of HOC** - More flexible
+
+---
+
+## Phase 7: Simple Standalone Routes Migration (January 2025)
+
+### Summary
+
+Migrated 11 straightforward standalone frontend routes to React Router v7 Framework Mode. These routes are simple, single-component routes with minimal or no data fetching, making them ideal candidates for early migration.
+
+### Routes Migrated ✅
+
+| Route            | Path                     | Loader Required             | Action Required  | Auth Required |
+| ---------------- | ------------------------ | --------------------------- | ---------------- | ------------- |
+| Search           | `/search`                | ✅ (checkLibraryMode)       | ❌               | ❌            |
+| Login            | `/login`                 | ❌                          | ❌               | ❌            |
+| Sign Up          | `/signup`                | ❌                          | ❌               | ❌            |
+| Contact          | `/contact`               | ❌                          | ✅ (form submit) | ❌            |
+| Password Reset   | `/reset-password/:token` | ❌                          | ✅ (form submit) | ❌            |
+| Page             | `/page/:slug`            | ✅ (fetch page)             | ❌               | ❌            |
+| Subscriptions    | `/subscriptions`         | ✅ (requireLogin)           | ❌               | ✅            |
+| Privacy Settings | `/privacy`               | ✅ (requireLogin)           | ❌               | ✅            |
+| Data Use         | `/data-use`              | ✅ (get settings)           | ❌               | ❌            |
+| Unsubscribe      | `/unsubscribe/:token`    | ✅ (unsubscribe + redirect) | ❌               | ❌            |
+| API Docs         | `/docs/api`              | ✅ (fetch schema)           | ❌               | ❌            |
+
+### Migration Patterns
+
+#### 1. Simple Routes (No Loader/Action)
+
+Routes that just render a component without data fetching or form submissions:
+
+```javascript
+// app/routes/frontend/_frontend.login.jsx
+import LoginContainer from "frontend/containers/Login";
+
+export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
+
+export default function LoginRoute() {
+  return <LoginContainer />;
+}
+```
+
+#### 2. Routes with Library Mode Check
+
+Routes that need to check if library mode is enabled:
+
+```javascript
+// app/routes/frontend/_frontend.search.jsx
+import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
+
+export const loader = async ({ request, context }) => {
+  checkLibraryMode({ request, context });
+  return null;
+};
+
+export default function SearchRoute() {
+  return <SearchContainer />;
+}
+```
+
+#### 3. Routes with Data Fetching
+
+Routes that fetch data in the loader:
+
+```javascript
+// app/routes/frontend/_frontend.page.$slug.jsx
+export const loader = async ({ params, context }) => {
+  const { auth } = context.get(routerContext) ?? {};
+  const client = new ApiClient(auth?.authToken, { denormalize: true });
+
+  try {
+    const page = await client.call(pagesAPI.show(params.slug));
+    return { page };
+  } catch (error) {
+    return { page: null };
+  }
+};
+
+export default function PageRoute({ loaderData }) {
+  return <PageContainer page={loaderData?.page} />;
+}
+```
+
+#### 4. Routes with Form Actions
+
+Routes that handle form submissions:
+
+```javascript
+// app/routes/frontend/_frontend.contact.jsx
+export async function action({ request, context }) {
+  const { auth } = context.get(routerContext) ?? {};
+  const client = new ApiClient(auth?.authToken, { denormalize: true });
+  const formData = await request.formData();
+
+  const contact = {
+    email: formData.get("attributes[email]"),
+    message: formData.get("attributes[message]"),
+    fullName: formData.get("attributes[fullName]")
+  };
+
+  try {
+    const result = await client.call(
+      contactsAPI.create({ attributes: contact })
+    );
+
+    if (result?.errors) {
+      return { errors: result.errors };
+    }
+
+    throw redirect("/");
+  } catch (error) {
+    if (
+      error instanceof Response &&
+      error.status >= 300 &&
+      error.status < 400
+    ) {
+      throw error;
+    }
+    return { errors: [{ detail: error.message || "Failed to send message" }] };
+  }
+}
+
+export default function ContactRoute({ actionData }) {
+  return <ContactContainer actionData={actionData} />;
+}
+```
+
+#### 5. Routes with Auth Protection
+
+Routes that require authentication:
+
+```javascript
+// app/routes/frontend/_frontend.subscriptions.jsx
+import requireLogin from "app/routes/utility/loaders/requireLogin";
+
+export const loader = async ({ request, context }) => {
+  requireLogin(request, context);
+  return null;
+};
+
+export default function SubscriptionsRoute() {
+  return <SubscriptionsContainer />;
+}
+```
+
+#### 6. Routes with Loader Redirects
+
+Routes that perform an action and redirect:
+
+```javascript
+// app/routes/frontend/_frontend.unsubscribe.$token.jsx
+export const loader = async ({ params, context }) => {
+  const { auth } = context.get(routerContext) ?? {};
+  const client = new ApiClient(auth?.authToken, { denormalize: true });
+
+  try {
+    await client.call(notificationPreferencesAPI.unsubscribe(params.token));
+  } catch (error) {
+    console.error("Failed to unsubscribe:", error);
+  }
+
+  throw redirect("/");
+};
+```
+
+### Container Component Updates
+
+#### Migrating from Redux to Form Actions
+
+**Before (Redux)**:
+
+```javascript
+import { useDispatch } from "react-redux";
+import { entityStoreActions } from "actions";
+
+export default function ContactContainer() {
+  const dispatch = useDispatch();
+  const response = useFromStore({
+    path: `entityStore.responses.${requests.gContactForm}`
+  });
+
+  const sendMessage = event => {
+    event.preventDefault();
+    dispatch(
+      request(
+        contactsAPI.create({ attributes: contact }),
+        requests.gContactForm
+      )
+    ).promise.then(() => navigate("/"));
+  };
+
+  const errors = get(response, "errors") || [];
+  // ...
+}
+```
+
+**After (Framework Mode)**:
+
+```javascript
+import { useSubmit } from "react-router";
+
+export default function ContactContainer({ actionData }) {
+  const submit = useSubmit();
+
+  const sendMessage = event => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.set("attributes[email]", contact.email);
+    formData.set("attributes[message]", contact.message);
+    formData.set("attributes[fullName]", contact.fullName);
+    submit(formData, { method: "post" });
+  };
+
+  const errors = actionData?.errors || [];
+  // ...
+}
+```
+
+#### Migrating from useFetch to Loader Props
+
+**Before (useFetch hook)**:
+
+```javascript
+import { useFetch } from "hooks";
+import { pagesAPI } from "api";
+
+export default function PageContainer() {
+  const { slug } = useParams();
+  const { data: page } = useFetch({
+    request: [pagesAPI.show, slug]
+  });
+  // ...
+}
+```
+
+**After (Loader props)**:
+
+```javascript
+export default function PageContainer({ page }) {
+  // page comes from loaderData
+  // ...
+}
+```
+
+#### Migrating from useFromStore to Loader Props
+
+**Before (Redux store)**:
+
+```javascript
+import { useFromStore } from "hooks";
+
+export default function DataUseContainer() {
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  // ...
+}
+```
+
+**After (Loader props)**:
+
+```javascript
+export default function DataUseContainer({ settings }) {
+  // settings comes from loaderData
+  // ...
+}
+```
+
+### Files Created
+
+```
+app/routes/frontend/
+├── _frontend.search.jsx
+├── _frontend.login.jsx
+├── _frontend.signup.jsx
+├── _frontend.contact.jsx
+├── _frontend.reset-password.$resetToken.jsx
+├── _frontend.page.$slug.jsx
+├── _frontend.subscriptions.jsx
+├── _frontend.privacy.jsx
+├── _frontend.data-use.jsx
+├── _frontend.unsubscribe.$token.jsx
+└── _frontend.docs.api.jsx
+```
+
+### Files Modified
+
+```
+src/frontend/containers/
+├── Contact/index.js          # Migrated to useSubmit + actionData
+├── PasswordReset/index.js     # Migrated to useSubmit + actionData
+├── Page/index.js              # Migrated to loader props
+├── DataUse/index.js           # Migrated to loader props
+├── Api/index.js               # Migrated to loader props
+└── Login/index.js             # Updated imports (react-router-dom → react-router)
+```
+
+### Key Takeaways
+
+1. **Simple routes are quick wins**: These 11 routes were migrated quickly because they follow straightforward patterns with minimal complexity.
+
+2. **Form actions pattern**: Routes with forms benefit from server-side actions that handle validation and redirects, reducing client-side complexity.
+
+3. **Loader props over hooks**: When data is fetched in loaders, pass it as props rather than using hooks like `useFetch` or `useFromStore`.
+
+4. **Auth protection**: Use `requireLogin` loader utility for routes that need authentication.
+
+5. **Library mode checks**: Use `checkLibraryMode` loader utility for routes that should only work when library mode is enabled.
+
+---
+
 ## Next Steps: Migrating Additional Routes
 
 ### Route Migration Pattern
@@ -752,25 +1319,28 @@ For list routes, use the established pattern with shared utilities:
 
 ### Routes to Migrate (Priority Order)
 
-| Route                   | Path                   | Complexity               | Status  |
-| ----------------------- | ---------------------- | ------------------------ | ------- |
-| ~~Projects List~~       | `/projects`            | Medium                   | ✅ Done |
-| ~~Journals List~~       | `/journals`            | Medium                   | ✅ Done |
-| ~~Issues List~~         | `/issues`              | Medium                   | ✅ Done |
-| ~~Project Collections~~ | `/project-collections` | Medium                   | ✅ Done |
-| Project Detail          | `/projects/:slug`      | High (many child routes) | Pending |
-| Journal Detail          | `/journals/:slug`      | High                     | Pending |
-| Reading Groups          | `/my/groups`           | Medium                   | Pending |
-| Backend Routes          | `/backend/*`           | High (large subtree)     | Pending |
-| Reader Routes           | `/read/*`              | High (specialized UI)    | Pending |
+| Route                   | Path                     | Complexity               | Status  |
+| ----------------------- | ------------------------ | ------------------------ | ------- |
+| ~~Projects List~~       | `/projects`              | Medium                   | ✅ Done |
+| ~~Journals List~~       | `/journals`              | Medium                   | ✅ Done |
+| ~~Issues List~~         | `/issues`                | Medium                   | ✅ Done |
+| ~~Project Collections~~ | `/project-collections`   | Medium                   | ✅ Done |
+| ~~Reading Groups~~      | `/groups`, `/my/groups`  | Medium                   | ✅ Done |
+| ~~Simple Standalone~~   | `/search`, `/login`, etc | Low                      | ✅ Done |
+| Project Detail          | `/projects/:slug`        | High (many child routes) | Pending |
+| Journal Detail          | `/journals/:slug`        | High                     | Pending |
+| Backend Routes          | `/backend/*`             | High (large subtree)     | Pending |
+| Reader Routes           | `/read/*`                | High (specialized UI)    | Pending |
 
 ### Remaining Codebase Updates
 
 1. **Replace `withSettings` HOC** in non-homepage components (~4 files remain)
 2. **Replace `useFromStore` for auth/settings/pages** in non-homepage components (~40+ files)
-3. **Replace remaining `react-uid`** with `useId()` (~53 files remain)
+3. **Replace remaining `react-uid`** with `useId()` (~50 files remain, ~4 fixed in reading groups)
 4. **Remove Redux auth/settings reducers** once all components migrated
 5. **Delete old SSR files** (`src/entry-ssr.js`, `src/servers/proxies/renderer.js`) and `ServerCookie` helper
+6. **Replace `withConfirmation` HOC** with `useConfirmation` hook in remaining components
+7. **Remove React imports** from components (React 17+ doesn't require them)
 
 ### Issues Resolved During POC ✅
 

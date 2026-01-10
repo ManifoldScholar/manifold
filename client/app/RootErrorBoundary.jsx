@@ -42,6 +42,7 @@ export function ErrorBoundary() {
       </head>
       <body>
         <GlobalStyles styles={styles} />
+        <div>Root Error Boundary</div>
         <div id="content">
           <FatalError fatalError={formatError(error)} />
         </div>
