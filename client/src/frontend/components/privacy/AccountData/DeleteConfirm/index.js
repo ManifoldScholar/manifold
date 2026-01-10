@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  useApiCallback,
-  useNotification,
-  useCurrentUser,
-  useLogout
-} from "hooks";
+import { useNotification, useCurrentUser, useLogout } from "hooks";
 import { meAPI } from "api";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 import Form from "global/components/form";
 import * as Styled from "./styles";
 
@@ -19,8 +15,6 @@ export default function DeleteConfirm() {
   const [mismatch, setMismatch] = useState(false);
   const [errors, setErrors] = useState(null);
 
-  const deleteAccount = useApiCallback(meAPI.destroy, { removes: currentUser });
-
   const notifyDestroy = useNotification(me => ({
     level: 0,
     id: `USER_DESTROYED_${me.id}`,
@@ -32,10 +26,15 @@ export default function DeleteConfirm() {
   }));
 
   const deleteAndRedirect = async () => {
-    const res = await deleteAccount();
-    if (res?.errors) return setErrors(res.errors);
-    notifyDestroy(currentUser);
-    logout();
+    try {
+      const res = await queryApi(meAPI.destroy());
+      if (res?.errors) return setErrors(res.errors);
+      notifyDestroy(currentUser);
+      logout();
+    } catch (error) {
+      console.error("Failed to delete account:", error);
+      setErrors(error?.errors || [{ detail: "Failed to delete account" }]);
+    }
   };
 
   const handleDelete = e => {

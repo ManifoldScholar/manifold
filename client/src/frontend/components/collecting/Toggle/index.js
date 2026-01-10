@@ -8,7 +8,8 @@ import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
 import { useRevalidator } from "react-router";
-import { useCurrentUser, useApiCallback } from "hooks";
+import { useCurrentUser } from "hooks";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 
 const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals"];
 
@@ -64,9 +65,6 @@ function CollectingToggle({
   const currentUser = useCurrentUser();
   const { revalidate } = useRevalidator();
 
-  const collectCollectable = useApiCallback(collectingAPI.collect);
-  const removeCollectable = useApiCallback(collectingAPI.remove);
-
   const collected = inCollections(collectable, currentUser, ...myReadingGroups);
 
   useEffect(() => {
@@ -89,7 +87,7 @@ function CollectingToggle({
   const doCollect = useCallback(
     async (collection = currentUser) => {
       try {
-        await collectCollectable([collectable], collection);
+        await queryApi(collectingAPI.collect([collectable], collection));
         setHovered(false);
         setIsCollecting(true);
         revalidate();
@@ -97,13 +95,13 @@ function CollectingToggle({
         console.error("Failed to collect:", error);
       }
     },
-    [collectable, currentUser, collectCollectable, revalidate]
+    [collectable, currentUser, revalidate]
   );
 
   const doRemove = useCallback(
     async (collection = currentUser) => {
       try {
-        await removeCollectable([collectable], collection);
+        await queryApi(collectingAPI.remove([collectable], collection));
         setHovered(false);
         revalidate();
         if (onUncollect) onUncollect(collection);
@@ -111,7 +109,7 @@ function CollectingToggle({
         console.error("Failed to remove from collection:", error);
       }
     },
-    [collectable, currentUser, removeCollectable, onUncollect, revalidate]
+    [collectable, currentUser, onUncollect, revalidate]
   );
 
   const onClick = useCallback(
