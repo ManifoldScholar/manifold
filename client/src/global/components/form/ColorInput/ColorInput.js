@@ -1,13 +1,19 @@
 import { useId, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import Coloris from "@melloware/coloris";
-import setter from "../setter";
+import { useFormField } from "hooks";
 import * as Styled from "./styles";
 
-function ColorInput({ defaultValue, container, ...props }) {
+export default function ColorInput({
+  name,
+  defaultValue,
+  container,
+  ...props
+}) {
   const id = useId();
   const inputRef = useRef();
-  const colorRef = useRef(props.value || defaultValue);
+  const { value, set } = useFormField(name);
+  const colorRef = useRef(value || defaultValue);
 
   const inputId = `color-input-${id}`;
 
@@ -33,11 +39,11 @@ function ColorInput({ defaultValue, container, ...props }) {
       document.removeEventListener("coloris:pick", setColor);
       picker.removeEventListener("keydown", handleEnter);
     };
-  }, [inputId, container, props]);
+  }, [inputId, container]);
 
   useEffect(() => {
     const onClose = () => {
-      props.onChange({ target: { value: colorRef.current } });
+      set(colorRef.current);
     };
 
     const inputEl = inputRef.current;
@@ -58,11 +64,12 @@ function ColorInput({ defaultValue, container, ...props }) {
 
       return () => inputEl.removeEventListener("close", onClose);
     }
-  }, [inputRef, defaultValue, colorRef, container, props]);
+  }, [defaultValue, container, set]);
 
   return (
     <Styled.ColorInput
       id={inputId}
+      name={name}
       colorRef={inputRef}
       idForError={`color-input-error-${id}`}
       idForInstructions={`color-input-instructions-${id}`}
@@ -73,14 +80,10 @@ function ColorInput({ defaultValue, container, ...props }) {
   );
 }
 
-ColorInput.propTypes = {
-  defaultValue: PropTypes.string.isRequired,
-  // By default the color picker renders as a dialog in <body>.
-  // Pass a selector if rendering in a focus trap.
-  container: PropTypes.string
-  // See BaseInput for remaining propTypes
-};
-
-export default setter(ColorInput);
-
 ColorInput.displayName = "Form.ColorInput";
+
+ColorInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string.isRequired,
+  container: PropTypes.string
+};

@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
@@ -6,15 +6,15 @@ import Header from "../Header";
 import Utility from "global/components/utility";
 import * as Styled from "./styles";
 
+const placeholderChar = "\u005F";
+const mask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
+
 function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
   const [pickerOpen, setPickerOpen] = useState(false);
 
   const { t, i18n } = useTranslation();
   const locale = t("date_fns", { returnObjects: true });
   registerLocale(i18n.language, locale);
-
-  const placeholderChar = "\u005F";
-  const mask = [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/];
 
   // Due to a11y issues with the date picker, we render this custom text input, which does a couple things:
   // * disables the default click handler on the input that would normally open the picker
@@ -62,7 +62,7 @@ function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
         onChange={onChange}
         onCalendarOpen={() => setPickerOpen(true)}
         onCalendarClose={() => setPickerOpen(false)}
-        customInput={<CustomInput />}
+        customInput={__BROWSER__ ? <CustomInput /> : undefined}
         dropdownMode="scroll"
         dateformat="P"
         locale={i18n.language}

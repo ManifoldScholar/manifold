@@ -1,16 +1,31 @@
-import React, { PureComponent } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useContext,
+  useMemo,
+  useId
+} from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import { UIDConsumer } from "react-uid";
+import { useTranslation } from "react-i18next";
+import { useFormField, useAuthentication } from "hooks";
 import Errorable from "../Errorable";
-// import setter from "../setter";
 import Instructions from "../Instructions";
 import Developer from "global/components/developer";
 import IconComposer from "global/components/utility/IconComposer";
-import withFormOptions from "hoc/withFormOptions";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import isString from "lodash/isString";
+import isNumber from "lodash/isNumber";
+import isBoolean from "lodash/isBoolean";
+import isFunction from "lodash/isFunction";
+import isNil from "lodash/isNil";
+import has from "lodash/has";
+import keyBy from "lodash/keyBy";
+import startsWith from "lodash/startsWith";
 import { FormContext } from "helpers/contexts";
+import { ApiClient } from "api";
+import { isPromise } from "utils/promise";
+import Authorization from "helpers/authorization";
 import BaseLabel from "../BaseLabel";
 import * as Styled from "./styles";
 
@@ -22,441 +37,712 @@ const KEYS = {
   ESCAPE: 27
 };
 
-export class PickerComponent extends PureComponent {
-  static displayName = "Form.Picker";
+// Helper functions for option processing
+const isSimpleValue = value =>
+  isString(value) || isNumber(value) || isBoolean(value);
 
-  static propTypes = {
-    debug: PropTypes.bool,
-    /* The label is displayed above the input                                   */
-    label: PropTypes.string,
-    /* When the picker is passed an array value, it acts as a select multiple.  */
-    /* The current selection renders below the input using the EntitesList      */
-    /* component. The listStyle dictates how that list will display. We've      */
-    /* tested display with rows and well lists. Other list types may require    */
-    /* modest styles to work properly                                           */
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
-    /* The listRowComponent will be passed to the EntitiesList component as its */
-    /* "rowComponent" prop. Defaults to StringRow for simple options. It should */
-    /* be a React component or a function that takes props as an argument. It   */
-    /* should not be an _instance_ of a component. It can also be a string that */
-    /* references a component exported by the EntitiesList index.js file.       */
-    listRowComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    /* props to be passed to each row in the list                               */
-    listRowProps: PropTypes.object,
-    /* This function will be passed the entity for a given row and should       */
-    /* a URL string. If present, entities in the list will render with an edit  */
-    /* link.                                                                    */
-    listRowEditUrlGenerator: PropTypes.func,
-    /* The path to the attribute on the model that's being updated in bracket   */
-    /* notation. For example: "attributes[tagList]"                             */
-    name: PropTypes.string,
-    /* The options that should appear in the picker. These will be passed on to */
-    /* the withFormOptions HOC, which is responsible for managing options and */
-    /* the current value. You may pass a function to this component. The        */
-    /* function must return { endpoint, method, options }, which is typically   */
-    /* what is returned from a Manifold API resource method. For example,       */
-    /* one could pass "subjectsAPI.index" as options, and the HOC will fetch    */
-    /* the subjects from the API and turn them into picker options.             */
-    // options: PropTypes.oneOfType([
-    //   PropTypes.arrayOf(
-    //     PropTypes.oneOfType([
-    //       PropTypes.shape({
-    //         label: PropTypes.string.isRequired,
-    //         instructions: PropTypes.string,
-    //         value: PropTypes.any.isRequired
-    //       }),
-    //       PropTypes.shape({
-    //         id: PropTypes.string.isRequired,
-    //         attributes: PropTypes.object
-    //       })
-    //     ])
-    //   ),
-    //   PropTypes.func
-    // ]),
-    /* The update options function will be called when a user searches in the   */
-    /* search input and is used to refresh the options. It's passed the search  */
-    /* word from the input. The assumption is that this function will update    */
-    /* state or props in the outer component, which will trigger new options    */
-    /* to be passed into the component. Nothing is currently done with the      */
-    /* output from this callback, although that could change in the future      */
-    updateOptions: PropTypes.func,
-    /* This function is used to transform an option, or the results of an       */
-    /* options function into a label. By default, simply option values are cast */
-    /* to strings. Labels for resource options will generate the label from  */
-    /* the type and ID attribute.                                               */
-    optionToLabel: PropTypes.func,
-    /* By default, whatever is passed in as an option is the value that's set   */
-    /* when the user makes a selection. However, in some cases, we want to      */
-    /* transform the options before they're set. When the withFormOptions HOC */
-    /* analyzes the options, this function will be called to transform the      */
-    /* option. For example, in a tag picker, we might want to generate options  */
-    /* from existing tag resources, but treat them as strings within the        */
-    /* picker and set them as strings in the form session state. To do this, we */
-    /* can include an optionToValue transformer: tag => tag.attributes.name.    */
-    optionToValue: PropTypes.func,
-    /* Because HTML select inputs deal in strings rather than complex objects,  */
-    /* the withFormOptions HOC needs to convert every option into a string    */
-    /* value. In most cases, it can do this without intervention, assuming all  */
-    /* options have an id attribute or have a value that can be cast to a       */
-    /* string. If you have an edge case, use this function to determine how the */
-    /* options are mapped to strings.                                           */
-    optionToString: PropTypes.func,
-    /* The placeholder will display in the search input when the text input is  */
-    /* empty.                                                                   */
-    placeholder: PropTypes.string,
-    /* If true, a wide class will be applied to the input to render it at 100%  */
-    /* width.                                                                   */
-    wide: PropTypes.bool.isRequired,
-    /* AllowNew can be a boolean value or a shape that can be passed to the     */
-    /* widely used authorizeAbility function. If the former is true or if the   */
-    /* latter returns true, when the user presses return in the text input      */
-    /* after typing in an option that was not available, the value will still   */
-    /* be accepted. For example, in a tag list, we have the user choose from    */
-    /* existing tags, but we also want her to be able to enter a new tag.       */
-    /* This can be used in conjunction with the newToValue prop to transform a  */
-    /* user-provided string into a settable value (eg, string into a model)     */
-    allowNew: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.shape({
-        entity: PropTypes.string.isRequired,
-        ability: PropTypes.string.isRequired
-      })
-    ]),
-    /* NewToValue takes a string input and returns the value that should be set */
-    /* the picker. For example, if the picker allows users to create subject    */
-    /* resources, use this prop to transform the string into a resource. The    */
-    /* function implementation should return a value or a promise that will     */
-    /* resolve to a value.                                                      */
-    newToValue: PropTypes.func,
-    /* This function will be passed the value from the picker before it is set  */
-    /* in the form session state. This could be useful, for example, to turn an */
-    /* array into a comma-separated list before posting to the API. By default  */
-    /* this function is a noop.                                                 */
-    beforeSetValue: PropTypes.func,
-    /* This function will be passed the value from the session state before it  */
-    /* is passed down to the picker. Use this in conjunection with the          */
-    /* beforeSetValue prop to transform a value back into an array for the      */
-    /* picker and option to work with. By default, this function is a noop.     */
-    beforeGetValue: PropTypes.func,
-    /* Set to true to show the add and remove all buttons                       */
-    showAddRemoveAll: PropTypes.bool,
-    /* Instructions display underneath the picker                               */
-    instructions: PropTypes.string,
-    /* When true, the picker will set the empty value to { _remove: true }      */
-    /* rather than null. This allows the API to see that a belongs_to           */
-    /* association is being removed.                                            */
-    belongsTo: PropTypes.bool,
-    t: PropTypes.func
-  };
+const hasOptionShape = option => has(option, "label") && has(option, "value");
 
-  static defaultProps = {
-    debug: false,
-    wide: false,
-    labelStyle: "label",
-    reorderable: false,
-    value: "",
-    listRowComponent: "FormOptionRow",
-    listRowProps: { namePath: "attributes.name" },
-    belongsTo: false,
-    renderLiveRegion: () => {
-      /* noop */
-    }
-  };
+const hasResourceShape = option => has(option, "id");
 
-  static contextType = FormContext;
+const valueToString = value => {
+  if (isSimpleValue(value)) return value.toString();
+  if (hasResourceShape(value)) return value.id;
+  return String(value);
+};
 
-  constructor(props) {
-    super(props);
-    this.inputWrapperRef = React.createRef();
-    this.searchInputRef = React.createRef();
-    this.optionsRef = React.createRef();
+const defaultOptionToLabel = value => {
+  if (isSimpleValue(value)) return value.toString();
+  if (hasResourceShape(value)) return `${value.type} - ${value.id}`;
+  return String(value);
+};
 
-    this.state = {
-      listBoxVisible: false,
-      searchInputValue: null,
-      activeOption: null
-    };
-  }
+const defaultOptionFilter = (searchWord, option) => {
+  return startsWith(option.label.toLowerCase(), searchWord.toLowerCase());
+};
 
-  componentDidMount() {
-    this.setupGlobalEvents();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.listboxBecameVisible(prevState)) this.scrollListboxToTop();
-    if (this.announcementChanged(prevProps)) {
-      this.props.setScreenReaderStatus(this.props.optionsMeta.announcement);
-    }
-  }
-
-  componentWillUnmount() {
-    this.cleanupGlobalEvents();
-  }
-
-  get isMultiple() {
-    return this.props.isMultiple;
-  }
-
-  get isNotMultiple() {
-    return !this.isMultiple;
-  }
-
-  get isListBoxVisible() {
-    const { listBoxVisible } = this.state;
-    return listBoxVisible;
-  }
-
-  get isResetButtonVisible() {
-    return this.isNotMultiple && this.hasSelection;
-  }
-
-  get isSearchInputValueNull() {
-    return this.state.searchInputValue === null;
-  }
-
-  get isSearchInputValuePresent() {
-    return !this.isSearchInputValueNull;
-  }
-
-  get isSearchInputValueEmptyString() {
-    const { searchInputValue } = this.state;
-    if (!isString(searchInputValue)) return false;
-    return searchInputValue.trim() === "";
-  }
-
-  get hasSelection() {
-    const { optionsMeta } = this.props;
-    return optionsMeta.selectedOptions.length > 0;
-  }
-
-  get hasOptions() {
-    return this.props.options && this.props.options.length > 0;
-  }
-
-  get searchInputValue() {
-    const { optionsMeta, value } = this.props;
-    const { searchInputValue } = this.state;
-    if (searchInputValue !== null) return searchInputValue;
-    if (this.isMultiple) return "";
-    if (optionsMeta.selectedOptions[0])
-      return optionsMeta.selectedOptions[0].label;
-    if (this.props.allowNew && value) return value;
-    return "";
-  }
-
-  get somethingInPickerHasFocus() {
-    return document.activeElement && this.isInPicker(document.activeElement);
-  }
-
-  get singleSelectedOption() {
-    if (this.isMultiple) return null;
-    if (!this.hasSelection) return null;
-    const { optionsMeta } = this.props;
-    return optionsMeta.selectedOptions[0];
-  }
-
-  get activeOption() {
-    const { options } = this.props;
-    const activeOption = this.state.activeOption || this.singleSelectedOption;
-    if (options.includes(activeOption)) return activeOption;
-    return null;
-  }
-
-  get activeOptionFromState() {
-    const { options } = this.props;
-    const activeOption = this.state.activeOption;
-    if (options.includes(activeOption)) return activeOption;
-    return null;
-  }
-
-  get activeOptionIndex() {
-    if (!this.activeOption) return -1;
-    const { options } = this.props;
-    return options.findIndex(option => option === this.activeOption);
-  }
-
-  get callbacks() {
+const rawOptionToOption = rawOption => {
+  if (hasOptionShape(rawOption))
     return {
-      selectOrToggleOption: this.selectOrToggleOption,
-      toggleListBoxVisibility: this.toggleListBoxVisibility,
-      makeListBoxVisible: this.makeListBoxVisible,
-      makeListBoxHidden: this.makeListBoxHidden,
-      removeSelection: this.removeSelection,
-      reorderSelection: this.reorderSelection,
-      selectAll: this.selectAll,
-      unselectAll: this.unselectAll
+      label: rawOption.label,
+      instructions: rawOption.instructions,
+      originalValue: rawOption.value
     };
-  }
-
-  announcementChanged(prevProps) {
-    return (
-      prevProps.optionsMeta.announcement !== this.props.optionsMeta.announcement
-    );
-  }
-
-  isInPicker(element) {
-    this.inputWrapperRef.current.contains(element);
-  }
-
-  scrollListboxToTop() {
-    if (!this.optionsRef.current) return;
-    this.optionsRef.current.scrollTop = 0;
-  }
-
-  listboxBecameVisible(prevState) {
-    return !prevState.listBoxVisible && this.state.listBoxVisible;
-  }
-
-  searchInputValueChanged(prevState) {
-    return prevState.searchInputValue !== this.state.searchInputValue;
-  }
-
-  setupGlobalEvents() {
-    window.addEventListener("click", this.maybeCloseListBox);
-  }
-
-  cleanupGlobalEvents() {
-    window.removeEventListener("click", this.maybeCloseListBox);
-  }
-
-  selectOrToggleOption = value => {
-    if (this.isMultiple) return this.toggleOption(value);
-    return this.selectOption(value);
+  return {
+    label: null,
+    instructions: null,
+    originalValue: rawOption
   };
+};
 
-  toggleOption = value => {
-    this.props.optionsHandlers.toggleOption(value);
-    this.makeListBoxHidden();
-  };
+const enhanceOption = (option, props) => {
+  const optionToValue = props.optionToValue || (v => v);
+  const optionToString = props.optionToString || valueToString;
+  const optionToLabel = props.optionToLabel || defaultOptionToLabel;
+  const optionToInstructions = props.optionToInstructions || (() => null);
 
-  selectOption = value => {
-    this.updateSearchInputValue(null);
-    this.props.select(value);
-    this.makeListBoxHidden();
-  };
+  const originalValue = optionToValue(option.originalValue);
+  const value = optionToString(originalValue);
+  const enhancements = { originalValue, value };
 
-  makeListBoxVisible = () => {
-    this.setState({ listBoxVisible: true });
-  };
-
-  makeListBoxHidden = () => {
-    this.setActiveOption(null);
-    this.setState({ listBoxVisible: false });
-  };
-
-  toggleListBoxVisibility = () => {
-    const { listBoxVisible } = this.state;
-    this.setState({ listBoxVisible: !listBoxVisible });
-  };
-
-  preventDefault(callback, event) {
-    event.preventDefault();
-    callback.bind(this)();
+  if (isNil(option.label)) {
+    enhancements.label = optionToLabel(option.originalValue);
   }
-
-  stopPropagation(callback, event) {
-    event.preventDefault();
-    event.stopPropagation();
-    callback.bind(this)();
+  if (isNil(option.instructions)) {
+    enhancements.instructions = optionToInstructions(option.originalValue);
   }
+  if (isNil(option.key)) enhancements.key = enhancements.value;
+  return Object.assign(option, enhancements);
+};
 
-  listenForListBoxNavigation = event => {
-    if (event.keyCode === KEYS.DOWN)
-      this.preventDefault(this.activateNextOption, event);
-    if (event.keyCode === KEYS.UP)
-      this.preventDefault(this.activatePreviousOption, event);
-    if (event.keyCode === KEYS.TAB) this.makeListBoxHidden();
-    if (event.keyCode === KEYS.ENTER)
-      this.preventDefault(this.selectActiveOption, event);
-    // It could be in a drawer, so we need to stop escape key from bubbling.
-    if (event.keyCode === KEYS.ESCAPE)
-      this.stopPropagation(this.makeListBoxHidden, event);
-  };
+const deriveStateFromOptions = (optionsIn, props) => {
+  const options = Array.isArray(optionsIn)
+    ? optionsIn.map(rawOption => {
+        return enhanceOption(rawOptionToOption(rawOption), props);
+      })
+    : [];
+  const valueMap = keyBy(options, "value");
+  const labelMap = keyBy(options, "label");
+  return { options, valueMap, labelMap };
+};
 
-  stopEscapePropagation = event => {
-    if (event.keyCode === KEYS.ESCAPE) event.stopPropagation();
-  };
+export default function FormPicker({
+  name,
+  debug = false,
+  label,
+  listStyle,
+  listRowComponent = "FormOptionRow",
+  listRowProps = { namePath: "attributes.name" },
+  listRowEditRoute,
+  placeholder,
+  wide = false,
+  allowNew = false,
+  newToValue = v => v,
+  beforeSetValue = v => v,
+  beforeGetValue = v => v,
+  showAddRemoveAll,
+  instructions,
+  belongsTo = false,
+  reorderable = false,
+  options: optionsProp = [],
+  updateOptions: updateOptionsProp,
+  optionToLabel,
+  optionToValue,
+  optionToInstructions,
+  optionToString,
+  optionFilter = defaultOptionFilter,
+  predictive = false,
+  value: valueProp,
+  onChange: onChangeProp,
+  errors: errorsProp
+}) {
+  const id = useId();
+  const { t } = useTranslation();
+  const context = useContext(FormContext);
+  const { authToken } = useAuthentication();
+  const authorization = useMemo(() => new Authorization(), []);
 
-  focusOnSearchInput() {
-    this.searchInputRef.current.focus();
-  }
+  // Form field integration
+  const { value: formValue, set, errors } = useFormField(name, {
+    controlledValue: valueProp,
+    controlledOnChange: onChangeProp,
+    controlledErrors: errorsProp
+  });
 
-  // Called when user presses enter in the picker.
-  selectActiveOption() {
-    const activeOption = this.activeOptionFromState;
-    // If the input is empty and the picker is a single select, then we actually clear
-    // the selection when there is no active option.
-    if (
-      !activeOption &&
-      this.isSearchInputValueEmptyString &&
-      this.isNotMultiple
-    ) {
-      this.callbacks.unselectAll();
-      // If there's an active option, we can select it.
-    } else if (activeOption) {
-      this.callbacks.selectOrToggleOption(activeOption.value);
-      if (this.isMultiple) {
-        this.updateSearchInputValue(null);
-        this.makeListBoxHidden();
-      }
-      // If there's no active option, we can still add this value if the picker
-      // allowsNew options.
-    } else if (!activeOption && this.props.allowNew) {
-      this.selectOption(this.searchInputValue);
+  const rawValue = beforeGetValue(formValue);
+  const isMultiple = Array.isArray(rawValue);
+
+  // Refs
+  const inputWrapperRef = useRef(null);
+  const searchInputRef = useRef(null);
+  const optionsRef = useRef(null);
+  const unmountingRef = useRef(false);
+
+  // Screen reader status state
+  const [srMessage, setSrMessage] = useState(null);
+  const srTimeoutRef = useRef(null);
+
+  const setScreenReaderStatus = useCallback(message => {
+    setSrMessage(message);
+    if (srTimeoutRef.current) clearTimeout(srTimeoutRef.current);
+    srTimeoutRef.current = setTimeout(() => {
+      setSrMessage(null);
+    }, 1000);
+  }, []);
+
+  // Options state
+  const [optionsState, setOptionsState] = useState(() => {
+    if (!isFunction(optionsProp)) {
+      return deriveStateFromOptions(optionsProp, {
+        optionToLabel,
+        optionToValue,
+        optionToInstructions,
+        optionToString
+      });
     }
-  }
+    return { options: [], valueMap: {}, labelMap: {} };
+  });
 
-  scrollToActiveOption = () => {
-    const activeOptionIndex = this.activeOptionIndex;
+  const [searchWord, setSearchWord] = useState(null);
+  const [announcement, setAnnouncement] = useState(null);
+
+  // UI state
+  const [listBoxVisible, setListBoxVisible] = useState(false);
+  const [searchInputValue, setSearchInputValue] = useState(null);
+  const [activeOptionState, setActiveOptionState] = useState(null);
+
+  // Fetch options when optionsProp is a function
+  const canFetchOptions = isFunction(optionsProp);
+
+  const fetchOptions = useCallback(() => {
+    if (!canFetchOptions) return;
+    const { endpoint, method, options: fetchOpts = {} } = optionsProp();
+
+    fetchOpts.authToken = authToken;
+    fetchOpts.params = fetchOpts.params || {};
+    fetchOpts.params.noPagination = true;
+
+    const client = new ApiClient();
+    client.call(endpoint, method, fetchOpts).then(results => {
+      if (unmountingRef.current) return;
+      const resources = results.data;
+      const newState = deriveStateFromOptions(resources, {
+        optionToLabel,
+        optionToValue,
+        optionToInstructions,
+        optionToString
+      });
+      setOptionsState(newState);
+    });
+  }, [
+    canFetchOptions,
+    optionsProp,
+    authToken,
+    optionToLabel,
+    optionToValue,
+    optionToInstructions,
+    optionToString
+  ]);
+
+  // Update options when prop changes
+  useEffect(() => {
+    if (!isFunction(optionsProp)) {
+      setOptionsState(
+        deriveStateFromOptions(optionsProp, {
+          optionToLabel,
+          optionToValue,
+          optionToInstructions,
+          optionToString
+        })
+      );
+    } else {
+      fetchOptions();
+    }
+  }, [
+    optionsProp,
+    optionToLabel,
+    optionToValue,
+    optionToInstructions,
+    optionToString,
+    fetchOptions
+  ]);
+
+  // Handle search word changes for external filtering
+  useEffect(() => {
+    if (updateOptionsProp && searchWord !== null) {
+      updateOptionsProp(searchWord);
+    }
+  }, [searchWord, updateOptionsProp]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      unmountingRef.current = true;
+      if (srTimeoutRef.current) clearTimeout(srTimeoutRef.current);
+    };
+  }, []);
+
+  // Announcement effect
+  useEffect(() => {
+    if (announcement) {
+      setScreenReaderStatus(announcement);
+    }
+  }, [announcement, setScreenReaderStatus]);
+
+  // Options processing
+  const filterOptionsInternally = isNil(updateOptionsProp);
+  const unfilteredOptions = optionsState.options;
+
+  const filteredOptions = useMemo(() => {
+    if (!searchWord || searchWord === "") return unfilteredOptions;
+    if (!filterOptionsInternally) return unfilteredOptions;
+    return unfilteredOptions.filter(option => optionFilter(searchWord, option));
+  }, [searchWord, unfilteredOptions, filterOptionsInternally, optionFilter]);
+
+  const options = filterOptionsInternally ? filteredOptions : unfilteredOptions;
+
+  // Option helpers
+  const findOption = useCallback(
+    value => {
+      const stringValue = valueToString(value);
+      const byValue = has(optionsState.valueMap, stringValue)
+        ? optionsState.valueMap[stringValue]
+        : null;
+      if (byValue || !predictive) return byValue;
+      return has(optionsState.labelMap, value)
+        ? optionsState.labelMap[value]
+        : null;
+    },
+    [optionsState.valueMap, optionsState.labelMap, predictive]
+  );
+
+  const selectToOriginalValue = useCallback(
+    select => {
+      const option = findOption(select);
+      return option ? option.originalValue : null;
+    },
+    [findOption]
+  );
+
+  const valueToLabel = useCallback(
+    value => {
+      const option = findOption(value);
+      if (!option || !option.label) return value;
+      return option.label;
+    },
+    [findOption]
+  );
+
+  // Selected options
+  const selectedOptions = useMemo(() => {
+    const values = isMultiple ? rawValue : [rawValue].filter(i => i);
+    const toStringFn = optionToString || valueToString;
+    return values.map(v => findOption(toStringFn(v))).filter(i => i);
+  }, [rawValue, isMultiple, findOption, optionToString]);
+
+  // Active option logic
+  const singleSelectedOption =
+    !isMultiple && selectedOptions.length > 0 ? selectedOptions[0] : null;
+
+  const activeOption = useMemo(() => {
+    const candidate = activeOptionState || singleSelectedOption;
+    if (options.includes(candidate)) return candidate;
+    return null;
+  }, [activeOptionState, singleSelectedOption, options]);
+
+  const activeOptionFromState = useMemo(() => {
+    if (options.includes(activeOptionState)) return activeOptionState;
+    return null;
+  }, [activeOptionState, options]);
+
+  const activeOptionIndex = useMemo(() => {
+    if (!activeOption) return -1;
+    return options.findIndex(option => option === activeOption);
+  }, [activeOption, options]);
+
+  // Authorization for allowNew
+  const allowsNew = useMemo(() => {
+    if (typeof allowNew === "boolean") return allowNew;
+    return authorization.authorizeAbility({
+      authentication: { authToken },
+      entity: allowNew.entity,
+      ability: allowNew.ability
+    });
+  }, [allowNew, authorization, authToken]);
+
+  // Selection handlers
+  const replaceSelection = useCallback(
+    value => {
+      set(beforeSetValue(value));
+    },
+    [set, beforeSetValue]
+  );
+
+  const announceDeselection = useCallback(
+    value => {
+      setAnnouncement(`${valueToLabel(value)} was deselected`);
+    },
+    [valueToLabel]
+  );
+
+  const announceSelection = useCallback(
+    value => {
+      setAnnouncement(`${valueToLabel(value)} was selected`);
+    },
+    [valueToLabel]
+  );
+
+  const doValuesMatch = useCallback((value, compareValue) => {
+    if (value === compareValue) return true;
+    return valueToString(value) === valueToString(compareValue);
+  }, []);
+
+  const isSelected = useCallback(
+    value => {
+      if (!isMultiple) return rawValue === value;
+      return rawValue.some(compareValue => doValuesMatch(value, compareValue));
+    },
+    [isMultiple, rawValue, doValuesMatch]
+  );
+
+  const appendSelection = useCallback(
+    value => {
+      if (value === null) return;
+      if (rawValue.includes(value)) return;
+      const newValue = [...rawValue, value];
+      replaceSelection(newValue);
+    },
+    [rawValue, replaceSelection]
+  );
+
+  const addOrReplaceSelection = useCallback(
+    value => {
+      announceSelection(value);
+      if (isMultiple) {
+        appendSelection(value);
+      } else {
+        replaceSelection(value);
+      }
+    },
+    [isMultiple, appendSelection, replaceSelection, announceSelection]
+  );
+
+  const newThenSelectValue = useCallback(
+    inputValue => {
+      const value = newToValue(inputValue);
+      if (!isPromise(value)) return addOrReplaceSelection(value);
+      value
+        .then(addOrReplaceSelection, () => {})
+        .then(
+          () => {
+            if (canFetchOptions) fetchOptions();
+          },
+          () => {}
+        );
+    },
+    [newToValue, addOrReplaceSelection, canFetchOptions, fetchOptions]
+  );
+
+  const select = useCallback(
+    value => {
+      const originalValue = selectToOriginalValue(value);
+      if (originalValue == null && allowsNew && value)
+        return newThenSelectValue(value);
+      return addOrReplaceSelection(originalValue);
+    },
+    [
+      selectToOriginalValue,
+      allowsNew,
+      newThenSelectValue,
+      addOrReplaceSelection
+    ]
+  );
+
+  const deselect = useCallback(
+    value => {
+      if (!isMultiple) {
+        if (rawValue === value) return replaceSelection(null);
+      }
+      const newValue = rawValue.filter(
+        compareValue => !doValuesMatch(value, compareValue)
+      );
+      if (newValue.length !== rawValue.length) {
+        announceDeselection(value);
+      }
+      replaceSelection(newValue);
+    },
+    [isMultiple, rawValue, replaceSelection, doValuesMatch, announceDeselection]
+  );
+
+  const unselectAll = useCallback(() => {
+    const nullValue = belongsTo ? { _remove: true } : null;
+    replaceSelection(isMultiple ? [] : nullValue);
+  }, [belongsTo, isMultiple, replaceSelection]);
+
+  const selectAll = useCallback(() => {
+    if (!isMultiple) return;
+    const values = filteredOptions.map(option => option.originalValue);
+    replaceSelection(values);
+  }, [isMultiple, filteredOptions, replaceSelection]);
+
+  const toggleOptionSelection = useCallback(
+    value => {
+      const originalValue = selectToOriginalValue(value);
+      if (isSelected(originalValue)) {
+        deselect(originalValue);
+      } else {
+        select(value);
+      }
+    },
+    [selectToOriginalValue, isSelected, deselect, select]
+  );
+
+  const reorderSelection = useCallback(
+    ({ id: itemId, position }) => {
+      const toStringFn = optionToString || valueToString;
+      const thingToMove = rawValue.find(thing => toStringFn(thing) === itemId);
+      const newCollection = rawValue.filter(thing => thing !== thingToMove);
+      let insertIndex;
+      switch (position) {
+        case "top":
+          insertIndex = 0;
+          break;
+        case "bottom":
+          insertIndex = newCollection.length - 1;
+          break;
+        default:
+          insertIndex = position - 1;
+      }
+      newCollection.splice(insertIndex, 0, thingToMove);
+      replaceSelection(newCollection);
+    },
+    [rawValue, optionToString, replaceSelection]
+  );
+
+  // UI helpers
+  const hasSelection = selectedOptions.length > 0;
+  const isSearchInputValueNull = searchInputValue === null;
+  const isSearchInputValuePresent = !isSearchInputValueNull;
+  const isSearchInputValueEmptyString =
+    isString(searchInputValue) && searchInputValue.trim() === "";
+  const isResetButtonVisible = !isMultiple && hasSelection;
+
+  const searchInputDisplayValue = useMemo(() => {
+    if (searchInputValue !== null) return searchInputValue;
+    if (isMultiple) return "";
+    if (selectedOptions[0]) return selectedOptions[0].label;
+    if (allowsNew && rawValue) return rawValue;
+    return "";
+  }, [searchInputValue, isMultiple, selectedOptions, allowsNew, rawValue]);
+
+  // Listbox visibility
+  const makeListBoxVisible = useCallback(() => {
+    setListBoxVisible(true);
+  }, []);
+
+  const makeListBoxHidden = useCallback(() => {
+    setActiveOptionState(null);
+    setListBoxVisible(false);
+  }, []);
+
+  const toggleListBoxVisibility = useCallback(() => {
+    setListBoxVisible(prev => !prev);
+  }, []);
+
+  // Scroll to active option
+  const scrollToActiveOption = useCallback(() => {
     if (activeOptionIndex < 0) return;
-    const parent = this.optionsRef.current;
-    const node = parent.children[this.activeOptionIndex];
+    const parent = optionsRef.current;
+    if (!parent) return;
+    const node = parent.children[activeOptionIndex];
     if (!node) return;
     const visible =
       node.offsetTop > parent.scrollTop &&
       node.offsetTop < parent.scrollTop + parent.offsetHeight;
     if (!visible) node.scrollIntoView();
-  };
+  }, [activeOptionIndex]);
 
-  setActiveOption(activeOption) {
-    this.setState({ activeOption }, this.scrollToActiveOption);
-  }
+  const setActiveOption = useCallback(
+    option => {
+      setActiveOptionState(option);
+      // Defer scroll to next tick
+      setTimeout(scrollToActiveOption, 0);
+    },
+    [scrollToActiveOption]
+  );
 
-  activateNextOption() {
-    const activeOptionIndex = this.activeOptionIndex;
+  const activateNextOption = useCallback(() => {
     const nextIndex =
-      !this.isListBoxVisible && activeOptionIndex !== -1
+      !listBoxVisible && activeOptionIndex !== -1
         ? activeOptionIndex
         : activeOptionIndex + 1;
-    this.makeListBoxVisible();
-    const { options } = this.props;
+    makeListBoxVisible();
     const index = Math.min(nextIndex, options.length - 1);
-    this.setActiveOption(options[index]);
-  }
+    setActiveOption(options[index]);
+  }, [
+    listBoxVisible,
+    activeOptionIndex,
+    options,
+    makeListBoxVisible,
+    setActiveOption
+  ]);
 
-  activatePreviousOption() {
-    this.makeListBoxVisible();
-    const { options } = this.props;
-    const index = Math.max(this.activeOptionIndex - 1, 0);
-    this.setActiveOption(options[index]);
-  }
+  const activatePreviousOption = useCallback(() => {
+    makeListBoxVisible();
+    const index = Math.max(activeOptionIndex - 1, 0);
+    setActiveOption(options[index]);
+  }, [activeOptionIndex, options, makeListBoxVisible, setActiveOption]);
 
-  maybeCloseListBox = event => {
-    if (!this.inputWrapperRef.current) return;
-    if (!this.inputWrapperRef.current.contains(event.target))
-      this.makeListBoxHidden();
+  // Select or toggle option
+  const selectOrToggleOption = useCallback(
+    value => {
+      if (isMultiple) {
+        toggleOptionSelection(value);
+        makeListBoxHidden();
+      } else {
+        setSearchInputValue(null);
+        select(value);
+        makeListBoxHidden();
+      }
+    },
+    [isMultiple, toggleOptionSelection, select, makeListBoxHidden]
+  );
+
+  // Select active option (on Enter)
+  const selectActiveOption = useCallback(() => {
+    const active = activeOptionFromState;
+    if (!active && isSearchInputValueEmptyString && !isMultiple) {
+      unselectAll();
+    } else if (active) {
+      selectOrToggleOption(active.value);
+      if (isMultiple) {
+        setSearchInputValue(null);
+        makeListBoxHidden();
+      }
+    } else if (!active && allowsNew) {
+      selectOrToggleOption(searchInputDisplayValue);
+    }
+  }, [
+    activeOptionFromState,
+    isSearchInputValueEmptyString,
+    isMultiple,
+    unselectAll,
+    selectOrToggleOption,
+    allowsNew,
+    searchInputDisplayValue,
+    makeListBoxHidden
+  ]);
+
+  // Global click handler
+  useEffect(() => {
+    const maybeCloseListBox = event => {
+      if (!inputWrapperRef.current) return;
+      if (!inputWrapperRef.current.contains(event.target)) {
+        makeListBoxHidden();
+      }
+    };
+    window.addEventListener("click", maybeCloseListBox);
+    return () => window.removeEventListener("click", maybeCloseListBox);
+  }, [makeListBoxHidden]);
+
+  // Key handlers
+  const listenForListBoxNavigation = useCallback(
+    event => {
+      if (event.keyCode === KEYS.DOWN) {
+        event.preventDefault();
+        activateNextOption();
+      }
+      if (event.keyCode === KEYS.UP) {
+        event.preventDefault();
+        activatePreviousOption();
+      }
+      if (event.keyCode === KEYS.TAB) makeListBoxHidden();
+      if (event.keyCode === KEYS.ENTER) {
+        event.preventDefault();
+        selectActiveOption();
+      }
+      if (event.keyCode === KEYS.ESCAPE) {
+        event.preventDefault();
+        event.stopPropagation();
+        makeListBoxHidden();
+      }
+    },
+    [
+      activateNextOption,
+      activatePreviousOption,
+      makeListBoxHidden,
+      selectActiveOption
+    ]
+  );
+
+  const stopEscapePropagation = useCallback(event => {
+    if (event.keyCode === KEYS.ESCAPE) event.stopPropagation();
+  }, []);
+
+  // Search input handlers
+  const updateSearchInputValue = useCallback(
+    value => {
+      makeListBoxVisible();
+      setSearchInputValue(value);
+      setSearchWord(value ? value.trim() : null);
+    },
+    [makeListBoxVisible]
+  );
+
+  const onSearchInputChange = useCallback(
+    event => {
+      updateSearchInputValue(event.target.value);
+    },
+    [updateSearchInputValue]
+  );
+
+  const onSearchInputClick = useCallback(() => {
+    if (isMultiple || (!isMultiple && isSearchInputValueNull)) {
+      toggleListBoxVisibility();
+    }
+  }, [isMultiple, isSearchInputValueNull, toggleListBoxVisibility]);
+
+  const onSearchInputFocus = useCallback(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.select();
+    }
+  }, []);
+
+  const somethingInPickerHasFocus = () => {
+    return (
+      document.activeElement &&
+      inputWrapperRef.current?.contains(document.activeElement)
+    );
   };
 
-  removeSelection = selection => {
-    this.props.optionsHandlers.deselect(selection);
-  };
+  const onSearchInputBlur = useCallback(
+    event => {
+      if (
+        !somethingInPickerHasFocus() ||
+        !inputWrapperRef.current?.contains(event.relatedTarget)
+      )
+        return;
 
-  reorderSelection = (selection, newPosition) => {
-    this.props.optionsHandlers.reorderSelection(selection, newPosition);
-  };
+      if (!isMultiple && isSearchInputValueEmptyString) unselectAll();
+      if (isSearchInputValuePresent) {
+        if (allowsNew) {
+          selectActiveOption();
+        } else {
+          updateSearchInputValue(null);
+        }
+      }
+      makeListBoxHidden();
+    },
+    [
+      isMultiple,
+      isSearchInputValueEmptyString,
+      isSearchInputValuePresent,
+      allowsNew,
+      unselectAll,
+      selectActiveOption,
+      updateSearchInputValue,
+      makeListBoxHidden
+    ]
+  );
 
-  ids(id) {
-    return {
+  // Remove/reorder callbacks for list
+  const removeSelection = useCallback(
+    selection => {
+      deselect(selection);
+    },
+    [deselect]
+  );
+
+  const handleReorderSelection = useCallback(
+    (selection, newPosition) => {
+      reorderSelection({ id: selection, position: newPosition });
+    },
+    [reorderSelection]
+  );
+
+  // IDs
+  const ids = useMemo(
+    () => ({
       wrapper: `${id}-picker`,
       label: `${id}-picker-label`,
       instructions: `${id}-picker-instructions`,
@@ -464,273 +750,278 @@ export class PickerComponent extends PureComponent {
       textBox: `${id}-picker-textbox`,
       listBox: `${id}-picker-listbox`,
       option: `${id}-picker-option`
-    };
-  }
+    }),
+    [id]
+  );
 
-  activeOptionId(formId) {
-    if (!this.activeOptionFromState) return null;
-    return `${this.ids(formId).option}-${this.activeOptionFromState.key}`;
-  }
+  const activeOptionId = activeOptionFromState
+    ? `${ids.option}-${activeOptionFromState.key}`
+    : null;
 
-  updateSearchInputValue(searchInputValue) {
-    this.makeListBoxVisible();
-    this.setState({ searchInputValue }, () => {
-      this.setOptionFilter(searchInputValue);
-    });
-  }
+  // Callbacks for list component
+  const callbacks = useMemo(
+    () => ({
+      selectOrToggleOption,
+      toggleListBoxVisibility,
+      makeListBoxVisible,
+      makeListBoxHidden,
+      removeSelection,
+      reorderSelection: handleReorderSelection,
+      selectAll,
+      unselectAll
+    }),
+    [
+      selectOrToggleOption,
+      toggleListBoxVisibility,
+      makeListBoxVisible,
+      makeListBoxHidden,
+      removeSelection,
+      handleReorderSelection,
+      selectAll,
+      unselectAll
+    ]
+  );
 
-  selectSearchInputText() {
-    this.searchInputRef.current.select();
-  }
+  // Options meta for list row props
+  const optionsMeta = useMemo(
+    () => ({
+      activeOption,
+      selectedOptions,
+      value: rawValue,
+      stringValue: (optionToString || valueToString)(rawValue),
+      allOptions: unfilteredOptions,
+      announcement
+    }),
+    [
+      activeOption,
+      selectedOptions,
+      rawValue,
+      optionToString,
+      unfilteredOptions,
+      announcement
+    ]
+  );
 
-  selectAll = () => {
-    this.props.optionsHandlers.selectAll();
-  };
+  const TextInput =
+    context?.styleType === "secondary"
+      ? Styled.TextInputSecondary
+      : Styled.TextInput;
 
-  unselectAll = () => {
-    this.props.optionsHandlers.unselectAll();
-  };
+  // Live region for screen readers
+  const renderLiveRegion = () => (
+    <div
+      role="status"
+      aria-live="polite"
+      aria-atomic
+      className="screen-reader-text"
+    >
+      {srMessage}
+    </div>
+  );
 
-  onSearchInputChange = event => {
-    const { value } = event.target;
-    this.updateSearchInputValue(value);
-  };
+  return (
+    <Errorable
+      className={wide ? "wide" : undefined}
+      name={name}
+      errors={errors}
+      label={label}
+      idForError={ids.error}
+    >
+      {debug && (
+        <Developer.Debugger
+          shouldExpandNode={(keyName, data, level) => level <= 1}
+          object={{
+            value: rawValue,
+            state: {
+              listBoxVisible,
+              searchInputValue,
+              activeOption: activeOptionState
+            }
+          }}
+        />
+      )}
+      {renderLiveRegion()}
+      <Styled.Wrapper>
+        <BaseLabel
+          id={ids.textBox}
+          label={label}
+          styleType={context?.styleType}
+        />
+        <Instructions instructions={instructions} />
+        <Styled.InputWrapper>
+          <Styled.ComboBox
+            ref={inputWrapperRef}
+            // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
+            role="combobox"
+            aria-expanded={listBoxVisible}
+            aria-owns={ids.listBox}
+            aria-haspopup="listbox"
+          >
+            <TextInput
+              ref={searchInputRef}
+              id={ids.textBox}
+              type="text"
+              onClick={onSearchInputClick}
+              onFocus={onSearchInputFocus}
+              onBlur={onSearchInputBlur}
+              onChange={onSearchInputChange}
+              value={searchInputDisplayValue}
+              placeholder={placeholder}
+              onKeyDown={listenForListBoxNavigation}
+              onKeyUp={stopEscapePropagation}
+              aria-labelledby={ids.label}
+              aria-autocomplete="list"
+              aria-controls={ids.listBox}
+              aria-activedescendant={activeOptionId}
+              $paddingFactor={1}
+            />
+          </Styled.ComboBox>
+          <Styled.ButtonGroup>
+            {isResetButtonVisible && (
+              <Styled.Button
+                aria-label={t("forms.picker.reset")}
+                tabIndex="-1"
+                type="button"
+                onClick={unselectAll}
+              >
+                <Styled.IconReset icon="close16" size={20} />
+                <span className="screen-reader-text">
+                  {t("forms.picker.clear_selection")}
+                </span>
+              </Styled.Button>
+            )}
+            <Styled.Button as="div" aria-hidden>
+              <Styled.IconDisclosure icon="disclosureDown16" size={20} />
+            </Styled.Button>
+          </Styled.ButtonGroup>
+        </Styled.InputWrapper>
+        <Styled.ResultsList
+          aria-labelledby={ids.label}
+          ref={optionsRef}
+          role="listbox"
+          id={ids.listBox}
+          onKeyDown={listenForListBoxNavigation}
+          $open={listBoxVisible}
+        >
+          {options.length === 0 && (
+            <Styled.EmptyResult id="no-options">
+              {t("forms.picker.no_options")}
+            </Styled.EmptyResult>
+          )}
 
-  onSearchInputClick = () => {
-    if (this.isMultiple || (this.isNotMultiple && this.isSearchInputValueNull))
-      this.toggleListBoxVisibility();
-  };
-
-  onSearchInputFocus = () => {
-    this.selectSearchInputText();
-  };
-
-  onSearchInputBlur = event => {
-    if (
-      !this.somethingInPickerHasFocus ||
-      !this.isInPicker(event.relatedTarget)
-    )
-      return;
-
-    if (this.isNotMultiple && this.isSearchInputValueEmptyString)
-      this.unselectAll();
-    if (this.isSearchInputValuePresent) {
-      if (this.props.allowNew) {
-        this.selectActiveOption();
-      } else {
-        this.updateSearchInputValue(null);
-      }
-    }
-    this.makeListBoxHidden();
-  };
-
-  setOptionFilter(searchWord) {
-    this.props.optionsHandlers.filterOptions(searchWord);
-  }
-
-  render() {
-    const {
-      wide,
-      errors,
-      name,
-      label,
-      options,
-      showAddRemoveAll,
-      optionsMeta,
-      placeholder,
-      listStyle,
-      reorderable,
-      listRowComponent,
-      listRowProps,
-      debug,
-      value,
-      renderLiveRegion,
-      t
-    } = this.props;
-
-    const TextInput =
-      this.context?.styleType === "secondary"
-        ? Styled.TextInputSecondary
-        : Styled.TextInput;
-
-    return (
-      <UIDConsumer>
-        {id => {
-          const ids = this.ids(id);
-          return (
-            <Errorable
-              className={wide ? "wide" : undefined}
-              name={name}
-              errors={errors}
-              label={label}
-              idForError={ids.error}
-            >
-              {debug && (
-                <Developer.Debugger
-                  shouldExpandNode={(keyName, data, level) => level <= 1}
-                  object={{
-                    value,
-                    state: this.state
-                  }}
+          {options.map(option => {
+            const active = option === activeOptionState;
+            const selected = selectedOptions.includes(option);
+            return (
+              <Styled.Result
+                key={option.key}
+                role="option"
+                id={`${ids.option}-${option.key}`}
+                aria-selected={active}
+                onClick={() => {
+                  selectOrToggleOption(option.value);
+                }}
+                $active={active}
+                $selected={selected}
+              >
+                {option.label}
+              </Styled.Result>
+            );
+          })}
+        </Styled.ResultsList>
+      </Styled.Wrapper>
+      {isMultiple && (
+        <>
+          {showAddRemoveAll && (
+            <Styled.Utility className="utility-button-group utility-button-group--inline">
+              <button
+                className="utility-button"
+                type="button"
+                onClick={selectAll}
+              >
+                <IconComposer
+                  icon="circlePlus32"
+                  size="default"
+                  className="utility-button__icon utility-button__icon--highlight"
                 />
-              )}
-              {renderLiveRegion()}
-              <Styled.Wrapper>
-                <BaseLabel
-                  id={ids.textBox}
-                  label={label}
-                  styleType={this.context?.styleType}
+                <span className="utility-button__text">
+                  {t("forms.picker.add_all")}
+                </span>
+              </button>
+              <button
+                className="utility-button"
+                type="button"
+                onClick={unselectAll}
+              >
+                <IconComposer
+                  icon="circleMinus32"
+                  size="default"
+                  className="utility-button__icon utility-button__icon--notice"
                 />
-                <Instructions instructions={this.props.instructions} />
-                <Styled.InputWrapper>
-                  <Styled.ComboBox
-                    ref={this.inputWrapperRef}
-                    // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
-                    role="combobox"
-                    aria-expanded={this.isListBoxVisible}
-                    aria-owns={ids.listBox}
-                    aria-haspopup="listbox"
-                  >
-                    <TextInput
-                      ref={this.searchInputRef}
-                      id={ids.textBox}
-                      type="text"
-                      onClick={this.onSearchInputClick}
-                      onFocus={this.onSearchInputFocus}
-                      onBlur={this.onSearchInputBlur}
-                      onChange={this.onSearchInputChange}
-                      value={this.searchInputValue}
-                      placeholder={placeholder}
-                      onKeyDown={this.listenForListBoxNavigation}
-                      onKeyUp={this.stopEscapePropagation}
-                      aria-labelledby={ids.label}
-                      aria-autocomplete="list"
-                      aria-controls={ids.listBox}
-                      aria-activedescendant={this.activeOptionId(id)}
-                      $paddingFactor={1}
-                    />
-                  </Styled.ComboBox>
-                  <Styled.ButtonGroup>
-                    {this.isResetButtonVisible && (
-                      <Styled.Button
-                        aria-label={t("forms.picker.reset")}
-                        tabIndex="-1"
-                        type="button"
-                        onClick={this.callbacks.unselectAll}
-                      >
-                        <Styled.IconReset icon="close16" size={20} />
-                        <span className="screen-reader-text">
-                          {t("forms.picker.clear_selection")}
-                        </span>
-                      </Styled.Button>
-                    )}
-                    <Styled.Button as="div" aria-hidden>
-                      <Styled.IconDisclosure
-                        icon="disclosureDown16"
-                        size={20}
-                      />
-                    </Styled.Button>
-                  </Styled.ButtonGroup>
-                </Styled.InputWrapper>
-                <Styled.ResultsList
-                  aria-labelledby={ids.label}
-                  ref={this.optionsRef}
-                  role="listbox"
-                  id={ids.listBox}
-                  onKeyDown={this.listenForListBoxNavigation}
-                  $open={this.isListBoxVisible}
-                >
-                  {options.length === 0 && (
-                    <Styled.EmptyResult id="no-options">
-                      {t("forms.picker.no_options")}
-                    </Styled.EmptyResult>
-                  )}
+                <span className="utility-button__text">
+                  {t("forms.picker.remove_all")}
+                </span>
+              </button>
+            </Styled.Utility>
+          )}
 
-                  {options.map(option => {
-                    const active = option === this.state.activeOption;
-                    const selected = optionsMeta.selectedOptions.includes(
-                      option
-                    );
-                    return (
-                      <Styled.Result
-                        key={option.key}
-                        role="option"
-                        id={`${ids.option}-${option.key}`}
-                        aria-selected={active}
-                        onClick={() => {
-                          this.callbacks.selectOrToggleOption(option.value);
-                        }}
-                        $active={active}
-                        $selected={selected}
-                      >
-                        {option.label}
-                      </Styled.Result>
-                    );
-                  })}
-                </Styled.ResultsList>
-              </Styled.Wrapper>
-              {this.isMultiple && (
-                <>
-                  {showAddRemoveAll && (
-                    <Styled.Utility className="utility-button-group utility-button-group--inline">
-                      <button
-                        className="utility-button"
-                        type="button"
-                        onClick={this.callbacks.selectAll}
-                      >
-                        <IconComposer
-                          icon="circlePlus32"
-                          size="default"
-                          className="utility-button__icon utility-button__icon--highlight"
-                        />
-                        <span className="utility-button__text">
-                          {t("forms.picker.add_all")}
-                        </span>
-                      </button>
-                      <button
-                        className="utility-button"
-                        type="button"
-                        onClick={this.callbacks.unselectAll}
-                      >
-                        <IconComposer
-                          icon="circleMinus32"
-                          size="default"
-                          className="utility-button__icon utility-button__icon--notice"
-                        />
-                        <span className="utility-button__text">
-                          {t("forms.picker.remove_all")}
-                        </span>
-                      </button>
-                    </Styled.Utility>
-                  )}
-
-                  <Styled.List
-                    $tight={showAddRemoveAll || listStyle === "rows"}
-                    listStyle={listStyle}
-                    reorderable={reorderable}
-                    rowComponent={listRowComponent}
-                    rowProps={{
-                      ...listRowProps,
-                      options: optionsMeta.allOptions
-                    }}
-                    rowEditRoute={this.props.listRowEditRoute}
-                    callbacks={this.callbacks}
-                    entities={value}
-                  />
-                </>
-              )}
-            </Errorable>
-          );
-        }}
-      </UIDConsumer>
-    );
-  }
+          <Styled.List
+            $tight={showAddRemoveAll || listStyle === "rows"}
+            listStyle={listStyle}
+            reorderable={reorderable}
+            rowComponent={listRowComponent}
+            rowProps={{
+              ...listRowProps,
+              options: optionsMeta.allOptions
+            }}
+            rowEditRoute={listRowEditRoute}
+            callbacks={callbacks}
+            entities={rawValue}
+          />
+        </>
+      )}
+    </Errorable>
+  );
 }
 
-export const BasePicker = withTranslation()(
-  withScreenReaderStatus(withFormOptions(PickerComponent), false)
-);
+FormPicker.displayName = "Form.Picker";
 
-export default withTranslation()(
-  withScreenReaderStatus(withFormOptions(PickerComponent), false)
-);
+FormPicker.propTypes = {
+  name: PropTypes.string,
+  debug: PropTypes.bool,
+  label: PropTypes.string,
+  listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
+  listRowComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  listRowProps: PropTypes.object,
+  listRowEditRoute: PropTypes.func,
+  placeholder: PropTypes.string,
+  wide: PropTypes.bool,
+  allowNew: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      entity: PropTypes.string.isRequired,
+      ability: PropTypes.string.isRequired
+    })
+  ]),
+  newToValue: PropTypes.func,
+  beforeSetValue: PropTypes.func,
+  beforeGetValue: PropTypes.func,
+  showAddRemoveAll: PropTypes.bool,
+  instructions: PropTypes.string,
+  belongsTo: PropTypes.bool,
+  reorderable: PropTypes.bool,
+  options: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
+  updateOptions: PropTypes.func,
+  optionToLabel: PropTypes.func,
+  optionToValue: PropTypes.func,
+  optionToInstructions: PropTypes.func,
+  optionToString: PropTypes.func,
+  optionFilter: PropTypes.func,
+  predictive: PropTypes.bool,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
+  errors: PropTypes.array
+};
+
+// Also export as BasePicker for backwards compatibility
+export const BasePicker = FormPicker;

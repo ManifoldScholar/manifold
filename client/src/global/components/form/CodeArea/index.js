@@ -1,54 +1,54 @@
-import React, { Component } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import loadable from "@loadable/component";
-import setter from "../setter";
-import withDispatch from "hoc/withDispatch";
+import { useFormField } from "hooks";
 
 const CodeAreaInput = loadable(() =>
   import(/* webpackChunkName: "ace-editor" */ "./AceEditor")
 );
 
-class FormCodeArea extends Component {
-  static displayName = "Form.CodeArea";
+export default function FormCodeArea({
+  name,
+  label,
+  instructions,
+  height = "200px",
+  readOnly = false,
+  mode
+}) {
+  const { value, set, errors } = useFormField(name);
 
-  static propTypes = {
-    label: PropTypes.string,
-    dispatch: PropTypes.func.isRequired,
-    value: PropTypes.string,
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    errors: PropTypes.array,
-    set: PropTypes.func,
-    height: PropTypes.string,
-    name: PropTypes.string,
-    readOnly: PropTypes.bool,
-    mode: PropTypes.oneOf(["css", "javascript", "html"])
-  };
+  const onChange = useCallback(
+    newValue => {
+      set(newValue);
+    },
+    [set]
+  );
 
-  static defaultProps = {
-    height: "200px",
-    readOnly: false
-  };
-
-  onChange = value => {
-    this.props.set(value);
-  };
-
-  get value() {
-    return this.props.value || "";
-  }
-
-  render() {
-    const props = {
-      ...this.props,
-      theme: "idle_fingers",
-      editorProps: { $blockScrolling: true },
-      onChange: this.onChange,
-      value: this.value,
-      width: "100%"
-    };
-
-    return <CodeAreaInput {...props} />;
-  }
+  return (
+    <CodeAreaInput
+      name={name}
+      label={label}
+      instructions={instructions}
+      errors={errors}
+      height={height}
+      readOnly={readOnly}
+      mode={mode}
+      theme="idle_fingers"
+      editorProps={{ $blockScrolling: true }}
+      onChange={onChange}
+      value={value || ""}
+      width="100%"
+    />
+  );
 }
 
-export default setter(withDispatch(FormCodeArea));
+FormCodeArea.displayName = "Form.CodeArea";
+
+FormCodeArea.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  height: PropTypes.string,
+  readOnly: PropTypes.bool,
+  mode: PropTypes.oneOf(["css", "javascript", "html"])
+};

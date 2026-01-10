@@ -22,12 +22,11 @@ export default function TextArea({
   errors: errorsProp
 }) {
   const id = useId();
-  const { value, onChange, errors: errorsFromField } = useFormField(
-    name,
-    valueProp,
-    onChangeProp
-  );
-  const errors = errorsProp ?? errorsFromField;
+  const { value, onChange, errors } = useFormField(name, {
+    controlledValue: valueProp,
+    controlledOnChange: onChangeProp,
+    controlledErrors: errorsProp
+  });
   const context = useContext(FormContext);
   const styleType = context?.styleType;
 

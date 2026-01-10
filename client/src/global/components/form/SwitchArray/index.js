@@ -1,69 +1,54 @@
-import React, { Component } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
+import { useFormField } from "hooks";
 import Switch from "../Switch";
 import Errorable from "global/components/form/Errorable";
-import setter from "../setter";
 import * as Styled from "./styles";
 
-class FormSwitchArray extends Component {
-  static displayName = "Form.SwitchArray";
+export default function FormSwitchArray({
+  name,
+  options,
+  label,
+  focusOnMount = false
+}) {
+  const { value = [], set, errors } = useFormField(name);
 
-  static propTypes = {
-    set: PropTypes.func,
-    value: PropTypes.any,
-    options: PropTypes.arrayOf(
-      PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
-    ).isRequired,
-    name: PropTypes.string,
-    errors: PropTypes.array,
-    label: PropTypes.string,
-    focusOnMount: PropTypes.bool
-  };
+  const handleChange = useCallback(
+    optionValue => {
+      const adjustedValues = value.includes(optionValue)
+        ? value.filter(v => v !== optionValue)
+        : [optionValue].concat(value);
+      set(adjustedValues);
+    },
+    [value, set]
+  );
 
-  static defaultProps = {
-    value: [],
-    focusOnMount: false
-  };
-
-  handleChange(value) {
-    const adjustedValues = this.props.value.includes(value)
-      ? this.props.value.filter(v => v !== value)
-      : [value].concat(this.props.value);
-
-    this.props.set(adjustedValues);
-  }
-
-  renderSwitch(option, index) {
-    const focusOnMount = this.props.focusOnMount && index === 0;
-
-    return (
-      <Switch
-        key={option.value}
-        label={option.label}
-        set={() => this.handleChange(option.value)}
-        value={this.props.value.includes(option.value)}
-        focusOnMount={focusOnMount}
-        isPrimary
-        wide
-      />
-    );
-  }
-
-  render() {
-    return (
-      <Styled.Wrapper>
-        <Errorable
-          name={this.props.name}
-          nameForError={this.props.label}
-          errors={this.props.errors}
-        >
-          {this.props.options.map((option, index) => {
-            return this.renderSwitch(option, index);
-          })}
-        </Errorable>
-      </Styled.Wrapper>
-    );
-  }
+  return (
+    <Styled.Wrapper>
+      <Errorable name={name} nameForError={label} errors={errors}>
+        {options.map((option, index) => (
+          <Switch
+            key={option.value}
+            label={option.label}
+            set={() => handleChange(option.value)}
+            value={value.includes(option.value)}
+            focusOnMount={focusOnMount && index === 0}
+            isPrimary
+            wide
+          />
+        ))}
+      </Errorable>
+    </Styled.Wrapper>
+  );
 }
 
-export default setter(FormSwitchArray);
+FormSwitchArray.displayName = "Form.SwitchArray";
+
+FormSwitchArray.propTypes = {
+  name: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
+  ).isRequired,
+  label: PropTypes.string,
+  focusOnMount: PropTypes.bool
+};

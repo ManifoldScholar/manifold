@@ -1,172 +1,156 @@
-import React, { Component } from "react";
+import { useCallback, useId } from "react";
 import PropTypes from "prop-types";
-import { UIDConsumer } from "react-uid";
-import setter from "../setter";
+import { useFormField } from "hooks";
 import Base from "./Base";
 import UserAvatar from "./UserAvatar";
 import get from "lodash/get";
 
-export class FormUpload extends Component {
-  static types = {
-    images: {
-      accepts: "image/*",
-      extensions: "gif, jpeg, jpg, png"
-    },
-    audio: {
-      accepts: "audio/*",
-      extensions: "mp3, flac, wav, ogg, oga"
-    },
-    video: {
-      accepts: "video/x-flv,video/*",
-      extensions: "mp4, webm, flv, mov, avi"
-    },
-    pdf: {
-      accepts: "application/pdf",
-      extensions: "pdf"
-    },
-    document: {
-      accepts:
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
-        "application/msword,text/*," +
-        "application/vnd.oasis.opendocument.text",
-      extensions: "doc, docx, txt, odt"
-    },
-    csv: {
-      accepts: "text/*,",
-      extensions: "txt, csv"
-    },
-    spreadsheet: {
-      accepts:
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet," +
-        "application/vnd.ms-excel," +
-        "application/vnd.oasis.opendocument.spreadsheet,",
-      extensions: "xls, xlsx, ods"
-    },
-    presentation: {
-      accepts:
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation," +
-        "application/vnd.ms-powerpoint," +
-        "application/vnd.oasis.opendocument.presentation",
-      extensions: "ppt, pptx, odp"
-    },
-    texts: {
-      accepts: "application/epub+zip,application/zip,text/*",
-      extensions: "epub, zip, md"
-    },
-    json: {
-      accepts: "application/json",
-      extensions: "json"
-    },
-    vtt: {
-      accepts: "text/vtt",
-      extensions: "vtt"
-    },
-    any: {
-      accepts: null,
-      extensions: null
-    }
-  };
-
-  static displayName = "Form.Upload";
-
-  static propTypes = {
-    set: PropTypes.func.isRequired, // set is called when the value changes
-    setOther: PropTypes.func, // used to set another prop, eg removed, in session
-    getModelValue: PropTypes.func,
-    label: PropTypes.string,
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    inlineStyle: PropTypes.object,
-    name: PropTypes.string, // name of the model field: attributes[avatar]
-    layout: PropTypes.oneOf([
-      "square",
-      "portrait",
-      "landscape",
-      "horizontal",
-      "embed"
-    ]),
-    placeholder: PropTypes.string, // Allows override of placeholder graphic
-    remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
-    accepts: PropTypes.string,
-    value: PropTypes.any, // the current value of the field in the connected model
-    initialValue: PropTypes.string, // the initial value of the input when it's rendered
-    errors: PropTypes.array,
-    fileNameFrom: PropTypes.string,
-    instructionsSingleLine: PropTypes.bool
-  };
-
-  static defaultProps = {
-    layout: "square",
-    accepts: "any"
-  };
-
-  get idPrefix() {
-    return "upload";
+const UPLOAD_TYPES = {
+  images: {
+    accepts: "image/*",
+    extensions: "gif, jpeg, jpg, png"
+  },
+  audio: {
+    accepts: "audio/*",
+    extensions: "mp3, flac, wav, ogg, oga"
+  },
+  video: {
+    accepts: "video/x-flv,video/*",
+    extensions: "mp4, webm, flv, mov, avi"
+  },
+  pdf: {
+    accepts: "application/pdf",
+    extensions: "pdf"
+  },
+  document: {
+    accepts:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document," +
+      "application/msword,text/*," +
+      "application/vnd.oasis.opendocument.text",
+    extensions: "doc, docx, txt, odt"
+  },
+  csv: {
+    accepts: "text/*,",
+    extensions: "txt, csv"
+  },
+  spreadsheet: {
+    accepts:
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet," +
+      "application/vnd.ms-excel," +
+      "application/vnd.oasis.opendocument.spreadsheet,",
+    extensions: "xls, xlsx, ods"
+  },
+  presentation: {
+    accepts:
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation," +
+      "application/vnd.ms-powerpoint," +
+      "application/vnd.oasis.opendocument.presentation",
+    extensions: "ppt, pptx, odp"
+  },
+  texts: {
+    accepts: "application/epub+zip,application/zip,text/*",
+    extensions: "epub, zip, md"
+  },
+  json: {
+    accepts: "application/json",
+    extensions: "json"
+  },
+  vtt: {
+    accepts: "text/vtt",
+    extensions: "vtt"
+  },
+  any: {
+    accepts: null,
+    extensions: null
   }
+};
 
-  get idForErrorPrefix() {
-    return "upload-error";
-  }
+export function FormUpload({
+  name,
+  remove,
+  accepts: acceptsKey = "any",
+  layout = "square",
+  isUserAvatar,
+  isBuilder,
+  ...baseProps
+}) {
+  const id = useId();
+  const { value, initialValue, set, errors } = useFormField(name);
 
-  get idForInstructionsPrefix() {
-    return "upload-instructions";
-  }
+  const updateValue = useCallback(
+    state => {
+      const { attachment, removed } = state;
+      if (remove) set(removed, true, remove);
+      if (attachment) {
+        const { type, name: fileName } = attachment;
+        const reader = new FileReader();
+        reader.onload = () => {
+          set({ data: reader.result, content_type: type, filename: fileName });
+        };
+        reader.readAsDataURL(attachment);
+      } else {
+        set(null);
+      }
+    },
+    [set, remove]
+  );
 
-  updateValue = state => {
-    const { attachment, removed } = state;
-    const { set, setOther, remove: removeName } = this.props;
-    if (setOther && removeName) setOther(removed, removeName);
-    if (attachment) {
-      const { type, name } = attachment;
-      const reader = new FileReader();
-      reader.onload = eventIgnored => {
-        set({ data: reader.result, content_type: type, filename: name });
-      };
-      reader.readAsDataURL(attachment);
-    } else {
-      set(null);
-    }
-  };
+  const acceptsConfig = get(UPLOAD_TYPES, acceptsKey) || UPLOAD_TYPES.any;
 
-  accepts(props) {
-    const key = props.accepts;
-    let config;
-    config = get(FormUpload.types, key);
-    if (!config) config = FormUpload.types.any;
-    return config;
-  }
-
-  render() {
-    const {
-      set: _set,
-      setOther: _setOther,
-      isUserAvatar,
-      ...baseProps
-    } = this.props;
-    return (
-      <UIDConsumer>
-        {id =>
-          isUserAvatar ? (
-            <UserAvatar
-              {...baseProps}
-              updateValue={this.updateValue}
-              inputId={`${this.idPrefix}-${id}`}
-              idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
-            />
-          ) : (
-            <Base
-              {...baseProps}
-              accepts={this.accepts(this.props)}
-              updateValue={this.updateValue}
-              inputId={`${this.idPrefix}-${id}`}
-              idForError={`${this.idForErrorPrefix}-${id}`}
-              idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
-              isBuilder={this.props.isBuilder}
-            />
-          )
-        }
-      </UIDConsumer>
-    );
-  }
+  return isUserAvatar ? (
+    <UserAvatar
+      {...baseProps}
+      name={name}
+      value={value}
+      initialValue={initialValue}
+      errors={errors}
+      layout={layout}
+      updateValue={updateValue}
+      inputId={`upload-${id}`}
+      idForInstructions={`upload-instructions-${id}`}
+    />
+  ) : (
+    <Base
+      {...baseProps}
+      name={name}
+      value={value}
+      initialValue={initialValue}
+      errors={errors}
+      layout={layout}
+      accepts={acceptsConfig}
+      updateValue={updateValue}
+      inputId={`upload-${id}`}
+      idForError={`upload-error-${id}`}
+      idForInstructions={`upload-instructions-${id}`}
+      isBuilder={isBuilder}
+    />
+  );
 }
 
-export default setter(FormUpload);
+FormUpload.displayName = "Form.Upload";
+
+// Expose types for external use
+FormUpload.types = UPLOAD_TYPES;
+
+FormUpload.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  inlineStyle: PropTypes.object,
+  layout: PropTypes.oneOf([
+    "square",
+    "portrait",
+    "landscape",
+    "horizontal",
+    "embed"
+  ]),
+  placeholder: PropTypes.string,
+  remove: PropTypes.string,
+  accepts: PropTypes.string,
+  fileNameFrom: PropTypes.string,
+  instructionsSingleLine: PropTypes.bool,
+  isUserAvatar: PropTypes.bool,
+  isBuilder: PropTypes.bool
+};
+
+export default FormUpload;

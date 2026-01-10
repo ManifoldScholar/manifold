@@ -1,172 +1,178 @@
-import React, { Component } from "react";
+import { useRef, useEffect, useContext, useCallback, useId } from "react";
 import PropTypes from "prop-types";
-import { UIDConsumer } from "react-uid";
 import classNames from "classnames";
-import setter from "../setter";
+import { useFormField } from "hooks";
 import Instructions from "../Instructions";
 import FieldWrapper from "../FieldWrapper";
 import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
-class FormSwitch extends Component {
-  static displayName = "Form.Switch";
+export default function FormSwitch({
+  name,
+  label,
+  labelPos = "above",
+  className,
+  instructions,
+  customValues,
+  focusOnMount,
+  submitOnChange = false,
+  wide,
+  theme = "default",
+  isPrimary,
+  disabled,
+  collapseProps,
+  value: valueProp,
+  onChange: onChangeProp
+}) {
+  const checkboxRef = useRef(null);
+  const context = useContext(FormContext);
+  const id = useId();
 
-  static propTypes = {
-    label: PropTypes.string,
-    labelPos: PropTypes.oneOf(["above", "below", "inline"]),
-    className: PropTypes.string,
-    instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    set: PropTypes.func,
-    value: PropTypes.any,
-    customValues: PropTypes.shape({
-      true: PropTypes.string,
-      false: PropTypes.string
-    }),
-    focusOnMount: PropTypes.bool,
-    submitOnChange: PropTypes.bool,
-    wide: PropTypes.bool,
-    theme: PropTypes.oneOf(["default", "checkbox"]),
-    isPrimary: PropTypes.bool,
-    collapseProps: PropTypes.object
-  };
+  // Determine if we're in controlled mode
+  const isControlled = valueProp !== undefined || onChangeProp !== undefined;
 
-  static defaultProps = {
-    labelPos: "above",
-    theme: "default",
-    submitOnChange: false
-  };
+  // Only use form field if name is provided (hooks must be called unconditionally)
+  // Pass empty string as fallback to avoid errors in useFormField
+  const formField = useFormField(name || "");
 
-  static contextType = FormContext;
+  // Use controlled props if provided, otherwise use form field
+  const value = isControlled ? valueProp : name ? formField.value : undefined;
+  const set = formField.set;
 
-  componentDidMount() {
-    if (this.props.focusOnMount && this.checkbox) {
-      this.checkbox.focus();
+  useEffect(() => {
+    if (focusOnMount && checkboxRef.current) {
+      checkboxRef.current.focus();
     }
-  }
+  }, [focusOnMount]);
 
-  get checked() {
-    return this.determineChecked(this.props.value);
-  }
+  const truthy = val => val === true || val === "true";
 
-  get idPrefix() {
-    return "switch-input";
-  }
+  const determineChecked = useCallback(
+    val => {
+      if (customValues) return val === customValues.true;
+      return truthy(val);
+    },
+    [customValues]
+  );
 
-  get idForInstructionsPrefix() {
-    return "switch-input-instructions";
-  }
+  const handleChange = useCallback(
+    event => {
+      if (isControlled && onChangeProp) {
+        // Controlled mode: call the provided onChange
+        onChangeProp(event);
+      } else {
+        // Form field mode: update form state
+        if (customValues) {
+          const trueValue = customValues.true;
+          const falseValue = customValues.false;
+          if (value === trueValue) {
+            set(falseValue);
+          } else {
+            set(trueValue);
+          }
+        } else {
+          set(!truthy(value));
+        }
 
-  get showSwitch() {
-    return this.props.theme === "default";
-  }
+        if (submitOnChange && context?.triggerSubmit) {
+          context.triggerSubmit();
+        }
+      }
+    },
+    [
+      isControlled,
+      onChangeProp,
+      customValues,
+      value,
+      set,
+      submitOnChange,
+      context
+    ]
+  );
 
-  get showCheckbox() {
-    return this.props.theme === "checkbox";
-  }
+  const checked = determineChecked(value);
+  const showSwitch = theme === "default";
+  const showCheckbox = theme === "checkbox";
+  const styleType = context?.styleType;
 
-  truthy(value) {
-    return value === true || value === "true";
-  }
+  const LabelText =
+    styleType === "secondary" && !isPrimary
+      ? Styled.LabelTextSecondary
+      : Styled.LabelTextPrimary;
 
-  handleChange = () => {
-    if (this.props.customValues) {
-      this.handleCustomValues();
-    } else {
-      this.handleBooleans();
-    }
-    if (this.props.submitOnChange && this.props.triggerSubmit) {
-      this.props.triggerSubmit();
-    }
-  };
+  const Input = showSwitch ? Styled.InputSwitch : Styled.InputCheckbox;
 
-  handleCustomValues() {
-    const trueValue = this.props.customValues.true;
-    const falseValue = this.props.customValues.false;
-    if (this.props.value === trueValue) return this.props.set(falseValue);
-    return this.props.set(trueValue);
-  }
+  const renderSwitchIndicator = () => (
+    <Styled.IndicatorSwitchOuter className="toggle-indicator">
+      <Styled.IndicatorSwitchInner aria-hidden="true" />
+    </Styled.IndicatorSwitchOuter>
+  );
 
-  handleBooleans() {
-    this.props.set(!this.truthy(this.props.value));
-  }
+  const renderCheckboxIndicator = () => (
+    <Styled.IndicatorCheckbox aria-hidden="true">
+      <Styled.IconCheckbox icon="checkmark16" size="default" />
+    </Styled.IndicatorCheckbox>
+  );
 
-  determineChecked(value) {
-    if (this.props.customValues) return value === this.props.customValues.true;
-    return this.truthy(value);
-  }
+  const inputId = `switch-input-${id}`;
 
-  renderSwitchIndicator() {
-    return (
-      /* toggle-indicator does not seem to apply any styles here; used for customization by other parent components */
-      <Styled.IndicatorSwitchOuter className="toggle-indicator">
-        <Styled.IndicatorSwitchInner aria-hidden="true" />
-      </Styled.IndicatorSwitchOuter>
-    );
-  }
-
-  renderCheckboxIndicator() {
-    return (
-      <Styled.IndicatorCheckbox aria-hidden="true">
-        <Styled.IconCheckbox icon="checkmark16" size="default" />
-      </Styled.IndicatorCheckbox>
-    );
-  }
-
-  render() {
-    const LabelText =
-      this.context?.styleType === "secondary" && !this.props.isPrimary
-        ? Styled.LabelTextSecondary
-        : Styled.LabelTextPrimary;
-    const Input = this.showSwitch ? Styled.InputSwitch : Styled.InputCheckbox;
-
-    return (
-      <UIDConsumer>
-        {id => (
-          <FieldWrapper
-            className={classNames({
-              wide: this.props.wide,
-              [this.props.className]: !!this.props.className
-            })}
-          >
-            <Styled.Label
-              htmlFor={`${this.idPrefix}-${id}`}
-              $inline={this.props.labelPos === "inline"}
-              $below={this.props.labelPos === "below"}
-            >
-              {(this.props.labelPos === "above" ||
-                this.props.labelPos === "inline") && (
-                <LabelText $marginEnd={this.props.isPrimary}>
-                  {this.props.label}
-                </LabelText>
-              )}
-              <Input
-                ref={c => {
-                  this.checkbox = c;
-                }}
-                type="checkbox"
-                id={`${this.idPrefix}-${id}`}
-                checked={this.checked}
-                onChange={eventIgnored => this.handleChange()}
-                disabled={this.props.disabled}
-                {...this.props.collapseProps}
-              />
-              {this.showCheckbox && this.renderCheckboxIndicator()}
-              {this.showSwitch && this.renderSwitchIndicator()}
-              {this.props.labelPos === "below" && (
-                <LabelText>{this.props.label}</LabelText>
-              )}
-              {!!this.props.instructions && (
-                <Instructions
-                  instructions={this.props.instructions}
-                  className={this.showCheckbox ? "inline" : undefined}
-                />
-              )}
-            </Styled.Label>
-          </FieldWrapper>
+  return (
+    <FieldWrapper
+      className={classNames({
+        wide,
+        [className]: !!className
+      })}
+    >
+      <Styled.Label
+        htmlFor={inputId}
+        $inline={labelPos === "inline"}
+        $below={labelPos === "below"}
+      >
+        {(labelPos === "above" || labelPos === "inline") && (
+          <LabelText $marginEnd={isPrimary}>{label}</LabelText>
         )}
-      </UIDConsumer>
-    );
-  }
+        <Input
+          ref={checkboxRef}
+          type="checkbox"
+          id={inputId}
+          checked={checked}
+          onChange={handleChange}
+          disabled={disabled}
+          {...collapseProps}
+        />
+        {showCheckbox && renderCheckboxIndicator()}
+        {showSwitch && renderSwitchIndicator()}
+        {labelPos === "below" && <LabelText>{label}</LabelText>}
+        {!!instructions && (
+          <Instructions
+            instructions={instructions}
+            className={showCheckbox ? "inline" : undefined}
+          />
+        )}
+      </Styled.Label>
+    </FieldWrapper>
+  );
 }
 
-export default setter(FormSwitch);
+FormSwitch.displayName = "Form.Switch";
+
+FormSwitch.propTypes = {
+  name: PropTypes.string,
+  label: PropTypes.string,
+  labelPos: PropTypes.oneOf(["above", "below", "inline"]),
+  className: PropTypes.string,
+  instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  customValues: PropTypes.shape({
+    true: PropTypes.string,
+    false: PropTypes.string
+  }),
+  focusOnMount: PropTypes.bool,
+  submitOnChange: PropTypes.bool,
+  wide: PropTypes.bool,
+  theme: PropTypes.oneOf(["default", "checkbox"]),
+  isPrimary: PropTypes.bool,
+  disabled: PropTypes.bool,
+  collapseProps: PropTypes.object,
+  value: PropTypes.bool,
+  onChange: PropTypes.func
+};

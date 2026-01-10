@@ -1,141 +1,90 @@
-import React, { Component } from "react";
+import { useState, useRef, useEffect, useContext, useId } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import { UIDConsumer } from "react-uid";
-import setter from "../setter";
+import { useTranslation } from "react-i18next";
+import { useFormField } from "hooks";
 import Errorable from "global/components/form/Errorable";
 import generatePassword from "helpers/passwordGenerator";
 import BaseLabel from "../BaseLabel";
 import { FormContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
-class FormGeneratedPasswordInput extends Component {
-  static displayName = "Form.GeneratedPasswordInput";
+export default function FormGeneratedPasswordInput({
+  name,
+  focusOnMount = false
+}) {
+  const id = useId();
+  const { t } = useTranslation();
+  const inputRef = useRef(null);
+  const { set, errors } = useFormField(name);
+  const context = useContext(FormContext);
+  const styleType = context?.styleType;
 
-  static propTypes = {
-    name: PropTypes.string,
-    onChange: PropTypes.func,
-    value: PropTypes.any,
-    focusOnMount: PropTypes.bool,
-    errors: PropTypes.array,
-    set: PropTypes.func,
-    t: PropTypes.func
-  };
+  const [password, setPassword] = useState(() => generatePassword());
+  const [showPassword, setShowPassword] = useState(false);
 
-  static defaultProps = {
-    focusOnMount: false
-  };
+  useEffect(() => {
+    if (focusOnMount && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [focusOnMount]);
 
-  static contextType = FormContext;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      password: this.initializePassword(),
-      showPassword: false
-    };
-  }
-
-  componentDidMount() {
-    if (this.props.focusOnMount === true && this.inputElement)
-      this.inputElement.focus();
-    this.setValueFromCurrentState();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state !== prevState || this.props.value === undefined)
-      this.setValueFromCurrentState();
-  }
-
-  get idPrefix() {
-    return "generated-password";
-  }
-
-  get idForErrorPrefix() {
-    return "generated-password-error";
-  }
-
-  setValueFromCurrentState() {
-    const password = this.state.password;
-    const { set } = this.props;
+  useEffect(() => {
     set(password, false);
-  }
+  }, [password, set]);
 
-  togglePassword(event) {
+  const togglePassword = event => {
     event.preventDefault();
-    this.setState({ showPassword: !this.state.showPassword });
-  }
+    setShowPassword(prev => !prev);
+  };
 
-  initializePassword() {
-    return generatePassword();
-  }
-
-  handlePasswordChange(event) {
+  const handlePasswordChange = event => {
     event.preventDefault();
     const value = event.target.value || null;
-    this.setState({ password: value });
-  }
+    setPassword(value);
+  };
 
-  renderInput(id) {
-    const type = this.state.showPassword ? "text" : "password";
+  const icon = !showPassword ? "eyeClosed32" : "eyeOpen32";
+  const inputType = showPassword ? "text" : "password";
+  const Input =
+    styleType === "primary" ? Styled.PrimaryInput : Styled.SecondaryInput;
 
-    const Input =
-      this.context?.styleType === "primary"
-        ? Styled.PrimaryInput
-        : Styled.SecondaryInput;
-
-    return (
-      <Input
-        ref={input => {
-          this.inputElement = input;
-        }}
-        id={`${this.idPrefix}-${id}`}
-        aria-describedby={this.props.idForError}
-        type={type}
-        placeholder={this.props.t("forms.password_reset.enter_password")}
-        onChange={event => this.handlePasswordChange(event)}
-        value={this.state.password}
+  return (
+    <Errorable
+      name={name}
+      errors={errors}
+      label={t("forms.password_reset.password")}
+      idForError={`generated-password-error-${id}`}
+      className="rel"
+    >
+      <BaseLabel
+        id={`generated-password-${id}`}
+        label={t("forms.password_reset.password")}
+        styleType={styleType}
       />
-    );
-  }
-
-  render() {
-    const icon = !this.state.showPassword ? "eyeClosed32" : "eyeOpen32";
-    const t = this.props.t;
-
-    return (
-      <UIDConsumer>
-        {id => (
-          <Errorable
-            name={this.props.name}
-            errors={this.props.errors}
-            label={t("forms.password_reset.password")}
-            idForError={`${this.idForErrorPrefix}-${id}`}
-            className="rel"
-          >
-            <BaseLabel
-              id={`${this.idPrefix}-${id}`}
-              label={t("forms.password_reset.password")}
-              styleType={this.context?.styleType}
-            />
-            <Styled.Toggle
-              onClick={event => this.togglePassword(event)}
-              role="button"
-              tabIndex="0"
-            >
-              <Styled.Icon icon={icon} size="default" />
-              <span className="screen-reader-text">
-                {this.state.showPassword
-                  ? t("forms.password_reset.hide")
-                  : t("forms.password_reset.show")}
-              </span>
-            </Styled.Toggle>
-            {this.renderInput(id)}
-          </Errorable>
-        )}
-      </UIDConsumer>
-    );
-  }
+      <Styled.Toggle onClick={togglePassword} role="button" tabIndex="0">
+        <Styled.Icon icon={icon} size="default" />
+        <span className="screen-reader-text">
+          {showPassword
+            ? t("forms.password_reset.hide")
+            : t("forms.password_reset.show")}
+        </span>
+      </Styled.Toggle>
+      <Input
+        ref={inputRef}
+        id={`generated-password-${id}`}
+        aria-describedby={`generated-password-error-${id}`}
+        type={inputType}
+        placeholder={t("forms.password_reset.enter_password")}
+        onChange={handlePasswordChange}
+        value={password}
+      />
+    </Errorable>
+  );
 }
 
-export default withTranslation()(setter(FormGeneratedPasswordInput));
+FormGeneratedPasswordInput.displayName = "Form.GeneratedPasswordInput";
+
+FormGeneratedPasswordInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  focusOnMount: PropTypes.bool
+};
