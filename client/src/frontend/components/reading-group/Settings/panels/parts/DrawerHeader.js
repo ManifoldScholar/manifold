@@ -1,48 +1,50 @@
+import { useCallback } from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
 import { useArchiveOrActivateGroup } from "frontend/components/reading-group/hooks";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
-import { readingGroupsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
-import lh from "helpers/linkHandler";
+import { readingGroupsAPI } from "api";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { useConfirmation } from "hooks";
+import Dialog from "global/components/dialog";
 
-const { request } = entityStoreActions;
-
-export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
+export default function DrawerHeader({ readingGroup }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {
+    confirm: confirmDelete,
+    confirmation: deleteConfirmation
+  } = useConfirmation();
 
   const membership =
     readingGroup.relationships.currentUserReadingGroupMembership;
   const {
     onClick: onArchiveClick,
-    label: archiveLabel
+    label: archiveLabel,
+    confirmation: archiveConfirmation
   } = useArchiveOrActivateGroup({
-    membership,
-    confirm,
-    callback: onArchive
+    membership
   });
 
-  function handleDelete() {
+  const handleDelete = useCallback(() => {
     const heading = t("messages.reading_group.destroy_heading");
     const message = t("messages.reading_group.destroy_message");
-    confirm(heading, message, () => {
-      const call = readingGroupsAPI.destroy(readingGroup.id);
-      const options = { removes: readingGroup };
-      const readingGroupRequest = request(
-        call,
-        requests.feReadingGroupDestroy,
-        options
-      );
-      dispatch(readingGroupRequest).promise.then(() => {
-        navigate(lh.link("frontendMyReadingGroups"));
-      });
+    confirmDelete({
+      heading,
+      message,
+      callback: async closeDialog => {
+        try {
+          await queryApi(readingGroupsAPI.destroy(readingGroup.id));
+          navigate("/my/groups");
+          closeDialog();
+        } catch (err) {
+          console.error(err);
+        }
+      }
     });
-  }
+  }, [confirmDelete, t, readingGroup.id, navigate]);
 
   const { toggleProps } = useCollapseContext();
 
@@ -76,19 +78,21 @@ export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
   ];
 
   return (
-    <Layout.DrawerHeader
-      title={t("forms.edit_group.title")}
-      buttons={buttons}
-      buttonLayout="inline"
-      small
-    />
+    <>
+      {archiveConfirmation}
+      {deleteConfirmation && <Dialog.Confirm {...deleteConfirmation} />}
+      <Layout.DrawerHeader
+        title={t("forms.edit_group.title")}
+        buttons={buttons}
+        buttonLayout="inline"
+        small
+      />
+    </>
   );
 }
 
 DrawerHeader.displayName = "ReadingGroup.Settings.DrawerHeader";
 
 DrawerHeader.propTypes = {
-  readingGroup: PropTypes.object.isRequired,
-  confirm: PropTypes.func.isRequired,
-  onArchive: PropTypes.func
+  readingGroup: PropTypes.object.isRequired
 };

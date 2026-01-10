@@ -28,7 +28,7 @@ export default function ResourceCollectionListItem({
         <Styled.TextColumn>
           {renderAsLink ? (
             <Styled.Link
-              to={`/projects/${project.attributes.slug}/resource-collections/${collection.attributes.slug}`}
+              to={`/projects/${project.attributes.slug}/resource-collection/${collection.attributes.slug}`}
             >
               <Styled.Title as={`h${headingLevel}`}>{title}</Styled.Title>
             </Styled.Link>

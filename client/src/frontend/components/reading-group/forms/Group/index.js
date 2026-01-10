@@ -1,129 +1,96 @@
-import React from "react";
+import { useState, useMemo } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
 import Form from "global/components/form";
-import { readingGroupsAPI, requests } from "api";
 import config from "config";
-import memoize from "lodash/memoize";
 import withConfirmation from "hoc/withConfirmation";
-import withCurrentUser from "hoc/withCurrentUser";
 import { ClassNames } from "@emotion/react";
-import { connect } from "react-redux";
-import { select } from "utils/entityUtils";
+import { useSettings, useCurrentUser } from "hooks";
 import * as Styled from "./styles";
 
-class ReadingGroupForm extends React.PureComponent {
-  static displayName = "ReadingGroup.Forms.GroupSettings";
+const generateToken = (length = 8) => {
+  const rand = () =>
+    Math.random(0)
+      .toString(36)
+      .substr(2);
+  const token = tokenLength =>
+    (rand() + rand() + rand() + rand()).substr(0, tokenLength);
+  return token(length).toUpperCase();
+};
 
-  static mapStateToProps = state => {
-    return {
-      allowPublic: !select(requests.settings, state.entityStore).attributes
-        .general.disablePublicReadingGroups
-    };
-  };
+const urlForToken = token =>
+  `${config.services.client.url}/my/groups?join=${token}`;
 
-  static propTypes = {
-    mode: PropTypes.oneOf(["new", "edit"]),
-    group: PropTypes.object,
-    onSuccess: PropTypes.func.isRequired,
-    t: PropTypes.func,
-    allowPublic: PropTypes.bool.isRequired
-  };
+function ReadingGroupForm({
+  mode = "new",
+  group = {},
+  submit,
+  errors = [],
+  confirm
+}) {
+  const { t } = useTranslation();
+  const currentUser = useCurrentUser();
+  const settings = useSettings();
 
-  static defaultProps = {
-    group: {}
-  };
+  const allowPublic = !settings?.attributes?.general
+    ?.disablePublicReadingGroups;
+  const isNew = mode === "new";
 
-  constructor(props) {
-    super(props);
-    const token = this.token();
-    this.state = {
-      invitationCode: token,
-      invitationUrl: `${config.services.client.url}/my/groups?join=${token}`,
-      courseEnabled: this.isCourseEnabled
-    };
-  }
+  const [courseEnabled, setCourseEnabled] = useState(
+    isNew ? false : group?.attributes?.course?.enabled
+  );
 
-  get isCourseEnabled() {
-    if (this.isNew) return false;
-    return this.props.group.attributes.course.enabled;
-  }
-
-  get isNew() {
-    const { mode } = this.props;
-    return mode === "new";
-  }
-
-  handleRegenerate = (event, input, notify, set) => {
-    event.preventDefault();
-    set(this.token());
-  };
-
-  newGroup() {
-    return {
+  const newGroup = useMemo(
+    () => ({
       attributes: {
         privacy: "private",
-        invitationCode: this.state.invitationCode,
+        invitationCode: generateToken(),
         course: {
           enabled: false
         }
       }
-    };
-  }
+    }),
+    []
+  );
 
-  memoizedNewGroup = memoize(this.newGroup);
-
-  urlForToken(token) {
-    return `${config.services.client.url}/my/groups?join=${token}`;
-  }
-
-  token(length = 8) {
-    const rand = () =>
-      Math.random(0)
-        .toString(36)
-        .substr(2);
-    const token = tokenLength =>
-      (rand() + rand() + rand() + rand()).substr(0, tokenLength);
-    return token(length).toUpperCase();
-  }
-
-  /* eslint-disable no-param-reassign */
-  handleCopy = (event, input, notify) => {
-    const disabled = input.disabled;
+  const handleRegenerate = (event, input, notify, set) => {
     event.preventDefault();
-    if (disabled) {
-      input.disabled = false;
-    }
-    input.select();
-    document.execCommand("copy");
-    input.setSelectionRange(0, 0);
-    if (disabled) {
-      input.disabled = true;
-    }
-    notify("copied!");
+    set(generateToken());
   };
-  /* eslint-enable no-param-reassign */
 
-  warnOnPrivacyChange = (initialValue, newValue) => {
-    if (this.isNew) return;
+  const handleCopy = async (event, input, notify) => {
+    event.preventDefault();
+    try {
+      const text = input.value;
+      await navigator.clipboard.writeText(text);
+      notify("copied!");
+    } catch (err) {
+      notify("failed to copy");
+    }
+  };
 
-    const messages = this.props.t("messages.reading_group.privacy_change", {
+  const warnOnPrivacyChange = (initialValue, newValue) => {
+    if (isNew) return;
+
+    const messages = t("messages.reading_group.privacy_change", {
       returnObjects: true
     });
     const msg = messages[`${initialValue}_to_${newValue}`];
-    return msg ? this.props.confirm(messages.heading, msg, () => {}) : null;
+    return msg ? confirm(messages.heading, msg, () => {}) : null;
   };
 
-  handleCourseChange = (initialValueIgnored, oldValueIgnored, newEvent) => {
-    this.setState({ courseEnabled: newEvent.target.value === "true" });
+  const handleCourseChange = (
+    initialValueIgnored,
+    oldValueIgnored,
+    newEvent
+  ) => {
+    setCourseEnabled(newEvent.target.value === "true");
   };
 
-  get privacyOptions() {
-    const { t, allowPublic, currentUser } = this.props;
-
-    const established = currentUser?.attributes.established;
-    const trusted = currentUser?.attributes.trusted;
+  const privacyOptions = useMemo(() => {
+    const established = currentUser?.attributes?.established;
+    const trusted = currentUser?.attributes?.trusted;
 
     const publicOption =
       allowPublic && (established || trusted)
@@ -146,23 +113,17 @@ class ReadingGroupForm extends React.PureComponent {
         value: "anonymous"
       }
     ];
-  }
+  }, [allowPublic, currentUser, t]);
 
-  render() {
-    const { group, onSuccess, t } = this.props;
-
-    return (
-      <Styled.Form
-        model={this.isNew ? this.memoizedNewGroup() : group}
-        name={requests.feNewReadingGroup}
-        update={readingGroupsAPI.update}
-        create={readingGroupsAPI.create}
-        options={{ adds: requests.feMyReadingGroups }}
-        onSuccess={onSuccess}
-        className="form-secondary"
-        notificationScope="drawer"
-      >
-        {getModelValue => (
+  return (
+    <Styled.Form
+      model={isNew ? newGroup : group}
+      submit={submit}
+      errors={errors}
+      className="form-secondary"
+    >
+      {getModelValue => {
+        return (
           <>
             <Form.TextInput
               wide
@@ -176,9 +137,9 @@ class ReadingGroupForm extends React.PureComponent {
               label={t("forms.reading_group.privacy")}
               name="attributes[privacy]"
               defaultValue={"private"}
-              beforeOnChange={this.warnOnPrivacyChange}
+              beforeOnChange={warnOnPrivacyChange}
               instructions={t("forms.reading_group.privacy_instructions")}
-              options={this.privacyOptions}
+              options={privacyOptions}
               inline
               wide
             />
@@ -191,11 +152,11 @@ class ReadingGroupForm extends React.PureComponent {
                   label: t(
                     "forms.reading_group.invitation_code_buttons.regenerate"
                   ),
-                  onClick: this.handleRegenerate
+                  onClick: handleRegenerate
                 },
                 {
                   label: t("forms.reading_group.invitation_code_buttons.copy"),
-                  onClick: this.handleCopy
+                  onClick: handleCopy
                 }
               ]}
               instructions={t(
@@ -206,16 +167,14 @@ class ReadingGroupForm extends React.PureComponent {
               wide
               isDisabled
               label={t("forms.reading_group.invitation_url")}
-              value={this.urlForToken(
-                getModelValue("attributes[invitationCode]")
-              )}
+              value={urlForToken(getModelValue("attributes[invitationCode]"))}
               instructions={t(
                 "forms.reading_group.invitation_url_instructions"
               )}
               buttons={[
                 {
                   label: t("forms.reading_group.invitation_url_button_label"),
-                  onClick: this.handleCopy
+                  onClick: handleCopy
                 }
               ]}
             />
@@ -236,16 +195,16 @@ class ReadingGroupForm extends React.PureComponent {
                       value: false
                     }
                   ]}
-                  beforeOnChange={this.handleCourseChange}
+                  beforeOnChange={handleCourseChange}
                   inputClasses={css(`padding-block-end: 20px;`)}
                   inline
                   wide
                 />
               )}
             </ClassNames>
-            <Collapse initialVisible={this.state.courseEnabled}>
+            <Collapse initialVisible={courseEnabled}>
               <Collapse.Content>
-                <Styled.DatesInner>
+                {/* <Styled.DatesInner>
                   <Form.DatePicker
                     label={t("forms.reading_group.course_start_date")}
                     name="attributes[course][startsOn]"
@@ -254,7 +213,7 @@ class ReadingGroupForm extends React.PureComponent {
                     label={t("forms.reading_group.course_end_date")}
                     name="attributes[course][endsOn]"
                   />
-                </Styled.DatesInner>
+                </Styled.DatesInner> */}
               </Collapse.Content>
             </Collapse>
             <Form.Switch
@@ -267,16 +226,20 @@ class ReadingGroupForm extends React.PureComponent {
             />
             <Form.Save text={t("actions.save")} theme="frontend" />
           </>
-        )}
-      </Styled.Form>
-    );
-  }
+        );
+      }}
+    </Styled.Form>
+  );
 }
 
-export default withCurrentUser(
-  withConfirmation(
-    withTranslation()(
-      connect(ReadingGroupForm.mapStateToProps)(ReadingGroupForm)
-    )
-  )
-);
+ReadingGroupForm.displayName = "ReadingGroup.Forms.GroupSettings";
+
+ReadingGroupForm.propTypes = {
+  mode: PropTypes.oneOf(["new", "edit"]),
+  group: PropTypes.object,
+  submit: PropTypes.func.isRequired,
+  errors: PropTypes.array,
+  confirm: PropTypes.func.isRequired
+};
+
+export default withConfirmation(ReadingGroupForm);

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState, useId } from "react";
 import PropTypes from "prop-types";
-import { useUIDSeed } from "react-uid";
 import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
@@ -10,7 +9,8 @@ import Form from "global/components/form";
 import * as Styled from "./styles";
 
 function DuplicatePanel({ readingGroup, onProceed }) {
-  const uidSeed = useUIDSeed();
+  const baseId = useId();
+  const uidSeed = suffix => `${baseId}-${suffix}`;
   const { t } = useTranslation();
   const [name, setName] = useState(readingGroup.attributes.name);
   const [copyAnnotations, setCopyAnnotations] = useState(false);

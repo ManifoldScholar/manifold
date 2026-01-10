@@ -10,7 +10,8 @@ function ReadingGroupMemberForm({
   membership,
   readingGroup,
   confirm,
-  onSuccess
+  submit,
+  errors = []
 }) {
   const { t } = useTranslation();
 
@@ -37,8 +38,8 @@ function ReadingGroupMemberForm({
     <Styled.Form
       model={membership}
       name={requests.feReadingGroupMembershipEdit}
-      update={readingGroupMembershipsAPI.update}
-      onSuccess={onSuccess}
+      submit={submit}
+      errors={errors}
       className="form-secondary"
       notificationScope="drawer"
     >
@@ -124,7 +125,8 @@ ReadingGroupMemberForm.propTypes = {
   membership: PropTypes.object.isRequired,
   readingGroup: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
-  onSuccess: PropTypes.func.isRequired
+  submit: PropTypes.func,
+  errors: PropTypes.array
 };
 
 export default ReadingGroupMemberForm;

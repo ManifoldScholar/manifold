@@ -53,8 +53,8 @@ export default function ResourceListItem({
             <Styled.Link
               to={
                 resourceCollection
-                  ? `/projects/${resource.attributes.projectSlug}/resource-collections/${resourceCollection.attributes.slug}/resources/${resource.attributes.slug}`
-                  : `/projects/${project.attributes.slug}/resources/${resource.attributes.slug}`
+                  ? `/projects/${resource.attributes.projectSlug}/resource-collection/${resourceCollection.attributes.slug}/resource/${resource.attributes.slug}`
+                  : `/projects/${project.attributes.slug}/resource/${resource.attributes.slug}`
               }
             >
               <Styled.Title as={`h${headingLevel}`}>{title}</Styled.Title>

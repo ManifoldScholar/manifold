@@ -18,7 +18,7 @@ export default class ResourceListThumbnails extends Component {
           const { projectSlug, slug } = resource.attributes ?? {};
           return (
             <li key={resource.id}>
-              <Styled.Link to={`/projects/${projectSlug}/resources/${slug}`}>
+              <Styled.Link to={`/projects/${projectSlug}/resource/${slug}`}>
                 <Resource.Thumbnail
                   key={resource.id}
                   resource={resource}

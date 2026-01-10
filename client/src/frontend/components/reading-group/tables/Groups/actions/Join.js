@@ -1,67 +1,76 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useRevalidator } from "react-router";
 import template from "lodash/template";
 import classNames from "classnames";
-import { requests } from "api";
-import { entityStoreActions } from "actions";
-import withConfirmation from "hoc/withConfirmation";
+import { useConfirmation } from "hooks";
+import Dialog from "global/components/dialog";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 
-const { request } = entityStoreActions;
-
-function JoinGroup({ confirm, readingGroup, onSuccess, buttonText, outlined }) {
-  const dispatch = useDispatch();
+function JoinGroup({ readingGroup, buttonText, outlined }) {
   const { t } = useTranslation();
+  const { revalidate } = useRevalidator();
+  const { confirm, confirmation } = useConfirmation();
 
-  function doJoin() {
+  const joinGroup = group => {
     const {
       href: endpoint,
       meta: { method }
-    } = readingGroup.links.join;
-    const call = {
+    } = group.links.join;
+    return queryApi({
       endpoint,
       method,
       options: {}
-    };
-    const joinRequest = request(
-      call,
-      requests.feReadingGroupMembershipCreate,
-      {}
-    );
-    dispatch(joinRequest).promise.then(() => {
-      if (onSuccess) onSuccess();
     });
-  }
+  };
+
+  const doJoin = async () => {
+    try {
+      await joinGroup(readingGroup);
+      revalidate();
+    } catch (error) {
+      // Error handling - could show a notification here if needed
+      console.error("Failed to join reading group:", error);
+    }
+  };
 
   function handleClick() {
     const heading = t("messages.reading_group.join.heading");
     const message = t("messages.reading_group.join.message");
     const compiledMessage = template(message)({ readingGroup });
-    confirm(heading, compiledMessage, () => doJoin());
+    confirm({
+      heading,
+      message: compiledMessage,
+      callback: closeDialog => {
+        doJoin().then(() => {
+          closeDialog();
+        });
+      }
+    });
   }
 
   return (
-    <button
-      onClick={handleClick}
-      className={classNames({
-        "button-tertiary": true,
-        "button-tertiary--outlined": outlined
-      })}
-    >
-      {buttonText || t("actions.join")}
-    </button>
+    <>
+      {confirmation && <Dialog.Confirm {...confirmation} />}
+      <button
+        onClick={handleClick}
+        className={classNames({
+          "button-tertiary": true,
+          "button-tertiary--outlined": outlined
+        })}
+      >
+        {buttonText || t("actions.join")}
+      </button>
+    </>
   );
 }
 
 JoinGroup.displayName = "GroupsTable.Group.Join";
 
 JoinGroup.propTypes = {
-  confirm: PropTypes.func.isRequired,
   readingGroup: PropTypes.object.isRequired,
-  onSuccess: PropTypes.func,
   buttonText: PropTypes.string,
   outlined: PropTypes.bool
 };
 
-export default withConfirmation(JoinGroup);
+export default JoinGroup;

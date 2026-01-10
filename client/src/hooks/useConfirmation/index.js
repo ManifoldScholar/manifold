@@ -7,6 +7,7 @@ export default function useConfirmation() {
 
   const confirm = ({
     heading,
+    message,
     icon,
     form,
     resolveLabel,
@@ -14,7 +15,18 @@ export default function useConfirmation() {
     closeCallback
   }) => {
     const promise = new Promise((resolve, reject) => {
-      const values = { reject, heading, icon, form, resolveLabel };
+      const handleReject = () => {
+        closeDialog();
+        reject();
+      };
+      const values = {
+        reject: handleReject,
+        heading,
+        message,
+        icon,
+        form,
+        resolveLabel
+      };
       if (callback) values.resolve = resolve;
       setConfirmation(values);
     });
@@ -23,7 +35,7 @@ export default function useConfirmation() {
         callback(closeDialog);
       },
       () => {
-        closeCallback(closeDialog);
+        if (closeCallback) closeCallback(closeDialog);
       }
     );
     return promise;

@@ -1,15 +1,13 @@
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { readingGroupsAPI, collectingAPI, requests } from "api";
-import { entityStoreActions } from "actions";
+import { readingGroupsAPI, collectingAPI } from "api";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 import { CategoryNewToggle } from "./CategoryNew";
 import SortableCategories from "./SortableCategories";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
 import { useNotification } from "hooks";
 import * as Styled from "./styles";
-
-const { request } = entityStoreActions;
 
 export default function CollectionEditor({
   readingGroup,
@@ -17,7 +15,6 @@ export default function CollectionEditor({
   responses,
   refresh
 }) {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const notifyUpdateError = useNotification(() => ({
@@ -30,56 +27,64 @@ export default function CollectionEditor({
 
   const collection = getEntityCollection(readingGroup);
 
-  function updateCategory(category) {
-    const { id: categoryId, position } = category;
-    const changes = { attributes: { position } };
-    const call = readingGroupsAPI.updateCategory(
-      readingGroup.id,
-      categoryId,
-      changes
-    );
-    const updateRequest = request(call, requests.feReadingGroupCategoryUpdate);
-    dispatch(updateRequest).promise.catch(err => {
-      console.error(err);
-      notifyUpdateError();
-      refresh();
-    });
-  }
-
-  function removeCategory(category) {
-    const call = readingGroupsAPI.destroyCategory(readingGroup.id, category.id);
-    const destroyRequest = request(
-      call,
-      requests.feReadingGroupCategoryDestroy
-    );
-    dispatch(destroyRequest)
-      .promise.then(() => refresh())
-      .catch(err => {
+  const updateCategory = useCallback(
+    async category => {
+      const { id: categoryId, position } = category;
+      const changes = { attributes: { position } };
+      try {
+        await queryApi(
+          readingGroupsAPI.updateCategory(readingGroup.id, categoryId, changes)
+        );
+      } catch (err) {
         console.error(err);
         notifyUpdateError();
         refresh();
-      });
-  }
+      }
+    },
+    [readingGroup.id, notifyUpdateError, refresh]
+  );
 
-  function updateCollectable(collectables) {
-    const call = collectingAPI.collect(collectables, readingGroup);
-    const updateRequest = request(call, requests.feCollectCollectable);
-    dispatch(updateRequest).promise.catch(err => {
-      console.error(err);
-      notifyUpdateError();
-      refresh();
-    });
-  }
+  const removeCategory = useCallback(
+    async category => {
+      try {
+        await queryApi(
+          readingGroupsAPI.destroyCategory(readingGroup.id, category.id)
+        );
+        refresh();
+      } catch (err) {
+        console.error(err);
+        notifyUpdateError();
+        refresh();
+      }
+    },
+    [readingGroup.id, notifyUpdateError, refresh]
+  );
 
-  function removeCollectable(collectable) {
-    const call = collectingAPI.remove([collectable], readingGroup);
-    const updateRequest = request(call, requests.feCollectCollectable);
-    dispatch(updateRequest).promise.catch(err => {
-      console.error(err);
-      notifyUpdateError();
-      refresh();
-    });
-  }
+  const updateCollectable = useCallback(
+    async collectables => {
+      try {
+        await queryApi(collectingAPI.collect(collectables, readingGroup));
+      } catch (err) {
+        console.error(err);
+        notifyUpdateError();
+        refresh();
+      }
+    },
+    [readingGroup, notifyUpdateError, refresh]
+  );
+
+  const removeCollectable = useCallback(
+    async collectable => {
+      try {
+        await queryApi(collectingAPI.remove([collectable], readingGroup));
+      } catch (err) {
+        console.error(err);
+        notifyUpdateError();
+        refresh();
+      }
+    },
+    [readingGroup, notifyUpdateError, refresh]
+  );
 
   function onCategoryEditError(err) {
     console.error(err);

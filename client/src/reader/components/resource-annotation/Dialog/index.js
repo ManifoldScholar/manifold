@@ -17,9 +17,7 @@ export default function ResourceAnnotationDialog({
 
   const renderPreview =
     resource.type === "resourceCollection" ? (
-      <ResourceCollectionSlideshow
-        resourceCollection={resourceEntity}
-      />
+      <ResourceCollectionSlideshow resourceCollection={resourceEntity} />
     ) : (
       <ResourcePreview
         resource={resourceEntity}

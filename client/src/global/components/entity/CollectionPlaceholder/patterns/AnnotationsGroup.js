@@ -1,5 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
+import { useRevalidator } from "react-router";
 import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ function GroupAnnotationsPlaceholder({ readingGroup, style }) {
   const currentUser = useCurrentUser();
   const loggedIn = !isEmpty(currentUser);
   const userIsMember = readingGroup.attributes.currentUserRole === "none";
+  const { revalidate } = useRevalidator();
 
   function getContent() {
     if (!loggedIn) {
@@ -39,7 +40,7 @@ function GroupAnnotationsPlaceholder({ readingGroup, style }) {
             children: (
               <JoinGroup
                 readingGroup={readingGroup}
-                onSuccess={refresh}
+                onSuccess={revalidate}
                 buttonText={t("actions.join_group")}
               />
             )
