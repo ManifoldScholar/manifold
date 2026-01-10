@@ -2,31 +2,28 @@
 
 import type { GetInfo, GetAnnotations } from "react-router/internal";
 
-type Module = typeof import("../_frontend.groups.$id.annotations.settings.js")
+type Module = typeof import("../route.js")
 
 type Info = GetInfo<{
-  file: "routes/frontend/_frontend.groups.$id.annotations.settings.jsx",
+  file: "routes/frontend/_frontend.groups.$id.edit/route.jsx",
   module: Module
 }>
 
 type Matches = [{
   id: "root";
-  module: typeof import("../../../root.js");
+  module: typeof import("../../../../root.js");
 }, {
   id: "routes/frontend/_frontend";
-  module: typeof import("../_frontend/route.js");
+  module: typeof import("../../_frontend/route.js");
 }, {
   id: "routes/frontend/_frontend.groups";
-  module: typeof import("../_frontend.groups.js");
+  module: typeof import("../../_frontend.groups.js");
 }, {
   id: "routes/frontend/_frontend.groups.$id";
-  module: typeof import("../_frontend.groups.$id.js");
+  module: typeof import("../../_frontend.groups.$id.js");
 }, {
-  id: "routes/frontend/_frontend.groups.$id.annotations";
-  module: typeof import("../_frontend.groups.$id.annotations/route.js");
-}, {
-  id: "routes/frontend/_frontend.groups.$id.annotations.settings";
-  module: typeof import("../_frontend.groups.$id.annotations.settings.js");
+  id: "routes/frontend/_frontend.groups.$id.edit";
+  module: typeof import("../route.js");
 }];
 
 type Annotations = GetAnnotations<Info & { module: Module, matches: Matches }, false>;

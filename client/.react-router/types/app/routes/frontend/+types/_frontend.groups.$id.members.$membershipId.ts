@@ -23,7 +23,7 @@ type Matches = [{
   module: typeof import("../_frontend.groups.$id.js");
 }, {
   id: "routes/frontend/_frontend.groups.$id.members";
-  module: typeof import("../_frontend.groups.$id.members.js");
+  module: typeof import("../_frontend.groups.$id.members/route.js");
 }, {
   id: "routes/frontend/_frontend.groups.$id.members.$membershipId";
   module: typeof import("../_frontend.groups.$id.members.$membershipId.js");

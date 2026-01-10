@@ -385,7 +385,7 @@ type RouteFiles = {
     id: "routes/frontend/_frontend.groups.$id";
     page: "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings";
   };
-  "routes/frontend/_frontend.groups.$id.annotations.jsx": {
+  "routes/frontend/_frontend.groups.$id.annotations/route.jsx": {
     id: "routes/frontend/_frontend.groups.$id.annotations";
     page: "/groups/:id/annotations" | "/groups/:id/annotations/settings";
   };
@@ -397,7 +397,7 @@ type RouteFiles = {
     id: "routes/frontend/_frontend.groups.$id.settings";
     page: "/groups/:id/settings";
   };
-  "routes/frontend/_frontend.groups.$id.members.jsx": {
+  "routes/frontend/_frontend.groups.$id.members/route.jsx": {
     id: "routes/frontend/_frontend.groups.$id.members";
     page: "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings";
   };
@@ -413,7 +413,7 @@ type RouteFiles = {
     id: "routes/frontend/_frontend.groups.$id._index";
     page: "/groups/:id";
   };
-  "routes/frontend/_frontend.groups.$id.edit.jsx": {
+  "routes/frontend/_frontend.groups.$id.edit/route.jsx": {
     id: "routes/frontend/_frontend.groups.$id.edit";
     page: "/groups/:id/edit" | "/groups/:id/edit/settings";
   };
@@ -507,14 +507,14 @@ type RouteModules = {
   "routes/frontend/_frontend.groups": typeof import("./app/routes/frontend/_frontend.groups.jsx");
   "routes/frontend/_frontend.groups._index": typeof import("./app/routes/frontend/_frontend.groups._index.jsx");
   "routes/frontend/_frontend.groups.$id": typeof import("./app/routes/frontend/_frontend.groups.$id.jsx");
-  "routes/frontend/_frontend.groups.$id.annotations": typeof import("./app/routes/frontend/_frontend.groups.$id.annotations.jsx");
+  "routes/frontend/_frontend.groups.$id.annotations": typeof import("./app/routes/frontend/_frontend.groups.$id.annotations/route.jsx");
   "routes/frontend/_frontend.groups.$id.annotations.settings": typeof import("./app/routes/frontend/_frontend.groups.$id.annotations.settings.jsx");
   "routes/frontend/_frontend.groups.$id.settings": typeof import("./app/routes/frontend/_frontend.groups.$id.settings.jsx");
-  "routes/frontend/_frontend.groups.$id.members": typeof import("./app/routes/frontend/_frontend.groups.$id.members.jsx");
+  "routes/frontend/_frontend.groups.$id.members": typeof import("./app/routes/frontend/_frontend.groups.$id.members/route.jsx");
   "routes/frontend/_frontend.groups.$id.members.$membershipId": typeof import("./app/routes/frontend/_frontend.groups.$id.members.$membershipId.jsx");
   "routes/frontend/_frontend.groups.$id.members.settings": typeof import("./app/routes/frontend/_frontend.groups.$id.members.settings.jsx");
   "routes/frontend/_frontend.groups.$id._index": typeof import("./app/routes/frontend/_frontend.groups.$id._index.jsx");
-  "routes/frontend/_frontend.groups.$id.edit": typeof import("./app/routes/frontend/_frontend.groups.$id.edit.jsx");
+  "routes/frontend/_frontend.groups.$id.edit": typeof import("./app/routes/frontend/_frontend.groups.$id.edit/route.jsx");
   "routes/frontend/_frontend.groups.$id.edit.settings": typeof import("./app/routes/frontend/_frontend.groups.$id.edit.settings.jsx");
   "routes/frontend/_frontend.groups.$id.home": typeof import("./app/routes/frontend/_frontend.groups.$id.home.jsx");
   "routes/frontend/_frontend.groups.$id.home.settings": typeof import("./app/routes/frontend/_frontend.groups.$id.home.settings.jsx");

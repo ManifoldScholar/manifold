@@ -7,7 +7,7 @@ import {
 import { routerContext } from "app/contexts";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
-import Content from "frontend/containers/Home/Content";
+import Content from "frontend/components/home/Content";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import HeadContent from "global/components/HeadContent";
 
