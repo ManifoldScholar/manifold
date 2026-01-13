@@ -34,27 +34,27 @@ api:
     host: princeton-manifold-friends-api-rails
     resources:
       limits:
-        memory: "4Gi"
+        memory: "2Gi"
         cpu: "1000m"
       requests:
-        memory: "2Gi"
-        cpu: "250m"
+        memory: "1Gi"
+        cpu: "100m"
   cable:
     host: princeton-manifold-friends-api-cable
     resources:
       limits:
-        memory: "4Gi"
+        memory: "2Gi"
         cpu: "1000m"
       requests:
-        memory: "2Gi"
-        cpu: "250m"
+        memory: "1Gi"
+        cpu: "100m"
   clockwork:
     resources:
       limits:
-        memory: "4Gi"
+        memory: "2Gi"
         cpu: "1000m"
       requests:
-        memory: "2Gi"
+        memory: "1Gi"
         cpu: "300m"
   sidekiq:
     resources:
@@ -62,17 +62,17 @@ api:
         memory: "6Gi"
         cpu: "1000m"
       requests:
-        memory: "5Gi"
+        memory: "2Gi"
         cpu: "400m"
 
 client:
   resources:
     limits:
-      memory: "4Gi"
-      cpu: "1000m"
+      memory: "256Mi"
+      cpu: "100m"
     requests:
-      memory: "2Gi"
-      cpu: "250m"
+      memory: "256Mi"
+      cpu: "20m"
   browserApiCableUrl: https://princeton-manifold-friends.notch8.cloud/cable
   browserApiUrl: https://princeton-manifold-friends.notch8.cloud
   serverApiUrl: http://princeton-manifold-friends-api-rails:3020
@@ -82,11 +82,11 @@ elasticsearch:
   master:
     resources:
       limits:
-        memory: "2Gi"
+        memory: "1.5Gi"
         cpu: "1000m"
       requests:
-        memory: "1Gi"
-        cpu: "500m"
+        memory: "640Mi"
+        cpu: "250m"
   image:
     repository: bitnamilegacy/elasticsearch
     tag: 8.12.2-debian-12-r0
@@ -97,11 +97,11 @@ redis:
   master:
     resources:
       limits:
-        memory: "512Mi"
-        cpu: "250m"
-      requests:
         memory: "256Mi"
-        cpu: "50m"
+        cpu: "100m"
+      requests:
+        memory: "128Mi"
+        cpu: "20m"
   image:
     repository: bitnamilegacy/redis
     tag: 7.2.0-debian-11-r3
@@ -135,8 +135,8 @@ postgresql:
         memory: "1Gi"
         cpu: "500m"
       requests:
-        memory: "512Mi"
-        cpu: "100m"
+        memory: "384Mi"
+        cpu: "50m"
     service:
       ports:
         postgresql: 5432
@@ -149,11 +149,11 @@ nginx:
   enabled: false
   resources:
     limits:
-      memory: "256Mi"
+      memory: "128Mi"
       cpu: "100m"
     requests:
-      memory: "128Mi"
-      cpu: "50m"
+      memory: "64Mi"
+      cpu: "20m"
   service:
     type: ClusterIP
   image:
