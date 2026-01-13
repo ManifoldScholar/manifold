@@ -80,13 +80,14 @@ client:
   serverHost: princeton-manifold-friends-client
 
 elasticsearch:
-  resources:
-    limits:
-      memory: "2Gi"
-      cpu: "1000m"
-    requests:
-      memory: "1Gi"
-      cpu: "500m"
+  master:
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "1000m"
+      requests:
+        memory: "1Gi"
+        cpu: "500m"
   image:
     repository: bitnamilegacy/elasticsearch
     tag: 8.12.2-debian-12-r0
