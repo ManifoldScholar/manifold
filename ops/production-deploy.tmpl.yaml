@@ -8,14 +8,6 @@ volumes:
     persistentVolumeClaim:
       claimName: princeton-manifold-production-shared-pvc
 
-resources:
-  limits:
-    memory: "4Gi"
-    cpu: "1000m"
-  requests:
-    memory: "3Gi"
-    cpu: "250m"
-
 livenessProbe:
   enabled: false
 readinessProbe:
@@ -41,6 +33,13 @@ api:
   rails:
     replicaCount: 2
     host: princeton-manifold-production-api-rails
+    resources:
+      limits:
+        memory: "4Gi"
+        cpu: "1000m"
+      requests:
+        memory: "3Gi"
+        cpu: "250m"
   cable:
     resources:
       limits:
@@ -52,12 +51,12 @@ api:
     host: princeton-manifold-production-api-cable
   clockwork:
     resources:
-    limits:
-      memory: "4Gi"
-      cpu: "1000m"
-    requests:
-      memory: "2Gi"
-      cpu: "300m"
+      limits:
+        memory: "4Gi"
+        cpu: "1000m"
+      requests:
+        memory: "2Gi"
+        cpu: "300m"
   sidekiq:
     resources:
       limits:
@@ -82,13 +81,14 @@ client:
   serverHost: princeton-manifold-production-client
 
 elasticsearch:
-  resources:
-    limits:
-      memory: "2Gi"
-      cpu: "1000m"
-    requests:
-      memory: "1Gi"
-      cpu: "500m"
+  master:
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "1000m"
+      requests:
+        memory: "1Gi"
+        cpu: "500m"
   image:
     repository: bitnamilegacy/elasticsearch
     tag: 8.12.2-debian-12-r0
