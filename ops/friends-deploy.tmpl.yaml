@@ -8,14 +8,6 @@ volumes:
     persistentVolumeClaim:
       claimName: princeton-manifold-friends-shared-pvc
 
-resources:
-  limits:
-    memory: "4Gi"
-    cpu: "1000m"
-  requests:
-    memory: "2Gi"
-    cpu: "250m"
-
 livenessProbe:
   enabled: false
 readinessProbe:
@@ -40,6 +32,13 @@ ingress:
 api:
   rails:
     host: princeton-manifold-friends-api-rails
+    resources:
+      limits:
+        memory: "4Gi"
+        cpu: "1000m"
+      requests:
+        memory: "2Gi"
+        cpu: "250m"
   cable:
     host: princeton-manifold-friends-api-cable
     resources:
