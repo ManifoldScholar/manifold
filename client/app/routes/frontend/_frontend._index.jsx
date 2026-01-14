@@ -63,8 +63,13 @@ export const loader = async ({ request, context }) => {
 };
 
 export default function HomePage() {
+  const home = undefined;
+  if (home) {
+    console.log("broken");
+  }
   return (
     <>
+      <div>this should work yes?</div>
       <HeadContent />
       <EventTracker event={EVENTS.VIEW_LIBRARY} />
       <Content />

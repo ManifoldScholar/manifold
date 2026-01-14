@@ -27,6 +27,8 @@ export default function handleLoaderError(error, options = {}) {
     }
   }
 
+  if (error.status) throw error;
+
   // Convert all non-Response errors to not found
   throw data(null, { status: notFoundStatus });
 }

@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import {
   useRouteError,
   isRouteErrorResponse,
-  useLoaderData
+  useLoaderData,
+  useLocation
 } from "react-router";
 import classNames from "classnames";
 import { FrontendContext } from "app/contexts";
@@ -13,15 +14,22 @@ import Layout from "frontend/components/layout";
 import { useFromStore } from "hooks";
 import { SearchProvider } from "hooks/useSearch/context";
 import FatalError from "global/components/FatalError";
+import formatRouteError from "app/routes/utility/helpers/formatRouteError";
 
-// Handles 404 errors for frontend routes
+// Handles 404, 401, and 403 errors for frontend routes
 export function ErrorBoundary() {
   const error = useRouteError();
   const loaderData = useLoaderData();
+  const location = useLocation();
   const frontendMode = useFromStore({ path: "ui.transitory.frontendMode" });
 
-  // Only handle 404 errors here, re-throw others to root ErrorBoundary
-  if (isRouteErrorResponse(error) && error.status === 404) {
+  console.log("error boundary");
+  console.log({ error });
+  console.log(isRouteErrorResponse(error));
+
+  // Handle route error responses (404, 401, 403)
+  if (!!error.status && error.status === 500) {
+    console.log("making it here");
     const frontendContextValue = useMemo(
       () => ({
         subjects: loaderData?.subjects ?? [],
@@ -31,14 +39,14 @@ export function ErrorBoundary() {
       [loaderData?.subjects, loaderData?.journalSubjects, frontendMode]
     );
 
-    const formattedError = {
-      type: "HTTP_RESPONSE",
-      error: {
-        status: 404,
-        heading: "Page not found",
-        body: null
-      }
-    };
+    const {
+      fatalError,
+      contained,
+      hideStatus,
+      userMessage,
+      headerLineOne,
+      headerLineTwo
+    } = formatRouteError(error, location.pathname);
 
     return (
       <FrontendContext.Provider value={frontendContextValue}>
@@ -54,7 +62,14 @@ export function ErrorBoundary() {
                 "flex-viewport": true
               })}
             >
-              <FatalError fatalError={formattedError} contained />
+              <FatalError
+                fatalError={fatalError}
+                contained={contained}
+                hideStatus={hideStatus}
+                userMessage={userMessage}
+                headerLineOne={headerLineOne}
+                headerLineTwo={headerLineTwo}
+              />
             </main>
             <Footers.FrontendFooter />
           </SearchProvider>
@@ -63,6 +78,6 @@ export function ErrorBoundary() {
     );
   }
 
-  // Re-throw non-404 errors to root ErrorBoundary
+  // Re-throw non-route errors to root ErrorBoundary
   throw error;
 }

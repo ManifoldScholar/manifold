@@ -55,7 +55,11 @@ export default function FatalError(props) {
                   </Styled.ErrorTitle>
                 ) : null}
                 {userMessage ? (
-                  <Styled.ErrorBody>{t(userMessage)}</Styled.ErrorBody>
+                  <Styled.ErrorBody>
+                    {Array.isArray(userMessage)
+                      ? t(userMessage[0], userMessage[1])
+                      : t(userMessage)}
+                  </Styled.ErrorBody>
                 ) : null}
                 {config.environment.isDevelopment && (dismiss || error.body) ? (
                   <Styled.ErrorBody>
@@ -104,5 +108,8 @@ FatalError.propTypes = {
   dismiss: PropTypes.func,
   hideStatus: PropTypes.bool,
   contained: PropTypes.bool,
-  userMessage: PropTypes.string
+  userMessage: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ])
 };
