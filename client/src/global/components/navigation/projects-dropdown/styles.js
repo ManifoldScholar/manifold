@@ -23,8 +23,8 @@ export const Wrapper = styled.div`
   border: 1px solid var(--_Wrapper-border-color);
   box-shadow: 0px 12px 32px 3px rgba(0, 0, 0, 0.3);
   position: absolute;
-  top: 60px;
-  left: 150px;
+  top: calc(100% + 16px);
+  left: 0;
   z-index: 1;
 
   ${({ $visible }) =>
@@ -50,7 +50,7 @@ export const Wrapper = styled.div`
 
 export const List = styled.ul`
   ${listUnstyled}
-  whitespace: nowrap;
+  white-space: nowrap;
   display: flex;
   flex-direction: column;
 
