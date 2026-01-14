@@ -41,21 +41,21 @@ export default function LibraryHeader() {
   const links = () => {
     const routes = navigation.frontend(authentication, settings);
 
-    let routesWithDropdown;
+    const projectsLink = routes.find(l => l.route === "frontendProjects");
 
     if (settings.attributes.calculated?.hasProjectCollections) {
-      const projectsLink = routes.find(l => l.route === "frontendProjects");
       projectsLink.dropdownContent = (
         <ProjectsDropdown links={projectsLink.children} />
       );
       projectsLink.toggle = ProjectsToggle;
-      routesWithDropdown = routes.filter(
-        l => l.route !== "frontendProjects" && l.route !== "frontendProjectsAll"
-      );
-      routesWithDropdown.splice(1, 0, projectsLink);
     } else {
-      routesWithDropdown = routes.filter(l => l.route !== "frontendProjects");
+      projectsLink.dropdown = false;
     }
+
+    const routesWithDropdown = routes.filter(
+      l => l.route !== "frontendProjects" && l.route !== "frontendProjectsAll"
+    );
+    routesWithDropdown.splice(1, 0, projectsLink);
 
     if (!pages) {
       return routesWithDropdown;
