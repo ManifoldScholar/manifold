@@ -37,6 +37,7 @@ export default function useFetchHomepageContent(fetchProjects) {
 
   const { data: projectsData, loaded: projectsLoaded } = useFetch({
     request: [projectsAPI.index, projectFilters, projectPagination],
+    withAuthDependency: true,
     condition: fetchProjects
   });
 

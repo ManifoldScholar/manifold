@@ -106,7 +106,7 @@ class FatalError extends PureComponent {
         <Helmet title={`${error.status} Error: ${error.heading}`} />
         <GlobalStyles styles={styles} />
         <Styled.Body className="browse">
-          <Styled.Wrapper>
+          <Styled.Wrapper $minHeight={this.props.minHeight}>
             <Styled.Inner>
               <Styled.Container>
                 <header>

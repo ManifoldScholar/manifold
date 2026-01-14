@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class Identity < ApplicationRecord
+  include ProvidesEntitlements
+
   attribute :provider, Inquiry.new
 
   belongs_to :user, optional: false, inverse_of: :identities
 
-  validates :provider, inclusion: { in: ManifoldEnv.oauth.known_strategies }
+  has_many :user_group_memberships, as: :source, dependent: :destroy
+
+  validates :provider, inclusion: { in: ->(_) { (ManifoldEnv.oauth.known_strategies + SamlConfig.provider_names) } }
   validates :uid, :provider, presence: true
   validates :uid, uniqueness: { scope: %i(provider) }
 
@@ -24,5 +28,9 @@ class Identity < ApplicationRecord
     def from_omniauth(auth_env)
       provider(auth_env["provider"]).uid(auth_env["uid"]).first_or_initialize
     end
+  end
+
+  def name
+    "#{provider} identity for #{user.name}"
   end
 end

@@ -43,7 +43,7 @@ export default function NewUserWrapper() {
               }
             ]}
             panel
-            ariaLabel={t("users.settings")}
+            ariaLabel={t("records.users.settings")}
           />
         }
       >

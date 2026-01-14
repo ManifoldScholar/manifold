@@ -49,6 +49,9 @@ module V1
       typed_attribute :image_credits, Types::String.optional
       typed_attribute :image_credits_formatted, Types::String.meta(read_only: true)
       typed_attribute :pending_slug, Types::String
+      typed_attribute :external_identifier, Types::String do |object, params|
+        object.external_identifier&.identifier
+      end
 
       typed_has_many :collaborators,
                      serializer: FlattenedCollaboratorSerializer,

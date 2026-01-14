@@ -122,8 +122,8 @@ Rails.application.eager_load!
 # Ensure imagemagick is loaded and accessible. If it's not, there is no sense
 # in running the test suite because dozens of tests are gonna fail.
 begin
-  MiniMagick.cli
-rescue MiniMagick::Error => e
+  ImageProcessing::MiniMagick.source('data/assets/images/1x1.png')
+rescue StandardError => e
   # :nocov:
   raise "Failed to load MiniMagick CLI, aborting tests: #{e.message}"
   # :nocov:

@@ -58,7 +58,33 @@
       "email_not_verified": "Email not confirmed",
       "trusted": "Trusted account",
       "no_public_engagement": "Public engagement disabled",
-      "admin_verified": "Admin verified"
+      "admin_verified": "Admin verified",
+      "settings": "User settings"
+    },
+    "user_groups": {
+      "header": "Manage User Groups",
+      "button_label": "Add New User Group",
+      "settings": "User Group settings",
+      "properties": {
+        "header": "Properties",
+        "name_label": "Name",
+        "name_placeholder": "Enter Group Name",
+        "name_instructions": "For display in admin. This name is not shown to end users.",
+        "external_id_label": "External Identifier",
+        "external_id_placeholder": "Enter External ID",
+        "external_id_instructions": "Used by external identity providers when creating entitlements",
+        "submit_label": "Save User Group",
+        "new_header": "New User Group"
+      },
+      "users": {
+        "header": "Manage Users"
+      },
+      "entitlements": {
+        "header": "Manage Entitlements",
+        "add_button_label": "Add Entitlement",
+        "add_header": "Add Entitlement",
+        "add_instructions": "Grant an entitlement to a user for this user group."
+      }
     },
     "pages": {
       "header": "Manage Pages",

@@ -50,7 +50,10 @@
         "disable_public_label": "Disable Public Annotations and Comments",
         "disable_public_instructions": "When on, this setting will prevent users from commenting or annotating publicly on this project. Reading group annotations will only appear for group members.",
         "save": "Save Project",
-        "social_image_instructions": "If blank, Cover then Thumbnail field will be used as fallbacks for og:image meta tags."
+        "social_image_instructions": "If blank, Cover then Thumbnail field will be used as fallbacks for og:image meta tags.",
+        "external_id_label": "External Identifier",
+        "external_id_placeholder": "Enter External ID",
+        "external_id_instructions": "Used by external identity providers to create entitlements to this project for user groups"
       },
       "access": {
         "title": "Configure Access Restrictions",

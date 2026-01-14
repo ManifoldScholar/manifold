@@ -46,7 +46,10 @@
         "subjects_placeholder": "Select a Subject",
         "tags_label": "Tags",
         "tags_placeholder": "Enter Tags",
-        "save": "Save Journal"
+        "save": "Save Journal",
+        "external_id_label": "External Identifier",
+        "external_id_placeholder": "Enter External ID",
+        "external_id_instructions": "Used by external identity providers to create entitlements to this journal for user groups"
       }
     },
     "permissions": {
