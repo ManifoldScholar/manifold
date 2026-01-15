@@ -34,36 +34,36 @@ api:
     host: princeton-manifold-friends-api-rails
     resources:
       limits:
-        memory: "2Gi"
+        memory: "4Gi"
         cpu: "1000m"
       requests:
-        memory: "1Gi"
+        memory: "2Gi"
         cpu: "100m"
   cable:
     host: princeton-manifold-friends-api-cable
     resources:
       limits:
-        memory: "2Gi"
+        memory: "4Gi"
         cpu: "1000m"
       requests:
-        memory: "1Gi"
+        memory: "2Gi"
         cpu: "100m"
   clockwork:
     resources:
       limits:
-        memory: "2Gi"
+        memory: "4Gi"
         cpu: "1000m"
       requests:
-        memory: "1Gi"
+        memory: "2Gi"
         cpu: "300m"
   sidekiq:
     resources:
       limits:
-        memory: "6Gi"
+        memory: "10Gi"
         cpu: "1000m"
       requests:
-        memory: "2Gi"
-        cpu: "400m"
+        memory: "7Gi"
+        cpu: "800m"
 
 client:
   resources:
@@ -82,10 +82,10 @@ elasticsearch:
   master:
     resources:
       limits:
-        memory: "1.5Gi"
+        memory: "2Gi"
         cpu: "1000m"
       requests:
-        memory: "640Mi"
+        memory: "1Gi"
         cpu: "250m"
   image:
     repository: bitnamilegacy/elasticsearch
@@ -97,10 +97,10 @@ redis:
   master:
     resources:
       limits:
-        memory: "256Mi"
+        memory: "512Mi"
         cpu: "100m"
       requests:
-        memory: "128Mi"
+        memory: "256Mi"
         cpu: "20m"
   image:
     repository: bitnamilegacy/redis
@@ -135,7 +135,7 @@ postgresql:
         memory: "1Gi"
         cpu: "500m"
       requests:
-        memory: "384Mi"
+        memory: "512Mi"
         cpu: "50m"
     service:
       ports:
@@ -149,10 +149,10 @@ nginx:
   enabled: false
   resources:
     limits:
-      memory: "128Mi"
+      memory: "256Mi"
       cpu: "100m"
     requests:
-      memory: "64Mi"
+      memory: "128Mi"
       cpu: "20m"
   service:
     type: ClusterIP
