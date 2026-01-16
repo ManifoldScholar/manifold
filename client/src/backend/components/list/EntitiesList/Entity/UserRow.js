@@ -27,7 +27,7 @@ function UserRow({
   const isSelected =
     !!bulkSelection?.filters || bulkSelection?.ids?.includes(id);
 
-  const isMember = memberIds.includes(id);
+  const isMember = memberIds?.includes(id);
   const actionId = isMember ? entity.membershipId : id;
 
   const utility = (
