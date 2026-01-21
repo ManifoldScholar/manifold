@@ -8,14 +8,6 @@ volumes:
     persistentVolumeClaim:
       claimName: princeton-manifold-friends-shared-pvc
 
-resources:
-  limits:
-    memory: "4Gi"
-    cpu: "600m"
-  requests:
-    memory: "2Gi"
-    cpu: "300m"
-
 livenessProbe:
   enabled: false
 readinessProbe:
@@ -40,24 +32,61 @@ ingress:
 api:
   rails:
     host: princeton-manifold-friends-api-rails
-  cable:
-    host: princeton-manifold-friends-api-cable
-  sidekiq:
     resources:
       limits:
         memory: "4Gi"
-        cpu: "300m"
+        cpu: "1000m"
       requests:
         memory: "2Gi"
-        cpu: "150m"
+        cpu: "100m"
+  cable:
+    host: princeton-manifold-friends-api-cable
+    resources:
+      limits:
+        memory: "4Gi"
+        cpu: "1000m"
+      requests:
+        memory: "2Gi"
+        cpu: "100m"
+  clockwork:
+    resources:
+      limits:
+        memory: "4Gi"
+        cpu: "1000m"
+      requests:
+        memory: "2Gi"
+        cpu: "300m"
+  sidekiq:
+    resources:
+      limits:
+        memory: "10Gi"
+        cpu: "1000m"
+      requests:
+        memory: "7Gi"
+        cpu: "800m"
 
 client:
+  resources:
+    limits:
+      memory: "256Mi"
+      cpu: "100m"
+    requests:
+      memory: "256Mi"
+      cpu: "20m"
   browserApiCableUrl: https://princeton-manifold-friends.notch8.cloud/cable
   browserApiUrl: https://princeton-manifold-friends.notch8.cloud
   serverApiUrl: http://princeton-manifold-friends-api-rails:3020
   serverHost: princeton-manifold-friends-client
 
 elasticsearch:
+  master:
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "1000m"
+      requests:
+        memory: "1Gi"
+        cpu: "250m"
   image:
     repository: bitnamilegacy/elasticsearch
     tag: 8.12.2-debian-12-r0
@@ -65,6 +94,14 @@ elasticsearch:
     repository: bitnamilegacy/os-shell
 
 redis:
+  master:
+    resources:
+      limits:
+        memory: "512Mi"
+        cpu: "100m"
+      requests:
+        memory: "256Mi"
+        cpu: "20m"
   image:
     repository: bitnamilegacy/redis
     tag: 7.2.0-debian-11-r3
@@ -93,6 +130,13 @@ postgresql:
   containerPorts:
     postgresql: 5432
   primary:
+    resources:
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+      requests:
+        memory: "512Mi"
+        cpu: "50m"
     service:
       ports:
         postgresql: 5432
@@ -103,6 +147,13 @@ postgresql:
 
 nginx:
   enabled: false
+  resources:
+    limits:
+      memory: "256Mi"
+      cpu: "100m"
+    requests:
+      memory: "128Mi"
+      cpu: "20m"
   service:
     type: ClusterIP
   image:
