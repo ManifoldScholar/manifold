@@ -51,8 +51,6 @@ module JSONAPI
   def serializable_errors(to_serialize)
     raise_not_errors unless to_serialize.respond_to?(:errors)
     V1::Helpers::Errors.new(to_serialize.errors).for_serialization
-
-    # errors.map { |attribute, message| ::V1::Helpers::Error.new(attribute, message) }
   end
 
   def set_content_type
