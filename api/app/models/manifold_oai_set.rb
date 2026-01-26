@@ -33,10 +33,27 @@ class ManifoldOAISet < ApplicationRecord
     return self
   end
 
+  # @api private
+  # @return [ManifoldOAISet]
+  def normalize_journals_set!
+    self.source = nil
+    self.name = "Journals"
+    self.description = "A list of all journals in this Manifold installation."
+
+    save!
+
+    return self
+  end
+
   class << self
     # @return [ManifoldOAISet]
     def fetch_projects!
       where(spec: "projects").first_or_initialize.tap(&:normalize_projects_set!)
+    end
+
+    # @return [ManifoldOAISet]
+    def fetch_journals!
+      where(spec: "journals").first_or_initialize.tap(&:normalize_journals_set!)
     end
   end
 end

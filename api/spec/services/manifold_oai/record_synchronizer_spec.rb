@@ -27,4 +27,22 @@ RSpec.describe ManifoldOAI::RecordSynchronizer do
       expect(result.success.oai_dc_content).to have_xml('//oai_dc:rightsHolder', project.metadata[:rights_holder])
     end
   end
+
+  describe "linking projects to sets" do
+    let(:project) { FactoryBot.create(:project) }
+    subject(:result) { described_class.new(project).call }
+
+    it "links the project to the projects set" do
+      expect { result }.to change { ManifoldOAISet.find_by(spec: "projects")&.records&.count || 0 }.by(1)
+    end
+  end
+
+  describe "linking journals to sets" do
+    let(:journal) { FactoryBot.create(:journal) }
+    subject(:result) { described_class.new(journal).call }
+
+    it "links the journal to the journals set" do
+      expect { result }.to change { ManifoldOAISet.find_by(spec: "journals")&.records&.count || 0 }.by(1)
+    end
+  end
 end

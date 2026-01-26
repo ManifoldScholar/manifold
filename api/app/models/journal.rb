@@ -25,6 +25,7 @@ class Journal < ApplicationRecord
   include WithProjectCollectionLayout
   include WithConfigurableAvatar
   include HasKeywordSearch
+  include ManifoldOAIRecordSource
 
   multisearch_draftable true
 
@@ -131,6 +132,12 @@ class Journal < ApplicationRecord
 
   def journal_issues_without_volume_count
     journal_issues.where(journal_volume: nil).count
+  end
+
+  def should_have_oai_record?
+    return false if draft?
+
+    super
   end
 
   # This method is named a little oddly, as it actually returns references to projects.

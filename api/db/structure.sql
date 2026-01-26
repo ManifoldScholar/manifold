@@ -863,9 +863,9 @@ CREATE TABLE public.projects (
     social_image_data jsonb,
     social_description text,
     social_title text,
+    exclude_from_oai boolean DEFAULT false,
     orphaned_journal_issue_id uuid,
-    orphaned_journal_issue boolean DEFAULT false NOT NULL,
-    exclude_from_oai boolean DEFAULT false
+    orphaned_journal_issue boolean DEFAULT false NOT NULL
 );
 
 
@@ -1865,7 +1865,8 @@ CREATE TABLE public.journals (
     logo_data jsonb,
     hero_background_color character varying,
     show_on_homepage boolean DEFAULT false NOT NULL,
-    home_page_priority integer DEFAULT 0 NOT NULL
+    home_page_priority integer DEFAULT 0 NOT NULL,
+    exclude_from_oai boolean DEFAULT false
 );
 
 
@@ -8026,4 +8027,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20251105165521'),
 ('20251121202033'),
 ('20251203230443'),
-('20251203231940');
+('20251203231940'),
+('20260126221732');
+
+
