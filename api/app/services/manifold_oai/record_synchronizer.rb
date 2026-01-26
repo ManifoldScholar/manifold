@@ -20,6 +20,8 @@ module ManifoldOAI
 
       maybe_link_project!
 
+      maybe_link_journal!
+
       Success(record)
     end
 
@@ -65,6 +67,7 @@ module ManifoldOAI
     def prepare!
       @record = ManifoldOAIRecord.where(source:).first_or_initialize
       @projects_set = ManifoldOAISet.fetch_projects!
+      @journals_set = ManifoldOAISet.fetch_journals!
     end
 
     # @return [void]
@@ -74,6 +77,15 @@ module ManifoldOAI
       # :nocov:
 
       @projects_set.link! record
+    end
+
+    # @return [void]
+    def maybe_link_journal!
+      # :nocov:
+      return unless source.kind_of?(Journal)
+      # :nocov:
+
+      @journals_set.link! record
     end
   end
 end
