@@ -1,14 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import EntitiesList, { LogRow } from "backend/components/list/EntitiesList";
 import { useListQueryParams, useFetch } from "hooks";
-
 import Authorize from "hoc/Authorize";
 
-export default function LogContainer({ project }) {
+export default function LogContainer() {
+  const outletContext = useOutletContext() || {};
+  const { project } = outletContext;
   const { t } = useTranslation();
 
   const { pagination, filters } = useListQueryParams({ initSize: 10 });
@@ -18,14 +18,14 @@ export default function LogContainer({ project }) {
     options: { requestKey: requests.beVersions }
   });
 
-  if (!versions || !versionsMeta) return null;
+  if (!project || !versions || !versionsMeta) return null;
 
   return (
     <Authorize
       entity={project}
       ability="readLog"
       failureNotification
-      failureRedirect={lh.link("backendProject", project.id)}
+      failureRedirect={lh.link("backendProjects")}
     >
       <EntitiesList
         title={t("projects.changes")}
@@ -45,7 +45,3 @@ export default function LogContainer({ project }) {
 }
 
 LogContainer.displayName = "Project.Log";
-
-LogContainer.propTypes = {
-  project: PropTypes.object.isRequired
-};

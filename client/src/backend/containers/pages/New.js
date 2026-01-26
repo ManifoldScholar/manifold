@@ -1,99 +1,94 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { pagesAPI } from "api";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import connectAndFetch from "utils/connectAndFetch";
+import PageHeader from "backend/components/layout/PageHeader";
+import Layout from "backend/components/layout";
 import lh from "helpers/linkHandler";
+import Authorize from "hoc/Authorize";
 
-import withFormSession from "hoc/withFormSession";
+const DEFAULT_PAGE = {
+  attributes: { isExternalLink: false, kind: "default" }
+};
 
-class PagesNewContainer extends PureComponent {
-  static displayName = "Pages.New";
+export default function PagesNew() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
-    form: PropTypes.object,
-    t: PropTypes.func
-  };
-
-  constructor() {
-    super();
-    this.defaultPage = {
-      attributes: { isExternalLink: false, kind: "default" }
-    };
-  }
-
-  redirectToPage(page) {
+  const handleSuccess = page => {
     const path = lh.link("backendRecordsPage", page.id);
-    this.props.history.push(path);
-  }
-
-  handleSuccess = page => {
-    this.redirectToPage(page);
+    navigate(path);
   };
 
-  renderPath() {
-    const t = this.props.t;
-    const isExternal = this.props.form.getModelValue(
-      "attributes[isExternalLink]"
-    );
-    if (isExternal)
-      return (
-        <Form.TextInput
-          validation={["required"]}
-          label={t("records.pages.external_label")}
-          name="attributes[externalLink]"
-          placeholder={t("records.pages.external_placeholder")}
-          instructions={t("records.pages.external_instructions")}
-        />
-      );
-    return (
-      <Form.TextInput
-        validation={["required"]}
-        label={t("records.pages.slug_label")}
-        name="attributes[slug]"
-        placeholder={t("records.pages.slug_placeholder")}
-        instructions={t("records.pages.slug_instructions")}
+  return (
+    <Authorize
+      failureNotification={{
+        body: t("records.pages.unauthorized_create")
+      }}
+      failureRedirect
+      entity="page"
+      ability="create"
+    >
+      <PageHeader
+        type="page"
+        backUrl={lh.link("backendRecordsPages")}
+        backLabel={t("records.pages.back_label")}
+        title={t("records.pages.new_header")}
+        note={t("records.pages.new_instructions")}
+        icon="ResourceDocument64"
       />
-    );
-  }
-
-  render() {
-    const t = this.props.t;
-    return (
-      <section>
+      <Layout.BackendPanel>
         <section>
           <FormContainer.Form
-            onSuccess={this.handleSuccess}
-            model={this.defaultPage}
+            onSuccess={handleSuccess}
+            model={DEFAULT_PAGE}
             name="backend-page-create"
             update={pagesAPI.update}
             create={pagesAPI.create}
             className="form-secondary"
           >
-            <Form.TextInput
-              focusOnMount
-              label={t("records.pages.title_label")}
-              name="attributes[title]"
-              placeholder={t("records.pages.title_placeholder")}
-            />
-            <Form.Switch
-              label={t("records.pages.switch_label")}
-              name="attributes[isExternalLink]"
-            />
-            {this.renderPath()}
-            <Form.Save text={t("records.pages.submit_label")} />
+            {getModelValue => {
+              const isExternal = getModelValue("attributes[isExternalLink]");
+
+              return (
+                <>
+                  <Form.TextInput
+                    focusOnMount
+                    label={t("records.pages.title_label")}
+                    name="attributes[title]"
+                    placeholder={t("records.pages.title_placeholder")}
+                  />
+                  <Form.Switch
+                    label={t("records.pages.switch_label")}
+                    name="attributes[isExternalLink]"
+                  />
+                  {isExternal ? (
+                    <Form.TextInput
+                      validation={["required"]}
+                      label={t("records.pages.external_label")}
+                      name="attributes[externalLink]"
+                      placeholder={t("records.pages.external_placeholder")}
+                      instructions={t("records.pages.external_instructions")}
+                    />
+                  ) : (
+                    <Form.TextInput
+                      validation={["required"]}
+                      label={t("records.pages.slug_label")}
+                      name="attributes[slug]"
+                      placeholder={t("records.pages.slug_placeholder")}
+                      instructions={t("records.pages.slug_instructions")}
+                    />
+                  )}
+                  <Form.Save text={t("records.pages.submit_label")} />
+                </>
+              );
+            }}
           </FormContainer.Form>
         </section>
-      </section>
-    );
-  }
+      </Layout.BackendPanel>
+    </Authorize>
+  );
 }
 
-export default withFormSession(
-  withTranslation()(connectAndFetch(PagesNewContainer)),
-  "backend-page-create"
-);
+PagesNew.displayName = "Pages.New";

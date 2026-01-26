@@ -20,7 +20,7 @@ function ProjectsEntityCollection({
   const showFilters = !isEmpty(meta) && !isEmpty(filterProps);
   return (
     <EntityCollection
-      title={t("pages.projects_all")}
+      title={t("titles.projects")}
       icon="projects64"
       filterProps={showFilters ? filterProps : null}
       BodyComponent={props => (

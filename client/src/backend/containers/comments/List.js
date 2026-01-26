@@ -16,16 +16,16 @@ import withFilteredLists, { commentFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
   SelectAll,
   BulkActionButtons
 } from "backend/components/list/EntitiesList/List/bulkActions";
+import Authorize from "hoc/Authorize";
 
 function CommentsList({
-  route,
   confirm,
   entitiesListSearchProps,
   entitiesListSearchParams
@@ -111,24 +111,26 @@ function CommentsList({
       });
   };
 
-  const renderChildRoutes = () => {
-    const closeUrl = lh.link("backendRecordsComments");
-
-    return childRoutes(route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        closeUrl
-      },
-      childProps: { refresh }
-    });
-  };
-
   const currentPageIds = comments?.map(a => a.id);
+  const closeUrl = lh.link("backendRecordsComments");
 
   return (
-    <>
-      {renderChildRoutes()}
+    <Authorize
+      kind="admin"
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "comments"
+        })
+      }}
+      failureRedirect
+    >
+      <OutletWithDrawer
+        drawerProps={{
+          lockScroll: "always",
+          closeUrl
+        }}
+        context={{ refresh }}
+      />
       <PageHeader type="list" title={t("titles.comments")} />
       {!!comments && (
         <EntitiesList
@@ -171,7 +173,7 @@ function CommentsList({
           ]}
         />
       )}
-    </>
+    </Authorize>
   );
 }
 
@@ -182,7 +184,6 @@ export default withFilteredLists(withConfirmation(CommentsList), {
 CommentsList.displayName = "Comments.List";
 
 CommentsList.propTypes = {
-  route: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
   entitiesListSearchProps: PropTypes.func,
   entitiesListSearchParams: PropTypes.object

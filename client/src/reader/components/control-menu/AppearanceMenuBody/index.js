@@ -1,27 +1,29 @@
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import { useTranslation } from "react-i18next";
+import { doViewTransition } from "utils/domUtils";
+import { uiColorActions, uiTypographyActions } from "actions";
 import FontControls from "./FontControls";
 import ColorSchemeControls from "./ColorSchemeControls";
 import HighContrastControls from "./HighContrastControls";
 import MarginControls from "./MarginControls";
 
-function AppearanceMenuBody({
-  appearance,
+const {
   selectFont,
-  setColorScheme,
-  setHighContrast,
   incrementFontSize,
   decrementFontSize,
   incrementMargins,
   decrementMargins,
-  resetTypography,
-  className,
-  setScreenReaderStatus
-}) {
+  resetTypography
+} = uiTypographyActions;
+const { setColorScheme, setHighContrast } = uiColorActions;
+
+function AppearanceMenuBody({ appearance, className, setScreenReaderStatus }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const resetMessage = t("reader.menus.appearance.appearance_reset");
 
@@ -65,7 +67,7 @@ function AppearanceMenuBody({
   }
 
   const handleFontStyleControl = event => {
-    selectFont(event.target.value);
+    doViewTransition(() => dispatch(selectFont(event.target.value)));
     setScreenReaderStatus(
       resetOptionMessage(t("reader.menus.appearance.font"), event.target.value)
     );
@@ -74,7 +76,7 @@ function AppearanceMenuBody({
   const handleColorSchemeControl = event => {
     const buttonEl = event.currentTarget;
     const value = buttonEl.dataset.value;
-    setColorScheme(value);
+    doViewTransition(() => dispatch(setColorScheme(value)));
     setScreenReaderStatus(
       resetOptionMessage(t("reader.menus.appearance.color_scheme"), value)
     );
@@ -82,7 +84,7 @@ function AppearanceMenuBody({
 
   const handleHighContrastControl = () => {
     const value = !highContrast;
-    setHighContrast(value);
+    doViewTransition(() => dispatch(setHighContrast(value)));
     setScreenReaderStatus(
       resetOptionMessage(
         t("reader.menus.appearance.high_contrast"),
@@ -93,39 +95,37 @@ function AppearanceMenuBody({
     );
   };
 
-  const incrementSizeHandler = (event, enabled) => {
+  const incrementSizeHandler = event => {
     event.stopPropagation();
-    if (enabled) {
-      incrementFontSize();
-      setScreenReaderStatus(incrementFontMessage);
-    }
+    doViewTransition(() => dispatch(incrementFontSize()));
+    setScreenReaderStatus(incrementFontMessage);
   };
 
-  const decrementSizeHandler = (event, enabled) => {
+  const decrementSizeHandler = event => {
     event.stopPropagation();
-    if (enabled) {
-      decrementFontSize();
-      setScreenReaderStatus(decrementFontMessage);
-    }
+    doViewTransition(() => dispatch(decrementFontSize()));
+    setScreenReaderStatus(decrementFontMessage);
   };
 
   const resetHandler = event => {
     event.stopPropagation();
-    setColorScheme("light");
-    setHighContrast(false);
-    resetTypography();
+    doViewTransition(() => {
+      dispatch(setColorScheme("light"));
+      dispatch(setHighContrast(false));
+      dispatch(resetTypography());
+    });
     setScreenReaderStatus(resetMessage);
   };
 
   const incrementMarginsHandler = event => {
     event.stopPropagation();
-    incrementMargins();
+    doViewTransition(() => dispatch(incrementMargins()));
     setScreenReaderStatus(incrementMarginsMessage);
   };
 
   const decrementMarginsHandler = event => {
     event.stopPropagation();
-    decrementMargins();
+    doViewTransition(() => dispatch(decrementMargins()));
     setScreenReaderStatus(decrementMarginsMessage);
   };
 
@@ -185,15 +185,6 @@ AppearanceMenuBody.displayName = "ControlMenu.AppearanceMenuBody";
 
 AppearanceMenuBody.propTypes = {
   appearance: PropTypes.object,
-  selectFont: PropTypes.func,
-  setColorScheme: PropTypes.func,
-  setHighContrast: PropTypes.func,
-  incrementFontSize: PropTypes.func,
-  decrementFontSize: PropTypes.func,
-  incrementMargins: PropTypes.func,
-  decrementMargins: PropTypes.func,
-  resetTypography: PropTypes.func,
-  t: PropTypes.func,
   className: PropTypes.string
 };
 

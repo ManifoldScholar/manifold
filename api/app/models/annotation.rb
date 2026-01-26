@@ -55,6 +55,8 @@ class Annotation < ApplicationRecord
   has_many_readonly :annotation_membership_comments
   has_many :membership_comments, through: :annotation_membership_comments, source: :comment
 
+  classy_enum_attr :reader_display_format, enum: "AnnotationReaderDisplayFormat", allow_nil: true
+
   # Validations
   validates :text_section, presence: true
   validates :resource, presence: true, if: :resource?
@@ -69,6 +71,7 @@ class Annotation < ApplicationRecord
             inclusion: { in: ANNOTATION_FORMATS }
   validate :valid_subject?
   validates :body, presence: true, spam: { type: "annotation", if: :public? }, if: :annotation?
+  validates_associated :reader_display_format
 
   # Delegations
   delegate :id, to: :project, allow_nil: true, prefix: true

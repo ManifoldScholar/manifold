@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import * as Styled from "./styles";
 
 export default function Splash(props) {
-  const { preview, feature, authenticated } = props;
+  const { preview, feature, authenticated, previewAttrs } = props;
   const {
     style: mode,
     backgroundColor,
@@ -28,46 +28,88 @@ export default function Splash(props) {
     includeSignUp
   } = feature.attributes;
 
+  const renderedHeader = () => {
+    if (preview && previewAttrs?.header) return previewAttrs.header;
+    return headerFormatted || header;
+  };
+
+  const renderedSubheader = () => {
+    if (preview && previewAttrs?.subheader) return previewAttrs.subheader;
+    return subheaderFormatted || subheader;
+  };
+
+  const renderedBody = () => {
+    if (preview && previewAttrs?.body) return previewAttrs.body;
+    return bodyFormatted || body;
+  };
+
+  const showSignUp = () => {
+    if (preview) return previewAttrs?.includeSignUp;
+    return !!includeSignUp && !authenticated;
+  };
+
+  const getLinkAttrs = () => {
+    if (preview) {
+      const text = previewAttrs?.linkText ?? linkText;
+      const url = previewAttrs?.linkUrl ?? linkUrl;
+      return {
+        linkText: text,
+        linkUrl: url,
+        visible: !!text && !!url
+      };
+    }
+
+    return {
+      linkText,
+      linkUrl,
+      visible: !!linkText && !!linkUrl
+    };
+  };
+
   return (
     <Styled.Wrapper
       $preview={preview}
       $lightMode={mode === "light"}
-      $bgColor={backgroundColor}
+      $bgColor={previewAttrs?.backgroundColor ?? backgroundColor}
       $bgImage={backgroundStyles?.original}
     >
       <Styled.Container>
         <Styled.Left>
           <Styled.Heading
-            $color={headerColor}
+            $color={previewAttrs?.headerColor ?? headerColor}
             dangerouslySetInnerHTML={{
-              __html: headerFormatted || header
+              __html: renderedHeader()
             }}
           />
-          {(subheaderFormatted || subheader) && (
+          {renderedSubheader() && (
             <Styled.Subheading
               $color={headerColor}
               dangerouslySetInnerHTML={{
-                __html: subheaderFormatted || subheader
+                __html: renderedSubheader()
               }}
             />
           )}
           <Styled.Body
-            $color={foregroundColor}
-            dangerouslySetInnerHTML={{ __html: bodyFormatted || body }}
+            $color={previewAttrs?.foregroundColor ?? foregroundColor}
+            dangerouslySetInnerHTML={{ __html: renderedBody() }}
           />
           <Styled.Buttons>
-            {linkText && linkUrl ? (
-              <a href={linkUrl} target="blank" className="utility-button">
+            {getLinkAttrs().visible ? (
+              <a
+                href={getLinkAttrs().linkUrl}
+                target="blank"
+                className="utility-button"
+              >
                 <Styled.Button
                   className={classNames({
                     "utility-button__text--dark-green": mode === "light"
                   })}
                 >
-                  {linkText}
+                  {getLinkAttrs().linkText}
                 </Styled.Button>
               </a>
             ) : null}
-            {includeSignUp && !authenticated ? (
+            {showSignUp() ? (
               <Link
                 className="utility-button"
                 role="button"

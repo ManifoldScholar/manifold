@@ -1,34 +1,29 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
+import { useParams, useNavigate, useLocation, Outlet } from "react-router-dom";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import { usersAPI } from "api";
-import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
-import {
-  useFetch,
-  useApiCallback,
-  useNotification,
-  useRedirectToFirstMatch
-} from "hooks";
+import { useFetch, useApiCallback, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
 import Dialog from "global/components/dialog";
-import UserNew from "./New";
 
-function UserWrapper({ match, route, history, confirm, location }) {
+function UserWrapper({ confirm }) {
   const { t } = useTranslation();
-
-  const id = match.params.id;
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [passwordModalOpen, toggleOpen] = useState(false);
   const [passwordModalProps, setModalProps] = useState(null);
 
   const { data: user, refresh } = useFetch({
     request: [usersAPI.show, id],
-    condition: id !== "new"
+    condition: !!id
   });
 
   const destroy = useApiCallback(usersAPI.destroy, {
@@ -44,16 +39,16 @@ function UserWrapper({ match, route, history, confirm, location }) {
     expiration: 5000
   }));
 
-  const destroyAndRedirect = useCallback(() => {
-    const redirect = () => history.push(lh.link("backendRecordsUsers"));
-    destroy(user.id).then(
-      () => {
-        notifyDestroy(user);
-        redirect();
-      },
-      () => redirect()
-    );
-  }, [destroy, history, user, notifyDestroy]);
+  const destroyAndRedirect = useCallback(async () => {
+    const redirect = () => navigate(lh.link("backendRecordsUsers"));
+    try {
+      await destroy(user.id);
+      notifyDestroy(user);
+      redirect();
+    } catch {
+      redirect();
+    }
+  }, [destroy, navigate, user, notifyDestroy]);
 
   const handleUserDestroy = useCallback(() => {
     const heading = t("modals.delete_user");
@@ -119,21 +114,6 @@ function UserWrapper({ match, route, history, confirm, location }) {
     }
   ];
 
-  const renderRoutes = () => {
-    return childRoutes(route, {
-      childProps: { refresh, user }
-    });
-  };
-
-  useRedirectToFirstMatch({
-    route: "backendRecordsUser",
-    id: user?.id,
-    slug: user?.attributes.slug,
-    candidates: user ? navigation.user(user) : []
-  });
-
-  if (id === "new") return <UserNew />;
-
   if (!user) return null;
 
   const subpage = location.pathname.split("/")[5]?.replace("-", "_");
@@ -142,9 +122,10 @@ function UserWrapper({ match, route, history, confirm, location }) {
     <div>
       <Authorize
         entity={user}
-        failureFatalError={{
-          detail: t("groups.unauthorized_edit")
+        failureNotification={{
+          body: t("groups.unauthorized_edit")
         }}
+        failureRedirect
         ability={["update"]}
       >
         {subpage && (
@@ -172,7 +153,9 @@ function UserWrapper({ match, route, history, confirm, location }) {
             />
           }
         >
-          <div>{renderRoutes()}</div>
+          <div>
+            <Outlet context={{ refresh, user }} />
+          </div>
         </Layout.BackendPanel>
       </Authorize>
       {passwordModalOpen ? (

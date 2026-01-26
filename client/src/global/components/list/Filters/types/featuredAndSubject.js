@@ -11,7 +11,7 @@ export const featuredAndSubjectFilter = (filters, updateFilters, params, t) => {
     ? getSubjectOptions(params.subjects)
     : [];
   const options = params.hideFeatured
-    ? [subjectOptions]
+    ? subjectOptions
     : [{ label: params.featuredLabel, value: "featured" }, ...subjectOptions];
 
   if (!options.length) return null;

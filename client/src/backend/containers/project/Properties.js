@@ -1,4 +1,5 @@
-import React, { useCallback } from "react";
+import { useOutletContext } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Project from "backend/components/project";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -6,26 +7,24 @@ import { subjectsAPI, journalVolumesAPI, projectsAPI, tagsAPI } from "api";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useApiCallback } from "hooks";
-import { useTranslation } from "react-i18next";
 
-function ProjectPropertiesContainer({ project }) {
+export default function ProjectPropertiesContainer() {
+  const { t } = useTranslation();
+  const { project } = useOutletContext() || {};
   const createSubject = useApiCallback(subjectsAPI.create);
 
-  const createSubjectFromValue = useCallback(
-    name => {
-      return createSubject({ type: "subject", attributes: { name } });
-    },
-    [createSubject]
-  );
+  if (!project) return null;
 
   const { journal, journalIssue } = project.relationships;
 
-  const fetchJournalVolumes = useCallback(() => {
+  const createSubjectFromValue = name => {
+    return createSubject({ type: "subject", attributes: { name } });
+  };
+
+  const fetchJournalVolumes = () => {
     if (!journal) return [];
     return journalVolumesAPI.index(journal.id);
-  }, [journal]);
-
-  const { t } = useTranslation();
+  };
 
   const formatData = data => {
     const { avatarAltText, avatar: avatarData, ...rest } =
@@ -61,7 +60,7 @@ function ProjectPropertiesContainer({ project }) {
       entity={project}
       ability="update"
       failureNotification
-      failureRedirect={lh.link("backendProject", project.id)}
+      failureRedirect={lh.link("backendProjects")}
     >
       <section>
         <FormContainer.Form
@@ -276,4 +275,4 @@ function ProjectPropertiesContainer({ project }) {
   );
 }
 
-export default ProjectPropertiesContainer;
+ProjectPropertiesContainer.displayName = "Project.Properties";

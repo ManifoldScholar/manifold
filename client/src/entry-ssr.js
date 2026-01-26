@@ -20,6 +20,9 @@ import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import { createServerFetchDataContext } from "hooks/api/contexts/InternalContext";
+import { createStaticHandler, createStaticRouter } from "react-router";
+import createRouter from "./routes/createRouter";
+import { setStore } from "store/storeInstance";
 
 const socket = config.services.client.rescueEnabled
   ? null
@@ -54,6 +57,38 @@ const render = async (req, res, store) => {
   const routingContext = {};
   const helmetContext = {};
 
+  const stats = readStats("Client");
+
+  // Set store instance for SSR loaders
+  setStore(store);
+
+  // Create v6 static router for SSR
+  const routes = createRouter();
+  // Pass store in context so loaders can access it
+  const handler = createStaticHandler(routes, {
+    basename: "/",
+    context: { store }
+  });
+
+  // Query the handler to get the context for the current request
+  // Bootstrap has already completed, so authentication state is available
+  const context = await handler.query(
+    new Request(`http://localhost${req.url}`)
+  );
+
+  // Handle redirects from context
+  if (
+    context instanceof Response &&
+    context.status >= 300 &&
+    context.status < 400
+  ) {
+    const redirectUrl = context.headers.get("Location");
+    return respondWithRedirect(res, redirectUrl);
+  }
+
+  // Create static router with the context
+  const staticRouter = createStaticRouter(routes, context);
+
   const cache = createCache({ key: "emotion" });
   const {
     extractCriticalToChunks,
@@ -70,8 +105,9 @@ const render = async (req, res, store) => {
       <CacheProvider value={cache}>
         <App
           helmetContext={helmetContext}
-          staticContext={routingContext}
+          staticContext={context instanceof Response ? routingContext : context}
           staticRequest={req}
+          staticRouter={staticRouter}
           store={store}
         />
       </CacheProvider>
@@ -82,8 +118,6 @@ const render = async (req, res, store) => {
 
   let renderString = "";
   let isError = false;
-
-  const stats = readStats("Client");
 
   try {
     ch.notice("Rendering application on server.", "floppy_disk");
@@ -98,38 +132,62 @@ const render = async (req, res, store) => {
       <HtmlBody component={appComponent} stats={stats} store={store} />
     );
   } catch (renderError) {
+    // Handle redirect Response objects thrown by components
+    if (
+      renderError instanceof Response &&
+      renderError.status >= 300 &&
+      renderError.status < 400
+    ) {
+      const redirectUrl = renderError.headers.get("Location");
+      return respondWithRedirect(res, redirectUrl);
+    }
+
     isError = true;
     ch.error("Server-side render failed in server-react.js");
     const errorComponent = exceptionRenderer(renderError);
     renderString = fatalErrorOutput(errorComponent, store);
   } finally {
-    // Redirect if the routing context has a url prop.
-    if (routingContext.url) {
-      respondWithRedirect(res, routingContext.url);
-    } else {
+    // Don't send response if headers have already been sent (e.g., redirect)
+    if (!res.headersSent) {
       const state = store.getState();
-      if (has(state, "fatalError.error.status")) {
-        res.statusCode = state.fatalError.error.status;
-        const errorComponent = <FatalError fatalError={state.fatalError} />;
-        renderString = fatalErrorOutput(errorComponent, store);
-      }
 
-      const chunks = extractCriticalToChunks(renderString);
-      const styleTags = constructStyleTagsFromChunks(chunks);
-      const htmlOutput = wrapHtmlBody({
-        store,
-        stats,
-        styleTags,
-        helmetContext,
-        body: renderString
-      });
-      if (isError) {
-        res.statusCode = 500;
-        res.setHeader("Content-Type", "text/html");
-        res.end(htmlOutput);
+      // Redirect if the routing context has a url prop.
+      if (routingContext.url) {
+        respondWithRedirect(res, routingContext.url);
+      }
+      // After migrating global/containers/Manifold to functional component we no longer hit the catch
+      // Move 401 check here
+      else if (
+        req.method === "GET" &&
+        state.fatalError?.error?.status === 401
+      ) {
+        respondWithRedirect(res, `/login?redirect_uri=${req.url}`);
       } else {
-        res.setHeader("Content-Type", "text/html");
-        res.end("<!doctype html>\n" + htmlOutput);
+        if (has(state, "fatalError.error.status")) {
+          res.statusCode = state.fatalError.error.status;
+          if (res.statusCode !== 403) {
+            const errorComponent = <FatalError fatalError={state.fatalError} />;
+            renderString = fatalErrorOutput(errorComponent, store);
+          }
+        }
+
+        const chunks = extractCriticalToChunks(renderString);
+        const styleTags = constructStyleTagsFromChunks(chunks);
+        const htmlOutput = wrapHtmlBody({
+          store,
+          stats,
+          styleTags,
+          helmetContext,
+          body: renderString
+        });
+        if (isError) {
+          res.statusCode = 500;
+          res.setHeader("Content-Type", "text/html");
+          res.end(htmlOutput);
+        } else {
+          res.setHeader("Content-Type", "text/html");
+          res.end("<!doctype html>\n" + htmlOutput);
+        }
       }
     }
   }

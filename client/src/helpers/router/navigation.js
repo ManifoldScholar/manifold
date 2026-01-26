@@ -20,12 +20,13 @@ class Navigation {
       {
         label: "titles.projects",
         route: "frontendProjects",
+        dropdown: true,
         children: [
           {
             label: "titles.projects_all",
             route: "frontendProjectsAll"
           },
-          {
+          settings.attributes.calculated?.hasProjectCollections && {
             label: "titles.project_collections",
             route: "frontendProjectCollections"
           }
@@ -152,6 +153,10 @@ class Navigation {
           {
             label: "titles.theme",
             route: "backendSettingsTheme"
+          },
+          {
+            label: "titles.content",
+            route: "backendSettingsContent"
           },
           {
             label: "titles.ingestion",
@@ -470,7 +475,7 @@ class Navigation {
   });
 
   static resource = memoize(resource => {
-    const externalVideo = resource.attributes.externalVideo;
+    const externalVideo = !!resource.attributes.externalId;
     const project = resource.relationships.project;
     const kind = resource.attributes.kind;
     const args = [resource.id];
@@ -493,7 +498,6 @@ class Navigation {
     if (
       kind === "image" ||
       kind === "audio" ||
-      kind === "pdf" ||
       kind === "interactive" ||
       (kind === "video" && !externalVideo)
     ) {
@@ -505,7 +509,7 @@ class Navigation {
         args
       });
     }
-    if (kind === "video" && !externalVideo) {
+    if (kind === "audio" || (kind === "video" && !externalVideo)) {
       out.push({
         label: "titles.tracks",
         route: "backendResourceTracks",
@@ -528,6 +532,12 @@ class Navigation {
       {
         label: "titles.theme",
         route: "backendSettingsTheme",
+        entity: "settings",
+        ability: "update"
+      },
+      {
+        label: "titles.content",
+        route: "backendSettingsContent",
         entity: "settings",
         ability: "update"
       },

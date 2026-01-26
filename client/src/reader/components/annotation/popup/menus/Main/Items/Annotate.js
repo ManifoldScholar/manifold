@@ -13,7 +13,7 @@ function Annotate({ menu, actions }) {
       kind="any"
       label={t("actions.annotate")}
       srLabel={t("reader.menus.popup.annotate_selection")}
-      icon="comment24"
+      icon="interactAnnotate24"
     />
   );
 }

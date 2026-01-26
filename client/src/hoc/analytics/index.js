@@ -1,12 +1,21 @@
-import React, { useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import withSettings from "hoc/withSettings";
-import { withRouter } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useFromStore } from "hooks";
+import { requests } from "api";
 import { ManifoldAnalyticsContext } from "helpers/contexts";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import useManifoldAnalytics from "./hooks/useManifoldAnalytics";
 
-function Analytics({ location, settings, children, dispatch }) {
+export default function Analytics({ children }) {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const settings = useFromStore({
+    requestKey: requests.settings,
+    action: "select"
+  });
+
   const { track: googleTrack } = useGoogleAnalytics(location, settings);
 
   const { track: manifoldTrack } = useManifoldAnalytics(
@@ -23,7 +32,6 @@ function Analytics({ location, settings, children, dispatch }) {
     [googleTrack, manifoldTrack]
   );
 
-  // Trigger a global leave event before unloading the client application.
   useEffect(() => {
     const handler = () => {
       onTrack({ event: "leave" });
@@ -42,10 +50,5 @@ function Analytics({ location, settings, children, dispatch }) {
 }
 
 Analytics.propTypes = {
-  location: PropTypes.object.isRequired,
-  settings: PropTypes.object,
-  authToken: PropTypes.string,
   children: PropTypes.element.isRequired
 };
-
-export default withRouter(withSettings(Analytics));

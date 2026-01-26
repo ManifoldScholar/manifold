@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { pendingEntitlementsAPI } from "api";
 import EntitiesList, {
@@ -9,19 +9,19 @@ import EntitiesList, {
   PendingEntitlementRow
 } from "backend/components/list/EntitiesList";
 import { useFetch, useApiCallback, useListQueryParams } from "hooks";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
+import Authorize from "hoc/Authorize";
 
 function PendingEntitlementsList({
-  route,
-  history,
   confirm,
-  location,
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
 
   const { pagination, filters, searchProps } = useListQueryParams({
@@ -35,23 +35,16 @@ function PendingEntitlementsList({
     dependencies: [filters]
   });
 
-  const renderChildRoutes = () => {
-    const closeUrl = lh.link("backendRecordsEntitlements");
-
-    return childRoutes(route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        wide: true,
-        closeUrl,
-        showNotifications: location.pathname.includes("import")
-      },
-      childProps: { refresh }
-    });
+  const closeUrl = lh.link("backendRecordsEntitlements");
+  const drawerProps = {
+    lockScroll: "always",
+    wide: true,
+    closeUrl,
+    showNotifications: location.pathname.includes("import")
   };
 
   const onEdit = id => {
-    history.push(lh.link("backendRecordsEntitlementsEdit", id));
+    navigate(lh.link("backendRecordsEntitlementsEdit", id));
   };
 
   const deleteEntitlement = useApiCallback(pendingEntitlementsAPI.destroy);
@@ -75,8 +68,17 @@ function PendingEntitlementsList({
   ];
 
   return (
-    <>
-      {renderChildRoutes()}
+    <Authorize
+      ability="update"
+      entity={["pendingEntitlement"]}
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "entitlements"
+        })
+      }}
+      failureRedirect
+    >
+      <OutletWithDrawer drawerProps={drawerProps} context={{ refresh }} />
       {entitlements && (
         <>
           <PageHeader
@@ -119,7 +121,7 @@ function PendingEntitlementsList({
           />
         </>
       )}
-    </>
+    </Authorize>
   );
 }
 
@@ -130,10 +132,7 @@ export default withFilteredLists(withConfirmation(PendingEntitlementsList), {
 PendingEntitlementsList.displayName = "PendingEntitlements.List";
 
 PendingEntitlementsList.propTypes = {
-  route: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   confirm: PropTypes.func,
-  location: PropTypes.object.isRequired,
   entitiesListSearchProps: PropTypes.func,
   entitiesListSearchParams: PropTypes.object
 };

@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import { annotationsAPI, bulkDeleteAPI } from "api";
 import EntitiesList, {
   Search,
@@ -16,16 +16,15 @@ import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
 import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
   SelectAll,
   BulkActionButtons
 } from "backend/components/list/EntitiesList/List/bulkActions";
+import Authorize from "hoc/Authorize";
 
 function AnnotationsList({
-  route,
   confirm,
   entitiesListSearchProps,
   entitiesListSearchParams
@@ -112,24 +111,26 @@ function AnnotationsList({
       });
   };
 
-  const renderChildRoutes = () => {
-    const closeUrl = lh.link("backendRecordsAnnotations");
-
-    return childRoutes(route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        closeUrl
-      },
-      childProps: { refresh }
-    });
-  };
-
   const currentPageIds = annotations?.map(a => a.id);
+  const closeUrl = lh.link("backendRecordsAnnotations");
 
   return (
-    <>
-      {renderChildRoutes()}
+    <Authorize
+      kind="admin"
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "annotations"
+        })
+      }}
+      failureRedirect
+    >
+      <OutletWithDrawer
+        drawerProps={{
+          lockScroll: "always",
+          closeUrl
+        }}
+        context={{ refresh }}
+      />
       <PageHeader type="list" title={t("titles.annotations")} />
       {!!annotations && (
         <EntitiesList
@@ -172,7 +173,7 @@ function AnnotationsList({
           ]}
         />
       )}
-    </>
+    </Authorize>
   );
 }
 
@@ -183,7 +184,6 @@ export default withFilteredLists(withConfirmation(AnnotationsList), {
 AnnotationsList.displayName = "Annotations.List";
 
 AnnotationsList.propTypes = {
-  route: PropTypes.object.isRequired,
   confirm: PropTypes.func.isRequired,
   entitiesListSearchProps: PropTypes.func,
   entitiesListSearchParams: PropTypes.object

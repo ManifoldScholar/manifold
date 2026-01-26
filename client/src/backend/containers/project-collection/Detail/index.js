@@ -1,109 +1,103 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
+import { useOutletContext, useParams, useMatches } from "react-router-dom";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import { collectionProjectsAPI, projectCollectionsAPI, requests } from "api";
 import ProjectCollection from "backend/components/project-collection";
-import { childRoutes } from "helpers/router";
 import Manual from "./Manual";
 import Smart from "./Smart";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
+import { useFetch, useApiCallback } from "hooks";
 
-export class ProjectCollectionDetail extends PureComponent {
-  static displayName = "ProjectCollection.Detail";
+export default function ProjectCollectionDetail() {
+  const { t } = useTranslation();
+  const { id } = useParams();
+  const matches = useMatches();
+  const { projectCollection } = useOutletContext() || {};
 
-  static propTypes = {
-    projectCollection: PropTypes.object,
-    dispatch: PropTypes.func,
-    match: PropTypes.object,
-    history: PropTypes.object,
-    route: PropTypes.object,
-    t: PropTypes.func
-  };
+  const {
+    data: collectionProjects,
+    refresh: refreshCollectionProjects
+  } = useFetch({
+    request: [collectionProjectsAPI.index, id],
+    condition: !!id
+  });
 
-  handleProjectOrderChange = result => {
-    const id = result.id;
+  const updateCollectionProject = useApiCallback(
+    projectCollectionsAPI.updateCollectionProject,
+    {
+      requestKey: requests.beCollectionProjectUpdate,
+      noTouch: true
+    }
+  );
+
+  const updateProjectCollection = useApiCallback(projectCollectionsAPI.update, {
+    requestKey: requests.beProjectCollectionUpdate
+  });
+
+  const handleProjectOrderChange = async result => {
+    if (!projectCollection) return;
     const changes = { attributes: { position: result.position } };
-    const options = { noTouch: true };
-    this.props.updateCollectionProject(id, changes, options);
+    await updateCollectionProject(projectCollection.id, result.id, changes);
+    refreshCollectionProjects();
   };
 
-  handleSortOrderChange = order => {
-    this.props.updateProjectCollection({
+  const handleSortOrderChange = async order => {
+    if (!projectCollection) return;
+    await updateProjectCollection(projectCollection.id, {
       attributes: { sortOrder: order.sortBy }
     });
+    refreshCollectionProjects();
   };
 
-  drawerProps(props, padding = "default") {
-    return {
-      lockScroll: "always",
-      size: "flexible",
-      padding,
-      closeUrl: lh.link("backendProjectCollection", props.projectCollection.id)
-    };
-  }
+  if (!projectCollection || !collectionProjects) return null;
 
-  render() {
-    const { collectionProjects, projectCollection, t, route } = this.props;
+  const projects = collectionProjects.map(cp => cp.relationships.project);
 
-    if (!projectCollection || !collectionProjects) return null;
-    const projects = collectionProjects.map(cp => cp.relationships.project);
+  const currentMatch = matches[matches.length - 1];
+  const isManageProjectsRoute =
+    currentMatch?.handle?.name === "backendProjectCollectionManageProjects";
 
-    const manageProjectsRoute = {
-      ...route,
-      routes: [
-        route.routes.find(
-          r => r.name === "backendProjectCollectionManageProjects"
-        )
-      ]
-    };
+  const drawerProps = {
+    lockScroll: "always",
+    size: "flexible",
+    padding: isManageProjectsRoute ? "large" : "default",
+    closeUrl: lh.link("backendProjectCollection", projectCollection.id)
+  };
 
-    const restRoutes = {
-      ...route,
-      routes: route.routes.filter(
-        r => r.name !== "backendProjectCollectionManageProjects"
-      )
-    };
-
-    return (
-      <Authorize
-        entity={projectCollection}
-        failureFatalError={{
-          detail: t("project_collections.unauthorized_edit")
-        }}
-        ability="update"
-      >
-        <div>
-          <h2 className="screen-reader-text">
-            {t("project_collections.sr_list_title")}
-          </h2>
-          <ProjectCollection.SortBy
-            sortChangeHandler={this.handleSortOrderChange}
-            projectCollection={this.props.projectCollection}
+  return (
+    <Authorize
+      entity={projectCollection}
+      failureNotification={{
+        body: t("project_collections.unauthorized_edit")
+      }}
+      failureRedirect
+      ability="update"
+    >
+      <div>
+        <h2 className="screen-reader-text">
+          {t("project_collections.sr_list_title")}
+        </h2>
+        <ProjectCollection.SortBy
+          sortChangeHandler={handleSortOrderChange}
+          projectCollection={projectCollection}
+        />
+        {projectCollection.attributes.smart ? (
+          <Smart projects={projects} projectCollection={projectCollection} />
+        ) : (
+          <Manual
+            collectionProjects={collectionProjects}
+            orderChangeHandler={handleProjectOrderChange}
+            projectCollection={projectCollection}
           />
-          {projectCollection.attributes.smart ? (
-            <Smart projects={projects} {...this.props} />
-          ) : (
-            <Manual
-              projects={collectionProjects}
-              orderChangeHandler={this.handleProjectOrderChange}
-              {...this.props}
-            />
-          )}
-          {childRoutes(manageProjectsRoute, {
-            childProps: this.props,
-            drawer: true,
-            drawerProps: this.drawerProps(this.props, "large")
-          })}
-          {childRoutes(restRoutes, {
-            childProps: this.props,
-            drawer: true,
-            drawerProps: this.drawerProps(this.props)
-          })}
-        </div>
-      </Authorize>
-    );
-  }
+        )}
+        <OutletWithDrawer
+          drawerProps={drawerProps}
+          context={{ projectCollection }}
+        />
+      </div>
+    </Authorize>
+  );
 }
 
-export default withTranslation()(connectAndFetch(ProjectCollectionDetail));
+ProjectCollectionDetail.displayName = "ProjectCollection.Detail";

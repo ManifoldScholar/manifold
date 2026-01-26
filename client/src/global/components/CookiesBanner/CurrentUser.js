@@ -5,11 +5,11 @@ import { meAPI } from "api";
 import NarrowBanner from "./NarrowBanner";
 
 export default function CurrentUserBanner() {
-  const { currentUser } = useFromStore("authentication");
+  const { currentUser } = useFromStore({ path: "authentication" });
   const { consentNeededManifoldAnalytics, consentNeededGoogleAnalytics } =
     currentUser?.attributes ?? {};
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
     settings?.attributes?.calculated ?? {};
 

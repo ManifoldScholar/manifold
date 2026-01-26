@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Static from "global/components/navigation/Static";
@@ -12,26 +11,29 @@ export default function NavigationPrimary(props) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
 
-  const currentUser = props.authentication.currentUser;
+  const authentication = useFromStore({ path: "authentication" });
+  const currentUser = authentication.currentUser;
 
   const label = getAdminModeLabel({ currentUser, mode: props.mode, t });
 
-  const resources = useFromStore(`entityStore.entities.resources`);
-  const resourceCollections = useFromStore(
-    `entityStore.entities.resourceCollections`
-  );
-  const pages = useFromStore(`entityStore.entities.pages`);
-  const texts = useFromStore(`entityStore.entities.texts`);
+  const resources = useFromStore({ path: `entityStore.entities.resources` });
+  const resourceCollections = useFromStore({
+    path: `entityStore.entities.resourceCollections`
+  });
+  const pages = useFromStore({ path: `entityStore.entities.pages` });
+  const texts = useFromStore({ path: `entityStore.entities.texts` });
+  const fatalError = useFromStore({ path: "fatalError" });
 
   const to = getDestinationPath({
     mode: props.mode,
     pathname,
-    entities: { resources, resourceCollections, pages, texts }
+    entities: { resources, resourceCollections, pages, texts },
+    fatalError
   });
 
   const authorization = new Authorization();
   const canAccessAdmin = authorization.authorizeKind({
-    authentication: props.authentication,
+    authentication,
     kind: [
       "admin",
       "editor",
@@ -53,14 +55,10 @@ export default function NavigationPrimary(props) {
     <>
       <Static
         backendButton={adminModeButton}
-        {...props}
         style={props.desktopStyle}
-      />
-      <Mobile
-        backendButton={adminModeButton}
         {...props}
-        style={props.mobileStyle}
       />
+      <Mobile backendButton={adminModeButton} {...props} />
     </>
   );
 }
@@ -69,9 +67,6 @@ NavigationPrimary.displayName = "Navigation.Primary";
 
 NavigationPrimary.propTypes = {
   links: PropTypes.array,
-  authentication: PropTypes.object,
-  visibility: PropTypes.object,
-  commonActions: PropTypes.object.isRequired,
   mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
   exact: PropTypes.bool,
   desktopStyle: PropTypes.object,

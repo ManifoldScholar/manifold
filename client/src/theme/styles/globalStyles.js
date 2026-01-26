@@ -6,9 +6,10 @@ import baseStyles from "./base";
 import componentStyles from "./components";
 import utilityStyles from "./utility";
 import printStyles from "./print";
+import rteStyles from "./utility/rte";
 
 export default css`
-@layer manifold, stylesheets;
+@layer manifold, custom-styles, editor;
 
 @layer manifold {
   ${fonts}
@@ -18,5 +19,9 @@ export default css`
   ${utilityStyles}
   ${componentStyles}
   ${printStyles}
+}
+
+@layer editor {
+  ${rteStyles}
 }
 `;

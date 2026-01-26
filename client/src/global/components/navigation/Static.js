@@ -1,74 +1,66 @@
-import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import classNames from "classnames";
+import { NavLink } from "react-router-dom";
 import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
 import UserMenuBody from "global/components/UserMenuBody";
 import UIPanel from "global/components/UIPanel";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
-import { NavLink, withRouter } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
-import withSettings from "hoc/withSettings";
 import Authorize from "hoc/Authorize";
+import { useFromStore, useShowJournalsActive } from "hooks";
+import { commonActions } from "actions/helpers";
+import { requests } from "api";
 
-export class NavigationStatic extends PureComponent {
-  static displayName = "Navigation.Static";
+export default function NavigationStatic({
+  links,
+  backendButton,
+  mode,
+  exact = false,
+  style,
+  darkTheme
+}) {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const context = useContext(FrontendModeContext);
+  const journalIsActive = useShowJournalsActive();
 
-  static propTypes = {
-    links: PropTypes.array,
-    classNames: PropTypes.string,
-    location: PropTypes.object,
-    authentication: PropTypes.object,
-    visibility: PropTypes.object,
-    commonActions: PropTypes.object.isRequired,
-    backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-    mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
-    exact: PropTypes.bool,
-    style: PropTypes.object,
-    darkTheme: PropTypes.bool,
-    t: PropTypes.func
-  };
+  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const settings = useFromStore({
+    requestKey: requests.settings,
+    action: "select"
+  });
 
-  static contextType = FrontendModeContext;
+  const commonActionsHelper = commonActions(dispatch);
 
-  static defaultProps = {
-    exact: false
-  };
+  const userMenuClasses = classNames({
+    "user-nav": true,
+    "show-82": mode === "frontend",
+    "show-100": mode === "backend",
+    "user-nav--dark": darkTheme
+  });
 
-  get userMenuClasses() {
-    return classNames({
-      "user-nav": true,
-      "show-82": this.props.mode === "frontend",
-      "show-100": this.props.mode === "backend",
-      "user-nav--dark": this.props.darkTheme
-    });
-  }
+  const siteNavClasses = classNames({
+    "site-nav": true,
+    "show-82": mode === "frontend",
+    "show-100": mode === "backend",
+    "site-nav--backend": mode === "backend"
+  });
 
-  get siteNavClasses() {
-    return classNames({
-      "site-nav": true,
-      "show-82": this.props.mode === "frontend",
-      "show-100": this.props.mode === "backend",
-      "site-nav--backend": this.props.mode === "backend"
-    });
-  }
+  const hasLinks = links && links.length > 0;
 
-  get hasLinks() {
-    return this.props.links && this.props.links.length > 0;
-  }
+  const isLibraryDisabled = settings.attributes.general.libraryDisabled;
 
-  get isLibraryDisabled() {
-    return this.props.settings.attributes.general.libraryDisabled;
-  }
-
-  pathForLink(link) {
+  const pathForLink = link => {
     const args = link.args || [];
     return lh.link(link.route, ...args);
-  }
+  };
 
-  renderExternalLink(link) {
+  const renderExternalLink = link => {
     return (
       <a
         href={link.externalUrl}
@@ -79,92 +71,99 @@ export class NavigationStatic extends PureComponent {
         {link.label}
       </a>
     );
-  }
+  };
 
-  adjustClassesForJournalIssue(link) {
-    if (typeof this.props.journalIsActive !== "boolean") {
-      if (link.label.includes("projects"))
-        return { className: "site-nav__link", activeClassName: "" };
+  const getClassNameForLink = link => {
+    let baseClassName = "site-nav__link";
+    let shouldShowActive = true;
+
+    if (typeof journalIsActive !== "boolean") {
+      if (link.label.includes("projects")) {
+        shouldShowActive = false;
+      }
+    } else if (journalIsActive) {
+      if (link.label.includes("projects")) {
+        shouldShowActive = false;
+      } else if (link.label.includes("journals")) {
+        baseClassName = "site-nav__link site-nav__link--active";
+        shouldShowActive = false;
+      }
     }
-    if (this.props.journalIsActive) {
-      if (link.label.includes("projects"))
-        return { className: "site-nav__link", activeClassName: "" };
-      if (link.label.includes("journals"))
-        return { className: "site-nav__link site-nav__link--active" };
-    }
-    return {
-      className: "site-nav__link",
-      activeClassName: "site-nav__link--active"
+
+    return ({ isActive }) => {
+      if (!shouldShowActive) {
+        return baseClassName;
+      }
+      return classNames(baseClassName, {
+        "site-nav__link--active": isActive
+      });
     };
-  }
+  };
 
-  renderManifoldLink(link) {
-    const exact = this.pathForLink(link) === "/" ? true : this.props.exact;
-    const classes = this.adjustClassesForJournalIssue(link);
+  const renderManifoldLink = link => {
+    const path = pathForLink(link);
+    const linkEnd = path === "/" ? true : exact;
     return (
       <NavLink
-        to={this.pathForLink(link)}
-        exact={exact}
+        to={path}
+        end={linkEnd}
         target={link.newTab ? "_blank" : null}
-        {...classes}
+        className={getClassNameForLink(link)}
       >
-        {this.props.t(link.label)}
+        {t(link.label)}
       </NavLink>
     );
-  }
+  };
 
-  renderStaticItem(link, index) {
+  const renderStaticItem = (link, index) => {
     if (link.hideInNav) return null;
     if (link.dropdown) {
       const Toggle = link.toggle;
       return (
-        <DisclosureNavigationMenu
-          key={`${link.label}-${index}`}
-          disclosure={
-            <Toggle
-              link={link}
-              index={index}
-              journalIsActive={this.props.journalIsActive}
-            />
-          }
-        >
-          {link.dropdownContent}
-        </DisclosureNavigationMenu>
+        <li key={`${link.label}-${index}`} className="site-nav__item">
+          <DisclosureNavigationMenu
+            key={`${link.label}-${index}`}
+            disclosure={
+              <Toggle
+                link={link}
+                index={index}
+                journalIsActive={journalIsActive}
+              />
+            }
+          >
+            {link.dropdownContent}
+          </DisclosureNavigationMenu>
+        </li>
       );
     }
     return (
       <li key={`${link.label}-${index}`} className="site-nav__item">
-        {link.route
-          ? this.renderManifoldLink(link)
-          : this.renderExternalLink(link)}
+        {link.route ? renderManifoldLink(link) : renderExternalLink(link)}
       </li>
     );
-  }
+  };
 
-  renderSearch(props) {
-    if (props.mode === "backend") return null;
-    const t = this.props.t;
+  const renderSearch = () => {
+    if (mode === "backend") return null;
 
     const scopeToProject =
-      this.context.isStandalone ||
-      Boolean(this.isLibraryDisabled && this.context.project);
+      context.isStandalone || Boolean(isLibraryDisabled && context.project);
 
     const description = scopeToProject
       ? t("search.description_project_scope")
       : t("search.description_full_scope");
-    const projectId = scopeToProject ? this.context.project.id : null;
+    const projectId = scopeToProject ? context.project.id : null;
 
     return (
       <li className="user-nav__item">
         <SearchMenu.Button
-          toggleSearchMenu={this.props.commonActions.toggleSearchPanel}
-          active={this.props.visibility.uiPanels.search}
+          toggleSearchMenu={commonActionsHelper.toggleSearchPanel}
+          active={visibility.uiPanels.search}
           className="user-nav__button user-nav__button--search"
         />
         <UIPanel
           id="search"
-          toggleVisibility={this.props.commonActions.toggleSearchPanel}
-          visibility={this.props.visibility.uiPanels}
+          visibility={visibility.uiPanels}
           bodyComponent={SearchMenu.Body}
           bodyClassName="search-menu"
           searchType={projectId ? "project" : "library"}
@@ -173,34 +172,34 @@ export class NavigationStatic extends PureComponent {
             keyword: ""
           }}
           description={description}
-          hidePanel={this.props.commonActions.hideSearchPanel}
+          hidePanel={commonActionsHelper.hideSearchPanel}
+          afterSubmit={commonActionsHelper.hideSearchPanel}
         />
       </li>
     );
-  }
+  };
 
-  renderUserMenu(props) {
-    const t = this.props.t;
+  const renderUserMenu = () => {
     return (
-      <nav className={this.userMenuClasses}>
+      <nav className={userMenuClasses}>
         <ul
           aria-label={t("navigation.user_links")}
-          style={this.props.style}
+          style={style}
           className="user-nav__list"
         >
-          {this.props.backendButton && (
+          {backendButton && (
             <li className="user-nav__item user-nav__item--align-center">
-              {this.props.backendButton}
+              {backendButton}
             </li>
           )}
-          {this.renderSearch(props)}
+          {renderSearch()}
           <li className="user-nav__item">
             <DisclosureNavigationMenu
-              visible={props.visibility.uiPanels.user}
+              visible={visibility.uiPanels.user}
               disclosure={<UserMenuButton />}
-              callbacks={props.commonActions}
-              onBlur={props.commonActions.hideUserPanel}
-              context={props.mode}
+              callbacks={commonActionsHelper}
+              onBlur={commonActionsHelper.hideUserPanel}
+              context={mode}
             >
               <UserMenuBody />
             </DisclosureNavigationMenu>
@@ -208,18 +207,17 @@ export class NavigationStatic extends PureComponent {
         </ul>
       </nav>
     );
-  }
+  };
 
-  renderSiteNav() {
-    const t = this.props.t;
+  const renderSiteNav = () => {
     return (
-      <nav className={this.siteNavClasses} aria-label={t("navigation.primary")}>
+      <nav className={siteNavClasses} aria-label={t("navigation.primary")}>
         <ul
           aria-label={t("navigation.page_links")}
-          style={this.props.style}
+          style={style}
           className="site-nav__list"
         >
-          {this.props.links.map((link, index) => {
+          {links.map((link, index) => {
             if (link.ability || link.kind)
               return (
                 <Authorize
@@ -228,24 +226,31 @@ export class NavigationStatic extends PureComponent {
                   ability={link.ability}
                   kind={link.kind}
                 >
-                  {this.renderStaticItem(link, index)}
+                  {renderStaticItem(link, index)}
                 </Authorize>
               );
-            return this.renderStaticItem(link, index);
+            return renderStaticItem(link, index);
           })}
         </ul>
       </nav>
     );
-  }
+  };
 
-  render() {
-    return (
-      <>
-        {this.hasLinks && this.renderSiteNav()}
-        {this.renderUserMenu(this.props)}
-      </>
-    );
-  }
+  return (
+    <>
+      {hasLinks && renderSiteNav()}
+      {renderUserMenu()}
+    </>
+  );
 }
 
-export default withTranslation()(withRouter(withSettings(NavigationStatic)));
+NavigationStatic.displayName = "Navigation.Static";
+
+NavigationStatic.propTypes = {
+  links: PropTypes.array,
+  backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+  mode: PropTypes.oneOf(["backend", "frontend"]).isRequired,
+  exact: PropTypes.bool,
+  style: PropTypes.object,
+  darkTheme: PropTypes.bool
+};

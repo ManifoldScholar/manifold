@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { urlWithTextFragment } from "./useCopyLinkToSelection";
 import useFromStore from "./useFromStore";
 
-export default function useShare(
+export default function useShare({
   title,
+  uri,
   urlTextFragment,
   shareOnly = false,
-  appendDefaultTitle = true
-) {
+  appendDefaultTitle = true,
+  size = "lg"
+}) {
   const { t } = useTranslation();
 
   const [copied, setCopied] = useState(false);
@@ -24,13 +26,15 @@ export default function useShare(
     }
   }, [copied]);
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
+
+  const shareIcon = size === "sm" ? "share24" : "share32";
 
   if (!isMounted)
     return {
       canRender: true,
       disabled: true,
-      icon: "share24",
+      icon: shareIcon,
       label: t("actions.share")
     };
 
@@ -39,11 +43,14 @@ export default function useShare(
   const appendedTitle =
     headTitle && appendDefaultTitle ? `${title} | ${headTitle}` : title;
 
-  const baseUrl = window.location.toString();
+  const baseUrl = uri
+    ? new URL(uri, window.location.origin)
+    : new URL(window.location);
+  const url = baseUrl.toString();
   const { status, fragment } = urlTextFragment ?? {};
-  const url = status === 0 ? urlWithTextFragment(baseUrl, fragment) : baseUrl;
+  const finalUrl = status === 0 ? urlWithTextFragment(url, fragment) : url;
 
-  const shareData = { title: appendedTitle, url };
+  const shareData = { title: appendedTitle, url: finalUrl };
 
   /* eslint-disable */
   const onShare = async () => {
@@ -67,7 +74,7 @@ export default function useShare(
     return {
       canRender: shareSupported,
       onClick: onShare,
-      icon: "share24",
+      icon: shareIcon,
       label: t("actions.share")
     };
 
@@ -77,7 +84,7 @@ export default function useShare(
 
   /* eslint-disable no-nested-ternary */
   const icon = shareSupported
-    ? "share24"
+    ? shareIcon
     : copied
     ? "checkmark16"
     : "RTELink24";

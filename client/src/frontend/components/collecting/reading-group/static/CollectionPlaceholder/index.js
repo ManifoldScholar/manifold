@@ -1,11 +1,13 @@
-import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
 function CollectionPlaceholder() {
   const { t } = useTranslation();
+  const location = useLocation();
+
+  const settingsPath = `${location.pathname}/settings`;
 
   return (
     <Styled.Placeholder>
@@ -27,9 +29,9 @@ function CollectionPlaceholder() {
           components={[<Styled.Heading />, <p />]}
         />
         <Styled.Actions>
-          <a href="#settings" className="button-tertiary">
+          <Link to={settingsPath} className="button-tertiary">
             {t("actions.edit_reading_group")}
-          </a>
+          </Link>
         </Styled.Actions>
       </Styled.Inner>
     </Styled.Placeholder>

@@ -1,28 +1,22 @@
-import React, { useState, useMemo } from "react";
+import { useState } from "react";
 import { readingGroupsAPI } from "api";
-import { useNavigate, useLocation } from "react-router-dom-v5-compat";
 import { useParams } from "react-router-dom";
-import { childRoutes } from "helpers/router";
-import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
-import Drawer from "global/containers/drawer";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { GroupHeading } from "frontend/components/reading-group/headings";
-import Settings from "frontend/components/reading-group/Settings";
 import SearchDialog from "frontend/components/collecting/SearchDialog";
-import { useFetch, useFromStore } from "hooks";
+import { Outlet } from "react-router-dom";
+import { useFetch } from "hooks";
 import Authorize from "hoc/Authorize";
 
-export default function ReadingGroup({ route }) {
+export default function ReadingGroup() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-
-  const settings = useFromStore("settings", "select");
 
   const [fetchVersion, setFetchVersion] = useState(1);
 
@@ -31,65 +25,52 @@ export default function ReadingGroup({ route }) {
     dependencies: [fetchVersion]
   });
 
-  const breadcrumbProps = useMemo(() => {
-    if (readingGroup?.attributes?.currentUserRole === "none")
-      return {
-        breadcrumbs: [
-          {
-            to: lh.link("frontendPublicReadingGroups"),
-            label: t("pages.public_groups")
-          }
-        ]
-      };
-    return {
-      breadcrumbs: [
-        {
-          to: lh.link("frontendMyReadingGroups"),
-          label: t("pages.my_groups")
+  const breadcrumbProps =
+    readingGroup?.attributes?.currentUserRole === "none"
+      ? {
+          breadcrumbs: [
+            {
+              to: lh.link("frontendPublicReadingGroups"),
+              label: t("pages.public_groups")
+            }
+          ]
         }
-      ]
-    };
-  }, [readingGroup?.attributes?.currentUserRole, t]);
+      : {
+          breadcrumbs: [
+            {
+              to: lh.link("frontendMyReadingGroups"),
+              label: t("pages.my_groups")
+            }
+          ]
+        };
 
   if (!readingGroup) return null;
 
   const { name: groupName } = readingGroup.attributes ?? {};
 
-  const showSettingsDrawer = location.hash === "#settings";
   const showSearchDialog = location.hash === "#search";
 
   const childProps = {
-    settings,
     refresh: () => setFetchVersion(prev => prev + 1),
     fetchVersion,
-    navigate,
-    route,
     readingGroup,
-    dispatch
+    closeDrawer: () => {
+      const { pathname, search = "" } = location;
+      const url = `${pathname}${search}`;
+      navigate(url);
+    },
+    onArchive: () => {
+      setFetchVersion(prev => prev + 1);
+      const { pathname, search = "" } = location;
+      const url = `${pathname}${search}`;
+      navigate(url);
+    }
   };
 
   const handleClose = () => {
     const { pathname, search = "" } = location;
     const url = `${pathname}${search}`;
     navigate(url);
-  };
-
-  const settingsProps = {
-    readingGroup,
-    closeDrawer: handleClose,
-    onArchive: () => {
-      setFetchVersion(prev => prev + 1);
-      handleClose();
-    }
-  };
-
-  const drawerProps = {
-    open: showSettingsDrawer,
-    context: "frontend",
-    size: "wide",
-    position: "overlay",
-    lockScroll: "always",
-    closeCallback: () => handleClose()
   };
 
   const onCloseSearch = () => {
@@ -100,9 +81,6 @@ export default function ReadingGroup({ route }) {
   return (
     <>
       <Authorize entity={readingGroup} ability="read">
-        <Drawer.Wrapper {...drawerProps}>
-          <Settings {...settingsProps} />
-        </Drawer.Wrapper>
         <HeadContent title={groupName} appendDefaultTitle />
         <section>
           <div className="container">
@@ -112,7 +90,7 @@ export default function ReadingGroup({ route }) {
               location={location}
               refresh={childProps.refresh}
             />
-            {childRoutes(route, { childProps })}
+            <Outlet context={childProps} />
             {showSearchDialog && (
               <SearchDialog heading={groupName} onClose={onCloseSearch} />
             )}

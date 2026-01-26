@@ -87,6 +87,7 @@
     "unflag": "Unflag",
     "unmute": "Unmute",
     "update": "Update",
+    "upload": "Upload",
     "view": "View",
     "view_all": "View all",
     "view_contents": "$t(actions.view) Contents",

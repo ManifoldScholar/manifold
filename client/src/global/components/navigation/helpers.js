@@ -43,14 +43,14 @@ const FE_ROUTE_MAP = {
     regex: /^\/projects\/([A-Za-z0-9-]+)\/resource/,
     link: `/backend/projects/resource`
   },
-  projectCollection: {
-    regex: /^\/projects\/project-collection/,
-    link: `/backend/projects/project-collections`,
-    hasAdminList: true
-  },
   project: {
     regex: /^\/projects/,
     link: `/backend/projects`,
+    hasAdminList: true
+  },
+  projectCollection: {
+    regex: /^\/project-collections/,
+    link: `/backend/projects/project-collections`,
     hasAdminList: true
   },
   journal: {
@@ -77,8 +77,8 @@ const BE_ROUTE_MAP = {
   },
   projectCollection: {
     regex: /^\/backend\/projects\/project-collections/,
-    link: `/projects/project-collection`,
-    hasList: `/projects/project-collections`
+    link: `/project-collections`,
+    hasList: `/project-collections`
   },
   text: {
     regex: /^\/backend\/projects\/text/,
@@ -108,7 +108,10 @@ const extractIdentifier = (pathname, basePath) => {
   return identifier === "all" ? null : identifier;
 };
 
-const getAdminPath = pathname => {
+const getAdminPath = (pathname, fatalError) => {
+  if (fatalError && fatalError.type === "AUTHORIZATION")
+    return "/backend/dashboard";
+
   const routeKey = Object.keys(FE_ROUTE_MAP).find(key => {
     return FE_ROUTE_MAP[key]?.regex.test(pathname);
   });
@@ -184,7 +187,12 @@ const getFrontendPath = (pathname, entities) => {
   return `${route.link}/${identifier}`;
 };
 
-export const getDestinationPath = ({ mode, pathname, entities }) => {
-  if (mode === "frontend") return getAdminPath(pathname);
+export const getDestinationPath = ({
+  mode,
+  pathname,
+  entities,
+  fatalError
+}) => {
+  if (mode === "frontend") return getAdminPath(pathname, fatalError);
   return getFrontendPath(pathname, entities);
 };

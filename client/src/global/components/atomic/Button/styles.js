@@ -1,97 +1,143 @@
 import styled from "@emotion/styled";
-import { defaultTransitionProps, rgba, respond } from "theme/styles/mixins";
+import { defaultTransitionProps, buttonUnstyled } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
-import { breakpoints } from "theme/styles/variables/media";
 import IconComposer from "global/components/utility/IconComposer";
 
-const HERO_BREAKPOINT = breakpoints[60];
+function getSizeStyles(size) {
+  switch (size) {
+    case "lg":
+      return `
+        --_padding: 6px 24px 8px;
+        --_font-size: 14px;
+        --_inner-text-padding-block: 0.6em 0.68em;
 
-const aSecondaryButton = `
-  background-color: var(--color-base-neutral10);
+        &:has(> svg) {
+          padding-inline: 20px;
+        }
+      `;
+    case "md":
+      return `
+        --_padding: 6px 32px 8px;
+        --_font-size: 14px;
 
-  &:hover {
-    color: inherit;
-    background-color: ${rgba("neutral30", 0.7)};
+        &:has(> svg) {
+          padding-inline: 20px;
+        }
+      `;
+    case "sm":
+      return `
+        --_padding: 6px 14px 8px;
+        --_font-size: 12px;
+      `;
+    default:
+      return ``;
   }
-`;
+}
 
-const aSecondaryButtonDark = `
-  color: var(--color-base-neutral95);
-  background-color: var(--color-neutral-ui-light);
-  border-color: var(--color-neutral-ui-light);
-
-  &:hover,
-  &:focus-visible {
-    color: var(--color-base-neutral95);
-    background-color: var(--color-base-neutral30);
+function getShapeStyles(shape) {
+  switch (shape) {
+    case "rectangle":
+      return `
+          --_border-radius: 4px;
+          --_letter-spacing: 0.089em;
+        `;
+    case "lozenge":
+      return `
+          --_border-radius: 400px;
+        `;
+    default:
+      return ``;
   }
+}
 
-  &:hover {
-    border-color: var(--color-base-neutral30);
+function getColorStyles(background) {
+  switch (background) {
+    case "accent":
+      return `
+        --_color: var(--color-neutral-text-extra-dark);
+        --_background-color: var(--color-accent-primary);
+        --_hover-background-color: var(--color-accent-primary-dull);
+        --_border-color: var(--color-accent-primary);
+      `;
+    case "neutral":
+      return `
+        --_color: var(--strong-color);
+        --_background-color: var(--button-bg-color);
+        --_hover-background-color: var(--color-accent-primary);
+        --_border-color: var(--button-bg-color);
+      `;
+    case "outline":
+      return `
+        --_background-color: transparent;
+        --_hover-background-color: var(--color-accent-primary);
+        --_border-color: currentColor;
+      `;
+    case "outline-accent":
+      return `
+        --_color: var(--outline-button-color);
+        --_background-color: transparent;
+        --_hover-background-color: var(--color-accent-primary);
+        --_border-color: var(--highlight-color);
+      `;
+    default:
+      return ``;
   }
-`;
-
-const aButtonLg = `
-  --ButtonText-padding-block: 12px;
-  --ButtonIcon-margin: -6px;
-
-  justify-content: center;
-  border-radius: 6px;
-
-  ${respond(`--ButtonText-padding-block: 12px`, HERO_BREAKPOINT, "max")}
-`;
+}
 
 export const Button = styled("button", transientOptions)`
-  --ButtonText-padding-block: 9px;
+  ${({ $size }) => getSizeStyles($size)}
+  ${({ $shape }) => getShapeStyles($shape)}
+  ${({ $background }) => getColorStyles($background)}
 
-  display: flex;
-  gap: 12px;
+  ${buttonUnstyled}
+  min-inline-size: var(--Button-min-inline-size);
+  vertical-align: middle;
+  display: inline-flex;
+  gap: 8px;
   align-items: center;
-  min-width: min(200px, 100%);
-  width: ${({ $width }) => $width && `${$width}px`};
-  padding-inline: 12px;
-  color: var(--color-neutral-text-extra-dark);
-  border: 2px solid transparent;
-  border-radius: var(--box-border-radius);
-  background-color: var(--color-accent-primary);
-  transition: background-color ${defaultTransitionProps},
-    border-color ${defaultTransitionProps},
-    outline-color ${defaultTransitionProps};
+  justify-content: center;
+  padding: var(--_padding);
+  color: var(--_color, var(--strong-color));
+  background-color: var(--_background-color, var(--background-color));
+  border: 1px solid var(--_border-color);
+  border-radius: var(--_border-radius);
+  transition:
+    color ${defaultTransitionProps},
+    background-color ${defaultTransitionProps},
+    border-color ${defaultTransitionProps};
   font-family: var(--font-family-heading);
-  font-size: 14px;
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--_font-size);
+  line-height: 1;
   text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.104em;
-  line-height: 18px;
+
+  ${({ $lowercase }) =>
+    $lowercase
+      ? `
+          font-size: max(14px, var(--_font-size));
+        `
+      : `
+          --_inner-text-translateY: -3%;
+          text-transform: uppercase;
+          letter-spacing: 0.125em;
+          font-weight: var(--font-weight-semibold);
+        `}
 
   &:hover,
   &:focus-visible {
-    color: var(--color-base-neutral90);
-    background-color: var(--color-accent-primary-dull);
+    color: var(--_hover-color, var(--color-neutral-text-extra-dark));
+    background-color: var(--_hover-background-color);
+    border-color: var(--_hover-background-color);
   }
 
-  &:focus-visible {
-    border-color: transparent;
-    outline-offset: 3px;
+  > span {
+    min-block-size: var(--_min-block-size);
+    display: inline-flex;
+    align-items: center;
+    transform: translateY(var(--_inner-text-translateY, -5%));
   }
-
-  ${({ $secondary, $darkMode }) => {
-    if ($secondary) {
-      if ($darkMode) {
-        return aSecondaryButtonDark;
-      }
-      return aSecondaryButton;
-    }
-  }}
-
-  ${({ $size }) => $size === "lg" && aButtonLg}
-`;
-
-export const ButtonText = styled.span`
-  padding-block: var(--ButtonText-padding-block);
 `;
 
 export const ButtonIcon = styled(IconComposer)`
-  margin-inline-start: var(--ButtonIcon-margin);
+  // inline-size: 1.667em;
+  // block-size: 1.667em;
 `;

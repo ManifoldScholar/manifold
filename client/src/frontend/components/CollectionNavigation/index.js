@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
-import { useRouteMatch } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useCurrentUser } from "hooks";
 import Link from "./Link";
 import * as Styled from "./styles";
@@ -10,7 +10,7 @@ import withSettings from "hoc/withSettings";
 function CollectionNavigation({ settings }) {
   const { t } = useTranslation();
   const currentUser = useCurrentUser();
-  const { path } = useRouteMatch();
+  const location = useLocation();
 
   const links = useMemo(
     () =>
@@ -27,14 +27,14 @@ function CollectionNavigation({ settings }) {
           label: t("pages.journals"),
           icon: "journals64",
           requiresAuthorization: false,
-          show: path !== lh.link("frontendJournalsList")
+          show: location.pathname !== lh.link("frontendJournalsList")
         },
         {
           to: lh.link("frontendIssuesList"),
           label: t("pages.issues"),
           icon: "journals64",
           requiresAuthorization: false,
-          show: path === lh.link("frontendJournalsList")
+          show: location.pathname === lh.link("frontendJournalsList")
         },
         settings?.attributes?.calculated?.hasProjectCollections && {
           to: lh.link("frontendProjectCollections"),
@@ -58,7 +58,7 @@ function CollectionNavigation({ settings }) {
           show: true
         }
       ].filter(x => x),
-    [settings, path, t]
+    [settings, location.pathname, t]
   );
 
   const filteredLinks = links

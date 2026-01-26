@@ -33,6 +33,17 @@ export const Wrapper = styled.section`
   padding-block-start: var(--container-padding-block-start);
   padding-block-end: var(--container-padding-block-end);
   background-color: var(--color-base-red20);
+
+  ${({ $contained }) =>
+    $contained &&
+    `
+    --_Inner-box-shadow: none;
+    --_Inner-border-thickness: 3px;
+
+    min-height: auto;
+    flex-grow: 1;
+    background-color: transparent;
+  `}
 `;
 
 export const Inner = styled.div`
@@ -46,7 +57,11 @@ export const Inner = styled.div`
   padding-block-end: calc(0.75 * var(--container-padding-block-end));
   background-color: var(--background-color);
   border-radius: var(--box-border-radius);
-  box-shadow: 0px 12px 32px 3px var(--color-base-red45);
+  border: var(--_Inner-border-thickness) solid var(--color-base-red45);
+  box-shadow: var(
+    --_Inner-box-shadow,
+    0px 12px 32px 3px var(--color-base-red45)
+  );
 `;
 
 export const Container = styled.div`

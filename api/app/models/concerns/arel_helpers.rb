@@ -9,7 +9,7 @@ module ArelHelpers
 
   TEXT_ARRAY = ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Array.new(ActiveRecord::Type::Text.new)
 
-  class_methods do
+  module ClassMethods
     # @!group JSON methods
 
     # Use the `@>` operator to test if the given `attribute` contains `values` (auto-cast to JSONB)
@@ -123,7 +123,7 @@ module ArelHelpers
       end
     end
 
-    alias_method :arel_json_array_length, :arel_json_safe_array_length
+    alias arel_json_array_length arel_json_safe_array_length
 
     # @return [Arel::Nodes::Equality]
     def arel_json_blank_array(attribute)
@@ -347,7 +347,7 @@ module ArelHelpers
       Arel::Nodes::Grouping.new(value)
     end
 
-    alias_method :arel_grouping, :arel_grouped
+    alias arel_grouping arel_grouped
 
     # @api private
     # @param [String] operator

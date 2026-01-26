@@ -1,9 +1,15 @@
-import React, { PureComponent } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useMemo,
+  useCallback
+} from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import get from "lodash/get";
-import { commonActions } from "actions/helpers";
-import connectAndFetch from "utils/connectAndFetch";
+import { requests } from "api";
 import Navigation from "global/components/navigation";
 import HeaderNotifications from "global/components/HeaderNotifications";
 import { FrontendModeContext } from "helpers/contexts";
@@ -11,232 +17,178 @@ import { throttle } from "lodash";
 import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
+import { useFromStore } from "hooks";
 
-class StandaloneHeader extends PureComponent {
-  static displayName = "Layout.StandaloneHeader";
+const BREAKPOINT = 620;
 
-  static mapStateToProps = state => {
-    return {
-      authentication: state.authentication,
-      visibility: state.ui.transitory.visibility,
-      notifications: state.notifications
-    };
-  };
-
-  static propTypes = {
-    dispatch: PropTypes.func,
-    authentication: PropTypes.object,
-    visibility: PropTypes.object,
-    notifications: PropTypes.object,
-    settings: PropTypes.object,
-    alwaysVisible: PropTypes.bool
-  };
-
-  static defaultProps = {
-    alwaysVisible: false
-  };
-
-  static contextType = FrontendModeContext;
-
-  constructor(props) {
-    super(props);
-    this.shimRef = React.createRef();
-    this.fixedRef = React.createRef();
-    this.breakpoint = 620;
-    this.resizeId = null;
-
-    this.commonActions = commonActions(props.dispatch);
-    this.state = {
-      sticky: false,
-      scroll: 0,
-      direction: "down",
-      log: null,
-      mobile: window.innerWidth <= this.breakpoint
-    };
-
-    this.throttleScroll = throttle(this.handleScroll, 250, {
-      leading: true,
-      trailing: true
-    }).bind(this);
+const getScrollTop = () => {
+  if (window.pageYOffset !== undefined) {
+    return window.pageYOffset;
   }
+  return (document.documentElement || document.body.parentNode || document.body)
+    .scrollTop;
+};
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.throttleScroll);
-    window.addEventListener("resize", this.handleResize);
-    this.setShimHeight();
-  }
+export default function StandaloneHeader({ alwaysVisible = false }) {
+  const context = useContext(FrontendModeContext);
+  const settings = useFromStore({
+    requestKey: requests.settings,
+    action: "select"
+  });
 
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.throttleScroll);
-    window.removeEventListener("resize", this.handleResize);
-  }
+  const shimRef = useRef(null);
+  const fixedRef = useRef(null);
+  const resizeIdRef = useRef(null);
 
-  componentDidUpdate() {
-    this.setShimHeight();
-  }
+  const [sticky, setSticky] = useState(false);
+  // Initialize mobile as false to match server render, update in useEffect
+  const [mobile, setMobile] = useState(false);
 
-  setShimHeight() {
-    if (!this.fixedRef.current || !this.shimRef.current) return;
-    const fixedHeight = this.fixedRef.current.offsetHeight;
-    this.shimRef.current.style.height = `${fixedHeight}px`;
-  }
+  const darkMode = context?.project?.darkMode;
+  const alwaysVisibleComputed = !context?.isProjectHomepage
+    ? true
+    : alwaysVisible;
+  const lightTheme = (alwaysVisibleComputed && !darkMode) || !darkMode;
+  const title = context?.project?.titleFormatted;
+  const subtitle = context?.project?.subtitleFormatted;
+  const projectSlug = context?.project?.slug;
+  const projectUrl = projectSlug
+    ? lh.link("frontendProjectDetail", projectSlug)
+    : null;
 
-  maybeLog(direction) {
-    // Set a scroll log on direction change
-    // Note that this.state.direction is the old direction
-    let log = this.state.log;
-    if (this.state.direction !== direction) {
-      log = this.getScrollTop();
+  const directionRef = useRef("down");
+  const logRef = useRef(null);
+  const scrollRef = useRef(0);
+
+  const handleScroll = useCallback(() => {
+    const currentScroll = getScrollTop();
+    const newDirection = currentScroll > scrollRef.current ? "down" : "up";
+    let newLog = logRef.current;
+    if (directionRef.current !== newDirection) {
+      newLog = currentScroll;
+    }
+    const newSticky = currentScroll > 50;
+
+    directionRef.current = newDirection;
+    logRef.current = newLog;
+    scrollRef.current = currentScroll;
+
+    setSticky(newSticky);
+  }, []);
+
+  const throttledScroll = useMemo(
+    () =>
+      throttle(handleScroll, 250, {
+        leading: true,
+        trailing: true
+      }),
+    [handleScroll]
+  );
+
+  const handleResize = useCallback(() => {
+    if (!context?.isProjectHomepage) return null;
+
+    if (resizeIdRef.current) {
+      window.cancelAnimationFrame(resizeIdRef.current);
     }
 
-    return log;
-  }
+    resizeIdRef.current = window.requestAnimationFrame(() => {
+      setMobile(window.innerWidth <= BREAKPOINT);
+    });
+  }, [context?.isProjectHomepage]);
 
-  getScrollTop() {
-    let scrollTop = 0;
-    if (window.pageYOffset !== undefined) {
-      scrollTop = window.pageYOffset;
-    } else {
-      scrollTop = (
-        document.documentElement ||
-        document.body.parentNode ||
-        document.body
-      ).scrollTop;
-    }
-    return scrollTop;
-  }
+  const setShimHeight = useCallback(() => {
+    if (!fixedRef.current || !shimRef.current) return;
+    const fixedHeight = fixedRef.current.offsetHeight;
+    shimRef.current.style.height = `${fixedHeight}px`;
+  }, []);
 
-  handleScroll() {
-    const direction = this.getScrollTop() > this.state.scroll ? "down" : "up";
-    const log = this.maybeLog(direction);
-    const state = {
-      direction,
-      log,
-      scroll: this.getScrollTop()
+  useEffect(() => {
+    setMobile(window.innerWidth <= BREAKPOINT);
+
+    window.addEventListener("scroll", throttledScroll);
+    window.addEventListener("resize", handleResize);
+    setShimHeight();
+
+    return () => {
+      window.removeEventListener("scroll", throttledScroll);
+      window.removeEventListener("resize", handleResize);
     };
-    state.sticky = state.scroll > 50;
-    this.setState(state);
-  }
+  }, [throttledScroll, handleResize, setShimHeight]);
 
-  handleResize = () => {
-    if (!this.context.isProjectHomepage) return null;
+  useEffect(() => {
+    setShimHeight();
+  });
 
-    if (this.resizeId) {
-      window.cancelAnimationFrame(this.resizeId);
-    }
+  const visible = (sticky && !alwaysVisibleComputed) || mobile;
+  const hidden = !sticky && !alwaysVisibleComputed && !mobile;
 
-    this.resizeId = window.requestAnimationFrame(() => {
-      this.setState({ mobile: window.innerWidth <= this.breakpoint });
-    });
-  };
+  const wrapperClasses = classNames({
+    "standalone-header": true,
+    "standalone-header--visible": visible,
+    "standalone-header--hidden": hidden,
+    "standalone-header--light": lightTheme,
+    "standalone-header--dark": !lightTheme
+  });
 
-  get darkMode() {
-    return this.context.project.darkMode;
-  }
+  const innerClasses = classNames({
+    "standalone-header__inner": true
+  });
 
-  get backgroundImage() {
-    return this.context.project.heroStyles;
-  }
+  const headingClasses = classNames({
+    "standalone-header__header": true
+  });
 
-  get lightTheme() {
-    if (this.alwaysVisible && !this.darkMode) return true;
-    if (!this.darkMode) return true;
-    return false;
-  }
+  const offset = get(settings, "attributes.theme.headerOffset");
+  const navStyle = offset
+    ? { position: "relative", top: parseInt(offset, 10) }
+    : {};
 
-  get title() {
-    return this.context.project.titleFormatted;
-  }
+  if (!projectUrl) return null;
 
-  get subtitle() {
-    return this.context.project.subtitleFormatted;
-  }
-
-  get projectSlug() {
-    return this.context.project.slug;
-  }
-
-  get alwaysVisible() {
-    if (!this.context.isProjectHomepage) return true;
-    return this.props.alwaysVisible;
-  }
-
-  get projectUrl() {
-    return lh.link("frontendProjectDetail", this.context.project.slug);
-  }
-
-  render() {
-    const { sticky, mobile } = this.state;
-    const visible = (sticky && !this.alwaysVisible) || mobile;
-    const hidden = !sticky && !this.alwaysVisible && !mobile;
-
-    const wrapperClasses = classNames({
-      "standalone-header": true,
-      "standalone-header--visible": visible,
-      "standalone-header--hidden": hidden,
-      "standalone-header--light": this.lightTheme,
-      "standalone-header--dark": !this.lightTheme
-    });
-
-    const innerClasses = classNames({
-      "standalone-header__inner": true
-    });
-
-    const headingClasses = classNames({
-      "standalone-header__header": true
-    });
-
-    const offset = get(this.props, "settings.attributes.theme.headerOffset");
-    const navStyle = offset
-      ? { position: "relative", top: parseInt(offset, 10) }
-      : {};
-
-    return (
-      <>
-        <div className={wrapperClasses}>
-          <SetCSSProperty
-            measurement="height"
-            propertyName="--standalone-header-height"
-          >
-            <div className={innerClasses} ref={this.fixedRef}>
-              <div className={headingClasses} aria-hidden={hidden}>
-                <Link
-                  to={this.projectUrl}
-                  className="standalone-header__title-link"
-                >
-                  {this.title && (
-                    <div
-                      className="standalone-header__title"
-                      dangerouslySetInnerHTML={{ __html: this.title }}
-                    />
-                  )}
-                  {this.subtitle && (
-                    <div
-                      className="standalone-header__subtitle"
-                      dangerouslySetInnerHTML={{ __html: this.subtitle }}
-                    />
-                  )}
-                </Link>
-              </div>
-              <Navigation.Primary
-                desktopStyle={navStyle}
-                commonActions={this.commonActions}
-                authentication={this.props.authentication}
-                visibility={this.props.visibility}
-                mode="frontend"
-                standaloneMode
-                darkTheme={!this.lightTheme}
-              />
+  return (
+    <>
+      <div className={wrapperClasses}>
+        <SetCSSProperty
+          measurement="height"
+          propertyName="--standalone-header-height"
+        >
+          <div className={innerClasses} ref={fixedRef}>
+            <div className={headingClasses} aria-hidden={hidden}>
+              <Link to={projectUrl} className="standalone-header__title-link">
+                {title && (
+                  <div
+                    className="standalone-header__title"
+                    dangerouslySetInnerHTML={{ __html: title }}
+                  />
+                )}
+                {subtitle && (
+                  <div
+                    className="standalone-header__subtitle"
+                    dangerouslySetInnerHTML={{ __html: subtitle }}
+                  />
+                )}
+              </Link>
             </div>
-          </SetCSSProperty>
-        </div>
-        {this.alwaysVisible && (
-          <div className="standalone-header__shim" ref={this.shimRef} />
-        )}
-        <HeaderNotifications scope="global" />
-      </>
-    );
-  }
+            <Navigation.Primary
+              desktopStyle={navStyle}
+              mode="frontend"
+              standaloneMode
+              darkTheme={!lightTheme}
+            />
+          </div>
+        </SetCSSProperty>
+      </div>
+      {alwaysVisibleComputed && (
+        <div className="standalone-header__shim" ref={shimRef} />
+      )}
+      <HeaderNotifications scope="global" />
+    </>
+  );
 }
 
-export default connectAndFetch(StandaloneHeader);
+StandaloneHeader.displayName = "Layout.StandaloneHeader";
+
+StandaloneHeader.propTypes = {
+  alwaysVisible: PropTypes.bool
+};

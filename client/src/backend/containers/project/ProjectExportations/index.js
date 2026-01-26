@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import isArray from "lodash/isArray";
 import { useFetch, useListQueryParams, useApiCallback } from "hooks";
@@ -19,9 +18,10 @@ import Authorize from "hoc/Authorize";
 import * as Styled from "./styles";
 
 export default function ProjectExportations({
-  project,
   projectExportationsPerPage = 20
 }) {
+  const outletContext = useOutletContext() || {};
+  const { project } = outletContext;
   const { t } = useTranslation();
 
   const { pagination } = useListQueryParams({
@@ -69,7 +69,7 @@ export default function ProjectExportations({
 
   const active = false;
 
-  if (!projectExportations) return null;
+  if (!project || !projectExportations) return null;
 
   const hasExportTargets = !!exportTargets?.length;
 
@@ -78,7 +78,7 @@ export default function ProjectExportations({
       entity={project}
       ability="manageProjectExportations"
       failureNotification
-      failureRedirect={lh.link("backendProject", project.id)}
+      failureRedirect={lh.link("backendProjects")}
     >
       <Styled.Form
         className="form-secondary"
@@ -163,8 +163,3 @@ export default function ProjectExportations({
 }
 
 ProjectExportations.displayName = "Project.Exportations.List";
-
-ProjectExportations.propTypes = {
-  project: PropTypes.object.isRequired,
-  projectExportationsPerPage: PropTypes.number
-};

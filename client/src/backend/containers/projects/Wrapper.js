@@ -1,35 +1,22 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { childRoutes } from "helpers/router";
-import navigation from "helpers/router/navigation";
+import { Outlet } from "react-router-dom";
 import Authorize from "hoc/Authorize";
-import { useRedirectToFirstMatch } from "hooks";
 
-export default function ProjectsWrapper({ route }) {
+export default function ProjectsWrapper() {
   const { t } = useTranslation();
-  const secondaryLinks = navigation.projects();
-
-  useRedirectToFirstMatch({
-    route: "backendProjects",
-    candidates: secondaryLinks
-  });
 
   return (
     <Authorize
       ability="update"
       entity={["project"]}
-      failureFatalError={{
+      failureNotification={{
         body: t("projects.unauthorized")
       }}
+      failureRedirect
     >
       <main id="skip-to-main" tabIndex={-1} className="backend-detail">
-        {childRoutes(route)}
+        <Outlet />
       </main>
     </Authorize>
   );
 }
-
-ProjectsWrapper.propTypes = {
-  route: PropTypes.object
-};

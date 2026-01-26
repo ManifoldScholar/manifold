@@ -335,6 +335,31 @@ RSpec.describe Project, type: :model do
     end
   end
 
+  context "when filtering by collection and searching" do
+    let_it_be(:collected_project, refind: true) { FactoryBot.create(:project, title: "Found Project", draft: false) }
+    let_it_be(:other_project, refind: true) { FactoryBot.create(:project, title: "Not Found Project", draft: false) }
+
+    let_it_be(:project_collection, refind: true) do
+      FactoryBot.create(:project_collection, :manual).tap do |project_collection|
+        FactoryBot.create(:collection_project, project_collection:, project: collected_project)
+      end
+    end
+
+    let(:filters) do
+      {
+        collection_order: project_collection.slug,
+        keyword: "Found"
+      }
+    end
+
+    it "returns the right projects", :aggregate_failures do
+      results = Project.filtered(**filters)
+
+      expect(results).to contain_exactly(collected_project)
+      expect(results).not_to include(other_project)
+    end
+  end
+
   context "it correctly scopes the visible projects" do
     before do
       FactoryBot.create(:project, draft: false)

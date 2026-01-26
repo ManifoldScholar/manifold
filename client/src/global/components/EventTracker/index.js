@@ -43,17 +43,16 @@ export default class EventTracker extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.context.track(this.event);
+    this.maybeTrack(this.event);
   }
 
   componentWillUnmount() {
-    this.maybeTrackLeave();
+    this.maybeTrack(this.leaveEvent);
   }
 
-  maybeTrackLeave() {
-    const event = this.leaveEvent;
+  maybeTrack(event) {
     if (!event.resourceType || !event.resourceId) return;
-    this.context.track(this.leaveEvent);
+    this.context.track(event);
   }
 
   render() {

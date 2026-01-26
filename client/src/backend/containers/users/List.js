@@ -22,6 +22,7 @@ import {
   SelectAll,
   BulkActionButtons
 } from "backend/components/list/EntitiesList/List/bulkActions";
+import Authorize from "hoc/Authorize";
 
 function UsersListContainer({
   confirm,
@@ -98,54 +99,67 @@ function UsersListContainer({
   const currentPageIds = users?.map(a => a.id);
 
   return (
-    <EntitiesList
-      entityComponent={UserRow}
-      entityComponentProps={{
-        bulkActionsActive,
-        bulkSelection,
-        addItem,
-        removeItem
+    <Authorize
+      ability="update"
+      entity={["user"]}
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "users"
+        })
       }}
-      title={t("records.users.header")}
-      titleStyle="bar"
-      entities={users}
-      unit={unit}
-      pagination={usersMeta.pagination}
-      showCount={
-        bulkActionsActive ? (
-          <SelectAll
-            pagination={usersMeta.pagination}
-            unit={unit}
-            onSelect={handleSelectAll}
-            onClear={resetBulkSelection}
-            onSelectPage={() => addPage(currentPageIds)}
-            allSelected={!!bulkSelection.filters}
-            idsSelectedCount={bulkSelection.ids.length}
-          />
-        ) : (
-          true
-        )
-      }
-      search={<Search {...searchProps} setParam={setParam} onReset={onReset} />}
-      buttons={[
-        <BulkActionButtons
-          active={bulkActionsActive}
-          onBulkDelete={onBulkDelete}
-          toggleBulkActions={toggleBulkActions}
-          actionsDisabled={bulkSelectionEmpty}
-        />,
-        ...(!bulkActionsActive
-          ? [
-              <Button
-                path={lh.link("backendRecordsUserNew")}
-                text={t("records.users.button_label")}
-                authorizedFor="user"
-                type="add"
-              />
-            ]
-          : [])
-      ]}
-    />
+      failureRedirect
+    >
+      <EntitiesList
+        entityComponent={UserRow}
+        entityComponentProps={{
+          bulkActionsActive,
+          bulkSelection,
+          addItem,
+          removeItem
+        }}
+        title={t("records.users.header")}
+        titleStyle="bar"
+        entities={users}
+        unit={unit}
+        pagination={usersMeta.pagination}
+        showCount={
+          bulkActionsActive ? (
+            <SelectAll
+              pagination={usersMeta.pagination}
+              unit={unit}
+              onSelect={handleSelectAll}
+              onClear={resetBulkSelection}
+              onSelectPage={() => addPage(currentPageIds)}
+              allSelected={!!bulkSelection.filters}
+              idsSelectedCount={bulkSelection.ids.length}
+            />
+          ) : (
+            true
+          )
+        }
+        search={
+          <Search {...searchProps} setParam={setParam} onReset={onReset} />
+        }
+        buttons={[
+          <BulkActionButtons
+            active={bulkActionsActive}
+            onBulkDelete={onBulkDelete}
+            toggleBulkActions={toggleBulkActions}
+            actionsDisabled={bulkSelectionEmpty}
+          />,
+          ...(!bulkActionsActive
+            ? [
+                <Button
+                  path={lh.link("backendRecordsUserNew")}
+                  text={t("records.users.button_label")}
+                  authorizedFor="user"
+                  type="add"
+                />
+              ]
+            : [])
+        ]}
+      />
+    </Authorize>
   );
 }
 

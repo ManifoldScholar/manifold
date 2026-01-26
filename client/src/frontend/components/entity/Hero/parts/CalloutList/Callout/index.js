@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { getCalloutParams } from "./params";
@@ -27,7 +26,6 @@ export default function Callout({
   showErrors = false,
   isLink = false,
   buttonSize,
-  darkMode = false,
   track
 }) {
   const { t } = useTranslation();
@@ -56,7 +54,7 @@ export default function Callout({
     url,
     title,
     as,
-    primary,
+    background = "neutral",
     mismatch,
     analyticsEvent
   } = getCalloutParams(callout, type, isLink, t);
@@ -78,17 +76,14 @@ export default function Callout({
     <Button
       as={as === "UserLink" ? UserLink : as}
       {...navProps(as, url, type)}
+      label={title}
       size={buttonSize}
-      dark={darkMode}
-      secondary={!primary}
-      icon={icon}
-      iconSize={iconSize}
+      background={background}
+      preIcon={icon}
       {...(analyticsEvent && track
         ? { onClick: () => track(analyticsEvent) }
         : {})}
-    >
-      {title}
-    </Button>
+    />
   );
 }
 
@@ -98,7 +93,6 @@ Callout.propTypes = {
   callout: PropTypes.object.isRequired,
   showErrors: PropTypes.bool,
   isLink: PropTypes.bool,
-  darkMode: PropTypes.bool,
   buttonSize: PropTypes.oneOf(["sm", "lg"]),
   track: PropTypes.func
 };

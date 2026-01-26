@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Link as LinkComponent } from "react-router-dom";
 import { respond, listUnstyled, rgba, fluidScale } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
-import { Wrapper as Thumbnail } from "frontend/components/resourceish/Thumbnail/styles";
+import { Wrapper as Thumbnail } from "frontend/components/resource/Thumbnail/styles";
 
 const breakpoint = breakpoints[60];
 const maxGap = "25px";

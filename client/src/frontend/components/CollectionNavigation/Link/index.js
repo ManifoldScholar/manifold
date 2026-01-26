@@ -1,15 +1,18 @@
-import React from "react";
 import PropTypes from "prop-types";
-import IconComposer from "global/components/utility/IconComposer";
-import * as Styled from "./styles";
+import { Link as ReactRouterLink } from "react-router-dom";
+import Button from "global/components/atomic/Button";
 
 function Link({ to, label, icon }) {
   return (
-    <Styled.Link to={to}>
-      <IconComposer icon={icon} size="32" />
-      <Styled.Label>{label}</Styled.Label>
-      <IconComposer icon="arrowLongRight16" size="default" />
-    </Styled.Link>
+    <Button
+      as={ReactRouterLink}
+      to={to}
+      label={label}
+      preIcon={icon}
+      postIcon="arrowLongRight16"
+      size="md"
+      background="neutral"
+    />
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import get from "lodash/get";
 import CookieHelper from "helpers/cookie/Browser";
 import config from "config";
@@ -37,13 +37,20 @@ function getTokens() {
 }
 
 export default function useManifoldAnalytics(location, settings, dispatch) {
-  const { currentUser } = useFromStore("authentication") ?? {};
+  const { currentUser } = useFromStore({ path: "authentication" }) ?? {};
+  const [consentManifoldAnalytics, setConsentManifoldAnalytics] = useState(
+    currentUser?.attributes?.consentManifoldAnalytics || false
+  );
 
-  const anonConsent = JSON.parse(cookie.read("anonAnalyticsConsent") ?? "{}");
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-  const consentManifoldAnalytics =
-    currentUser?.attributes?.consentManifoldAnalytics ||
-    anonConsent?.consentManifoldAnalytics;
+    const anonConsent = JSON.parse(cookie.read("anonAnalyticsConsent") ?? "{}");
+    const consent =
+      currentUser?.attributes?.consentManifoldAnalytics ||
+      anonConsent?.consentManifoldAnalytics;
+    setConsentManifoldAnalytics(consent);
+  }, [currentUser]);
 
   useEffect(() => {
     if (manifoldAnalyticsEnabled(settings) && consentManifoldAnalytics) {

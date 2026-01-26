@@ -1,4 +1,3 @@
-import React from "react";
 import Feature from "./Feature";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { useFromStore } from "hooks";
@@ -7,7 +6,7 @@ import EntityCollection from "frontend/components/entity/Collection";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 
 export default function Content() {
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   const { hasVisibleHomeProjectCollections, hasVisibleProjects } =
     settings?.attributes?.calculated ?? {};

@@ -1,6 +1,15 @@
-import { outlineOnFocus, setHoverStyle } from "../mixins/appearance";
+import {
+  outlineOnFocus,
+  setHoverStyle,
+  transparentize,
+  defaultFocusStyle
+} from "../mixins";
 
 export default `
+  ::view-transition-group(root) {
+    animation-duration: 250ms;
+  }
+
   /* Default hover styles */
   button,
   [role="button"],
@@ -15,7 +24,8 @@ export default `
   a,
   input,
   select,
-  [data-react-beautiful-dnd-drag-handle] {
+  [data-react-beautiful-dnd-drag-handle],
+  .recharts-surface {
     ${outlineOnFocus()}
   }
 
@@ -26,5 +36,39 @@ export default `
   .manicon-svg {
     display: inline-block;
     vertical-align: middle;
+  }
+
+  dialog {
+    &:focus-visible {
+      ${defaultFocusStyle}
+    }
+
+    &,
+    &::backdrop {
+      transition:
+        display 0.2s allow-discrete,
+        overlay 0.2s allow-discrete,
+        opacity 0.2s ease;
+    }
+
+    &::backdrop {
+      background-color: ${transparentize("neutralBlack", 0.3)};
+    }
+
+    /* On Stage */
+    &[open] {
+      opacity: 1;
+
+      &::backdrop {
+        opacity: 1;
+      }
+    }
+
+    @starting-style {
+      &[open],
+      &[open]::backdrop {
+        opacity: 0;
+      }
+    }
   }
 `;

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
@@ -18,26 +18,28 @@ export default function ReturnMenuBody({
   hidePanel
 }) {
   const context = useContext(FrontendModeContext);
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
   const { t } = useTranslation();
 
   return (
     <Styled.Menu className={className}>
       <Styled.List>
-        <Styled.Item>
-          <Styled.ItemLink to={returnUrl} onClick={hidePanel}>
-            <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
-            <Styled.LinkText>
-              {isJournalArticle
-                ? t("reader.menus.return.issue_home")
-                : t("reader.menus.return.project_home")}
-            </Styled.LinkText>
-            <Styled.EntityTitle {...maybeHtml(entityTitle)}>
-              {maybeReactNode(entityTitle)}
-            </Styled.EntityTitle>
-          </Styled.ItemLink>
-        </Styled.Item>
+        {returnUrl && (
+          <Styled.Item>
+            <Styled.ItemLink to={returnUrl} onClick={hidePanel}>
+              <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
+              <Styled.LinkText>
+                {isJournalArticle
+                  ? t("reader.menus.return.issue_home")
+                  : t("reader.menus.return.project_home")}
+              </Styled.LinkText>
+              <Styled.EntityTitle {...maybeHtml(entityTitle)}>
+                {maybeReactNode(entityTitle)}
+              </Styled.EntityTitle>
+            </Styled.ItemLink>
+          </Styled.Item>
+        )}
         {context.isLibrary && !isLibraryDisabled && (
           <Styled.Item>
             <Styled.ItemLink
@@ -92,9 +94,9 @@ export default function ReturnMenuBody({
 ReturnMenuBody.displayName = "ReturnMenuBody";
 
 ReturnMenuBody.propTypes = {
-  returnUrl: PropTypes.string.isRequired,
-  projectTitle: PropTypes.string.isRequired,
-  toggleSignInUpOverlay: PropTypes.func.isRequired,
+  returnUrl: PropTypes.string,
+  projectTitle: PropTypes.string,
+  toggleSignInUpOverlay: PropTypes.func,
   moreLink: PropTypes.string,
   settings: PropTypes.object,
   className: PropTypes.string

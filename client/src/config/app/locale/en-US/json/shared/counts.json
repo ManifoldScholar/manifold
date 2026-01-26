@@ -22,6 +22,12 @@
     "text_highlights_one": "This text has {{count}} highlight",
     "text_highlights_other": "This text has {{count}} highlights",
     "uncategorized_issues_one": " and <strong>{{count}}</strong> additional issue",
-    "uncategorized_issues_other": " and <strong>{{count}}</strong> additional issues"
+    "uncategorized_issues_other": " and <strong>{{count}}</strong> additional issues",
+    "project_one": "{{count}} Project",
+    "project_other": "{{count}} Projects",
+    "volume_one": "{{count}} Volume",
+    "volume_other": "{{count}} Volumes",
+    "issue_one": "{{count}} Issue",
+    "issue_other": "{{count}} Issues"
   }
 }
