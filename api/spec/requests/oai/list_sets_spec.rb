@@ -9,19 +9,19 @@ RSpec.describe "OAI PMH List Sets", type: :request do
   it { is_expected.to be_an_instance_of OAI::ListSetsResponse }
 
   it "finds default sets" do
-    expect(response.count).to eq 1
+    expect(response.count).to eq 2
   end
 
   context "when there are multiple project collections" do
     let_it_be(:num_collections) { 5 }
     let_it_be(:collections) { FactoryBot.create_list :project_collection, 5 }
     it "finds a set for every project collection" do
-      expect(response.count).to eq(num_collections + 1) # The "projects" set should always exist
+      expect(response.count).to eq(num_collections + 2) # The "projects" and "journals" sets should always exist
     end
 
     it "does not find excluded collections" do
       FactoryBot.create_list :project_collection, 3, exclude_from_oai: true
-      expect(response.count).to eq(num_collections + 1) # The "projects" set should always exist
+      expect(response.count).to eq(num_collections + 2) # The "projects" and "journals" sets should always exist
     end
   end
 end
