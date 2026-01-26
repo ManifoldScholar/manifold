@@ -199,6 +199,7 @@ RSpec.describe "Projects API", type: :request do
           it("contains the updated hashtag") { expect_updated_param("hashtag", "the_hashtag") }
           it("contains the updated description") { expect_updated_param("description", "the description") }
           it("contains the updated tag list") { expect_updated_param("tagList", %w(rowan dog puppy), %w(rowan dog puppy)) }
+          it("contains the updated exclude_from_oai value") { expect_updated_param("excludeFromOAI", "true", true) }
         end
 
         it "has a 200 OK status code" do
