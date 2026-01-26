@@ -82,7 +82,7 @@ module Validation
                   :restricted_access_body, :open_access, :disable_engagement,
                   :journal_issue_pending_sort_title, :journal_issue_number, :pending_slug,
                   :social_title, attachment(:social_image), :remove_social_image,
-                  :social_description]
+                  :social_description, :exclude_from_oai]
     relationships = [:collaborators, :creators, :contributors, :subjects, :journal_volume]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -173,7 +173,7 @@ module Validation
                   :pending_slug, :homepage_start_date, :homepage_end_date,
                   :homepage_count, :social_description, attachment(:custom_icon),
                   attachment(:hero), :hero_layout, :remove_hero, :remove_custom_icon,
-                  :social_title, attachment(:social_image), :remove_social_image]
+                  :social_title, attachment(:social_image), :remove_social_image, :exclude_from_oai]
     relationships = [:projects, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
