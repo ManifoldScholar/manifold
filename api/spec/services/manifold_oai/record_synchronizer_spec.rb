@@ -91,4 +91,23 @@ RSpec.describe ManifoldOAI::RecordSynchronizer do
       expect { result }.to change { ManifoldOAISet.find_by(spec: "journals")&.records&.count || 0 }.by(1)
     end
   end
+
+  describe "linking projects to directory set" do
+    let(:project) { FactoryBot.create(:project) }
+    subject(:result) { described_class.new(project).call }
+
+    it "links the project to the directory set" do
+      expect { result }.to change { ManifoldOAISet.find_by(spec: "directory")&.records&.count || 0 }.by(1)
+    end
+
+    context "the project is excluded from directory" do
+      before do
+        project.update(exclude_from_directory: true)
+      end
+
+      it "does not link the project to the directory set" do
+        expect { result }.not_to change { ManifoldOAISet.find_by(spec: "directory")&.records&.count || 0 }
+      end
+    end
+  end
 end
