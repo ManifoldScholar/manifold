@@ -11,5 +11,11 @@ module SettingSections
 
       !previous_oai.directory_enabled? && directory_enabled?
     end
+
+    def directory_enabled_changed_to_false?(previous_oai)
+      return false if previous_oai.nil?
+
+      previous_oai.directory_enabled? && !directory_enabled?
+    end
   end
 end

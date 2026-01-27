@@ -132,5 +132,11 @@ module V1
       google_private_key: Types::String,
       smtp_settings_password: Types::String
     )
+
+    typed_section_attribute :oai, Types::Hash.schema(
+      repository_name: Types::String,
+      admin_email: Types::Serializer::Email,
+      directory_enabled: Types::Bool
+    )
   end
 end
