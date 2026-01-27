@@ -22,6 +22,8 @@ module ManifoldOAI
 
       maybe_link_journal!
 
+      maybe_link_to_directory!
+
       Success(record)
     end
 
@@ -68,6 +70,7 @@ module ManifoldOAI
       @record = ManifoldOAIRecord.where(source:).first_or_initialize
       @projects_set = ManifoldOAISet.fetch_projects!
       @journals_set = ManifoldOAISet.fetch_journals!
+      @directory_set = ManifoldOAISet.fetch_directory!
     end
 
     # @return [void]
@@ -86,6 +89,24 @@ module ManifoldOAI
       # :nocov:
 
       @journals_set.link! record
+    end
+
+    # @return [void]
+    def maybe_link_to_directory!
+      # :nocov:
+      return if @directory_set.nil?
+      # :nocov:
+
+      case source
+      when Project
+        # :nocov:
+        return if source.journal_issue_id.present?
+        # :nocov:
+
+        @directory_set.link! record
+      when Journal
+        @directory_set.link! record
+      end
     end
   end
 end

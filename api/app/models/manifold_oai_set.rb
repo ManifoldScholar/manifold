@@ -45,6 +45,18 @@ class ManifoldOAISet < ApplicationRecord
     return self
   end
 
+  # @api private
+  # @return [ManifoldOAISet]
+  def normalize_directory_set!
+    self.source = nil
+    self.name = "Directory"
+    self.description = "A list of projects and journals in this installation that should be included in the Manifold Directory"
+
+    save!
+
+    return self
+  end
+
   class << self
     # @return [ManifoldOAISet]
     def fetch_projects!
@@ -54,6 +66,13 @@ class ManifoldOAISet < ApplicationRecord
     # @return [ManifoldOAISet]
     def fetch_journals!
       where(spec: "journals").first_or_initialize.tap(&:normalize_journals_set!)
+    end
+
+    # @return [ManifoldOAISet, nil]
+    def fetch_directory!
+      return nil unless Settings.instance.oai.directory_enabled?
+
+      where(spec: "directory").first_or_initialize.tap(&:normalize_directory_set!)
     end
   end
 end
