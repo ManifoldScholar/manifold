@@ -36,7 +36,6 @@ module ManifoldOAI
 
     def dc_to_internal_metadata_map
       {
-        title: :series_title,
         rights: :rights,
         publisher: :publisher,
         rightsHolder: :rights_holder,
@@ -56,6 +55,7 @@ module ManifoldOAI
             http://www.openarchives.org/OAI/2.0/oai_dc.xsd
           }.squish
         ) do
+          xml["oai_dc"].send("title", source.title)
           dc_to_internal_metadata_map.each do |key, value|
             xml["oai_dc"].send(key, metadata[value])
           end

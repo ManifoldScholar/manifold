@@ -12,7 +12,7 @@ RSpec.describe ManifoldOAI::RecordSynchronizer do
     it { is_expected.to be_success }
 
     it "has title" do
-      expect(result.success.oai_dc_content).to have_xml('//oai_dc:title', project.metadata[:subject_title])
+      expect(result.success.oai_dc_content).to have_xml('//oai_dc:title', project.title)
     end
 
     it "has rights" do
