@@ -2801,7 +2801,8 @@ CREATE TABLE public.settings (
     favicon_data jsonb,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     ingestion jsonb DEFAULT '{}'::jsonb,
-    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL
+    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL,
+    oai jsonb DEFAULT '{"admin_email": "admin@manifold.app", "repository_name": "Manifold", "directory_enabled": true}'::jsonb
 );
 
 
@@ -8031,6 +8032,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20251203230443'),
 ('20251203231940'),
 ('20260126221732'),
-('20260127162821');
+('20260127162821'),
+('20260127185424');
 
 
