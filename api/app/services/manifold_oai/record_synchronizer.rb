@@ -34,16 +34,17 @@ module ManifoldOAI
       @record.oai_dc_content = extract_oai_dc_from_source
     end
 
-    def dc_to_internal_metadata_map
+    def dc_identifier_metadata_map
       {
-        rights: :rights,
-        publisher: :publisher,
-        rightsHolder: :rights_holder,
+        "doi" => :doi,
+        "isbn" => :isbn,
+        "issn" => :issn,
       }
     end
 
     def extract_oai_dc_from_source
       metadata = source.metadata
+      subjects = source.subjects
 
       builder = Nokogiri::XML::Builder.new do |xml|
         xml["oai_dc"].dc(
@@ -55,9 +56,26 @@ module ManifoldOAI
             http://www.openarchives.org/OAI/2.0/oai_dc.xsd
           }.squish
         ) do
-          xml["oai_dc"].send("title", source.title)
-          dc_to_internal_metadata_map.each do |key, value|
-            xml["oai_dc"].send(key, metadata[value])
+          xml["dc"].title(source.title)
+          xml["dc"].title(source.subtitle) if source.subtitle.present?
+          xml["dc"].description(source.description) if source.description.present?
+          xml["dc"].creator(source.creator_names)
+          xml["dc"].date(source.publication_date.iso8601) if source.respond_to?(:publication_date) && source.publication_date.present?
+          xml["dc"].publisher(metadata[:publisher]) if metadata[:publisher].present?
+          xml["dc"].rights(metadata[:rights]) if metadata[:rights].present?
+          xml["dc"].rights(metadata[:rights_holder]) if metadata[:rights_holder].present?
+
+          dc_identifier_metadata_map.each do |prefix, value|
+            xml["dc"].identifier("#{prefix}:#{metadata[value]}") if metadata[value].present?
+          end
+
+          if source.avatar.present?
+            avatar_url = source.avatar_styles[:medium_square]
+            xml["dc"].relation("Cover Image: #{avatar_url}") if avatar_url.present?
+          end
+
+          subjects.each do |subject|
+            xml["dc"].subject(subject.name)
           end
         end
       end
