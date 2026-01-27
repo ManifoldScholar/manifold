@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OAI
   class SyncDirectorySetJob < ApplicationJob
     queue_as :default
