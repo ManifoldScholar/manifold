@@ -95,6 +95,26 @@ function JournalPropertiesContainer() {
                 />
                 <Form.Switch
                   wide
+                  label={t("journals.forms.properties.exclude_from_oai_label")}
+                  name="attributes[excludeFromOAI]"
+                  instructions={t(
+                    "journals.forms.properties.exclude_from_oai_instructions"
+                  )}
+                />
+                {!getModelValue("attributes[excludeFromOAI]") && (
+                  <Form.Switch
+                    wide
+                    label={t(
+                      "journals.forms.properties.exclude_from_directory_label"
+                    )}
+                    name="attributes[excludeFromDirectory]"
+                    instructions={t(
+                      "journals.forms.properties.exclude_from_directory_instructions"
+                    )}
+                  />
+                )}
+                <Form.Switch
+                  wide
                   label={t("journals.forms.properties.show_home_label")}
                   name="attributes[showOnHomepage]"
                   instructions={t(
