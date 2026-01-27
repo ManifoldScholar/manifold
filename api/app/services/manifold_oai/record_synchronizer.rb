@@ -115,16 +115,29 @@ module ManifoldOAI
       return if @directory_set.nil?
       # :nocov:
 
-      case source
-      when Project
-        # :nocov:
-        return if source.journal_issue_id.present?
-        # :nocov:
+      should_exclude = source.exclude_from_directory ||
+                      (source.is_a?(Project) && source.journal_issue_id.present?)
 
-        @directory_set.link! record
-      when Journal
-        @directory_set.link! record
+      if should_exclude
+        # Remove from directory set if previously linked
+        unlink_from_directory!
+      else
+        # Add to directory set
+        case source
+        when Project, Journal
+          @directory_set.link! record
+        end
       end
+    end
+
+    # @return [void]
+    def unlink_from_directory!
+      return if @directory_set.nil? || record.nil?
+
+      ManifoldOAISetLink.where(
+        manifold_oai_set: @directory_set,
+        manifold_oai_record: record
+      ).destroy_all
     end
   end
 end
