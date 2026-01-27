@@ -196,6 +196,13 @@
       "submit_label": "Save Export Target",
       "sftp_key_tag": "SFTP Key",
       "sftp_password_tag": "$t(settings.export_targets.password_label)"
+    },
+    "oai": {
+      "header": "OAI-PMH",
+      "repository_name_label": "Repository Name",
+      "admin_email_label": "Admin Email",
+      "directory_enabled_label": "Enable Directory Feed",
+      "directory_enabled_instructions": "Expose content from this instance for publication in the Manifold directory on manifoldapp.org"
     }
   }
 }
