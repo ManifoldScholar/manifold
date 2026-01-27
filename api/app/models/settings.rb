@@ -36,6 +36,7 @@ class Settings < ApplicationRecord
 
   after_update :update_oauth_providers!
   after_update :enqueue_directory_sync, if: :oai_directory_enabled?
+  after_update :delete_directory_set, if: :oai_directory_disabled?
 
   # @!group Derived Settings
 
@@ -196,7 +197,18 @@ class Settings < ApplicationRecord
     new_oai.directory_enabled_changed_to_true?(old_oai)
   end
 
+  def oai_directory_disabled?
+    return false unless saved_change_to_oai?
+
+    old_oai, new_oai = saved_change_to_oai
+    new_oai.directory_enabled_changed_to_false?(old_oai)
+  end
+
   def enqueue_directory_sync
     OAI::SyncDirectorySetJob.perform_later
+  end
+
+  def delete_directory_set
+    ManifoldOAISet.where(spec: "directory").destroy_all
   end
 end
