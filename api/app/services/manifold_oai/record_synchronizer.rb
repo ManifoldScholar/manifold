@@ -49,10 +49,12 @@ module ManifoldOAI
           }.squish
         ) do
           xml["dc"].identifier(source.canonical_url)
+          xml["dc"].type(source.model_name.name)
           xml["dc"].title(source.title)
           xml["dc"].title(source.subtitle) if source.subtitle.present?
           xml["dc"].description(source.description) if source.description.present?
           xml["dc"].date(source.publication_date.iso8601) if source.respond_to?(:publication_date) && source.publication_date.present?
+          xml["dc"].date("info:eu-repo/date/updatedAt/#{source.updated_at.iso8601}")
           xml["dc"].publisher(metadata[:publisher]) if metadata[:publisher].present?
           xml["dc"].rights(metadata[:rights]) if metadata[:rights].present?
           xml["dc"].rights(metadata[:rights_holder]) if metadata[:rights_holder].present?
