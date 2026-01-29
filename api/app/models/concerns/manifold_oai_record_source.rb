@@ -42,7 +42,7 @@ module ManifoldOAIRecordSource
 
   def canonical_url
     client_url = Rails.configuration.manifold.url
-    route = self.model_name.plural
-    "#{client_url}/#{route}/#{self.slug}"
+    route = model_name.plural
+    "#{client_url}/#{route}/#{slug}"
   end
 end
