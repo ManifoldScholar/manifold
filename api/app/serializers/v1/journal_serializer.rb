@@ -41,6 +41,7 @@ module V1
     typed_attribute :logo_alt_text, Types::String.optional
     typed_attribute :logo_meta, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :entitlement_subject_url, Types::String.meta(read_only: true)
+    typed_attribute :exclude_from_directory, Types::Bool
 
     typed_has_many :recent_journal_volumes, serializer: ::V1::JournalVolumeSerializer, record_type: "journalVolume"
     typed_has_many :recent_journal_issues, serializer: ::V1::JournalIssueSerializer, record_type: "journalIssue"

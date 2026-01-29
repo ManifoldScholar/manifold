@@ -6,7 +6,6 @@ module V1
       extend ActiveSupport::Concern
       included do
         typed_attribute :exclude_from_oai, Types::Bool
-        typed_attribute :exclude_from_directory, Types::Bool
       end
     end
   end
