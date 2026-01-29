@@ -39,4 +39,10 @@ module ManifoldOAIRecordSource
   def synchronize_oai_record!
     ManifoldApi::Container["manifold_oai.synchronize_record"].(self).value!
   end
+
+  def canonical_url
+    client_url = Rails.configuration.manifold.url
+    route = self.model_name.plural
+    "#{client_url}/#{route}/#{self.slug}"
+  end
 end
