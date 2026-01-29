@@ -93,25 +93,31 @@ function JournalPropertiesContainer() {
                     "journals.forms.properties.draft_mode_instructions"
                   )}
                 />
-                <Form.Switch
-                  wide
-                  label={t("journals.forms.properties.exclude_from_oai_label")}
-                  name="attributes[excludeFromOAI]"
-                  instructions={t(
-                    "journals.forms.properties.exclude_from_oai_instructions"
-                  )}
-                />
-                {!getModelValue("attributes[excludeFromOAI]") && (
-                  <Form.Switch
-                    wide
-                    label={t(
-                      "journals.forms.properties.exclude_from_directory_label"
+                {!getModelValue("attributes[draft]") && (
+                  <>
+                    <Form.Switch
+                      wide
+                      label={t(
+                        "journals.forms.properties.exclude_from_oai_label"
+                      )}
+                      name="attributes[excludeFromOAI]"
+                      instructions={t(
+                        "journals.forms.properties.exclude_from_oai_instructions"
+                      )}
+                    />
+                    {!getModelValue("attributes[excludeFromOAI]") && (
+                      <Form.Switch
+                        wide
+                        label={t(
+                          "journals.forms.properties.exclude_from_directory_label"
+                        )}
+                        name="attributes[excludeFromDirectory]"
+                        instructions={t(
+                          "journals.forms.properties.exclude_from_directory_instructions"
+                        )}
+                      />
                     )}
-                    name="attributes[excludeFromDirectory]"
-                    instructions={t(
-                      "journals.forms.properties.exclude_from_directory_instructions"
-                    )}
-                  />
+                  </>
                 )}
                 <Form.Switch
                   wide
