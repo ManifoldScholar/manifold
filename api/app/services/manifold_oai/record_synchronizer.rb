@@ -34,14 +34,6 @@ module ManifoldOAI
       @record.oai_dc_content = extract_oai_dc_from_source
     end
 
-    def dc_identifier_metadata_map
-      {
-        "doi" => :doi,
-        "isbn" => :isbn,
-        "issn" => :issn,
-      }
-    end
-
     def extract_oai_dc_from_source
       metadata = source.metadata
       subjects = source.subjects
@@ -56,22 +48,37 @@ module ManifoldOAI
             http://www.openarchives.org/OAI/2.0/oai_dc.xsd
           }.squish
         ) do
+          xml["dc"].identifier(source.canonical_url)
           xml["dc"].title(source.title)
           xml["dc"].title(source.subtitle) if source.subtitle.present?
           xml["dc"].description(source.description) if source.description.present?
-          xml["dc"].creator(source.creator_names)
           xml["dc"].date(source.publication_date.iso8601) if source.respond_to?(:publication_date) && source.publication_date.present?
           xml["dc"].publisher(metadata[:publisher]) if metadata[:publisher].present?
           xml["dc"].rights(metadata[:rights]) if metadata[:rights].present?
           xml["dc"].rights(metadata[:rights_holder]) if metadata[:rights_holder].present?
 
-          dc_identifier_metadata_map.each do |prefix, value|
-            xml["dc"].identifier("#{prefix}:#{metadata[value]}") if metadata[value].present?
+          if !source.creator_names_array.empty?
+            source.creator_names_array.each do |creator|
+              xml["dc"].creator(creator)
+            end
           end
 
-          if source.avatar.present?
-            avatar_url = source.avatar_styles[:medium_square]
-            xml["dc"].relation("Cover Image: #{avatar_url}") if avatar_url.present?
+          xml["dc"].identifier("info:eu-repo/semantics/altIdentifier/isbn/#{metadata[:isbn]}") if metadata[:isbn].present?
+          xml["dc"].relation("info:eu-repo/semantics/reference/issn/#{metadata[:issn]}") if metadata[:issn].present?
+
+          if metadata[:doi].present?
+            doi = metadata[:doi]
+            value = doi.match?(/\Ahttps?:\/\/doi\.org\//) ? doi : "https://doi.org/#{doi}"
+            xml["dc"].identifier(value)
+          end
+
+          if source.avatar_attacher.stored?
+            source.avatar(:medium_portrait).then do |avatar|
+              next unless avatar
+
+              xml["dc"].format(avatar.content_type)
+              xml["dc"].relation(avatar.url)
+            end
           end
 
           subjects.each do |subject|
