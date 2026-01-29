@@ -205,25 +205,32 @@ export default function ProjectPropertiesContainer() {
                     "projects.forms.properties.draft_mode_instructions"
                   )}
                 />
-                <Form.Switch
-                  wide
-                  label={t("projects.forms.properties.exclude_from_oai_label")}
-                  name="attributes[excludeFromOAI]"
-                  instructions={t(
-                    "projects.forms.properties.exclude_from_oai_instructions"
-                  )}
-                />
-                {!getModelValue("attributes[excludeFromOAI]") && (
-                  <Form.Switch
-                    wide
-                    label={t(
-                      "projects.forms.properties.exclude_from_directory_label"
-                    )}
-                    name="attributes[excludeFromDirectory]"
-                    instructions={t(
-                      "projects.forms.properties.exclude_from_directory_instructions"
-                    )}
-                  />
+                {!getModelValue("attributes[draft]") && (
+                  <>
+                    <Form.Switch
+                      wide
+                      label={t(
+                        "projects.forms.properties.exclude_from_oai_label"
+                      )}
+                      name="attributes[excludeFromOAI]"
+                      instructions={t(
+                        "projects.forms.properties.exclude_from_oai_instructions"
+                      )}
+                    />
+                    {!getModelValue("attributes[excludeFromOAI]") &&
+                      !journalIssue && (
+                        <Form.Switch
+                          wide
+                          label={t(
+                            "projects.forms.properties.exclude_from_directory_label"
+                          )}
+                          name="attributes[excludeFromDirectory]"
+                          instructions={t(
+                            "projects.forms.properties.exclude_from_directory_instructions"
+                          )}
+                        />
+                      )}
+                  </>
                 )}
               </Form.FieldGroup>
               <Form.FieldGroup
