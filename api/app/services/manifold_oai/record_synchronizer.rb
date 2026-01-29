@@ -57,7 +57,7 @@ module ManifoldOAI
           xml["dc"].rights(metadata[:rights]) if metadata[:rights].present?
           xml["dc"].rights(metadata[:rights_holder]) if metadata[:rights_holder].present?
 
-          if !source.creator_names_array.empty?
+          unless source.creator_names_array.empty?
             source.creator_names_array.each do |creator|
               xml["dc"].creator(creator)
             end
@@ -68,7 +68,7 @@ module ManifoldOAI
 
           if metadata[:doi].present?
             doi = metadata[:doi]
-            value = doi.match?(/\Ahttps?:\/\/doi\.org\//) ? doi : "https://doi.org/#{doi}"
+            value = doi.match?(%r{\Ahttps?://doi\.org/}) ? doi : "https://doi.org/#{doi}"
             xml["dc"].identifier(value)
           end
 
