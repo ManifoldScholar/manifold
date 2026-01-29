@@ -39,6 +39,8 @@ module ManifoldOAISetLinkSource
   # @see ManifoldOAI::SetSynchronizer
   # @return [void]
   def synchronize_oai_set_link!
+    return unless oai_set.present? && oai_record.present?
+
     ManifoldApi::Container["manifold_oai.synchronize_set_link"].(oai_set, [oai_record], link_source: self).value!
   end
 end
