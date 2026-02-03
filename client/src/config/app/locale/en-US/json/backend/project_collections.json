@@ -71,6 +71,6 @@
     "properties_header": "Properties",
     "visibility_header": "Visibility",
     "exclude_from_oai_label": "Exclude from OAI-PMH",
-    "exclude_from_oai_instructions": "If set, Manifold will exclude this project from the OAI-PMH feed."
+    "exclude_from_oai_instructions": "If set, Manifold will exclude this project collection from the OAI-PMH feed."
   }
 }
