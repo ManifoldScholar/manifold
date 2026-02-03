@@ -202,7 +202,7 @@
       "repository_name_label": "Repository Name",
       "admin_email_label": "Admin Email",
       "directory_enabled_label": "Enable Directory Feed",
-      "directory_enabled_instructions": "Expose content from this instance for publication in the Manifold directory on manifoldapp.org"
+      "directory_enabled_instructions": "Expose content from this instance for publication in the Manifold Directory on manifoldapp.org"
     }
   }
 }
