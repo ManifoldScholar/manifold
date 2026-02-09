@@ -3,8 +3,12 @@
 module Attachments
   class ProcessAttachmentJob < ApplicationJob
     include ExclusiveJob
+    include GoodJob::ActiveJobExtensions::Concurrency
 
-    concurrency 1, drop: false unless Rails.env.test?
+    good_job_control_concurrency_with(
+      perform_limit: 1,
+      key: -> { "ProcessAttachmentJob:#{arguments.first.values_at('record').flatten.join(':')}" }
+    )
 
     discard_on ActiveJob::DeserializationError, ActiveRecord::RecordNotFound
 
