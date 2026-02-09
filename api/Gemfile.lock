@@ -77,13 +77,6 @@ GEM
     activejob-retry (0.6.3)
       activejob (>= 4.2)
       activesupport (>= 4.2)
-    activejob-traffic_control (0.1.3)
-      activejob (>= 4.2)
-      activesupport (>= 4.2)
-      suo
-    activejob-uniqueness (0.2.5)
-      activejob (>= 4.2, < 7.1)
-      redlock (>= 1.2, < 2)
     activemodel (7.0.8.7)
       activesupport (= 7.0.8.7)
     activemodel-serializers-xml (1.0.3)
@@ -192,9 +185,6 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
-    database_cleaner-redis (2.0.0)
-      database_cleaner-core (~> 2.0.0)
-      redis
     date (3.3.3)
     declarative (0.0.20)
     device_detector (1.0.7)
@@ -495,7 +485,6 @@ GEM
     minitest (5.20.0)
     money (6.16.0)
       i18n (>= 0.6.4, <= 2)
-    msgpack (1.7.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
@@ -639,13 +628,6 @@ GEM
       ffi (~> 1.0)
     rbtree (0.4.6)
     redcarpet (3.6.0)
-    redis (4.5.1)
-    redis-namespace (1.11.0)
-      redis (>= 4)
-    redis-objects (1.7.0)
-      redis
-    redlock (1.3.2)
-      redis (>= 3.0.0, < 6.0)
     regexp_parser (2.10.0)
     representable (3.2.0)
       declarative (< 0.1.0)
@@ -777,6 +759,10 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
+    solid_cache (0.7.0)
+      activejob (>= 7)
+      activerecord (>= 7)
+      railties (>= 7)
     sorted_set (1.0.3)
       rbtree
       set (~> 1.0)
@@ -793,10 +779,6 @@ GEM
       activerecord (>= 5.2)
     strip_attributes (1.13.0)
       activemodel (>= 3.0, < 8.0)
-    suo (0.4.0)
-      dalli
-      msgpack
-      redis
     systemu (2.6.5)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
@@ -867,8 +849,6 @@ DEPENDENCIES
   active_interaction (~> 4.0)
   active_record_upsert (~> 0.11.1)
   activejob-retry (~> 0.4)
-  activejob-traffic_control (~> 0.1.0)
-  activejob-uniqueness (~> 0.2.4)
   activerecord-import (~> 1.4.1)
   acts-as-taggable-on (~> 9.0)
   acts_as_list (~> 1.2.4)
@@ -895,7 +875,6 @@ DEPENDENCIES
   dalli (= 2.7.11)
   data_uri_revived
   database_cleaner-active_record (~> 2.1.0)
-  database_cleaner-redis (~> 2.0)
   dotenv-rails (~> 2.0)
   draper (~> 4.0.3)
   dry-core (~> 1.0)
@@ -970,9 +949,6 @@ DEPENDENCIES
   rails (~> 7.0)
   rainbow (~> 3.0)
   redcarpet (~> 3.5)
-  redis (~> 4.5)
-  redis-namespace (~> 1.0)
-  redis-objects (~> 1.4)
   rolify (~> 5.1)
   rspec-collection_matchers (~> 1.2.0)
   rspec-core (~> 3.12)
@@ -1000,6 +976,7 @@ DEPENDENCIES
   simplecov
   sinatra (~> 2.2)
   sixarm_ruby_unaccent (~> 1.2.2)
+  solid_cache (~> 0.7)
   sorted_set (~> 1.0, >= 1.0.3)
   spring
   spring-commands-rspec (~> 1.0.4)
