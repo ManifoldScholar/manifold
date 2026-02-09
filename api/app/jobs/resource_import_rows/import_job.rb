@@ -3,11 +3,12 @@
 # Simple job to process a resource import row
 module ResourceImportRows
   class ImportJob < ApplicationJob
-    # Our acceptance tests use perform_now, which break if this is throttled.
-    unless Rails.env.test?
-      # concurrency 6, drop: false
-      throttle threshold: 3, period: 0.5.seconds, drop: false
-    end
+    include GoodJob::ActiveJobExtensions::Concurrency
+
+    good_job_control_concurrency_with(
+      perform_limit: 3,
+      key: -> { "ResourceImportRows::ImportJob" }
+    )
 
     queue_as :low_priority
 

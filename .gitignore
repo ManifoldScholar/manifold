@@ -64,3 +64,5 @@ backup-local*.tar
 /docker/minio/client/*
 !/docker/minio/client/.keep
 !/docker/minio/client/initialize.sh
+
+CLAUDE.md

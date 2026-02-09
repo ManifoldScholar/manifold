@@ -1,4 +1,4 @@
-\restrict icifZWZLPtT6Lj46Ay9keEYrjf2KGl0QqeEq4XbrArOKmRHf8Bo8itDhFf6QETT
+\restrict 1r0TdcfyYP4jSHv5hkezx9QOb0oJOLdlTfCMj7lOlAaTEuigzvtkw4QhAyMw7nP
 
 -- Dumped from database version 13.22
 -- Dumped by pg_dump version 13.22 (Debian 13.22-1.pgdg11+1)
@@ -2895,6 +2895,19 @@ ALTER SEQUENCE public.settings_id_seq OWNED BY public.settings.id;
 
 
 --
+-- Name: statistics_records; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.statistics_records (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    key character varying NOT NULL,
+    value double precision DEFAULT 0.0,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: stylesheets; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4270,6 +4283,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 ALTER TABLE ONLY public.settings
     ADD CONSTRAINT settings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: statistics_records statistics_records_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.statistics_records
+    ADD CONSTRAINT statistics_records_pkey PRIMARY KEY (id);
 
 
 --
@@ -6326,6 +6347,13 @@ CREATE UNIQUE INDEX index_settings_on_singleton_guard ON public.settings USING b
 
 
 --
+-- Name: index_statistics_records_on_key; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_statistics_records_on_key ON public.statistics_records USING btree (key);
+
+
+--
 -- Name: index_stylesheets_on_ingestion_source_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7952,7 +7980,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 -- PostgreSQL database dump complete
 --
 
-\unrestrict icifZWZLPtT6Lj46Ay9keEYrjf2KGl0QqeEq4XbrArOKmRHf8Bo8itDhFf6QETT
+\unrestrict 1r0TdcfyYP4jSHv5hkezx9QOb0oJOLdlTfCMj7lOlAaTEuigzvtkw4QhAyMw7nP
 
 SET search_path TO "$user", public;
 
@@ -8325,6 +8353,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20251120233556'),
 ('20251121202033'),
 ('20251203230443'),
-('20251203231940');
+('20251203231940'),
+('20260209183815');
 
 

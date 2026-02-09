@@ -22,40 +22,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  redis:
-    image: redis:6.2.7
-    platform: linux/amd64
-    environment:
-      - "ALLOW_EMPTY_PASSWORD=yes"
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "10"
-    restart: unless-stopped
-    volumes:
-      - redis-data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
-      interval: 30s
-      timeout: 5s
-      retries: 5
-  test-redis:
-    image: redis:6.2.7
-    platform: linux/amd64
-    environment:
-      - "ALLOW_EMPTY_PASSWORD=yes"
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "10"
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
-      interval: 30s
-      timeout: 5s
-      retries: 5
   migrations:
     build:
       context: api
@@ -63,8 +29,6 @@ services:
     command: bin/ensure-db
     depends_on:
       postgres:
-        condition: service_healthy
-      redis:
         condition: service_healthy
     env_file: docker/manifold.env
     logging:
@@ -141,8 +105,6 @@ services:
         condition: service_completed_successfully
       minio-client:
         condition: service_completed_successfully
-      redis:
-        condition: service_healthy
     env_file:
       - ./docker/manifold.env
     environment:
@@ -210,15 +172,13 @@ services:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
-      test-redis:
-        condition: service_healthy
     env_file:
       - ./docker/manifold.env
     environment:
       - RACK_ENV=test
       - RAILS_ENV=test
-      - RAILS_REDIS_URL=redis://test-redis:6379
-      - REDIS_URL=redis://test-redis:6379
+      - DATABASE_URL=postgres://postgres:password@postgres/manifold_test
+      - CACHE_DATABASE_URL=postgres://postgres:password@postgres/manifold_cache_test
     logging:
       driver: json-file
       options:
@@ -245,8 +205,6 @@ volumes:
   rails-log:
     driver: local
   rails-tmp:
-    driver: local
-  redis-data:
     driver: local
   uploads:
     driver: local
