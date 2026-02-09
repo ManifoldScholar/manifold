@@ -13,7 +13,6 @@ module ManifoldEnv
     autoload :OauthConfig
     autoload :OauthProvider
     autoload :RateLimiting
-    autoload :RedisConfig
     autoload :Types
   end
 
@@ -23,10 +22,6 @@ module ManifoldEnv
 
   mattr_accessor :rate_limiting do
     ManifoldEnv::RateLimiting.new
-  end
-
-  mattr_accessor :redis do
-    ManifoldEnv::RedisConfig.new
   end
 end
 

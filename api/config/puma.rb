@@ -63,13 +63,6 @@ on_worker_fork do
   ActiveSupport.on_load(:active_record) do
     ActiveRecord::Base.connection.disconnect!
   end
-
-  # Ensure we disconnect from Rails cache on forking.
-  Rails.cache.redis.disconnect!
-
-  Redis.current.disconnect!
-
-  Redis::Objects.redis.disconnect!
 end
 
 on_worker_boot do
