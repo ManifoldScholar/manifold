@@ -6,7 +6,7 @@ module TextSectionNodes
 
     queue_as :low_priority
 
-    unique :until_executed, lock_ttl: 2.days, on_conflict: :log
+    unique_job! by: :job
 
     def build_enumerator(cursor:)
       enumerator_builder.active_record_on_records(
