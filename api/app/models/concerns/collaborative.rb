@@ -21,10 +21,16 @@ module Collaborative
              -> { where(role: CollaboratorRole::Other).order(:position) },
              as: :collaboratable,
              class_name: "Collaborator"
+    has_many_readonly :editor_collaborators,
+             -> { where(role: CollaboratorRole::Editor).order(:position) },
+             as: :collaboratable,
+             class_name: "Collaborator",
+             inverse_of: :collaboratable
 
     has_many :makers, through: :collaborators
     has_many :creators, through: :creator_collaborators, source: "maker"
     has_many :contributors, through: :contributor_collaborators, source: "maker"
+    has_many :editors, through: :editor_collaborators, source: "maker"
     has_many_readonly :flattened_collaborators, as: :collaboratable
 
     scope :with_collaborators, ->(role = nil) { where(id: Collaborator.by_role(role).select(:collaboratable_id)) }
@@ -37,6 +43,10 @@ module Collaborative
 
   def creator_names_array
     creators.map(&:full_name)
+  end
+
+  def editor_names_array
+    editors.map(&:full_name)
   end
 
   def collaborator_packaging_metadata
