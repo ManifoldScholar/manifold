@@ -31,7 +31,7 @@ export default function useFetch({
   const firstRun = useRef(true);
   const uid = `fetch_${useUID()}`;
   const [requestKey] = useState(options.requestKey ?? `fetch_${useUID()}`);
-  const [count, setCount] = useState(1);
+  const count = useRef(1);
   const store = useStore();
   const getState = store.getState;
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ export default function useFetch({
 
   const [apiCall, ...apiCallArgs] = request;
 
-  if (count > 25)
+  if (count.current > 25)
     throw new Error(
       `useFetch tried to fetch data more than 25 times. This suggests that an input to
       useFetch needs to be memoized.`
@@ -58,7 +58,7 @@ export default function useFetch({
   const triggerFetchData = useCallback(() => {
     if (!condition) return Promise.resolve();
     log("useFetch", requestKey);
-    setCount(count + 1);
+    count.current += 1;
     const apiFetch = apiCall(...apiCallArgs);
     const action = entityStoreActions.request(apiFetch, requestKey, options);
     const { promise } = dispatch(action);
