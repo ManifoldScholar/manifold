@@ -6,7 +6,7 @@ ActiveSupport::Reloader.to_prepare do
   # :nocov:
   # We want to ensure that the public IP used by the client is never
   # accidentally blocklisted or throttled.
-  if !(Rails.env.development? || Rails.env.test?)
+  unless Rails.env.development? || Rails.env.test?
     if ENV["CLIENT_SERVER_IP"]
       Rack::Attack.safelist_ip ENV["CLIENT_SERVER_IP"]
     else
