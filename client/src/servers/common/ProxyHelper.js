@@ -20,7 +20,7 @@ class ProxyHelper {
       target,
       logLevel: proxyDebug ? logLevel : "silent",
       changeOrigin: true,
-      onError: (err, req, res) => {
+      onError: (err, req, ignored) => {
         ch.error(
           `[Proxy Error] ${this.name} | ${proxyPath} -> ${target} | ${req.method} ${req.url}`
         );
@@ -42,7 +42,9 @@ class ProxyHelper {
           `[Proxy Res] ${this.name} | ${req.method} ${req.url} | Status: ${proxyRes.statusCode}`
         );
         if (proxyRes.headers.location) {
-          ch.info(`[Proxy Res] Redirect Location: ${proxyRes.headers.location}`);
+          ch.info(
+            `[Proxy Res] Redirect Location: ${proxyRes.headers.location}`
+          );
         }
       };
     }

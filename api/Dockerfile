@@ -64,6 +64,6 @@ RUN bundle install
 CMD ["bin/puma", "-C", "config/puma.rb"]
 
 # There are currently no differences between dev and prod Dockerfiles, but these are here to provide parity with the client Dockerfile
-FROM base AS dev
+FROM base AS development
 
-FROM base AS prod
+FROM base AS production
