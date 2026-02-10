@@ -34,6 +34,7 @@ module ManifoldOAI
       @record.oai_dc_content = extract_oai_dc_from_source
     end
 
+    # rubocop:disable Metrics/MethodLength
     def extract_oai_dc_from_source
       metadata = source.metadata
       subjects = source.subjects
@@ -65,6 +66,12 @@ module ManifoldOAI
             end
           end
 
+          unless source.editor_names_array.empty?
+            source.editor_names_array.each do |editor|
+              xml["dc"].collaborator(editor)
+            end
+          end
+
           xml["dc"].identifier("info:eu-repo/semantics/altIdentifier/isbn/#{metadata[:isbn]}") if metadata[:isbn].present?
           xml["dc"].relation("info:eu-repo/semantics/reference/issn/#{metadata[:issn]}") if metadata[:issn].present?
 
@@ -91,6 +98,7 @@ module ManifoldOAI
 
       builder.doc.root.to_xml
     end
+    # rubocop:enable Metrics/MethodLength
 
     # @return [void]
     def prepare!
