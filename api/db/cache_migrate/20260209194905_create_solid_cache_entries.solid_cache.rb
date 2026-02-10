@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This migration comes from solid_cache (originally 20230724121448)
 class CreateSolidCacheEntries < ActiveRecord::Migration[7.0]
   def change
