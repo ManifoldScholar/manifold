@@ -1,6 +1,7 @@
 import config from "../config";
 import qs from "qs";
 import humps from "utils/humps";
+import { getClientIp } from "helpers/ssrRequestContext";
 
 export default class LowLevelApiClient {
   constructor() {
@@ -35,12 +36,14 @@ export default class LowLevelApiClient {
     );
 
     const baseHeaders = rawOptions.headers || {};
+    const clientIp = getClientIp();
     const headers = {
       ...baseHeaders,
       "Content-Type": "application/json",
       Authorization: `Bearer ${options.authToken}`,
       "VISIT-TOKEN": options.visitToken,
-      "VISITOR-TOKEN": options.visitorToken
+      "VISITOR-TOKEN": options.visitorToken,
+      ...(clientIp && { "X-Forwarded-For": clientIp })
     };
 
     const fetchConfig = {

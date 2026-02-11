@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { AsyncLocalStorage } from "async_hooks";
 import config from "config";
 import ch from "./helpers/consoleHelpers";
 import React from "react";
@@ -20,6 +21,10 @@ import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import { createServerFetchDataContext } from "hooks/api/contexts/InternalContext";
+import { setStoreGetter } from "helpers/ssrRequestContext";
+
+const requestContext = new AsyncLocalStorage();
+setStoreGetter(() => requestContext.getStore());
 
 const socket = config.services.client.rescueEnabled
   ? null
@@ -142,27 +147,31 @@ const performBootstrap = (req, res, store) => {
 
 // Handle requests
 const requestHandler = (req, res) => {
-  const store = createStore();
+  const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-  // Prior to the router upgrade, we handled these cases... may no
-  // longer be necessary.
-  // if (error) return respondWithRouterError(res, error);
-  // if (!props) return respondWithInternalServerError(res);
+  requestContext.run({ clientIp }, () => {
+    const store = createStore();
 
-  // 1. Run manifold bootstrap
-  // 2. Fetch any data, as the user
-  // 3. Send the response to the user
-  /* eslint-disable max-len */
-  performBootstrap(req, res, store).then(
-    () => {
-      ch.plain("App bootstrapped");
-      render(req, res, store);
-    },
-    () => {
-      ch.error("App bootstrap failed", "rain_cloud");
-      render(req, res, store);
-    }
-  );
+    // Prior to the router upgrade, we handled these cases... may no
+    // longer be necessary.
+    // if (error) return respondWithRouterError(res, error);
+    // if (!props) return respondWithInternalServerError(res);
+
+    // 1. Run manifold bootstrap
+    // 2. Fetch any data, as the user
+    // 3. Send the response to the user
+    /* eslint-disable max-len */
+    performBootstrap(req, res, store).then(
+      () => {
+        ch.plain("App bootstrapped");
+        render(req, res, store);
+      },
+      () => {
+        ch.error("App bootstrap failed", "rain_cloud");
+        render(req, res, store);
+      }
+    );
+  });
 };
 
 // Create the app and the server
