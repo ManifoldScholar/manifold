@@ -29,6 +29,7 @@ export default function useFetch({
   condition = true
 }) {
   const firstRun = useRef(true);
+  const firstClientRun = useRef(true);
   const uid = `fetch_${useUID()}`;
   const [requestKey] = useState(options.requestKey ?? `fetch_${useUID()}`);
   const count = useRef(1);
@@ -110,19 +111,6 @@ export default function useFetch({
       ]
     : dependencies;
 
-  /* eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    triggerFetchData().then(
-      () => {
-        if (isFunction(afterFetch)) afterFetch();
-      },
-      () => {
-        // do nothing
-      }
-    );
-  }, [triggerFetchData, ...refetchDependencies]);
-  /* eslint-enable react-hooks/exhaustive-deps */
-
   const data = useSelector(state =>
     entityUtils.select(requestKey, state.entityStore)
   );
@@ -136,6 +124,28 @@ export default function useFetch({
   );
 
   const response = getState()?.entityStore.responses[requestKey];
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    // if first run on client, only fetch if data isn't already in redux store
+    if (firstClientRun.current) {
+      firstClientRun.current = false;
+      if (loaded) {
+        if (isFunction(afterFetch)) afterFetch();
+        return;
+      }
+    }
+
+    triggerFetchData().then(
+      () => {
+        if (isFunction(afterFetch)) afterFetch();
+      },
+      () => {
+        // do nothing
+      }
+    );
+  }, [triggerFetchData, ...refetchDependencies]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   firstRun.current = false;
   return { data, meta, loaded, uid, response, refresh: triggerFetchData };
