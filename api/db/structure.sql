@@ -6934,13 +6934,6 @@ CREATE UNIQUE INDEX index_user_group_memberships_on_user_id_and_user_group_id ON
 
 
 --
--- Name: index_user_groups_on_name; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_user_groups_on_name ON public.user_groups USING btree (name);
-
-
---
 -- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 --
 

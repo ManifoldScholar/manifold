@@ -293,6 +293,8 @@ GEM
       yard_types
     equalizer (0.0.11)
     erubi (1.13.1)
+    et-orbi (1.2.11)
+      tzinfo
     factory_bot (6.5.5)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.1)
@@ -615,6 +617,7 @@ GEM
     public_suffix (6.0.2)
     puma (6.6.1)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.8.1)
     rack (2.2.18)
     rack-attack (6.7.0)
@@ -773,11 +776,6 @@ GEM
       down (~> 5.0)
       http (>= 3.2, < 6)
       shrine (>= 3.0.0.rc, < 4)
-    sidekiq (5.2.7)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack (>= 1.5.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
     signet (0.21.0)
       addressable (~> 2.8)
       faraday (>= 0.17.5, < 3.a)
@@ -880,11 +878,6 @@ GEM
     yard_types (0.2.0)
     zaru (1.0.0)
     zeitwerk (2.7.3)
-    zhong (0.3.0)
-      activesupport
-      redis
-      suo
-      tzinfo
 
 PLATFORMS
   aarch64-linux
