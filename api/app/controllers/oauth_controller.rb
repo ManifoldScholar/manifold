@@ -58,6 +58,8 @@ class OauthController < ApplicationController
   end
 
   def redirect_body
+    scrubbed_provider_name = Loofah.scrub_html5_fragment(params[:provider], :prune).to_s
+
     <<~HEREDOC
       <!DOCTYPE html>
       <html>
@@ -68,7 +70,7 @@ class OauthController < ApplicationController
         <body>
           <div style="margin-top: 100px; text-align: center;">
             <h1>Redirecting, Please Wait</h1>
-            <form id="auth_redirect_form" action="/auth/#{params[:provider]}" method="POST">
+            <form id="auth_redirect_form" action="/auth/#{scrubbed_provider_name}" method="POST">
               <input type="hidden" name="authenticity_token" value="#{session["_csrf_token"]}" />
               <input type="submit" id="auth_redirect_submit" value="Click here if you're not automatically redirected" />
             </form>

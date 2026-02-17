@@ -14,6 +14,10 @@ class UserGroup < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def entitlement_subjects
-    entitleables.includes(:entitleable).map(&:entitleable).compact
+    entitleables.map(&:entitleable).compact
+  end
+
+  def sync_member_entitlements!
+    UserGroups::SyncMemberEntitlements.new.call(self)
   end
 end
