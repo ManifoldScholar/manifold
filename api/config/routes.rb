@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   # Omniauth
   get "auth/:provider/redirect", to: "oauth#redirect"
   post "auth/:provider/callback", to: "oauth#authorize"
+
+  # Omniauth tests issue a redirect to the callback, and require a GET endpoint
+  # Real world callbacks will be POSTs
   get "auth/:provider/callback", to: "oauth#authorize" if Rails.env.test?
 
   namespace :api do

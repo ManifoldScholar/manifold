@@ -18,7 +18,9 @@ module Identities
       @auth_hash = auth_hash
 
       to_remove.each do |entitleable|
-        Entitlement.by_entitling_entity(identity).by_subject(entitleable).destroy_all
+        Entitlement.by_entitling_entity(identity)
+                   .by_subject(entitleable)
+                   .destroy_all
       end
 
       to_add.each do |entitleable|
