@@ -19,6 +19,6 @@ RSpec.describe UserGroupMembership, type: :model do
   it "destroys entitlements upon its destruction" do
     user_group_membership
 
-    expect { user_group_membership.destroy }.to change(Entitlement, :count).by(1)
+    expect { user_group_membership.destroy }.to change(Entitlement, :count).by(-1)
   end
 end

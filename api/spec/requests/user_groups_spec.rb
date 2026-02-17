@@ -35,9 +35,6 @@ RSpec.describe "UserGroup API", type: :request do
         build_json_payload(
           attributes: {
             name:
-          }, relationships: {
-            members: [{ id: user.id }],
-            entitleables: [{ id: entitleable.id }]
           }
         )
       end

@@ -3,9 +3,6 @@
 module UserGroups
   class AddMember
     include Dry::Monads[:result, :do]
-    include ManifoldApi::Deps[
-      upsert_user_group_entitlements: "user_groups.upsert_entitlements",
-    ]
 
     include UserGroups::ParsesIdentity
 

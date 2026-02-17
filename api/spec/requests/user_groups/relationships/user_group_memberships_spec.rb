@@ -3,12 +3,12 @@
 RSpec.describe "User Group Memberships API", type: :request do
   let!(:user_group) { FactoryBot.create(:user_group) }
   let!(:user) { FactoryBot.create(:user) }
-  let!(:user_group_membership) { FactoryBot.creat(:user_group_membership) }
+  let!(:user_group_membership) { FactoryBot.create(:user_group_membership, user_group:) }
 
   base_path = "/api/v1/user_groups/:user_group_id/relationships/user_group_memberships"
 
-  let(:path) { api_v1_user_group_relationships_user_group_memberships(user_group_id: user_group.id) }
-  let(:membership_path) { api_v1_user_group_relationships_user_group_membership(user_group_id: user_group.id, id: user_group_membership.id) }
+  let(:path) { api_v1_user_group_relationships_user_group_memberships_path(user_group_id: user_group.id) }
+  let(:membership_path) { api_v1_user_group_relationships_user_group_membership_path(user_group_id: user_group.id, id: user_group_membership.id) }
 
   let(:params) do
     {
@@ -32,6 +32,7 @@ RSpec.describe "User Group Memberships API", type: :request do
         end.to change(UserGroupMembership, :count).by(1)
         expect(response).to have_http_status(:created)
       end
+
     end
 
     context "when the user is a reader" do

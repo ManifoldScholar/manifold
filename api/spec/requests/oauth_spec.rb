@@ -123,6 +123,7 @@ RSpec.describe "Oauth", type: :request do
     before do
       allow(SamlConfig).to receive(:provider_names).and_return([provider.to_s])
       allow_any_instance_of(SamlConfig).to receive(:provider_names).and_return([provider.to_s])
+      allow_any_instance_of(AbstractSamlProviderConfig).to receive(:enabled?).and_return(true)
 
       # Clear any cached config
       SamlConfig.instance_variable_set("@instance", nil)
