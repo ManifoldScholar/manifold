@@ -10,7 +10,13 @@ class UserGroupMembership < ApplicationRecord
 
   belongs_to :source, polymorphic: true, optional: true
 
+  after_create :sync_entitlements!
+
   def name
     "#{user_group.name} membership for #{user.name}"
+  end
+
+  def sync_entitlements!
+    UserGroupMemberships::SyncEntitlements.new.call(self)
   end
 end
