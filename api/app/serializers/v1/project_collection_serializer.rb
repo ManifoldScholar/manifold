@@ -45,7 +45,7 @@ module V1
     typed_attribute :social_description, Types::String.optional
     typed_attribute :social_title, Types::String.optional
     typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
-    typed_attribute :external_identifier, Types::String do |object, params|
+    typed_attribute :external_identifier, Types::String.optional do |object, params|
       object.external_identifier&.identifier
     end
 
