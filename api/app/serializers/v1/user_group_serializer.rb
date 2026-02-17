@@ -9,7 +9,7 @@ module V1
     typed_attribute :id, Types::Serializer::ID
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
     typed_attribute :name, Types::String.meta(example: "Manifold SAML users")
-    typed_attribute :external_identifier, Types::String do |object, params|
+    typed_attribute :external_identifier, Types::String.optional do |object, params|
       object.external_identifier&.identifier
     end
 
