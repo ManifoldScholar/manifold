@@ -32,7 +32,6 @@ RSpec.describe "User Group Memberships API", type: :request do
         end.to change(UserGroupMembership, :count).by(1)
         expect(response).to have_http_status(:created)
       end
-
     end
 
     context "when the user is a reader" do
