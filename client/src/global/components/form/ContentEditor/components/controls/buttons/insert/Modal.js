@@ -1,12 +1,12 @@
+import { useId } from "react";
 import PropTypes from "prop-types";
-import { useUID } from "react-uid";
 import { useTranslation } from "react-i18next";
 import Button from "global/components/atomic/Button";
 import * as Styled from "./styles";
 
 export default function InsertModal(props) {
   const { form, resolve, reject, heading, icon, resolveLabel } = props;
-  const uid = useUID();
+  const uid = useId();
   const { t } = useTranslation();
 
   const handleResolveClick = e => {

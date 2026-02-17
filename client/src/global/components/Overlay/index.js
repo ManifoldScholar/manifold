@@ -1,8 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useId, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { FocusTrap } from "focus-trap-react";
-import { useUID } from "react-uid";
 import Header from "./Header";
 import helpers from "reader/containers/Annotatable/helpers/selectionHelpers";
 
@@ -23,7 +22,7 @@ function Overlay({
   ariaLabel
 }) {
   const overlayRef = useRef(null);
-  const headerId = useUID();
+  const headerId = useId();
   const navigate = useNavigate();
 
   function handleCloseEvent(event) {

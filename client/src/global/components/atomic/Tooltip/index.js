@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useId, useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useUID } from "react-uid";
 import * as Styled from "./styles";
 
 export default function Tooltip({
@@ -26,7 +25,7 @@ export default function Tooltip({
     setUserClosed(false);
   };
 
-  const uid = useUID();
+  const uid = useId();
 
   const renderContent =
     typeof content === "string" ? (
