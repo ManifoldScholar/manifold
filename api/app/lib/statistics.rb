@@ -21,21 +21,21 @@ class Statistics
   # @!attribute [rw] readers_this_week
   # @return [Float]
   def readers_this_week
-    StatisticsRecord.get(THIS_WEEK_KEY).to_f
+    Rails.cache.read(THIS_WEEK_KEY).to_f
   end
 
   def readers_this_week=(new_value)
-    StatisticsRecord.set(THIS_WEEK_KEY, new_value.to_f)
+    Rails.cache.write(THIS_WEEK_KEY, new_value.to_f)
   end
 
   # @!attribute [rw] readers_last_week
   # @return [Float]
   def readers_last_week
-    StatisticsRecord.get(LAST_WEEK_KEY).to_f
+    Rails.cache.read(LAST_WEEK_KEY).to_f
   end
 
   def readers_last_week=(new_value)
-    StatisticsRecord.set(LAST_WEEK_KEY, new_value.to_f)
+    Rails.cache.write(LAST_WEEK_KEY, new_value.to_f)
   end
 
   # Update values within an advisory lock.
