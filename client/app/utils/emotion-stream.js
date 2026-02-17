@@ -10,6 +10,10 @@
  * 3. Remove inline style tags from Suspense chunks during streaming
  *
  * Styles remain available via <head> or Emotion's client cache.
+ *
+ * If css is visible on the page during SSR, the culprit is likely a * selector
+ * that sets display. Emotion can't handle this case and needs the explicit
+ * *:not(style) to avoid rendering style tag content as text.
  */
 
 import createCache from "@emotion/cache";
@@ -122,7 +126,7 @@ export function createEmotionStyleFixerStream(options = {}) {
   const decoder = new TextDecoder();
   const inlineStyleRegex = new RegExp(
     `<style data-emotion="${cacheKey}[^"]*">.*?</style>`,
-    "g"
+    "gs"
   );
 
   return new TransformStream({

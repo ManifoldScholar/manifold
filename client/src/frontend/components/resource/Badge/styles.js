@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
     light-dark(var(--color-base-neutral10), var(--color-base-neutral100))
   );
 
-  > * {
+  > *:not(style) {
     display: flex;
     align-items: center;
     gap: 8px;
