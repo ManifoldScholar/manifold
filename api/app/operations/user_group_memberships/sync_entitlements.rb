@@ -32,8 +32,8 @@ module UserGroupMemberships
     end
 
     def destroy_excess_entitlements
-      entitlements_to_destroy.map do
-        Entitlement.by_entitling_entity(membership).where(**_1)
+      entitlements_to_destroy.map do |entitlement_hash|
+        Entitlement.by_entitling_entity(membership).where(**entitlement_hash)
       end.reduce do |memo, query|
         memo.or(query)
       end&.destroy_all
@@ -51,14 +51,14 @@ module UserGroupMemberships
       @existing_entitlements ||= Entitlement.where(
         target: user,
         entitler: membership.to_upsertable_entitler
-      ).map do
-        { subject_type: _1.subject_type, subject_id: _1.subject_id }
+      ).map do |entitlement|
+        { subject_type: entitlement.subject_type, subject_id: entitlement.subject_id }
       end
     end
 
     def expected_entitlements
-      @expected_entitlements ||= user_group.entitleables.reload.map do
-        { subject_type: _1.entitleable_type, subject_id: _1.entitleable_id }
+      @expected_entitlements ||= user_group.entitleables.reload.map do |entitleable|
+        { subject_type: entitleable.entitleable_type, subject_id: entitleable.entitleable_id }
       end
     end
   end
