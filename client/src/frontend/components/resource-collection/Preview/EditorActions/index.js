@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
 import Button from "global/components/atomic/Button";
 import Authorize from "hoc/Authorize";
@@ -26,11 +26,7 @@ function ResourceCollectionPreviewEditorActions({
     id: textId
   });
 
-  const project = useFromStore({
-    action: "grab",
-    entityType: "projects",
-    id: resourceCollection.attributes?.projectId
-  });
+  const project = useRouteLoaderData("routes/frontend/_frontend.projects.$id");
 
   return (
     <Styled.List>

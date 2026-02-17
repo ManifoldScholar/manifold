@@ -1,4 +1,4 @@
-import { Outlet, useOutletContext } from "react-router";
+import { Outlet, useRouteLoaderData } from "react-router";
 import { resourceCollectionsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
@@ -15,7 +15,7 @@ export const loader = async ({ params, request, context }) => {
 export default function ResourceCollectionLayoutRoute({
   loaderData: collection
 }) {
-  const project = useOutletContext();
+  const project = useRouteLoaderData("_frontend.projects.$id");
 
   return (
     <>
