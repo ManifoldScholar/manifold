@@ -1,9 +1,7 @@
 import PropTypes from "prop-types";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import { Global as GlobalStyles } from "@emotion/react";
 import config from "config";
-import styles from "theme/styles/globalStyles";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import * as Styled from "./styles";
@@ -29,7 +27,6 @@ export default function FatalError(props) {
   return (
     <HelmetProvider>
       <Helmet title={`${error.status} Error: ${error.heading}`} />
-      {!contained && <GlobalStyles styles={styles} />}
       <Styled.Body className={!contained ? "browse" : undefined}>
         <Styled.Wrapper $contained={contained}>
           <Styled.Inner>
@@ -55,7 +52,11 @@ export default function FatalError(props) {
                   </Styled.ErrorTitle>
                 ) : null}
                 {userMessage ? (
-                  <Styled.ErrorBody>{t(userMessage)}</Styled.ErrorBody>
+                  <Styled.ErrorBody>
+                    {Array.isArray(userMessage)
+                      ? t(userMessage[0], userMessage[1])
+                      : t(userMessage)}
+                  </Styled.ErrorBody>
                 ) : null}
                 {config.environment.isDevelopment && (dismiss || error.body) ? (
                   <Styled.ErrorBody>
@@ -104,5 +105,5 @@ FatalError.propTypes = {
   dismiss: PropTypes.func,
   hideStatus: PropTypes.bool,
   contained: PropTypes.bool,
-  userMessage: PropTypes.string
+  userMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
 };

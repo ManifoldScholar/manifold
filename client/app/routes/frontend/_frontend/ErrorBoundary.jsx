@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import {
   useRouteError,
   isRouteErrorResponse,
-  useLoaderData
+  useLoaderData,
+  useLocation
 } from "react-router";
 import classNames from "classnames";
 import { FrontendContext } from "app/contexts";
@@ -13,32 +14,31 @@ import Layout from "frontend/components/layout";
 import { useFromStore } from "hooks";
 import { SearchProvider } from "hooks/useSearch/context";
 import FatalError from "global/components/FatalError";
+import formatError from "app/routes/utility/helpers/formatError";
 
-// Handles 404 errors for frontend routes
+const STATUSES = [404, 401, 403, 500];
+
+// Handles 404, 401, 403, and 500 errors for frontend routes
 export function ErrorBoundary() {
   const error = useRouteError();
   const loaderData = useLoaderData();
+  const location = useLocation();
   const frontendMode = useFromStore({ path: "ui.transitory.frontendMode" });
 
-  // Only handle 404 errors here, re-throw others to root ErrorBoundary
-  if (isRouteErrorResponse(error) && error.status === 404) {
-    const frontendContextValue = useMemo(
-      () => ({
-        subjects: loaderData?.subjects ?? [],
-        journalSubjects: loaderData?.journalSubjects ?? [],
-        frontendMode: frontendMode ?? {}
-      }),
-      [loaderData?.subjects, loaderData?.journalSubjects, frontendMode]
-    );
+  const frontendContextValue = useMemo(
+    () => ({
+      subjects: loaderData?.subjects ?? [],
+      journalSubjects: loaderData?.journalSubjects ?? [],
+      frontendMode: frontendMode ?? {}
+    }),
+    [loaderData?.subjects, loaderData?.journalSubjects, frontendMode]
+  );
 
-    const formattedError = {
-      type: "HTTP_RESPONSE",
-      error: {
-        status: 404,
-        heading: "Page not found",
-        body: null
-      }
-    };
+  if (
+    isRouteErrorResponse(error) ||
+    (!!error.status && STATUSES.includes(error.status))
+  ) {
+    const errorProps = formatError(error, location.pathname);
 
     return (
       <FrontendContext.Provider value={frontendContextValue}>
@@ -54,7 +54,7 @@ export function ErrorBoundary() {
                 "flex-viewport": true
               })}
             >
-              <FatalError fatalError={formattedError} contained />
+              <FatalError {...errorProps} contained />
             </main>
             <Footers.FrontendFooter />
           </SearchProvider>
@@ -63,6 +63,6 @@ export function ErrorBoundary() {
     );
   }
 
-  // Re-throw non-404 errors to root ErrorBoundary
+  // Re-throw runtime errors to root ErrorBoundary
   throw error;
 }

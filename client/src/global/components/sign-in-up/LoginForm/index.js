@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useFetcher, useRevalidator } from "react-router";
+import {
+  useFetcher,
+  useRevalidator,
+  useLocation,
+  useNavigate
+} from "react-router";
 import Notifications from "global/containers/Notifications";
 import Form from "global/components/form";
 import BrowserCookieHelper from "helpers/cookie/Browser";
@@ -18,6 +23,8 @@ export default function LoginForm({
   const { t } = useTranslation();
   const fetcher = useFetcher();
   const { revalidate } = useRevalidator();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const formatData = data => {
     return { email: data.email, password: data.password };
@@ -28,8 +35,20 @@ export default function LoginForm({
       cookie.write("authToken", fetcher.data.authToken);
       revalidate();
       if (hideOverlay) hideOverlay();
+      if (willRedirect) {
+        const searchParams = new URLSearchParams(location?.search);
+        const redirectUri = searchParams.get("redirect_uri");
+        if (redirectUri) navigate(redirectUri);
+      }
     }
-  }, [fetcher.data, hideOverlay, revalidate]);
+  }, [
+    fetcher.data,
+    hideOverlay,
+    revalidate,
+    location?.search,
+    willRedirect,
+    navigate
+  ]);
 
   return (
     <div>

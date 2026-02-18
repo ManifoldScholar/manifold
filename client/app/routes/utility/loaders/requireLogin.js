@@ -8,10 +8,10 @@ export default function requireLogin(request, context) {
   const { auth } = context.get(routerContext) ?? {};
 
   if (!auth?.user) {
-    const url = new URL(request.url);
+    const url = new URL(request?.url);
     const loginPath = "/login";
     const redirectUrl = url?.pathname
-      ? `${loginPath}?redirect_uri=${encodeURIComponent(url.pathname)}`
+      ? `${loginPath}?redirect_uri=${encodeURIComponent(url?.pathname)}`
       : loginPath;
 
     throw redirect(redirectUrl);

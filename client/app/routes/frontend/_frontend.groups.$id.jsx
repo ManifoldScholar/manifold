@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { redirect } from "react-router";
 import { readingGroupsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import authorize from "app/routes/utility/loaders/authorize";
 import { hasItemsInCollection } from "frontend/components/collecting/helpers";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
@@ -11,15 +10,7 @@ import { GroupHeading } from "frontend/components/reading-group/headings";
 
 export const loader = async ({ params, context, request }) => {
   const fetchFn = () => readingGroupsAPI.show(params.id);
-  const readingGroup = await loadEntity({ context, fetchFn });
-
-  await authorize({
-    context,
-    ability: "read",
-    entity: readingGroup,
-    failureRedirect: "/groups",
-    currentPath: new URL(request.url).pathname
-  });
+  const readingGroup = await loadEntity({ context, fetchFn, request });
 
   /*
   Some RGs may choose to only use annotation features and not do any collecting.

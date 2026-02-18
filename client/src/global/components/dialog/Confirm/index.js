@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 import Wrapper from "../Wrapper";
 import Body from "./ConfirmModalBody";
 
-export default function DialogConfirm({ resolve, reject, heading, options, message }) {
+export default function DialogConfirm({
+  resolve,
+  reject,
+  heading,
+  options,
+  message
+}) {
   const baseId = useId();
   const id = `dialog-${baseId}`;
 

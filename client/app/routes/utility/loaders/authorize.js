@@ -1,32 +1,14 @@
-import { redirect, data } from "react-router";
+import { data } from "react-router";
 import Authorization from "helpers/authorization";
-import lh from "helpers/linkHandler";
 import { routerContext } from "app/contexts";
+import { requireLogin } from "./requireLogin";
 
 const authorization = new Authorization();
-
-function getRedirectPath(redirectProp, currentPath) {
-  if (redirectProp === true) {
-    const pathKey = currentPath.split("/")?.[1];
-    const availableRedirects = [
-      "projects/all",
-      "backend/dashboard",
-      "journals/all",
-      "groups"
-    ];
-    return pathKey
-      ? `/${availableRedirects.find(r => r.startsWith(pathKey))}`
-      : "/";
-  }
-
-  if (typeof redirectProp === "string") return redirectProp;
-
-  return null;
-}
 
 /**
  * Checks authorization in a route loader.
  * Throws redirect if unauthorized.
+ * Use only for ability checks; loadEntity handles 401/403 returned from api
  *
  * @param {Object} options
  * @param {Object} options.context - Router context (from middleware)
@@ -39,22 +21,22 @@ function getRedirectPath(redirectProp, currentPath) {
  * @throws {Response} Throws redirect Response if unauthorized
  */
 export default async function authorizeLoader({
+  request,
   context,
   ability,
   kind,
   entity,
-  failureRedirect,
-  failureMessage,
-  currentPath
+  failureMessage
 }) {
+  await requireLogin(request, context);
+
   // Get user from middleware context
   const { auth } = context.get(routerContext) ?? {};
   const currentUser = auth?.user;
-  const isAuthenticated = !!currentUser;
 
   // Build authentication object for Authorization class
   const authentication = {
-    authenticated: isAuthenticated,
+    authenticated: true,
     currentUser
   };
 
@@ -65,7 +47,7 @@ export default async function authorizeLoader({
     entity
   });
 
-  if (!isAuthorized && isAuthenticated) {
+  if (!isAuthorized) {
     const hasAnyAdminAccess = authorization.authorizeKind({
       authentication,
       kind: [
@@ -81,39 +63,16 @@ export default async function authorizeLoader({
 
     throw data(
       {
-        method: "GET",
-        heading: "Access Denied",
-        userMessage:
+        message:
           failureMessage ??
           (!hasAnyAdminAccess
             ? "errors.access_denied.no_admin_access"
-            : "errors.access_denied.authorization_admin"),
-        contained: true,
-        hideStatus: true
+            : "errors.access_denied.authorization_admin")
       },
       {
         status: 403
       }
     );
-  }
-
-  if (!isAuthorized && failureRedirect) {
-    const loginPath = lh.link("frontendLogin");
-    const redirectPath = getRedirectPath(failureRedirect, currentPath);
-    const redirectUri =
-      redirectPath && redirectPath !== loginPath ? redirectPath : currentPath;
-    const redirectUrl = redirectUri
-      ? `${loginPath}?redirect_uri=${encodeURIComponent(redirectUri)}`
-      : loginPath;
-
-    throw redirect(redirectUrl);
-  }
-
-  if (!isAuthorized) {
-    throw new Response(null, {
-      status: 403,
-      statusText: "Forbidden"
-    });
   }
 
   return null;

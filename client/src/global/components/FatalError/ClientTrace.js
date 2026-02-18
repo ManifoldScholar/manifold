@@ -10,7 +10,7 @@ export default class FatalErrorClientTrace extends PureComponent {
         adjustedLine = adjustedLine.replace(" (", "%%%");
         adjustedLine = adjustedLine.replace(")", "");
         const parts = adjustedLine.split("%%%");
-        if (parts.length === 1) return null;
+        if (parts.length === 1) return { location: adjustedLine };
         return {
           id: index,
           method: parts[0].trim(),

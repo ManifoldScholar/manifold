@@ -23,11 +23,10 @@ export const loader = async ({ params, request, context }) => {
   const readingGroup = await loadEntity({ context, fetchFn });
 
   await authorize({
+    request,
     context,
     ability: "update",
-    entity: readingGroup,
-    failureRedirect: `/groups/${params.id}`,
-    currentPath: new URL(request.url).pathname
+    entity: readingGroup
   });
 
   const results = await loadParallelLists({
