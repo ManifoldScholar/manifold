@@ -67,7 +67,7 @@ export default function ReadingGroupMemberEdit({
   actionData
 }) {
   const submit = useSubmit();
-  const { readingGroup } = useOutletContext();
+  const readingGroup = useOutletContext();
   const { t } = useTranslation();
   const { confirm, confirmation } = useConfirmation();
 

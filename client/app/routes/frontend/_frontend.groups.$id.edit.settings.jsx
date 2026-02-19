@@ -10,7 +10,7 @@ export const action = readingGroupSettings;
 
 export default function ReadingGroupHomepageEditSettingsRoute({ actionData }) {
   const submit = useSubmit();
-  const { readingGroup } = useOutletContext();
+  const readingGroup = useOutletContext();
 
   return (
     <ReadingGroupSettings

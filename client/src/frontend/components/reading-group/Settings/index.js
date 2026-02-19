@@ -6,7 +6,7 @@ import { DuplicatePanel } from "./panels";
 import DrawerHeader from "./panels/parts/DrawerHeader";
 
 function ReadingGroupSettings({ submit, errors = [] }) {
-  const { readingGroup } = useOutletContext();
+  const readingGroup = useOutletContext();
 
   function doDuplicate({ name, copyAnnotations, archive, openOnProceed }) {
     const {

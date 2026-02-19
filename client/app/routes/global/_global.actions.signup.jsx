@@ -1,13 +1,12 @@
-import { ApiClient, usersAPI } from "api";
+import { usersAPI } from "api";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 
 export async function action({ request }) {
   const data = await request.json();
 
-  const client = new ApiClient();
-
   try {
-    const result = await client.call(usersAPI.create(data));
+    const result = await queryApi(usersAPI.create(data));
 
     if (result?.errors) {
       return { errors: result.errors };
@@ -19,6 +18,6 @@ export async function action({ request }) {
       password: data.attributes?.password
     };
   } catch (error) {
-    return handleActionError(error, "Failed to create account");
+    return handleActionError(error);
   }
 }

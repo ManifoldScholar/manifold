@@ -8,15 +8,14 @@ const authorization = new Authorization();
 /**
  * Checks authorization in a route loader.
  * Throws redirect if unauthorized.
- * Use only for ability checks; loadEntity handles 401/403 returned from api
+ * Use only for ability checks; loadEntity handles 401/403 returned from api.
  *
  * @param {Object} options
  * @param {Object} options.context - Router context (from middleware)
+ * @param {Object} options.request - Request object
  * @param {string|Array} options.ability - Ability to check
  * @param {string|Array} options.kind - Kind to check
  * @param {Object|string|Array} options.entity - Entity to check
- * @param {string|boolean} options.failureRedirect - Redirect path if unauthorized
- * @param {string} options.currentPath - Current pathname for redirect_uri
  * @returns {Promise<null>} Returns null if authorized
  * @throws {Response} Throws redirect Response if unauthorized
  */

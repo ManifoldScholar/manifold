@@ -82,6 +82,6 @@ export async function action({ request, context }) {
 
     return { success: true, data: result?.data };
   } catch (error) {
-    return handleActionError(error, "Failed to flag content");
+    return handleActionError(error);
   }
 }

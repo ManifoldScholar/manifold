@@ -2,7 +2,6 @@ import { redirect } from "react-router";
 import { Outlet } from "react-router";
 import { projectsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import EventTracker, { EVENTS } from "global/components/EventTracker";
 
 export const loader = async ({ params, context }) => {
   if (params.id === "all") {
@@ -14,10 +13,5 @@ export const loader = async ({ params, context }) => {
 };
 
 export default function ProjectWrapperRoute({ loaderData: project }) {
-  return (
-    <>
-      <EventTracker event={EVENTS.VIEW_RESOURCE} resource={project} />
-      <Outlet context={project} />
-    </>
-  );
+  return <Outlet context={project} />;
 }

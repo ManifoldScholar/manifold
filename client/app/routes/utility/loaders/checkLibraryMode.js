@@ -15,6 +15,7 @@ export default function checkLibraryMode({ request, context }) {
   const { settings } = context.get(routerContext) ?? {};
 
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
+
   if (!libraryDisabled) {
     return null;
   }
@@ -28,9 +29,9 @@ export default function checkLibraryMode({ request, context }) {
       ? general.homeRedirectUrl
       : general.libraryRedirectUrl;
 
-  if (!redirectUrl) {
-    return null;
+  if (redirectUrl) {
+    throw redirect(redirectUrl);
   }
 
-  throw redirect(redirectUrl);
+  return null;
 }

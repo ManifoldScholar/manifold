@@ -27,6 +27,6 @@ export async function action({ request, context }) {
 
     return { success: true };
   } catch (error) {
-    return handleActionError(error, "Failed to update profile");
+    return handleActionError(error);
   }
 }

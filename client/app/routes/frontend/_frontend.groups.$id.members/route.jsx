@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useOutletContext, useNavigate, useParams } from "react-router";
+import { useOutletContext, useParams } from "react-router";
 import { useRevalidator } from "react-router";
 import { redirect } from "react-router";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
@@ -56,7 +56,6 @@ function ReadingGroupMembersRoute({ loaderData }) {
   const { data: members = [], meta } = loaderData;
   const readingGroup = useOutletContext();
   const { id } = useParams();
-  const navigate = useNavigate();
   const { revalidate } = useRevalidator();
   const { t } = useTranslation();
   const { confirm, confirmation } = useConfirmation();
@@ -83,12 +82,6 @@ function ReadingGroupMembersRoute({ loaderData }) {
   );
 
   const closeUrl = `/groups/${id}/members`;
-  const handleCloseDrawer = () => navigate(closeUrl);
-
-  const handleEditSuccess = () => {
-    revalidate();
-    handleCloseDrawer();
-  };
 
   return (
     <>
@@ -109,11 +102,7 @@ function ReadingGroupMembersRoute({ loaderData }) {
           position: "overlay",
           lockScroll: "always"
         }}
-        context={{
-          readingGroup,
-          closeDrawer: handleCloseDrawer,
-          onEditSuccess: handleEditSuccess
-        }}
+        context={readingGroup}
       />
     </>
   );

@@ -1,5 +1,5 @@
-import { ApiClient, tokensAPI } from "api";
-import normalizeApiError from "app/routes/utility/helpers/normalizeApiError";
+import { tokensAPI } from "api";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 
 const getErrorMessage = status => {
   switch (status) {
@@ -14,10 +14,8 @@ const getErrorMessage = status => {
 export async function action({ request }) {
   const data = await request.json();
 
-  const client = new ApiClient();
-
   try {
-    const result = await client.call(tokensAPI.loginForm(data));
+    const result = await queryApi(tokensAPI.loginForm(data));
 
     if (result?.errors) {
       return { errors: result.errors };
@@ -32,13 +30,11 @@ export async function action({ request }) {
 
     return { authToken };
   } catch (error) {
-    // Normalize error to get status, then format with custom message
-    const normalized = normalizeApiError(error);
     const status =
-      normalized.errors?.[0]?.status ||
+      error?.body?.errors?.[0]?.status ||
       error?.status ||
       error?.body?.status ||
-      401;
+      500;
     return {
       error: getErrorMessage(status)
     };

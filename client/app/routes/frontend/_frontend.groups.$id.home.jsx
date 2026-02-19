@@ -1,4 +1,4 @@
-import { useOutletContext, useNavigate } from "react-router";
+import { useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useRevalidator } from "react-router";
 import { readingGroupsAPI } from "api";
@@ -45,11 +45,9 @@ export default function ReadingGroupHomepageWrapper({ loaderData }) {
   const { responses, categories } = loaderData;
   const readingGroup = useOutletContext();
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { revalidate } = useRevalidator();
 
   const closeUrl = `/groups/${readingGroup.id}/home`;
-  const closeDrawer = () => navigate(closeUrl);
 
   function handleUncollect(collection) {
     if (collection.id === readingGroup.id) {
@@ -99,13 +97,7 @@ export default function ReadingGroupHomepageWrapper({ loaderData }) {
         </>
       )}
       <OutletWithDrawer
-        context={{
-          readingGroup,
-          categories,
-          responses,
-          refresh: revalidate,
-          closeDrawer
-        }}
+        context={readingGroup}
         drawerProps={{
           context: "frontend",
           size: "wide",

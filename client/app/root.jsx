@@ -15,12 +15,10 @@ import { ErrorBoundary } from "./RootErrorBoundary";
 
 // Middleware and contexts
 import { bootstrapMiddleware } from "./middleware/bootstrap.server";
-import { clientBootstrapMiddleware } from "./middleware/bootstrap.client";
 import { routerContext, AppContext } from "./contexts";
 
 // Export middleware
 export const middleware = [bootstrapMiddleware];
-export const clientMiddleware = [clientBootstrapMiddleware];
 
 // Loader reads from middleware context and returns data for component
 export const loader = ({ context }) => {

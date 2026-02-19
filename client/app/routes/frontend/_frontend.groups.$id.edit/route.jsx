@@ -108,10 +108,7 @@ export default function ReadingGroupHomepageEdit({ loaderData }) {
         />
       </Styled.Body>
       <OutletWithDrawer
-        context={{
-          readingGroup,
-          closeDrawer
-        }}
+        context={readingGroup}
         drawerProps={{
           context: "frontend",
           size: "wide",

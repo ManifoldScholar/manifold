@@ -24,17 +24,15 @@ export async function action({ request, context }) {
     if (result?.errors) {
       return { errors: result.errors };
     }
-
     return { success: true };
   } catch (error) {
-    return handleActionError(error, "Failed to update preferences");
+    return handleActionError(error);
   }
 }
 
 export default function PrivacyRoute({ actionData }) {
   const { t } = useTranslation();
   const submit = useSubmit();
-  const errors = actionData?.errors || [];
 
   return (
     <>
@@ -54,7 +52,7 @@ export default function PrivacyRoute({ actionData }) {
             </div>
             <CookiesForm
               submit={submit}
-              errors={errors}
+              errors={actionData?.errors || []}
               actionData={actionData}
             />
             <AccountData />

@@ -25,10 +25,9 @@ export async function action({ request, context }) {
     if (result?.errors) {
       return { errors: result.errors };
     }
-
     return { success: true };
   } catch (error) {
-    return handleActionError(error, "Failed to update notification preferences");
+    return handleActionError(error);
   }
 }
 
@@ -61,8 +60,6 @@ export default function SubscriptionsRoute({ actionData }) {
     };
   };
 
-  const errors = actionData?.errors || [];
-
   return (
     <>
       <HeadContent title={t("titles.notifications")} appendDefaultTitle />
@@ -70,7 +67,7 @@ export default function SubscriptionsRoute({ actionData }) {
         <div className="container">
           <Styled.Form
             submit={submit}
-            errors={errors}
+            errors={actionData?.errors || []}
             model={{ attributes: {} }}
             formatData={formatData}
             className="form-primary"

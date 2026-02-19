@@ -10,17 +10,20 @@ export const action = readingGroupSettings;
 
 export default function ReadingGroupMembersSettingsRoute({ actionData }) {
   const submit = useSubmit();
-  const { readingGroup } = useOutletContext();
+  const readingGroup = useOutletContext();
 
   return (
     <ReadingGroupSettings
-      submit={(formData, options) => {
-        // For update, add intent and groupId
-        if (!formData.has("intent")) {
-          formData.append("intent", "update");
-          formData.append("groupId", readingGroup.id);
+      submit={(json, options) => {
+        const data = JSON.parse(json);
+        if (!data.intent) {
+          data.intent = "update";
+          data.groupId = readingGroup.id;
         }
-        submit(formData, options);
+        submit(JSON.stringify(data), {
+          ...options,
+          encType: "application/json"
+        });
       }}
       errors={actionData?.errors || []}
     />

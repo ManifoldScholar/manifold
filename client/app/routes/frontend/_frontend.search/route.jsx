@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useLoaderData } from "react-router";
 import { useSearchContext } from "hooks/useSearch/context";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import searchLoader from "app/routes/utility/loaders/search";
@@ -13,8 +12,7 @@ export const loader = async ({ request, context }) => {
   return searchLoader({ request, context });
 };
 
-export default function SearchRoute() {
-  const { results, meta } = useLoaderData();
+export default function SearchRoute({ loaderData: { results, meta } }) {
   const { searchQueryState, setQueryState, setPage } = useSearchContext();
   const { t } = useTranslation();
 

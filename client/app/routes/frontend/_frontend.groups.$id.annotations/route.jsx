@@ -1,4 +1,4 @@
-import { useOutletContext, useNavigate, useParams } from "react-router";
+import { useOutletContext, useParams } from "react-router";
 import { readingGroupsAPI } from "api";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
@@ -44,7 +44,6 @@ export default function ReadingGroupAnnotationsRoute({ loaderData }) {
   const { data: annotations, meta } = loaderData;
   const readingGroup = useOutletContext();
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const { filters, setFilters } = useListSearchParams({
     defaultFilters: DEFAULT_FILTERS,
@@ -62,15 +61,11 @@ export default function ReadingGroupAnnotationsRoute({ loaderData }) {
   });
 
   const closeUrl = `/groups/${id}/annotations`;
-  const handleCloseDrawer = () => navigate(closeUrl);
 
   return (
     <Styled.Body>
       <OutletWithDrawer
-        context={{
-          readingGroup,
-          closeDrawer: handleCloseDrawer
-        }}
+        context={readingGroup}
         drawerProps={{
           context: "frontend",
           size: "wide",

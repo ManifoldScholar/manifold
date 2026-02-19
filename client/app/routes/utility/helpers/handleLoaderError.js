@@ -1,7 +1,7 @@
 import { data } from "react-router";
 
 /**
- * Handles errors in route loaders with configurable behavior.
+ * Handles errors in route loaders by thowing to nearest boundary.
  *
  * @param {Error|Object|Response} error - The error to handle
  * @throws {Response} Always throws a Response object

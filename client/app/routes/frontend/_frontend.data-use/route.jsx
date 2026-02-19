@@ -5,11 +5,10 @@ import * as Styled from "./styles";
 
 export const loader = async ({ context }) => {
   const { settings } = context.get(routerContext);
-  return { settings };
+  return settings;
 };
 
-export default function DataUseRoute({ loaderData }) {
-  const { settings } = loaderData || {};
+export default function DataUseRoute({ loaderData: settings }) {
   const header = settings?.attributes?.theme?.stringDataUseHeader;
   const body = settings?.attributes?.stringDataUseCopyFormatted;
 
