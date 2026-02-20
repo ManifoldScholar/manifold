@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import Drawer from "global/containers/drawer";
+import Drawer from "global/components/drawer";
 import Drawers from "./types";
 import upperFirst from "lodash/upperFirst";
 

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useLocation, useNavigate, Outlet } from "react-router-dom";
 import Overlay from "global/components/Overlay";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import TextMeta from "reader/components/TextMeta";
 import Layout from "reader/components/layout";
 import Toc from "reader/components/Toc";
@@ -101,10 +100,6 @@ export default function ReaderContainer() {
     <BodyClass className={bodyClass}>
       <ReaderContext.Provider value={text}>
         <EventTracker event={EVENTS.VIEW_RESOURCE} resource={text} />
-        <CheckFrontendMode
-          debugLabel="ReaderWrapper"
-          project={text?.relationships?.project}
-        />
         <SearchProvider>
           <ScrollAware>
             <Header text={text} />

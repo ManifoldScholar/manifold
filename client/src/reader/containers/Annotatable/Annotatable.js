@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { annotationsAPI, requests } from "api";
-import { entityStoreActions, uiVisibilityActions } from "actions";
+import { entityStoreActions } from "actions";
+import { SignInUpOverlayContext } from "global/components/sign-in-up/Overlay/context";
 import AnnotatableDebug from "./handlers/Debug";
 import AnnotatableDrawer from "./Drawer";
 import { DisplaySelectModal } from "./Drawer/types";
@@ -18,6 +19,8 @@ import lh from "helpers/linkHandler";
 const { request } = entityStoreActions;
 
 export class Annotatable extends Component {
+  static contextType = SignInUpOverlayContext;
+
   static mapStateToProps() {
     return {};
   }
@@ -367,9 +370,7 @@ export class Annotatable extends Component {
   };
 
   showLogin = () => {
-    this.props.dispatch(
-      uiVisibilityActions.visibilityToggle("signInUpOverlay")
-    );
+    this.context?.toggle();
   };
 
   maybeRemoveAnnotationHashFromUrl() {

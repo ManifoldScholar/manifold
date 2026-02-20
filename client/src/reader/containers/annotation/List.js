@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 import { annotationsAPI } from "api";
 import Annotation from "global/components/Annotation";
 import { useFetch, useAuthentication } from "hooks";
@@ -14,8 +13,6 @@ export default function AnnotationList({
   sectionId,
   textId
 }) {
-  const dispatch = useDispatch();
-
   const { data: annotations = [] } = useFetch({
     request: [
       annotationsAPI.forSection,
@@ -52,7 +49,6 @@ export default function AnnotationList({
       annotations={annotations}
       loginHandler={loginHandler}
       focusHandler={focusHandler}
-      dispatch={dispatch}
       showUnverifiedWarning={showUnverifiedWarning()}
     />
   );

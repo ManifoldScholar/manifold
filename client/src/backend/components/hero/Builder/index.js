@@ -4,7 +4,7 @@ import { UIDConsumer } from "react-uid";
 import Block from "./Block";
 import Forms from "./forms";
 import { projectsAPI } from "api";
-import Drawer from "global/containers/drawer";
+import Drawer from "global/components/drawer";
 import ActionCallouts from "./ActionCallouts";
 import SectionLabel from "global/components/form/SectionLabel";
 import { withTranslation } from "react-i18next";

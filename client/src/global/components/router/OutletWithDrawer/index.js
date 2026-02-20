@@ -1,5 +1,5 @@
 import { Outlet, useMatches } from "react-router";
-import Drawer from "global/containers/drawer";
+import Drawer from "global/components/drawer";
 
 export default function OutletWithDrawer({
   drawerProps,
