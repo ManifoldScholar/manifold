@@ -62,12 +62,12 @@ export const loader = async ({ request, context }) => {
   };
 };
 
-export default function HomePage() {
+export default function HomePage({ loaderData }) {
   return (
     <>
       <HeadContent />
       <EventTracker event={EVENTS.VIEW_LIBRARY} />
-      <Content />
+      <Content {...loaderData} />
     </>
   );
 }

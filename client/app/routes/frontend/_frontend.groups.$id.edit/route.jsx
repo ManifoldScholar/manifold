@@ -16,8 +16,6 @@ import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import SearchDialog from "frontend/components/collecting/SearchDialog";
 import * as Styled from "./styles";
 
-export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
-
 export const loader = async ({ params, request, context }) => {
   const fetchFn = () => readingGroupsAPI.show(params.id);
   const readingGroup = await loadEntity({ context, fetchFn });
@@ -68,7 +66,6 @@ export default function ReadingGroupHomepageEdit({ loaderData }) {
   const location = useLocation();
 
   const editRoute = `/groups/${id}/edit`;
-  const closeDrawer = () => navigate(editRoute);
 
   const { name: groupName } = readingGroup.attributes ?? {};
   const showSearchDialog = location.hash === "#search";

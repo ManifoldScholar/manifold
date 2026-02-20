@@ -1,19 +1,16 @@
 import Feature from "./Feature";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
-import { useLoaderData } from "react-router";
 import EntityCollection from "frontend/components/entity/Collection";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 
-export default function Content() {
-  const {
-    journals,
-    features,
-    projects,
-    collections,
-    showProjects,
-    hasVisibleProjects
-  } = useLoaderData() || {};
-
+export default function Content({
+  journals,
+  features,
+  projects,
+  collections,
+  showProjects,
+  hasVisibleProjects
+}) {
   const filteredProjects = Array.isArray(projects)
     ? projects.filter(p => !p?.attributes?.markedForPurgeAt)
     : null;

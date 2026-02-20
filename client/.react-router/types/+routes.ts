@@ -329,7 +329,7 @@ type RouteFiles = {
     id: "routes/frontend/_frontend.projects.$id.events";
     page: "/projects/:id/events";
   };
-  "routes/frontend/_frontend.projects.$id.search/route.jsx": {
+  "routes/frontend/_frontend.projects.$id.search.jsx": {
     id: "routes/frontend/_frontend.projects.$id.search";
     page: "/projects/:id/search";
   };
@@ -429,7 +429,7 @@ type RouteFiles = {
     id: "routes/frontend/_frontend.groups.$id.home.settings";
     page: "/groups/:id/home/settings";
   };
-  "routes/frontend/_frontend.search/route.jsx": {
+  "routes/frontend/_frontend.search.jsx": {
     id: "routes/frontend/_frontend.search";
     page: "/search";
   };
@@ -493,7 +493,7 @@ type RouteModules = {
   "routes/frontend/_frontend.projects.$id.resources": typeof import("./app/routes/frontend/_frontend.projects.$id.resources.jsx");
   "routes/frontend/_frontend.projects.$id._index": typeof import("./app/routes/frontend/_frontend.projects.$id._index.jsx");
   "routes/frontend/_frontend.projects.$id.events": typeof import("./app/routes/frontend/_frontend.projects.$id.events.jsx");
-  "routes/frontend/_frontend.projects.$id.search": typeof import("./app/routes/frontend/_frontend.projects.$id.search/route.jsx");
+  "routes/frontend/_frontend.projects.$id.search": typeof import("./app/routes/frontend/_frontend.projects.$id.search.jsx");
   "routes/frontend/_frontend.my.starred": typeof import("./app/routes/frontend/_frontend.my.starred.jsx");
   "routes/frontend/_frontend.page.$slug": typeof import("./app/routes/frontend/_frontend.page.$slug.jsx");
   "routes/frontend/_frontend.my.groups": typeof import("./app/routes/frontend/_frontend.my.groups.jsx");
@@ -518,7 +518,7 @@ type RouteModules = {
   "routes/frontend/_frontend.groups.$id.edit.settings": typeof import("./app/routes/frontend/_frontend.groups.$id.edit.settings.jsx");
   "routes/frontend/_frontend.groups.$id.home": typeof import("./app/routes/frontend/_frontend.groups.$id.home.jsx");
   "routes/frontend/_frontend.groups.$id.home.settings": typeof import("./app/routes/frontend/_frontend.groups.$id.home.settings.jsx");
-  "routes/frontend/_frontend.search": typeof import("./app/routes/frontend/_frontend.search/route.jsx");
+  "routes/frontend/_frontend.search": typeof import("./app/routes/frontend/_frontend.search.jsx");
   "routes/frontend/_frontend.signup": typeof import("./app/routes/frontend/_frontend.signup.jsx");
   "routes/frontend/_frontend.login": typeof import("./app/routes/frontend/_frontend.login.jsx");
   "routes/global/_global.actions.forgot-password": typeof import("./app/routes/global/_global.actions.forgot-password.jsx");

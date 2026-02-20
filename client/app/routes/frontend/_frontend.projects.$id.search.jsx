@@ -1,38 +1,62 @@
 import { useTranslation } from "react-i18next";
-import { useSearchContext } from "hooks/useSearch/context";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
+import { useOutletContext } from "react-router";
+import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import { projectsAPI } from "api";
+import loadEntity from "app/routes/utility/loaders/loadEntity";
 import searchLoader from "app/routes/utility/loaders/search";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
 import HeadContent from "global/components/HeadContent";
-import * as Styled from "./styles";
+import { useSearchContext } from "hooks/useSearch/context";
+import * as Styled from "app/routes/frontend/shared/search/styles";
 
-export const loader = async ({ request, context }) => {
-  await checkLibraryMode({ request, context });
-  return searchLoader({ request, context });
+export const loader = async ({ params, request, context }) => {
+  // Load project to get its UUID (API expects UUID, not slug)
+  const fetchFn = () => projectsAPI.show(params.id);
+  const project = await loadEntity({ context, fetchFn });
+
+  return searchLoader({
+    request,
+    context,
+    beforeQuery: searchQueryState => {
+      /* eslint-disable no-param-reassign */
+      searchQueryState.project = project.id;
+    }
+  });
 };
 
-export default function SearchRoute({ loaderData: { results, meta } }) {
+export const handle = { frontendMode: { isProjectSubpage: true } };
+
+export default function ProjectSearch({ loaderData }) {
+  const { results, meta } = loaderData;
+  const project = useOutletContext();
   const { searchQueryState, setQueryState, setPage } = useSearchContext();
   const { t } = useTranslation();
 
   const facets = [
-    { label: t("glossary.project_other"), value: "Project" },
-    { label: t("glossary.journal_other"), value: "Journal" },
     { label: t("glossary.resource_other"), value: "Resource" },
     { label: t("glossary.text_other"), value: "Text" },
     { label: t("glossary.annotation_other"), value: "Annotation" },
-    { label: t("glossary.full_text_other"), value: "TextSection" }
+    { label: t("glossary.full_text_one"), value: "TextSection" }
+  ];
+
+  const breadcrumbs = [
+    {
+      to: `/projects/${project?.attributes?.slug}`,
+      label: project?.attributes?.titlePlaintext
+    }
   ];
 
   return (
     <>
       <HeadContent title={t("search.title")} appendDefaultTitle />
+      <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <h1 className="screen-reader-text">{t("search.title")}</h1>
       <Styled.FormWrapper>
         <Styled.Inner>
           <h2 className="screen-reader-text">{t("search.form")}</h2>
           <SearchQuery.Form
+            projectId={project.id}
             searchQueryState={searchQueryState}
             setQueryState={setQueryState}
             facets={facets}
@@ -47,6 +71,7 @@ export default function SearchRoute({ loaderData: { results, meta } }) {
               pagination={meta?.pagination}
               paginationClickHandler={setPage}
               results={results}
+              hideParent
               context="frontend"
             />
           </Styled.Inner>
