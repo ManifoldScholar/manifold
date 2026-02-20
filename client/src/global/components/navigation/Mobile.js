@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import { useLocation, NavLink } from "react-router";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
-import {
-  useShowJournalsActive,
-  useFrontendMode,
-  useLogout,
-  useAuthentication
-} from "hooks";
+import { useShowJournalsActive, useFrontendMode } from "hooks";
 import memoize from "lodash/memoize";
 import UserLinks from "./mobile-components/UserLinks";
 import MobileSearch from "./mobile-components/Search";
@@ -17,20 +12,12 @@ import { FocusTrap } from "focus-trap-react";
 import IconComposer from "global/components/utility/IconComposer";
 import Authorize from "hoc/Authorize";
 import BodyClass from "hoc/BodyClass";
-import { useDispatch } from "react-redux";
-import { commonActions } from "actions/helpers";
 
 export default function NavigationMobile({ links, backendButton, mode }) {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const location = useLocation();
   const context = useFrontendMode();
-  const authentication = useAuthentication();
   const journalIsActive = useShowJournalsActive();
-  const logout = useLogout();
-
-  // Override logout to use the hook that triggers revalidation
-  const commonActionsHelper = { ...commonActions(dispatch), logout };
 
   const initialState = {
     expanded: [],
@@ -288,10 +275,7 @@ export default function NavigationMobile({ links, backendButton, mode }) {
               )}
             </ul>
             <UserLinks
-              authentication={authentication}
-              commonActions={commonActionsHelper}
               backendButton={backendButton}
-              mode={mode}
               closeNavigation={closeNavigation}
             />
           </div>

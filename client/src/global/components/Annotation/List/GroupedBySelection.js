@@ -5,14 +5,15 @@ import GroupBySubject from "../GroupBy/Subject";
 import Editor from "../Editor";
 import TextContent from "../Annotation/TextContent";
 import UserContent from "../Annotation/UserContent";
-import { uiVisibilityActions } from "actions";
+import { SignInUpOverlayContext } from "global/components/sign-in-up/Overlay/context";
 import * as Styled from "./styles";
 
 export default class GroupedList extends PureComponent {
   static displayName = "Annotation.List.GroupedBySelection";
 
+  static contextType = SignInUpOverlayContext;
+
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
     loginHandler: PropTypes.func.isRequired,
     focusHandler: PropTypes.func,
     annotations: PropTypes.array,
@@ -45,8 +46,7 @@ export default class GroupedList extends PureComponent {
     );
   };
 
-  onProfileClick = () =>
-    this.props.dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
+  onProfileClick = () => this.context?.show();
 
   render() {
     const {

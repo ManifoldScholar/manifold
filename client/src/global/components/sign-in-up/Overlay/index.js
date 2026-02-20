@@ -1,41 +1,22 @@
-import { useId, useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { FocusTrap } from "focus-trap-react";
+import { useId, forwardRef } from "react";
 import TrapContent from "./Content";
-import { usePreventBodyScroll, useFromStore } from "hooks";
-import { uiVisibilityActions } from "actions";
 import * as Styled from "./styles";
 
-export default function Overlay() {
-  const dispatch = useDispatch();
-  const visibility = useFromStore({ path: "ui.transitory.visibility" });
-  const active = visibility?.signInUpOverlay ?? false;
-
-  const hideOverlay = useCallback(() => {
-    dispatch(uiVisibilityActions.visibilityHide("signInUpOverlay"));
-  }, [dispatch]);
-
-  usePreventBodyScroll(active);
+const Overlay = forwardRef(function Overlay({ active, onClose, hide }, ref) {
   const uid = useId();
 
   return (
-    <FocusTrap
-      active={active}
-      focusTrapOptions={{
-        onDeactivate: hideOverlay
-      }}
+    <Styled.Dialog
+      ref={ref}
+      className="bg-neutral90"
+      aria-labelledby={uid}
+      onClose={onClose}
     >
-      <Styled.Dialog
-        className="bg-neutral90"
-        role="dialog"
-        aria-modal
-        aria-labelledby={uid}
-        inert={!active ? "" : undefined}
-      >
-        {active && <TrapContent uid={uid} hideOverlay={hideOverlay} />}
-      </Styled.Dialog>
-    </FocusTrap>
+      {active && <TrapContent uid={uid} hideOverlay={hide} />}
+    </Styled.Dialog>
   );
-}
+});
+
+export default Overlay;
 
 Overlay.displayName = "Global.SignInUp.Overlay";

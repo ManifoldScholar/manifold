@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import { useAuthentication } from "hooks";
+import { useAuthentication, useSignInUpOverlay } from "hooks";
 import { useTranslation } from "react-i18next";
 import Avatar from "global/components/avatar";
 import * as Styled from "./styles";
@@ -18,12 +18,11 @@ const UserMenuButton = forwardRef(
   ) => {
     const { authenticated, currentUser } = useAuthentication();
     const { t } = useTranslation();
+    const { toggle: toggleSignInUpOverlay } = useSignInUpOverlay();
 
     function handleClick(event) {
       event.stopPropagation();
-      authenticated
-        ? callbacks.toggleUserPanel()
-        : callbacks.toggleSignInUpOverlay();
+      authenticated ? callbacks.toggleUserPanel() : toggleSignInUpOverlay();
     }
 
     return (
@@ -57,8 +56,7 @@ UserMenuButton.displayName = "UserMenuButton";
 
 UserMenuButton.propTypes = {
   callbacks: PropTypes.shape({
-    toggleUserPanel: PropTypes.func.isRequired,
-    toggleSignInUpOverlay: PropTypes.func.isRequired
+    toggleUserPanel: PropTypes.func.isRequired
   }),
   visible: PropTypes.bool,
   context: PropTypes.oneOf(["frontend", "backend", "reader"])

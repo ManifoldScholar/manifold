@@ -2,17 +2,17 @@ import { useMenuState, MenuItem } from "reakit/Menu";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { useSettings, useFrontendModeContext } from "hooks";
+import { useSettings, useFrontendMode, useSignInUpOverlay } from "hooks";
 import Authorize from "hoc/Authorize";
 import * as Styled from "./styles";
 
 export default function SiteNav({
   returnUrl,
   entityTitle,
-  toggleSignInUpOverlay,
   moreLink = "https://manifoldapp.org/"
 }) {
-  const context = useFrontendModeContext();
+  const context = useFrontendMode();
+  const { toggle: toggleSignInUpOverlay } = useSignInUpOverlay();
   const menu = useMenuState();
   const settings = useSettings();
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
@@ -83,6 +83,5 @@ SiteNav.displayName = "Reader.SiteNav";
 SiteNav.propTypes = {
   returnUrl: PropTypes.string.isRequired,
   entityTitle: PropTypes.string.isRequired,
-  toggleSignInUpOverlay: PropTypes.func.isRequired,
   moreLink: PropTypes.string
 };

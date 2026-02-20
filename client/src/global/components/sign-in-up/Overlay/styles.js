@@ -4,23 +4,22 @@ import {
   respond,
   defaultFocusStyle,
   headerContainerPrimary,
-  containerPrototype,
-  defaultTransitionProps
+  containerPrototype
 } from "theme/styles/mixins";
 
-export const Dialog = styled.div`
-  position: fixed;
-  top: 0;
+export const Dialog = styled.dialog`
+  padding: 0;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   font-size: 18px;
   font-family: var(--font-family-copy);
-  background-color: ${transparentize("neutral90", 0.025)};
-  z-index: 600;
-  transition: opacity ${defaultTransitionProps};
+  position: relative;
+  background: transparent;
 
-  &[inert] {
-    opacity: 0;
+  &::backdrop {
+    background: ${transparentize("neutral90", 0.025)};
   }
 
   a {
@@ -31,6 +30,7 @@ export const Dialog = styled.div`
 export const Header = styled.div`
   position: fixed;
   width: 100%;
+  left: 0;
   z-index: 1;
 `;
 

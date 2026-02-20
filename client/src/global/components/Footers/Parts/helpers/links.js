@@ -51,15 +51,15 @@ export function pageLinks({ pages }) {
 
 export function authenticationLink({
   authentication: { authenticated },
-  commonActions
+  callbacks
 }) {
   if (authenticated)
     return {
-      onClick: commonActions.logout,
+      onClick: callbacks.logout,
       title: "Log Out"
     };
   return {
-    onClick: commonActions.toggleSignInUpOverlay,
+    onClick: callbacks.toggleSignInUpOverlay,
     title: "Log In"
   };
 }

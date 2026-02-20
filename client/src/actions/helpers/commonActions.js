@@ -35,11 +35,6 @@ const commonActions = dispatch => {
     hideVisibilityPanel: b(() => panelHide("visibility"), dispatch),
     hideNotesPanel: b(() => panelHide("notes"), dispatch),
     hideReaderReturnPanel: b(() => panelHide("readerReturn"), dispatch),
-    toggleSignInUpOverlay: b(
-      () => visibilityToggle("signInUpOverlay"),
-      dispatch
-    ),
-    closeSignInUpOverlay: b(() => visibilityHide("signInUpOverlay"), dispatch),
     addNotification: b(opts => addNotification(opts), dispatch),
     removeNotification: b(opts => removeNotification(opts), dispatch),
     clearNotifications: b(removeAllNotifications, dispatch),

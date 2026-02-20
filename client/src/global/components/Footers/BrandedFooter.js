@@ -1,21 +1,24 @@
-import { useDispatch } from "react-redux";
-import { commonActions } from "actions/helpers";
 import FooterParts from "./Parts";
-import { useAuthentication, useSettings, usePages, useLogout } from "hooks";
+import {
+  useAuthentication,
+  useSettings,
+  usePages,
+  useLogout,
+  useSignInUpOverlay
+} from "hooks";
 import withPluginReplacement from "hoc/withPluginReplacement";
 import links from "./Parts/helpers/links";
 // import LanguageSelect from "global/components/LanguageSelect";
 import * as Styled from "./styles";
 
 function BrandedFooter(props) {
-  const dispatch = useDispatch();
   const authentication = useAuthentication();
   const settings = useSettings();
   const pages = usePages();
   const logout = useLogout();
+  const { toggle: toggleSignInUpOverlay } = useSignInUpOverlay();
 
-  // Override logout to use the hook that triggers revalidation
-  const commonActionsWithLogout = { ...commonActions(dispatch), logout };
+  const callbacks = { logout, toggleSignInUpOverlay };
 
   return (
     <Styled.BrandedFooter className="bg-neutral95">
@@ -29,7 +32,7 @@ function BrandedFooter(props) {
               authentication,
               settings,
               pages,
-              commonActions: commonActionsWithLogout,
+              callbacks,
               ...props
             })}
           </FooterParts.Navigation>

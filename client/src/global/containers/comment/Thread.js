@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { requests } from "api";
-import { entityStoreActions, uiVisibilityActions } from "actions";
-import { bindActionCreators } from "redux";
+import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
+import { SignInUpOverlayContext } from "global/components/sign-in-up/Overlay/context";
 import Detail from "global/components/comment/detail";
 import { commentsAPI } from "api";
 import Utility from "global/components/utility";
@@ -14,6 +14,8 @@ const { request } = entityStoreActions;
 const perPage = 10;
 
 export class CommentThread extends PureComponent {
+  static contextType = SignInUpOverlayContext;
+
   static mapStateToProps = (state, ownProps) => {
     const newState = {
       comments: select(
@@ -125,10 +127,7 @@ export class CommentThread extends PureComponent {
       return null;
     const children = this.childrenOf(this.props.parentId);
     if (children.length <= 0) return null;
-    const showLogin = bindActionCreators(
-      () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
-      this.props.dispatch
-    );
+    const showLogin = this.context?.toggle;
 
     return (
       <div className="annotation-comment-thread">

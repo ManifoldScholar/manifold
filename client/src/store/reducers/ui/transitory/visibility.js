@@ -2,7 +2,6 @@ import { handleActions } from "redux-actions";
 import mapValues from "lodash/mapValues";
 
 export const initialState = {
-  loginOverlay: false,
   userMenu: false,
   visibilityFilters: {
     annotation: { yours: true, others: true, highlights: true },

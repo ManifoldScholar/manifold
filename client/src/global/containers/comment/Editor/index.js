@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { requests } from "api";
-import { entityStoreActions, uiVisibilityActions } from "actions";
+import { entityStoreActions } from "actions";
 import { singularEntityName } from "utils/entityUtils";
-import { bindActionCreators } from "redux";
 import { commentsAPI } from "api";
+import { SignInUpOverlayContext } from "global/components/sign-in-up/Overlay/context";
 import { UIDConsumer } from "react-uid";
 import * as Styled from "./styles";
 
@@ -22,6 +22,8 @@ export class CommentEditor extends PureComponent {
   };
 
   static displayName = "Comment.Editor";
+
+  static contextType = SignInUpOverlayContext;
 
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -207,10 +209,7 @@ export class CommentEditor extends PureComponent {
     });
 
   render() {
-    const showLogin = bindActionCreators(
-      () => uiVisibilityActions.visibilityToggle("signInUpOverlay"),
-      this.props.dispatch
-    );
+    const showLogin = this.context?.toggle;
 
     const t = this.props.t;
 

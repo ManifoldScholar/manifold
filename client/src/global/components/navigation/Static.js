@@ -1,8 +1,8 @@
+import { useState, useEffect, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import classNames from "classnames";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import SearchMenu from "global/components/search/menu";
 import UserMenuButton from "global/components/UserMenuButton";
 import UserMenuBody from "global/components/UserMenuBody";
@@ -10,13 +10,11 @@ import UIPanel from "global/components/UIPanel";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
 import Authorize from "hoc/Authorize";
 import {
-  useFromStore,
   useShowJournalsActive,
   useSettings,
   useLogout,
   useFrontendMode
 } from "hooks";
-import { commonActions } from "actions/helpers";
 
 export default function NavigationStatic({
   links,
@@ -26,17 +24,39 @@ export default function NavigationStatic({
   style,
   darkTheme
 }) {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const context = useFrontendMode();
   const journalIsActive = useShowJournalsActive();
   const logout = useLogout();
-
-  const visibility = useFromStore({ path: "ui.transitory.visibility" });
+  const location = useLocation();
   const settings = useSettings();
 
-  // Override logout to use the hook that triggers revalidation
-  const commonActionsHelper = { ...commonActions(dispatch), logout };
+  const [activePanel, setActivePanel] = useState(null);
+
+  // Close panels on navigation (replaces Redux router middleware behavior)
+  useEffect(() => {
+    setActivePanel(null);
+  }, [location.pathname]);
+
+  const togglePanel = useCallback(
+    panel => setActivePanel(prev => (prev === panel ? null : panel)),
+    []
+  );
+  const hidePanel = useCallback(() => setActivePanel(null), []);
+
+  const searchOpen = activePanel === "search";
+  const userOpen = activePanel === "user";
+
+  const panelCallbacks = useMemo(
+    () => ({
+      toggleSearchPanel: () => togglePanel("search"),
+      hideSearchPanel: hidePanel,
+      toggleUserPanel: () => togglePanel("user"),
+      hideUserPanel: hidePanel,
+      logout
+    }),
+    [togglePanel, hidePanel, logout]
+  );
 
   const userMenuClasses = classNames({
     "user-nav": true,
@@ -160,13 +180,13 @@ export default function NavigationStatic({
     return (
       <li className="user-nav__item">
         <SearchMenu.Button
-          toggleSearchMenu={commonActionsHelper.toggleSearchPanel}
-          active={visibility.uiPanels.search}
+          toggleSearchMenu={() => togglePanel("search")}
+          active={searchOpen}
           className="user-nav__button user-nav__button--search"
         />
         <UIPanel
           id="search"
-          visibility={visibility.uiPanels}
+          visibility={{ search: searchOpen }}
           bodyComponent={SearchMenu.Body}
           bodyClassName="search-menu"
           searchType={projectId ? "project" : "library"}
@@ -175,8 +195,8 @@ export default function NavigationStatic({
             keyword: ""
           }}
           description={description}
-          hidePanel={commonActionsHelper.hideSearchPanel}
-          afterSubmit={commonActionsHelper.hideSearchPanel}
+          hidePanel={hidePanel}
+          afterSubmit={hidePanel}
         />
       </li>
     );
@@ -198,10 +218,10 @@ export default function NavigationStatic({
           {renderSearch()}
           <li className="user-nav__item">
             <DisclosureNavigationMenu
-              visible={visibility.uiPanels.user}
+              visible={userOpen}
               disclosure={<UserMenuButton />}
-              callbacks={commonActionsHelper}
-              onBlur={commonActionsHelper.hideUserPanel}
+              callbacks={panelCallbacks}
+              onBlur={hidePanel}
               context={mode}
             >
               <UserMenuBody />

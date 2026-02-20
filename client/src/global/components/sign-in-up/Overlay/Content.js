@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import Utility from "global/components/utility";
 import CloseButton from "global/components/Overlay/Close";
 import Interface from "../Interface";
@@ -6,12 +5,12 @@ import { useTranslation } from "react-i18next";
 import { useAuthentication } from "hooks";
 import * as Styled from "./styles";
 
-const OverlayContent = ({ uid, hideOverlay }, ref) => {
+export default function OverlayContent({ uid, hideOverlay }) {
   const { t } = useTranslation();
   const { authenticated } = useAuthentication();
 
   return (
-    <div ref={ref}>
+    <>
       <Styled.Header>
         <Styled.HeaderInner>
           <Utility.IconComposer size={26} icon="manifoldLogo32" />
@@ -31,12 +30,8 @@ const OverlayContent = ({ uid, hideOverlay }, ref) => {
           </Styled.FormContainer>
         </Styled.LayoutContainer>
       </Styled.Content>
-    </div>
+    </>
   );
-};
-
-export default forwardRef(OverlayContent);
+}
 
 OverlayContent.displayName = "Global.SignInUp.Overlay.Content";
-
-OverlayContent.propTypes = {};

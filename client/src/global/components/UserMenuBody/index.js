@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useCurrentUser } from "hooks";
+import { useCurrentUser, useSignInUpOverlay } from "hooks";
 import Item from "./Item";
 import * as Styled from "./styles";
 
@@ -12,6 +12,7 @@ const UserMenuBody = forwardRef(
   ) => {
     const currentUser = useCurrentUser();
     const { t } = useTranslation();
+    const { toggle: toggleSignInUpOverlay } = useSignInUpOverlay();
 
     return (
       <Styled.List
@@ -51,7 +52,7 @@ const UserMenuBody = forwardRef(
           icon="editProfile24"
           onClick={() => {
             callbacks.hideUserPanel();
-            callbacks.toggleSignInUpOverlay();
+            toggleSignInUpOverlay();
           }}
         />
         <Item
@@ -85,7 +86,6 @@ UserMenuBody.displayName = "UserMenuBody";
 UserMenuBody.propTypes = {
   callbacks: PropTypes.shape({
     hideUserPanel: PropTypes.func.isRequired,
-    toggleSignInUpOverlay: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired
   }),
   visible: PropTypes.bool,

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import Authorize from "hoc/Authorize";
-import { useSettings, useFrontendModeContext } from "hooks";
+import { useSettings, useFrontendMode, useSignInUpOverlay } from "hooks";
 import * as Styled from "./styles";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -10,12 +10,12 @@ export default function ReturnMenuBody({
   returnUrl,
   isJournalArticle,
   projectTitle: entityTitle,
-  toggleSignInUpOverlay,
   moreLink,
   className,
   hidePanel
 }) {
-  const context = useFrontendModeContext();
+  const context = useFrontendMode();
+  const { toggle: toggleSignInUpOverlay } = useSignInUpOverlay();
   const settings = useSettings();
   const isLibraryDisabled = settings.attributes.general.libraryDisabled;
   const { t } = useTranslation();
@@ -94,7 +94,6 @@ ReturnMenuBody.displayName = "ReturnMenuBody";
 ReturnMenuBody.propTypes = {
   returnUrl: PropTypes.string,
   projectTitle: PropTypes.string,
-  toggleSignInUpOverlay: PropTypes.func,
   moreLink: PropTypes.string,
   settings: PropTypes.object,
   className: PropTypes.string

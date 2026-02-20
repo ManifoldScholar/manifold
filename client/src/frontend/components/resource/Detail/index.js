@@ -1,26 +1,23 @@
 import PropTypes from "prop-types";
 import { Trans, useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import CommentContainer from "global/containers/comment";
 import Meta from "../Meta";
 import VariantList from "../VariantList";
 import Annotations from "./Annotations";
-import { uiVisibilityActions } from "actions";
-import { useAuthentication } from "hooks";
+import { useAuthentication, useSignInUpOverlay } from "hooks";
 import * as Styled from "./styles";
 import Preview from "../Preview";
 
 export default function ResourceDetail({ resource }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const authentication = useAuthentication();
+  const { show } = useSignInUpOverlay();
 
   if (!resource) return null;
 
   const canEngagePublicly = resource?.attributes?.abilities?.engagePublicly;
 
-  const onLoginClick = () =>
-    dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
+  const onLoginClick = () => show();
 
   return (
     <Styled.Container>

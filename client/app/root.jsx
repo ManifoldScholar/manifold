@@ -7,9 +7,9 @@ import get from "lodash/get";
 import Analytics from "hoc/analytics";
 import Utility from "global/components/utility";
 import LoadingBar from "global/components/LoadingBar";
-import SignInUp from "global/components/sign-in-up";
 import CookiesBanner from "global/components/CookiesBanner";
 import { NavigationBlockerProvider } from "global/components/router/NavigationBlockerContext";
+import { SignInUpOverlayProvider } from "global/components/sign-in-up/Overlay/context";
 import { useColorScheme } from "hooks";
 import { ErrorBoundary } from "./RootErrorBoundary";
 
@@ -80,10 +80,11 @@ export default function Root({ loaderData }) {
                   <div id="global-notification-container" />
                   <div id="global-overlay-container" />
                   <NavigationBlockerProvider>
-                    <LoadingBar />
-                    <SignInUp.Overlay />
-                    <Outlet />
-                    <CookiesBanner />
+                    <SignInUpOverlayProvider>
+                      <LoadingBar />
+                      <Outlet />
+                      <CookiesBanner />
+                    </SignInUpOverlayProvider>
                   </NavigationBlockerProvider>
                 </div>
               </Analytics>

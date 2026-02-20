@@ -226,7 +226,6 @@ export default function Header({ text, scrollAware }) {
               isJournalArticle={
                 text?.relationships.project.attributes.isJournalIssue
               }
-              toggleSignInUpOverlay={actions.toggleSignInUpOverlay}
               hidePanel={actions.hideReaderReturnPanel}
               moreLink="https://manifoldapp.org/"
             />
@@ -248,7 +247,6 @@ export default function Header({ text, scrollAware }) {
             id="readerReturn"
             visibility={visibility?.uiPanels}
             bodyComponent={ReturnMenu.Body}
-            toggleSignInUpOverlay={commonActions.toggleSignInUpOverlay}
             hidePanel={commonActions.hideReaderReturnPanel}
             moreLink="https://manifoldapp.org/"
           />
