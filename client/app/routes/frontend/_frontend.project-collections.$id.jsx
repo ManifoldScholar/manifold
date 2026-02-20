@@ -6,7 +6,6 @@ import loadList from "app/routes/utility/loaders/loadList";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
@@ -110,10 +109,6 @@ export default function ProjectCollectionDetailRoute({ loaderData }) {
 
   return (
     <>
-      <CheckFrontendMode
-        debugLabel="ProjectCollectionDetail"
-        isProjectSubpage
-      />
       <EventTracker event={EVENTS.VIEW_RESOURCE} resource={projectCollection} />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <HeadContent {...headContentProps} />

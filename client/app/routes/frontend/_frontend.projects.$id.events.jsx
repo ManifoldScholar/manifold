@@ -1,7 +1,6 @@
 import { Navigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "frontend/components/entity/Collection";
@@ -11,6 +10,8 @@ import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadList from "app/routes/utility/loaders/loadList";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+
+export const handle = { frontendMode: { isProjectSubpage: true } };
 
 export const loader = async ({ params, request, context }) => {
   checkLibraryMode({ request, context });
@@ -73,11 +74,6 @@ export default function EventListRoute({ loaderData }) {
         description={description}
         image={avatarStyles.mediumSquare}
         appendDefaultTitle
-      />
-      <CheckFrontendMode
-        debugLabel="EventList"
-        project={project}
-        isProjectSubpage
       />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <EntityCollection.Events events={events} eventsMeta={meta} />

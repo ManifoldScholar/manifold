@@ -1,5 +1,4 @@
 import { useOutletContext } from "react-router";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
 import HeadContent from "global/components/HeadContent";
@@ -11,6 +10,8 @@ import { useSettings } from "hooks";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import Schema from "global/components/schema";
+
+export const handle = { frontendMode: { isProjectHomepage: true } };
 
 export default function JournalDetailRoute() {
   const journal = useOutletContext();
@@ -46,7 +47,6 @@ export default function JournalDetailRoute() {
 
   return (
     <>
-      <CheckFrontendMode debugLabel="JournalDetail" isProjectHomePage />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <HeadContent {...headContentProps} />
       <EntityHero.Journal entity={journal} />

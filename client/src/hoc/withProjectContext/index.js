@@ -1,6 +1,6 @@
 import React from "react";
 import hoistStatics from "../hoist-non-react-statics";
-import { useFrontendModeContext } from "hooks";
+import { useFrontendMode } from "hooks";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 
@@ -14,7 +14,7 @@ export default function withProjectContext(WrappedComponent) {
   )})`;
 
   function WithProjectContext(props) {
-    const context = useFrontendModeContext();
+    const context = useFrontendMode();
     const projectContext = context?.project;
 
     const projectBackLink = projectContext ? (

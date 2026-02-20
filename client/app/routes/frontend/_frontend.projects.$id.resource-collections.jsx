@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI } from "api";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadList from "app/routes/utility/loaders/loadList";
@@ -12,6 +11,8 @@ import useEntityHeadContent from "frontend/components/entity/useEntityHeadConten
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+
+export const handle = { frontendMode: { isProjectSubpage: true } };
 
 export const loader = async ({ params, request, context }) => {
   checkLibraryMode({ request, context });
@@ -70,10 +71,6 @@ export default function ProjectResourceCollectionsRoute({ loaderData }) {
 
   return (
     <>
-      <CheckFrontendMode
-        debugLabel="ProjectResourceCollections"
-        isProjectSubpage
-      />
       <HeadContent {...headContentProps} />
       <h1 className="screen-reader-text">
         {`${titlePlaintext} ${t("glossary.resource_collection_other")}`}

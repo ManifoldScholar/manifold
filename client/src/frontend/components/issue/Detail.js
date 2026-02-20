@@ -5,11 +5,11 @@ import EntityCollection from "frontend/components/entity/Collection/EntityCollec
 import EntityHero from "frontend/components/entity/Hero";
 import ContentBlockList from "frontend/components/content-block-list/List";
 import { Warning } from "frontend/components/content-block/parts";
-import { useSettings, useFrontendModeContext } from "hooks";
+import { useSettings, useFrontendMode } from "hooks";
 import Authorize from "hoc/Authorize";
 
 function Detail({ issue }) {
-  const { isStandalone } = useFrontendModeContext();
+  const { isStandalone } = useFrontendMode();
   const settings = useSettings();
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
 

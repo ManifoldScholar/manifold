@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import { resourceCollectionsAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
@@ -14,6 +13,8 @@ import createListClientLoader from "app/routes/utility/loaders/createListClientL
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import { useSettings } from "hooks";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+
+export const handle = { frontendMode: { isProjectSubpage: true } };
 
 const DEFAULT_FILTERS = {};
 
@@ -137,10 +138,6 @@ export default function ResourceCollectionDetailRoute({ loaderData }) {
 
   return (
     <>
-      <CheckFrontendMode
-        debugLabel="ResourceCollectionDetail"
-        isProjectSubpage
-      />
       <HeadContent {...headContentProps} />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <EntityCollection.ProjectResourceCollectionDetail

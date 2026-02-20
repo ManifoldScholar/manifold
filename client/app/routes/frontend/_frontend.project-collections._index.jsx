@@ -3,7 +3,6 @@ import { projectCollectionsAPI } from "api";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
@@ -67,7 +66,6 @@ export default function ProjectCollectionsRoute({ loaderData }) {
   return (
     <>
       <HeadContent title={t("titles.project_collections")} appendDefaultTitle />
-      <CheckFrontendMode debugLabel="ProjectCollections" isProjectSubpage />
       <h1 className="screen-reader-text">{t("titles.project_collections")}</h1>
       {showPlaceholder ? (
         <EntityCollectionPlaceholder.ProjectCollectionsFrontend />

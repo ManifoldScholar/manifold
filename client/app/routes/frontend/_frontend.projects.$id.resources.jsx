@@ -11,6 +11,8 @@ import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "frontend/components/entity/Collection";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
 
+export const handle = { frontendMode: { isProjectSubpage: true } };
+
 export const loader = async ({ params, request, context }) => {
   checkLibraryMode({ request, context });
 

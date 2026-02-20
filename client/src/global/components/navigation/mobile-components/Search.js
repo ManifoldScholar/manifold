@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import SearchMenu from "global/components/search/menu";
-import { useFrontendModeContext, useSettings } from "hooks";
+import { useFrontendMode, useSettings } from "hooks";
 
 export default function MobileSearch({ closeNavigation }) {
-  const context = useFrontendModeContext();
+  const context = useFrontendMode();
   const settings = useSettings();
 
   const isLibraryDisabled = settings?.attributes?.general?.libraryDisabled;

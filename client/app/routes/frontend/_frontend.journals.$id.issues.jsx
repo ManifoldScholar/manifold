@@ -11,6 +11,8 @@ import EntityCollection from "frontend/components/entity/Collection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { useTranslation } from "react-i18next";
 
+export const handle = { frontendMode: { isProjectSubpage: true } };
+
 const FILTER_RESET = { order: "sort_title DESC" };
 
 export const loader = async ({ params, request, context }) => {

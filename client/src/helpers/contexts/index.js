@@ -2,7 +2,6 @@ export { default as FormContext } from "./FormContext";
 export { default as ManifoldAnalyticsContext } from "./ManifoldAnalyticsContext";
 export { default as LanguageContext } from "./LanguageContext";
 export { default as TableHeaderContext } from "./TableHeaderContext";
-export { default as FrontendModeContext } from "./FrontendModeContext";
 export { default as BackLinkContext } from "./BackLinkContext";
 export { default as ReaderContext } from "./ReaderContext";
 export { default as DrawerContext } from "./DrawerContext";

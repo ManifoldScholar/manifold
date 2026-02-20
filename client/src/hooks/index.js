@@ -21,7 +21,7 @@ export { default as useEventTracker } from "./useEventTracker";
 
 export { default as useAnalyticsContext } from "./useAnalyticsContext";
 export { default as useReaderContext } from "./useReaderContext";
-export { default as useFrontendModeContext } from "./useFrontendModeContext";
+
 
 export { default as useNotification } from "./useNotification";
 
@@ -45,3 +45,6 @@ export { default as useCopyLinkToSelection } from "./useCopyLinkToSelection";
 export { default as useFormField } from "./useFormField";
 
 export { default as useAfterRevalidate } from "./useAfterRevalidate";
+
+export { default as useFrontendMode } from "./useFrontendMode";
+

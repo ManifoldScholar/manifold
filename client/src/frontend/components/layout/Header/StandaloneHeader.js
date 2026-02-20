@@ -7,7 +7,7 @@ import HeaderNotifications from "global/components/HeaderNotifications";
 import throttle from "lodash/throttle";
 import { Link } from "react-router";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
-import { useSettings, useFrontendModeContext } from "hooks";
+import { useSettings, useFrontendMode } from "hooks";
 
 const BREAKPOINT = 620;
 
@@ -20,7 +20,7 @@ const getScrollTop = () => {
 };
 
 export default function StandaloneHeader({ alwaysVisible = false }) {
-  const context = useFrontendModeContext();
+  const context = useFrontendMode();
   const settings = useSettings();
 
   const shimRef = useRef(null);

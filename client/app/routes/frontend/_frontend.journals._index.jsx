@@ -3,7 +3,6 @@ import { journalsAPI } from "api";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
@@ -55,7 +54,6 @@ export default function JournalsRoute({ loaderData }) {
   return (
     <>
       <HeadContent title={t("titles.journals")} appendDefaultTitle />
-      <CheckFrontendMode debugLabel="JournalsList" />
       <h1 className="screen-reader-text">{t("titles.journals")}</h1>
       {showPlaceholder ? (
         <EntityCollectionPlaceholder.Journals />

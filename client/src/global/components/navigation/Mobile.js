@@ -5,7 +5,7 @@ import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import {
   useShowJournalsActive,
-  useFrontendModeContext,
+  useFrontendMode,
   useLogout,
   useAuthentication
 } from "hooks";
@@ -24,7 +24,7 @@ export default function NavigationMobile({ links, backendButton, mode }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const location = useLocation();
-  const context = useFrontendModeContext();
+  const context = useFrontendMode();
   const authentication = useAuthentication();
   const journalIsActive = useShowJournalsActive();
   const logout = useLogout();

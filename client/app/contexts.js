@@ -16,6 +16,5 @@ export const AppContext = createReactContext({
 // Not available in backend/reader routes
 export const FrontendContext = createReactContext({
   subjects: [],
-  journalSubjects: [],
-  frontendMode: {}
+  journalSubjects: []
 });

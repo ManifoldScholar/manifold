@@ -9,7 +9,6 @@ export * as uiVisibilityActions from "./ui/visibility";
 export * as uiReaderActions from "./ui/reader";
 export * as uiStateSnapshotActions from "./ui/stateSnapshot";
 export * as uiSearchActions from "./ui/search";
-export * as uiFrontendModeActions from "./ui/frontendMode";
 export * as uiReadingGroupActions from "./ui/readingGroup";
 export * as persistentUI from "./ui/persistentUi";
 export * as entityEditorActions from "./entityEditor";

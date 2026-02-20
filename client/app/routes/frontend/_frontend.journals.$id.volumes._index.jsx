@@ -10,6 +10,8 @@ import EntityCollection from "frontend/components/entity/Collection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { useTranslation } from "react-i18next";
 
+export const handle = { frontendMode: { isProjectSubpage: true } };
+
 export const loader = async ({ params, request, context }) => {
   checkLibraryMode({ request, context });
 

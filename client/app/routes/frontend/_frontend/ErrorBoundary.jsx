@@ -11,7 +11,6 @@ import Utility from "global/components/utility";
 import Footers from "global/components/Footers";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
-import { useFromStore } from "hooks";
 import { SearchProvider } from "hooks/useSearch/context";
 import FatalError from "global/components/FatalError";
 import formatError from "app/routes/utility/helpers/formatError";
@@ -23,15 +22,13 @@ export function ErrorBoundary() {
   const error = useRouteError();
   const loaderData = useLoaderData();
   const location = useLocation();
-  const frontendMode = useFromStore({ path: "ui.transitory.frontendMode" });
 
   const frontendContextValue = useMemo(
     () => ({
       subjects: loaderData?.subjects ?? [],
-      journalSubjects: loaderData?.journalSubjects ?? [],
-      frontendMode: frontendMode ?? {}
+      journalSubjects: loaderData?.journalSubjects ?? []
     }),
-    [loaderData?.subjects, loaderData?.journalSubjects, frontendMode]
+    [loaderData?.subjects, loaderData?.journalSubjects]
   );
 
   if (

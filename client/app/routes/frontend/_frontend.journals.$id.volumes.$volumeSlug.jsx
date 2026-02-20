@@ -1,7 +1,6 @@
 import { useOutletContext } from "react-router";
 import { journalVolumesAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
 import HeadContent from "global/components/HeadContent";
@@ -10,6 +9,8 @@ import Journal from "frontend/components/journal";
 import { useSettings } from "hooks";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
+
+export const handle = { frontendMode: { isProjectSubpage: true } };
 
 export const loader = async ({ params, context }) => {
   const fetchFn = () => journalVolumesAPI.show(params.volumeSlug);
@@ -64,7 +65,6 @@ export default function VolumeDetailRoute({ loaderData: volume }) {
 
   return (
     <>
-      <CheckFrontendMode debugLabel="VolumeDetail" isProjectSubpage />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <HeadContent {...headContentProps} />
       <h1 className="screen-reader-text">

@@ -5,11 +5,12 @@ import { resourcesAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import HeadContent from "global/components/HeadContent";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
 import { useSettings } from "hooks";
+
+export const handle = { frontendMode: { isProjectSubpage: true } };
 
 const getBreadcrumbs = ({
   journalBreadcrumbs,
@@ -69,7 +70,6 @@ export default function ResourceDetailRoute({ loaderData: resource }) {
   return (
     <>
       <EventTracker event={EVENTS.VIEW_RESOURCE} resource={resource} />
-      <CheckFrontendMode debugLabel="ResourceDetail" isProjectSubpage />
       <HeadContent {...headContentProps} />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <ResourceDetail

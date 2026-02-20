@@ -7,7 +7,6 @@ import searchLoader from "app/routes/utility/loaders/search";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
 import { useSearchContext } from "hooks/useSearch/context";
-import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import * as Styled from "./styles";
 
 export const loader = async ({ params, request, context }) => {
@@ -24,6 +23,8 @@ export const loader = async ({ params, request, context }) => {
     }
   });
 };
+
+export const handle = { frontendMode: { isProjectSubpage: true } };
 
 export default function ProjectSearch() {
   const { results, meta } = useLoaderData();
@@ -47,7 +48,6 @@ export default function ProjectSearch() {
 
   return (
     <>
-      <CheckFrontendMode debugLabel="ProjectSearch" isProjectSubpage />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <h1 className="screen-reader-text">{t("search.title")}</h1>
       <Styled.FormWrapper>

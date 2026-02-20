@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import { useFrontendModeContext } from "hooks";
+import { useFrontendMode } from "hooks";
 import * as Styled from "./styles";
 
 export default function EntityHero({
@@ -16,7 +16,7 @@ export default function EntityHero({
   const resizeId = useRef(null);
   const rightColRef = useRef();
   const titleRef = useRef();
-  const { isStandalone } = useFrontendModeContext();
+  const { isStandalone } = useFrontendMode();
 
   const addStandaloneMargin = () => {
     if (!rightColRef.current || !titleRef.current) return;

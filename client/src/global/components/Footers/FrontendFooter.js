@@ -2,10 +2,10 @@ import withPluginReplacement from "hoc/withPluginReplacement";
 import DefaultFooter from "./DefaultFooter";
 import BrandedFooter from "./BrandedFooter";
 import StandaloneFooter from "./StandaloneFooter";
-import { useFrontendModeContext, useSettings } from "hooks";
+import { useFrontendMode, useSettings } from "hooks";
 
 function FrontendFooter(props) {
-  const context = useFrontendModeContext();
+  const context = useFrontendMode();
   const settings = useSettings();
 
   if (!settings) return null;

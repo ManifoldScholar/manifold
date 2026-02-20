@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
-import { useFrontendModeContext, useSettings } from "hooks";
+import { useFrontendMode, useSettings } from "hooks";
 import get from "lodash/get";
 
 const WHITE = "#ffffff";
@@ -34,7 +34,7 @@ export default function PressHeader({
   label: propsLabel,
   bgColor: propsBgColor
 }) {
-  const context = useFrontendModeContext();
+  const context = useFrontendMode();
   const settings = useSettings();
 
   if (!settings) return null;

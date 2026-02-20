@@ -14,7 +14,7 @@ import {
   useShowJournalsActive,
   useSettings,
   useLogout,
-  useFrontendModeContext
+  useFrontendMode
 } from "hooks";
 import { commonActions } from "actions/helpers";
 
@@ -28,7 +28,7 @@ export default function NavigationStatic({
 }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const context = useFrontendModeContext();
+  const context = useFrontendMode();
   const journalIsActive = useShowJournalsActive();
   const logout = useLogout();
 

@@ -8,7 +8,7 @@ import Utility from "global/components/utility";
 import Footers from "global/components/Footers";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
-import { useSettings, useBodyClass, useFromStore } from "hooks";
+import { useSettings, useBodyClass } from "hooks";
 import get from "lodash/get";
 import { SearchProvider } from "hooks/useSearch/context";
 import { ErrorBoundary } from "./ErrorBoundary";
@@ -42,15 +42,13 @@ export default function FrontendLayout({ loaderData }) {
 
   const settings = useSettings();
   const hasPressLogo = get(settings, "attributes.pressLogoStyles.small");
-  const frontendMode = useFromStore({ path: "ui.transitory.frontendMode" });
 
   const frontendContextValue = useMemo(
     () => ({
       subjects: loaderData?.subjects ?? [],
-      journalSubjects: loaderData?.journalSubjects ?? [],
-      frontendMode: frontendMode ?? {}
+      journalSubjects: loaderData?.journalSubjects ?? []
     }),
-    [loaderData?.subjects, loaderData?.journalSubjects, frontendMode]
+    [loaderData?.subjects, loaderData?.journalSubjects]
   );
 
   return (
