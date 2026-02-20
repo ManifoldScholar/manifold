@@ -14,4 +14,3 @@ export * as websocketActions from "./websocket";
 export * as oauthActions from "./oauth";
 export * as loadingActions from "./loading";
 export * as routingActions from "./routing";
-export * as pluginActions from "./plugin";

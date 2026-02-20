@@ -6,7 +6,6 @@ import {
   useLogout,
   useSignInUpOverlay
 } from "hooks";
-import withPluginReplacement from "hoc/withPluginReplacement";
 import links from "./Parts/helpers/links";
 // import LanguageSelect from "global/components/LanguageSelect";
 import * as Styled from "./styles";
@@ -50,7 +49,4 @@ function BrandedFooter(props) {
   );
 }
 
-export default withPluginReplacement(
-  BrandedFooter,
-  "Global.Components.Footers.BrandedFooter"
-);
+export default BrandedFooter;

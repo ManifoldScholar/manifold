@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import withPluginReplacement from "hoc/withPluginReplacement";
 import * as Styled from "./styles";
 
 class PressLogo extends PureComponent {
@@ -37,7 +36,4 @@ class PressLogo extends PureComponent {
   }
 }
 
-export default withPluginReplacement(
-  PressLogo,
-  "Global.Components.Footer.PressLogo"
-);
+export default PressLogo;

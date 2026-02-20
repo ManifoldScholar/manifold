@@ -10,7 +10,6 @@ import currentUserMiddleware from "./middleware/currentUserMiddleware";
 import notificationMiddleware from "./middleware/notificationMiddleware";
 import apiErrorMiddleware from "./middleware/apiErrorMiddleware";
 import websocketMiddleware from "./middleware/websocketMiddleware";
-import pluginMiddleware from "./middleware/pluginMiddleware";
 import updatePersistentUi from "./subscriptions/updatePersistentUi";
 import updateCurrentUser from "./subscriptions/updateCurrentUser";
 
@@ -18,7 +17,6 @@ import reduxPromise from "redux-promise";
 // Handle both ESM and CommonJS exports
 const promiseMiddleware = reduxPromise.default || reduxPromise;
 import reducers from "./reducers";
-import pluginInitializer from "services/plugin/initializer";
 
 export default function createStore(data) {
   const middleware = [];
@@ -27,7 +25,6 @@ export default function createStore(data) {
   middleware.push(apiErrorMiddleware);
   middleware.push(entityStoreMiddleware);
   middleware.push(thunkMiddleware);
-  middleware.push(pluginMiddleware);
   middleware.push(promiseMiddleware);
   middleware.push(websocketMiddleware);
   middleware.push(notificationMiddleware);
@@ -55,8 +52,6 @@ export default function createStore(data) {
   const store = finalCreateStore(reducers, data);
   store.subscribe(updatePersistentUi(store));
   store.subscribe(updateCurrentUser(store));
-
-  pluginInitializer.initialize(store);
 
   return store;
 }

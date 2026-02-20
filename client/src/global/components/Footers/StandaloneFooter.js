@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import withPluginReplacement from "hoc/withPluginReplacement";
 import FooterParts from "./Parts";
 import { socialLinks } from "./Parts/helpers/links";
 // import LanguageSelect from "global/components/LanguageSelect";
@@ -35,7 +34,4 @@ class StandaloneFooter extends Component {
   }
 }
 
-export default withPluginReplacement(
-  StandaloneFooter,
-  "Global.Components.Footers.StandaloneFooter"
-);
+export default StandaloneFooter;

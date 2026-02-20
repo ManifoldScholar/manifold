@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import withPluginReplacement from "hoc/withPluginReplacement";
 import FooterParts from "./Parts";
 import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -38,6 +37,4 @@ class ReaderFooter extends Component {
   }
 }
 
-export default withTranslation()(
-  withPluginReplacement(ReaderFooter, "Global.Components.Footers.ReaderFooter")
-);
+export default withTranslation()(ReaderFooter);

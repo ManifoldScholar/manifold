@@ -1,4 +1,3 @@
-import withPluginReplacement from "hoc/withPluginReplacement";
 import DefaultFooter from "./DefaultFooter";
 import BrandedFooter from "./BrandedFooter";
 import StandaloneFooter from "./StandaloneFooter";
@@ -20,7 +19,4 @@ function FrontendFooter(props) {
   return <DefaultFooter {...props} />;
 }
 
-export default withPluginReplacement(
-  FrontendFooter,
-  "Global.Components.Footers.FrontendFooter"
-);
+export default FrontendFooter;

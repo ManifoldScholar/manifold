@@ -7,7 +7,6 @@ import {
   useLogout,
   useSignInUpOverlay
 } from "hooks";
-import withPluginReplacement from "hoc/withPluginReplacement";
 import links from "./Parts/helpers/links";
 // import LanguageSelect from "global/components/LanguageSelect";
 import * as Styled from "./styles";
@@ -58,7 +57,4 @@ DefaultFooter.propTypes = {
   withVersion: PropTypes.bool
 };
 
-export default withPluginReplacement(
-  DefaultFooter,
-  "Global.Components.Footers.DefaultFooter"
-);
+export default DefaultFooter;

@@ -1,12 +1,3 @@
-import withPluginReplacement from "hoc/withPluginReplacement";
-
-function LayoutPreHeader() {
+export default function LayoutPreHeader() {
   return null;
 }
-
-LayoutPreHeader.displayName = "Reader.Layout.PreHeader";
-
-export default withPluginReplacement(
-  LayoutPreHeader,
-  "Reader.Components.Layout.PreHeader"
-);

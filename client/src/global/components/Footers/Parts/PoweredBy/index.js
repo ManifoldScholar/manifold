@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import withPluginReplacement from "hoc/withPluginReplacement";
 import Utility from "global/components/utility";
 import { useSettings } from "hooks";
 import * as Styled from "./styles";
@@ -91,7 +90,4 @@ PoweredBy.propTypes = {
   children: PropTypes.node
 };
 
-export default withPluginReplacement(
-  PoweredBy,
-  "Global.Components.Footers.PoweredBy"
-);
+export default PoweredBy;

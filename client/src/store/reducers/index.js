@@ -11,7 +11,6 @@ import developer from "./developer";
 import entityStore from "./entityStore";
 import entityEditor from "./entityEditor";
 import websocket from "./websocket";
-import plugin from "./plugin";
 
 const routing = routerReducer;
 const reducers = combineReducers({
@@ -25,7 +24,6 @@ const reducers = combineReducers({
   authentication,
   isomorphic,
   websocket,
-  plugin,
   developer
 });
 export default reducers;
