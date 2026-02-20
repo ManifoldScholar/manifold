@@ -9,7 +9,7 @@ import Meta from "./Meta";
 import BlockToggle from "./BlockToggle";
 import InlineToggle from "./InlineToggle";
 import FlagToggle from "./Flag/Toggle";
-import CommentContainer from "global/containers/comment";
+import Comment from "global/components/comment";
 import { annotationsAPI } from "api";
 import Authorize from "hoc/Authorize";
 import { useRevalidator } from "react-router";
@@ -24,7 +24,6 @@ export default function AnnotationDetail({
   annotation,
   showCommentsToggleAsBlock,
   showLogin,
-  refresh,
   closeDrawer,
   readingGroups
 }) {
@@ -60,7 +59,7 @@ export default function AnnotationDetail({
 
   const stopReply = () => {
     setAction(null);
-
+    setShowComments(true);
     if (replyToggleRef.current) replyToggleRef.current.focus();
   };
 
@@ -110,13 +109,8 @@ export default function AnnotationDetail({
     return established || trusted;
   };
 
-  const onReplySuccess = () => {
-    if (refresh) refresh();
-    setShowComments(true);
-  };
-
   return (
-    <>
+    <Comment.Provider subject={annotation} condition={showComments}>
       <li className="annotation-comments">
         <Styled.Inner>
           <Meta
@@ -183,12 +177,7 @@ export default function AnnotationDetail({
                   )}
                 </Styled.UtilityList>
                 {action === "replying" && (
-                  <CommentContainer.Editor
-                    subject={annotation}
-                    cancel={stopReply}
-                    onSuccess={onReplySuccess}
-                    initialOpen
-                  />
+                  <Comment.Editor cancel={stopReply} initialOpen />
                 )}
               </Styled.Utility>
             </Authorize>
@@ -225,7 +214,7 @@ export default function AnnotationDetail({
             aria-label={t("glossary.comments__thread")}
             className="annotation-comments__thread-container"
           >
-            {showComments && <CommentContainer.Thread subject={annotation} />}
+            {showComments && <Comment.Thread />}
           </div>
         </Styled.Inner>
       </li>
@@ -236,7 +225,7 @@ export default function AnnotationDetail({
           expanded={showComments}
         />
       )}
-    </>
+    </Comment.Provider>
   );
 }
 

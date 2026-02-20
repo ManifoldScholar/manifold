@@ -1,230 +1,153 @@
-import React, { PureComponent } from "react";
+import { useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import CommentContainer from "global/containers/comment";
-import Meta from "global/components/comment/meta";
-import Deleted from "global/components/comment/deleted";
+import { useTranslation } from "react-i18next";
+// eslint-disable-next-line import/no-cycle
+import CommentThread from "../Thread";
+import CommentEditor from "../Editor";
+import { useThread } from "../Thread/Context";
+import Meta from "../meta";
+import Deleted from "../deleted";
 import Helper from "global/components/helper";
 import FlagToggle from "global/components/Annotation/Annotation/UserContent/Flag/Toggle";
 import * as Styled from "global/components/Annotation/Annotation/UserContent/styles";
-
 import Authorize from "hoc/Authorize";
 
-class CommentDetail extends PureComponent {
-  static displayName = "Comment.Detail";
+export default function CommentDetail({ comment, parent }) {
+  const { t } = useTranslation();
+  const { showLogin, handleDelete, handleRestore, handleDestroy } = useThread();
 
-  static propTypes = {
-    subject: PropTypes.object.isRequired,
-    handleDelete: PropTypes.func.isRequired,
-    handleDestroy: PropTypes.func.isRequired,
-    handleRestore: PropTypes.func.isRequired,
-    comment: PropTypes.object.isRequired,
-    showLogin: PropTypes.func,
-    parent: PropTypes.object,
-    t: PropTypes.func
+  const [editor, setEditor] = useState(null);
+  const [editorKey, setEditorKey] = useState(0);
+  const replyToggleRef = useRef(null);
+  const editToggleRef = useRef(null);
+
+  const startEdit = () => {
+    setEditor("edit");
+    setEditorKey(k => k + 1);
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      editor: null
-    };
-    this.replyToggleRef = React.createRef();
-    this.editToggleRef = React.createRef();
-  }
-
-  handleDelete = event => {
-    this.props.handleDelete(event, this.props.comment);
+  const startReply = () => {
+    setEditor("reply");
+    setEditorKey(k => k + 1);
   };
 
-  handleRestore = event => {
-    this.props.handleRestore(event, this.props.comment);
-  };
+  const stopEdit = useCallback(() => {
+    setEditor(null);
+    if (editToggleRef.current) editToggleRef.current.focus();
+  }, []);
 
-  handleDestroy = event => {
-    this.props.handleDestroy(event, this.props.comment);
-  };
+  const stopReply = useCallback(() => {
+    setEditor(null);
+    if (replyToggleRef.current) replyToggleRef.current.focus();
+  }, []);
 
-  startEdit = () => {
-    this.setState(
-      {
-        editor: null
-      },
-      () => {
-        this.setState({
-          editor: "edit"
-        });
-      }
-    );
-  };
-
-  startReply = () => {
-    this.setState(
-      {
-        editor: null
-      },
-      () => {
-        this.setState({
-          editor: "reply"
-        });
-      }
-    );
-  };
-
-  stopEdit = () => {
-    this.setState(
-      {
-        editor: null
-      },
-      () => {
-        if (this.editToggleRef.current) this.editToggleRef.current.focus();
-      }
-    );
-  };
-
-  stopReply = () => {
-    this.setState(
-      {
-        editor: null
-      },
-      () => {
-        if (this.replyToggleRef.current) this.replyToggleRef.current.focus();
-      }
-    );
-  };
-
-  closeEditor = () => {
-    this.setState({
-      editor: null
-    });
-  };
-
-  renderEditor() {
-    if (!this.state.editor) return null;
-    if (this.state.editor === "reply") return this.renderReplyEditor();
-    if (this.state.editor === "edit") return this.renderEditEditor();
+  const renderEditor = () => {
+    if (!editor) return null;
+    if (editor === "reply") {
+      return (
+        <CommentEditor
+          key={editorKey}
+          parentId={comment.id}
+          cancel={stopReply}
+        />
+      );
+    }
+    if (editor === "edit") {
+      return (
+        <CommentEditor key={editorKey} comment={comment} cancel={stopEdit} />
+      );
+    }
     return null;
+  };
+
+  const { attributes } = comment;
+  if (attributes.deleted && !attributes.abilities.readDeleted) {
+    return <Deleted comment={comment} />;
   }
 
-  renderReplyEditor() {
-    return (
-      <CommentContainer.Editor
-        subject={this.props.subject}
-        parentId={this.props.comment.id}
-        cancel={this.stopReply}
-      />
-    );
-  }
+  const { creator } = comment.relationships;
 
-  renderEditEditor() {
-    return (
-      <CommentContainer.Editor
-        comment={this.props.comment}
-        subject={this.props.subject}
-        cancel={this.stopEdit}
-      />
-    );
-  }
-
-  renderComment() {
-    const { comment, parent, t, subject } = this.props;
-    const { creator } = comment.relationships;
-
-    return (
-      <li className="annotation-reply">
-        <Meta comment={comment} creator={creator} parent={parent} />
-        <Styled.Body>
-          <Helper.SimpleFormat text={comment.attributes.body} />
-        </Styled.Body>
-        <Authorize kind={"any"}>
-          <Styled.Utility>
-            {this.state.editor !== "edit" && (
-              <Styled.UtilityList $isFlagged={comment.attributes.flagged}>
-                <Authorize entity={comment} ability={"create"}>
-                  <li>
-                    <Styled.Button
-                      ref={this.replyToggleRef}
-                      onClick={
-                        this.state.editor === "reply"
-                          ? this.stopReply
-                          : this.startReply
-                      }
-                      aria-expanded={this.state.editor === "reply"}
-                    >
-                      {t("actions.reply")}
-                    </Styled.Button>
-                  </li>
-                </Authorize>
-                <Authorize entity={comment} ability={"update"}>
-                  <li>
-                    <Styled.Button
-                      ref={this.editToggleRef}
-                      onClick={this.startEdit}
-                      aria-expanded={this.state.editor === "edit"}
-                    >
-                      {t("actions.edit")}
-                    </Styled.Button>
-                  </li>
-                </Authorize>
-                <Authorize entity={comment} ability={"delete"}>
-                  <li>
-                    <Styled.Button
-                      onClick={
-                        comment.attributes.deleted
-                          ? this.handleRestore
-                          : this.handleDelete
-                      }
-                    >
-                      {comment.attributes.deleted
-                        ? t("actions.restore")
-                        : t("actions.delete")}
-                    </Styled.Button>
-                  </li>
-                </Authorize>
-                {comment.attributes.deleted && (
-                  <li>
-                    <Styled.Button onClick={this.handleDestroy}>
-                      {t("actions.destroy")}
-                    </Styled.Button>
-                  </li>
-                )}
+  return (
+    <li className="annotation-reply">
+      <Meta comment={comment} creator={creator} parent={parent} />
+      <Styled.Body>
+        <Helper.SimpleFormat text={comment.attributes.body} />
+      </Styled.Body>
+      <Authorize kind={"any"}>
+        <Styled.Utility>
+          {editor !== "edit" && (
+            <Styled.UtilityList $isFlagged={comment.attributes.flagged}>
+              <Authorize entity={comment} ability={"create"}>
                 <li>
-                  <FlagToggle record={comment} />
+                  <Styled.Button
+                    ref={replyToggleRef}
+                    onClick={editor === "reply" ? stopReply : startReply}
+                    aria-expanded={editor === "reply"}
+                  >
+                    {t("actions.reply")}
+                  </Styled.Button>
                 </li>
-              </Styled.UtilityList>
-            )}
-            {this.renderEditor()}
-          </Styled.Utility>
-        </Authorize>
-        <Authorize kind="unauthenticated">
-          <Styled.Utility>
-            <Styled.UtilityList>
+              </Authorize>
+              <Authorize entity={comment} ability={"update"}>
+                <li>
+                  <Styled.Button
+                    ref={editToggleRef}
+                    onClick={startEdit}
+                    aria-expanded={editor === "edit"}
+                  >
+                    {t("actions.edit")}
+                  </Styled.Button>
+                </li>
+              </Authorize>
+              <Authorize entity={comment} ability={"delete"}>
+                <li>
+                  <Styled.Button
+                    onClick={() =>
+                      comment.attributes.deleted
+                        ? handleRestore(comment)
+                        : handleDelete(comment)
+                    }
+                  >
+                    {comment.attributes.deleted
+                      ? t("actions.restore")
+                      : t("actions.delete")}
+                  </Styled.Button>
+                </li>
+              </Authorize>
+              {comment.attributes.deleted && (
+                <li>
+                  <Styled.Button onClick={() => handleDestroy(comment)}>
+                    {t("actions.destroy")}
+                  </Styled.Button>
+                </li>
+              )}
               <li>
-                <Styled.Button onClick={this.props.showLogin}>
-                  {t("actions.login_to_reply")}
-                </Styled.Button>
+                <FlagToggle record={comment} />
               </li>
             </Styled.UtilityList>
-          </Styled.Utility>
-        </Authorize>
-        <CommentContainer.Thread
-          subject={this.props.subject}
-          parent={this.props.comment}
-          parentId={comment.id}
-        />
-      </li>
-    );
-  }
-
-  render() {
-    const { comment } = this.props;
-    const { attributes } = comment;
-    if (attributes.deleted && !attributes.abilities.readDeleted) {
-      return <Deleted comment={comment} subject={this.props.subject} />;
-    }
-    return this.renderComment();
-  }
+          )}
+          {renderEditor()}
+        </Styled.Utility>
+      </Authorize>
+      <Authorize kind="unauthenticated">
+        <Styled.Utility>
+          <Styled.UtilityList>
+            <li>
+              <Styled.Button onClick={showLogin}>
+                {t("actions.login_to_reply")}
+              </Styled.Button>
+            </li>
+          </Styled.UtilityList>
+        </Styled.Utility>
+      </Authorize>
+      <CommentThread parentId={comment.id} parent={comment} />
+    </li>
+  );
 }
 
-export default withTranslation()(CommentDetail);
+CommentDetail.displayName = "Comment.Detail";
+
+CommentDetail.propTypes = {
+  comment: PropTypes.object.isRequired,
+  parent: PropTypes.object
+};

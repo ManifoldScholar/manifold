@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Trans, useTranslation } from "react-i18next";
-import CommentContainer from "global/containers/comment";
+import Comment from "global/components/comment";
 import Meta from "../Meta";
 import VariantList from "../VariantList";
 import Annotations from "./Annotations";
@@ -35,14 +35,10 @@ export default function ResourceDetail({ resource }) {
               {t("glossary.comment_title_case_other")}
             </Styled.ListHeader>
             {canEngagePublicly ? (
-              <>
-                <CommentContainer.Thread subject={resource} />
-                <CommentContainer.Editor
-                  focus={false}
-                  label={t("actions.add_comment_title_case")}
-                  subject={resource}
-                />
-              </>
+              <Comment.Provider subject={resource}>
+                <Comment.Thread />
+                <Comment.Editor label={t("actions.add_comment_title_case")} />
+              </Comment.Provider>
             ) : (
               <Styled.EmptyMessage>
                 <Trans
