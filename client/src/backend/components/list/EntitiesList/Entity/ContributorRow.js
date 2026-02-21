@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
+
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
@@ -34,7 +34,7 @@ function ContributorRow({ entity, onDelete, onEdit, ...props }) {
     figureShape: "circle",
     ...(canAccessMakers
       ? {
-          onRowClick: lh.link("backendRecordsMaker", makerId),
+          onRowClick: `/backend/records/makers/${makerId}`,
           rowClickMode: "inline"
         }
       : {})

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
-import lh from "helpers/linkHandler";
+
 import truncate from "lodash/truncate";
 import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
@@ -48,7 +48,7 @@ class FeatureRow extends PureComponent {
   }
 
   get url() {
-    return lh.link("backendRecordsFeature", this.id);
+    return `/backend/records/features/${this.id}`;
   }
 
   get name() {

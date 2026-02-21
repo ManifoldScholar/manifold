@@ -4,7 +4,7 @@ import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
+
 import FormattedDate from "global/components/FormattedDate";
 import PopoverMenu from "global/components/popover/Menu";
 import { withTranslation } from "react-i18next";
@@ -49,11 +49,7 @@ class StylesheetList extends PureComponent {
   }
 
   get editUrl() {
-    return lh.link(
-      "BackendTextStylesheetEdit",
-      this.text.id,
-      this.stylesheet.id
-    );
+    return `/backend/projects/text/${this.text.id}/styles/${this.stylesheet.id}`;
   }
 
   get index() {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
+
 import EntityRow from "./Row";
 
 export default class SubjectRow extends PureComponent {
@@ -40,7 +40,7 @@ export default class SubjectRow extends PureComponent {
       active: this.active
     };
     if (clickable) {
-      additionalProps.onRowClick = lh.link("backendSettingsSubject", this.id);
+      additionalProps.onRowClick = `/backend/settings/subjects/${this.id}`;
       additionalProps.rowClickMode = "block";
     }
 

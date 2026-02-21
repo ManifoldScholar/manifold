@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
+
 import { Link } from "react-router-dom";
 import Tooltip from "global/components/atomic/Tooltip";
 import { textsAPI, sectionsAPI } from "api";
@@ -32,13 +32,9 @@ function SectionListItem(props) {
 
   const popoverDisclosureRef = useRef(null);
 
-  const editUrl = lh.link("backendTextSectionEdit", textId, section.id);
-  const ingestUrl = lh.link("backendTextSectionIngestEdit", textId, section.id);
-  const propertiesUrl = lh.link(
-    "backendTextSectionProperties",
-    textId,
-    section.id
-  );
+  const editUrl = `/backend/projects/text/${textId}/sections/${section.id}/edit`;
+  const ingestUrl = `/backend/projects/text/${textId}/sections/${section.id}/ingestion`;
+  const propertiesUrl = `/backend/projects/text/${textId}/sections/${section.id}/properties`;
 
   const updateText = useApiCallback(textsAPI.update);
 

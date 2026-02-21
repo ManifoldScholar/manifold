@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Utility from "global/components/utility";
 import PopoverMenu from "global/components/popover/Menu";
-import lh from "helpers/linkHandler";
+
 import classNames from "classnames";
 
 export default function Chip({
@@ -30,7 +30,7 @@ export default function Chip({
 
   const onEdit = event => {
     event.preventDefault();
-    navigate(lh.link(actionCalloutEditRoute, modelId, id), {
+    navigate(actionCalloutEditRoute(modelId, id), {
       state: { noScroll: true }
     });
   };
@@ -163,7 +163,7 @@ Chip.propTypes = {
   actionCallout: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   model: PropTypes.object.isRequired,
-  actionCalloutEditRoute: PropTypes.string.isRequired,
+  actionCalloutEditRoute: PropTypes.func.isRequired,
   isDragging: PropTypes.bool,
   chipCount: PropTypes.number,
   slotIndex: PropTypes.number,

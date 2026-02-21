@@ -2,10 +2,19 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
+
 import humps from "utils/humps";
 import EntityRow from "./Row";
 import { Trans, withTranslation } from "react-i18next";
+
+const ITEM_TYPE_PATHS = {
+  Project: id => `/backend/projects/${id}`,
+  Text: id => `/backend/projects/text/${id}`,
+  Resource: id => `/backend/projects/resource/${id}`,
+  ResourceCollection: id => `/backend/projects/resource-collection/${id}`,
+  Page: id => `/backend/records/pages/${id}`,
+  Feature: id => `/backend/records/features/${id}`
+};
 
 class LogRow extends PureComponent {
   static displayName = "EntitiesList.Entity.LogRow";
@@ -65,7 +74,7 @@ class LogRow extends PureComponent {
     return (
       <Link
         className="entity-row__link--inverted"
-        to={lh.link("backendRecordsUser", this.actorId)}
+        to={`/backend/records/users/${this.actorId}`}
       >
         {this.actorName}
       </Link>
@@ -73,8 +82,6 @@ class LogRow extends PureComponent {
   }
 
   get itemLink() {
-    const urlName = `backend${this.itemType}`;
-
     if (this.deleted)
       return (
         <span
@@ -87,7 +94,7 @@ class LogRow extends PureComponent {
     return (
       <Link
         className="entity-row__link--inverted"
-        to={lh.link(urlName, this.itemId)}
+        to={ITEM_TYPE_PATHS[this.itemType]?.(this.itemId) ?? "#"}
         dangerouslySetInnerHTML={{
           __html: this.itemDisplayName
         }}

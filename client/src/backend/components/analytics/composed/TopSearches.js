@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Block from "../Block";
 import Table from "../parts/Table";
 import SearchRow from "../parts/SearchRow";
-import lh from "helpers/linkHandler";
+
 import { withTranslation } from "react-i18next";
 
 class TopSearches extends Component {
@@ -48,7 +48,7 @@ class TopSearches extends Component {
           rows={this.data}
           paginationClickHandler={paginationClickHandler}
           pagination={pagination}
-          allLink={withAllLink ? lh.link("backendAnalyticsTopSearches") : null}
+          allLink={withAllLink ? "/backend/analytics/top-searches" : null}
         />
       </Block>
     );

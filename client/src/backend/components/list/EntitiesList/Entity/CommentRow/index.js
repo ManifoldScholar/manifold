@@ -5,7 +5,7 @@ import FormattedDate from "global/components/FormattedDate";
 import LabelSet from "../LabelSet";
 import Checkbox from "../../List/bulkActions/Checkbox";
 import Utility from "global/components/utility";
-import lh from "helpers/linkHandler";
+
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
@@ -52,8 +52,8 @@ function CommentRow({
   /* eslint-disable no-nested-ternary */
   const subjectLink = subjectId
     ? subjectType === "Resource"
-      ? lh.link("backendResource", subjectId)
-      : lh.link("backendRecordsAnnotationsDetail", subjectId)
+      ? `/backend/projects/resource/${subjectId}`
+      : `/backend/records/annotations/${subjectId}`
     : null;
 
   const utility = !bulkActionsActive ? (
@@ -100,7 +100,7 @@ function CommentRow({
             {!hideCreator && creator?.id && (
               <Link
                 to={{
-                  pathname: lh.link("backendRecordsUserProperties", creator.id)
+                  pathname: `/backend/records/users/${creator.id}/properties`
                 }}
               >
                 {creator?.attributes?.fullName}
@@ -112,9 +112,7 @@ function CommentRow({
               <span>{subjectLabel}</span>
             )}
           </Styled.MetaTwo>
-          <Styled.Link
-            to={{ pathname: lh.link("backendRecordsCommentsDetail", id) }}
-          >
+          <Styled.Link to={{ pathname: `/backend/records/comments/${id}` }}>
             {body && (
               <Styled.Body className="entity-row__title entity-row__title">
                 {body}

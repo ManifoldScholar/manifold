@@ -1,7 +1,7 @@
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
 import HeaderNotifications from "global/components/HeaderNotifications";
-import lh from "helpers/linkHandler";
+
 import navigation from "helpers/router/navigation";
 import Utility from "global/components/utility";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
@@ -40,17 +40,15 @@ export default function LayoutHeader() {
   let links;
 
   if (canUpdateProjectCollections) {
-    const projectsLink = baseLinks.find(l => l.route === "backendProjects");
+    const projectsLink = baseLinks.find(l => l.path === "/backend/projects");
     projectsLink.dropdownContent = (
-      <ProjectsDropdown links={projectsLink.children} />
+      <ProjectsDropdown links={projectsLink?.children} />
     );
     projectsLink.toggle = ProjectsToggle;
-    links = baseLinks.filter(
-      l => l.route !== "backendProjects" && l.route !== "backendProjectsAll"
-    );
+    links = baseLinks.filter(l => l.path !== "/backend/projects");
     links.splice(1, 0, projectsLink);
   } else {
-    links = baseLinks.filter(l => l.route !== "backendProjects");
+    links = baseLinks.filter(l => l.path !== "/backend/projects");
   }
 
   return (
@@ -61,7 +59,7 @@ export default function LayoutHeader() {
       >
         <div className="library-header library-header--dark">
           <div className="library-header__inner">
-            <HeaderLogo as="Link" to={lh.link("backend")}>
+            <HeaderLogo as="Link" to="/backend">
               <span className="screen-reader-text">
                 {t("navigation.return_home")}
               </span>

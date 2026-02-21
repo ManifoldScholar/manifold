@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
+
 import { ingestionSourcesAPI } from "api";
 import { useNavigate } from "react-router-dom";
 import * as Styled from "./styles";
@@ -44,7 +44,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
 
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
-    navigate(lh.link("backendTextAssets", textId));
+    navigate(`/backend/projects/text/${textId}/assets`);
   }, [navigate, textId, refresh]);
 
   const src = `/api/proxy/ingestion_sources/${assetId}`;
@@ -115,7 +115,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
       </Form.FieldGroup>
       <Form.DrawerButtons
         showCancel
-        cancelUrl={lh.link("backendTextAssets", textId)}
+        cancelUrl={`/backend/projects/text/${textId}/assets`}
         submitLabel={asset ? "texts.toc.save_button_label" : "actions.save"}
       />
     </FormContainer.Form>

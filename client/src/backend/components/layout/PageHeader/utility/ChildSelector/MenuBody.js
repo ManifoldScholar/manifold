@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
+
 import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -10,8 +10,8 @@ function ChildSelectorMenuBody(props, ref) {
   const { t } = useTranslation();
 
   const renderItem = link => {
-    const maybeLinkProps = link.route
-      ? { to: lh.link(link.route, link.id) }
+    const maybeLinkProps = link.path
+      ? { to: link.path }
       : { as: "span", $noLink: true };
 
     return (

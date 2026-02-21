@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
+
 import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import { useTranslation } from "react-i18next";
@@ -25,11 +25,7 @@ function JournalVolumeRow({
   };
 
   if (clickable) {
-    additionalProps.onRowClick = lh.link(
-      "backendJournalVolumeEdit",
-      journal.id,
-      id
-    );
+    additionalProps.onRowClick = `/backend/journals/${journal.id}/volumes/${id}`;
     additionalProps.rowClickMode = "block";
   }
 

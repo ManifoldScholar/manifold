@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import Form from "global/components/form";
 import ContentEditor from "global/components/form/ContentEditor";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
+
 import { sectionsAPI } from "api";
 import { useNavigate } from "react-router-dom";
 import { serializeToSlate } from "global/components/form/ContentEditor/serializers";
@@ -83,7 +83,7 @@ export default function EditSectionForm({
   const onSuccess = useCallback(() => {
     if (!closeOnSave) return;
     if (refresh) refresh();
-    navigate(lh.link("backendTextSections", textId));
+    navigate(`/backend/projects/text/${textId}/sections`);
   }, [navigate, textId, refresh, closeOnSave]);
 
   const [hasErrors, setHasErrors] = useState(false);
@@ -157,7 +157,7 @@ export default function EditSectionForm({
         <Form.DrawerButtons
           showCancel
           showSaveAndClose
-          cancelUrl={lh.link("backendTextSections", textId)}
+          cancelUrl={`/backend/projects/text/${textId}/sections`}
           submitLabel="actions.save"
           onSaveAndCloseClick={handleSaveAndCloseClick}
           saveRef={saveRef}

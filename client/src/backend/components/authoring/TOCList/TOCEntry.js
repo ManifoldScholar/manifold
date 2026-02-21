@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
+
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
@@ -21,7 +21,7 @@ export default function TOCEntry({
 }) {
   const { t } = useTranslation();
 
-  const editUrl = lh.link("backendTextTOCEntryEdit", textId, entry.id);
+  const editUrl = `/backend/projects/text/${textId}/contents/${entry.id}/edit`;
 
   const collapseExpandHandler = entry.isExpanded ? onCollapse : onExpand;
   const icon = entry.isExpanded ? "DisclosureUp32" : "DisclosureDown32";

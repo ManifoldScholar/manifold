@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
+
 import { pendingEntitlementsAPI, projectsAPI, journalsAPI } from "api";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +13,7 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
 
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
-    navigate(lh.link("backendRecordsEntitlements"));
+    navigate("/backend/records/entitlements");
   }, [navigate, refresh]);
 
   const formatData = data => {
@@ -102,7 +102,7 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
             </Form.FieldGroup>
             <Form.DrawerButtons
               showCancel
-              cancelUrl={lh.link("backendRecordsEntitlements")}
+              cancelUrl="/backend/records/entitlements"
               submitLabel="entitlements.pending.save_label"
             />
           </>

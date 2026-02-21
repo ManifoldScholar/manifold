@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
+
 import IconComposer from "global/components/utility/IconComposer";
 import { Trans, withTranslation } from "react-i18next";
 
@@ -28,7 +28,7 @@ class ResourceImportResultsPending extends PureComponent {
             components={{
               resourceLink: (
                 <Link
-                  to={lh.link("backendResource", resourceImportRow.resourceId)}
+                  to={`/backend/projects/resource/${resourceImportRow.resourceId}`}
                 />
               )
             }}

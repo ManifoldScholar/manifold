@@ -4,7 +4,7 @@ import classNames from "classnames";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
+
 import { sectionsAPI } from "api";
 import { useNavigate } from "react-router-dom";
 import * as Styled from "./styles";
@@ -37,9 +37,11 @@ export default function AddSectionForm({ textId, nextPosition, refresh }) {
       if (refresh) refresh();
 
       if (openInEditor)
-        return navigate(lh.link("backendTextSectionEdit", textId, res.id));
+        return navigate(
+          `/backend/projects/text/${textId}/sections/${res.id}/edit`
+        );
 
-      navigate(lh.link("backendTextSections", textId));
+      navigate(`/backend/projects/text/${textId}/sections`);
     },
     [navigate, textId, refresh, openInEditor]
   );
@@ -48,7 +50,7 @@ export default function AddSectionForm({ textId, nextPosition, refresh }) {
 
   const handleCancelClick = e => {
     e.preventDefault();
-    navigate(lh.link("backendTextSections", textId));
+    navigate(`/backend/projects/text/${textId}/sections`);
   };
 
   const handleEditorClick = () => {

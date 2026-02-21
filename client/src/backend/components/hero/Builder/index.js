@@ -26,9 +26,9 @@ class Builder extends PureComponent {
     model: PropTypes.object.isRequired,
     api: PropTypes.object,
     modelLabel: PropTypes.string,
-    failureRedirectRoute: PropTypes.string,
-    actionCalloutEditRoute: PropTypes.string,
-    actionCalloutNewRoute: PropTypes.string,
+    failureRedirectRoute: PropTypes.func,
+    actionCalloutEditRoute: PropTypes.func,
+    actionCalloutNewRoute: PropTypes.func,
     actionCallouts: PropTypes.array,
     actionCalloutsResponse: PropTypes.object,
     actionCalloutSlots: PropTypes.array,
@@ -48,9 +48,11 @@ class Builder extends PureComponent {
       "right-button",
       "right-link"
     ],
-    failureRedirectRoute: "backendProject",
-    actionCalloutEditRoute: "backendProjectActionCalloutEdit",
-    actionCalloutNewRoute: "backendProjectActionCalloutNew"
+    failureRedirectRoute: id => `/backend/projects/${id}`,
+    actionCalloutEditRoute: (modelId, calloutId) =>
+      `/backend/projects/${modelId}/layout/action-callout/${calloutId}`,
+    actionCalloutNewRoute: modelId =>
+      `/backend/projects/${modelId}/layout/action-callout/new`
   };
 
   get defaultModelLabel() {

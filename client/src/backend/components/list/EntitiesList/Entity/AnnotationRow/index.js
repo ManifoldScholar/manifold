@@ -5,7 +5,7 @@ import FormattedDate from "global/components/FormattedDate";
 import LabelSet from "../LabelSet";
 import Checkbox from "../../List/bulkActions/Checkbox";
 import Utility from "global/components/utility";
-import lh from "helpers/linkHandler";
+
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
@@ -105,7 +105,7 @@ function AnnotationRow({
             {!hideCreator && (
               <Link
                 to={{
-                  pathname: lh.link("backendRecordsUserProperties", creatorId)
+                  pathname: `/backend/records/users/${creatorId}/properties`
                 }}
               >
                 {creatorName}
@@ -113,7 +113,7 @@ function AnnotationRow({
             )}
             <Link
               to={{
-                pathname: lh.link("backendText", textId)
+                pathname: `/backend/projects/text/${textId}`
               }}
               dangerouslySetInnerHTML={{
                 __html:
@@ -123,7 +123,7 @@ function AnnotationRow({
             {!!readingGroupId && !hideRG && (
               <Link
                 to={{
-                  pathname: lh.link("backendReadingGroup", readingGroupId)
+                  pathname: `/backend/groups/${readingGroupId}`
                 }}
               >
                 {readingGroupName}
@@ -135,7 +135,7 @@ function AnnotationRow({
               linkOverride
                 ? linkOverride(id)
                 : {
-                    pathname: lh.link("backendRecordsAnnotationsDetail", id)
+                    pathname: `/backend/records/annotations/${id}`
                   }
             }
           >

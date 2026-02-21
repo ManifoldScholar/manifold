@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import Utility from "../utility";
 import { getTextLinks } from "../utility/helpers";
 import { NavLink } from "react-router-dom";
-import lh from "helpers/linkHandler";
+
 import * as Styled from "./styles";
 
 export default function ProjectHeader({
@@ -24,7 +24,7 @@ export default function ProjectHeader({
   const titleLinkProps = parent
     ? {
         as: NavLink,
-        to: lh.link("backendProject", id)
+        to: `/backend/projects/${id}`
       }
     : {};
 

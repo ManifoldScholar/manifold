@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
+
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import FormattedDate from "global/components/FormattedDate";
@@ -68,7 +68,7 @@ class ProjectRow extends PureComponent {
 
   get url() {
     if (this.props.renderWithoutLink) return null;
-    return lh.link("backendProject", this.id);
+    return `/backend/projects/${this.id}`;
   }
 
   get label() {

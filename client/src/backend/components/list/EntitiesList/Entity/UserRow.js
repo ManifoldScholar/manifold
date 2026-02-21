@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
+
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import Checkbox from "../List/bulkActions/Checkbox";
@@ -42,7 +42,7 @@ function UserRow({
           ]
         : [])
     ],
-    onRowClick: lh.link("backendRecordsUser", id),
+    onRowClick: `/backend/records/users/${id}`,
     rowClickMode: "block",
     prepend: bulkActionsActive && (
       <Checkbox

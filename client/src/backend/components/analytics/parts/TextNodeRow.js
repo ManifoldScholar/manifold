@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 
 function TextNodeRow({ id, depth, textSlug, anchor, label, count }) {
   return (
     <tr className="analytics-table__row">
       <td>
         <Link
-          to={lh.link("readerSection", textSlug, id, `#${anchor || ""}`)}
+          to={`/read/${textSlug}/section/${id}#${anchor || ""}`}
           className={`analytics-table__link analytics-table__link--depth-${depth}`}
         >
           {label}

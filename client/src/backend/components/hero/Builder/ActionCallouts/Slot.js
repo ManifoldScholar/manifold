@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
-import lh from "helpers/linkHandler";
+
 import classNames from "classnames";
 import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Chip from "./Chip";
@@ -24,7 +24,7 @@ export default function Slot({
 
   const openNewDrawer = () => {
     const actionCallout = { attributes };
-    navigate(lh.link(actionCalloutNewRoute, model.id), {
+    navigate(actionCalloutNewRoute(model.id), {
       state: { noScroll: true, actionCallout }
     });
   };
@@ -84,8 +84,8 @@ Slot.propTypes = {
   actionCallouts: PropTypes.array.isRequired,
   id: PropTypes.string.isRequired,
   model: PropTypes.object.isRequired,
-  actionCalloutEditRoute: PropTypes.string.isRequired,
-  actionCalloutNewRoute: PropTypes.string.isRequired,
+  actionCalloutEditRoute: PropTypes.func.isRequired,
+  actionCalloutNewRoute: PropTypes.func.isRequired,
   index: PropTypes.number,
   slotCount: PropTypes.number,
   onKeyboardMove: PropTypes.func

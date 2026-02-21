@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
-import lh from "helpers/linkHandler";
+
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
 import Checkbox from "../List/bulkActions/Checkbox";
@@ -60,7 +60,7 @@ function ReadingGroupRow({
         : [])
     ],
     active: active === id,
-    onRowClick: lh.link("backendReadingGroupDetails", id),
+    onRowClick: `/backend/groups/${id}/details`,
     rowClickMode: "inline",
     prepend: bulkActionsActive && (
       <Checkbox

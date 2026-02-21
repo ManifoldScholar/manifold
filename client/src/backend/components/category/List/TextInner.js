@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
+
 import FormattedDate from "global/components/FormattedDate";
 import Text from "global/components/text";
 import Utility from "global/components/utility";
@@ -111,7 +111,7 @@ class TextInner extends Component {
     return (
       <>
         <Link
-          to={lh.link("backendText", this.text.id)}
+          to={`/backend/projects/text/${this.text.id}`}
           className="texts-list__details"
         >
           <div className="texts-list__icon">
@@ -159,7 +159,7 @@ class TextInner extends Component {
             </span>
           </button>
           <Link
-            to={lh.link("backendText", this.text.id)}
+            to={`/backend/projects/text/${this.text.id}`}
             className="texts-list__button"
           >
             <Utility.IconComposer icon="annotate32" size={26} />

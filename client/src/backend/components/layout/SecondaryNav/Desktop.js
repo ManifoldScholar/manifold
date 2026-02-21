@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import classnames from "classnames";
-import lh from "helpers/linkHandler";
+
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 
@@ -9,10 +9,7 @@ export default function NavigationSecondary(props) {
   const { ariaLabel, links, panel } = props;
   const { t } = useTranslation();
 
-  const pathForLink = link => {
-    const args = link.args || [];
-    return lh.link(link.route, ...args);
-  };
+  const pathForLink = link => link.path;
 
   const renderItem = link => {
     return (

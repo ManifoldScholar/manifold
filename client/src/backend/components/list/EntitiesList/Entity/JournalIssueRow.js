@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
+
 import EntityRow from "./Row";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import { useTranslation } from "react-i18next";
@@ -31,7 +31,7 @@ function JournalIssueRow({
   };
 
   if (clickable) {
-    additionalProps.onRowClick = lh.link("backendProject", projectId);
+    additionalProps.onRowClick = `/backend/projects/${projectId}`;
     additionalProps.rowClickMode = "block";
   }
 

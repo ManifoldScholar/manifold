@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Controls from "./controls";
-import lh from "helpers/linkHandler";
 
 export default class ResourceImportState extends PureComponent {
   static displayName = "ResourceImport.State";
@@ -15,16 +14,12 @@ export default class ResourceImportState extends PureComponent {
 
   get finishUrl() {
     const { match } = this.props;
-    return lh.link("backendProjectResources", match.params.projectId);
+    return `/backend/projects/${match.params.projectId}/resources`;
   }
 
   get backLinkUrl() {
     const { match } = this.props;
-    return lh.link(
-      "backendResourceImportMap",
-      match.params.projectId,
-      match.params.id
-    );
+    return `/backend/projects/${match.params.projectId}/resource-import/${match.params.id}/map`;
   }
 
   resetImport = event => {

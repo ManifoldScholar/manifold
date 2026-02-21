@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
+
 import { textsAPI } from "api";
 import { useNavigate } from "react-router-dom";
 import {
@@ -60,7 +60,7 @@ export default function AddEditTOCEntryForm({
   const onSuccess = useCallback(
     (_, res) => {
       setTree(formatTreeData(res.data?.attributes?.toc));
-      navigate(lh.link("backendTextTOC", textId));
+      navigate(`/backend/projects/text/${textId}/contents`);
     },
     [textId, navigate, setTree]
   );
@@ -123,7 +123,7 @@ export default function AddEditTOCEntryForm({
       </Form.FieldGroup>
       <Form.DrawerButtons
         showCancel
-        cancelUrl={lh.link("backendTextTOC", textId)}
+        cancelUrl={`/backend/projects/text/${textId}/contents`}
         submitLabel="texts.toc.save_button_label"
       />
     </FormContainer.Form>

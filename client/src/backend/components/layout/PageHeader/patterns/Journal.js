@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import Utility from "../utility";
 import { getIssueLinks } from "../utility/helpers";
 import { NavLink } from "react-router-dom";
-import lh from "helpers/linkHandler";
+
 import * as Styled from "./styles";
 
 export default function JournalHeader({
@@ -24,7 +24,7 @@ export default function JournalHeader({
   const titleLinkProps = parent
     ? {
         as: NavLink,
-        to: lh.link("backendJournal", id)
+        to: `/backend/journals/${id}`
       }
     : {};
 

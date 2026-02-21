@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
+
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import { withTranslation } from "react-i18next";
@@ -11,7 +11,7 @@ class PermissionRow extends PureComponent {
   static propTypes = {
     entity: PropTypes.object,
     active: PropTypes.string,
-    linkName: PropTypes.string.isRequired,
+    getPermissionPath: PropTypes.func.isRequired,
     t: PropTypes.func
   };
 
@@ -32,7 +32,7 @@ class PermissionRow extends PureComponent {
   }
 
   get url() {
-    return lh.link(this.props.linkName, this.resource.id, this.id);
+    return this.props.getPermissionPath(this.resource.id, this.id);
   }
 
   get title() {

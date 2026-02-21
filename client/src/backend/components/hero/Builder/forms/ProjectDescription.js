@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import Authorize from "hoc/Authorize";
-import lh from "helpers/linkHandler";
+
 import Layout from "backend/components/layout";
 import { useTranslation } from "react-i18next";
 
@@ -54,7 +54,7 @@ function ProjectDescription({
       entity={model}
       ability="update"
       failureNotification
-      failureRedirect={lh.link(failureRedirectRoute, model.id)}
+      failureRedirect={failureRedirectRoute(model.id)}
     >
       <section>
         <Layout.DrawerHeader
@@ -138,7 +138,7 @@ ProjectDescription.propTypes = {
   model: PropTypes.object.isRequired,
   modelLabel: PropTypes.string.isRequired,
   api: PropTypes.object.isRequired,
-  failureRedirectRoute: PropTypes.string.isRequired,
+  failureRedirectRoute: PropTypes.func.isRequired,
   closeDrawer: PropTypes.func,
   withDarkMode: PropTypes.bool,
   headerId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
+
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
@@ -40,7 +40,7 @@ export default function ReadingGroupMemberRow({
   return (
     <EntityRow
       {...props}
-      onRowClick={lh.link("backendRecordsUser", user.id)}
+      onRowClick={`/backend/records/users/${user.id}`}
       rowClickMode="inline"
       title={name}
       subtitle={meta}

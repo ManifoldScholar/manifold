@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
+
 import textTracksAPI from "api/resources/textTracks";
 import { useNavigate } from "react-router-dom";
 import Upload from "global/components/form/Upload";
@@ -15,7 +15,7 @@ export default function AddEditForm({ resource, track, refresh }) {
 
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
-    navigate(lh.link("backendResourceTracks", resource?.id));
+    navigate(`/backend/projects/resource/${resource?.id}/tracks`);
   }, [refresh, navigate, resource?.id]);
 
   return (
@@ -78,7 +78,7 @@ export default function AddEditForm({ resource, track, refresh }) {
       />
       <Form.DrawerButtons
         showCancel
-        cancelUrl={lh.link("backendResourceTracks", resource?.id)}
+        cancelUrl={`/backend/projects/resource/${resource?.id}/tracks`}
         submitLabel={isEdit ? t("actions.save") : t("actions.add")}
       />
     </FormContainer.Form>

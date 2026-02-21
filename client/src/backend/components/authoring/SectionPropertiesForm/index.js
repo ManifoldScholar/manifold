@@ -3,7 +3,7 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { sectionsAPI } from "api";
-import lh from "helpers/linkHandler";
+
 import * as Styled from "./styles";
 
 export default function SectionPropertiesForm({
@@ -17,7 +17,7 @@ export default function SectionPropertiesForm({
 
   const onSuccess = () => {
     if (refreshText) refreshText();
-    navigate(lh.link("backendTextSections", textId));
+    navigate(`/backend/projects/text/${textId}/sections`);
   };
 
   const disableHide = startSectionId === section?.id;
@@ -52,7 +52,7 @@ export default function SectionPropertiesForm({
       />
       <Form.DrawerButtons
         showCancel
-        cancelUrl={lh.link("backendTextSections", textId)}
+        cancelUrl={`/backend/projects/text/${textId}/sections`}
         submitLabel="actions.save"
       />
     </Styled.Form>

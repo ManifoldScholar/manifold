@@ -6,7 +6,7 @@ import Form from "global/components/form";
 import SectionsList from "./SectionsList";
 import { useUIDSeed } from "react-uid";
 import { textsAPI } from "api";
-import lh from "helpers/linkHandler";
+
 import { useNavigate } from "react-router-dom";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
@@ -72,7 +72,7 @@ function CreateTextForm({
 
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
-    navigate(lh.link("backendProjectTexts", projectId));
+    navigate(`/backend/projects/${projectId}/texts`);
   }, [navigate, projectId, refresh]);
 
   return (

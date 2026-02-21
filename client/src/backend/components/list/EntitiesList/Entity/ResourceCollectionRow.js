@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
-import lh from "helpers/linkHandler";
+
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import { withTranslation } from "react-i18next";
@@ -29,7 +29,7 @@ class ResourceCollectionRow extends PureComponent {
         event.stopPropagation();
         return this.props.onRowClick(this.resourceCollection);
       };
-    return lh.link("backendResourceCollection", this.id);
+    return `/backend/projects/resource-collection/${this.id}`;
   }
 
   get resourceCollection() {

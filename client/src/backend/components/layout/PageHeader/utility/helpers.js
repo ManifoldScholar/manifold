@@ -1,10 +1,8 @@
-import lh from "helpers/linkHandler";
-
 export const getTextLinks = ({ texts, pathname }) =>
   texts?.length
     ? texts?.map(t => ({
         label: t.label,
-        route: "backendTextAnalytics",
+        path: `/backend/projects/text/${t.id}/analytics`,
         id: t.id,
         active: pathname?.includes(t.id)
       }))
@@ -14,7 +12,7 @@ export const getIssueLinks = ({ issues, pathname }) =>
   issues?.length
     ? issues?.map(i => ({
         label: i.label,
-        route: "backendProjectAnalytics",
+        path: `/backend/projects/${i.id}/analytics`,
         id: i.id,
         active: pathname?.includes(i.id)
       }))
@@ -32,13 +30,9 @@ export const getLinkOrButtonProps = action => {
         };
   }
 
-  if (action.route) {
-    const params = action.routeParams
-      ? action.routeParams
-      : [action.slug, action.resourceSlug];
-
+  if (action.path) {
     return {
-      to: lh.link(action.route, ...params)
+      to: action.path
     };
   }
 

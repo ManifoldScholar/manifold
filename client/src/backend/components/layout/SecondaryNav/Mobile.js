@@ -1,7 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { useMatches } from "react-router-dom";
-import lh from "helpers/linkHandler";
+import { useLocation } from "react-router-dom";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -9,14 +8,12 @@ import * as Styled from "./styles";
 export default function NavigationDropdown({ links, className }) {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
-  const matches = useMatches();
+  const location = useLocation();
 
   const visitLinks = linkList => {
-    const activeLink = linkList.find(link => {
-      const route = lh.routeFromName(link.route);
-      // Use useMatches to check if route is active by comparing route name
-      return matches.some(match => match.handle?.name === route?.handle?.name);
-    });
+    const activeLink = linkList.find(link =>
+      location.pathname.startsWith(link.path)
+    );
     if (activeLink && activeLink.children) {
       return visitLinks(activeLink.children);
     }
@@ -37,10 +34,7 @@ export default function NavigationDropdown({ links, className }) {
     setOpen(false);
   };
 
-  const pathForLink = link => {
-    const args = link.args || [];
-    return lh.link(link.route, ...args);
-  };
+  const pathForLink = link => link.path;
 
   const renderItem = link => {
     return (

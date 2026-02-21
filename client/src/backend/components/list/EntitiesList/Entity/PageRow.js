@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
+
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 
@@ -20,7 +20,7 @@ export default class PageRow extends PureComponent {
   }
 
   get url() {
-    return lh.link("backendRecordsPage", this.id);
+    return `/backend/records/pages/${this.id}`;
   }
 
   get title() {

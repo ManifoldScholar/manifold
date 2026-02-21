@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
-import lh from "helpers/linkHandler";
 
 export default function TextTrackRow({
   entity,
@@ -42,7 +41,7 @@ export default function TextTrackRow({
       label={labels}
       utility={utility}
       rowClickMode="inline"
-      onRowClick={lh.link("backendResourceTrackEdit", resourceId, id)}
+      onRowClick={`/backend/projects/resource/${resourceId}/tracks/${id}`}
       {...props}
     />
   );

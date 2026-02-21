@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
+
 import Texts from "./Texts";
 import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Utility from "global/components/utility";
@@ -110,11 +110,7 @@ class CategoryListCategory extends PureComponent {
 
                   <Link
                     className="text-categories__button"
-                    to={lh.link(
-                      "backendProjectCategory",
-                      project.id,
-                      category.id
-                    )}
+                    to={`/backend/projects/${project.id}/texts/category/${category.id}/edit`}
                   >
                     <Utility.IconComposer icon="annotate32" size={26} />
                     <span className="screen-reader-text">

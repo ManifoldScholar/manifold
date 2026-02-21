@@ -8,7 +8,7 @@ import DraggableEventHelper from "../helpers/draggableEvent";
 import { contentBlocksAPI, projectsAPI, requests } from "api";
 import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import withConfirmation from "hoc/withConfirmation";
-import lh from "helpers/linkHandler";
+
 import configHelper from "../helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";
 import { UIDConsumer } from "react-uid";
@@ -71,7 +71,7 @@ function ProjectContent({ project, confirm, children }) {
   const newBlock = blockToCreate => {
     const block = blockToCreate || pendingBlock;
     if (configHelper.isConfigurable(block?.attributes.type)) {
-      navigate(lh.link("backendProjectContentBlockNew", project.id));
+      navigate(`/backend/projects/${project.id}/layout/content-blocks/new`);
     } else {
       createBlock(block);
     }
@@ -116,9 +116,12 @@ function ProjectContent({ project, confirm, children }) {
   };
 
   const editBlock = block => {
-    navigate(lh.link("backendProjectContentBlock", project.id, block.id), {
-      state: { noScroll: true }
-    });
+    navigate(
+      `/backend/projects/${project.id}/layout/content-blocks/${block.id}`,
+      {
+        state: { noScroll: true }
+      }
+    );
   };
 
   const deleteBlock = async block => {

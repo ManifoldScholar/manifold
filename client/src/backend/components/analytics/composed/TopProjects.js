@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Block from "../Block";
 import Table from "../parts/Table";
 import ProjectRow from "../parts/ProjectRow";
-import lh from "helpers/linkHandler";
+
 import { withTranslation } from "react-i18next";
 
 class TopProjects extends Component {
@@ -66,7 +66,7 @@ class TopProjects extends Component {
           paginationClickHandler={paginationClickHandler}
           pagination={pagination}
           sortOptions={this.sortOptions}
-          allLink={withAllLink ? lh.link("backendAnalyticsTopProjects") : null}
+          allLink={withAllLink ? "/backend/analytics/top-projects" : null}
         />
       </Block>
     );

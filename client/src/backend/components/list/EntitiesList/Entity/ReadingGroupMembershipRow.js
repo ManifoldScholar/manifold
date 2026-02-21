@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
+
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
 import { useTranslation } from "react-i18next";
@@ -36,7 +36,7 @@ function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {
         : [])
     ],
     active: active === id,
-    onRowClick: lh.link("backendReadingGroupMembers", readingGroup.id),
+    onRowClick: `/backend/groups/${readingGroup.id}/members`,
     rowClickMode: "inline"
   };
 

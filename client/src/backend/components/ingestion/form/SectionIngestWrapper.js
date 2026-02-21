@@ -5,7 +5,6 @@ import FormContainer from "global/containers/form";
 import Upload from "./Upload";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ingestionsAPI } from "api";
-import lh from "helpers/linkHandler";
 
 export default function SectionIngestionFormWrapper({
   textId,
@@ -29,7 +28,9 @@ export default function SectionIngestionFormWrapper({
 
   const onSuccess = useCallback(
     res => {
-      navigate(lh.link("backendTextSectionIngestIngest", textId, res.id));
+      navigate(
+        `/backend/projects/text/${textId}/sections/ingestion/${res.id}/ingest`
+      );
     },
     [navigate, textId]
   );
