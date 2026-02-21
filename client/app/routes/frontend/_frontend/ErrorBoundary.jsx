@@ -7,11 +7,11 @@ import {
 } from "react-router";
 import classNames from "classnames";
 import { FrontendContext } from "app/contexts";
-import Utility from "global/components/utility";
 import Footers from "global/components/Footers";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
 import { SearchProvider } from "hooks/useSearch/context";
+import { useScrollToTop } from "hooks";
 import FatalError from "global/components/FatalError";
 import formatError from "app/routes/utility/helpers/formatError";
 
@@ -22,6 +22,7 @@ export function ErrorBoundary() {
   const error = useRouteError();
   const loaderData = useLoaderData();
   const location = useLocation();
+  useScrollToTop();
 
   const frontendContextValue = useMemo(
     () => ({
@@ -40,7 +41,6 @@ export function ErrorBoundary() {
     return (
       <FrontendContext.Provider value={frontendContextValue}>
         <BreadcrumbsProvider>
-          <Utility.ScrollToTop />
           <SearchProvider>
             <Layout.Header />
             <main

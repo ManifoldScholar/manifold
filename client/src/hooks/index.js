@@ -47,4 +47,5 @@ export { default as useAfterRevalidate } from "./useAfterRevalidate";
 
 export { default as useFrontendMode } from "./useFrontendMode";
 
+export { default as useScrollToTop } from "./useScrollToTop";
 export { useSignInUpOverlay } from "global/components/sign-in-up/Overlay/context";

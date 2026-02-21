@@ -1,7 +1,7 @@
 import { data } from "react-router";
 import Authorization from "helpers/authorization";
 import { routerContext } from "app/contexts";
-import { requireLogin } from "./requireLogin";
+import requireLogin from "./requireLogin";
 
 const authorization = new Authorization();
 

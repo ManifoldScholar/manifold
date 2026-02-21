@@ -14,6 +14,17 @@ type Pages = {
   "/": {
     params: {};
   };
+  "/backend": {
+    params: {};
+  };
+  "/backend/dashboard": {
+    params: {};
+  };
+  "/backend/*": {
+    params: {
+      "*": string;
+    };
+  };
   "/project-collections": {
     params: {};
   };

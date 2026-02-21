@@ -4,11 +4,10 @@ import classNames from "classnames";
 import { subjectsAPI } from "api";
 import { FrontendContext } from "app/contexts";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
-import Utility from "global/components/utility";
 import Footers from "global/components/Footers";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import Layout from "frontend/components/layout";
-import { useSettings, useBodyClass } from "hooks";
+import { useSettings, useBodyClass, useScrollToTop } from "hooks";
 import get from "lodash/get";
 import { SearchProvider } from "hooks/useSearch/context";
 import { ErrorBoundary } from "./ErrorBoundary";
@@ -39,6 +38,7 @@ export { ErrorBoundary };
 
 export default function FrontendLayout({ loaderData }) {
   useBodyClass("browse");
+  useScrollToTop();
 
   const settings = useSettings();
   const hasPressLogo = get(settings, "attributes.pressLogoStyles.small");
@@ -54,7 +54,6 @@ export default function FrontendLayout({ loaderData }) {
   return (
     <FrontendContext.Provider value={frontendContextValue}>
       <BreadcrumbsProvider>
-        <Utility.ScrollToTop />
         <SearchProvider>
           <Layout.Header />
           <main
