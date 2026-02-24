@@ -11,7 +11,6 @@ class UserLinks extends PureComponent {
     authentication: PropTypes.object,
     commonActions: PropTypes.object.isRequired,
     backendButton: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
-    history: PropTypes.object.isRequired,
     closeNavigation: PropTypes.func.isRequired,
     t: PropTypes.func
   };

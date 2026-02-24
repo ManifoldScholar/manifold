@@ -1,12 +1,12 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { makersAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import withFilteredLists, { makerFilters } from "hoc/withFilteredLists";
 import { useParams } from "react-router-dom";
 import { useFetch, useListQueryParams } from "hooks";
+import Authorize from "hoc/Authorize";
 
 import EntitiesList, {
   Search,
@@ -16,8 +16,7 @@ import EntitiesList, {
 
 function MakersListContainer({
   entitiesListSearchProps,
-  entitiesListSearchParams,
-  route
+  entitiesListSearchParams
 }) {
   const { t } = useTranslation();
   const { id } = useParams();
@@ -41,12 +40,20 @@ function MakersListContainer({
   };
 
   return (
-    <>
-      {childRoutes(route, {
-        drawer: true,
-        drawerProps,
-        childProps: { refetch: refresh }
-      })}
+    <Authorize
+      ability="update"
+      entity={["maker"]}
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "makers"
+        })
+      }}
+      failureRedirect
+    >
+      <OutletWithDrawer
+        drawerProps={drawerProps}
+        context={{ refetch: refresh }}
+      />
       {makers && (
         <EntitiesList
           title={t("records.makers.header")}
@@ -70,7 +77,7 @@ function MakersListContainer({
           })}
         />
       )}
-    </>
+    </Authorize>
   );
 }
 
@@ -78,8 +85,7 @@ MakersListContainer.displayName = "Makers.List";
 
 MakersListContainer.propTypes = {
   entitiesListSearchProps: PropTypes.func.isRequired,
-  entitiesListSearchParams: PropTypes.object.isRequired,
-  route: PropTypes.object
+  entitiesListSearchParams: PropTypes.object.isRequired
 };
 
 export default withFilteredLists(MakersListContainer, {

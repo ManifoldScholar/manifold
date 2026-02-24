@@ -1,6 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import { resourceCollectionsAPI, projectsAPI, requests } from "api";
 import { useListQueryParams, useFetch, useApiCallback } from "hooks";
 import EntitiesList, {
@@ -11,11 +10,11 @@ import withFilteredLists, { resourceFilters } from "hoc/withFilteredLists";
 import isNil from "lodash/isNil";
 
 function ResourceCollectionResourcesContainer({
-  resourceCollection,
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
   const { t } = useTranslation();
+  const { resourceCollection } = useOutletContext();
 
   const { project, resources: collectionResources } =
     resourceCollection?.relationships ?? {};
@@ -126,10 +125,3 @@ export default withFilteredLists(ResourceCollectionResourcesContainer, {
 
 ResourceCollectionResourcesContainer.displayName =
   "ResourceCollection.Resources";
-
-ResourceCollectionResourcesContainer.propTypes = {
-  dispatch: PropTypes.func,
-  resourceCollection: PropTypes.object,
-  resources: PropTypes.array,
-  resourcesMeta: PropTypes.object
-};

@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { entityStoreActions as store } from "actions";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
@@ -14,10 +13,8 @@ import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useListQueryParams } from "hooks";
 
-export default function ProjectResourceCollectionsContainer({
-  project,
-  journalBreadcrumbs
-}) {
+export default function ProjectResourceCollectionsContainer() {
+  const { project, journalBreadcrumbs } = useOutletContext() || {};
   const { id } = useParams();
 
   const { pagination } = useListQueryParams({ initSize: 10 });
@@ -34,19 +31,17 @@ export default function ProjectResourceCollectionsContainer({
 
   const { titlePlaintext, slug } = project?.attributes ?? {};
 
-  const breadcrumbs = useMemo(() => {
-    const projectCrumb = {
-      to: lh.link("frontendProject", slug),
-      label: titlePlaintext
-    };
-    const collectionsCrumb = {
-      to: lh.link("frontendProjectResourceCollections", slug),
-      label: t("glossary.resource_collection_other")
-    };
-    return journalBreadcrumbs
-      ? [...journalBreadcrumbs, collectionsCrumb].filter(Boolean)
-      : [projectCrumb, collectionsCrumb].filter(Boolean);
-  }, [journalBreadcrumbs, slug, titlePlaintext, t]);
+  const projectCrumb = {
+    to: lh.link("frontendProject", slug),
+    label: titlePlaintext
+  };
+  const collectionsCrumb = {
+    to: lh.link("frontendProjectResourceCollections", slug),
+    label: t("glossary.resource_collection_other")
+  };
+  const breadcrumbs = journalBreadcrumbs
+    ? [...journalBreadcrumbs, collectionsCrumb].filter(Boolean)
+    : [projectCrumb, collectionsCrumb].filter(Boolean);
 
   const headContentProps = useEntityHeadContent(
     project,
@@ -82,8 +77,3 @@ export default function ProjectResourceCollectionsContainer({
 
 ProjectResourceCollectionsContainer.displayName =
   "Frontend.Containers.ProjectResourceCollections";
-
-ProjectResourceCollectionsContainer.propTypes = {
-  project: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array
-};

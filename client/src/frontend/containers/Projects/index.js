@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
-import { projectsAPI } from "api";
+import { projectsAPI, requests } from "api";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
@@ -12,13 +11,16 @@ import {
   useListQueryParams
 } from "hooks";
 
-export default function ProjectsContainer() {
-  const subjects = useFromStore("feSubjects", "select");
+const FILTER_RESET = { standaloneModeEnforced: "false" };
 
-  const filterReset = useMemo(() => ({ standaloneModeEnforced: "false" }), []);
+export default function ProjectsContainer() {
+  const subjects = useFromStore({
+    requestKey: requests.feSubjects,
+    action: "select"
+  });
 
   const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filterReset
+    initFilters: FILTER_RESET
   });
 
   const { data: projects, meta } = useFetch({
@@ -33,7 +35,7 @@ export default function ProjectsContainer() {
   const filterProps = useListFilters({
     onFilterChange: param => setFilters(param),
     initialState: filters,
-    resetState: filterReset,
+    resetState: FILTER_RESET,
     options: {
       entityType: "project",
       sort: true,
@@ -45,8 +47,8 @@ export default function ProjectsContainer() {
 
   return meta ? (
     <>
-      <HeadContent title={t("titles.projects_all")} appendDefaultTitle />
-      <h1 className="screen-reader-text">{t("pages.projects_all")}</h1>
+      <HeadContent title={t("titles.projects")} appendDefaultTitle />
+      <h1 className="screen-reader-text">{t("titles.projects")}</h1>
       {showPlaceholder ? (
         <EntityCollectionPlaceholder.Projects />
       ) : (

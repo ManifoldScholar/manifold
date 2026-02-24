@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import PropTypes from "prop-types";
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import { requests } from "api";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
 import lh from "helpers/linkHandler";
@@ -10,17 +10,23 @@ import HeaderLogo from "global/components/atomic/HeaderLogo";
 import Breadcrumbs, {
   BreadcrumbsContext
 } from "global/components/atomic/Breadcrumbs";
-import { useShowJournalsActive } from "hooks";
+import ProjectsToggle from "global/components/navigation/projects-dropdown/Toggle";
+import ProjectsDropdown from "global/components/navigation/projects-dropdown";
+import { useFromStore } from "hooks";
 
-export default function LibraryHeader({
-  settings,
-  authentication,
-  pages,
-  visibility,
-  commonActions
-}) {
+export default function LibraryHeader() {
   const { t } = useTranslation();
   const { breadcrumbs } = useContext(BreadcrumbsContext);
+
+  const authentication = useFromStore({ path: "authentication" });
+  const settings = useFromStore({
+    requestKey: requests.settings,
+    action: "select"
+  });
+  const pages = useFromStore({
+    requestKey: requests.gPages,
+    action: "select"
+  });
 
   const pageToLinkAttrs = page => ({
     label: page.attributes.navTitle || page.attributes.title,
@@ -34,13 +40,31 @@ export default function LibraryHeader({
   });
   const links = () => {
     const routes = navigation.frontend(authentication, settings);
-    if (!pages) {
-      return routes;
+
+    const projectsLink = routes.find(l => l.route === "frontendProjects");
+
+    if (settings.attributes.calculated?.hasProjectCollections) {
+      projectsLink.dropdownContent = (
+        <ProjectsDropdown links={projectsLink.children} />
+      );
+      projectsLink.toggle = ProjectsToggle;
+    } else {
+      projectsLink.dropdown = false;
     }
+
+    const routesWithDropdown = routes.filter(
+      l => l.route !== "frontendProjects" && l.route !== "frontendProjectsAll"
+    );
+    routesWithDropdown.splice(1, 0, projectsLink);
+
+    if (!pages) {
+      return routesWithDropdown;
+    }
+
     const pageLinks = pages
       .filter(page => page.attributes.showInHeader)
       .map(pageToLinkAttrs);
-    return [...routes, ...pageLinks];
+    return [...routesWithDropdown, ...pageLinks];
   };
 
   const { libraryDisabled, homeRedirectUrl } = settings.attributes.general;
@@ -56,8 +80,6 @@ export default function LibraryHeader({
   const navStyle = offset
     ? { position: "relative", top: parseInt(offset, 10) }
     : {};
-
-  const journalIsActive = useShowJournalsActive();
 
   return (
     <header>
@@ -83,11 +105,7 @@ export default function LibraryHeader({
             <Navigation.Primary
               desktopStyle={navStyle}
               links={links()}
-              commonActions={commonActions}
-              authentication={authentication}
-              visibility={visibility}
               mode="frontend"
-              journalIsActive={journalIsActive}
             />
           </div>
         </SetCSSProperty>
@@ -99,11 +117,3 @@ export default function LibraryHeader({
 }
 
 LibraryHeader.displayName = "Layout.LibraryHeader";
-
-LibraryHeader.propTypes = {
-  settings: PropTypes.object,
-  authentication: PropTypes.object,
-  pages: PropTypes.arrayOf(PropTypes.object),
-  visibility: PropTypes.object,
-  commonActions: PropTypes.object
-};

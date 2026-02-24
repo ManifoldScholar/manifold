@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef, useRef, cloneElement } from "react";
 import PropTypes from "prop-types";
 import { FocusTrap } from "focus-trap-react";
 import classNames from "classnames";
@@ -8,7 +8,7 @@ import { DrawerContext } from "helpers/contexts";
 import { usePreventBodyScroll } from "hooks";
 import * as Styled from "./styles";
 
-function DrawerContent(props, ref) {
+function DrawerContent(props, forwardedRef) {
   const {
     headerId,
     id,
@@ -28,6 +28,9 @@ function DrawerContent(props, ref) {
     open,
     additionalDrawerProps = {}
   } = props;
+
+  const internalRef = useRef(null);
+  const ref = forwardedRef ?? internalRef;
 
   usePreventBodyScroll(lockScroll && open);
 
@@ -82,7 +85,7 @@ function DrawerContent(props, ref) {
   };
 
   const handleBlur = e => {
-    if (focusTrap || !ref?.current) return;
+    if (focusTrap || !ref.current) return;
     if (ref.current.contains(e.relatedTarget)) return;
 
     if (hasConfirm) {
@@ -118,7 +121,7 @@ function DrawerContent(props, ref) {
         {!!children &&
           (typeof children === "string"
             ? children
-            : React.cloneElement(children, {
+            : cloneElement(children, {
                 closeDrawer: handleLeaveEvent
               }))}
       </DrawerContext.Provider>
@@ -134,7 +137,8 @@ function DrawerContent(props, ref) {
         clickOutsideDeactivates: handleClickOutside,
         escapeDeactivates: handleEscape,
         returnFocusOnDeactivate,
-        fallbackFocus: ref
+        fallbackFocus: () => ref.current,
+        preventScroll: context === "reader"
       }}
     >
       <Drawer key="drawer" {...drawerProps}>

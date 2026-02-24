@@ -1,42 +1,34 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { pagesAPI, requests } from "api";
-import { entityStoreActions } from "actions";
-import connectAndFetch from "utils/connectAndFetch";
-import { select } from "utils/entityUtils";
+import { useFetch } from "hooks";
 import EntitiesList, {
   Button,
   PageRow
 } from "backend/components/list/EntitiesList";
+import Authorize from "hoc/Authorize";
 
-const { request } = entityStoreActions;
+export default function PagesList() {
+  const { t } = useTranslation();
 
-class PagesDashboardContainer extends PureComponent {
-  static fetchData = (getState, dispatch) => {
-    const pages = request(pagesAPI.index(), requests.gPages);
-    const { promise: one } = dispatch(pages);
-    return Promise.all([one]);
-  };
+  const { data: pages } = useFetch({
+    request: [pagesAPI.index],
+    options: { requestKey: requests.gPages }
+  });
 
-  static mapStateToProps = state => {
-    return {
-      pages: select(requests.gPages, state.entityStore)
-    };
-  };
+  if (!pages) return null;
 
-  static displayName = "Pages.List";
-
-  static propTypes = {
-    pages: PropTypes.array,
-    t: PropTypes.func
-  };
-
-  render() {
-    const { pages, t } = this.props;
-    if (!pages) return null;
-    return (
+  return (
+    <Authorize
+      ability="update"
+      entity={["page"]}
+      failureNotification={{
+        body: t("errors.access_denied.authorization_admin_type", {
+          type: "pages"
+        })
+      }}
+      failureRedirect
+    >
       <EntitiesList
         entityComponent={PageRow}
         title={t("records.pages.header")}
@@ -44,6 +36,7 @@ class PagesDashboardContainer extends PureComponent {
         entities={pages}
         buttons={[
           <Button
+            key="new"
             path={lh.link("backendRecordsPageNew")}
             type="add"
             text={t("records.pages.button_label")}
@@ -51,8 +44,8 @@ class PagesDashboardContainer extends PureComponent {
           />
         ]}
       />
-    );
-  }
+    </Authorize>
+  );
 }
 
-export default withTranslation()(connectAndFetch(PagesDashboardContainer));
+PagesList.displayName = "Pages.List";

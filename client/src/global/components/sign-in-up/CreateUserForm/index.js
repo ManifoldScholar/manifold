@@ -1,13 +1,13 @@
 import React, { useRef, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { usersAPI } from "api";
+import { usersAPI, requests } from "api";
 import { currentUserActions } from "actions";
 import { useFromStore } from "hooks";
 import CreateFormFields from "./CreateFormFields";
 import Form from "global/components/form";
 import { useDispatch } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom-v5-compat";
+import { useNavigate, useLocation } from "react-router-dom";
 import * as SharedStyles from "../styles";
 
 export default function CreateUserForm({
@@ -19,7 +19,7 @@ export default function CreateUserForm({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
   const { currentUser } = authentication ?? {};
 
   const emailRef = useRef();
@@ -32,7 +32,7 @@ export default function CreateUserForm({
     [dispatch]
   );
 
-  const pages = useFromStore("gPages", "select");
+  const pages = useFromStore({ requestKey: requests.gPages, action: "select" });
   const termsPage = pages?.find(
     p => p.attributes.purpose === "terms_and_conditions"
   );

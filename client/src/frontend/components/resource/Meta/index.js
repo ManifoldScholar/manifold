@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 import TagList from "../TagList";
 import { filesize } from "filesize";
 import pickBy from "lodash/pickBy";
 import isNull from "lodash/isNull";
-import IconComputed from "global/components/icon-computed";
 import Meta from "global/components/meta";
 import * as Styled from "./styles";
 
@@ -14,12 +13,10 @@ export default class ResourceMeta extends Component {
   static propTypes = {
     resource: PropTypes.object,
     layout: PropTypes.string,
-    showIcon: PropTypes.bool,
     showTags: PropTypes.bool
   };
 
   static defaultProps = {
-    showIcon: true,
     showTags: true
   };
 
@@ -62,19 +59,13 @@ export default class ResourceMeta extends Component {
 
     return (
       <Styled.Meta>
-        {this.props.showIcon ? (
-          <Styled.ResourceIcon aria-hidden="true">
-            <IconComputed.Resource icon={attr.kind} size={48} />
-          </Styled.ResourceIcon>
-        ) : null}
-
+        <h2 className="screen-reader-text">Metadata</h2>
         <Meta.List
           map={keys}
           metadata={metadata}
           level={this.props.layout}
           sortByLength={false}
         />
-
         {this.props.showTags ? (
           <TagList resource={this.props.resource} />
         ) : null}

@@ -4,9 +4,9 @@ import CurrentUserBanner from "./CurrentUser";
 import AnonymousUserBanner from "./AnonymousUser";
 
 export default function CookiesBanner() {
-  const { currentUser } = useFromStore("authentication");
+  const { currentUser } = useFromStore({ path: "authentication" });
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =
     settings?.attributes?.calculated ?? {};
 

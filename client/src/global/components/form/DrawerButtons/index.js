@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -9,6 +9,7 @@ export default function DrawerButtons({
   showCancel = false,
   showSaveAndClose = false,
   cancelUrl,
+  onCancelClick,
   submitLabel = "actions.save",
   disableSubmit = false,
   onSaveClick,
@@ -22,6 +23,9 @@ export default function DrawerButtons({
 
   const handleCancelClick = e => {
     e.preventDefault();
+
+    if (onCancelClick) return onCancelClick();
+
     navigate(cancelUrl ?? -1);
   };
 
@@ -67,6 +71,7 @@ export default function DrawerButtons({
 DrawerButtons.propTypes = {
   showCancel: PropTypes.bool,
   cancelUrl: PropTypes.string,
+  onCancelClick: PropTypes.func,
   submitLabel: PropTypes.string,
   disableSubmit: PropTypes.bool
 };

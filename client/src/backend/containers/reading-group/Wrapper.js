@@ -1,27 +1,25 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
+import { useParams, useNavigate, useLocation, Outlet } from "react-router-dom";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import { readingGroupsAPI } from "api";
-import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
-import {
-  useFetch,
-  useApiCallback,
-  useNotification,
-  useRedirectToFirstMatch
-} from "hooks";
+import { useFetch, useApiCallback, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import capitalize from "lodash/capitalize";
 
-function ReadingGroupWrapper({ match, route, history, confirm, location }) {
+function ReadingGroupWrapper({ confirm }) {
   const { t } = useTranslation();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { data: readingGroup, refresh } = useFetch({
-    request: [readingGroupsAPI.show, match.params.id]
+    request: [readingGroupsAPI.show, id]
   });
   const destroy = useApiCallback(readingGroupsAPI.destroy, {
     removes: readingGroup
@@ -38,7 +36,7 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
   }));
 
   const destroyAndRedirect = useCallback(() => {
-    const redirect = () => history.push(lh.link("backendReadingGroups"));
+    const redirect = () => navigate(lh.link("backendReadingGroups"));
     destroy(readingGroup.id).then(
       () => {
         notifyDestroy(readingGroup);
@@ -46,7 +44,7 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
       },
       () => redirect()
     );
-  }, [destroy, history, readingGroup, notifyDestroy]);
+  }, [destroy, navigate, readingGroup, notifyDestroy]);
 
   const handleReadingGroupDestroy = useCallback(() => {
     const heading = t("modals.delete_reading_group");
@@ -69,19 +67,6 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
     }
   ];
 
-  const renderRoutes = () => {
-    return childRoutes(route, {
-      childProps: { refresh, readingGroup }
-    });
-  };
-
-  useRedirectToFirstMatch({
-    route: "backendReadingGroup",
-    id: readingGroup?.id,
-    slug: readingGroup?.attributes.slug,
-    candidates: readingGroup ? navigation.readingGroup(readingGroup) : []
-  });
-
   if (!readingGroup) return null;
 
   const subpage = location.pathname.split("/")[4]?.replace("-", "_");
@@ -101,9 +86,10 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
     <div>
       <Authorize
         entity={readingGroup}
-        failureFatalError={{
-          detail: t("groups.unauthorized_edit")
+        failureNotification={{
+          body: t("groups.unauthorized_edit")
         }}
+        failureRedirect
         ability={["update"]}
       >
         {subpage && (
@@ -132,7 +118,9 @@ function ReadingGroupWrapper({ match, route, history, confirm, location }) {
             />
           }
         >
-          <div>{renderRoutes()}</div>
+          <div>
+            <Outlet context={{ refresh, readingGroup }} />
+          </div>
         </Layout.BackendPanel>
       </Authorize>
     </div>

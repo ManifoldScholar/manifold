@@ -106,6 +106,7 @@ import New64 from "./64/New";
 import Notes24 from "./24/Notes";
 import Notifications24 from "./24/Notifications";
 import PauseSolid24 from "./24/PauseSolid";
+import Pencil24 from "./24/Pencil";
 import Play16 from "./16/Play";
 import PlaySolid24 from "./24/PlaySolid";
 import PlayOutline24 from "./24/PlayOutline";
@@ -184,6 +185,10 @@ import RTELink24 from "./24/RTELink";
 import RTEImage24 from "./24/RTEImage";
 import CodeBlock24 from "./24/CodeBlock";
 import ProjectCollection32 from "./32/ProjectCollection";
+import RTEAlignLeft32 from "./32/RTEAlignLeft";
+import RTEAlignRight32 from "./32/RTEAlignRight";
+import RTEAlignCenter32 from "./32/RTEAlignCenter";
+import RTEAlignJustify32 from "./32/RTEAlignJustify";
 
 export default {
   ActivityComments64,
@@ -305,6 +310,7 @@ export default {
   Notifications24,
   OrderedList24,
   PauseSolid24,
+  Pencil24,
   Play16,
   PlaySolid24,
   PlayOutline24,
@@ -335,6 +341,10 @@ export default {
   ResourceSpreadsheet64,
   ResourceVideo64,
   Resources64,
+  RTEAlignLeft32,
+  RTEAlignRight32,
+  RTEAlignCenter32,
+  RTEAlignJustify32,
   RTELink24,
   RTEImage24,
   Search16,
