@@ -50,7 +50,7 @@ module UserGroupMemberships
     def existing_entitlements
       @existing_entitlements ||= Entitlement.where(
         target: user,
-        entitler: membership.to_upsertable_entitler
+        entitler: membership.to_upsertable_entitler(user_group: { id: user_group.id, name: user_group.name })
       ).map do |entitlement|
         { subject_type: entitlement.subject_type, subject_id: entitlement.subject_id }
       end

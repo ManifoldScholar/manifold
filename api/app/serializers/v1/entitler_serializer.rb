@@ -9,5 +9,7 @@ module V1
     typed_has_many :entitlements
 
     typed_attribute :name, Types::String.meta(example: "G.K. Chesteron", read_only: true)
+    typed_attribute :entity_type, Types::String.meta(read_only: true)
+    typed_attribute :metadata, Types::JSON
   end
 end
