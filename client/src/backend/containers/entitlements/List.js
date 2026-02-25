@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withTranslation, Trans } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
@@ -12,6 +13,7 @@ import EntitiesList, {
   EntitlementRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { keywordFilter } from "hoc/withFilteredLists";
+import { filterEntitlements, getUserGroups } from "./helpers";
 
 const { select, meta } = entityUtils;
 const { request } = entityStoreActions;
@@ -85,14 +87,30 @@ export class EntitlementsList extends PureComponent {
       preList,
       t
     } = this.props;
+
+    const [userGroupEntitlements, rest] = filterEntitlements(entitlements);
+    const entitlementsToRender = [
+      ...getUserGroups(userGroupEntitlements),
+      ...rest
+    ];
+
     const active = match.params.id;
     const listUrl = lh.nameFromType("backend", "Entitlement", entity);
     const newUrl = lh.nameFromType("backend", "EntitlementsNew", entity);
     const instructions = (
       <Trans
-        i18nKey="entitlements.instructions_project"
+        i18nKey={
+          entity.type === "journals"
+            ? "entitlements.instructions_journal"
+            : "entitlements.instructions_project"
+        }
         values={{ gid: entity.attributes.entitlementSubjectUrl }}
-        components={[<p />, <p className="entitlement-gid" />, <br />]}
+        components={[
+          <span />,
+          <span className="entitlement-gid" />,
+          <br />,
+          <Link to={lh.link("backendRecordsUserGroups")} />
+        ]}
       />
     );
     return (
@@ -105,7 +123,7 @@ export class EntitlementsList extends PureComponent {
             instructions={instructions}
             preList={preList}
             titleStyle="section"
-            entities={entitlements}
+            entities={entitlementsToRender}
             entityComponent={EntitlementRow}
             entityComponentProps={{
               active,

@@ -581,7 +581,9 @@ export class PickerComponent extends PureComponent {
                   label={label}
                   styleType={this.context?.styleType}
                 />
-                <Instructions instructions={this.props.instructions} />
+                {!this.props.instructionsBelow && (
+                  <Instructions instructions={this.props.instructions} />
+                )}
                 <Styled.InputWrapper>
                   <Styled.ComboBox
                     ref={this.inputWrapperRef}
@@ -632,6 +634,9 @@ export class PickerComponent extends PureComponent {
                     </Styled.Button>
                   </Styled.ButtonGroup>
                 </Styled.InputWrapper>
+                {this.props.instructionsBelow && (
+                  <Instructions instructions={this.props.instructions} />
+                )}
                 <Styled.ResultsList
                   aria-labelledby={ids.label}
                   ref={this.optionsRef}
