@@ -10,7 +10,9 @@ module ProvidesEntitlements
   end
 
   # @return [Entitler]
-  def to_upsertable_entitler
-    entitler || build_entitler
+  def to_upsertable_entitler(**metadata)
+    (entitler || build_entitler).tap do |entitler|
+      entitler.metadata = metadata if metadata.present?
+    end
   end
 end
