@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "./CookiesFormFields";
 import GlobalForm from "global/containers/form";
-import { useSettings, useCurrentUser, useNotification } from "hooks";
+import { useSettings, useAuthentication, useNotification } from "hooks";
 import * as Styled from "./styles";
 
 export default function CookiesForm({ submit, errors = [], actionData }) {
@@ -15,7 +15,7 @@ export default function CookiesForm({ submit, errors = [], actionData }) {
   const googleAnalyticsEnabled = !!settings?.attributes?.integrations
     ?.gaFourTrackingId;
 
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const { consentManifoldAnalytics, consentGoogleAnalytics } =
     currentUser.attributes ?? {};
 

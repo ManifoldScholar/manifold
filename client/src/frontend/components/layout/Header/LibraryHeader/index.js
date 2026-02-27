@@ -10,12 +10,13 @@ import Breadcrumbs, {
 } from "global/components/atomic/Breadcrumbs";
 import ProjectsToggle from "global/components/navigation/projects-dropdown/Toggle";
 import ProjectsDropdown from "global/components/navigation/projects-dropdown";
-import { useSettings, usePages, useAuthentication } from "hooks";
+import { useSettings, useAuthentication } from "hooks";
+import { AppContext } from "app/contexts";
 
 export default function LibraryHeader() {
   const { t } = useTranslation();
   const { breadcrumbs } = useContext(BreadcrumbsContext);
-  const pages = usePages();
+  const { pages } = useContext(AppContext);
 
   const authentication = useAuthentication();
   const settings = useSettings();

@@ -1,10 +1,10 @@
 import React from "react";
-import { useSettings, useCurrentUser } from "hooks";
+import { useSettings, useAuthentication } from "hooks";
 import CurrentUserBanner from "./CurrentUser";
 import AnonymousUserBanner from "./AnonymousUser";
 
 export default function CookiesBanner() {
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const settings = useSettings();
 
   const { manifoldAnalyticsEnabled, googleAnalyticsEnabled } =

@@ -13,7 +13,7 @@ import Comment from "global/components/comment";
 import { annotationsAPI } from "api";
 import Authorize from "hoc/Authorize";
 import { useRevalidator } from "react-router";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 import useApiCallback from "hooks/api/useApiCallback";
 import * as Styled from "./styles";
 
@@ -28,7 +28,7 @@ export default function AnnotationDetail({
   readingGroups
 }) {
   const { t } = useTranslation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const { revalidate } = useRevalidator();
 
   const { readingGroupPrivacy, commentsCount } = annotation?.attributes ?? {};

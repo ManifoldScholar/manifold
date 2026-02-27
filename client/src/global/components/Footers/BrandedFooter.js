@@ -1,11 +1,12 @@
+import { useContext } from "react";
 import FooterParts from "./Parts";
 import {
   useAuthentication,
   useSettings,
-  usePages,
   useLogout,
   useSignInUpOverlay
 } from "hooks";
+import { AppContext } from "app/contexts";
 import links from "./Parts/helpers/links";
 // import LanguageSelect from "global/components/LanguageSelect";
 import * as Styled from "./styles";
@@ -13,7 +14,7 @@ import * as Styled from "./styles";
 function BrandedFooter(props) {
   const authentication = useAuthentication();
   const settings = useSettings();
-  const pages = usePages();
+  const { pages } = useContext(AppContext);
   const logout = useLogout();
   const { toggle: toggleSignInUpOverlay } = useSignInUpOverlay();
 

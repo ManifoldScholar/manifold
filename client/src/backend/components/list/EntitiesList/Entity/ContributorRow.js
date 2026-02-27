@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 import Authorization from "helpers/authorization";
 import capitalize from "lodash/capitalize";
 
@@ -18,7 +18,7 @@ function ContributorRow({ entity, onDelete, onEdit, ...props }) {
 
   const { roles } = attributes ?? {};
 
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const auth = new Authorization();
   const canAccessMakers = auth.authorizeAbility({
     entity: "maker",

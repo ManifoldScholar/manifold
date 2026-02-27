@@ -1,7 +1,7 @@
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 
 export default function useUnverifiedMessage(currentGroupId, currentGroupData) {
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
 
   const established = currentUser?.attributes.established;
   const trusted = currentUser?.attributes.trusted;

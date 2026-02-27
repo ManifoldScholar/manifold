@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
-import { useCurrentUser, useSettings, useApiCallback } from "hooks";
+import { useAuthentication, useSettings, useApiCallback } from "hooks";
 import { meAPI } from "api";
 import NarrowBanner from "./NarrowBanner";
 
 export default function CurrentUserBanner() {
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const { consentNeededManifoldAnalytics, consentNeededGoogleAnalytics } =
     currentUser?.attributes ?? {};
 

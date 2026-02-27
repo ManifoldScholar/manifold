@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { useLocation, Navigate } from "react-router-dom";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 import FatalErrorRender from ".";
 
 export default function FatalErrorAppWrapper(props) {
@@ -12,7 +12,7 @@ export default function FatalErrorAppWrapper(props) {
 
   const { t } = useTranslation();
   const location = useLocation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
 
   const isAuthorizationError = error.status === 403 || error.status === 401;
 

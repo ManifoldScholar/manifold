@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
-import { useCurrentUser, useSettings } from "hooks";
+import { useAuthentication, useSettings } from "hooks";
 import Link from "./Link";
 import * as Styled from "./styles";
 
 function CollectionNavigation() {
   const { t } = useTranslation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const settings = useSettings();
   const location = useLocation();
 

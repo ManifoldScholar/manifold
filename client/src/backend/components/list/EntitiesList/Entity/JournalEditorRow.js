@@ -4,11 +4,11 @@ import { useTranslation } from "react-i18next";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import Utility from "global/components/utility";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 
 function JournalEditorRow({ entity, handleDelete, ...props }) {
   const { t } = useTranslation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
 
   const { id, attributes } = entity;
 

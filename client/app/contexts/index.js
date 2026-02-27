@@ -6,7 +6,7 @@ import { initialReaderState } from "./readerReducer";
 export const routerContext = createRouterContext();
 
 // React context - provides settings, auth, pages, and utilities to components
-// Individual hooks (useSettings, useCurrentUser, usePages, etc.) read from this
+// Individual hooks (useSettings, useAuthentication) read from this
 export const AppContext = createReactContext({
   settings: null,
   auth: null,

@@ -6,7 +6,7 @@ import HeadContent from "global/components/HeadContent";
 import MyStarredEntityCollection from "frontend/components/entity/Collection/patterns/MyStarred";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 
 export const loader = async ({ request, context }) => {
   requireLogin(request, context);
@@ -35,7 +35,7 @@ export const loader = async ({ request, context }) => {
 
 export default function MyStarredRoute({ loaderData }) {
   const { t } = useTranslation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
 
   const collection = getEntityCollection(currentUser);
 

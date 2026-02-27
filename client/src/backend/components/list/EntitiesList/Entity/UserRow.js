@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import EntityRow from "./Row";
 import Checkbox from "../List/bulkActions/Checkbox";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 
 function UserRow({
   entity,
@@ -16,7 +16,7 @@ function UserRow({
   ...props
 }) {
   const { t } = useTranslation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
 
   const { id, attributes } = entity;
 

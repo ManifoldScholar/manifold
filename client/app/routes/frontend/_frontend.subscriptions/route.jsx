@@ -7,7 +7,7 @@ import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import Form from "global/components/form";
-import { useCurrentUser, useNotification } from "hooks";
+import { useAuthentication, useNotification } from "hooks";
 import HeadContent from "global/components/HeadContent";
 import * as Styled from "./styles";
 
@@ -34,7 +34,7 @@ export async function action({ request, context }) {
 export default function SubscriptionsRoute({ actionData }) {
   const { t } = useTranslation();
   const submit = useSubmit();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const [preferences, setPreferences] = useState(
     currentUser?.attributes?.notificationPreferences
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import hoistStatics from "../hoist-non-react-statics";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -12,7 +12,7 @@ export default function withCurrentUser(WrappedComponent) {
   )})`;
 
   function WithCurrentUser(props) {
-    const currentUser = useCurrentUser();
+    const { currentUser } = useAuthentication();
 
     return <WrappedComponent {...props} currentUser={currentUser} />;
   }

@@ -6,7 +6,7 @@ import Form from "global/components/form";
 import config from "config";
 import withConfirmation from "hoc/withConfirmation";
 import { ClassNames } from "@emotion/react";
-import { useSettings, useCurrentUser } from "hooks";
+import { useSettings, useAuthentication } from "hooks";
 import * as Styled from "./styles";
 
 const generateToken = (length = 8) => {
@@ -30,7 +30,7 @@ function ReadingGroupForm({
   confirm
 }) {
   const { t } = useTranslation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const settings = useSettings();
 
   const allowPublic = !settings?.attributes?.general

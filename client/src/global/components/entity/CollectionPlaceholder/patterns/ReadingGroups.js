@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
 function ReadingGroupsPlaceholder({ isPublic }) {
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const { t } = useTranslation();
 
   function getContent() {

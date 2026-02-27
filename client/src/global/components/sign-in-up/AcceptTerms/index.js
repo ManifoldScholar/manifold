@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import AcceptTermsCheckbox from "./AcceptTermsCheckbox";
-import { useSettings, usePages } from "hooks";
+import { useSettings } from "hooks";
+import { AppContext } from "app/contexts";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 export default function AcceptTerms({ handleViewChange }) {
   const [accepted, setAccepted] = useState(false);
   const { t } = useTranslation();
-  const pages = usePages();
+  const { pages } = useContext(AppContext);
   const settings = useSettings();
 
   const { attributes } = settings ?? {};

@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { tokensAPI } from "api";
 import { useRevalidator } from "react-router";
-import { useCurrentUser, usePages } from "hooks";
+import { useAuthentication } from "hooks";
+import { AppContext } from "app/contexts";
 import CreateFormFields from "./CreateFormFields";
 import Form from "global/components/form";
 import { useNavigate, useLocation } from "react-router";
@@ -22,9 +23,9 @@ export default function CreateUserForm({
   const fetcher = useFetcher();
   const navigate = useNavigate();
   const location = useLocation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const { revalidate } = useRevalidator();
-  const pages = usePages();
+  const { pages } = useContext(AppContext);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const termsPage = pages?.find(

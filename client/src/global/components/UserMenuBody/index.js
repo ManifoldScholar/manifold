@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useCurrentUser, useSignInUpOverlay } from "hooks";
+import { useAuthentication, useSignInUpOverlay } from "hooks";
 import Item from "./Item";
 import * as Styled from "./styles";
 
@@ -10,7 +10,7 @@ const UserMenuBody = forwardRef(
     { callbacks, context = "frontend", visible = false, className, ...props },
     ref
   ) => {
-    const currentUser = useCurrentUser();
+    const { currentUser } = useAuthentication();
     const { t } = useTranslation();
     const { toggle: toggleSignInUpOverlay } = useSignInUpOverlay();
 

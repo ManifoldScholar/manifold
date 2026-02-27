@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNotification, useCurrentUser, useLogout } from "hooks";
+import { useNotification, useAuthentication, useLogout } from "hooks";
 import { meAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import Form from "global/components/form";
 import * as Styled from "./styles";
 
 export default function DeleteConfirm() {
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const { t } = useTranslation();
   const logout = useLogout();
 

@@ -4,12 +4,12 @@ import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import { Link } from "react-router-dom";
 import { JoinGroup } from "frontend/components/reading-group/tables/Groups/actions";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
 function GroupAnnotationsPlaceholder({ readingGroup, style }) {
   const { t } = useTranslation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const loggedIn = !isEmpty(currentUser);
   const userIsMember = readingGroup.attributes.currentUserRole === "none";
   const { revalidate } = useRevalidator();

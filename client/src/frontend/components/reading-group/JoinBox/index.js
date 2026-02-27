@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useId, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useRevalidator } from "react-router";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
-import { useCurrentUser, useConfirmation } from "hooks";
+import { useAuthentication, useConfirmation } from "hooks";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
 import template from "lodash/template";
 import Dialog from "global/components/dialog";
@@ -14,7 +14,7 @@ import * as Styled from "./styles";
 function JoinBox({ readingGroup }) {
   const { t } = useTranslation();
   const location = useLocation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const { revalidate } = useRevalidator();
   const { confirm, confirmation } = useConfirmation();
   const [code, setCode] = useState("");

@@ -2,7 +2,7 @@ import GroupsTable from "frontend/components/reading-group/tables/Groups";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
-import { useCurrentUser, useListSearchParams } from "hooks";
+import { useAuthentication, useListSearchParams } from "hooks";
 import * as Styled from "./styles";
 
 export default function ReadingGroupsList({
@@ -17,7 +17,7 @@ export default function ReadingGroupsList({
 
   const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
 
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
 
   return readingGroups ? (
     <section>

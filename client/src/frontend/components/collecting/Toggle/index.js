@@ -7,7 +7,7 @@ import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
 import { useRevalidator } from "react-router";
-import { useCurrentUser, useReadingGroups } from "hooks";
+import { useAuthentication, useReadingGroups } from "hooks";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 
 const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals"];
@@ -62,7 +62,7 @@ function CollectingToggle({
     onDialogOpen();
   }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const { revalidate } = useRevalidator();
 
   const collected = inCollections(collectable, currentUser, ...readingGroups);

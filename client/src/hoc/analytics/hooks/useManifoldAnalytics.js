@@ -6,7 +6,7 @@ import ch from "helpers/consoleHelpers";
 import { v1 as uuidv1 } from "uuid";
 import { entityStoreActions, currentUserActions } from "actions";
 import { analyticEventsAPI, requests } from "api";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 
 const { request } = entityStoreActions;
 const cookie = new CookieHelper();
@@ -37,7 +37,7 @@ function getTokens() {
 }
 
 export default function useManifoldAnalytics(location, settings, dispatch) {
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
   const [consentManifoldAnalytics, setConsentManifoldAnalytics] = useState(
     currentUser?.attributes?.consentManifoldAnalytics || false
   );

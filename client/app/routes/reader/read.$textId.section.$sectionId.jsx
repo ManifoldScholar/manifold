@@ -40,7 +40,7 @@ export const loader = async ({ params, context }) => {
 };
 
 export default function SectionRoute({ loaderData }) {
-  const { section, annotations, resources, resourceCollections } = loaderData;
+  const { section, annotations } = loaderData;
 
   const text = useOutletContext();
 
@@ -73,13 +73,7 @@ export default function SectionRoute({ loaderData }) {
       ))}
       <HeadContent {...headContentProps} />
       <Outlet context={{ text, section }} />
-      <Section.Text
-        text={text}
-        section={section}
-        annotations={annotations}
-        resources={resources}
-        resourceCollections={resourceCollections}
-      />
+      <Section.Text text={text} section={section} annotations={annotations} />
       <div>
         <Section.NextSection
           sectionsMap={text.attributes.sectionsMap}
