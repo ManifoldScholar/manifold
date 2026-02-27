@@ -232,6 +232,9 @@ type Pages = {
   "/actions/login": {
     params: {};
   };
+  "/actions/resource-create": {
+    params: {};
+  };
   "/read/:textId": {
     params: {
       "textId": string;
@@ -259,7 +262,7 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/backend" | "/backend/dashboard" | "/backend/*" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/journals/issues" | "/unsubscribe/:token" | "/journals" | "/projects" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes" | "/journals/:id/volumes/:volumeSlug" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/my/groups" | "/my/groups/new" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/actions/forgot-password" | "/actions/update-profile" | "/actions/flag-content" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/*";
+    page: "/" | "/backend" | "/backend/dashboard" | "/backend/*" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/journals/issues" | "/unsubscribe/:token" | "/journals" | "/projects" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes" | "/journals/:id/volumes/:volumeSlug" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/my/groups" | "/my/groups/new" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/actions/forgot-password" | "/actions/update-profile" | "/actions/flag-content" | "/actions/signup" | "/actions/login" | "/actions/resource-create" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/*";
   };
   "routes/backend/backend/route.jsx": {
     id: "routes/backend/backend";
@@ -505,6 +508,10 @@ type RouteFiles = {
     id: "routes/global/_global.actions.login";
     page: "/actions/login";
   };
+  "routes/reader/actions.resource-create.jsx": {
+    id: "routes/reader/actions.resource-create";
+    page: "/actions/resource-create";
+  };
   "routes/reader/read.$textId/route.jsx": {
     id: "routes/reader/read.$textId";
     page: "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search";
@@ -586,6 +593,7 @@ type RouteModules = {
   "routes/global/_global.actions.flag-content": typeof import("./app/routes/global/_global.actions.flag-content.jsx");
   "routes/global/_global.actions.signup": typeof import("./app/routes/global/_global.actions.signup.jsx");
   "routes/global/_global.actions.login": typeof import("./app/routes/global/_global.actions.login.jsx");
+  "routes/reader/actions.resource-create": typeof import("./app/routes/reader/actions.resource-create.jsx");
   "routes/reader/read.$textId": typeof import("./app/routes/reader/read.$textId/route.jsx");
   "routes/reader/read.$textId.section.$sectionId": typeof import("./app/routes/reader/read.$textId.section.$sectionId.jsx");
   "routes/reader/read.$textId.section.$sectionId.search": typeof import("./app/routes/reader/read.$textId.section.$sectionId.search.jsx");
