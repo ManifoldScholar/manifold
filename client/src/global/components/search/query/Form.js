@@ -115,8 +115,8 @@ export default function SearchQueryForm({
 
   const setScope = useCallback(
     scopeValue => {
-      if (scopeValue === state.scope) return;
       setState(prevState => {
+        if (scopeValue === prevState.scope) return prevState;
         const newState = setScopeIdFromScopeString({
           ...prevState,
           scope: scopeValue
@@ -127,7 +127,7 @@ export default function SearchQueryForm({
         return newState;
       });
     },
-    [state.scope, setScopeIdFromScopeString, searchOnScopeChange, setQueryState]
+    [setScopeIdFromScopeString, searchOnScopeChange, setQueryState]
   );
 
   const setKeyword = event => {

@@ -10,14 +10,14 @@ import { hasSearchableQuery, parseQueryFromUrl } from "hooks/useSearch/helpers";
  * @param {Object} options - Configuration options
  * @param {Object} options.request - React Router request object
  * @param {Object} options.context - React Router context object
- * @param {Function} options.beforeQuery - Optional function to modify searchQueryState before processing
+ * @param {Object} options.params - Optional extra fields to merge into searchQueryState
  * @param {Function} options.beforeLoad - Optional async function to run before processing (e.g., checkLibraryMode)
  * @returns {Promise<Object>} Object with results, meta, and optionally searchQueryState
  */
 export default async function searchLoader({
   request,
   context,
-  beforeQuery = null,
+  params = null,
   beforeLoad = null
 }) {
   if (beforeLoad) {
@@ -25,12 +25,10 @@ export default async function searchLoader({
   }
 
   const url = new URL(request.url);
-  const searchQueryState = parseQueryFromUrl(url.search);
-
-  // Allow modification of query state (e.g., adding project ID)
-  if (beforeQuery) {
-    beforeQuery(searchQueryState);
-  }
+  const searchQueryState = {
+    ...parseQueryFromUrl(url.search),
+    ...params
+  };
 
   if (!hasSearchableQuery(searchQueryState)) {
     return {

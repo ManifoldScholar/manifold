@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { annotationsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
 import { SignInUpOverlayContext } from "global/components/sign-in-up/Overlay/context";
 import AnnotatableDebug from "./handlers/Debug";
 import AnnotatableDrawer from "./Drawer";
@@ -12,36 +9,27 @@ import CaptureSelection from "./handlers/CaptureSelection";
 import CaptureClick from "./handlers/CaptureClick";
 import selectionHelpers from "./helpers/selectionHelpers";
 import locationHelper from "helpers/location";
-import withReadingGroups from "hoc/withReadingGroups";
 import isEqual from "lodash/isEqual";
 import lh from "helpers/linkHandler";
-
-const { request } = entityStoreActions;
 
 export class Annotatable extends Component {
   static contextType = SignInUpOverlayContext;
 
-  static mapStateToProps() {
-    return {};
-  }
-
   static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     currentAnnotatingReadingGroup: PropTypes.string,
     debug: PropTypes.bool.isRequired,
     text: PropTypes.object.isRequired,
     textId: PropTypes.string.isRequired,
     section: PropTypes.object.isRequired,
     sectionId: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    createAnnotationApi: PropTypes.func.isRequired,
+    destroyAnnotationApi: PropTypes.func.isRequired,
+    revalidate: PropTypes.func.isRequired,
     projectId: PropTypes.string.isRequired,
-    history: PropTypes.object.isRequired,
+    navigate: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
-    containerSize: PropTypes.number.isRequired,
-    bodySelector: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired,
     annotations: PropTypes.array,
-    notations: PropTypes.array,
     resourceDisplayFormatDialog: PropTypes.object
   };
 
@@ -260,22 +248,13 @@ export class Annotatable extends Component {
   };
 
   createAnnotation = ({ attributes }, options = {}) => {
-    const call = annotationsAPI.create(
+    const promise = this.props.createAnnotationApi(
       this.props.sectionId,
       attributes,
       options.notation || null
     );
-    const requestOptions = {
-      adds: requests.rAnnotations,
-      clears: [
-        requests.rMyAnnotationsForText,
-        requests.rMyFilteredAnnotationsForText
-      ]
-    };
-    const res = this.props.dispatch(
-      request(call, requests.rAnnotationCreate, requestOptions)
-    );
-    res.promise.then(response => {
+    promise.then(response => {
+      this.props.revalidate();
       this.setState(this.initialState, () => {
         setTimeout(() => {
           // delay till after closeDrawer() runs
@@ -286,7 +265,7 @@ export class Annotatable extends Component {
         });
       });
     });
-    return res.promise;
+    return promise;
   };
 
   /* Currently, this callback is used only for removing highlights.
@@ -300,15 +279,12 @@ export class Annotatable extends Component {
   */
   destroyAnnotation = (annotation, onSuccess) => {
     if (!annotation) return;
-    const call = annotationsAPI.destroy(annotation.id);
-    const options = { removes: annotation };
-    const res = this.props.dispatch(
-      request(call, requests.rAnnotationDestroy, options)
-    );
     const fullAnnotation = this.state.renderedAnnotations.find(
       a => a.id === annotation.id
     );
-    res.promise.then(() => {
+    const promise = this.props.destroyAnnotationApi(annotation.id);
+    promise.then(() => {
+      this.props.revalidate();
       if (onSuccess) onSuccess();
       // recreate destroyed node and append to renderedAnnotations
       const selectionAnnotation = this.createAnnotationFromSelection(
@@ -331,7 +307,7 @@ export class Annotatable extends Component {
         annotationState: null
       });
     });
-    return res.promise;
+    return promise;
   };
 
   openNewResourceAnnotationDrawer = displayFormat => {
@@ -370,14 +346,13 @@ export class Annotatable extends Component {
   };
 
   showLogin = () => {
-    this.context?.toggle();
+    if (this.context) this.context.toggle();
   };
 
   maybeRemoveAnnotationHashFromUrl() {
-    if (!this.props.history) return;
     if (!locationHelper.hashTypeMatch(this.props.location, "annotation"))
       return;
-    this.props.history.push({ hash: "", state: { noScroll: true } });
+    this.props.navigate({ hash: "" }, { state: { noScroll: true } });
   }
 
   openDrawer = (drawerState, event = null, lock = true) => {
@@ -625,6 +600,4 @@ export class Annotatable extends Component {
   }
 }
 
-export default connect(Annotatable.mapStateToProps)(
-  withReadingGroups(Annotatable)
-);
+export default Annotatable;

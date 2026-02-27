@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useFromStore } from "hooks";
+import { ReaderContext } from "app/contexts";
 import { ResourceMarkerContext } from "../context";
 import Thumbnail from "../Thumbnail";
 import * as Styled from "./styles";
@@ -10,9 +10,7 @@ export default function Sidebar({
   handleClick,
   setActiveAnnotation
 }) {
-  const activeAnnotation = useFromStore({
-    path: `ui.transitory.reader.activeAnnotation`
-  });
+  const activeAnnotation = useContext(ReaderContext)?.activeAnnotation;
 
   const { groups } = useContext(ResourceMarkerContext) ?? {};
 

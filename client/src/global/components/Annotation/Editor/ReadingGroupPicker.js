@@ -1,8 +1,7 @@
-import { useState, useRef, useEffect, useId } from "react";
+import { useState, useRef, useEffect, useId, useContext } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { uiReadingGroupActions } from "actions";
+import { ReaderContext } from "app/contexts";
 import IconComposer from "global/components/utility/IconComposer";
 import classNames from "classnames";
 import RGMenuItem from "reader/components/annotation/popup/parts/RGMenuItem";
@@ -15,7 +14,7 @@ export default function ReadingGroupPicker({
   canAccessReadingGroups
 }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const readerContext = useContext(ReaderContext);
   const [pickerOpen, setPickerOpen] = useState(false);
   const pickerRef = useRef(null);
   const pickerToggleRef = useRef(null);
@@ -53,7 +52,12 @@ export default function ReadingGroupPicker({
 
   const setReadingGroup = id => {
     setPickerOpen(false);
-    dispatch(uiReadingGroupActions.setAnnotatingReadingGroup(id));
+    if (readerContext?.dispatch) {
+      readerContext.dispatch({
+        type: "SET_ANNOTATING_READING_GROUP",
+        payload: id
+      });
+    }
   };
 
   const isSelected = option => option === currentGroupId;

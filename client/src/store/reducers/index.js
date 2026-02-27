@@ -7,7 +7,6 @@ import authentication from "./authentication";
 import fatalError from "./fatalError";
 import oauth from "./oauth";
 import isomorphic from "./isomorphic";
-import developer from "./developer";
 import entityStore from "./entityStore";
 import entityEditor from "./entityEditor";
 import websocket from "./websocket";
@@ -23,7 +22,6 @@ const reducers = combineReducers({
   oauth,
   authentication,
   isomorphic,
-  websocket,
-  developer
+  websocket
 });
 export default reducers;

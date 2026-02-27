@@ -1,49 +1,52 @@
-import { useParams, useOutletContext, Outlet } from "react-router-dom";
+import { useOutletContext, Outlet, data } from "react-router";
 import Section from "reader/components/section";
 import {
   sectionsAPI,
   annotationsAPI,
   resourcesAPI,
-  resourceCollectionsAPI,
-  requests
+  resourceCollectionsAPI
 } from "api";
 import HeadContent from "global/components/HeadContent";
 import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import { useFetch, useFromStore } from "hooks";
+import { useContext } from "react";
+import { ReaderContext } from "app/contexts";
+import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
 
-export default function SectionContainer() {
-  const { textId, sectionId } = useParams();
+export const loader = async ({ params, context }) => {
+  const { textId, sectionId } = params;
 
-  const { text } = useOutletContext() || {};
-
-  const appearance = useFromStore({ path: "ui.persistent.reader" });
-
-  const { data: section } = useFetch({
-    request: [sectionsAPI.show, sectionId, textId],
-    condition: !!sectionId && !!textId
+  const results = await loadParallelLists({
+    context,
+    fetchFns: {
+      section: () => sectionsAPI.show(sectionId, textId),
+      annotations: () => annotationsAPI.forSection(sectionId, textId),
+      resources: () => resourcesAPI.forSection(sectionId, textId),
+      resourceCollections: () =>
+        resourceCollectionsAPI.forSection(sectionId, textId)
+    }
   });
 
-  const { data: annotations } = useFetch({
-    request: [annotationsAPI.forSection, sectionId, textId],
-    options: { requestKey: requests.rAnnotations },
-    condition: !!sectionId && !!textId,
-    refetchOnLogin: true
-  });
+  if (!results.section) {
+    throw data(null, { status: 404 });
+  }
 
-  const { data: resources } = useFetch({
-    request: [resourcesAPI.forSection, sectionId, textId],
-    condition: !!sectionId && !!textId
-  });
+  return {
+    section: results.section,
+    annotations: results.annotations ?? [],
+    resources: results.resources ?? [],
+    resourceCollections: results.resourceCollections ?? []
+  };
+};
 
-  const { data: resourceCollections } = useFetch({
-    request: [resourceCollectionsAPI.forSection, sectionId, textId],
-    condition: !!sectionId && !!textId
-  });
+export default function SectionRoute({ loaderData }) {
+  const { section, annotations, resources, resourceCollections } = loaderData;
+
+  const text = useOutletContext();
+
+  const { typography } = useContext(ReaderContext);
 
   const headContentProps = useEntityHeadContent(section, text);
-
-  if (!section?.attributes || !text) return null;
 
   const globalStylesheet = text.relationships?.stylesheets?.find(
     s => s.attributes.appliesToAllTextSections
@@ -82,7 +85,7 @@ export default function SectionContainer() {
           sectionsMap={text.attributes.sectionsMap}
           text={text}
           sectionId={section.id}
-          typography={appearance?.typography}
+          typography={typography}
         />
         <Section.Pagination
           text={text}
@@ -96,5 +99,3 @@ export default function SectionContainer() {
     </>
   );
 }
-
-SectionContainer.displayName = "Section.Container";

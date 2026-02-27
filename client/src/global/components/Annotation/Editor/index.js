@@ -12,7 +12,6 @@ export default function AnnotationEditor({
   annotation = { attributes: {} },
   cancel,
   closeOnSave = true,
-  readingGroups = [],
   saveAnnotation
 }) {
   const { t } = useTranslation();
@@ -29,8 +28,7 @@ export default function AnnotationEditor({
     currentGroupId,
     currentGroupData
   } = useReadingGroups({
-    annotation,
-    readingGroups
+    annotation
   });
 
   const showUnverifiedMessage = useUnverifiedMessage(
@@ -133,7 +131,5 @@ AnnotationEditor.propTypes = {
   annotation: PropTypes.object,
   cancel: PropTypes.func,
   closeOnSave: PropTypes.bool,
-  sectionId: PropTypes.string,
-  readingGroups: PropTypes.array,
   saveAnnotation: PropTypes.func.isRequired
 };

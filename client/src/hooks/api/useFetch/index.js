@@ -36,46 +36,53 @@ export default function useFetch({
   const [apiCall, ...apiCallArgs] = request;
 
   /* eslint-disable react-hooks/exhaustive-deps */
-  const triggerFetchData = useCallback(async () => {
-    if (!condition) {
-      setResult(null);
-      setLoaded(false);
-      return Promise.resolve();
-    }
+  const triggerFetchData = useCallback(
+    async signal => {
+      if (!condition) {
+        setResult(null);
+        setLoaded(false);
+        return Promise.resolve();
+      }
 
-    countRef.current += 1;
-    if (countRef.current > 25) {
-      throw new Error(
-        `useFetch tried to fetch data more than 25 times. This suggests that an input to
+      countRef.current += 1;
+      if (countRef.current > 25) {
+        throw new Error(
+          `useFetch tried to fetch data more than 25 times. This suggests that an input to
         useFetch needs to be memoized.`
-      );
-    }
+        );
+      }
 
-    log("useFetch", requestKey);
-    setLoaded(false);
-    setError(null);
+      log("useFetch", requestKey);
+      setLoaded(false);
+      setError(null);
 
-    try {
-      const apiFetch = apiCall(...apiCallArgs);
-      const response = await queryApi(apiFetch);
-      setResult(response);
-      setLoaded(true);
-      if (isFunction(afterFetch)) afterFetch();
-      return response;
-    } catch (err) {
-      setError(err);
-      setResult(null);
-      setLoaded(true);
-      throw err;
-    }
-  }, [apiCall, ...apiCallArgs, requestKey, condition, afterFetch]);
+      try {
+        const apiFetch = apiCall(...apiCallArgs);
+        const response = await queryApi(apiFetch, null, signal);
+        if (signal?.aborted) return;
+        setResult(response);
+        setLoaded(true);
+        if (isFunction(afterFetch)) afterFetch();
+        return response;
+      } catch (err) {
+        if (signal?.aborted) return;
+        setError(err);
+        setResult(null);
+        setLoaded(true);
+        throw err;
+      }
+    },
+    [apiCall, ...apiCallArgs, requestKey, condition, afterFetch]
+  );
   /* eslint-enable react-hooks/exhaustive-deps */
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    triggerFetchData().catch(() => {
+    const controller = new AbortController();
+    triggerFetchData(controller.signal).catch(() => {
       // Error already handled in triggerFetchData
     });
+    return () => controller.abort();
   }, [triggerFetchData, ...dependencies]);
   /* eslint-enable react-hooks/exhaustive-deps */
 

@@ -1,25 +1,20 @@
 import { useEffect, useContext, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { uiReadingGroupActions } from "actions";
-import { ReaderContext } from "helpers/contexts";
-import { useCurrentUser } from "hooks";
-import get from "lodash/get";
+import { ReaderContext } from "app/contexts";
+import { useAuthentication } from "hooks";
+import useLoaderEntity from "hooks/useLoaderEntity";
 
-export default function useReadingGroups({ annotation, readingGroups }) {
+export default function useReadingGroups({ annotation }) {
   const readerContext = useContext(ReaderContext);
-  const currentUser = useCurrentUser();
-  const dispatch = useDispatch();
+  const { currentUser, readingGroups } = useAuthentication();
+  const dispatch = readerContext?.dispatch;
+  const text = useLoaderEntity("texts");
 
-  const currentAnnotatingReadingGroup = useSelector(state =>
-    get(
-      state,
-      "ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup"
-    )
-  );
+  const currentAnnotatingReadingGroup =
+    readerContext?.readingGroups?.currentAnnotatingReadingGroup;
 
   const canAccessReadingGroups =
     currentUser?.attributes.classAbilities.readingGroup.read;
-  const canEngagePublicly = readerContext?.attributes.abilities.engagePublicly;
+  const canEngagePublicly = text?.attributes.abilities.engagePublicly;
 
   const shouldShowReadingGroups = readerContext
     ? canAccessReadingGroups || canEngagePublicly
@@ -64,7 +59,12 @@ export default function useReadingGroups({ annotation, readingGroups }) {
     if (!annotation.id) return;
 
     const setReadingGroup = id => {
-      dispatch(uiReadingGroupActions.setAnnotatingReadingGroup(id));
+      if (dispatch) {
+        dispatch({
+          type: "SET_ANNOTATING_READING_GROUP",
+          payload: id
+        });
+      }
     };
 
     if (annotation.attributes.readingGroupId) {

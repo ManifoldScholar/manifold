@@ -1,43 +1,35 @@
-import { useParams, useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import Overlay from "global/components/Overlay";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
 import { useSearchContext } from "hooks/useSearch/context";
+import searchLoader from "app/routes/utility/loaders/search";
 
-export default function SearchContainer() {
+export const loader = async ({ request, context }) => {
+  return searchLoader({ request, context });
+};
+
+export default function ReaderSearch({ loaderData }) {
+  const { results, meta } = loaderData || {};
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { textId: textIdParam, sectionId: sectionIdParam } = useParams();
-  const { text, section } = useOutletContext() || {};
-  const {
-    results,
-    resultsMeta,
-    searchQueryState,
-    setQueryState,
-    setPage
-  } = useSearchContext();
+  const { text, section } = useOutletContext();
+  const { searchQueryState, setQueryState, setPage } = useSearchContext();
 
   const facets = [
     { label: t("reader.full_text"), value: "TextSection" },
     { label: t("glossary.annotation_title_case_other"), value: "Annotation" }
   ];
 
-  const projectId = text?.relationships?.project?.id ?? null;
-  const textId = text?.id ?? null;
-  const sectionId = section?.id ?? null;
+  const projectId = text.relationships.project.id;
+  const textId = text.id;
+  const sectionId = section.id;
 
   const close = () => {
-    const finalTextId = textId || textIdParam;
-    const finalSectionId = sectionId || sectionIdParam;
-    if (finalTextId && finalSectionId) {
-      navigate(lh.link("readerSection", finalTextId, finalSectionId), {
-        state: { noScroll: true }
-      });
-    } else {
-      navigate(lh.link("reader", finalTextId), { state: { noScroll: true } });
-    }
+    navigate(`/read/${textId}/section/${sectionId}`, {
+      state: { noScroll: true }
+    });
   };
 
   return (
@@ -60,7 +52,7 @@ export default function SearchContainer() {
         />
         {results ? (
           <SearchResults.List
-            pagination={resultsMeta.pagination}
+            pagination={meta?.pagination}
             paginationClickHandler={setPage}
             results={results}
             context="project"
@@ -70,5 +62,3 @@ export default function SearchContainer() {
     </Overlay>
   );
 }
-
-SearchContainer.displayName = "Reader.SearchContainer";

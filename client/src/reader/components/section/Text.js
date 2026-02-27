@@ -1,6 +1,6 @@
-import { Children, cloneElement, useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import classNames from "classnames";
 import Body from "./Body";
 import Annotatable from "reader/containers/Annotatable";
@@ -8,47 +8,24 @@ import lh from "helpers/location";
 import filterAnnotations from "./helpers/filter-annotations";
 import HtmlClass from "hoc/HtmlClass";
 import isEqual from "lodash/isEqual";
-import useDialog from "@castiron/hooks/useDialog";
-import { useFromStore, useCurrentUser } from "hooks";
+import { ReaderContext } from "app/contexts";
 
-export default function Text({
-  children,
-  text,
-  section,
-  resources,
-  resourceCollections,
-  annotations
-}) {
+export default function Text({ text, section, annotations }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const currentUser = useCurrentUser();
-  const visibility = useFromStore({ path: "ui.transitory.visibility" });
-  const appearance = useFromStore({ path: "ui.persistent.reader" });
-
-  // Create v5-compatible history object for Annotatable
-  const history = useMemo(
-    () => ({
-      push: (path, state) => navigate(path, { state }),
-      replace: (path, state) => navigate(path, { replace: true, state }),
-      goBack: () => navigate(-1)
-    }),
-    [navigate]
-  );
+  const { visibilityFilters, typography, colors } = useContext(ReaderContext);
 
   const [filteredAnnotations, setFilteredAnnotations] = useState(
-    filterAnnotations(annotations, visibility?.visibilityFilters)
+    filterAnnotations(annotations, visibilityFilters)
   );
 
   useEffect(() => {
-    const newState = filterAnnotations(
-      annotations,
-      visibility?.visibilityFilters
-    );
+    const newState = filterAnnotations(annotations, visibilityFilters);
 
     if (!isEqual(newState, filteredAnnotations))
       setFilteredAnnotations(newState);
-  }, [filteredAnnotations, annotations, visibility?.visibilityFilters]);
+  }, [filteredAnnotations, annotations, visibilityFilters]);
 
   useEffect(() => {
     const el = document.getElementById("text-section-interactive-region");
@@ -76,17 +53,11 @@ export default function Text({
     );
     if (!hiddenMatch) return;
 
-    history.replace({ hash: "", state: { noScroll: true } });
-  }, [history, filteredAnnotations, annotations, location]);
+    navigate({ hash: "" }, { replace: true, state: { noScroll: true } });
+  }, [navigate, filteredAnnotations, annotations, location]);
 
-  const resourceDisplayFormatDialog = useDialog({
-    modal: true,
-    scrollLockClassName: "no-scroll"
-  });
-
-  const typography = appearance?.typography;
-  const colorScheme = appearance?.colors?.colorScheme;
-  const highContrast = appearance?.colors?.highContrast;
+  const colorScheme = colors?.colorScheme;
+  const highContrast = colors?.highContrast;
 
   const readerAppearanceClass = classNames({
     "reader-window": true,
@@ -111,27 +82,14 @@ export default function Text({
   // Apply a conditional container class that maps to a size in CSS
   const containerClass = `container-focus container-width-${typography?.margins?.current}`;
 
-  // Page used to generate key for transitions
-  const page = location.pathname.slice(1);
-
   return (
     <HtmlClass className={fontSizeClass}>
       <div className="main-content" style={{ flexGrow: 1 }}>
         <section className={readerAppearanceClass}>
           <Annotatable
-            currentUser={currentUser}
-            projectId={text.relationships.project.id}
-            textId={text.id}
-            sectionId={section.id}
-            notations={[...(resources ?? []), ...(resourceCollections ?? [])]}
-            annotations={filteredAnnotations}
-            containerSize={typography?.margins?.current}
-            bodySelector='[data-id="body"]'
             text={text}
-            location={location}
-            history={history}
             section={section}
-            resourceDisplayFormatDialog={resourceDisplayFormatDialog}
+            annotations={filteredAnnotations}
             render={(
               pendingAnnotation,
               adjustedAnnotations,
@@ -155,7 +113,6 @@ export default function Text({
             )}
           />
         </section>
-        {Children.count(children) > 0 && cloneElement(children, { key: page })}
       </div>
     </HtmlClass>
   );
@@ -164,8 +121,5 @@ export default function Text({
 Text.propTypes = {
   text: PropTypes.object,
   section: PropTypes.object,
-  resources: PropTypes.array,
-  resourceCollections: PropTypes.array,
-  annotations: PropTypes.array,
-  children: PropTypes.object
+  annotations: PropTypes.array
 };

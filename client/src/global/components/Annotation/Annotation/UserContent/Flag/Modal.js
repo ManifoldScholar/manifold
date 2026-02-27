@@ -1,4 +1,4 @@
-import { useState, useEffect, useId } from "react";
+import { useState, useEffect, useId, useContext } from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -6,7 +6,7 @@ import { useFetcher } from "react-router";
 import Form from "global/components/form";
 import IconComposer from "global/components/utility/IconComposer";
 import { FormContext } from "helpers/contexts";
-import { useFromStore } from "hooks";
+import { ReaderContext } from "app/contexts";
 import Modal from "global/components/dialog/Modal";
 import * as Styled from "./styles";
 
@@ -49,10 +49,8 @@ export default function FlagAnnotationModal({ id, type, dialog, dialogId }) {
     "button-icon-secondary"
   );
 
-  const colorScheme = useFromStore({
-    path: "ui.persistent.reader.colors.colorScheme"
-  });
-  const styleType = colorScheme === "dark" ? "secondary" : "primary";
+  const { colors } = useContext(ReaderContext) ?? {};
+  const styleType = colors?.colorScheme === "dark" ? "secondary" : "primary";
 
   return (
     <Modal id={dialogId} dialog={dialog} maxWidth={600}>

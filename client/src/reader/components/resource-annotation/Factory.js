@@ -1,14 +1,13 @@
-import { useContext } from "react";
-import { ReaderContext } from "helpers/contexts";
 import partition from "lodash/partition";
+import { useLoaderEntity } from "hooks";
 import ResourceBlock from "./Block";
 import ResourceMarker from "./Marker";
 import StaticMarker from "./Marker/Static";
 
 export default function Factory({ annotations }) {
-  const readerContext = useContext(ReaderContext);
+  const text = useLoaderEntity("texts");
 
-  if (!readerContext)
+  if (!text)
     return annotations.map(annotation => (
       <StaticMarker key={annotation.id} annotation={annotation} />
     ));

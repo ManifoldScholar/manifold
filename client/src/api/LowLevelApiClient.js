@@ -46,7 +46,8 @@ export default class LowLevelApiClient {
     const fetchConfig = {
       method,
       body: options.body,
-      headers
+      headers,
+      signal: options.signal
     };
 
     const out = fetch(endpoint, fetchConfig).catch(error => {

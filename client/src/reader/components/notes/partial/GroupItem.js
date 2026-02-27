@@ -6,7 +6,6 @@ import IconComposer from "global/components/utility/IconComposer";
 import Tag from "global/components/Annotation/Tag";
 import Avatar from "global/components/avatar";
 
-import withReadingGroups from "hoc/withReadingGroups";
 import { withTranslation } from "react-i18next";
 
 class GroupItem extends Component {
@@ -161,4 +160,4 @@ class GroupItem extends Component {
   }
 }
 
-export default withTranslation()(withReadingGroups(GroupItem));
+export default withTranslation()(GroupItem);

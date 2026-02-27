@@ -20,8 +20,6 @@ export { default as useFromStore } from "./useFromStore";
 export { default as useEventTracker } from "./useEventTracker";
 
 export { default as useAnalyticsContext } from "./useAnalyticsContext";
-export { default as useReaderContext } from "./useReaderContext";
-
 export { default as useNotification } from "./useNotification";
 
 export { default as useListFilters } from "./useListFilters";
@@ -47,5 +45,11 @@ export { default as useAfterRevalidate } from "./useAfterRevalidate";
 
 export { default as useFrontendMode } from "./useFrontendMode";
 
+export { default as useReadingGroups } from "./useReadingGroups";
+
+export { default as useLoaderEntity } from "./useLoaderEntity";
+export { default as useLoaderCollection } from "./useLoaderCollection";
 export { default as useScrollToTop } from "./useScrollToTop";
+export { default as useReaderLocationChange } from "./useReaderLocationChange";
+
 export { useSignInUpOverlay } from "global/components/sign-in-up/Overlay/context";

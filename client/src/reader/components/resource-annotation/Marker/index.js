@@ -2,29 +2,29 @@ import { useState, useCallback, useEffect, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
-import { uiReaderActions } from "actions";
-import { useDispatch } from "react-redux";
 import capitalize from "lodash/capitalize";
-import { useFromStore } from "hooks";
+import { ReaderContext } from "app/contexts";
 import { ResourceMarkerContext } from "./context";
+import useLoaderCollection from "hooks/useLoaderCollection";
 import MobileMarker from "./Mobile";
 import Sidebar from "./Sidebar";
 import { useWindowSize } from "usehooks-ts";
 import * as Styled from "./styles";
 
 export default function Marker({ annotation }) {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const activeAnnotation = useFromStore({
-    path: `ui.transitory.reader.activeAnnotation`
-  });
+  const readerContext = useContext(ReaderContext);
+  const activeAnnotation = readerContext?.activeAnnotation;
+  const readerDispatch = readerContext?.dispatch;
   const setActiveAnnotation = annotationId =>
-    dispatch(uiReaderActions.setActiveAnnotation({ annotationId }));
+    readerDispatch?.({
+      type: "SET_ACTIVE_ANNOTATION",
+      payload: annotationId ? { annotationId } : null
+    });
 
-  const { font, fontSize, margins } = useFromStore({
-    path: `ui.persistent.reader.typography`
-  });
+  const { typography } = readerContext ?? {};
+  const { font, fontSize, margins } = typography ?? {};
 
   const [markerEl, setMarkerEl] = useState(null);
   const [left, setLeft] = useState(0);
@@ -32,6 +32,9 @@ export default function Marker({ annotation }) {
   const { width } = useWindowSize();
 
   const { thumbCount, openDialog } = useContext(ResourceMarkerContext) ?? {};
+
+  const resources = useLoaderCollection("resources");
+  const resourceCollections = useLoaderCollection("resource_collections");
 
   const markerRef = useCallback(node => {
     if (node !== null) {
@@ -50,12 +53,10 @@ export default function Marker({ annotation }) {
 
   const { id, resourceId, resourceCollectionId } = annotation;
 
-  const resource = useFromStore({
-    path: `entityStore.entities.resources["${resourceId}"]`
-  });
-  const collection = useFromStore({
-    path: `entityStore.entities.resourceCollections["${resourceCollectionId}"]`
-  });
+  const resource = resources.find(r => r.id === resourceId);
+  const collection = resourceCollections.find(
+    c => c.id === resourceCollectionId
+  );
 
   /* eslint-disable no-nested-ternary */
   const kind = resource

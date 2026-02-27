@@ -1,6 +1,5 @@
-import { useDispatch } from "react-redux";
+import { useContext, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import ControlMenu from "reader/components/control-menu";
 import Notes from "reader/components/notes";
@@ -12,46 +11,40 @@ import UserMenuBody from "global/components/UserMenuBody";
 import UserMenuButton from "global/components/UserMenuButton";
 import UIPanel from "global/components/UIPanel";
 import Layout from "reader/components/layout";
-import memoize from "lodash/memoize";
 import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import Utility from "global/components/utility";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
 import Authorize from "hoc/Authorize";
-import { commonActions } from "actions/helpers";
-import { useFromStore, useLogout } from "hooks";
+import { useLogout, useLoaderEntity } from "hooks";
+import { ReaderContext } from "app/contexts";
 
-export default function Header({ text, scrollAware }) {
+export default function Header({ scrollAware }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const { sectionId } = useParams();
   const logout = useLogout();
+  const text = useLoaderEntity("texts");
+  const section = useLoaderEntity("textSections");
 
-  const section = useFromStore({
-    entityType: "textSections",
-    action: "grab",
-    id: sectionId
-  });
-  const visibility = useFromStore({ path: "ui.transitory.visibility" });
-  const appearance = useFromStore({ path: "ui.persistent.reader" });
+  const { panels, visibilityFilters, dispatch } = useContext(ReaderContext);
 
-  // Override logout to use the hook that triggers revalidation
-  const actions = { ...commonActions(dispatch), logout };
+  const togglePanel = useCallback(
+    panel => dispatch({ type: "PANEL_TOGGLE", payload: panel }),
+    [dispatch]
+  );
+
+  const hidePanel = useCallback(
+    panel => dispatch({ type: "PANEL_HIDE", payload: panel }),
+    [dispatch]
+  );
 
   const handleContentsButtonClick = event => {
     event.stopPropagation();
-    actions.panelToggle("tocDrawer");
+    togglePanel("tocDrawer");
   };
 
   const handleVisibilityFilterChange = filters => {
-    actions.visibilityChange({ visibilityFilters: filters });
+    dispatch({ type: "VISIBILITY_FILTERS_CHANGE", payload: filters });
   };
-
-  const panelToggleHandler = memoize(panel => {
-    return () => {
-      actions.panelToggle(panel);
-    };
-  });
 
   const renderContentsButton = textAttrs => {
     if (textAttrs?.toc.length <= 0 && isEmpty(textAttrs?.metadata)) {
@@ -62,7 +55,7 @@ export default function Header({ text, scrollAware }) {
       "reader-header__button": true,
       "reader-header__button--gray": true,
       "reader-header__button--pad-default": true,
-      "button-active": visibility?.uiPanels?.tocDrawer
+      "button-active": panels?.tocDrawer
     });
 
     return (
@@ -71,7 +64,7 @@ export default function Header({ text, scrollAware }) {
         className={buttonClassName}
         onClick={handleContentsButtonClick}
         aria-haspopup
-        aria-expanded={visibility?.uiPanels?.tocDrawer}
+        aria-expanded={panels?.tocDrawer}
       >
         <span className="reader-header__button-text reader-header__button-text--dark">
           {t("reader.header.contents")}
@@ -99,10 +92,10 @@ export default function Header({ text, scrollAware }) {
         <Authorize kind={"any"}>
           <li className="reader-header__nav-item">
             <ControlMenu.Button
-              onClick={panelToggleHandler("notes")}
+              onClick={() => togglePanel("notes")}
               icon="notes24"
               label={t("glossary.note_title_case_other")}
-              active={visibility?.uiPanels?.notes}
+              active={panels?.notes}
               ariaHasPopup="dialog"
               ariaControls="notes"
             />
@@ -110,7 +103,6 @@ export default function Header({ text, scrollAware }) {
         </Authorize>
         <li className="reader-header__nav-item">
           <DisclosureNavigationMenu
-            visible={visibility?.uiPanels?.visibility}
             disclosure={
               <ControlMenu.DisclosureButton
                 icon="eyeball24"
@@ -121,7 +113,7 @@ export default function Header({ text, scrollAware }) {
             <ControlMenu.DisclosurePanel direction="right">
               <ControlMenu.VisibilityMenuBody
                 className="panel"
-                filter={visibility?.visibilityFilters}
+                filter={visibilityFilters}
                 filterChangeHandler={handleVisibilityFilterChange}
               />
             </ControlMenu.DisclosurePanel>
@@ -129,7 +121,6 @@ export default function Header({ text, scrollAware }) {
         </li>
         <li className="reader-header__nav-item">
           <DisclosureNavigationMenu
-            visible={visibility?.uiPanels?.appearance}
             disclosure={
               <ControlMenu.DisclosureButton
                 icon="text24"
@@ -138,16 +129,12 @@ export default function Header({ text, scrollAware }) {
             }
           >
             <ControlMenu.DisclosurePanel direction="right">
-              <ControlMenu.AppearanceMenuBody
-                appearance={appearance}
-                className="panel"
-              />
+              <ControlMenu.AppearanceMenuBody className="panel" />
             </ControlMenu.DisclosurePanel>
           </DisclosureNavigationMenu>
         </li>
         <li className="reader-header__nav-item">
           <DisclosureNavigationMenu
-            visible={visibility?.uiPanels?.search}
             disclosure={
               <ControlMenu.DisclosureButton
                 icon="search24"
@@ -157,7 +144,6 @@ export default function Header({ text, scrollAware }) {
           >
             <ControlMenu.DisclosurePanel direction="right">
               <SearchMenu.Body
-                afterSubmit={panelToggleHandler("search")}
                 initialState={{
                   keyword: "",
                   scope: "text"
@@ -173,10 +159,8 @@ export default function Header({ text, scrollAware }) {
         </li>
         <li className="reader-header__nav-item">
           <DisclosureNavigationMenu
-            visible={visibility?.uiPanels?.user}
             disclosure={<UserMenuButton />}
-            callbacks={actions}
-            onBlur={actions.hideUserPanel}
+            logout={logout}
             context="reader"
           >
             <UserMenuBody />
@@ -192,8 +176,8 @@ export default function Header({ text, scrollAware }) {
       <nav className="reader-header__inner">
         <div className="reader-header__menu-group reader-header__menu-group--left">
           <ReturnMenu.Button
-            toggleReaderMenu={panelToggleHandler("readerReturn")}
-            expanded={visibility?.uiPanels?.readerReturn}
+            toggleReaderMenu={() => togglePanel("readerReturn")}
+            expanded={panels?.readerReturn}
           />
           {renderContentsButton(text?.attributes)}
         </div>
@@ -213,7 +197,7 @@ export default function Header({ text, scrollAware }) {
           <div className="reader-header__panels reader-header__panels--left">
             <UIPanel
               id="readerReturn"
-              visibility={visibility?.uiPanels}
+              visibility={panels}
               bodyComponent={ReturnMenu.Body}
               returnUrl={lh.link(
                 "frontendProjectDetail",
@@ -226,7 +210,7 @@ export default function Header({ text, scrollAware }) {
               isJournalArticle={
                 text?.relationships.project.attributes.isJournalIssue
               }
-              hidePanel={actions.hideReaderReturnPanel}
+              hidePanel={() => hidePanel("readerReturn")}
               moreLink="https://manifoldapp.org/"
             />
           </div>
@@ -234,10 +218,10 @@ export default function Header({ text, scrollAware }) {
           <div className="reader-header__panels reader-header__panels--right">
             <UIPanel
               id="notes"
-              visibility={visibility?.uiPanels}
-              visible={visibility?.uiPanels?.notes}
+              visibility={panels}
+              visible={panels?.notes}
               bodyComponent={Notes.ReaderDrawer}
-              hidePanel={actions.hideNotesPanel}
+              hidePanel={() => hidePanel("notes")}
             />
           </div>
         </>
@@ -245,9 +229,9 @@ export default function Header({ text, scrollAware }) {
         <div className="reader-header__panels reader-header__panels--left">
           <UIPanel
             id="readerReturn"
-            visibility={visibility?.uiPanels}
+            visibility={panels}
             bodyComponent={ReturnMenu.Body}
-            hidePanel={commonActions.hideReaderReturnPanel}
+            hidePanel={() => hidePanel("readerReturn")}
             moreLink="https://manifoldapp.org/"
           />
         </div>

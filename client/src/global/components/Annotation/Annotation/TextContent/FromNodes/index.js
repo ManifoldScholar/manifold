@@ -1,10 +1,9 @@
 import { memo, useRef } from "react";
-import { useParams } from "react-router-dom";
 import BodyNodes from "reader/components/section/body-nodes";
 import Wrapper from "./Wrapper";
 import { maybeTruncateChildren } from "./helpers";
 import blacklist from "./elementBlacklist";
-import { useFromStore } from "hooks";
+import { useLoaderEntity, useReadingGroups } from "hooks";
 import { nl2br } from "utils/string";
 import isEmpty from "lodash/isEmpty";
 
@@ -28,10 +27,8 @@ function AnnotationWithNodes({
     </Wrapper>
   );
 
-  const { sectionId } = useParams();
-  const bodyJSON = useFromStore({
-    path: `entityStore.entities.textSections["${sectionId}"].attributes.bodyJSON`
-  });
+  const section = useLoaderEntity("textSections");
+  const bodyJSON = section?.attributes?.bodyJSON ?? null;
 
   const length = selection?.replace("\n", " ")?.length;
   /* eslint-disable no-nested-ternary */
@@ -69,22 +66,7 @@ function AnnotationWithNodes({
   const nodesToRender =
     finalStack?.children ?? finalStack?.content ? [finalStack] : undefined;
 
-  const activeGroup = useFromStore({
-    path: `ui.persistent.reader.readingGroups.currentAnnotatingReadingGroup`
-  });
-  const memberships = useFromStore({
-    path: `entityStore.entities.readingGroupMemberships`
-  });
-  const membership =
-    typeof memberships === "object"
-      ? Object.keys(memberships)?.find(
-          m => memberships[m].relationships.readingGroup.data.id === activeGroup
-        )
-      : null;
-  const annotationStyle =
-    memberships && membership
-      ? memberships[membership]?.attributes?.annotationStyle
-      : "solid";
+  const { currentAnnotationStyle: annotationStyle } = useReadingGroups();
 
   if (!annotation || !nodesToRender?.length) return fallback;
 

@@ -1,7 +1,7 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo, useEffect, useContext } from "react";
 import IconComposer from "global/components/utility/IconComposer";
 import ThumbnailMobile from "./Thumbnail/Mobile";
-import { useFromStore } from "hooks";
+import { ReaderContext } from "app/contexts";
 import * as Styled from "./styles";
 
 export default function MobileMarker({
@@ -11,9 +11,7 @@ export default function MobileMarker({
   setActiveAnnotation,
   accesibleTitle
 }) {
-  const activeAnnotation = useFromStore({
-    path: `ui.transitory.reader.activeAnnotation`
-  });
+  const activeAnnotation = useContext(ReaderContext)?.activeAnnotation;
 
   const [markerEl, setMarkerEl] = useState(null);
   const [visible, setVisible] = useState(false);

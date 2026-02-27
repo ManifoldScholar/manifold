@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useContext, useState, useMemo } from "react";
 import IconComposer from "global/components/utility/IconComposer";
-import { useFromStore } from "hooks";
+import { ReaderContext } from "app/contexts";
 import { useWindowSize } from "usehooks-ts";
 import capitalize from "lodash/capitalize";
 import { useTranslation } from "react-i18next";
 import { ResourceMarkerContext } from "../context";
+import useLoaderCollection from "hooks/useLoaderCollection";
 import * as Styled from "./styles";
 
 export default function Thumbnail({
@@ -16,22 +17,22 @@ export default function Thumbnail({
   onMouseLeave,
   handleClick
 }) {
-  const annotation = useFromStore({
-    path: `entityStore.entities.annotations["${id}"]`
-  });
+  const { setResourceThumbs, thumbCount } = useContext(ResourceMarkerContext);
 
-  const { resourceId, resourceCollectionId } = annotation?.attributes;
+  const annotations = useLoaderCollection("annotations");
+  const resources = useLoaderCollection("resources");
+  const resourceCollections = useLoaderCollection("resource_collections");
 
-  const resource = useFromStore({
-    path: `entityStore.entities.resources["${resourceId}"]`
-  });
-  const collection = useFromStore({
-    path: `entityStore.entities.resourceCollections["${resourceCollectionId}"]`
-  });
+  const annotation = annotations.find(a => a.id === id);
+
+  const { resourceId, resourceCollectionId } = annotation?.attributes ?? {};
+
+  const resource = resources.find(r => r.id === resourceId);
+  const collection = resourceCollections.find(
+    c => c.id === resourceCollectionId
+  );
 
   const entity = resource ?? collection;
-
-  const { setResourceThumbs, thumbCount } = useContext(ResourceMarkerContext);
 
   const [visible, setVisible] = useState(false);
   const [el, setEl] = useState(null);
@@ -71,9 +72,8 @@ export default function Thumbnail({
     }
   }, [el, observer]);
 
-  const { font, fontSize, margins } = useFromStore({
-    path: `ui.persistent.reader.typography`
-  });
+  const { typography } = useContext(ReaderContext);
+  const { font, fontSize, margins } = typography ?? {};
 
   const { width } = useWindowSize();
 

@@ -1,33 +1,21 @@
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import { useTranslation } from "react-i18next";
 import { doViewTransition } from "utils/domUtils";
-import { uiColorActions, uiTypographyActions } from "actions";
+import { useContext } from "react";
+import { ReaderContext } from "app/contexts";
 import FontControls from "./FontControls";
 import ColorSchemeControls from "./ColorSchemeControls";
 import HighContrastControls from "./HighContrastControls";
 import MarginControls from "./MarginControls";
 
-const {
-  selectFont,
-  incrementFontSize,
-  decrementFontSize,
-  incrementMargins,
-  decrementMargins,
-  resetTypography
-} = uiTypographyActions;
-const { setColorScheme, setHighContrast } = uiColorActions;
-
-function AppearanceMenuBody({ appearance, className, setScreenReaderStatus }) {
+function AppearanceMenuBody({ className, setScreenReaderStatus }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const { typography, colors, dispatch } = useContext(ReaderContext);
 
   const resetMessage = t("reader.menus.appearance.appearance_reset");
-
-  const { typography, colors } = appearance;
   const { font, fontSize, margins } = typography;
   const { colorScheme, highContrast } = colors;
 
@@ -67,7 +55,9 @@ function AppearanceMenuBody({ appearance, className, setScreenReaderStatus }) {
   }
 
   const handleFontStyleControl = event => {
-    doViewTransition(() => dispatch(selectFont(event.target.value)));
+    doViewTransition(() =>
+      dispatch({ type: "SELECT_FONT", payload: event.target.value })
+    );
     setScreenReaderStatus(
       resetOptionMessage(t("reader.menus.appearance.font"), event.target.value)
     );
@@ -76,7 +66,9 @@ function AppearanceMenuBody({ appearance, className, setScreenReaderStatus }) {
   const handleColorSchemeControl = event => {
     const buttonEl = event.currentTarget;
     const value = buttonEl.dataset.value;
-    doViewTransition(() => dispatch(setColorScheme(value)));
+    doViewTransition(() =>
+      dispatch({ type: "SET_COLOR_SCHEME", payload: value })
+    );
     setScreenReaderStatus(
       resetOptionMessage(t("reader.menus.appearance.color_scheme"), value)
     );
@@ -84,7 +76,9 @@ function AppearanceMenuBody({ appearance, className, setScreenReaderStatus }) {
 
   const handleHighContrastControl = () => {
     const value = !highContrast;
-    doViewTransition(() => dispatch(setHighContrast(value)));
+    doViewTransition(() =>
+      dispatch({ type: "SET_HIGH_CONTRAST", payload: value })
+    );
     setScreenReaderStatus(
       resetOptionMessage(
         t("reader.menus.appearance.high_contrast"),
@@ -97,35 +91,35 @@ function AppearanceMenuBody({ appearance, className, setScreenReaderStatus }) {
 
   const incrementSizeHandler = event => {
     event.stopPropagation();
-    doViewTransition(() => dispatch(incrementFontSize()));
+    doViewTransition(() => dispatch({ type: "INCREMENT_FONT_SIZE" }));
     setScreenReaderStatus(incrementFontMessage);
   };
 
   const decrementSizeHandler = event => {
     event.stopPropagation();
-    doViewTransition(() => dispatch(decrementFontSize()));
+    doViewTransition(() => dispatch({ type: "DECREMENT_FONT_SIZE" }));
     setScreenReaderStatus(decrementFontMessage);
   };
 
   const resetHandler = event => {
     event.stopPropagation();
     doViewTransition(() => {
-      dispatch(setColorScheme("light"));
-      dispatch(setHighContrast(false));
-      dispatch(resetTypography());
+      dispatch({ type: "SET_COLOR_SCHEME", payload: "light" });
+      dispatch({ type: "SET_HIGH_CONTRAST", payload: false });
+      dispatch({ type: "RESET_TYPOGRAPHY" });
     });
     setScreenReaderStatus(resetMessage);
   };
 
   const incrementMarginsHandler = event => {
     event.stopPropagation();
-    doViewTransition(() => dispatch(incrementMargins()));
+    doViewTransition(() => dispatch({ type: "INCREMENT_MARGINS" }));
     setScreenReaderStatus(incrementMarginsMessage);
   };
 
   const decrementMarginsHandler = event => {
     event.stopPropagation();
-    doViewTransition(() => dispatch(decrementMargins()));
+    doViewTransition(() => dispatch({ type: "DECREMENT_MARGINS" }));
     setScreenReaderStatus(decrementMarginsMessage);
   };
 
@@ -184,7 +178,6 @@ function AppearanceMenuBody({ appearance, className, setScreenReaderStatus }) {
 AppearanceMenuBody.displayName = "ControlMenu.AppearanceMenuBody";
 
 AppearanceMenuBody.propTypes = {
-  appearance: PropTypes.object,
   className: PropTypes.string
 };
 

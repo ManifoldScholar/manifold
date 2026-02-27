@@ -1,29 +1,22 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router";
 import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
-import { useFromStore } from "hooks";
-import { uiVisibilityActions } from "actions";
+import { useLoaderEntity } from "hooks";
+import { ReaderContext } from "app/contexts";
 import TocNode from "./TocNode";
 import * as Styled from "./styles";
 
-export default function Toc({ text, showMeta }) {
+export default function Toc({ showMeta }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const location = useLocation();
-  const { sectionId } = useParams();
   const [mounted, setMounted] = useState(false);
+  const text = useLoaderEntity("texts");
+  const section = useLoaderEntity("textSections");
 
-  const visibility = useFromStore({ path: "ui.transitory.visibility" });
-  const tocDrawerVisible = visibility?.uiPanels?.tocDrawer;
-
-  const section = useFromStore({
-    entityType: "textSections",
-    action: "grab",
-    id: sectionId
-  });
+  const { panels, dispatch } = useContext(ReaderContext);
+  const tocDrawerVisible = panels?.tocDrawer;
 
   useEffect(() => {
     setMounted(true);
@@ -35,7 +28,7 @@ export default function Toc({ text, showMeta }) {
 
   const hideTocDrawer = () => {
     if (tocDrawerVisible) {
-      dispatch(uiVisibilityActions.panelHide("tocDrawer"));
+      dispatch({ type: "PANEL_HIDE", payload: "tocDrawer" });
       const toggleEl = document.getElementById("toc-drawer-toggle");
       if (toggleEl) toggleEl.focus();
     }

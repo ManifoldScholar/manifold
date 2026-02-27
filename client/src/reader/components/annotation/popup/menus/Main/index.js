@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useCurrentUser } from "hooks";
+import { useAuthentication } from "hooks";
 import PropTypes from "prop-types";
 import Menu from "../../parts/Menu";
 import MenuItems from "./Items";
@@ -23,7 +23,7 @@ function MainMenu({
     ...restProps
   };
   const { t } = useTranslation();
-  const currentUser = useCurrentUser();
+  const { currentUser } = useAuthentication();
 
   const { readingGroups, currentReadingGroup } = itemProps;
 

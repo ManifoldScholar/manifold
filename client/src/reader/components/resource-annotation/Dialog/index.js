@@ -1,7 +1,7 @@
-import { useFromStore } from "hooks";
 import Dialog from "global/components/NativeDialog";
 import ResourcePreview from "frontend/components/resource/Preview";
 import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow/Fetcher";
+import useLoaderCollection from "hooks/useLoaderCollection";
 
 export default function ResourceAnnotationDialog({
   resource,
@@ -9,9 +9,13 @@ export default function ResourceAnnotationDialog({
   destroyAnnotation,
   ...dialog
 }) {
-  const resourceEntity = useFromStore({
-    path: `entityStore.entities.${resource.type}s.${resource.id}`
-  });
+  const resources = useLoaderCollection("resources");
+  const resourceCollections = useLoaderCollection("resource_collections");
+
+  const resourceEntity =
+    resource.type === "resourceCollection"
+      ? resourceCollections.find(c => c.id === resource.id)
+      : resources.find(r => r.id === resource.id);
 
   if (!resourceEntity) return null;
 

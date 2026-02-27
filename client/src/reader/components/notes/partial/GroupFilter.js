@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ReaderContext } from "helpers/contexts";
+import { ReaderContext } from "app/contexts";
 
 import { ListFilters } from "global/components/list";
 import { withTranslation } from "react-i18next";

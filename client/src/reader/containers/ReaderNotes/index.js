@@ -1,14 +1,16 @@
-import { cloneElement, useMemo } from "react";
+import { cloneElement, useMemo, useContext } from "react";
 import PropTypes from "prop-types";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router";
 import { readingGroupsAPI, meAPI, requests } from "api";
 import groupBy from "lodash/groupBy";
 import isString from "lodash/isString";
-import { commonActions } from "actions/helpers";
-import lh from "helpers/linkHandler";
-import { useFetch, useFilterState, useFromStore } from "hooks";
-import withReadingGroups from "hoc/withReadingGroups";
+import {
+  useFetch,
+  useFilterState,
+  useReadingGroups,
+  useLoaderEntity
+} from "hooks";
+import { ReaderContext } from "app/contexts";
 
 const DEFAULT_FORMATS = ["annotation"];
 
@@ -19,27 +21,19 @@ function getSectionName(text, sectionId) {
   return section.name;
 }
 
-function ReaderNotesContainer({
-  readingGroups,
-  currentAnnotationOverlayReadingGroup: currentGroup,
-  setAnnotationOverlayReadingGroup,
-  children
-}) {
+function ReaderNotesContainer({ children }) {
+  const {
+    readingGroups,
+    currentAnnotationOverlayReadingGroup: currentGroup,
+    setAnnotationOverlayReadingGroup
+  } = useReadingGroups();
+
+  const { visibilityFilters, dispatch } = useContext(ReaderContext);
+
   const { textId, sectionId } = useParams();
   const navigate = useNavigate();
-  const text = useFromStore({
-    entityType: "texts",
-    action: "grab",
-    id: textId
-  });
-  const section = useFromStore({
-    entityType: "textSections",
-    action: "grab",
-    id: sectionId
-  });
-  const visibilityFilters = useFromStore({
-    path: "ui.transitory.visibility.visibilityFilters"
-  });
+  const text = useLoaderEntity("texts");
+  const section = useLoaderEntity("textSections");
 
   const baseFilters = {
     orphaned: currentGroup === "orphaned",
@@ -85,33 +79,23 @@ function ReaderNotesContainer({
       .filter(Boolean);
   }
 
-  const dispatch = useDispatch();
-  const actions = commonActions(dispatch);
-
   const handleVisitAnnotation = annotation => {
     const { textSectionId, currentUserIsCreator } = annotation.attributes;
-    const url = lh.link(
-      "readerSection",
-      textId,
-      textSectionId,
-      `#annotation-${annotation.id}`
-    );
-    actions.panelToggle("notes");
+    const url = `/read/${textId}/section/${textSectionId}#annotation-${annotation.id}`;
+    dispatch({ type: "PANEL_TOGGLE", payload: "notes" });
     const annotationFilter = currentUserIsCreator
       ? { annotation: { ...visibilityFilters.annotation, yours: true } }
       : { annotation: { ...visibilityFilters.annotation, others: true } };
-    actions.visibilityChange({
-      visibilityFilters: {
-        ...visibilityFilters,
-        ...annotationFilter
-      }
+    dispatch({
+      type: "VISIBILITY_FILTERS_CHANGE",
+      payload: { ...visibilityFilters, ...annotationFilter }
     });
     navigate(url);
   };
 
   const handleSeeAllClick = event => {
     event.preventDefault();
-    navigate(lh.link("readerSection", textId, sectionId, "#group-annotations"));
+    navigate(`/read/${textId}/section/${sectionId}#group-annotations`);
   };
 
   if (!annotations || !meta || !loaded) return null;
@@ -139,10 +123,7 @@ function ReaderNotesContainer({
 }
 
 ReaderNotesContainer.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  readingGroups: PropTypes.array,
-  setAnnotationOverlayReadingGroup: PropTypes.func.isRequired,
-  currentAnnotationOverlayReadingGroup: PropTypes.string
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 
-export default withReadingGroups(ReaderNotesContainer);
+export default ReaderNotesContainer;

@@ -5,7 +5,7 @@ import Menu from "../../parts/Menu";
 import RGMenuItem from "../../parts/RGMenuItem";
 import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
-import { useReaderContext } from "hooks";
+import { useLoaderEntity } from "hooks";
 import withCurrentUser from "hoc/withCurrentUser";
 import * as Styled from "./styles";
 
@@ -20,8 +20,8 @@ function ReadingGroupMenu({
   onSelect,
   currentUser
 }) {
-  const context = useReaderContext();
-  const canEngagePublicly = context.attributes.abilities.engagePublicly;
+  const text = useLoaderEntity("texts");
+  const canEngagePublicly = text.attributes.abilities.engagePublicly;
   const canAccessReadingGroups =
     currentUser?.attributes.classAbilities.readingGroup.read;
 

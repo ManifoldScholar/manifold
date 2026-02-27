@@ -15,12 +15,14 @@ export const bootstrapMiddleware = async ({ request, context }, next) => {
     settingsResult,
     userResult,
     collectionResult,
-    pagesResult
+    pagesResult,
+    readingGroupsResult
   ] = await Promise.allSettled([
     client.call(settingsAPI.show()),
     authToken ? client.call(meAPI.show()) : Promise.resolve(null),
     authToken ? client.call(meAPI.myCollection()) : Promise.resolve(null),
-    client.call(pagesAPI.index())
+    client.call(pagesAPI.index()),
+    authToken ? client.call(meAPI.readingGroups()) : Promise.resolve(null)
   ]);
 
   let settings = null;
@@ -49,9 +51,16 @@ export const bootstrapMiddleware = async ({ request, context }, next) => {
       user.relationships.collection = collectionResult.value.data;
     }
 
+    const readingGroups =
+      readingGroupsResult.status === "fulfilled" &&
+      readingGroupsResult.value?.data
+        ? readingGroupsResult.value.data
+        : [];
+
     auth = {
       user,
-      authToken
+      authToken,
+      readingGroups
     };
   } else if (authToken && userResult.status === "rejected") {
     console.error("[Middleware] Failed to authenticate:", userResult.reason);

@@ -232,6 +232,23 @@ type Pages = {
   "/actions/login": {
     params: {};
   };
+  "/read/:textId": {
+    params: {
+      "textId": string;
+    };
+  };
+  "/read/:textId/section/:sectionId": {
+    params: {
+      "textId": string;
+      "sectionId": string;
+    };
+  };
+  "/read/:textId/section/:sectionId/search": {
+    params: {
+      "textId": string;
+      "sectionId": string;
+    };
+  };
   "/*": {
     params: {
       "*": string;
@@ -242,7 +259,23 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/journals/issues" | "/unsubscribe/:token" | "/journals" | "/projects" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes" | "/journals/:id/volumes/:volumeSlug" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/my/groups" | "/my/groups/new" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/actions/forgot-password" | "/actions/update-profile" | "/actions/flag-content" | "/actions/signup" | "/actions/login" | "/*";
+    page: "/" | "/backend" | "/backend/dashboard" | "/backend/*" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/journals/issues" | "/unsubscribe/:token" | "/journals" | "/projects" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes" | "/journals/:id/volumes/:volumeSlug" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/my/groups" | "/my/groups/new" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/actions/forgot-password" | "/actions/update-profile" | "/actions/flag-content" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/*";
+  };
+  "routes/backend/backend/route.jsx": {
+    id: "routes/backend/backend";
+    page: "/backend" | "/backend/dashboard" | "/backend/*";
+  };
+  "routes/backend/backend.dashboard.jsx": {
+    id: "routes/backend/backend.dashboard";
+    page: "/backend/dashboard";
+  };
+  "routes/backend/backend._index.jsx": {
+    id: "routes/backend/backend._index";
+    page: "/backend";
+  };
+  "routes/backend/backend.$.jsx": {
+    id: "routes/backend/backend.$";
+    page: "/backend/*";
   };
   "routes/frontend/_frontend/route.jsx": {
     id: "routes/frontend/_frontend";
@@ -472,6 +505,18 @@ type RouteFiles = {
     id: "routes/global/_global.actions.login";
     page: "/actions/login";
   };
+  "routes/reader/read.$textId/route.jsx": {
+    id: "routes/reader/read.$textId";
+    page: "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search";
+  };
+  "routes/reader/read.$textId.section.$sectionId.jsx": {
+    id: "routes/reader/read.$textId.section.$sectionId";
+    page: "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search";
+  };
+  "routes/reader/read.$textId.section.$sectionId.search.jsx": {
+    id: "routes/reader/read.$textId.section.$sectionId.search";
+    page: "/read/:textId/section/:sectionId/search";
+  };
   "routes/$.jsx": {
     id: "routes/$";
     page: "/*";
@@ -480,6 +525,10 @@ type RouteFiles = {
 
 type RouteModules = {
   "root": typeof import("./app/root.jsx");
+  "routes/backend/backend": typeof import("./app/routes/backend/backend/route.jsx");
+  "routes/backend/backend.dashboard": typeof import("./app/routes/backend/backend.dashboard.jsx");
+  "routes/backend/backend._index": typeof import("./app/routes/backend/backend._index.jsx");
+  "routes/backend/backend.$": typeof import("./app/routes/backend/backend.$.jsx");
   "routes/frontend/_frontend": typeof import("./app/routes/frontend/_frontend/route.jsx");
   "routes/frontend/_frontend.project-collections._index": typeof import("./app/routes/frontend/_frontend.project-collections._index.jsx");
   "routes/frontend/_frontend.reset-password.$resetToken": typeof import("./app/routes/frontend/_frontend.reset-password.$resetToken.jsx");
@@ -537,5 +586,8 @@ type RouteModules = {
   "routes/global/_global.actions.flag-content": typeof import("./app/routes/global/_global.actions.flag-content.jsx");
   "routes/global/_global.actions.signup": typeof import("./app/routes/global/_global.actions.signup.jsx");
   "routes/global/_global.actions.login": typeof import("./app/routes/global/_global.actions.login.jsx");
+  "routes/reader/read.$textId": typeof import("./app/routes/reader/read.$textId/route.jsx");
+  "routes/reader/read.$textId.section.$sectionId": typeof import("./app/routes/reader/read.$textId.section.$sectionId.jsx");
+  "routes/reader/read.$textId.section.$sectionId.search": typeof import("./app/routes/reader/read.$textId.section.$sectionId.search.jsx");
   "routes/$": typeof import("./app/routes/$.jsx");
 };

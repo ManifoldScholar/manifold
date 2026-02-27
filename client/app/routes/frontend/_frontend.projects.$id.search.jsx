@@ -18,10 +18,7 @@ export const loader = async ({ params, request, context }) => {
   return searchLoader({
     request,
     context,
-    beforeQuery: searchQueryState => {
-      /* eslint-disable no-param-reassign */
-      searchQueryState.project = project.id;
-    }
+    params: { project: project.id }
   });
 };
 

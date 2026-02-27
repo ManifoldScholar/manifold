@@ -2,13 +2,12 @@ import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { collectingAPI } from "api";
-import withReadingGroups from "hoc/withReadingGroups";
 import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
 import { useRevalidator } from "react-router";
-import { useCurrentUser } from "hooks";
+import { useCurrentUser, useReadingGroups } from "hooks";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 
 const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals"];
@@ -45,7 +44,6 @@ function CollectingToggle({
   outlined = true,
   onDialogOpen,
   onDialogClose,
-  readingGroups: myReadingGroups,
   onUncollect,
   hiddenIfUncollected
 }) {
@@ -53,9 +51,11 @@ function CollectingToggle({
   const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
 
-  const myCollectableReadingGroups = !Array.isArray(myReadingGroups)
+  const { readingGroups } = useReadingGroups();
+
+  const myCollectableReadingGroups = !Array.isArray(readingGroups)
     ? []
-    : myReadingGroups.filter(rg => rg?.attributes?.abilities?.update);
+    : readingGroups.filter(rg => rg?.attributes?.abilities?.update);
 
   useEffect(() => {
     if (!dialogVisible || (!onDialogOpen && !onDialogClose)) return;
@@ -65,7 +65,7 @@ function CollectingToggle({
   const currentUser = useCurrentUser();
   const { revalidate } = useRevalidator();
 
-  const collected = inCollections(collectable, currentUser, ...myReadingGroups);
+  const collected = inCollections(collectable, currentUser, ...readingGroups);
 
   useEffect(() => {
     setIsCollecting(false);
@@ -199,7 +199,6 @@ CollectingToggle.displayName = "Collecting.Toggle";
 
 CollectingToggle.propTypes = {
   collectable: PropTypes.object,
-  readingGroups: PropTypes.array,
   onDialogOpen: PropTypes.func,
   onDialogClose: PropTypes.func,
   onUncollect: PropTypes.func,
@@ -208,4 +207,4 @@ CollectingToggle.propTypes = {
   hiddenIfUncollected: PropTypes.bool
 };
 
-export default withReadingGroups(CollectingToggle);
+export default CollectingToggle;

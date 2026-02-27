@@ -6,6 +6,7 @@ export default function NewAnnotation({ pendingAnnotation, actions }) {
   const saveAnnotation = annotation => {
     const attributes = {
       ...pendingAnnotation,
+      format: "annotation",
       ...annotation.attributes
     };
     const toCreate = { ...pendingAnnotation, attributes };

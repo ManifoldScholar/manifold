@@ -1,5 +1,6 @@
 import { createContext as createRouterContext } from "react-router";
 import { createContext as createReactContext } from "react";
+import { initialReaderState } from "./readerReducer";
 
 // Router context - used in middleware and loaders to pass data through request lifecycle
 export const routerContext = createRouterContext();
@@ -17,4 +18,10 @@ export const AppContext = createReactContext({
 export const FrontendContext = createReactContext({
   subjects: [],
   journalSubjects: []
+});
+
+// Reader context - provides reader-specific data to reader routes
+export const ReaderContext = createReactContext({
+  ...initialReaderState,
+  dispatch: () => {}
 });

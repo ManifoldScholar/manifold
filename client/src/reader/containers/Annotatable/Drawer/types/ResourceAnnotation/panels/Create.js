@@ -1,7 +1,7 @@
-import { useId, useMemo } from "react";
+import { useId, useMemo, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { resourcesAPI } from "api";
-import setter from "global/components/form/setter";
+import { useFetcher } from "react-router";
+import { useFormField } from "hooks";
 import Form from "global/components/form";
 import IconComputed from "global/components/icon-computed";
 import ButtonGroup from "./ButtonGroup";
@@ -20,13 +20,11 @@ const RESOURCE_KINDS = [
   "Interactive"
 ];
 
-export default function CreateResource({ projectId, onSuccess, handleClose }) {
+function KindPicker({ id, selected }) {
+  const { set } = useFormField("attributes[kind]");
   const { t } = useTranslation();
-  const id = useId();
 
-  const defaultValue = useMemo(() => ({ attributes: { kind: null } }), []);
-
-  const Kinds = setter(({ set, selected }) => (
+  return (
     <Styled.Kinds
       label="kinds"
       aria-describedby={`${id}_kind-picker`}
@@ -52,11 +50,22 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
         );
       })}
     </Styled.Kinds>
-  ));
+  );
+}
 
-  const Fingerprint = setter(props => <Form.Errorable {...props} />);
+function ConnectedErrorable({ name }) {
+  const fieldProps = useFormField(name);
+  return <Form.Errorable {...fieldProps} name={name} />;
+}
 
-  const formatData = data => {
+export default function CreateResource({ projectId, onSuccess, handleClose }) {
+  const { t } = useTranslation();
+  const id = useId();
+  const fetcher = useFetcher();
+
+  const defaultValue = useMemo(() => ({ attributes: { kind: null } }), []);
+
+  const shapeResourceData = useCallback(data => {
     const {
       variantThumbnail: thumbnailData,
       variantThumbnailAltText,
@@ -98,15 +107,33 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
           : {})
       }
     };
-  };
+  }, []);
+
+  const formatData = useCallback(
+    (dirty, source) => ({
+      projectId,
+      resource: shapeResourceData({
+        attributes: { ...source.attributes, ...dirty.attributes }
+      })
+    }),
+    [projectId, shapeResourceData]
+  );
+
+  useEffect(() => {
+    if (fetcher.data?.resource) {
+      onSuccess(fetcher.data.resource);
+    }
+  }, [fetcher.data, onSuccess]);
 
   return (
     <Styled.Form
       className="form-secondary"
       name="reader-resource-create"
       model={defaultValue}
-      create={data => resourcesAPI.create(projectId, formatData(data))}
-      onSuccess={resource => onSuccess(resource)}
+      fetcher={fetcher}
+      action="/actions/resource-create"
+      formatData={formatData}
+      doNotWarn
     >
       {getModelValue => {
         const kind = getModelValue("attributes[kind]");
@@ -114,7 +141,7 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
 
         return (
           <>
-            <Fingerprint name="attributes[fingerprint]" />
+            <ConnectedErrorable name="attributes[fingerprint]" />
             <Form.TextInput
               label={t("resources.title_label")}
               name="attributes[title]"
@@ -133,7 +160,7 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
                 id={`${id}_kind-picker`}
                 label={t("resources.new.kind")}
               />
-              <Kinds name="attributes[kind]" selected={kind} />
+              <KindPicker id={id} selected={kind} />
             </fieldset>
             {(kind === "link" || kind === "interactive") && (
               <Form.TextInput

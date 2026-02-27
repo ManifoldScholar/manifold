@@ -6,6 +6,7 @@ export default function useAuthentication() {
   return {
     authenticated: !!auth?.user,
     currentUser: auth?.user ?? null,
-    authToken: auth?.authToken ?? null
+    authToken: auth?.authToken ?? null,
+    readingGroups: auth?.readingGroups ?? []
   };
 }

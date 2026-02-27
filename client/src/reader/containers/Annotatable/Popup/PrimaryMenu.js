@@ -2,13 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Menus } from "reader/components/annotation/popup";
 import { useAnnotationMenu } from "reader/components/annotation/popup/hooks";
-
-import withReadingGroups from "hoc/withReadingGroups";
+import { useReadingGroups } from "hooks";
 
 function PrimaryMenu({
-  currentAnnotatingReadingGroup,
-  readingGroups,
-  setAnnotatingReadingGroup,
   text,
   section,
   selectionState,
@@ -18,6 +14,12 @@ function PrimaryMenu({
   visible,
   clearSelection
 }) {
+  const {
+    readingGroups,
+    currentAnnotatingReadingGroup,
+    setAnnotatingReadingGroup
+  } = useReadingGroups();
+
   const {
     menus,
     activeMenu,
@@ -87,11 +89,8 @@ PrimaryMenu.propTypes = {
   section: PropTypes.object.isRequired,
   selectionState: PropTypes.object.isRequired,
   activeAnnotation: PropTypes.object,
-  currentAnnotatingReadingGroup: PropTypes.string,
-  readingGroups: PropTypes.array,
-  setAnnotatingReadingGroup: PropTypes.func,
   direction: PropTypes.oneOf(["up", "down"]),
   visible: PropTypes.bool
 };
 
-export default withReadingGroups(PrimaryMenu);
+export default PrimaryMenu;

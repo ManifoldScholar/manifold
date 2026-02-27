@@ -1,20 +1,19 @@
+import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import groupBy from "lodash/groupBy";
 import isEqual from "lodash/isEqual";
 import { meAPI, readingGroupsAPI, requests } from "api";
-import { commonActions } from "actions/helpers";
-import lh from "helpers/linkHandler";
 import Overlay from "global/components/Overlay";
 import {
   useFetch,
   useFilterState,
   usePaginationState,
   useListFilters,
-  useFromStore
+  useReadingGroups,
+  useLoaderEntity
 } from "hooks";
-import withReadingGroups from "hoc/withReadingGroups";
+import { ReaderContext } from "app/contexts";
 import EntityCollection from "frontend/components/entity/Collection";
 
 const INITIAL_FORMATS = ["annotation"];
@@ -31,17 +30,18 @@ function getSectionName(text, sectionId) {
   return section.name;
 }
 
-function ReaderFullNotesContainer({
-  currentAnnotationOverlayReadingGroup: currentGroupId,
-  readingGroups,
-  text,
-  closeCallback,
-  readingGroupsLoaded
-}) {
+function ReaderFullNotesContainer({ closeCallback }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const { textId } = useParams();
   const navigate = useNavigate();
+  const text = useLoaderEntity("texts");
+
+  const { visibilityFilters, dispatch } = useContext(ReaderContext);
+
+  const {
+    readingGroups,
+    currentAnnotationOverlayReadingGroup: currentGroupId
+  } = useReadingGroups();
 
   const initialFilters = {
     orphaned: currentGroupId === "orphaned",
@@ -66,13 +66,8 @@ function ReaderFullNotesContainer({
     options: { fetchKey }
   });
 
-  const actions = commonActions(dispatch);
   const readingGroup =
     readingGroups.find(group => group.id === currentGroupId) || currentGroupId;
-
-  const visibilityFilters = useFromStore({
-    path: "ui.transitory.visibility.visibilityFilters"
-  });
 
   const mapAnnotationsToSections = () => {
     const annotationGroups = groupBy(annotations, "attributes.textSectionId");
@@ -87,18 +82,14 @@ function ReaderFullNotesContainer({
 
   const handleVisitAnnotation = annotation => {
     const { textSectionId, currentUserIsCreator } = annotation.attributes;
-    const url = lh.link(
-      "readerSection",
-      textId,
-      textSectionId,
-      `#annotation-${annotation.id}`
-    );
-    actions.panelToggle("notes");
+    const url = `/read/${textId}/section/${textSectionId}#annotation-${annotation.id}`;
+    dispatch({ type: "PANEL_TOGGLE", payload: "notes" });
     const annotationFilter = currentUserIsCreator
       ? { annotation: { ...visibilityFilters.annotation, yours: true } }
       : { annotation: { ...visibilityFilters.annotation, others: true } };
-    actions.visibilityChange({
-      visibilityFilters: { ...visibilityFilters, ...annotationFilter }
+    dispatch({
+      type: "VISIBILITY_FILTERS_CHANGE",
+      payload: { ...visibilityFilters, ...annotationFilter }
     });
     navigate(url);
   };
@@ -129,7 +120,7 @@ function ReaderFullNotesContainer({
     options: { memberships, sections }
   });
 
-  if (!annotations || !meta || !readingGroupsLoaded) return null;
+  if (!annotations || !meta) return null;
 
   const sortedAnnotations = mapAnnotationsToSections();
 
@@ -159,4 +150,4 @@ function ReaderFullNotesContainer({
 
 ReaderFullNotesContainer.displayName = "Reader.FullNotes";
 
-export default withReadingGroups(ReaderFullNotesContainer);
+export default ReaderFullNotesContainer;

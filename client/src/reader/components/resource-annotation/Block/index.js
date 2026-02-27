@@ -1,25 +1,20 @@
 import { useContext, useCallback } from "react";
 import ResourcePreview from "frontend/components/resource/Preview";
 import ResourceCollectionPreview from "frontend/components/resource-collection/Preview";
-import { useFromStore } from "hooks";
 import { ResourceMarkerContext } from "../Marker/context";
+import useLoaderCollection from "hooks/useLoaderCollection";
 import * as Styled from "./styles";
 
 export default function ResourceBlock({ annotation }) {
-  const resource = useFromStore({
-    action: "grab",
-    entityType: "resources",
-    id: annotation.resourceId,
-    allowPartial: true
-  });
-  const resourceCollection = useFromStore({
-    action: "grab",
-    entityType: "resourceCollections",
-    id: annotation.resourceCollectionId,
-    allowPartial: true
-  });
-
   const { destroyAnnotation } = useContext(ResourceMarkerContext);
+
+  const resources = useLoaderCollection("resources");
+  const resourceCollections = useLoaderCollection("resource_collections");
+
+  const resource = resources.find(r => r.id === annotation.resourceId);
+  const resourceCollection = resourceCollections.find(
+    c => c.id === annotation.resourceCollectionId
+  );
 
   const handleDestroy = useCallback(() => {
     destroyAnnotation({ id: annotation.id, type: "annotations" });

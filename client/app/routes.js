@@ -4,8 +4,9 @@ export default [
   ...(await flatRoutes({ rootDirectory: "routes/backend" })),
   ...(await flatRoutes({ rootDirectory: "routes/frontend" })),
   ...(await flatRoutes({ rootDirectory: "routes/global" })),
+  ...(await flatRoutes({ rootDirectory: "routes/reader" })),
   ...(await flatRoutes({
     rootDirectory: "routes",
-    ignoredRouteFiles: ["frontend/**", "global/**"]
+    ignoredRouteFiles: ["backend/**", "frontend/**", "global/**", "reader/**"]
   }))
 ];

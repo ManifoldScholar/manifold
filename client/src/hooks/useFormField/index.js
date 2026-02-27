@@ -99,10 +99,10 @@ export default function useFormField(name, options = {}) {
 
   const errors = useMemo(() => {
     if (!context?.errors) return [];
+    const pointerPath = path.replace(/\./g, "/");
     return context.errors.filter(err => {
       const pointer = err.source?.pointer || "";
-      // Match by path or original name
-      return pointer.includes(path) || pointer.includes(name);
+      return pointer.includes(pointerPath) || pointer.includes(name);
     });
   }, [context?.errors, path, name]);
 

@@ -9,7 +9,7 @@ import cookie from "js-cookie";
  * @param {Object} context - Optional React Router context
  * @returns {Promise} API response promise
  */
-export async function queryApi(fetchFn, context = null) {
+export async function queryApi(fetchFn, context = null, signal) {
   let authToken = null;
 
   if (context) {
@@ -20,5 +20,13 @@ export async function queryApi(fetchFn, context = null) {
   }
 
   const client = new ApiClient(authToken);
+
+  if (signal && fetchFn?.endpoint) {
+    return client.call({
+      ...fetchFn,
+      options: { ...fetchFn.options, signal }
+    });
+  }
+
   return client.call(fetchFn);
 }
