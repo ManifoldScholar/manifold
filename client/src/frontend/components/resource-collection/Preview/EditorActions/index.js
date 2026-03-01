@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import { Link, useRouteLoaderData } from "react-router";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import Button from "global/components/atomic/Button";
 import Authorize from "hoc/Authorize";
-import { useFromStore } from "hooks";
+import { useLoaderEntity } from "hooks";
 import * as Styled from "frontend/components/resource/Preview/EditorActions/styles";
 
 const BUTTON_STYLE_PROPS = {
@@ -15,18 +15,12 @@ const BUTTON_STYLE_PROPS = {
 
 function ResourceCollectionPreviewEditorActions({
   resourceCollection,
-  textId,
   destroyAnnotation
 }) {
   const { t } = useTranslation();
 
-  const text = useFromStore({
-    action: "grab",
-    entityType: "texts",
-    id: textId
-  });
-
-  const project = useRouteLoaderData("routes/frontend/_frontend.projects.$id");
+  const text = useLoaderEntity("texts");
+  const project = useLoaderEntity("projects");
 
   return (
     <Styled.List>
@@ -62,7 +56,6 @@ ResourceCollectionPreviewEditorActions.displayName =
 
 ResourceCollectionPreviewEditorActions.propTypes = {
   resourceCollection: PropTypes.object.isRequired,
-  textId: PropTypes.string,
   destroyAnnotation: PropTypes.func
 };
 

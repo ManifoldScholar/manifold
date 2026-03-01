@@ -1,12 +1,10 @@
-import { flatRoutes } from "@react-router/fs-routes";
+import { recursiveFlatRoutes } from "./utils/recursiveFlatRoutes";
+
+const ignoredRouteFiles = ["**/styles.js", "**/ErrorBoundary.jsx"];
 
 export default [
-  ...(await flatRoutes({ rootDirectory: "routes/backend" })),
-  ...(await flatRoutes({ rootDirectory: "routes/frontend" })),
-  ...(await flatRoutes({ rootDirectory: "routes/global" })),
-  ...(await flatRoutes({ rootDirectory: "routes/reader" })),
-  ...(await flatRoutes({
+  ...(await recursiveFlatRoutes({
     rootDirectory: "routes",
-    ignoredRouteFiles: ["backend/**", "frontend/**", "global/**", "reader/**"]
+    ignoredRouteFiles: [...ignoredRouteFiles, "utility/**"]
   }))
 ];
