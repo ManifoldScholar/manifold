@@ -1,7 +1,6 @@
 import Pagination from "./Pagination/index";
 import EntityCount from "./EntityCount/index";
 import IconComposer from "./IconComposer";
-import LockBodyScroll from "./LockBodyScroll";
 import ScrollToTop from "./ScrollToTop";
 import SetCSSProperty from "./SetCSSProperty";
 import SkipLink from "./SkipLink";
@@ -12,7 +11,6 @@ export default {
   Pagination,
   EntityCount,
   IconComposer,
-  LockBodyScroll,
   ScrollToTop,
   SkipLink,
   LabelWithIcon,

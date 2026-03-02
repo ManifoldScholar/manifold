@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import config from "config";
 import get from "lodash/get";
-import withSettings from "hoc/withSettings";
+import { useSettings } from "hooks";
 import * as Styled from "./styles";
 
 const TEXT_PATHS = {
@@ -67,8 +67,9 @@ function fetchTextPath(props, type) {
 }
 
 function AccessDenied(props) {
-  const heading = fetchTextPath(props, "heading");
-  const body = fetchTextPath(props, "body");
+  const settings = useSettings();
+  const heading = fetchTextPath({ ...props, settings }, "heading");
+  const body = fetchTextPath({ ...props, settings }, "body");
 
   return <Styled.Warning icon="stopSign64" heading={heading} body={body} />;
 }
@@ -83,18 +84,9 @@ AccessDenied.propTypes = {
       restrictedAccessBody: PropTypes.string,
       restrictedAccessBodyFormatted: PropTypes.string
     })
-  }),
-  settings: PropTypes.shape({
-    attributes: PropTypes.shape({
-      general: PropTypes.shape({
-        restrictedAccessHeading: PropTypes.string,
-        restrictedAccessBody: PropTypes.string,
-        restrictedAccessBodyFormatted: PropTypes.string
-      })
-    })
   })
 };
 
 AccessDenied.defaultProps = { config };
 
-export default withSettings(AccessDenied);
+export default AccessDenied;

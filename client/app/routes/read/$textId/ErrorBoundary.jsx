@@ -7,7 +7,7 @@ import {
 import Layout from "reader/components/layout";
 import Footers from "global/components/Footers";
 import Header from "reader/components/Header";
-import BodyClass from "hoc/BodyClass";
+import { useBodyClass } from "hooks";
 import { ReaderContext } from "app/contexts";
 import { SearchProvider } from "hooks/useSearch/context";
 import FatalError from "global/components/FatalError";
@@ -20,6 +20,8 @@ export function ErrorBoundary() {
   const text = useLoaderData();
   const location = useLocation();
 
+  useBodyClass("reader scheme-light");
+
   if (
     isRouteErrorResponse(error) ||
     (!!error.status && STATUSES.includes(error.status))
@@ -27,22 +29,20 @@ export function ErrorBoundary() {
     const errorProps = formatError(error, location.pathname);
 
     return (
-      <BodyClass className="reader scheme-light">
-        <ReaderContext.Provider>
-          <SearchProvider>
-            <Header text={text} />
-            <main
-              id="skip-to-main"
-              tabIndex={-1}
-              className="main-content flex-viewport"
-            >
-              <FatalError {...errorProps} contained />
-            </main>
-          </SearchProvider>
-          <Footers.ReaderFooter text={text} />
-          <Layout.PostFooter />
-        </ReaderContext.Provider>
-      </BodyClass>
+      <ReaderContext.Provider>
+        <SearchProvider>
+          <Header text={text} />
+          <main
+            id="skip-to-main"
+            tabIndex={-1}
+            className="main-content flex-viewport"
+          >
+            <FatalError {...errorProps} contained />
+          </main>
+        </SearchProvider>
+        <Footers.ReaderFooter text={text} />
+        <Layout.PostFooter />
+      </ReaderContext.Provider>
     );
   }
 

@@ -11,7 +11,7 @@ import MobileBreadcrumb from "./mobile-components/Breadcrumb";
 import { FocusTrap } from "focus-trap-react";
 import IconComposer from "global/components/utility/IconComposer";
 import Authorize from "hoc/Authorize";
-import BodyClass from "hoc/BodyClass";
+import { useBodyClass } from "hooks";
 
 export default function NavigationMobile({ links, backendButton, mode }) {
   const { t } = useTranslation();
@@ -25,6 +25,8 @@ export default function NavigationMobile({ links, backendButton, mode }) {
   };
 
   const [state, setState] = useState(initialState);
+
+  useBodyClass(state.open ? "no-scroll" : undefined);
 
   const hasLinks = links && links.length > 0;
   const isStandalone = context.isStandalone;
@@ -240,47 +242,45 @@ export default function NavigationMobile({ links, backendButton, mode }) {
 
   const renderNavigationMenu = () => {
     return (
-      <BodyClass className={"no-scroll"}>
-        <FocusTrap
-          focusTrapOptions={{
-            allowOutsideClick: true,
-            escapeDeactivates: closeNavigation
-          }}
-        >
-          <div className="nested-nav__content">
-            <ul
-              aria-label="Page Links"
-              className="nested-nav__list nested-nav__list--primary-links"
-            >
-              {isStandalone && renderStandaloneHeading()}
-              {hasLinks &&
-                links.map((link, index) => {
-                  if (link.ability || link.kind)
-                    return (
-                      <Authorize
-                        key={`${pathForLink(link)}-wrapped`}
-                        entity={link.entity}
-                        ability={link.ability}
-                        kind={link.kind}
-                      >
-                        {renderItem(link, index)}
-                      </Authorize>
-                    );
-                  return renderItem(link, index);
-                })}
-              {mode === "frontend" && (
-                <li className="nested-nav__item">
-                  <MobileSearch closeNavigation={closeNavigation} />
-                </li>
-              )}
-            </ul>
-            <UserLinks
-              backendButton={backendButton}
-              closeNavigation={closeNavigation}
-            />
-          </div>
-        </FocusTrap>
-      </BodyClass>
+      <FocusTrap
+        focusTrapOptions={{
+          allowOutsideClick: true,
+          escapeDeactivates: closeNavigation
+        }}
+      >
+        <div className="nested-nav__content">
+          <ul
+            aria-label="Page Links"
+            className="nested-nav__list nested-nav__list--primary-links"
+          >
+            {isStandalone && renderStandaloneHeading()}
+            {hasLinks &&
+              links.map((link, index) => {
+                if (link.ability || link.kind)
+                  return (
+                    <Authorize
+                      key={`${pathForLink(link)}-wrapped`}
+                      entity={link.entity}
+                      ability={link.ability}
+                      kind={link.kind}
+                    >
+                      {renderItem(link, index)}
+                    </Authorize>
+                  );
+                return renderItem(link, index);
+              })}
+            {mode === "frontend" && (
+              <li className="nested-nav__item">
+                <MobileSearch closeNavigation={closeNavigation} />
+              </li>
+            )}
+          </ul>
+          <UserLinks
+            backendButton={backendButton}
+            closeNavigation={closeNavigation}
+          />
+        </div>
+      </FocusTrap>
     );
   };
 

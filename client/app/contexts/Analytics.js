@@ -1,20 +1,16 @@
 import { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
-import { useFromStore } from "hooks";
-import { requests } from "api";
+import { useSettings } from "hooks";
 import { ManifoldAnalyticsContext } from "helpers/contexts";
-import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
-import useManifoldAnalytics from "./hooks/useManifoldAnalytics";
+import useGoogleAnalytics from "./analytics/useGoogleAnalytics";
+import useManifoldAnalytics from "./analytics/useManifoldAnalytics";
 
 export default function Analytics({ children }) {
   const location = useLocation();
   const dispatch = useDispatch();
-  const settings = useFromStore({
-    requestKey: requests.settings,
-    action: "select"
-  });
+  const settings = useSettings();
 
   const { track: googleTrack } = useGoogleAnalytics(location, settings);
 

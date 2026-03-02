@@ -105,7 +105,7 @@ export default async function handleRequest(
                       content="width=device-width, initial-scale=1"
                     />
                   </head>
-                  <body>
+                  <body className="browse">
                     <GlobalStyles styles={styles} />
                     <div id="content">
                       <FatalError {...errorProps} />

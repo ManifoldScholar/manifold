@@ -1,6 +1,6 @@
 import { useRouteError, isRouteErrorResponse, useLocation } from "react-router";
 import Layout from "backend/components/layout";
-import BodyClass from "hoc/BodyClass";
+import { useBodyClass } from "hooks";
 import Footers from "global/components/Footers";
 import FatalError from "global/components/FatalError";
 import formatError from "app/routes/utility/helpers/formatError";
@@ -13,6 +13,8 @@ export function ErrorBoundary() {
   const location = useLocation();
   useScrollToTop();
 
+  useBodyClass("backend bg-neutral90");
+
   if (
     isRouteErrorResponse(error) ||
     (!!error.status && STATUSES.includes(error.status))
@@ -20,15 +22,13 @@ export function ErrorBoundary() {
     const errorProps = formatError(error, location.pathname);
 
     return (
-      <BodyClass className="backend bg-neutral90">
-        <>
-          <Layout.GlobalHeader />
-          <div className="main-content">
-            <FatalError {...errorProps} contained />
-          </div>
-          <Footers.FrontendFooter withVersion />
-        </>
-      </BodyClass>
+      <>
+        <Layout.GlobalHeader />
+        <div className="main-content">
+          <FatalError {...errorProps} contained />
+        </div>
+        <Footers.FrontendFooter withVersion />
+      </>
     );
   }
 

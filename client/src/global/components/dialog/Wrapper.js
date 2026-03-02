@@ -7,7 +7,7 @@ import classnames from "classnames";
 import { FocusTrap } from "focus-trap-react";
 import isString from "lodash/isString";
 import IconComposer from "global/components/utility/IconComposer";
-import BodyClass from "hoc/BodyClass";
+import { useBodyClass } from "hooks";
 
 export default function DialogWrapper({
   closeUrl,
@@ -96,40 +96,40 @@ export default function DialogWrapper({
     });
   }, [children, handleCloseClick, setDialogClassName]);
 
+  useBodyClass("no-scroll");
+
   const output = (
-    <BodyClass className={"no-scroll"}>
-      <FocusTrap
-        focusTrapOptions={{
-          escapeDeactivates: handleEscape
-        }}
-      >
-        <div className="dialog-wrapper">
-          {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
-          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-          <div
-            className="dialog-overlay"
-            onClick={handleOverlayClick}
-            role={overlayRole}
-          />
-          <div
-            role="dialog"
-            aria-modal
-            aria-labelledby={labelledBy}
-            aria-describedby={describedBy}
-            className={classnames("dialog", className, additionalClassNames)}
-            style={style}
-          >
-            {showCloseButton ? (
-              <button onClick={handleCloseClick} className="dialog__close">
-                <IconComposer icon="close16" size={24} />
-                <span className="screen-reader-text">{t("modals.close")}</span>
-              </button>
-            ) : null}
-            {renderChildren()}
-          </div>
+    <FocusTrap
+      focusTrapOptions={{
+        escapeDeactivates: handleEscape
+      }}
+    >
+      <div className="dialog-wrapper">
+        {/* The <div> element's role is declared dynamically, confusing jsx-a11y */}
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+        <div
+          className="dialog-overlay"
+          onClick={handleOverlayClick}
+          role={overlayRole}
+        />
+        <div
+          role="dialog"
+          aria-modal
+          aria-labelledby={labelledBy}
+          aria-describedby={describedBy}
+          className={classnames("dialog", className, additionalClassNames)}
+          style={style}
+        >
+          {showCloseButton ? (
+            <button onClick={handleCloseClick} className="dialog__close">
+              <IconComposer icon="close16" size={24} />
+              <span className="screen-reader-text">{t("modals.close")}</span>
+            </button>
+          ) : null}
+          {renderChildren()}
         </div>
-      </FocusTrap>
-    </BodyClass>
+      </div>
+    </FocusTrap>
   );
 
   if (__SERVER__) return output;

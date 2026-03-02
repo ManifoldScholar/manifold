@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Authorize from "hoc/Authorize";
-import withCurrentUser from "hoc/withCurrentUser";
+import { useAuthentication } from "hooks";
 import * as Styled from "./styles";
 
 function CurrentReadingGroup({
@@ -9,9 +9,9 @@ function CurrentReadingGroup({
   onClick,
   activeMenu,
   currentReadingGroup = "public",
-  readingGroups,
-  currentUser
+  readingGroups
 }) {
+  const { currentUser } = useAuthentication();
   const canAccessReadingGroups =
     currentUser?.attributes.classAbilities.readingGroup.read;
   const { t } = useTranslation();
@@ -65,8 +65,7 @@ CurrentReadingGroup.propTypes = {
   onClick: PropTypes.func.isRequired,
   activeMenu: PropTypes.string,
   readingGroups: PropTypes.array,
-  currentReadingGroup: PropTypes.string,
-  currentUser: PropTypes.object
+  currentReadingGroup: PropTypes.string
 };
 
-export default withCurrentUser(CurrentReadingGroup);
+export default CurrentReadingGroup;

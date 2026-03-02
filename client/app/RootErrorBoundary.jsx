@@ -70,7 +70,7 @@ export function ErrorBoundary() {
         <style>{styles.styles}</style>
         <Meta />
       </head>
-      <body>
+      <body className="browse">
         <CacheProvider value={cache}>
           <div id="content">
             <FatalError {...errorProps} />

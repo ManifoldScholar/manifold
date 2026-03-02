@@ -5,7 +5,7 @@ import { FocusTrap } from "focus-trap-react";
 import Header from "./Header";
 import helpers from "reader/containers/Annotatable/helpers/selectionHelpers";
 
-import BodyClass from "hoc/BodyClass";
+import { useBodyClass } from "hooks";
 
 function Overlay({
   open = true,
@@ -44,40 +44,40 @@ function Overlay({
     overlayRef.current.scrollTop = 0;
   }, [triggerScrollToTop]);
 
+  useBodyClass(open ? "no-scroll overlay" : undefined);
+
   return (
-    <BodyClass className={open ? "no-scroll overlay" : ""}>
-      <FocusTrap
-        active={open}
-        focusTrapOptions={{
-          escapeDeactivates: e => handleCloseEvent(e),
-          fallbackFocus: overlayRef
-        }}
+    <FocusTrap
+      active={open}
+      focusTrapOptions={{
+        escapeDeactivates: e => handleCloseEvent(e),
+        fallbackFocus: overlayRef
+      }}
+    >
+      <div
+        className={appearance || "overlay-full"}
+        ref={overlayRef}
+        id={id}
+        role="dialog"
+        aria-modal
+        aria-labelledby={headerId}
+        inert={!open ? "" : undefined}
       >
-        <div
-          className={appearance || "overlay-full"}
-          ref={overlayRef}
-          id={id}
-          role="dialog"
-          aria-modal
-          aria-labelledby={headerId}
-          inert={!open ? "" : undefined}
-        >
-          <div>
-            <Header
-              title={title}
-              subtitle={subtitle}
-              ariaLabel={ariaLabel}
-              icon={icon}
-              onCloseClick={handleCloseEvent}
-              headerId={headerId}
-            />
-            <div style={{ maxWidth: contentWidth }} className="container">
-              {children}
-            </div>
+        <div>
+          <Header
+            title={title}
+            subtitle={subtitle}
+            ariaLabel={ariaLabel}
+            icon={icon}
+            onCloseClick={handleCloseEvent}
+            headerId={headerId}
+          />
+          <div style={{ maxWidth: contentWidth }} className="container">
+            {children}
           </div>
         </div>
-      </FocusTrap>
-    </BodyClass>
+      </div>
+    </FocusTrap>
   );
 }
 

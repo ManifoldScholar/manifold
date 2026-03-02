@@ -5,8 +5,7 @@ import Menu from "../../parts/Menu";
 import RGMenuItem from "../../parts/RGMenuItem";
 import IconComposer from "global/components/utility/IconComposer";
 import lh from "helpers/linkHandler";
-import { useLoaderEntity } from "hooks";
-import withCurrentUser from "hoc/withCurrentUser";
+import { useAuthentication, useLoaderEntity } from "hooks";
 import * as Styled from "./styles";
 
 function ReadingGroupMenu({
@@ -17,9 +16,9 @@ function ReadingGroupMenu({
   direction,
   readingGroups,
   currentReadingGroup,
-  onSelect,
-  currentUser
+  onSelect
 }) {
+  const { currentUser } = useAuthentication();
   const text = useLoaderEntity("texts");
   const canEngagePublicly = text.attributes.abilities.engagePublicly;
   const canAccessReadingGroups =
@@ -107,8 +106,7 @@ ReadingGroupMenu.propTypes = {
   direction: PropTypes.oneOf(["up", "down"]),
   readingGroups: PropTypes.array,
   currentReadingGroup: PropTypes.string.isRequired,
-  onSelect: PropTypes.func.isRequired,
-  currentUser: PropTypes.object
+  onSelect: PropTypes.func.isRequired
 };
 
-export default withCurrentUser(ReadingGroupMenu);
+export default ReadingGroupMenu;

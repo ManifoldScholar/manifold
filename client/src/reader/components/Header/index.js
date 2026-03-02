@@ -17,9 +17,11 @@ import Utility from "global/components/utility";
 import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
 import Authorize from "hoc/Authorize";
 import { useLogout, useLoaderEntity } from "hooks";
+import useScrollAware from "hooks/useScrollAware";
 import { ReaderContext } from "app/contexts";
 
-export default function Header({ scrollAware }) {
+export default function Header() {
+  const scrollAware = useScrollAware();
   const { t } = useTranslation();
   const logout = useLogout();
   const text = useLoaderEntity("texts");

@@ -6,7 +6,7 @@ import Body from "./Body";
 import Annotatable from "reader/containers/Annotatable";
 import lh from "helpers/location";
 import filterAnnotations from "./helpers/filter-annotations";
-import HtmlClass from "hoc/HtmlClass";
+import { useHtmlClass } from "hooks";
 import isEqual from "lodash/isEqual";
 import { ReaderContext } from "app/contexts";
 
@@ -82,39 +82,39 @@ export default function Text({ text, section, annotations }) {
   // Apply a conditional container class that maps to a size in CSS
   const containerClass = `container-focus container-width-${typography?.margins?.current}`;
 
+  useHtmlClass(fontSizeClass);
+
   return (
-    <HtmlClass className={fontSizeClass}>
-      <div className="main-content" style={{ flexGrow: 1 }}>
-        <section className={readerAppearanceClass}>
-          <Annotatable
-            text={text}
-            section={section}
-            annotations={filteredAnnotations}
-            render={(
-              pendingAnnotation,
-              adjustedAnnotations,
-              destroyAnnotation
-            ) => (
-              <div className={containerClass}>
-                <div
-                  data-id="body"
-                  id="manifold-text-section"
-                  className={textSectionClass}
-                >
-                  <Body
-                    location={location}
-                    pendingAnnotation={pendingAnnotation}
-                    annotations={adjustedAnnotations}
-                    section={section}
-                    destroyAnnotation={destroyAnnotation}
-                  />
-                </div>
+    <div className="main-content" style={{ flexGrow: 1 }}>
+      <section className={readerAppearanceClass}>
+        <Annotatable
+          text={text}
+          section={section}
+          annotations={filteredAnnotations}
+          render={(
+            pendingAnnotation,
+            adjustedAnnotations,
+            destroyAnnotation
+          ) => (
+            <div className={containerClass}>
+              <div
+                data-id="body"
+                id="manifold-text-section"
+                className={textSectionClass}
+              >
+                <Body
+                  location={location}
+                  pendingAnnotation={pendingAnnotation}
+                  annotations={adjustedAnnotations}
+                  section={section}
+                  destroyAnnotation={destroyAnnotation}
+                />
               </div>
-            )}
-          />
-        </section>
-      </div>
-    </HtmlClass>
+            </div>
+          )}
+        />
+      </section>
+    </div>
   );
 }
 

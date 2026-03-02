@@ -4,7 +4,7 @@ import { Outlet } from "react-router";
 import Footers from "global/components/Footers";
 import Layout from "backend/components/layout";
 import { uiStateSnapshotActions } from "actions";
-import BodyClass from "hoc/BodyClass";
+import { useBodyClass } from "hooks";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import { useScrollToTop } from "hooks";
 import authorize from "app/routes/utility/loaders/authorize";
@@ -37,8 +37,10 @@ export default function BackendLayout() {
     };
   }, [dispatch]);
 
+  useBodyClass("backend bg-neutral90");
+
   return (
-    <BodyClass className="backend bg-neutral90">
+    <>
       <Layout.GlobalHeader />
       <BreadcrumbsProvider>
         <div className="main-content">
@@ -46,6 +48,6 @@ export default function BackendLayout() {
         </div>
       </BreadcrumbsProvider>
       <Footers.FrontendFooter withVersion />
-    </BodyClass>
+    </>
   );
 }

@@ -1,4 +1,3 @@
-export { default as useDeprecatedFetchData } from "./api/useDeprecatedFetchData";
 export { default as useApiCallback } from "./api/useApiCallback";
 export { default as useFetch } from "./api/useFetch";
 export { default as usePaginationState } from "./api/usePaginationState";
@@ -23,6 +22,7 @@ export { default as useListSearchParams } from "./useListSearchParams";
 export { default as usePreventBodyScroll } from "./usePreventBodyScroll";
 
 export { default as useBodyClass } from "./useBodyClass";
+export { default as useHtmlClass } from "./useHtmlClass";
 export { default as useColorScheme } from "./useColorScheme";
 
 export { default as useBlurOnLocationChange } from "./useBlurOnLocationChange";

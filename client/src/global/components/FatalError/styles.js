@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import IconComposer from "global/components/utility/IconComposer";
-import BodyClass from "hoc/BodyClass";
 import {
   buttonUnstyled,
   darken,
@@ -8,17 +7,6 @@ import {
   headingPrimary,
   headingTertiary
 } from "theme/styles/mixins";
-
-export const Body = styled(BodyClass)`
-  display: flex;
-  flex-direction: column;
-
-  #content {
-    flex-grow: 1;
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-`;
 
 export const Wrapper = styled.section`
   --_gap: 1.5rem;

@@ -4,7 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
 import get from "lodash/get";
-import Analytics from "hoc/analytics";
+import Analytics from "./contexts/Analytics";
 import Utility from "global/components/utility";
 import LoadingBar from "global/components/LoadingBar";
 import CookiesBanner from "global/components/CookiesBanner";

@@ -4,8 +4,7 @@ import Layout from "reader/components/layout";
 import Footers from "global/components/Footers";
 import Header from "reader/components/Header";
 import { textsAPI } from "api";
-import ScrollAware from "hoc/ScrollAware";
-import BodyClass from "hoc/BodyClass";
+import { useBodyClass } from "hooks";
 import { ReaderContext } from "app/contexts";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import { SearchProvider } from "hooks/useSearch/context";
@@ -62,26 +61,24 @@ export default function ReaderRoute({ loaderData: text }) {
     highContrast ? "high-contrast" : ""
   }`;
 
+  useBodyClass(bodyClass);
+
   return (
-    <BodyClass className={bodyClass}>
-      <ReaderContext.Provider value={contextValue}>
-        <EventTracker event={EVENTS.VIEW_RESOURCE} resource={text} />
-        <SearchProvider>
-          <ScrollAware>
-            <Header />
-          </ScrollAware>
-          <ReaderOverlay />
-          <main
-            id="skip-to-main"
-            tabIndex={-1}
-            className="main-content flex-viewport"
-          >
-            <Outlet context={text} />
-          </main>
-        </SearchProvider>
-        <Footers.ReaderFooter text={text} />
-        <Layout.PostFooter />
-      </ReaderContext.Provider>
-    </BodyClass>
+    <ReaderContext.Provider value={contextValue}>
+      <EventTracker event={EVENTS.VIEW_RESOURCE} resource={text} />
+      <SearchProvider>
+        <Header />
+        <ReaderOverlay />
+        <main
+          id="skip-to-main"
+          tabIndex={-1}
+          className="main-content flex-viewport"
+        >
+          <Outlet context={text} />
+        </main>
+      </SearchProvider>
+      <Footers.ReaderFooter text={text} />
+      <Layout.PostFooter />
+    </ReaderContext.Provider>
   );
 }
