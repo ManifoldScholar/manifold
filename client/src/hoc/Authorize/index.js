@@ -1,12 +1,10 @@
 import { useCallback } from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 import isPlainObject from "lodash/isPlainObject";
 import { Navigate, useLocation } from "react-router-dom";
-import { notificationActions } from "actions";
 import Authorization from "helpers/authorization";
 import FatalErrorRender from "global/components/FatalError";
-import { useAuthentication } from "hooks";
+import { useAuthentication, useNotifications } from "hooks";
 
 const authorization = new Authorization();
 
@@ -18,7 +16,7 @@ export default function Authorize(props) {
     children
   } = props;
 
-  const dispatch = useDispatch();
+  const { addNotification } = useNotifications();
   const location = useLocation();
   const authentication = useAuthentication();
   const propsWithAuth = { ...props, authentication };
@@ -98,9 +96,9 @@ export default function Authorize(props) {
       if (isPlainObject(failureNotificationParam)) {
         error = Object.assign(error, failureNotificationParam);
       }
-      dispatch(notificationActions.addNotification(error));
+      addNotification(error);
     },
-    [dispatch]
+    [addNotification]
   );
 
   const redirectAndNotify = useCallback(

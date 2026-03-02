@@ -7,7 +7,7 @@ import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import Form from "global/components/form";
-import { useAuthentication, useNotification } from "hooks";
+import { useAuthentication, useNotifications } from "hooks";
 import HeadContent from "global/components/HeadContent";
 import * as Styled from "./styles";
 
@@ -39,18 +39,18 @@ export default function SubscriptionsRoute({ actionData }) {
     currentUser?.attributes?.notificationPreferences
   );
 
-  const notifyUpdate = useNotification(() => ({
-    level: 0,
-    id: `CURRENT_USER_UPDATED`,
-    heading: t("forms.signin_overlay.update_notification_header"),
-    expiration: 3000
-  }));
+  const { addNotification } = useNotifications();
 
   useEffect(() => {
     if (actionData?.success) {
-      notifyUpdate();
+      addNotification({
+        level: 0,
+        id: `CURRENT_USER_UPDATED`,
+        heading: t("forms.signin_overlay.update_notification_header"),
+        expiration: 3000
+      });
     }
-  }, [actionData?.success, notifyUpdate]);
+  }, [actionData?.success, addNotification, t]);
 
   const formatData = () => {
     return {
