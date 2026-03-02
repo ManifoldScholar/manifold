@@ -1,10 +1,12 @@
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Static from "global/components/navigation/Static";
 import Mobile from "global/components/navigation/Mobile";
 import { Link, useLocation } from "react-router";
 import { getAdminModeLabel, getDestinationPath } from "./helpers";
-import { useFromStore, useAuthentication } from "hooks";
+import { AppContext } from "app/contexts";
+import { useLoaderCollection, useAuthentication } from "hooks";
 import Authorization from "helpers/authorization";
 
 export default function NavigationPrimary(props) {
@@ -16,19 +18,26 @@ export default function NavigationPrimary(props) {
 
   const label = getAdminModeLabel({ currentUser, mode: props.mode, t });
 
-  const resources = useFromStore({ path: `entityStore.entities.resources` });
-  const resourceCollections = useFromStore({
-    path: `entityStore.entities.resourceCollections`
-  });
-  const pages = useFromStore({ path: `entityStore.entities.pages` });
-  const texts = useFromStore({ path: `entityStore.entities.texts` });
-  const fatalError = useFromStore({ path: "fatalError" });
+  const { pages: pagesArray } = useContext(AppContext);
+
+  // This isn't quite right. Fix after BE routes are migrated.
+  const resources = useLoaderCollection("resources");
+  const resourceCollections = useLoaderCollection("resource_collections");
+  const texts = useLoaderCollection("texts");
+
+  const toEntityMap = arr =>
+    arr ? Object.fromEntries(arr.map(item => [item.id, item])) : {};
+  const entities = {
+    resources: toEntityMap(resources),
+    resourceCollections: toEntityMap(resourceCollections),
+    pages: toEntityMap(pagesArray),
+    texts: toEntityMap(texts)
+  };
 
   const to = getDestinationPath({
     mode: props.mode,
     pathname,
-    entities: { resources, resourceCollections, pages, texts },
-    fatalError
+    entities
   });
 
   const authorization = new Authorization();

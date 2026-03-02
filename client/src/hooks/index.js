@@ -8,9 +8,6 @@ export { default as useAuthentication } from "./useAuthentication";
 
 export { default as useSettings } from "./useSettings";
 export { default as useLogout } from "./useLogout";
-
-export { default as useFromStore } from "./useFromStore";
-
 export { default as useEventTracker } from "./useEventTracker";
 
 export { default as useAnalyticsContext } from "./useAnalyticsContext";

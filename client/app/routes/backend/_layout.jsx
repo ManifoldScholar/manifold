@@ -1,9 +1,6 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Outlet } from "react-router";
 import Footers from "global/components/Footers";
 import Layout from "backend/components/layout";
-import { uiStateSnapshotActions } from "actions";
 import { useBodyClass } from "hooks";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import { useScrollToTop } from "hooks";
@@ -29,14 +26,6 @@ export { ErrorBoundary };
 
 export default function BackendLayout() {
   useScrollToTop();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    return () => {
-      dispatch(uiStateSnapshotActions.resetSnapshots());
-    };
-  }, [dispatch]);
-
   useBodyClass("backend bg-neutral90");
 
   return (

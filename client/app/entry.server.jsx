@@ -2,11 +2,8 @@ import { PassThrough } from "node:stream";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { ServerRouter } from "react-router";
 import { renderToPipeableStream, renderToString } from "react-dom/server";
-import { Provider } from "react-redux";
 import { CacheProvider, Global as GlobalStyles } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
-import createStore from "store/createStore";
-import { setStore } from "store/storeInstance";
 import {
   createEmotionStyleFixerStream,
   createEmotionStyleExtractorStream,
@@ -27,11 +24,6 @@ export default async function handleRequest(
   responseHeaders,
   routerContext
 ) {
-  // Create a fresh store for each request
-  // Middleware handles user/settings via context, so no bootstrap needed
-  const store = createStore();
-  setStore(store);
-
   // Create Emotion cache and server instance for advanced SSR
   const cache = createEmotionCache();
   const {
@@ -58,9 +50,7 @@ export default async function handleRequest(
 
     const { pipe, abort } = renderToPipeableStream(
       <CacheProvider value={cache}>
-        <Provider store={store}>
-          <ServerRouter context={routerContext} url={request.url} />
-        </Provider>
+        <ServerRouter context={routerContext} url={request.url} />
       </CacheProvider>,
       {
         onShellReady() {
