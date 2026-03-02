@@ -1,7 +1,6 @@
 import { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router";
-import { useDispatch } from "react-redux";
 import { useSettings } from "hooks";
 import { ManifoldAnalyticsContext } from "helpers/contexts";
 import useGoogleAnalytics from "./analytics/useGoogleAnalytics";
@@ -9,16 +8,11 @@ import useManifoldAnalytics from "./analytics/useManifoldAnalytics";
 
 export default function Analytics({ children }) {
   const location = useLocation();
-  const dispatch = useDispatch();
   const settings = useSettings();
 
   const { track: googleTrack } = useGoogleAnalytics(location, settings);
 
-  const { track: manifoldTrack } = useManifoldAnalytics(
-    location,
-    settings,
-    dispatch
-  );
+  const { track: manifoldTrack } = useManifoldAnalytics(location, settings);
 
   const onTrack = useCallback(
     trackedEvent => {

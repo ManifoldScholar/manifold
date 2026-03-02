@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import get from "lodash/get";
 import ReactGA from "react-ga4";
 import ch from "helpers/consoleHelpers";

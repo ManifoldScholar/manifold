@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import get from "lodash/get";
 import CookieHelper from "helpers/cookie/Browser";
 import config from "config";
 import ch from "helpers/consoleHelpers";
 import { v1 as uuidv1 } from "uuid";
-import { entityStoreActions, currentUserActions } from "actions";
-import { analyticEventsAPI, requests } from "api";
-import { useAuthentication } from "hooks";
+import { analyticEventsAPI } from "api";
+import { useApiCallback, useAuthentication } from "hooks";
 
-const { request } = entityStoreActions;
 const cookie = new CookieHelper();
 
 function nullTracker(trackedEventIgnored) {}
@@ -36,8 +34,9 @@ function getTokens() {
   return { visitToken, visitorToken };
 }
 
-export default function useManifoldAnalytics(location, settings, dispatch) {
+export default function useManifoldAnalytics(location, settings) {
   const { currentUser } = useAuthentication();
+  const createAnalyticEvent = useApiCallback(analyticEventsAPI.create);
   const [consentManifoldAnalytics, setConsentManifoldAnalytics] = useState(
     currentUser?.attributes?.consentManifoldAnalytics || false
   );
@@ -54,9 +53,6 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
 
   useEffect(() => {
     if (manifoldAnalyticsEnabled(settings) && consentManifoldAnalytics) {
-      const { visitToken, visitorToken } = getTokens();
-      dispatch(currentUserActions.setVisitorToken(visitorToken));
-      dispatch(currentUserActions.setVisitToken(visitToken));
       if (config.environment.isDevelopment) {
         ch.notice(
           `Manifold analytics initialized.`,
@@ -64,7 +60,7 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
         );
       }
     }
-  }, [dispatch, settings, consentManifoldAnalytics]);
+  }, [settings, consentManifoldAnalytics]);
 
   const track = trackedEvent => {
     const { visitToken, visitorToken } = getTokens();
@@ -84,12 +80,7 @@ export default function useManifoldAnalytics(location, settings, dispatch) {
         recordId: resourceId
       }
     };
-    const call = analyticEventsAPI.create(visitorToken, visitToken, payload);
-    const trackRequest = request(call, requests.analyticsEventCreate, {
-      silent: true,
-      suppressErrors: true
-    });
-    dispatch(trackRequest);
+    createAnalyticEvent(visitorToken, visitToken, payload).catch(() => {});
   };
 
   if (!manifoldAnalyticsEnabled(settings) || !consentManifoldAnalytics)
