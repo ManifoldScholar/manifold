@@ -1,38 +1,37 @@
+import { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useRevalidator } from "react-router";
+import { useFetcher } from "react-router";
 import template from "lodash/template";
 import classNames from "classnames";
 import { useConfirmation } from "hooks";
 import Dialog from "global/components/dialog";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
 
 function JoinGroup({ readingGroup, buttonText, outlined }) {
   const { t } = useTranslation();
-  const { revalidate } = useRevalidator();
+  const fetcher = useFetcher();
   const { confirm, confirmation } = useConfirmation();
 
-  const joinGroup = group => {
+  useEffect(() => {
+    if (fetcher.data?.errors) {
+      console.error("Failed to join reading group:", fetcher.data.errors);
+    }
+  }, [fetcher.data]);
+
+  const doJoin = useCallback(() => {
     const {
       href: endpoint,
       meta: { method }
-    } = group.links.join;
-    return queryApi({
-      endpoint,
-      method,
-      options: {}
-    });
-  };
-
-  const doJoin = async () => {
-    try {
-      await joinGroup(readingGroup);
-      revalidate();
-    } catch (error) {
-      // Error handling - could show a notification here if needed
-      console.error("Failed to join reading group:", error);
-    }
-  };
+    } = readingGroup.links.join;
+    fetcher.submit(
+      JSON.stringify({ intent: "join-via-link", endpoint, method }),
+      {
+        method: "post",
+        encType: "application/json",
+        action: "/actions/reading-group-membership"
+      }
+    );
+  }, [readingGroup, fetcher]);
 
   function handleClick() {
     const heading = t("messages.reading_group.join.heading");
@@ -42,9 +41,8 @@ function JoinGroup({ readingGroup, buttonText, outlined }) {
       heading,
       message: compiledMessage,
       callback: closeDialog => {
-        doJoin().then(() => {
-          closeDialog();
-        });
+        doJoin();
+        closeDialog();
       }
     });
   }

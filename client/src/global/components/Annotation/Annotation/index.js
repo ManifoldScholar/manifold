@@ -16,7 +16,7 @@ export default function Annotation({
   showMarkers,
   markerIcons,
   compact,
-  refresh,
+  onDelete,
   ...props
 }) {
   const navigate = useNavigate();
@@ -27,8 +27,8 @@ export default function Annotation({
   const deleteHandler = useCallback(async () => {
     await deleteAnnotation(annotation.id);
     revalidate();
-    if (refresh) refresh(annotation.id);
-  }, [annotation.id, deleteAnnotation, refresh, revalidate]);
+    if (onDelete) onDelete(annotation.id);
+  }, [annotation.id, deleteAnnotation, revalidate, onDelete]);
 
   const handleVisit = useCallback(
     event => {
@@ -63,7 +63,6 @@ export default function Annotation({
         showMarkers={showMarkers}
         markerIcons={markerIcons}
         compact={compact}
-        refresh={refresh}
         {...props}
       />
     );
@@ -78,7 +77,6 @@ export default function Annotation({
         showMarkers={showMarkers}
         markerIcons={markerIcons}
         compact={compact}
-        refresh={refresh}
         deleteHandler={deleteHandler}
         {...props}
       />
@@ -93,7 +91,6 @@ export default function Annotation({
       showMarkers={showMarkers}
       markerIcons={markerIcons}
       compact={compact}
-      refresh={refresh}
       deleteHandler={deleteHandler}
       {...props}
     />
@@ -109,5 +106,5 @@ Annotation.propTypes = {
   showMarkers: PropTypes.bool,
   markerIcons: PropTypes.bool,
   compact: PropTypes.bool,
-  refresh: PropTypes.func
+  onDelete: PropTypes.func
 };

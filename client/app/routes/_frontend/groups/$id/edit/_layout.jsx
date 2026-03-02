@@ -6,7 +6,10 @@ import {
 } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useRevalidator } from "react-router";
-import { readingGroupsAPI } from "api";
+import { readingGroupsAPI, collectingAPI } from "api";
+import { routerContext } from "app/contexts";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
+import handleActionError from "app/routes/utility/helpers/handleActionError";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
@@ -15,6 +18,81 @@ import { CollectionEditor } from "frontend/components/collecting/reading-group";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import SearchDialog from "frontend/components/collecting/SearchDialog";
 import * as Styled from "./styles";
+
+export async function action({ request, context, params }) {
+  const { auth } = context.get(routerContext) ?? {};
+  if (!auth?.authToken) return { errors: [{ detail: "Unauthorized" }] };
+
+  const requestData = await request.json();
+  const { intent, ...data } = requestData;
+
+  try {
+    if (intent === "create-category") {
+      const result = await queryApi(
+        readingGroupsAPI.createCategory(params.id, data),
+        context
+      );
+      if (result?.errors) return { errors: result.errors };
+      return { success: true };
+    }
+
+    if (intent === "update-category") {
+      const { categoryId, ...updateData } = data;
+      const result = await queryApi(
+        readingGroupsAPI.updateCategory(params.id, categoryId, updateData),
+        context
+      );
+      if (result?.errors) return { errors: result.errors };
+      return { success: true };
+    }
+
+    if (intent === "update-category-position") {
+      const { categoryId, position } = data;
+      const result = await queryApi(
+        readingGroupsAPI.updateCategory(params.id, categoryId, {
+          attributes: { position }
+        }),
+        context
+      );
+      if (result?.errors) return { errors: result.errors };
+      return { success: true };
+    }
+
+    if (intent === "delete-category") {
+      const { categoryId } = data;
+      const result = await queryApi(
+        readingGroupsAPI.destroyCategory(params.id, categoryId),
+        context
+      );
+      if (result?.errors) return { errors: result.errors };
+      return { success: true };
+    }
+
+    if (intent === "update-collectables") {
+      const { collectables, collection } = data;
+      const result = await queryApi(
+        collectingAPI.collect(collectables, collection),
+        context
+      );
+      if (result?.errors) return { errors: result.errors };
+      return { success: true };
+    }
+
+    if (intent === "remove-collectable") {
+      const { collectables, collection } = data;
+      const result = await queryApi(
+        collectingAPI.remove(collectables, collection),
+        context
+      );
+      if (result?.errors) return { errors: result.errors };
+      return { success: true };
+    }
+
+    return { errors: [{ detail: "Unknown intent" }] };
+  } catch (error) {
+    return handleActionError(error, "Category operation failed");
+  }
+}
 
 export const loader = async ({ params, request, context }) => {
   const fetchFn = () => readingGroupsAPI.show(params.id);
@@ -101,7 +179,6 @@ export default function ReadingGroupHomepageEdit({ loaderData }) {
           readingGroup={readingGroup}
           categories={categories}
           responses={responses}
-          refresh={revalidate}
         />
       </Styled.Body>
       <OutletWithDrawer

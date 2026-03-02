@@ -26,10 +26,6 @@ function ResourceDetailAnnotations() {
       ANNOTATION_FILTERS,
       annotationsPagination
     ],
-    options: {
-      requestKey: "RESOURCE_DETAIL_ANNOTATIONS",
-      appends: "RESOURCE_DETAIL_ANNOTATIONS"
-    },
     dependencies: [resourceId]
   });
 
@@ -43,7 +39,7 @@ function ResourceDetailAnnotations() {
     <>
       <AnnotationList
         annotations={annotations}
-        refresh={refreshAnnotations}
+        onDelete={refreshAnnotations}
         compact
       />
       {!!annotationsMeta?.pagination?.nextPage && (

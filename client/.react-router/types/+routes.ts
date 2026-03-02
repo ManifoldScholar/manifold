@@ -14,6 +14,12 @@ type Pages = {
   "/": {
     params: {};
   };
+  "/actions/reading-group-membership": {
+    params: {};
+  };
+  "/actions/reading-group-status": {
+    params: {};
+  };
   "/actions/forgot-password": {
     params: {};
   };
@@ -24,6 +30,9 @@ type Pages = {
     params: {};
   };
   "/actions/flag-content": {
+    params: {};
+  };
+  "/actions/collect": {
     params: {};
   };
   "/actions/signup": {
@@ -262,7 +271,15 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/actions/forgot-password" | "/actions/resource-create" | "/actions/update-profile" | "/actions/flag-content" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/unsubscribe/:token" | "/my/groups" | "/journals" | "/journals/issues" | "/projects" | "/my/groups/new" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes/:volumeId" | "/journals/:id/volumes" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/backend" | "/backend/dashboard" | "/backend/*" | "/*";
+    page: "/" | "/actions/reading-group-membership" | "/actions/reading-group-status" | "/actions/forgot-password" | "/actions/resource-create" | "/actions/update-profile" | "/actions/flag-content" | "/actions/collect" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/unsubscribe/:token" | "/my/groups" | "/journals" | "/journals/issues" | "/projects" | "/my/groups/new" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes/:volumeId" | "/journals/:id/volumes" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/backend" | "/backend/dashboard" | "/backend/*" | "/*";
+  };
+  "routes/actions/reading-group-membership.jsx": {
+    id: "routes/actions/reading-group-membership";
+    page: "/actions/reading-group-membership";
+  };
+  "routes/actions/reading-group-status.jsx": {
+    id: "routes/actions/reading-group-status";
+    page: "/actions/reading-group-status";
   };
   "routes/actions/forgot-password.jsx": {
     id: "routes/actions/forgot-password";
@@ -279,6 +296,10 @@ type RouteFiles = {
   "routes/actions/flag-content.jsx": {
     id: "routes/actions/flag-content";
     page: "/actions/flag-content";
+  };
+  "routes/actions/collect.jsx": {
+    id: "routes/actions/collect";
+    page: "/actions/collect";
   };
   "routes/actions/signup.jsx": {
     id: "routes/actions/signup";
@@ -528,10 +549,13 @@ type RouteFiles = {
 
 type RouteModules = {
   "root": typeof import("./app/root.jsx");
+  "routes/actions/reading-group-membership": typeof import("./app/routes/actions/reading-group-membership.jsx");
+  "routes/actions/reading-group-status": typeof import("./app/routes/actions/reading-group-status.jsx");
   "routes/actions/forgot-password": typeof import("./app/routes/actions/forgot-password.jsx");
   "routes/actions/resource-create": typeof import("./app/routes/actions/resource-create.jsx");
   "routes/actions/update-profile": typeof import("./app/routes/actions/update-profile.jsx");
   "routes/actions/flag-content": typeof import("./app/routes/actions/flag-content.jsx");
+  "routes/actions/collect": typeof import("./app/routes/actions/collect.jsx");
   "routes/actions/signup": typeof import("./app/routes/actions/signup.jsx");
   "routes/actions/login": typeof import("./app/routes/actions/login.jsx");
   "routes/read/$textId": typeof import("./app/routes/read/$textId/_layout.jsx");

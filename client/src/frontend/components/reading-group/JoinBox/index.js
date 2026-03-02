@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback, useId, useMemo } from "react";
+import { useState, useEffect, useCallback, useId } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useRevalidator } from "react-router";
+import { useLocation, useFetcher } from "react-router";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import { useAuthentication, useConfirmation } from "hooks";
-import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
+import { readingGroupsAPI } from "api";
 import template from "lodash/template";
 import Dialog from "global/components/dialog";
 import ActionBox from "frontend/components/reading-group/ActionBox";
@@ -15,7 +15,7 @@ function JoinBox({ readingGroup }) {
   const { t } = useTranslation();
   const location = useLocation();
   const { currentUser } = useAuthentication();
-  const { revalidate } = useRevalidator();
+  const fetcher = useFetcher();
   const { confirm, confirmation } = useConfirmation();
   const [code, setCode] = useState("");
   const id = useId();
@@ -35,22 +35,31 @@ function JoinBox({ readingGroup }) {
   }, [messages, confirm]);
 
   const doJoin = useCallback(
-    async readingGroupData => {
-      try {
-        await queryApi(
-          readingGroupMembershipsAPI.create({
-            userId: currentUser.id,
-            readingGroupId: readingGroupData.id
-          })
-        );
-        setCode("");
-        revalidate();
-      } catch (error) {
-        handleFailure();
-      }
+    readingGroupData => {
+      fetcher.submit(
+        JSON.stringify({
+          intent: "join",
+          userId: currentUser.id,
+          readingGroupId: readingGroupData.id
+        }),
+        {
+          method: "post",
+          encType: "application/json",
+          action: "/actions/reading-group-membership"
+        }
+      );
     },
-    [currentUser, revalidate, handleFailure]
+    [currentUser, fetcher]
   );
+
+  useEffect(() => {
+    if (fetcher.data?.success) {
+      setCode("");
+    }
+    if (fetcher.data?.errors) {
+      handleFailure();
+    }
+  }, [fetcher.data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const openConfirmation = useCallback(
     readingGroupData => {
@@ -63,9 +72,8 @@ function JoinBox({ readingGroup }) {
         heading,
         message: compiledMessage,
         callback: closeDialog => {
-          doJoin(readingGroupData).then(() => {
-            closeDialog();
-          });
+          doJoin(readingGroupData);
+          closeDialog();
         }
       });
     },

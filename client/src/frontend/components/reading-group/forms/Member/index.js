@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { readingGroupMembershipsAPI, requests } from "api";
 import Form from "global/components/form";
 import StylePreview from "./StylePreview";
 import * as Styled from "./styles";
@@ -37,7 +36,6 @@ function ReadingGroupMemberForm({
   return (
     <Styled.Form
       model={membership}
-      name={requests.feReadingGroupMembershipEdit}
       submit={submit}
       errors={errors}
       className="form-secondary"

@@ -1,48 +1,47 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useRevalidator } from "react-router";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { useFetcher } from "react-router";
 import { useConfirmation } from "hooks";
 import Dialog from "global/components/dialog";
 
 export default function useArchiveOrActivateGroup({ membership }) {
   const { t } = useTranslation();
-  const { revalidate } = useRevalidator();
+  const fetcher = useFetcher();
   const { confirm, confirmation } = useConfirmation();
 
   const archive = membership?.links?.archive;
   const activate = membership?.links?.activate;
 
-  const doArchive = useCallback(async () => {
-    if (!archive) {
-      throw new Error("Archiving is not permitted under this membership.");
+  useEffect(() => {
+    if (fetcher.data?.errors) {
+      console.error(
+        "Reading group status operation failed:",
+        fetcher.data.errors
+      );
     }
-    await queryApi({
-      endpoint: archive,
-      method: "POST",
-      options: {}
-    });
-  }, [archive]);
+  }, [fetcher.data]);
 
-  const doActivate = useCallback(async () => {
-    if (!activate) {
-      throw new Error("Activation is not permitted under this membership.");
-    }
-    await queryApi({
-      endpoint: activate,
-      method: "POST",
-      options: {}
+  const doArchive = useCallback(() => {
+    if (!archive) return;
+    fetcher.submit(JSON.stringify({ intent: "archive", endpoint: archive }), {
+      method: "post",
+      encType: "application/json",
+      action: "/actions/reading-group-status"
     });
-  }, [activate]);
+  }, [archive, fetcher]);
 
-  const onClick = useCallback(async () => {
+  const doActivate = useCallback(() => {
+    if (!activate) return;
+    fetcher.submit(JSON.stringify({ intent: "activate", endpoint: activate }), {
+      method: "post",
+      encType: "application/json",
+      action: "/actions/reading-group-status"
+    });
+  }, [activate, fetcher]);
+
+  const onClick = useCallback(() => {
     if (activate) {
-      try {
-        await doActivate();
-        revalidate();
-      } catch (error) {
-        console.error("Failed to activate reading group:", error);
-      }
+      doActivate();
       return;
     }
 
@@ -51,18 +50,12 @@ export default function useArchiveOrActivateGroup({ membership }) {
     confirm({
       heading,
       message,
-      callback: async closeDialog => {
-        try {
-          await doArchive();
-          revalidate();
-          closeDialog();
-        } catch (error) {
-          console.error("Failed to archive reading group:", error);
-          closeDialog();
-        }
+      callback: closeDialog => {
+        doArchive();
+        closeDialog();
       }
     });
-  }, [activate, doActivate, doArchive, confirm, t, revalidate]);
+  }, [activate, doActivate, doArchive, confirm, t]);
 
   return {
     onClick,

@@ -10,7 +10,6 @@ export default function TextAnnotation({
   showCommentsToggleAsBlock,
   showMarkers,
   markerIcons,
-  refresh,
   readingGroups
 }) {
   const annotationListClassNames = classNames({
@@ -40,7 +39,6 @@ export default function TextAnnotation({
           includeMarkers={showMarkers}
           markerIcons={markerIcons}
           showCommentsToggleAsBlock={showCommentsToggleAsBlock}
-          refresh={refresh}
           readingGroups={readingGroups}
         />
       </ul>
@@ -57,6 +55,5 @@ TextAnnotation.propTypes = {
   showCommentsToggleAsBlock: PropTypes.bool,
   showMarkers: PropTypes.bool,
   markerIcons: PropTypes.bool,
-  refresh: PropTypes.func,
   readingGroups: PropTypes.array
 };

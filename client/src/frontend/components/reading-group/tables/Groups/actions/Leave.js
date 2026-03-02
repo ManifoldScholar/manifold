@@ -1,25 +1,34 @@
-import { useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useFetcher } from "react-router";
 import Action from "global/components/table/Action";
-import { readingGroupMembershipsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import { useRevalidator } from "react-router";
 
 function LeaveGroup({ membership, readingGroup }) {
   const { t } = useTranslation();
-  const { revalidate } = useRevalidator();
+  const fetcher = useFetcher();
+
+  useEffect(() => {
+    if (fetcher.data?.errors) {
+      console.error("Failed to leave reading group:", fetcher.data.errors);
+    }
+  }, [fetcher.data]);
 
   const destroyMembership = useCallback(
-    async rgMembership => {
-      try {
-        await queryApi(readingGroupMembershipsAPI.destroy(rgMembership.id));
-        revalidate();
-      } catch (err) {
-        console.error(err);
-      }
+    rgMembership => {
+      fetcher.submit(
+        JSON.stringify({
+          intent: "leave",
+          membershipId: rgMembership.id
+        }),
+        {
+          method: "post",
+          encType: "application/json",
+          action: "/actions/reading-group-membership"
+        }
+      );
     },
-    [revalidate]
+    [fetcher]
   );
 
   const isCreator =

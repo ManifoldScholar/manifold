@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useRevalidator } from "react-router";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import Switch from "global/components/form/Switch";
 import * as Styled from "./styles";
@@ -10,7 +9,6 @@ import { useNavigate } from "react-router";
 function HeadingManageGroup({ readingGroup, location }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { revalidate } = useRevalidator();
   const currentLocation = useLocation();
 
   const settingsPath = `${currentLocation.pathname}/settings`;
@@ -23,7 +21,6 @@ function HeadingManageGroup({ readingGroup, location }) {
     if (!inEditMode) {
       navigate(homepageEditPath);
     } else {
-      revalidate();
       navigate(homepageStaticPath);
     }
   }

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router";
 import groupBy from "lodash/groupBy";
 import isEqual from "lodash/isEqual";
-import { meAPI, readingGroupsAPI, requests } from "api";
+import { meAPI, readingGroupsAPI } from "api";
 import Overlay from "global/components/Overlay";
 import {
   useFetch,
@@ -55,15 +55,11 @@ function ReaderFullNotesContainer({ closeCallback }) {
 
   const isMe = currentGroupId === "me" || currentGroupId === "orphaned";
   const endpoint = isMe ? meAPI.annotations : readingGroupsAPI.annotations;
-  const fetchKey = isMe
-    ? requests.rMyFilteredAnnotationsForText
-    : requests.rReadingGroupFilteredAnnotationsForText;
   const args = isMe
     ? [filters, pagination]
     : [currentGroupId, filters, pagination];
   const { data: annotations, meta, refresh } = useFetch({
-    request: [endpoint, ...args],
-    options: { fetchKey }
+    request: [endpoint, ...args]
   });
 
   const readingGroup =
@@ -141,7 +137,7 @@ function ReaderFullNotesContainer({ closeCallback }) {
         paginationProps={{
           paginationClickHandler: page => () => setPageNumber(page)
         }}
-        refresh={refresh}
+        onDelete={refresh}
         nested
       />
     </Overlay>

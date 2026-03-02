@@ -9,9 +9,9 @@ export default class GroupedBySection extends PureComponent {
   static propTypes = {
     groupedAnnotations: PropTypes.array.isRequired,
     handleVisitAnnotation: PropTypes.func.isRequired,
+    onDelete: PropTypes.func,
     pagination: PropTypes.object,
-    paginationClickHandler: PropTypes.func,
-    refresh: PropTypes.func
+    paginationClickHandler: PropTypes.func
   };
 
   get notesListClassNames() {
@@ -59,7 +59,7 @@ export default class GroupedBySection extends PureComponent {
                           visitHandler={this.props.handleVisitAnnotation}
                           annotation={annotation}
                           displayFormat="fullPage"
-                          refresh={this.props.refresh}
+                          onDelete={this.props.onDelete}
                         />
                       </li>
                     );

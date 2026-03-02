@@ -1,14 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { collectingAPI } from "api";
+import { useFetcher } from "react-router";
 import Dialog from "frontend/components/collecting/Dialog";
 import Text from "./Text";
 import Icons from "./Icons";
 import { inCollections } from "../helpers";
-import { useRevalidator } from "react-router";
 import { useAuthentication, useReadingGroups } from "hooks";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
 
 const COLLECTABLE_TYPE_RESTRICTED_LIST = ["journals"];
 
@@ -38,6 +36,16 @@ function normalizeTitle(collectable) {
   return "";
 }
 
+function buildCollection(collection) {
+  if (
+    collection?.type === "readingGroups" ||
+    collection?.type === "reading-groups"
+  ) {
+    return { type: collection.type, id: collection.id };
+  }
+  return { type: "users" };
+}
+
 function CollectingToggle({
   collectable,
   inline = true,
@@ -50,6 +58,7 @@ function CollectingToggle({
   const [hovered, setHovered] = useState(false);
   const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [lastIntent, setLastIntent] = useState(null);
 
   const { readingGroups } = useReadingGroups();
 
@@ -63,13 +72,22 @@ function CollectingToggle({
   }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const { currentUser } = useAuthentication();
-  const { revalidate } = useRevalidator();
+  const fetcher = useFetcher();
 
   const collected = inCollections(collectable, currentUser, ...readingGroups);
 
   useEffect(() => {
     setIsCollecting(false);
   }, [collected]);
+
+  useEffect(() => {
+    if (fetcher.data?.success && lastIntent === "remove" && onUncollect) {
+      onUncollect();
+    }
+    if (fetcher.data?.errors) {
+      console.error("Collection operation failed:", fetcher.data.errors);
+    }
+  }, [fetcher.data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const view = determineView(collected, hovered, isCollecting);
   const hasReadingGroups = myCollectableReadingGroups?.length > 0;
@@ -85,31 +103,44 @@ function CollectingToggle({
   };
 
   const doCollect = useCallback(
-    async (collection = currentUser) => {
-      try {
-        await queryApi(collectingAPI.collect([collectable], collection));
-        setHovered(false);
-        setIsCollecting(true);
-        revalidate();
-      } catch (error) {
-        console.error("Failed to collect:", error);
-      }
+    (collection = currentUser) => {
+      setHovered(false);
+      setIsCollecting(true);
+      setLastIntent("collect");
+      fetcher.submit(
+        JSON.stringify({
+          intent: "collect",
+          collectables: [collectable],
+          collection: buildCollection(collection)
+        }),
+        {
+          method: "post",
+          encType: "application/json",
+          action: "/actions/collect"
+        }
+      );
     },
-    [collectable, currentUser, revalidate]
+    [collectable, currentUser, fetcher]
   );
 
   const doRemove = useCallback(
-    async (collection = currentUser) => {
-      try {
-        await queryApi(collectingAPI.remove([collectable], collection));
-        setHovered(false);
-        revalidate();
-        if (onUncollect) onUncollect(collection);
-      } catch (error) {
-        console.error("Failed to remove from collection:", error);
-      }
+    (collection = currentUser) => {
+      setHovered(false);
+      setLastIntent("remove");
+      fetcher.submit(
+        JSON.stringify({
+          intent: "remove",
+          collectables: [collectable],
+          collection: buildCollection(collection)
+        }),
+        {
+          method: "post",
+          encType: "application/json",
+          action: "/actions/collect"
+        }
+      );
     },
-    [collectable, currentUser, onUncollect, revalidate]
+    [collectable, currentUser, fetcher]
   );
 
   const onClick = useCallback(

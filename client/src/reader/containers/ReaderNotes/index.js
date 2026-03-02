@@ -1,7 +1,7 @@
 import { cloneElement, useMemo, useContext } from "react";
 import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router";
-import { readingGroupsAPI, meAPI, requests } from "api";
+import { readingGroupsAPI, meAPI } from "api";
 import groupBy from "lodash/groupBy";
 import isString from "lodash/isString";
 import {
@@ -51,13 +51,11 @@ function ReaderNotesContainer({ children }) {
 
   const { data: myAnnotations, meta: myMeta, loaded: myLoaded } = useFetch({
     request: [meAPI.annotations, fetchFilters],
-    condition: showMyAnnotations,
-    options: { fetchKey: requests.rMyFilteredAnnotationsForText }
+    condition: showMyAnnotations
   });
   const { data: rgAnnotations, meta: rgMeta, loaded: rgLoaded } = useFetch({
     request: [readingGroupsAPI.annotations, groupId, fetchFilters],
-    condition: !showMyAnnotations,
-    options: { fetchKey: requests.rReadingGroupFilteredAnnotationsForText }
+    condition: !showMyAnnotations
   });
 
   const annotations = showMyAnnotations ? myAnnotations : rgAnnotations;

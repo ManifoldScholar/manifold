@@ -6,7 +6,7 @@ function AnnotationListDefault({
   annotations,
   handleVisitAnnotation,
   showCommentsToggleAsBlock,
-  refresh,
+  onDelete,
   showMarkers,
   markerIcons,
   compact = false,
@@ -26,7 +26,7 @@ function AnnotationListDefault({
               annotation={annotation}
               displayFormat="fullPage"
               showCommentsToggleAsBlock={showCommentsToggleAsBlock}
-              refresh={refresh}
+              onDelete={onDelete}
               showMarkers={showMarkers}
               markerIcons={markerIcons}
               compact={compact}
@@ -44,7 +44,7 @@ AnnotationListDefault.propTypes = {
   annotations: PropTypes.array,
   handleVisitAnnotation: PropTypes.func,
   showCommentsToggleAsBlock: PropTypes.bool,
-  refresh: PropTypes.func,
+  onDelete: PropTypes.func,
   showMarkers: PropTypes.bool,
   markerIcons: PropTypes.bool,
   compact: PropTypes.bool,

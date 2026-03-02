@@ -1,7 +1,6 @@
-import { useMemo } from "react";
 import PropTypes from "prop-types";
 import { useFetch } from "hooks";
-import { annotationsAPI, requests } from "api";
+import { annotationsAPI } from "api";
 import Annotation from "global/components/Annotation";
 
 export default function ViewAnnotations({
@@ -11,19 +10,13 @@ export default function ViewAnnotations({
   annotationIds,
   close: closeDrawer
 }) {
-  const request = useMemo(
-    () => [
+  const { data: annotations } = useFetch({
+    request: [
       annotationsAPI.forSection,
       sectionId,
       textId,
       { ids: annotationIds }
-    ],
-    [textId, sectionId, annotationIds]
-  );
-
-  const { data: annotations } = useFetch({
-    request,
-    options: { requestKey: requests.rDrawerAnnotations }
+    ]
   });
 
   const saveAnnotation = (model, group) => {

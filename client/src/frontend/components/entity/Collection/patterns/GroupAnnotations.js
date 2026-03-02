@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useRevalidator } from "react-router";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import Annotation from "global/components/Annotation";
@@ -18,7 +17,6 @@ function GroupAnnotationsEntityCollection({
   ...passThroughProps
 }) {
   const { t } = useTranslation();
-  const { revalidate } = useRevalidator();
 
   if (!readingGroup || !annotations || !annotationsMeta) return null;
 
@@ -44,7 +42,6 @@ function GroupAnnotationsEntityCollection({
           {hasAnnotations && (
             <Annotation.List.Default
               annotations={annotations}
-              refresh={revalidate}
               showCommentsToggleAsBlock
             />
           )}

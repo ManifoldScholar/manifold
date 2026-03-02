@@ -61,7 +61,7 @@ export default function ResourceCollectionAnnotations({
         <>
           <AnnotationList
             annotations={annotations}
-            refresh={afterDelete}
+            onDelete={afterDelete}
             compact
           />
           {!!annotationsMeta?.pagination?.nextPage && (
