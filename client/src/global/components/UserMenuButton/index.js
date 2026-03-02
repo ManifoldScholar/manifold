@@ -11,7 +11,7 @@ const UserMenuButton = forwardRef(
       context = "frontend",
       callbacks,
       className,
-      onClick: onClickIgnored,
+      onClick,
       ...props
     },
     ref
@@ -22,7 +22,12 @@ const UserMenuButton = forwardRef(
 
     function handleClick(event) {
       event.stopPropagation();
-      authenticated ? callbacks.toggleUserPanel() : toggleSignInUpOverlay();
+      if (authenticated) {
+        callbacks?.toggleUserPanel();
+        onClick?.(event);
+      } else {
+        toggleSignInUpOverlay();
+      }
     }
 
     return (
