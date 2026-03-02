@@ -15,9 +15,9 @@ export const handle = {
   drawer: true
 };
 
-export const loader = async ({ params, context }) => {
+export const loader = async ({ params, request, context }) => {
   const fetchFn = () => readingGroupMembershipsAPI.show(params.membershipId);
-  return loadEntity({ context, fetchFn });
+  return loadEntity({ context, fetchFn, request });
 };
 
 export async function action({ request, context, params }) {

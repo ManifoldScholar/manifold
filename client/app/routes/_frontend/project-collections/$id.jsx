@@ -23,7 +23,7 @@ export const loader = async ({ params, request, context }) => {
   }
 
   const fetchFn = () => projectCollectionsAPI.show(params.id);
-  const projectCollection = await loadEntity({ context, fetchFn });
+  const projectCollection = await loadEntity({ context, fetchFn, request });
 
   const projectsData = await loadList({
     request,

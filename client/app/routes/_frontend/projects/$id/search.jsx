@@ -13,7 +13,7 @@ import * as Styled from "app/routes/utility/search/styles";
 export const loader = async ({ params, request, context }) => {
   // Load project to get its UUID (API expects UUID, not slug)
   const fetchFn = () => projectsAPI.show(params.id);
-  const project = await loadEntity({ context, fetchFn });
+  const project = await loadEntity({ context, fetchFn, request });
 
   return searchLoader({
     request,

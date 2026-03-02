@@ -96,7 +96,7 @@ export async function action({ request, context, params }) {
 
 export const loader = async ({ params, request, context }) => {
   const fetchFn = () => readingGroupsAPI.show(params.id);
-  const readingGroup = await loadEntity({ context, fetchFn });
+  const readingGroup = await loadEntity({ context, fetchFn, request });
 
   await authorize({
     request,

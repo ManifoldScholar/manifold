@@ -12,9 +12,9 @@ import { useParams } from "react-router";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };
 
-export const loader = async ({ params, context }) => {
+export const loader = async ({ params, request, context }) => {
   const fetchFn = () => journalVolumesAPI.show(params.volumeId);
-  return loadEntity({ context, fetchFn });
+  return loadEntity({ context, fetchFn, request });
 };
 
 // Can adjust the api, but for now issues are included with

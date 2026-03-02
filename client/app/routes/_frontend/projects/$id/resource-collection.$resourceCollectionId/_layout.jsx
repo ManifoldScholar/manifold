@@ -9,7 +9,7 @@ export const loader = async ({ params, request, context }) => {
 
   const fetchFn = () =>
     resourceCollectionsAPI.show(params.resourceCollectionId);
-  return loadEntity({ context, fetchFn });
+  return loadEntity({ context, fetchFn, request });
 };
 
 export default function ResourceCollectionLayoutRoute({

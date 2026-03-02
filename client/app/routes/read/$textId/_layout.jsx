@@ -19,7 +19,8 @@ export { ErrorBoundary };
 export const loader = async ({ params, request, context }) => {
   const text = await loadEntity({
     context,
-    fetchFn: () => textsAPI.show(params.textId)
+    fetchFn: () => textsAPI.show(params.textId),
+    request
   });
 
   const url = new URL(request.url);

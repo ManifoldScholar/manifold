@@ -4,13 +4,13 @@ import { journalsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 
-export const loader = async ({ params, context }) => {
+export const loader = async ({ params, request, context }) => {
   if (params.id === "all") {
     throw redirect("/journals");
   }
 
   const fetchFn = () => journalsAPI.show(params.id);
-  return loadEntity({ context, fetchFn });
+  return loadEntity({ context, fetchFn, request });
 };
 
 export default function JournalWrapperRoute({ loaderData: journal }) {

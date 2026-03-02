@@ -2,9 +2,9 @@ import { pagesAPI } from "api";
 import HeadContent from "global/components/HeadContent";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 
-export const loader = async ({ params, context }) => {
+export const loader = async ({ params, request, context }) => {
   const fetchFn = () => pagesAPI.show(params.slug);
-  return loadEntity({ context, fetchFn });
+  return loadEntity({ context, fetchFn, request });
 };
 
 export default function PageRoute({ loaderData: page }) {

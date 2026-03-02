@@ -18,7 +18,7 @@ const DEFAULT_PAGINATION = { page: 1, perPage: 10 };
 
 export const loader = async ({ params, request, context }) => {
   const fetchFn = () => readingGroupsAPI.show(params.id);
-  const readingGroup = await loadEntity({ context, fetchFn });
+  const readingGroup = await loadEntity({ context, fetchFn, request });
 
   const { abilities, currentUserRole } = readingGroup.attributes || {};
   const canUpdateGroup = abilities?.update;
