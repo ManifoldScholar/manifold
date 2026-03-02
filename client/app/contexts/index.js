@@ -25,3 +25,12 @@ export const ReaderContext = createReactContext({
   ...initialReaderState,
   dispatch: () => {}
 });
+
+// Notification context - separate from AppContext to avoid re-renders
+// from frequent notification state changes
+export const NotificationContext = createReactContext({
+  notifications: [],
+  addNotification: () => {},
+  removeNotification: () => {},
+  removeNotifications: () => {}
+});

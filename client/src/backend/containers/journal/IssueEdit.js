@@ -3,7 +3,7 @@ import { useParams, useNavigate, useOutletContext } from "react-router";
 import Issue from "backend/components/issue";
 import Layout from "backend/components/layout";
 import { journalIssuesAPI } from "api";
-import { useFetch, useApiCallback, useNotification } from "hooks";
+import { useFetch, useApiCallback, useNotifications } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import lh from "helpers/linkHandler";
 
@@ -23,13 +23,7 @@ function JournalIssueEdit({ confirm }) {
     removes: journalIssue
   });
 
-  const notifyDestroy = useNotification(i => ({
-    level: 0,
-    id: `JOURNAL_ISSUE_DESTROYED_${i.id}`,
-    heading: "The issue has been destroyed.",
-    body: `Issue #${i?.attributes?.number} has passed into the endless night.`,
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const handleSuccess = useCallback(() => {
     navigate(closeUrl, { state: { keepNotifications: false } });
@@ -40,12 +34,18 @@ function JournalIssueEdit({ confirm }) {
       navigate(lh.link("backendJournalIssues", journal?.id));
     destroy(journalIssue.id).then(
       () => {
-        notifyDestroy(journalIssue);
+        addNotification({
+          level: 0,
+          id: `JOURNAL_ISSUE_DESTROYED_${journalIssue.id}`,
+          heading: "The issue has been destroyed.",
+          body: `Issue #${journalIssue?.attributes?.number} has passed into the endless night.`,
+          expiration: 5000
+        });
         redirect();
       },
       () => redirect()
     );
-  }, [destroy, navigate, journal?.id, journalIssue, notifyDestroy]);
+  }, [destroy, navigate, journal?.id, journalIssue, addNotification]);
 
   const onDelete = useCallback(() => {
     const heading = "Are you sure you want to delete this issue?";

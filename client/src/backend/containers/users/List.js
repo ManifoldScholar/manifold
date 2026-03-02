@@ -14,7 +14,7 @@ import {
   useListQueryParams,
   useFetch,
   useApiCallback,
-  useNotification
+  useNotifications
 } from "hooks";
 import {
   useBulkActions,
@@ -63,16 +63,7 @@ function UsersListContainer({
 
   const bulkDelete = useApiCallback(bulkDeleteAPI.users);
 
-  const notifyBulkDelete = useNotification(count => ({
-    level: 0,
-    id: "BULK_DELETE_SUCCESS",
-    heading: t("notifications.bulk_delete_success"),
-    body: t("notifications.bulk_delete_success_body", {
-      count,
-      entity: t("glossary.user", { count })
-    }),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const unit = t("glossary.user", { count: usersMeta?.pagination?.totalCount });
 
@@ -88,7 +79,17 @@ function UsersListContainer({
           ? { filters: bulkSelection.filters, ids: [] }
           : { filters: {}, ids: bulkSelection.ids };
         const res = await bulkDelete(params);
-        notifyBulkDelete(res.bulk_deletions.total);
+        const count = res.bulk_deletions.total;
+        addNotification({
+          level: 0,
+          id: "BULK_DELETE_SUCCESS",
+          heading: t("notifications.bulk_delete_success"),
+          body: t("notifications.bulk_delete_success_body", {
+            count,
+            entity: t("glossary.user", { count })
+          }),
+          expiration: 5000
+        });
         refresh();
         resetBulkSelection();
       });

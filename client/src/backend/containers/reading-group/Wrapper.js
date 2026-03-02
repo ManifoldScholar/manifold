@@ -6,7 +6,7 @@ import { readingGroupsAPI } from "api";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
-import { useFetch, useApiCallback, useNotification } from "hooks";
+import { useFetch, useApiCallback, useNotifications } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -25,26 +25,26 @@ function ReadingGroupWrapper({ confirm }) {
     removes: readingGroup
   });
 
-  const notifyDestroy = useNotification(rg => ({
-    level: 0,
-    id: `READING_GROUP_DESTROYED_${rg.id}`,
-    heading: t("notifications.reading_group_delete"),
-    body: t("notifications.delete_entity_body", {
-      title: rg?.name
-    }),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const destroyAndRedirect = useCallback(() => {
     const redirect = () => navigate(lh.link("backendReadingGroups"));
     destroy(readingGroup.id).then(
       () => {
-        notifyDestroy(readingGroup);
+        addNotification({
+          level: 0,
+          id: `READING_GROUP_DESTROYED_${readingGroup.id}`,
+          heading: t("notifications.reading_group_delete"),
+          body: t("notifications.delete_entity_body", {
+            title: readingGroup?.name
+          }),
+          expiration: 5000
+        });
         redirect();
       },
       () => redirect()
     );
-  }, [destroy, navigate, readingGroup, notifyDestroy]);
+  }, [destroy, navigate, readingGroup, addNotification, t]);
 
   const handleReadingGroupDestroy = useCallback(() => {
     const heading = t("modals.delete_reading_group");

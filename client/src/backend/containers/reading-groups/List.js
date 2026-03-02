@@ -10,7 +10,7 @@ import {
   useFetch,
   useApiCallback,
   useListQueryParams,
-  useNotification
+  useNotifications
 } from "hooks";
 import withFilteredLists, { readingGroupFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -74,16 +74,7 @@ function ReadingGroupsList({
 
   const bulkDelete = useApiCallback(bulkDeleteAPI.readingGroups);
 
-  const notifyBulkDelete = useNotification(count => ({
-    level: 0,
-    id: "BULK_DELETE_SUCCESS",
-    heading: t("notifications.bulk_delete_success"),
-    body: t("notifications.bulk_delete_success_body", {
-      count,
-      entity: t("glossary.reading_group", { count })
-    }),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const unit = t("glossary.reading_group", {
     count: meta?.pagination?.totalCount
@@ -101,7 +92,17 @@ function ReadingGroupsList({
           ? { filters: bulkSelection.filters, ids: [] }
           : { filters: {}, ids: bulkSelection.ids };
         const res = await bulkDelete(params);
-        notifyBulkDelete(res.bulk_deletions.total);
+        const count = res.bulk_deletions.total;
+        addNotification({
+          level: 0,
+          id: "BULK_DELETE_SUCCESS",
+          heading: t("notifications.bulk_delete_success"),
+          body: t("notifications.bulk_delete_success_body", {
+            count,
+            entity: t("glossary.reading_group", { count })
+          }),
+          expiration: 5000
+        });
         refresh();
         resetBulkSelection();
       });

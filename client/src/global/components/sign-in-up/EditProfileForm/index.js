@@ -5,7 +5,7 @@ import ProfileFormFields from "./ProfileFormFields";
 import Greeting from "./Greeting";
 import { useNavigate } from "react-router";
 import { useRevalidator } from "react-router";
-import { useAuthentication, useSettings, useNotification } from "hooks";
+import { useAuthentication, useSettings, useNotifications } from "hooks";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "frontend/components/privacy/CookiesForm/CookiesFormFields";
 import Form from "global/components/form";
@@ -30,12 +30,7 @@ export default function EditProfileForm({ hideOverlay, mode }) {
   const googleAnalyticsEnabled = !!settings?.attributes?.integrations
     ?.gaFourTrackingId;
 
-  const notifyUpdate = useNotification(() => ({
-    level: 0,
-    id: `CURRENT_USER_UPDATED`,
-    heading: t("forms.signin_overlay.update_notification_header"),
-    expiration: 3000
-  }));
+  const { addNotification } = useNotifications();
 
   const formatAttributes = data => {
     const consentAttrs =
@@ -57,11 +52,16 @@ export default function EditProfileForm({ hideOverlay, mode }) {
 
   useEffect(() => {
     if (fetcher.data?.success) {
-      notifyUpdate();
+      addNotification({
+        level: 0,
+        id: `CURRENT_USER_UPDATED`,
+        heading: t("forms.signin_overlay.update_notification_header"),
+        expiration: 3000
+      });
       revalidate();
       if (hideOverlay) hideOverlay();
     }
-  }, [fetcher.data, notifyUpdate, revalidate, hideOverlay]);
+  }, [fetcher.data, addNotification, t, revalidate, hideOverlay]);
 
   const redirect = path => () => {
     if (hideOverlay) hideOverlay();

@@ -7,7 +7,6 @@ import thunkMiddleware from "./middleware/thunkMiddleware";
 import oauthMiddleware from "./middleware/oauthMiddleware";
 import entityStoreMiddleware from "./middleware/entityStoreMiddleware";
 import currentUserMiddleware from "./middleware/currentUserMiddleware";
-import notificationMiddleware from "./middleware/notificationMiddleware";
 import apiErrorMiddleware from "./middleware/apiErrorMiddleware";
 import websocketMiddleware from "./middleware/websocketMiddleware";
 import updatePersistentUi from "./subscriptions/updatePersistentUi";
@@ -27,7 +26,6 @@ export default function createStore(data) {
   middleware.push(thunkMiddleware);
   middleware.push(promiseMiddleware);
   middleware.push(websocketMiddleware);
-  middleware.push(notificationMiddleware);
 
   let finalCreateStore;
   if (__BROWSER__) {

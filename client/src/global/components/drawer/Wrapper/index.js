@@ -1,8 +1,7 @@
 import { useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { notificationActions } from "actions";
+import { useNotifications } from "hooks";
 import Content from "../Content";
 import * as Styled from "./styles";
 
@@ -14,17 +13,17 @@ export default function DrawerWrapper({
 }) {
   const { closeCallback, closeUrl } = props;
   const uid = useId();
-  const dispatch = useDispatch();
+  const { removeNotifications } = useNotifications();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (open) {
-      dispatch(notificationActions.removeNotifications("global"));
+      removeNotifications("global");
     }
-  }, [open, dispatch]);
+  }, [open, removeNotifications]);
 
   const clearDrawerNotifications = () => {
-    dispatch(notificationActions.removeNotifications("drawer"));
+    removeNotifications("drawer");
   };
 
   const handleLeaveEvent = e => {

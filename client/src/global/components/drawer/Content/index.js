@@ -2,7 +2,7 @@ import { forwardRef, useRef, cloneElement } from "react";
 import PropTypes from "prop-types";
 import { FocusTrap } from "focus-trap-react";
 import classNames from "classnames";
-import Notifications from "global/containers/Notifications";
+import Notifications from "global/components/Notifications";
 import FrontMatter from "../FrontMatter";
 import { DrawerContext } from "helpers/contexts";
 import { usePreventBodyScroll } from "hooks";

@@ -5,7 +5,7 @@ import NavigationBlocker from "global/components/router/NavigationBlocker";
 import Heading from "./Heading";
 import Actions from "./Actions";
 import Log from "./Log";
-import { useFetch, useApiCallback, useNotification } from "hooks";
+import { useFetch, useApiCallback, useNotifications } from "hooks";
 import { ingestionsAPI } from "api";
 import useFetchIngestionMessages from "./useFetchIngestionMessages";
 
@@ -38,14 +38,7 @@ export default function IngestContainer() {
   const doProcess = useApiCallback(ingestionsAPI.process);
   const doReset = useApiCallback(ingestionsAPI.reset);
 
-  const setErrorNotification = useNotification(message => ({
-    level: 0,
-    id: `INGESTION_ERROR`,
-    heading: t("texts.ingestion.error.heading"),
-    body: message,
-    expiration: 0,
-    scope: ingestion.attributes.state !== "sleeping" ? "global" : "drawer"
-  }));
+  const { addNotification } = useNotifications();
 
   const onReset = async () => {
     if (loading) return;
@@ -56,7 +49,14 @@ export default function IngestContainer() {
       setLog("Ready to ingest...");
       setShouldFetch(true);
     } else {
-      setErrorNotification(errors);
+      addNotification({
+        level: 0,
+        id: `INGESTION_ERROR`,
+        heading: t("texts.ingestion.error.heading"),
+        body: errors,
+        expiration: 0,
+        scope: ingestion.attributes.state !== "sleeping" ? "global" : "drawer"
+      });
     }
   };
 
@@ -69,7 +69,14 @@ export default function IngestContainer() {
       setLog(log.concat("\n").concat("Starting ingestion..."));
       startPolling();
     } else {
-      setErrorNotification(errors);
+      addNotification({
+        level: 0,
+        id: `INGESTION_ERROR`,
+        heading: t("texts.ingestion.error.heading"),
+        body: errors,
+        expiration: 0,
+        scope: ingestion.attributes.state !== "sleeping" ? "global" : "drawer"
+      });
     }
   };
 

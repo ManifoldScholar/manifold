@@ -1,8 +1,4 @@
-import {
-  currentUserActions,
-  uiVisibilityActions,
-  notificationActions
-} from "actions";
+import { currentUserActions, uiVisibilityActions } from "actions";
 import { bindActionCreators } from "redux";
 
 const {
@@ -15,11 +11,6 @@ const {
   panelShow,
   showMyNotes
 } = uiVisibilityActions;
-const {
-  addNotification,
-  removeNotification,
-  removeAllNotifications
-} = notificationActions;
 
 function b(action, dispatch) {
   return bindActionCreators(action, dispatch);
@@ -35,9 +26,6 @@ const commonActions = dispatch => {
     hideVisibilityPanel: b(() => panelHide("visibility"), dispatch),
     hideNotesPanel: b(() => panelHide("notes"), dispatch),
     hideReaderReturnPanel: b(() => panelHide("readerReturn"), dispatch),
-    addNotification: b(opts => addNotification(opts), dispatch),
-    removeNotification: b(opts => removeNotification(opts), dispatch),
-    clearNotifications: b(removeAllNotifications, dispatch),
     logout: b(currentUserActions.logout, dispatch),
     visibilityChange: b(el => visibilityChange(el), dispatch),
     visibilityToggle: b(el => visibilityToggle(el), dispatch),

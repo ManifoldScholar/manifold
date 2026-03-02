@@ -3,21 +3,14 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import Form from "global/components/form";
-import { useNotification } from "hooks";
+import { useNotifications } from "hooks";
 import * as SharedStyles from "../styles";
 
 export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const { t } = useTranslation();
   const fetcher = useFetcher();
 
-  const notifySuccess = useNotification(email => ({
-    level: 0,
-    id: "PASSWORD_RESET_SENT",
-    heading: t("forms.signin_overlay.send_reset_success", {
-      email
-    }),
-    expiration: 3000
-  }));
+  const { addNotification } = useNotifications();
 
   const formatData = useCallback(data => {
     return data.email;
@@ -25,10 +18,17 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
 
   useEffect(() => {
     if (fetcher.data?.success) {
-      notifySuccess(fetcher.data.email || "your email");
+      addNotification({
+        level: 0,
+        id: "PASSWORD_RESET_SENT",
+        heading: t("forms.signin_overlay.send_reset_success", {
+          email: fetcher.data.email || "your email"
+        }),
+        expiration: 3000
+      });
       if (hideOverlay) hideOverlay();
     }
-  }, [fetcher.data, hideOverlay, notifySuccess]);
+  }, [fetcher.data, hideOverlay, addNotification, t]);
 
   return (
     <div>

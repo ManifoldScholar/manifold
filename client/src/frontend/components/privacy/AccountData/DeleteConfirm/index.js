@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNotification, useAuthentication, useLogout } from "hooks";
+import { useNotifications, useAuthentication, useLogout } from "hooks";
 import { meAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import Form from "global/components/form";
@@ -15,21 +15,21 @@ export default function DeleteConfirm() {
   const [mismatch, setMismatch] = useState(false);
   const [errors, setErrors] = useState(null);
 
-  const notifyDestroy = useNotification(me => ({
-    level: 0,
-    id: `USER_DESTROYED_${me.id}`,
-    heading: t("forms.privacy.delete.confirmation_header"),
-    body: t("forms.privacy.delete.confirmation_body", {
-      name: me?.attributes?.fullName
-    }),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const deleteAndRedirect = async () => {
     try {
       const res = await queryApi(meAPI.destroy());
       if (res?.errors) return setErrors(res.errors);
-      notifyDestroy(currentUser);
+      addNotification({
+        level: 0,
+        id: `USER_DESTROYED_${currentUser.id}`,
+        heading: t("forms.privacy.delete.confirmation_header"),
+        body: t("forms.privacy.delete.confirmation_body", {
+          name: currentUser?.attributes?.fullName
+        }),
+        expiration: 5000
+      });
       logout();
     } catch (error) {
       console.error("Failed to delete account:", error);

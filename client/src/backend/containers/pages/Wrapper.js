@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
-import { useFetch, useApiCallback, useNotification } from "hooks";
+import { useFetch, useApiCallback, useNotifications } from "hooks";
 import Authorize from "hoc/Authorize";
 
 function PageWrapper({ confirm }) {
@@ -25,19 +25,19 @@ function PageWrapper({ confirm }) {
     removes: page
   });
 
-  const notifyDestroy = useNotification(p => ({
-    level: 0,
-    id: `PAGE_DESTROYED_${p.id}`,
-    heading: t("notifications.page_delete"),
-    body: t("notifications.delete_record_body"),
-    expiration: 3000
-  }));
+  const { addNotification } = useNotifications();
 
   const doDestroy = async () => {
     if (!page) return;
     try {
       await deletePage(page.id);
-      notifyDestroy(page);
+      addNotification({
+        level: 0,
+        id: `PAGE_DESTROYED_${page.id}`,
+        heading: t("notifications.page_delete"),
+        body: t("notifications.delete_record_body"),
+        expiration: 3000
+      });
       navigate(lh.link("backendRecordsPages"));
     } catch {
       navigate(lh.link("backendRecordsPages"));

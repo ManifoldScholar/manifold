@@ -5,7 +5,7 @@ import { useFetcher } from "react-router";
 import { CategoryNewToggle } from "./CategoryNew";
 import SortableCategories from "./SortableCategories";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
-import { useNotification } from "hooks";
+import { useNotifications } from "hooks";
 import * as Styled from "./styles";
 
 export default function CollectionEditor({
@@ -16,17 +16,17 @@ export default function CollectionEditor({
   const { t } = useTranslation();
   const fetcher = useFetcher();
 
-  const notifyUpdateError = useNotification(() => ({
-    level: 2,
-    id: "READING_GROUP_UPDATE_FAILURE",
-    heading: t("notifications.reading_group_update_failure"),
-    body: t("notifications.reading_group_update_failure_body"),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   useEffect(() => {
     if (fetcher.data?.errors) {
-      notifyUpdateError();
+      addNotification({
+        level: 2,
+        id: "READING_GROUP_UPDATE_FAILURE",
+        heading: t("notifications.reading_group_update_failure"),
+        body: t("notifications.reading_group_update_failure_body"),
+        expiration: 5000
+      });
     }
   }, [fetcher.data]); // eslint-disable-line react-hooks/exhaustive-deps
 

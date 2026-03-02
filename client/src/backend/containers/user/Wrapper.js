@@ -6,7 +6,7 @@ import { usersAPI } from "api";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
-import { useFetch, useApiCallback, useNotification } from "hooks";
+import { useFetch, useApiCallback, useNotifications } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -32,23 +32,23 @@ function UserWrapper({ confirm }) {
 
   const update = useApiCallback(usersAPI.update);
 
-  const notifyDestroy = useNotification(u => ({
-    level: 0,
-    id: `USER_DESTROYED_${u.id}`,
-    heading: t("notifications.user_delete", { name: u.attributes.fullName }),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const destroyAndRedirect = useCallback(async () => {
     const redirect = () => navigate(lh.link("backendRecordsUsers"));
     try {
       await destroy(user.id);
-      notifyDestroy(user);
+      addNotification({
+        level: 0,
+        id: `USER_DESTROYED_${user.id}`,
+        heading: t("notifications.user_delete", { name: user.attributes.fullName }),
+        expiration: 5000
+      });
       redirect();
     } catch {
       redirect();
     }
-  }, [destroy, navigate, user, notifyDestroy]);
+  }, [destroy, navigate, user, addNotification, t]);
 
   const handleUserDestroy = useCallback(() => {
     const heading = t("modals.delete_user");

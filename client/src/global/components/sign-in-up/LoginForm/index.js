@@ -7,7 +7,7 @@ import {
   useLocation,
   useNavigate
 } from "react-router";
-import Notifications from "global/containers/Notifications";
+import Notifications from "global/components/Notifications";
 import Form from "global/components/form";
 import BrowserCookieHelper from "helpers/cookie/Browser";
 import * as Styled from "./styles";

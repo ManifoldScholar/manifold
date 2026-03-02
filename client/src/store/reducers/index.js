@@ -2,7 +2,6 @@ import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
 
 import ui from "./ui";
-import notifications from "./notifications";
 import authentication from "./authentication";
 import fatalError from "./fatalError";
 import oauth from "./oauth";
@@ -16,7 +15,6 @@ const reducers = combineReducers({
   entityStore,
   entityEditor,
   ui,
-  notifications,
   fatalError,
   routing,
   oauth,

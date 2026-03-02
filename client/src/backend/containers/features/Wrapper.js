@@ -7,7 +7,7 @@ import Layout from "backend/components/layout";
 import PageHeader from "backend/components/layout/PageHeader";
 import FrontendLayout from "frontend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
-import { useFetch, useApiCallback, useNotification, useFromStore } from "hooks";
+import { useFetch, useApiCallback, useNotifications, useFromStore } from "hooks";
 import Form from "global/components/form";
 import Authorize from "hoc/Authorize";
 
@@ -30,24 +30,24 @@ function FeatureDetailWrapper({ confirm }) {
     removes: feature
   });
 
-  const notifyDestroy = useNotification(f => ({
-    level: 0,
-    id: `FEATURE_DESTROYED_${f.id}`,
-    heading: t("notifications.feature_delete"),
-    body: t("notifications.delete_record_body"),
-    expiration: 3000
-  }));
+  const { addNotification } = useNotifications();
 
   const doDestroy = useCallback(async () => {
     if (!feature) return;
     try {
       await deleteFeature(feature.id);
-      notifyDestroy(feature);
+      addNotification({
+        level: 0,
+        id: `FEATURE_DESTROYED_${feature.id}`,
+        heading: t("notifications.feature_delete"),
+        body: t("notifications.delete_record_body"),
+        expiration: 3000
+      });
       navigate(lh.link("backendRecordsFeatures"));
     } catch {
       navigate(lh.link("backendRecordsFeatures"));
     }
-  }, [deleteFeature, feature, notifyDestroy, navigate]);
+  }, [deleteFeature, feature, addNotification, t, navigate]);
 
   const handleDestroy = () => {
     if (!feature) return;

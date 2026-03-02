@@ -14,7 +14,7 @@ export { default as useFromStore } from "./useFromStore";
 export { default as useEventTracker } from "./useEventTracker";
 
 export { default as useAnalyticsContext } from "./useAnalyticsContext";
-export { default as useNotification } from "./useNotification";
+export { default as useNotifications } from "./useNotifications";
 
 export { default as useListFilters } from "./useListFilters";
 export { default as useListSearchParams } from "./useListSearchParams";

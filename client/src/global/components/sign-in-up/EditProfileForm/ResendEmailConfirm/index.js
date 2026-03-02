@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import PropTypes from "prop-types";
-import { useApiCallback, useNotification } from "hooks";
+import { useApiCallback, useNotifications } from "hooks";
 import { emailConfirmationsAPI } from "api";
 import { useTranslation } from "react-i18next";
 
@@ -8,12 +8,7 @@ export default function ResendEmailConfirmation({ id, hideOverlay }) {
   const { t } = useTranslation();
   const triggerConfirm = useApiCallback(emailConfirmationsAPI?.update);
 
-  const notifyEmailSent = useNotification(() => ({
-    level: 0,
-    id: `CURRENT_USER_VERIFICATION_EMAIL_SENT`,
-    heading: t("forms.signin_overlay.email_success_notification"),
-    expiration: 3000
-  }));
+  const { addNotification } = useNotifications();
 
   const onClick = useCallback(
     async e => {
@@ -21,13 +16,18 @@ export default function ResendEmailConfirmation({ id, hideOverlay }) {
 
       try {
         await triggerConfirm(id);
-        notifyEmailSent();
+        addNotification({
+          level: 0,
+          id: `CURRENT_USER_VERIFICATION_EMAIL_SENT`,
+          heading: t("forms.signin_overlay.email_success_notification"),
+          expiration: 3000
+        });
         if (hideOverlay) hideOverlay();
       } catch (err) {
         if (hideOverlay) hideOverlay();
       }
     },
-    [id, triggerConfirm, notifyEmailSent, hideOverlay]
+    [id, triggerConfirm, addNotification, t, hideOverlay]
   );
 
   return (

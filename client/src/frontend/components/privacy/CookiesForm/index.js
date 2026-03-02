@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "./CookiesFormFields";
 import GlobalForm from "global/containers/form";
-import { useSettings, useAuthentication, useNotification } from "hooks";
+import { useSettings, useAuthentication, useNotifications } from "hooks";
 import * as Styled from "./styles";
 
 export default function CookiesForm({ submit, errors = [], actionData }) {
@@ -24,18 +24,18 @@ export default function CookiesForm({ submit, errors = [], actionData }) {
     google: consentGoogleAnalytics ? "yes" : "no"
   });
 
-  const notifyUpdate = useNotification(() => ({
-    level: 0,
-    id: `CURRENT_USER_UPDATED`,
-    heading: t("forms.signin_overlay.update_notification_header"),
-    expiration: 3000
-  }));
+  const { addNotification } = useNotifications();
 
   useEffect(() => {
     if (actionData?.success) {
-      notifyUpdate();
+      addNotification({
+        level: 0,
+        id: `CURRENT_USER_UPDATED`,
+        heading: t("forms.signin_overlay.update_notification_header"),
+        expiration: 3000
+      });
     }
-  }, [actionData?.success, notifyUpdate]);
+  }, [actionData?.success, addNotification, t]);
 
   const formatData = () => {
     return {

@@ -16,6 +16,7 @@ import { ErrorBoundary } from "./RootErrorBoundary";
 // Middleware and contexts
 import { bootstrapMiddleware } from "./middleware/bootstrap.server";
 import { routerContext, AppContext } from "./contexts";
+import NotificationProvider from "./contexts/NotificationProvider";
 
 // Export middleware
 export const middleware = [bootstrapMiddleware];
@@ -73,22 +74,24 @@ export default function Root({ loaderData }) {
         <GlobalStyles styles={styles} />
         <div id="content">
           <AppContext.Provider value={appContextValue}>
-            <HelmetProvider>
-              <Analytics>
-                <div role="presentation" className="global-container">
-                  <Utility.SkipLink />
-                  <div id="global-notification-container" />
-                  <div id="global-overlay-container" />
-                  <NavigationBlockerProvider>
-                    <SignInUpOverlayProvider>
-                      <LoadingBar />
-                      <Outlet />
-                      <CookiesBanner />
-                    </SignInUpOverlayProvider>
-                  </NavigationBlockerProvider>
-                </div>
-              </Analytics>
-            </HelmetProvider>
+            <NotificationProvider>
+              <HelmetProvider>
+                <Analytics>
+                  <div role="presentation" className="global-container">
+                    <Utility.SkipLink />
+                    <div id="global-notification-container" />
+                    <div id="global-overlay-container" />
+                    <NavigationBlockerProvider>
+                      <SignInUpOverlayProvider>
+                        <LoadingBar />
+                        <Outlet />
+                        <CookiesBanner />
+                      </SignInUpOverlayProvider>
+                    </NavigationBlockerProvider>
+                  </div>
+                </Analytics>
+              </HelmetProvider>
+            </NotificationProvider>
           </AppContext.Provider>
         </div>
         <ScrollRestoration />

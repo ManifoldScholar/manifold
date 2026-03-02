@@ -4,7 +4,7 @@ import Layout from "backend/components/layout";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { settingsAPI, testMailsAPI, requests } from "api";
-import { useFromStore, useApiCallback, useNotification } from "hooks";
+import { useFromStore, useApiCallback, useNotifications } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
 
 export default function SettingsEmailContainer() {
@@ -18,33 +18,31 @@ export default function SettingsEmailContainer() {
     requestKey: requests.beCreateTestMail
   });
 
-  const notifyEmailSuccess = useNotification(() => ({
-    level: 0,
-    id: `TEST_EMAIL_SENT`,
-    heading: t("notifications.email.success"),
-    body: t("notifications.email_success_body"),
-    expiration: 5000
-  }));
-
-  const notifyEmailFail = useNotification(() => ({
-    level: 0,
-    id: `TEST_EMAIL_NOT_SENT`,
-    heading: t("notifications.email_failure"),
-    body: t("notifications.email_failure_body"),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const handleSendTestEmail = useCallback(
     async event => {
       event.preventDefault();
       try {
         await sendTestEmail();
-        notifyEmailSuccess();
+        addNotification({
+          level: 0,
+          id: `TEST_EMAIL_SENT`,
+          heading: t("notifications.email.success"),
+          body: t("notifications.email_success_body"),
+          expiration: 5000
+        });
       } catch {
-        notifyEmailFail();
+        addNotification({
+          level: 0,
+          id: `TEST_EMAIL_NOT_SENT`,
+          heading: t("notifications.email_failure"),
+          body: t("notifications.email_failure_body"),
+          expiration: 5000
+        });
       }
     },
-    [sendTestEmail, notifyEmailSuccess, notifyEmailFail]
+    [sendTestEmail, addNotification, t]
   );
 
   if (!settings) return null;

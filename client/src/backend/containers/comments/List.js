@@ -10,7 +10,7 @@ import {
   useFetch,
   useApiCallback,
   useListQueryParams,
-  useNotification
+  useNotifications
 } from "hooks";
 import withFilteredLists, { commentFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -82,16 +82,7 @@ function CommentsList({
 
   const bulkDelete = useApiCallback(bulkDeleteAPI.comments);
 
-  const notifyBulkDelete = useNotification(count => ({
-    level: 0,
-    id: "BULK_DELETE_SUCCESS",
-    heading: t("notifications.bulk_delete_success"),
-    body: t("notifications.bulk_delete_success_body", {
-      count,
-      entity: t("glossary.comment", { count })
-    }),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const onBulkDelete = () => {
     const count = bulkSelection.filters
@@ -105,7 +96,17 @@ function CommentsList({
           ? { filters: bulkSelection.filters, ids: [] }
           : { filters: {}, ids: bulkSelection.ids };
         const res = await bulkDelete(params);
-        notifyBulkDelete(res.bulk_deletions.total);
+        const count = res.bulk_deletions.total;
+        addNotification({
+          level: 0,
+          id: "BULK_DELETE_SUCCESS",
+          heading: t("notifications.bulk_delete_success"),
+          body: t("notifications.bulk_delete_success_body", {
+            count,
+            entity: t("glossary.comment", { count })
+          }),
+          expiration: 5000
+        });
         refresh();
         resetBulkSelection();
       });

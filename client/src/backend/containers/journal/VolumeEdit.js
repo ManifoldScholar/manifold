@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Volume from "backend/components/volume";
 import Layout from "backend/components/layout";
 import { journalVolumesAPI } from "api";
-import { useFetch, useApiCallback, useNotification } from "hooks";
+import { useFetch, useApiCallback, useNotifications } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import lh from "helpers/linkHandler";
 
@@ -23,27 +23,27 @@ function JournalVolumeEdit({ confirm }) {
     removes: journalVolume
   });
 
-  const notifyDestroy = useNotification(v => ({
-    level: 0,
-    id: `JOURNAL_VOLUME_DESTROYED_${v.id}`,
-    heading: t("notifications.volume_delete"),
-    body: t("notifications.volume_body", {
-      number: v?.attributes?.number
-    }),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const destroyAndRedirect = useCallback(() => {
     const redirect = () =>
       navigate(lh.link("backendJournalVolumes", journal?.id));
     destroy(journalVolume.id).then(
       () => {
-        notifyDestroy(journalVolume);
+        addNotification({
+          level: 0,
+          id: `JOURNAL_VOLUME_DESTROYED_${journalVolume.id}`,
+          heading: t("notifications.volume_delete"),
+          body: t("notifications.volume_body", {
+            number: journalVolume?.attributes?.number
+          }),
+          expiration: 5000
+        });
         redirect();
       },
       () => redirect()
     );
-  }, [destroy, navigate, journal?.id, journalVolume, notifyDestroy]);
+  }, [destroy, navigate, journal?.id, journalVolume, addNotification, t]);
 
   const onDelete = useCallback(() => {
     const heading = t("modals.delete_volume");

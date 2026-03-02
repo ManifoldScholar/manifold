@@ -6,7 +6,7 @@ import { journalsAPI } from "api";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
-import { useFetch, useApiCallback, useNotification } from "hooks";
+import { useFetch, useApiCallback, useNotifications } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -25,26 +25,26 @@ function JournalWrapper({ confirm }) {
 
   const destroy = useApiCallback(journalsAPI.destroy, { removes: journal });
 
-  const notifyDestroy = useNotification(j => ({
-    level: 0,
-    id: `JOURNAL_DESTROYED_${j.id}`,
-    heading: t("notifications.journal_delete"),
-    body: t("notifications.delete_entity_body", {
-      title: j?.attributes?.title
-    }),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const destroyAndRedirect = useCallback(() => {
     const redirect = () => navigate(lh.link("backendJournals"));
     destroy(journal.id).then(
       () => {
-        notifyDestroy(journal);
+        addNotification({
+          level: 0,
+          id: `JOURNAL_DESTROYED_${journal.id}`,
+          heading: t("notifications.journal_delete"),
+          body: t("notifications.delete_entity_body", {
+            title: journal?.attributes?.title
+          }),
+          expiration: 5000
+        });
         redirect();
       },
       () => redirect()
     );
-  }, [destroy, navigate, journal, notifyDestroy]);
+  }, [destroy, navigate, journal, addNotification, t]);
 
   const handleJournalDestroy = useCallback(() => {
     const heading = t("modals.delete_journal");

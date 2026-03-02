@@ -10,7 +10,7 @@ import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getBreadcrumbs } from "./breadcrumbs";
 import PageHeader from "backend/components/layout/PageHeader";
-import { useApiCallback, useNotification, useFromStore } from "hooks";
+import { useApiCallback, useNotifications, useFromStore } from "hooks";
 
 function ProjectWrapperContainer({ confirm }) {
   const { t } = useTranslation();
@@ -34,26 +34,26 @@ function ProjectWrapperContainer({ confirm }) {
     removes: project
   });
 
-  const notifyDestroy = useNotification(p => ({
-    level: 0,
-    id: `PROJECT_DESTROYED_${p.id}`,
-    heading: t("notifications.project_delete"),
-    body: t("notifications.delete_entity_body", {
-      title: p?.attributes?.titlePlaintext
-    }),
-    expiration: 5000
-  }));
+  const { addNotification } = useNotifications();
 
   const destroyAndRedirect = useCallback(async () => {
     if (!project) return;
     try {
       await destroy(project.id);
-      notifyDestroy(project);
+      addNotification({
+        level: 0,
+        id: `PROJECT_DESTROYED_${project.id}`,
+        heading: t("notifications.project_delete"),
+        body: t("notifications.delete_entity_body", {
+          title: project?.attributes?.titlePlaintext
+        }),
+        expiration: 5000
+      });
       navigate(lh.link("backend"));
     } catch {
       navigate(lh.link("backend"));
     }
-  }, [destroy, project, notifyDestroy, navigate]);
+  }, [destroy, project, addNotification, t, navigate]);
 
   const handleProjectDestroy = useCallback(() => {
     const heading = t("modals.delete_project");

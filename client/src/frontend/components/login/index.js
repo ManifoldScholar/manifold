@@ -2,22 +2,14 @@ import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
-import { useNotification, useFromStore } from "hooks";
+import { useNotifications } from "hooks";
 import SignInUp from "global/components/sign-in-up";
 import * as Styled from "./styles";
 
 export default function Login({ isSignUp = false }) {
   const { t } = useTranslation();
   const location = useLocation();
-  const notifications = useFromStore({ path: "notifications.notifications" });
-
-  const notifyUnauthorized = useNotification(() => ({
-    id: "authenticationError",
-    level: 2,
-    heading: t("errors.access_denied.header"),
-    body: t("errors.access_denied.authentication"),
-    scope: "authentication"
-  }));
+  const { notifications, addNotification } = useNotifications();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -30,9 +22,15 @@ export default function Login({ isSignUp = false }) {
       !hasAuthNotification;
 
     if (shouldNotify) {
-      notifyUnauthorized();
+      addNotification({
+        id: "authenticationError",
+        level: 2,
+        heading: t("errors.access_denied.header"),
+        body: t("errors.access_denied.authentication"),
+        scope: "authentication"
+      });
     }
-  }, [location, notifyUnauthorized, notifications]);
+  }, [location, addNotification, notifications, t]);
 
   return (
     <Styled.Section className="bg-neutral05">
