@@ -28,7 +28,7 @@ class OauthController < ApplicationController
       set_auth_code(outcome.user)
     end
 
-    redirect_to post_authorize_redirect_uri(error: outcome.invalid?).to_s
+    redirect_to post_authorize_redirect_uri(error: outcome.invalid?).to_s, allow_other_host: true
   end
 
   private
