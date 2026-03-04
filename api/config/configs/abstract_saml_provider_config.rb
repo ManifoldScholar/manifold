@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 # @abstract
-class AbstractSamlProviderConfig < ApplicationConfig
+class AbstractSamlProviderConfig < AbstractAuthProviderConfig
   extend Dry::Core::ClassAttributes
 
   include ActiveModel::Validations
 
   defines :provider_name, type: Dry::Types["symbol"]
 
+  strategy_name :saml
+
   config_name :_unused
 
   provider_name :_unused
 
   attr_config :endpoint,
-              :display_name,
-              :logo,
               :instructions,
               :sp_entity_id,
               :idp_entity_id,
