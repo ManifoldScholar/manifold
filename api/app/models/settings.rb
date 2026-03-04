@@ -67,31 +67,23 @@ class Settings < ApplicationRecord
   end
 
   def identity_providers
-    ManifoldEnv.oauth.enabled.map do |oauth|
-      {
-        name: oauth.name,
-        display_name: oauth.name,
-        url: "/auth/#{oauth.strategy_name}/redirect"
-      }
-    end + SamlConfig.providers.map do |saml|
-      next unless saml.show?
+    AuthConfig.providers.map do |auth|
+      next unless auth.show?
 
       {
-        name: saml.provider_name,
-        display_name: saml.display_name,
-        url: "#{Rails.application.config.manifold.api_url}/auth/#{saml.provider_name}/redirect"
+        name: auth.provider_name,
+        display_name: auth.display_name,
+        url: "#{Rails.application.config.manifold.api_url}/auth/#{auth.provider_name}/redirect"
       }
-    end.compact
+    end
   end
 
-  # Currently only supports SAML providers
   def default_identity_provider
-    SamlConfig.providers.find(&:default)&.provider_name
+    AuthConfig.providers.find(&:default)&.provider_name
   end
 
-  # @todo Move this into a more generic config, it's not specific to SAML
   def hide_local_login
-    SamlConfig.disable_password_auth
+    AuthConfig.disable_password_auth?
   end
 
   # @!endgroup

@@ -34,12 +34,11 @@ module ManagesOauthCookie
   end
 
   def cookie_domain
-    domain = Rails.application.config.manifold.domain
+    client_parts = URI.parse(Rails.application.config.manifold.url).host.split(".").reverse
+    api_parts = URI.parse(Rails.application.config.manifold.api_url).host.split(".").reverse
 
-    if (Rails.env.development? || Rails.env.test?) && domain.include?(":")
-      domain.split(":")[0]
-    else
-      ".#{domain}"
-    end
+    shared_parts = client_parts.take_while.with_index { |part, index| api_parts[index] == part }
+
+    ".#{shared_parts.reverse.join(".")}"
   end
 end
