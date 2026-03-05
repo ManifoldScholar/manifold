@@ -376,24 +376,21 @@ class Navigation {
     return [
       {
         label: "titles.details",
-        path: id => `/backend/groups/${id}/details`,
+        path: `/backend/groups/${group.id}/details`,
         entity: group,
-        ability: "read",
-        id: group.id
+        ability: "read"
       },
       {
         label: "titles.members",
-        path: id => `/backend/groups/${id}/members`,
+        path: `/backend/groups/${group.id}/members`,
         entity: group,
-        ability: "update",
-        id: group.id
+        ability: "update"
       },
       {
         label: "titles.annotations",
-        path: id => `/backend/groups/${id}/annotations`,
+        path: `/backend/groups/${group.id}/annotations`,
         entity: group,
-        ability: "update",
-        id: group.id
+        ability: "update"
       }
     ];
   });
