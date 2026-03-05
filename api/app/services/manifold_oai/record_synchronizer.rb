@@ -57,7 +57,12 @@ module ManifoldOAI
           xml["dc"].date(source.publication_date.iso8601) if source.respond_to?(:publication_date) && source.publication_date.present?
           xml["dc"].date("info:eu-repo/date/updatedAt/#{source.updated_at.iso8601}")
           xml["dc"].publisher(metadata[:publisher]) if metadata[:publisher].present?
-          xml["dc"].rights(metadata[:rights]) if metadata[:rights].present?
+
+          if source.license.present?
+            xml["dc"].rights(source.license.name)
+          elsif metadata[:rights].present?
+            xml["dc"].rights(metadata[:rights])
+          end
           xml["dc"].rights(metadata[:rights_holder]) if metadata[:rights_holder].present?
 
           unless source.creator_names_array.empty?
