@@ -866,7 +866,8 @@ CREATE TABLE public.projects (
     orphaned_journal_issue_id uuid,
     orphaned_journal_issue boolean DEFAULT false NOT NULL,
     exclude_from_oai boolean DEFAULT false,
-    exclude_from_directory boolean DEFAULT false
+    exclude_from_directory boolean DEFAULT false,
+    license character varying
 );
 
 
@@ -1969,7 +1970,8 @@ CREATE TABLE public.journals (
     show_on_homepage boolean DEFAULT false NOT NULL,
     home_page_priority integer DEFAULT 0 NOT NULL,
     exclude_from_oai boolean DEFAULT false,
-    exclude_from_directory boolean DEFAULT false
+    exclude_from_directory boolean DEFAULT false,
+    license character varying
 );
 
 
@@ -7920,6 +7922,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260305225814'),
 ('20260127185424'),
 ('20260127162821'),
 ('20260126221732'),
