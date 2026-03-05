@@ -56,6 +56,8 @@ class Journal < ApplicationRecord
 
   has_many :projects, through: :journal_project_links
 
+  classy_enum_attr :license, class_name: "License"
+
   validates :title, presence: true
   validates :draft, inclusion: { in: [true, false] }
 
