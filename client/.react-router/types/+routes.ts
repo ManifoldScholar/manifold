@@ -253,6 +253,15 @@ type Pages = {
   "/backend": {
     params: {};
   };
+  "/backend/analytics": {
+    params: {};
+  };
+  "/backend/analytics/top-projects": {
+    params: {};
+  };
+  "/backend/analytics/top-searches": {
+    params: {};
+  };
   "/backend/dashboard": {
     params: {};
   };
@@ -613,6 +622,10 @@ type RouteModules = {
   "routes/_frontend/signup": typeof import("./app/routes/_frontend/signup.jsx");
   "routes/_frontend/login": typeof import("./app/routes/_frontend/login.jsx");
   "routes/backend": typeof import("./app/routes/backend/_layout.jsx");
+  "routes/backend/analytics": typeof import("./app/routes/backend/analytics/_layout.jsx");
+  "routes/backend/analytics/top-projects": typeof import("./app/routes/backend/analytics/top-projects.jsx");
+  "routes/backend/analytics/top-searches": typeof import("./app/routes/backend/analytics/top-searches.jsx");
+  "routes/backend/analytics/_index": typeof import("./app/routes/backend/analytics/_index.jsx");
   "routes/backend/dashboard": typeof import("./app/routes/backend/dashboard.jsx");
   "routes/backend/_index": typeof import("./app/routes/backend/_index.jsx");
   "routes/backend/$": typeof import("./app/routes/backend/$.jsx");

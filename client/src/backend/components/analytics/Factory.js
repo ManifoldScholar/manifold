@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import ComposedAnalytics from "./composed";
 import isString from "lodash/isString";

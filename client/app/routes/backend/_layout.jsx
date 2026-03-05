@@ -32,7 +32,7 @@ export default function BackendLayout() {
     <>
       <Layout.GlobalHeader />
       <BreadcrumbsProvider>
-        <div className="main-content">
+        <div className="main-content bg-neutral90">
           <Outlet />
         </div>
       </BreadcrumbsProvider>

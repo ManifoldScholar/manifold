@@ -1,9 +1,8 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
 import cloneDeep from "lodash/cloneDeep";
 import merge from "lodash/merge";
 import { isDate } from "date-fns/isDate";
-import loadable from "@loadable/component";
 import { useTranslation } from "react-i18next";
 import chartOptions from "./chartOptions";
 
@@ -20,7 +19,7 @@ function shapeData({ x, y }) {
   };
 }
 
-const LoadableChart = loadable(() => import("./LoadableChart"));
+const LoadableChart = lazy(() => import("./LoadableChart"));
 
 function Chart({ options, data, tooltipLabel, height = 170 }) {
   const { t } = useTranslation();
@@ -45,7 +44,9 @@ function Chart({ options, data, tooltipLabel, height = 170 }) {
   };
   return (
     <div className="analytics-chart" style={{ width: "100%", height }}>
-      <LoadableChart {...chartProps} />
+      <Suspense fallback={null}>
+        <LoadableChart {...chartProps} />
+      </Suspense>
     </div>
   );
 }

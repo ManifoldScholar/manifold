@@ -7,8 +7,7 @@ import {
 } from "backend/components/analytics";
 import PageHeader from "backend/components/layout/PageHeader";
 import useAnalyticsReport from "hooks/useAnalyticsReport";
-import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
+import { Link } from "react-router";
 
 export default function AnalyticsProjectsContainer() {
   const {
@@ -32,7 +31,7 @@ export default function AnalyticsProjectsContainer() {
         title={
           <Trans
             i18nKey="analytics.top_projects_header"
-            components={[<Link to={lh.link("backendAnalyticsGlobal")} />]}
+            components={[<Link to="/backend/analytics" />]}
           />
         }
       />
