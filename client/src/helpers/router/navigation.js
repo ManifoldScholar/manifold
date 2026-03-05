@@ -77,10 +77,6 @@ class Navigation {
         ]
       },
       {
-        label: "titles.projects",
-        path: "/backend/projects/all"
-      },
-      {
         label: "titles.journals",
         path: "/backend/journals"
       },

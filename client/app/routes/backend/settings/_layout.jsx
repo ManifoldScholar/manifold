@@ -1,11 +1,28 @@
-import { useLocation, Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
+import { settingsAPI } from "api";
+import authorize from "app/routes/utility/loaders/authorize";
+import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Layout from "backend/components/layout";
-import navigation from "helpers/router/navigation";
 import HeadContent from "global/components/HeadContent";
-import Authorize from "hoc/Authorize";
+import navigation from "helpers/router/navigation";
 
-export default function SettingsWrapperContainer() {
+export const loader = async ({ request, context }) => {
+  await authorize({
+    request,
+    context,
+    entity: "settings",
+    ability: "update"
+  });
+
+  return loadEntity({
+    context,
+    fetchFn: () => settingsAPI.show(),
+    request
+  });
+};
+
+export default function SettingsLayout({ loaderData: settings }) {
   const { t } = useTranslation();
   const location = useLocation();
   const secondaryLinks = navigation.settings();
@@ -14,14 +31,7 @@ export default function SettingsWrapperContainer() {
   const subpageOverride = subpage === "properties" ? "settings" : null;
 
   return (
-    <Authorize
-      entity="settings"
-      failureNotification={{
-        body: t("settings.unauthorized")
-      }}
-      failureRedirect
-      ability="update"
-    >
+    <>
       <HeadContent
         title={`${t(`titles.${subpageOverride ?? subpage}`)} | ${t(
           "common.admin"
@@ -32,10 +42,10 @@ export default function SettingsWrapperContainer() {
         <Layout.SecondaryNav links={secondaryLinks} />
         <main id="skip-to-main" tabIndex={-1} className="backend-detail">
           <div className="panel">
-            <Outlet />
+            <Outlet context={settings} />
           </div>
         </main>
       </section>
-    </Authorize>
+    </>
   );
 }

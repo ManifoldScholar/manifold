@@ -17,7 +17,8 @@ export default function parseListParams(url, options = {}) {
     paginationKeys = ["page", "perPage"],
     defaultPagination = { page: 1, perPage: 20 },
     additionalPagination = {},
-    arrayKeys = []
+    arrayKeys = [],
+    skipPagination = false
   } = options;
 
   const page = parseInt(
@@ -65,6 +66,10 @@ export default function parseListParams(url, options = {}) {
 
     pagination[nestedKey] = { number, size };
   });
+
+  if (skipPagination) {
+    return { filters, pagination: null };
+  }
 
   return {
     filters,

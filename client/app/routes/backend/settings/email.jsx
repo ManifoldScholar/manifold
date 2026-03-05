@@ -1,18 +1,36 @@
 import { useCallback } from "react";
+import { useOutletContext, useFetcher } from "react-router";
 import { useTranslation } from "react-i18next";
+import { settingsAPI, testMailsAPI } from "api";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
+import handleActionError from "app/routes/utility/helpers/handleActionError";
+import { useApiCallback, useNotifications } from "hooks";
+import { requests } from "api";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import { settingsAPI, testMailsAPI, requests } from "api";
-import { useFromStore, useApiCallback, useNotifications } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
 
-export default function SettingsEmailContainer() {
+export async function action({ request, context }) {
+  const data = await request.json();
+
+  try {
+    const result = await queryApi(settingsAPI.update(null, data), context);
+
+    if (result?.errors) {
+      return { errors: result.errors };
+    }
+
+    return { success: true };
+  } catch (error) {
+    return handleActionError(error);
+  }
+}
+
+export default function SettingsEmailRoute() {
   const { t } = useTranslation();
-  const settings = useFromStore({
-    requestKey: requests.settings,
-    action: "select"
-  });
+  const settings = useOutletContext();
+  const fetcher = useFetcher();
 
   const sendTestEmail = useApiCallback(testMailsAPI.create, {
     requestKey: requests.beCreateTestMail
@@ -45,18 +63,14 @@ export default function SettingsEmailContainer() {
     [sendTestEmail, addNotification, t]
   );
 
-  if (!settings) return null;
-
   return (
     <section>
       <PageHeader title={t("settings.email.header")} type="settings" />
       <Layout.BackendPanel>
         <FormContainer.Form
           model={settings}
-          name="backend-settings"
-          update={settingsAPI.update}
-          create={settingsAPI.update}
           className="form-secondary"
+          fetcher={fetcher}
         >
           {getModelValue => {
             const deliveryMethod = getModelValue(

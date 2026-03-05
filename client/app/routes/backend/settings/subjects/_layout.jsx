@@ -1,31 +1,32 @@
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
+import { subjectsAPI } from "api";
+import loadList from "app/routes/utility/loaders/loadList";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
-import { requests } from "api";
-import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
   SubjectRow
 } from "backend/components/list/EntitiesList";
-import { useFromStore } from "hooks";
 
-export default function SettingsSubjectsListContainer() {
+export const loader = async ({ request, context }) => {
+  return loadList({
+    request,
+    context,
+    fetchFn: subjectsAPI.index,
+    options: {
+      defaultPagination: { page: 1, perPage: 10 }
+    }
+  });
+};
+
+export default function SettingsSubjectsLayout({ loaderData }) {
   const { t } = useTranslation();
   const { id } = useParams();
 
-  const subjects = useFromStore({
-    requestKey: requests.beSubjects,
-    action: "select"
-  });
-  const subjectsMeta = useFromStore({
-    requestKey: requests.beSubjects,
-    action: "meta"
-  });
-
-  if (!subjects || !subjectsMeta) return null;
+  const { data: subjects, meta } = loaderData;
 
   const drawerProps = {
-    closeUrl: lh.link("backendSettingsSubjects"),
+    closeUrl: "/backend/settings/subjects",
     lockScroll: "always"
   };
 
@@ -40,13 +41,13 @@ export default function SettingsSubjectsListContainer() {
           titleStyle="bar"
           entities={subjects}
           unit={t("glossary.subject", {
-            count: subjectsMeta?.pagination?.totalCount
+            count: meta?.pagination?.totalCount
           })}
-          pagination={subjectsMeta.pagination}
+          pagination={meta?.pagination}
           showCountInHeader
           buttons={[
             <Button
-              path={lh.link("backendSettingsSubjectsNew")}
+              path="/backend/settings/subjects/new"
               text={t("settings.subjects.add_button_label")}
               authorizedFor="subject"
               type="add"
@@ -57,5 +58,3 @@ export default function SettingsSubjectsListContainer() {
     </>
   );
 }
-
-SettingsSubjectsListContainer.displayName = "Settings.Subjects.List";

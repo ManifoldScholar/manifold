@@ -24,7 +24,7 @@ export function ErrorBoundary() {
     return (
       <>
         <Layout.GlobalHeader />
-        <div className="main-content">
+        <div className="main-content bg-neutral90">
           <FatalError {...errorProps} contained />
         </div>
         <Footers.FrontendFooter withVersion />

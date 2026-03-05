@@ -12,7 +12,10 @@ export default async function ListLoader({
     const url = new URL(request.url);
     const { filters, pagination } = parseListParams(url, options);
 
-    const result = await queryApi(fetchFn(filters, pagination), context);
+    const result = await queryApi(
+      options?.skipPagination ? fetchFn(filters) : fetchFn(filters, pagination),
+      context
+    );
 
     return { data: result.data ?? [], meta: result.meta ?? null };
   } catch (error) {
