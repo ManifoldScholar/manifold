@@ -14,7 +14,6 @@ import Save from "./Save";
 import SectionLabel from "./SectionLabel";
 import Select from "./Select";
 import Switch from "./Switch";
-import { Toggle } from "./Switch/ToggleOnly";
 import SwitchArray from "./SwitchArray";
 import TextArea from "./TextArea";
 import TextInput from "./TextInput";
@@ -25,7 +24,7 @@ import InputError from "./InputError";
 import Errorable from "./Errorable";
 import Errors from "./Errors";
 import Divider from "./Divider";
-import Picker, { BasePicker } from "./Picker";
+import Picker from "./Picker";
 import Label from "./BaseLabel";
 import FieldWrapper from "./FieldWrapper";
 import { InputGroupPrimary, InputGroupSecondary } from "./InputGroup/styles";
@@ -67,9 +66,4 @@ export default {
   InputGroupSecondary,
   DrawerButtons,
   ColorInput
-};
-
-export const Unwrapped = {
-  Toggle,
-  Picker: BasePicker
 };

@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import hoistStatics from "../hoist-non-react-statics";
 import memoize from "lodash/memoize";
 import isPlainObject from "lodash/isPlainObject";
 import pickBy from "lodash/pickBy";
 import identity from "lodash/identity";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { uiStateSnapshotActions } from "actions";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -22,27 +18,9 @@ function withFilters(WrappedComponent, filteredLists = {}) {
 
     static displayName = displayName;
 
-    static mapStateToProps = state => {
-      return { snapshots: state.ui.transitory.stateSnapshots };
-    };
-
-    static propTypes = {
-      snapshot: PropTypes.object,
-      dispatch: PropTypes.func
-    };
-
     constructor(props) {
       super(props);
       this.state = this.initialState;
-    }
-
-    UNSAFE_componentWillMount() {
-      this.managedLists.forEach(listKey => {
-        if (!this.state[listKey].config.snapshotState) return null;
-        const snapshot = this.props.snapshots[this.snapshotKey(listKey)];
-        if (!snapshot || !snapshot.filters) return null;
-        this.setValues(listKey, snapshot.filters);
-      });
     }
 
     onReset = key => {
@@ -170,29 +148,6 @@ function withFilters(WrappedComponent, filteredLists = {}) {
       return this.state[key].params;
     };
 
-    snapshotKey(key) {
-      return `entities-list-search-${key}`;
-    }
-
-    saveSearchState = (key, pagination) => {
-      if (!this.state[key].config.snapshotState) return;
-      const action = uiStateSnapshotActions.takeSnapshot(
-        this.snapshotKey(key),
-        {
-          filters: this.requestParams(key),
-          pagination
-        }
-      );
-      this.props.dispatch(action);
-    };
-
-    savedSearchPaginationState = key => {
-      if (!this.state[key].config.snapshotState) return null;
-      const snapshot = this.props.snapshots[this.snapshotKey(key)];
-      if (!snapshot) return null;
-      return snapshot.pagination;
-    };
-
     renderLiveRegion() {
       return (
         <div
@@ -214,19 +169,13 @@ function withFilters(WrappedComponent, filteredLists = {}) {
             {...this.props}
             entitiesListSearchProps={this.entitiesListSearchProps}
             entitiesListSearchParams={this.entitiesListSearchParams(this.state)}
-            saveSearchState={this.saveSearchState}
-            savedSearchPaginationState={this.savedSearchPaginationState}
           />
         </>
       );
     }
   }
 
-  const connectedWithFilters = connect(WithFilters.mapStateToProps)(
-    WithFilters
-  );
-
-  return hoistStatics(connectedWithFilters, WrappedComponent);
+  return WithFilters;
 }
 
 export default withFilters;

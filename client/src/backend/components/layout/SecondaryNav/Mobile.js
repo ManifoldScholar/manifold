@@ -38,7 +38,7 @@ export default function NavigationDropdown({ links, className }) {
 
   const renderItem = link => {
     return (
-      <li key={link.route}>
+      <li key={link.path}>
         <Styled.Link
           onClick={close}
           to={pathForLink(link)}
@@ -72,7 +72,7 @@ export default function NavigationDropdown({ links, className }) {
             if (link.ability || link.kind)
               return (
                 <Authorize
-                  key={`${link.route}-wrapped`}
+                  key={`${link.path}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
                   kind={link.kind}

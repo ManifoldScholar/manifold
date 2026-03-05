@@ -1022,6 +1022,3 @@ FormPicker.propTypes = {
   onChange: PropTypes.func,
   errors: PropTypes.array
 };
-
-// Also export as BasePicker for backwards compatibility
-export const BasePicker = FormPicker;

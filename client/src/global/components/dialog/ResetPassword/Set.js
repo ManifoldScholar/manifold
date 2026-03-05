@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { usersAPI } from "api";
 import { FormContext } from "helpers/contexts";
-import { Unwrapped } from "global/components/form";
+import BaseInput from "global/components/form/BaseInput";
 import { useApiCallback } from "hooks";
 import * as Styled from "./styles";
 
@@ -34,7 +34,7 @@ export default function SetNewPassword({ user, resolve, toggleSetForm }) {
   return (
     <form method="put" className="dialog__body" onSubmit={resetUserPassword}>
       <FormContext.Provider value={{ styleType: "secondary" }}>
-        <Unwrapped.Input
+        <BaseInput
           value={password}
           onChange={e => setPassword(e.target.value)}
           type="password"

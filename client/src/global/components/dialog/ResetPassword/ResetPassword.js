@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 import Wrapper from "../Wrapper";
 import Generate from "./Generate";
 import Menu from "./Menu";
 
 export default function ResetPasswordBase({ resolve, reject, user }) {
-  const dispatch = useDispatch();
 
   const [confirm, setConfirm] = useState(false);
 
@@ -33,7 +31,7 @@ export default function ResetPasswordBase({ resolve, reject, user }) {
     return () => {
       window.removeEventListener("keyup", handleKeyPress);
     };
-  }, [dispatch, handleKeyPress]);
+  }, [handleKeyPress]);
 
   return (
     <Wrapper

@@ -1,11 +1,8 @@
-import { useCallback } from "react";
+import { lazy, Suspense, useCallback } from "react";
 import PropTypes from "prop-types";
-import loadable from "@loadable/component";
 import { useFormField } from "hooks";
 
-const CodeAreaInput = loadable(() =>
-  import(/* webpackChunkName: "ace-editor" */ "./AceEditor")
-);
+const CodeAreaInput = lazy(() => import("./AceEditor"));
 
 export default function FormCodeArea({
   name,
@@ -25,20 +22,22 @@ export default function FormCodeArea({
   );
 
   return (
-    <CodeAreaInput
-      name={name}
-      label={label}
-      instructions={instructions}
-      errors={errors}
-      height={height}
-      readOnly={readOnly}
-      mode={mode}
-      theme="idle_fingers"
-      editorProps={{ $blockScrolling: true }}
-      onChange={onChange}
-      value={value || ""}
-      width="100%"
-    />
+    <Suspense fallback={null}>
+      <CodeAreaInput
+        name={name}
+        label={label}
+        instructions={instructions}
+        errors={errors}
+        height={height}
+        readOnly={readOnly}
+        mode={mode}
+        theme="idle_fingers"
+        editorProps={{ $blockScrolling: true }}
+        onChange={onChange}
+        value={value || ""}
+        width="100%"
+      />
+    </Suspense>
   );
 }
 

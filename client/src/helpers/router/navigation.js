@@ -453,17 +453,15 @@ class Navigation {
     return [
       {
         label: "titles.properties",
-        path: id => `/backend/records/users/${id}/properties`,
+        path: `/backend/records/users/${user.id}/properties`,
         entity: user,
-        ability: "update",
-        id: user.id
+        ability: "update"
       },
       {
         label: "titles.activity",
-        path: id => `/backend/records/users/${id}/activity`,
+        path: `/backend/records/users/${user.id}/activity`,
         entity: user,
-        ability: "update",
-        id: user.id
+        ability: "update"
       }
     ];
   });

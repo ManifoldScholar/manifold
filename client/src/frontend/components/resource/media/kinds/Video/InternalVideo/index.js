@@ -1,7 +1,7 @@
+import { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
-import loadable from "@loadable/component";
 
-const LoadablePlayer = loadable(() => import("../../shared/DefaultPlayer"));
+const LoadablePlayer = lazy(() => import("../../shared/DefaultPlayer"));
 
 function urlToRelativePath(url) {
   const trackUrl = new URL(url);
@@ -51,14 +51,16 @@ function ResourceMediaVideoInternal({ resource }) {
     : false;
 
   return (
-    <LoadablePlayer
-      title={title}
-      src={src}
-      poster={poster}
-      tracks={tracks}
-      download={download}
-      viewType="video"
-    />
+    <Suspense fallback={null}>
+      <LoadablePlayer
+        title={title}
+        src={src}
+        poster={poster}
+        tracks={tracks}
+        download={download}
+        viewType="video"
+      />
+    </Suspense>
   );
 }
 

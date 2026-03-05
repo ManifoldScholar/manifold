@@ -1,13 +1,17 @@
+import { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
-import loadable from "@loadable/component";
 import { useFormField } from "hooks";
 
-const Editor = loadable(() => import("./components/Wrapper"));
+const Editor = lazy(() => import("./components/Wrapper"));
 
 export default function ContentEditor({ name, ...props }) {
   const { set } = useFormField(name);
 
-  return <Editor set={set} {...props} />;
+  return (
+    <Suspense fallback={null}>
+      <Editor set={set} {...props} />
+    </Suspense>
+  );
 }
 
 ContentEditor.displayName = "Global.Form.ContentEditor";

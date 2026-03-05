@@ -1,20 +1,12 @@
-import { useCallback } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 
-import { pendingEntitlementsAPI, projectsAPI, journalsAPI } from "api";
-import { useNavigate } from "react-router-dom";
+import { projectsAPI, journalsAPI } from "api";
 
-export default function AddEditEntitlementForm({ refresh, entitlement }) {
+export default function AddEditEntitlementForm({ fetcher, entitlement }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const onSuccess = useCallback(() => {
-    if (refresh) refresh();
-    navigate("/backend/records/entitlements");
-  }, [navigate, refresh]);
 
   const formatData = data => {
     const { expiresOn, ...rest } = data.attributes;
@@ -28,17 +20,11 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
 
   return (
     <FormContainer.Form
+      fetcher={fetcher}
       model={entitlement}
-      name={
-        entitlement
-          ? "backend-pending-entitlement-update"
-          : "backend-pending-entitlement-create"
-      }
       className="form-secondary"
-      onSuccess={onSuccess}
       formatData={formatData}
-      create={pendingEntitlementsAPI.create}
-      update={pendingEntitlementsAPI.update}
+      notificationScope="drawer"
     >
       {getValue => {
         const type = getValue("entityType");
@@ -115,6 +101,6 @@ export default function AddEditEntitlementForm({ refresh, entitlement }) {
 AddEditEntitlementForm.displayName = "Records.Entitlements.AddEdit.Form";
 
 AddEditEntitlementForm.propTypes = {
-  refresh: PropTypes.func.isRequired,
+  fetcher: PropTypes.object.isRequired,
   entitlement: PropTypes.object
 };

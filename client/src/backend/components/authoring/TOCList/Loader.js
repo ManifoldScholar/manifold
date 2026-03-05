@@ -1,15 +1,8 @@
-import React from "react";
-import loadable from "@loadable/component";
-import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
+import React, { lazy, Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import * as Styled from "./styles";
 
-const Loading = ({ timedOut, retry }) => {
-  const handleTimeOut = useErrorHandler();
-  if (timedOut) handleTimeOut({ timeout: retry });
-  return null;
-};
-
-const TOCList = loadable(() => import("./List"));
+const TOCList = lazy(() => import("./List"));
 
 const Fallback = ({ error }) => {
   return (
@@ -23,7 +16,9 @@ const Fallback = ({ error }) => {
 export default function Loader(props) {
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
-      <TOCList fallback={Loading} {...props} />
+      <Suspense fallback={null}>
+        <TOCList {...props} />
+      </Suspense>
     </ErrorBoundary>
   );
 }

@@ -1,34 +1,31 @@
-import React from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
+import { useNotifications } from "hooks";
 
-import { entitlementImportsAPI } from "api";
-import { useDispatch } from "react-redux";
-import { notificationActions } from "actions";
-
-export default function CSVImportForm() {
+export default function CSVImportForm({ fetcher }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const { addNotification } = useNotifications();
 
-  const notifySuccess = () => {
-    const notification = {
-      level: 0,
-      id: "Entitlement_Import_Success",
-      heading: t("notifications.entitlement_import_success"),
-      body: t("notifications.entitlement_import_success_body"),
-      scope: "drawer"
-    };
-    dispatch(notificationActions.addNotification(notification));
-  };
+  useEffect(() => {
+    if (fetcher.data?.success) {
+      addNotification({
+        level: 0,
+        id: "Entitlement_Import_Success",
+        heading: t("notifications.entitlement_import_success"),
+        body: t("notifications.entitlement_import_success_body"),
+        scope: "drawer"
+      });
+    }
+  }, [fetcher.data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <FormContainer.Form
-      name={"backend-entitlement-import-create"}
+      fetcher={fetcher}
       className="form-secondary"
-      onSuccess={notifySuccess}
-      create={entitlementImportsAPI.create}
+      notificationScope="drawer"
     >
       <Form.Upload
         layout="landscape"
@@ -53,4 +50,6 @@ export default function CSVImportForm() {
 
 CSVImportForm.displayName = "Records.Entitlements.CSVImport.Form";
 
-CSVImportForm.propTypes = {};
+CSVImportForm.propTypes = {
+  fetcher: PropTypes.object.isRequired
+};

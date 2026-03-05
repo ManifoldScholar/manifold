@@ -1,10 +1,10 @@
+import { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
-import loadable from "@loadable/component";
 import ThumbnailImage from "../shared/ThumbnailImage";
 import PlaceholderGraphic from "../shared/PlaceholderGraphic";
 import * as Styled from "./styles";
 
-const LoadablePlayer = loadable(() => import("../shared/DefaultPlayer"));
+const LoadablePlayer = lazy(() => import("../shared/DefaultPlayer"));
 
 function urlToRelativePath(url) {
   const trackUrl = new URL(url);
@@ -50,15 +50,17 @@ function ResourcePlayerAudio({ resource }) {
         <PlaceholderGraphic resource={resource} />
       )}
       <Styled.PlayerWrapper>
-        <LoadablePlayer
-          title={title}
-          src={src}
-          tracks={tracks}
-          download={
-            allowDownload ? urlToRelativePath(attachmentStyles.original) : false
-          }
-          viewType="audio"
-        />
+        <Suspense fallback={null}>
+          <LoadablePlayer
+            title={title}
+            src={src}
+            tracks={tracks}
+            download={
+              allowDownload ? urlToRelativePath(attachmentStyles.original) : false
+            }
+            viewType="audio"
+          />
+        </Suspense>
       </Styled.PlayerWrapper>
     </Styled.Wrapper>
   );

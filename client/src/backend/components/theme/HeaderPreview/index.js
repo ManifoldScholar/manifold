@@ -1,4 +1,3 @@
-import { useFromStore } from "hooks";
 import { useTranslation } from "react-i18next";
 import SetCSSProperty from "global/components/utility/SetCSSProperty";
 import PressLogo from "global/components/PressLogo";
@@ -13,14 +12,14 @@ const DEFAULTS = {
 };
 
 export default function HeaderPreview({
+  settings,
   accentColor,
   foregroundColor,
   backgroundColor,
   activeColor
 }) {
   const { t } = useTranslation();
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
-  const offset = settings.attributes.theme.headerOffset;
+  const offset = settings?.attributes?.theme?.headerOffset;
   const navStyle = offset
     ? { position: "relative", top: parseInt(offset, 10) }
     : {};
@@ -50,8 +49,8 @@ export default function HeaderPreview({
                 {t("navigation.return_home")}
               </span>
               <PressLogo
-                url={settings.attributes.pressLogoStyles.medium}
-                styles={settings.attributes.theme.logoStyles}
+                url={settings?.attributes?.pressLogoStyles?.medium}
+                styles={settings?.attributes?.theme?.logoStyles}
                 aria-hidden="true"
               />
             </>

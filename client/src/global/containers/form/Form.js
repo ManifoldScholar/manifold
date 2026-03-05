@@ -52,8 +52,8 @@ export default function FormContainer({
 
   // Notify parent of dirty state changes
   useEffect(() => {
-    if (onDirty) onDirty(changed);
-  }, [changed, onDirty]);
+    if (onDirty) onDirty(dirty);
+  }, [dirty, onDirty]);
 
   const setValue = useCallback(
     (path, value, triggersDirty = true) => {

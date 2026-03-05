@@ -71,7 +71,7 @@ export default function AnnotationMetadata({
               <Styled.CreatorName>
                 <span>{creator.attributes?.fullName}</span>
                 <span>
-                  {t(`records.users.role_options.${creator.attributes.role}`)}
+                  {t(`records.users.role_options.${creator.attributes?.role}`)}
                 </span>
               </Styled.CreatorName>
             </Styled.Creator>

@@ -5,7 +5,6 @@ import Utility from "global/components/utility";
 import EntityRow from "./Row";
 import FormattedDate from "global/components/FormattedDate";
 import { useTranslation } from "react-i18next";
-import { useFromStore } from "hooks";
 
 export default function PendingEntitlementRow({
   entity: entitlement,
@@ -15,15 +14,9 @@ export default function PendingEntitlementRow({
 }) {
   const { t } = useTranslation();
 
-  const { email, subjectId, expiresOn } = entitlement?.attributes ?? {};
+  const { email, expiresOn } = entitlement?.attributes ?? {};
 
-  const project = useFromStore({
-    path: `entityStore.entities.projects["${subjectId}"]`
-  });
-  const journal = useFromStore({
-    path: `entityStore.entities.journals["${subjectId}"]`
-  });
-  const target = project ?? journal;
+  const target = entitlement?.relationships?.subject;
 
   const subtitle = target ? target.attributes?.titlePlaintext : "";
 

@@ -13,7 +13,7 @@ export default function NavigationSecondary(props) {
 
   const renderItem = link => {
     return (
-      <li key={link.route}>
+      <li key={link.path}>
         <NavLink
           to={pathForLink(link)}
           className={({ isActive }) => (isActive ? "active" : undefined)}
@@ -45,7 +45,7 @@ export default function NavigationSecondary(props) {
             if (link.ability || link.kind)
               return (
                 <Authorize
-                  key={`${link.route}-wrapped`}
+                  key={`${link.path}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
                   kind={link.kind}

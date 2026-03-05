@@ -108,7 +108,7 @@ export default function FormSelect({
           $wide={wide}
         >
           {options.map(option => (
-            <option key={option.key} value={String(option.value)}>
+            <option key={option.key ?? String(option.value)} value={String(option.value)}>
               {option.label}
             </option>
           ))}
@@ -141,7 +141,7 @@ FormSelect.propTypes = {
     PropTypes.shape({
       value: PropTypes.any.isRequired,
       label: PropTypes.string.isRequired,
-      key: PropTypes.string.isRequired
+      key: PropTypes.string
     })
   ).isRequired,
   focusOnMount: PropTypes.bool,

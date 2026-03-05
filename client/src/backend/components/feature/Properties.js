@@ -1,21 +1,16 @@
 import { useTranslation } from "react-i18next";
-import { useOutletContext } from "react-router-dom";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import { featuresAPI } from "api";
 
-export default function FeaturesProperties({ onSuccess }) {
+export default function FeaturesProperties({ feature, fetcher, onDirty }) {
   const { t } = useTranslation();
-  const { feature } = useOutletContext() || {};
   return (
     <section>
       <FormContainer.Form
+        fetcher={fetcher}
         model={feature}
-        onSuccess={onSuccess}
-        name={feature ? "backend-feature-update" : "backend-feature-create"}
-        update={featuresAPI.update}
-        create={featuresAPI.create}
         className="form-secondary"
+        onDirty={onDirty}
       >
         <Form.FieldGroup label={t("records.features.properties_label")}>
           <Form.Switch

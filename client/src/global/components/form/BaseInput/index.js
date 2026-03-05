@@ -201,3 +201,5 @@ BaseInput.propTypes = {
   onChange: PropTypes.func,
   errors: PropTypes.array
 };
+
+export { BaseInput as FormBaseInput };

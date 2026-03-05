@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useListFilters } from "hooks";
 import * as Styled from "./styles";
-import { Unwrapped } from "global/components/form";
+import { Toggle } from "global/components/form/Switch/ToggleOnly";
 import { useTranslation } from "react-i18next";
 
 export default function ProjectCollectionSortBy({
@@ -39,7 +39,7 @@ export default function ProjectCollectionSortBy({
           label={t("project_collections.order_manually")}
         />
         <div className="toggle-indicator">
-          <Unwrapped.Toggle
+          <Toggle
             as="div"
             onClick={handleClick}
             $checked={isManualSort}
@@ -50,7 +50,7 @@ export default function ProjectCollectionSortBy({
             <span className="screen-reader-text">
               {t("project_collections.order_collection_manually")}
             </span>
-          </Unwrapped.Toggle>
+          </Toggle>
         </div>
       </Styled.Toggle>
     );

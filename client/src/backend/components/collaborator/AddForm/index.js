@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FormContext } from "helpers/contexts";
-import Form, { Unwrapped } from "global/components/form";
+import Form from "global/components/form";
 import InputError from "global/components/form/InputError";
 import { useTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -111,7 +111,7 @@ export default function AddCollaboratorForm({
         <Form.FieldGroup>
           {!collaborator && (
             <Form.FieldWrapper className="wide">
-              <Unwrapped.Picker
+              <Form.Picker
                 label={t("glossary.maker_title_case_one")}
                 optionToLabel={record => record.attributes.fullName}
                 predictive
@@ -134,7 +134,7 @@ export default function AddCollaboratorForm({
             </Form.FieldWrapper>
           )}
           <Form.FieldWrapper className="wide">
-            <Unwrapped.Picker
+            <Form.Picker
               label={t("common.role_other")}
               optionToLabel={role => capitalize(role.replaceAll("_", " "))}
               predictive

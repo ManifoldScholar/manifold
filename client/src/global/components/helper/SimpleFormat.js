@@ -1,11 +1,20 @@
-import React, { PureComponent, createElement } from "react";
+import React, { lazy, Suspense, PureComponent, createElement } from "react";
 import PropTypes from "prop-types";
 import he from "he";
-import loadable from "@loadable/component";
 import { nl2br } from "utils/string";
 
-const Loaded = loadable.lib(() =>
-  import(/* webpackChunkName: "autolinker" */ "autolinker")
+const AutolinkedText = lazy(() =>
+  import("autolinker").then(mod => ({
+    default: function AutolinkedParagraph({ formatted }) {
+      return (
+        <p
+          dangerouslySetInnerHTML={{
+            __html: mod.default.link(formatted)
+          }}
+        />
+      );
+    }
+  }))
 );
 
 const formattedText = props => {
@@ -13,15 +22,9 @@ const formattedText = props => {
   const formatted = nl2br(sanitized);
 
   return (
-    <Loaded>
-      {({ default: autolinker }) => (
-        <p
-          dangerouslySetInnerHTML={{
-            __html: autolinker.link(formatted)
-          }}
-        />
-      )}
-    </Loaded>
+    <Suspense fallback={<p dangerouslySetInnerHTML={{ __html: formatted }} />}>
+      <AutolinkedText formatted={formatted} />
+    </Suspense>
   );
 };
 

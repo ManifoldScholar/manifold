@@ -265,6 +265,106 @@ type Pages = {
   "/backend/dashboard": {
     params: {};
   };
+  "/backend/records": {
+    params: {};
+  };
+  "/backend/records/features/:id/properties": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/entitlement-imports": {
+    params: {};
+  };
+  "/backend/records/features/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/features": {
+    params: {};
+  };
+  "/backend/records/entitlements": {
+    params: {};
+  };
+  "/backend/records/entitlements/edit/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/entitlements/import": {
+    params: {};
+  };
+  "/backend/records/entitlements/new": {
+    params: {};
+  };
+  "/backend/records/features/new": {
+    params: {};
+  };
+  "/backend/records/pages": {
+    params: {};
+  };
+  "/backend/records/users": {
+    params: {};
+  };
+  "/backend/records/annotations": {
+    params: {};
+  };
+  "/backend/records/annotations/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/pages/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/pages/:id/properties": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/pages/new": {
+    params: {};
+  };
+  "/backend/records/users/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/users/:id/properties": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/users/:id/activity": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/users/new": {
+    params: {};
+  };
+  "/backend/records/comments": {
+    params: {};
+  };
+  "/backend/records/comments/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/makers": {
+    params: {};
+  };
+  "/backend/records/makers/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/records/makers/new": {
+    params: {};
+  };
   "/backend/*": {
     params: {
       "*": string;
@@ -280,7 +380,7 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/actions/reading-group-membership" | "/actions/reading-group-status" | "/actions/forgot-password" | "/actions/resource-create" | "/actions/update-profile" | "/actions/flag-content" | "/actions/collect" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/unsubscribe/:token" | "/my/groups" | "/journals" | "/journals/issues" | "/projects" | "/my/groups/new" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes/:volumeId" | "/journals/:id/volumes" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/backend" | "/backend/dashboard" | "/backend/*" | "/*";
+    page: "/" | "/actions/reading-group-membership" | "/actions/reading-group-status" | "/actions/forgot-password" | "/actions/resource-create" | "/actions/update-profile" | "/actions/flag-content" | "/actions/collect" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/unsubscribe/:token" | "/my/groups" | "/journals" | "/journals/issues" | "/projects" | "/my/groups/new" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes/:volumeId" | "/journals/:id/volumes" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/backend" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*" | "/*";
   };
   "routes/actions/reading-group-membership.jsx": {
     id: "routes/actions/reading-group-membership";
@@ -536,11 +636,143 @@ type RouteFiles = {
   };
   "routes/backend/_layout.jsx": {
     id: "routes/backend";
-    page: "/backend" | "/backend/dashboard" | "/backend/*";
+    page: "/backend" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*";
+  };
+  "routes/backend/analytics/_layout.jsx": {
+    id: "routes/backend/analytics";
+    page: "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches";
+  };
+  "routes/backend/analytics/top-projects.jsx": {
+    id: "routes/backend/analytics/top-projects";
+    page: "/backend/analytics/top-projects";
+  };
+  "routes/backend/analytics/top-searches.jsx": {
+    id: "routes/backend/analytics/top-searches";
+    page: "/backend/analytics/top-searches";
+  };
+  "routes/backend/analytics/_index.jsx": {
+    id: "routes/backend/analytics/_index";
+    page: "/backend/analytics";
   };
   "routes/backend/dashboard.jsx": {
     id: "routes/backend/dashboard";
     page: "/backend/dashboard";
+  };
+  "routes/backend/records/_layout.jsx": {
+    id: "routes/backend/records";
+    page: "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new";
+  };
+  "routes/backend/records/features/$id/properties.jsx": {
+    id: "routes/backend/records/features/$id/properties";
+    page: "/backend/records/features/:id/properties";
+  };
+  "routes/backend/records/entitlement-imports.jsx": {
+    id: "routes/backend/records/entitlement-imports";
+    page: "/backend/records/entitlement-imports";
+  };
+  "routes/backend/records/features/$id/_index.jsx": {
+    id: "routes/backend/records/features/$id/_index";
+    page: "/backend/records/features/:id";
+  };
+  "routes/backend/records/features/_index.jsx": {
+    id: "routes/backend/records/features/_index";
+    page: "/backend/records/features";
+  };
+  "routes/backend/records/entitlements/_layout.jsx": {
+    id: "routes/backend/records/entitlements";
+    page: "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new";
+  };
+  "routes/backend/records/entitlements/edit.$id.jsx": {
+    id: "routes/backend/records/entitlements/edit.$id";
+    page: "/backend/records/entitlements/edit/:id";
+  };
+  "routes/backend/records/entitlements/import.jsx": {
+    id: "routes/backend/records/entitlements/import";
+    page: "/backend/records/entitlements/import";
+  };
+  "routes/backend/records/entitlements/new.jsx": {
+    id: "routes/backend/records/entitlements/new";
+    page: "/backend/records/entitlements/new";
+  };
+  "routes/backend/records/features/new.jsx": {
+    id: "routes/backend/records/features/new";
+    page: "/backend/records/features/new";
+  };
+  "routes/backend/records/pages/_index.jsx": {
+    id: "routes/backend/records/pages/_index";
+    page: "/backend/records/pages";
+  };
+  "routes/backend/records/users/_index.jsx": {
+    id: "routes/backend/records/users/_index";
+    page: "/backend/records/users";
+  };
+  "routes/backend/records/annotations/_layout.jsx": {
+    id: "routes/backend/records/annotations";
+    page: "/backend/records/annotations" | "/backend/records/annotations/:id";
+  };
+  "routes/backend/records/annotations/$id.jsx": {
+    id: "routes/backend/records/annotations/$id";
+    page: "/backend/records/annotations/:id";
+  };
+  "routes/backend/records/pages/$id/_layout.jsx": {
+    id: "routes/backend/records/pages/$id";
+    page: "/backend/records/pages/:id" | "/backend/records/pages/:id/properties";
+  };
+  "routes/backend/records/pages/$id/properties.jsx": {
+    id: "routes/backend/records/pages/$id/properties";
+    page: "/backend/records/pages/:id/properties";
+  };
+  "routes/backend/records/pages/$id/_index.jsx": {
+    id: "routes/backend/records/pages/$id/_index";
+    page: "/backend/records/pages/:id";
+  };
+  "routes/backend/records/pages/new.jsx": {
+    id: "routes/backend/records/pages/new";
+    page: "/backend/records/pages/new";
+  };
+  "routes/backend/records/users/$id/_layout.jsx": {
+    id: "routes/backend/records/users/$id";
+    page: "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity";
+  };
+  "routes/backend/records/users/$id/properties.jsx": {
+    id: "routes/backend/records/users/$id/properties";
+    page: "/backend/records/users/:id/properties";
+  };
+  "routes/backend/records/users/$id/activity.jsx": {
+    id: "routes/backend/records/users/$id/activity";
+    page: "/backend/records/users/:id/activity";
+  };
+  "routes/backend/records/users/$id/_index.jsx": {
+    id: "routes/backend/records/users/$id/_index";
+    page: "/backend/records/users/:id";
+  };
+  "routes/backend/records/users/new.jsx": {
+    id: "routes/backend/records/users/new";
+    page: "/backend/records/users/new";
+  };
+  "routes/backend/records/comments/_layout.jsx": {
+    id: "routes/backend/records/comments";
+    page: "/backend/records/comments" | "/backend/records/comments/:id";
+  };
+  "routes/backend/records/comments/$id.jsx": {
+    id: "routes/backend/records/comments/$id";
+    page: "/backend/records/comments/:id";
+  };
+  "routes/backend/records/_index.jsx": {
+    id: "routes/backend/records/_index";
+    page: "/backend/records";
+  };
+  "routes/backend/records/makers/_layout.jsx": {
+    id: "routes/backend/records/makers";
+    page: "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new";
+  };
+  "routes/backend/records/makers/$id.jsx": {
+    id: "routes/backend/records/makers/$id";
+    page: "/backend/records/makers/:id";
+  };
+  "routes/backend/records/makers/new.jsx": {
+    id: "routes/backend/records/makers/new";
+    page: "/backend/records/makers/new";
   };
   "routes/backend/_index.jsx": {
     id: "routes/backend/_index";
@@ -627,6 +859,35 @@ type RouteModules = {
   "routes/backend/analytics/top-searches": typeof import("./app/routes/backend/analytics/top-searches.jsx");
   "routes/backend/analytics/_index": typeof import("./app/routes/backend/analytics/_index.jsx");
   "routes/backend/dashboard": typeof import("./app/routes/backend/dashboard.jsx");
+  "routes/backend/records": typeof import("./app/routes/backend/records/_layout.jsx");
+  "routes/backend/records/features/$id/properties": typeof import("./app/routes/backend/records/features/$id/properties.jsx");
+  "routes/backend/records/entitlement-imports": typeof import("./app/routes/backend/records/entitlement-imports.jsx");
+  "routes/backend/records/features/$id/_index": typeof import("./app/routes/backend/records/features/$id/_index.jsx");
+  "routes/backend/records/features/_index": typeof import("./app/routes/backend/records/features/_index.jsx");
+  "routes/backend/records/entitlements": typeof import("./app/routes/backend/records/entitlements/_layout.jsx");
+  "routes/backend/records/entitlements/edit.$id": typeof import("./app/routes/backend/records/entitlements/edit.$id.jsx");
+  "routes/backend/records/entitlements/import": typeof import("./app/routes/backend/records/entitlements/import.jsx");
+  "routes/backend/records/entitlements/new": typeof import("./app/routes/backend/records/entitlements/new.jsx");
+  "routes/backend/records/features/new": typeof import("./app/routes/backend/records/features/new.jsx");
+  "routes/backend/records/pages/_index": typeof import("./app/routes/backend/records/pages/_index.jsx");
+  "routes/backend/records/users/_index": typeof import("./app/routes/backend/records/users/_index.jsx");
+  "routes/backend/records/annotations": typeof import("./app/routes/backend/records/annotations/_layout.jsx");
+  "routes/backend/records/annotations/$id": typeof import("./app/routes/backend/records/annotations/$id.jsx");
+  "routes/backend/records/pages/$id": typeof import("./app/routes/backend/records/pages/$id/_layout.jsx");
+  "routes/backend/records/pages/$id/properties": typeof import("./app/routes/backend/records/pages/$id/properties.jsx");
+  "routes/backend/records/pages/$id/_index": typeof import("./app/routes/backend/records/pages/$id/_index.jsx");
+  "routes/backend/records/pages/new": typeof import("./app/routes/backend/records/pages/new.jsx");
+  "routes/backend/records/users/$id": typeof import("./app/routes/backend/records/users/$id/_layout.jsx");
+  "routes/backend/records/users/$id/properties": typeof import("./app/routes/backend/records/users/$id/properties.jsx");
+  "routes/backend/records/users/$id/activity": typeof import("./app/routes/backend/records/users/$id/activity.jsx");
+  "routes/backend/records/users/$id/_index": typeof import("./app/routes/backend/records/users/$id/_index.jsx");
+  "routes/backend/records/users/new": typeof import("./app/routes/backend/records/users/new.jsx");
+  "routes/backend/records/comments": typeof import("./app/routes/backend/records/comments/_layout.jsx");
+  "routes/backend/records/comments/$id": typeof import("./app/routes/backend/records/comments/$id.jsx");
+  "routes/backend/records/_index": typeof import("./app/routes/backend/records/_index.jsx");
+  "routes/backend/records/makers": typeof import("./app/routes/backend/records/makers/_layout.jsx");
+  "routes/backend/records/makers/$id": typeof import("./app/routes/backend/records/makers/$id.jsx");
+  "routes/backend/records/makers/new": typeof import("./app/routes/backend/records/makers/new.jsx");
   "routes/backend/_index": typeof import("./app/routes/backend/_index.jsx");
   "routes/backend/$": typeof import("./app/routes/backend/$.jsx");
   "routes/$": typeof import("./app/routes/$.jsx");

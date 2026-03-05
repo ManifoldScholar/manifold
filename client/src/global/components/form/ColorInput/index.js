@@ -1,7 +1,11 @@
-import loadable from "@loadable/component";
+import { lazy, Suspense } from "react";
 
-const ColorInput = loadable(() =>
-  import(/* webpackChunkName: "coloris" */ "./ColorInput")
-);
+const ColorInput = lazy(() => import("./ColorInput"));
 
-export default ColorInput;
+export default function LazyColorInput(props) {
+  return (
+    <Suspense fallback={null}>
+      <ColorInput {...props} />
+    </Suspense>
+  );
+}

@@ -6,16 +6,7 @@ import Avatar from "global/components/avatar";
 import * as Styled from "./styles";
 
 const UserMenuButton = forwardRef(
-  (
-    {
-      context = "frontend",
-      callbacks,
-      className,
-      onClick,
-      ...props
-    },
-    ref
-  ) => {
+  ({ context = "frontend", callbacks, className, onClick, ...props }, ref) => {
     const { authenticated, currentUser } = useAuthentication();
     const { t } = useTranslation();
     const { toggle: toggleSignInUpOverlay } = useSignInUpOverlay();

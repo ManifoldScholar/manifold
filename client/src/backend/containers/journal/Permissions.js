@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Layout from "backend/components/layout";
 import { FormContext } from "helpers/contexts";
-import Form, { Unwrapped } from "global/components/form";
+import Form from "global/components/form";
 import { useApiCallback, useFetch } from "hooks";
 import { usersAPI, permissionsAPI } from "api";
 import withConfirmation from "hoc/withConfirmation";
@@ -78,7 +78,7 @@ function JournalPermissions({ journal, confirm }) {
         <Form.Instructions
           instructions={t("journals.permissions.instructions")}
         />
-        <Unwrapped.Picker
+        <Form.Picker
           name=""
           listStyle="rows"
           options={() => usersAPI.index({ order: "first_name, last_name" })}

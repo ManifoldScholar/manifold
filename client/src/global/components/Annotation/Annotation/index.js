@@ -86,7 +86,7 @@ export default function Annotation({
   return (
     <HighlightAnnotation
       annotation={annotation}
-      visitHandler={visitHandler}
+      visitHandler={handleVisit}
       showCommentsToggleAsBlock={showCommentsToggleAsBlock}
       showMarkers={showMarkers}
       markerIcons={markerIcons}

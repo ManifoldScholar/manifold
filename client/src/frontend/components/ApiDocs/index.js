@@ -1,11 +1,8 @@
-import React from "react";
-import loadable from "@loadable/component";
+import React, { lazy, Suspense } from "react";
 import Layout from "./SwaggerUIComponents/Layout";
 import AuthorizeOperationBtn from "./SwaggerUIComponents/AuthorizeOperationBtn";
 
-const SwaggerUI = loadable(() =>
-  import(/* webpackChunkName: "swagger-ui" */ "./SwaggerUi")
-);
+const SwaggerUI = lazy(() => import("./SwaggerUi"));
 
 export default class ApiDocs extends React.Component {
   constructor(props) {
@@ -49,13 +46,15 @@ export default class ApiDocs extends React.Component {
 
   render() {
     return (
-      <SwaggerUI
-        spec={this.props.schema}
-        layout="ManifoldLayout"
-        docExpansion="list"
-        plugins={this.plugins}
-        onComplete={this.onComplete}
-      />
+      <Suspense fallback={null}>
+        <SwaggerUI
+          spec={this.props.schema}
+          layout="ManifoldLayout"
+          docExpansion="list"
+          plugins={this.plugins}
+          onComplete={this.onComplete}
+        />
+      </Suspense>
     );
   }
 }
