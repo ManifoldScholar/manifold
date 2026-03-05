@@ -5,7 +5,6 @@ import Generate from "./Generate";
 import Menu from "./Menu";
 
 export default function ResetPasswordBase({ resolve, reject, user }) {
-
   const [confirm, setConfirm] = useState(false);
 
   const handleRejectClick = useCallback(

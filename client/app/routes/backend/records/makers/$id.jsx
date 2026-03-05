@@ -81,7 +81,7 @@ export default function MakersEdit({ loaderData: maker }) {
         <FormContainer.Form
           fetcher={fetcher}
           model={maker}
-          name="backend-maker-update"
+
           className="form-secondary"
           notificationScope="drawer"
         >

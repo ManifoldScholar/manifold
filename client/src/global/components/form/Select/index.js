@@ -108,7 +108,10 @@ export default function FormSelect({
           $wide={wide}
         >
           {options.map(option => (
-            <option key={option.key ?? String(option.value)} value={String(option.value)}>
+            <option
+              key={option.key ?? String(option.value)}
+              value={String(option.value)}
+            >
               {option.label}
             </option>
           ))}

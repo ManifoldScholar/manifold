@@ -56,7 +56,9 @@ function ResourcePlayerAudio({ resource }) {
             src={src}
             tracks={tracks}
             download={
-              allowDownload ? urlToRelativePath(attachmentStyles.original) : false
+              allowDownload
+                ? urlToRelativePath(attachmentStyles.original)
+                : false
             }
             viewType="audio"
           />

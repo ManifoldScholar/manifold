@@ -40,7 +40,7 @@ export default function MakersNew() {
       <Layout.DrawerHeader title={t("records.makers.new_header")} />
       <FormContainer.Form
         fetcher={fetcher}
-        name="backend-maker-create"
+
         className="form-secondary"
         notificationScope="drawer"
       >

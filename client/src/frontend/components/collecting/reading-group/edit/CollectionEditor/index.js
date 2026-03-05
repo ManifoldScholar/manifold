@@ -18,15 +18,19 @@ export default function CollectionEditor({
 
   const { addNotification } = useNotifications();
 
+  const notifyUpdateError = () => {
+    addNotification({
+      level: 2,
+      id: "READING_GROUP_UPDATE_FAILURE",
+      heading: t("notifications.reading_group_update_failure"),
+      body: t("notifications.reading_group_update_failure_body"),
+      expiration: 5000
+    });
+  };
+
   useEffect(() => {
     if (fetcher.data?.errors) {
-      addNotification({
-        level: 2,
-        id: "READING_GROUP_UPDATE_FAILURE",
-        heading: t("notifications.reading_group_update_failure"),
-        body: t("notifications.reading_group_update_failure_body"),
-        expiration: 5000
-      });
+      notifyUpdateError();
     }
   }, [fetcher.data]); // eslint-disable-line react-hooks/exhaustive-deps
 

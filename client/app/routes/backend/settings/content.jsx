@@ -29,8 +29,6 @@ export default function SettingsContentRoute() {
   const settings = useOutletContext();
   const fetcher = useFetcher();
 
-  if (!settings) return null;
-
   return (
     <div>
       <PageHeader title={t("settings.content.header")} type="settings" />

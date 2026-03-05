@@ -6,7 +6,7 @@ import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Layout from "backend/components/layout";
 import Dialog from "global/components/dialog";
-import lh from "helpers/linkHandler";
+
 import {
   FlagsList,
   Body,
@@ -80,17 +80,12 @@ export default function CommentDetail({ loaderData: comment }) {
     subjectType === "Resource"
       ? !!projectSlug && !!subjectId
         ? {
-            path: lh.link("frontendProjectResource", projectSlug, subjectId)
+            path: `/projects/${projectSlug}/resource/${subjectId}`
           }
         : null
       : !!subjectTextSlug && !!subjectTextSectionId
       ? {
-          path: lh.link(
-            "readerSection",
-            subjectTextSlug,
-            subjectTextSectionId,
-            `#annotation-${subjectId}`
-          )
+          path: `/read/${subjectTextSlug}/section/${subjectTextSectionId}#annotation-${subjectId}`
         }
       : null;
 
