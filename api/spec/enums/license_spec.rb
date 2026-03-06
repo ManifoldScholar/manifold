@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe License, type: :enum do
+  subject { described_class.new }
+
   describe License::CcBy do
     its(:name) { is_expected.to eq "CC BY" }
   end
