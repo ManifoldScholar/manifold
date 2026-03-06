@@ -29,7 +29,7 @@ export default function FormRadioOption({
           type="radio"
           name={groupName}
           value={inputValue}
-          checked={inputValue === value}
+          checked={inputValue === String(value)}
           onChange={onChange}
           tabIndex={tabIndex ?? 0}
         />

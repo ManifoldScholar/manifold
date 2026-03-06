@@ -7,7 +7,6 @@ import Properties from "./Properties";
 import Analytics from "./Analytics";
 import Log from "./Log";
 import Metadata from "./Metadata";
-import New from "./New";
 // import ProjectPage from "./ProjectPage";
 // import Resource from "./resource";
 import ResourceCollections from "./ResourceCollections";
@@ -27,7 +26,6 @@ export default {
   Log,
   Analytics,
   Metadata,
-  New,
   // ProjectPage,
   // Resource,
   ResourceCollections,

@@ -294,6 +294,21 @@ type Pages = {
   "/backend/dashboard": {
     params: {};
   };
+  "/backend/journals": {
+    params: {};
+  };
+  "/backend/journals/new": {
+    params: {};
+  };
+  "/backend/projects": {
+    params: {};
+  };
+  "/backend/projects/all": {
+    params: {};
+  };
+  "/backend/projects/new": {
+    params: {};
+  };
   "/backend/settings": {
     params: {};
   };
@@ -452,7 +467,7 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/actions/reading-group-membership" | "/actions/reading-group-status" | "/actions/forgot-password" | "/actions/resource-create" | "/actions/update-profile" | "/actions/flag-content" | "/actions/collect" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/unsubscribe/:token" | "/my/groups" | "/journals" | "/journals/issues" | "/projects" | "/my/groups/new" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes/:volumeId" | "/journals/:id/volumes" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/backend" | "/backend/groups" | "/backend/groups/:id" | "/backend/groups/:id/annotations" | "/backend/groups/:id/annotations/:annotationId" | "/backend/groups/:id/details" | "/backend/groups/:id/members" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/settings" | "/backend/settings/export-targets" | "/backend/settings/export-targets/:id" | "/backend/settings/export-targets/new" | "/backend/settings/integrations" | "/backend/settings/properties" | "/backend/settings/ingestion" | "/backend/settings/subjects" | "/backend/settings/subjects/:id" | "/backend/settings/subjects/new" | "/backend/settings/content" | "/backend/settings/email" | "/backend/settings/theme" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*" | "/*";
+    page: "/" | "/actions/reading-group-membership" | "/actions/reading-group-status" | "/actions/forgot-password" | "/actions/resource-create" | "/actions/update-profile" | "/actions/flag-content" | "/actions/collect" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/unsubscribe/:token" | "/my/groups" | "/journals" | "/journals/issues" | "/projects" | "/my/groups/new" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes/:volumeId" | "/journals/:id/volumes" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/backend" | "/backend/groups" | "/backend/groups/:id" | "/backend/groups/:id/annotations" | "/backend/groups/:id/annotations/:annotationId" | "/backend/groups/:id/details" | "/backend/groups/:id/members" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/journals" | "/backend/journals/new" | "/backend/projects" | "/backend/projects/all" | "/backend/projects/new" | "/backend/settings" | "/backend/settings/export-targets" | "/backend/settings/export-targets/:id" | "/backend/settings/export-targets/new" | "/backend/settings/integrations" | "/backend/settings/properties" | "/backend/settings/ingestion" | "/backend/settings/subjects" | "/backend/settings/subjects/:id" | "/backend/settings/subjects/new" | "/backend/settings/content" | "/backend/settings/email" | "/backend/settings/theme" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*" | "/*";
   };
   "routes/actions/reading-group-membership.jsx": {
     id: "routes/actions/reading-group-membership";
@@ -708,7 +723,7 @@ type RouteFiles = {
   };
   "routes/backend/_layout.jsx": {
     id: "routes/backend";
-    page: "/backend" | "/backend/groups" | "/backend/groups/:id" | "/backend/groups/:id/annotations" | "/backend/groups/:id/annotations/:annotationId" | "/backend/groups/:id/details" | "/backend/groups/:id/members" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/settings" | "/backend/settings/export-targets" | "/backend/settings/export-targets/:id" | "/backend/settings/export-targets/new" | "/backend/settings/integrations" | "/backend/settings/properties" | "/backend/settings/ingestion" | "/backend/settings/subjects" | "/backend/settings/subjects/:id" | "/backend/settings/subjects/new" | "/backend/settings/content" | "/backend/settings/email" | "/backend/settings/theme" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*";
+    page: "/backend" | "/backend/groups" | "/backend/groups/:id" | "/backend/groups/:id/annotations" | "/backend/groups/:id/annotations/:annotationId" | "/backend/groups/:id/details" | "/backend/groups/:id/members" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/journals" | "/backend/journals/new" | "/backend/projects" | "/backend/projects/all" | "/backend/projects/new" | "/backend/settings" | "/backend/settings/export-targets" | "/backend/settings/export-targets/:id" | "/backend/settings/export-targets/new" | "/backend/settings/integrations" | "/backend/settings/properties" | "/backend/settings/ingestion" | "/backend/settings/subjects" | "/backend/settings/subjects/:id" | "/backend/settings/subjects/new" | "/backend/settings/content" | "/backend/settings/email" | "/backend/settings/theme" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*";
   };
   "routes/backend/groups/_index.jsx": {
     id: "routes/backend/groups/_index";
@@ -757,6 +772,34 @@ type RouteFiles = {
   "routes/backend/dashboard.jsx": {
     id: "routes/backend/dashboard";
     page: "/backend/dashboard";
+  };
+  "routes/backend/journals/_layout.jsx": {
+    id: "routes/backend/journals";
+    page: "/backend/journals" | "/backend/journals/new";
+  };
+  "routes/backend/journals/_index.jsx": {
+    id: "routes/backend/journals/_index";
+    page: "/backend/journals";
+  };
+  "routes/backend/journals/new.jsx": {
+    id: "routes/backend/journals/new";
+    page: "/backend/journals/new";
+  };
+  "routes/backend/projects/_layout.jsx": {
+    id: "routes/backend/projects";
+    page: "/backend/projects" | "/backend/projects/all" | "/backend/projects/new";
+  };
+  "routes/backend/projects/_index.jsx": {
+    id: "routes/backend/projects/_index";
+    page: "/backend/projects";
+  };
+  "routes/backend/projects/all.jsx": {
+    id: "routes/backend/projects/all";
+    page: "/backend/projects/all";
+  };
+  "routes/backend/projects/new.jsx": {
+    id: "routes/backend/projects/new";
+    page: "/backend/projects/new";
   };
   "routes/backend/settings/_layout.jsx": {
     id: "routes/backend/settings";
@@ -1022,6 +1065,13 @@ type RouteModules = {
   "routes/backend/analytics/top-searches": typeof import("./app/routes/backend/analytics/top-searches.jsx");
   "routes/backend/analytics/_index": typeof import("./app/routes/backend/analytics/_index.jsx");
   "routes/backend/dashboard": typeof import("./app/routes/backend/dashboard.jsx");
+  "routes/backend/journals": typeof import("./app/routes/backend/journals/_layout.jsx");
+  "routes/backend/journals/_index": typeof import("./app/routes/backend/journals/_index.jsx");
+  "routes/backend/journals/new": typeof import("./app/routes/backend/journals/new.jsx");
+  "routes/backend/projects": typeof import("./app/routes/backend/projects/_layout.jsx");
+  "routes/backend/projects/_index": typeof import("./app/routes/backend/projects/_index.jsx");
+  "routes/backend/projects/all": typeof import("./app/routes/backend/projects/all.jsx");
+  "routes/backend/projects/new": typeof import("./app/routes/backend/projects/new.jsx");
   "routes/backend/settings": typeof import("./app/routes/backend/settings/_layout.jsx");
   "routes/backend/settings/export-targets": typeof import("./app/routes/backend/settings/export-targets/_layout.jsx");
   "routes/backend/settings/export-targets/$id": typeof import("./app/routes/backend/settings/export-targets/$id.jsx");
