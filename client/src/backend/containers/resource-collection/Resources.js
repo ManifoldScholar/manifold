@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router-dom";
-import { resourceCollectionsAPI, projectsAPI, requests } from "api";
+import { resourceCollectionsAPI, projectsAPI } from "api";
 import { useListQueryParams, useFetch, useApiCallback } from "hooks";
 import EntitiesList, {
   Search,
@@ -30,8 +30,7 @@ function ResourceCollectionResourcesContainer({
 
   const { data: resources, meta, refresh } = useFetch({
     request: [projectsAPI.resources, project.id, filters, pagination],
-    dependencies: [filters],
-    options: { requestKey: requests.beResources }
+    dependencies: [filters]
   });
 
   const updateCollection = useApiCallback(resourceCollectionsAPI.update);
