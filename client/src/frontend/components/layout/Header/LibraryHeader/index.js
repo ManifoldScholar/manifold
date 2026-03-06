@@ -62,7 +62,7 @@ export default function LibraryHeader() {
     }
 
     const pageLinks = pages
-      .filter(page => page.attributes.showInHeader)
+      .filter(page => page.attributes.showInHeader && !page.attributes.hidden)
       .map(pageToLinkAttrs);
     return [...routesWithDropdown, ...pageLinks];
   };
