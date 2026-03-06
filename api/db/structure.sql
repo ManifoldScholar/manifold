@@ -865,7 +865,9 @@ CREATE TABLE public.projects (
     social_title text,
     orphaned_journal_issue_id uuid,
     orphaned_journal_issue boolean DEFAULT false NOT NULL,
-    exclude_from_oai boolean DEFAULT false
+    exclude_from_oai boolean DEFAULT false,
+    exclude_from_directory boolean DEFAULT false,
+    license character varying
 );
 
 
@@ -1865,7 +1867,10 @@ CREATE TABLE public.journals (
     logo_data jsonb,
     hero_background_color character varying,
     show_on_homepage boolean DEFAULT false NOT NULL,
-    home_page_priority integer DEFAULT 0 NOT NULL
+    home_page_priority integer DEFAULT 0 NOT NULL,
+    exclude_from_oai boolean DEFAULT false,
+    exclude_from_directory boolean DEFAULT false,
+    license character varying
 );
 
 
@@ -2798,7 +2803,8 @@ CREATE TABLE public.settings (
     favicon_data jsonb,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     ingestion jsonb DEFAULT '{}'::jsonb,
-    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL
+    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL,
+    oai jsonb DEFAULT '{"admin_email": "admin@manifold.app", "repository_name": "Manifold", "directory_enabled": true}'::jsonb
 );
 
 
@@ -8026,4 +8032,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20251105165521'),
 ('20251121202033'),
 ('20251203230443'),
-('20251203231940');
+('20251203231940'),
+('20260126221732'),
+('20260127162821'),
+('20260127185424'),
+('20260305225814');
+
+

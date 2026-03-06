@@ -12,19 +12,112 @@ RSpec.describe ManifoldOAI::RecordSynchronizer do
     it { is_expected.to be_success }
 
     it "has title" do
-      expect(result.success.oai_dc_content).to have_xml('//oai_dc:title', project.metadata[:subject_title])
+      expect(result.success.oai_dc_content).to include("<dc:title>#{project.title}</dc:title>")
+    end
+
+    it "has subtitle" do
+      project.update(subtitle: "A Subtitle")
+      result = described_class.new(project).call
+      expect(result.success.oai_dc_content).to include("<dc:title>A Subtitle</dc:title>")
+    end
+
+    it "has description" do
+      project.update(description: "Test Description")
+      result = described_class.new(project).call
+      expect(result.success.oai_dc_content).to include("<dc:description>Test Description</dc:description>")
+    end
+
+    it "has publication date" do
+      project.update(publication_date: Date.new(2024, 1, 15))
+      result = described_class.new(project).call
+      expect(result.success.oai_dc_content).to include("<dc:date>2024-01-15</dc:date>")
     end
 
     it "has rights" do
-      expect(result.success.oai_dc_content).to have_xml('//oai_dc:rights', project.metadata[:rights])
+      expect(result.success.oai_dc_content).to include("<dc:rights>")
     end
 
     it "has publisher" do
-      expect(result.success.oai_dc_content).to have_xml('//oai_dc:publisher', project.metadata[:publisher])
+      expect(result.success.oai_dc_content).to include("<dc:publisher>")
     end
 
-    it "has rightsHolder" do
-      expect(result.success.oai_dc_content).to have_xml('//oai_dc:rightsHolder', project.metadata[:rights_holder])
+    it "has canonical URL identifier" do
+      expect(result.success.oai_dc_content).to include("<dc:identifier>#{project.canonical_url}</dc:identifier>")
+    end
+
+    it "has creator" do
+      maker = FactoryBot.create(:maker, name: "Test Creator")
+      project.creators << maker
+      result = described_class.new(project).call
+      expect(result.success.oai_dc_content).to include("<dc:creator>Test Creator</dc:creator>")
+    end
+
+    it "has subjects" do
+      subject_obj = FactoryBot.create(:subject, name: "Test Subject")
+      project.subjects << subject_obj
+      result = described_class.new(project).call
+      expect(result.success.oai_dc_content).to include("<dc:subject>Test Subject</dc:subject>")
+    end
+
+    context "with identifiers" do
+      before do
+        project.metadata[:doi] = "10.1234/example"
+        project.metadata[:isbn] = "978-1234567890"
+        project.metadata[:issn] = "1234-5678"
+        project.save
+      end
+
+      it "has DOI identifier" do
+        result = described_class.new(project.reload).call
+        expect(result.success.oai_dc_content).to include("<dc:identifier>https://doi.org/10.1234/example</dc:identifier>")
+      end
+
+      it "has ISBN identifier" do
+        result = described_class.new(project.reload).call
+        expect(result.success.oai_dc_content).to include("<dc:identifier>info:eu-repo/semantics/altIdentifier/isbn/978-1234567890</dc:identifier>")
+      end
+
+      it "has ISSN relation" do
+        result = described_class.new(project.reload).call
+        expect(result.success.oai_dc_content).to include("<dc:relation>info:eu-repo/semantics/reference/issn/1234-5678</dc:relation>")
+      end
+    end
+  end
+
+  describe "linking projects to sets" do
+    let(:project) { FactoryBot.create(:project) }
+    subject(:result) { described_class.new(project).call }
+
+    it "links the project to the projects set" do
+      expect { result }.to change { ManifoldOAISet.find_by(spec: "projects")&.records&.count || 0 }.by(1)
+    end
+  end
+
+  describe "linking journals to sets" do
+    let(:journal) { FactoryBot.create(:journal) }
+    subject(:result) { described_class.new(journal).call }
+
+    it "links the journal to the journals set" do
+      expect { result }.to change { ManifoldOAISet.find_by(spec: "journals")&.records&.count || 0 }.by(1)
+    end
+  end
+
+  describe "linking projects to directory set" do
+    let(:project) { FactoryBot.create(:project) }
+    subject(:result) { described_class.new(project).call }
+
+    it "links the project to the directory set" do
+      expect { result }.to change { ManifoldOAISet.find_by(spec: "directory")&.records&.count || 0 }.by(1)
+    end
+
+    context "the project is excluded from directory" do
+      before do
+        project.update(exclude_from_directory: true)
+      end
+
+      it "does not link the project to the directory set" do
+        expect { result }.not_to change { ManifoldOAISet.find_by(spec: "directory")&.records&.count || 0 }
+      end
     end
   end
 end

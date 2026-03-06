@@ -25,6 +25,7 @@ class Journal < ApplicationRecord
   include WithProjectCollectionLayout
   include WithConfigurableAvatar
   include HasKeywordSearch
+  include ManifoldOAIRecordSource
 
   multisearch_draftable true
 
@@ -54,6 +55,8 @@ class Journal < ApplicationRecord
   has_many_readonly :journal_project_links, -> { in_default_order }
 
   has_many :projects, through: :journal_project_links
+
+  classy_enum_attr :license, class_name: "License", allow_nil: true
 
   validates :title, presence: true
   validates :draft, inclusion: { in: [true, false] }
@@ -131,6 +134,12 @@ class Journal < ApplicationRecord
 
   def journal_issues_without_volume_count
     journal_issues.where(journal_volume: nil).count
+  end
+
+  def should_have_oai_record?
+    return false if draft?
+
+    super
   end
 
   # This method is named a little oddly, as it actually returns references to projects.

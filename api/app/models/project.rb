@@ -123,6 +123,8 @@ class Project < ApplicationRecord
   has_one_readonly :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
   has_one_readonly :current_project_export, through: :current_project_export_status, source: :project_export
 
+  classy_enum_attr :license, class_name: "License", allow_nil: true
+
   delegate :number, to: :journal_issue, allow_nil: true, prefix: true
   delegate :pending_sort_title, to: :journal_issue, allow_nil: true, prefix: true
   delegate :number, to: :journal_volume, allow_nil: true, prefix: true
