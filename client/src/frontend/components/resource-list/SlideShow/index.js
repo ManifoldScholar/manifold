@@ -196,6 +196,7 @@ class ResourceSlideshow extends PureComponent {
           resource={slide}
           aspectRatio="16 / 9"
           loading={!this.isLoaded(index)}
+          active={index === position - 1}
         />
       </Styled.Slide>
     ));
