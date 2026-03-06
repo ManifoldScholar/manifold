@@ -56,7 +56,7 @@ module V1
       typed_attribute :image_credits, Types::String.optional
       typed_attribute :image_credits_formatted, Types::String.meta(read_only: true)
       typed_attribute :pending_slug, Types::String
-      typed_attribute :license, Types::String
+      typed_attribute :license, Types::String.optional
 
       typed_attribute :available_journal_issues_without_volume_count, Types::Integer.meta(read_only: true) do |object, params|
         object.journal_issues.where(journal_volume: nil).with_read_ability(params[:current_user]).count
