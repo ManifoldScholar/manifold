@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useRevalidator } from "react-router";
 import { featuresAPI } from "api";
-import authorize from "app/routes/utility/loaders/authorize";
 import loadList from "app/routes/utility/loaders/loadList";
 import { useApiCallback } from "hooks";
 import EntitiesList, {
@@ -10,7 +9,6 @@ import EntitiesList, {
 } from "backend/components/list/EntitiesList";
 
 export const loader = async ({ request, context }) => {
-  await authorize({ request, context, ability: "update", entity: "feature" });
   return loadList({ request, context, fetchFn: featuresAPI.index });
 };
 

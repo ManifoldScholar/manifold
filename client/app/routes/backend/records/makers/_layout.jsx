@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 import { makersAPI } from "api";
-import authorize from "app/routes/utility/loaders/authorize";
 import loadList from "app/routes/utility/loaders/loadList";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import { useListQueryParams } from "hooks";
@@ -13,7 +12,6 @@ import EntitiesList, {
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
 export const loader = async ({ request, context }) => {
-  await authorize({ request, context, ability: "update", entity: "maker" });
   return loadList({
     request,
     context,

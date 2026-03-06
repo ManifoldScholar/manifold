@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { pagesAPI } from "api";
-import authorize from "app/routes/utility/loaders/authorize";
 import loadList from "app/routes/utility/loaders/loadList";
 import EntitiesList, {
   Button,
@@ -8,7 +7,6 @@ import EntitiesList, {
 } from "backend/components/list/EntitiesList";
 
 export const loader = async ({ request, context }) => {
-  await authorize({ request, context, ability: "update", entity: "page" });
   return loadList({ request, context, fetchFn: pagesAPI.index });
 };
 
