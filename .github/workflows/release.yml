@@ -1,0 +1,22 @@
+name: Production Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Update Release Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: "checkout release-candidate"
+        uses: actions/checkout@v4
+        with:
+          ref: release
+
+      - name: "Push release changes"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch
+          git reset --hard origin/master
+          git push --force origin release
