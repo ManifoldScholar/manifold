@@ -36,6 +36,8 @@ import CommentRow from "./Entity/CommentRow";
 import ContributorRow from "./Entity/ContributorRow";
 import JournalEditorRow from "./Entity/JournalEditorRow";
 import TextTrackRow from "./Entity/TextTrackRow";
+import UserGroupRow from "./Entity/UserGroupRow";
+import UserGroupEntitlementRow from "./Entity/UserGroupEntitlementRow";
 
 export default List;
 export {
@@ -75,5 +77,7 @@ export {
   CommentRow,
   ContributorRow,
   JournalEditorRow,
-  TextTrackRow
+  TextTrackRow,
+  UserGroupRow,
+  UserGroupEntitlementRow
 };

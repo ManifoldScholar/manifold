@@ -5,7 +5,8 @@ module Entitlements
   class Create < AbstractCreate
     object :entitling_entity, class: "ProvidesEntitlements"
 
-    record :subject_url, class: "GlobalID", finder: :new
+    record :subject_url, class: "GlobalID", finder: :new, default: -> {}
+    object :subject, class: "Entitleable", default: -> {}
 
     validate :find_entitler!
     validate :find_subject!
@@ -34,13 +35,14 @@ module Entitlements
 
     # @return [void]
     def find_subject!
-      if subject_url.app.to_s != "entitlements"
+      if subject
+        @subject ||= subject
+      elsif subject_url&.app.to_s != "entitlements"
         errors.add :subject_url, "must be gid://entitlements"
-
         return
+      else
+        @subject = subject_url.find
       end
-
-      @subject = subject_url.find
     rescue ActiveRecord::RecordNotFound => e
       errors.add :subject_url, e.message
     else

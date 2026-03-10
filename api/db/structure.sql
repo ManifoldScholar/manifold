@@ -1,4 +1,4 @@
-\restrict OI1rgHalIvDF5UL29S8nJbvhRJKIUusBSAEJwbetaiPj6bhTFIJggTwTu84S6lU
+\restrict DQr2dwNagKD5zodJLIzAe2gpTkoIddxM7as8wjyE7iSeL0KfHbyQYaJOG1I5jkq
 
 -- Dumped from database version 13.22
 -- Dumped by pg_dump version 13.22 (Debian 13.22-1.pgdg11+1)
@@ -6930,12 +6930,11 @@ CREATE INDEX index_user_group_memberships_on_user_id ON public.user_group_member
 --
 -- Name: index_user_group_memberships_on_user_id_and_user_group_id; Type: INDEX; Schema: public; Owner: -
 --
-
 CREATE UNIQUE INDEX index_user_group_memberships_on_user_id_and_user_group_id ON public.user_group_memberships USING btree (user_id, user_group_id);
 
 
 --
--- Name: index_user_groups_on_name; Type: INDEX; Schema: public; Owner: -
+-- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_user_groups_on_name ON public.user_groups USING btree (name);
@@ -6943,8 +6942,6 @@ CREATE UNIQUE INDEX index_user_groups_on_name ON public.user_groups USING btree 
 
 --
 -- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
---
-
 CREATE INDEX index_users_on_deleted_at ON public.users USING btree (deleted_at);
 
 
@@ -7952,7 +7949,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 -- PostgreSQL database dump complete
 --
 
-\unrestrict OI1rgHalIvDF5UL29S8nJbvhRJKIUusBSAEJwbetaiPj6bhTFIJggTwTu84S6lU
+\unrestrict DQr2dwNagKD5zodJLIzAe2gpTkoIddxM7as8wjyE7iSeL0KfHbyQYaJOG1I5jkq
 
 SET search_path TO "$user", public;
 

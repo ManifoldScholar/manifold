@@ -25,7 +25,14 @@ class RecordsContainer extends PureComponent {
     return (
       <Authorize
         ability="update"
-        entity={["user", "maker", "page", "feature", "exportTarget"]}
+        entity={[
+          "user",
+          "userGroup",
+          "maker",
+          "page",
+          "feature",
+          "exportTarget"
+        ]}
         failureFatalError={{
           body: this.props.t("records.unauthorized")
         }}
@@ -33,7 +40,14 @@ class RecordsContainer extends PureComponent {
         {subpage && (
           <HeadContent
             title={`${t(
-              `titles.${subpage === "reading-groups" ? "groups" : subpage}`
+              `titles.${
+                /* eslint-disable-next-line no-nested-ternary */
+                subpage === "reading-groups"
+                  ? "groups"
+                  : subpage === "user-groups"
+                  ? "user_groups"
+                  : subpage
+              }`
             )} | ${t("common.admin")}`}
             appendDefaultTitle
           />

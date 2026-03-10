@@ -19,5 +19,9 @@ FactoryBot.define do
     trait :twitter do
       provider { 'twitter' }
     end
+
+    trait :saml do
+      provider { 'saml' }
+    end
   end
 end
