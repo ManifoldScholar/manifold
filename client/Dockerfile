@@ -5,7 +5,7 @@ COPY ./ /srv/app
 
 RUN yarn
 
-FROM base AS dev
+FROM base AS development
 
   RUN yarn build:dev
   
@@ -13,7 +13,7 @@ FROM base AS dev
 
   CMD ["yarn", "run", "watch"]
 
-FROM base AS prod
+FROM base AS production
 
   RUN yarn build:prod
 
