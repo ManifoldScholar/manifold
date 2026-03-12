@@ -18,6 +18,15 @@ import * as Styled from "./styles";
 export default class ListEntities extends PureComponent {
   static displayName = "List.Entities.List";
 
+  constructor(props) {
+    super(props);
+    this.state = { isMounted: false };
+  }
+
+  componentDidMount() {
+    this.setState({ isMounted: true });
+  }
+
   static errors = {
     callbackInvalid:
       'List.Entities.List "callback" prop must be null or plain object.',
@@ -305,7 +314,7 @@ export default class ListEntities extends PureComponent {
                   idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
                 />
               )}
-              {this.isSortable && (
+              {this.isSortable && this.state.isMounted && (
                 <SortableEntities
                   {...this.props}
                   className={listClassNames}

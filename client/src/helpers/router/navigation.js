@@ -329,45 +329,39 @@ class Navigation {
     return [
       {
         label: "titles.properties",
-        path: id => `/backend/journals/${id}/properties`,
+        path: `/backend/journals/${journal.id}/properties`,
         entity: journal,
-        ability: "update",
-        id: journal.id
+        ability: "update"
       },
       {
         label: "titles.layout",
-        path: id => `/backend/journals/${id}/layout`,
+        path: `/backend/journals/${journal.id}/layout`,
         entity: journal,
-        ability: "update",
-        id: journal.id
+        ability: "update"
       },
       {
         label: "titles.access",
-        path: id => `/backend/journals/${id}/access`,
+        path: `/backend/journals/${journal.id}/access`,
         entity: journal,
-        ability: "update",
-        id: journal.id
+        ability: "update"
       },
       {
         label: "titles.metadata",
-        path: id => `/backend/journals/${id}/metadata`,
+        path: `/backend/journals/${journal.id}/metadata`,
         entity: journal,
-        ability: "update",
-        id: journal.id
+        ability: "update"
       },
       {
         label: "titles.issues",
-        path: id => `/backend/journals/${id}/issues`,
+        path: `/backend/journals/${journal.id}/issues`,
         entity: journal,
-        ability: "read",
-        id: journal.id
+        ability: "read"
       },
       {
         label: "titles.volumes",
-        path: id => `/backend/journals/${id}/volumes`,
+        path: `/backend/journals/${journal.id}/volumes`,
         entity: journal,
-        ability: "update",
-        id: journal.id
+        ability: "update"
       }
     ];
   });

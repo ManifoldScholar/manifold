@@ -23,7 +23,7 @@ import has from "lodash/has";
 import keyBy from "lodash/keyBy";
 import startsWith from "lodash/startsWith";
 import { FormContext } from "helpers/contexts";
-import { ApiClient } from "api";
+import { queryApi } from "app/routes/utility/helpers/queryApi";
 import { isPromise } from "utils/promise";
 import Authorization from "helpers/authorization";
 import BaseLabel from "../BaseLabel";
@@ -156,7 +156,7 @@ export default function FormPicker({
   const inputWrapperRef = useRef(null);
   const searchInputRef = useRef(null);
   const optionsRef = useRef(null);
-  const unmountingRef = useRef(false);
+  const abortControllerRef = useRef(null);
 
   // Screen reader status state
   const [srMessage, setSrMessage] = useState(null);
@@ -196,15 +196,19 @@ export default function FormPicker({
 
   const fetchOptions = useCallback(() => {
     if (!canFetchOptions) return;
-    const { endpoint, method, options: fetchOpts = {} } = optionsProp();
+    if (typeof window === "undefined") return;
 
-    fetchOpts.authToken = authToken;
-    fetchOpts.params = fetchOpts.params || {};
-    fetchOpts.params.noPagination = true;
+    if (abortControllerRef.current) abortControllerRef.current.abort();
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
 
-    const client = new ApiClient();
-    client.call(endpoint, method, fetchOpts).then(results => {
-      if (unmountingRef.current) return;
+    const request = optionsProp();
+    request.options = request.options || {};
+    request.options.params = request.options.params || {};
+    request.options.params.noPagination = true;
+
+    queryApi(request, null, controller.signal).then(results => {
+      if (controller.signal.aborted) return;
       const resources = results.data;
       const newState = deriveStateFromOptions(resources, {
         optionToLabel,
@@ -217,7 +221,6 @@ export default function FormPicker({
   }, [
     canFetchOptions,
     optionsProp,
-    authToken,
     optionToLabel,
     optionToValue,
     optionToInstructions,
@@ -257,7 +260,7 @@ export default function FormPicker({
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      unmountingRef.current = true;
+      if (abortControllerRef.current) abortControllerRef.current.abort();
       if (srTimeoutRef.current) clearTimeout(srTimeoutRef.current);
     };
   }, []);

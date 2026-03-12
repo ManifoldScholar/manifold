@@ -2,20 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import { journalVolumesAPI } from "api";
 import { useTranslation } from "react-i18next";
 
-function VolumeForm({ journalId, model, ...props }) {
+function VolumeForm({ model, fetcher }) {
   const { t } = useTranslation();
 
   return (
     <FormContainer.Form
-      {...props}
-      name={model ? "update-journal-volume" : "create-journal-volume"}
-      update={journalVolumesAPI.update}
-      create={toCreate => journalVolumesAPI.create(journalId, toCreate)}
-      className="form-secondary"
+      fetcher={fetcher}
       model={model}
+      className="form-secondary"
+      notifyOnSuccess
     >
       <Form.NumberInput
         label={t("volumes.number_truncated")}
@@ -37,7 +34,7 @@ function VolumeForm({ journalId, model, ...props }) {
 
 VolumeForm.prop_types = {
   model: PropTypes.object,
-  journalId: PropTypes.string.isRequired
+  fetcher: PropTypes.object.isRequired
 };
 
 export default VolumeForm;

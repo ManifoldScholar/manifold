@@ -108,15 +108,22 @@ export default function useFormField(name, options = {}) {
 
   // Pass through controlled state if not inside a Form
   // Replaces previous "Unwrapped" exports
+  const controlledSet = useCallback(
+    newValue => {
+      if (controlledOnChange) controlledOnChange(newValue);
+    },
+    [controlledOnChange]
+  );
+
   const controlledState = useMemo(
     () => ({
       value: controlledValue,
       onChange: controlledOnChange,
-      set: () => {},
+      set: controlledSet,
       errors: controlledErrors || [],
       isSubmitting: false
     }),
-    [controlledValue, controlledOnChange, controlledErrors]
+    [controlledValue, controlledOnChange, controlledSet, controlledErrors]
   );
 
   if (!context || !name || controlledValue) return controlledState;

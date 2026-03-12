@@ -2,11 +2,11 @@ import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import { journalIssuesAPI, journalVolumesAPI, projectsAPI } from "api";
+import { journalVolumesAPI, projectsAPI } from "api";
 import EntitiesList, { ProjectRow } from "backend/components/list/EntitiesList";
 import { useTranslation } from "react-i18next";
 
-function IssueForm({ journalId, model, ...props }) {
+function IssueForm({ journalId, model, fetcher }) {
   const fetchWritableProjects = useCallback(() => {
     return projectsAPI.index({ withUpdateAbility: true });
   }, []);
@@ -19,12 +19,10 @@ function IssueForm({ journalId, model, ...props }) {
 
   return (
     <FormContainer.Form
-      {...props}
-      name={model ? "update-journal-issue" : "create-journal-issue"}
-      update={journalIssuesAPI.update}
-      create={toCreate => journalIssuesAPI.create(journalId, toCreate)}
-      className="form-secondary"
+      fetcher={fetcher}
       model={model}
+      className="form-secondary"
+      notifyOnSuccess
     >
       <Form.TextInput
         label={t("volumes.number_truncated")}

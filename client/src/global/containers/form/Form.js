@@ -11,6 +11,7 @@ import isPlainObject from "lodash/isPlainObject";
 import { brackets2dots } from "utils/string";
 import NavigationBlocker from "global/components/router/NavigationBlocker";
 import { FormContext } from "helpers/contexts";
+import { useNotifications } from "hooks";
 import { areValuesEqualish, hasChanges, adjustRelationships } from "./helpers";
 import * as Styled from "./styles";
 
@@ -23,6 +24,7 @@ export default function FormContainer({
   errors: errorsProp = [],
   onDirty,
   formatData,
+  notifyOnSuccess = false,
   doNotWarn = false,
   debug = false,
   groupErrors = false,
@@ -32,6 +34,7 @@ export default function FormContainer({
   formRef
 }) {
   const { t } = useTranslation();
+  const { addNotification } = useNotifications();
 
   const defaultModel = useMemo(
     () => ({ attributes: {}, relationships: {} }),
@@ -54,6 +57,33 @@ export default function FormContainer({
   useEffect(() => {
     if (onDirty) onDirty(dirty);
   }, [dirty, onDirty]);
+
+  // Show success notification after form submission
+  useEffect(() => {
+    if (
+      !notifyOnSuccess ||
+      !fetcher?.data?.success ||
+      fetcher?.state !== "idle"
+    )
+      return;
+
+    const title = source?.attributes?.title || source?.attributes?.name;
+    const defaultNotification = {
+      level: 0,
+      heading: t("notifications.form_save_success_heading"),
+      body: title
+        ? t("notifications.form_save_success_body", { title })
+        : undefined,
+      expiration: 5000
+    };
+
+    const notification =
+      typeof notifyOnSuccess === "object"
+        ? { ...defaultNotification, ...notifyOnSuccess }
+        : defaultNotification;
+
+    addNotification({ id: `FORM_SUCCESS_${Date.now()}`, ...notification });
+  }, [fetcher?.data?.success, fetcher?.state]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setValue = useCallback(
     (path, value, triggersDirty = true) => {
@@ -207,6 +237,7 @@ FormContainer.propTypes = {
   errors: PropTypes.array,
   onDirty: PropTypes.func,
   formatData: PropTypes.func,
+  notifyOnSuccess: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   doNotWarn: PropTypes.bool,
   debug: PropTypes.bool,
   groupErrors: PropTypes.bool,
