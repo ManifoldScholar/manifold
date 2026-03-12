@@ -43,7 +43,7 @@ export default function JournalDetailLayout({ loaderData: journal }) {
             id: `JOURNAL_DESTROYED_${journal.id}`,
             heading: t("notifications.journal_delete"),
             body: t("notifications.delete_entity_body", {
-              title: journal?.attributes?.title
+              title: journal?.attributes?.titlePlaintext
             }),
             expiration: 5000
           });
@@ -53,7 +53,10 @@ export default function JournalDetailLayout({ loaderData: journal }) {
           addNotification({
             level: 2,
             id: `JOURNAL_DESTROY_FAILED_${journal.id}`,
-            heading: t("notifications.journal_delete_fail"),
+            heading: t("notifications.delete_failure", {
+              entity: journal?.attributes?.titlePlaintext
+            }),
+            body: t("notifications.delete_failure_body"),
             expiration: 5000
           });
         }

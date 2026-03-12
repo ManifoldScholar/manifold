@@ -37,6 +37,10 @@ export default function SettingsContentRoute() {
           model={settings}
           className="form-secondary"
           fetcher={fetcher}
+          notifyOnSuccess={{
+            heading: t("notifications.settings_save_success_heading"),
+            body: t("notifications.settings_save_success_body")
+          }}
         >
           <Form.FieldGroup label={t("settings.content.top_bar_header")}>
             <Form.TextInput

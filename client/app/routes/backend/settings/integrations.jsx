@@ -37,6 +37,10 @@ export default function SettingsIntegrationsRoute() {
           model={settings}
           className="form-secondary"
           fetcher={fetcher}
+          notifyOnSuccess={{
+            heading: t("notifications.settings_save_success_heading"),
+            body: t("notifications.settings_save_success_body")
+          }}
         >
           <Form.FieldGroup label={t("settings.integrations.google_header")}>
             <Form.Upload

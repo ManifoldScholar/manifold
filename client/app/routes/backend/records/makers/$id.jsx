@@ -51,11 +51,9 @@ export default function MakersEdit({ loaderData: maker }) {
       callback: async closeDialog => {
         try {
           await deleteMaker(maker.id);
-          closeDialog();
           navigate("/backend/records/makers");
         } catch {
           closeDialog();
-          navigate("/backend/records/makers");
         }
       }
     });
@@ -81,9 +79,8 @@ export default function MakersEdit({ loaderData: maker }) {
         <FormContainer.Form
           fetcher={fetcher}
           model={maker}
-
           className="form-secondary"
-          notificationScope="drawer"
+          notifyOnSuccess
         >
           <Form.TextInput
             label={t("records.makers.title")}

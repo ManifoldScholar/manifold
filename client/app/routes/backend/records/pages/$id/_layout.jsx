@@ -37,11 +37,18 @@ export default function PageDetailLayout({ loaderData: page }) {
             body: t("notifications.delete_record_body"),
             expiration: 3000
           });
-          closeDialog();
           navigate("/backend/records/pages");
         } catch {
           closeDialog();
-          navigate("/backend/records/pages");
+          addNotification({
+            level: 2,
+            id: `PAGE_DESTROY_FAILED_${page.id}`,
+            heading: t("notifications.delete_failure", {
+              entity: page.attributes.title
+            }),
+            body: t("notifications.delete_failure_body"),
+            expiration: 5000
+          });
         }
       }
     });

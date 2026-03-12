@@ -37,9 +37,12 @@ export default function CommentDetail({ loaderData: comment }) {
       heading: t("modals.delete_comment"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
-        await deleteComment(comment.id);
-        closeDialog();
-        navigate("/backend/records/comments");
+        try {
+          await deleteComment(comment.id);
+          navigate("/backend/records/comments");
+        } catch {
+          closeDialog();
+        }
       }
     });
   };

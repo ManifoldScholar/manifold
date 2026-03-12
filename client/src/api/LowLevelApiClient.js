@@ -26,7 +26,7 @@ export default class LowLevelApiClient {
     return endpoint + "?" + qs.stringify(humps.decamelizeKeys(params));
   }
 
-  call(rawEndpoint, rawMethod, rawOptions) {
+  call(rawEndpoint, rawMethod, rawOptions = {}) {
     const method = this._adjustedMethod(rawMethod);
     const options = this._adjustedOptions(rawOptions);
     const endpoint = this._endpointWithParams(

@@ -4,6 +4,7 @@ import { useFetcher } from "react-router";
 import { useFormField } from "hooks";
 import Form from "global/components/form";
 import IconComputed from "global/components/icon-computed";
+import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 import ButtonGroup from "./ButtonGroup";
 import * as Styled from "./styles";
 
@@ -66,45 +67,29 @@ export default function CreateResource({ projectId, onSuccess, handleClose }) {
   const defaultValue = useMemo(() => ({ attributes: { kind: null } }), []);
 
   const shapeResourceData = useCallback(data => {
-    const {
-      variantThumbnail: thumbnailData,
-      variantThumbnailAltText,
-      attachment: attachmentData,
-      attachmentAltText,
-      ...attrs
-    } = data.attributes;
-
+    const merged = mergeImageAltText(
+      data.attributes,
+      "attachment",
+      "variantThumbnail"
+    );
+    const { attachment, variantThumbnail, ...rest } = merged;
     const isImage = data.attributes.kind === "image";
 
-    if (!isImage)
+    if (isImage) {
       return {
         ...data,
-        attributes: {
-          ...attrs,
-          ...(attachmentData ? { attachment: attachmentData } : {}),
-          ...(thumbnailData
-            ? {
-                variantThumbnail: {
-                  ...thumbnailData,
-                  altText: variantThumbnailAltText
-                }
-              }
-            : {})
-        }
+        attributes: { ...rest, ...(attachment ? { attachment } : {}) }
       };
+    }
 
     return {
       ...data,
       attributes: {
-        ...attrs,
-        ...(attachmentData
-          ? {
-              attachment: {
-                ...attachmentData,
-                altText: attachmentAltText
-              }
-            }
-          : {})
+        ...rest,
+        ...(attachment
+          ? { attachment: { ...attachment, altText: undefined } }
+          : {}),
+        ...(variantThumbnail ? { variantThumbnail } : {})
       }
     };
   }, []);

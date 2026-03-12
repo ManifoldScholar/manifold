@@ -3,6 +3,7 @@ import { useFetcher, useOutletContext, redirect } from "react-router";
 import { journalsAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
+import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import Layout from "backend/components/layout";
@@ -31,18 +32,9 @@ function formatData(dirty, source) {
     relationships: { ...dirty.relationships }
   };
 
-  const { logoAltText, logo, heroAltText, hero, ...rest } =
-    merged.attributes ?? {};
-
-  const finalLogoData =
-    typeof logoAltText === "string" ? { ...logo, altText: logoAltText } : logo;
-
-  const finalHeroData =
-    typeof heroAltText === "string" ? { ...hero, altText: heroAltText } : hero;
-
   return {
     ...merged,
-    attributes: { logo: finalLogoData, hero: finalHeroData, ...rest }
+    attributes: mergeImageAltText(merged.attributes, "logo", "hero")
   };
 }
 

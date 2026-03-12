@@ -46,11 +46,18 @@ export default function GroupDetailLayout({ loaderData: readingGroup }) {
             }),
             expiration: 5000
           });
-          closeDialog();
           navigate("/backend/groups");
         } catch {
           closeDialog();
-          navigate("/backend/groups");
+          addNotification({
+            level: 2,
+            id: `READING_GROUP_DESTROY_FAILED_${readingGroup.id}`,
+            heading: t("notifications.delete_failure", {
+              entity: readingGroup.attributes.name
+            }),
+            body: t("notifications.delete_failure_body"),
+            expiration: 5000
+          });
         }
       }
     });

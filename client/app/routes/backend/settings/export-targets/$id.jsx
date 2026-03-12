@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher, useNavigate, useRevalidator } from "react-router";
+import { useFetcher, useNavigate } from "react-router";
 import { exportTargetsAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
@@ -45,7 +45,6 @@ export default function SettingsExportTargetsEdit({
   const { t } = useTranslation();
   const fetcher = useFetcher();
   const navigate = useNavigate();
-  const { revalidate } = useRevalidator();
   const { confirm, confirmation } = useConfirmation();
 
   const destroyExportTarget = useApiCallback(exportTargetsAPI.destroy);
@@ -55,10 +54,12 @@ export default function SettingsExportTargetsEdit({
       heading: t("modals.delete_export_target"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
-        await destroyExportTarget(exportTarget?.id);
-        closeDialog();
-        revalidate();
-        navigate("/backend/settings/export-targets");
+        try {
+          await destroyExportTarget(exportTarget?.id);
+          navigate("/backend/settings/export-targets");
+        } catch {
+          closeDialog();
+        }
       }
     });
   };

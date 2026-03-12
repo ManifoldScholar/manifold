@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher, useNavigate, useRevalidator } from "react-router";
+import { useFetcher, useNavigate } from "react-router";
 import { subjectsAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
@@ -41,7 +41,6 @@ export default function SettingsSubjectsEdit({ loaderData: subject }) {
   const { t } = useTranslation();
   const fetcher = useFetcher();
   const navigate = useNavigate();
-  const { revalidate } = useRevalidator();
   const { confirm, confirmation } = useConfirmation();
 
   const destroySubject = useApiCallback(subjectsAPI.destroy);
@@ -51,10 +50,12 @@ export default function SettingsSubjectsEdit({ loaderData: subject }) {
       heading: t("modals.delete_subject"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
-        await destroySubject(subject?.id);
-        closeDialog();
-        revalidate();
-        navigate("/backend/settings/subjects");
+        try {
+          await destroySubject(subject?.id);
+          navigate("/backend/settings/subjects");
+        } catch {
+          closeDialog();
+        }
       }
     });
   };
@@ -78,6 +79,7 @@ export default function SettingsSubjectsEdit({ loaderData: subject }) {
           model={subject}
           className="form-secondary"
           fetcher={fetcher}
+          notifyOnSuccess
         >
           <Form.TextInput
             label={t("settings.subjects.name_label")}

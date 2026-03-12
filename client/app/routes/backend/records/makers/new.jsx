@@ -40,9 +40,8 @@ export default function MakersNew() {
       <Layout.DrawerHeader title={t("records.makers.new_header")} />
       <FormContainer.Form
         fetcher={fetcher}
-
         className="form-secondary"
-        notificationScope="drawer"
+        notifyOnSuccess
       >
         <Form.TextInput
           label={t("records.makers.title")}

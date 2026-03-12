@@ -1,5 +1,6 @@
 import { useFetcher, useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
+import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 import Project from "backend/components/project";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -30,20 +31,13 @@ export default function JournalProperties() {
   };
 
   const formatData = data => {
-    const { avatarAltText, avatar, ...rest } = data?.attributes ?? {};
-
-    const finalAvatarData =
-      typeof avatarAltText === "string"
-        ? { ...avatar, altText: avatarAltText }
-        : avatar;
-
     const relationships = data.relationships?.subjects
       ? { subjects: { data: data.relationships?.subjects } }
       : {};
 
     return {
       relationships,
-      attributes: { avatar: finalAvatarData, ...rest }
+      attributes: mergeImageAltText(data?.attributes, "avatar")
     };
   };
 

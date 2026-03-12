@@ -5,6 +5,8 @@
     "bulk_delete_success_body_other": "{{count}} {{entity}} have been removed.",
     "delete_entity_body": "{{title}} has passed into the endless night.",
     "delete_record_body": "And we're sorry to see it go.",
+    "delete_failure": "Error removing {{entity}}",
+    "delete_failure_body": "Please try again.",
     "email_failure": "Manifold was unable to send a test email.",
     "email_failure_body": "Please check that your email configuration is correct.",
     "email_success": "The test email appears to have been sent.",
