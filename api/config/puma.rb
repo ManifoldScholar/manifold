@@ -38,8 +38,11 @@ max_threads = ENV.fetch "RAILS_MAX_THREADS" do
   is_development ? 16 : 6
 end
 
-pidfile pidfile_path
-state_path state_path
+if listen_on_socket
+  pidfile pidfile_path
+  state_path state_path
+end
+
 tag "manifold-#{application}"
 environment rails_environment
 workers number_of_workers
@@ -60,13 +63,6 @@ on_worker_fork do
   ActiveSupport.on_load(:active_record) do
     ActiveRecord::Base.connection.disconnect!
   end
-
-  # Ensure we disconnect from Rails cache on forking.
-  Rails.cache.redis.disconnect!
-
-  Redis.current.disconnect!
-
-  Redis::Objects.redis.disconnect!
 end
 
 on_worker_boot do

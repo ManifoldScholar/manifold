@@ -110,8 +110,6 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
-ActiveJob::Uniqueness.test_mode!
-
 TestProf::FactoryDefault.configure do |config|
   config.preserve_attributes = true
   config.preserve_traits = true
@@ -189,10 +187,7 @@ RSpec.configure do |config|
   # Truncate all test database tables before running tests.
   config.before(:suite) do
     DatabaseCleaner[:active_record].strategy = :transaction
-    DatabaseCleaner[:redis].strategy = :deletion
-
     DatabaseCleaner[:active_record].clean_with(:truncation)
-    DatabaseCleaner[:redis].clean_with(:deletion)
 
     Scenic.database.views.select(&:materialized).each do |view|
       Scenic.database.refresh_materialized_view view.name, concurrently: false, cascade: false
