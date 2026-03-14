@@ -4,21 +4,17 @@ import { FormContext } from "helpers/contexts";
 import Form from "global/components/form";
 import InputError from "global/components/form/InputError";
 import { useTranslation, Trans } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { makersAPI, collaboratorsAPI } from "api";
 import { useApiCallback } from "hooks";
 import capitalize from "lodash/capitalize";
 import * as Styled from "./styles";
 
 export default function AddCollaboratorForm({
-  entityId,
-  entityType,
   closeUrl,
-  refresh,
+  fetcher,
   collaborator
 }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const [maker, setMaker] = useState(
     collaborator?.relationships?.maker.data || ""
@@ -44,14 +40,16 @@ export default function AddCollaboratorForm({
   }, []);
   /* eslint-enable react-hooks/exhaustive-deps */
 
-  const createCollaborator = useApiCallback(collaboratorsAPI.create);
+  const serverErrors = fetcher.data?.errors;
 
-  const updateCollaborator = useApiCallback(collaboratorsAPI.update);
+  const allErrors = formErrors || serverErrors || null;
+  const makerErrors = allErrors?.filter(e => e.source === "maker");
+  const roleErrors = allErrors?.filter(e => e.source === "roles");
 
-  const onSubmit = async e => {
+  const onSubmit = e => {
     e.preventDefault();
 
-    if (!maker?.id) {
+    if (!collaborator && !maker?.id) {
       return setFormErrors([
         {
           detail: (
@@ -74,32 +72,21 @@ export default function AddCollaboratorForm({
       ]);
     }
 
+    setFormErrors(null);
+
+    const makerId = maker?.id || collaborator?.relationships?.maker?.id;
+
     const data = {
       roles,
-      maker: { id: maker.id, type: "maker" },
+      maker: { id: makerId, type: "maker" },
       ...(collaborator ? { position: collaborator.attributes.position } : {})
     };
 
-    const callback = collaborator ? updateCollaborator : createCollaborator;
-
-    try {
-      const { errors } = await callback(
-        `${entityType.toLowerCase()}s`,
-        entityId,
-        data
-      );
-
-      if (!errors) {
-        if (refresh) refresh();
-        navigate(closeUrl);
-      }
-    } catch (err) {
-      setFormErrors(err?.body?.errors);
-    }
+    fetcher.submit(JSON.stringify(data), {
+      method: "POST",
+      encType: "application/json"
+    });
   };
-
-  const makerErrors = formErrors?.filter(e => e.source === "maker");
-  const roleErrors = formErrors?.filter(e => e.source === "roles");
 
   return (
     <FormContext.Provider value={{ styleType: "secondary" }}>
@@ -117,7 +104,7 @@ export default function AddCollaboratorForm({
                 predictive
                 listStyle={"well"}
                 options={makersAPI.index}
-                set={val => {
+                onChange={val => {
                   setMaker(val);
                 }}
                 value={maker}
@@ -142,7 +129,7 @@ export default function AddCollaboratorForm({
               listStyle="rows"
               options={roleOptions ?? []}
               value={roles}
-              set={val => setRoles(val)}
+              onChange={val => setRoles(val)}
               aria-describedby={
                 makerErrors?.length ? "collaborator-role-error" : undefined
               }
@@ -171,5 +158,5 @@ AddCollaboratorForm.propTypes = {
   entityId: PropTypes.string.isRequired,
   entityType: PropTypes.oneOf(["Project", "Text"]).isRequired,
   closeUrl: PropTypes.string.isRequired,
-  refresh: PropTypes.func
+  fetcher: PropTypes.object.isRequired
 };
