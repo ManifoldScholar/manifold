@@ -3,20 +3,12 @@ import { useOutletContext } from "react-router-dom";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { textsAPI } from "api";
+import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 
-const formatData = data => {
-  const { coverAltText, cover, ...rest } = data?.attributes ?? {};
-
-  const finalCoverData =
-    typeof coverAltText === "string"
-      ? { ...cover, altText: coverAltText }
-      : cover;
-
-  return {
-    ...data,
-    attributes: { cover: finalCoverData, ...rest }
-  };
-};
+const formatData = data => ({
+  ...data,
+  attributes: mergeImageAltText(data?.attributes, "cover")
+});
 
 export default function TextPropertiesContainer() {
   const { t } = useTranslation();

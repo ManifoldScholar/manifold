@@ -16,7 +16,7 @@
       "slug_placeholder": "Enter URL Slug",
       "image_label": "Cover Image",
       "save": "Save Collection",
-      "new_title": "New Collection",
+      "new_title": "New Resource Collection",
       "new_instructions": "Enter a name and a brief description. Press save to continue.",
       "new_save": "Save and Continue"
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext, useEffect, useRef } from "react";
 import { ManifoldAnalyticsContext } from "helpers/contexts";
 
 export const EVENTS = {
@@ -6,56 +6,29 @@ export const EVENTS = {
   VIEW_LIBRARY: "view library"
 };
 
-export default class EventTracker extends React.PureComponent {
-  static contextType = ManifoldAnalyticsContext;
+export default function EventTracker({ event, resource }) {
+  const { track } = useContext(ManifoldAnalyticsContext);
+  const didTrackRef = useRef(false);
 
-  get resourceType() {
-    const { resource } = this.props;
-    if (!resource) return null;
-    return resource.type;
-  }
+  // useEffect(() => {
+  //   didTrackRef.current = false;
+  //   const resourceType = resource?.type ?? null;
+  //   const resourceId = resource?.id ?? null;
+  //   if (!resourceType || !resourceId) return;
+  //
+  //   // Defer tracking past StrictMode's synchronous unmount/remount cycle
+  //   const timer = setTimeout(() => {
+  //     didTrackRef.current = true;
+  //     track({ resourceType, resourceId, event });
+  //   }, 0);
+  //
+  //   return () => {
+  //     clearTimeout(timer);
+  //     if (didTrackRef.current) {
+  //       track({ resourceType, resourceId, event: "leave" });
+  //     }
+  //   };
+  // }, [event, resource?.type, resource?.id, track]);
 
-  get resourceId() {
-    const { resource } = this.props;
-    if (!resource) return null;
-    return resource.id;
-  }
-
-  get eventName() {
-    const { event } = this.props;
-    return event;
-  }
-
-  get event() {
-    return {
-      resourceType: this.resourceType,
-      resourceId: this.resourceId,
-      event: this.eventName
-    };
-  }
-
-  get leaveEvent() {
-    return {
-      resourceType: this.resourceType,
-      resourceId: this.resourceId,
-      event: "leave"
-    };
-  }
-
-  componentDidMount() {
-    this.maybeTrack(this.event);
-  }
-
-  componentWillUnmount() {
-    this.maybeTrack(this.leaveEvent);
-  }
-
-  maybeTrack(event) {
-    if (!event.resourceType || !event.resourceId) return;
-    this.context.track(event);
-  }
-
-  render() {
-    return null;
-  }
+  return null;
 }

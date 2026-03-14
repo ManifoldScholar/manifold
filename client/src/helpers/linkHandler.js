@@ -68,10 +68,11 @@ class LinkHandler {
 
       // Reading groups
       frontendPublicReadingGroups: () => "/reading-groups",
-      frontendMyReadingGroups: () => "/my-reading-groups",
-      frontendMyReadingGroupsNew: () => "/my-reading-groups/new",
+      frontendMyReadingGroups: () => "/my/groups",
+      frontendMyReadingGroupsNew: () => "/my/groups/new",
       frontendReadingGroup: id => `/reading-groups/${id}`,
       frontendReadingGroupDetail: id => `/reading-groups/${id}`,
+      frontendReadingGroupDetailSettings: id => `/reading-groups/${id}`,
       frontendReadingGroupMembers: id => `/reading-groups/${id}/members`,
       frontendReadingGroupAnnotations: (id, params = {}) => {
         const query = queryString.stringify(params);
@@ -112,6 +113,7 @@ class LinkHandler {
       backendProjectNew: () => "/backend/projects/new",
       backendProjectsNew: () => "/backend/projects/new",
       backendProjectCollections: () => "/backend/project-collections",
+      backendJournalsNew: () => "/backend/journals/new",
 
       // Backend settings
       backendSettings: () => "/backend/settings",
@@ -123,6 +125,8 @@ class LinkHandler {
       backendSettingsIngestion: () => "/backend/settings/ingestion",
       backendSettingsProperties: () => "/backend/settings/properties",
       backendSettingsExportTargets: () => "/backend/settings/export-targets",
+      backendSettingsExportTargetsNew: () =>
+        "/backend/settings/export-targets/new",
 
       // Backend records
       backendRecords: () => "/backend/records",
@@ -131,6 +135,15 @@ class LinkHandler {
       backendRecordsMakers: () => "/backend/records/makers",
       backendRecordsPages: () => "/backend/records/pages",
       backendRecordsFeatures: () => "/backend/records/features",
+
+      // Backend reading groups
+      backendReadingGroups: () => "/backend/groups",
+      backendReadingGroup: id => `/backend/groups/${id}`,
+      backendReadingGroupDetails: id => `/backend/groups/${id}/details`,
+      backendReadingGroupMembers: id => `/backend/groups/${id}/members`,
+      backendReadingGroupAnnotations: id => `/backend/groups/${id}/annotations`,
+      backendReadingGroupAnnotationDetail: (id, annotationId) =>
+        `/backend/groups/${id}/annotations/${annotationId}`,
 
       // Reader routes
       reader: (textId, params = {}) => {

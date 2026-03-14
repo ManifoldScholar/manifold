@@ -192,17 +192,15 @@ class Navigation {
     return [
       {
         label: "titles.properties",
-        path: id => `/backend/projects/resource-collection/${id}/properties`,
+        path: `/backend/projects/resource-collection/${collection.id}/properties`,
         entity: collection,
-        ability: "update",
-        id: collection.id
+        ability: "update"
       },
       {
         label: "titles.resources",
-        path: id => `/backend/projects/resource-collection/${id}/resources`,
+        path: `/backend/projects/resource-collection/${collection.id}/resources`,
         entity: collection,
-        ability: "update",
-        id: collection.id
+        ability: "update"
       }
     ];
   }
@@ -220,90 +218,79 @@ class Navigation {
   });
 
   static project = memoize(project => {
+    const id = project.id;
     return [
       {
         label: "titles.analytics",
-        path: id => `/backend/projects/${id}/analytics`,
+        path: `/backend/projects/${id}/analytics`,
         entity: project,
-        ability: "update",
-        id: project.id
+        ability: "update"
       },
       {
         label: "titles.properties",
-        path: id => `/backend/projects/${id}/properties`,
+        path: `/backend/projects/${id}/properties`,
         entity: project,
-        ability: "update",
-        id: project.id
+        ability: "update"
       },
       {
         label: "titles.layout",
-        path: id => `/backend/projects/${id}/layout`,
+        path: `/backend/projects/${id}/layout`,
         entity: project,
-        ability: "update",
-        id: project.id
+        ability: "update"
       },
       {
         label: "titles.access",
-        path: id => `/backend/projects/${id}/access`,
+        path: `/backend/projects/${id}/access`,
         entity: project,
-        ability: "update",
-        id: project.id
+        ability: "update"
       },
       {
         label: "titles.collaborators",
-        path: id => `/backend/projects/${id}/collaborators`,
+        path: `/backend/projects/${id}/collaborators`,
         entity: project,
-        ability: "updateMakers",
-        id: project.id
+        ability: "updateMakers"
       },
       {
         label: "titles.texts",
-        path: id => `/backend/projects/${id}/texts`,
+        path: `/backend/projects/${id}/texts`,
         entity: project,
-        ability: "manageTexts",
-        id: project.id
+        ability: "manageTexts"
       },
       {
         label: "titles.resources",
-        path: id => `/backend/projects/${id}/resources`,
+        path: `/backend/projects/${id}/resources`,
         entity: project,
-        ability: "manageResources",
-        id: project.id
+        ability: "manageResources"
       },
       {
         label: "titles.resource_collections",
-        path: id => `/backend/projects/${id}/resource-collections`,
+        path: `/backend/projects/${id}/resource-collections`,
         entity: project,
-        ability: "manageResourceCollections",
-        id: project.id
+        ability: "manageResourceCollections"
       },
       {
         label: "titles.events",
-        path: id => `/backend/projects/${id}/events`,
+        path: `/backend/projects/${id}/events`,
         entity: project,
-        ability: "manageEvents",
-        id: project.id
+        ability: "manageEvents"
       },
       {
         label: "titles.metadata",
-        path: id => `/backend/projects/${id}/metadata`,
+        path: `/backend/projects/${id}/metadata`,
         entity: project,
-        ability: "update",
-        id: project.id
+        ability: "update"
       },
       {
         label: "titles.exports",
-        path: id => `/backend/projects/${id}/exports`,
+        path: `/backend/projects/${id}/exports`,
         entity: project,
-        ability: "manageProjectExportations",
-        id: project.id
+        ability: "manageProjectExportations"
       },
       {
         label: "titles.log",
-        path: id => `/backend/projects/${id}/log`,
+        path: `/backend/projects/${id}/log`,
         entity: project,
-        ability: "readLog",
-        id: project.id
+        ability: "readLog"
       }
     ];
   });

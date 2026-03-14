@@ -8,20 +8,16 @@ import { projectCollectionsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { useApiCallback } from "hooks";
+import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 
 const formatData = data => {
-  const { heroAltText, hero, ...rest } = data?.attributes ?? {};
-
-  const finalHeroData =
-    typeof heroAltText === "string" ? { ...hero, altText: heroAltText } : hero;
-
   const relationships = data.relationships?.subjects
     ? { subjects: { data: data.relationships?.subjects } }
     : {};
 
   return {
     relationships,
-    attributes: { hero: finalHeroData, ...rest }
+    attributes: mergeImageAltText(data?.attributes, "hero")
   };
 };
 

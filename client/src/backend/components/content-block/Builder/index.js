@@ -29,8 +29,13 @@ function ProjectContent({ project, confirm, children }) {
     condition: !!project?.id
   });
 
+  const [isMounted, setIsMounted] = useState(false);
   const [blocks, setBlocks] = useState(() => cloneBlocks(contentBlocks || []));
   const [activeDraggableType, setActiveDraggableType] = useState(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     setBlocks(cloneBlocks(contentBlocks || []));
@@ -182,19 +187,21 @@ function ProjectContent({ project, confirm, children }) {
             aria-labelledby={`${id}-header`}
             aria-describedby={`${id}-instructions`}
           >
-            <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
-              <AvailableSection
-                onClickAdd={handleAddEntity}
-                currentBlocks={blocks}
-                headerId={`${id}-header`}
-                instructionsId={`${id}-instructions`}
-              />
-              <CurrentSection
-                activeDraggableType={activeDraggableType}
-                entityCallbacks={entityCallbacks}
-                currentBlocks={blocks}
-              />
-            </DragDropContext>
+            {isMounted && (
+              <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+                <AvailableSection
+                  onClickAdd={handleAddEntity}
+                  currentBlocks={blocks}
+                  headerId={`${id}-header`}
+                  instructionsId={`${id}-instructions`}
+                />
+                <CurrentSection
+                  activeDraggableType={activeDraggableType}
+                  entityCallbacks={entityCallbacks}
+                  currentBlocks={blocks}
+                />
+              </DragDropContext>
+            )}
             {children(closeWithoutSave, onSave, pendingBlock)}
           </div>
         )}

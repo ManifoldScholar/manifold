@@ -4,52 +4,41 @@ import Form from "global/components/form";
 import Resource from "backend/components/resource";
 import FormContainer from "global/containers/form";
 import { resourcesAPI, tagsAPI } from "api";
+import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 
 const formatData = (data, resourceKind) => {
   const { attributes, relationships } = data ?? {};
-  const {
-    sortOrder,
-    variantThumbnail: thumbnailData,
-    variantThumbnailAltText,
-    attachment: attachmentData,
-    attachmentAltText,
-    ...rest
-  } = attributes;
+  const { sortOrder, ...imageAttrs } = attributes;
+  const merged = mergeImageAltText(
+    imageAttrs,
+    "attachment",
+    "variantThumbnail"
+  );
+  const { attachment, variantThumbnail, ...rest } = merged;
 
-  const isImage = data.attributes.kind
-    ? data.attributes.kind === "image"
+  const isImage = attributes.kind
+    ? attributes.kind === "image"
     : resourceKind === "image";
 
-  if (!isImage)
+  if (isImage) {
     return {
       relationships,
       attributes: {
         ...rest,
-        ...(attachmentData ? { attachment: attachmentData } : {}),
-        ...(thumbnailData
-          ? {
-              variantThumbnail: {
-                ...thumbnailData,
-                altText: variantThumbnailAltText
-              }
-            }
-          : {}),
+        ...(attachment ? { attachment } : {}),
         sortOrder: sortOrder ? 1 : null
       }
     };
+  }
 
   return {
     relationships,
     attributes: {
       ...rest,
-      ...(attachmentData || attachmentAltText
-        ? {
-            attachment: {
-              ...attachmentData,
-              altText: attachmentAltText
-            }
-          }
+      ...(attachment
+        ? { attachment: { ...attachment, altText: undefined } }
         : {}),
+      ...(variantThumbnail ? { variantThumbnail } : {}),
       sortOrder: sortOrder ? 1 : null
     }
   };

@@ -297,11 +297,242 @@ type Pages = {
   "/backend/journals": {
     params: {};
   };
+  "/backend/journals/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/properties": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/metadata": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/volumes": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/volumes/:volumeId": {
+    params: {
+      "id": string;
+      "volumeId": string;
+    };
+  };
+  "/backend/journals/:id/volumes/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/access": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/access/entitlements/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/issues": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/issues/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/layout": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/layout/action-callout/:calloutId": {
+    params: {
+      "id": string;
+      "calloutId": string;
+    };
+  };
+  "/backend/journals/:id/layout/action-callout/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/journals/:id/layout/hero": {
+    params: {
+      "id": string;
+    };
+  };
   "/backend/journals/new": {
     params: {};
   };
   "/backend/projects": {
     params: {};
+  };
+  "/backend/projects/resource-collection/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/resource-collection/:id/properties": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/resource-collection/:id/resources": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/resource-import/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/resource-import/:id/results": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/resource-import/:id/map": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/resource-collections": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/resource-collections/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/resources": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/resources/import": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/collaborators": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/collaborators/:collaboratorId": {
+    params: {
+      "id": string;
+      "collaboratorId": string;
+    };
+  };
+  "/backend/projects/:id/collaborators/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/resources/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/properties": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/analytics": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/metadata": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/exports": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/access": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/access/permissions/:permissionId": {
+    params: {
+      "id": string;
+      "permissionId": string;
+    };
+  };
+  "/backend/projects/:id/access/entitlements/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/access/permissions/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/events": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/layout": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/layout/action-callout/:calloutId": {
+    params: {
+      "id": string;
+      "calloutId": string;
+    };
+  };
+  "/backend/projects/:id/layout/content-blocks/:blockId": {
+    params: {
+      "id": string;
+      "blockId": string;
+    };
+  };
+  "/backend/projects/:id/layout/action-callout/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/layout/content-blocks/new": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/layout/hero": {
+    params: {
+      "id": string;
+    };
+  };
+  "/backend/projects/:id/log": {
+    params: {
+      "id": string;
+    };
   };
   "/backend/projects/all": {
     params: {};
@@ -467,7 +698,7 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/actions/reading-group-membership" | "/actions/reading-group-status" | "/actions/forgot-password" | "/actions/resource-create" | "/actions/update-profile" | "/actions/flag-content" | "/actions/collect" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/unsubscribe/:token" | "/my/groups" | "/journals" | "/journals/issues" | "/projects" | "/my/groups/new" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes/:volumeId" | "/journals/:id/volumes" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/backend" | "/backend/groups" | "/backend/groups/:id" | "/backend/groups/:id/annotations" | "/backend/groups/:id/annotations/:annotationId" | "/backend/groups/:id/details" | "/backend/groups/:id/members" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/journals" | "/backend/journals/new" | "/backend/projects" | "/backend/projects/all" | "/backend/projects/new" | "/backend/settings" | "/backend/settings/export-targets" | "/backend/settings/export-targets/:id" | "/backend/settings/export-targets/new" | "/backend/settings/integrations" | "/backend/settings/properties" | "/backend/settings/ingestion" | "/backend/settings/subjects" | "/backend/settings/subjects/:id" | "/backend/settings/subjects/new" | "/backend/settings/content" | "/backend/settings/email" | "/backend/settings/theme" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*" | "/*";
+    page: "/" | "/actions/reading-group-membership" | "/actions/reading-group-status" | "/actions/forgot-password" | "/actions/resource-create" | "/actions/update-profile" | "/actions/flag-content" | "/actions/collect" | "/actions/signup" | "/actions/login" | "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search" | "/project-collections" | "/reset-password/:resetToken" | "/project-collections/:id" | "/unsubscribe/:token" | "/my/groups" | "/journals" | "/journals/issues" | "/projects" | "/my/groups/new" | "/subscriptions" | "/journals/:id" | "/journals/:id/volumes/:volumeId" | "/journals/:id/volumes" | "/journals/:id/issues" | "/projects/:id" | "/projects/:id/resource-collection/:resourceCollectionId" | "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId" | "/projects/:id/resource-collections" | "/projects/:id/resource/:resourceId" | "/projects/:id/resources" | "/projects/:id/events" | "/projects/:id/search" | "/my/starred" | "/page/:slug" | "/data-use" | "/docs/api" | "/my/notes" | "/contact" | "/privacy" | "/groups" | "/groups/:id" | "/groups/:id/annotations" | "/groups/:id/annotations/settings" | "/groups/:id/settings" | "/groups/:id/members" | "/groups/:id/members/:membershipId" | "/groups/:id/members/settings" | "/groups/:id/edit" | "/groups/:id/edit/settings" | "/groups/:id/home" | "/groups/:id/home/settings" | "/search" | "/signup" | "/login" | "/backend" | "/backend/groups" | "/backend/groups/:id" | "/backend/groups/:id/annotations" | "/backend/groups/:id/annotations/:annotationId" | "/backend/groups/:id/details" | "/backend/groups/:id/members" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/journals" | "/backend/journals/:id" | "/backend/journals/:id/properties" | "/backend/journals/:id/metadata" | "/backend/journals/:id/volumes" | "/backend/journals/:id/volumes/:volumeId" | "/backend/journals/:id/volumes/new" | "/backend/journals/:id/access" | "/backend/journals/:id/access/entitlements/new" | "/backend/journals/:id/issues" | "/backend/journals/:id/issues/new" | "/backend/journals/:id/layout" | "/backend/journals/:id/layout/action-callout/:calloutId" | "/backend/journals/:id/layout/action-callout/new" | "/backend/journals/:id/layout/hero" | "/backend/journals/new" | "/backend/projects" | "/backend/projects/resource-collection/:id" | "/backend/projects/resource-collection/:id/properties" | "/backend/projects/resource-collection/:id/resources" | "/backend/projects/resource-import/:id" | "/backend/projects/resource-import/:id/results" | "/backend/projects/resource-import/:id/map" | "/backend/projects/:id" | "/backend/projects/:id/resource-collections" | "/backend/projects/:id/resource-collections/new" | "/backend/projects/:id/resources" | "/backend/projects/:id/resources/import" | "/backend/projects/:id/collaborators" | "/backend/projects/:id/collaborators/:collaboratorId" | "/backend/projects/:id/collaborators/new" | "/backend/projects/:id/resources/new" | "/backend/projects/:id/properties" | "/backend/projects/:id/analytics" | "/backend/projects/:id/metadata" | "/backend/projects/:id/exports" | "/backend/projects/:id/access" | "/backend/projects/:id/access/permissions/:permissionId" | "/backend/projects/:id/access/entitlements/new" | "/backend/projects/:id/access/permissions/new" | "/backend/projects/:id/events" | "/backend/projects/:id/layout" | "/backend/projects/:id/layout/action-callout/:calloutId" | "/backend/projects/:id/layout/content-blocks/:blockId" | "/backend/projects/:id/layout/action-callout/new" | "/backend/projects/:id/layout/content-blocks/new" | "/backend/projects/:id/layout/hero" | "/backend/projects/:id/log" | "/backend/projects/all" | "/backend/projects/new" | "/backend/settings" | "/backend/settings/export-targets" | "/backend/settings/export-targets/:id" | "/backend/settings/export-targets/new" | "/backend/settings/integrations" | "/backend/settings/properties" | "/backend/settings/ingestion" | "/backend/settings/subjects" | "/backend/settings/subjects/:id" | "/backend/settings/subjects/new" | "/backend/settings/content" | "/backend/settings/email" | "/backend/settings/theme" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*" | "/*";
   };
   "routes/actions/reading-group-membership.jsx": {
     id: "routes/actions/reading-group-membership";
@@ -723,7 +954,7 @@ type RouteFiles = {
   };
   "routes/backend/_layout.jsx": {
     id: "routes/backend";
-    page: "/backend" | "/backend/groups" | "/backend/groups/:id" | "/backend/groups/:id/annotations" | "/backend/groups/:id/annotations/:annotationId" | "/backend/groups/:id/details" | "/backend/groups/:id/members" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/journals" | "/backend/journals/new" | "/backend/projects" | "/backend/projects/all" | "/backend/projects/new" | "/backend/settings" | "/backend/settings/export-targets" | "/backend/settings/export-targets/:id" | "/backend/settings/export-targets/new" | "/backend/settings/integrations" | "/backend/settings/properties" | "/backend/settings/ingestion" | "/backend/settings/subjects" | "/backend/settings/subjects/:id" | "/backend/settings/subjects/new" | "/backend/settings/content" | "/backend/settings/email" | "/backend/settings/theme" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*";
+    page: "/backend" | "/backend/groups" | "/backend/groups/:id" | "/backend/groups/:id/annotations" | "/backend/groups/:id/annotations/:annotationId" | "/backend/groups/:id/details" | "/backend/groups/:id/members" | "/backend/analytics" | "/backend/analytics/top-projects" | "/backend/analytics/top-searches" | "/backend/dashboard" | "/backend/journals" | "/backend/journals/:id" | "/backend/journals/:id/properties" | "/backend/journals/:id/metadata" | "/backend/journals/:id/volumes" | "/backend/journals/:id/volumes/:volumeId" | "/backend/journals/:id/volumes/new" | "/backend/journals/:id/access" | "/backend/journals/:id/access/entitlements/new" | "/backend/journals/:id/issues" | "/backend/journals/:id/issues/new" | "/backend/journals/:id/layout" | "/backend/journals/:id/layout/action-callout/:calloutId" | "/backend/journals/:id/layout/action-callout/new" | "/backend/journals/:id/layout/hero" | "/backend/journals/new" | "/backend/projects" | "/backend/projects/resource-collection/:id" | "/backend/projects/resource-collection/:id/properties" | "/backend/projects/resource-collection/:id/resources" | "/backend/projects/resource-import/:id" | "/backend/projects/resource-import/:id/results" | "/backend/projects/resource-import/:id/map" | "/backend/projects/:id" | "/backend/projects/:id/resource-collections" | "/backend/projects/:id/resource-collections/new" | "/backend/projects/:id/resources" | "/backend/projects/:id/resources/import" | "/backend/projects/:id/collaborators" | "/backend/projects/:id/collaborators/:collaboratorId" | "/backend/projects/:id/collaborators/new" | "/backend/projects/:id/resources/new" | "/backend/projects/:id/properties" | "/backend/projects/:id/analytics" | "/backend/projects/:id/metadata" | "/backend/projects/:id/exports" | "/backend/projects/:id/access" | "/backend/projects/:id/access/permissions/:permissionId" | "/backend/projects/:id/access/entitlements/new" | "/backend/projects/:id/access/permissions/new" | "/backend/projects/:id/events" | "/backend/projects/:id/layout" | "/backend/projects/:id/layout/action-callout/:calloutId" | "/backend/projects/:id/layout/content-blocks/:blockId" | "/backend/projects/:id/layout/action-callout/new" | "/backend/projects/:id/layout/content-blocks/new" | "/backend/projects/:id/layout/hero" | "/backend/projects/:id/log" | "/backend/projects/all" | "/backend/projects/new" | "/backend/settings" | "/backend/settings/export-targets" | "/backend/settings/export-targets/:id" | "/backend/settings/export-targets/new" | "/backend/settings/integrations" | "/backend/settings/properties" | "/backend/settings/ingestion" | "/backend/settings/subjects" | "/backend/settings/subjects/:id" | "/backend/settings/subjects/new" | "/backend/settings/content" | "/backend/settings/email" | "/backend/settings/theme" | "/backend/records" | "/backend/records/features/:id/properties" | "/backend/records/entitlement-imports" | "/backend/records/features/:id" | "/backend/records/features" | "/backend/records/entitlements" | "/backend/records/entitlements/edit/:id" | "/backend/records/entitlements/import" | "/backend/records/entitlements/new" | "/backend/records/features/new" | "/backend/records/pages" | "/backend/records/users" | "/backend/records/annotations" | "/backend/records/annotations/:id" | "/backend/records/pages/:id" | "/backend/records/pages/:id/properties" | "/backend/records/pages/new" | "/backend/records/users/:id" | "/backend/records/users/:id/properties" | "/backend/records/users/:id/activity" | "/backend/records/users/new" | "/backend/records/comments" | "/backend/records/comments/:id" | "/backend/records/makers" | "/backend/records/makers/:id" | "/backend/records/makers/new" | "/backend/*";
   };
   "routes/backend/groups/_index.jsx": {
     id: "routes/backend/groups/_index";
@@ -775,11 +1006,71 @@ type RouteFiles = {
   };
   "routes/backend/journals/_layout.jsx": {
     id: "routes/backend/journals";
-    page: "/backend/journals" | "/backend/journals/new";
+    page: "/backend/journals" | "/backend/journals/:id" | "/backend/journals/:id/properties" | "/backend/journals/:id/metadata" | "/backend/journals/:id/volumes" | "/backend/journals/:id/volumes/:volumeId" | "/backend/journals/:id/volumes/new" | "/backend/journals/:id/access" | "/backend/journals/:id/access/entitlements/new" | "/backend/journals/:id/issues" | "/backend/journals/:id/issues/new" | "/backend/journals/:id/layout" | "/backend/journals/:id/layout/action-callout/:calloutId" | "/backend/journals/:id/layout/action-callout/new" | "/backend/journals/:id/layout/hero" | "/backend/journals/new";
   };
   "routes/backend/journals/_index.jsx": {
     id: "routes/backend/journals/_index";
     page: "/backend/journals";
+  };
+  "routes/backend/journals/$id/_layout.jsx": {
+    id: "routes/backend/journals/$id";
+    page: "/backend/journals/:id" | "/backend/journals/:id/properties" | "/backend/journals/:id/metadata" | "/backend/journals/:id/volumes" | "/backend/journals/:id/volumes/:volumeId" | "/backend/journals/:id/volumes/new" | "/backend/journals/:id/access" | "/backend/journals/:id/access/entitlements/new" | "/backend/journals/:id/issues" | "/backend/journals/:id/issues/new" | "/backend/journals/:id/layout" | "/backend/journals/:id/layout/action-callout/:calloutId" | "/backend/journals/:id/layout/action-callout/new" | "/backend/journals/:id/layout/hero";
+  };
+  "routes/backend/journals/$id/properties.jsx": {
+    id: "routes/backend/journals/$id/properties";
+    page: "/backend/journals/:id/properties";
+  };
+  "routes/backend/journals/$id/metadata.jsx": {
+    id: "routes/backend/journals/$id/metadata";
+    page: "/backend/journals/:id/metadata";
+  };
+  "routes/backend/journals/$id/volumes/_layout.jsx": {
+    id: "routes/backend/journals/$id/volumes";
+    page: "/backend/journals/:id/volumes" | "/backend/journals/:id/volumes/:volumeId" | "/backend/journals/:id/volumes/new";
+  };
+  "routes/backend/journals/$id/volumes/$volumeId.jsx": {
+    id: "routes/backend/journals/$id/volumes/$volumeId";
+    page: "/backend/journals/:id/volumes/:volumeId";
+  };
+  "routes/backend/journals/$id/volumes/new.jsx": {
+    id: "routes/backend/journals/$id/volumes/new";
+    page: "/backend/journals/:id/volumes/new";
+  };
+  "routes/backend/journals/$id/_index.jsx": {
+    id: "routes/backend/journals/$id/_index";
+    page: "/backend/journals/:id";
+  };
+  "routes/backend/journals/$id/access/_layout.jsx": {
+    id: "routes/backend/journals/$id/access";
+    page: "/backend/journals/:id/access" | "/backend/journals/:id/access/entitlements/new";
+  };
+  "routes/backend/journals/$id/access/entitlements/new.jsx": {
+    id: "routes/backend/journals/$id/access/entitlements/new";
+    page: "/backend/journals/:id/access/entitlements/new";
+  };
+  "routes/backend/journals/$id/issues/_layout.jsx": {
+    id: "routes/backend/journals/$id/issues";
+    page: "/backend/journals/:id/issues" | "/backend/journals/:id/issues/new";
+  };
+  "routes/backend/journals/$id/issues/new.jsx": {
+    id: "routes/backend/journals/$id/issues/new";
+    page: "/backend/journals/:id/issues/new";
+  };
+  "routes/backend/journals/$id/layout/_layout.jsx": {
+    id: "routes/backend/journals/$id/layout";
+    page: "/backend/journals/:id/layout" | "/backend/journals/:id/layout/action-callout/:calloutId" | "/backend/journals/:id/layout/action-callout/new" | "/backend/journals/:id/layout/hero";
+  };
+  "routes/backend/journals/$id/layout/action-callout/$calloutId.jsx": {
+    id: "routes/backend/journals/$id/layout/action-callout/$calloutId";
+    page: "/backend/journals/:id/layout/action-callout/:calloutId";
+  };
+  "routes/backend/journals/$id/layout/action-callout/new.jsx": {
+    id: "routes/backend/journals/$id/layout/action-callout/new";
+    page: "/backend/journals/:id/layout/action-callout/new";
+  };
+  "routes/backend/journals/$id/layout/hero.jsx": {
+    id: "routes/backend/journals/$id/layout/hero";
+    page: "/backend/journals/:id/layout/hero";
   };
   "routes/backend/journals/new.jsx": {
     id: "routes/backend/journals/new";
@@ -787,11 +1078,147 @@ type RouteFiles = {
   };
   "routes/backend/projects/_layout.jsx": {
     id: "routes/backend/projects";
-    page: "/backend/projects" | "/backend/projects/all" | "/backend/projects/new";
+    page: "/backend/projects" | "/backend/projects/resource-collection/:id" | "/backend/projects/resource-collection/:id/properties" | "/backend/projects/resource-collection/:id/resources" | "/backend/projects/resource-import/:id" | "/backend/projects/resource-import/:id/results" | "/backend/projects/resource-import/:id/map" | "/backend/projects/:id" | "/backend/projects/:id/resource-collections" | "/backend/projects/:id/resource-collections/new" | "/backend/projects/:id/resources" | "/backend/projects/:id/resources/import" | "/backend/projects/:id/collaborators" | "/backend/projects/:id/collaborators/:collaboratorId" | "/backend/projects/:id/collaborators/new" | "/backend/projects/:id/resources/new" | "/backend/projects/:id/properties" | "/backend/projects/:id/analytics" | "/backend/projects/:id/metadata" | "/backend/projects/:id/exports" | "/backend/projects/:id/access" | "/backend/projects/:id/access/permissions/:permissionId" | "/backend/projects/:id/access/entitlements/new" | "/backend/projects/:id/access/permissions/new" | "/backend/projects/:id/events" | "/backend/projects/:id/layout" | "/backend/projects/:id/layout/action-callout/:calloutId" | "/backend/projects/:id/layout/content-blocks/:blockId" | "/backend/projects/:id/layout/action-callout/new" | "/backend/projects/:id/layout/content-blocks/new" | "/backend/projects/:id/layout/hero" | "/backend/projects/:id/log" | "/backend/projects/all" | "/backend/projects/new";
+  };
+  "routes/backend/projects/resource-collection/$id/_layout.jsx": {
+    id: "routes/backend/projects/resource-collection/$id";
+    page: "/backend/projects/resource-collection/:id" | "/backend/projects/resource-collection/:id/properties" | "/backend/projects/resource-collection/:id/resources";
+  };
+  "routes/backend/projects/resource-collection/$id/properties.jsx": {
+    id: "routes/backend/projects/resource-collection/$id/properties";
+    page: "/backend/projects/resource-collection/:id/properties";
+  };
+  "routes/backend/projects/resource-collection/$id/resources.jsx": {
+    id: "routes/backend/projects/resource-collection/$id/resources";
+    page: "/backend/projects/resource-collection/:id/resources";
+  };
+  "routes/backend/projects/resource-collection/$id/_index.jsx": {
+    id: "routes/backend/projects/resource-collection/$id/_index";
+    page: "/backend/projects/resource-collection/:id";
+  };
+  "routes/backend/projects/resource-import/$id/_layout.jsx": {
+    id: "routes/backend/projects/resource-import/$id";
+    page: "/backend/projects/resource-import/:id" | "/backend/projects/resource-import/:id/results" | "/backend/projects/resource-import/:id/map";
+  };
+  "routes/backend/projects/resource-import/$id/results.jsx": {
+    id: "routes/backend/projects/resource-import/$id/results";
+    page: "/backend/projects/resource-import/:id/results";
+  };
+  "routes/backend/projects/resource-import/$id/_index.jsx": {
+    id: "routes/backend/projects/resource-import/$id/_index";
+    page: "/backend/projects/resource-import/:id";
+  };
+  "routes/backend/projects/resource-import/$id/map.jsx": {
+    id: "routes/backend/projects/resource-import/$id/map";
+    page: "/backend/projects/resource-import/:id/map";
   };
   "routes/backend/projects/_index.jsx": {
     id: "routes/backend/projects/_index";
     page: "/backend/projects";
+  };
+  "routes/backend/projects/$id/_layout.jsx": {
+    id: "routes/backend/projects/$id";
+    page: "/backend/projects/:id" | "/backend/projects/:id/resource-collections" | "/backend/projects/:id/resource-collections/new" | "/backend/projects/:id/resources" | "/backend/projects/:id/resources/import" | "/backend/projects/:id/collaborators" | "/backend/projects/:id/collaborators/:collaboratorId" | "/backend/projects/:id/collaborators/new" | "/backend/projects/:id/resources/new" | "/backend/projects/:id/properties" | "/backend/projects/:id/analytics" | "/backend/projects/:id/metadata" | "/backend/projects/:id/exports" | "/backend/projects/:id/access" | "/backend/projects/:id/access/permissions/:permissionId" | "/backend/projects/:id/access/entitlements/new" | "/backend/projects/:id/access/permissions/new" | "/backend/projects/:id/events" | "/backend/projects/:id/layout" | "/backend/projects/:id/layout/action-callout/:calloutId" | "/backend/projects/:id/layout/content-blocks/:blockId" | "/backend/projects/:id/layout/action-callout/new" | "/backend/projects/:id/layout/content-blocks/new" | "/backend/projects/:id/layout/hero" | "/backend/projects/:id/log";
+  };
+  "routes/backend/projects/$id/resource-collections/_index.jsx": {
+    id: "routes/backend/projects/$id/resource-collections/_index";
+    page: "/backend/projects/:id/resource-collections";
+  };
+  "routes/backend/projects/$id/resource-collections/new.jsx": {
+    id: "routes/backend/projects/$id/resource-collections/new";
+    page: "/backend/projects/:id/resource-collections/new";
+  };
+  "routes/backend/projects/$id/resources/_index.jsx": {
+    id: "routes/backend/projects/$id/resources/_index";
+    page: "/backend/projects/:id/resources";
+  };
+  "routes/backend/projects/$id/resources/import.jsx": {
+    id: "routes/backend/projects/$id/resources/import";
+    page: "/backend/projects/:id/resources/import";
+  };
+  "routes/backend/projects/$id/collaborators/_layout.jsx": {
+    id: "routes/backend/projects/$id/collaborators";
+    page: "/backend/projects/:id/collaborators" | "/backend/projects/:id/collaborators/:collaboratorId" | "/backend/projects/:id/collaborators/new";
+  };
+  "routes/backend/projects/$id/collaborators/$collaboratorId.jsx": {
+    id: "routes/backend/projects/$id/collaborators/$collaboratorId";
+    page: "/backend/projects/:id/collaborators/:collaboratorId";
+  };
+  "routes/backend/projects/$id/collaborators/new.jsx": {
+    id: "routes/backend/projects/$id/collaborators/new";
+    page: "/backend/projects/:id/collaborators/new";
+  };
+  "routes/backend/projects/$id/resources/new.jsx": {
+    id: "routes/backend/projects/$id/resources/new";
+    page: "/backend/projects/:id/resources/new";
+  };
+  "routes/backend/projects/$id/properties.jsx": {
+    id: "routes/backend/projects/$id/properties";
+    page: "/backend/projects/:id/properties";
+  };
+  "routes/backend/projects/$id/analytics.jsx": {
+    id: "routes/backend/projects/$id/analytics";
+    page: "/backend/projects/:id/analytics";
+  };
+  "routes/backend/projects/$id/metadata.jsx": {
+    id: "routes/backend/projects/$id/metadata";
+    page: "/backend/projects/:id/metadata";
+  };
+  "routes/backend/projects/$id/exports/route.jsx": {
+    id: "routes/backend/projects/$id/exports";
+    page: "/backend/projects/:id/exports";
+  };
+  "routes/backend/projects/$id/_index.jsx": {
+    id: "routes/backend/projects/$id/_index";
+    page: "/backend/projects/:id";
+  };
+  "routes/backend/projects/$id/access/_layout.jsx": {
+    id: "routes/backend/projects/$id/access";
+    page: "/backend/projects/:id/access" | "/backend/projects/:id/access/permissions/:permissionId" | "/backend/projects/:id/access/entitlements/new" | "/backend/projects/:id/access/permissions/new";
+  };
+  "routes/backend/projects/$id/access/permissions/$permissionId.jsx": {
+    id: "routes/backend/projects/$id/access/permissions/$permissionId";
+    page: "/backend/projects/:id/access/permissions/:permissionId";
+  };
+  "routes/backend/projects/$id/access/entitlements/new.jsx": {
+    id: "routes/backend/projects/$id/access/entitlements/new";
+    page: "/backend/projects/:id/access/entitlements/new";
+  };
+  "routes/backend/projects/$id/access/permissions/new.jsx": {
+    id: "routes/backend/projects/$id/access/permissions/new";
+    page: "/backend/projects/:id/access/permissions/new";
+  };
+  "routes/backend/projects/$id/events/route.jsx": {
+    id: "routes/backend/projects/$id/events";
+    page: "/backend/projects/:id/events";
+  };
+  "routes/backend/projects/$id/layout/_layout.jsx": {
+    id: "routes/backend/projects/$id/layout";
+    page: "/backend/projects/:id/layout" | "/backend/projects/:id/layout/action-callout/:calloutId" | "/backend/projects/:id/layout/content-blocks/:blockId" | "/backend/projects/:id/layout/action-callout/new" | "/backend/projects/:id/layout/content-blocks/new" | "/backend/projects/:id/layout/hero";
+  };
+  "routes/backend/projects/$id/layout/action-callout/$calloutId.jsx": {
+    id: "routes/backend/projects/$id/layout/action-callout/$calloutId";
+    page: "/backend/projects/:id/layout/action-callout/:calloutId";
+  };
+  "routes/backend/projects/$id/layout/content-blocks/$blockId.jsx": {
+    id: "routes/backend/projects/$id/layout/content-blocks/$blockId";
+    page: "/backend/projects/:id/layout/content-blocks/:blockId";
+  };
+  "routes/backend/projects/$id/layout/action-callout/new.jsx": {
+    id: "routes/backend/projects/$id/layout/action-callout/new";
+    page: "/backend/projects/:id/layout/action-callout/new";
+  };
+  "routes/backend/projects/$id/layout/content-blocks/new.jsx": {
+    id: "routes/backend/projects/$id/layout/content-blocks/new";
+    page: "/backend/projects/:id/layout/content-blocks/new";
+  };
+  "routes/backend/projects/$id/layout/hero.jsx": {
+    id: "routes/backend/projects/$id/layout/hero";
+    page: "/backend/projects/:id/layout/hero";
+  };
+  "routes/backend/projects/$id/log.jsx": {
+    id: "routes/backend/projects/$id/log";
+    page: "/backend/projects/:id/log";
   };
   "routes/backend/projects/all.jsx": {
     id: "routes/backend/projects/all";
@@ -1067,9 +1494,58 @@ type RouteModules = {
   "routes/backend/dashboard": typeof import("./app/routes/backend/dashboard.jsx");
   "routes/backend/journals": typeof import("./app/routes/backend/journals/_layout.jsx");
   "routes/backend/journals/_index": typeof import("./app/routes/backend/journals/_index.jsx");
+  "routes/backend/journals/$id": typeof import("./app/routes/backend/journals/$id/_layout.jsx");
+  "routes/backend/journals/$id/properties": typeof import("./app/routes/backend/journals/$id/properties.jsx");
+  "routes/backend/journals/$id/metadata": typeof import("./app/routes/backend/journals/$id/metadata.jsx");
+  "routes/backend/journals/$id/volumes": typeof import("./app/routes/backend/journals/$id/volumes/_layout.jsx");
+  "routes/backend/journals/$id/volumes/$volumeId": typeof import("./app/routes/backend/journals/$id/volumes/$volumeId.jsx");
+  "routes/backend/journals/$id/volumes/new": typeof import("./app/routes/backend/journals/$id/volumes/new.jsx");
+  "routes/backend/journals/$id/_index": typeof import("./app/routes/backend/journals/$id/_index.jsx");
+  "routes/backend/journals/$id/access": typeof import("./app/routes/backend/journals/$id/access/_layout.jsx");
+  "routes/backend/journals/$id/access/entitlements/new": typeof import("./app/routes/backend/journals/$id/access/entitlements/new.jsx");
+  "routes/backend/journals/$id/issues": typeof import("./app/routes/backend/journals/$id/issues/_layout.jsx");
+  "routes/backend/journals/$id/issues/new": typeof import("./app/routes/backend/journals/$id/issues/new.jsx");
+  "routes/backend/journals/$id/layout": typeof import("./app/routes/backend/journals/$id/layout/_layout.jsx");
+  "routes/backend/journals/$id/layout/action-callout/$calloutId": typeof import("./app/routes/backend/journals/$id/layout/action-callout/$calloutId.jsx");
+  "routes/backend/journals/$id/layout/action-callout/new": typeof import("./app/routes/backend/journals/$id/layout/action-callout/new.jsx");
+  "routes/backend/journals/$id/layout/hero": typeof import("./app/routes/backend/journals/$id/layout/hero.jsx");
   "routes/backend/journals/new": typeof import("./app/routes/backend/journals/new.jsx");
   "routes/backend/projects": typeof import("./app/routes/backend/projects/_layout.jsx");
+  "routes/backend/projects/resource-collection/$id": typeof import("./app/routes/backend/projects/resource-collection/$id/_layout.jsx");
+  "routes/backend/projects/resource-collection/$id/properties": typeof import("./app/routes/backend/projects/resource-collection/$id/properties.jsx");
+  "routes/backend/projects/resource-collection/$id/resources": typeof import("./app/routes/backend/projects/resource-collection/$id/resources.jsx");
+  "routes/backend/projects/resource-collection/$id/_index": typeof import("./app/routes/backend/projects/resource-collection/$id/_index.jsx");
+  "routes/backend/projects/resource-import/$id": typeof import("./app/routes/backend/projects/resource-import/$id/_layout.jsx");
+  "routes/backend/projects/resource-import/$id/results": typeof import("./app/routes/backend/projects/resource-import/$id/results.jsx");
+  "routes/backend/projects/resource-import/$id/_index": typeof import("./app/routes/backend/projects/resource-import/$id/_index.jsx");
+  "routes/backend/projects/resource-import/$id/map": typeof import("./app/routes/backend/projects/resource-import/$id/map.jsx");
   "routes/backend/projects/_index": typeof import("./app/routes/backend/projects/_index.jsx");
+  "routes/backend/projects/$id": typeof import("./app/routes/backend/projects/$id/_layout.jsx");
+  "routes/backend/projects/$id/resource-collections/_index": typeof import("./app/routes/backend/projects/$id/resource-collections/_index.jsx");
+  "routes/backend/projects/$id/resource-collections/new": typeof import("./app/routes/backend/projects/$id/resource-collections/new.jsx");
+  "routes/backend/projects/$id/resources/_index": typeof import("./app/routes/backend/projects/$id/resources/_index.jsx");
+  "routes/backend/projects/$id/resources/import": typeof import("./app/routes/backend/projects/$id/resources/import.jsx");
+  "routes/backend/projects/$id/collaborators": typeof import("./app/routes/backend/projects/$id/collaborators/_layout.jsx");
+  "routes/backend/projects/$id/collaborators/$collaboratorId": typeof import("./app/routes/backend/projects/$id/collaborators/$collaboratorId.jsx");
+  "routes/backend/projects/$id/collaborators/new": typeof import("./app/routes/backend/projects/$id/collaborators/new.jsx");
+  "routes/backend/projects/$id/resources/new": typeof import("./app/routes/backend/projects/$id/resources/new.jsx");
+  "routes/backend/projects/$id/properties": typeof import("./app/routes/backend/projects/$id/properties.jsx");
+  "routes/backend/projects/$id/analytics": typeof import("./app/routes/backend/projects/$id/analytics.jsx");
+  "routes/backend/projects/$id/metadata": typeof import("./app/routes/backend/projects/$id/metadata.jsx");
+  "routes/backend/projects/$id/exports": typeof import("./app/routes/backend/projects/$id/exports/route.jsx");
+  "routes/backend/projects/$id/_index": typeof import("./app/routes/backend/projects/$id/_index.jsx");
+  "routes/backend/projects/$id/access": typeof import("./app/routes/backend/projects/$id/access/_layout.jsx");
+  "routes/backend/projects/$id/access/permissions/$permissionId": typeof import("./app/routes/backend/projects/$id/access/permissions/$permissionId.jsx");
+  "routes/backend/projects/$id/access/entitlements/new": typeof import("./app/routes/backend/projects/$id/access/entitlements/new.jsx");
+  "routes/backend/projects/$id/access/permissions/new": typeof import("./app/routes/backend/projects/$id/access/permissions/new.jsx");
+  "routes/backend/projects/$id/events": typeof import("./app/routes/backend/projects/$id/events/route.jsx");
+  "routes/backend/projects/$id/layout": typeof import("./app/routes/backend/projects/$id/layout/_layout.jsx");
+  "routes/backend/projects/$id/layout/action-callout/$calloutId": typeof import("./app/routes/backend/projects/$id/layout/action-callout/$calloutId.jsx");
+  "routes/backend/projects/$id/layout/content-blocks/$blockId": typeof import("./app/routes/backend/projects/$id/layout/content-blocks/$blockId.jsx");
+  "routes/backend/projects/$id/layout/action-callout/new": typeof import("./app/routes/backend/projects/$id/layout/action-callout/new.jsx");
+  "routes/backend/projects/$id/layout/content-blocks/new": typeof import("./app/routes/backend/projects/$id/layout/content-blocks/new.jsx");
+  "routes/backend/projects/$id/layout/hero": typeof import("./app/routes/backend/projects/$id/layout/hero.jsx");
+  "routes/backend/projects/$id/log": typeof import("./app/routes/backend/projects/$id/log.jsx");
   "routes/backend/projects/all": typeof import("./app/routes/backend/projects/all.jsx");
   "routes/backend/projects/new": typeof import("./app/routes/backend/projects/new.jsx");
   "routes/backend/settings": typeof import("./app/routes/backend/settings/_layout.jsx");

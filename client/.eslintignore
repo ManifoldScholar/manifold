@@ -8,3 +8,5 @@ plugins.off
 tmp
 !tmp/.gitkeep
 codeshifts
+
+app/utils/*

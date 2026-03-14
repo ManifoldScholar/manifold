@@ -1,3 +1,8 @@
+\restrict fnawKPtpwgsz4dyCDfai5AEwdbKNn29ryUjRnh90t3vUMloGZuyLLfpTF2ScFim
+
+-- Dumped from database version 13.23
+-- Dumped by pg_dump version 13.23 (Debian 13.23-1.pgdg11+1)
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -596,8 +601,8 @@ CREATE TABLE public.text_sections (
     slug text,
     hidden_in_reader boolean DEFAULT false NOT NULL,
     metadata jsonb DEFAULT '{}'::jsonb,
-    body_text text,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
+    body_text text,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
 );
 
@@ -789,7 +794,8 @@ CREATE TABLE public.project_collections (
     social_description text,
     social_title text,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    short_description text
+    short_description text,
+    exclude_from_oai boolean DEFAULT false
 );
 
 
@@ -863,7 +869,10 @@ CREATE TABLE public.projects (
     social_description text,
     social_title text,
     orphaned_journal_issue_id uuid,
-    orphaned_journal_issue boolean DEFAULT false NOT NULL
+    orphaned_journal_issue boolean DEFAULT false NOT NULL,
+    exclude_from_oai boolean DEFAULT false,
+    exclude_from_directory boolean DEFAULT false,
+    license character varying
 );
 
 
@@ -1515,6 +1524,20 @@ CREATE TABLE public.export_targets (
 
 
 --
+-- Name: external_identifiers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.external_identifiers (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    identifier character varying NOT NULL,
+    identifiable_type character varying,
+    identifiable_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: user_collected_composite_entries; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1676,6 +1699,107 @@ CREATE SEQUENCE public.friendly_id_slugs_id_seq
 --
 
 ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs.id;
+
+
+--
+-- Name: good_job_batches; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_batches (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    description text,
+    serialized_properties jsonb,
+    on_finish text,
+    on_success text,
+    on_discard text,
+    callback_queue_name text,
+    callback_priority integer,
+    enqueued_at timestamp(6) without time zone,
+    discarded_at timestamp(6) without time zone,
+    finished_at timestamp(6) without time zone
+);
+
+
+--
+-- Name: good_job_executions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_executions (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    active_job_id uuid NOT NULL,
+    job_class text,
+    queue_name text,
+    serialized_params jsonb,
+    scheduled_at timestamp(6) without time zone,
+    finished_at timestamp(6) without time zone,
+    error text,
+    error_event smallint,
+    error_backtrace text[],
+    process_id uuid,
+    duration interval
+);
+
+
+--
+-- Name: good_job_processes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_processes (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    state jsonb,
+    lock_type smallint
+);
+
+
+--
+-- Name: good_job_settings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_settings (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    key text,
+    value jsonb
+);
+
+
+--
+-- Name: good_jobs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_jobs (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    queue_name text,
+    priority integer,
+    serialized_params jsonb,
+    scheduled_at timestamp(6) without time zone,
+    performed_at timestamp(6) without time zone,
+    finished_at timestamp(6) without time zone,
+    error text,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    active_job_id uuid,
+    concurrency_key text,
+    cron_key text,
+    retried_good_job_id uuid,
+    cron_at timestamp(6) without time zone,
+    batch_id uuid,
+    batch_callback_id uuid,
+    is_discrete boolean,
+    executions_count integer,
+    job_class text,
+    error_event smallint,
+    labels text[],
+    locked_by_id uuid,
+    locked_at timestamp(6) without time zone
+);
 
 
 --
@@ -1863,7 +1987,10 @@ CREATE TABLE public.journals (
     logo_data jsonb,
     hero_background_color character varying,
     show_on_homepage boolean DEFAULT false NOT NULL,
-    home_page_priority integer DEFAULT 0 NOT NULL
+    home_page_priority integer DEFAULT 0 NOT NULL,
+    exclude_from_oai boolean DEFAULT false,
+    exclude_from_directory boolean DEFAULT false,
+    license character varying
 );
 
 
@@ -1901,6 +2028,52 @@ CREATE TABLE public.makers (
     avatar_data jsonb,
     prefix character varying,
     cached_full_name character varying
+);
+
+
+--
+-- Name: manifold_oai_records; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_records (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    oai_dc_content text,
+    deleted_at timestamp without time zone,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: manifold_oai_set_links; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_set_links (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    manifold_oai_set_id uuid NOT NULL,
+    manifold_oai_record_id uuid NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: manifold_oai_sets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_sets (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    spec public.citext NOT NULL,
+    name text NOT NULL,
+    description text,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -2750,7 +2923,8 @@ CREATE TABLE public.settings (
     favicon_data jsonb,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     ingestion jsonb DEFAULT '{}'::jsonb,
-    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL
+    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL,
+    oai jsonb DEFAULT '{"admin_email": "admin@manifold.app", "repository_name": "Manifold", "directory_enabled": true}'::jsonb
 );
 
 
@@ -3345,6 +3519,47 @@ CREATE VIEW public.user_derived_roles AS
 
 
 --
+-- Name: user_group_entitleables; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_group_entitleables (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_group_id uuid NOT NULL,
+    entitleable_type character varying NOT NULL,
+    entitleable_id uuid NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: user_group_memberships; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_group_memberships (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
+    user_group_id uuid NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    source_type text,
+    source_id uuid
+);
+
+
+--
+-- Name: user_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_groups (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name text NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
 -- Name: version_associations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3688,6 +3903,14 @@ ALTER TABLE ONLY public.export_targets
 
 
 --
+-- Name: external_identifiers external_identifiers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.external_identifiers
+    ADD CONSTRAINT external_identifiers_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: features features_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3709,6 +3932,46 @@ ALTER TABLE ONLY public.flags
 
 ALTER TABLE ONLY public.friendly_id_slugs
     ADD CONSTRAINT friendly_id_slugs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_batches good_job_batches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_batches
+    ADD CONSTRAINT good_job_batches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_executions good_job_executions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_executions
+    ADD CONSTRAINT good_job_executions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_processes good_job_processes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_processes
+    ADD CONSTRAINT good_job_processes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_settings good_job_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_settings
+    ADD CONSTRAINT good_job_settings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_jobs good_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_jobs
+    ADD CONSTRAINT good_jobs_pkey PRIMARY KEY (id);
 
 
 --
@@ -3805,6 +4068,30 @@ ALTER TABLE ONLY public.legacy_favorites
 
 ALTER TABLE ONLY public.makers
     ADD CONSTRAINT makers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: manifold_oai_records manifold_oai_records_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_records
+    ADD CONSTRAINT manifold_oai_records_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: manifold_oai_set_links manifold_oai_set_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_set_links
+    ADD CONSTRAINT manifold_oai_set_links_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: manifold_oai_sets manifold_oai_sets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_sets
+    ADD CONSTRAINT manifold_oai_sets_pkey PRIMARY KEY (id);
 
 
 --
@@ -4253,6 +4540,30 @@ ALTER TABLE ONLY public.user_collected_text_sections
 
 ALTER TABLE ONLY public.user_collected_texts
     ADD CONSTRAINT user_collected_texts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_group_entitleables user_group_entitleables_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_group_entitleables
+    ADD CONSTRAINT user_group_entitleables_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_group_memberships user_group_memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_group_memberships
+    ADD CONSTRAINT user_group_memberships_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_groups user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_groups
+    ADD CONSTRAINT user_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -4882,6 +5193,20 @@ CREATE INDEX index_export_targets_on_strategy ON public.export_targets USING btr
 
 
 --
+-- Name: index_external_identifiers_on_identifiable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_external_identifiers_on_identifiable ON public.external_identifiers USING btree (identifiable_type, identifiable_id);
+
+
+--
+-- Name: index_external_identifiers_on_identifier; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_external_identifiers_on_identifier ON public.external_identifiers USING btree (identifier);
+
+
+--
 -- Name: index_flags_on_flaggable_type_and_flaggable_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4928,6 +5253,125 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_id ON public.friendly_id_slugs
 --
 
 CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON public.friendly_id_slugs USING btree (sluggable_type);
+
+
+--
+-- Name: index_good_job_executions_on_active_job_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_job_executions_on_active_job_id_and_created_at ON public.good_job_executions USING btree (active_job_id, created_at);
+
+
+--
+-- Name: index_good_job_executions_on_process_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_job_executions_on_process_id_and_created_at ON public.good_job_executions USING btree (process_id, created_at);
+
+
+--
+-- Name: index_good_job_jobs_for_candidate_lookup; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_job_jobs_for_candidate_lookup ON public.good_jobs USING btree (priority, created_at) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_job_settings_on_key; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_good_job_settings_on_key ON public.good_job_settings USING btree (key);
+
+
+--
+-- Name: index_good_jobs_jobs_on_finished_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_jobs_on_finished_at ON public.good_jobs USING btree (finished_at) WHERE ((retried_good_job_id IS NULL) AND (finished_at IS NOT NULL));
+
+
+--
+-- Name: index_good_jobs_jobs_on_priority_created_at_when_unfinished; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_jobs_on_priority_created_at_when_unfinished ON public.good_jobs USING btree (priority DESC NULLS LAST, created_at) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_jobs_on_active_job_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_active_job_id_and_created_at ON public.good_jobs USING btree (active_job_id, created_at);
+
+
+--
+-- Name: index_good_jobs_on_batch_callback_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_batch_callback_id ON public.good_jobs USING btree (batch_callback_id) WHERE (batch_callback_id IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_batch_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_batch_id ON public.good_jobs USING btree (batch_id) WHERE (batch_id IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_concurrency_key_when_unfinished; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_concurrency_key_when_unfinished ON public.good_jobs USING btree (concurrency_key) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_jobs_on_cron_key_and_created_at_cond; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_cron_key_and_created_at_cond ON public.good_jobs USING btree (cron_key, created_at) WHERE (cron_key IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_cron_key_and_cron_at_cond; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_good_jobs_on_cron_key_and_cron_at_cond ON public.good_jobs USING btree (cron_key, cron_at) WHERE (cron_key IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_labels; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_labels ON public.good_jobs USING gin (labels) WHERE (labels IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_locked_by_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_locked_by_id ON public.good_jobs USING btree (locked_by_id) WHERE (locked_by_id IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_priority_scheduled_at_unfinished_unlocked; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_priority_scheduled_at_unfinished_unlocked ON public.good_jobs USING btree (priority, scheduled_at) WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL));
+
+
+--
+-- Name: index_good_jobs_on_queue_name_and_scheduled_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_queue_name_and_scheduled_at ON public.good_jobs USING btree (queue_name, scheduled_at) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_jobs_on_scheduled_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_scheduled_at ON public.good_jobs USING btree (scheduled_at) WHERE (finished_at IS NULL);
 
 
 --
@@ -5145,6 +5589,41 @@ CREATE INDEX index_legacy_favorites_on_user_id ON public.legacy_favorites USING 
 --
 
 CREATE INDEX index_makers_sort_by_name ON public.makers USING btree ((((COALESCE(last_name, ''::character varying))::text || (COALESCE(first_name, ''::character varying))::text)));
+
+
+--
+-- Name: index_manifold_oai_records_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_records_on_source ON public.manifold_oai_records USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_set_links_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_set_links_on_source ON public.manifold_oai_set_links USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_set_links_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_set_links_uniqueness ON public.manifold_oai_set_links USING btree (manifold_oai_set_id, manifold_oai_record_id);
+
+
+--
+-- Name: index_manifold_oai_sets_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_sets_on_source ON public.manifold_oai_sets USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_sets_on_spec; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_sets_on_spec ON public.manifold_oai_sets USING btree (spec);
 
 
 --
@@ -6520,6 +6999,34 @@ CREATE INDEX index_user_collected_texts_on_user_id ON public.user_collected_text
 
 
 --
+-- Name: index_user_group_entitleables_on_entitleable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_user_group_entitleables_on_entitleable ON public.user_group_entitleables USING btree (entitleable_type, entitleable_id);
+
+
+--
+-- Name: index_user_group_entitleables_on_user_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_user_group_entitleables_on_user_group_id ON public.user_group_entitleables USING btree (user_group_id);
+
+
+--
+-- Name: index_user_group_memberships_on_user_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_user_group_memberships_on_user_group_id ON public.user_group_memberships USING btree (user_group_id);
+
+
+--
+-- Name: index_user_group_memberships_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_user_group_memberships_on_user_id ON public.user_group_memberships USING btree (user_id);
+
+
+--
 -- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6724,6 +7231,14 @@ ALTER TABLE ONLY public.reading_group_journal_issues
 
 ALTER TABLE ONLY public.reading_group_texts
     ADD CONSTRAINT fk_rails_0cfbd9d8a7 FOREIGN KEY (reading_group_category_id) REFERENCES public.reading_group_categories(id) ON DELETE SET NULL;
+
+
+--
+-- Name: manifold_oai_set_links fk_rails_0dab76c54d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_set_links
+    ADD CONSTRAINT fk_rails_0dab76c54d FOREIGN KEY (manifold_oai_set_id) REFERENCES public.manifold_oai_sets(id) ON DELETE CASCADE;
 
 
 --
@@ -7020,6 +7535,14 @@ ALTER TABLE ONLY public.reading_group_texts
 
 ALTER TABLE ONLY public.import_selection_matches
     ADD CONSTRAINT fk_rails_614cdd326b FOREIGN KEY (import_selection_id) REFERENCES public.import_selections(id) ON DELETE CASCADE;
+
+
+--
+-- Name: manifold_oai_set_links fk_rails_61f6bce33f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_set_links
+    ADD CONSTRAINT fk_rails_61f6bce33f FOREIGN KEY (manifold_oai_record_id) REFERENCES public.manifold_oai_records(id) ON DELETE CASCADE;
 
 
 --
@@ -7530,6 +8053,8 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 -- PostgreSQL database dump complete
 --
 
+\unrestrict fnawKPtpwgsz4dyCDfai5AEwdbKNn29ryUjRnh90t3vUMloGZuyLLfpTF2ScFim
+
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
@@ -7883,10 +8408,16 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250527180248'),
 ('20250528002025'),
 ('20250530205742'),
+('20250603170620'),
 ('20250603192547'),
 ('20250609191642'),
 ('20250609192241'),
+('20250715233614'),
+('20250718200409'),
+('20250718201018'),
+('20250721212242'),
 ('20250723210143'),
+('20250729212944'),
 ('20251016204352'),
 ('20251017174417'),
 ('20251017211501'),
@@ -7896,8 +8427,14 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20251103175949'),
 ('20251103180007'),
 ('20251105165521'),
+('20251117204731'),
+('20251120233556'),
 ('20251121202033'),
 ('20251203230443'),
-('20251203231940');
+('20251203231940'),
+('20260126221732'),
+('20260127162821'),
+('20260127185424'),
+('20260305225814');
 
 

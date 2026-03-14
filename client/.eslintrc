@@ -1,22 +1,23 @@
-{ "extends": [
-    "eslint-config-airbnb",
-    "prettier"
-  ],
+{
+  "extends": ["eslint-config-airbnb", "prettier"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
     "node": true
   },
   "rules": {
-
     //////////////// NEW /////////////////
 
-    "prefer-destructuring": ["error", {
-      "array": false,
-      "object": false
-    }, {
-      "enforceForRenamedProperties": false
-    }],
+    "prefer-destructuring": [
+      "error",
+      {
+        "array": false,
+        "object": false
+      },
+      {
+        "enforceForRenamedProperties": false
+      }
+    ],
 
     "react/jsx-curly-newline": 0,
     "react/static-property-placement": 0,
@@ -41,17 +42,18 @@
     "no-nested-ternary": ["warn"],
     "jsx-a11y/label-has-associated-control": 0,
     "jsx-a11y/control-has-associated-label": 0,
+    "no-shadow": 0,
 
     ///////// END NEW //////////////////
 
-    "camelcase": ["error", {
-      "properties": "never",
-      "ignoreDestructuring": false,
-      "allow": [
-        "UNSAFE_componentDidMount",
-        "UNSAFE_componentWillMount"
-      ]
-    }],
+    "camelcase": [
+      "error",
+      {
+        "properties": "never",
+        "ignoreDestructuring": false,
+        "allow": ["UNSAFE_componentDidMount", "UNSAFE_componentWillMount"]
+      }
+    ],
 
     "prettier/prettier": "error",
 
@@ -84,10 +86,18 @@
     "react/jsx-indent": 0,
 
     // Unused vars are bad.
-    "no-unused-vars": [1, {"args": "after-used", "ignoreRestSiblings": true, "varsIgnorePattern": "PropTypes|React", "argsIgnorePattern": "[iI]gnored"}],
+    "no-unused-vars": [
+      1,
+      {
+        "args": "after-used",
+        "ignoreRestSiblings": true,
+        "varsIgnorePattern": "PropTypes|React",
+        "argsIgnorePattern": "[iI]gnored"
+      }
+    ],
 
     // Unused expressions are OK if ternary
-    "no-unused-expressions": [1, {"allowTernary": true }],
+    "no-unused-expressions": [1, { "allowTernary": true }],
 
     "no-return-assign": [2, "except-parens"],
 
@@ -164,9 +174,9 @@
     "jsx-a11y/label-has-for": [
       2,
       {
-        "components": [ "Label" ],
+        "components": ["Label"],
         "required": {
-          "some": [ "nesting", "id" ]
+          "some": ["nesting", "id"]
         },
         "allowChildren": false
       }
@@ -184,11 +194,9 @@
     "jsx-a11y/heading-has-content": 0,
     "jsx-a11y/no-autofocus": 0,
     "jsx-a11y/no-distracting-elements": 0,
-    "jsx-a11y/scope": 0,
+    "jsx-a11y/scope": 0
   },
-  "plugins": [
-    "react", "react-hooks", "import", "prettier", "jsx-a11y"
-  ],
+  "plugins": ["react", "react-hooks", "import", "prettier", "jsx-a11y"],
   "settings": {
     "import/parser": "babel-eslint",
     "import/resolve": {
