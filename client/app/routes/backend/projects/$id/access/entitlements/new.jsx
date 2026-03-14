@@ -13,7 +13,7 @@ export async function action({ request, context, params }) {
 
   try {
     const result = await queryApi(
-      entitlementsAPI.create({ type: "journals", id: params.id }, data),
+      entitlementsAPI.create({ type: "projects", id: params.id }, data),
       context
     );
 
@@ -21,13 +21,13 @@ export async function action({ request, context, params }) {
       return { errors: result.errors };
     }
 
-    throw redirect(`/backend/journals/${params.id}/access`);
+    throw redirect(`/backend/projects/${params.id}/access`);
   } catch (error) {
     return handleActionError(error);
   }
 }
 
-export default function JournalEntitlementNew() {
+export default function ProjectEntitlementNew() {
   const { t } = useTranslation();
   const fetcher = useFetcher();
 

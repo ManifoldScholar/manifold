@@ -1,5 +1,6 @@
 {
   "common": {
+    "all": "All",
     "about": "about",
     "active": "Active",
     "archived": "archived",

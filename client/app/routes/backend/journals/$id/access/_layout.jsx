@@ -4,7 +4,7 @@ import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import loadList from "app/routes/utility/loaders/loadList";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
-import EntitlementsContainer from "backend/containers/entitlements";
+import EntitlementsList from "backend/components/entitlements/List";
 import Authorization from "helpers/authorization";
 import Layout from "backend/components/layout";
 import { useAuthentication } from "hooks";
@@ -84,7 +84,7 @@ export default function JournalAccessLayout({ loaderData }) {
     <>
       {canGrantPermissions && <Permissions permissions={permissions} />}
       <Layout.BackendPanel flush={!canGrantPermissions}>
-        <EntitlementsContainer.List
+        <EntitlementsList
           entity={journal}
           entities={entitlements.data}
           meta={entitlements.meta}

@@ -30,7 +30,7 @@ export default function FormSwitchArray({
           <Switch
             key={option.value}
             label={option.label}
-            set={() => handleChange(option.value)}
+            onChange={() => handleChange(option.value)}
             value={value.includes(option.value)}
             focusOnMount={focusOnMount && index === 0}
             isPrimary
