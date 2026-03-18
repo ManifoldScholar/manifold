@@ -49,9 +49,7 @@ export default function AccessForm({ project }) {
           <Form.TextInput
             label={t("projects.forms.access.notice_header_label")}
             name="attributes[restrictedAccessHeading]"
-            placeholder={t(
-              "projects.forms.access.notice_header_placeholder"
-            )}
+            placeholder={t("projects.forms.access.notice_header_placeholder")}
             wide
           />
           <Form.TextArea

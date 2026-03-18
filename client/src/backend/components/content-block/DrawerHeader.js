@@ -79,6 +79,8 @@ class ContentBlockDrawerHeader extends PureComponent {
   }
 
   render() {
+    if (!this.contentBlock) return null;
+
     return (
       <Layout.DrawerHeader
         icon={this.icon}

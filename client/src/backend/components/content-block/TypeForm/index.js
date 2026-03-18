@@ -1,78 +1,70 @@
-import React, { PureComponent } from "react";
+import { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import typeResolver from "../helpers/resolver";
-import setter from "global/components/form/setter";
 import Form from "../../../../global/components/form";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { FormContext } from "helpers/contexts";
+import { brackets2dots } from "utils/string";
 import { unwrappedForDefaultAttrs } from "./types";
 
-export class ProjectContentTypeForm extends PureComponent {
-  static displayName = "Project.Content.TypeForm";
+export default function ProjectContentTypeForm({ contentBlock, project }) {
+  const { t } = useTranslation();
+  const formContext = useContext(FormContext);
+  const setValue = formContext?.actions?.setValue;
+  const getModelValue = formContext?.getModelValue ?? (() => null);
 
-  static propTypes = {
-    contentBlock: PropTypes.object,
-    project: PropTypes.object,
-    t: PropTypes.func
-  };
+  const isNew = contentBlock?.id === "pending";
+  const type = contentBlock?.attributes?.type;
 
-  componentDidMount() {
-    if (this.isNew) this.setDefaults();
-  }
-
-  get contentBlock() {
-    return this.props.contentBlock;
-  }
-
-  get isNew() {
-    return this.contentBlock.id === "pending";
-  }
-
-  get type() {
-    return this.contentBlock.attributes.type;
-  }
-
-  get typeComponent() {
-    return typeResolver.typeToFormComponent(this.type);
-  }
-
-  setDefaults() {
-    const key = this.type.split("::")?.[1]?.replace("Block", "");
+  useEffect(() => {
+    if (!isNew || !setValue) return;
+    const key = type?.split("::")?.[1]?.replace("Block", "");
     const defaults = key
       ? unwrappedForDefaultAttrs[key]?.defaultAttributes
       : null;
-    if (!defaults) return null;
+    if (!defaults) return;
     Object.keys(defaults).forEach(attr =>
-      this.props.setOther(defaults[attr], `attributes[${attr}]`)
+      setValue(brackets2dots(`attributes[${attr}]`), defaults[attr])
     );
-  }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  render() {
-    const TypeForm = this.typeComponent;
+  if (!contentBlock) return null;
 
-    return (
-      <>
-        <Form.Select
-          label="Access"
-          options={[
-            {
-              label: this.props.t("layout.visibility_options.always"),
-              value: "always"
-            },
-            {
-              label: this.props.t("layout.visibility_options.authorized"),
-              value: "authorized"
-            },
-            {
-              label: this.props.t("layout.visibility_options.unauthorized"),
-              value: "unauthorized"
-            }
-          ]}
-          name="attributes[access]"
-        />
-        <TypeForm {...this.props} />
-      </>
-    );
-  }
+  const TypeForm = typeResolver.typeToFormComponent(type);
+
+  return (
+    <>
+      <Form.Select
+        label="Access"
+        options={[
+          {
+            label: t("layout.visibility_options.always"),
+            value: "always"
+          },
+          {
+            label: t("layout.visibility_options.authorized"),
+            value: "authorized"
+          },
+          {
+            label: t("layout.visibility_options.unauthorized"),
+            value: "unauthorized"
+          }
+        ]}
+        name="attributes[access]"
+      />
+      <TypeForm
+        contentBlock={contentBlock}
+        project={project}
+        getModelValue={getModelValue}
+        setOther={(value, name) => setValue?.(brackets2dots(name), value)}
+      />
+    </>
+  );
 }
 
-export default withTranslation()(setter(ProjectContentTypeForm));
+ProjectContentTypeForm.displayName = "Project.Content.TypeForm";
+
+ProjectContentTypeForm.propTypes = {
+  contentBlock: PropTypes.object,
+  project: PropTypes.object
+};

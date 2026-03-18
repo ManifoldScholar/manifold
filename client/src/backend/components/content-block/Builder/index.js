@@ -1,68 +1,70 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRevalidator } from "react-router";
 import { useTranslation } from "react-i18next";
 import AvailableSection from "./sections/Available";
 import CurrentSection from "./sections/Current";
 import DraggableEventHelper from "../helpers/draggableEvent";
-import { contentBlocksAPI, projectsAPI, requests } from "api";
+import { contentBlocksAPI } from "api";
 import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import withConfirmation from "hoc/withConfirmation";
 
 import configHelper from "../helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";
-import { UIDConsumer } from "react-uid";
-import { useFetch, useApiCallback } from "hooks";
+import { useApiCallback } from "hooks";
 
 const cloneBlocks = contentBlocks => {
   const blocks = contentBlocks || [];
   return cloneDeep(blocks);
 };
 
-function ProjectContent({ project, confirm, children }) {
+function ProjectContent({ project, contentBlocks, confirm, children }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { revalidate } = useRevalidator();
 
-  const { data: contentBlocks, refresh } = useFetch({
-    request: [projectsAPI.contentBlocks, project?.id],
-    options: { requestKey: requests.beProjectContentBlocks },
-    condition: !!project?.id
-  });
-
-  const [blocks, setBlocks] = useState(() => cloneBlocks(contentBlocks || []));
+  const [isMounted, setIsMounted] = useState(false);
+  const [blocks, setBlocks] = useState(cloneBlocks(contentBlocks));
   const [activeDraggableType, setActiveDraggableType] = useState(null);
 
   useEffect(() => {
-    setBlocks(cloneBlocks(contentBlocks || []));
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    setBlocks(prev => {
+      const hadPending = prev.some(b => b.id === "pending");
+      if (hadPending) {
+        // Preserve the pending block; update only the non-pending blocks
+        const pending = prev.find(b => b.id === "pending");
+        const pendingIndex = prev.indexOf(pending);
+        const updated = cloneBlocks(contentBlocks);
+        updated.splice(pendingIndex, 0, pending);
+        return updated;
+      }
+      return cloneBlocks(contentBlocks);
+    });
   }, [contentBlocks]);
 
   const pendingBlock = blocks.find(block => block.id === "pending");
 
-  const createContentBlock = useApiCallback(contentBlocksAPI.create, {
-    requestKey: requests.beContentBlockCreate,
-    options: { adds: requests.beProjectContentBlocks }
-  });
+  const createContentBlock = useApiCallback(contentBlocksAPI.create);
 
-  const updateContentBlock = useApiCallback(contentBlocksAPI.update, {
-    requestKey: requests.beContentBlockUpdate,
-    noTouch: true
-  });
+  const updateContentBlock = useApiCallback(contentBlocksAPI.update);
 
-  const deleteContentBlock = useApiCallback(contentBlocksAPI.destroy, {
-    requestKey: requests.beContentBlockDestroy
-  });
+  const deleteContentBlock = useApiCallback(contentBlocksAPI.destroy);
 
   const createBlock = async blockToCreate => {
     const block = blockToCreate || pendingBlock;
     await createContentBlock(project.id, block);
-    refresh();
+    revalidate();
   };
 
   const updateBlock = async (block, callback) => {
     await updateContentBlock(block.id, {
       attributes: block.attributes
     });
-    refresh();
+    revalidate();
     if (callback && typeof callback === "function") {
       callback();
     }
@@ -112,7 +114,7 @@ function ProjectContent({ project, confirm, children }) {
   };
 
   const resetState = () => {
-    setBlocks(cloneBlocks(contentBlocks || []));
+    setBlocks(cloneBlocks(contentBlocks));
   };
 
   const editBlock = block => {
@@ -126,7 +128,7 @@ function ProjectContent({ project, confirm, children }) {
 
   const deleteBlock = async block => {
     await deleteContentBlock(block.id);
-    refresh();
+    revalidate();
   };
 
   const toggleBlockVisibility = (block, visible) => {
@@ -169,36 +171,35 @@ function ProjectContent({ project, confirm, children }) {
     onKeyboardMove
   };
 
-  const closeWithoutSave = pendingBlock ? resetState : null;
-  const onSave = refresh;
+  const clearPendingBlock = pendingBlock ? resetState : null;
+
+  const id = useId();
 
   return (
     <section className="backend-project-content rbd-migration-resets">
-      <UIDConsumer name={id => `content-block-builder-${id}`}>
-        {id => (
-          <div
-            className="form-secondary"
-            role="group"
-            aria-labelledby={`${id}-header`}
-            aria-describedby={`${id}-instructions`}
-          >
-            <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
-              <AvailableSection
-                onClickAdd={handleAddEntity}
-                currentBlocks={blocks}
-                headerId={`${id}-header`}
-                instructionsId={`${id}-instructions`}
-              />
-              <CurrentSection
-                activeDraggableType={activeDraggableType}
-                entityCallbacks={entityCallbacks}
-                currentBlocks={blocks}
-              />
-            </DragDropContext>
-            {children(closeWithoutSave, onSave, pendingBlock)}
-          </div>
+      <div
+        className="form-secondary"
+        role="group"
+        aria-labelledby={`${id}-header`}
+        aria-describedby={`${id}-instructions`}
+      >
+        {isMounted && (
+          <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+            <AvailableSection
+              onClickAdd={handleAddEntity}
+              currentBlocks={blocks}
+              headerId={`${id}-header`}
+              instructionsId={`${id}-instructions`}
+            />
+            <CurrentSection
+              activeDraggableType={activeDraggableType}
+              entityCallbacks={entityCallbacks}
+              currentBlocks={blocks}
+            />
+          </DragDropContext>
         )}
-      </UIDConsumer>
+        {children(pendingBlock, clearPendingBlock)}
+      </div>
     </section>
   );
 }
@@ -207,6 +208,7 @@ ProjectContent.displayName = "ContentBlock.Builder";
 
 ProjectContent.propTypes = {
   project: PropTypes.object,
+  contentBlocks: PropTypes.array,
   confirm: PropTypes.func.isRequired,
   children: PropTypes.func
 };
