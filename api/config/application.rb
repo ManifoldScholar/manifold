@@ -83,6 +83,7 @@ module ManifoldApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.middleware.use ActionDispatch::RemoteIp
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
