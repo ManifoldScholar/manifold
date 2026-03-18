@@ -38,7 +38,8 @@ ActiveSupport::Reloader.to_prepare do
     end
 
     Rack::Attack.throttle throttler.ip_key, **throttler.options do |request|
-      request.ip if request.env["manifold_env.throttled_category"] == throttler.category
+      next unless request.env["manifold_env.throttled_category"] == throttler.category
+      request.env["action_dispatch.remote_ip"]&.calculate_ip || request.ip
     end
   end
 
@@ -56,13 +57,13 @@ ActiveSupport::Reloader.to_prepare do
 
   Rack::Attack.blocklisted_responder = lambda do |request|
     # :nocov:
-    [503, {}, ["Internal Server Error\n"]]
+    [429, {}, ["Rate Limit Exceeded\n"]]
     # :nocov:
   end
 
   Rack::Attack.throttled_responder = lambda do |request|
     # :nocov:
-    [503, {}, ["Internal Server Error\n"]]
+    [429, {}, ["Rate Limit Exceeded\n"]]
     # :nocov:
   end
 end
