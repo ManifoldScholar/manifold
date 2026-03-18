@@ -133,7 +133,7 @@ RSpec.describe "Comments API", type: :request do
           end.to change(Comment, :count).by(10)
             .and change(ThrottledRequest, :count).by(1)
 
-          expect(response).to have_http_status(:service_unavailable)
+          expect(response).to have_http_status(:too_many_requests)
         end
 
         context "when the comment is spammy" do
