@@ -206,7 +206,7 @@ RSpec.describe "Text Section Annotations API", type: :request do
         end.to change(Annotation, :count).by(5)
           .and change(ThrottledRequest, :count).by(1)
 
-        expect(response).to have_http_status(:service_unavailable)
+        expect(response).to have_http_status(:too_many_requests)
       end
 
       context "when the user has not confirmed their email" do

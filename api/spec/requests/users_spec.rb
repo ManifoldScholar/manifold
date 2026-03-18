@@ -83,7 +83,7 @@ RSpec.describe "Users API", type: :request do
       end.to change(User, :count).by(5)
         .and change(ThrottledRequest, :count).by(1)
 
-      expect(response).to have_http_status(:service_unavailable)
+      expect(response).to have_http_status(:too_many_requests)
     end
 
     it "tells the welcome mailer that the user was created by the admin when meta[createdByAdmin] is true" do
@@ -121,7 +121,7 @@ RSpec.describe "Users API", type: :request do
         end.to keep_the_same(User, :count)
           .and change(ThrottledRequest, :count).by(1)
 
-        expect(response).to have_http_status(:service_unavailable)
+        expect(response).to have_http_status(:too_many_requests)
       end
     end
   end
