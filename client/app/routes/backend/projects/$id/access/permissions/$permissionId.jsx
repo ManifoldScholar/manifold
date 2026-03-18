@@ -3,12 +3,10 @@ import {
   useFetcher,
   useOutletContext,
   useNavigate,
-  useParams,
-  redirect
+  useParams
 } from "react-router";
 import { permissionsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import Layout from "backend/components/layout";
 import Dialog from "global/components/dialog";
 import PermissionForm from "backend/components/permission/Form";
@@ -17,25 +15,15 @@ import useConfirmation from "hooks/useConfirmation";
 
 export const handle = { drawer: true };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-  const entity = { type: "projects", id: params.id };
-
-  try {
-    const result = await queryApi(
-      permissionsAPI.update(entity, params.permissionId, data),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    throw redirect(`/backend/projects/${params.id}/access/`);
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) =>
+    permissionsAPI.update(
+      { type: "projects", id: params.id },
+      params.permissionId,
+      data
+    ),
+  redirectTo: ({ params }) => `/backend/projects/${params.id}/access/`
+});
 
 export default function ProjectPermissionEdit() {
   const { t } = useTranslation();

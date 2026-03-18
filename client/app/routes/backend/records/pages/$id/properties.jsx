@@ -1,26 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useFetcher } from "react-router";
 import { pagesAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(pagesAPI.update(params.id, data), context);
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    return { success: true };
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => pagesAPI.update(params.id, data)
+});
 
 export default function PagePropertiesRoute() {
   const { t } = useTranslation();

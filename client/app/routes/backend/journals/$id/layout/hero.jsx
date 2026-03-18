@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher, useOutletContext, redirect } from "react-router";
+import { useFetcher, useOutletContext } from "react-router";
 import { journalsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
@@ -10,21 +9,10 @@ import Layout from "backend/components/layout";
 
 export const handle = { drawer: true };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(journalsAPI.update(params.id, data), context);
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    throw redirect(`/backend/journals/${params.id}/layout`);
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => journalsAPI.update(params.id, data),
+  redirectTo: ({ params }) => `/backend/journals/${params.id}/layout`
+});
 
 function formatData(dirty, source) {
   const merged = {

@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher, redirect } from "react-router";
+import { useFetcher } from "react-router";
 import { pagesAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import authorize from "app/routes/utility/loaders/authorize";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -22,21 +21,10 @@ export const loader = ({ request, context }) => {
   });
 };
 
-export async function action({ request, context }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(pagesAPI.create(data), context);
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    throw redirect(`/backend/records/pages/${result.data.id}`);
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data }) => pagesAPI.create(data),
+  redirectTo: ({ result }) => `/backend/records/pages/${result.data.id}`
+});
 
 export default function PagesNewRoute() {
   const { t } = useTranslation();

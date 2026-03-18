@@ -1,28 +1,15 @@
 import { useOutletContext, useFetcher } from "react-router";
 import { useTranslation, Trans } from "react-i18next";
 import { settingsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import PageHeader from "backend/components/layout/PageHeader";
 
-export async function action({ request, context }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(settingsAPI.update(null, data), context);
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    return { success: true };
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data }) => settingsAPI.update(null, data)
+});
 
 export default function SettingsIngestionRoute() {
   const { t } = useTranslation();

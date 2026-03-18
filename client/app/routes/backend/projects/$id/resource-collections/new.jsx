@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher, redirect } from "react-router";
+import { useFetcher } from "react-router";
 import FormContainer from "global/containers/form";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
 import PageHeader from "backend/components/layout/PageHeader";
 import { resourceCollectionsAPI, projectsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getResourceCollectionBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
 import authorize from "app/routes/utility/loaders/authorize";
@@ -33,21 +32,11 @@ export const loader = async ({ params, context, request }) => {
   return project;
 };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-  try {
-    const result = await queryApi(
-      resourceCollectionsAPI.create(params.id, data),
-      context
-    );
-    if (result?.errors) return { errors: result.errors };
-    throw redirect(
-      `/backend/projects/resource-collection/${result.data.id}/properties`
-    );
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => resourceCollectionsAPI.create(params.id, data),
+  redirectTo: ({ result }) =>
+    `/backend/projects/resource-collection/${result.data.id}/properties`
+});
 
 export default function ResourceCollectionNew({ loaderData: project }) {
   const { t } = useTranslation();

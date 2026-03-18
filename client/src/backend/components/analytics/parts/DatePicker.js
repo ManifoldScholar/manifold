@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import { useState, forwardRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
@@ -8,6 +8,9 @@ import Utility from "global/components/utility";
 
 function DatePicker({ parentId, inputId, value, onChange, label }) {
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
 
   const { t, i18n } = useTranslation();
   const locale = t("date_fns", { returnObjects: true });
@@ -56,26 +59,24 @@ function DatePicker({ parentId, inputId, value, onChange, label }) {
     )
   );
 
-  return (
-    <>
-      <ReactDatePicker
-        renderCustomHeader={props => <Header uid={parentId} {...props} />}
-        selected={value}
-        onChange={onChange}
-        onCalendarOpen={() => setPickerOpen(true)}
-        onCalendarClose={() => setPickerOpen(false)}
-        customInput={<CustomInput />}
-        dropdownMode="scroll"
-        dateformat="P"
-        locale={i18n.language}
-        popperContainer={({ children, className }) => (
-          <div aria-hidden className={className}>
-            {children}
-          </div>
-        )}
-      />
-    </>
-  );
+  return isMounted ? (
+    <ReactDatePicker
+      renderCustomHeader={props => <Header uid={parentId} {...props} />}
+      selected={value}
+      onChange={onChange}
+      onCalendarOpen={() => setPickerOpen(true)}
+      onCalendarClose={() => setPickerOpen(false)}
+      customInput={<CustomInput />}
+      dropdownMode="scroll"
+      dateformat="P"
+      locale={i18n.language}
+      popperContainer={({ children, className }) => (
+        <div aria-hidden className={className}>
+          {children}
+        </div>
+      )}
+    />
+  ) : null;
 }
 
 DatePicker.displayName = "Analytics.RangePicker.DatePicker";

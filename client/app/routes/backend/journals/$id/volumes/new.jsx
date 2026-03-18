@@ -1,31 +1,16 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher, redirect } from "react-router";
+import { useFetcher } from "react-router";
 import { journalVolumesAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import Volume from "backend/components/volume";
 import Layout from "backend/components/layout";
 
 export const handle = { drawer: true };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(
-      journalVolumesAPI.create(params.id, data),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    throw redirect(`/backend/journals/${params.id}/volumes`);
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => journalVolumesAPI.create(params.id, data),
+  redirectTo: ({ params }) => `/backend/journals/${params.id}/volumes`
+});
 
 export default function JournalVolumeNew() {
   const { t } = useTranslation();

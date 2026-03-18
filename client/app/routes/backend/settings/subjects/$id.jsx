@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useNavigate } from "react-router";
 import { subjectsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -21,21 +20,9 @@ export const loader = async ({ params, context, request }) => {
   });
 };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(subjectsAPI.update(params.id, data), context);
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    return { success: true };
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => subjectsAPI.update(params.id, data)
+});
 
 export default function SettingsSubjectsEdit({ loaderData: subject }) {
   const { t } = useTranslation();

@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useNavigate, useParams } from "react-router";
 import { journalVolumesAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 import Volume from "backend/components/volume";
@@ -19,24 +18,9 @@ export const loader = async ({ params, context, request }) => {
   });
 };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(
-      journalVolumesAPI.update(params.volumeId, data),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    return { success: true };
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => journalVolumesAPI.update(params.volumeId, data)
+});
 
 export default function JournalVolumeEdit({ loaderData: volume }) {
   const { t } = useTranslation();

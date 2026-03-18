@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher, redirect } from "react-router";
+import { useFetcher } from "react-router";
 import { featuresAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import authorize from "app/routes/utility/loaders/authorize";
 import PageHeader from "backend/components/layout/PageHeader";
 import Layout from "backend/components/layout";
@@ -12,21 +11,10 @@ export const loader = ({ request, context }) => {
   return authorize({ request, context, ability: "create", entity: "feature" });
 };
 
-export async function action({ request, context }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(featuresAPI.create(data), context);
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    throw redirect(`/backend/records/features/${result.data.id}`);
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data }) => featuresAPI.create(data),
+  redirectTo: ({ result }) => `/backend/records/features/${result.data.id}`
+});
 
 export default function FeaturesNewRoute() {
   const { t } = useTranslation();

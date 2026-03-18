@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useNavigate } from "react-router";
 import { exportTargetsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Layout from "backend/components/layout";
 import { useApiCallback } from "hooks";
@@ -20,24 +19,9 @@ export const loader = async ({ params, context, request }) => {
   });
 };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(
-      exportTargetsAPI.update(params.id, data),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    return { success: true };
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => exportTargetsAPI.update(params.id, data)
+});
 
 export default function SettingsExportTargetsEdit({
   loaderData: exportTarget

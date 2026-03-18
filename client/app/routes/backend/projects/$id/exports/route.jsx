@@ -3,8 +3,7 @@ import { useFetcher, useOutletContext, useRevalidator } from "react-router";
 import isArray from "lodash/isArray";
 import { projectsAPI, exportTargetsAPI, projectExportationsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import { useListQueryParams, useApiCallback } from "hooks";
 import EntitiesList, {
   Button,
@@ -33,16 +32,9 @@ export const loader = async ({ params, request, context }) => {
   return { ...listData, exportTargets: targetsResult.data ?? [] };
 };
 
-export async function action({ request, context }) {
-  const data = await request.json();
-  try {
-    const result = await queryApi(projectExportationsAPI.create(data), context);
-    if (result?.errors) return { errors: result.errors };
-    return { success: true };
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data }) => projectExportationsAPI.create(data)
+});
 
 export default function ProjectExports({ loaderData }) {
   const { t } = useTranslation();

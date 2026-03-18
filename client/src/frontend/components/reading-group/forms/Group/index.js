@@ -204,7 +204,7 @@ function ReadingGroupForm({
             </ClassNames>
             <Collapse initialVisible={courseEnabled}>
               <Collapse.Content>
-                {/* <Styled.DatesInner>
+                <Styled.DatesInner>
                   <Form.DatePicker
                     label={t("forms.reading_group.course_start_date")}
                     name="attributes[course][startsOn]"
@@ -213,7 +213,7 @@ function ReadingGroupForm({
                     label={t("forms.reading_group.course_end_date")}
                     name="attributes[course][endsOn]"
                   />
-                </Styled.DatesInner> */}
+                </Styled.DatesInner>
               </Collapse.Content>
             </Collapse>
             <Form.Switch

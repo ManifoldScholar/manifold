@@ -28,7 +28,6 @@ export default function AccessForm({ project }) {
           className="form-secondary"
           notifyOnSuccess
           formatData={(dirty, source) => ({
-            intent: "updateAccess",
             attributes: { ...source.attributes, ...dirty.attributes }
           })}
         >

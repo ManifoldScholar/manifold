@@ -7,32 +7,16 @@ import {
 } from "react-router";
 import { useTranslation } from "react-i18next";
 import { contentBlocksAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import ContentBlock from "backend/components/content-block";
 
 export const handle = { drawer: true };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(
-      contentBlocksAPI.create(params.id, data),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    return { success: true };
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => contentBlocksAPI.create(params.id, data)
+});
 
 export default function ContentBlockNew() {
   const { t } = useTranslation();

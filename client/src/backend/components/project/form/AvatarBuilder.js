@@ -1,185 +1,178 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import withConfirmation from "hoc/withConfirmation";
+import { useCallback, useContext } from "react";
+import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
-import setter from "global/components/form/setter";
-import GlobalForm from "global/components/form";
 import ColorPicker from "./ColorPicker";
 import UniqueIcons from "global/components/icon/unique";
 import classNames from "classnames";
-import { withTranslation } from "react-i18next";
+import { FormContext } from "helpers/contexts";
+import { brackets2dots } from "utils/string";
+import Dialog from "global/components/dialog";
+import useConfirmation from "hooks/useConfirmation";
 
-class AvatarBuilder extends Component {
-  static displayName = "Project.Form.AvatarBuilder";
+export default function AvatarBuilder({ wide, label: labelProp }) {
+  const { t } = useTranslation();
+  const { getModelValue, actions } = useContext(FormContext);
+  const { confirm, confirmation } = useConfirmation();
 
-  static propTypes = {
-    label: PropTypes.string,
-    confirm: PropTypes.func.isRequired,
-    errors: PropTypes.array,
-    getModelValue: PropTypes.func,
-    setOther: PropTypes.func,
-    wide: PropTypes.bool,
-    t: PropTypes.func
-  };
+  const setField = useCallback(
+    (value, name) => {
+      if (actions?.setValue) actions.setValue(brackets2dots(name), value);
+    },
+    [actions]
+  );
 
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
-  };
+  const removeAvatar = useCallback(() => {
+    setField(true, "attributes[removeAvatar]");
+    setField(null, "attributes[avatarStyles][smallSquare]");
+    setField(null, "attributes[avatar]");
+  }, [setField]);
 
-  onColorChange = color => {
-    if (
-      this.props.getModelValue("attributes[avatar][data]") ||
-      this.props.getModelValue("attributes[avatarStyles][smallSquare]")
-    ) {
-      return this.handleColorChange(color);
-    }
-    this.setAvatarColor(color);
-  };
+  const setAvatarImage = useCallback(
+    image => {
+      if (!image) return;
+      setField(false, "attributes[removeAvatar]");
+      setField(image, "attributes[avatar]");
+    },
+    [setField]
+  );
 
-  onUploadChange = image => {
-    if (!image) return this.removeAvatar();
-    this.setAvatarImage(image);
-  };
+  const setAvatarColor = useCallback(
+    color => {
+      if (!color) return;
+      setField(color.value, "attributes[avatarColor]");
+    },
+    [setField]
+  );
 
-  setAvatarImage(image) {
-    if (!image) return null;
-    this.props.setOther(false, "attributes[removeAvatar]");
-    this.props.setOther(image, "attributes[avatar]");
-  }
+  const displayLabel = labelProp || t("glossary.project_one");
 
-  setAvatarColor(color) {
-    if (!color) return null;
-    this.props.setOther(color.value, "attributes[avatarColor]");
-  }
+  const handleColorChange = useCallback(
+    color => {
+      confirm({
+        heading: t("modals.thumbnail_change", { label: displayLabel }),
+        message: t("modals.thumbnail_change_body"),
+        callback: closeDialog => {
+          removeAvatar();
+          setAvatarColor(color);
+          closeDialog();
+        }
+      });
+    },
+    [confirm, t, displayLabel, removeAvatar, setAvatarColor]
+  );
 
-  label() {
-    if (this.props.label) return this.props.label;
-    return this.props.t("glossary.project_one");
-  }
+  const onColorChange = useCallback(
+    color => {
+      if (
+        getModelValue("attributes[avatar][data]") ||
+        getModelValue("attributes[avatarStyles][smallSquare]")
+      ) {
+        return handleColorChange(color);
+      }
+      setAvatarColor(color);
+    },
+    [getModelValue, handleColorChange, setAvatarColor]
+  );
 
-  handleColorChange = color => {
-    const t = this.props.t;
-    const heading = t("modals.thumbnail_change", {
-      label: this.label()
-    });
-    const message = t("modals.thumbnail_change_body");
-    this.props.confirm(heading, message, () => {
-      this.removeAvatar();
-      this.setAvatarColor(color);
-    });
-  };
+  const onUploadChange = useCallback(
+    image => {
+      if (!image) return removeAvatar();
+      setAvatarImage(image);
+    },
+    [removeAvatar, setAvatarImage]
+  );
 
-  removeAvatar() {
-    this.props.setOther(true, "attributes[removeAvatar]");
-    this.props.setOther(null, "attributes[avatarStyles][smallSquare]");
-    this.props.setOther(null, "attributes[avatar]");
-  }
+  const image =
+    getModelValue("attributes[avatar][data]") ||
+    getModelValue("attributes[avatarStyles][smallSquare]");
 
-  renderCoverImage(image) {
-    if (!image) return null;
-    const title = this.props.getModelValue("attributes[title]");
-    return (
-      <div
-        role="img"
-        aria-label={this.props.t("projects.thumbnail.thumbnail_label", {
-          title
-        })}
-        className="preview"
-        style={{ backgroundImage: `url(${image})` }}
-      />
-    );
-  }
+  const uploadClasses = classNames({
+    section: true,
+    upload: true,
+    active: image
+  });
+  const pickerClasses = classNames({
+    section: true,
+    color: true,
+    active: !image
+  });
 
-  renderPlaceholderImage() {
-    if (!this.props.getModelValue("attributes[avatarColor]")) return null;
-    return (
-      <div className="preview">
-        <UniqueIcons.ProjectPlaceholderUnique
-          color={this.props.getModelValue("attributes[avatarColor]")}
-        />
-      </div>
-    );
-  }
-
-  render() {
-    const image =
-      this.props.getModelValue("attributes[avatar][data]") ||
-      this.props.getModelValue("attributes[avatarStyles][smallSquare]");
-
-    const uploadClasses = classNames({
-      section: true,
-      upload: true,
-      active: image
-    });
-    const pickerClasses = classNames({
-      section: true,
-      color: true,
-      active: !image
-    });
-    const t = this.props.t;
-
-    return (
-      <>
-        <GlobalForm.Errorable
-          className={this.props.wide ? "wide" : undefined}
-          name="attributes[avatar]"
-          errors={this.props.errors}
-          label="Avatar"
-        >
-          <div className="avatar-builder">
-            <Form.Label label={t("projects.thumbnail.thumbnail")} />
-            <div className="grid">
-              <div className="section current">
-                <span className="label" aria-hidden="true">
-                  {t("common.current")}
-                </span>
-                <span className="label screen-reader-text">
-                  {t("projects.thumbnail.current_thumbnail")}
-                </span>
-                {image
-                  ? this.renderCoverImage(image)
-                  : this.renderPlaceholderImage()}
-              </div>
-              <div className={pickerClasses}>
-                <span className="label" aria-hidden="true">
-                  {t("common.default")}
-                </span>
-                <ColorPicker
-                  onChange={this.onColorChange}
-                  value={this.props.getModelValue("attributes[avatarColor]")}
-                  label={t("projects.thumbnail.default_thumbnail")}
-                  {...this.props}
+  return (
+    <>
+      {confirmation && <Dialog.Confirm {...confirmation} />}
+      <Form.Errorable
+        className={wide ? "wide" : undefined}
+        name="attributes[avatar]"
+        label="Avatar"
+      >
+        <div className="avatar-builder">
+          <Form.Label label={t("projects.thumbnail.thumbnail")} />
+          <div className="grid">
+            <div className="section current">
+              <span className="label" aria-hidden="true">
+                {t("common.current")}
+              </span>
+              <span className="label screen-reader-text">
+                {t("projects.thumbnail.current_thumbnail")}
+              </span>
+              {image ? (
+                <div
+                  role="img"
+                  aria-label={t("projects.thumbnail.thumbnail_label", {
+                    title: getModelValue("attributes[title]")
+                  })}
+                  className="preview"
+                  style={{ backgroundImage: `url(${image})` }}
                 />
-              </div>
-              <div className={uploadClasses}>
-                <span className="label" aria-hidden="true">
-                  {t("common.custom")}
-                </span>
-                <Form.Upload
-                  set={this.onUploadChange}
-                  initialValue={this.props.getModelValue(
-                    "attributes[avatarStyles][smallSquare]"
-                  )}
-                  value={this.props.getModelValue("attributes[avatar]")}
-                  placeholder="cover"
-                  accepts="images"
-                  label={t("projects.thumbnail.custom_thumbnail")}
-                  labelClass="screen-reader-text"
-                  isBuilder
-                />
-              </div>
+              ) : (
+                getModelValue("attributes[avatarColor]") && (
+                  <div className="preview">
+                    <UniqueIcons.ProjectPlaceholderUnique
+                      color={getModelValue("attributes[avatarColor]")}
+                    />
+                  </div>
+                )
+              )}
+            </div>
+            <div className={pickerClasses}>
+              <span className="label" aria-hidden="true">
+                {t("common.default")}
+              </span>
+              <ColorPicker
+                onChange={onColorChange}
+                value={getModelValue("attributes[avatarColor]")}
+                label={t("projects.thumbnail.default_thumbnail")}
+                getModelValue={getModelValue}
+              />
+            </div>
+            <div className={uploadClasses}>
+              <span className="label" aria-hidden="true">
+                {t("common.custom")}
+              </span>
+              <Form.Upload
+                set={onUploadChange}
+                initialValue={getModelValue(
+                  "attributes[avatarStyles][smallSquare]"
+                )}
+                value={getModelValue("attributes[avatar]")}
+                placeholder="cover"
+                accepts="images"
+                label={t("projects.thumbnail.custom_thumbnail")}
+                labelClass="screen-reader-text"
+                isBuilder
+              />
             </div>
           </div>
-        </GlobalForm.Errorable>
-        {image && (
-          <GlobalForm.TextInput
-            label={t("projects.thumbnail.alt_label")}
-            name="attributes[avatarAltText]"
-          />
-        )}
-      </>
-    );
-  }
+        </div>
+      </Form.Errorable>
+      {image && (
+        <Form.TextInput
+          label={t("projects.thumbnail.alt_label")}
+          name="attributes[avatarAltText]"
+        />
+      )}
+    </>
+  );
 }
 
-export default withTranslation()(withConfirmation(setter(AvatarBuilder)));
+AvatarBuilder.displayName = "Project.Form.AvatarBuilder";

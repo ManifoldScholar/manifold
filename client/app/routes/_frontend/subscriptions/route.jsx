@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import { meAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import NotificationsForm from "frontend/components/preferences/NotificationsForm";
 import Form from "global/components/form";
 import { useAuthentication, useNotifications } from "hooks";
@@ -16,20 +15,9 @@ export const loader = async ({ request, context }) => {
   return null;
 };
 
-export async function action({ request, context }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(meAPI.update(data.attributes), context);
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-    return { success: true };
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data }) => meAPI.update(data.attributes)
+});
 
 export default function SubscriptionsRoute({ actionData }) {
   const { t } = useTranslation();

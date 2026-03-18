@@ -5,20 +5,12 @@ import Project from "backend/components/project";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { subjectsAPI, tagsAPI, journalsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import { useApiCallback } from "hooks";
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-  try {
-    const result = await queryApi(journalsAPI.update(params.id, data), context);
-    if (result?.errors) return { errors: result.errors };
-    return { success: true };
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => journalsAPI.update(params.id, data)
+});
 
 export default function JournalProperties() {
   const journal = useOutletContext();

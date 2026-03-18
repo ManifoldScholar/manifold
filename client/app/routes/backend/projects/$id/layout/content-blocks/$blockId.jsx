@@ -1,16 +1,10 @@
 import { useCallback } from "react";
-import {
-  useFetcher,
-  useNavigate,
-  useOutletContext,
-  redirect
-} from "react-router";
+import { useFetcher, useNavigate, useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
 import { contentBlocksAPI } from "api";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
@@ -27,24 +21,10 @@ export const loader = async ({ params, context, request }) => {
   });
 };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(
-      contentBlocksAPI.update(params.blockId, data),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    throw redirect(`/backend/projects/${params.id}/layout`);
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => contentBlocksAPI.update(params.blockId, data),
+  redirectTo: ({ params }) => `/backend/projects/${params.id}/layout`
+});
 
 export default function ContentBlockEdit({ loaderData: contentBlock }) {
   const { t } = useTranslation();

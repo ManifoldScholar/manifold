@@ -1,31 +1,17 @@
 import { useTranslation } from "react-i18next";
-import {
-  useOutletContext,
-  useParams,
-  useFetcher,
-  redirect
-} from "react-router";
+import { useOutletContext, useParams, useFetcher } from "react-router";
 import { collaboratorsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import Layout from "backend/components/layout";
 import AddCollaboratorForm from "backend/components/collaborator/AddForm";
 
 export const handle = { drawer: true };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-  try {
-    const result = await queryApi(
-      collaboratorsAPI.update("projects", params.id, data),
-      context
-    );
-    if (result?.errors) return { errors: result.errors };
-    throw redirect(`/backend/projects/${params.id}/collaborators`);
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) =>
+    collaboratorsAPI.update("projects", params.id, data),
+  redirectTo: ({ params }) => `/backend/projects/${params.id}/collaborators`
+});
 
 export default function ProjectCollaboratorEdit() {
   const { t } = useTranslation();

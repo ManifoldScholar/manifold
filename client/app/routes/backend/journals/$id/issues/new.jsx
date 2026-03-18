@@ -1,31 +1,16 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher, redirect, useParams } from "react-router";
+import { useFetcher, useParams } from "react-router";
 import { journalIssuesAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import Issue from "backend/components/issue";
 import Layout from "backend/components/layout";
 
 export const handle = { drawer: true };
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(
-      journalIssuesAPI.create(params.id, data),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    throw redirect(`/backend/journals/${params.id}/issues`);
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) => journalIssuesAPI.create(params.id, data),
+  redirectTo: ({ params }) => `/backend/journals/${params.id}/issues`
+});
 
 export default function JournalIssueNew() {
   const { t } = useTranslation();

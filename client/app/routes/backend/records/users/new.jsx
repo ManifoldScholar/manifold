@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher, redirect } from "react-router";
+import { useFetcher } from "react-router";
 import { usersAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import authorize from "app/routes/utility/loaders/authorize";
 import Layout from "backend/components/layout";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -12,24 +11,11 @@ export const loader = ({ request, context }) => {
   return authorize({ request, context, ability: "create", entity: "user" });
 };
 
-export async function action({ request, context }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(
-      usersAPI.create({ ...data, meta: { createdByAdmin: true } }),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    throw redirect(`/backend/records/users/${result.data.id}`);
-  } catch (error) {
-    return handleActionError(error);
-  }
-}
+export const action = formAction({
+  mutation: ({ data }) =>
+    usersAPI.create({ ...data, meta: { createdByAdmin: true } }),
+  redirectTo: ({ result }) => `/backend/records/users/${result.data.id}`
+});
 
 export default function UsersNewRoute() {
   const { t } = useTranslation();
