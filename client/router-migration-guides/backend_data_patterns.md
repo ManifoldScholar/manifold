@@ -89,7 +89,7 @@ Checks authorization in a loader. Calls `requireLogin` first, then uses the `Aut
 
 **Important:** Pass the actual entity object, not a type string like `["journal"]`. A type string checks "can this user update *any* journal"; passing the entity checks "can this user update *this* journal." Load the entity first, then authorize against it.
 
-**Important:** Don't duplicate `authorize` calls in child routes when the parent layout already checks the same ability. React Router runs parent loaders before children, so a child nested under `$id/_layout.jsx` (which authorizes `update` on the entity) doesn't need its own `authorize` call. Only add `authorize` in a child when it checks a *different* ability or entity.
+**Important:** Don't duplicate `authorize` calls in child routes when the parent layout already checks the same ability. React Router runs parent loaders before children, so a child nested under `$id/_layout.jsx` (which authorizes `update` on the entity) doesn't need its own `authorize` call. Only add `authorize` in a child when it checks a *different* ability or entity. If the child needs a different auth check but doesn't need to fetch the entity itself (because the parent already provides it via outlet context), use `useAuthorizeRoute` in the component instead — this avoids a redundant `loadEntity` call in the child loader just to run auth.
 
 **Default export** from `authorize.js`.
 
@@ -107,6 +107,45 @@ export const loader = async ({ params, request, context }) => {
   return project;
 };
 ```
+
+### `useAuthorizeRoute({ entity, ability, message? })` (client-side)
+
+Client-side authorization hook for sub-layouts that receive their entity from `useOutletContext()`. Throws a 403 `data()` response (caught by the backend `ErrorBoundary`) if the user lacks the required ability.
+
+**Default export** from `src/hooks/useAuthorizeRoute/index.js`. Also exported from `hooks`.
+
+Use this instead of `authorize()` in the loader when the parent layout already fetches the entity — it avoids a redundant server-side fetch just to run an auth check.
+
+```js
+import { Outlet, useOutletContext } from "react-router";
+import { useAuthorizeRoute } from "hooks";
+
+export default function ResourcesLayout() {
+  const project = useOutletContext();
+  useAuthorizeRoute({ entity: project, ability: "manageResources" });
+  return <Outlet context={project} />;
+}
+```
+
+With a custom error message (uses `useTranslation` in the caller):
+
+```js
+useAuthorizeRoute({
+  entity: project,
+  ability: "manageTexts",
+  message: t("errors.access_denied.authorization_admin_type", {
+    type: t("glossary.text_other")
+  })
+});
+```
+
+**When to use `authorize` (loader) vs `useAuthorizeRoute` (component):**
+
+| Scenario | Use |
+|---|---|
+| Route fetches its own entity in the loader | `authorize()` in the loader — you already have the entity |
+| Route gets entity from parent via outlet context | `useAuthorizeRoute()` in the component — avoids re-fetching |
+| Parent layout broadens auth for multiple child groups | `useAuthorizeRoute()` in each child group's sub-layout |
 
 ### `requireLogin(request, context)`
 
@@ -400,7 +439,7 @@ const resources = useLoaderCollection("resources");
 | `useFromStore("entityStore.entities.X")` | `useLoaderEntity` / `useLoaderCollection` / `useOutletContext` |
 | `useDispatch` + `flush(requestKey)` cleanup | Remove — loaders handle caching |
 | `useApiCallback` for mutations | Keep as-is, add `revalidate()` after mutation |
-| `Authorize` HOC wrapping route component | `authorize()` call in route loader |
+| `Authorize` HOC wrapping route component | `authorize()` in loader, or `useAuthorizeRoute()` in component if entity comes from parent context |
 | `withConfirmation` HOC | `useConfirmation` hook + `<Dialog.Confirm />` |
 | `RedirectToFirstMatch` hook | Index route with `throw redirect("child")` in loader |
 | `connectAndFetch` / `connect` (Redux) | Route loader + hooks |

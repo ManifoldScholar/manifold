@@ -1,15 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { useFetcher } from "react-router";
+import { useFetcher, useOutletContext } from "react-router";
 import FormContainer from "global/containers/form";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
 import PageHeader from "backend/components/layout/PageHeader";
-import { resourceCollectionsAPI, projectsAPI } from "api";
+import { resourceCollectionsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getResourceCollectionBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
-import authorize from "app/routes/utility/loaders/authorize";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 
 const formatData = data => ({
@@ -17,28 +15,15 @@ const formatData = data => ({
   attributes: mergeImageAltText(data?.attributes, "thumbnail")
 });
 
-export const loader = async ({ params, context, request }) => {
-  const project = await loadEntity({
-    context,
-    fetchFn: () => projectsAPI.show(params.id),
-    request
-  });
-  await authorize({
-    request,
-    context,
-    entity: project,
-    ability: "createResourceCollections"
-  });
-  return project;
-};
-
 export const action = formAction({
-  mutation: ({ data, params }) => resourceCollectionsAPI.create(params.id, data),
+  mutation: ({ data, params }) =>
+    resourceCollectionsAPI.create(params.id, data),
   redirectTo: ({ result }) =>
     `/backend/projects/resource-collection/${result.data.id}/properties`
 });
 
-export default function ResourceCollectionNew({ loaderData: project }) {
+export default function ResourceCollectionNew() {
+  const project = useOutletContext();
   const { t } = useTranslation();
   const fetcher = useFetcher();
 

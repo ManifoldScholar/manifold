@@ -22,6 +22,9 @@ type Matches = [{
   id: "routes/backend/projects/$id";
   module: typeof import("../../_layout.js");
 }, {
+  id: "routes/backend/projects/$id/resource-collections";
+  module: typeof import("../_layout.js");
+}, {
   id: "routes/backend/projects/$id/resource-collections/_index";
   module: typeof import("../_index.js");
 }];

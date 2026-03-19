@@ -19,7 +19,17 @@ export const loader = async ({ params, context, request }) => {
     fetchFn: () => projectsAPI.show(params.id),
     request
   });
-  await authorize({ request, context, entity: project, ability: "update" });
+  await authorize({
+    request,
+    context,
+    entity: project,
+    ability: [
+      "update",
+      "manageResources",
+      "manageResourceCollections",
+      "manageTexts"
+    ]
+  });
   return project;
 };
 

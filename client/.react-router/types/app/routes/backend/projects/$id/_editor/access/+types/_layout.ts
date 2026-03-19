@@ -2,31 +2,31 @@
 
 import type { GetInfo, GetAnnotations } from "react-router/internal";
 
-type Module = typeof import("../new.js")
+type Module = typeof import("../_layout.js")
 
 type Info = GetInfo<{
-  file: "routes/backend/projects/$id/resource-collections/new.jsx",
+  file: "routes/backend/projects/$id/_editor/access/_layout.jsx",
   module: Module
 }>
 
 type Matches = [{
   id: "root";
-  module: typeof import("../../../../../../root.js");
+  module: typeof import("../../../../../../../root.js");
 }, {
   id: "routes/backend";
-  module: typeof import("../../../../_layout.js");
+  module: typeof import("../../../../../_layout.js");
 }, {
   id: "routes/backend/projects";
-  module: typeof import("../../../_layout.js");
+  module: typeof import("../../../../_layout.js");
 }, {
   id: "routes/backend/projects/$id";
+  module: typeof import("../../../_layout.js");
+}, {
+  id: "routes/backend/projects/$id/_editor";
   module: typeof import("../../_layout.js");
 }, {
-  id: "routes/backend/projects/$id/resource-collections";
+  id: "routes/backend/projects/$id/_editor/access";
   module: typeof import("../_layout.js");
-}, {
-  id: "routes/backend/projects/$id/resource-collections/new";
-  module: typeof import("../new.js");
 }];
 
 type Annotations = GetAnnotations<Info & { module: Module, matches: Matches }, false>;

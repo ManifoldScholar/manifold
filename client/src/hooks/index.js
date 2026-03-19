@@ -5,6 +5,7 @@ export { default as useFilterState } from "./api/useFilterState";
 export { default as useListQueryParams } from "./useListQueryParams";
 
 export { default as useAuthentication } from "./useAuthentication";
+export { default as useAuthorizeRoute } from "./useAuthorizeRoute";
 
 export { default as useSettings } from "./useSettings";
 export { default as useLogout } from "./useLogout";

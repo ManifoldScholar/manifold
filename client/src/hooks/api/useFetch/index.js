@@ -1,6 +1,5 @@
-import { useEffect, useCallback, useState, useRef } from "react";
+import { useEffect, useCallback, useState, useRef, useId } from "react";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
-import { useUID } from "react-uid";
 import config from "config";
 import ch from "helpers/consoleHelpers";
 import isFunction from "lodash/isFunction";
@@ -18,8 +17,8 @@ export default function useFetch({
   dependencies = [],
   condition = true
 }) {
-  const uid = `fetch_${useUID()}`;
-  const [requestKey] = useState(options.requestKey ?? `fetch_${useUID()}`);
+  const uid = `fetch_${useId()}`;
+  const [requestKey] = useState(options.requestKey ?? `fetch_${useId()}`);
   const countRef = useRef(0);
   const [result, setResult] = useState(null);
   const [loaded, setLoaded] = useState(false);

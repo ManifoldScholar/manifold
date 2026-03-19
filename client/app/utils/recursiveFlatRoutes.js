@@ -382,7 +382,7 @@ function flatRoutesUniversal(appDirectory, routes, prefix = "routes") {
 
     const lastRouteSegment = config.id
       .replace(new RegExp(`^${prefix}/`), "")
-      .split(".")
+      .split(/[./]/)
       .pop();
     const isPathlessLayoutRoute =
       lastRouteSegment &&

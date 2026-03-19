@@ -1,4 +1,4 @@
-import { useId, useRef, useState, useEffect } from "react";
+import { cloneElement, useId, useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
@@ -36,7 +36,7 @@ export default function Tooltip({
 
   return children && content ? (
     <Styled.Wrapper>
-      {React.cloneElement(children, {
+      {cloneElement(children, {
         "aria-describedby": uid,
         onBlur: resetEscape,
         onMouseLeave: resetEscape

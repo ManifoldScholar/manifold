@@ -2,10 +2,10 @@
 
 import type { GetInfo, GetAnnotations } from "react-router/internal";
 
-type Module = typeof import("../new.js")
+type Module = typeof import("../properties.js")
 
 type Info = GetInfo<{
-  file: "routes/backend/projects/$id/resource-collections/new.jsx",
+  file: "routes/backend/projects/$id/_editor/properties.jsx",
   module: Module
 }>
 
@@ -22,11 +22,11 @@ type Matches = [{
   id: "routes/backend/projects/$id";
   module: typeof import("../../_layout.js");
 }, {
-  id: "routes/backend/projects/$id/resource-collections";
+  id: "routes/backend/projects/$id/_editor";
   module: typeof import("../_layout.js");
 }, {
-  id: "routes/backend/projects/$id/resource-collections/new";
-  module: typeof import("../new.js");
+  id: "routes/backend/projects/$id/_editor/properties";
+  module: typeof import("../properties.js");
 }];
 
 type Annotations = GetAnnotations<Info & { module: Module, matches: Matches }, false>;
