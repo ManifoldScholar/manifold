@@ -10643,7 +10643,6 @@ __metadata:
     react-helmet-async: "npm:^1"
     react-i18next: "npm:^15.x"
     react-json-tree: "npm:^0.x"
-    react-redux: "npm:^9.x"
     react-refresh: "npm:^0.17.0"
     react-router: "npm:7.10.1"
     react-router-dom: "npm:7.10.1"
@@ -12960,7 +12959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-redux@npm:8.x.x || 9.x.x, react-redux@npm:^9.2.0, react-redux@npm:^9.x":
+"react-redux@npm:8.x.x || 9.x.x, react-redux@npm:^9.2.0":
   version: 9.2.0
   resolution: "react-redux@npm:9.2.0"
   dependencies:
