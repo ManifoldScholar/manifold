@@ -50,7 +50,7 @@ export const MetaTwo = styled.div`
   margin-block: 8px;
   max-inline-size: 100%;
 
-  > * {
+  > *:not(style) {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

@@ -5,7 +5,7 @@ export const Group = styled.div`
   flex-wrap: wrap;
   gap: 40px;
 
-  > * {
+  > *:not(style) {
     flex-basis: 350px;
     display: flex;
     flex-direction: column;

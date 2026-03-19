@@ -164,7 +164,7 @@ export default `
       display: none;
     }
 
-    > * {
+    > *:not(style) {
       display: inline;
     }
   }

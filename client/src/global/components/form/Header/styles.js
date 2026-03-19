@@ -14,7 +14,7 @@ export const Header = styled.header`
     `
     margin-bottom: 0 !important;
 
-    > * {
+    > *:not(style) {
       display: block;
     }
 

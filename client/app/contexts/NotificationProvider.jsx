@@ -16,9 +16,7 @@ function reducer(state, action) {
       return { ...state, notifications };
     }
     case "REMOVE_ONE": {
-      const filtered = state.notifications.filter(
-        n => n.id !== action.payload
-      );
+      const filtered = state.notifications.filter(n => n.id !== action.payload);
       if (filtered.length === state.notifications.length) return state;
       return { ...state, notifications: filtered };
     }
@@ -83,7 +81,12 @@ export default function NotificationProvider({ children }) {
       removeNotification,
       removeNotifications
     }),
-    [state.notifications, addNotification, removeNotification, removeNotifications]
+    [
+      state.notifications,
+      addNotification,
+      removeNotification,
+      removeNotifications
+    ]
   );
 
   return (

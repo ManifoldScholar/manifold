@@ -336,7 +336,7 @@ export const roundedFormHeader = `
     --label-color: var(--color);
   }
 
-  > * {
+  > *:not(style) {
     ${utilityPrimary}
     display: table-cell;
     width: 100%;
