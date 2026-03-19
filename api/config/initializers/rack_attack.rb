@@ -39,7 +39,12 @@ ActiveSupport::Reloader.to_prepare do
 
     Rack::Attack.throttle throttler.ip_key, **throttler.options do |request|
       next unless request.env["manifold_env.throttled_category"] == throttler.category
-      request.env["action_dispatch.remote_ip"]&.calculate_ip || request.ip
+
+      ENV.fetch("PROXY_CLIENT_IP_HEADER", "").split(/,\s*/).map do |header|
+        request.get_header(header)
+      end.push(request.env["action_dispatch.remote_ip"].to_s, request.ip)
+         .compact_blank
+         .first
     end
   end
 

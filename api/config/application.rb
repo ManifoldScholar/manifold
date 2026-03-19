@@ -28,6 +28,7 @@ module Dotenv
   class Railtie < Rails::Railtie
     def load
       Dotenv.load(
+        root.join("./.env"),
         root.join("../.env.local"),
         root.join("../.env.#{Rails.env}"),
         root.join("../.env")
