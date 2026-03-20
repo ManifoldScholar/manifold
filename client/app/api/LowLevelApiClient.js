@@ -1,4 +1,4 @@
-import config from "../config";
+import config from "config";
 import qs from "qs";
 import humps from "utils/humps";
 

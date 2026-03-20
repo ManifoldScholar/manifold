@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { settingsAPI, testMailsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import { useApiCallback, useNotifications } from "hooks";
-import { requests } from "api";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
@@ -19,9 +18,7 @@ export default function SettingsEmailRoute() {
   const settings = useOutletContext();
   const fetcher = useFetcher();
 
-  const sendTestEmail = useApiCallback(testMailsAPI.create, {
-    requestKey: requests.beCreateTestMail
-  });
+  const sendTestEmail = useApiCallback(testMailsAPI.create);
 
   const { addNotification } = useNotifications();
 

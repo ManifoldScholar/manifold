@@ -111,18 +111,10 @@ export default defineConfig(({ mode }) => ({
       helpers: path.resolve(__dirname, "src/helpers"),
       hooks: path.resolve(__dirname, "src/hooks"),
       hoc: path.resolve(__dirname, "src/hoc"),
-      store: path.resolve(__dirname, "src/store"),
-      actions: path.resolve(__dirname, "src/actions"),
-      api: path.resolve(__dirname, "src/api"),
+      api: path.resolve(__dirname, "app/api"),
       utils: path.resolve(__dirname, "src/utils"),
       theme: path.resolve(__dirname, "src/theme"),
-      config: path.resolve(__dirname, "src/config"),
-      routes: path.resolve(__dirname, "src/routes"),
-      services: path.resolve(__dirname, "src/services"),
-      plugins: path.resolve(
-        __dirname,
-        "src/utils/plugins/missingPluginsManifest.js"
-      )
+      config: path.resolve(__dirname, "src/config")
     }
   },
   optimizeDeps: {
