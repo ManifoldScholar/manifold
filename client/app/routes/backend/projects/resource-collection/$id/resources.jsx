@@ -1,50 +1,89 @@
 import { useTranslation } from "react-i18next";
-import { useOutletContext } from "react-router-dom";
-import { resourceCollectionsAPI, projectsAPI, requests } from "api";
-import { useListQueryParams, useFetch, useApiCallback } from "hooks";
+import { useOutletContext, useRevalidator } from "react-router";
+import { resourceCollectionsAPI, projectsAPI } from "api";
+import { useListQueryParams, useApiCallback } from "hooks";
 import EntitiesList, {
   Search,
   ResourceRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { resourceFilters } from "hoc/withFilteredLists";
 import isNil from "lodash/isNil";
+import loadList from "app/routes/utility/loaders/loadList";
+import loadEntity from "app/routes/utility/loaders/loadEntity";
+import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import { INIT_FILTERS, dynamicSearchProps } from "./filters";
 
-function ResourceCollectionResourcesContainer({
-  entitiesListSearchProps,
-  entitiesListSearchParams
-}) {
-  const { t } = useTranslation();
-  const { resourceCollection } = useOutletContext();
+const LIST_OPTIONS = {
+  defaultFilters: INIT_FILTERS,
+  defaultPagination: { page: 1, perPage: 5 }
+};
 
-  const { project, resources: collectionResources } =
-    resourceCollection?.relationships ?? {};
-
-  const { pagination, filters, setFilters, searchProps } = useListQueryParams({
-    initSize: 5,
-    initFilters: entitiesListSearchParams.resources,
-    initSearchProps: resourceFilters.dynamicParams(
-      entitiesListSearchProps("resources"),
-      project
-    )
+export const loader = async ({ params, request, context }) => {
+  const resourceCollection = await loadEntity({
+    context,
+    fetchFn: () => resourceCollectionsAPI.show(params.id),
+    request
+  });
+  const projectId = resourceCollection.relationships.project.id;
+  const project = await loadEntity({
+    context,
+    fetchFn: () => projectsAPI.show(projectId),
+    request
   });
 
-  const { data: resources, meta, refresh } = useFetch({
-    request: [projectsAPI.resources, project.id, filters, pagination],
-    dependencies: [filters],
-    options: { requestKey: requests.beResources }
+  const list = await loadList({
+    request,
+    context,
+    fetchFn: (filters, pagination) =>
+      projectsAPI.resources(projectId, filters, pagination),
+    options: LIST_OPTIONS
+  });
+
+  return { ...list, projectId, project };
+};
+
+export const clientLoader = async ({ request, serverLoader }) => {
+  const serverData = await serverLoader();
+  const { projectId, project } = serverData;
+
+  const fetchFn = (filters, pagination) =>
+    projectsAPI.resources(projectId, filters, pagination);
+
+  const clientLoaderFn = createListClientLoader({
+    hydrateKey: "__rcResourcesHydrated",
+    fetchFn,
+    options: LIST_OPTIONS
+  });
+
+  const result = await clientLoaderFn({
+    request,
+    serverLoader: () => serverData
+  });
+  return { ...result, projectId, project };
+};
+
+export default function ResourceCollectionResources({ loaderData }) {
+  const { t } = useTranslation();
+  const resourceCollection = useOutletContext();
+  const { revalidate } = useRevalidator();
+
+  const { data: resources, meta, project } = loaderData;
+
+  const { resources: collectionResources } =
+    resourceCollection?.relationships ?? {};
+
+  const { searchProps, filters, setFilters } = useListQueryParams({
+    initSize: 5,
+    initFilters: INIT_FILTERS,
+    initSearchProps: dynamicSearchProps(project)
   });
 
   const updateCollection = useApiCallback(resourceCollectionsAPI.update);
 
-  if (!resourceCollection) return null;
-
   const updateResources = async data => {
-    const adjustedResources = data.map(r => {
-      return {
-        id: r.id,
-        type: r.type
-      };
-    });
+    const adjustedResources = data.map(r => ({
+      id: r.id,
+      type: r.type
+    }));
 
     const update = {
       type: "resourceCollections",
@@ -54,7 +93,7 @@ function ResourceCollectionResourcesContainer({
 
     await updateCollection(resourceCollection.id, update);
 
-    refresh();
+    revalidate();
   };
 
   const addRemoveResource = (event, resource) => {
@@ -118,10 +157,3 @@ function ResourceCollectionResourcesContainer({
     />
   ) : null;
 }
-
-export default withFilteredLists(ResourceCollectionResourcesContainer, {
-  resources: resourceFilters.defaultParams()
-});
-
-ResourceCollectionResourcesContainer.displayName =
-  "ResourceCollection.Resources";

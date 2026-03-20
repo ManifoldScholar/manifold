@@ -81,3 +81,191 @@ export const getJournalBreadcrumbs = (project, t, libraryDisabled) => {
     }
   ].filter(Boolean);
 };
+
+export const getResourceBreadcrumbs = (
+  resource,
+  project,
+  belongsToJournalIssue,
+  t
+) => {
+  /* eslint-disable no-nested-ternary */
+  const currentCrumb =
+    resource === "import"
+      ? [
+          {
+            to: `/backend/projects/${project.id}/resources/import`,
+            label: t("actions.import")
+          }
+        ]
+      : resource
+      ? [
+          {
+            to: `/backend/projects/resource/${resource.id}`,
+            label: resource.attributes.title
+          }
+        ]
+      : [
+          {
+            to: `/backend/projects/${project.id}/resources/new`,
+            label: t("common.new")
+          }
+        ];
+
+  return belongsToJournalIssue && project.relationships.journal
+    ? [
+        {
+          to: "/backend/journals",
+          label: t("glossary.journal_title_case_other")
+        },
+        {
+          to: `/backend/journals/${project.relationships.journal.id}`,
+          label: project.relationships.journal.attributes.titlePlaintext
+        },
+        {
+          to: `/backend/journals/${project.relationships.journal.id}/issues`,
+          label: t("glossary.issue_truncated_title_case_other")
+        },
+        {
+          to: `/backend/projects/${project.id}`,
+          label: project.relationships.journalIssue?.attributes.title
+        },
+        {
+          to: `/backend/projects/${project.id}/resources`,
+          label: t("glossary.resource_title_case_other")
+        },
+        ...currentCrumb
+      ]
+    : [
+        { to: null, label: t("glossary.project_title_case_other") },
+        {
+          to: "/backend/projects",
+          label: t("pages.projects_all")
+        },
+        {
+          to: `/backend/projects/${project.id}`,
+          label: project.attributes.titlePlaintext
+        },
+        {
+          to: `/backend/projects/${project.id}/resources`,
+          label: t("glossary.resource_title_case_other")
+        },
+        ...currentCrumb
+      ];
+};
+
+export const getTextBreadcrumbs = (text, belongsToJournalIssue, t) => {
+  const journal = belongsToJournalIssue
+    ? text.attributes.projectJournalNav
+    : {};
+
+  return belongsToJournalIssue
+    ? [
+        {
+          to: "/backend/journals",
+          label: t("glossary.journal_title_case_other")
+        },
+        {
+          to: `/backend/journals/${journal.id}`,
+          label: journal.label
+        },
+        {
+          to: `/backend/journals/${journal.id}/issues`,
+          label: t("glossary.issue_truncated_title_case_other")
+        },
+        {
+          to: `/backend/projects/${text.relationships.project.id}`,
+          label: text.relationships.project.attributes.titlePlaintext
+        },
+        {
+          to: `/backend/projects/${text.relationships.project.id}/texts`,
+          label: t("glossary.article_title_case_other")
+        },
+        {
+          to: `/backend/projects/text/${text.id}`,
+          label: text.attributes.titlePlaintext
+        }
+      ]
+    : [
+        {
+          to: null,
+          label: t("glossary.project_title_case_other")
+        },
+        {
+          to: "/backend/projects",
+          label: t("pages.projects_all")
+        },
+        {
+          to: `/backend/projects/${text.relationships.project.id}`,
+          label: text.relationships.project.attributes.titlePlaintext
+        },
+        {
+          to: `/backend/projects/${text.relationships.project.id}/texts`,
+          label: t("glossary.text_title_case_other")
+        },
+        {
+          to: `/backend/projects/text/${text.id}`,
+          label: text.attributes.titlePlaintext
+        }
+      ];
+};
+
+export const getResourceCollectionBreadcrumbs = (
+  resourceCollection,
+  project,
+  belongsToJournalIssue,
+  t
+) => {
+  const currentCrumb = resourceCollection
+    ? [
+        {
+          to: `/backend/projects/resource-collection/${resourceCollection.id}`,
+          label: resourceCollection.attributes.title
+        }
+      ]
+    : [
+        {
+          to: `/backend/projects/${project.id}/resource-collections/new`,
+          label: t("common.new")
+        }
+      ];
+  return belongsToJournalIssue && project.relationships.journal
+    ? [
+        {
+          to: "/backend/journals",
+          label: t("glossary.journal_title_case_other")
+        },
+        {
+          to: `/backend/journals/${project.relationships.journal.id}`,
+          label: project.relationships.journal.attributes.titlePlaintext
+        },
+        {
+          to: `/backend/journals/${project.relationships.journal.id}/issues`,
+          label: t("glossary.issue_truncated_title_case_other")
+        },
+        {
+          to: `/backend/projects/${project.id}`,
+          label: project.relationships.journalIssue.attributes.title
+        },
+        {
+          to: `/backend/projects/${project.id}/resource-collections`,
+          label: t("glossary.resource_collection_title_case_other")
+        },
+        ...currentCrumb
+      ]
+    : [
+        { to: null, label: t("glossary.project_title_case_other") },
+        {
+          to: "/backend/projects/all",
+          label: t("pages.projects_all")
+        },
+        {
+          to: `/backend/projects/${project.id}`,
+          label: project.attributes.titlePlaintext
+        },
+        {
+          to: `/backend/projects/${project.id}/resource-collections`,
+          label: t("glossary.resource_collection_title_case_other")
+        },
+        ...currentCrumb
+      ];
+};

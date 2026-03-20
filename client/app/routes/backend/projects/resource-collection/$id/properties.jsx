@@ -1,38 +1,33 @@
 import { useTranslation } from "react-i18next";
-import { useOutletContext } from "react-router-dom";
+import { useFetcher, useOutletContext } from "react-router";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { resourceCollectionsAPI } from "api";
+import formAction from "app/routes/utility/helpers/formAction";
+import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 
-const formatData = data => {
-  const { thumbnailAltText, thumbnail, ...rest } = data?.attributes ?? {};
+const formatData = data => ({
+  ...data,
+  attributes: mergeImageAltText(data?.attributes, "thumbnail")
+});
 
-  const finalThumbnailData =
-    typeof thumbnailAltText === "string"
-      ? { ...thumbnail, altText: thumbnailAltText }
-      : thumbnail;
+export const action = formAction({
+  mutation: ({ data, params }) => resourceCollectionsAPI.update(params.id, data)
+});
 
-  return {
-    ...data,
-    attributes: { thumbnail: finalThumbnailData, ...rest }
-  };
-};
-
-function ResourceCollectionPropertiesContainer() {
+export default function ResourceCollectionProperties() {
   const { t } = useTranslation();
-  const { resourceCollection } = useOutletContext();
-
-  if (!resourceCollection) return null;
+  const fetcher = useFetcher();
+  const resourceCollection = useOutletContext();
 
   return (
     <section>
       <FormContainer.Form
         model={resourceCollection}
-        name="backend-collection-update"
-        update={resourceCollectionsAPI.update}
-        create={resourceCollectionsAPI.create}
+        fetcher={fetcher}
         className="form-secondary"
         formatData={formatData}
+        notifyOnSuccess
       >
         <Form.TextInput
           label={t("resource_collections.forms.title_label")}
@@ -65,8 +60,3 @@ function ResourceCollectionPropertiesContainer() {
     </section>
   );
 }
-
-ResourceCollectionPropertiesContainer.displayName =
-  "ResourceCollection.Properties";
-
-export default ResourceCollectionPropertiesContainer;
