@@ -1,44 +1,58 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import ProjectCollection from "backend/components/project-collection";
-import { projectsAPI, collectionProjectsAPI, requests } from "api";
-import lh from "helpers/linkHandler";
+import { projectsAPI, collectionProjectsAPI } from "api";
 import Layout from "backend/components/layout";
 import EntitiesList, {
   Search,
   ProjectRow
 } from "backend/components/list/EntitiesList";
-import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import IconComposer from "global/components/utility/IconComposer";
-import { useOutletContext } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useListQueryParams, useFetch, useApiCallback } from "hooks";
+import { useListQueryParams, useApiCallback } from "hooks";
+import loadList from "app/routes/utility/loaders/loadList";
+import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
+
+export const handle = { drawer: true, manageProjects: true };
+
+export const loader = async ({ request, context }) => {
+  return loadList({
+    request,
+    context,
+    fetchFn: projectsAPI.index,
+    options: {
+      defaultFilters: INIT_FILTERS,
+      defaultPagination: { page: 1, perPage: 12 }
+    }
+  });
+};
+
+export const clientLoader = createListClientLoader({
+  hydrateKey: "__manageCollectionProjectsHydrated",
+  fetchFn: projectsAPI.index,
+  options: {
+    defaultFilters: INIT_FILTERS,
+    defaultPagination: { page: 1, perPage: 12 }
+  }
+});
 
 function ProjectCollectionManageProjects({
-  entitiesListSearchProps,
-  entitiesListSearchParams,
+  loaderData,
   setScreenReaderStatus
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { projectCollection } = useOutletContext() || {};
+  const { projectCollection, collectionProjects } = useOutletContext() || {};
+  const { revalidate } = useRevalidator();
 
-  const { pagination, filters, searchProps } = useListQueryParams({
+  const { data: projects, meta: projectsMeta } = loaderData;
+
+  const { searchProps } = useListQueryParams({
     initSize: 12,
-    initFilters: entitiesListSearchParams.projects,
-    initSearchProps: entitiesListSearchProps("projects")
-  });
-
-  const { data: collectionProjects, refresh } = useFetch({
-    request: [collectionProjectsAPI.index, projectCollection.id],
-    options: { requestKey: requests.beCollectionProjects }
-  });
-
-  const { data: projects, meta: projectsMeta } = useFetch({
-    request: [projectsAPI.index, filters, pagination],
-    options: { requestKey: requests.beProjects }
+    initFilters: INIT_FILTERS,
+    initSearchProps: INIT_SEARCH_PROPS
   });
 
   const addCollectionProject = useApiCallback(collectionProjectsAPI.create);
@@ -48,16 +62,12 @@ function ProjectCollectionManageProjects({
 
   const projectAddMessage = project => {
     const title = project.attributes.title;
-    return t("project_collections.add_message", {
-      title
-    });
+    return t("project_collections.add_message", { title });
   };
 
   const projectRemoveMessage = project => {
     const title = project.attributes.title;
-    return t("project_collections.remove_message", {
-      title
-    });
+    return t("project_collections.remove_message", { title });
   };
 
   const collectionProjectParams = project => {
@@ -89,7 +99,7 @@ function ProjectCollectionManageProjects({
       collectionProjectParams(project)
     );
 
-    refresh();
+    revalidate();
   };
 
   const handleProjectRemove = async project => {
@@ -100,7 +110,7 @@ function ProjectCollectionManageProjects({
 
     await removeCollectionProject(projectCollection.id, collectionProject.id);
 
-    refresh();
+    revalidate();
   };
 
   const projectCover = props => {
@@ -123,8 +133,7 @@ function ProjectCollectionManageProjects({
   };
 
   const handleClose = () => {
-    const url = lh.link("backendProjectCollection", projectCollection.id);
-    return navigate(url);
+    navigate(`/backend/projects/project-collections/${projectCollection.id}`);
   };
 
   const renderProjectCount = () => {
@@ -134,22 +143,15 @@ function ProjectCollectionManageProjects({
     return (
       <>
         <p className="list-total" aria-hidden>
-          {t("project_collections.added_count", {
-            total,
-            count
-          })}
+          {t("project_collections.added_count", { total, count })}
         </p>
-        {/* Better readout for screen readers */}
         <div
           role="status"
           aria-live="polite"
           aria-atomic
           className="screen-reader-text"
         >
-          {t("project_collections.added_count", {
-            total,
-            count
-          })}
+          {t("project_collections.added_count", { total, count })}
         </div>
       </>
     );
@@ -202,17 +204,4 @@ function ProjectCollectionManageProjects({
   );
 }
 
-ProjectCollectionManageProjects.displayName =
-  "ProjectCollection.ManageProjects";
-
-ProjectCollectionManageProjects.propTypes = {
-  entitiesListSearchProps: PropTypes.func.isRequired,
-  entitiesListSearchParams: PropTypes.object.isRequired
-};
-
-export default withFilteredLists(
-  withScreenReaderStatus(ProjectCollectionManageProjects),
-  {
-    projects: projectFilters()
-  }
-);
+export default withScreenReaderStatus(ProjectCollectionManageProjects);

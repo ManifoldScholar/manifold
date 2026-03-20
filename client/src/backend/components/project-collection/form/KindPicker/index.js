@@ -1,53 +1,38 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import Utility from "frontend/components/utility";
-import { withTranslation } from "react-i18next";
+import { useFormField } from "hooks";
 import * as Styled from "./styles";
 
-class KindPicker extends Component {
-  static displayName = "ProjectCollection.Form.KindPicker";
+export default function KindPicker() {
+  const { t } = useTranslation();
+  const { value: isSmart, set } = useFormField("attributes[smart]");
 
-  static propTypes = {
-    getModelValue: PropTypes.func,
-    setOther: PropTypes.func,
-    t: PropTypes.func
-  };
+  const handleSmartClick = () => set(!isSmart);
 
-  get isSmart() {
-    return this.props.getModelValue("attributes[smart]");
-  }
+  const selected = isSmart
+    ? t("project_collections.smart")
+    : t("project_collections.manual");
 
-  handleSmartClick = () => {
-    this.props.setOther(!this.isSmart, "attributes[smart]");
-  };
-
-  render() {
-    const t = this.props.t;
-    const selected = this.isSmart
-      ? t("project_collections.smart")
-      : t("project_collections.manual");
-
-    return (
-      <Styled.Wrapper>
-        <span className="screen-reader-text">
-          {t("project_collections.collection_kind_instructions")}
-        </span>
-        <Utility.Toggle
-          handleToggle={this.handleSmartClick}
-          selected={selected}
-          label="kind"
-          optionOne={{
-            label: t("project_collections.manual"),
-            icon: "BECollectionManual64"
-          }}
-          optionTwo={{
-            label: t("project_collections.smart"),
-            icon: "BECollectionSmart64"
-          }}
-        />
-      </Styled.Wrapper>
-    );
-  }
+  return (
+    <Styled.Wrapper>
+      <span className="screen-reader-text">
+        {t("project_collections.collection_kind_instructions")}
+      </span>
+      <Utility.Toggle
+        handleToggle={handleSmartClick}
+        selected={selected}
+        label="kind"
+        optionOne={{
+          label: t("project_collections.manual"),
+          icon: "BECollectionManual64"
+        }}
+        optionTwo={{
+          label: t("project_collections.smart"),
+          icon: "BECollectionSmart64"
+        }}
+      />
+    </Styled.Wrapper>
+  );
 }
 
-export default withTranslation()(KindPicker);
+KindPicker.displayName = "ProjectCollection.Form.KindPicker";

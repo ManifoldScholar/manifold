@@ -1,30 +1,41 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useRevalidator } from "react-router";
 import { useListFilters } from "hooks";
-import * as Styled from "./styles";
+import { projectCollectionsAPI } from "api";
 import { Toggle } from "global/components/form/Switch/ToggleOnly";
 import { useTranslation } from "react-i18next";
+import { useApiCallback } from "hooks";
+import * as Styled from "./styles";
 
-export default function ProjectCollectionSortBy({
-  projectCollection,
-  sortChangeHandler
-}) {
+export default function ProjectCollectionSortBy({ projectCollection }) {
   const { t } = useTranslation();
+  const { revalidate } = useRevalidator();
 
   const isManualSort = projectCollection.attributes.manuallySorted;
 
   const sortOrder = projectCollection.attributes.sortOrder;
+
+  const updateProjectCollection = useApiCallback(projectCollectionsAPI.update);
+
+  const handleSortOrderChange = async order => {
+    if (!projectCollection) return;
+    await updateProjectCollection(projectCollection.id, {
+      attributes: { sortOrder: order.sortBy }
+    });
+    revalidate();
+  };
 
   const handleClick = event => {
     event.preventDefault();
     const order = isManualSort
       ? { sortBy: "created_at_asc" }
       : { sortBy: "manual" };
-    return sortChangeHandler(order);
+    return handleSortOrderChange(order);
   };
 
   const filterProps = useListFilters({
-    onFilterChange: sortChangeHandler,
+    onFilterChange: handleSortOrderChange,
     initialState: { sortBy: sortOrder },
     options: { orderCollection: true }
   });
@@ -74,6 +85,5 @@ export default function ProjectCollectionSortBy({
 ProjectCollectionSortBy.displayName = "ProjectCollection.SortBy";
 
 ProjectCollectionSortBy.propTypes = {
-  projectCollection: PropTypes.object,
-  sortChangeHandler: PropTypes.func.isRequired
+  projectCollection: PropTypes.object
 };
