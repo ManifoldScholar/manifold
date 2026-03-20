@@ -1,4 +1,4 @@
-import { startTransition, StrictMode } from "react";
+import { startTransition } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { HydratedRouter } from "react-router/dom";
 import { CacheProvider } from "@emotion/react";
@@ -8,13 +8,14 @@ import "utils/i18n";
 
 const cache = createEmotionCache();
 
+// React-router docs may recommend using StrictMode here
+// @atlaskit/pragmatic-drag-and-drop is not compatible with StrictMode
+
 startTransition(() => {
   hydrateRoot(
     document,
-    <StrictMode>
-      <CacheProvider value={cache}>
-        <HydratedRouter />
-      </CacheProvider>
-    </StrictMode>
+    <CacheProvider value={cache}>
+      <HydratedRouter />
+    </CacheProvider>
   );
 });
