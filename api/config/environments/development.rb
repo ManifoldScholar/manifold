@@ -31,6 +31,7 @@ Rails.application.configure do
   Rails.application.configure do
     config.hosts << "www.example.com"
     config.hosts << "localhost"
+    config.hosts << "web"
     config.hosts << "manifold.lvh"
     config.hosts << "web.manifold.orb.local"
     config.hosts << "manifold-api.ngrok.io"
