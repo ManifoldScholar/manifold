@@ -1,35 +1,18 @@
-import React, { useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-
-import textTracksAPI from "api/resources/textTracks";
-import { useNavigate } from "react-router-dom";
 import Upload from "global/components/form/Upload";
 
-export default function AddEditForm({ resource, track, refresh }) {
+export default function AddEditForm({ resource, track, fetcher }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const isEdit = !!track;
-
-  const onSuccess = useCallback(() => {
-    if (refresh) refresh();
-    navigate(`/backend/projects/resource/${resource?.id}/tracks`);
-  }, [refresh, navigate, resource?.id]);
 
   return (
     <FormContainer.Form
       model={track}
-      name={
-        isEdit
-          ? "backend-resource-track-update"
-          : "backend-resource-track-create"
-      }
+      fetcher={fetcher}
       className="form-secondary"
-      onSuccess={onSuccess}
-      create={attrs => textTracksAPI.create(resource.id, attrs)}
-      update={(id, attrs) => textTracksAPI.update(resource.id, id, attrs)}
     >
       <Form.Select
         label={t("records.tracks.kind")}
@@ -79,7 +62,7 @@ export default function AddEditForm({ resource, track, refresh }) {
       <Form.DrawerButtons
         showCancel
         cancelUrl={`/backend/projects/resource/${resource?.id}/tracks`}
-        submitLabel={isEdit ? t("actions.save") : t("actions.add")}
+        submitLabel={track ? t("actions.save") : t("actions.add")}
       />
     </FormContainer.Form>
   );
@@ -88,5 +71,5 @@ export default function AddEditForm({ resource, track, refresh }) {
 AddEditForm.propTypes = {
   resource: PropTypes.object.isRequired,
   track: PropTypes.object,
-  refresh: PropTypes.func.isRequired
+  fetcher: PropTypes.object.isRequired
 };

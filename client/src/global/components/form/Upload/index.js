@@ -1,4 +1,4 @@
-import { useCallback, useId } from "react";
+import { useCallback, useId, useRef } from "react";
 import PropTypes from "prop-types";
 import { useFormField } from "hooks";
 import Base from "./Base";
@@ -68,6 +68,7 @@ const UPLOAD_TYPES = {
 export function FormUpload({
   name,
   remove,
+  readFrom,
   accepts: acceptsKey = "any",
   layout = "square",
   isUserAvatar,
@@ -75,7 +76,9 @@ export function FormUpload({
   ...baseProps
 }) {
   const id = useId();
-  const { value, initialValue, set, errors } = useFormField(name);
+  const { value, set, errors } = useFormField(name, { readFrom });
+  const initialValueRef = useRef(value);
+  const initialValue = initialValueRef.current;
 
   const updateValue = useCallback(
     state => {
@@ -146,6 +149,7 @@ FormUpload.propTypes = {
   ]),
   placeholder: PropTypes.string,
   remove: PropTypes.string,
+  readFrom: PropTypes.string,
   accepts: PropTypes.string,
   fileNameFrom: PropTypes.string,
   instructionsSingleLine: PropTypes.bool,

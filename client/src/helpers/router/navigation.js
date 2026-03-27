@@ -441,23 +441,22 @@ class Navigation {
   });
 
   static resource = memoize(resource => {
+    const id = resource.id;
     const externalVideo = !!resource.attributes.externalId;
     const project = resource.relationships.project;
     const kind = resource.attributes.kind;
     const out = [
       {
         label: "titles.properties",
-        path: id => `/backend/projects/resource/${id}/properties`,
+        path: `/backend/projects/resource/${id}/properties`,
         entity: project,
-        ability: "update",
-        id: resource.id
+        ability: "update"
       },
       {
         label: "titles.metadata",
-        path: id => `/backend/projects/resource/${id}/metadata`,
+        path: `/backend/projects/resource/${id}/metadata`,
         entity: project,
-        ability: "manageResources",
-        id: resource.id
+        ability: "manageResources"
       }
     ];
     if (
@@ -468,19 +467,17 @@ class Navigation {
     ) {
       out.splice(1, 0, {
         label: "titles.variants",
-        path: id => `/backend/projects/resource/${id}/variants`,
+        path: `/backend/projects/resource/${id}/variants`,
         entity: project,
-        ability: "update",
-        id: resource.id
+        ability: "update"
       });
     }
     if (kind === "audio" || (kind === "video" && !externalVideo)) {
       out.push({
         label: "titles.tracks",
-        path: id => `/backend/projects/resource/${id}/tracks`,
+        path: `/backend/projects/resource/${id}/tracks`,
         entity: project,
-        ability: "update",
-        id: resource.id
+        ability: "update"
       });
     }
     return out;

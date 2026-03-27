@@ -35,17 +35,22 @@ export default function useFormField(name, options = {}) {
     controlledOnChange,
     controlledErrors,
     beforeOnChange,
-    transformValue
+    transformValue,
+    readFrom
   } = options;
   const context = useContext(FormContext);
   const path = useMemo(() => brackets2dots(name), [name]);
+  const readPath = useMemo(() => (readFrom ? brackets2dots(readFrom) : null), [
+    readFrom
+  ]);
 
   const value = useMemo(() => {
     if (!context) return undefined;
     const { dirtyModel, sourceModel } = context;
     if (has(dirtyModel, path)) return get(dirtyModel, path);
-    return get(sourceModel, path);
-  }, [context, path]);
+    const sourcePath = readPath || path;
+    return get(sourceModel, sourcePath);
+  }, [context, path, readPath]);
 
   const set = useCallback(
     // Optional otherName to set a different field's value
