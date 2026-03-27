@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useOutletContext } from "react-router-dom";
+import { useParams, useOutletContext, useRevalidator } from "react-router";
 import NavigationBlocker from "global/components/router/NavigationBlocker";
 import Heading from "./Heading";
 import Actions from "./Actions";
@@ -12,13 +12,14 @@ import useFetchIngestionMessages from "./useFetchIngestionMessages";
 export default function IngestContainer() {
   const { ingestionId } = useParams();
   const { t } = useTranslation();
-  const { sectionIngest, refresh } = useOutletContext() || {};
+  const { sectionIngest } = useOutletContext() || {};
+  const { revalidate } = useRevalidator();
 
   useEffect(() => {
     return () => {
-      if (refresh) refresh();
+      revalidate();
     };
-  }, [refresh]);
+  }, [revalidate]);
 
   const [shouldFetch, setShouldFetch] = useState(true);
 

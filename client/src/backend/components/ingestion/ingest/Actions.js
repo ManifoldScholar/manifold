@@ -1,9 +1,8 @@
 import { useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router";
 import IconComposer from "global/components/utility/IconComposer";
-import lh from "helpers/linkHandler";
 
 export default function IngestionActions({
   onStart,
@@ -32,24 +31,20 @@ export default function IngestionActions({
 
   const editUrl = () => {
     if (isSection) {
-      return lh.link("backendTextSectionIngestNewEdit", id, ingestionId);
+      return `/backend/projects/text/${id}/sections/ingestions/${ingestionId}/edit`;
     }
 
-    const path = pathname.includes("texts")
-      ? "backendProjectTextsIngestionEdit"
-      : "backendTextIngestionEdit";
-
-    return lh.link(path, id, ingestionId);
+    return pathname.includes("texts")
+      ? `/backend/projects/${id}/texts/ingestions/${ingestionId}/edit`
+      : `/backend/projects/text/${id}/ingestions/${ingestionId}/edit`;
   };
 
   const closeUrl = () => {
-    if (isSection) return lh.link("backendTextSections", id);
+    if (isSection) return `/backend/projects/text/${id}/sections`;
 
-    const path = pathname.includes("texts")
-      ? "backendProjectTexts"
-      : "backendTextIngestionsNew";
-
-    return lh.link(path, id);
+    return pathname.includes("texts")
+      ? `/backend/projects/${id}/texts`
+      : `/backend/projects/text/${id}/ingestions/new`;
   };
 
   const onCancel = () => {
