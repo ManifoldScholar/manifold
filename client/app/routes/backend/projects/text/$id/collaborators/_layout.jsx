@@ -1,24 +1,26 @@
 import { useTranslation } from "react-i18next";
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import { collaboratorsAPI, textsAPI } from "api";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
-import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
   ContributorRow
 } from "backend/components/list/EntitiesList";
 import Authorization from "helpers/authorization";
+import Dialog from "global/components/dialog";
 import { useApiCallback } from "hooks";
-import withConfirmation from "hoc/withConfirmation";
+import useConfirmation from "hooks/useConfirmation";
 
 const authorization = new Authorization();
 
-function TextCollaboratorsContainer({ confirm }) {
+export default function TextCollaboratorsLayout() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { text, refresh } = useOutletContext() || {};
+  const text = useOutletContext();
+  const { revalidate } = useRevalidator();
+  const { confirm, confirmation } = useConfirmation();
 
-  const closeUrl = lh.link("backendTextCollaborators", text?.id);
+  const closeUrl = `/backend/projects/text/${text.id}/collaborators`;
 
   const canUpdate = authorization.authorizeAbility({
     entity: text?.relationships?.project,
@@ -29,12 +31,14 @@ function TextCollaboratorsContainer({ confirm }) {
   const updateText = useApiCallback(textsAPI.update);
 
   const onDelete = makerId => {
-    const heading = t("modals.remove_contributor");
-    if (confirm)
-      confirm(heading, null, async () => {
+    confirm({
+      heading: t("modals.remove_contributor"),
+      callback: async closeDialog => {
         await destroyCollaborator("texts", text.id, { maker: makerId });
-        if (refresh) refresh();
-      });
+        closeDialog();
+        revalidate();
+      }
+    });
   };
 
   const onReorder = async (_change, flattenedCollaborators) => {
@@ -53,22 +57,18 @@ function TextCollaboratorsContainer({ confirm }) {
     });
 
     if (errors) {
-      if (refresh) refresh();
+      revalidate();
     }
   };
 
   const onEdit = id => {
-    navigate(lh.link("backendTextCollaboratorEdit", text.id, id));
+    navigate(`/backend/projects/text/${text.id}/collaborators/${id}`);
   };
-
-  if (!text) return null;
 
   return (
     <section>
-      <OutletWithDrawer
-        drawerProps={{ closeUrl }}
-        context={{ refresh, textId: text.id }}
-      />
+      {confirmation && <Dialog.Confirm {...confirmation} />}
+      <OutletWithDrawer drawerProps={{ closeUrl }} context={text} />
       <EntitiesList
         className="full-width"
         title={t("projects.contributors_header")}
@@ -83,7 +83,7 @@ function TextCollaboratorsContainer({ confirm }) {
           canUpdate
             ? [
                 <Button
-                  path={lh.link("backendTextCollaboratorNew", text.id)}
+                  path={`/backend/projects/text/${text.id}/collaborators/new`}
                   type="add"
                   text={t("projects.add_contributor_label")}
                 />
@@ -94,7 +94,3 @@ function TextCollaboratorsContainer({ confirm }) {
     </section>
   );
 }
-
-TextCollaboratorsContainer.displayName = "Text.Collaborators";
-
-export default withConfirmation(TextCollaboratorsContainer);
