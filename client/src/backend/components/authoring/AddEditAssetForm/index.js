@@ -2,29 +2,17 @@ import { useCallback } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
+import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 import { useTranslation } from "react-i18next";
 
-import { ingestionSourcesAPI } from "api";
-import { useNavigate } from "react-router-dom";
 import * as Styled from "./styles";
 
-export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
+export default function AddEditAssetForm({ assetId, textId, asset, fetcher }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const formatData = useCallback(
     data => {
-      const { attachmentAltText, attachment, ...rest } = data?.attributes ?? {};
-
-      const finalAttachmentData =
-        typeof attachmentAltText === "string"
-          ? { ...attachment, altText: attachmentAltText }
-          : attachment;
-
-      const attributes = {
-        ...{ attachment: finalAttachmentData },
-        ...rest
-      };
+      const attributes = mergeImageAltText(data?.attributes, "attachment");
 
       return asset
         ? { attributes }
@@ -33,7 +21,7 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
               ...attributes,
               sourceIdentifier:
                 asset?.sourceIdentifier ??
-                attachment?.filename ??
+                attributes.attachment?.filename ??
                 "filename missing",
               kind: asset?.kind ?? "publication_resource"
             }
@@ -41,11 +29,6 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
     },
     [asset]
   );
-
-  const onSuccess = useCallback(() => {
-    if (refresh) refresh();
-    navigate(`/backend/projects/text/${textId}/assets`);
-  }, [navigate, textId, refresh]);
 
   const src = `/api/proxy/ingestion_sources/${assetId}`;
 
@@ -56,18 +39,11 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
     }
   };
 
-  const createAsset = data => {
-    return ingestionSourcesAPI.create(textId, data);
-  };
-
   return (assetId && asset) || (!assetId && !asset) ? (
     <FormContainer.Form
       model={asset}
-      name={assetId ? "be-asset-update" : "be-asset-create"}
-      create={createAsset}
-      update={ingestionSourcesAPI.update}
+      fetcher={fetcher}
       formatData={formatData}
-      onSuccess={onSuccess}
       className="form-secondary"
     >
       <Form.TextInput
@@ -103,13 +79,12 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
         label={t("texts.assets.upload_label")}
         instructions={t("texts.assets.upload_instructions")}
       >
-        {/* Alt text field hidden per request until available for use in the editor. -LD */}
         <Form.Upload
           readFrom="attributes[attachmentStyles][small]"
           name="attributes[attachment]"
           required={!asset}
-          // altTextName={"attributes[attachmentAltText]"}
-          // altTextLabel={t("texts.assets.alt_label")}
+          altTextName={"attributes[attachmentAltText]"}
+          altTextLabel={t("texts.assets.alt_label")}
           accepts="any"
         />
       </Form.FieldGroup>
