@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import includes from "lodash/includes";
 import debounce from "lodash/debounce";
 import ResourceSlide from "frontend/components/resource-slide";
-import { resourceCollectionsAPI, requests } from "api";
+import { resourceCollectionsAPI } from "api";
 import { entityStoreActions } from "actions";
 import DirectionalButton from "./DirectionalButton";
 import capitalize from "lodash/capitalize";
@@ -148,7 +148,7 @@ class ResourceSlideshow extends PureComponent {
         {},
         { number: page, size: this.props.pagination.perPage }
       );
-      this.props.dispatch(request(fetch, requests.feSlideshow));
+      this.props.dispatch(request(fetch));
     }
   };
 

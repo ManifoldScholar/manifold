@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { readingGroupsAPI, requests } from "api";
+import { readingGroupsAPI } from "api";
 import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
@@ -22,8 +22,7 @@ function PublicReadingGroupsListContainer({ route }) {
   });
 
   const { data: readingGroups, meta, refresh } = useFetch({
-    request: [readingGroupsAPI.publicIndex, filters, pagination],
-    options: { requestKey: requests.fePublicReadingGroups }
+    request: [readingGroupsAPI.publicIndex, filters, pagination]
   });
 
   const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;

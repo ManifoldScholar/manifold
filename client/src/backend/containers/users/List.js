@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { usersAPI, bulkDeleteAPI, requests } from "api";
+import { usersAPI, bulkDeleteAPI } from "api";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
@@ -37,8 +37,7 @@ function UsersListContainer({
   });
 
   const { data: users, meta: usersMeta, refresh } = useFetch({
-    request: [usersAPI.index, filters, pagination],
-    options: { requestKey: requests.beUsers }
+    request: [usersAPI.index, filters, pagination]
   });
 
   const {

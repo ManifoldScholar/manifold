@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { projectsAPI, requests } from "api";
+import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
@@ -33,8 +33,7 @@ function ProjectResourceCollectionsListContainer({
         project.id,
         filters,
         pagination
-      ],
-      options: { requestKey: requests.beResourceCollections }
+      ]
     }
   );
 

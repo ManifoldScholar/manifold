@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { projectsAPI, requests } from "api";
+import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import EntitiesList, { LogRow } from "backend/components/list/EntitiesList";
 import { useListQueryParams, useFetch } from "hooks";
@@ -14,8 +14,7 @@ export default function LogContainer({ project }) {
   const { pagination, filters } = useListQueryParams({ initSize: 10 });
 
   const { data: versions, meta: versionsMeta } = useFetch({
-    request: [projectsAPI.versions, project.id, filters, pagination],
-    options: { requestKey: requests.beVersions }
+    request: [projectsAPI.versions, project.id, filters, pagination]
   });
 
   if (!versions || !versionsMeta) return null;
