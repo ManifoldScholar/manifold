@@ -29,13 +29,11 @@ export default function ProjectExportations({
   });
 
   const { data: projectExportations, meta, refresh } = useFetch({
-    request: [projectsAPI.project_exportations, project.id, null, pagination],
-    options: { requestKey: requests.beProjectExportations }
+    request: [projectsAPI.project_exportations, project.id, null, pagination]
   });
 
   const { data: exportTargets } = useFetch({
-    request: [exportTargetsAPI.index],
-    options: { requestKey: requests.beExportTargets }
+    request: [exportTargetsAPI.index]
   });
 
   const exportTargetSelectOptions = () => {
@@ -59,12 +57,11 @@ export default function ProjectExportations({
     return targets;
   };
 
-  const deleteExportation = useApiCallback(projectExportationsAPI.destroy, {
-    refreshes: requests.beProjectExportations
-  });
+  const deleteExportation = useApiCallback(projectExportationsAPI.destroy);
 
   const onDelete = projectExportation => {
     deleteExportation(projectExportation.id);
+    refresh();
   };
 
   const active = false;

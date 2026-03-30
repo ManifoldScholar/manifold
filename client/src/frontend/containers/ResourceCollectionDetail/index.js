@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { resourceCollectionsAPI, requests } from "api";
+import { resourceCollectionsAPI } from "api";
 import { entityStoreActions as store } from "actions";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -32,8 +32,7 @@ export default function ResourceCollectionDetailContainer({
 
   const { resourceCollectionId } = useParams();
   const { data: collection } = useFetch({
-    request: [resourceCollectionsAPI.show, resourceCollectionId],
-    options: { requestKey: requests.feResourceCollection }
+    request: [resourceCollectionsAPI.show, resourceCollectionId]
   });
 
   const { pagination, filters, setFilters } = useListQueryParams({
@@ -46,12 +45,10 @@ export default function ResourceCollectionDetailContainer({
       resourceCollectionId,
       filters,
       pagination
-    ],
-    options: { requestKey: requests.feCollectionResources }
+    ]
   });
   const { data: slideshowResources, meta: slideshowMeta } = useFetch({
-    request: [resourceCollectionsAPI.collectionResources, resourceCollectionId],
-    options: { requestKey: requests.feSlideshow }
+    request: [resourceCollectionsAPI.collectionResources, resourceCollectionId]
   });
 
   const [annotationsPagination, setAnnotationsPage] = usePaginationState(1, 5);

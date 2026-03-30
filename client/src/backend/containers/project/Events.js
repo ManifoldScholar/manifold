@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import withConfirmation from "hoc/withConfirmation";
-import { projectsAPI, eventsAPI, requests } from "api";
+import { projectsAPI, eventsAPI } from "api";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Search,
@@ -28,8 +28,7 @@ function ProjectEventsContainer({
   });
 
   const { data: events, meta: eventsMeta, refresh } = useFetch({
-    request: [projectsAPI.events, project.id, filters, pagination],
-    options: { requestKey: requests.beEvents }
+    request: [projectsAPI.events, project.id, filters, pagination]
   });
 
   const destroyEvent = useApiCallback(eventsAPI.destroy);
