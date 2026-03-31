@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState, useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import * as Styled from "./styles";
 
@@ -14,6 +14,11 @@ const Fallback = ({ error }) => {
 };
 
 export default function Loader(props) {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
+
+  if (!isMounted) return null;
+
   return (
     <ErrorBoundary FallbackComponent={Fallback}>
       <Suspense fallback={null}>

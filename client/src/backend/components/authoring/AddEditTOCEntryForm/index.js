@@ -1,69 +1,17 @@
-import React, { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 
-import { textsAPI } from "api";
-import { useNavigate } from "react-router-dom";
-import {
-  formatTreeData,
-  formatTOCData
-} from "backend/components/authoring/TOCList/treeHelpers";
-
 export default function AddEditTOCEntryForm({
   entry,
-  tree,
-  toc,
   textId,
   sections,
-  setTree
+  fetcher,
+  formatData
 }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const formatDataOnSubmit = useCallback(
-    (data, model) => {
-      if (entry) {
-        const update = {
-          ...entry,
-          data: {
-            sectionId: data.sectionId ?? model.sectionId,
-            title: data.label ?? model.label,
-            anchor: data.anchor ?? model.anchor
-          }
-        };
-
-        const newTree = {
-          ...tree,
-          items: { ...tree.items, [entry.id]: update }
-        };
-        const newToc = formatTOCData(newTree);
-        return {
-          attributes: { toc: newToc }
-        };
-      }
-
-      const newEntry = {
-        id: data.sectionId,
-        label: data.label,
-        anchor: data.anchor
-      };
-      const newToc = [...toc, newEntry];
-      return {
-        attributes: { toc: newToc }
-      };
-    },
-    [toc, entry, tree]
-  );
-
-  const onSuccess = useCallback(
-    (_, res) => {
-      setTree(formatTreeData(res.data?.attributes?.toc));
-      navigate(`/backend/projects/text/${textId}/contents`);
-    },
-    [textId, navigate, setTree]
-  );
 
   const sectionOptions = sections.map(s => ({
     value: s.id,
@@ -83,11 +31,9 @@ export default function AddEditTOCEntryForm({
   return (
     <FormContainer.Form
       model={model}
-      name="be-text-update"
       className="form-secondary"
-      update={textsAPI.update}
-      formatData={formatDataOnSubmit}
-      onSuccess={onSuccess}
+      fetcher={fetcher}
+      formatData={formatData}
       groupErrors
     >
       <Form.TextInput
@@ -136,7 +82,6 @@ AddEditTOCEntryForm.propTypes = {
   textId: PropTypes.string.isRequired,
   entry: PropTypes.object,
   sections: PropTypes.array,
-  toc: PropTypes.array.isRequired,
-  setTree: PropTypes.func.isRequired,
-  tree: PropTypes.object
+  fetcher: PropTypes.object.isRequired,
+  formatData: PropTypes.func
 };

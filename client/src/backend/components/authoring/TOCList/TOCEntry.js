@@ -21,7 +21,7 @@ export default function TOCEntry({
 }) {
   const { t } = useTranslation();
 
-  const editUrl = `/backend/projects/text/${textId}/contents/${entry.id}/edit`;
+  const editUrl = `/backend/projects/text/${textId}/contents/${entry.id}`;
 
   const collapseExpandHandler = entry.isExpanded ? onCollapse : onExpand;
   const icon = entry.isExpanded ? "DisclosureUp32" : "DisclosureDown32";

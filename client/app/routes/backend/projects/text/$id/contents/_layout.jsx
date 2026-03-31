@@ -1,34 +1,33 @@
 import { useState, useEffect } from "react";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import { Link, useOutletContext } from "react-router-dom";
-import lh from "helpers/linkHandler";
+import { Link, useOutletContext } from "react-router";
 import IconComposer from "global/components/utility/IconComposer";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import TOCList from "backend/components/authoring/TOCList";
 import { formatTreeData } from "backend/components/authoring/TOCList/treeHelpers";
 import { textsAPI } from "api";
 import { useApiCallback } from "hooks";
-import withConfirmation from "hoc/withConfirmation";
+import useConfirmation from "hooks/useConfirmation";
+import Dialog from "global/components/dialog";
 import * as Styled from "./styles";
 
-function TextTOCContainer({ confirm }) {
+export default function TextTOCLayout() {
   const { t } = useTranslation();
-  const { text } = useOutletContext() || {};
+  const text = useOutletContext();
 
-  // tree + setTree are here in the container because child route drawers need to call setTree after save to update the dnd tree. This could instead be implemented as a useEffect in List, but it made more sense to me to call it in the onSuccess callback in the forms. -LD
   const [tocAsDndTree, setTree] = useState(
     formatTreeData(text?.attributes?.toc)
   );
   const [error, setError] = useState(null);
 
-  // Update tree when text changes
   useEffect(() => {
     if (text?.attributes?.toc) {
       setTree(formatTreeData(text.attributes.toc));
     }
   }, [text?.attributes?.toc]);
 
+  const { confirm, confirmation } = useConfirmation();
   const updateText = useApiCallback(textsAPI.update);
 
   const onAutoGenerate = async () => {
@@ -46,15 +45,21 @@ function TextTOCContainer({ confirm }) {
   const confirmAutoGenerate = () => {
     const heading = t("modals.auto_generate_toc");
     const message = t("modals.auto_generate_toc_body");
-    if (confirm) confirm(heading, message, onAutoGenerate);
+    confirm({
+      heading,
+      message,
+      callback: async closeDialog => {
+        await onAutoGenerate();
+        closeDialog();
+      }
+    });
   };
 
-  if (!text) return null;
-
-  const closeUrl = lh.link("backendTextTOC", text.id);
+  const closeUrl = `/backend/projects/text/${text.id}/contents`;
 
   return (
     <section>
+      {confirmation && <Dialog.Confirm {...confirmation} />}
       <OutletWithDrawer
         drawerProps={{
           lockScroll: "always",
@@ -64,7 +69,6 @@ function TextTOCContainer({ confirm }) {
         }}
         context={{
           tree: tocAsDndTree,
-          setTree,
           textId: text.id,
           sections: text.attributes?.sectionsMap,
           toc: text.attributes?.toc
@@ -75,7 +79,6 @@ function TextTOCContainer({ confirm }) {
         doNotWarn
         groupErrors
         model={text}
-        name="backend-text-sections"
       >
         <Form.Header
           label={t("texts.toc_header")}
@@ -83,7 +86,7 @@ function TextTOCContainer({ confirm }) {
         />
         <div className="entity-list__button-set-flex full-width">
           <Link
-            to={lh.link("backendTextTOCEntryNew", text.id)}
+            to={`/backend/projects/text/${text.id}/contents/new`}
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
@@ -127,7 +130,3 @@ function TextTOCContainer({ confirm }) {
     </section>
   );
 }
-
-TextTOCContainer.displayName = "Text.TOC";
-
-export default withConfirmation(TextTOCContainer);
