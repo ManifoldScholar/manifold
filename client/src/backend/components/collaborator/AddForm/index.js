@@ -155,8 +155,7 @@ export default function AddCollaboratorForm({
 AddCollaboratorForm.displayName = "Collaborator.AddEdit.Form";
 
 AddCollaboratorForm.propTypes = {
-  entityId: PropTypes.string.isRequired,
-  entityType: PropTypes.oneOf(["Project", "Text"]).isRequired,
   closeUrl: PropTypes.string.isRequired,
-  fetcher: PropTypes.object.isRequired
+  fetcher: PropTypes.object.isRequired,
+  collaborator: PropTypes.object
 };
