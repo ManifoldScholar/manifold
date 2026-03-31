@@ -9,7 +9,6 @@ import entityStoreMiddleware from "./middleware/entityStoreMiddleware";
 import currentUserMiddleware from "./middleware/currentUserMiddleware";
 import notificationMiddleware from "./middleware/notificationMiddleware";
 import apiErrorMiddleware from "./middleware/apiErrorMiddleware";
-import websocketMiddleware from "./middleware/websocketMiddleware";
 import pluginMiddleware from "./middleware/pluginMiddleware";
 import updatePersistentUi from "./subscriptions/updatePersistentUi";
 import updateCurrentUser from "./subscriptions/updateCurrentUser";
@@ -27,7 +26,6 @@ export default function createStore(data) {
   middleware.push(thunkMiddleware);
   middleware.push(pluginMiddleware);
   middleware.push(promiseMiddleware);
-  middleware.push(websocketMiddleware);
   middleware.push(notificationMiddleware);
 
   let finalCreateStore;

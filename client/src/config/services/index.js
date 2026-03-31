@@ -22,15 +22,11 @@ const browserApiUrl =
 const serverApiUrl =
   process.env.CLIENT_SERVER_API_URL ||
   `${secure ? "https" : "http"}://${domain}`;
-const browserCableUrl =
-  process.env.CLIENT_BROWSER_API_CABLE_URL ||
-  `${secure ? "wss" : "ws"}://${domain}/cable`;
 const url =
   process.env.CLIENT_URL || secure ? `https://${domain}` : `http://${domain}`;
 
 const serviceConfig = {
   api: isBrowser ? browserApiUrl : serverApiUrl,
-  cable: browserCableUrl,
   client: {
     domain,
     url
