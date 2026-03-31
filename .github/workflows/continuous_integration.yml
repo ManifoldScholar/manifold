@@ -3,9 +3,14 @@ name: Continuous Integration
 on:
   push:
     branches:
+      - main
       - master
   pull_request:
-
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
 env:
   BROWSERSLIST_IGNORE_OLD_DATA: beQuiet
   DISABLE_SPRING: yes
@@ -21,7 +26,7 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - run: corepack enable
       - uses: ./.github/actions/setup-node
@@ -41,7 +46,7 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - uses: ./.github/actions/setup-ruby
 
@@ -65,7 +70,7 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - uses: ./.github/actions/setup-ruby
 

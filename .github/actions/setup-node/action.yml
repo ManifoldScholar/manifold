@@ -2,8 +2,12 @@ name: "Setup Node.js"
 runs:
   using: "composite"
   steps:
-    - name: "Install Node 20.x"
-      uses: actions/setup-node@v4
+    - name: "Enable Corepack"
+      shell: bash
+      run: corepack enable
+
+    - name: "Install Node"
+      uses: actions/setup-node@v6
       with:
         node-version-file: "./client/package.json"
         cache: "yarn"
