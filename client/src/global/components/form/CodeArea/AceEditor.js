@@ -11,9 +11,9 @@ import "ace-builds/src-noconflict/mode-html";
 import "./darkTheme";
 import "./lightTheme";
 
-import cssWorkerUrl from "ace-builds/src-noconflict/worker-css";
-import htmlWorkerUrl from "ace-builds/src-noconflict/worker-html";
-import jsWorkerUrl from "ace-builds/src-noconflict/worker-javascript";
+import cssWorkerUrl from "ace-builds/src-noconflict/worker-css?url";
+import htmlWorkerUrl from "ace-builds/src-noconflict/worker-html?url";
+import jsWorkerUrl from "ace-builds/src-noconflict/worker-javascript?url";
 
 config.setModuleUrl("ace/mode/css_worker", cssWorkerUrl);
 config.setModuleUrl("ace/mode/html_worker", htmlWorkerUrl);
