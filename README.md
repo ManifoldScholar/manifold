@@ -35,6 +35,76 @@ The [University of Minnesota Press](https://www.upress.umn.edu) in partnership w
 
 Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](https://manifoldscholar.github.io/manifold-docusaurus/blog). Early adopters of Manifold are encouraged to download the source code, experiment, and submit fixes and features in the form of pull requests.
 
+## Local Development
+
+Manifold uses Docker Compose to run all services locally. The API (Rails), background worker,
+PostgreSQL, and MinIO (S3-compatible storage) all run in containers. The client application can
+run in Docker as well, though most frontend developers prefer to run it locally.
+
+### Prerequisites
+
+* [Docker](https://docs.docker.com/get-docker/) (with Docker Compose)
+* Node.js 22.17.1 and [Yarn](https://yarnpkg.com/) (only if running the client locally)
+
+### Getting Started
+
+From the project root:
+
+```sh
+docker compose up
+```
+
+This starts all services including the client. Once running:
+
+* **Client**: http://localhost:13100
+* **API**: http://localhost:13110
+* **MinIO Console**: http://localhost:13116
+
+### Running the Client Locally
+
+Frontend developers often run the client outside of Docker for a faster feedback loop. To do
+this, start the backend services without the client container:
+
+```sh
+docker compose up -d --scale client=0
+```
+
+To avoid passing `--scale client=0` every time, create a `docker-compose.override.yml` file in
+the project root:
+
+```yaml
+services:
+  client:
+    deploy:
+      replicas: 0
+```
+
+Then start the backend services normally:
+
+```sh
+docker compose up -d
+```
+
+With the backend running, install dependencies and start the client:
+
+```sh
+cp docker/local.env .env
+cd client
+corepack enable
+yarn
+yarn watch
+```
+
+The client will be available at http://localhost:13100.
+
+### Running Specs
+
+The `spec` container is available for running the API test suite:
+
+```sh
+docker compose exec spec bin/rspec
+```
+
 ## About Manifold
 
 #### License
