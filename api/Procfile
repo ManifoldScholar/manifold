@@ -1,3 +1,0 @@
-api: ./bin/puma
-worker: ./bin/good_job start --probe-port 7001
-zhong: ./bin/zhong zhong.rb
