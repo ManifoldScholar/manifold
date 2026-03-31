@@ -1,66 +1,24 @@
 import { useTranslation } from "react-i18next";
-import { useParams, useNavigate, useOutletContext } from "react-router-dom";
-import { stylesheetsAPI, requests, sectionsAPI } from "api";
+import { sectionsAPI } from "api";
 import Form from "global/components/form";
-import lh from "helpers/linkHandler";
 import FormContainer from "global/containers/form";
 import Collapse from "global/components/Collapse";
 import SectionFields from "./SectionFields";
-import { useFetch } from "hooks";
 
-const DEFAULT_STYLESHEET = {
-  attributes: {},
-  relationships: { textSections: [] }
-};
-
-export default function StylesheetEditContainer() {
+export default function StylesheetForm({
+  stylesheet,
+  textId,
+  fetcher,
+  cancelUrl
+}) {
   const { t } = useTranslation();
-  const { id, stylesheet: stylesheetId } = useParams();
-  const navigate = useNavigate();
-  const { text } = useOutletContext() || {};
-
-  const isNew = !stylesheetId;
-  const isEdit = !isNew;
-
-  const { data: fetchedStylesheet } = useFetch({
-    request: [stylesheetsAPI.show, stylesheetId],
-    options: { requestKey: requests.beStylesheetShow },
-    condition: !!stylesheetId
-  });
-
-  const stylesheet = isNew ? DEFAULT_STYLESHEET : fetchedStylesheet;
-
-  const redirectToStylesheet = newStylesheet => {
-    const path = lh.link(
-      "BackendTextStylesheetEdit",
-      text?.id,
-      newStylesheet.id
-    );
-    navigate(path);
-  };
-
-  const create = attributes => {
-    return stylesheetsAPI.create(id, attributes);
-  };
-
-  const fetchTextSections = () => {
-    return sectionsAPI.forText(text?.id);
-  };
-
-  if (isEdit && !stylesheet) return null;
-
-  const name = isNew
-    ? requests.beStylesheetCreate
-    : requests.beStylesheetUpdate;
+  const fetchTextSections = () => sectionsAPI.forText(textId);
 
   return (
     <section>
       <FormContainer.Form
         model={stylesheet}
-        name={name}
-        update={stylesheetsAPI.update}
-        create={create}
-        onSuccess={redirectToStylesheet}
+        fetcher={fetcher}
         className="form-secondary"
       >
         {getModelValue => (
@@ -105,7 +63,7 @@ export default function StylesheetEditContainer() {
               />
             </Collapse>
             <Form.Save
-              cancelRoute={lh.link("backendTextStyles", id)}
+              cancelRoute={cancelUrl}
               text={t("texts.stylesheets.edit.save")}
             />
           </>
@@ -114,5 +72,3 @@ export default function StylesheetEditContainer() {
     </section>
   );
 }
-
-StylesheetEditContainer.displayName = "Stylesheet.Edit";

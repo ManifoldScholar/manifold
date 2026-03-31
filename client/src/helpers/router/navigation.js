@@ -537,69 +537,61 @@ class Navigation {
   });
 
   static text = memoize(text => {
+    const id = text.id;
     return [
       {
         label: "titles.analytics",
-        path: id => `/backend/projects/text/${id}/analytics`,
+        path: `/backend/projects/text/${id}/analytics`,
         entity: text,
-        ability: "update",
-        id: text.id
+        ability: "update"
       },
       {
         label: "titles.properties",
-        path: id => `/backend/projects/text/${id}/properties`,
+        path: `/backend/projects/text/${id}/properties`,
         entity: text,
-        ability: "update",
-        id: text.id
+        ability: "update"
       },
       {
         label: "titles.collaborators",
-        path: id => `/backend/projects/text/${id}/collaborators`,
+        path: `/backend/projects/text/${id}/collaborators`,
         entity: text.relationships.project,
-        ability: "updateMakers",
-        id: text.id
+        ability: "updateMakers"
       },
       {
         label: "titles.sections",
-        path: id => `/backend/projects/text/${id}/sections`,
+        path: `/backend/projects/text/${id}/sections`,
         entity: text,
-        ability: "update",
-        id: text.id
+        ability: "update"
       },
       {
         label: "titles.toc",
-        path: id => `/backend/projects/text/${id}/contents`,
+        path: `/backend/projects/text/${id}/contents`,
         entity: text,
-        ability: "update",
-        id: text.id
+        ability: "update"
       },
       {
         label: "titles.assets",
-        path: id => `/backend/projects/text/${id}/assets`,
+        path: `/backend/projects/text/${id}/assets`,
         entity: text,
-        ability: "update",
-        id: text.id
+        ability: "update"
       },
       {
         label: "titles.metadata",
-        path: id => `/backend/projects/text/${id}/metadata`,
+        path: `/backend/projects/text/${id}/metadata`,
         entity: text,
-        ability: "update",
-        id: text.id
+        ability: "update"
       },
       {
         label: "titles.styles",
-        path: id => `/backend/projects/text/${id}/styles`,
+        path: `/backend/projects/text/${id}/styles`,
         entity: text,
-        ability: "update",
-        id: text.id
+        ability: "update"
       },
       {
         label: "titles.reingest",
-        path: id => `/backend/projects/text/${id}/ingestions/new`,
+        path: `/backend/projects/text/${id}/ingestions/new`,
         entity: text,
-        ability: "update",
-        id: text.id
+        ability: "update"
       }
     ];
   });

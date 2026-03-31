@@ -1,41 +1,31 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useOutletContext, Outlet, useMatches } from "react-router-dom";
+import { Link, useOutletContext, useRevalidator } from "react-router";
 import classNames from "classnames";
-import lh from "helpers/linkHandler";
-import { stylesheetsAPI, requests } from "api";
+import { stylesheetsAPI } from "api";
 import IconComposer from "global/components/utility/IconComposer";
 import Stylesheet from "backend/components/stylesheet";
-import withConfirmation from "hoc/withConfirmation";
+import Dialog from "global/components/dialog";
 import { useApiCallback } from "hooks";
+import useConfirmation from "hooks/useConfirmation";
 
-function TextStylesContainer({ confirm }) {
+export default function TextStylesIndex() {
   const { t } = useTranslation();
-  const { text, refresh } = useOutletContext() || {};
-  const matches = useMatches();
+  const text = useOutletContext();
+  const { revalidate } = useRevalidator();
+  const { confirm, confirmation } = useConfirmation();
 
-  const currentMatch = matches[matches.length - 1];
-  const isChildRouteActive = currentMatch?.handle?.name !== "backendTextStyles";
-
-  const destroyStylesheet = useApiCallback(stylesheetsAPI.destroy, {
-    requestKey: requests.beStylesheetDestroy
-  });
-
-  const updateStylesheet = useApiCallback(stylesheetsAPI.update, {
-    requestKey: requests.beStylesheetUpdate,
-    notificationScope: "none"
-  });
-
-  useEffect(() => {
-    if (refresh) refresh();
-  }, [refresh]);
+  const destroyStylesheet = useApiCallback(stylesheetsAPI.destroy);
+  const updateStylesheet = useApiCallback(stylesheetsAPI.update);
 
   const confirmDestroy = stylesheet => {
-    const heading = t("modals.delete_text");
-    const message = t("modals.delete_text_body");
-    confirm(heading, message, async () => {
-      await destroyStylesheet(stylesheet.id);
-      if (refresh) refresh();
+    confirm({
+      heading: t("modals.delete_text"),
+      message: t("modals.delete_text_body"),
+      callback: async closeDialog => {
+        await destroyStylesheet(stylesheet.id);
+        closeDialog();
+        revalidate();
+      }
     });
   };
 
@@ -43,14 +33,15 @@ function TextStylesContainer({ confirm }) {
     const changes = {
       attributes: { position: newPos }
     };
-    await updateStylesheet(stylesheet.id, changes);
-    if (refresh) refresh();
+    const { errors } = await updateStylesheet(stylesheet.id, changes);
+
+    if (errors) {
+      revalidate();
+    }
     if (callback && typeof callback === "function") {
       callback();
     }
   };
-
-  if (!text) return null;
 
   const stylesheets = text.relationships.stylesheets;
   const callbacks = {
@@ -58,12 +49,9 @@ function TextStylesContainer({ confirm }) {
     confirmDestroy
   };
 
-  if (isChildRouteActive) {
-    return <Outlet context={{ text, refresh }} />;
-  }
-
   return (
     <section className="text-category-list-secondary">
+      {confirmation && <Dialog.Confirm {...confirmation} />}
       <div className="instructional-copy">
         <p>{t("texts.stylesheets.instructions")}</p>
       </div>
@@ -74,7 +62,7 @@ function TextStylesContainer({ confirm }) {
       >
         <Link
           className="entity-list__button button-lozenge-secondary"
-          to={lh.link("BackendTextStylesheetNew", text.id)}
+          to={`/backend/projects/text/${text.id}/styles/new`}
         >
           <IconComposer
             icon="circlePlus32"
@@ -96,7 +84,3 @@ function TextStylesContainer({ confirm }) {
     </section>
   );
 }
-
-TextStylesContainer.displayName = "Text.Styles";
-
-export default withConfirmation(TextStylesContainer);

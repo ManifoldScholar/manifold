@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback } from "react";
+import { lazy, Suspense, useCallback, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useFormField } from "hooks";
 
@@ -13,6 +13,9 @@ export default function FormCodeArea({
   mode
 }) {
   const { value, set, errors } = useFormField(name);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
 
   const onChange = useCallback(
     newValue => {
@@ -20,6 +23,8 @@ export default function FormCodeArea({
     },
     [set]
   );
+
+  if (!isMounted) return null;
 
   return (
     <Suspense fallback={null}>
