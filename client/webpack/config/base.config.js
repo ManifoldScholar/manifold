@@ -118,7 +118,8 @@ export default function buildWebpackConfiguration(
     },
 
     watchOptions: {
-      ignored: /node_modules/
+      ignored: /node_modules/,
+      poll: process.env.WEBPACK_WATCH_POLL ? 500 : false
     },
 
     stats: {
