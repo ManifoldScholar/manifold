@@ -29,7 +29,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    env_file: docker/manifold.env
+    env_file:
+      - ./docker/api/api.env
     logging:
       driver: json-file
       options:
@@ -57,7 +58,7 @@ services:
     volumes:
       - minio-storage:/data
     env_file:
-      - docker/minio.env
+      - ./docker/minio/minio.env
     command: server --console-address ":9001" /data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
@@ -71,8 +72,8 @@ services:
       minio:
         condition: service_healthy
     env_file:
-      - docker/manifold.env
-      - docker/minio.env
+      - ./docker/api/api.env
+      - ./docker/minio/minio.env
     restart: "no"
     volumes:
       - ./docker/minio/client:/root/.mc
@@ -87,7 +88,7 @@ services:
       - "13101:13101" # SSR
       - "13102:13102" # Webpack dev server
     env_file:
-      - ./docker/local.env
+      - ./docker/client/client.env
     restart: unless-stopped
     volumes:
       - ./client:/srv/app
@@ -105,7 +106,7 @@ services:
       minio-client:
         condition: service_completed_successfully
     env_file:
-      - ./docker/manifold.env
+      - ./docker/api/api.env
     environment:
       PUMA_APPLICATION: API
     healthcheck:
@@ -141,7 +142,7 @@ services:
       web:
         condition: service_healthy
     env_file:
-      - ./docker/manifold.env
+      - ./docker/api/api.env
     logging:
       driver: json-file
       options:
@@ -172,7 +173,7 @@ services:
       migrations:
         condition: service_completed_successfully
     env_file:
-      - ./docker/manifold.env
+      - ./docker/api/api.env
     environment:
       - RACK_ENV=test
       - RAILS_ENV=test
