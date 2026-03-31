@@ -11,7 +11,7 @@
   "keywords": [],
   "main": "bin/server.js",
   "scripts": {
-    "clean": "rimraf ${BUILD_IN}dist",
+    "clean": "rimraf ${BUILD_IN:-}dist",
     "build": "npm-run-all build:prod",
     "build:prod": "NODE_ENV=production npm-run-all _build",
     "build:dev": "NODE_ENV=development npm-run-all _build",
@@ -30,14 +30,14 @@
     "_build:ssr": "IS_BUILD=true node --max_old_space_size=4096 -r @babel/register node_modules/.bin/webpack --color --mode production --config ./webpack/config/ssr-prd.config.js",
     "_build:ssr:rescue": "IS_BUILD=true NODE_ENV=production node --max_old_space_size=4096 -r @babel/register node_modules/.bin/webpack --color --config ./webpack/config/ssr-rescue.config.js",
     "_build:browser-config": "IS_BUILD=true node --max_old_space_size=4096 -r @babel/register ./script/build-browser-config.js",
-    "_serve:ssr": "node ${BUILD_IN}dist/manifold/ssr/manifold-client-ssr.js",
+    "_serve:ssr": "node ${BUILD_IN:-}dist/manifold/ssr/manifold-client-ssr.js",
     "_serve:ssr:rescue": "yarn _wait:builds && npm-run-all --parallel _serve:ssr:rescue:server _serve:ssr:rescue:render",
-    "_serve:ssr:rescue:server": "node ${BUILD_IN}dist/manifold/ssr/manifold-client-ssr-rescue.js",
-    "_serve:ssr:rescue:render": "SSR_RESCUE=TRUE nodemon -q ${BUILD_IN}dist/manifold/ssr/manifold-client-ssr.js --watch ${BUILD_IN}dist/manifold/ssr/manifold-client-ssr.js",
+    "_serve:ssr:rescue:server": "node ${BUILD_IN:-}dist/manifold/ssr/manifold-client-ssr-rescue.js",
+    "_serve:ssr:rescue:render": "SSR_RESCUE=TRUE nodemon -q ${BUILD_IN:-}dist/manifold/ssr/manifold-client-ssr.js --watch ${BUILD_IN:-}dist/manifold/ssr/manifold-client-ssr.js",
     "_watch:banner": "node ./script/banner.js",
     "_watch:ssr": "IS_BUILD=true node -r @babel/register node_modules/.bin/webpack --color --watch --config ./webpack/config/ssr-dev.config.js",
     "_watch:browser": "node -r @babel/register node_modules/.bin/webpack serve --color --config ./webpack/config/browser-dev.config.js",
-    "_wait:builds": "node script/wait.js --name=\"SSR\" --base=${BUILD_IN}dist/manifold/ --on=ssr/manifold-client-ssr-rescue.js,ssr/manifold-client-ssr.js,manifest.json"
+    "_wait:builds": "node script/wait.js --name=\"SSR\" --base=${BUILD_IN:-}dist/manifold/ --on=ssr/manifold-client-ssr-rescue.js,ssr/manifold-client-ssr.js,manifest.json"
   },
   "lint-staged": {
     "*.js": "yarn fix",
