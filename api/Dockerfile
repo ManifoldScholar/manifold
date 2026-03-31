@@ -13,9 +13,9 @@ ENV BUNDLE_PATH=/bundle \
     RAILS_MAX_THREADS=16 \
     WORKER_COUNT=0
 
-COPY docker/install_node_16.sh /usr/local/src/install_node_16.sh
+COPY docker/install_node.sh /usr/local/src/install_node.sh
 
-RUN bash /usr/local/src/install_node_16.sh
+RUN bash /usr/local/src/install_node.sh
 
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
     build-essential \

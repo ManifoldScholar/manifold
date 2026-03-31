@@ -41,7 +41,7 @@ const browserConfig = {
     client: {
       overlay: false // use react-refresh overlay instead
     },
-    host: process.env.DOMAIN || "localhost",
+    host: process.env.WEBPACK_DEV_HOST || process.env.DOMAIN || "localhost",
     allowedHosts,
     port: environment.devPort,
     headers: {
