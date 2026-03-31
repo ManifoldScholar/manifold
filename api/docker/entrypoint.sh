@@ -10,6 +10,7 @@ gem install --no-document bundler:2.2.19
 bundle check || bundle install
 
 bundle binstubs --all --path="$BUNDLE_BIN"
+bundle binstubs bundler --force --path="$BUNDLE_BIN"
 
 # Then exec the container's main process
 exec "$@"
