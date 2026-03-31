@@ -88,7 +88,7 @@ docker compose up -d
 With the backend running, install dependencies and start the client:
 
 ```sh
-cp docker/local.env .env
+cp docker/client/client.env .env
 cd client
 corepack enable
 yarn
