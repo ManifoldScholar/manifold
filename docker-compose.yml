@@ -1,3 +1,5 @@
+name: manifold
+
 services:
   postgres:
     image: postgres:13-alpine

@@ -97,6 +97,25 @@ yarn watch
 
 The client will be available at http://localhost:13100.
 
+### Working Inside Containers
+
+Helper scripts are provided for running commands and opening shells inside the running
+containers.
+
+Run a one-off command:
+
+```sh
+./api/bin/run bundle exec rails c
+./client/bin/run yarn test
+```
+
+Open an interactive shell:
+
+```sh
+./api/bin/shell
+./client/bin/shell
+```
+
 ### Running Specs
 
 The `spec` container is available for running the API test suite:
