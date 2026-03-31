@@ -1,7 +1,0 @@
-#!/bin/bash
-set -e
-cd "$(dirname "$0")/.."
-
-./script/update
-cd api &>/dev/null
-bin/rails console
