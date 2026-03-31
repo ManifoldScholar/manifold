@@ -158,6 +158,23 @@ export default function FormPicker({
   const optionsRef = useRef(null);
   const abortControllerRef = useRef(null);
 
+  // Ref for option formatting functions so they don't trigger re-fetches
+  const optionFormattersRef = useRef({
+    optionToLabel,
+    optionToValue,
+    optionToInstructions,
+    optionToString
+  });
+
+  useEffect(() => {
+    optionFormattersRef.current = {
+      optionToLabel,
+      optionToValue,
+      optionToInstructions,
+      optionToString
+    };
+  }, [optionToLabel, optionToValue, optionToInstructions, optionToString]);
+
   // Screen reader status state
   const [srMessage, setSrMessage] = useState(null);
   const srTimeoutRef = useRef(null);
@@ -173,12 +190,7 @@ export default function FormPicker({
   // Options state
   const [optionsState, setOptionsState] = useState(() => {
     if (!isFunction(optionsProp)) {
-      return deriveStateFromOptions(optionsProp, {
-        optionToLabel,
-        optionToValue,
-        optionToInstructions,
-        optionToString
-      });
+      return deriveStateFromOptions(optionsProp, optionFormattersRef.current);
     }
     return { options: [], valueMap: {}, labelMap: {} };
   });
@@ -210,45 +222,24 @@ export default function FormPicker({
     queryApi(request, null, controller.signal).then(results => {
       if (controller.signal.aborted) return;
       const resources = results.data;
-      const newState = deriveStateFromOptions(resources, {
-        optionToLabel,
-        optionToValue,
-        optionToInstructions,
-        optionToString
-      });
+      const newState = deriveStateFromOptions(
+        resources,
+        optionFormattersRef.current
+      );
       setOptionsState(newState);
     });
-  }, [
-    canFetchOptions,
-    optionsProp,
-    optionToLabel,
-    optionToValue,
-    optionToInstructions,
-    optionToString
-  ]);
+  }, [canFetchOptions, optionsProp]);
 
   // Update options when prop changes
   useEffect(() => {
     if (!isFunction(optionsProp)) {
       setOptionsState(
-        deriveStateFromOptions(optionsProp, {
-          optionToLabel,
-          optionToValue,
-          optionToInstructions,
-          optionToString
-        })
+        deriveStateFromOptions(optionsProp, optionFormattersRef.current)
       );
     } else {
       fetchOptions();
     }
-  }, [
-    optionsProp,
-    optionToLabel,
-    optionToValue,
-    optionToInstructions,
-    optionToString,
-    fetchOptions
-  ]);
+  }, [optionsProp, fetchOptions]);
 
   // Handle search word changes for external filtering
   useEffect(() => {

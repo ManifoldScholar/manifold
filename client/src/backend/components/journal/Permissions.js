@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import Layout from "backend/components/layout";
@@ -12,6 +12,11 @@ export default function JournalPermissions({ permissions }) {
   const { t } = useTranslation();
   const fetcher = useFetcher();
   const { confirm, confirmation } = useConfirmation();
+
+  const fetchUsers = useCallback(
+    () => usersAPI.index({ order: "first_name, last_name" }),
+    []
+  );
 
   const editors = (permissions ?? []).map(p => p.relationships?.user);
   const permissionMap = (permissions ?? []).map(p => ({
@@ -61,7 +66,7 @@ export default function JournalPermissions({ permissions }) {
           />
           <Form.Picker
             listStyle="rows"
-            options={() => usersAPI.index({ order: "first_name, last_name" })}
+            options={fetchUsers}
             optionToLabel={u => u.attributes.fullName}
             placeholder={t("projects.permissions.user_placeholder")}
             predictive

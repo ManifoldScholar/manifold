@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { sectionsAPI } from "api";
 import Form from "global/components/form";
@@ -12,7 +13,9 @@ export default function StylesheetForm({
   cancelUrl
 }) {
   const { t } = useTranslation();
-  const fetchTextSections = () => sectionsAPI.forText(textId);
+  const fetchTextSections = useCallback(() => sectionsAPI.forText(textId), [
+    textId
+  ]);
 
   return (
     <section>

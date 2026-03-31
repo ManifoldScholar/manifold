@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useFetcher, useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
@@ -24,10 +25,10 @@ export default function ProjectProperties() {
     return createSubject({ type: "subject", attributes: { name } });
   };
 
-  const fetchJournalVolumes = () => {
+  const fetchJournalVolumes = useCallback(() => {
     if (!journal) return [];
     return journalVolumesAPI.index(journal.id);
-  };
+  }, [journal]);
 
   const formatData = data => {
     const { avatar, ...rest } = mergeImageAltText(data?.attributes, "avatar");
