@@ -126,7 +126,7 @@ configure_repo() {
 }
 
 # Define Node.js version
-NODE_VERSION="16.x"
+NODE_VERSION="22.x"
 
 # Check OS
 check_os

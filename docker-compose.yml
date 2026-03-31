@@ -25,7 +25,6 @@ services:
   migrations:
     build:
       context: api
-      dockerfile: docker/development/Dockerfile
     command: bin/ensure-db
     depends_on:
       postgres:

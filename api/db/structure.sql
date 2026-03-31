@@ -1,7 +1,7 @@
-\restrict LNheIDBOnK0QpSehtUWNxnxD3q94AfOg7XcUemfZCwkIiA26sNgFEmPkBcpqG1A
+\restrict AoJ334eMcV4cYm7ZjpXHoR6AgEHsRA5NYVOT4jvqy6ZCDQ2ia8asjIApQTYc2gC
 
 -- Dumped from database version 13.22
--- Dumped by pg_dump version 13.22 (Debian 13.22-1.pgdg11+1)
+-- Dumped by pg_dump version 13.23 (Debian 13.23-1.pgdg11+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -473,8 +473,7 @@ CREATE TABLE public.annotations (
     marked_for_purge_at timestamp without time zone,
     resolved_flags_count bigint DEFAULT 0 NOT NULL,
     unresolved_flags_count bigint DEFAULT 0 NOT NULL,
-    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
-    reader_display_format text
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL
 );
 
 
@@ -866,9 +865,7 @@ CREATE TABLE public.projects (
     marked_for_purge_at timestamp without time zone,
     social_image_data jsonb,
     social_description text,
-    social_title text,
-    orphaned_journal_issue_id uuid,
-    orphaned_journal_issue boolean DEFAULT false NOT NULL
+    social_title text
 );
 
 
@@ -1520,20 +1517,6 @@ CREATE TABLE public.export_targets (
 
 
 --
--- Name: external_identifiers; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.external_identifiers (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    identifier character varying NOT NULL,
-    identifiable_type character varying,
-    identifiable_id uuid,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
-
-
---
 -- Name: user_collected_composite_entries; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2162,9 +2145,7 @@ CREATE TABLE public.pg_search_documents (
     metadata jsonb,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    tsv_composite tsvector GENERATED ALWAYS AS ((((((((public.to_unaccented_weighted_tsv(title, 'A'::"char") || public.to_unaccented_weighted_tsv(primary_data, 'A'::"char")) || public.to_unaccented_weighted_tsv(secondary, 'B'::"char")) || public.to_unaccented_weighted_tsv(secondary_data, 'B'::"char")) || public.to_unaccented_weighted_tsv(tertiary, 'C'::"char")) || public.to_unaccented_weighted_tsv(tertiary_data, 'C'::"char")) || public.to_unaccented_weighted_tsv(content, 'D'::"char")) || public.to_unaccented_weighted_tsv(metadata, 'D'::"char"))) STORED NOT NULL,
-    journal_issue_id uuid,
-    journal_content boolean DEFAULT false NOT NULL
+    tsv_composite tsvector GENERATED ALWAYS AS ((((((((public.to_unaccented_weighted_tsv(title, 'A'::"char") || public.to_unaccented_weighted_tsv(primary_data, 'A'::"char")) || public.to_unaccented_weighted_tsv(secondary, 'B'::"char")) || public.to_unaccented_weighted_tsv(secondary_data, 'B'::"char")) || public.to_unaccented_weighted_tsv(tertiary, 'C'::"char")) || public.to_unaccented_weighted_tsv(tertiary_data, 'C'::"char")) || public.to_unaccented_weighted_tsv(content, 'D'::"char")) || public.to_unaccented_weighted_tsv(metadata, 'D'::"char"))) STORED NOT NULL
 );
 
 
@@ -3465,47 +3446,6 @@ CREATE VIEW public.user_derived_roles AS
 
 
 --
--- Name: user_group_entitleables; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.user_group_entitleables (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    user_group_id uuid NOT NULL,
-    entitleable_type character varying NOT NULL,
-    entitleable_id uuid NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-
-
---
--- Name: user_group_memberships; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.user_group_memberships (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    user_id uuid NOT NULL,
-    user_group_id uuid NOT NULL,
-    source_type character varying,
-    source_id uuid,
-    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-
-
---
--- Name: user_groups; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.user_groups (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    name text NOT NULL,
-    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-
-
---
 -- Name: version_associations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3846,14 +3786,6 @@ ALTER TABLE ONLY public.events
 
 ALTER TABLE ONLY public.export_targets
     ADD CONSTRAINT export_targets_pkey PRIMARY KEY (id);
-
-
---
--- Name: external_identifiers external_identifiers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.external_identifiers
-    ADD CONSTRAINT external_identifiers_pkey PRIMARY KEY (id);
 
 
 --
@@ -4462,30 +4394,6 @@ ALTER TABLE ONLY public.user_collected_text_sections
 
 ALTER TABLE ONLY public.user_collected_texts
     ADD CONSTRAINT user_collected_texts_pkey PRIMARY KEY (id);
-
-
---
--- Name: user_group_entitleables user_group_entitleables_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.user_group_entitleables
-    ADD CONSTRAINT user_group_entitleables_pkey PRIMARY KEY (id);
-
-
---
--- Name: user_group_memberships user_group_memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.user_group_memberships
-    ADD CONSTRAINT user_group_memberships_pkey PRIMARY KEY (id);
-
-
---
--- Name: user_groups user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.user_groups
-    ADD CONSTRAINT user_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -5115,20 +5023,6 @@ CREATE INDEX index_export_targets_on_strategy ON public.export_targets USING btr
 
 
 --
--- Name: index_external_identifiers_on_identifiable; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_external_identifiers_on_identifiable ON public.external_identifiers USING btree (identifiable_type, identifiable_id);
-
-
---
--- Name: index_external_identifiers_on_identifier; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_external_identifiers_on_identifier ON public.external_identifiers USING btree (identifier);
-
-
---
 -- Name: index_flags_on_flaggable_type_and_flaggable_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5595,13 +5489,6 @@ CREATE INDEX index_pending_entitlements_on_user_id ON public.pending_entitlement
 --
 
 CREATE INDEX index_pg_search_documents_on_journal_id ON public.pg_search_documents USING btree (journal_id);
-
-
---
--- Name: index_pg_search_documents_on_journal_issue_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_pg_search_documents_on_journal_issue_id ON public.pg_search_documents USING btree (journal_issue_id);
 
 
 --
@@ -6886,62 +6773,6 @@ CREATE INDEX index_user_collected_texts_on_user_id ON public.user_collected_text
 
 
 --
--- Name: index_user_group_entitleables_on_entitleable; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_user_group_entitleables_on_entitleable ON public.user_group_entitleables USING btree (entitleable_type, entitleable_id);
-
-
---
--- Name: index_user_group_entitleables_on_user_group_and_entitleable; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_user_group_entitleables_on_user_group_and_entitleable ON public.user_group_entitleables USING btree (user_group_id, entitleable_type, entitleable_id);
-
-
---
--- Name: index_user_group_entitleables_on_user_group_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_user_group_entitleables_on_user_group_id ON public.user_group_entitleables USING btree (user_group_id);
-
-
---
--- Name: index_user_group_memberships_on_source; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_user_group_memberships_on_source ON public.user_group_memberships USING btree (source_type, source_id);
-
-
---
--- Name: index_user_group_memberships_on_user_group_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_user_group_memberships_on_user_group_id ON public.user_group_memberships USING btree (user_group_id);
-
-
---
--- Name: index_user_group_memberships_on_user_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_user_group_memberships_on_user_id ON public.user_group_memberships USING btree (user_id);
-
-
---
--- Name: index_user_group_memberships_on_user_id_and_user_group_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_user_group_memberships_on_user_id_and_user_group_id ON public.user_group_memberships USING btree (user_id, user_group_id);
-
-
---
--- Name: index_user_groups_on_name; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_user_groups_on_name ON public.user_groups USING btree (name);
-
-
---
 -- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7181,22 +7012,6 @@ ALTER TABLE ONLY public.user_collected_texts
 
 
 --
--- Name: journal_issues fk_rails_159f2e66d4; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.journal_issues
-    ADD CONSTRAINT fk_rails_159f2e66d4 FOREIGN KEY (journal_id) REFERENCES public.journals(id) ON DELETE RESTRICT;
-
-
---
--- Name: journal_issues fk_rails_15a20a3530; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.journal_issues
-    ADD CONSTRAINT fk_rails_15a20a3530 FOREIGN KEY (journal_volume_id) REFERENCES public.journal_volumes(id) ON DELETE RESTRICT;
-
-
---
 -- Name: entitlement_import_transitions fk_rails_19acd61494; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7250,14 +7065,6 @@ ALTER TABLE ONLY public.user_collected_projects
 
 ALTER TABLE ONLY public.pending_entitlement_transitions
     ADD CONSTRAINT fk_rails_292c17a15e FOREIGN KEY (pending_entitlement_id) REFERENCES public.pending_entitlements(id) ON DELETE CASCADE;
-
-
---
--- Name: projects fk_rails_2a006842be; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.projects
-    ADD CONSTRAINT fk_rails_2a006842be FOREIGN KEY (journal_issue_id) REFERENCES public.journal_issues(id) ON DELETE RESTRICT;
 
 
 --
@@ -7669,14 +7476,6 @@ ALTER TABLE ONLY public.reading_group_projects
 
 
 --
--- Name: pg_search_documents fk_rails_b02f365b4d; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.pg_search_documents
-    ADD CONSTRAINT fk_rails_b02f365b4d FOREIGN KEY (journal_issue_id) REFERENCES public.journal_issues(id) ON DELETE SET NULL;
-
-
---
 -- Name: import_selection_matches fk_rails_b3b5d1b78b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7837,14 +7636,6 @@ ALTER TABLE ONLY public.user_collected_composite_entries
 
 
 --
--- Name: journal_volumes fk_rails_e11de3191d; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.journal_volumes
-    ADD CONSTRAINT fk_rails_e11de3191d FOREIGN KEY (journal_id) REFERENCES public.journals(id) ON DELETE RESTRICT;
-
-
---
 -- Name: user_collected_text_sections fk_rails_e3bf44e760; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7952,7 +7743,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 -- PostgreSQL database dump complete
 --
 
-\unrestrict LNheIDBOnK0QpSehtUWNxnxD3q94AfOg7XcUemfZCwkIiA26sNgFEmPkBcpqG1A
+\unrestrict AoJ334eMcV4cYm7ZjpXHoR6AgEHsRA5NYVOT4jvqy6ZCDQ2ia8asjIApQTYc2gC
 
 SET search_path TO "$user", public;
 
@@ -8311,21 +8102,14 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20250603192547'),
 ('20250609191642'),
 ('20250609192241'),
-('20250723210143'),
 ('20251016204352'),
 ('20251017174417'),
 ('20251017211501'),
 ('20251020225421'),
-('20251022183946'),
 ('20251103175506'),
 ('20251103175949'),
 ('20251103180007'),
 ('20251105165521'),
-('20251117204731'),
-('20251120233556'),
-('20251121202033'),
-('20251203230443'),
-('20251203231940'),
-('20260209183815');
+('20251121202033');
 
 
