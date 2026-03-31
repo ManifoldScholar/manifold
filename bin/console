@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-exec docker compose exec web bin/rails console
