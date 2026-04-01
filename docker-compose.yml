@@ -179,8 +179,6 @@ services:
     environment:
       - RACK_ENV=test
       - RAILS_ENV=test
-      - DATABASE_URL=postgres://postgres:password@postgres/manifold_test
-      - CACHE_DATABASE_URL=postgres://postgres:password@postgres/manifold_cache_test
     logging:
       driver: json-file
       options:
