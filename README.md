@@ -60,6 +60,16 @@ This starts all services including the client. Once running:
 * **API**: http://localhost:13110
 * **MinIO Console**: http://localhost:13116
 
+### Creating an Admin User
+
+Once the services are running, create an admin user:
+
+```sh
+./api/bin/run bin/rake "manifold:user:create:admin[email@example.com,First,Last]"
+```
+
+You will be prompted to enter and confirm a password.
+
 ### Running the Client Locally
 
 Frontend developers often run the client outside of Docker for a faster feedback loop. To do
