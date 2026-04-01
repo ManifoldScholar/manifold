@@ -115,7 +115,7 @@ module API
           include resource_configuration
 
           if authorize
-            ActiveSupport::Deprecation.silence do
+            Rails.application.deprecators.silence do
               # Authority still uses `after_filter`. This check only occurs in dev & test
               # by default.
               performed_options = authorize_options.deep_dup

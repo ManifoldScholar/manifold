@@ -17,11 +17,9 @@ module SystemUpgrades
     private
 
     def build_logger
-      logger = Logger.new(output)
-      ActiveSupport::TaggedLogging.new(logger).tap do |l|
-        l.extend(ActiveSupport::Logger.broadcast(Rails.logger))
-        l.extend(ActiveSupport::Logger.broadcast(Logger.new($stdout))) if stdout
-      end
+      destinations = [Logger.new(output), Rails.logger]
+      destinations << Logger.new($stdout) if stdout
+      ActiveSupport::BroadcastLogger.new(*destinations)
     end
   end
 end

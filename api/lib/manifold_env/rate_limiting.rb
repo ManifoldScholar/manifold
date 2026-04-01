@@ -37,6 +37,8 @@ module ManifoldEnv
     # @return [Set<String>]
     def public_ips
       Rails.cache.read(PUBLIC_IPS_CACHE_KEY) || Set.new
+    rescue ActiveRecord::StatementInvalid
+      Set.new
     end
 
     # @param [String] domain

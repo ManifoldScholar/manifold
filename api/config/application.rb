@@ -55,7 +55,7 @@ module ManifoldApi
     #
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.2
 
     config.autoload_paths += %W(#{config.root}/app/lib)
 

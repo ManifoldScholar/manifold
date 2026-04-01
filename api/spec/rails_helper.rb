@@ -108,6 +108,9 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
+# Rails 7.1+ added Object#with which conflicts with RSpec matcher chain methods.
+Object.remove_method(:with) if Object.method_defined?(:with)
+
 ActiveRecord::Migration.maintain_test_schema!
 
 TestProf::FactoryDefault.configure do |config|
@@ -120,7 +123,7 @@ Rails.application.eager_load!
 # Ensure imagemagick is loaded and accessible. If it's not, there is no sense
 # in running the test suite because dozens of tests are gonna fail.
 begin
-  MiniMagick.cli
+  MiniMagick.cli_version
 rescue MiniMagick::Error => e
   # :nocov:
   raise "Failed to load MiniMagick CLI, aborting tests: #{e.message}"
@@ -134,7 +137,7 @@ RSpec.configure do |config|
   config.alias_it_should_behave_like_to :the_subject_behaves_like, "the subject's"
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -169,10 +172,6 @@ RSpec.configure do |config|
 
   config.after do
     RequestStore.clear!
-  end
-
-  config.before(:suite) do
-    ManifoldApi::Container.enable_stubs!
   end
 
   # Set up jsonapi request encoder

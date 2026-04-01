@@ -38,6 +38,7 @@ RSpec.describe Ingestions::TextSection::Ingestor do
   context "when Google Doc", slow: true do
     before(:all) do
       Settings.instance.update_from_environment!
+      skip "Google Drive credentials are not configured" unless Factory::DriveSession.create_service_account_session
     end
 
     let(:path) { "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing" }

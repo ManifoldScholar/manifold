@@ -1,6 +1,3 @@
--- Dumped from database version 13.22
--- Dumped by pg_dump version 13.23 (Debian 13.23-1.pgdg11+1)
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -129,9 +126,8 @@ CREATE INDEX index_solid_cache_entries_on_key_hash_and_byte_size ON public.solid
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20260209194905'),
-('20260209194906'),
+('20260209194908'),
 ('20260209194907'),
-('20260209194908');
-
+('20260209194906'),
+('20260209194905');
 

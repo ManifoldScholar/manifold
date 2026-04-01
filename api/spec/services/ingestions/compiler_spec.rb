@@ -118,6 +118,10 @@ RSpec.describe Ingestions::Compiler do
   end
 
   describe "a google doc document ingestion", slow: true do
+    before(:all) do
+      skip "Google Drive credentials are not configured" unless Factory::DriveSession.create_service_account_session
+    end
+
     let(:path) { "https://docs.google.com/document/d/1bTY_5mtv0nIGUOLxvltqmwsrruqgVNgNoT2XJv1m5JQ/edit?usp=sharing" }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, external_source_url: path }
     let(:context) { create_context(ingestion) }

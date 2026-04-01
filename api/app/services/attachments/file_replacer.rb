@@ -6,7 +6,7 @@ module Attachments
     string :replacement_dir
     string :field_name, default: "attachment"
     boolean :dry_run, default: false
-    interface :logger, default: Rails.logger
+    object :logger, class: Object, default: -> { Rails.logger }
 
     def execute
       replace_attachments!

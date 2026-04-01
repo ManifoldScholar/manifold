@@ -50,7 +50,7 @@ module APIDocumentation
         return base_date_time if type?(type, :datetime)
         return base_null if type?(type, :nilclass)
 
-        { type: type.name.downcase }
+        { type: base_type_name(type) }
       end
 
       def merge_enum_values(hash, type)
@@ -92,10 +92,14 @@ module APIDocumentation
         type.respond_to? :keys
       end
 
+      def base_type_name(type)
+        type.name.downcase.sub(/\(.*\)$/, "")
+      end
+
       def type?(type, sym)
         return boolean_type?(type) if sym == :bool
 
-        type.name.downcase.to_sym == sym
+        base_type_name(type).to_sym == sym
       end
 
       def boolean_type?(type)
