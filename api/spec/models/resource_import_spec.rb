@@ -183,6 +183,10 @@ RSpec.describe ResourceImport, type: :model, slow: true do
     end
 
     context "after parsing it" do
+      before(:all) do
+        skip "Google Drive credentials are not configured" unless Factory::DriveSession.create_service_account_session
+      end
+
       let(:ri) do
         parsing_google_resource_import
       end

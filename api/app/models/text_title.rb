@@ -32,10 +32,6 @@ class TextTitle < ApplicationRecord
 
   alias_attribute :title, :value
   alias_attribute :subtitle, :value
-  alias_attribute :title_formatted, :value_formatted
-  alias_attribute :subtitle_formatted, :value_formatted
-  alias_attribute :title_plaintext, :value_plaintext
-  alias_attribute :subtitle_plaintext, :value_plaintext
 
   # Authority
   include Authority::Abilities
@@ -44,6 +40,11 @@ class TextTitle < ApplicationRecord
 
   include HasFormattedAttributes
   has_formatted_attributes :value, include_wrap: false
+
+  alias_method :title_formatted, :value_formatted
+  alias_method :subtitle_formatted, :value_formatted
+  alias_method :title_plaintext, :value_plaintext
+  alias_method :subtitle_plaintext, :value_plaintext
 
   # Associations
   belongs_to :text

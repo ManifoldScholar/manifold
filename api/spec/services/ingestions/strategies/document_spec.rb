@@ -217,6 +217,7 @@ RSpec.describe Ingestions::Strategies::Document do
 
     before(:all) do
       Settings.instance.update_from_environment!
+      skip "Google Drive credentials are not configured" unless Factory::DriveSession.create_service_account_session
       WebMock.allow_net_connect!
     end
 

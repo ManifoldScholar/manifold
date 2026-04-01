@@ -2,6 +2,6 @@
 
 # rubocop:disable Rails/ApplicationJob
 class AsyncApplicationJob < ActiveJob::Base
-  self.queue_adapter = :async
+  self.queue_adapter = :async unless Rails.env.test?
 end
 # rubocop:enable Rails/ApplicationJob

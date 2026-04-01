@@ -40,6 +40,16 @@ module Utility
     #
     # @api private
     module EnhancedBrackets
+      # Rails 7.2 changed _assign_attribute to use public_send instead of []=,
+      # which breaks for unknown attributes. Route them through our bracket accessor.
+      def _assign_attribute(key, value)
+        if has_attribute?(key)
+          super
+        else
+          self[key] = value
+        end
+      end
+
       # @param [#to_s] attr
       # @return [Object]
       def [](attr)

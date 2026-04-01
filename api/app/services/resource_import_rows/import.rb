@@ -239,5 +239,9 @@ module ResourceImportRows
     def block_special_instructions(*_args)
       true
     end
+
+    def block_iframe_allow_fullscreen(*_args)
+      true
+    end
   end
 end

@@ -17,7 +17,7 @@ class Favorite < ApplicationRecord
   has_many :subjects, through: :project
 
   # This makes the favorite authorizer a bit simpler.
-  alias_attribute :creator, :user
+  alias_method :creator, :user
 
   # @return [UserCollectedEntry]
   def user_collected_entry

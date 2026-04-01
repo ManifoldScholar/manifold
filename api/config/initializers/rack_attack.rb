@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # Needs to run after initialization, else Solid Cache won't be ready
-# Revisit after upgrading to Solid Cache 1.0
 ActiveSupport::Reloader.to_prepare do
   # :nocov:
   # We want to ensure that the public IP used by the client is never

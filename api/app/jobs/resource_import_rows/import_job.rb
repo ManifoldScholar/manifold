@@ -12,20 +12,15 @@ module ResourceImportRows
 
     queue_as :low_priority
 
-    include ActiveJob::Retry.new(
-      strategy: :exponential,
-      limit: 10,
-      retryable_exceptions: [::Google::Apis::RateLimitError]
-    )
+    retry_on ::Google::Apis::RateLimitError,
+             wait: :exponentially_longer,
+             attempts: 10
 
     # Statesman gem does not seem to be threadsafe.
     # https://github.com/gocardless/statesman/issues/201
-    include ActiveJob::Retry.new(
-      strategy: :constant,
-      limit: 6,
-      delay: 0.5.seconds,
-      retryable_exceptions: [::Statesman::TransitionConflictError]
-    )
+    retry_on ::Statesman::TransitionConflictError,
+             wait: 0.5.seconds,
+             attempts: 6
 
     # rubocop:disable Lint/SafeNavigationChain
     rescue_from(Google::Apis::RateLimitError) do |_e|

@@ -22,6 +22,7 @@ class ResourceImport < ApplicationRecord
   validates :source, inclusion: { in: %w(google_sheet attached_data) }
   validates :storage_type, inclusion: { in: ["google_drive", nil] }
   validates :header_row, presence: true
+  validates :creator, presence: true
   validates :url, presence: true, if: :google_sheet?
   validates :data, presence: true, if: :attached_data?
 
