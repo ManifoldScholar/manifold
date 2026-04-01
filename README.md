@@ -58,6 +58,7 @@ This starts all services including the client. Once running:
 
 * **Client**: http://localhost:13100
 * **API**: http://localhost:13110
+* **GoodJob Dashboard**: http://localhost:13110/api/good_job
 * **MinIO Console**: http://localhost:13116
 
 ### Creating an Admin User
