@@ -1,0 +1,41 @@
+name: Update Yarn Lockfile for Dependabot
+
+on:
+  pull_request:
+    paths:
+      - "client/package.json"
+
+permissions:
+  contents: write
+
+jobs:
+  update-lockfile:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Enable Corepack"
+        run: corepack enable
+
+      - name: "Install Node"
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: "./client/package.json"
+
+      - name: "Update lockfile"
+        working-directory: "./client"
+        run: yarn install --no-immutable
+
+      - name: "Commit updated lockfile"
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add client/yarn.lock
+          git diff --staged --quiet || git commit -m "Update yarn.lock"
+          git push
