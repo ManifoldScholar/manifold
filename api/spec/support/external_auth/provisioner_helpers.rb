@@ -37,7 +37,7 @@ module ExternalAuth::ProvisionerSpecs
     end
 
     class_methods do
-      def with_provider(name, &block)
+      def with_provider(name, &)
         context "when the provider is #{name}" do
           include ExternalAuth::ProvisionerSpecs::ProvisionerHelpers
 
@@ -55,7 +55,7 @@ module ExternalAuth::ProvisionerSpecs
             it { is_expected.not_to __send__(:"be_#{other_provider_name}") }
           end
 
-          instance_eval(&block) if block_given?
+          instance_eval(&) if block_given?
         end
       end
     end
@@ -67,7 +67,7 @@ module ExternalAuth::ProvisionerSpecs
     end
 
     class_methods do
-      def upon_running_the_provisioner(&block)
+      def upon_running_the_provisioner(&)
         context 'upon running the provisioner' do
           include ExternalAuth::ProvisionerSpecs::AfterProvisionerCalledHelpers
 
@@ -75,7 +75,7 @@ module ExternalAuth::ProvisionerSpecs
 
           expect_default_hooks!
 
-          instance_eval(&block)
+          instance_eval(&)
         end
       end
     end
@@ -120,7 +120,7 @@ module ExternalAuth::ProvisionerSpecs
         end
       end
 
-      def the_user_has(&block)
+      def the_user_has(&)
         context 'the user has' do
           include ExternalAuth::ProvisionerSpecs::UserHelpers
 
@@ -130,7 +130,7 @@ module ExternalAuth::ProvisionerSpecs
             have_attributes password: a_kind_of(String)
           end
 
-          instance_eval(&block)
+          instance_eval(&)
         end
       end
     end
@@ -138,13 +138,13 @@ module ExternalAuth::ProvisionerSpecs
 
   concern :UserHelpers do
     class_methods do
-      def user_expectation(description = nil, &conditions)
-        it(description) { is_expected.to instance_eval(&conditions) }
+      def user_expectation(description = nil, &)
+        it(description) { is_expected.to instance_eval(&) }
       end
 
-      def set_attributes(description = nil, &block)
+      def set_attributes(description = nil, &)
         user_expectation(description) do
-          have_attributes instance_eval(&block)
+          have_attributes instance_eval(&)
         end
       end
 

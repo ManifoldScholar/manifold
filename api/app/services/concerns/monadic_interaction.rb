@@ -34,8 +34,8 @@ module MonadicInteraction
   class_methods do
     # @see #as_monadic_result
     # @return [Dry::Monads::Result]
-    def run_as_monad(inputs = {}, &block)
-      run(inputs).as_monadic_result(&block)
+    def run_as_monad(inputs = {}, &)
+      run(inputs).as_monadic_result(&)
     end
   end
 end

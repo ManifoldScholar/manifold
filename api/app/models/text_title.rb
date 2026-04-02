@@ -41,10 +41,10 @@ class TextTitle < ApplicationRecord
   include HasFormattedAttributes
   has_formatted_attributes :value, include_wrap: false
 
-  alias_method :title_formatted, :value_formatted
-  alias_method :subtitle_formatted, :value_formatted
-  alias_method :title_plaintext, :value_plaintext
-  alias_method :subtitle_plaintext, :value_plaintext
+  alias title_formatted value_formatted
+  alias subtitle_formatted value_formatted
+  alias title_plaintext value_plaintext
+  alias subtitle_plaintext value_plaintext
 
   # Associations
   belongs_to :text

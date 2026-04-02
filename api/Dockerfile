@@ -1,4 +1,4 @@
-FROM ruby:3.2-bullseye AS base
+FROM ruby:3.4-bookworm AS base
 
 RUN mkdir -pv /bundle/bin
 
@@ -57,6 +57,7 @@ ENV MAMMOTH_PATH=/usr/bin/mammoth
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 ENV LD_PRELOAD=libjemalloc.so.2
 
+RUN gem update --system 4.0.9
 RUN bundle install
 
 CMD ["bin/puma", "-C", "config/puma.rb"]

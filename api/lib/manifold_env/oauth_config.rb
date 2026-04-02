@@ -60,14 +60,14 @@ module ManifoldEnv
     dsl do
       ivar_reader :providers
 
-      def provider(name, &config)
+      def provider(name, &)
         name = name.to_sym unless name.is_a?(Symbol)
 
         definition = ManifoldEnv::OauthProvider.new(name)
 
         providers.add?(definition) or raise DefinedProvider, "Already defined provider: #{name}"
 
-        definition.configure(&config)
+        definition.configure(&)
       end
     end
 
