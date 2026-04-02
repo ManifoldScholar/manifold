@@ -9664,7 +9664,6 @@ __metadata:
     redux-promise: "npm:^0.6"
     regenerator-runtime: "npm:^0.14.1"
     rimraf: "npm:^6.0.1"
-    serialize-javascript: "npm:^7.0.5"
     serve-static: "npm:^2.2.0"
     slate: "npm:^0.117.2"
     slate-dom: "npm:^0.117.4"
@@ -12980,13 +12979,6 @@ __metadata:
   dependencies:
     randombytes: "npm:^2.1.0"
   checksum: 10c0/2dd09ef4b65a1289ba24a788b1423a035581bef60817bea1f01eda8e3bda623f86357665fe7ac1b50f6d4f583f97db9615b3f07b2a2e8cbcb75033965f771dd2
-  languageName: node
-  linkType: hard
-
-"serialize-javascript@npm:^7.0.5":
-  version: 7.0.5
-  resolution: "serialize-javascript@npm:7.0.5"
-  checksum: 10c0/7b7818e5267f6d474ec7a56d36ba69dd712726a13eab37706ec94615fb7ca8945471f2b7fb0dc9dbe8c79c1930c1079d97f66f91315c8c8c2ca6c38898cec96f
   languageName: node
   linkType: hard
 
