@@ -16,10 +16,10 @@ module ExportStrategies
 
     delegate :connection_klass, to: :class
 
-    def connect(&block)
+    def connect(&)
       # :nocov:
       with_connection do |c|
-        c.connect!(&block)
+        c.connect!(&)
       end
       # :nocov:
     end
@@ -68,9 +68,9 @@ module ExportStrategies
       # @yield a class-evaled block
       # @yieldreturn [void]
       # @return [void]
-      def connection(&block)
+      def connection(&)
         connection_klass.tap do |klass|
-          klass.class_eval(&block) if block_given?
+          klass.class_eval(&) if block_given?
         end
       end
 
@@ -110,9 +110,9 @@ module ExportStrategies
       # @yield a class-evaled block
       # @yieldreturn [void]
       # @return [void]
-      def uploader(&block)
+      def uploader(&)
         uploader_klass.tap do |klass|
-          klass.class_eval(&block) if block_given?
+          klass.class_eval(&) if block_given?
         end
       end
 

@@ -11,7 +11,7 @@ RSpec.describe Packaging::Shared::ReferenceSelector, packaging: true do
   subject { reference_selector }
 
   class << self
-    def with_tuple(tag, attribute, &block)
+    def with_tuple(tag, attribute, &)
       selector = "#{tag}[#{attribute}]"
 
       context "when #{selector}" do
@@ -22,7 +22,7 @@ RSpec.describe Packaging::Shared::ReferenceSelector, packaging: true do
           expect(reference_selector.selector).to eq selector
         end
 
-        instance_eval(&block)
+        instance_eval(&)
       end
     end
   end

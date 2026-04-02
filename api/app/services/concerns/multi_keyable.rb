@@ -148,14 +148,14 @@ module MultiKeyable
       end
     end
 
-    def fetch(needle, &block)
+    def fetch(needle, &)
       case needle
       when Types::Model
         mapping.fetch(needle.model_name.name) do
-          mapping.fetch(needle, &block)
+          mapping.fetch(needle, &)
         end
       when String, Symbol
-        mapping.fetch(needle, &block)
+        mapping.fetch(needle, &)
       end
     end
 

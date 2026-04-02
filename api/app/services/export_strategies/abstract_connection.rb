@@ -32,7 +32,7 @@ module ExportStrategies
     # @yieldparam [Object] connection
     # @yieldreturn [Dry::Monads::Result, nil]
     # @return [Dry::Monads::Result]
-    def connect!(&block)
+    def connect!(&)
       raise "Must provide a block to connect!" unless block_given?
 
       haltable! do
@@ -44,7 +44,7 @@ module ExportStrategies
           end
 
           run_callbacks :connect do
-            establish_connection!(&block)
+            establish_connection!(&)
           end
         end
       end

@@ -11,7 +11,7 @@ RSpec.describe ExportTarget, type: :model do
   subject { instance }
 
   class << self
-    def with_strategy(value, &block)
+    def with_strategy(value, &)
       context "with strategy: #{value.inspect}" do |*args|
         let(:strategy) { value }
 
@@ -23,7 +23,7 @@ RSpec.describe ExportTarget, type: :model do
           its(:configuration) { is_expected.not_to be_using_strategy enum.to_sym }
         end
 
-        instance_exec(*args, &block)
+        instance_exec(*args, &)
       end
     end
   end

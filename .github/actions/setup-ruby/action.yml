@@ -8,10 +8,10 @@ runs:
         sudo apt-get update
         sudo apt-get -yqq install imagemagick libpq-dev libvips libvips-dev
 
-    - name: "Install Ruby 2.7.8"
+    - name: "Install Ruby 3.4"
       uses: ruby/setup-ruby@v1
       with:
-        bundler: 2.4.19
+        bundler: 2.6.2
         bundler-cache: true
-        ruby-version: 3.2.3
+        ruby-version: 3.4.9
         working-directory: api

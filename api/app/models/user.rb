@@ -368,20 +368,20 @@ class User < ApplicationRecord
         value.in? UserClassification
       end
 
-      def anonymous_user(&block)
-        fetch_by_classification :anonymous, &block
+      def anonymous_user(&)
+        fetch_by_classification(:anonymous, &)
       end
 
-      def cli_user(&block)
-        fetch_by_classification :command_line, &block
+      def cli_user(&)
+        fetch_by_classification(:command_line, &)
       end
 
-      def deleted_user(&block)
-        fetch_by_classification :deleted, &block
+      def deleted_user(&)
+        fetch_by_classification(:deleted, &)
       end
 
-      def testing_user(&block)
-        fetch_by_classification :testing, &block
+      def testing_user(&)
+        fetch_by_classification(:testing, &)
       end
 
       # @api private

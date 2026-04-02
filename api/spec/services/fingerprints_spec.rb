@@ -17,11 +17,11 @@ RSpec.describe Fingerprints, fingerprint_calculation: true do
       end
     end
 
-    def with_singleton_method(singleton_method_name, &block)
+    def with_singleton_method(singleton_method_name, &)
       describe ".#{singleton_method_name}" do |args|
         let(:singleton_method_name) { singleton_method_name.to_sym }
 
-        instance_exec(*args, &block)
+        instance_exec(*args, &)
       end
     end
   end
