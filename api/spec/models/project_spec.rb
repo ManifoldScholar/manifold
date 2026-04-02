@@ -331,6 +331,16 @@ RSpec.describe Project, type: :model do
         FactoryBot.create(:project_collection, :smart, tag_list: tag_list)
       end
 
+      before do
+        # Re-cache collection projects to ensure they reflect persisted tags.
+        # The after_save callback may have stale tag associations, leading to
+        # incorrect caching when run as part of the full suite.
+        project_collection.collection_projects.delete_all
+        collected_projects.each_with_index do |project, position|
+          project_collection.collection_projects.create!(project: project, position: position)
+        end
+      end
+
       it_behaves_like "a valid filtered collection"
     end
   end
