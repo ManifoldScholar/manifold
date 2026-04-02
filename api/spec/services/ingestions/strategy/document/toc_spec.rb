@@ -75,7 +75,7 @@ RSpec.describe Ingestions::Strategy::Document::TOC do
                   ] },
                   { label: "C", anchor: nil, source_path: nil, children: [
                     { label: "C/1", anchor: nil, source_path: nil, children: [
-                      label: "C/1/a", anchor: nil, source_path: nil, children: []
+                      { label: "C/1/a", anchor: nil, source_path: nil, children: [] }
                     ] }
                   ] }]
       actual = inspector.toc

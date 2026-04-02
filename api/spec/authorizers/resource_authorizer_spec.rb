@@ -5,5 +5,5 @@ RSpec.describe "Resource Abilities", :authorizer, :project_role_tests do
 
   let(:object) { resource }
 
-  include_examples "unauthenticated user", Resource
+  it_behaves_like "unauthenticated user", Resource
 end

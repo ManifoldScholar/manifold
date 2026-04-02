@@ -52,8 +52,8 @@ module ManifoldEnv
     end
 
     def as_json(options = nil)
-      each_with_object({}) do |provider, hsh|
-        hsh[provider.strategy_name] = provider.as_json(options)
+      to_h do |provider|
+        [provider.strategy_name, provider.as_json(options)]
       end
     end
 

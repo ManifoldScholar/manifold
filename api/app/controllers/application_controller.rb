@@ -216,6 +216,7 @@ class ApplicationController < ActionController::API
 
     def record_analytics_for!(model, record_getter: "@#{model.model_name.param_key}")
       include API::V1::RecordsAnalytics
+
       @analytics_record_getter = record_getter
 
       yield

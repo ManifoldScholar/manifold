@@ -17,11 +17,11 @@ module Packaging
             context.with! :book, :epub_path do |book, epub_path|
               book.generate_epub epub_path
 
-              epub_file = File.open epub_path, "rb"
+              File.open epub_path, "rb" do |epub_file|
+                text_export.asset = epub_file
 
-              text_export.asset = epub_file
-
-              try_to_save! text_export, code: :failed_export, prefix: "Could not export text"
+                try_to_save! text_export, code: :failed_export, prefix: "Could not export text"
+              end
             end
 
             self.pipeline_result = context

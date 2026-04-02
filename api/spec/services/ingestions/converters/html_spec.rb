@@ -48,7 +48,7 @@ RSpec.describe Ingestions::Converters::HTML do
     end
 
     it "generates unique header tags, even when contents are the same" do
-      ids = headers.map { |header| header["id"] }
+      ids = headers.pluck("id")
       expect(ids.length > 0).to be true
       expect(ids.uniq.length).to eq ids.length
     end

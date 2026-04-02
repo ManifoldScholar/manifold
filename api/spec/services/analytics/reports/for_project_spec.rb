@@ -5,9 +5,9 @@ RSpec.describe Analytics::Reports::ForProject do
 
   include_context "with a single project"
 
-  include_examples "analytics reporter visits"
+  it_behaves_like "analytics reporter visits"
 
-  include_examples "analytics reporter events" do
+  it_behaves_like "analytics reporter events" do
     let(:expectations) do
       l_daily_visitors = build_expected_daily_visitors from_date: Date.yesterday
 

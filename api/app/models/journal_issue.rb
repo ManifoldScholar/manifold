@@ -174,8 +174,8 @@ class JournalIssue < ApplicationRecord
     end
 
     def arel_draft_access
-      project_draft = arel_grouping(Project.arel_table[:draft].then { _1.not_eq(nil).and(_1.eq(true)) })
-      journal_draft = arel_grouping(Journal.arel_table[:draft].then { _1.not_eq(nil).and(_1.eq(true)) })
+      project_draft = arel_grouping(Project.arel_table[:draft].then { it.not_eq(nil).and(it.eq(true)) })
+      journal_draft = arel_grouping(Journal.arel_table[:draft].then { it.not_eq(nil).and(it.eq(true)) })
 
       project_draft.or(journal_draft)
     end

@@ -8,7 +8,7 @@ RSpec.describe "Test Mail", type: :request do
   path "/test_mails" do
     post "Sends a test email" do
       tags "Test Mail"
-      security [apiKey: []]
+      security [{ apiKey: [] }]
 
       response "204", "Email sent successfully" do
         let(:Authorization) { admin_auth }

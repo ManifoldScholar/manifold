@@ -245,7 +245,7 @@ RSpec.describe Project, type: :model do
       @child_class = FactoryBot.create(:text, project: @calling_class)
     end
 
-    include_examples "a citable class with_citable_children"
+    it_behaves_like "a citable class with_citable_children"
   end
 
   describe ".filtered(collection_order:)" do
@@ -302,7 +302,7 @@ RSpec.describe Project, type: :model do
       end
 
       1.upto(3).each do |page_number|
-        include_examples "valid counts for a page", page_number
+        it_behaves_like "valid counts for a page", page_number
       end
     end
 

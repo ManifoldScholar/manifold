@@ -40,7 +40,7 @@ module HTMLNodes
     # @return [{ String => String }]
     def to_prefix_hash
       {}.tap do |h|
-        h["epub:prefix"] = epub_prefixes.map(&:to_s).join(", ") if has_epub_prefixes?
+        h["epub:prefix"] = epub_prefixes.join(", ") if has_epub_prefixes?
       end
     end
 

@@ -4,6 +4,7 @@ class ProjectCollectionSubject < ApplicationRecord
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Association

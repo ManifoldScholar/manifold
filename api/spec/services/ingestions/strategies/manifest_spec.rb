@@ -84,7 +84,7 @@ RSpec.describe Ingestions::Strategies::Manifest do
   context "when collection of different file kinds" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local.zip") }
 
-    include_examples "outcome assertions"
+    it_behaves_like "outcome assertions"
   end
 
   context "when the manifest is composed of nested, remote sources", slow: true do

@@ -2,6 +2,7 @@
 
 class SerializerRegistry
   include Enumerable
+
   attr_reader :klass, :entries, :full, :active
 
   def initialize(klass, full: false)

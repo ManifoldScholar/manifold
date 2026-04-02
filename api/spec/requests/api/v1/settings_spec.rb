@@ -6,13 +6,13 @@ RSpec.describe "Settings", type: :request do
   let(:resource) { Settings.instance }
 
   path "/settings" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                      factory: :setting,
                      exclude: ["404"],
                      parameters: [],
                      resource_name: "Setting"
 
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                      factory: :setting,
                      resource_name: "Setting",
                      request_id: false,

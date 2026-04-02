@@ -4,6 +4,7 @@ require "rails_helper"
 
 class LoggingThing
   include Ingestions::Concerns::Loggable
+
   def initialize(logger)
     @logger = logger
   end

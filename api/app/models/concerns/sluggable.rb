@@ -5,6 +5,7 @@ module Sluggable
 
   included do
     include FriendlyId
+
     validates :slug, presence: true, uniqueness: true, allow_nil: true
     friendly_id :slugable_candidates, use: :slugged
   end

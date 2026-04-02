@@ -2,6 +2,7 @@
 
 class ApplicationJob < ActiveJob::Base
   include JobConcurrency
+
   def match_result(result, &)
     Dry::Matcher::ResultMatcher.(result, &)
   end

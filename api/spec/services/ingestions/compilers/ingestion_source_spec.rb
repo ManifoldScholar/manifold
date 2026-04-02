@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe Ingestions::Compiler do
   include TestHelpers::IngestionHelper
+
   let(:logger_target) { StringIO.new }
   let(:logger) { Logger.new(logger_target) }
   let(:context) { create_context(ingestion, logger) }

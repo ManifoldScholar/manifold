@@ -11,6 +11,7 @@ AllCops:
     - "bin/*"
     - "config/puma.rb"
     - "lib/templates/rspec/**/*.rb"
+    - "db/cache_migrate/**/*.rb"
     - "db/migrate/**/*.rb"
     - "db/schema.rb"
     - "tmp/**/*"
@@ -339,11 +340,11 @@ Naming/MethodParameterName:
 Naming/MethodName:
   Enabled: false
 
-Naming/PredicateName:
-  ForbiddenPrefixes:
-    - is_
-  NamePrefix:
-    - is_
+Naming/PredicateMethod:
+  Enabled: false
+
+Naming/PredicatePrefix:
+  Enabled: false
 
 Naming/VariableNumber:
   Enabled: false
@@ -561,6 +562,9 @@ Rails/WhereRange:
 RSpec/AnyInstance:
   Enabled: false
 
+RSpec/LeakyLocalVariable:
+  Enabled: false
+
 RSpec/BeEmpty:
   Enabled: true
 
@@ -767,6 +771,14 @@ Security/IoMethods:
 
 Style/AmbiguousEndlessMethodDefinition:
   Enabled: true
+
+# Intentional pattern in enums and some config files
+Style/OneClassPerFile:
+  Exclude:
+    - "app/enums/**/*.rb"
+    - "config/application.rb"
+    - "config/initializers/30_monkeypatches.rb"
+    - "spec/support/middleware_helpers.rb"
 
 Style/ArgumentsForwarding:
   Enabled: false

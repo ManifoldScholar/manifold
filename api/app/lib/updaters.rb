@@ -78,7 +78,7 @@ module Updaters
   end
 
   def attachmentize_attributes!(attr, model)
-    return unless attachment_fields.count.positive?
+    return unless attachment_fields.any?
 
     attachment_fields.each do |field|
       remove_key = :"remove_#{field}"

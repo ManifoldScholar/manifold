@@ -18,18 +18,18 @@ RSpec.describe "Projects API", type: :request do
   ]
 
   path "/projects/{id}" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                      model: Project,
                      description: "Authorization required when trying to access a draft project",
                      paginated: true,
                      included_relationships: included_relationships
 
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                      model: Project,
                      authorized_user: :admin,
                      included_relationships: included_relationships
 
-    include_examples "an API destroy request", model: Project, authorized_user: :admin
+    it_behaves_like "an API destroy request", model: Project, authorized_user: :admin
   end
 
   path "/projects" do
@@ -44,7 +44,7 @@ RSpec.describe "Projects API", type: :request do
     let(:'filter[with_creator_role]') { nil }
     let(:'filter[standalone_mode_enforced]') { nil }
 
-    include_examples "an API index request", model: Project, additional_parameters: [
+    it_behaves_like "an API index request", model: Project, additional_parameters: [
       { name: "filter[draft]", in: :query, type: :boolean },
       { name: "filter[featured]", in: :query, type: :boolean },
       { name: "filter[subject]", in: :query, type: :string },
@@ -57,7 +57,7 @@ RSpec.describe "Projects API", type: :request do
       { name: "filter[standalone_mode_enforced]", in: :query, type: :boolean }
     ], included_relationships: [:creators]
 
-    include_examples "an API create request", model: Project, authorized_user: :admin
+    it_behaves_like "an API create request", model: Project, authorized_user: :admin
   end
 
   context "my favorite projects" do
@@ -65,7 +65,7 @@ RSpec.describe "Projects API", type: :request do
     let!(:favorite) { FactoryBot.create(:user_collected_project, user: admin, project: project) }
 
     path "/me/relationships/favorite_projects" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        tags: "Me",
                        parent: "current user",
                        model: Project,

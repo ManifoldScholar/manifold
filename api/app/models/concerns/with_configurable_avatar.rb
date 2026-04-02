@@ -20,6 +20,7 @@ module WithConfigurableAvatar
 
   included do
     include Attachments
+
     manifold_has_attached_file :avatar, :image
 
     validates :avatar_color,

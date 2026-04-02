@@ -14,7 +14,7 @@ RSpec.describe "Text Ingestions API", type: :request do
     end
 
     path "/texts/{text_id}/ingestions" do
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
             model: Ingestion,
             parent: "text",
             url_parameters: [:text_id],

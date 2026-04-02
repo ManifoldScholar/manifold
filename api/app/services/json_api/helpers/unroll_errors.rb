@@ -2,7 +2,6 @@
 
 module JSONAPI
   module Helpers
-    # rubocop:disable Metrics/CyclomaticComplexity
     class UnrollErrors
       extend Dry::Initializer
 
@@ -50,6 +49,5 @@ module JSONAPI
         end
       end
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

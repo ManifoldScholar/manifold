@@ -6,16 +6,16 @@ RSpec.describe "Stylesheets", type: :request do
   included_relationships = [:text, :text_sections]
 
   path "/stylesheets/{id}" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                      model: Stylesheet,
                      included_relationships: included_relationships
 
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                      model: Stylesheet,
                      authorized_user: :admin,
                      included_relationships: included_relationships
 
-    include_examples "an API destroy request",
+    it_behaves_like "an API destroy request",
                      model: Stylesheet,
                      authorized_user: :admin
   end
@@ -25,7 +25,7 @@ RSpec.describe "Stylesheets", type: :request do
     let(:text_id) { resource.text_id }
 
     path "/texts/{text_id}/relationships/stylesheets" do
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
                        parent: "text",
                        model: Stylesheet,
                        url_parameters: [:text_id],

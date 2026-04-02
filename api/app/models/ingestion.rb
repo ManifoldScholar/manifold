@@ -10,6 +10,7 @@ class Ingestion < ApplicationRecord
 
   # Authorization
   include Authority::Abilities
+
   self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   attr_writer :log_buffer

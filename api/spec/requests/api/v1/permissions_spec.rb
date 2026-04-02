@@ -7,13 +7,13 @@ RSpec.describe "Permissions", type: :request do
   let!(:project_id) { project.id }
 
   path "/projects/{project_id}/relationships/permissions" do
-    include_examples "an API index request",
+    it_behaves_like "an API index request",
                      parent: "project",
                      model: Permission,
                      url_parameters: [:project_id],
                      authorized_user: :admin
 
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                      parent: "project",
                      model: Permission,
                      authorized_user: :admin,
@@ -47,20 +47,20 @@ RSpec.describe "Permissions", type: :request do
   end
 
   path "/projects/{project_id}/relationships/permissions/{id}" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                      parent: "project",
                      model: Permission,
                      authorized_user: :admin,
                      url_parameters: [:project_id]
 
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                      parent: "project",
                      model: Permission,
                      authorized_user: :admin,
                      included_relationships: [:user],
                      url_parameters: [:project_id]
 
-    include_examples "an API destroy request",
+    it_behaves_like "an API destroy request",
                      parent: "project",
                      model: Permission,
                      authorized_user: :admin,

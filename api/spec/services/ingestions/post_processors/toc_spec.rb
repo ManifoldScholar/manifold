@@ -42,7 +42,7 @@ RSpec.describe Ingestions::PostProcessors::TOC do
     let(:hashed) { text.toc.detect { |item| item["label"] == "Section 2#1" } }
     let(:unhashed) { text.toc.detect { |item| item["label"] == "Section 2" } }
 
-    include_examples "toc items"
+    it_behaves_like "toc items"
   end
 
   describe "a manifest ingestion" do
@@ -51,7 +51,7 @@ RSpec.describe Ingestions::PostProcessors::TOC do
     let(:hashed) { text.toc.detect { |item| item["label"] == "Section 1#1" } }
     let(:unhashed) { text.toc.detect { |item| item["label"] == "Title Set From TOC" } }
 
-    include_examples "toc items"
+    it_behaves_like "toc items"
   end
 
   describe "a document ingestion" do

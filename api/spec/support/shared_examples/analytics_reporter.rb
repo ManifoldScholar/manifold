@@ -229,7 +229,7 @@ RSpec.shared_examples_for "analytics reporter visits" do
       end
 
       it "should return results for all analytics" do
-        analytics = running_the_interaction!.data.map { |h| h["name"] }
+        analytics = running_the_interaction!.data.pluck("name")
 
         expect(analytics.to_set).to eq described_class.analytics.to_set(&:to_s)
       end

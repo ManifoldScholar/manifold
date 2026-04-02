@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe Ingestions::Compiler do
   include TestHelpers::IngestionHelper
+
   let(:context) { create_context(ingestion) }
   let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
   let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }

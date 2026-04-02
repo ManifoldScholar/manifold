@@ -8,13 +8,13 @@ RSpec.describe "Favorites", type: :request do
     let(:resource) { user_collected_project && Favorite.where(favoritable: user_collected_project.project, user: admin).first! }
 
     path "/me/relationships/favorites" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "current user",
                        tags: "Me",
                        model: Favorite,
                        authorized_user: :admin
 
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
                        parent: "current user",
                        model: Favorite,
                        tags: "Me",
@@ -39,13 +39,13 @@ RSpec.describe "Favorites", type: :request do
     end
 
     path "/me/relationships/favorites/{id}" do
-      include_examples "an API show request",
+      it_behaves_like "an API show request",
                        tags: "Me",
                        parent: "current user",
                        model: Favorite,
                        authorized_user: :admin
 
-      include_examples "an API destroy request",
+      it_behaves_like "an API destroy request",
                        tags: "Me",
                        parent: "current user",
                        model: Favorite,

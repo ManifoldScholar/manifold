@@ -16,11 +16,11 @@ RSpec.describe Packaging::Exportation::ExportTextToEpubV3Job, packaging: true, t
     end
   end
 
-  include_examples "a called interaction"
+  it_behaves_like "a called interaction"
 
   context "when forced" do
     let(:force) { true }
 
-    include_examples "a called interaction"
+    it_behaves_like "a called interaction"
   end
 end

@@ -16,7 +16,7 @@ RSpec.describe Ingestions::TextSection::Ingestor do
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let!(:text) { FactoryBot.create :text }
 
-    include_examples "a valid text section ingestion"
+    it_behaves_like "a valid text section ingestion"
   end
 
   context "when HTML" do
@@ -24,7 +24,7 @@ RSpec.describe Ingestions::TextSection::Ingestor do
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let!(:text) { FactoryBot.create :text }
 
-    include_examples "a valid text section ingestion"
+    it_behaves_like "a valid text section ingestion"
   end
 
   context "when Markdown" do
@@ -32,7 +32,7 @@ RSpec.describe Ingestions::TextSection::Ingestor do
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
     let!(:text) { FactoryBot.create :text }
 
-    include_examples "a valid text section ingestion"
+    it_behaves_like "a valid text section ingestion"
   end
 
   context "when Google Doc", slow: true do
@@ -45,7 +45,7 @@ RSpec.describe Ingestions::TextSection::Ingestor do
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, external_source_url: path }
     let!(:text) { FactoryBot.create :text }
 
-    include_examples "a valid text section ingestion"
+    it_behaves_like "a valid text section ingestion"
   end
 
   context "when a text has existing sections" do

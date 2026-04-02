@@ -61,7 +61,7 @@ RSpec.describe Ingestions::Strategies::Epub do
   context "when V3" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
 
-    include_examples "outcome assertions"
+    it_behaves_like "outcome assertions"
 
     it "has the correct unique identifier" do
       expect(manifest[:attributes][:metadata][:unique_identifier]).to eq "test-v3"
@@ -98,7 +98,7 @@ RSpec.describe Ingestions::Strategies::Epub do
   context "when V2" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.zip") }
 
-    include_examples "outcome assertions"
+    it_behaves_like "outcome assertions"
 
     it "has the correct unique identifier" do
       expect(manifest[:attributes][:metadata][:unique_identifier]).to eq "test-v2"

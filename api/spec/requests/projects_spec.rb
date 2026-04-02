@@ -58,13 +58,13 @@ RSpec.describe "Projects API", type: :request do
     context "as an admin" do
       let(:headers) { admin_headers }
 
-      include_examples "finding the project"
+      it_behaves_like "finding the project"
     end
 
     context "as a reader" do
       let(:headers) { reader_headers }
 
-      include_examples "finding the project"
+      it_behaves_like "finding the project"
     end
   end
 

@@ -45,13 +45,13 @@ RSpec.describe Content::ScaffoldProjectContent do
   end
 
   context "when kind is present" do
-    include_examples "scaffolded blocks", "simple"
-    include_examples "scaffolded blocks", "enhanced"
-    include_examples "scaffolded blocks", "journal_single"
-    include_examples "scaffolded blocks", "journal_multi"
-    include_examples "scaffolded blocks", "teaching_resource"
-    include_examples "scaffolded blocks", "report"
-    include_examples "scaffolded blocks", "resources"
+    it_behaves_like "scaffolded blocks", "simple"
+    it_behaves_like "scaffolded blocks", "enhanced"
+    it_behaves_like "scaffolded blocks", "journal_single"
+    it_behaves_like "scaffolded blocks", "journal_multi"
+    it_behaves_like "scaffolded blocks", "teaching_resource"
+    it_behaves_like "scaffolded blocks", "report"
+    it_behaves_like "scaffolded blocks", "resources"
   end
 
   context "when configuration object is present" do
@@ -80,9 +80,9 @@ RSpec.describe Content::ScaffoldProjectContent do
         end
       end
 
-      include_examples "configured blocks", :resources
-      include_examples "configured blocks", :markdown
-      include_examples "configured blocks", :recent_activity
+      it_behaves_like "configured blocks", :resources
+      it_behaves_like "configured blocks", :markdown
+      it_behaves_like "configured blocks", :recent_activity
     end
 
     it "always creates a metadata block" do

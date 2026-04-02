@@ -43,7 +43,6 @@ module Ingestions
 
         protected
 
-        # rubocop:disable Metrics/CyclomaticComplexity
         def onix_code_to_type(code)
           case code.to_i
           when 1, 2, 3, 7
@@ -66,7 +65,6 @@ module Ingestions
             ::TextTitle::KIND_ALTERNATIVE
           end
         end
-        # rubocop:enable Metrics/CyclomaticComplexity
 
         def id
           @title_node.attribute("id")&.value

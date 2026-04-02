@@ -4,6 +4,7 @@ module ResourceAttachmentValidation
   extend ActiveSupport::Concern
 
   include Attachments
+
   def validate_image_fields
     errors.add(:attachment, "image is required") unless attachment.present?
     errors.add(:attachment, "is invalid image file") if attachment.present? && !attachment_is_image?

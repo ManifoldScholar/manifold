@@ -21,32 +21,32 @@ RSpec.describe "Journal Abilities", :authorizer do
   shared_examples_for "no access" do
     it { is_expected.to be_unable_to(:read, :create, :update, :delete).on(journal) }
 
-    include_examples "unauthorized to manage journal permissions"
-    include_examples "unauthorized to manage journal entitlements"
-    include_examples "unauthorized to manage journal issues"
-    include_examples "unauthorized to manage journal issue projects"
+    it_behaves_like "unauthorized to manage journal permissions"
+    it_behaves_like "unauthorized to manage journal entitlements"
+    it_behaves_like "unauthorized to manage journal issues"
+    it_behaves_like "unauthorized to manage journal issue projects"
   end
 
   shared_examples_for "full access" do
     it("can perform all CRUD actions") { is_expected.to be_able_to(:create, :read, :update, :delete).on(journal) }
 
-    include_examples "authorized to manage journal permissions"
-    include_examples "authorized to manage journal entitlements"
-    include_examples "authorized to manage journal issues"
+    it_behaves_like "authorized to manage journal permissions"
+    it_behaves_like "authorized to manage journal entitlements"
+    it_behaves_like "authorized to manage journal issues"
   end
 
   shared_examples_for "not admin" do
-    include_examples "unauthorized to manage journal permissions"
-    include_examples "unauthorized to manage journal entitlements"
+    it_behaves_like "unauthorized to manage journal permissions"
+    it_behaves_like "unauthorized to manage journal entitlements"
   end
 
   shared_examples_for "read only" do
     it { is_expected.to be_able_to(:read).on(journal).and be_unable_to(:create, :update, :delete).on(journal) }
 
-    include_examples "unauthorized to manage journal permissions"
-    include_examples "unauthorized to manage journal entitlements"
-    include_examples "unauthorized to manage journal issues"
-    include_examples "unauthorized to manage journal issue projects"
+    it_behaves_like "unauthorized to manage journal permissions"
+    it_behaves_like "unauthorized to manage journal entitlements"
+    it_behaves_like "unauthorized to manage journal issues"
+    it_behaves_like "unauthorized to manage journal issue projects"
   end
 
   shared_examples_for "read access" do
@@ -151,23 +151,23 @@ RSpec.describe "Journal Abilities", :authorizer do
   context "when unauthenticated" do
     let(:user) { anonymous_user }
 
-    include_examples "read only"
+    it_behaves_like "read only"
   end
 
   context "when the user is a regular reader" do
-    include_examples "read only"
+    it_behaves_like "read only"
   end
 
   context "when the user is an editor" do
     let(:user_traits) { [:editor] }
 
-    include_examples "full access"
+    it_behaves_like "full access"
   end
 
   context "when the user is an admin" do
     let(:user_traits) { [:admin] }
 
-    include_examples "full access"
+    it_behaves_like "full access"
   end
 
   context "when the user is a project editor" do
@@ -176,12 +176,12 @@ RSpec.describe "Journal Abilities", :authorizer do
       user.remove_role :reader
     end
 
-    include_examples "authorized to manage journal issues"
-    include_examples "unauthorized to create new journals"
-    include_examples "not admin"
-    include_examples "read access"
-    include_examples "edit access"
-    include_examples "delete access"
+    it_behaves_like "authorized to manage journal issues"
+    it_behaves_like "unauthorized to create new journals"
+    it_behaves_like "not admin"
+    it_behaves_like "read access"
+    it_behaves_like "edit access"
+    it_behaves_like "delete access"
   end
 
   context "when the user is a journal editor" do
@@ -190,18 +190,18 @@ RSpec.describe "Journal Abilities", :authorizer do
       user.remove_role :reader
     end
 
-    include_examples "authorized to manage journal issues"
-    include_examples "authorized to manage journal issue projects"
-    include_examples "unauthorized to delete journals"
-    include_examples "not admin"
-    include_examples "read access"
-    include_examples "edit access"
+    it_behaves_like "authorized to manage journal issues"
+    it_behaves_like "authorized to manage journal issue projects"
+    it_behaves_like "unauthorized to delete journals"
+    it_behaves_like "not admin"
+    it_behaves_like "read access"
+    it_behaves_like "edit access"
 
     context "when the journal issue is a draft" do
       let!(:journal_issue) { FactoryBot.create :draft_journal_issue, journal: journal }
 
-      include_examples "authorized to manage journal issues"
-      include_examples "authorized to manage journal issue projects"
+      it_behaves_like "authorized to manage journal issues"
+      it_behaves_like "authorized to manage journal issue projects"
     end
   end
 end

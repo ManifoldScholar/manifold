@@ -36,7 +36,7 @@ class CoreMediaTypeKind < ClassyEnum::Base
   private
 
   def matches_pattern?(content_type)
-    config.mime_pattern =~ content_type if config.mime_pattern.present?
+    config.mime_pattern.presence&.=~(content_type)
   end
 
   def matches_types?(content_type)

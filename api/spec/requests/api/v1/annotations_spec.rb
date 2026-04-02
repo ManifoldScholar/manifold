@@ -8,13 +8,13 @@ RSpec.describe "Annotations", type: :request do
   end
 
   path "/annotations" do
-    include_examples "an API index request", model: Annotation
+    it_behaves_like "an API index request", model: Annotation
   end
 
   path "/annotations/{id}" do
-    include_examples "an API show request", model: Annotation
-    include_examples "an API update request", model: Annotation, authorized_user: :admin
-    include_examples "an API destroy request", model: Annotation, authorized_user: :admin
+    it_behaves_like "an API show request", model: Annotation
+    it_behaves_like "an API update request", model: Annotation, authorized_user: :admin
+    it_behaves_like "an API destroy request", model: Annotation, authorized_user: :admin
   end
 
   describe "for a text section" do
@@ -23,14 +23,14 @@ RSpec.describe "Annotations", type: :request do
     let_it_be(:text_id) { parent.text.id }
 
     path "/texts/{text_id}/relationships/text_sections/{text_section_id}/annotations" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "text section",
                        model: Annotation,
                        url_parameters: [:text_section_id, :text_id]
     end
 
     path "/text_sections/{text_section_id}/relationships/annotations" do
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
                        parent: "text section",
                        model: Annotation,
                        url_parameters: [:text_section_id],
@@ -38,7 +38,7 @@ RSpec.describe "Annotations", type: :request do
     end
 
     path "/text_sections/{text_section_id}/relationships/annotations/{id}" do
-      include_examples "an API update request",
+      it_behaves_like "an API update request",
                        parent: "text section",
                        model: Annotation,
                        url_parameters: [:text_section_id],
@@ -56,7 +56,7 @@ RSpec.describe "Annotations", type: :request do
     path "/me/relationships/annotations" do
       let!(:'filter[text]') { nil }
 
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "current user",
                        tags: "Me",
                        model: Annotation,
@@ -81,7 +81,7 @@ RSpec.describe "Annotations", type: :request do
     let_it_be(:user_id) { user.id }
 
     path "/users/{user_id}/relationships/annotations" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "user",
                        model: Annotation,
                        included_relationships: [:creator, :flags],
@@ -96,7 +96,7 @@ RSpec.describe "Annotations", type: :request do
     let_it_be(:reading_group_id) { parent.id }
 
     path "/reading_groups/{reading_group_id}/relationships/annotations" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "reading group",
                        model: Annotation,
                        url_parameters: [:reading_group_id],
@@ -111,14 +111,14 @@ RSpec.describe "Annotations", type: :request do
     let_it_be(:flag, refind: true) { FactoryBot.create(:flag, creator: admin, flaggable: annotation) }
 
     path "/annotations/{annotation_id}/relationships/flags" do
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
                        summary: "Flag the annotation for moderation",
                        model: Annotation,
                        authorized_user: :admin,
                        request_body: false,
                        url_parameters: [:annotation_id]
 
-      include_examples "an API destroy request",
+      it_behaves_like "an API destroy request",
                        summary: "Unflag the annotation",
                        model: Annotation,
                        authorized_user: :admin,

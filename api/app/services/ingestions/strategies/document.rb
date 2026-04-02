@@ -130,7 +130,7 @@ module Ingestions
       def maybe_fix_legacy_source_identifiers!
         return unless reingest?
 
-        return unless existing_text.present? && existing_text_sections.count == 1
+        return unless existing_text.present? && existing_text_sections.one?
         return if existing_text_sections.where(source_identifier: text_section_source_identifier).any?
 
         existing_text_section = existing_text_sections.find_by(text: existing_text, kind: ::TextSection::KIND_SECTION)

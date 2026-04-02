@@ -59,7 +59,7 @@ RSpec.describe Text, type: :model do
       @child_class = FactoryBot.create(:text_section, text: @calling_class, name: "Section Name")
     end
 
-    include_examples "a citable class with_citable_children"
+    it_behaves_like "a citable class with_citable_children"
   end
 
   describe "its titles" do
