@@ -55,6 +55,9 @@ doc
 ## Plugins ##
 client/plugins*
 
+## Client build output ##
+client/dist
+
 __MACOSX
 
 Brewfile.lock.json
