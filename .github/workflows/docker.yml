@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - next # Next, tags as "next"
-      - master # Edge, tags as "edge"
+      - main # Edge, tags as "edge"
       - release # Production, tags as "latest"
 
 concurrency:
