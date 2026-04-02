@@ -10,6 +10,7 @@ class Stylesheet < ApplicationRecord
   # Authorization
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   self.filter_attributes = [/\Araw_styles\z/, /\Astyles\z/].freeze

@@ -10,7 +10,7 @@ RSpec.describe "Passwords", type: :request do
   end
 
   path "/passwords" do
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                       factory: :user,
                       resource_name: "Password",
                       summary: "Send a reset password message",
@@ -25,7 +25,7 @@ RSpec.describe "Passwords", type: :request do
   end
 
   path "/passwords/update" do
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                       model: User,
                       summary: "Update a password",
                       tags: "Passwords",
@@ -41,7 +41,7 @@ RSpec.describe "Passwords", type: :request do
   end
 
   path "/passwords/admin_reset_password" do
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                       model: User,
                       tags: "Passwords",
                       parameters: [

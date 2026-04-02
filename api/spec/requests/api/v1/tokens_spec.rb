@@ -12,7 +12,7 @@ RSpec.describe "Tokens", type: :request do
   let(:email) { admin_email }
 
   path "/tokens" do
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                      model: User,
                      tags: "Token",
                      resource_name: "CurrentUser",

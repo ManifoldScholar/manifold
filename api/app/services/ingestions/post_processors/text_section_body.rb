@@ -11,7 +11,6 @@ module Ingestions
       object :text_section
 
       delegate :source_body, to: :text_section
-      delegate :body, to: :text_section
 
       # A multidimensional array of tags and attributes that the
       # TextSectionBody transformer will transform.

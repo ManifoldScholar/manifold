@@ -3,8 +3,6 @@
 module SystemUpgrades
   module Upgrades
     class Manifold040100 < SystemUpgrades::AbstractVersion
-      # rubocop:disable Metrics/AbcSize
-
       def perform!
         remove_collaborators_without_makers!
         update_resource_sort_titles!
@@ -67,8 +65,6 @@ module SystemUpgrades
 
         Maker.find_each { |t| t.cache_name && t.save }
       end
-
-      # rubocop:enable Metrics/AbcSize
     end
   end
 end

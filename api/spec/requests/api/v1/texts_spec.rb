@@ -4,12 +4,12 @@ require "swagger_helper"
 
 RSpec.describe "Text", type: :request do
   path "/texts" do
-    include_examples "an API index request",
+    it_behaves_like "an API index request",
                       model: Text,
                       included_relationships: [:project]
   end
   path "/texts/{id}" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                       model: Text,
                       included_relationships: [
                         :project,
@@ -19,7 +19,7 @@ RSpec.describe "Text", type: :request do
                         :stylesheets
                       ]
 
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                       model: Text,
                       authorized_user: :admin,
                       included_relationships: [
@@ -28,7 +28,7 @@ RSpec.describe "Text", type: :request do
                         :contributors
                       ]
 
-    include_examples "an API destroy request",
+    it_behaves_like "an API destroy request",
                       model: Text,
                       authorized_user: :admin
   end
@@ -37,7 +37,7 @@ RSpec.describe "Text", type: :request do
   let(:project_id) { project.id }
 
   path "/projects/{project_id}/relationships/texts" do
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                     model: Text,
                     parent: "project",
                     url_parameters: [:project_id],

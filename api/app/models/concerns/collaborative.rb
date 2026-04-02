@@ -4,6 +4,7 @@
 # and contributors
 module Collaborative
   extend ActiveSupport::Concern
+
   included do
     has_many :collaborators,
              -> { order(:position) },

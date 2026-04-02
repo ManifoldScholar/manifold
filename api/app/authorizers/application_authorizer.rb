@@ -16,7 +16,6 @@ class ApplicationAuthorizer < Authority::Authorizer
     :creator_or_has_admin_permissions?,
     :creator_or_has_marketeer_permissions?,
     :editor_of_any_project?,
-    :trusted_or_established_user?,
     :authenticated?,
     to: :class
   )

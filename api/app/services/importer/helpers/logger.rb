@@ -7,6 +7,7 @@ module Importer
     # Logger helper for Drive Resources importer
     class Logger
       extend Forwardable
+
       def_delegators :@logger, :info, :warn, :debug, :error
 
       def initialize(logger)

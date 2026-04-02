@@ -191,7 +191,7 @@ module Analytics
         cte_sql = "WITH #{required_ctes.map { |c| self.class.ctes[c] }.join(',')}"
 
         <<~SQL
-          #{required_ctes.present? ? cte_sql : nil}
+          #{cte_sql if required_ctes.present?}
           #{yield}
         SQL
       end
@@ -209,7 +209,7 @@ module Analytics
             #{build_meta(type, **metadata)},
             #{build_simple_data(value, value_key: value_key)}
           FROM #{from}
-          #{filter.present? ? "WHERE #{filter}" : nil}
+          #{"WHERE #{filter}" if filter.present?}
         SQL
       end
 
@@ -220,7 +220,7 @@ module Analytics
             #{build_meta(type, **metadata)},
             #{build_row_data(query_or_table_name)}
           FROM #{from}
-          #{filter.present? ? "WHERE #{filter}" : nil}
+          #{"WHERE #{filter}" if filter.present?}
         SQL
       end
 

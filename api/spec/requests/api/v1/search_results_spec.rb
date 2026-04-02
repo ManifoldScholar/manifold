@@ -20,7 +20,7 @@ RSpec.describe "Search Results", type: :request do
       let(:raw) { nil }
       let(:facets) { [] }
 
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        factory: "foo",
                        resource_name: "SearchResult",
                        additional_parameters: [

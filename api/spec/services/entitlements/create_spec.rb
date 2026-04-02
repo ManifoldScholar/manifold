@@ -85,19 +85,19 @@ RSpec.describe Entitlements::Create, interaction: true do
       context "with an invalid date" do
         let_input!(:expiration) { "Invalid Date Breaks The Bank" }
 
-        include_examples "a failed expiration"
+        it_behaves_like "a failed expiration"
       end
 
       context "with a date in the past" do
         let_input!(:expiration) { "1999/12/13" }
 
-        include_examples "a failed expiration"
+        it_behaves_like "a failed expiration"
       end
 
       context "that is ambiguous" do
         let_input!(:expiration) { "2 years" }
 
-        include_examples "a failed expiration"
+        it_behaves_like "a failed expiration"
       end
     end
   end

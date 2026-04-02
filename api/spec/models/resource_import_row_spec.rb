@@ -207,17 +207,17 @@ RSpec.describe ResourceImportRow, type: :model, slow: true do
       end
     end
 
-    include_examples "Imported resource rows", "image"
-    include_examples "Imported resource rows", "local_video"
-    include_examples "Imported resource rows", "external_video"
-    include_examples "Imported resource rows", "audio"
-    include_examples "Imported resource rows", "link"
-    include_examples "Imported resource rows", "pdf"
-    include_examples "Imported resource rows", "document"
-    include_examples "Imported resource rows", "file"
-    include_examples "Imported resource rows", "spreadsheet"
-    include_examples "Imported resource rows", "presentation"
-    include_examples "Imported resource rows", "interactive"
+    it_behaves_like "Imported resource rows", "image"
+    it_behaves_like "Imported resource rows", "local_video"
+    it_behaves_like "Imported resource rows", "external_video"
+    it_behaves_like "Imported resource rows", "audio"
+    it_behaves_like "Imported resource rows", "link"
+    it_behaves_like "Imported resource rows", "pdf"
+    it_behaves_like "Imported resource rows", "document"
+    it_behaves_like "Imported resource rows", "file"
+    it_behaves_like "Imported resource rows", "spreadsheet"
+    it_behaves_like "Imported resource rows", "presentation"
+    it_behaves_like "Imported resource rows", "interactive"
 
     # Generating styles in tests is too slow, but this test was useful during
     # development, so I'm leaving it for now --ZD

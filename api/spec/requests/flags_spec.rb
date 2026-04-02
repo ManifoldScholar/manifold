@@ -163,7 +163,7 @@ RSpec.describe "Flags API", type: :request do
   context "when working with annotations" do
     let_it_be(:annotation, refind: true) { FactoryBot.create(:annotation, creator: reader) }
 
-    include_examples "a flaggable relationship", Annotation do
+    it_behaves_like "a flaggable relationship", Annotation do
       let(:flaggable) { annotation }
     end
   end
@@ -171,7 +171,7 @@ RSpec.describe "Flags API", type: :request do
   context "when working with comments" do
     let_it_be(:comment, refind: true) { FactoryBot.create(:comment, creator: reader) }
 
-    include_examples "a flaggable relationship", Comment do
+    it_behaves_like "a flaggable relationship", Comment do
       let(:flaggable) { comment }
     end
   end

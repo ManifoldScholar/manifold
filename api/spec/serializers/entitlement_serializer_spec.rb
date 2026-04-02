@@ -10,36 +10,36 @@ RSpec.describe V1::EntitlementSerializer do
   let(:serialized_object) { entitlement }
 
   shared_examples_for "multiple variations" do
-    include_examples "a serializer"
+    it_behaves_like "a serializer"
 
     context "with an expiration" do
       let(:other_traits) { [:with_expiration, :read_access] }
 
-      include_examples "a serializer"
+      it_behaves_like "a serializer"
     end
 
     context "for a reading group" do
       let(:target_trait) { :for_reading_group }
 
-      include_examples "a serializer"
+      it_behaves_like "a serializer"
     end
   end
 
   context "for a project" do
     let(:main_trait) { :project_read_access }
 
-    include_examples "multiple variations"
+    it_behaves_like "multiple variations"
   end
 
   context "for a project collection" do
     let(:main_trait) { :collection_read_access }
 
-    include_examples "multiple variations"
+    it_behaves_like "multiple variations"
   end
 
   context "for a global subscription" do
     let(:main_trait) { :global_subscriber }
 
-    include_examples "multiple variations"
+    it_behaves_like "multiple variations"
   end
 end

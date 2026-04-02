@@ -4,9 +4,9 @@ require "swagger_helper"
 
 RSpec.describe "Resources", type: :request do
   path "/resources/{id}" do
-    include_examples "an API show request", model: Resource
-    include_examples "an API destroy request", model: Resource, authorized_user: :admin
-    include_examples "an API update request", model: Resource, authorized_user: :admin
+    it_behaves_like "an API show request", model: Resource
+    it_behaves_like "an API destroy request", model: Resource, authorized_user: :admin
+    it_behaves_like "an API update request", model: Resource, authorized_user: :admin
   end
 
   context "when relating to a project" do
@@ -15,13 +15,13 @@ RSpec.describe "Resources", type: :request do
     let(:project_id) { project.id }
 
     path "/projects/{project_id}/relationships/resources" do
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
                        parent: "project",
                        model: Resource,
                        authorized_user: :admin,
                        url_parameters: [:project_id]
 
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "project",
                        model: Resource,
                        url_parameters: [:project_id]
@@ -34,7 +34,7 @@ RSpec.describe "Resources", type: :request do
     let(:resource_collection_id) { resource_collection.id }
 
     path "/resource_collections/{resource_collection_id}/relationships/resources" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "resource collection",
                        model: Resource,
                        url_parameters: [:resource_collection_id]
@@ -48,7 +48,7 @@ RSpec.describe "Resources", type: :request do
     let!(:text_id) { text_section.text.id }
 
     path "/texts/{text_id}/relationships/text_sections/{text_section_id}/resources" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "text section",
                        model: Resource,
                        url_parameters: [:text_section_id, :text_id]

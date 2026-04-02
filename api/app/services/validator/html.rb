@@ -93,7 +93,6 @@ module Validator
       end
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity
     def tag_valid_with_parent?(tag, parent)
       case tag
       when "option"
@@ -113,6 +112,5 @@ module Validator
       end
       true
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

@@ -72,8 +72,6 @@ module Serializer
       MATHML_ELEMENTS.include?(representation[:tag])
     end
 
-    # rubocop:disable Metrics/PerceivedComplexity, Metrics/AbcSize
-    # rubocop:disable Metrics/CyclomaticComplexity
     def clean_empty_text_nodes!(representation)
       return unless representation[:node_type] == "element"
       return unless block_level_element?(representation)
@@ -99,8 +97,6 @@ module Serializer
         child[:delete] == true
       end
     end
-    # rubocop:enable Metrics/PerceivedComplexity, Metrics/AbcSize
-    # rubocop:enable Metrics/CyclomaticComplexity
 
     def traverse(node)
       children = nil

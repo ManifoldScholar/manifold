@@ -4,13 +4,13 @@ require "swagger_helper"
 
 RSpec.describe "JournalIssues", type: :request do
   path "/journal_issues/{id}" do
-    include_examples "an API show request", model: JournalIssue
-    include_examples "an API update request", model: JournalIssue, authorized_user: :admin
-    include_examples "an API destroy request", model: JournalIssue, authorized_user: :admin
+    it_behaves_like "an API show request", model: JournalIssue
+    it_behaves_like "an API update request", model: JournalIssue, authorized_user: :admin
+    it_behaves_like "an API destroy request", model: JournalIssue, authorized_user: :admin
   end
 
   path "/journal_issues" do
-    include_examples "an API index request", model: JournalIssue
+    it_behaves_like "an API index request", model: JournalIssue
   end
 
   describe "for a journal" do
@@ -20,8 +20,8 @@ RSpec.describe "JournalIssues", type: :request do
     let(:journal_id) { parent.id }
 
     path "/journals/{journal_id}/relationships/journal_issues" do
-      include_examples "an API index request", parent: "journal", model: JournalIssue, resource_name: "journal_issue", url_parameters: [:journal_id]
-      include_examples "an API create request", parent: "journal", model: JournalIssue, resource_name: "journal_issue", url_parameters: [:journal_id], authorized_user: :admin, included_relationships: [:project] do
+      it_behaves_like "an API index request", parent: "journal", model: JournalIssue, resource_name: "journal_issue", url_parameters: [:journal_id]
+      it_behaves_like "an API create request", parent: "journal", model: JournalIssue, resource_name: "journal_issue", url_parameters: [:journal_id], authorized_user: :admin, included_relationships: [:project] do
         let(:body) do
           {
             data: {

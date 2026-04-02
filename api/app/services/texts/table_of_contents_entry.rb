@@ -19,7 +19,7 @@ module Texts
     def ensure_uid!
       self.uid ||= SecureRandom.uuid
 
-      children.each(&:ensure_uid!) if children.present?
+      children.presence&.each(&:ensure_uid!)
     end
   end
 end

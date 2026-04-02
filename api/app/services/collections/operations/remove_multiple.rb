@@ -23,7 +23,7 @@ module Collections
         def remove_entry!
           entry = yield find_entry
 
-          entry.destroy! if entry.present?
+          entry.presence&.destroy!
         rescue ActiveRecord::RecordNotDestroyed
           operation_error title: "Failed To Remove", detail: rgp.flattened_errors, code: :cannot_remove
         else

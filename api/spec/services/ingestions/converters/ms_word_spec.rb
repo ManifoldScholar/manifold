@@ -33,7 +33,7 @@ RSpec.describe Ingestions::Converters::MsWord do
       let(:media_tags) { parsed.xpath("//img | //image | //video | //audio") }
 
       it "relativizes the media tag src paths", odd_fs: true do
-        srcs = media_tags.map { |tag| tag["src"] }
+        srcs = media_tags.pluck("src")
         expect(srcs.all? { |src| src.start_with? "/" }).to be false
       end
     end

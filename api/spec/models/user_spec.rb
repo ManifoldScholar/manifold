@@ -254,14 +254,14 @@ RSpec.describe User, type: :model do
     end
 
     context "when fetching the anonymous user" do
-      include_examples "unique user classification" do
+      it_behaves_like "unique user classification" do
         let(:classification) { :anonymous }
         let(:method_name) { :anonymous_user }
       end
     end
 
     context "when fetching the CLI user" do
-      include_examples "unique user classification" do
+      it_behaves_like "unique user classification" do
         let(:classification) { :command_line }
         let(:method_name) { :cli_user }
       end

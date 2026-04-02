@@ -27,7 +27,6 @@ module CollectionEntry
     extend Memoist
 
     delegate :collectable_associations,
-             :collectable_project?, :collectable_resource?, :collectable_resource_collection?, :collectable_text?,
              to: :collectable_definition, allow_nil: true
 
     delegate :project?, :resource?, :resource_collection?, :text?,

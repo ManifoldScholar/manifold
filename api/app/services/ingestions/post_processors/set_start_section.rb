@@ -37,7 +37,9 @@ module Ingestions
       end
 
       def text_section
-        @text_section ||= text.text_sections.find_by(source_identifier: manifest_start_text_section[:source_identifier])
+        return @text_section if defined?(@text_section)
+
+        @text_section = text.text_sections.find_by(source_identifier: manifest_start_text_section[:source_identifier])
       end
     end
   end

@@ -236,7 +236,7 @@ module Ingestions
 
       def source_root_dir?(path = source_root_path)
         entities = top_level_entities(path)
-        entities[:dirs].count == 1 && entities[:files].count.zero?
+        entities[:dirs].one? && entities[:files].none?
       end
 
       def top_level_entities(path = source_root_path)

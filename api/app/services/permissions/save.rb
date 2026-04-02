@@ -5,7 +5,6 @@ module Permissions
     object :permission
 
     # @return [Permission, nil]
-    # rubocop:disable Metrics/AbcSize
     def execute
       return permission unless permission.valid?
 
@@ -31,6 +30,5 @@ module Permissions
 
       Permission.fetch!(@resource, @user) if permission.role_names.present?
     end
-    # rubocop:enable Metrics/AbcSize
   end
 end

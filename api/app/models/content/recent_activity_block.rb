@@ -7,7 +7,7 @@ module Content
     # This gets exposed as is to the client, and we don't really want hash keys with
     # question marks on the client side.
     def has_activity
-      project.events.count.positive?
+      project.events.any?
     end
   end
 end

@@ -3,9 +3,9 @@
 RSpec.describe Analytics::Reports::Global do
   include_context "with projects"
 
-  include_examples "analytics reporter visits"
+  it_behaves_like "analytics reporter visits"
 
-  include_examples "analytics reporter events" do
+  it_behaves_like "analytics reporter events" do
     let_it_be(:werd) { Faker::Lorem.word }
 
     let_it_be(:search_events) do

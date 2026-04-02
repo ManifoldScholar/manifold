@@ -57,5 +57,5 @@ RSpec.describe "Text Abilities", :authorizer, :project_role_tests do
     end
   end
 
-  include_examples "unauthenticated user", Text
+  it_behaves_like "unauthenticated user", Text
 end

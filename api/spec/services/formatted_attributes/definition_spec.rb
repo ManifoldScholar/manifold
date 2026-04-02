@@ -89,19 +89,19 @@ RSpec.describe FormattedAttributes::Definition do
       context "with a standard method accessor" do
         let(:model_instance) { maybe_wrap_container method_accessor }
 
-        include_examples "finds the value"
+        it_behaves_like "finds the value"
       end
 
       context "with a #dig accessor" do
         let(:model_instance) { maybe_wrap_container dig_accessor }
 
-        include_examples "finds the value"
+        it_behaves_like "finds the value"
       end
 
       context "with a #[] accessor" do
         let(:model_instance) { maybe_wrap_container bracket_accessor }
 
-        include_examples "finds the value"
+        it_behaves_like "finds the value"
       end
 
       context "with a blank model" do
@@ -142,7 +142,7 @@ RSpec.describe FormattedAttributes::Definition do
     it { is_expected.to be_match :title }
     it { is_expected.to be_match "title" }
 
-    include_examples "accessor examples"
+    it_behaves_like "accessor examples"
   end
 
   context "with a container" do
@@ -158,6 +158,6 @@ RSpec.describe FormattedAttributes::Definition do
     it { is_expected.to be_match "metadata.title" }
     it { is_expected.to be_match "title" }
 
-    include_examples "accessor examples"
+    it_behaves_like "accessor examples"
   end
 end

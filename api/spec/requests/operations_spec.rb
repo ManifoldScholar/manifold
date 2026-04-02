@@ -62,14 +62,14 @@ RSpec.describe "Operations API", type: :request do
       let!(:collector) { current_user }
       let_it_be(:collectable, refind: true) { FactoryBot.create :project }
 
-      include_examples "a collectable operation"
+      it_behaves_like "a collectable operation"
     end
 
     context "when a user is collecting a project for a reading group" do
       let_it_be(:collector, refind: true) { FactoryBot.create :reading_group, creator: current_user }
       let_it_be(:collectable, refind: true) { FactoryBot.create :project }
 
-      include_examples "a collectable operation"
+      it_behaves_like "a collectable operation"
     end
 
     context "when a user is reordering multiple record types in a reading group" do

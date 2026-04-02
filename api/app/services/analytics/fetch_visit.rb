@@ -24,7 +24,9 @@ module Analytics
     end
 
     def visit
-      @visit ||= Analytics::Visit.find_by(visit_token: valid_visit_token)
+      return @visit if defined?(@visit)
+
+      @visit = Analytics::Visit.find_by(visit_token: valid_visit_token)
     end
 
     def track_new_visit

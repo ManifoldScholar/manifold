@@ -5,6 +5,7 @@ class Category < ApplicationRecord
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Constants

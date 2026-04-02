@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.shared_examples "after importing" do
   include ActiveJob::TestHelper
+
   include_context "resource import"
 
   it "is valid" do
@@ -190,7 +191,7 @@ RSpec.describe ResourceImport, type: :model, slow: true do
       let(:ri) do
         parsing_google_resource_import
       end
-      include_examples "after parsing"
+      it_behaves_like "after parsing"
     end
   end
 
@@ -204,14 +205,14 @@ RSpec.describe ResourceImport, type: :model, slow: true do
       let(:ri) do
         parsing_csv_resource_import
       end
-      include_examples "after parsing"
+      it_behaves_like "after parsing"
     end
 
     context "after importing" do
       let(:ri) do
         importing_csv_resource_import
       end
-      include_examples "after importing"
+      it_behaves_like "after importing"
     end
   end
 

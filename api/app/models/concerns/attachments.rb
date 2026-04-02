@@ -255,7 +255,7 @@ module Attachments
     # @!scope class
     # @return [<AttachmentUploader::Attachment>]
     def shrine_attachment_modules
-      ancestors.select { |mod| mod.is_a?(Shrine::Attachment) }
+      ancestors.grep(Shrine::Attachment)
     end
 
     # @param [Symbol, String] attachment_name

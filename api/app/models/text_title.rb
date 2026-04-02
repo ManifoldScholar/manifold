@@ -36,9 +36,11 @@ class TextTitle < ApplicationRecord
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   include HasFormattedAttributes
+
   has_formatted_attributes :value, include_wrap: false
 
   alias title_formatted value_formatted

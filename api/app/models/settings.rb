@@ -112,7 +112,7 @@ class Settings < ApplicationRecord
       has_visible_home_project_collections: ProjectCollection.by_visible_on_homepage.exists?,
       has_visible_projects: Project.with_read_ability(current_user).exists?,
       has_visible_journals: Journal.with_read_ability(current_user).exists?,
-      has_project_collections: ProjectCollection.count.positive?,
+      has_project_collections: ProjectCollection.any?,
       manifold_version: self.class.manifold_version,
       require_terms_and_conditions: Page.by_purpose(:terms_and_conditions).exists?,
       google_analytics_enabled: google_analytics_enabled,

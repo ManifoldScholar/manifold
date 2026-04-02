@@ -39,7 +39,7 @@ RSpec.describe Ingestions::PostProcessor do
 
     it "has the correct labels" do
       toc = text.toc
-      expect(toc.map { |i| i[:label] }).to eq ["Section 1", "Section 2", "Section 2#1", "Section 3"]
+      expect(toc.pluck(:label)).to eq ["Section 1", "Section 2", "Section 2#1", "Section 3"]
       expect(toc[1][:children][0][:label]).to eq "Section 2.a"
     end
 

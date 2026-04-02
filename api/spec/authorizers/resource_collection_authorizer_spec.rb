@@ -5,5 +5,5 @@ RSpec.describe "ResourceCollection Abilities", :authorizer, :project_role_tests 
 
   let(:object) { resource_collection }
 
-  include_examples "unauthenticated user", ResourceCollection
+  it_behaves_like "unauthenticated user", ResourceCollection
 end

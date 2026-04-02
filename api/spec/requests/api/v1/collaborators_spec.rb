@@ -15,7 +15,7 @@ RSpec.describe "Collaborators", type: :request do
     let(:project_id) { resource.collaboratable_id }
 
     path "/projects/{project_id}/relationships/collaborators" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "project",
                        model: Collaborator,
                        url_parameters: [:project_id],
@@ -23,7 +23,7 @@ RSpec.describe "Collaborators", type: :request do
     end
 
     path "/projects/{project_id}/relationships/collaborators/{id}" do
-      include_examples "an API show request",
+      it_behaves_like "an API show request",
                        parent: "project",
                        model: Collaborator,
                        url_parameters: [:project_id]
@@ -36,7 +36,7 @@ RSpec.describe "Collaborators", type: :request do
     let(:text_id) { text.id }
 
     path "/texts/{text_id}/relationships/collaborators" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "text",
                        model: Collaborator,
                        url_parameters: [:text_id],
@@ -44,7 +44,7 @@ RSpec.describe "Collaborators", type: :request do
     end
 
     path "/texts/{text_id}/relationships/collaborators/{id}" do
-      include_examples "an API show request",
+      it_behaves_like "an API show request",
                        parent: "text",
                        model: Collaborator,
                        url_parameters: [:text_id]

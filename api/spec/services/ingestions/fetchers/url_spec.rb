@@ -12,5 +12,5 @@ RSpec.describe Ingestions::Fetchers::URL, slow: true do
     WebMock.disable_net_connect!
   end
 
-  include_examples "a fetcher"
+  it_behaves_like "a fetcher"
 end

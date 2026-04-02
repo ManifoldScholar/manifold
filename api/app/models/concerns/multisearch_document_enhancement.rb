@@ -15,9 +15,9 @@ module MultisearchDocumentEnhancement
     text_section
   ].freeze
 
-  SEARCHABLE_TYPE_MAP = SEARCHABLE_TYPES.index_with { _1.to_s.classify }.freeze
+  SEARCHABLE_TYPE_MAP = SEARCHABLE_TYPES.index_with { it.to_s.classify }.freeze
 
-  SEARCHABLE_LOOKUP_MAP = SEARCHABLE_TYPE_MAP.invert.transform_values { :"searchable_#{_1}" }
+  SEARCHABLE_LOOKUP_MAP = SEARCHABLE_TYPE_MAP.invert.transform_values { :"searchable_#{it}" }
 
   STANDARD_ASSOCIATIONS = {
     journal: [
@@ -70,8 +70,8 @@ module MultisearchDocumentEnhancement
     },
   }.freeze
 
-  SEARCHABLE_TYPE_ASSOCIATIONS = SEARCHABLE_TYPES.each_with_object({}) do |key, h|
-    h[:"searchable_#{key}"] = SEARCHABLE_ASSOCIATIONS.fetch(key, [])
+  SEARCHABLE_TYPE_ASSOCIATIONS = SEARCHABLE_TYPES.to_h do |key|
+    [:"searchable_#{key}", SEARCHABLE_ASSOCIATIONS.fetch(key, [])]
   end
 
   DEFAULT_ASSOCIATIONS = STANDARD_ASSOCIATIONS.merge(SEARCHABLE_TYPE_ASSOCIATIONS)

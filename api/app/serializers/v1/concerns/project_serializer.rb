@@ -134,7 +134,7 @@ module V1
             )
           ).meta(read_only: true).optional do |object, params|
             journal = object.journal
-            journal.issues_nav(user: params[:current_user]) if journal.present?
+            journal.presence&.issues_nav(user: params[:current_user])
           end
         end
       end

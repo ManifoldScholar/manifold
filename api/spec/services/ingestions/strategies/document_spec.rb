@@ -138,7 +138,7 @@ RSpec.describe Ingestions::Strategies::Document do
     context "when single HTML page" do
       let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
 
-      include_examples "outcome assertions"
+      it_behaves_like "outcome assertions"
 
       it "has one text section" do
         expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
@@ -154,7 +154,7 @@ RSpec.describe Ingestions::Strategies::Document do
       context "when ZIP" do
         let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal.zip") }
 
-        include_examples "outcome assertions"
+        it_behaves_like "outcome assertions"
 
         it "has one text section" do
           expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
@@ -169,7 +169,7 @@ RSpec.describe Ingestions::Strategies::Document do
       xcontext "when dir" do
         let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal") }
 
-        include_examples "outcome assertions"
+        it_behaves_like "outcome assertions"
 
         it "has one text section" do
           expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]
@@ -186,7 +186,7 @@ RSpec.describe Ingestions::Strategies::Document do
   context "when markdown file" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "markdown", "minimal-single", "minimal-single.md") }
 
-    include_examples "outcome assertions"
+    it_behaves_like "outcome assertions"
 
     it "has one text section" do
       expected = [{ "source_identifier" => "eacf331f0ffc35d4b482f1d15a887d3b", "name" => "title", "kind" => "section", "position" => 1, "build" => "build/index.html" }]

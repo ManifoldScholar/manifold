@@ -3,6 +3,7 @@
 module V1
   class ErrorSerializer < ManifoldSerializer
     include ::V1::Concerns::ManifoldSerializer
+
     set_id :id
     attr_accessor :with_root_key
 

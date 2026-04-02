@@ -5,9 +5,9 @@ RSpec.describe Analytics::Reports::ForText do
 
   include_context "with a single text"
 
-  include_examples "analytics reporter visits"
+  it_behaves_like "analytics reporter visits"
 
-  include_examples "analytics reporter events" do
+  it_behaves_like "analytics reporter events" do
     let_it_be(:share_actions) { %w[facebook twitter] }
 
     let_it_be(:share_clicks) do

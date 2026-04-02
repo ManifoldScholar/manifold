@@ -330,7 +330,7 @@ RSpec.describe "Reading Groups API", type: :request do
     end
 
     context "as an unaffiliated user" do
-      include_examples "forbidden to clone"
+      it_behaves_like "forbidden to clone"
     end
 
     context "as a member" do
@@ -338,7 +338,7 @@ RSpec.describe "Reading Groups API", type: :request do
         FactoryBot.create :reading_group_membership, user: current_user, reading_group: reading_group
       end
 
-      include_examples "forbidden to clone"
+      it_behaves_like "forbidden to clone"
     end
 
     context "as a moderator" do
@@ -346,19 +346,19 @@ RSpec.describe "Reading Groups API", type: :request do
         FactoryBot.create :reading_group_membership, :moderator, user: current_user, reading_group: reading_group
       end
 
-      include_examples "able to clone"
+      it_behaves_like "able to clone"
     end
 
     context "as the creator" do
       let(:reading_group_creator) { current_user }
 
-      include_examples "able to clone"
+      it_behaves_like "able to clone"
     end
 
     context "as an admin" do
       let(:current_user) { FactoryBot.create :user, :admin }
 
-      include_examples "able to clone"
+      it_behaves_like "able to clone"
     end
   end
 end

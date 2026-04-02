@@ -14,7 +14,7 @@ RSpec.describe "Project Ingestions API", type: :request do
     end
 
     path "/projects/{project_id}/ingestions" do
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
             model: Ingestion,
             parent: "project",
             url_parameters: [:project_id],
