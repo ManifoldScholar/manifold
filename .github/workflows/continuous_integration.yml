@@ -39,6 +39,21 @@ jobs:
         working-directory: "./client"
         run: yarn depcheck
 
+  client-build:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v6
+
+      - run: corepack enable
+      - uses: ./.github/actions/setup-node
+
+      - name: "Build client"
+        working-directory: "./client"
+        run: yarn build
+
   api-lint:
     if: github.event.pull_request.draft == false
 
