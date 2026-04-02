@@ -16,6 +16,7 @@ import exceptionRenderer from "./helpers/exceptionRenderer";
 import manifoldBootstrap from "./bootstrap";
 import has from "lodash/has";
 import FatalError from "global/components/FatalError";
+import BodyClass from "hoc/BodyClass";
 import { resetServerContext as resetDndServerContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
@@ -41,16 +42,26 @@ const respondWithRedirect = (res, redirectLocation) => {
   res.end();
 };
 
-const fatalErrorOutput = (errorComponent, store) => {
-  const stats = readStats("Client");
+const renderComponentToBody = (component, stats, store, options = {}) => {
+  const content = component ? ReactDOM.renderToString(component) : null;
+  const bodyClasses = BodyClass.rewind() || [];
+  const bodyClass = bodyClasses.filter(Boolean).join(" ");
   return ReactDOM.renderToString(
     <HtmlBody
-      component={errorComponent}
-      disableBrowserRender
+      content={content}
+      bodyClass={bodyClass}
       stats={stats}
       store={store}
+      disableBrowserRender={options.disableBrowserRender}
     />
   );
+};
+
+const fatalErrorOutput = (errorComponent, store) => {
+  const stats = readStats("Client");
+  return renderComponentToBody(errorComponent, stats, store, {
+    disableBrowserRender: true
+  });
 };
 
 const render = async (req, res, store) => {
@@ -92,16 +103,14 @@ const render = async (req, res, store) => {
 
   try {
     ch.notice("Rendering application on server.", "floppy_disk");
-    ReactDOM.renderToString(
-      <HtmlBody component={appComponent} stats={stats} store={store} />
-    );
+    ReactDOM.renderToString(appComponent);
+    BodyClass.rewind();
 
     await isFetchingComplete();
     ch.notice("ResolveData completed.", "floppy_disk");
 
-    renderString = ReactDOM.renderToString(
-      <HtmlBody component={appComponent} stats={stats} store={store} />
-    );
+    resetDndServerContext();
+    renderString = renderComponentToBody(appComponent, stats, store);
   } catch (renderError) {
     isError = true;
     ch.error("Server-side render failed in server-react.js");

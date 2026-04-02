@@ -1,15 +1,19 @@
 import fs from "fs";
 import path from "path";
+import config from "config";
 import ch from "../../helpers/consoleHelpers";
 
+let cachedStats = null;
+
 export default function readStats(name) {
+  if (cachedStats && config.environment.isProduction) return cachedStats;
+
   const statsPath = path.join(__dirname, "..", "manifest.json");
 
-  let stats;
   try {
     const data = fs.readFileSync(statsPath, "utf8");
-    stats = JSON.parse(data);
-    return stats;
+    cachedStats = JSON.parse(data);
+    return cachedStats;
   } catch (err) {
     [
       `Manifold's Node ${name} server is starting without a client asset manifest,`,

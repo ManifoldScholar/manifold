@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReactDOM from "react-dom/server";
 import serialize from "serialize-javascript";
-import BodyClass from "hoc/BodyClass";
 import reduceAssets from "./reduceAssets";
 
 function getJavascripts(stats) {
@@ -12,10 +10,7 @@ function getJavascripts(stats) {
   });
 }
 
-function HtmlBody({ stats, component, store, disableBrowserRender }) {
-  const content = component ? ReactDOM.renderToString(component) : null;
-  const bodyClasses = BodyClass.rewind() || [];
-  const bodyClass = bodyClasses.filter(Boolean).join(" ");
+function HtmlBody({ stats, content, bodyClass, store, disableBrowserRender }) {
   const contentProps = {};
   if (content) {
     contentProps.dangerouslySetInnerHTML = { __html: content };
@@ -47,7 +42,8 @@ function HtmlBody({ stats, component, store, disableBrowserRender }) {
 
 HtmlBody.propTypes = {
   stats: PropTypes.object,
-  component: PropTypes.node,
+  content: PropTypes.string,
+  bodyClass: PropTypes.string,
   store: PropTypes.object,
   disableBrowserRender: PropTypes.bool
 };
