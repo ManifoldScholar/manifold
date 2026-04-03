@@ -2,7 +2,5 @@
 
 set -eux
 
-bin/rails db:create
-bin/rails db:migrate:primary
-bin/rails db:migrate:cache
+bin/rails db:prepare
 bin/rails db:seed
