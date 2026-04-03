@@ -70,4 +70,6 @@ ActiveSupport::Reloader.to_prepare do
     [429, {}, ["Rate Limit Exceeded\n"]]
     # :nocov:
   end
+rescue ActiveRecord::NoDatabaseError, ActiveRecord::StatementInvalid
+  warn "Skipping rate limiting setup, no database yet."
 end
