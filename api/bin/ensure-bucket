@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -eux
+
+bin/rails runner '
+bucket = UploadConfig.new.bucket
+client = S3Config.new.build_s3_client
+
+begin
+  client.create_bucket(bucket: bucket)
+rescue Aws::S3::Errors::BucketAlreadyOwnedByYou
+  # already exists
+end
+
+policy = {
+  Version: "2012-10-17",
+  Statement: [{
+    Effect: "Allow",
+    Principal: "*",
+    Action: "s3:GetObject",
+    Resource: "arn:aws:s3:::#{bucket}/*"
+  }]
+}.to_json
+
+client.put_bucket_policy(bucket: bucket, policy: policy)
+'
