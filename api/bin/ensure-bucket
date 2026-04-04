@@ -1,15 +1,26 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
 
-set -eux
+require 'bundler/setup'
+require 'aws-sdk-s3'
+require 'json'
 
-bin/rails runner '
-bucket = UploadConfig.new.bucket
-client = S3Config.new.build_s3_client
+bucket   = ENV.fetch('UPLOAD_BUCKET')
+endpoint = ENV.fetch('S3_ENDPOINT')
+region   = ENV.fetch('S3_REGION', 'us-east-1')
+
+client = Aws::S3::Client.new(
+  endpoint: endpoint,
+  region: region,
+  access_key_id: ENV.fetch('S3_ACCESS_KEY_ID'),
+  secret_access_key: ENV.fetch('S3_SECRET_ACCESS_KEY'),
+  force_path_style: true
+)
 
 begin
   client.create_bucket(bucket: bucket)
+  puts "Created bucket: #{bucket}"
 rescue Aws::S3::Errors::BucketAlreadyOwnedByYou
-  # already exists
+  puts "Bucket already exists: #{bucket}"
 end
 
 policy = {
@@ -23,4 +34,4 @@ policy = {
 }.to_json
 
 client.put_bucket_policy(bucket: bucket, policy: policy)
-'
+puts "Set public-read policy on #{bucket}"
