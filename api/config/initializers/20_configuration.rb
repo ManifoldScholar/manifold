@@ -16,6 +16,7 @@ m.domain ||= "manifold.lvh" if Rails.env.local?
 m.url ||= ENV["CLIENT_URL"] || "#{ssl_enabled ? 'https' : 'http'}://#{m.domain}"
 m.api_url ||= ENV["CLIENT_BROWSER_API_URL"] || m.url
 m.mammoth_path ||= ENV["MAMMOTH_PATH"] || Rails.root.join("..", "client/node_modules/mammoth/bin/mammoth")
+m.private_key ||= ENV["PRIVATE_KEY"] || OpenSSL::PKey::RSA.new(2048)
 
 m.url_options = {
   protocol: m.protocol,
