@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module JSONAPI
   class ParseParams
     extend Dry::Initializer
@@ -6,9 +8,9 @@ module JSONAPI
 
     param :params, Types::Hash
 
-    option :attribute_parser, Types::Implements(Types::FlexibleStruct), optional: true
+    option :attribute_parser, ::Types.Implements(::Types::FlexibleStruct), optional: true
 
-    option :type, Types::String.optional, optional: true, default: proc { nil }
+    option :type, Types::String.optional, optional: true, default: proc {}
     option :allow_blank_type, Types::Bool, optional: true, default: proc { true }
 
     def call
@@ -50,12 +52,12 @@ module JSONAPI
     def build_params_struct
       attribute_struct = attribute_parser || Types::Hash
 
-      data_struct = Class.new(Types::FlexibleStruct).class_eval do
+      data_struct = Class.new(::Types::FlexibleStruct).class_eval do
         attribute :attributes, attribute_struct
         attribute? :type, Types::String.optional
       end
 
-      Class.new(Types::FlexibleStruct).class_eval do
+      Class.new(::Types::FlexibleStruct).class_eval do
         attribute :data, data_struct.default { { attributes: {}, type: nil } }
       end
     end

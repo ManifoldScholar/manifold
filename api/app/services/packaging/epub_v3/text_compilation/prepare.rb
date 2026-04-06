@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     module TextCompilation
@@ -8,7 +10,7 @@ module Packaging
         # @param [Text] text
         # @return [Dry::Types::Result(Hash)]
         def call(text)
-          build_state text: text do |state|
+          build_state(text:) do |state|
             state[:package_context] = Packaging::EpubV3::PackageContext.new text
           end
         end

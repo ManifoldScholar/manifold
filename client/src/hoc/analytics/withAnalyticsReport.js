@@ -1,16 +1,16 @@
 import React from "react";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "../hoist-non-react-statics";
 import { connect } from "react-redux";
 import { entityStoreActions } from "actions";
 import { select, meta } from "utils/entityUtils";
 import { statisticsAPI, analyticReportsAPI, requests } from "api";
-import subDays from "date-fns/subDays";
-import intervalToDuration from "date-fns/intervalToDuration";
-import formatDuration from "date-fns/formatDuration";
-import startOfDay from "date-fns/startOfDay";
-import endOfDay from "date-fns/endOfDay";
-import sub from "date-fns/sub";
-import uuid from "uuid";
+import { subDays } from "date-fns/subDays";
+import { intervalToDuration } from "date-fns/intervalToDuration";
+import { formatDuration } from "date-fns/formatDuration";
+import { startOfDay } from "date-fns/startOfDay";
+import { endOfDay } from "date-fns/endOfDay";
+import { sub } from "date-fns/sub";
+import { v4 as uuidv4 } from "uuid";
 
 const { request } = entityStoreActions;
 
@@ -23,7 +23,7 @@ export default function withAnalyticsReport(WrappedComponent) {
     WrappedComponent
   )})`;
 
-  const requestUUID = uuid();
+  const requestUUID = uuidv4();
   const requestName = `${requests.beAnalyticsReport}-${requestUUID}`;
 
   class WithAnalyticsReport extends React.PureComponent {

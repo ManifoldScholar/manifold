@@ -27,7 +27,7 @@ export default `
   .sr-collecting-toggle {
     ${screenReaderText}
 
-    &.focus-visible ~ .collecting-toggle {
+    &:focus-visible ~ .collecting-toggle {
       ${defaultFocusStyle}
       outline-color: var(--focus-color);
     }
@@ -50,6 +50,19 @@ export default `
     text-align: left;
     white-space: nowrap;
     cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+
+      .collecting-toggle__inner {
+        ${defaultFocusStyle}
+      }
+    }
+
+    &--inline {
+      margin-block-start: 3px;
+      margin-inline-end: 64px;
+    }
 
     &--project-cover {
       --toggle-size: 28px;
@@ -167,25 +180,11 @@ export default `
       display: block;
       padding: var(--text-top-padding) 14px 0 32px;
       line-height: 1;
-
-      &-enter {
-        opacity: 0;
-      }
-
-      &-enter-active {
-        opacity: 1;
-        transition: opacity calc(var(--transition-duration-default) * 3)
+      transition: opacity calc(var(--transition-duration-default) * 3)
           var(--transition-timing-function);
-      }
 
-      &-exit {
-        opacity: 1;
-      }
-
-      &-exit.collecting-toggle__text-exit-active {
+      @starting-style {
         opacity: 0;
-        transition: opacity calc(var(--transition-duration-default) * 3)
-          var(--transition-timing-function);
       }
     }
 
@@ -228,7 +227,6 @@ export default `
     }
 
     &--toc-hidden {
-      visibility: hidden;
       opacity: 0;
     }
   }

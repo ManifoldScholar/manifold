@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates a Text model from JSON-API style params
   class Text
@@ -5,8 +7,7 @@ module Updaters
     include ::Updaters::Concerns::HasSortableCollaborators
 
     def attachment_fields
-      [:cover]
+      [:cover, :social_image]
     end
-
   end
 end

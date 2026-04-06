@@ -1,5 +1,8 @@
 {
   "notifications": {
+    "bulk_delete_success": "Bulk delete completed.",
+    "bulk_delete_success_body_one": "{{count}} {{entity}} has been removed.",
+    "bulk_delete_success_body_other": "{{count}} {{entity}} have been removed.",
     "delete_entity_body": "{{title}} has passed into the endless night.",
     "delete_record_body": "And we're sorry to see it go.",
     "email_failure": "Manifold was unable to send a test email.",
@@ -11,9 +14,14 @@
     "feature_delete": "The feature has been deleted.",
     "journal_delete": "The journal has been destroyed.",
     "page_delete": "The page has been deleted.",
+    "reading_group_delete": "The reading group has been destroyed.",
+    "reading_group_update_failure": "There was an error updating the reading group.",
+    "reading_group_update_failure_body": "Please try again.",
     "resource_collection_delete": "The resource collection has been destroyed.",
     "resource_delete": "The resource has been destroyed.",
     "text_delete": "The text has been destroyed.",
+    "text_delete_body": "{{title}} has passed into the endless night. However, it may take a minute or two for all traces to disappear from your Manifold library.",
+    "user_delete": "{{name}} has been removed.",
     "volume_body": "Volume #{{number}} has passed into the endless night.",
     "volume_delete": "The volume has been destroyed."
   }

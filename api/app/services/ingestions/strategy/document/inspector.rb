@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Strategy
     module Document
       class Inspector
-
         attr_reader :ingestion, :context
 
         def initialize(context)
@@ -53,13 +54,13 @@ module Ingestions
         def contributors
           index_parsed.xpath("//meta[@name=\"dc.contributor\"]")
             .map { |node| node&.attribute("content")&.value }
-            .reject(&:nil?)
+            .compact
         end
 
         def creators
           index_parsed.xpath("//meta[@name=\"dc.creator\"]")
             .map { |node| node&.attribute("content")&.value }
-            .reject(&:nil?)
+            .compact
         end
 
         def index_node_for(identifier)

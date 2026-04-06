@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This model exists for legacy reasons, and is simply a view that remaps fields from {UserCollectedCompositeEntry},
 # and also will infer a {Project} based on its `#favoritable` model.
 class Favorite < ApplicationRecord
@@ -7,7 +9,7 @@ class Favorite < ApplicationRecord
 
   self.primary_key = :id
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :favorites
   belongs_to :favoritable, polymorphic: true
 
   belongs_to :project, optional: true
@@ -15,7 +17,7 @@ class Favorite < ApplicationRecord
   has_many :subjects, through: :project
 
   # This makes the favorite authorizer a bit simpler.
-  alias_attribute :creator, :user
+  alias creator user
 
   # @return [UserCollectedEntry]
   def user_collected_entry

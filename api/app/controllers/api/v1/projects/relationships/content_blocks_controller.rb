@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Projects
       module Relationships
         class ContentBlocksController < AbstractProjectChildController
-
           resourceful! ContentBlock, authorize_options: { except: [:index] } do
             @project.content_blocks
           end

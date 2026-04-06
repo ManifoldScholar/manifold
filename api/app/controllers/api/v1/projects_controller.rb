@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Projects controller
     class ProjectsController < ApplicationController
-
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filtered(
-          with_pagination!(project_filter_params&.with_defaults(no_issues: true)),
+          **with_pagination!(project_filter_params&.with_defaults(no_issues: true)),
           scope: scope_visibility.includes(:creators),
           user: current_user
         )
@@ -39,20 +40,20 @@ module API
 
       def destroy
         @project = load_and_authorize_project
-        @project.destroy
+        @project.async_destroy
       end
 
       protected
 
       def includes
         [:creators, :contributors, :texts, :text_categories, :events,
-         :resource_collections, :resources, :subjects, :twitter_queries,
+         :resource_collections, :resources, :subjects,
          :permitted_users, :content_blocks, :action_callouts, :journal,
-         :journal_volume, :journal_issue]
+         :journal_volume, :journal_issue, :flattened_collaborators, :collaborators]
       end
 
       def scope_for_projects
-        Project.friendly
+        Project.existing.friendly
       end
 
       def scope_visibility
@@ -63,11 +64,10 @@ module API
         # apply both the read and update scopes, but then we have to join roles on both
         # which I suspect is less efficient. Note that the with_update_ability is applied
         # automatically through the filterable concern. -ZD
-        return Project.with_read_ability current_user unless project_filter_params&.dig(:with_update_ability)
+        return Project.existing.with_read_ability current_user unless project_filter_params&.dig(:with_update_ability)
 
-        Project.all
+        Project.existing.all
       end
-
     end
   end
 end

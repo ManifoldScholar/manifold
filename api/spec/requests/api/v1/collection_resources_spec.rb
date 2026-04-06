@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Collection Resource", type: :request do
@@ -6,7 +8,7 @@ RSpec.describe "Collection Resource", type: :request do
     let(:resource_collection_id) { resource.resource_collection_id }
 
     path "/resource_collections/{resource_collection_id}/relationships/collection_resources" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        model: CollectionResource,
                        parent: "resource collection",
                        url_parameters: [:resource_collection_id],
@@ -15,7 +17,7 @@ RSpec.describe "Collection Resource", type: :request do
     end
 
     path "/resource_collections/{resource_collection_id}/relationships/collection_resources/{id}" do
-      include_examples "an API show request",
+      it_behaves_like "an API show request",
                        model: CollectionResource,
                        parent: "resource collection",
                        url_parameters: [:resource_collection_id],

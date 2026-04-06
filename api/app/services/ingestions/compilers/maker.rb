@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Compilers
     class Maker < AbstractInteraction
@@ -43,21 +45,21 @@ module Ingestions
 
       def collaborator_attributes
         {
-          role: Collaborator::ROLE_CREATOR
+          role: CollaboratorRole::Author
         }
       end
 
       def report
-        if !collaborator
-          key = "services.ingestions.compiler.maker.log.invalid"
-          info key, name: attributes[:name]
-        else
+        if collaborator
           key = if collaborator.id_previously_changed?
                   "services.ingestions.compiler.maker.log.new"
                 else
                   "services.ingestions.compiler.maker.log.updated"
                 end
           info key, role: collaborator.role, name: maker.full_name
+        else
+          key = "services.ingestions.compiler.maker.log.invalid"
+          info key, name: attributes[:name]
         end
       end
     end

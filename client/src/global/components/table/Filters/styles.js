@@ -4,10 +4,11 @@ import { panelRounded } from "theme/styles/mixins";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 
 export const Container = styled("div", transientOptions)`
+  container-type: inline-size;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  align-items: baseline;
+  align-items: center;
   padding-top: 6px;
   padding-bottom: 20px;
   margin-bottom: 8px;

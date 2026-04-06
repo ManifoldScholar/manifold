@@ -5,7 +5,8 @@ import {
   listHorizontal,
   buttonUnstyled,
   utilityPrimary,
-  defaultHoverStyle
+  defaultHoverStyle,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export const Inner = styled.div`
@@ -46,9 +47,21 @@ export const Button = styled.button`
   ${utilityPrimary}
   font-size: 12px;
 
+  &[aria-disabled="true"] {
+    pointer-events: none;
+  }
+
   &[aria-expanded="true"] {
     ${defaultHoverStyle}
     margin-bottom: 15px;
+  }
+
+  &:hover:not([disabled]) {
+    ${defaultHoverStyle}
+  }
+
+  &:focus-visible:not([disabled]) {
+    ${defaultFocusStyle}
   }
 `;
 
@@ -59,5 +72,17 @@ export const SecondaryButton = styled(Button)`
 export const Thread = styled.div`
   &:focus {
     outline: none;
+  }
+`;
+
+export const EditDialog = styled.dialog`
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+
+  &[open] {
+    position: relative;
+    inline-size: 100%;
   }
 `;

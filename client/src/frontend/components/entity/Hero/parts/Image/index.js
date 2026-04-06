@@ -8,7 +8,7 @@ const BREAKPOINT = breakpoints[60];
 
 export default function HeroImage({ image, alt }) {
   return (
-    <Styled.Wrapper aria-hidden>
+    <Styled.Wrapper>
       <Styled.Image
         srcSet={`
           ${image.largeLandscape} ${SIZES.large}w,

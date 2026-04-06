@@ -33,19 +33,35 @@ export class ResourcePropertiesContainer extends PureComponent {
     this.setState(this.initialState);
   };
 
+  formatData = data => {
+    const { attributes, relationships } = data ?? {};
+    const { sortOrder, ...rest } = attributes;
+
+    return {
+      relationships,
+      attributes: { ...rest, sortOrder: sortOrder ? 1 : null }
+    };
+  };
+
   render() {
-    const resource = this.props.resource.attributes;
-    const t = this.props.t;
+    const { resource, t } = this.props;
+    const { attributes } = resource ?? {};
+    const sortOrderBool = !!attributes?.sortOrder;
+
     return (
       <section>
         <FormContainer.Form
-          model={this.props.resource}
+          model={{
+            ...resource,
+            attributes: { ...resource.attributes, sortOrder: sortOrderBool }
+          }}
           name="backend-resource-update"
           update={resourcesAPI.update}
           create={model =>
             resourcesAPI.create(this.props.params.projectId, model)
           }
           onSuccess={this.handleSuccess}
+          formatData={this.formatData}
           className="form-secondary"
         >
           <Resource.Form.KindPicker name="attributes[kind]" includeButtons />
@@ -55,19 +71,24 @@ export class ResourcePropertiesContainer extends PureComponent {
             placeholder={t("resources.title_placeholder")}
             instructions={t("resources.properties.title_instructions")}
           />
+          <Form.Switch
+            label={t("resources.properties.sort_order_label")}
+            name="attributes[sortOrder]"
+            value={sortOrderBool}
+            placeholder={t("resources.properties.sort_order_placeholder")}
+            instructions={t("resources.properties.sort_order_instructions")}
+          />
           <Form.TextInput
             label={t("resources.properties.sort_title_label")}
             name="attributes[pendingSortTitle]"
             placeholder={t("resources.properties.sort_title_placeholder")}
             instructions={t("resources.properties.sort_title_instructions")}
-            disabled
           />
           <Form.TextInput
             label={t("resources.properties.fingerprint_label")}
             name="attributes[fingerprint]"
             placeholder={t("resources.properties.fingerprint_placeholder")}
             instructions={t("resources.properties.fingerprint_instructions")}
-            disabled
           />
           <Form.TextInput
             label={t("resources.properties.slug_label")}
@@ -95,7 +116,7 @@ export class ResourcePropertiesContainer extends PureComponent {
             name="attributes[caption]"
             placeholder={t("resources.properties.caption_placeholder")}
           />
-          {resource.downloadableKind ? (
+          {resource.attributes.downloadableKind ? (
             <Form.Switch
               label={t("resources.properties.download_label")}
               name="attributes[allowDownload]"

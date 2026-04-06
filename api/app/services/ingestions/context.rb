@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   class Context
     include Ingestions::Concerns::Loggable
@@ -14,7 +16,6 @@ module Ingestions
       @source_title = source[:title]
       @source_path = @source.path
       @loggable = loggable
-      @source_provided = false
 
       initialize_working_dirs
       update_working_dirs @source, @source_title
@@ -32,10 +33,6 @@ module Ingestions
 
     def logger
       loggable || ingestion || Rails.logger
-    end
-
-    def source_provided?
-      @source_provided.present?
     end
 
     def google_doc_url?
@@ -64,6 +61,5 @@ module Ingestions
       ensure_root
       ensure_working_dirs
     end
-
   end
 end

@@ -36,14 +36,8 @@ export const getPartsData = entity => {
       : false;
   const bgAlt = entity.attributes.heroAltText;
 
-  const twitter = entity.attributes.twitterId;
-  const instagram = entity.attributes.instagramId;
-  const facebook = entity.attributes.facebookId;
-  const hashtag = entity.attributes.hashtag;
-  const social = !!twitter || !!instagram || !!facebook || !!hashtag;
-
   const description = entity.attributes.descriptionFormatted;
-  const { creators, contributors } = entity.relationships;
+  const { creators, flattenedCollaborators } = entity.relationships;
   const cover = entity.attributes.coverStyles?.medium;
   return {
     callouts,
@@ -53,14 +47,9 @@ export const getPartsData = entity => {
     copy,
     bgImage,
     bgAlt,
-    twitter,
-    instagram,
-    facebook,
-    hashtag,
-    social,
     description,
     creators,
-    contributors,
+    flattenedCollaborators,
     cover
   };
 };

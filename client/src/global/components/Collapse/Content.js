@@ -1,6 +1,5 @@
-import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
+import React, { useLayoutEffect, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import useResizeObserver from "use-resize-observer";
 import classNames from "classnames";
 import useCollapseContext from "./useCollapseContext";
 
@@ -13,7 +12,7 @@ const getAnimationParams = (height, maxDuration) => {
   */
   const maxDurationSecs = maxDuration > 5 ? maxDuration / 1000 : maxDuration;
   const duration = (
-    clamp(height / 700, 0.3, maxDurationSecs ?? 0.5) * 1000
+    clamp(height / 800, 0.2, maxDurationSecs ?? 0.5) * 1000
   ).toFixed(0);
   const delay = clamp(duration / 10, 25, 75).toFixed(0);
   const diff = duration - delay;
@@ -26,19 +25,22 @@ function Content(props) {
     className,
     activeClassName,
     focusOnVisible,
-    maxDuration,
-    stubHeight
+    maxDuration
   } = props;
-  const { visible, contentProps, toggleVisible } = useCollapseContext();
-  const { ref: resizeRef, height } = useResizeObserver();
-  const [isMounted, setIsMounted] = useState(false);
+  const {
+    visible,
+    contentProps: { resizeRef, ...contentProps },
+    toggleVisible,
+    height,
+    stubHeight
+  } = useCollapseContext();
 
   const finalClassName = classNames({
     collapse__content: true,
-    "collapse__content--visible": visible || height < stubHeight,
+    "collapse__content--visible": visible || height <= stubHeight,
     "collapse__content--hidden": !visible,
     "collapse__content--stub": stubHeight,
-    "collapse__content--stub-only": height < stubHeight,
+    "collapse__content--stub-only": height <= stubHeight,
     [className]: className,
     [activeClassName]: activeClassName
   });
@@ -51,7 +53,11 @@ function Content(props) {
     }
   }, [visible, focusOnVisible]);
 
-  useLayoutEffect(() => {
+  const isBrowser =
+    typeof window !== "undefined" && !!window.document?.createElement;
+  const safeEffect = isBrowser ? useLayoutEffect : useEffect;
+
+  safeEffect(() => {
     if (contentRef.current) {
       const { duration, delay, diff } = getAnimationParams(height, maxDuration);
       contentRef.current.style.setProperty("--collapse-height", `${height}px`);
@@ -72,32 +78,6 @@ function Content(props) {
         );
     }
   }, [height, stubHeight, maxDuration]);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, [setIsMounted]);
-
-  useEffect(() => {
-    if (isMounted && contentRef.current) {
-      const interactiveElSelector = [
-        "a[href]",
-        "button:not(:disabled)",
-        'input:not([disabled]):not([type="hidden"])',
-        "select:not([disabled])",
-        "textarea:not([disabled])",
-        "[contenteditable]",
-        '[tabindex]:not([tabindex="-1"])',
-        "summary",
-        "[href]"
-      ].join(", ");
-      const interactiveEls = contentRef.current.querySelectorAll(
-        interactiveElSelector
-      );
-      interactiveEls.forEach(el =>
-        el.setAttribute("tabIndex", visible ? 0 : -1)
-      );
-    }
-  }, [visible, isMounted]);
 
   return (
     <div

@@ -1,12 +1,10 @@
+# frozen_string_literal: true
+
 # Model concern that money calculations
 module MoneyAttributes
   extend ActiveSupport::Concern
 
-  included do
-  end
-
   class_methods do
-    # rubocop:disable Metrics/MethodLength
     def money_attributes(*args)
       args.each do |attribute|
         cents_attribute = "#{attribute}_in_cents"
@@ -20,11 +18,9 @@ module MoneyAttributes
         define_method "#{attribute}_money" do
           Money.locale_backend = :i18n
           I18n.locale = :en
-          Money.new(send("#{attribute}_in_cents").to_f ||
-                      0, send("#{attribute}_currency")).format
+          Money.new(send("#{attribute}_in_cents").to_f, send("#{attribute}_currency")).format
         end
       end
     end
-    # rubocop:enable Metrics/MethodLength
   end
 end

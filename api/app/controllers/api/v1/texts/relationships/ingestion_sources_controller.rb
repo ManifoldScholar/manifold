@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Texts
@@ -7,7 +9,7 @@ module API
 
           resourceful! IngestionSource, authorize_options: { except: [:index] } do
             @text.ingestion_sources.filtered(
-              with_pagination!(
+              **with_pagination!(
                 ingestion_source_filter_params
               )
             )

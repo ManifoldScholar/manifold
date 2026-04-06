@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # Model representing a page of content
 class Page < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -9,7 +10,6 @@ class Page < ApplicationRecord
   include TrackedCreator
   include Sluggable
   include HasFormattedAttributes
-  include ClassyEnum::ActiveRecord
 
   classy_enum_attr :purpose, class_name: "PagePurpose"
 
@@ -55,5 +55,4 @@ class Page < ApplicationRecord
   def policy_page?
     purpose.in? PagePurpose.policy
   end
-
 end

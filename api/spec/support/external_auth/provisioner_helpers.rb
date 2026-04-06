@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 module ExternalAuth::ProvisionerSpecs
-  DEFAULT_HOOKS = %i(random_password)
+  DEFAULT_HOOKS = %i(random_password).freeze
 
-  HOOKS = %i(name_to_nickname first_and_last_name twitter_details)
+  HOOKS = %i(name_to_nickname first_and_last_name twitter_details).freeze
 
-  PROVIDER_NAMES = %i[facebook google twitter]
+  PROVIDER_NAMES = %i[facebook google twitter].freeze
 
   concern :GlobalHelpers do
     def each_hook
       return enum_for(__method__) unless block_given?
 
-      ( DEFAULT_HOOKS + HOOKS ).each do |hook|
+      (DEFAULT_HOOKS + HOOKS).each do |hook|
         yield hook
       end
     end
@@ -29,13 +31,13 @@ module ExternalAuth::ProvisionerSpecs
         if Faker::Omniauth.respond_to?(provider)
           Faker::Omniauth.__send__(provider)
         else
-          raise NoMethodError, "Faker::Omniauth does not implement :#{provider}", caller[2..-1]
+          raise NoMethodError, "Faker::Omniauth does not implement :#{provider}", caller[2..]
         end
       end
     end
 
     class_methods do
-      def with_provider(name, &block)
+      def with_provider(name, &)
         context "when the provider is #{name}" do
           include ExternalAuth::ProvisionerSpecs::ProvisionerHelpers
 
@@ -53,7 +55,7 @@ module ExternalAuth::ProvisionerSpecs
             it { is_expected.not_to __send__(:"be_#{other_provider_name}") }
           end
 
-          instance_eval(&block) if block_given?
+          instance_eval(&) if block_given?
         end
       end
     end
@@ -65,7 +67,7 @@ module ExternalAuth::ProvisionerSpecs
     end
 
     class_methods do
-      def upon_running_the_provisioner(&block)
+      def upon_running_the_provisioner(&)
         context 'upon running the provisioner' do
           include ExternalAuth::ProvisionerSpecs::AfterProvisionerCalledHelpers
 
@@ -73,7 +75,7 @@ module ExternalAuth::ProvisionerSpecs
 
           expect_default_hooks!
 
-          instance_eval(&block)
+          instance_eval(&)
         end
       end
     end
@@ -118,7 +120,7 @@ module ExternalAuth::ProvisionerSpecs
         end
       end
 
-      def the_user_has(&block)
+      def the_user_has(&)
         context 'the user has' do
           include ExternalAuth::ProvisionerSpecs::UserHelpers
 
@@ -128,7 +130,7 @@ module ExternalAuth::ProvisionerSpecs
             have_attributes password: a_kind_of(String)
           end
 
-          instance_eval(&block)
+          instance_eval(&)
         end
       end
     end
@@ -136,13 +138,13 @@ module ExternalAuth::ProvisionerSpecs
 
   concern :UserHelpers do
     class_methods do
-      def user_expectation(description = nil, &conditions)
-        it(description) { is_expected.to instance_eval(&conditions) }
+      def user_expectation(description = nil, &)
+        it(description) { is_expected.to instance_eval(&) }
       end
 
-      def set_attributes(description = nil, &block)
+      def set_attributes(description = nil, &)
         user_expectation(description) do
-          have_attributes instance_eval(&block)
+          have_attributes instance_eval(&)
         end
       end
 
@@ -172,8 +174,8 @@ module ExternalAuth::ProvisionerSpecs
         attributes.flatten!
 
         set_attributes "copied #{attributes.map(&:inspect).to_sentence} from auth_hash.info" do
-          attribute_expectations = attributes.each_with_object({}) do |attr, hsh|
-            hsh[attr] = auth_hash.info[attr]
+          attribute_expectations = attributes.index_with do |attr|
+            auth_hash.info[attr]
           end
 
           attribute_expectations
@@ -193,7 +195,7 @@ RSpec.shared_context 'an external auth provisioner' do
 
   subject { provisioner }
 
-  before(:each) do
+  before do
     each_hook do |hook|
       allow(provisioner).to receive(hook).and_call_original
     end

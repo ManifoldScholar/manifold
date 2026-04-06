@@ -42,7 +42,7 @@ export class SettingsEmailContainer extends PureComponent {
     const notification = {
       level: 0,
       id: `TEST_EMAIL_SENT`,
-      heading: t("notifications.email.success"),
+      heading: t("notifications.email_success"),
       body: t("notifications.email_success_body"),
       expiration: 5000
     };

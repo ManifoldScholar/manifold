@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "pathname"
 require "uri"
 require "cgi"
@@ -9,7 +11,6 @@ module Ingestions
       object :text_section
 
       delegate :source_body, to: :text_section
-      delegate :body, to: :text_section
 
       # A multidimensional array of tags and attributes that the
       # TextSectionBody transformer will transform.
@@ -88,7 +89,7 @@ module Ingestions
       def map_uri(input_uri, cd_source_path,
                   source_path_map, section_source_map)
         new_uri = URI(input_uri)
-        if !new_uri.path.blank? && !new_uri.scheme
+        if new_uri.path.present? && !new_uri.scheme
           new_path = uri_to_app_uri(new_uri, cd_source_path,
                                     source_path_map, section_source_map)
           new_uri.path = new_path if new_path
@@ -120,14 +121,10 @@ module Ingestions
         package_path = if uri.absolute? || uri.path.start_with?("/")
                          uri.path[1..]
                        else
-                         File.expand_path("/" +
-                                            File.dirname(source_doc_path) +
-                                            "/" +
-                                            uri.path)[1..]
+                         File.expand_path("/#{File.dirname(source_doc_path)}/#{uri.path}")[1..]
                        end
         CGI.unescape package_path
       end
-
     end
   end
 end

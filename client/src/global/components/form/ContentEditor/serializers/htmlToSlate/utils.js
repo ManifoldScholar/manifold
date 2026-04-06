@@ -126,9 +126,8 @@ export const addTextNodeToEmptyChildren = element => {
 
 export const markTags = {
   code: "code",
-  del: "strikethrough",
+  del: "del",
   em: "italic",
-  i: "italic",
   s: "strikethrough",
   strong: "bold",
   u: "underline"

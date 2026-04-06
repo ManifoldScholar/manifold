@@ -136,6 +136,8 @@ class Toc extends PureComponent {
   }
 
   render() {
+    if (!this.text) return null;
+
     const drawerProps = {
       open: this.props.tocDrawerVisible,
       context: "reader",

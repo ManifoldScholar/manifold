@@ -10,17 +10,10 @@ import { entityStoreActions as store } from "actions";
 import { projectCollectionsAPI, projectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
-import has from "lodash/has";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useFromStore,
-  useSetLocation,
-  useListFilters
-} from "hooks";
+import { useFetch, useListFilters, useListQueryParams } from "hooks";
 
 export default function ProjectCollectionDetailContainer() {
   const { id } = useParams();
@@ -28,41 +21,37 @@ export default function ProjectCollectionDetailContainer() {
     request: [projectCollectionsAPI.show, id]
   });
 
-  const baseFilters = {
-    collectionOrder: id
-  };
-  const [filters, setFilters] = useFilterState(baseFilters);
-  const [pagination, setPageNumber] = usePaginationState();
+  const filtersReset = useMemo(
+    () => ({
+      collectionOrder: id
+    }),
+    [id]
+  );
+
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initFilters: filtersReset
+  });
+
   const { data: projects, meta } = useFetch({
     request: [projectsAPI.index, filters, pagination]
   });
 
-  useSetLocation({ filters, page: pagination.number });
-
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const settings = useFromStore("settings", "select");
 
   useEffect(() => {
     return () => dispatch(store.flush(uid));
   }, [dispatch, uid]);
 
   const filterProps = useListFilters({
-    onFilterChange: param => setFilters({ newState: param }),
+    onFilterChange: state => setFilters(state),
     initialState: filters,
-    resetState: baseFilters,
+    resetState: filtersReset,
     options: {
       featured: true,
       featuredLabel: t("filters.featured_projects")
     }
   });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
 
   const breadcrumbs = useMemo(
     () => [
@@ -74,31 +63,9 @@ export default function ProjectCollectionDetailContainer() {
     [t]
   );
 
+  const headContentProps = useEntityHeadContent(projectCollection);
+
   if (!projectCollection) return null;
-
-  const ogDescription = () => {
-    if (!projectCollection) return null;
-    const {
-      descriptionPlaintext,
-      socialDescription
-    } = projectCollection.attributes;
-    return socialDescription || descriptionPlaintext;
-  };
-
-  const ogTitle = () => {
-    if (!projectCollection || !settings) return null;
-    const { socialTitle, title } = projectCollection.attributes;
-    return socialTitle || `\u201c${title}\u201d`;
-  };
-
-  const ogImage = () => {
-    if (!projectCollection) return null;
-    const { socialImageStyles, heroStyles } = projectCollection.attributes;
-    if (has(socialImageStyles, "mediumLandscape"))
-      return socialImageStyles.mediumLandscape;
-    if (has(heroStyles, "mediumLandscape")) return heroStyles.mediumLandscape;
-    return null;
-  };
 
   return (
     <>
@@ -113,12 +80,7 @@ export default function ProjectCollectionDetailContainer() {
         />
       )}
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
-      <HeadContent
-        title={ogTitle()}
-        description={ogDescription()}
-        image={ogImage()}
-        appendDefaultTitle
-      />
+      <HeadContent {...headContentProps} />
       <h1 className="screen-reader-text">
         {projectCollection.attributes.title}
       </h1>
@@ -127,9 +89,6 @@ export default function ProjectCollectionDetailContainer() {
         projects={projects}
         projectsMeta={meta}
         filterProps={filterProps}
-        paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator
-        }}
         bgColor="neutral05"
         className="flex-grow"
       />

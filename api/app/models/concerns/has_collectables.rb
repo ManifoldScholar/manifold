@@ -1,4 +1,5 @@
-# rubocop:disable Naming/PredicateName
+# frozen_string_literal: true
+
 module HasCollectables
   extend ActiveSupport::Concern
 
@@ -23,4 +24,3 @@ module HasCollectables
     end
   end
 end
-# rubocop:enable Naming/PredicateName

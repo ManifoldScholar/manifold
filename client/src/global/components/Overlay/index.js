@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import { useUID } from "react-uid";
 import Header from "./Header";
+import helpers from "reader/containers/annotation/annotatable-components/selectionHelpers";
 
 import BodyClass from "hoc/BodyClass";
 
 function Overlay({
+  open = true,
   title,
   subtitle,
   icon,
@@ -24,6 +26,9 @@ function Overlay({
   const headerId = useUID();
 
   function handleCloseEvent(event) {
+    const dialog = helpers.closest(event.target, "dialog");
+    if (dialog) return false;
+
     if (closeCallback) {
       closeCallback(event);
     }
@@ -40,20 +45,22 @@ function Overlay({
   }, [triggerScrollToTop]);
 
   return (
-    <BodyClass className="no-scroll overlay">
-      <div
-        className={appearance || "overlay-full"}
-        key="globalOverlay"
-        ref={overlayRef}
-        id={id}
-        role="dialog"
-        aria-modal
-        aria-labelledby={headerId}
+    <BodyClass className={open ? "no-scroll overlay" : ""}>
+      <FocusTrap
+        active={open}
+        focusTrapOptions={{
+          escapeDeactivates: e => handleCloseEvent(e),
+          fallbackFocus: overlayRef
+        }}
       >
-        <FocusTrap
-          focusTrapOptions={{
-            escapeDeactivates: e => handleCloseEvent(e)
-          }}
+        <div
+          className={appearance || "overlay-full"}
+          ref={overlayRef}
+          id={id}
+          role="dialog"
+          aria-modal
+          aria-labelledby={headerId}
+          inert={!open ? "" : undefined}
         >
           <div>
             <Header
@@ -68,8 +75,8 @@ function Overlay({
               {children}
             </div>
           </div>
-        </FocusTrap>
-      </div>
+        </div>
+      </FocusTrap>
     </BodyClass>
   );
 }

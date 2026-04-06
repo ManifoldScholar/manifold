@@ -37,9 +37,6 @@ export default class ListEntities extends PureComponent {
     const callbacks = props[propName];
     const callbackInvalid = callbacks !== null && !isPlainObject(callbacks);
     if (callbackInvalid) return new Error(this.errors.callbackInvalid);
-    const missingOnPageClick =
-      props.pagination && !isFunction(callbacks.onPageClick);
-    if (missingOnPageClick) return new Error(this.errors.missingOnPageClick);
   };
 
   static validateShowCounts = (props, propName) => {
@@ -51,8 +48,14 @@ export default class ListEntities extends PureComponent {
 
   static validateEnsureButton = (propValue, key) => {
     const value = propValue[key];
-    if (!value) return;
-    if (!value.type || value.type.displayName !== "List.Entities.List.Button") {
+    if (!value || typeof value) return;
+    if (
+      !value.type ||
+      !(
+        value.type.displayName === "List.Entities.List.Button" ||
+        value.type.displayName === "List.Entities.List.BulkActionButtons"
+      )
+    ) {
       return new Error(this.errors.invalidButton);
     }
   };
@@ -304,6 +307,7 @@ export default class ListEntities extends PureComponent {
               {this.pagination && (
                 <Pagination
                   pagination={this.pagination}
+                  paginationTarget={this.props.paginationTarget}
                   padding={this.paginationPadding}
                   onPageClick={this.callback("onPageClick")}
                   style={this.paginationStyle}

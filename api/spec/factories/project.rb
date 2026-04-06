@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :project do
     title { "A project title" }
@@ -16,5 +18,9 @@ FactoryBot.define do
     trait :with_restricted_access do
       restricted_access { true }
     end
+  end
+
+  factory :draft_project, parent: :project do
+    draft { true }
   end
 end

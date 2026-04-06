@@ -18,7 +18,8 @@ class VisibilityMenuBody extends PureComponent {
   static propTypes = {
     filter: PropTypes.object,
     filterChangeHandler: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
+    className: PropTypes.string
   };
 
   static contextType = ReaderContext;
@@ -35,7 +36,7 @@ class VisibilityMenuBody extends PureComponent {
   }
 
   get canEngagePublicly() {
-    return this.context.attributes.abilities.engagePublicly;
+    return this.context?.attributes.abilities.engagePublicly;
   }
 
   get canAccessReadingGroups() {
@@ -55,8 +56,7 @@ class VisibilityMenuBody extends PureComponent {
 
   showAll = () => {
     const filter = {
-      highlight: { yours: true, others: true },
-      annotation: { yours: true, others: true },
+      annotation: { yours: true, others: true, highlights: true },
       resource: { all: true },
       readingGroups: Object.assign(this.readingGroupFilterBase(false), {
         all: true,
@@ -69,8 +69,7 @@ class VisibilityMenuBody extends PureComponent {
 
   hideAll = () => {
     const filter = {
-      highlight: { yours: false, others: false },
-      annotation: { yours: false, others: false },
+      annotation: { yours: false, others: false, highlights: false },
       resource: { all: false },
       readingGroups: Object.assign(this.readingGroupFilterBase(false), {
         all: false,
@@ -107,8 +106,6 @@ class VisibilityMenuBody extends PureComponent {
     switch (format) {
       case "annotation":
         return "comment24";
-      case "highlight":
-        return "annotate24";
       case "resource":
         return "resource24";
       case "reading-group":
@@ -119,9 +116,11 @@ class VisibilityMenuBody extends PureComponent {
   };
 
   renderFilter(format, label, children) {
-    const flex = format !== "reading-group";
+    const flex = format !== "reading-group" && format !== "annotation";
+    const ListTag = children?.length > 1 ? "ul" : "div";
+    const ItemTag = children?.length > 1 ? "li" : React.Fragment;
     return (
-      <li key={`visibility-${format}`} className="visibility-menu__section">
+      <div key={`visibility-${format}`} className="visibility-menu__section">
         <fieldset className="visibility-menu__group">
           <legend className="visibility-menu__legend control-menu__header control-menu__header--with-icon">
             <IconComposer
@@ -131,16 +130,18 @@ class VisibilityMenuBody extends PureComponent {
             />
             <span className="visibility-menu__group-name">{label}</span>
           </legend>
-          <div
+          <ListTag
             className={classNames(
               "visibility-menu__filters control-menu__section",
               { "visibility-menu__filters--flex": flex }
             )}
           >
-            {children}
-          </div>
+            {React.Children.map(children, child => (
+              <ItemTag>{child}</ItemTag>
+            ))}
+          </ListTag>
         </fieldset>
-      </li>
+      </div>
     );
   }
 
@@ -237,8 +238,13 @@ class VisibilityMenuBody extends PureComponent {
 
   renderCheckbox(key, label, filterState, format, index, flex) {
     const checkboxId = format + "-checkbox-" + index;
+    /* eslint-disable no-nested-ternary */
     const adjustedLabel =
-      key === "all" ? this.props.t("actions.show_all") : label;
+      key === "all"
+        ? this.props.t("actions.show_all")
+        : key === "highlights"
+        ? this.props.t("reader.menus.visibility.highlights_label")
+        : label;
     const checkboxClasses = classNames({
       "checkbox checkbox--white": true,
       "visibility-menu__checkbox": true,
@@ -269,20 +275,18 @@ class VisibilityMenuBody extends PureComponent {
   }
 
   showAllPressed(filters) {
-    const { annotation, highlight, readingGroups, resource } = filters ?? {};
-    if (!annotation || !highlight || !readingGroups || !resource) return false;
+    const { annotation, readingGroups, resource } = filters ?? {};
+    if (!annotation || !readingGroups || !resource) return false;
     if (Object.values(annotation).some(val => !val)) return false;
-    if (Object.values(highlight).some(val => !val)) return false;
     if (Object.values(resource).some(val => !val)) return false;
     if (!readingGroups?.all) return false;
     return true;
   }
 
   hideAllPressed(filters) {
-    const { annotation, highlight, readingGroups, resource } = filters ?? {};
-    if (!annotation || !highlight || !readingGroups || !resource) return false;
+    const { annotation, readingGroups, resource } = filters ?? {};
+    if (!annotation || !readingGroups || !resource) return false;
     if (Object.values(annotation).some(val => val)) return false;
-    if (Object.values(highlight).some(val => val)) return false;
     if (Object.values(resource).some(val => val)) return false;
     if (Object.values(readingGroups).some(val => val)) return false;
     return true;
@@ -290,7 +294,7 @@ class VisibilityMenuBody extends PureComponent {
 
   renderFooterButtons(filters) {
     return (
-      <li className="visibility-menu__footer">
+      <div className="visibility-menu__footer">
         <button
           onClick={this.showAll}
           className="control-menu__button"
@@ -305,27 +309,30 @@ class VisibilityMenuBody extends PureComponent {
         >
           {this.props.t("actions.hide_all")}
         </button>
-      </li>
+      </div>
     );
   }
 
   render() {
-    const { filter } = this.props;
+    const { filter, className } = this.props;
     return (
-      <div className="visibility-menu control-menu">
+      <div
+        className={classNames("visibility-menu control-menu", {
+          [className]: !!className
+        })}
+      >
         <div className="control-menu__header">
           <h2 className="control-menu__heading">
             {this.props.t("reader.menus.visibility.show_the_following")}
           </h2>
         </div>
-        <ul className="visibility-menu__section-list">
-          {this.renderCheckboxGroup("highlight", filter.highlight)}
-          {this.renderCheckboxGroup("annotation", filter.annotation)}
+        <div className="visibility-menu__section-list">
+          {this.renderCheckboxGroup("annotation", filter.annotation, true)}
           {this.renderCheckboxGroup("resource", filter.resource)}
           {(this.canAccessReadingGroups || this.canEngagePublicly) &&
             this.renderReadingGroups()}
           {this.renderFooterButtons(filter)}
-        </ul>
+        </div>
       </div>
     );
   }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates an Ingestion model from JSON-API style params
   class Ingestion

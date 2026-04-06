@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   module Concerns
     module ProjectSerializer
@@ -29,6 +31,10 @@ module V1
         typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
         typed_attribute :entitlement_subject_url, Types::String.meta(read_only: true)
 
+        typed_attribute :marked_for_purge_at, Types::DateTime.optional.meta(read_only: true) do |object|
+          object.respond_to?(:marked_for_purge_at) ? object.marked_for_purge_at : object.project.marked_for_purge_at
+        end
+
         serialize_collectable_attributes!
 
         when_full do
@@ -50,9 +56,6 @@ module V1
           typed_attribute :purchase_price_currency, Types::String.optional.meta(example: "USD")
           typed_attribute :purchase_price, Types::Float.optional.meta(read_only: true)
           typed_attribute :purchase_call_to_action, Types::String.optional
-          typed_attribute :twitter_id, Types::String.optional
-          typed_attribute :instagram_id, Types::String.optional
-          typed_attribute :facebook_id, Types::String.optional
           typed_attribute :description_formatted, Types::String.meta(read_only: true)
           typed_attribute :resource_kinds, Types::Array.of(Types::String).meta(read_only: true)
           typed_attribute :dark_mode, Types::Bool
@@ -76,10 +79,20 @@ module V1
           typed_attribute :journal_issue_number, Types::String.optional
           typed_attribute :journal_issue_pending_sort_title, Types::String.optional
           typed_attribute :journal_volume_number, Types::String.optional
+          typed_attribute :social_description, Types::String.optional
+          typed_attribute :social_title, Types::String.optional
+          typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
 
           typed_has_one :journal
           typed_has_one :journal_volume, record_type: "journalVolume"
           typed_has_one :journal_issue, record_type: "journalIssue"
+
+          typed_has_many :flattened_collaborators,
+                         serializer: ::V1::FlattenedCollaboratorSerializer,
+                         record_type: "flattenedCollaborator"
+
+          typed_has_many :collaborators,
+                         serializer: ::V1::CollaboratorSerializer
 
           typed_has_many :texts,
                          object_method_name: :text_summaries,
@@ -97,7 +110,6 @@ module V1
                          id_method_name: :resources_for_project_detail_ids,
                          object_method_name: :resources_for_project_detail
           typed_has_many :subjects
-          typed_has_many :twitter_queries
           typed_has_many :permitted_users, serializer: ::V1::UserSerializer
           typed_has_many :content_blocks, polymorphic: true
           typed_has_many :action_callouts
@@ -122,14 +134,14 @@ module V1
             )
           ).meta(read_only: true).optional do |object, params|
             journal = object.journal
-            journal.issues_nav(user: params[:current_user]) if journal.present?
+            journal.presence&.issues_nav(user: params[:current_user])
           end
         end
       end
 
       class_methods do
         def filtered_events(project)
-          project.events.excluding_type(%w(comment_created text_annotated))
+          project.events.excluding_type(%w(comment_created text_annotated tweet))
         end
       end
     end

@@ -11,7 +11,7 @@ export const textFilter = (filters, updateFilters, params, t) => ({
   value: filters?.text || "",
   onChange: e => updateFilters(e, "text"),
   options: [
-    { label: t("filters.default_options.text"), value: "" },
+    { label: t("filters.default_options.generic"), value: "" },
     ...getTextOptions(params.texts)
   ]
 });

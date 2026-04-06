@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Attachments
   class FileReplacer < ActiveInteraction::Base
     string :klass_name
     string :replacement_dir
     string :field_name, default: "attachment"
     boolean :dry_run, default: false
-    interface :logger, default: Rails.logger
+    object :logger, class: Object, default: -> { Rails.logger }
 
     def execute
       replace_attachments!
@@ -69,6 +71,5 @@ module Attachments
       error_message = errors.join("/n    ")
       logger.error msg + error_message
     end
-
   end
 end

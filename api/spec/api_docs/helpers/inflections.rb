@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Helpers
     module Inflections
@@ -6,7 +8,7 @@ module APIDocs
       end
 
       def resource_klass(resource)
-        klass = "APIDocs::Definitions::Resources::#{resource.to_s.camelize}".constantize
+        "APIDocs::Definitions::Resources::#{resource.to_s.camelize}".constantize
       end
 
       def request_or_response(type)

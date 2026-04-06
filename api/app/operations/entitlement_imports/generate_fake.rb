@@ -75,7 +75,7 @@ module EntitlementImports
         f.write content
       end
 
-      puts "Wrote testing entitlement import at #{path}" unless Rails.env.test?
+      Rails.logger.debug { "Wrote testing entitlement import at #{path}" } unless Rails.env.test?
 
       Success()
     end

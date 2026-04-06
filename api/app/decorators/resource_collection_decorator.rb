@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResourceCollectionDecorator < ApplicationDecorator
   delegate_all
   decorates_association :project
@@ -8,5 +10,4 @@ class ResourceCollectionDecorator < ApplicationDecorator
                    project_slug: project.slug,
                    resource_collection_slug: slug)
   end
-
 end

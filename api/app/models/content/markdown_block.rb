@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Content
   class MarkdownBlock < ::ContentBlock
-
     config.required_render_attributes = %i{style body}.freeze
 
     include ::HasFormattedAttributes

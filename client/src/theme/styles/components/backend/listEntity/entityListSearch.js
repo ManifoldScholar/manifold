@@ -24,7 +24,7 @@ export default `
       margin-top: -2px;
       margin-left: 14px;
 
-      &.focus-visible {
+      &:focus-visible {
         color: var(--color-accent-primary);
         outline: 0;
       }
@@ -44,7 +44,7 @@ export default `
         display: block;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         color: var(--color-accent-primary-pale);
         outline: 0;
       }
@@ -80,7 +80,9 @@ export default `
 
     &__option {
       flex: 0 0 100%;
-      padding: 30px 11px 0;
+      padding: 20px 11px 0;
+
+      ${respond(`padding-block-start: 30px;`, 60)}
 
       &--vertical {
         flex: none;
@@ -95,7 +97,7 @@ export default `
         }
 
         & + & {
-          margin-block-start: 30px;
+          margin-block-start: 20px;
         }
       }
 

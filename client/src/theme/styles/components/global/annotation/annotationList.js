@@ -6,6 +6,7 @@ export default `
 
     &--dark {
       --marker-bg-color: var(--box-medium-bg-color);
+      --tag-bg-color: var(--color-base-neutral-white);
 
       background-color: var(--box-bg-color);
       border-bottom-right-radius: var(--box-border-radius);

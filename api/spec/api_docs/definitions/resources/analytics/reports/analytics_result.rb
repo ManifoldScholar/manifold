@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       module Analytics
         module Reports
           class AnalyticsResult
-
             REQUIRED_CREATE_ATTRIBUTES = [name].freeze
 
             REQUEST_ATTRIBUTES = {

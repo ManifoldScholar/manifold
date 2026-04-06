@@ -1,44 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { readingGroupsAPI, requests } from "api";
+import { readingGroupsAPI } from "api";
 import { childRoutes } from "helpers/router";
 import HeadContent from "global/components/HeadContent";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import GroupsTable from "frontend/components/reading-group/tables/Groups";
 import JoinBox from "frontend/components/reading-group/JoinBox";
 import { GroupsHeading } from "frontend/components/reading-group/headings";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useSetLocation,
-  useCurrentUser
-} from "hooks";
+import { useFetch, useCurrentUser, useListQueryParams } from "hooks";
 import * as Styled from "./styles";
 
-const DEFAULT_SORT_ORDER = "";
+const DEFAULT_SORT_ORDER = "created_at_asc";
 
 function PublicReadingGroupsListContainer({ route }) {
-  const [pagination, setPageNumber] = usePaginationState();
-  const baseFilters = {
+  const filtersReset = {
     sort_order: DEFAULT_SORT_ORDER
   };
-  const [filters, setFilters] = useFilterState(baseFilters);
-
-  const { data: readingGroups, meta, refresh } = useFetch({
-    request: [readingGroupsAPI.publicIndex, filters, pagination],
-    options: { requestKey: requests.fePublicReadingGroups }
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initFilters: filtersReset
   });
 
-  useSetLocation({ filters, page: pagination.number });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
+  const { data: readingGroups, meta, refresh } = useFetch({
+    request: [readingGroupsAPI.publicIndex, filters, pagination]
+  });
 
   const showPlaceholder = "keyword" in filters ? false : !readingGroups?.length;
 
@@ -69,11 +54,10 @@ function PublicReadingGroupsListContainer({ route }) {
               readingGroups={readingGroups}
               currentUser={currentUser}
               pagination={meta?.pagination}
-              onPageClick={paginationClickHandlerCreator}
               filterProps={{
-                onFilterChange: param => setFilters({ newState: param }),
+                onFilterChange: state => setFilters(state),
                 initialState: filters,
-                resetState: baseFilters
+                resetState: filtersReset
               }}
               hideActions
               hideTags

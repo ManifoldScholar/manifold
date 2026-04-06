@@ -1,33 +1,32 @@
+# frozen_string_literal: true
+
 # Events are things that happen in relation to a project. Events populate the project
 # activity feed.
 class Event < ApplicationRecord
-
-  TYPEAHEAD_ATTRIBUTES = [:title].freeze
-
-  # ClassyEnum
-  include ClassyEnum::ActiveRecord
-  classy_enum_attr :event_type
-
-  # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
-  self.authorizer_name = "ProjectChildAuthorizer"
-
-  # Concerns
   include Filterable
   include HasFormattedAttributes
   include SearchIndexable
+  include HasKeywordSearch
+
+  TYPEAHEAD_ATTRIBUTES = %i[title].freeze
+  KEYWORD_SEARCH_ATTRIBUTES = %i[subject_title subject_subtitle excerpt].freeze
+
+  self.authorizer_name = "ProjectChildAuthorizer"
+
+  classy_enum_attr :event_type
+
+  has_keyword_search! against: KEYWORD_SEARCH_ATTRIBUTES
 
   has_formatted_attribute :subject_title
 
-  # Associations
   belongs_to :subject, polymorphic: true, counter_cache: true
   belongs_to :twitter_query, optional: true
   belongs_to :project
 
   delegate :slug, to: :project, prefix: true
 
-  # Scopes
   scope :created, ->(value) { where(created_at: value) }
   scope :by_type, lambda { |type|
     next all unless type.present?
@@ -45,33 +44,22 @@ class Event < ApplicationRecord
     where(subject_type: type)
   }
 
-  # Validation
   validates :event_type, presence: true
 
-  # Search
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title])
-
-  scope :search_import, -> { includes(:project) }
+  multisearch_parent_name :project
 
   after_commit :touch_project!
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: subject_title_formatted,
-      full_text: attribution_name,
-      parent_project: project&.id,
-      parent_keywords: [
-        project&.title
-      ]
-    }.merge(search_hidden)
+  def multisearch_title
+    subject_title_formatted
   end
 
-  def search_hidden
-    project.present? ? project.search_hidden : { hidden: true }
+  def multisearch_full_text
+    attribution_name
+  end
+
+  def multisearch_parent_keywords
+    [project.try(:title)].compact_blank
   end
 
   def self.trigger(type, subject)
@@ -118,5 +106,4 @@ class Event < ApplicationRecord
 
     project.touch
   end
-
 end

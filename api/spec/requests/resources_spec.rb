@@ -30,7 +30,7 @@ RSpec.describe "Resources API", type: :request do
 
         it "has a 200 OK status code" do
           patch path, headers: headers, params: build_json_payload
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe "Resources API", type: :request do
 
         it "has a 204 NO CONTENT status code" do
           delete path, headers: headers
-          expect(response).to have_http_status(204)
+          expect(response).to have_http_status(:no_content)
         end
       end
 
@@ -52,7 +52,7 @@ RSpec.describe "Resources API", type: :request do
 
         it "has a 403 FORBIDDEN status code" do
           delete path, headers: headers
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Entitlements
   class CheckExpiration < ActiveInteraction::Base
     isolatable!

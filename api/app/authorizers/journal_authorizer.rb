@@ -1,5 +1,15 @@
+# frozen_string_literal: true
+
 class JournalAuthorizer < ApplicationAuthorizer
-  expose_abilities [:read_drafts, :update_makers, :fully_read, :create_entitlements, :manage_entitlements]
+  expose_abilities [
+    :read_drafts,
+    :update_makers,
+    :fully_read,
+    :create_entitlements,
+    :manage_entitlements,
+    :manage_permissions,
+    :create_permissions
+  ]
 
   # First, we check to see if the journal is a draft. If so, {#drafts_readable_by? it must be readable}.
   # Otherwise, we allow a journal to be read.
@@ -19,7 +29,7 @@ class JournalAuthorizer < ApplicationAuthorizer
   # @param [User] user
   # @param [Hash] _options
   def updatable_by?(user, _options = {})
-    has_any_role? user, :admin, :editor, :marketeer, :project_editor
+    has_any_role? user, :admin, :editor, :marketeer, :project_editor, :journal_editor
   end
 
   def journal_administered_by?(user, _options = {})
@@ -74,7 +84,10 @@ class JournalAuthorizer < ApplicationAuthorizer
 
   private
 
+  # @param [User, nil]
   def issues_editable_by?(user)
+    return false if user.blank? || user.anonymous?
+
     resource.journal_issues.includes(:project).any? do |journal_issue|
       user.has_cached_role?(:project_editor, journal_issue.project)
     end

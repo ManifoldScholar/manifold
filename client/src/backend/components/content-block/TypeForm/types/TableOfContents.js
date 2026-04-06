@@ -52,4 +52,6 @@ class ProjectContentTypeFormTableOfContents extends PureComponent {
   }
 }
 
+export { ProjectContentTypeFormTableOfContents as UnwrappedTOC };
+
 export default withTranslation()(ProjectContentTypeFormTableOfContents);

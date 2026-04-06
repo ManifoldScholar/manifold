@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates a Reading Group model from JSON-API style params
   class ReadingGroup
@@ -6,6 +8,5 @@ module Updaters
     def attachment_fields
       []
     end
-
   end
 end

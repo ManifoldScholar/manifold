@@ -17,7 +17,7 @@ function hasCollection(possibleEntity, relationship = "collection") {
 }
 
 export function collectedIdsForCollection(collection) {
-  if (!collection) return [];
+  if (!collection?.attributes) return [];
   const mappings = collection.attributes.categoryMappings;
   return flatMapDepth(
     Object.values(mappings).map(mapping => Object.values(mapping)),
@@ -34,7 +34,7 @@ export function inCollection(collectionOrEntity, collectable) {
   if (!collection) return false;
 
   const collectedIds = collectedIdsForCollection(collection);
-  return collectedIds.includes(collectable.id);
+  return collectedIds.includes(collectable?.id);
 }
 
 export function inCollections(collectable, ...collectionsOrEntities) {

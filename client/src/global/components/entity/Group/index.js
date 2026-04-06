@@ -29,6 +29,7 @@ export default function EntityGroup({
             minColumns={4}
             minItemWidth="210px"
             parentView={parentView}
+            isList={entities.length > 1}
           >
             {({ stack }) =>
               entities.map(entity => (
@@ -37,6 +38,7 @@ export default function EntityGroup({
                   stack={stack}
                   key={entity.id}
                   parentView={parentView}
+                  isListItem={entities.length > 1}
                 />
               ))
             }

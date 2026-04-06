@@ -1,23 +1,25 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Packaging::EpubV3::Container, packaging: true do
   class << self
-    def with_entry(path, &block)
+    def with_entry(path, &)
       describe "[#{path.inspect}]" do
         let(:path) { path }
         let(:entry) { described_class[path] }
 
         subject { entry }
 
-        instance_eval(&block) if block_given?
+        instance_eval(&) if block_given?
       end
     end
 
-    def with_callable_entry(path, &block)
+    def with_callable_entry(path, &)
       with_entry(path) do
         it { is_expected.to respond_to :call }
 
-        instance_eval(&block) if block_given?
+        instance_eval(&) if block_given?
       end
     end
   end

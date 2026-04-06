@@ -8,7 +8,7 @@ import memoize from "lodash/memoize";
 import UserLinks from "./mobile-components/UserLinks";
 import MobileSearch from "./mobile-components/Search";
 import MobileBreadcrumb from "./mobile-components/Breadcrumb";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import IconComposer from "global/components/utility/IconComposer";
 import { FrontendModeContext } from "helpers/contexts";
 
@@ -264,12 +264,13 @@ export class NavigationMobile extends Component {
               {this.isStandalone && this.renderStandaloneHeading()}
               {this.hasLinks &&
                 this.props.links.map((link, index) => {
-                  if (link.ability)
+                  if (link.ability || link.kind)
                     return (
                       <Authorize
                         key={`${link.route}-wrapped`}
                         entity={link.entity}
                         ability={link.ability}
+                        kind={link.kind}
                       >
                         {this.renderItem(link, index)}
                       </Authorize>
@@ -291,7 +292,8 @@ export class NavigationMobile extends Component {
 
   render() {
     const navClasses = classnames({
-      "hide-82": true,
+      "hide-82": this.props.mode === "frontend",
+      "hide-100": this.props.mode === "backend",
       "nested-nav": true,
       "nested-nav--open": this.state.open,
       "nested-nav--dark": this.props.mode === "backend"

@@ -14,9 +14,7 @@ export const Outer = styled.nav`
   ${utilityPrimary}
   width: 100%;
   line-height: 1.4;
-
   background-color: var(--box-bg-color);
-  color: var(--weak-color);
   font-size: 13px;
   letter-spacing: 0.1em;
   padding: 13px 0 15px;

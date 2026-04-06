@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 module Analytics
   class RecordEvent < ActiveInteraction::Base
-
-    VIEW_EVENT_MATCHER = "view resource".freeze
-    SEARCH_EVENT_MATCHER = "search resource".freeze
-    SHARE_EVENT_MATCHER = "share".freeze
-    CITE_EVENT_MATCHER = "cite".freeze
-    LEAVE_EVENT_MATCHER = "leave".freeze
+    VIEW_EVENT_MATCHER = "view resource"
+    SEARCH_EVENT_MATCHER = "search resource"
+    SHARE_EVENT_MATCHER = "share"
+    CITE_EVENT_MATCHER = "cite"
+    LEAVE_EVENT_MATCHER = "leave"
+    DOWNLOAD_EVENT_MATCHER = "download"
 
     record :analytics_visit, class: Analytics::Visit
     string :visit_token, default: nil
@@ -23,6 +25,10 @@ module Analytics
                         Analytics::RecordLeaveEvent
                       when SHARE_EVENT_MATCHER, CITE_EVENT_MATCHER
                         inputs[:name] = Analytics::Event.event_name_for(inputs[:name], TextSection)
+                        Analytics::RecordCustomEvent
+                      when DOWNLOAD_EVENT_MATCHER
+                        klass = inputs[:record_type].classify.constantize
+                        inputs[:name] = Analytics::Event.event_name_for(inputs[:name], klass)
                         Analytics::RecordCustomEvent
                       else
                         Analytics::RecordCustomEvent
@@ -52,6 +58,5 @@ module Analytics
     def valid_visitor_token
       @valid_visitor_token ||= valid_visitor_token || request.headers["HTTP_VISITOR_TOKEN"]
     end
-
   end
 end

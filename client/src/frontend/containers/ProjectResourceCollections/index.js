@@ -7,19 +7,21 @@ import { useParams } from "react-router-dom";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import { projectsAPI } from "api";
 import lh from "helpers/linkHandler";
-import LoadingBlock from "global/components/loading-block";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
-import EntityHeadContent from "frontend/components/entity/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
+import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 
 export default function ProjectResourceCollectionsContainer({
   project,
   journalBreadcrumbs
 }) {
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
   const { id } = useParams();
+
+  const { pagination } = useListQueryParams({ initSize: 10 });
+
   const { data: resourceCollections, meta, uid } = useFetch({
     request: [projectsAPI.resourceCollections, id, null, pagination]
   });
@@ -46,7 +48,13 @@ export default function ProjectResourceCollectionsContainer({
       : [projectCrumb, collectionsCrumb].filter(Boolean);
   }, [journalBreadcrumbs, slug, titlePlaintext, t]);
 
-  if (!project) return <LoadingBlock />;
+  const headContentProps = useEntityHeadContent(
+    project,
+    null,
+    t("glossary.resource_collection_title_case_other")
+  );
+
+  if (!project || !resourceCollections) return null;
 
   return (
     <>
@@ -54,12 +62,7 @@ export default function ProjectResourceCollectionsContainer({
         debugLabel="ProjectResourceCollections"
         isProjectSubpage
       />
-      <EntityHeadContent
-        entity={project}
-        titleOverride={`${t(
-          "glossary.resource_collection_title_case_other"
-        )} | ${titlePlaintext}`}
-      />
+      <HeadContent {...headContentProps} />
       <h1 className="screen-reader-text">
         {`${titlePlaintext} ${t("glossary.resource_collection_other")}`}
       </h1>
@@ -70,9 +73,6 @@ export default function ProjectResourceCollectionsContainer({
         <EntityCollection.ProjectResourceCollections
           resourceCollections={resourceCollections}
           resourceCollectionsMeta={meta}
-          paginationProps={{
-            paginationClickHandler: page => () => setPageNumber(page)
-          }}
           itemHeadingLevel={2}
         />
       )}

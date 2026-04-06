@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Texts controller
     class TextsController < ApplicationController
-
       resourceful! Text, authorize_options: { actions: { toggle_export_epub_v3: :update }, except: [:index, :show] } do
-        Text.all
+        Text.existing
       end
 
       # GET /texts
@@ -37,7 +38,7 @@ module API
 
       def destroy
         @text = load_and_authorize_text
-        @text.destroy
+        @text.async_destroy
       end
 
       def toggle_export_epub_v3
@@ -52,13 +53,12 @@ module API
       protected
 
       def includes
-        [:project, :category, :creators, :contributors, :stylesheets]
+        [:project, :category, :creators, :contributors, :flattened_collaborators, :stylesheets]
       end
 
       def scope_for_texts
-        Text.friendly
+        Text.existing.friendly
       end
-
     end
   end
 end

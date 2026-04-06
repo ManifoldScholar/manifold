@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class CurrentUserSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
     include ::V1::Concerns::UserAttributes
 
@@ -25,8 +26,8 @@ module V1
       "such as 'create', 'read', 'update', 'delete', and each key has a boolean value" \
       "attached to it"
     ) do |object|
-      out = models_with_authorization.each_with_object({}) do |klass, abilities|
-        abilities[klass.name.underscore] = klass.serialized_abilities_for(object)
+      out = models_with_authorization.to_h do |klass|
+        [klass.name.underscore, klass.serialized_abilities_for(object)]
       end
       camelize_hash(out)
     end
@@ -38,7 +39,6 @@ module V1
     end
 
     class << self
-
       private
 
       def models_with_authorization
@@ -52,6 +52,5 @@ module V1
         models.select { |klass| klass.respond_to? :readable_by? }
       end
     end
-
   end
 end

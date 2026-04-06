@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utility
   # Recursively calculate the size of a given directory
   class CalculateDirectorySize < ActiveInteraction::Base

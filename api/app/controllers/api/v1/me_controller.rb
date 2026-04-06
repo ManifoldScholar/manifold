@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Me controller
     class MeController < ApplicationController
-
       before_action :authenticate_request!
 
       def show
@@ -37,7 +38,6 @@ module API
       def includes
         [:collection, :favorites]
       end
-
     end
   end
 end

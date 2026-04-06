@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Run a command inside the manifold web (API) container
+# Usage: ./api/bin/run <command>
+# Example: ./api/bin/run bundle exec rspec spec/models/user_spec.rb
+
+CONTAINER_NAME="manifold-web"
+
+if [ $# -eq 0 ]; then
+    echo "Usage: ./api/bin/run <command>"
+    echo "Example: ./api/bin/run bundle exec rspec spec/models/user_spec.rb"
+    exit 1
+fi
+
+container_id=$(docker ps --filter "name=$CONTAINER_NAME" -q)
+
+if [ -z "$container_id" ]; then
+    echo "Error: No container found with name '$CONTAINER_NAME'"
+    exit 1
+fi
+
+if [ $(echo "$container_id" | wc -l) -gt 1 ]; then
+    container_id=$(echo "$container_id" | head -n1)
+fi
+
+if [ -t 0 ]; then
+    exec docker exec -it "$container_id" "$@"
+else
+    exec docker exec "$container_id" "$@"
+fi

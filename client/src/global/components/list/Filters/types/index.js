@@ -9,6 +9,8 @@ import { orderCollectionFilter as orderCollection } from "./orderCollection";
 import { groupSortFilter as groupSort } from "./groupSort";
 import { groupStatusFilter as groupStatus } from "./groupStatus";
 import { sortChronFilter as sortChron } from "./sortChron";
+import { readingGroupFilter as readingGroup } from "./readingGroup";
+import { privacyFilter as privacy } from "./privacy";
 
 export default {
   sort,
@@ -21,5 +23,7 @@ export default {
   orderCollection,
   groupSort,
   groupStatus,
-  sortChron
+  sortChron,
+  readingGroup,
+  privacy
 };

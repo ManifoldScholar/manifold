@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module ReadingGroups
       module Relationships
         class AnnotationsController < ApplicationController
-
           before_action :set_reading_group
           authorize_actions_for :reading_group, all_actions: :read
 
           resourceful! Annotation do
             Annotation.filtered(
-              with_pagination!(annotation_filter_params),
+              **with_pagination!(annotation_filter_params),
               scope: @reading_group.annotations.with_existing_text
             )
           end

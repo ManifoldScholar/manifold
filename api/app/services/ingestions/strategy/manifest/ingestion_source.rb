@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Strategy
     module Manifest
       class IngestionSource
-
         def initialize(strategy, source)
           @context = strategy.context
           @inspector = strategy.inspector
@@ -49,7 +50,6 @@ module Ingestions
             ::IngestionSource::KIND_PUBLICATION_RESOURCE
           end
         end
-
       end
     end
   end

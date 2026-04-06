@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "global/components/utility";
+import PopoverMenu from "global/components/popover/Menu";
 import { withTranslation } from "react-i18next";
 
 class ProjectCollectionListItem extends PureComponent {
@@ -12,10 +13,18 @@ class ProjectCollectionListItem extends PureComponent {
     visibilityToggleHandler: PropTypes.func.isRequired,
     dragHandleProps: PropTypes.object,
     draggableProps: PropTypes.object,
+    onReorder: PropTypes.func,
     isDragging: PropTypes.bool,
-    innerRef: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
+    index: PropTypes.number,
+    itemCount: PropTypes.number
   };
+
+  constructor(props) {
+    super(props);
+
+    this.popoverDisclosureRef = React.createRef();
+  }
 
   get icon() {
     if (this.props.entity.attributes.visible)
@@ -63,8 +72,43 @@ class ProjectCollectionListItem extends PureComponent {
     return this.props.clickHandler(this.props.entity);
   };
 
+  onKeyboardMove = direction => {
+    const { entity, index, onReorder } = this.props;
+    const newIndex = direction === "down" ? index + 1 : index - 1;
+
+    const callback = () => {
+      setTimeout(() => {
+        // refs are unreliably here due to rerendering caused by ancestor components
+        const disclosureToggleEl = document.querySelector(
+          `[data-disclosure-toggle-for="${entity.id}"]`
+        );
+        if (disclosureToggleEl) {
+          disclosureToggleEl.focus();
+        }
+      }, 300);
+    };
+
+    const result = {
+      id: entity.id,
+      title: entity.attributes.title,
+      position: newIndex + 1,
+      announce: true,
+      callback
+    };
+    onReorder(result);
+  };
+
   render() {
-    const { active, entity, innerRef, draggableProps, isDragging } = this.props;
+    const {
+      active,
+      entity,
+      index,
+      itemCount,
+      innerRef,
+      dragHandleProps,
+      draggableProps,
+      isDragging
+    } = this.props;
     const t = this.props.t;
 
     if (!entity) return null;
@@ -121,12 +165,46 @@ class ProjectCollectionListItem extends PureComponent {
                 "project-collection-list-item__button",
                 "project-collection-list-item__button--drag-handle"
               )}
-              {...this.props.dragHandleProps}
+              {...dragHandleProps}
+              tabIndex={-1}
             >
               <Utility.IconComposer
                 size={30}
                 icon="grabber32"
                 className="project-collection-list-item__icon"
+              />
+            </div>
+            <div className="project-collection-list-item__keyboard-buttons">
+              <PopoverMenu
+                disclosure={
+                  <button
+                    ref={this.popoverDisclosureRef}
+                    data-disclosure-toggle-for={entity.id}
+                    className={classNames(
+                      "project-collection-list-item__icon-group-item",
+                      "project-collection-list-item__button"
+                    )}
+                  >
+                    <Utility.IconComposer icon="arrowUpDown32" size={30} />
+                    <span className="screen-reader-text">
+                      {this.props.t("actions.dnd.reorder")}
+                    </span>
+                  </button>
+                }
+                actions={[
+                  {
+                    id: "up",
+                    label: this.props.t("actions.dnd.move_up_position"),
+                    onClick: () => this.onKeyboardMove("up"),
+                    disabled: index === 0
+                  },
+                  {
+                    id: "down",
+                    label: this.props.t("actions.dnd.move_down_position"),
+                    onClick: () => this.onKeyboardMove("down"),
+                    disabled: index === itemCount - 1
+                  }
+                ]}
               />
             </div>
           </div>

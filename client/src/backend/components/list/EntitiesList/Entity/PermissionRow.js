@@ -49,7 +49,7 @@ class PermissionRow extends PureComponent {
     switch (name) {
       case "project_editor":
         return t("projects.permissions.project_editor");
-      case "project_resource_editor":
+      case "project_property_manager":
         return t("projects.permissions.metadata_editor");
       case "project_author":
         return t("projects.permissions.author");

@@ -7,6 +7,7 @@ import { isOnlyFormat, nestMarkElements, replaceLineBreaks } from "./utils";
 
 const MARK_TAG_MAP = {
   strikethrough: "s",
+  del: "del",
   bold: "strong",
   underline: "u",
   italic: "em",

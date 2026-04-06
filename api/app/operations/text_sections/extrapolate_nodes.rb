@@ -43,7 +43,7 @@ module TextSections
           body_json IS NOT NULL AND body_json <> 'null'::jsonb
     SQL
 
-    SECOND_PART = <<~SQL
+    SECOND_PART = <<~SQL.freeze
       UNION ALL
       SELECT
         text_section_id, body_hash,
@@ -75,7 +75,9 @@ module TextSections
         COALESCE(node_extra, '{}'::jsonb) AS node_extra,
         COALESCE(children_count, 0) AS children_count,
         (#{TAG_IS_INTERMEDIATE}) AS intermediate,
-        CURRENT_TIMESTAMP AS extrapolated_at
+        CURRENT_TIMESTAMP AS extrapolated_at,
+        CURRENT_TIMESTAMP AS search_indexed_at,
+        TRUE AS current
       FROM nodes
     )
     SQL
@@ -91,7 +93,9 @@ module TextSections
       node_extra,
       children_count,
       intermediate,
-      extrapolated_at
+      extrapolated_at,
+      search_indexed_at,
+      current
     ) SELECT
       text_section_id, body_hash,
       node_root, node_path, path,
@@ -102,7 +106,9 @@ module TextSections
       node_extra,
       children_count,
       intermediate,
-      extrapolated_at
+      extrapolated_at,
+      search_indexed_at,
+      current
       FROM finalized
     ON CONFLICT (node_path) DO UPDATE SET
       "text_section_id" = EXCLUDED."text_section_id",
@@ -122,6 +128,7 @@ module TextSections
       "children_count" = EXCLUDED."children_count",
       "intermediate" = EXCLUDED."intermediate",
       "extrapolated_at" = EXCLUDED."extrapolated_at",
+      "current" = TRUE,
       "updated_at" =
       CASE
       WHEN EXCLUDED."text_section_id" IS DISTINCT FROM text_section_nodes."text_section_id"
@@ -164,13 +171,14 @@ module TextSections
     SQL
 
     def call(**args)
-      corrected = yield correct_intermediate_nodes.(**args)
+      # We only need this if we end up changing the nodes that count as intermediate.
+      # corrected = yield correct_intermediate_nodes.(**args)
 
-      return Success(upserted: 0, corrected: corrected) if args[:text_section].present? && args[:text_section].body_json.blank?
+      return Success(upserted: 0) if args[:text_section].present? && args[:text_section].body_json.blank?
 
       upserted = sql_update! FIRST_PART, interpolate(**args), SECOND_PART, FINAL_PART
 
-      Success(upserted: upserted, corrected: corrected)
+      Success(upserted:)
     end
 
     private

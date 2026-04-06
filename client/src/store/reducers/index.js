@@ -10,7 +10,6 @@ import isomorphic from "./isomorphic";
 import developer from "./developer";
 import entityStore from "./entityStore";
 import entityEditor from "./entityEditor";
-import websocket from "./websocket";
 import plugin from "./plugin";
 
 const routing = routerReducer;
@@ -24,7 +23,6 @@ const reducers = combineReducers({
   oauth,
   authentication,
   isomorphic,
-  websocket,
   plugin,
   developer
 });

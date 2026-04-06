@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module ResourceAttachmentValidation
   extend ActiveSupport::Concern
 
   include Attachments
+
   def validate_image_fields
     errors.add(:attachment, "image is required") unless attachment.present?
     errors.add(:attachment, "is invalid image file") if attachment.present? && !attachment_is_image?
@@ -14,7 +17,6 @@ module ResourceAttachmentValidation
     errors.empty?
   end
 
-  # rubocop:disable Metrics/AbcSize
   def validate_video_fields
     if external_video?
       errors.add(:external_id, "can't be blank") unless external_id.present?
@@ -25,7 +27,6 @@ module ResourceAttachmentValidation
     end
     errors.empty?
   end
-  # rubocop:enable Metrics/AbcSize
 
   def validate_pdf_fields
     errors.add(:attachment, "pdf is required") unless attachment.present?

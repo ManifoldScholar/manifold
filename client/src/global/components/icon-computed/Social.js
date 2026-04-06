@@ -15,12 +15,9 @@ export default class IconComputedSocial extends PureComponent {
 
   iconForValue(value) {
     const map = {
-      facebook: "socialFacebook32",
       email: "socialEmail32",
-      twitter: "socialTwitter32",
       slack: "socialSlack32",
       linkedIn: "socialLinkedIn32",
-      instagram: "socialInstagram32",
       github: "socialGithub32",
       google: "socialGoogle32"
     };

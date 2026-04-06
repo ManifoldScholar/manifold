@@ -55,6 +55,17 @@ doc
 ## Plugins ##
 client/plugins*
 
+## Client build output ##
+client/dist
+
 __MACOSX
 
 Brewfile.lock.json
+
+backup-local*.tar
+
+/docker/minio/client/*
+!/docker/minio/client/.keep
+!/docker/minio/client/initialize.sh
+
+CLAUDE.md

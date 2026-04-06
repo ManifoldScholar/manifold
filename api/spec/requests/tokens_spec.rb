@@ -6,12 +6,13 @@ RSpec.describe "Tokens API", type: :request do
     let(:params) { { email: reader.email, password: password } }
     let(:invalid_params) { { email: reader.email, password: "boogers" } }
     let(:nonexistent_user_params) { { email: "123", password: "123" } }
-    let(:api_response) { JSON.parse(response.body) }
+    let(:api_response) { response.parsed_body }
 
     describe "the response" do
-      before(:each) { post path, params: params }
+      before { post path, params: params }
+
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it "returns the token as part of the response meta" do
@@ -33,19 +34,21 @@ RSpec.describe "Tokens API", type: :request do
     end
 
     context "when the username or password are incorrect" do
-      before(:each) { post path, params: invalid_params }
+      before { post path, params: invalid_params }
+
       describe "the response" do
         it "has a 401 status code" do
-          expect(response).to have_http_status(401)
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end
 
-    context "when the username or password are incorrect" do
-      before(:each) { post path, params: nonexistent_user_params }
+    context "when the username is a non-existent user" do
+      before { post path, params: nonexistent_user_params }
+
       describe "the response" do
         it "has a 401 status code" do
-          expect(response).to have_http_status(401)
+          expect(response).to have_http_status(:unauthorized)
         end
       end
     end

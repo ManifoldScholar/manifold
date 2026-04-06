@@ -20,7 +20,7 @@ export const Link = styled.a`
   }
 
   &[href]:hover,
-  &[href].focus-visible {
+  &[href]:focus-visible {
     color: var(--hover-color);
     outline: 0;
   }
@@ -41,5 +41,9 @@ export const Link = styled.a`
       `,
       75
     )}
+  }
+
+  .screen-reader-text {
+    color: initial;
   }
 `;

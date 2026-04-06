@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe TextSections::ExtrapolateNodesJob, type: :job do
-  let!(:text_section) { FactoryBot.create :text_section }
+  let!(:text_section) { FactoryBot.create :text_section, :with_simple_body }
 
   it "runs the operation" do
     expect do

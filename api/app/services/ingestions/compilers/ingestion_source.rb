@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Compilers
     class IngestionSource < AbstractInteraction
@@ -52,7 +54,6 @@ module Ingestions
 
         info key, source_path: ingestion_source.source_path
       end
-
     end
   end
 end

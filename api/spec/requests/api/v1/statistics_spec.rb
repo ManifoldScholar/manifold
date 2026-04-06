@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Statistics", type: :request do
   path "/statistics" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                      model: Statistics,
                      exclude: ["404"],
                      request_id: false,

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class IngestionSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :state, Types::String.enum("sleeping", "processing", "finished").meta(read_only: true)
@@ -22,5 +23,18 @@ module V1
 
     typed_has_one :creator, serializer: ::V1::UserSerializer
 
+    typed_has_many :ingestion_messages, serializer: ::V1::IngestionMessageSerializer
+
+    link :reset do |ingestion, _|
+      ManifoldApi::Container["system.routes"].reset_api_v1_ingestion_path(ingestion)
+    end
+
+    link :reingest do |ingestion, _|
+      ManifoldApi::Container["system.routes"].reingest_api_v1_ingestion_path(ingestion)
+    end
+
+    link :process do |ingestion, _|
+      ManifoldApi::Container["system.routes"].process_api_v1_ingestion_path(ingestion)
+    end
   end
 end

@@ -1,28 +1,28 @@
+# frozen_string_literal: true
+
 # Connects texts to resources that were sources for text sections during ingestion
 #
 # @see IngestionSourceUploader
 class IngestionSource < ApplicationRecord
-  # Constants
   TYPEAHEAD_ATTRIBUTES = [:display_name, :source_identifier].freeze
 
-  # Authorization
   include Authority::Abilities
   include Filterable
   include SerializedAbilitiesFor
   include SearchIndexable
   include Attachments
+  include HasKeywordSearch
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   classy_enum_attr :kind, enum: "IngestionSourceKind", allow_blank: false
 
-  # Attachments
   manifold_has_attached_file :attachment, :resource
 
-  # Constants
-  KIND_COVER_IMAGE = "cover_image".freeze
-  KIND_NAVIGATION = "navigation".freeze
-  KIND_SECTION = "section".freeze
-  KIND_PUBLICATION_RESOURCE = "publication_resource".freeze
+  KIND_COVER_IMAGE = "cover_image"
+  KIND_NAVIGATION = "navigation"
+  KIND_SECTION = "section"
+  KIND_PUBLICATION_RESOURCE = "publication_resource"
   ALLOWED_KINDS = [
     KIND_COVER_IMAGE,
     KIND_NAVIGATION,
@@ -52,25 +52,66 @@ class IngestionSource < ApplicationRecord
     end
   end
 
-  # Search
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500)
+  has_keyword_search! against: TYPEAHEAD_ATTRIBUTES
 
-  # Associations
-  belongs_to :text
+  belongs_to :text, inverse_of: :ingestion_sources
+
+  has_one :project, through: :text
 
   # Delegations
-  delegate :project, to: :text
+  delegate :source_path_map, to: :text
   delegate *IngestionSourceKind.predicates, to: :kind
   delegate :content_type, to: :attachment, allow_nil: true
 
-  # Validations
   validates :source_identifier, presence: true
   validates :attachment, presence: { on: :from_api }
 
   def display_name
     read_attribute(:display_name).presence || source_identifier
+  end
+
+  def packaging_key
+    [
+      source_path,
+      attachment.try(:original_filename),
+      fallback_packaging_name,
+    ].compact.first
+  end
+
+  def packaging_name
+    [
+      base_source_path,
+      attachment.try(:original_filename),
+      fallback_packaging_name,
+    ].compact.first
+  end
+
+  def packaging_path
+    source_path_map.fetch(packaging_key)
+  rescue KeyError
+    # :nocov:
+    proxy_path
+    # :nocov:
+  end
+
+  def proxy_path
+    self.class.proxy_path self
+  end
+
+  def to_s
+    "ingestion source #{id}"
+  end
+
+  private
+
+  def base_source_path
+    File.basename(source_path) if source_path?
+  end
+
+  def fallback_packaging_name
+    ext = ::MIME::Types[content_type].first.try(:extensions).try(:first)
+
+    ["ingestion-source-#{id}", ext].compact.join(?.)
   end
 
   class << self
@@ -86,13 +127,5 @@ class IngestionSource < ApplicationRecord
         ingestion_source
       )
     end
-  end
-
-  def proxy_path
-    self.class.proxy_path self
-  end
-
-  def to_s
-    "ingestion source #{id}"
   end
 end

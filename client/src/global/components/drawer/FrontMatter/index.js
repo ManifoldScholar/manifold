@@ -84,7 +84,13 @@ FrontMatter.propTypes = {
   icon: PropTypes.string,
   closeCallback: PropTypes.func,
   closeUrl: PropTypes.string,
-  context: PropTypes.oneOf(["backend", "frontend", "reader", "editor"]),
+  context: PropTypes.oneOf([
+    "backend",
+    "frontend",
+    "reader",
+    "editor",
+    "ingestion"
+  ]),
   padding: PropTypes.oneOf(["none", "default", "large", "xl"]),
   includeDrawerFrontMatter: PropTypes.bool,
   headerId: PropTypes.string.isRequired,

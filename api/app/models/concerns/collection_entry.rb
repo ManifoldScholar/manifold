@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CollectionEntry
   extend ActiveSupport::Concern
 
@@ -18,14 +20,13 @@ module CollectionEntry
   # @!attribute [r] collectable_id
   # @return [String]
   def collectable_id
-    read_attribute collectable_associations.collectable.foreign_key
+    self[collectable_associations.collectable.foreign_key]
   end
 
   module ClassMethods
     extend Memoist
 
     delegate :collectable_associations,
-             :collectable_project?, :collectable_resource?, :collectable_resource_collection?, :collectable_text?,
              to: :collectable_definition, allow_nil: true
 
     delegate :project?, :resource?, :resource_collection?, :text?,

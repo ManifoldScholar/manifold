@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormattedAttributes
   class Configuration
     include Enumerable
@@ -23,7 +25,7 @@ module FormattedAttributes
     # @param [Hash] options
     # @return [void]
     def define!(attribute, **options)
-      definition = FormattedAttributes::Definition.new(attribute, options)
+      definition = FormattedAttributes::Definition.new(attribute, **options)
 
       add! definition
 
@@ -110,7 +112,6 @@ module FormattedAttributes
     def add!(definition)
       raise TypeError, "Must be a definition: #{definition.class}" unless definition.is_a?(FormattedAttributes::Definition)
       raise FormattedAttributes::AlreadyDefinedError, "Already defined #{definition.path.inspect}" unless @definitions.add?(definition)
-
       model.include definition.methods_module
 
       @cache_type.attribute definition.key, definition.cache_type.to_type, default: {}

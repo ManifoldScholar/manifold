@@ -5,13 +5,12 @@ import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
-import { useFetch, useFilterState, usePaginationState } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import HeadContent from "global/components/HeadContent";
 
 export default function JournalsListContainer() {
-  const [filters] = useFilterState();
-  const [pagination, setPageNumber] = usePaginationState(1, 8);
+  const { pagination, filters } = useListQueryParams({ initSize: 8 });
   const { data: journals, meta } = useFetch({
     request: [journalsAPI.index, filters, pagination]
   });
@@ -40,10 +39,7 @@ export default function JournalsListContainer() {
       {showPagination && (
         <section>
           <div className="container">
-            <GlobalUtility.Pagination
-              paginationClickHandler={page => () => setPageNumber(page)}
-              pagination={meta.pagination}
-            />
+            <GlobalUtility.Pagination pagination={meta.pagination} />
           </div>
         </section>
       )}

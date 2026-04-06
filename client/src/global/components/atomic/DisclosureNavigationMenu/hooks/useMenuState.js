@@ -12,9 +12,10 @@ export default function useMenuState(initialVisible = false, onBlur) {
 
   function handleBlur(event) {
     if (!contentRef.current || !disclosureRef.current) return;
+    const target = event.relatedTarget || event.target;
     if (
-      contentRef.current.contains(event.relatedTarget) ||
-      disclosureRef.current.contains(event.relatedTarget)
+      contentRef.current.contains(target) ||
+      disclosureRef.current.contains(target)
     )
       return;
     // state can optionally be controlled externally

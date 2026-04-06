@@ -9,11 +9,6 @@ const HERO_BREAKPOINT = breakpoints[60];
 const aSecondaryButton = `
   background-color: var(--color-base-neutral10);
 
-  &.focus-visible {
-    outline: 0;
-    border-color: var(--color-base-neutral70);
-  }
-
   &:hover {
     color: inherit;
     background-color: ${rgba("neutral30", 0.7)};
@@ -26,14 +21,13 @@ const aSecondaryButtonDark = `
   border-color: var(--color-neutral-ui-light);
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     color: var(--color-base-neutral95);
     background-color: var(--color-base-neutral30);
-    border-color: var(--color-base-neutral30);
   }
 
-  &.focus-visible {
-    border-color: var(--color-base-neutral75);
+  &:hover {
+    border-color: var(--color-base-neutral30);
   }
 `;
 
@@ -61,7 +55,8 @@ export const Button = styled("button", transientOptions)`
   border-radius: var(--box-border-radius);
   background-color: var(--color-accent-primary);
   transition: background-color ${defaultTransitionProps},
-    border-color ${defaultTransitionProps};
+    border-color ${defaultTransitionProps},
+    outline-color ${defaultTransitionProps};
   font-family: var(--font-family-heading);
   font-size: 14px;
   font-weight: var(--font-weight-semibold);
@@ -71,14 +66,14 @@ export const Button = styled("button", transientOptions)`
   line-height: 18px;
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     color: var(--color-base-neutral90);
     background-color: var(--color-accent-primary-dull);
   }
 
-  &.focus-visible {
-    outline: 0;
-    border-color: var(--color-accent-primary);
+  &:focus-visible {
+    border-color: transparent;
+    outline-offset: 3px;
   }
 
   ${({ $secondary, $darkMode }) => {

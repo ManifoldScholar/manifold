@@ -10,6 +10,7 @@ import HeaderLogo from "global/components/atomic/HeaderLogo";
 import { useTranslation } from "react-i18next";
 import ProjectsNav from "./SecondaryNav/Projects";
 import ProjectsButton from "./SecondaryNav/Projects/Button";
+import Authorization from "helpers/authorization";
 import { useShowJournalsActive } from "hooks";
 
 export default function LayoutHeader({
@@ -20,12 +21,30 @@ export default function LayoutHeader({
   const { t } = useTranslation();
   const journalIsActive = useShowJournalsActive();
 
+  const authorization = new Authorization();
+  const canUpdateProjectCollections = authorization.authorizeAbility({
+    authentication,
+    entity: "projectCollection",
+    ability: "update"
+  });
+
   const baseLinks = navigation.backend();
-  const projectsLink = baseLinks.find(l => l.route === "backendProjects");
-  projectsLink.dropdownContent = <ProjectsNav links={projectsLink.children} />;
-  projectsLink.toggle = ProjectsButton;
-  const links = baseLinks.filter(l => l.route !== "backendProjects");
-  links.splice(1, 0, projectsLink);
+
+  let links;
+
+  if (canUpdateProjectCollections) {
+    const projectsLink = baseLinks.find(l => l.route === "backendProjects");
+    projectsLink.dropdownContent = (
+      <ProjectsNav links={projectsLink.children} />
+    );
+    projectsLink.toggle = ProjectsButton;
+    links = baseLinks.filter(
+      l => l.route !== "backendProjects" && l.route !== "backendProjectsAll"
+    );
+    links.splice(1, 0, projectsLink);
+  } else {
+    links = baseLinks.filter(l => l.route !== "backendProjects");
+  }
 
   return (
     <header className="header-app header-app--sticky">

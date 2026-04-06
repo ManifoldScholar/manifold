@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TextSummary < ApplicationRecord
   include Attachments
   include TableOfContentsWithCollected
@@ -14,9 +16,10 @@ class TextSummary < ApplicationRecord
 
   manifold_has_attached_file :cover, :image
 
-  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: []
+  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: -> { [] }
 
   delegate :collected_by?, to: :text
+  delegate :creator_names, to: :text
 
   alias_attribute :toc_section_id, :toc_section
 

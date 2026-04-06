@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Entitlements
   # For use in relationships controllers, where the subject has already been defined
   # on a non-persisted {Entitlement}.

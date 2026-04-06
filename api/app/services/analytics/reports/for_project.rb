@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Analytics
   module Reports
     class ForProject < Analytics::Reports::ScopedBuilder
-
       validate :resource_is_project!
 
       def resource_is_project!
@@ -79,6 +80,18 @@ module Analytics
         WHERE favoritable_type = 'Project' AND favoritable_id = #{RESOURCE_PLACEHOLDER}
       SQL
 
+      register_cte! :downloads, <<~SQL
+        SELECT
+          COUNT(*) AS count
+        FROM (SELECT DISTINCT id FROM visits) visits
+        JOIN analytics_events
+          ON visits.id = analytics_events.visit_id
+        JOIN projects
+          ON (analytics_events.properties ->> '#{Project.model_name.param_key}')::uuid = projects.id
+        WHERE analytics_events.name = '#{Analytics::Event.event_name_for(:download, Project)}'
+          AND projects.id = #{RESOURCE_PLACEHOLDER}
+      SQL
+
       # END CTES
 
       # BEGIN ANALYTICS
@@ -141,8 +154,18 @@ module Analytics
         )
       end
 
-      # END ANALYTICS
+      define_analytic :downloads do
+        require_cte! :downloads
 
+        build_simple_query(
+          name: "downloads",
+          type: "integer",
+          value: "count",
+          from: "downloads"
+        )
+      end
+
+      # END ANALYTICS
     end
   end
 end

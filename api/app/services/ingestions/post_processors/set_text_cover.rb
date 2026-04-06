@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module PostProcessors
     class SetTextCover < AbstractInteraction
@@ -31,8 +33,10 @@ module Ingestions
       end
 
       def cover_source
-        @cover_source ||= text.ingestion_sources
-          .find_by(kind: IngestionSource::KIND_COVER_IMAGE)
+        return @cover_source if defined?(@cover_source)
+
+        @cover_source = text.ingestion_sources
+                  .find_by(kind: IngestionSource::KIND_COVER_IMAGE)
       end
     end
   end

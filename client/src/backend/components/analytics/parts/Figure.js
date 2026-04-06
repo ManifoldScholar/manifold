@@ -2,7 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Figure({ stat, caption }) {
-  return stat ? (
+  const canRender =
+    (typeof stat === "number" && !isNaN(stat)) || typeof stat === "string";
+
+  return canRender ? (
     <figure>
       <div className="analytics-block__stat">{stat}</div>
       <figcaption className="analytics-block__caption">{caption}</figcaption>

@@ -40,4 +40,6 @@ class ProjectContentTypeFormMarkdown extends PureComponent {
   }
 }
 
+export { ProjectContentTypeFormMarkdown as UnwrappedMarkdown };
+
 export default withTranslation()(ProjectContentTypeFormMarkdown);

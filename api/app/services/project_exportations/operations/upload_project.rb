@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProjectExportations
   module Operations
     class UploadProject
@@ -8,7 +10,9 @@ module ProjectExportations
       # @return [Dry::Monads::Result::Success(String)]
       # @return [Dry::Monads::Result::Failure((Symbol, String))]
       def call(exportation)
-        upload_pipeline.call(exportation.to_selection)
+        result = upload_pipeline.call(exportation.to_selection)
+
+        result.fmap { exportation }
       end
     end
   end

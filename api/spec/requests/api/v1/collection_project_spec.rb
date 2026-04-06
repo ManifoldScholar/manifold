@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Collection Project", type: :request do
@@ -6,13 +8,13 @@ RSpec.describe "Collection Project", type: :request do
   let(:project_id) { FactoryBot.create(:project).id }
 
   path "/project_collections/{project_collection_id}/relationships/collection_projects" do
-    include_examples "an API index request",
+    it_behaves_like "an API index request",
                      parent: "project collection",
                      model: CollectionProject,
                      url_parameters: [:project_collection_id],
                      included_relationships: [:project]
 
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                      parent: "project collection",
                      model: CollectionProject,
                      url_parameters: [:project_collection_id],
@@ -39,7 +41,7 @@ RSpec.describe "Collection Project", type: :request do
   end
 
   path "/project_collections/{project_collection_id}/relationships/collection_projects/{id}" do
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                      model: CollectionProject,
                      parent: "project collection",
                      tags: "Project Collections",
@@ -47,7 +49,7 @@ RSpec.describe "Collection Project", type: :request do
                      authorized_user: :admin,
                      included_relationships: [:creator]
 
-    include_examples "an API destroy request",
+    it_behaves_like "an API destroy request",
                      model: CollectionProject,
                      parent: "project collection",
                      tags: "Project Collections",

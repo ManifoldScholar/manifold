@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module APIDocumentation
   class DryTypesParser
     class << self
@@ -48,7 +50,7 @@ module APIDocumentation
         return base_date_time if type?(type, :datetime)
         return base_null if type?(type, :nilclass)
 
-        { type: type.name.downcase }
+        { type: base_type_name(type) }
       end
 
       def merge_enum_values(hash, type)
@@ -56,13 +58,11 @@ module APIDocumentation
       end
 
       def allowed_meta_values(type, allowed_swagger_meta_types)
-        type.meta.select do |k, _|
-          allowed_swagger_meta_types.include? k
-        end
+        type.meta.slice(*allowed_swagger_meta_types)
       end
 
       def add_description_for_uniqueness(converted_hash)
-        converted_hash[:description] = (converted_hash[:description].to_s + " Must be unique.").strip
+        converted_hash[:description] = "#{converted_hash[:description]} Must be unique.".strip
         converted_hash
       end
 
@@ -92,10 +92,14 @@ module APIDocumentation
         type.respond_to? :keys
       end
 
+      def base_type_name(type)
+        type.name.downcase.sub(/\(.*\)$/, "")
+      end
+
       def type?(type, sym)
         return boolean_type?(type) if sym == :bool
 
-        type.name.downcase.to_sym == sym
+        base_type_name(type).to_sym == sym
       end
 
       def boolean_type?(type)
@@ -109,7 +113,7 @@ module APIDocumentation
         if keys?(type)
           return {
             type: "object",
-            properties: type.keys.map { |item| [item.name, convert(item.type)] }.to_h
+            properties: type.keys.to_h { |item| [item.name, convert(item.type)] }
           }
         end
 

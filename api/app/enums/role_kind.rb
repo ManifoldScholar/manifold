@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoleKind < ClassyEnum::Base
   def entitlement?
     config.entitlement.present?
@@ -8,7 +10,7 @@ class RoleKind < ClassyEnum::Base
   end
 
   def valid?
-    not unknown?
+    !unknown?
   end
 
   class << self
@@ -16,11 +18,9 @@ class RoleKind < ClassyEnum::Base
       config.entitlement = true
     end
 
-    # rubocop:disable Naming/PredicateName
     def has_expected_resource!
       config.has_expected_resource = true
     end
-    # rubocop:enable Naming/PredicateName
   end
 end
 

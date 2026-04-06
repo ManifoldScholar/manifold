@@ -15,11 +15,12 @@ export default `
   a,
   input,
   select,
-  [data-react-beautiful-dnd-drag-handle] {
+  [data-react-beautiful-dnd-drag-handle],
+  .recharts-surface {
     ${outlineOnFocus()}
   }
 
-  main[tabindex='-1'].focus-visible {
+  main[tabindex='-1']:focus-visible {
     outline: none;
   }
 

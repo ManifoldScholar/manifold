@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useParams, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
+import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {
-  useFetch,
-  useApiCallback,
-  usePaginationState,
-  useSetLocation
-} from "hooks";
+import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
@@ -18,23 +14,14 @@ import withConfirmation from "hoc/withConfirmation";
 
 function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
+  const { pagination } = useListQueryParams({ initSize: 10 });
 
   const { data: members, meta, refresh } = useFetch({
     request: [readingGroupsAPI.members, id, null, pagination]
   });
-
-  useSetLocation({ page: pagination.number });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
 
   const membersRoute = lh.link("frontendReadingGroupMembers", readingGroup.id);
 
@@ -64,7 +51,7 @@ function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
         dispatch,
         readingGroup,
         onRemoveClick: removeMember,
-        onEditSuccess: () => history.push(membersRoute)
+        onEditSuccess: () => navigate(membersRoute)
       }
     });
   };
@@ -78,7 +65,6 @@ function MembersListContainer({ route, dispatch, confirm, readingGroup }) {
           readingGroup={readingGroup}
           members={members}
           pagination={meta.pagination}
-          onPageClick={paginationClickHandlerCreator}
           onRemoveMember={removeMember}
         />
       </Styled.Body>

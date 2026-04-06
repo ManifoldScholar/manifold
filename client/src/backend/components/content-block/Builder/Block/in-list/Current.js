@@ -14,7 +14,10 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
     entity: PropTypes.object.isRequired,
     entityCallbacks: PropTypes.object.isRequired,
     typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    dragHandleProps: PropTypes.object
+    dragHandleProps: PropTypes.object,
+    index: PropTypes.number,
+    entityCount: PropTypes.number,
+    announce: PropTypes.func
   };
 
   get entity() {
@@ -81,7 +84,12 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
                   visible={this.orderable}
                   baseClass={baseClass}
                   dragHandleProps={this.props.dragHandleProps}
+                  entityCallbacks={this.props.entityCallbacks}
                   blockTitle={block.title}
+                  entityId={this.entity.id}
+                  index={this.props.index}
+                  entityCount={this.props.entityCount}
+                  announce={this.props.announce}
                 />
               </Authorize>
             </div>

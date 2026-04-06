@@ -16,8 +16,8 @@ RSpec.describe "Resource Collections API", type: :request do
         end
 
         it "has a 200 OK status code" do
-          patch path, headers: headers, params: build_json_payload()
-          expect(response).to have_http_status(200)
+          patch path, headers: headers, params: build_json_payload
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -26,12 +26,11 @@ RSpec.describe "Resource Collections API", type: :request do
       let(:path) { api_v1_resource_collection_path(collection) }
 
       context "when the user is an admin" do
-
         let(:headers) { admin_headers }
 
         it "has a 204 NO CONTENT status code" do
           delete path, headers: headers
-          expect(response).to have_http_status(204)
+          expect(response).to have_http_status(:no_content)
         end
       end
 
@@ -40,7 +39,7 @@ RSpec.describe "Resource Collections API", type: :request do
 
         it "has a 403 FORBIDDEN status code" do
           delete path, headers: headers
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end

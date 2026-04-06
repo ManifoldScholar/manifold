@@ -18,11 +18,10 @@ const UserMenuBody = forwardRef(
       <Styled.List
         ref={ref}
         className={className}
-        $context={context}
-        $visible={visible}
+        data-context={context}
+        inert={!visible ? "" : undefined}
         {...props}
       >
-        {context !== "reader" && <Styled.Tail />}
         {!!currentUser && (
           <Item
             to={lh.link("frontendStarred")}
@@ -70,7 +69,7 @@ const UserMenuBody = forwardRef(
         />
         <Item
           as="button"
-          title={t("navigation.user.logout")}
+          title={t("navigation.user.log_out")}
           icon="logout24"
           onClick={() => {
             callbacks.logout();

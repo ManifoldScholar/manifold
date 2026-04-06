@@ -15,6 +15,7 @@ class AnnotationSelectionWrapper extends PureComponent {
     selection: PropTypes.string.isRequired,
     displayFormat: PropTypes.string,
     visitHandler: PropTypes.func,
+    focusHandler: PropTypes.func,
     onAnnotate: PropTypes.func,
     onLogin: PropTypes.func,
     t: PropTypes.func,
@@ -45,6 +46,12 @@ class AnnotationSelectionWrapper extends PureComponent {
     this.setState({ hovering });
   };
 
+  handleFocusHandler = () => {
+    const { annotation, focusHandler } = this.props;
+
+    if (focusHandler) focusHandler(annotation);
+  };
+
   render() {
     const { annotation, selection, t } = this.props;
     const wrapperClasses = classNames({
@@ -56,7 +63,7 @@ class AnnotationSelectionWrapper extends PureComponent {
 
     return (
       <div className={wrapperClasses}>
-        <div className="annotation-selection__container">
+        <figure className="annotation-selection__container">
           <IconComposer
             icon="socialCite32"
             size="default"
@@ -68,29 +75,41 @@ class AnnotationSelectionWrapper extends PureComponent {
             onClick={this.props.visitHandler}
             onHover={this.hoverHandler}
           />
-        </div>
-        {this.annotatable && (
-          <>
-            <Authorize kind="any">
+        </figure>
+        {(this.annotatable || this.props.focusHandler) && (
+          <div className="annotation-selection__button-wrapper">
+            {this.annotatable && (
+              <>
+                <Authorize kind="any">
+                  <button
+                    className="annotation-selection__button"
+                    onClick={this.props.onAnnotate}
+                    ref={this.props.annotateToggleRef}
+                  >
+                    {t("actions.annotate")}
+                  </button>
+                </Authorize>
+                {this.canLogin && (
+                  <Authorize kind="unauthenticated">
+                    <button
+                      className="annotation-selection__button"
+                      onClick={this.props.onLogin}
+                    >
+                      {t("actions.login_to_annotate")}
+                    </button>
+                  </Authorize>
+                )}
+              </>
+            )}
+            {this.props.focusHandler && (
               <button
                 className="annotation-selection__button"
-                onClick={this.props.onAnnotate}
-                ref={this.props.annotateToggleRef}
+                onClick={this.handleFocusHandler}
               >
-                {t("actions.annotate")}
+                {t("actions.go_to_passage")}
               </button>
-            </Authorize>
-            {this.canLogin && (
-              <Authorize kind="unauthenticated">
-                <button
-                  className="annotation-selection__button"
-                  onClick={this.props.onLogin}
-                >
-                  {t("actions.login_to_annotate")}
-                </button>
-              </Authorize>
             )}
-          </>
+          </div>
         )}
       </div>
     );

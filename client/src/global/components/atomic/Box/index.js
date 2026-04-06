@@ -1,4 +1,3 @@
-import React from "react";
 import * as Styled from "./styles";
 
 export default function Box({ children, className }) {

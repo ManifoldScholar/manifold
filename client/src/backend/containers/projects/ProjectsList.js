@@ -1,9 +1,7 @@
-import React, { PureComponent } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
 import { entityStoreActions } from "actions";
-import { select, meta } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import HeadContent from "global/components/HeadContent";
@@ -13,126 +11,80 @@ import EntitiesList, {
   ProjectRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { projectFilters } from "hoc/withFilteredLists";
+import { useFetch, useListQueryParams } from "hooks";
+import { useDispatch } from "react-redux";
 
-const { request, flush } = entityStoreActions;
+const { flush } = entityStoreActions;
 
-const perPage = 20;
+function ProjectsListContainer({
+  entitiesListSearchParams,
+  entitiesListSearchProps
+}) {
+  const dispatch = useDispatch();
 
-class ProjectsListContainerImplementation extends PureComponent {
-  static displayName = "Projects.List";
+  const { t } = useTranslation();
 
-  static mapStateToProps = state => {
-    return {
-      projects: select(requests.beProjects, state.entityStore),
-      projectsMeta: meta(requests.beProjects, state.entityStore),
-      authentication: state.authentication
-    };
-  };
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 20,
+    initFilters: {
+      ...entitiesListSearchParams.projectsList,
+      withUpdateAbility: true
+    },
+    initSearchProps: entitiesListSearchProps("projectsList")
+  });
 
-  static propTypes = {
-    projects: PropTypes.array,
-    dispatch: PropTypes.func,
-    projectsMeta: PropTypes.object,
-    authentication: PropTypes.object,
-    savedSearchPaginationState: PropTypes.func.isRequired,
-    entitiesListSearchParams: PropTypes.object,
-    t: PropTypes.func
-  };
+  const { data: projects, meta: projectsMeta } = useFetch({
+    request: [projectsAPI.index, filters, pagination],
+    options: { requestKey: requests.beProjects }
+  });
 
-  componentDidMount() {
-    const pagination = this.props.savedSearchPaginationState("projectsList");
-    const page = pagination ? pagination.number : 1;
-    this.fetchProjects(page, true);
-  }
+  useEffect(() => {
+    return () => dispatch(flush(requests.beProjects));
+  }, [dispatch]);
 
-  componentDidUpdate(prevProps) {
-    if (this.filtersChanged(prevProps)) {
-      return this.fetchProjects();
-    }
-  }
+  if (!projectsMeta || !projects) return null;
 
-  componentWillUnmount() {
-    this.props.dispatch(flush(requests.beProjects));
-  }
+  const { totalCount } = projectsMeta.pagination ?? {};
 
-  filtersChanged(prevProps) {
-    return (
-      prevProps.entitiesListSearchParams !== this.props.entitiesListSearchParams
-    );
-  }
-
-  fetchProjects(page = 1, doNotSnapshot = false) {
-    const listKey = "projectsList";
-    const filters = this.filterParams();
-    const pagination = { number: page, size: perPage };
-    if (!doNotSnapshot) this.props.saveSearchState(listKey, pagination);
-    const projectsRequest = request(
-      projectsAPI.index(filters, pagination),
-      requests.beProjects
-    );
-    this.props.dispatch(projectsRequest);
-  }
-
-  filterParams(additionalParams = {}) {
-    const filterState = this.props.entitiesListSearchParams.projectsList || {};
-    const out = { ...filterState, ...additionalParams };
-    const currentUser = this.props.authentication.currentUser;
-    if (!currentUser) return out;
-    if (currentUser.attributes.abilities.viewDrafts) return out;
-    out.withUpdateAbility = true;
-    return out;
-  }
-
-  updateHandlerCreator = page => {
-    return () => this.fetchProjects(page);
-  };
-
-  render() {
-    if (!this.props.projectsMeta || !this.props.projects) return null;
-    const { totalCount } = this.props.projectsMeta.pagination;
-    const t = this.props.t;
-
-    return (
-      <>
-        <HeadContent
-          title={`${t("titles.projects")} | ${t("common.admin")}`}
-          appendDefaultTitle
-        />
-        <EntitiesList
-          entityComponent={ProjectRow}
-          listStyle="grid"
-          title={t("glossary.project_title_case", { count: totalCount })}
-          titleStyle="bar"
-          titleIcon="BEProject64"
-          entities={this.props.projects}
-          unit={t("glossary.project", { count: totalCount })}
-          pagination={this.props.projectsMeta.pagination}
-          showCountInTitle
-          showCount
-          callbacks={{
-            onPageClick: this.updateHandlerCreator
-          }}
-          search={
-            <Search {...this.props.entitiesListSearchProps("projectsList")} />
-          }
-          buttons={[
-            <Button
-              path={lh.link("backendProjectsNew")}
-              text={t("projects.add_button_label")}
-              authorizedFor="project"
-              type="add"
-            />
-          ]}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <HeadContent
+        title={`${t("titles.projects")} | ${t("common.admin")}`}
+        appendDefaultTitle
+      />
+      <EntitiesList
+        entityComponent={ProjectRow}
+        listStyle="grid"
+        title={t("glossary.project_title_case", { count: totalCount })}
+        titleStyle="bar"
+        titleIcon="BEProject64"
+        entities={projects}
+        unit={t("glossary.project", { count: totalCount })}
+        pagination={projectsMeta.pagination}
+        showCountInTitle
+        showCount
+        search={<Search {...searchProps} />}
+        buttons={[
+          <Button
+            path={lh.link("backendProjectsNew")}
+            text={t("projects.add_button_label")}
+            authorizedFor="project"
+            type="add"
+          />
+        ]}
+      />
+    </>
+  );
 }
 
-export const ProjectsListContainer = withFilteredLists(
-  ProjectsListContainerImplementation,
-  {
-    projectsList: projectFilters({ snapshotState: true })
-  }
-);
-export default withTranslation()(connectAndFetch(ProjectsListContainer));
+ProjectsListContainer.displayName = "Projects.List";
+
+ProjectsListContainer.propTypes = {
+  savedSearchPaginationState: PropTypes.func.isRequired,
+  saveSearchState: PropTypes.func,
+  entitiesListSearchParams: PropTypes.object
+};
+
+export default withFilteredLists(ProjectsListContainer, {
+  projectsList: projectFilters({ snapshotState: true })
+});

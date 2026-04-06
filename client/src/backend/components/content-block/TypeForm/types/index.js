@@ -1,7 +1,7 @@
-import Markdown from "./Markdown";
+import Markdown, { UnwrappedMarkdown } from "./Markdown";
 import Resources from "./Resources";
-import TableOfContents from "./TableOfContents";
-import Texts from "./Texts";
+import TableOfContents, { UnwrappedTOC } from "./TableOfContents";
+import Texts, { UnwrappedTexts } from "./Texts";
 import Metadata from "./Metadata";
 import RecentActivity from "./RecentActivity";
 
@@ -12,4 +12,10 @@ export default {
   Texts,
   Metadata,
   RecentActivity
+};
+
+export const unwrappedForDefaultAttrs = {
+  Markdown: UnwrappedMarkdown,
+  TableOfContents: UnwrappedTOC,
+  Texts: UnwrappedTexts
 };

@@ -1,17 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import PropTypes from "prop-types";
-import {
-  CalloutList,
-  Cover,
-  Credits,
-  Image,
-  Meta,
-  Social,
-  Title
-} from "../parts";
+import { CalloutList, Cover, Credits, Image, Meta, Title } from "../parts";
 import EntityHero from "../EntityHero";
 import { getAuth, getPartsData } from "../helpers";
 import Authorization from "helpers/authorization";
+import { useEventTracker } from "hooks";
 
 export default function ProjectHero({ entity, mock }) {
   const authorization = useRef(new Authorization());
@@ -24,17 +17,18 @@ export default function ProjectHero({ entity, mock }) {
     copy,
     bgImage,
     bgAlt,
-    twitter,
-    instagram,
-    facebook,
-    hashtag,
-    social,
     description,
-    creators,
-    contributors
+    flattenedCollaborators
   } = getPartsData(entity);
 
   const darkMode = !!(bgImage || entity.attributes.darkMode);
+
+  const trackEvent = useEventTracker();
+
+  const trackProjectEvent = useCallback(
+    eventType => trackEvent(eventType, entity.type, entity.id),
+    [entity, trackEvent]
+  );
 
   return (
     <EntityHero
@@ -44,15 +38,15 @@ export default function ProjectHero({ entity, mock }) {
       )}
       TopLeftComponent={
         <>
-          {(creators || contributors || description) && (
+          {(flattenedCollaborators || description) && (
             <Meta
-              creators={creators}
-              contributors={contributors}
+              flattenedCollaborators={flattenedCollaborators}
               description={description}
             />
           )}
           {leftCallouts && (
             <CalloutList
+              track={trackProjectEvent}
               authorized={authorized || mock}
               callouts={leftCallouts}
               showErrors={showErrors || mock}
@@ -62,6 +56,7 @@ export default function ProjectHero({ entity, mock }) {
           )}
           {callouts && (
             <CalloutList
+              track={trackProjectEvent}
               authorized={authorized || mock}
               callouts={orderedCallouts}
               showErrors={showErrors || mock}
@@ -71,21 +66,12 @@ export default function ProjectHero({ entity, mock }) {
           )}
         </>
       }
-      BottomLeftComponent={
-        social && (
-          <Social
-            twitter={twitter}
-            facebook={facebook}
-            instagram={instagram}
-            hashtag={hashtag}
-          />
-        )
-      }
       TopRightComponent={
         <>
           <Cover entity={entity} />
           {rightCallouts && (
             <CalloutList
+              track={trackProjectEvent}
               authorized={authorized || mock}
               callouts={rightCallouts}
               showErrors={showErrors ?? mock}

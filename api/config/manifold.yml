@@ -380,6 +380,7 @@ common: &1
           - text/csv
           - text/html
           - text/plain
+          - text/vtt
           - audio/ogg
           - audio/wav
           - audio/x-wav
@@ -479,6 +480,7 @@ common: &1
           - css
           - xml
           - smil
+          - vtt
           - yaml
           - yml
 production: *1

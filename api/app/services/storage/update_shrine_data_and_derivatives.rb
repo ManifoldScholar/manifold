@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 module Storage
   class UpdateShrineDataAndDerivatives
-
     class << self
-
       def for_all_classes
         ShrineProperties.fetch.each_key { |klass| for_class(klass) }
       end
@@ -17,7 +17,6 @@ module Storage
       end
 
       # rubocop:disable Lint/SuppressedException
-      # rubocop:disable Metrics/MethodLength
       def for_instance_and_attribute(instance, attribute)
         attacher = attacher_for(instance, attribute)
 
@@ -45,7 +44,6 @@ module Storage
         end
       end
       # rubocop:enable Lint/SuppressedException
-      # rubocop:enable Metrics/MethodLength
 
       private
 
@@ -76,8 +74,6 @@ module Storage
       def constantize_class(klass)
         klass.is_a?(Class) ? klass : klass.to_s.constantize
       end
-
     end
-
   end
 end

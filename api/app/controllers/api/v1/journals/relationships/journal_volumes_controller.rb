@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Journals
       module Relationships
         class JournalVolumesController < AbstractJournalChildController
-
           resourceful! JournalVolume, authorize_options: { except: [:index] } do
             JournalIssue.filtered(
-              with_pagination!({}), scope: @journal.journal_volumes.in_reverse_order
+              **with_pagination!({}), scope: @journal.journal_volumes.in_reverse_order
             )
           end
 
@@ -35,7 +36,6 @@ module API
 
             api_v1_journal_volume_url(@journal_volume)
           end
-
         end
       end
     end

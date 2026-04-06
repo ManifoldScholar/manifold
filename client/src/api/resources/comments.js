@@ -1,6 +1,16 @@
 import isString from "lodash/isString";
 
 export default {
+  adminIndex(filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/comments`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
   index(subject, filter = {}, page = {}) {
     return {
       endpoint: `/api/v1/${subject.type}/${subject.id}/relationships/comments`,
@@ -19,6 +29,14 @@ export default {
       options: {
         body: JSON.stringify({ type: "comments", data })
       }
+    };
+  },
+
+  show(id) {
+    return {
+      endpoint: `/api/v1/comments/${id}`,
+      method: "GET",
+      options: {}
     };
   },
 
@@ -55,6 +73,14 @@ export default {
     const id = isString(comment) ? comment : comment.id;
     return {
       endpoint: `/api/v1/comments/${id}/relationships/flags`,
+      method: "DELETE",
+      options: {}
+    };
+  },
+
+  resolveAllFlags(commentId) {
+    return {
+      endpoint: `/api/v1/comments/${commentId}/relationships/flags/resolve_all`,
       method: "DELETE",
       options: {}
     };

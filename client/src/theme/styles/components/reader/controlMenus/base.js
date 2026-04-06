@@ -44,23 +44,23 @@ export default `
       min-height: 48px;
       padding: 12px 10px 10px;
       font-size: 13px;
-      background-color: var(--box-medium-bg-color);
+      background-color: var(--control-menu-button-bg-color, var(--box-medium-bg-color));
       transition: color ${defaultTransitionProps},
         background-color ${defaultTransitionProps};
 
       &:hover:not(:disabled):not([aria-disabled="true"]),
-      &.focus-visible {
+      &:focus-visible:not([aria-disabled="true"]) {
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--color-interaction-light);
-        outline: 0;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         ${defaultFocusStyle}
         outline-offset: -2px;
       }
 
-      &:disabled {
+      &:disabled,
+      &[aria-disabled="true"] {
         color: ${transparentize("neutral75", 0.5)};
         cursor: default;
       }

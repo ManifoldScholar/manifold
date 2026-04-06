@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module BagItSpec
     module Compilation
@@ -8,7 +10,7 @@ module Packaging
         # @param [Resource] resource
         # @return [Packaging::BagItSpec::Resources::Proxy]
         def call(resource)
-          Packaging::BagItSpec::Resources::Proxy.new resource
+          Success Packaging::BagItSpec::Resources::Proxy.new resource
         end
       end
     end

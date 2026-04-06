@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
   module HasConfigurationDSL
     extend ActiveSupport::Concern
@@ -27,8 +29,8 @@ module ManifoldEnv
       Rails.application.config.manifold
     end
     class_methods do
-      def dsl(&configuration_block)
-        dsl_klass.class_eval(&configuration_block)
+      def dsl(&)
+        dsl_klass.class_eval(&)
       end
 
       def configurable_property(name, declarative: true, &default_value)

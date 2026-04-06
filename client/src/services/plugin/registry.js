@@ -1,4 +1,4 @@
-import uuid from "uuid";
+import { v1 as uuidv1 } from "uuid";
 
 class PluginRegistry {
   constructor() {
@@ -6,7 +6,7 @@ class PluginRegistry {
   }
 
   add(component) {
-    const id = uuid.v1();
+    const id = uuidv1();
     this._registry[id] = component;
     return id;
   }

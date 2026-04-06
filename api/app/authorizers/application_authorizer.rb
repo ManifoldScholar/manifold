@@ -16,10 +16,20 @@ class ApplicationAuthorizer < Authority::Authorizer
     :creator_or_has_admin_permissions?,
     :creator_or_has_marketeer_permissions?,
     :editor_of_any_project?,
-    :trusted_or_established_user?,
     :authenticated?,
     to: :class
   )
+
+  # @note By default, defer to the class option. In general, bulk deletion should not
+  #   be determined by resource-level concerns (except for {UserAuthorizer}).
+  def bulk_deletable_by?(user, options = {})
+    self.class.bulk_deletable_by?(user, options)
+  end
+
+  # @note Defer to class option by default.
+  def flags_resolvable_by?(user, options = {})
+    self.class.flags_resolvable_by?(user, options)
+  end
 
   def has_any_role?(user, *roles, on: resource)
     roles.flatten.any? do |role|
@@ -64,30 +74,36 @@ class ApplicationAuthorizer < Authority::Authorizer
   # @yieldparam [Project] project
   # @yieldreturn [Boolean]
   # @return [Boolean]
-  def with_project
+  def with_project(&)
     project = resource.project
 
     return false if project.blank?
 
-    project.then(&Proc.new)
+    project.then(&)
   end
 
   # @yield [journal] do something with a journal if it is present on the resource.
   # @yieldparam [Journal] journal
   # @yieldreturn [Boolean]
   # @return [Boolean]
-  def with_journal
+  def with_journal(&)
     journal = resource.journal
 
     return false if journal.blank?
 
-    journal.then(&Proc.new)
+    journal.then(&)
   end
 
   class << self
     # @param [User, AnonymousUser, nil] user
     def authenticated?(user)
       user.present? && user.kind_of?(User) && user.persisted?
+    end
+
+    # @param [User, AnonymousUser, nil] user
+    # @param [Hash] options
+    def bulk_deletable_by?(user, _options = {})
+      admin_permissions?(user)
     end
 
     # Any class method from Authority::Authorizer that isn't overridden
@@ -101,6 +117,12 @@ class ApplicationAuthorizer < Authority::Authorizer
       # 'Whitelist' strategy for security: anything not explicitly allowed is
       # considered forbidden.
       config.allowed_by_default
+    end
+
+    # @param [User, AnonymousUser, nil] user
+    # @param [Hash] options
+    def flags_resolvable_by?(user, _options = {})
+      admin_permissions?(user)
     end
 
     def reading_groups_disabled?

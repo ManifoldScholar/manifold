@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # CallToActions controller
     class ActionCalloutsController < ApplicationController
-
       resourceful! ActionCallout
 
       def show

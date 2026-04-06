@@ -1,6 +1,24 @@
 {
   "records": {
     "unauthorized": "You are not allowed to manage records.",
+    "annotations": {
+      "flag_count_one": "1 Flag",
+      "flag_count_other": "{{ count }} Flags",
+      "resolved_flags_count_one": "resolved flag",
+      "resolved_flags_count_other": "resolved flags",
+      "resolve_all_label": "Resolve all flags",
+      "remove_label": "Remove annotation",
+      "detail_header": "Annotation Detail",
+      "metadata_header": "Metadata",
+      "text_title_placeholder": "[Text Title Missing]",
+      "bulk_actions": "Bulk Actions",
+      "orphaned_tag": "Previous"
+    },
+    "comments": {
+      "detail_header": "Comment Detail",
+      "view_parent": "View Parent Annotation",
+      "view_unavailable": "View Unavailable"
+    },
     "makers": {
       "header": "Manage Makers",
       "button_label": "Add New Maker",
@@ -30,6 +48,7 @@
       "first_name": "$t(records.makers.first_name)",
       "last_name": "$t(records.makers.last_name)",
       "submit_label": "Save User",
+      "create_label": "Create User",
       "unsubscribe": "Unsubscribe",
       "reset_password": "Reset Password",
       "verify": "Admin Verify",
@@ -136,6 +155,27 @@
         }
       },
       "submit_label": "Save Feature"
+    },
+    "tracks": {
+      "header": "Manage Text Tracks",
+      "button_label": "Add New Track",
+      "label": "Label",
+      "label_placeholder": "Enter a user-readable track title",
+      "kind": "Kind",
+      "kind_placeholder": "Select kind",
+      "kind_subtitles": "Subtitles",
+      "kind_captions": "Captions",
+      "kind_descriptions": "Descriptions",
+      "kind_chapters": "Chapters",
+      "kind_metadata": "Metadata",
+      "srclang": "Language",
+      "srclang_instructions": "Must be a valid IETF BCP 47 language tag",
+      "srclang_placeholder": "Enter a language tag (e.g. en, es, fr)",
+      "cues": "Track Content",
+      "delete_confirm": "Are you sure you want to delete this track?",
+      "add_header": "Add Text Track",
+      "edit_header": "Edit {{title}}",
+      "instructions": "Manifold can display WebVTT content alongside or embedded in media resources. Add or edit text tracks for this resource below."
     }
   }
 }

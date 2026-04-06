@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Versions", type: :request do
@@ -5,7 +7,7 @@ RSpec.describe "Versions", type: :request do
   let(:project_id) { resource.id }
 
   path "/projects/{project_id}/relationships/versions" do
-    include_examples "an API index request",
+    it_behaves_like "an API index request",
                      model: Version,
                      parent: "project",
                      authorized_user: :admin,

@@ -6,12 +6,12 @@ RSpec.describe "Project ActionCallout API", type: :request do
   describe "sends a list of project call to actions" do
     let(:path) { api_v1_project_relationships_action_callouts_path(project) }
 
-    before(:each) { 2.times { FactoryBot.create(:action_callout, calloutable: project) } }
+    before { 2.times { FactoryBot.create(:action_callout, calloutable: project) } }
 
     describe "the response" do
       it "has a 200 status code" do
         get path
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
   end
@@ -19,19 +19,20 @@ RSpec.describe "Project ActionCallout API", type: :request do
   describe "creates an action callout" do
     let(:path) { api_v1_project_relationships_action_callouts_path(project) }
     let(:text) { FactoryBot.create(:text, project: project) }
-    let(:params) { {
+    let(:params) do
+      {
       attributes: { kind: "toc", title: "DO IT", location: "left" },
       relationships: { text: { data: { id: text.id, type: "texts" } } }
-    } }
-
+    }
+    end
 
     context "when the user is an admin" do
       let(:headers) { admin_headers }
 
       describe "the response" do
         it "has a 201 CREATED status code" do
-          post path, headers: headers, params: build_json_payload(params)
-          expect(response).to have_http_status(201)
+          post path, headers: headers, params: build_json_payload(**params)
+          expect(response).to have_http_status(:created)
         end
       end
     end
@@ -41,8 +42,8 @@ RSpec.describe "Project ActionCallout API", type: :request do
 
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
-          post path, headers: headers, params: build_json_payload(params)
-          expect(response).to have_http_status(403)
+          post path, headers: headers, params: build_json_payload(**params)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end

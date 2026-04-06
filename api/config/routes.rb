@@ -1,7 +1,14 @@
-require "sidekiq/web"
-require "zhong/web"
+# frozen_string_literal: true
 
 Rails.application.routes.draw do
+  concern :flaggable do
+    resource :flags, controller: "/api/v1/flags", only: [:create, :destroy] do
+      member do
+        delete :resolve_all
+      end
+    end
+  end
+
   concern :permissible do
     resources :permissions,
               only: [:create, :index, :show, :update, :destroy],
@@ -9,9 +16,11 @@ Rails.application.routes.draw do
   end
 
   constraints ->(request) { AuthConstraint.new(request).admin? || Rails.env.development? } do
-    mount Sidekiq::Web => "/api/sidekiq"
-    mount Zhong::Web, at: "/api/zhong"
+    mount GoodJob::Engine => '/api/good_job'
   end
+
+  get "up" => "health#show"
+  get "api/up" => "health#show"
 
   get "auth/:provider/callback", to: "oauth#authorize"
 
@@ -30,6 +39,13 @@ Rails.application.routes.draw do
         resources :resource_collections, only: [:index]
         resources :texts, only: [:index]
         resources :text_sections, only: %[index]
+      end
+
+      scope as: :bulk_delete, controller: :bulk_deletions, path: "bulk_delete" do
+        delete :annotations
+        delete :comments
+        delete :reading_groups
+        delete :users
       end
 
       resources :action_callouts, only: [:show, :update, :destroy]
@@ -84,7 +100,19 @@ Rails.application.routes.draw do
       resources :subjects
       resources :categories, except: [:create, :index]
       resources :makers
-      resources :ingestions, only: [:show, :update]
+      resources :ingestions, only: [:show, :update] do
+        member do
+          post "reset"
+          post "process", action: :do_process
+          post "reingest"
+        end
+
+        scope module: :ingestions do
+          namespace :relationships do
+            resources :ingestion_messages, only: [:index]
+          end
+        end
+      end
       resources :stylesheets, only: [:show, :update, :destroy]
       resources :tags, only: [:index]
       resources :events, only: [:destroy]
@@ -94,6 +122,12 @@ Rails.application.routes.draw do
       resources :journal_issues, except: [:create]
       resources :journal_volumes, except: [:create, :index]
       resources :ingestion_sources, except: [:create, :index]
+      resources :annotations, only: [:index, :show, :destroy]
+      resources :collaborators do
+        collection do
+          get :roles
+        end
+      end
 
       resources :texts do
         put :toggle_export_epub_v3, on: :member, path: "export_epub_v3"
@@ -106,6 +140,13 @@ Rails.application.routes.draw do
             resources :stylesheets, only: [:create], controller: "/api/v1/stylesheets"
             resources :ingestions, only: [:create], controller: "/api/v1/texts/relationships/text_section_ingestions"
             resources :ingestion_sources, only: [:index, :create]
+            resources :collaborators, only: [:index, :show] do
+              collection do
+                post :create_from_roles
+                post :update_from_roles
+                delete :destroy
+              end
+            end
 
             resources :text_sections do
               scope module: :text_sections do
@@ -118,22 +159,26 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :comments, only: [:show, :update, :destroy] do
+      resources :comments, only: [:index, :show, :update, :destroy] do
         namespace :relationships do
-          resource :flags, controller: "/api/v1/flags", only: [:create, :destroy]
+          concerns :flaggable
         end
       end
 
-      resources :annotations, only: [:update, :destroy], controller: "text_sections/relationships/annotations" do
+      resources :annotations, only: [:update], controller: "text_sections/relationships/annotations" do
         namespace :relationships do
-          resource :flags, controller: "/api/v1/flags", only: [:create, :destroy]
+          concerns :flaggable
           resources :comments, controller: "/api/v1/comments"
         end
       end
 
       resources :resources, only: [:show, :update, :destroy] do
-        namespace :relationships do
-          resources :comments, controller: "/api/v1/comments"
+        scope module: :resources do
+          namespace :relationships do
+            resources :comments, controller: "/api/v1/comments"
+            resources :text_tracks
+            resources :annotations, only: [:index]
+          end
         end
       end
 
@@ -142,6 +187,7 @@ Rails.application.routes.draw do
           namespace :relationships do
             resources :collection_resources, only: [:index, :show]
             resources :resources, only: [:index]
+            resources :annotations, only: [:index]
           end
         end
       end
@@ -170,6 +216,7 @@ Rails.application.routes.draw do
             resources :entitlements, only: [:index, :create]
             resources :journal_issues, only: [:index, :create]
             resources :journal_volumes, only: [:index, :create]
+            concerns [:permissible]
           end
         end
       end
@@ -187,9 +234,14 @@ Rails.application.routes.draw do
             resources :resources, only: [:index, :create]
             resources :resource_collections, only: [:index, :create]
             resources :events, only: [:index]
-            resources :twitter_queries, only: [:index, :create]
             resources :resource_imports, only: [:create, :update, :show]
-            resources :collaborators, only: [:index, :show]
+            resources :collaborators, only: [:index, :show] do
+              collection do
+                post :create_from_roles
+                post :update_from_roles
+                delete :destroy
+              end
+            end
             resources :text_categories, only: [:index, :create, :show]
             resources :texts, only: [:create]
             resources :ingestions, only: [:create], controller: "/api/v1/ingestions"
@@ -199,19 +251,18 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :twitter_queries, only: [:show, :update, :destroy], controller: "projects/relationships/twitter_queries" do
-        scope module: :twitter_queries do
-          namespace :relationships do
-            resource :fetch, controller: "twitter_query_fetch", only: [:create]
-          end
-        end
-      end
-
       resources :tokens, only: [:create]
 
       resources :users do
         collection do
           get "whoami"
+        end
+
+        scope module: :users do
+          namespace :relationships do
+            resources :annotations, only: [:index]
+            resources :reading_group_memberships, only: [:index]
+          end
         end
       end
 
@@ -243,6 +294,8 @@ Rails.application.routes.draw do
 
       resources :passwords, only: [:create, :update]
       post "passwords/admin_reset_password" => "passwords#admin_reset_password"
+
+      get "ping", to: "status#ping", via: %i[get head]
 
       get "*path", to: "errors#error_404", via: :all
     end

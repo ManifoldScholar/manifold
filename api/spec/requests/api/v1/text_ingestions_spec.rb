@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Text Ingestions API", type: :request do
   context "when an ingestion is triggered" do
     let!(:text) { FactoryBot.create(:text) }
     let(:text_id) { text.id }
-    let(:attributes) {
+    let(:attributes) do
       {
         source: markdown_source_params,
         ingestionType: "epub"
       }
-    }
+    end
 
     path "/texts/{text_id}/ingestions" do
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
             model: Ingestion,
             parent: "text",
             url_parameters: [:text_id],

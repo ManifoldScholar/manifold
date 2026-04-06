@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates a User model from JSON-API style params
   class Settings
@@ -24,6 +26,5 @@ module Updaters
 
       ::SettingsService::AdjustGoogleConfig.run! config: data
     end
-
   end
 end

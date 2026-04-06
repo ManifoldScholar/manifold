@@ -13,7 +13,8 @@ class FormSave extends Component {
     cancelRoute: PropTypes.string,
     cancelCallback: PropTypes.func,
     theme: PropTypes.oneOf(["frontend", "backend", "reader"]),
-    t: PropTypes.func
+    t: PropTypes.func,
+    marginTop: PropTypes.bool
   };
 
   static defaultProps = {
@@ -25,7 +26,10 @@ class FormSave extends Component {
     const t = this.props.t;
 
     return (
-      <Styled.FormButtonsWrapper className="wide">
+      <Styled.FormButtonsWrapper
+        className="wide"
+        $marginTop={this.props.marginTop}
+      >
         {this.props.cancelRoute && (
           <Link
             to={this.props.cancelRoute}

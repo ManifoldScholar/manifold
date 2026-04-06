@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     # A proxy that wraps a {Collaborator} (and its {Maker}) for a given {Text}.
@@ -5,7 +7,7 @@ module Packaging
     # Its {CollaboratorRole role} is determined upon creation and is used to
     # determine where it is inserted in the Epub metadata.
     class CollaboratorItem < Types::FlexibleStruct
-      include Dry::Equalizer.new(:id, :kind)
+      include Dry::Core::Equalizer.new(:id, :kind)
       include Dux.comparable(:position)
 
       attribute :collaborator, Types.Instance(Collaborator)
@@ -20,7 +22,13 @@ module Packaging
 
       # @return [(String, Hash)]
       def to_gepub_args
-        [name, { display_seq: display_seq }]
+        [name]
+      end
+
+      def to_gepub_options
+        {
+          display_seq: display_seq
+        }
       end
     end
   end

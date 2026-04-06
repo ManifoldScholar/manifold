@@ -11,7 +11,6 @@ import Makers from "backend/containers/makers";
 import Ingestion from "backend/containers/ingestion";
 import ProjectCollection from "backend/containers/project-collection";
 import Permission from "backend/containers/permission";
-import TwitterQuery from "backend/containers/twitter-query";
 import Records from "backend/containers/Records";
 import Users from "backend/containers/users";
 import Pages from "backend/containers/pages";
@@ -25,6 +24,12 @@ import EntitlementsPending from "backend/containers/entitlements-pending";
 import Analytics from "backend/containers/analytics";
 import Journals from "backend/containers/journals";
 import Journal from "backend/containers/journal";
+import ReadingGroups from "backend/containers/reading-groups";
+import ReadingGroup from "backend/containers/reading-group";
+import Annotations from "backend/containers/annotations";
+import User from "backend/containers/user";
+import Comments from "backend/containers/comments";
+import TextTracks from "backend/containers/resource/tracks";
 
 export default {
   Backend,
@@ -50,7 +55,8 @@ export default {
   TextStyles: Text.Styles,
   StylesheetEdit: Stylesheet.Edit,
   TextMetadata: Text.Metadata,
-  TextCollaborators: Text.Collaborators,
+  TextCollaborators: Text.CollaboratorsList,
+  TextAddCollaborator: Text.AddCollaborator,
   TextIngestionNew: Text.Ingestion.New,
   TextIngestionEdit: Text.Ingestion.Edit,
   TextProperties: Text.Properties,
@@ -70,6 +76,7 @@ export default {
   ProjectCollectionDetail: ProjectCollection.Detail,
   ProjectCollectionManageProjects: ProjectCollection.ManageProjects,
   ProjectCollectionSettings: ProjectCollection.Settings,
+  ProjectCollectionNew: ProjectCollection.New,
   ProjectWrapper: Project.Wrapper,
   ProjectTexts: Project.Texts,
   ProjectTextIngestionNew: Project.Text.Ingestion.New,
@@ -88,21 +95,17 @@ export default {
   ProjectAnalytics: Project.Analytics,
   PermissionNew: Permission.New,
   PermissionEdit: Permission.Edit,
-  ProjectCollaborators: Project.Collaborators,
+  ProjectCollaborators: Project.CollaboratorsList,
+  ProjectAddCollaborator: Project.AddCollaborator,
   ProjectEvents: Project.Events,
   ProjectEntitlements: Project.ProjectEntitlements,
   ProjectExportations: Project.ProjectExportations,
   ProjectMetadata: Project.Metadata,
-  ProjectSocialWrapper: Project.Social.Wrapper,
-  TwitterQueryNew: TwitterQuery.New,
-  TwitterQueryEdit: TwitterQuery.Edit,
   ProjectLayout: Project.Layout,
   ContentBlockNew: Content.New,
   ContentBlockEdit: Content.Edit,
   Records,
   UsersList: Users.List,
-  UsersNew: Users.New,
-  UsersEdit: Users.Edit,
   MakersList: Makers.List,
   MakersNew: Makers.New,
   MakersEdit: Makers.Edit,
@@ -155,5 +158,20 @@ export default {
   EntitlementsPendingNew: EntitlementsPending.AddEdit,
   EntitlementsPendingEdit: EntitlementsPending.AddEdit,
   EntitlementsPendingImport: EntitlementsPending.Import,
-  CSVEntitlementImports: EntitlementsPending.CSVImports
+  CSVEntitlementImports: EntitlementsPending.CSVImports,
+  ReadingGroupsWrapper: ReadingGroups.Wrapper,
+  ReadingGroupsList: ReadingGroups.List,
+  ReadingGroupWrapper: ReadingGroup.Wrapper,
+  ReadingGroupMembers: ReadingGroup.Members,
+  ReadingGroupAnnotations: ReadingGroup.Annotations,
+  ReadingGroupDetails: ReadingGroup.Details,
+  AnnotationsList: Annotations.List,
+  AnnotationDetail: Annotations.Detail,
+  CommentsList: Comments.List,
+  CommentDetail: Comments.Detail,
+  UserWrapper: User.Wrapper,
+  UserProperties: User.Properties,
+  UserActivity: User.Activity,
+  ResourceTracksList: TextTracks.List,
+  ResourceTrackAdd: TextTracks.AddEdit
 };

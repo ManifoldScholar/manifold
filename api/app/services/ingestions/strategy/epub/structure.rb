@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "redcarpet"
 
 module Ingestions
@@ -5,7 +7,6 @@ module Ingestions
     module Epub
       # Inspects epub for structures
       class Structure
-
         def initialize(epub_inspector)
           @epub_inspector = epub_inspector
         end
@@ -24,7 +25,6 @@ module Ingestions
           structure = @epub_inspector.toc_inspector.text_structure
           structure[:page_list]
         end
-
       end
     end
   end

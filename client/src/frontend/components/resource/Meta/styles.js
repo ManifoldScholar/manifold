@@ -1,8 +1,12 @@
 import styled from "@emotion/styled";
-import { respond } from "theme/styles/mixins";
+import { respond, fluidScale } from "theme/styles/mixins";
 
 export const Meta = styled.section`
   display: block;
+
+  &:not(:first-child) {
+    margin-block-start: ${fluidScale("32px", "25px")};
+  }
 
   > * + * {
     margin-block-start: 22px;

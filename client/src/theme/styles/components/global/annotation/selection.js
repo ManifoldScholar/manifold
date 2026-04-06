@@ -15,9 +15,20 @@ export default `
       font-size: ${fluidScale("18px", "16px")};
       font-family: var(--font-family-sans);
       line-height: 1.3;
-      color: var(--strong-color);
       word-wrap: break-word;
       transition: background-color ${defaultTransitionProps};
+
+      @media (forced-colors: active) and (prefers-color-scheme: dark) {
+        --strong-color: var(--color-neutral-text-extra-light);
+      }
+
+      @media (forced-colors: active) and (prefers-color-scheme: light) {
+        --strong-color: var(--color-neutral-text-extra-dark);
+      }
+      
+      @media not (forced-colors: active) {
+        color: var(--strong-color);
+      }
 
       & * + p,
       & * + div[data-mathml="true"] {
@@ -60,11 +71,39 @@ export default `
         border-radius: var(--box-border-radius);
       }
 
+      &--compact {
+        padding: 0;
+        background-color: transparent;
+        border-radius: 0;
+      }
+
       &--hovering {
         position: relative;
 
         .annotation-selection__arrow-icon {
           transform: translateX(20%);
+        }
+      }
+
+      &--link {
+        display: block;
+        text-decoration: none;
+
+        &:hover {
+          color: inherit;
+        }
+
+        &:hover:not(:has(button:hover)) {
+          position: relative;
+          background-color: var(--box-medium-bg-color);
+
+          .annotation-selection__source-summary-link {
+            color: inherit;
+          }
+
+          .annotation-selection__arrow-icon {
+            transform: translateX(20%);
+          }
         }
       }
     }
@@ -93,10 +132,16 @@ export default `
       }
     }
 
+    &__button-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      ${drawerIndent("margin-left")}
+    }
+
     &__button {
       ${buttonUnstyled}
       ${utilityPrimary}
-      ${drawerIndent("margin-left")}
       display: block;
       margin-top: 20px;
       font-size: 13px;
@@ -114,6 +159,8 @@ export default `
 
     &__source-summary {
       padding-top: 10px;
+      display: inline-block;
+      font-style: initial;
     }
 
     &__source-summary-link {

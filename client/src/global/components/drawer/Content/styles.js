@@ -7,36 +7,6 @@ import {
 import { breakpoints } from "theme/styles/variables/media";
 import { ZOOM_BREAKPOINT } from "theme/styles/components/reader/readerHeader";
 
-function drawerSlideTransition(
-  from = "right",
-  selector = "&",
-  prefix = "drawer"
-) {
-  return `
-    .${prefix}-enter ~ ${selector},
-    .${prefix}-enter ${selector} {
-      transform: translateX(${from === "right" ? "100%" : "-100%"});
-    }
-
-    .${prefix}-enter-active ~ ${selector},
-    .${prefix}-enter-active ${selector} {
-      transition: transform ${defaultTransitionProps};
-      transform: translateX(0);
-    }
-
-    .${prefix}-exit ~ ${selector},
-    .${prefix}-exit ${selector} {
-      transform: translateX(0);
-    }
-
-    .${prefix}-exit.${prefix}-exit-active ~ ${selector},
-    .${prefix}-exit.${prefix}-exit-active ${selector} {
-      transition: transform ${defaultTransitionProps};
-      transform: translateX(${from === "right" ? "100%" : "-100%"});
-    }
-  `;
-}
-
 export const Drawer = styled.div`
   --Dropzone-max-width: 100%;
 
@@ -50,6 +20,11 @@ export const Drawer = styled.div`
   transition: transform ${defaultTransitionProps};
   padding: 20px var(--container-padding-inline-responsive) 33px;
   z-index: 500;
+  transition: transform ${defaultTransitionProps};
+
+  &[inert] {
+    transform: var(--_starting-transform);
+  }
 
   .utility-primary {
     color: var(--color-base-neutral-white);
@@ -66,17 +41,17 @@ export const Drawer = styled.div`
   }
 
   &.left {
-    ${drawerSlideTransition("left")}
+    --_starting-transform: translateX(-100%);
     left: 0;
   }
 
   &.right {
-    ${drawerSlideTransition()}
+    --_starting-transform: translateX(100%);
     right: 0;
     left: auto;
   }
 
-  ${respond(`width: 400px;`, 65)}
+  ${respond(`width: 500px;`, 65)}
   ${respond(`width: 555px;`, 90)}
   ${respond(`padding: 33px 48px;`, 90)}
 
@@ -109,7 +84,7 @@ export const Drawer = styled.div`
 
   &.pad-large {
     ${respond(`padding: 33px 48px;`, 65)}
-    ${respond(`padding: 33px 156px 66px 98px;`, 90)}
+    ${respond(`padding: 33px 98px 66px 98px;`, 90)}
     ${respond(
       `padding: 33px 70px;`,
       `${parseInt(breakpoints[120], 10) + 1000}px`
@@ -130,14 +105,6 @@ export const DrawerReader = styled(Drawer)`
 
   ${respond(`top: var(--reader-header-height);`, ZOOM_BREAKPOINT)}
 
-  .panel-exit & {
-    transform: translateX(0);
-  }
-
-  .panel-exit.panel-exit-active & {
-    transform: translateX(100%);
-  }
-
   .notes-message {
     ${drawerPadding("padding-right", "narrow")}
     ${drawerPadding("padding-left", "narrow")}
@@ -150,39 +117,22 @@ export const DrawerReader = styled(Drawer)`
   }
 `;
 
+export const DrawerReaderOverlay = styled(DrawerReader)`
+  top: 0;
+  z-index: 500;
+
+  ${respond(`top: 0;`, ZOOM_BREAKPOINT)}
+`;
+
 export const DrawerOverlay = styled(Drawer)`
   --Dropzone-max-width: 350px;
 
   top: 0;
 `;
 
-function editorDrawerTransition(selector = "&", prefix = "drawer") {
-  return `
-    .${prefix}-enter ~ ${selector},
-    .${prefix}-enter ${selector} {
-      transform: translateY(-100%);
-    }
-
-    .${prefix}-enter-active ~ ${selector},
-    .${prefix}-enter-active ${selector} {
-      transition: transform 0.75s ease-out;
-      transform: translateY(0);
-    }
-
-    .${prefix}-exit ~ ${selector},
-    .${prefix}-exit ${selector} {
-      transform: translateY(0);
-    }
-
-    .${prefix}-exit.${prefix}-exit-active ~ ${selector},
-    .${prefix}-exit.${prefix}-exit-active ${selector} {
-      transition: transform 0.5s ease-out;
-      transform: translateY(-100%);
-    }
-  `;
-}
-
 export const DrawerEditor = styled(Drawer)`
+  --_starting-transform: translateY(-100%);
+
   width: 100vw !important;
   min-height: 100vh;
   padding: 80px var(--container-padding-inline-responsive) 160px !important;
@@ -190,7 +140,11 @@ export const DrawerEditor = styled(Drawer)`
   left: 0;
   bottom: auto;
   z-index: 500;
-  ${editorDrawerTransition()}
+  transition-duration: 0.75s;
+
+  &[inert] {
+    transition-duration: 0.5s;
+  }
 `;
 
 export const DrawerEditorInner = styled.div`

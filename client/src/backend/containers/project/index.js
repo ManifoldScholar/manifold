@@ -1,5 +1,8 @@
 import Category from "./category";
-import Collaborators from "./Collaborators";
+import {
+  List as CollaboratorsList,
+  Add as AddCollaborator
+} from "./collaborators";
 import Layout from "./Layout";
 import Events from "./Events";
 import ProjectExportations from "./ProjectExportations";
@@ -12,7 +15,6 @@ import ProjectPage from "./ProjectPage";
 import Resource from "./resource";
 import ResourceCollections from "./ResourceCollections";
 import Resources from "./Resources";
-import Social from "./social";
 import Text from "./text";
 import Texts from "./Texts";
 import Wrapper from "./Wrapper";
@@ -20,7 +22,8 @@ import Access from "./access";
 
 export default {
   Category,
-  Collaborators,
+  CollaboratorsList,
+  AddCollaborator,
   Layout,
   Events,
   ProjectExportations,
@@ -33,7 +36,6 @@ export default {
   Resource,
   ResourceCollections,
   Resources,
-  Social,
   Text,
   Texts,
   Wrapper,

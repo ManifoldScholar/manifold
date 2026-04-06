@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { respond } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 import { transientOptions } from "helpers/emotionHelpers";
-import { SocialLinks } from "../Social/styles";
 
 const BREAKPOINT = breakpoints[60];
 const GUTTER = "20px";
@@ -16,16 +15,20 @@ export const Wrapper = styled("div", transientOptions)`
   * + & {
     margin-block-start: 20px;
   }
+`;
 
-  + ${SocialLinks} {
-    margin-block: 35px;
-  }
+export const ButtonListItem = styled("li", transientOptions)`
+  min-inline-size: min(200px, 100%);
 `;
 
 export const List = styled("div", transientOptions)`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  &:is(ul) {
+    margin-block: 0px;
+  }
 
   > *:not(:first-child) {
     width: 100%;
@@ -47,6 +50,10 @@ export const List = styled("div", transientOptions)`
       > *:not(:first-child) {
         width: auto;
         margin-block-start: 0;
+      }
+
+      > ${ButtonListItem} {
+        display: flex;
       }
     `,
       BREAKPOINT

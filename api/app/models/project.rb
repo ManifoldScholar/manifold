@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 # The project model is the primary unit of Manifold.
 class Project < ApplicationRecord
-  # Constants
   TYPEAHEAD_ATTRIBUTES = [:title, :maker_names].freeze
 
-  # Concerns
   include Authority::Abilities
   include Collectable
   include Entitleable
@@ -24,9 +24,10 @@ class Project < ApplicationRecord
   include WithPermittedUsers
   include Sluggable
   include SearchIndexable
+  include SoftDeletable
+  include TimestampScopes
   include WithConfigurableAvatar
-
-  # Magic
+  include HasKeywordSearch
 
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :restricted_access_body, include_wrap: false
@@ -35,7 +36,7 @@ class Project < ApplicationRecord
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version
     series_number edition issue volume rights rights_territory restrictions rights_holder
-    resources_doi
+    resources_doi citation_override
   )
   with_citation do |project|
     {
@@ -46,7 +47,7 @@ class Project < ApplicationRecord
   end
   with_citable_children :texts
   has_sort_title do |project|
-    project.title[/^((a|the|an) )?(?<title>.*)$/i, :title]
+    project.title[/^(?:(?:a|the|an) )?(?<title>.*)$/i, :title]
   end
 
   # PaperTrail
@@ -59,11 +60,12 @@ class Project < ApplicationRecord
 
   # Associations
   has_many :collection_projects, dependent: :destroy, inverse_of: :project
-  has_many :collection_project_rankings
+  has_many_readonly :collection_project_rankings
   has_many :project_collections, through: :collection_projects, dependent: :destroy
   has_many :texts, dependent: :destroy, inverse_of: :project
-  has_many :text_summaries, inverse_of: :project
-  has_many :published_texts,
+  has_many :text_sections, through: :texts
+  has_many_readonly :text_summaries, inverse_of: :project
+  has_many_readonly :published_texts,
            -> { published(true) },
            class_name: "Text",
            inverse_of: :project
@@ -84,7 +86,7 @@ class Project < ApplicationRecord
   has_many :subjects, through: :project_subjects
   has_many :ingestions, dependent: :destroy, inverse_of: :project
   has_many :twitter_queries, dependent: :destroy, inverse_of: :project
-  has_many :permissions, as: :resource, inverse_of: :resource
+  has_many_readonly :permissions, as: :resource, inverse_of: :resource
   has_many :resource_imports, inverse_of: :project, dependent: :destroy
   has_many :tracked_dependent_versions,
            -> { order(created_at: :desc) },
@@ -100,20 +102,23 @@ class Project < ApplicationRecord
   has_many :action_callouts,
            -> { order(:position) },
            dependent: :destroy,
-           as: :calloutable
+           as: :calloutable,
+           inverse_of: :calloutable
   has_many :project_exports, inverse_of: :project, dependent: :destroy
-  has_many :project_export_statuses, inverse_of: :project
+  has_many_readonly :project_export_statuses, inverse_of: :project
   has_many :project_exportations, dependent: :destroy
-  has_many :uncollected_resources, ->(object) {
+  has_many_readonly :uncollected_resources, ->(object) {
     where.not(id: object.collection_resources.select(:resource_id))
   }, class_name: "Resource"
+
+  has_one_readonly :project_summary, inverse_of: :project
 
   belongs_to :journal_issue, optional: true, dependent: :destroy, touch: true
 
   has_one :journal, through: :journal_issue
   has_one :journal_volume, through: :journal_issue, touch: true
-  has_one :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
-  has_one :current_project_export, through: :current_project_export_status, source: :project_export
+  has_one_readonly :current_project_export_status, -> { current }, class_name: "ProjectExportStatus"
+  has_one_readonly :current_project_export, through: :current_project_export_status, source: :project_export
 
   delegate :number, to: :journal_issue, allow_nil: true, prefix: true
   delegate :pending_sort_title, to: :journal_issue, allow_nil: true, prefix: true
@@ -122,10 +127,10 @@ class Project < ApplicationRecord
 
   # Callbacks
   before_validation :ensure_restricted_access_notice_content!
-  before_update :prepare_to_reindex_children, if: :draft_changed?
   before_create :assign_publisher_defaults!
   after_commit :trigger_creation_event, on: [:create]
-  after_commit :queue_reindex_children_job
+
+  after_save_commit :reindex_children!, if: :saved_change_to_draft?
 
   # Misc
   money_attributes :purchase_price
@@ -139,15 +144,16 @@ class Project < ApplicationRecord
   validates :draft, inclusion: { in: [true, false] }
   validates :restricted_access_heading, :restricted_access_body, presence: { if: :restricted_access }
 
-  enum standalone_mode: {
+  enum :standalone_mode, {
     disabled: 0,
     enabled: 1,
     enforced: 2
-  }, _prefix: true
+  }, prefix: true
 
   # Attachments
   manifold_has_attached_file :cover, :image
   manifold_has_attached_file :hero, :image
+  manifold_has_attached_file :social_image, :image
 
   scope :by_featured, lambda { |featured|
     next all if featured.nil?
@@ -200,7 +206,7 @@ class Project < ApplicationRecord
 
   scope :by_standalone_mode_enforced, ->(enforced) { to_boolean(enforced) ? standalone_enforced : standalone_unforced }
 
-  scope :with_creator_role, ->(user = nil) { where(creator: user) if user.present? }
+  scope :with_creator_role, ->(user = nil) { where(creator: user) if authorized_user?(user) }
   scope :with_read_ability, ->(user = nil) { build_read_ability_scope_for user }
   scope :with_full_read_ability, ->(user = nil) { build_full_read_ability_scope_for user }
 
@@ -228,43 +234,36 @@ class Project < ApplicationRecord
     where(journal_issue_id: nil)
   }
 
-  # Search
-  scope :search_import, -> {
-    includes(
-      :collaborators,
-      :subjects,
-      :makers,
-      texts: :titles
-    )
-  }
+  multisearch_draftable true
 
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
+  multisearches! :description
 
-  # rubocop:disable Metrics/AbcSize
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description_plaintext,
-      keywords: (tag_list + texts.map(&:title) + subjects.map(&:title) + hashtag).reject(&:blank?),
-      creator: creator&.full_name,
-      makers: makers.map(&:full_name),
-      metadata: metadata.values.reject(&:blank?)
-    }.merge(search_hidden)
-  end
-  # rubocop:enable Metrics/AbcSize
-
-  def search_hidden
-    {
-      hidden: draft?
+  has_keyword_search!(
+    against: %i[title subtitle description],
+    associated_against: {
+      creator: %i[first_name last_name],
+      makers: %i[first_name last_name display_name],
+      texts: %i[social_title],
+      subjects: %i[name],
+      tags: %i[name]
     }
+  )
+
+  def multisearch_full_text
+    description_plaintext
   end
 
-  def social_image
-    hero? ? hero_styles[:medium] : nil
+  def multisearch_keywords
+    Array(super).tap do |a|
+      a.concat(texts.map(&:title))
+      a.concat(subjects.map(&:title))
+      a << hashtag
+    end.compact_blank
+  end
+
+  # @return [void]
+  def reindex_children!
+    Projects::ReindexChildrenJob.perform_later self
   end
 
   def journal_issue?
@@ -301,7 +300,7 @@ class Project < ApplicationRecord
   end
 
   def filtered_events
-    events.excluding_type(%w(comment_created text_annotated))
+    events.excluding_type(%w(comment_created text_annotated tweet))
   end
 
   def filtered_event_count
@@ -354,13 +353,7 @@ class Project < ApplicationRecord
   end
 
   def recently_updated?
-    updated? && updated_at >= Time.current - 1.week
-  end
-
-  def reindex_children
-    resources.reindex(:search_hidden, mode: :async)
-    texts.reindex(:search_hidden, mode: :async)
-    TextSection.in_texts(texts).reindex(:search_hidden, mode: :async)
+    updated? && updated_at >= 1.week.ago
   end
 
   def standalone?
@@ -408,22 +401,11 @@ class Project < ApplicationRecord
     return if metadata[attr].present?
 
     settings = Settings.instance
-    default = settings.general.dig("default_#{attr}")
+    default = settings.general["default_#{attr}"]
 
     return unless default.present?
 
     metadata[attr] = default
-  end
-
-  def prepare_to_reindex_children
-    @reindex_children = true
-  end
-
-  def queue_reindex_children_job
-    return unless @reindex_children
-
-    ProjectJobs::ReindexChildren.perform_later(self)
-    @reindex_children = false
   end
 
   def trigger_creation_event
@@ -444,7 +426,7 @@ class Project < ApplicationRecord
     # @param [User, nil] user
     # @return [ActiveRecord::Relation<Project>]
     def build_read_ability_scope_for(user = nil)
-      return published unless user.present?
+      return published unless authorized_user?(user)
 
       where(arel_build_read_case_statement_for(user, full: false))
     end
@@ -453,7 +435,7 @@ class Project < ApplicationRecord
     # @param [User, nil] user
     # @return [ActiveRecord::Relation<Project>]
     def build_full_read_ability_scope_for(user = nil)
-      return published.unrestricted unless user.present?
+      return published.unrestricted unless authorized_user?(user)
 
       where(arel_build_read_case_statement_for(user, full: true))
     end
@@ -461,9 +443,9 @@ class Project < ApplicationRecord
     # @param [User, nil] user
     # @return [ActiveRecord::Relation<Project>]
     def build_update_ability_scope_for(user = nil)
-      return none if user.blank?
+      return none unless authorized_user?(user)
 
-      where arel_with_roles_for(user, RoleName.for_project_update)
+      where arel_with_roles_for(user, **RoleName.for_project_update)
     end
 
     # @param [:collection, :standard] mode
@@ -500,7 +482,6 @@ class Project < ApplicationRecord
 
     private
 
-    # rubocop:disable Metrics/AbcSize
     # This creates a case statement to be supplied to `where`.
     #
     # * If the project is a draft, only show for users with draft access roles
@@ -521,20 +502,19 @@ class Project < ApplicationRecord
         stmt.else(true)
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     # @see .arel_with_roles_for
     # @param [User] user
     # @return [Arel::Nodes::Or]
     def arel_with_draft_roles_for(user)
-      arel_with_roles_for(user, RoleName.for_draft_access)
+      arel_with_roles_for(user, **RoleName.for_draft_access)
     end
 
     # @see .arel_with_roles_for
     # @param [User] user
     # @return [Arel::Nodes::Or]
     def arel_with_full_read_access_roles_for(user)
-      arel_with_roles_for(user, RoleName.for_full_read_access)
+      arel_with_roles_for(user, **RoleName.for_full_read_access)
     end
 
     # @see RoleName.for_access

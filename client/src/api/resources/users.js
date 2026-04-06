@@ -51,5 +51,25 @@ export default {
       method: "DELETE",
       options: {}
     };
+  },
+
+  annotations(id, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/users/${id}/relationships/annotations`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
+  readingGroupMemberships(id, filter = {}, page = {}) {
+    return {
+      endpoint: `/api/v1/users/${id}/relationships/reading_group_memberships`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
   }
 };

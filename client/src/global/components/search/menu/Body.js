@@ -3,14 +3,12 @@ import PropTypes from "prop-types";
 import Query from "../query";
 import lh from "helpers/linkHandler";
 import { withRouter } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
 
 export class SearchMenuBody extends PureComponent {
   static propTypes = {
     toggleVisibility: PropTypes.func.isRequired,
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    visibility: PropTypes.object.isRequired,
     searchType: PropTypes.string.isRequired,
     onSubmit: PropTypes.func,
     facets: PropTypes.array,
@@ -26,12 +24,6 @@ export class SearchMenuBody extends PureComponent {
   static defaultProps = {
     toggleVisibility: () => {}
   };
-
-  get containerClass() {
-    if (this.props.className) return this.props.className;
-
-    return "search-menu";
-  }
 
   setQueryState = queryParams => {
     this.setState(queryParams, this.doSearch);
@@ -50,7 +42,8 @@ export class SearchMenuBody extends PureComponent {
       const path = lh.link("frontendSearch");
       this.props.history.push(path, {
         searchQueryState: this.state,
-        noScroll: true
+        noScroll: true,
+        fromMenu: true
       });
     }, 250);
   };
@@ -61,7 +54,8 @@ export class SearchMenuBody extends PureComponent {
       const path = lh.link("frontendProjectSearch", this.props.projectId);
       this.props.history.push(path, {
         searchQueryState: this.state,
-        noScroll: true
+        noScroll: true,
+        fromMenu: true
       });
     }, 250);
   };
@@ -73,34 +67,30 @@ export class SearchMenuBody extends PureComponent {
       const path = lh.link("readerSectionSearchResults", textId, sectionId);
       this.props.history.push(path, {
         searchQueryState: this.state,
-        noScroll: true
+        noScroll: true,
+        fromMenu: true
       });
     }, 250);
   };
 
   render() {
+    const { className } = this.props;
+
     return (
-      <div className={this.containerClass}>
-        <CSSTransition
-          in={this.props.visibility.search}
-          classNames="visibility"
-          timeout={{ enter: 500, exit: 500 }}
-          unmountOnExit
-        >
-          <Query.Form
-            projectId={this.props.projectId}
-            sectionId={this.props.sectionId}
-            textId={this.props.textId}
-            facets={this.props.facets}
-            initialState={this.props.initialState}
-            scopes={this.props.scopes}
-            searchType={this.props.searchType}
-            description={this.props.description}
-            searchOnScopeChange={false}
-            setQueryState={this.setQueryState}
-            autoFocus
-          />
-        </CSSTransition>
+      <div className={className}>
+        <Query.Form
+          projectId={this.props.projectId}
+          sectionId={this.props.sectionId}
+          textId={this.props.textId}
+          facets={this.props.facets}
+          initialState={this.props.initialState}
+          scopes={this.props.scopes}
+          searchType={this.props.searchType}
+          description={this.props.description}
+          searchOnScopeChange={false}
+          setQueryState={this.setQueryState}
+          autoFocus
+        />
       </div>
     );
   }

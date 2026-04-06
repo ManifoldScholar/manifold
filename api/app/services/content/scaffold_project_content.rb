@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Content
   class ScaffoldProjectContent < ActiveInteraction::Base
     string :kind, default: nil
@@ -26,12 +28,8 @@ module Content
     end
 
     def blueprint
-      @blueprint ||= begin
-        return Content::ScaffoldTemplate.new(kind) if kind.present?
-        return Content::ScaffoldConfigured.new(configuration) if configuration.present?
-
-        nil
-      end
+      return Content::ScaffoldTemplate.new(kind) if kind.present?
+      return Content::ScaffoldConfigured.new(configuration) if configuration.present?
     end
 
     def scaffold_content(types)

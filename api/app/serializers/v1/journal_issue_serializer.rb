@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class JournalIssueSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     abilities
@@ -20,6 +21,7 @@ module V1
     typed_attribute :draft, Types::Bool.meta(read_only: true)
     typed_attribute :title, Types::String.meta(read_only: true)
     typed_attribute :pending_sort_title, Types::String.optional
+    typed_attribute :project_marked_for_purge_at, Types::DateTime.optional.meta(read_only: true)
 
     typed_attribute :hero_styles, Types::Serializer::Attachment.meta(read_only: true)
     typed_attribute :hero_alt_text, Types::String.optional
@@ -36,6 +38,5 @@ module V1
     typed_has_many :texts, serializer: ::V1::TextSerializer
     typed_has_many :text_categories, serializer: ::V1::CategorySerializer, record_type: :category
     typed_has_many :creators, serializer: ::V1::MakerSerializer, record_type: :maker
-
   end
 end

@@ -8,10 +8,9 @@ class JournalVolume < ApplicationRecord
   include Filterable
   include Sluggable
 
-  belongs_to :journal, counter_cache: true
-  has_many :journal_issues, -> { in_reverse_order }, dependent: :nullify
+  belongs_to :journal, counter_cache: true, inverse_of: :journal_volumes
+  has_many :journal_issues, -> { in_reverse_order }, dependent: :nullify, inverse_of: :journal_volume
 
-  validates :journal_id, presence: true
   validates :number, presence: true
 
   scope :in_reverse_order, -> { order(number: :desc) }

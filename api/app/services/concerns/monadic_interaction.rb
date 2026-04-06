@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Methods to integrate ActiveInteractions more seamlessly with dry-transaction pipelines.
 module MonadicInteraction
   extend ActiveSupport::Concern
@@ -32,8 +34,8 @@ module MonadicInteraction
   class_methods do
     # @see #as_monadic_result
     # @return [Dry::Monads::Result]
-    def run_as_monad(inputs = {}, &block)
-      run(inputs).as_monadic_result(&block)
+    def run_as_monad(inputs = {}, &)
+      run(inputs).as_monadic_result(&)
     end
   end
 end

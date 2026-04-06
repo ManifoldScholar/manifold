@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "google/apis/analytics_v3"
 require "google/api_client/auth/key_utils"
 
@@ -7,11 +9,10 @@ class Statistics
   include ActiveModel::Conversion
   include Authority::Abilities
   include SerializedAbilitiesFor
-  include Redis::Objects
 
-  lock :transaction, timeout: 1, expiration: 15
-  value :this_week, marshal: true
-  value :last_week, marshal: true
+  DOWNLOAD_EVENT_NAMES = %w(download_project download_journal).freeze
+  THIS_WEEK_KEY = "statistics:this_week"
+  LAST_WEEK_KEY = "statistics:last_week"
 
   def id
     0
@@ -20,30 +21,30 @@ class Statistics
   # @!attribute [rw] readers_this_week
   # @return [Float]
   def readers_this_week
-    this_week.value.to_f
+    Rails.cache.read(THIS_WEEK_KEY).to_f
   end
 
   def readers_this_week=(new_value)
-    this_week.value = new_value.to_f
+    Rails.cache.write(THIS_WEEK_KEY, new_value.to_f)
   end
 
   # @!attribute [rw] readers_last_week
   # @return [Float]
   def readers_last_week
-    last_week.value.to_f
+    Rails.cache.read(LAST_WEEK_KEY).to_f
   end
 
   def readers_last_week=(new_value)
-    last_week.value = new_value
+    Rails.cache.write(LAST_WEEK_KEY, new_value.to_f)
   end
 
-  # Update values in a redis lock.
+  # Update values within an advisory lock.
   #
   # @yieldparam [Statistics] instance the instance itself to update
   # @yieldreturn [void]
   # @return [void]
   def update
-    transaction_lock.lock do
+    ApplicationRecord.with_advisory_lock("statistics:update", timeout_seconds: 15) do
       yield self if block_given?
     end
   end
@@ -99,6 +100,14 @@ class Statistics
     User.count
   end
 
+  def total_download_count
+    Analytics::Event.where(name: DOWNLOAD_EVENT_NAMES).count
+  end
+
+  def total_share_count
+    Analytics::Event.where(name: :share_text_section).count
+  end
+
   private
 
   # @param [Numeric] value
@@ -120,6 +129,5 @@ class Statistics
         yield instance
       end
     end
-
   end
 end

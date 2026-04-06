@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Content::ScaffoldProjectContent do
@@ -7,7 +9,7 @@ RSpec.describe Content::ScaffoldProjectContent do
     template = Content::ScaffoldTemplate.new(kind)
 
     context "when kind is '#{kind}'" do
-      before(:each) { described_class.run project: project, kind: kind }
+      before { described_class.run project: project, kind: kind }
 
       it "creates a content block for each block in #{template.kind} template" do
         expected = template.content_blocks.keys
@@ -17,7 +19,7 @@ RSpec.describe Content::ScaffoldProjectContent do
   end
 
   shared_examples_for "configured blocks" do |option|
-    block = "Content::" + option.to_s.camelize + "Block"
+    block = "Content::#{option.to_s.camelize}Block"
 
     describe ":#{option}" do
       context "when true" do
@@ -36,20 +38,20 @@ RSpec.describe Content::ScaffoldProjectContent do
 
           expect do
             described_class.run project: project, configuration: configuration
-          end.to_not change { project.content_blocks.where(type: block).count }.from(0)
+          end.not_to change { project.content_blocks.where(type: block).count }.from(0)
         end
       end
     end
   end
 
   context "when kind is present" do
-    include_examples "scaffolded blocks", "simple"
-    include_examples "scaffolded blocks", "enhanced"
-    include_examples "scaffolded blocks", "journal_single"
-    include_examples "scaffolded blocks", "journal_multi"
-    include_examples "scaffolded blocks", "teaching_resource"
-    include_examples "scaffolded blocks", "report"
-    include_examples "scaffolded blocks", "resources"
+    it_behaves_like "scaffolded blocks", "simple"
+    it_behaves_like "scaffolded blocks", "enhanced"
+    it_behaves_like "scaffolded blocks", "journal_single"
+    it_behaves_like "scaffolded blocks", "journal_multi"
+    it_behaves_like "scaffolded blocks", "teaching_resource"
+    it_behaves_like "scaffolded blocks", "report"
+    it_behaves_like "scaffolded blocks", "resources"
   end
 
   context "when configuration object is present" do
@@ -78,9 +80,9 @@ RSpec.describe Content::ScaffoldProjectContent do
         end
       end
 
-      include_examples "configured blocks", :resources
-      include_examples "configured blocks", :markdown
-      include_examples "configured blocks", :recent_activity
+      it_behaves_like "configured blocks", :resources
+      it_behaves_like "configured blocks", :markdown
+      it_behaves_like "configured blocks", :recent_activity
     end
 
     it "always creates a metadata block" do
@@ -94,17 +96,17 @@ RSpec.describe Content::ScaffoldProjectContent do
     it "does not create blocks" do
       expect do
         described_class.run project: FactoryBot.build(:project)
-      end.to_not change(project.content_blocks, :count)
+      end.not_to change(project.content_blocks, :count)
     end
   end
 
   context "when project has content blocks" do
-    before(:each) { FactoryBot.create(:content_block, project: project) }
+    before { FactoryBot.create(:content_block, project: project) }
 
     it "does not create blocks" do
       expect do
         described_class.run project: project
-      end.to_not change(project.content_blocks, :count)
+      end.not_to change(project.content_blocks, :count)
     end
   end
 end

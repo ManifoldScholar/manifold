@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HasFormattedAttributes
   extend ActiveSupport::Concern
 
@@ -39,8 +41,6 @@ module HasFormattedAttributes
   end
 
   module ClassMethods
-    # rubocop:disable Naming/PredicateName
-
     # @!scope class
     # @return [FormattedAttributes::Configuration]
     attr_accessor :formatted_attributes
@@ -63,7 +63,7 @@ module HasFormattedAttributes
     # @param [Hash] options
     # @return [void]
     def has_formatted_attribute(attribute, **options)
-      formatted_attributes.define! attribute, options
+      formatted_attributes.define! attribute, **options
     end
 
     def inherited(subclass)
@@ -84,7 +84,5 @@ module HasFormattedAttributes
         end
       end
     end
-
-    # rubocop:enable Naming/PredicateName
   end
 end

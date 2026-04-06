@@ -11,6 +11,7 @@ import resources from "./resources.json";
 import settings from "./settings.json";
 import texts from "./texts.json";
 import editor from "./editor.json";
+import readingGroups from "./reading_groups.json";
 
 export default {
   ...analytics,
@@ -24,5 +25,6 @@ export default {
   ...resources,
   ...settings,
   ...texts,
-  ...editor
+  ...editor,
+  ...readingGroups
 };

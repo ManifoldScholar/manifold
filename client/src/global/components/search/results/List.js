@@ -58,7 +58,6 @@ export default function SearchResultsList(props) {
         pagination={pagination}
         padding={padding}
         paginationClickHandler={paginationClickHandler}
-        paginationTarget="#search"
       />
     </Styled.Wrapper>
   );

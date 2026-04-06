@@ -9,16 +9,11 @@ import EntitiesList, {
   Search,
   AssetRow
 } from "backend/components/list/EntitiesList";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useApiCallback
-} from "hooks";
+import { useFetch, useApiCallback, useListQueryParams } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import withFilteredLists, { assetFilters } from "hoc/withFilteredLists";
 import { ingestionSourcesAPI } from "api";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import * as Styled from "./styles";
 
 function TextAssetsContainer({
@@ -29,11 +24,13 @@ function TextAssetsContainer({
   entitiesListSearchParams
 }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  const [pagination, setPageNumber] = usePaginationState(1, 10);
-  const baseFilters = entitiesListSearchParams.initialassets;
-  const [filters, setFilters] = useFilterState(baseFilters);
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initSize: 10,
+    initFilters: entitiesListSearchParams.initialassets,
+    initSearchProps: entitiesListSearchProps("assets")
+  });
 
   const { data: assets, meta, refresh } = useFetch({
     request: [ingestionSourcesAPI.index, text.id, filters, pagination],
@@ -63,20 +60,8 @@ function TextAssetsContainer({
     );
   };
 
-  const { setParam, onReset, ...searchProps } = entitiesListSearchProps(
-    "assets"
-  );
-  const updatedSetParam = (param, value) => {
-    setParam(param, value);
-    setFilters({ newState: { ...filters, [param.as || param.name]: value } });
-  };
-  const updatedOnReset = () => {
-    onReset();
-    setFilters({ newState: baseFilters });
-  };
-
   const onEdit = id => {
-    history.push(lh.link("backendTextAssetEdit", text.id, id));
+    navigate(lh.link("backendTextAssetEdit", text.id, id));
   };
 
   const deleteAsset = useApiCallback(ingestionSourcesAPI.destroy);
@@ -108,21 +93,12 @@ function TextAssetsContainer({
               text={t("texts.assets.add_button_label")}
             />
           ]}
-          search={
-            <Search
-              {...searchProps}
-              setParam={updatedSetParam}
-              onReset={updatedOnReset}
-            />
-          }
+          search={<Search {...searchProps} />}
           pagination={meta?.pagination}
           showCount
           unit={t("glossary.asset", {
             count: meta?.pagination.totalCount
           })}
-          callbacks={{
-            onPageClick: page => () => setPageNumber(page)
-          }}
         />
       )}
     </Styled.Wrapper>

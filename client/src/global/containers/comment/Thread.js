@@ -11,7 +11,7 @@ import { commentsAPI } from "api";
 import Utility from "global/components/utility";
 
 const { request } = entityStoreActions;
-const perPage = 50;
+const perPage = 10;
 
 export class CommentThread extends PureComponent {
   static mapStateToProps = (state, ownProps) => {
@@ -44,7 +44,7 @@ export class CommentThread extends PureComponent {
 
   componentDidMount() {
     if (this.props.subject && !this.props.comments) {
-      this.fetchComments({ number: 1, size: 1 });
+      this.fetchComments({ number: 1, size: perPage });
     }
   }
 
@@ -74,24 +74,6 @@ export class CommentThread extends PureComponent {
     const call = commentsAPI.update(comment.id, { deleted: false });
     this.props.dispatch(
       request(call, requests.rCommentUpdate, {
-        refreshes: `comments-for-${this.props.subject.id}`
-      })
-    );
-  };
-
-  handleCommentFlag = (event, comment) => {
-    const call = commentsAPI.flag(comment);
-    this.props.dispatch(
-      request(call, requests.rCommentFlag, {
-        refreshes: `comments-for-${this.props.subject.id}`
-      })
-    );
-  };
-
-  handleCommentUnflag = (event, comment) => {
-    const call = commentsAPI.unflag(comment);
-    this.props.dispatch(
-      request(call, requests.rCommentUnflag, {
         refreshes: `comments-for-${this.props.subject.id}`
       })
     );
@@ -162,8 +144,6 @@ export class CommentThread extends PureComponent {
                 handleDelete={this.handleCommentDelete}
                 handleRestore={this.handleCommentRestore}
                 handleDestroy={this.handleCommentDestroy}
-                handleFlag={this.handleCommentFlag}
-                handleUnflag={this.handleCommentUnflag}
                 showLogin={showLogin}
               />
             );

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Collections
   class CollectableDefinition
     extend Dry::Initializer
     extend Memoist
 
-    include Dry::Equalizer.new(:collectable)
+    include Dry::Core::Equalizer.new(:collectable)
     include MultiKeyable
 
     multi_keyable :collectable, :entry
@@ -26,7 +28,7 @@ module Collections
 
     delegate :collectable_jsonapi_type, :collectable_type, to: :associations
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       @collectable_associations = CollectableAssociations.new self

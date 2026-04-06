@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import connectAndFetch from "utils/connectAndFetch";
 import withConfirmation from "hoc/withConfirmation";
-import { entityStoreActions } from "actions";
+import { entityStoreActions, notificationActions } from "actions";
 import { textsAPI, textCategoriesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import cloneDeep from "lodash/cloneDeep";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 const { request } = entityStoreActions;
 
@@ -92,7 +93,7 @@ export class ProjectTextsContainer extends Component {
     this.setState({ categories });
   }
 
-  updateCategoryPosition = (category, position) => {
+  updateCategoryPosition = (category, position, callback, announce) => {
     this.updateCategoryPositionInternal(category, position);
     const changes = {
       attributes: { position }
@@ -106,10 +107,28 @@ export class ProjectTextsContainer extends Component {
     );
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
+
+      if (announce) {
+        const announcement = this.props.t("actions.dnd.moved_to_position", {
+          title: category.attributes.title,
+          position
+        });
+        this.props.setScreenReaderStatus(announcement);
+      }
+
+      if (callback && typeof callback === "function") {
+        callback();
+      }
     });
   };
 
-  updateTextCategoryAndPosition = (text, category, position) => {
+  updateTextCategoryAndPosition = (
+    text,
+    category,
+    position,
+    callback,
+    announce
+  ) => {
     let catPayload;
     if (category) {
       catPayload = { id: category.id, type: "categories" };
@@ -121,11 +140,26 @@ export class ProjectTextsContainer extends Component {
       attributes: { position }
     };
     this.updateTextCategoryAndPositionInternal(text, category, changes);
+
     const call = textsAPI.update(text.id, changes);
     const options = { noTouch: true };
     const categoryRequest = request(call, requests.beTextUpdate, options);
+
     this.props.dispatch(categoryRequest).promise.then(() => {
       this.props.refresh();
+
+      if (announce) {
+        const announcement = this.props.t("actions.dnd.moved_to_category", {
+          title: text.attributes.title,
+          category: `${category?.attributes.title || "Uncategorized"}`,
+          position
+        });
+        this.props.setScreenReaderStatus(announcement);
+      }
+
+      if (callback && typeof callback === "function") {
+        callback();
+      }
     });
   };
 
@@ -146,11 +180,27 @@ export class ProjectTextsContainer extends Component {
     });
   };
 
+  notifyDestroy(text) {
+    const t = this.props.t;
+    const notification = {
+      level: 0,
+      id: `TEXT_DESTROYED_${text.id}`,
+      heading: t("notifications.text_delete"),
+      body: t("notifications.text_delete_body", {
+        title: text.attributes.titlePlaintext
+      }),
+      expiration: 5000
+    };
+    this.props.dispatch(notificationActions.addNotification(notification));
+  }
+
   destroyText(text) {
     const call = textsAPI.destroy(text.id);
-    const textRequest = request(call, requests.beTextDestroy);
+    const options = { removes: text };
+    const textRequest = request(call, requests.beTextDestroy, options);
     this.props.dispatch(textRequest).promise.then(() => {
       this.props.refresh();
+      this.notifyDestroy(text);
     });
   }
 
@@ -158,16 +208,35 @@ export class ProjectTextsContainer extends Component {
     const { refresh } = this.props;
     const closeUrl = lh.link("backendProjectTexts", this.project.id);
 
-    return childRoutes(this.props.route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        wide: true,
-        lockScrollClickCloses: false,
-        closeUrl
-      },
-      childProps: { refresh, project: this.project }
-    });
+    const { routes, ...route } = this.props.route;
+    const drawerRoutes = { ...route, routes: routes.filter(r => !r.ingest) };
+    const ingestRoute = { ...route, routes: [routes.find(r => r.ingest)] };
+
+    return (
+      <>
+        {childRoutes(ingestRoute, {
+          drawer: true,
+          drawerProps: {
+            lockScroll: "always",
+            wide: true,
+            lockScrollClickCloses: false,
+            closeUrl,
+            context: "ingestion"
+          },
+          childProps: { refresh, project: this.project }
+        })}
+        {childRoutes(drawerRoutes, {
+          drawer: true,
+          drawerProps: {
+            lockScroll: "always",
+            wide: true,
+            lockScrollClickCloses: false,
+            closeUrl
+          },
+          childProps: { refresh, project: this.project }
+        })}
+      </>
+    );
   }
 
   render() {
@@ -249,7 +318,9 @@ export class ProjectTextsContainer extends Component {
             texts={this.state.texts}
             project={this.project}
             callbacks={this.callbacks}
+            setScreenReaderStatus={this.props.setScreenReaderStatus}
           />
+          {this.props.renderLiveRegion("alert")}
         </>
       </Authorize>
     );
@@ -257,5 +328,8 @@ export class ProjectTextsContainer extends Component {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ProjectTextsContainer))
+  withScreenReaderStatus(
+    withConfirmation(connectAndFetch(ProjectTextsContainer)),
+    false
+  )
 );

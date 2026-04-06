@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { withTranslation } from "react-i18next";
 import { Global as GlobalStyles } from "@emotion/react";
 import has from "lodash/has";
@@ -103,25 +103,26 @@ class FatalError extends PureComponent {
 
     return (
       <HelmetProvider>
+        <Helmet title={`${error.status} Error: ${error.heading}`} />
         <GlobalStyles styles={styles} />
         <Styled.Body className="browse">
           <Styled.Wrapper>
             <Styled.Inner>
               <Styled.Container>
-                <Styled.Header>
-                  <Styled.Icon icon="stopSign64" size={60} />
+                <header>
+                  <Styled.Icon icon="stopSign64" size={52} />
                   <Styled.Message>
                     {this.props.headerLineOne ??
                       this.defaultHeaders.headerLineOne}
                     {this.props.headerLineTwo !== null && (
-                      <span>
+                      <>
                         <br />
                         {this.props.headerLineTwo ??
                           this.defaultHeaders.headerLineTwo}
-                      </span>
+                      </>
                     )}
                   </Styled.Message>
-                </Styled.Header>
+                </header>
                 <div role="alert" aria-live="assertive" aria-atomic="true">
                   {error ? (
                     <Styled.ErrorTitle>

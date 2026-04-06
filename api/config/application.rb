@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails"
@@ -11,7 +13,6 @@ require "action_mailer/railtie"
 # require "action_mailbox/engine"
 # require "action_text/engine"
 require "action_view/railtie"
-require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
 require "dynamic_mailer/mailer"
@@ -27,6 +28,7 @@ module Dotenv
   class Railtie < Rails::Railtie
     def load
       Dotenv.load(
+        root.join("./.env"),
         root.join("../.env.local"),
         root.join("../.env.#{Rails.env}"),
         root.join("../.env")
@@ -41,29 +43,25 @@ require_relative "../lib/manifold_env"
 
 ActionMailer::Base.add_delivery_method :manifold_dynamic, DynamicMailer::Mailer
 
+require_relative "../lib/global_types/array_types"
+require_relative "../lib/patches/support_websearch"
+
 module ManifoldApi
   # Manifold main application
-
   class Application < Rails::Application
+    # Configure the path for configuration classes that should be used before initialization
+    # NOTE: path should be relative to the project root (Rails.root)
+    # config.anyway_config.autoload_static_config_path = "config/configs"
+    #
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 7.2
 
-    # TODO: Switch over to :zeitwerk autoloader.
-    # See https://weblog.rubyonrails.org/2019/2/22/zeitwerk-integration-in-rails-6-beta-2/#backwards-incompatibility
-    config.autoloader = :zeitwerk
     config.autoload_paths += %W(#{config.root}/app/lib)
 
     config.action_mailer.delivery_method = :manifold_dynamic
 
     config.active_record.belongs_to_required_by_default = true
-
-    config.action_cable.allowed_request_origins = [
-      "http://#{ENV['DOMAIN']}",
-      "https://#{ENV['DOMAIN']}",
-      "http://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_PORT']}",
-      "https://#{ENV['DOMAIN']}:#{ENV['CLIENT_SERVER_PORT']}"
-    ]
 
     # Settings in config/environments/* take precedence over those specified
     # here. Application configuration should go into files in
@@ -78,8 +76,7 @@ module ManifoldApi
 
     # The default locale is :en and all translations from
     # config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join("config",
-                                                 "locales", "**", "*.{rb,yml}")]
+    config.i18n.load_path += Rails.root.glob('config/locales/**/*.{rb,yml}')
     # config.i18n.default_locale = :de
 
     # Only loads a smaller set of middleware suitable for API only apps.
@@ -87,8 +84,15 @@ module ManifoldApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.middleware.use ActionDispatch::RemoteIp
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+
     config.eager_load_paths += [
       "#{config.root}/app/jobs",
+      "#{config.root}/app/models",
       "#{config.root}/app/operations",
       "#{config.root}/app/services",
       "#{config.root}/app/serializers",
@@ -107,10 +111,10 @@ module ManifoldApi
       g.orm :active_record, primary_key_type: :uuid
     end
 
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :good_job
 
     config.active_record.schema_format = :sql
 
-    config.cache_store = :redis_cache_store, ManifoldEnv.redis.cache_options
+    config.cache_store = :solid_cache_store
   end
 end

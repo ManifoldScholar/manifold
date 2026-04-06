@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MultiKeyable
   extend ActiveSupport::Concern
 
@@ -24,8 +26,8 @@ module MultiKeyable
   end
 
   def to_multi_keyable_hash
-    multi_keyable_keys.each_with_object({}) do |key, h|
-      h[key] = self
+    multi_keyable_keys.index_with do |key|
+      self
     end
   end
 
@@ -119,7 +121,7 @@ module MultiKeyable
 
     attr_reader :mapping
 
-    def initialize(*)
+    def initialize(*, **)
       super
 
       @mapping = items.reduce({}.with_indifferent_access) do |acc, item|
@@ -146,14 +148,14 @@ module MultiKeyable
       end
     end
 
-    def fetch(needle, &block)
+    def fetch(needle, &)
       case needle
       when Types::Model
         mapping.fetch(needle.model_name.name) do
-          mapping.fetch(needle, &block)
+          mapping.fetch(needle, &)
         end
       when String, Symbol
-        mapping.fetch(needle, &block)
+        mapping.fetch(needle, &)
       end
     end
 

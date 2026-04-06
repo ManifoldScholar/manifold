@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import { useParams, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
+import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { readingGroupsAPI, meAPI, requests } from "api";
 import groupBy from "lodash/groupBy";
@@ -10,7 +11,7 @@ import lh from "helpers/linkHandler";
 import { useFetch, useFilterState, useFromStore } from "hooks";
 import withReadingGroups from "hoc/withReadingGroups";
 
-const DEFAULT_FORMATS = ["highlight", "annotation", "bookmark"];
+const DEFAULT_FORMATS = ["annotation"];
 
 function getSectionName(text, sectionId) {
   const { sectionsMap } = text.attributes;
@@ -26,9 +27,12 @@ function ReaderNotesContainer({
   children
 }) {
   const { textId, sectionId } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const text = useFromStore("texts", "grab", textId);
   const section = useFromStore("textSections", "grab", sectionId);
+  const visibilityFilters = useFromStore(
+    "ui.transitory.visibility.visibilityFilters"
+  );
 
   const baseFilters = useMemo(
     () => ({
@@ -82,7 +86,7 @@ function ReaderNotesContainer({
   const commonActions = commonActionsHelper(dispatch);
 
   function handleVisitAnnotation(annotation) {
-    const { textSectionId } = annotation.attributes;
+    const { textSectionId, currentUserIsCreator } = annotation.attributes;
     const url = lh.link(
       "readerSection",
       textId,
@@ -90,8 +94,16 @@ function ReaderNotesContainer({
       `#annotation-${annotation.id}`
     );
     commonActions.panelToggle("notes");
-    commonActions.showMyNotes();
-    history.push(url);
+    const annotationFilter = currentUserIsCreator
+      ? { annotation: { ...visibilityFilters.annotation, yours: true } }
+      : { annotation: { ...visibilityFilters.annotation, others: true } };
+    commonActions.visibilityChange({
+      visibilityFilters: {
+        ...visibilityFilters,
+        ...annotationFilter
+      }
+    });
+    navigate(url);
   }
 
   function handleSeeAllClick(event) {
@@ -102,7 +114,7 @@ function ReaderNotesContainer({
       sectionId,
       "#group-annotations"
     );
-    history.push(url);
+    navigate(url);
   }
 
   if (!annotations || !meta) return null;

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
 import * as Styled from "./styles";
 
-function getRangeValues(pagination) {
+export function getRangeValues(pagination) {
   const { perPage, currentPage, totalCount } = pagination;
   let start = perPage * (currentPage - 1);
   if (totalCount > 0) start += 1;

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Me
@@ -52,11 +54,11 @@ module API
               resourceful! klass do
                 if klass < ::Filterable
                   klass.filtered(
-                    with_pagination!(public_send(filter_params_name)),
+                    **with_pagination!(public_send(filter_params_name)),
                     scope: current_user.public_send(association_name)
                   )
                 else
-                  current_user.public_send(association_name)
+                  current_user.public_send(association_name).existing
                 end
               end
             end

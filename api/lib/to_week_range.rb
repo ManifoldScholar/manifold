@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ToWeekRange
   include ActiveSupport::Concern
 
@@ -5,7 +7,7 @@ module ToWeekRange
   def to_week_range
     date = is_a?(Date) ? self : to_date
 
-    date.beginning_of_week..date.end_of_week
+    date.all_week
   end
 end
 

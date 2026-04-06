@@ -31,20 +31,20 @@ export const Button = styled("button", transientOptions)`
         outline: 0;
         background-color: var(--color-interaction-light);
 
-        &.focus-visible {
+        &:focus-visible {
           background-color: var(--color-interaction-dark);
         }
       `;
     }
     return `
       &:hover,
-      &.focus-visible {
+      &:focus-visible {
         color: var(--color-neutral-text-extra-dark);
         outline: 0;
         background-color: var(--color-interaction-light);
       }
 
-      &.focus-visible {
+      &:focus-visible {
         outline: 2px solid;
         outline-offset: -2px;
       }

@@ -60,14 +60,14 @@ export class AnalyticsContainer extends PureComponent {
         failureNotification
         failureRedirect={lh.link("backendProject", project.id)}
       >
-        <Grid columns={3}>
+        <Grid columns={4}>
           {analytics && (
             <>
               <RangePicker
                 onNewRangeSelected={updateAnalyticsRange}
                 initialStart={analyticsStartDate}
                 initialEnd={analyticsEndDate}
-                className="analytics-grid__item--100"
+                className="analytics-grid__item--100 range-picker--stacked"
               />
               <AnalyticsFactory
                 view="Visitors"
@@ -85,6 +85,12 @@ export class AnalyticsContainer extends PureComponent {
               <AnalyticsFactory
                 view="Highlights"
                 report="annotations"
+                data={analytics}
+                rangeInWords={analyticsRangeInWords}
+              />
+              <AnalyticsFactory
+                view="Downloads"
+                report="downloads"
                 data={analytics}
                 rangeInWords={analyticsRangeInWords}
               />

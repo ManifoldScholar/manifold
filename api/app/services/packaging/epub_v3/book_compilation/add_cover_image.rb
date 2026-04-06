@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     module BookCompilation
@@ -6,7 +8,7 @@ module Packaging
         include Packaging::PipelineOperation
 
         # @param [Packaging::EpubV3::BookContext] context
-        # @return [void]
+        # @return [Dry::Monads::Success(Packaging::EpubV3::BookContext)]
         def call(context)
           context.with!(:book, :compiled_text) do |book, compiled_text|
             next unless compiled_text.has_cover_image?
@@ -21,12 +23,14 @@ module Packaging
               end
             end
           end
+
+          Success context
         end
 
         private
 
-        def convert_image(compiled_text, &block)
-          compose_monadic_interaction Packaging::EpubV3::ConvertCoverImage, compiled_text.to_convert_cover_image_inputs, &block
+        def convert_image(compiled_text, &)
+          compose_monadic_interaction(Packaging::EpubV3::ConvertCoverImage, compiled_text.to_convert_cover_image_inputs, &)
         end
 
         def add_image_to!(book, cover_image_proxy)

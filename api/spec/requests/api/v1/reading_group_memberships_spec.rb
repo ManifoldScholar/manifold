@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "ReadingGroupMembership", type: :request do
-  let!(:user) { FactoryBot.create(:user) }
-  let!(:reading_group) { FactoryBot.create(:reading_group) }
-  let(:reading_group_id) { reading_group.id }
+  let_it_be(:user) { FactoryBot.create(:user) }
+  let_it_be(:user_id) { user.id }
+  let_it_be(:reading_group) { FactoryBot.create(:reading_group) }
+  let_it_be(:reading_group_id) { reading_group.id }
 
   path "/reading_group_memberships" do
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                      model: ReadingGroupMembership,
                      paginated: true,
                      included_relationships: [:user],
@@ -33,16 +36,24 @@ RSpec.describe "ReadingGroupMembership", type: :request do
   end
 
   path "/reading_group_memberships/{id}" do
-    include_examples "an API destroy request",
+    it_behaves_like "an API destroy request",
                      model: ReadingGroupMembership,
                      authorized_user: :admin
   end
 
   path "/reading_groups/{reading_group_id}/relationships/reading_group_memberships" do
-    include_examples "an API index request",
+    it_behaves_like "an API index request",
                      model: ReadingGroupMembership,
                      parent: "reading group",
                      url_parameters: [:reading_group_id],
                      authorized_user: :admin
+  end
+
+  path "/users/{user_id}/relationships/reading_group_memberships" do
+    it_behaves_like "an API index request",
+                     model: ReadingGroupMembership,
+                     parent: "user",
+                     url_parameters: [:user_id],
+                     included_relationships: [:reading_group]
   end
 end

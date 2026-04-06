@@ -1,20 +1,12 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Search Results", type: :request do
-  context "can search a project", :elasticsearch do
+  context "can search a project" do
     let!(:keyword) { "bananas" }
     let!(:text_resource) { FactoryBot.create(:text) }
     let!(:project_resource) { FactoryBot.create(:project, title: keyword, texts: [text_resource]) }
-
-    around(:example) do |example|
-      WebMock.disable_net_connect!(allow: [/127\.0\.0\.1:2?9200/, /localhost:2?9200/])
-      Journal.reindex
-      Text.reindex
-      Resource.reindex
-      Annotation.reindex
-      TextSection.reindex
-      example.run
-    end
 
     path "/search_results" do
       let(:scope) { nil }
@@ -28,7 +20,7 @@ RSpec.describe "Search Results", type: :request do
       let(:raw) { nil }
       let(:facets) { [] }
 
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        factory: "foo",
                        resource_name: "SearchResult",
                        additional_parameters: [

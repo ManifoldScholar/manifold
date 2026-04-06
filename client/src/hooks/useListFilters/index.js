@@ -11,12 +11,12 @@ export default function useListFilters({
 }) {
   const [filters, setFilters] = useState(initialState || {});
   const prevFilters = useRef(initialState || {});
-  const previnitialState = useRef(initialState || {});
+  const prevInitialState = useRef(initialState || {});
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (!isEqual(initialState, previnitialState.current)) {
-      previnitialState.current = initialState;
+    if (!isEqual(initialState, prevInitialState.current)) {
+      prevInitialState.current = initialState;
       prevFilters.current = initialState;
       setFilters(initialState);
       return;
@@ -36,9 +36,17 @@ export default function useListFilters({
           return setFilters({ ...filters, keyword: search });
         case "subject":
           if (e.target.value === "featured") {
-            return setFilters({ featured: true });
+            return setFilters({
+              ...filters,
+              subject: undefined,
+              featured: true
+            });
           }
-          return setFilters({ subject: e.target.value });
+          return setFilters({
+            ...filters,
+            featured: undefined,
+            subject: e.target.value || undefined
+          });
         default:
           return setFilters({ ...filters, [label]: e.target.value });
       }

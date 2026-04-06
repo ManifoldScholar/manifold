@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module JSONAPI
   module Operations
-    # rubocop:disable Metrics/CyclomaticComplexity
     class UnrollErrors
       extend Dry::Initializer
 
@@ -8,7 +9,7 @@ module JSONAPI
 
       TUPLE = Dux.yard("(Symbol, String)")
 
-      option :pointer, Types::String.optional, optional: true
+      option :pointer, ::JSONAPI::Types::String.optional, optional: true
 
       # @return [<JSONAPI::Operations::Error>]
       def call(err)
@@ -50,6 +51,5 @@ module JSONAPI
         end
       end
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

@@ -1,4 +1,3 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
 import ControlMenu from "reader/components/control-menu";
@@ -31,6 +30,7 @@ export default function Header(props) {
     appearance,
     selectFont,
     setColorScheme,
+    setHighContrast,
     incrementFontSize,
     decrementFontSize,
     incrementMargins,
@@ -38,9 +38,6 @@ export default function Header(props) {
     resetTypography
   } = props;
   const { t } = useTranslation();
-  const [mobileOptionsExpanded, setExpanded] = useState(false);
-  const breakpoint = useRef(560);
-  const resizeId = useRef(null);
 
   const projectId = text?.relationships?.project?.id;
   const textId = text?.id;
@@ -61,61 +58,8 @@ export default function Header(props) {
     };
   });
 
-  const handleOptionsToggleClick = () => {
-    setExpanded(!mobileOptionsExpanded);
-  };
-
-  const handleResize = useCallback(() => {
-    if (resizeId.current) {
-      window.cancelAnimationFrame(resizeId.current);
-    }
-
-    resizeId.current = window.requestAnimationFrame(() => {
-      if (window.innerWidth < breakpoint.current || !mobileOptionsExpanded)
-        return null;
-
-      setExpanded(false);
-    });
-  }, [mobileOptionsExpanded]);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, [handleResize]);
-
-  const renderOptionsToggle = () => {
-    return (
-      <button
-        onClick={handleOptionsToggleClick}
-        aria-hidden
-        tabIndex={-1}
-        className="reader-header__button reader-header__options-button"
-      >
-        <span>
-          {mobileOptionsExpanded
-            ? t("actions.close")
-            : t("glossary.option_title_case_other")}
-        </span>
-        {mobileOptionsExpanded ? (
-          <Utility.IconComposer
-            icon="close32"
-            size="default"
-            className="reader-header__options-button-icon"
-          />
-        ) : (
-          <Utility.IconComposer
-            icon="menu32"
-            size="default"
-            className="reader-header__options-button-icon reader-header__options-button-icon--options"
-          />
-        )}
-      </button>
-    );
-  };
-
   const renderContentsButton = textAttrs => {
-    if (textAttrs.toc.length <= 0 && isEmpty(textAttrs.metadata)) {
+    if (textAttrs?.toc.length <= 0 && isEmpty(textAttrs?.metadata)) {
       return null;
     }
 
@@ -151,20 +95,121 @@ export default function Header(props) {
     );
   };
 
-  const innerClassName = classNames({
-    "reader-header__inner": true,
-    "reader-header__inner--shifted": mobileOptionsExpanded
-  });
+  const renderOptionsNav = () => {
+    return (
+      <ul
+        aria-label={t("reader.header.reader_settings_search")}
+        className="reader-header__nav-list"
+      >
+        <Authorize kind={"any"}>
+          <li className="reader-header__nav-item">
+            <ControlMenu.Button
+              onClick={panelToggleHandler("notes")}
+              icon="notes24"
+              label={t("glossary.note_title_case_other")}
+              active={visibility.uiPanels.notes}
+              ariaHasPopup="dialog"
+              ariaControls="notes"
+            />
+          </li>
+        </Authorize>
+        <li className="reader-header__nav-item">
+          <DisclosureNavigationMenu
+            visible={visibility.uiPanels.visibility}
+            disclosure={
+              <ControlMenu.DisclosureButton
+                icon="eyeball24"
+                label={t("common.visibility_title_case")}
+              />
+            }
+          >
+            <ControlMenu.DisclosurePanel direction="right">
+              <ControlMenu.VisibilityMenuBody
+                className="panel"
+                filter={visibility.visibilityFilters}
+                filterChangeHandler={handleVisibilityFilterChange}
+              />
+            </ControlMenu.DisclosurePanel>
+          </DisclosureNavigationMenu>
+        </li>
+        <li className="reader-header__nav-item">
+          <DisclosureNavigationMenu
+            visible={visibility.uiPanels.appearance}
+            disclosure={
+              <ControlMenu.DisclosureButton
+                icon="text24"
+                label={t("reader.header.reader_appearance")}
+              />
+            }
+          >
+            <ControlMenu.DisclosurePanel direction="right">
+              <ControlMenu.AppearanceMenuBody
+                // Props required by body component
+                appearance={appearance}
+                selectFont={selectFont}
+                setColorScheme={setColorScheme}
+                setHighContrast={setHighContrast}
+                incrementFontSize={incrementFontSize}
+                decrementFontSize={decrementFontSize}
+                incrementMargins={incrementMargins}
+                decrementMargins={decrementMargins}
+                resetTypography={resetTypography}
+                className="panel"
+              />
+            </ControlMenu.DisclosurePanel>
+          </DisclosureNavigationMenu>
+        </li>
+        <li className="reader-header__nav-item">
+          <DisclosureNavigationMenu
+            visible={visibility.uiPanels.search}
+            disclosure={
+              <ControlMenu.DisclosureButton
+                icon="search24"
+                label={t("search.title")}
+              />
+            }
+          >
+            <ControlMenu.DisclosurePanel direction="right">
+              <SearchMenu.Body
+                toggleVisibility={panelToggleHandler("search")}
+                initialState={{
+                  keyword: "",
+                  scope: "text"
+                }}
+                projectId={projectId}
+                textId={textId}
+                sectionId={sectionId}
+                searchType="reader"
+                className="panel search-menu"
+              />
+            </ControlMenu.DisclosurePanel>
+          </DisclosureNavigationMenu>
+        </li>
+        <li className="reader-header__nav-item">
+          <DisclosureNavigationMenu
+            visible={visibility.uiPanels.user}
+            disclosure={<UserMenuButton />}
+            callbacks={commonActions}
+            onBlur={commonActions.hideUserPanel}
+            context="reader"
+          >
+            <UserMenuBody />
+          </DisclosureNavigationMenu>
+        </li>
+      </ul>
+    );
+  };
+
   return (
     <header className="reader-header">
       <Layout.PreHeader />
-      <nav className={innerClassName}>
+      <nav className="reader-header__inner">
         <div className="reader-header__menu-group reader-header__menu-group--left">
           <ReturnMenu.Button
             toggleReaderMenu={panelToggleHandler("readerReturn")}
             expanded={visibility.uiPanels.readerReturn}
           />
-          {renderContentsButton(text.attributes)}
+          {renderContentsButton(text?.attributes)}
         </div>
         {section && (
           <TextTitles
@@ -173,130 +218,49 @@ export default function Header(props) {
             showSection={!scrollAware.top}
           />
         )}
+        {/* Options menu */}
         <div className="reader-header__menu-group reader-header__menu-group--right">
-          <ul
-            aria-label={t("reader.header.reader_settings_search")}
-            className="reader-header__nav-list"
-          >
-            <Authorize kind={"any"}>
-              <li className="reader-header__nav-item">
-                <ControlMenu.Button
-                  onClick={panelToggleHandler("notes")}
-                  icon="notes24"
-                  label={t("glossary.note_title_case_other")}
-                  active={visibility.uiPanels.notes}
-                />
-              </li>
-            </Authorize>
-            <li className="reader-header__nav-item">
-              <ControlMenu.Button
-                onClick={panelToggleHandler("visibility")}
-                icon="eyeball24"
-                label={t("common.visibility_title_case")}
-                active={visibility.uiPanels.visibility}
-              />
-            </li>
-            <li className="reader-header__nav-item">
-              <ControlMenu.Button
-                onClick={panelToggleHandler("appearance")}
-                icon="text24"
-                label={t("reader.header.reader_appearance")}
-                active={visibility.uiPanels.appearance}
-              />
-            </li>
-            <li className="reader-header__nav-item">
-              <SearchMenu.Button
-                toggleSearchMenu={panelToggleHandler("search")}
-                active={visibility.uiPanels.search}
-                className="reader-header__button reader-header__button--pad-narrow"
-                iconSize={32}
-              />
-            </li>
-            <li className="reader-header__nav-item">
-              <DisclosureNavigationMenu
-                visible={visibility.uiPanels.user}
-                disclosure={<UserMenuButton />}
-                callbacks={commonActions}
-                onBlur={commonActions.hideUserPanel}
-                context="reader"
-              >
-                <UserMenuBody />
-              </DisclosureNavigationMenu>
-            </li>
-          </ul>
+          {renderOptionsNav()}
         </div>
       </nav>
-      <div className="reader-header__panels reader-header__panels--left">
-        <UIPanel
-          id="readerReturn"
-          visibility={visibility.uiPanels}
-          bodyComponent={ReturnMenu.Body}
-          returnUrl={lh.link(
-            "frontendProjectDetail",
-            text.relationships.project.attributes.slug
-          )}
-          projectId={text.relationships.project.id}
-          projectTitle={text.relationships.project.attributes.titleFormatted}
-          isJournalArticle={
-            text.relationships.project.attributes.isJournalIssue
-          }
-          toggleSignInUpOverlay={commonActions.toggleSignInUpOverlay}
-          hidePanel={commonActions.hideReaderReturnPanel}
-          // TODO: More link (and eventually, the link text) should be pulled from settings
-          moreLink="https://manifoldapp.org/"
-        />
-      </div>
+      {!!text && (
+        <>
+          <div className="reader-header__panels reader-header__panels--left">
+            <UIPanel
+              id="readerReturn"
+              visibility={visibility.uiPanels}
+              bodyComponent={ReturnMenu.Body}
+              returnUrl={lh.link(
+                "frontendProjectDetail",
+                text?.relationships.project.attributes.slug
+              )}
+              projectId={text?.relationships.project.id}
+              projectTitle={
+                text?.relationships.project.attributes.titleFormatted
+              }
+              isJournalArticle={
+                text?.relationships.project.attributes.isJournalIssue
+              }
+              toggleSignInUpOverlay={commonActions.toggleSignInUpOverlay}
+              hidePanel={commonActions.hideReaderReturnPanel}
+              // TODO: More link (and eventually, the link text) should be pulled from settings
+              moreLink="https://manifoldapp.org/"
+            />
+          </div>
 
-      <div className="reader-header__panels reader-header__panels--right">
-        <UIPanel
-          id="notes"
-          visibility={visibility.uiPanels}
-          visible={visibility.uiPanels.notes}
-          bodyComponent={Notes.ReaderDrawer}
-          match={match}
-          history={history}
-          hidePanel={commonActions.hideNotesPanel}
-        />
-        <UIPanel
-          id="visibility"
-          visibility={visibility.uiPanels}
-          filter={visibility.visibilityFilters}
-          filterChangeHandler={handleVisibilityFilterChange}
-          bodyComponent={ControlMenu.VisibilityMenuBody}
-          hidePanel={commonActions.hideVisibilityPanel}
-        />
-        <UIPanel
-          id="search"
-          visibility={visibility.uiPanels}
-          toggleVisibility={panelToggleHandler("search")}
-          initialState={{
-            keyword: "",
-            scope: "text"
-          }}
-          projectId={projectId}
-          textId={textId}
-          sectionId={sectionId}
-          searchType="reader"
-          bodyComponent={SearchMenu.Body}
-          hidePanel={commonActions.hideSearchPanel}
-        />
-        <UIPanel
-          id="appearance"
-          visibility={visibility.uiPanels}
-          bodyComponent={ControlMenu.AppearanceMenuBody}
-          // Props required by body component
-          appearance={appearance}
-          selectFont={selectFont}
-          setColorScheme={setColorScheme}
-          incrementFontSize={incrementFontSize}
-          decrementFontSize={decrementFontSize}
-          incrementMargins={incrementMargins}
-          decrementMargins={decrementMargins}
-          resetTypography={resetTypography}
-          hidePanel={commonActions.hideAppearancePanel}
-        />
-      </div>
-      {renderOptionsToggle()}
+          <div className="reader-header__panels reader-header__panels--right">
+            <UIPanel
+              id="notes"
+              visibility={visibility.uiPanels}
+              visible={visibility.uiPanels.notes}
+              bodyComponent={Notes.ReaderDrawer}
+              match={match}
+              history={history}
+              hidePanel={commonActions.hideNotesPanel}
+            />
+          </div>
+        </>
+      )}
       <HeaderNotifications />
     </header>
   );
@@ -316,6 +280,7 @@ Header.propTypes = {
   decrementMargins: PropTypes.func,
   resetTypography: PropTypes.func,
   setColorScheme: PropTypes.func,
+  setHighContrast: PropTypes.func,
   scrollAware: PropTypes.object,
   commonActions: PropTypes.object,
   match: PropTypes.object

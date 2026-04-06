@@ -11,6 +11,7 @@ export default class GroupedList extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     loginHandler: PropTypes.func.isRequired,
+    focusHandler: PropTypes.func,
     annotations: PropTypes.array,
     closeDrawer: PropTypes.func
   };
@@ -34,6 +35,12 @@ export default class GroupedList extends PureComponent {
     });
   };
 
+  hasComments = group => {
+    return group.annotations?.some(
+      annotation => (annotation?.attributes?.commentsCount || 0) > 0
+    );
+  };
+
   render() {
     const { annotations, saveAnnotation, loginHandler } = this.props;
 
@@ -50,6 +57,7 @@ export default class GroupedList extends PureComponent {
                   onAnnotate={this.showEditor}
                   onLogin={loginHandler}
                   annotateToggleRef={this.annotateToggleRef}
+                  focusHandler={this.props.focusHandler}
                 />
                 {this.state.editorVisible && (
                   <Editor
@@ -58,7 +66,12 @@ export default class GroupedList extends PureComponent {
                     saveAnnotation={attr => saveAnnotation(attr, group)}
                   />
                 )}
-                <ul className="annotation-list">
+                <ul
+                  className="annotation-list"
+                  {...(group.annotations.length > 1 || this.hasComments(group)
+                    ? {}
+                    : { role: "presentation" })}
+                >
                   {group.annotations.map(annotation => {
                     return (
                       <UserContent

@@ -30,12 +30,12 @@ RSpec.describe Packaging::EpubV3::TextSectionCompilation::Pipeline, packaging: t
   context "with a text section with a simple body" do
     let!(:text_section) { FactoryBot.create :text_section, :with_simple_body, stylesheets: [stylesheet] }
 
-    include_examples "a valid compilation"
+    it_behaves_like "a valid compilation"
   end
 
   context "with a text section with an empty body" do
     let!(:text_section) { FactoryBot.create :text_section, :with_empty_body, stylesheets: [stylesheet] }
 
-    include_examples "a valid compilation"
+    it_behaves_like "a valid compilation"
   end
 end

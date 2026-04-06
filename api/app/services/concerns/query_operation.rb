@@ -48,6 +48,12 @@ module QueryOperation
     ApplicationRecord.connection
   end
 
+  # @api private
+  # @return [String]
+  def quote_value(value)
+    connection.quote(value)
+  end
+
   # Join components of a query with the separator value in `join_with`.
   #
   # @param [<String>] parts

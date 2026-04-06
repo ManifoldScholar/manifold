@@ -6,6 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   INHERITS = Dux.inherits(self).freeze
 
+  include AssociationHelpers
   include ClassyEnum::ActiveRecord
   include ArelHelpers
   include DetectsSpam
@@ -26,6 +27,17 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   class << self
+    # @param [AnonymousUser, User, nil] user
+    def authorized_user?(user = nil)
+      user.present? && user.try(:persisted?).present?
+    end
+
+    # @see SoftDeletable
+    # @return [ActiveRecord::Relation]
+    def existing
+      all
+    end
+
     def in_the_week_of(date)
       where(created_at: date.to_week_range)
     end

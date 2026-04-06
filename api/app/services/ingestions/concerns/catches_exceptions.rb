@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Concerns
     module CatchesExceptions
@@ -12,11 +14,6 @@ module Ingestions
       # @!attribute [r] uncaught_exception
       # @return [Exception, nil]
       attr_reader :uncaught_exception
-
-      # @abstract
-      # @param [Exception] exception
-      # @return [void]
-      def handle_uncaught_exception!(exception); end
 
       # @api private
       # @return [void]

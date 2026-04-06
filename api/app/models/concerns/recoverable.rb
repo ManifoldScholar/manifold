@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Recoverable
   extend ActiveSupport::Concern
+
   class_methods do
     def by_reset_token(token)
       return nil unless token.present?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "uber/inheritable_attr"
 
 module API
@@ -54,7 +56,7 @@ module API
       # @return [void]
       def render_single_resource(model, ok_status: default_ok_status, error_status: :unprocessable_entity, **options)
         options[:serializer] ||= model_serializer
-        options[:serializer] = error_serializer if (action_name == "update" || action_name == "create") && !model.valid?(options[:context])
+        options[:serializer] = error_serializer if ["update", "create"].include?(action_name) && !model.valid?(options[:context])
         options[:location] ||= build_location_for model
         options[:status] ||= build_status_for model, ok_status, error_status, options[:context]
         options[:full] = true
@@ -74,7 +76,7 @@ module API
       # @param [Symbol] error
       # @return [Symbol]
       def build_status_for(model, ok, error, _context)
-        return ok unless action_name == "update" || action_name == "create"
+        return ok unless ["update", "create"].include?(action_name)
 
         model.errors.none? ? ok : error
       end
@@ -103,7 +105,6 @@ module API
         end
       end
 
-      # rubocop:disable Metrics/MethodLength
       class_methods do
         def setup_resources!(model:, authorize: true, authorize_options: {}, &model_scope)
           self.resource_configuration = API::V1::ResourcefulMethods.new(
@@ -114,16 +115,15 @@ module API
           include resource_configuration
 
           if authorize
-            ActiveSupport::Deprecation.silence do
+            Rails.application.deprecators.silence do
               # Authority still uses `after_filter`. This check only occurs in dev & test
               # by default.
               performed_options = authorize_options.deep_dup
               performed_options[:if] ||= :auditing_security?
-
-              ensure_authorization_performed performed_options
+              ensure_authorization_performed(**performed_options)
             end
 
-            authorize_actions_for resource_configuration.model, authorize_options
+            authorize_actions_for(resource_configuration.model, **authorize_options)
           end
 
           self.model_klass      = resource_configuration.model
@@ -148,7 +148,6 @@ module API
           "::V1::#{detect_model_name}Serializer".safe_constantize
         end
       end
-      # rubocop:enable Metrics/MethodLength
     end
   end
 end

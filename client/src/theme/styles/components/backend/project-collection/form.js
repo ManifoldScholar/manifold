@@ -3,7 +3,7 @@ import { respond } from "theme/styles/mixins";
 export default `
   .project-collection-form {
     ${respond(
-      `max-width: 446.44px; /* set explicity to prevent drawer from expanding */`,
+      `max-width: 475px; /* set explicity to prevent drawer from expanding */`,
       75
     )}
 

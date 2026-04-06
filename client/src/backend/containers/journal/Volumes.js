@@ -6,7 +6,7 @@ import lh from "helpers/linkHandler";
 import { childRoutes } from "helpers/router";
 import { journalVolumesAPI } from "api";
 import { withRouter } from "react-router-dom";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 import EntitiesList, {
   Button,
   JournalVolumeRow
@@ -15,7 +15,7 @@ import EntitiesList, {
 function JournalVolumesContainer({ refresh, journal, route }) {
   const closeUrl = lh.link("backendJournalVolumes", journal.id);
 
-  const [pagination, setPageNumber] = usePaginationState();
+  const { pagination } = useListQueryParams({ initSize: 10 });
 
   const { data, refresh: refreshVolumes, meta } = useFetch({
     request: [journalVolumesAPI.index, journal.id, pagination]
@@ -44,9 +44,6 @@ function JournalVolumesContainer({ refresh, journal, route }) {
         })}
         pagination={meta.pagination}
         showCount
-        callbacks={{
-          onPageClick: page => () => setPageNumber(page)
-        }}
         buttons={[
           <Button
             path={lh.link("backendJournalVolumeNew", journal.id)}

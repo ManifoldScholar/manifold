@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Legacy
   class Unfavorite
-    def call(options)
-      Operation.new(options).call
+    def call(**options)
+      Operation.new(**options).call
     end
 
     class Operation

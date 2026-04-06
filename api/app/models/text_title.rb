@@ -1,20 +1,21 @@
+# frozen_string_literal: true
+
 # A value object representing a text's title.
 class TextTitle < ApplicationRecord
-
   # Constants
-  KIND_MAIN = "main".freeze
-  KIND_ACRONYM = "acronym".freeze
-  KIND_ABBREVIATED = "abbreviated".freeze
-  KIND_ALTERNATIVE = "alternative".freeze
-  KIND_EXPANDED = "expanded".freeze
-  KIND_FORMER = "former".freeze
-  KIND_ALTERNATIVE_COVER = "alternative_cover".freeze
-  KIND_ALTERNATIVE_BACK = "alternative_back".freeze
-  KIND_TRANSLATED = "translated".freeze
-  KIND_SUBTITLE = "subtitle".freeze
-  KIND_SHORT = "short".freeze
-  KIND_COLLECTION = "collection".freeze
-  KIND_EDITION = "edition".freeze
+  KIND_MAIN = "main"
+  KIND_ACRONYM = "acronym"
+  KIND_ABBREVIATED = "abbreviated"
+  KIND_ALTERNATIVE = "alternative"
+  KIND_EXPANDED = "expanded"
+  KIND_FORMER = "former"
+  KIND_ALTERNATIVE_COVER = "alternative_cover"
+  KIND_ALTERNATIVE_BACK = "alternative_back"
+  KIND_TRANSLATED = "translated"
+  KIND_SUBTITLE = "subtitle"
+  KIND_SHORT = "short"
+  KIND_COLLECTION = "collection"
+  KIND_EDITION = "edition"
   ALLOWED_KINDS = [KIND_MAIN,
                    KIND_ACRONYM,
                    KIND_ABBREVIATED,
@@ -31,18 +32,21 @@ class TextTitle < ApplicationRecord
 
   alias_attribute :title, :value
   alias_attribute :subtitle, :value
-  alias_attribute :title_formatted, :value_formatted
-  alias_attribute :subtitle_formatted, :value_formatted
-  alias_attribute :title_plaintext, :value_plaintext
-  alias_attribute :subtitle_plaintext, :value_plaintext
 
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   include HasFormattedAttributes
+
   has_formatted_attributes :value, include_wrap: false
+
+  alias title_formatted value_formatted
+  alias subtitle_formatted value_formatted
+  alias title_plaintext value_plaintext
+  alias subtitle_plaintext value_plaintext
 
   # Associations
   belongs_to :text
@@ -58,5 +62,4 @@ class TextTitle < ApplicationRecord
   def packaging_metadata
     slice(:title, :kind).compact
   end
-
 end

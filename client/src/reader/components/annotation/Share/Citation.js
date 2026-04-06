@@ -92,19 +92,32 @@ export class AnnotationShareEditor extends PureComponent {
     const copiedText = this.state.copied
       ? this.props.t("reader.menus.citation.copied")
       : null;
-    const citations = this.props.section.attributes.citations;
+
+    const { attributes } = this.props.section ?? {};
+    const {
+      citations,
+      metadataFormatted: { citationOverride }
+    } = attributes ?? {};
 
     return (
       <div className="annotation-editor citation">
         <div>
-          {this.renderStyleButtons()}
+          {citationOverride ? (
+            <span className="citation__legend">
+              {this.props.t("reader.menus.citation.custom_label")}
+            </span>
+          ) : (
+            this.renderStyleButtons()
+          )}
           <div
             className="citation__copyable"
             ref={ci => {
               this.ci = ci;
             }}
             style={{ width: "100%" }}
-            dangerouslySetInnerHTML={{ __html: citations[this.state.style] }}
+            dangerouslySetInnerHTML={{
+              __html: citationOverride ?? citations[this.state.style]
+            }}
           />
           <div className="annotation-editor__actions">
             <span className="citation__notice">{copiedText}</span>

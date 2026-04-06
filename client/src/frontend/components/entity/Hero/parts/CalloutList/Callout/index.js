@@ -27,7 +27,8 @@ export default function Callout({
   showErrors = false,
   isLink = false,
   buttonSize,
-  darkMode = false
+  darkMode = false,
+  track
 }) {
   const { t } = useTranslation();
   const type =
@@ -56,7 +57,8 @@ export default function Callout({
     title,
     as,
     primary,
-    mismatch
+    mismatch,
+    analyticsEvent
   } = getCalloutParams(callout, type, isLink, t);
 
   if (mismatch) return null;
@@ -65,6 +67,9 @@ export default function Callout({
     <Styled.LinkCallout
       as={as === "UserLink" ? UserLink : as}
       {...navProps(as, url, type)}
+      {...(analyticsEvent && track
+        ? { onClick: () => track(analyticsEvent) }
+        : {})}
     >
       {icon && <Styled.LinkIcon icon={icon} size={iconSize} />}
       <span>{title}</span>
@@ -78,6 +83,9 @@ export default function Callout({
       secondary={!primary}
       icon={icon}
       iconSize={iconSize}
+      {...(analyticsEvent && track
+        ? { onClick: () => track(analyticsEvent) }
+        : {})}
     >
       {title}
     </Button>
@@ -91,5 +99,6 @@ Callout.propTypes = {
   showErrors: PropTypes.bool,
   isLink: PropTypes.bool,
   darkMode: PropTypes.bool,
-  buttonSize: PropTypes.oneOf(["sm", "lg"])
+  buttonSize: PropTypes.oneOf(["sm", "lg"]),
+  track: PropTypes.func
 };

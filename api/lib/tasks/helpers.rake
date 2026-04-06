@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Manifold
   module Rake
     def self.report_created_model(model)

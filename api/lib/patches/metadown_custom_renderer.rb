@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "metadown/renderer"
 require "metadown/metadata_parser"
 

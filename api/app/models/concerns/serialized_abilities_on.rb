@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Included in a user-type model (one that implements {Authority::UserAbilities})
 module SerializedAbilitiesOn
   extend ActiveSupport::Concern

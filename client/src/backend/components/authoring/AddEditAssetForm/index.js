@@ -1,16 +1,16 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { ingestionSourcesAPI } from "api";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 import * as Styled from "./styles";
 
 export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const formatData = useCallback(
     data => {
@@ -44,8 +44,8 @@ export default function AddEditAssetForm({ assetId, textId, asset, refresh }) {
 
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
-    history.push(lh.link("backendTextAssets", textId));
-  }, [history, textId, refresh]);
+    navigate(lh.link("backendTextAssets", textId));
+  }, [navigate, textId, refresh]);
 
   const src = `/api/proxy/ingestion_sources/${assetId}`;
 

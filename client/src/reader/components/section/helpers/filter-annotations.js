@@ -24,7 +24,7 @@ class AnnotationsFilter {
   }
 
   get showYourHighlights() {
-    return this.filters.highlight.yours;
+    return this.filters.annotation.highlights;
   }
 
   get hideYourHighlights() {
@@ -37,14 +37,6 @@ class AnnotationsFilter {
 
   get hideOthersAnnotations() {
     return !this.showOthersAnnotations;
-  }
-
-  get showOthersHighlights() {
-    return this.filters.highlight.others;
-  }
-
-  get hideOthersHighlights() {
-    return !this.showOthersHighlights;
   }
 
   get showResources() {
@@ -79,10 +71,11 @@ class AnnotationsFilter {
       } = annotation.attributes;
       const isHighlight = format === "highlight";
       const isAnnotation = format === "annotation";
-      const isResource = format === "resource";
+      const isResource =
+        format === "resource" || format === "resource_collection";
       const isInGroup = Boolean(readingGroupId);
       if (isHighlight && isCreator && this.hideYourHighlights) return false;
-      if (isHighlight && !isCreator && this.hideOthersHighlights) return false;
+      if (isHighlight && !isCreator) return false;
       if (isAnnotation && isCreator && this.hideYourAnnotations) return false;
       if (isAnnotation && !isCreator && this.hideOthersAnnotations)
         return false;

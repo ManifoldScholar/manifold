@@ -19,7 +19,7 @@ export default `
     ${drawerPadding("padding-left")}
     padding-top: 32px;
 
-    ${respond(`padding-top: 48px;`, 90)}
+    ${respond(`padding-top: 40px;`, 90)}
 
     .annotation-comments &,
     .resource-comments & {
@@ -69,7 +69,7 @@ export default `
       border: 0;
       border-radius: var(--box-border-radius);
 
-      &.focus-visible {
+      &:focus-visible {
         ${defaultFocusStyle}
       }
 
@@ -77,9 +77,16 @@ export default `
         color: var(--color);
       }
 
-      &.focus-visible::placeholder {
+      &:focus-visible::placeholder {
         color: var(--strong-color);
       }
+    }
+
+    &__textarea-label {
+      ${utilityPrimary}
+      font-size: 12px;
+      display: block;
+      margin-block-end: 4px;
     }
 
     &__actions {
@@ -130,7 +137,7 @@ export default `
     &__group-select {
       ${screenReaderText}
 
-      &.focus-visible ~ .annotation-editor__group-picker .annotation-editor__group-picker-toggle {
+      &:focus-visible ~ .annotation-editor__group-picker .annotation-editor__group-picker-toggle {
         ${defaultFocusStyle}
       }
     }
@@ -153,7 +160,7 @@ export default `
         background-color: var(--box-strong-bg-color);
       }
 
-      &.focus-visible {
+      &:focus-visible {
         background-color: var(--box-strong-bg-color);
         outline: 0;
       }

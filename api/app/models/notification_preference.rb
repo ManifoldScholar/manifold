@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationPreference < ApplicationRecord
   belongs_to :user, inverse_of: :notification_preferences
 

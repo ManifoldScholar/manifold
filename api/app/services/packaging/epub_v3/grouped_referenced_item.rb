@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     class GroupedReferencedItem < Types::FlexibleStruct
-      include Dry::Equalizer.new(:path)
+      include Dry::Core::Equalizer.new(:path)
 
       attribute :path, Types.Instance(Packaging::Shared::ReferencedPath)
       attribute :references, Types::Array.of(Packaging::EpubV3::ReferencedItem)

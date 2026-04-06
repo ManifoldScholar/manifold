@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # resources controller
     class ResourcesController < ApplicationController
-
       resourceful! Resource, authorize_options: { except: [:index, :show] } do
-        Resource.filtered(with_pagination!(resource_filter_params))
+        Resource.filtered(**with_pagination!(resource_filter_params))
       end
 
       def index
@@ -38,13 +39,12 @@ module API
       protected
 
       def includes
-        [:project]
+        [:project, :text_tracks]
       end
 
       def scope_for_zresources
         Resource.friendly
       end
-
     end
   end
 end

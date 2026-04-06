@@ -9,4 +9,9 @@ export const Label = styled.header`
   .backend & {
     background-color: var(--box-bg-color);
   }
+
+  > * {
+    color: ${({ $color }) =>
+      $color === "error" ? "var(--error-color)" : "var(--label-color)"};
+  }
 `;

@@ -1,5 +1,6 @@
-class ActionCallout < ApplicationRecord
+# frozen_string_literal: true
 
+class ActionCallout < ApplicationRecord
   # Authorization
   include Authority::Abilities
   include SerializedAbilitiesFor
@@ -18,20 +19,20 @@ class ActionCallout < ApplicationRecord
   validates :url, presence: true, if: :requires_url?
   validates :visibility, presence: true, if: :requires_visibility?
 
-  enum kind: {
+  enum :kind, {
     link: 0,
     read: 1,
     toc: 2,
     download: 3
   }
 
-  enum visibility: {
+  enum :visibility, {
     always: 0,
     authorized: 1,
     unauthorized: 2
   }
 
-  enum location: {
+  enum :location, {
     left: 0,
     right: 1
   }
@@ -62,5 +63,4 @@ class ActionCallout < ApplicationRecord
   def requires_text?
     read? || toc?
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ExportStrategies
   # A tuple of {ProjectExport} and {ExportTarget} that represents a selection to upload.
   #

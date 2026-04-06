@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resources
       class Feature
-
         REQUEST_ATTRIBUTES = {
           background: Types::Serializer::Upload,
           foreground: Types::Serializer::Upload,

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Open a shell inside the manifold web (API) container
+# Usage: ./api/bin/shell
+
+CONTAINER_NAME="manifold-spec"
+
+container_id=$(docker ps --filter "name=$CONTAINER_NAME" -q)
+
+if [ -z "$container_id" ]; then
+    echo "Error: No container found with name '$CONTAINER_NAME'"
+    exit 1
+fi
+
+if [ $(echo "$container_id" | wc -l) -gt 1 ]; then
+    container_id=$(echo "$container_id" | head -n1)
+fi
+
+exec docker exec -it "$container_id" bash

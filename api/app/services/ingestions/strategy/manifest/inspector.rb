@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Strategy
     module Manifest
       class Inspector
-
-        attr_reader :ingestion, :context, :source_map, :toc
+        attr_reader :ingestion, :context, :source_map, :toc, :toc_start_section_item
 
         def initialize(context)
           @context = context
           @ingestion = context.ingestion
           @toc = parsed_toc
           @source_map = build_source_map
+          @toc_start_section_item = detect_toc_start_section_item @toc
         end
 
         def unique_id
@@ -48,17 +50,6 @@ module Ingestions
           return nil unless toc_start_section_item.present?
 
           Digest::MD5.hexdigest context.basename(base_source_path(toc_start_section_item["source_path"]))
-        end
-
-        def toc_start_section_item(items = toc)
-          @toc_start_section_item ||= begin
-            items.each do |item|
-              return item if item["start_section"].present?
-              return toc_start_section_item(item["children"]) if item["children"].present?
-            end
-
-            nil
-          end
         end
 
         def manifest_meta_tag(tag)
@@ -110,6 +101,30 @@ module Ingestions
 
         def external_sources
           source_map.select { |source| context.url? source["source_path"] }
+        end
+
+        def local_sources
+          source_map.reject { |source| context.url? source["source_path"] }
+        end
+
+        def local_source_paths
+          local_sources.pluck("source_path")
+        end
+
+        # @yield [missing]
+        # @yieldparam [Array<String>] missing list of missing local source paths
+        # @yieldreturn [void]
+        # @return [Array<String>] list of missing local source paths
+        def validate_local_sources!
+          source_root_path = Pathname(context.source_root)
+
+          missing = local_source_paths.reject do |source_path|
+            source_root_path.join(source_path).exist?
+          end
+
+          yield missing if block_given? && missing.any?
+
+          return missing
         end
 
         def update_source_map(original_path, new_path)
@@ -176,6 +191,17 @@ module Ingestions
 
         def yaml_parsed(file_path)
           YAML.load_file file_path
+        end
+
+        private
+
+        def detect_toc_start_section_item(items = toc)
+          items.each do |item|
+            return item if item["start_section"].present?
+            return detect_toc_start_section_item(item["children"]) if item["children"].present?
+          end
+
+          nil
         end
       end
     end

@@ -7,7 +7,6 @@ import Maker from "./Maker";
 import User from "./User";
 import Page from "./Page";
 import Feature from "./Feature";
-import TwitterQuery from "./TwitterQuery";
 import ReadingGroup from "./ReadingGroup";
 import JournalVolume from "./JournalVolume";
 import Asset from "./Asset";
@@ -22,7 +21,6 @@ export default {
   User,
   Page,
   Feature,
-  TwitterQuery,
   ReadingGroup,
   JournalVolume,
   Asset

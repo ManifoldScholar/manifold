@@ -115,6 +115,32 @@ const routes = {
               component: "ResourceProperties",
               path: "/backend/projects/resource/:id/properties",
               helper: r => `/backend/projects/resource/${r}/properties`
+            },
+            {
+              name: "backendResourceTracks",
+              exact: false,
+              component: "ResourceTracksList",
+              path: "/backend/projects/resource/:id/tracks",
+              helper: r => `/backend/projects/resource/${r}/tracks`,
+              routes: [
+                {
+                  name: "backendResourceTrackNew",
+                  exact: true,
+                  component: "ResourceTrackAdd",
+                  path: "/backend/projects/resource/:id/tracks/new",
+                  helper: r => `/backend/projects/resource/${r}/tracks/new`,
+                  modal: true
+                },
+                {
+                  name: "backendResourceTrackEdit",
+                  exact: true,
+                  component: "ResourceTrackAdd",
+                  path: "/backend/projects/resource/:id/tracks/:trackId",
+                  helper: (r, trackId) =>
+                    `/backend/projects/resource/${r}/tracks/${trackId}`,
+                  modal: true
+                }
+              ]
             }
           ]
         },
@@ -193,9 +219,17 @@ const routes = {
               helper: t => `/backend/projects/text/${t}/collaborators`,
               routes: [
                 {
-                  name: "backendTextCollaborator",
+                  name: "backendTextCollaboratorNew",
                   exact: true,
-                  component: "MakersEdit",
+                  component: "TextAddCollaborator",
+                  path: "/backend/projects/text/:tId/collaborators/new",
+                  helper: tId =>
+                    `/backend/projects/text/${tId}/collaborators/new`
+                },
+                {
+                  name: "backendTextCollaboratorEdit",
+                  exact: true,
+                  component: "TextAddCollaborator",
                   path: "/backend/projects/text/:tId/collaborators/:id",
                   helper: (tId, id) =>
                     `/backend/projects/text/${tId}/collaborators/${id}`
@@ -226,7 +260,8 @@ const routes = {
               path: "/backend/projects/text/:id/ingestion/:ingestionId/ingest",
               helper: (t, i) =>
                 `/backend/projects/text/${t}/ingestion/${i}/ingest`,
-              modal: false
+              modal: false,
+              ingest: true
             },
             {
               name: "backendTextProperties",
@@ -270,6 +305,16 @@ const routes = {
                   modal: false
                 },
                 {
+                  name: "backendTextSectionIngestNewEdit",
+                  exact: true,
+                  component: "TextSectionIngest",
+                  path:
+                    "/backend/projects/text/:id/sections/ingestions/:ingestionId/edit",
+                  helper: (t, i) =>
+                    `/backend/projects/text/${t}/sections/ingestions/${i}/edit`,
+                  modal: false
+                },
+                {
                   name: "backendTextSectionIngestEdit",
                   exact: true,
                   component: "TextSectionIngestEdit",
@@ -287,7 +332,8 @@ const routes = {
                     "/backend/projects/text/:id/sections/ingestion/:ingestionId/ingest",
                   helper: (t, i) =>
                     `/backend/projects/text/${t}/sections/ingestion/${i}/ingest`,
-                  modal: false
+                  modal: false,
+                  ingest: true
                 },
                 {
                   name: "backendTextSectionProperties",
@@ -362,6 +408,14 @@ const routes = {
           path: "/backend/projects/project-collections/:id?",
           helper: () => "/backend/projects/project-collections",
           routes: [
+            {
+              name: "backendProjectCollectionsNew",
+              exact: true,
+              component: "ProjectCollectionNew",
+              path: "/backend/projects/project-collections/new",
+              helper: () => `/backend/projects/project-collections/new`,
+              modal: true
+            },
             {
               name: "backendProjectCollection",
               exact: false,
@@ -438,7 +492,8 @@ const routes = {
                     "/backend/projects/:id/texts/ingestion/:ingestionId/ingest",
                   helper: (p, i) =>
                     `/backend/projects/${p}/texts/ingestion/${i}/ingest`,
-                  modal: true
+                  modal: true,
+                  ingest: true
                 },
                 {
                   exact: false,
@@ -519,12 +574,20 @@ const routes = {
               helper: p => `/backend/projects/${p}/collaborators`,
               routes: [
                 {
-                  name: "backendProjectCollaborator",
+                  name: "backendProjectCollaboratorNew",
                   exact: true,
-                  component: "MakersEdit",
-                  path: "/backend/projects/:pId/collaborators/:id",
-                  helper: (pId, id) =>
-                    `/backend/projects/${pId}/collaborators/${id}`
+                  component: "ProjectAddCollaborator",
+                  path: "/backend/projects/:projectId/collaborators/new",
+                  helper: projectId =>
+                    `/backend/projects/${projectId}/collaborators/new`
+                },
+                {
+                  name: "backendProjectCollaboratorEdit",
+                  exact: true,
+                  component: "ProjectAddCollaborator",
+                  path: "/backend/projects/:projectId/collaborators/:id",
+                  helper: (projectId, id) =>
+                    `/backend/projects/${projectId}/collaborators/${id}`
                 }
               ]
             },
@@ -541,31 +604,6 @@ const routes = {
               component: "ProjectMetadata",
               path: "/backend/projects/:id/metadata",
               helper: p => `/backend/projects/${p}/metadata`
-            },
-            {
-              name: "backendProjectSocial",
-              exact: false,
-              component: "ProjectSocialWrapper",
-              path: "/backend/projects/:pId/social/:type(twitter-query)?/:qId?",
-              helper: p => `/backend/projects/${p}/social`,
-              routes: [
-                {
-                  name: "backendProjectSocialTwitterQueryNew",
-                  exact: true,
-                  component: "TwitterQueryNew",
-                  path: "/backend/projects/:pId/social/twitter-query/new",
-                  helper: pId =>
-                    `/backend/projects/${pId}/social/twitter-query/new`
-                },
-                {
-                  name: "backendProjectSocialTwitterQuery",
-                  exact: true,
-                  component: "TwitterQueryEdit",
-                  path: "/backend/projects/:pId/social/twitter-query/:id",
-                  helper: (pId, id) =>
-                    `/backend/projects/${pId}/social/twitter-query/${id}`
-                }
-              ]
             },
             {
               name: "backendProjectExportations",
@@ -789,6 +827,61 @@ const routes = {
       ]
     },
     {
+      name: "backendReadingGroups",
+      exact: false,
+      component: "ReadingGroupsWrapper",
+      path: "/backend/groups/:id?",
+      helper: () => `/backend/groups`,
+      routes: [
+        {
+          name: "backendReadingGroupsList",
+          exact: true,
+          component: "ReadingGroupsList",
+          path: "/backend/groups",
+          helper: () => "/backend/groups"
+        },
+        {
+          name: "backendReadingGroup",
+          exact: false,
+          component: "ReadingGroupWrapper",
+          path: "/backend/groups/:id",
+          helper: g => `/backend/groups/${g}`,
+          routes: [
+            {
+              name: "backendReadingGroupDetails",
+              exact: true,
+              component: "ReadingGroupDetails",
+              path: "/backend/groups/:id/details",
+              helper: g => `/backend/groups/${g}/details`
+            },
+            {
+              name: "backendReadingGroupMembers",
+              exact: true,
+              component: "ReadingGroupMembers",
+              path: "/backend/groups/:id/members",
+              helper: g => `/backend/groups/${g}/members`
+            },
+            {
+              name: "backendReadingGroupAnnotations",
+              exact: false,
+              component: "ReadingGroupAnnotations",
+              path: "/backend/groups/:id/annotations",
+              helper: g => `/backend/groups/${g}/annotations`,
+              routes: [
+                {
+                  name: "backendReadingGroupAnnotationDetail",
+                  exact: true,
+                  component: "AnnotationDetail",
+                  path: "/backend/groups/:rgId/annotations/:id",
+                  helper: (g, a) => `/backend/groups/${g}/annotations/${a}`
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       name: "backendRecords",
       exact: false,
       component: "Records",
@@ -799,22 +892,36 @@ const routes = {
           name: "backendRecordsUsers",
           exact: true,
           component: "UsersList",
-          path: "/backend/records/users/:id?",
-          helper: () => "/backend/records/users",
+          path: "/backend/records/users",
+          helper: () => "/backend/records/users"
+        },
+        {
+          name: "backendRecordsUser",
+          exact: false,
+          component: "UserWrapper",
+          path: "/backend/records/users/:id",
+          helper: u => `/backend/records/users/${u}`,
           routes: [
             {
-              name: "backendRecordsUsersNew",
+              name: "backendRecordsUserNew",
               exact: true,
-              component: "UsersNew",
+              component: "UserWrapper",
               path: "/backend/records/users/new",
               helper: () => "/backend/records/users/new"
             },
             {
-              name: "backendRecordsUser",
+              name: "backendRecordsUserProperties",
               exact: true,
-              component: "UsersEdit",
-              path: "/backend/records/users/:id",
-              helper: u => `/backend/records/users/${u}`
+              component: "UserProperties",
+              path: "/backend/records/users/:id/properties",
+              helper: u => `/backend/records/users/${u}/properties`
+            },
+            {
+              name: "backendRecordsUserActivity",
+              exact: true,
+              component: "UserActivity",
+              path: "/backend/records/users/:id/activity",
+              helper: u => `/backend/records/users/${u}/activity`
             }
           ]
         },
@@ -944,6 +1051,38 @@ const routes = {
           component: "CSVEntitlementImports",
           path: "/backend/records/entitlement-imports",
           helper: () => `/backend/records/entitlement-imports`
+        },
+        {
+          name: "backendRecordsAnnotations",
+          exact: false,
+          component: "AnnotationsList",
+          path: "/backend/records/annotations",
+          helper: () => `/backend/records/annotations`,
+          routes: [
+            {
+              name: "backendRecordsAnnotationsDetail",
+              exact: true,
+              component: "AnnotationDetail",
+              path: "/backend/records/annotations/:id",
+              helper: a => `/backend/records/annotations/${a}`
+            }
+          ]
+        },
+        {
+          name: "backendRecordsComments",
+          exact: false,
+          component: "CommentsList",
+          path: "/backend/records/comments",
+          helper: () => `/backend/records/comments`,
+          routes: [
+            {
+              name: "backendRecordsCommentsDetail",
+              exact: true,
+              component: "CommentDetail",
+              path: "/backend/records/comments/:id",
+              helper: c => `/backend/records/comments/${c}`
+            }
+          ]
         }
       ]
     },

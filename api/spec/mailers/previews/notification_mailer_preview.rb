@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationMailerPreview < ActionMailer::Preview
   # Accessible from http://manifold.lvh/rails/mailers/notification_mailer/digest_daily.html
   def digest_daily
@@ -71,10 +73,9 @@ class NotificationMailerPreview < ActionMailer::Preview
   end
 
   def events
-    out = {
-      projects: Event.where(project: Project.pluck(:id)).by_subject_type(%w(Text Resource Collection)).group_by(&:project),
-      annotations_and_comments: Event.where(project: Project.pluck(:id)).by_subject_type(%w(Annotation Comment)).group_by(&:project)
+    {
+      projects: Event.where(project: Project.select(:id)).by_subject_type(%w(Text Resource Collection)).group_by(&:project),
+      annotations_and_comments: Event.where(project: Project.select(:id)).by_subject_type(%w(Annotation Comment)).group_by(&:project)
     }
-    out
   end
 end

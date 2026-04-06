@@ -1,4 +1,4 @@
-require "stringio"
+# frozen_string_literal: true
 
 # Connects texts to resources that were sources for text sections during ingestion
 class Ingestion < ApplicationRecord
@@ -10,6 +10,7 @@ class Ingestion < ApplicationRecord
 
   # Authorization
   include Authority::Abilities
+
   self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   attr_writer :log_buffer
@@ -20,10 +21,12 @@ class Ingestion < ApplicationRecord
   belongs_to :text, optional: true
   belongs_to :text_section, optional: true
   belongs_to :project
+  has_many :ingestion_messages, -> { in_default_order }, inverse_of: :ingestion, dependent: :delete_all
 
   # Validations
   validates :source, presence: true, if: :file_based_ingestion?
   validates :external_source_url, presence: true, unless: :file_based_ingestion?
+
   aasm column: "state" do
     state :sleeping, initial: true
     state :processing
@@ -48,19 +51,44 @@ class Ingestion < ApplicationRecord
   end
 
   %w(DEBUG INFO WARN ERROR FATAL UNKNOWN).each do |severity|
-    class_eval <<-EOT, __FILE__, __LINE__ + 1
+    class_eval <<~RUBY, __FILE__, __LINE__ + 1
       def #{severity.downcase}(message = nil, progname = nil, &block)
         add("#{severity}", message, progname, &block)
       end
-    EOT
+    RUBY
   end
 
+  before_validation :infer_kind!
   before_save :commit_log
   before_update :commit_log
-  before_validation :infer_kind!
+
+  # @!group Main Entry Points
+
+  # @see Ingestions::ProcessJob
+  # @return [void]
+  def perform_process!(user)
+    process! user
+    save!
+  end
+
+  # @see Ingestions::ReingestJob
+  # @return [void]
+  def perform_reingest!(user)
+    reset!
+    perform_process! user
+  end
+
+  # @!endgroup
+
+  # @return [Ingestions::Context]
+  def build_context
+    ::Ingestions::Context.new(self)
+  end
 
   def reset_strategy
-    self.strategy = nil
+    prune_root_path!
+
+    update_column(:strategy, nil)
   end
 
   def file_based_ingestion?
@@ -73,6 +101,12 @@ class Ingestion < ApplicationRecord
 
   def ingestable?
     valid?
+  end
+
+  # @see Ingestions::Concerns::FileOperations#prune_root_path!
+  # @return [void]
+  def prune_root_path!
+    build_context.prune_root_path!
   end
 
   def reingest?
@@ -95,7 +129,12 @@ class Ingestion < ApplicationRecord
     log_buffer << line
     return if severity == "DEBUG"
 
-    IngestionChannel.broadcast_to self, type: "log", payload: line
+    ::Ingestions::LogMessageJob.perform_later(
+      ingestion_id: id,
+      kind: "log",
+      payload: line,
+      severity: severity.downcase,
+    )
   end
 
   def clear_log
@@ -107,26 +146,50 @@ class Ingestion < ApplicationRecord
     self.log_buffer = []
   end
 
+  # @param [User] user
+  # @return [void]
   def begin_processing(user)
+    update_column :processing_failed, false
+
     target_kind.begin_processing(user, self)
   end
 
+  # @param [StandardError, Ingestions::IngestionError, ActiveModel::Errors] errors
+  # @return [void]
   def handle_ingestion_exception(errors)
+    update_column :processing_failed, true
+
     error("Processing failed.\n")
 
-    if errors.respond_to?(:full_messages)
-      output_errors(errors)
-    else
-      compose_and_output_backtrace(errors)
-    end
+    handle_ingestion_errors!(errors)
 
     processing_failure
   end
 
   private
 
+  # @param [StandardError, Ingestions::IngestionError, ActiveModel::Errors] errors
+  # @return [void]
+  def handle_ingestion_errors!(errors)
+    if errors.respond_to?(:full_messages)
+      output_errors(errors)
+    else
+      case errors
+      when StandardError
+        compose_and_output_backtrace(errors)
+      else
+        # :nocov:
+        fatal("Something went wrong with ingestion: #{errors.inspect}")
+        # :nocov:
+      end
+    end
+  end
+
+  # @param [StandardError, Ingestions::IngestionError] errors
+  # @return [void]
   def compose_and_output_backtrace(errors)
     output = errors.message
+
     Rails.backtrace_cleaner.clean(errors.backtrace).each do |line|
       output += "\n#{line}"
     end
@@ -134,6 +197,8 @@ class Ingestion < ApplicationRecord
     error(output)
   end
 
+  # @param [ActiveModel::Errors] errors
+  # @return [void]
   def output_errors(errors)
     errors.full_messages.each do |e|
       error(e)
@@ -154,5 +219,4 @@ class Ingestion < ApplicationRecord
       "text"
     end
   end
-
 end

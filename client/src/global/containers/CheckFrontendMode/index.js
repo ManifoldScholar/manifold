@@ -46,7 +46,7 @@ class CheckFrontendMode extends PureComponent {
 
   get projectStandaloneMode() {
     if (!this.project) return "disabled";
-    return this.project.attributes.standaloneMode;
+    return this.project.attributes?.standaloneMode;
   }
 
   get canShowStandalone() {

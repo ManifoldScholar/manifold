@@ -48,6 +48,10 @@ en:
           landmark_nav_title: 'Landmark nav title is "%{text}"'
           toc_nav_title: 'TOC nav title is "%{text}"'
           page_list_nav_title: 'Page list nav title is "%{text}"'
+      pre_processor:
+        manifest:
+          missing_source_paths: "One or more source paths were defined by the manifest but not found. Check spelling and capitalization."
+          missing_source_path: "Manifest could not find an expected source path: %{source_path}"
       post_processor:
         log:
           transform_toc_structure: 'Transforming TOC structure'

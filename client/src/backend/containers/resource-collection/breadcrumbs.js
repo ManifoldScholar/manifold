@@ -19,7 +19,7 @@ export const getBreadcrumbs = (
           label: t("common.new")
         }
       ];
-  return belongsToJournalIssue
+  return belongsToJournalIssue && project.relationships.journal
     ? [
         {
           to: lh.link("backendJournals"),

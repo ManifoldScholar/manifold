@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Shrine.storages = Storage::Factory.shrine_storages
 
 Shrine.plugin :mirroring, mirror: { store: :mirror } if Shrine.storages[:mirror]

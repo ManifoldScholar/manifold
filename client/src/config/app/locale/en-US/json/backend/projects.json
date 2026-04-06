@@ -7,11 +7,12 @@
     "settings": "Project Settings",
     "activity": "Activity",
     "changes": "Project Changes",
-    "twitter_queries": "Twitter Queries",
-    "twitter_queries_instructions": "Manifold will periodically fetch tweets according to the queries specified below.",
-    "add_twitter_label": "Add New Twitter Query",
     "manage_resources": "Manage Resources",
     "manage_resource_collections": "Manage Resource Collections",
+    "contributors_header": "Manage Contributors",
+    "add_contributor_label": "Add Contributor",
+    "contributor_maker_error": "Maker is required. If this is a new maker, you must <0>first create the maker</0> before adding as a contributor.",
+    "contributor_role_error": "Please select at least one role.",
     "forms": {
       "title_label": "Title",
       "title_placeholder": "Enter Project Title",
@@ -48,7 +49,8 @@
         "restrictions_header": "Restrictions",
         "disable_public_label": "Disable Public Annotations and Comments",
         "disable_public_instructions": "When on, this setting will prevent users from commenting or annotating publicly on this project. Reading group annotations will only appear for group members.",
-        "save": "Save Project"
+        "save": "Save Project",
+        "social_image_instructions": "If blank, Cover then Thumbnail field will be used as fallbacks for og:image meta tags."
       },
       "access": {
         "title": "Configure Access Restrictions",
@@ -85,7 +87,7 @@
         "extended_descript_prompt": "Do you need additional space to describe your project?",
         "extended_descript_instructions": "A freeform content block can be used to add text contextualizing your project.",
         "activity_prompt": "Will your project change frequently?",
-        "activity_instructions": "Manifold can showcase the evolution of your project on the platform and in the Twitterverse.",
+        "activity_instructions": "A recent activity content block can be included on your project's detail page.",
         "save": "Save and Continue"
       }
     },
@@ -98,9 +100,6 @@
       "drag": "Drag $t(glossary.category_title_case_one)",
       "edit_text": "$t(actions.edit) $t(glossary.text_title_case_one)",
       "delete_text": "$t(actions.delete) $t(glossary.text_title_case_one)",
-      "cannot_move_up": "Cannot move up. Text is already in the first category.",
-      "cannot_move_down": "Cannot move down. Text is already in the last category.",
-      "text_moved": "Text moved to {{destination}}",
       "empty_category": "No texts have been added to this category",
       "all_texts_categorized": "All texts belong to categories",
       "uncategorized_tooltip": "Uncategorized texts can be hidden in the frontend using this project's Texts content block. If uncategorized texts are visible, they will appear under the heading 'Uncategorized'."
@@ -129,11 +128,11 @@
       "user_label": "User",
       "user_placeholder": "Select a User",
       "modify_project": "Can modify project?",
-      "modify_resource": "Can modify resource metadata?",
+      "modify_project_properties": "Can modify project resources and texts?",
       "author": "Is a project author?",
       "submit_label": "Save Permissions",
       "project_editor": "Project Editor",
-      "metadata_editor": "Metadata Editor",
+      "metadata_editor": "Project Collaborator",
       "author": "$t(glossary.author_title_case_one)"
     },
     "log": {
@@ -158,19 +157,6 @@
         "pending": "Pending",
         "failure": "Failure"
       }
-    },
-    "social": {
-      "title": "New Twitter Query",
-      "fetch_label": "Fetch Tweets",
-      "twitter_learn_more": "Learn more about Twitter <0>search operators</0>.",
-      "query": "Query",
-      "query_placeholder": "Enter query",
-      "fetch_tweets_by": "Fetch tweets by:",
-      "most_recent": "Most Recent",
-      "most_popular": "Most Popular",
-      "save_query": "Save Twitter Query",
-      "no_tweets": "No tweets have been fetched yet.",
-      "tweets_fetched": "{{count}} Tweets fetched"
     }
   }
 }

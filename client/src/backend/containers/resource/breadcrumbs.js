@@ -24,23 +24,26 @@ export const getBreadcrumbs = (resource, project, belongsToJournalIssue, t) => {
           }
         ];
 
-  return belongsToJournalIssue
+  return belongsToJournalIssue && project.relationships.journal
     ? [
         {
           to: lh.link("backendJournals"),
           label: t("glossary.journal_title_case_other")
         },
         {
-          to: lh.link("backendJournal", project.relationships.journal.id),
-          label: project.relationships.journal.attributes.titlePlaintext
+          to: lh.link("backendJournal", project.relationships.journal?.id),
+          label: project.relationships.journal?.attributes.titlePlaintext
         },
         {
-          to: lh.link("backendJournalIssues", project.relationships.journal.id),
+          to: lh.link(
+            "backendJournalIssues",
+            project.relationships.journal?.id
+          ),
           label: t("glossary.issue_truncated_title_case_other")
         },
         {
           to: lh.link("backendProject", project.id),
-          label: project.relationships.journalIssue.attributes.title
+          label: project.relationships.journalIssue?.attributes.title
         },
         {
           to: lh.link("backendProjectResources", project.id),

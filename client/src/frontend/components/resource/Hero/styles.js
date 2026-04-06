@@ -25,7 +25,10 @@ export const Resource = styled.div`
   overflow-x: auto;
   color: var(--color-neutral-text-extra-light);
   background-color: var(--color-base-neutral-black);
-  margin-block-end: ${fluidScale("42px", "30px")};
+
+  &:not(:last-child) {
+    margin-block-end: ${fluidScale("42px", "30px")};
+  }
 
   .overlay-full & {
     margin-block-end: 19px;

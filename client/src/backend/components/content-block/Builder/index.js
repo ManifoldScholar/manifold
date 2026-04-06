@@ -4,7 +4,7 @@ import AvailableSection from "./sections/Available";
 import CurrentSection from "./sections/Current";
 import DraggableEventHelper from "../helpers/draggableEvent";
 import { contentBlocksAPI, requests } from "api";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import withConfirmation from "hoc/withConfirmation";
 import lh from "helpers/linkHandler";
 import { entityStoreActions } from "actions";
@@ -71,6 +71,22 @@ export class ProjectContent extends PureComponent {
     this.setState({ blocks: draggableHelper.blocks }, callback);
   };
 
+  onKeyboardMove = (block, addtlParams) => {
+    const { index, direction, callback } = addtlParams;
+    const newIndex = direction === "down" ? index + 1 : index - 1;
+
+    const filteredBlocks = this.currentBlocks.filter(b => b.id !== block.id);
+    const updatedBlocks = filteredBlocks.toSpliced(newIndex, 0, block);
+
+    const clonedBlock = cloneDeep(block);
+    clonedBlock.attributes.position = newIndex + 1; // position starts from 1, index from 0
+
+    this.setState(
+      { blocks: updatedBlocks },
+      this.updateBlock(clonedBlock, callback)
+    );
+  };
+
   get projectId() {
     return this.props.project.id;
   }
@@ -85,7 +101,8 @@ export class ProjectContent extends PureComponent {
       hideBlock: this.hideBlock,
       deleteBlock: this.handleDeleteBlock,
       saveBlockPosition: this.updateBlock,
-      editBlock: this.editBlock
+      editBlock: this.editBlock,
+      onKeyboardMove: this.onKeyboardMove
     };
   }
 
@@ -125,7 +142,7 @@ export class ProjectContent extends PureComponent {
     });
   }
 
-  updateBlock = block => {
+  updateBlock = (block, callback) => {
     const call = contentBlocksAPI.update(block.id, {
       attributes: block.attributes
     });
@@ -133,6 +150,9 @@ export class ProjectContent extends PureComponent {
     const updateRequest = request(call, requests.beContentBlockUpdate, options);
     this.props.dispatch(updateRequest).promise.then(() => {
       this.props.refresh();
+      if (callback && typeof callback === "function") {
+        callback();
+      }
     });
   };
 
@@ -180,7 +200,7 @@ export class ProjectContent extends PureComponent {
 
   render() {
     return (
-      <section className="backend-project-content">
+      <section className="backend-project-content rbd-migration-resets">
         <UIDConsumer name={id => `content-block-builder-${id}`}>
           {id => (
             <div

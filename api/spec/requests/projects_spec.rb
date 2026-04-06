@@ -1,48 +1,70 @@
 # frozen_string_literal: true
 
 RSpec.describe "Projects API", type: :request do
-  let(:project) { FactoryBot.create(:project, draft: false) }
+  let_it_be(:project, refind: true) { FactoryBot.create(:project, draft: false) }
 
   describe "responds with a list of projects" do
-    before(:each) { get api_v1_projects_path, headers: reader_headers }
+    before { get api_v1_projects_path, headers: reader_headers }
+
     describe "the response" do
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
-    describe "it allows searching by keyword", :elasticsearch do
-      before(:each) do
-        FactoryBot.create(:project, title: "foo")
-        path = api_v1_projects_path(params: { filter: { keyword: "foo" } })
-        get path, headers: reader_headers
-      end
+    context "when searching by keyword" do
+      let_it_be(:project_foo, refind: true) { FactoryBot.create(:project, title: "foo") }
 
       it "has a 200 status code" do
-        expect(response).to have_http_status(200)
+        expect do
+          path = api_v1_projects_path(params: { filter: { keyword: "foo" } })
+          get path, headers: reader_headers
+        end
+
+        expect(response).to have_http_status(:ok)
       end
     end
   end
 
-  describe "sends a single project" do
-    let(:path) { api_v1_project_path(project) }
+  describe "GET /api/v1/projects/:id" do
+    let(:headers) { nil }
 
-    context "when the user is an reader" do
-      before(:each) { get path, headers: reader_headers }
-      describe "the response" do
-        it "has a 200 status code" do
-          expect(response).to have_http_status(200)
+    shared_examples_for "finding the project" do
+      context "with an existing project" do
+        it "finds the project" do
+          expect do
+            get api_v1_project_path(project)
+          end.to execute_safely
+
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
+      context "when the project has been soft-deleted" do
+        before do
+          project.soft_delete!
+        end
+
+        it "does not find the project" do
+          expect do
+            get api_v1_project_path(project)
+          end.to execute_safely
+
+          expect(response).to have_http_status(:not_found)
         end
       end
     end
 
-    context "when the user is an admin" do
-      before(:each) { get path, headers: admin_headers }
-      describe "the response" do
-        it "has a 200 status code" do
-          expect(response).to have_http_status(200)
-        end
-      end
+    context "as an admin" do
+      let(:headers) { admin_headers }
+
+      it_behaves_like "finding the project"
+    end
+
+    context "as a reader" do
+      let(:headers) { reader_headers }
+
+      it_behaves_like "finding the project"
     end
   end
 
@@ -55,7 +77,26 @@ RSpec.describe "Projects API", type: :request do
       it "has a 201 SUCCESS status code" do
         params = build_json_payload(attributes: { title: "foo" })
         post path, headers: headers, params: params
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
+      end
+    end
+
+    context "when the user is a project creator" do
+      let(:headers) { project_creator_headers }
+
+      it "creates the project and assigns the creator as an editor on the newly created project" do
+        params = build_json_payload(attributes: { title: "foo" })
+
+        expect do
+          post(path, headers:, params:)
+        end.to change(Project, :count).by(1)
+
+        expect(response).to have_http_status(:created)
+
+        project_id = response.parsed_body.dig("data", "id")
+        created_project = Project.find(project_id)
+
+        expect(project_creator).to have_role(:project_editor, created_project)
       end
     end
 
@@ -63,7 +104,7 @@ RSpec.describe "Projects API", type: :request do
       it "has a 401 status code" do
         params = build_json_payload(attributes: { title: "foo" })
         post path, params: params
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
@@ -73,7 +114,7 @@ RSpec.describe "Projects API", type: :request do
       it "has a 403 status code" do
         params = build_json_payload(attributes: { title: "foo" })
         post path, headers: headers, params: params
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end
@@ -117,19 +158,6 @@ RSpec.describe "Projects API", type: :request do
           patch path, headers: headers, params: params
           expect(project.contributors.reload.pluck(:id)).to contain_exactly(john.id, jim.id)
         end
-
-        it("are sorted correctly after being set") do
-          project.contributors << jenny
-          project.contributors << john
-          project.save
-          expect(project.contributors.reload.pluck(:id)).to eq([jenny.id, john.id])
-          params = build_json_payload(relationships: { contributors: { data: [
-                                        { type: "makers", id: john.id },
-                                        { type: "makers", id: jenny.id }
-                                      ] } })
-          patch path, headers: headers, params: params
-          expect(project.contributors.reload.pluck(:id)).to eq([john.id, jenny.id])
-        end
       end
 
       describe "its creators" do
@@ -142,18 +170,23 @@ RSpec.describe "Projects API", type: :request do
           patch path, headers: headers, params: params
           expect(project.creators.reload.pluck(:id)).to contain_exactly(jim.id, john.id)
         end
+      end
+
+      describe "its collaborators" do
+        let(:john_collaborator) { FactoryBot.create(:collaborator, maker_id: john.id) }
+        let(:jenny_collaborator) { FactoryBot.create(:collaborator, maker_id: jenny.id) }
 
         it("are sorted correctly after being set") do
-          project.creators << jenny
-          project.creators << john
+          project.collaborators << jenny_collaborator
+          project.collaborators << john_collaborator
           project.save
-          expect(project.creators.pluck(:id)).to eq([jenny.id, john.id])
-          params = build_json_payload(relationships: { creators: { data: [
-                                        { type: "makers", id: john.id },
-                                        { type: "makers", id: jenny.id }
+          expect(project.collaborators.pluck(:id)).to eq([jenny_collaborator.id, john_collaborator.id])
+          params = build_json_payload(relationships: { collaborators: { data: [
+                                        { type: "collaborator", id: john_collaborator.id },
+                                        { type: "collaborator", id: jenny_collaborator.id }
                                       ] } })
           patch path, headers: headers, params: params
-          expect(project.creators.reload.pluck(:id)).to eq([john.id, jenny.id])
+          expect(project.collaborators.reload.pluck(:id)).to eq([john_collaborator.id, jenny_collaborator.id])
         end
       end
 
@@ -170,7 +203,7 @@ RSpec.describe "Projects API", type: :request do
 
         it "has a 200 OK status code" do
           patch path, headers: headers, params: build_json_payload
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -181,30 +214,47 @@ RSpec.describe "Projects API", type: :request do
       describe "the response" do
         it "has a 403 forbidden status code" do
           patch path, headers: headers, params: build_json_payload
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
   end
 
-  describe "destroys a project" do
-    let(:path) { api_v1_project_path(project) }
+  describe "DELETE /api/v1/projects/:id" do
+    context "as an admin" do
+      it "soft-deletes the project" do
+        expect do
+          delete api_v1_project_path(project), headers: admin_headers
+        end.to keep_the_same(Project, :count)
+          .and have_enqueued_job(SoftDeletions::PurgeJob).once.with(project)
 
-    context "when the user is an admin" do
-      let(:headers) { admin_headers }
+        expect(response).to have_http_status(:no_content)
+      end
 
-      it "has a 204 NO CONTENT status code" do
-        delete path, headers: headers
-        expect(response).to have_http_status(204)
+      context "when the project has already been soft-deleted" do
+        before do
+          project.async_destroy
+        end
+
+        it "is not found and skipped" do
+          expect do
+            delete api_v1_project_path(project), headers: admin_headers
+          end.to keep_the_same(Project, :count)
+            .and have_enqueued_job(SoftDeletions::PurgeJob).exactly(0).times
+
+          expect(response).to have_http_status(:not_found)
+        end
       end
     end
 
-    context "when the user is a reader" do
-      let(:headers) { reader_headers }
+    context "as a reader" do
+      it "does nothing" do
+        expect do
+          delete api_v1_project_path(project), headers: reader_headers
+        end.to keep_the_same(Project, :count)
+          .and have_enqueued_job(SoftDeletions::PurgeJob).exactly(0).times
 
-      it "has a 403 FORBIDDEN status code" do
-        delete path, headers: headers
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status :forbidden
       end
     end
   end

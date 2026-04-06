@@ -5,7 +5,7 @@ export default function projectFilters({ snapshotState = false } = {}) {
     },
     params: [
       {
-        label: "Search...",
+        label: "Search…",
         name: "keyword",
         value: ""
       },
@@ -36,7 +36,11 @@ export default function projectFilters({ snapshotState = false } = {}) {
           { label: "Most recently updated", value: "updated_at ASC" },
           { label: "Alphabetical by title", value: "sort_title ASC" },
           { label: "Newest projects first", value: "created_at DESC" },
-          { label: "Oldest projects first", value: "created_at ASC" }
+          { label: "Oldest projects first", value: "created_at ASC" },
+          {
+            label: "Most recently published",
+            value: "publication_date DESC"
+          }
         ]
       }
     ]

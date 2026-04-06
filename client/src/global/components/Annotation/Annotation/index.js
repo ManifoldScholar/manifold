@@ -2,10 +2,11 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import TextAnnotation from "./TextAnnotation";
 import HighlightAnnotation from "./HighlightAnnotation";
+import ResourceAnnotation from "./ResourceAnnotation";
 import { entityStoreActions } from "actions";
 import lh from "helpers/linkHandler";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import { annotationsAPI, requests } from "api";
 
 const { request } = entityStoreActions;
@@ -18,6 +19,9 @@ class Annotation extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     visitHandler: PropTypes.func,
     showCommentsToggleAsBlock: PropTypes.bool,
+    showMarkers: PropTypes.bool,
+    markerIcons: PropTypes.bool,
+    compact: PropTypes.bool,
     refresh: PropTypes.func
   };
 
@@ -64,6 +68,10 @@ class Annotation extends PureComponent {
     return <TextAnnotation {...this.props} {...this.injectedProps} />;
   }
 
+  get resourceAnnotation() {
+    return <ResourceAnnotation {...this.props} {...this.injectedProps} />;
+  }
+
   get injectedProps() {
     return {
       deleteHandler: this.deleteHandler,
@@ -77,9 +85,20 @@ class Annotation extends PureComponent {
     return annotation.attributes.format === "annotation";
   }
 
+  get isResourceAnnotation() {
+    const { annotation } = this.props;
+    return (
+      annotation.attributes.format === "resource" ||
+      annotation.attributes.format === "resource_collection"
+    );
+  }
+
   render() {
+    /* eslint-disable no-nested-ternary */
     return this.isTextAnnotation
       ? this.textAnnotation
+      : this.isResourceAnnotation
+      ? this.resourceAnnotation
       : this.highlightAnnotation;
   }
 }

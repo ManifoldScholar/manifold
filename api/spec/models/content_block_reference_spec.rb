@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe ContentBlockReference do
@@ -18,6 +20,6 @@ RSpec.describe ContentBlockReference do
   end
 
   it "is invalid without a kind" do
-    expect(FactoryBot.build(:content_block_reference, kind: nil)).to_not be_valid
+    expect(FactoryBot.build(:content_block_reference, kind: nil)).not_to be_valid
   end
 end

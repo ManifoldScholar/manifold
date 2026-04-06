@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoleName < ClassyEnum::Base
   applicable!
 
@@ -125,7 +127,7 @@ class RoleName < ClassyEnum::Base
     end
 
     def scoped_predicates(**options)
-      scoped(options).map(&:predicate_name)
+      scoped(**options).map(&:predicate_name)
     end
 
     # @!endgroup
@@ -260,7 +262,18 @@ class RoleName::ProjectEditor < RoleName
   provides_full_read_access!
 end
 
-class RoleName::ProjectResourceEditor < RoleName
+class RoleName::JournalEditor < RoleName
+  any_editor!
+
+  scoped!
+
+  can_update_projects!
+  can_update_journals!
+  provides_draft_access!
+  provides_full_read_access!
+end
+
+class RoleName::ProjectPropertyManager < RoleName
   scoped!
 
   can_update_projects!

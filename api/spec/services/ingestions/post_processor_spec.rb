@@ -11,15 +11,16 @@ RSpec.describe Ingestions::PostProcessor do
       Ingestions::PreProcessor.run(context: context, manifest: manifest).result
     end
   end
-  let_it_be(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
-  let_it_be(:outcome) { Ingestions::PostProcessor.run(manifest: manifest, text: text, context: context) }
+  let_it_be(:text, refind: true) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
+  let_it_be(:outcome) { described_class.run(manifest: manifest, text: text, context: context) }
 
   describe "the text section bodies" do
     it "generates the body" do
-      expect(text.text_sections.pluck(:body)).to_not include nil
+      expect(text.text_sections.pluck(:body)).not_to include nil
     end
+
     it "generates the body_json" do
-      expect(text.text_sections.pluck(:body_json)).to_not include nil
+      expect(text.text_sections.pluck(:body_json)).not_to include nil
     end
   end
 
@@ -38,7 +39,7 @@ RSpec.describe Ingestions::PostProcessor do
 
     it "has the correct labels" do
       toc = text.toc
-      expect(toc.map { |i| i[:label] }).to eq ["Section 1", "Section 2", "Section 2#1", "Section 3"]
+      expect(toc.pluck(:label)).to eq ["Section 1", "Section 2", "Section 2#1", "Section 3"]
       expect(toc[1][:children][0][:label]).to eq "Section 2.a"
     end
 
@@ -58,26 +59,25 @@ RSpec.describe Ingestions::PostProcessor do
   describe "compiled files that are unreferenced" do
     let_it_be(:user_stylesheet) { FactoryBot.create(:stylesheet, text: text) }
 
-    let_it_be(:after_path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3-less.zip") }
-    let_it_be(:after_source) { File.open(after_path) }
-    let_it_be(:after_ingestion) { FactoryBot.create :ingestion, :file_source, text: text, source_path: after_path }
-    let_it_be(:reingestion_context) { create_context(after_ingestion) }
-    let_it_be(:reingestion_manifest) do
+    let(:after_path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3-less.zip") }
+    let(:after_ingestion) { FactoryBot.create :ingestion, :file_source, text: text, source_path: after_path }
+    let(:reingestion_context) { create_context(after_ingestion) }
+    let(:reingestion_manifest) do
       Ingestions::Strategies::Epub.run(context: reingestion_context).result.then do |reingestion_manifest|
         Ingestions::PreProcessor.run(context: reingestion_context, manifest: reingestion_manifest).result
       end
     end
-    let_it_be(:after_text) { Ingestions::Compiler.run(manifest: reingestion_manifest, context: reingestion_context).result }
+    let(:after_text) { Ingestions::Compiler.run(manifest: reingestion_manifest, context: reingestion_context).result }
 
     context "when text sections" do
       it "destroys the compiled records" do
-        expect { described_class.run(manifest: reingestion_manifest, text: after_text, context: context) }.to change { TextSection.count }.by -1
+        expect { described_class.run(manifest: reingestion_manifest, text: after_text, context: context) }.to change(TextSection, :count).by -1
       end
     end
 
     context "when stylesheets" do
       it "destroys the compiled records" do
-        expect { described_class.run(manifest: reingestion_manifest, text: after_text, context: context) }.to change { Stylesheet.count }.by -1
+        expect { described_class.run(manifest: reingestion_manifest, text: after_text, context: context) }.to change(Stylesheet, :count).by -1
       end
 
       it "does not destroy user created stylesheets" do

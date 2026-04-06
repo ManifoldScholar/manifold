@@ -1,8 +1,7 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import actions from "actions/currentUser";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import OAuthOptions from "../oauth/OAuthLoginOptions";
 import Notifications from "global/containers/Notifications";
 import { useDispatch } from "react-redux";
 import {
@@ -22,16 +21,20 @@ export default function LoginForm({
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const authentication = useFromStore("authentication");
   const error = authentication?.error?.body;
 
   const formatData = data => {
     dispatch(actions.loginStart());
+    setIsLoading(true);
     return { email: data.email, password: data.password };
   };
 
   const onSuccess = useCallback(
     (_, res) => {
+      setIsLoading(false);
+
       const { authToken } = res.meta ?? {};
       if (!authToken) {
         handleAuthenticationFailure(dispatch, {
@@ -47,17 +50,19 @@ export default function LoginForm({
         if (hideOverlay) hideOverlay();
       });
     },
-    [dispatch, hideOverlay]
+    [dispatch, hideOverlay, setIsLoading]
   );
 
   const onError = useCallback(
     err => {
+      setIsLoading(false);
+
       handleAuthenticationFailure(dispatch, {
         status: err.status,
         destroyCookie: true
       });
     },
-    [dispatch]
+    [dispatch, setIsLoading]
   );
 
   return (
@@ -94,6 +99,7 @@ export default function LoginForm({
                 inputMode="email"
                 label={t("forms.signin_overlay.email")}
                 autoComplete="email"
+                ariaRequired
               />
               <Form.TextInput
                 password
@@ -102,9 +108,12 @@ export default function LoginForm({
                 placeholder={t("forms.signin_overlay.password")}
                 label={t("forms.signin_overlay.password")}
                 autoComplete="current-password"
+                ariaRequired
               />
             </Form.FieldGroup>
-            {error && <Form.InputError errors={[{ detail: error }]} />}
+            <Form.InputError
+              errors={error && !isLoading ? [{ detail: error }] : []}
+            />
             <input
               type="submit"
               className="button-secondary"
@@ -120,7 +129,6 @@ export default function LoginForm({
             {t("forms.signin_overlay.need_account")}
           </SharedStyles.ViewLink>
         </SharedStyles.LinksWrapper>
-        <OAuthOptions />
       </div>
     </div>
   );

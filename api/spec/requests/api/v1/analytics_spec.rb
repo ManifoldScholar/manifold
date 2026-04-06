@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Analytics API", type: :request do
   let(:project) { FactoryBot.create(:project) }
 
   path "/analytics/events" do
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                      model: Analytics::Event,
                      response_body: false,
                      additional_parameters: [
@@ -34,7 +36,7 @@ RSpec.describe "Analytics API", type: :request do
     let(:resource) { Analytics::Reports::Global.run(start_date: start_date, end_date: end_date).result }
 
     path "/analytics/reports" do
-      include_examples "an API show request",
+      it_behaves_like "an API show request",
                        model: ::Analytics::Reports::AnalyticsResult,
                        success_response_code: 200,
                        exclude: %w(404),

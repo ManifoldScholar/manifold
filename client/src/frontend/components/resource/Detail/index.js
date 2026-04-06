@@ -1,31 +1,37 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import CommentContainer from "global/containers/comment";
-import Utility from "frontend/components/utility";
+import IconComposer from "global/components/utility/IconComposer";
 import Hero from "../Hero";
 import LinkComponent from "../Link";
 import Meta from "../Meta";
 import Title from "../Title";
 import VariantList from "../VariantList";
-import { useSelector } from "react-redux";
-import { meta } from "utils/entityUtils";
+import Share from "../Share";
+import Annotations from "./Annotations";
+import { uiVisibilityActions } from "actions";
+import { useAuthentication } from "hooks";
 import * as Styled from "./styles";
+import * as StyledLink from "../Link/styles";
 
-export default function ResourceDetail({ resourceUrl, resource }) {
+export default function ResourceDetail({ resource, projectTitle }) {
   const { t } = useTranslation();
-  const commentsMeta = useSelector(state =>
-    meta(`comments-for-${resource.id}`, state.entityStore)
-  );
-  const showComments = !!commentsMeta?.pagination?.totalCount;
+  const dispatch = useDispatch();
+  const authentication = useAuthentication();
 
   if (!resource) return null;
 
-  const canEngagePublicly = () => {
-    return resource.attributes?.abilities?.engagePublicly;
-  };
+  const canEngagePublicly = resource?.attributes?.abilities?.engagePublicly;
 
   const attr = resource.attributes;
+
+  const shareTitle = projectTitle
+    ? `${attr.title} | ${projectTitle}`
+    : attr.title;
+
+  const onLoginClick = () =>
+    dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
 
   return (
     <Styled.Container>
@@ -33,41 +39,84 @@ export default function ResourceDetail({ resourceUrl, resource }) {
         <Styled.Main>
           <Title resource={resource} showIcon={false} />
           <Hero resource={resource} />
-          <Styled.Content>
-            <Styled.Caption
-              dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
-            />
+          {(attr.captionFormatted || attr.descriptionFormatted) && (
+            <Styled.Content>
+              <Styled.Caption
+                dangerouslySetInnerHTML={{ __html: attr.captionFormatted }}
+              />
 
-            {!!attr.descriptionFormatted && (
+              {!!attr.descriptionFormatted && (
+                <>
+                  <Styled.DescriptionHeader>
+                    {t("pages.subheaders.full_description")}
+                  </Styled.DescriptionHeader>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: attr.descriptionFormatted
+                    }}
+                  />
+                </>
+              )}
+            </Styled.Content>
+          )}
+        </Styled.Main>
+        <Styled.CommentsWrapper>
+          <Styled.CommentsSection>
+            <Styled.ListHeader>
+              {t("glossary.comment_title_case_other")}
+            </Styled.ListHeader>
+            {canEngagePublicly ? (
               <>
-                <Styled.DescriptionHeader>
-                  {t("pages.subheaders.full_description")}
-                </Styled.DescriptionHeader>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: attr.descriptionFormatted
-                  }}
+                <CommentContainer.Thread subject={resource} />
+                <CommentContainer.Editor
+                  focus={false}
+                  label={t("actions.add_comment_title_case")}
+                  subject={resource}
                 />
               </>
+            ) : (
+              <Styled.EmptyMessage>
+                <Trans
+                  i18nKey={
+                    authentication?.authenticated
+                      ? "placeholders.comments.unverified"
+                      : "placeholders.comments.unauthenticated_full"
+                  }
+                  components={[
+                    <Styled.LoginButton type="button" onClick={onLoginClick} />
+                  ]}
+                />
+              </Styled.EmptyMessage>
             )}
-          </Styled.Content>
-        </Styled.Main>
-        {canEngagePublicly && (
-          <Styled.CommentsWrapper>
-            {/* This can't be conditionally rendered because the comment fetch happens in CommentContainer. */}
-            <Styled.Comments $show={showComments}>
-              <CommentContainer.Thread subject={resource} />
-            </Styled.Comments>
-            <CommentContainer.Editor
-              focus={false}
-              label={t("actions.add_comment_title_case")}
-              subject={resource}
-            />
-          </Styled.CommentsWrapper>
-        )}
+          </Styled.CommentsSection>
+          <Styled.CommentsSection>
+            <Styled.ListHeader>
+              {t("glossary.annotation_title_case_other")}
+            </Styled.ListHeader>
+            <Annotations />
+          </Styled.CommentsSection>
+        </Styled.CommentsWrapper>
         <Styled.MetadataWrapper>
-          <LinkComponent attributes={attr} />
-          <Utility.ShareBar url={resourceUrl} />
+          <Styled.CtaGroup>
+            <LinkComponent attributes={attr} />
+            {attr.transcriptUrl && attr.transcriptFileName && (
+              <StyledLink.Link
+                href={attr.transcriptUrl}
+                className="button-primary"
+                download={attr.transcriptFileName}
+              >
+                <span className="button-primary__text" aria-hidden>
+                  {t("resources.new.transcript")}
+                </span>
+                <IconComposer
+                  icon="arrowDown16"
+                  size="default"
+                  className="button-primary__icon"
+                />
+              </StyledLink.Link>
+            )}
+            <Share title={shareTitle} />
+          </Styled.CtaGroup>
           <Meta resource={resource} layout={"secondary"} />
           <VariantList resource={resource} />
         </Styled.MetadataWrapper>
@@ -79,7 +128,6 @@ export default function ResourceDetail({ resourceUrl, resource }) {
 ResourceDetail.displayName = "Resource.Detail";
 
 ResourceDetail.propTypes = {
-  projectUrl: PropTypes.string,
-  resourceUrl: PropTypes.string.isRequired,
-  resource: PropTypes.object
+  resource: PropTypes.object,
+  projectTitle: PropTypes.string
 };

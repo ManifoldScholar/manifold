@@ -14,7 +14,8 @@ function GroupAnnotationsEntityCollection({
   filterProps,
   isFiltered,
   paginationProps,
-  refresh,
+  refreshGroup,
+  refreshAnnotations,
   ...passThroughProps
 }) {
   const { t } = useTranslation();
@@ -43,6 +44,7 @@ function GroupAnnotationsEntityCollection({
           {hasAnnotations && (
             <Annotation.List.Default
               annotations={annotations}
+              refresh={refreshAnnotations}
               showCommentsToggleAsBlock
             />
           )}
@@ -54,7 +56,7 @@ function GroupAnnotationsEntityCollection({
           {!hasAnnotations && !isFiltered && (
             <EntityCollectionPlaceholder.GroupAnnotations
               readingGroup={readingGroup}
-              refresh={refresh}
+              refresh={refreshGroup}
               style={{ paddingBlockStart: "40px" }}
             />
           )}

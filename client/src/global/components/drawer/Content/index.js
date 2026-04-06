@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import FocusTrap from "focus-trap-react";
+import { FocusTrap } from "focus-trap-react";
 import classNames from "classnames";
 import Notifications from "global/containers/Notifications";
 import FrontMatter from "../FrontMatter";
 import { DrawerContext } from "helpers/contexts";
-import { usePreventBodyScroll, useFromStore } from "hooks";
+import { usePreventBodyScroll } from "hooks";
 import * as Styled from "./styles";
 
 function DrawerContent(props, ref) {
@@ -24,11 +24,12 @@ function DrawerContent(props, ref) {
     handleLeaveEvent,
     lockScroll = false,
     hasConfirm,
-    showNotifications
+    showNotifications,
+    open,
+    additionalDrawerProps = {}
   } = props;
 
-  const connected = useFromStore("websocket.connected");
-  usePreventBodyScroll(lockScroll);
+  usePreventBodyScroll(lockScroll && open);
 
   // Waits for animation to finish before focusing in trap.
   const checkCanFocusTrap = trapContainers => {
@@ -53,25 +54,27 @@ function DrawerContent(props, ref) {
     return true;
   };
 
-  /* eslint-disable no-nested-ternary */
-  const Drawer =
-    context === "reader"
-      ? Styled.DrawerReader
-      : context === "editor"
-      ? Styled.DrawerEditor
-      : position === "overlay"
-      ? Styled.DrawerOverlay
-      : Styled.Drawer;
+  let Drawer = Styled.Drawer;
+
+  if (context === "reader") {
+    Drawer =
+      position === "overlay" ? Styled.DrawerReaderOverlay : Styled.DrawerReader;
+  } else if (context === "editor") {
+    Drawer = Styled.DrawerEditor;
+  } else if (position === "overlay") {
+    Drawer = Styled.DrawerOverlay;
+  }
 
   const Inner = context === "editor" ? Styled.DrawerEditorInner : "div";
 
   // A variety of other classes depend on .drawer--backend
   const classes = classNames(entrySide, size, `pad-${padding}`, {
-    "drawer--backend": context === "backend"
+    "drawer--backend": context === "backend" || context === "ingestion"
   });
 
   const handleClickOutside = e => {
-    if (context === "reader" || context === "editor") return;
+    if (context === "reader" || context === "editor" || context === "ingestion")
+      return;
 
     handleLeaveEvent(e);
     // Return false here so the focus trap isn't actually deactivated. While we want to respond to outside clicks, we want to either fully close the drawer or maintain the focus trap depending on the user's choice in the confirm modal.
@@ -80,20 +83,35 @@ function DrawerContent(props, ref) {
 
   const handleBlur = e => {
     if (focusTrap || !ref?.current) return;
-    if (ref.current.contains(event.relatedTarget)) return;
+    if (ref.current.contains(e.relatedTarget)) return;
 
     if (hasConfirm) {
       const overlay = document.getElementById("global-overlay-container");
-      if (overlay.contains(event.relatedTarget)) return;
+      if (overlay.contains(e.relatedTarget)) return;
     }
 
     handleLeaveEvent(e);
   };
 
+  const drawerProps = {
+    ref,
+    className: classes,
+    id,
+    role: "dialog",
+    tabIndex: focusTrap ? -1 : undefined,
+    "aria-modal": focusTrap,
+    "aria-label": ariaLabel,
+    "aria-labelledby": headerId,
+    onBlur: handleBlur,
+    $fullHeight: focusTrap,
+    inert: !open ? "" : undefined,
+    ...additionalDrawerProps
+  };
+
   const inner = (
     <Inner>
       <FrontMatter {...props} />
-      {(connected || showNotifications) && (
+      {showNotifications && (
         <Notifications scope="drawer" style="drawer" animate={false} />
       )}
       <DrawerContext.Provider value={{ headerId }}>
@@ -107,34 +125,25 @@ function DrawerContent(props, ref) {
     </Inner>
   );
 
-  return (
-    <Drawer
-      key="drawer"
-      className={classes}
-      id={id}
-      role="dialog"
-      aria-modal={focusTrap}
-      aria-label={ariaLabel}
-      aria-labelledby={headerId}
-      ref={ref}
-      onBlur={handleBlur}
-      $fullHeight={focusTrap}
+  return focusTrap && lockScroll ? (
+    <FocusTrap
+      active={open}
+      focusTrapOptions={{
+        checkCanFocusTrap,
+        allowOutsideClick: context === "reader",
+        clickOutsideDeactivates: handleClickOutside,
+        escapeDeactivates: handleEscape,
+        returnFocusOnDeactivate,
+        fallbackFocus: ref
+      }}
     >
-      {focusTrap ? (
-        <FocusTrap
-          focusTrapOptions={{
-            checkCanFocusTrap,
-            allowOutsideClick: context === "reader",
-            clickOutsideDeactivates: handleClickOutside,
-            escapeDeactivates: handleEscape,
-            returnFocusOnDeactivate
-          }}
-        >
-          {inner}
-        </FocusTrap>
-      ) : (
-        inner
-      )}
+      <Drawer key="drawer" {...drawerProps}>
+        {inner}
+      </Drawer>
+    </FocusTrap>
+  ) : (
+    <Drawer key="drawer" {...drawerProps}>
+      {inner}
     </Drawer>
   );
 }
@@ -157,5 +166,7 @@ DrawerContent.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   handleLeaveEvent: PropTypes.func.isRequired,
   lockScroll: PropTypes.bool,
-  hasConfirm: PropTypes.bool
+  hasConfirm: PropTypes.bool,
+  open: PropTypes.bool,
+  additionalDrawerProps: PropTypes.object
 };

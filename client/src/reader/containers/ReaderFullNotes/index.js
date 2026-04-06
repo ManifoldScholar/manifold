@@ -11,12 +11,13 @@ import {
   useFetch,
   useFilterState,
   usePaginationState,
-  useListFilters
+  useListFilters,
+  useFromStore
 } from "hooks";
 import withReadingGroups from "hoc/withReadingGroups";
 import EntityCollection from "frontend/components/entity/Collection";
 
-const INITIAL_FORMATS = ["highlight", "annotation", "bookmark"];
+const INITIAL_FORMATS = ["annotation"];
 const INITIAL_VISIBLE_FILTER_STATE = {
   keyword: "",
   textSection: "",
@@ -37,8 +38,11 @@ function ReaderFullNotesContainer({
   match,
   history,
   dispatch,
-  closeCallback
+  closeCallback,
+  readingGroupsLoaded
 }) {
+  const { t } = useTranslation();
+
   const initialFilters = useMemo(() => {
     return {
       orphaned: !!(currentGroupId === "orphaned"),
@@ -84,8 +88,12 @@ function ReaderFullNotesContainer({
     return out;
   }
 
+  const visibilityFilters = useFromStore(
+    "ui.transitory.visibility.visibilityFilters"
+  );
+
   function handleVisitAnnotation(annotation) {
-    const { textSectionId } = annotation.attributes;
+    const { textSectionId, currentUserIsCreator } = annotation.attributes;
     const url = lh.link(
       "readerSection",
       match.params.textId,
@@ -94,17 +102,23 @@ function ReaderFullNotesContainer({
     );
 
     commonActions.panelToggle("notes");
-    commonActions.showMyNotes();
+    const annotationFilter = currentUserIsCreator
+      ? { annotation: { ...visibilityFilters.annotation, yours: true } }
+      : { annotation: { ...visibilityFilters.annotation, others: true } };
+    commonActions.visibilityChange({
+      visibilityFilters: {
+        ...visibilityFilters,
+        ...annotationFilter
+      }
+    });
     history.push(url);
   }
 
   function getMemberships() {
     if (readingGroup === "me" || readingGroup === "orphaned") return [];
-    const rgms = readingGroup.relationships.readingGroupMemberships;
+    const rgms = readingGroup?.relationships?.readingGroupMemberships;
     return rgms?.length ? rgms : [];
   }
-
-  const { t } = useTranslation();
 
   /* eslint-disable no-nested-ternary */
   function getOverlayPropsForGroup() {
@@ -114,7 +128,7 @@ function ReaderFullNotesContainer({
           ? t("reader.menus.notes.my_notes")
           : readingGroup === "orphaned"
           ? t("reader.menus.notes.orphaned_notes")
-          : readingGroup.attributes.name,
+          : readingGroup?.attributes.name,
       subtitle:
         readingGroup === "me" || readingGroup === "orphaned"
           ? null
@@ -139,12 +153,13 @@ function ReaderFullNotesContainer({
     options: { memberships, sections }
   });
 
-  if (!annotations || !meta) return null;
+  if (!annotations || !meta || !readingGroupsLoaded) return null;
 
   const sortedAnnotations = mapAnnotationsToSections();
 
   return (
     <Overlay
+      open
       closeCallback={closeCallback}
       contentWidth={950}
       {...getOverlayPropsForGroup()}
@@ -157,8 +172,7 @@ function ReaderFullNotesContainer({
         readingGroup={readingGroup}
         filterProps={filterProps}
         paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page),
-          paginationTarget: "#group-annotations"
+          paginationClickHandler: page => () => setPageNumber(page)
         }}
         refresh={refresh}
         nested

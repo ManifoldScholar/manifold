@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class StatisticsSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :readers_this_week, Types::Float.meta(read_only: true)
@@ -14,5 +15,7 @@ module V1
     typed_attribute :total_comment_count, Types::Integer.meta(read_only: true)
     typed_attribute :total_user_count, Types::Integer.meta(read_only: true)
     typed_attribute :total_project_count, Types::Integer.meta(read_only: true)
+    typed_attribute :total_download_count, Types::Integer.meta(read_only: true)
+    typed_attribute :total_share_count, Types::Integer.meta(read_only: true)
   end
 end

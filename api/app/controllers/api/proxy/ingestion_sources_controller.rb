@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module API
   module Proxy
     class IngestionSourcesController < ActionController::API
-
       def show
         source = IngestionSource.find(params[:id])
         raise ActionController::RoutingError unless source.attachment
@@ -9,7 +10,7 @@ module API
         if source.attachment.storage.respond_to? :path
           send_attachment(source)
         else
-          redirect_to source.attachment.url
+          redirect_to source.attachment.url, allow_other_host: true
         end
       end
 
@@ -22,7 +23,6 @@ module API
           disposition: "inline"
         )
       end
-
     end
   end
 end

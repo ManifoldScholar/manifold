@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class ReadingGroupSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     abilities
@@ -15,6 +16,10 @@ module V1
     typed_attribute :comments_count, Types::Integer.meta(read_only: true)
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
     typed_attribute :creator_id, Types::Serializer::ID.meta(read_only: true)
+    typed_attribute :creator_name,
+                    Types::String.meta(read_only: true) do |object, _params|
+                      object.creator_name if object.creator.present?
+                    end
     typed_attribute :course, Types::Hash.schema(
       enabled: Types::Bool,
       starts_on: Types::Date.optional,
@@ -25,6 +30,14 @@ module V1
 
     typed_attribute :all_annotations_count, Types::Integer.meta(read_only: true) do |object, _params|
       object.annotations_count + object.highlights_count
+    end
+
+    typed_attribute :annotation_flags_count, Types::Integer.meta(read_only: true) do |object, params|
+      if params[:current_user].try(:admin?)
+        object.annotations.sum(:unresolved_flags_count)
+      else
+        0
+      end
     end
 
     typed_attribute :current_user_counts, Users::ReadingGroupCount::SCHEMA.meta(read_only: true) do |object, params|
@@ -73,18 +86,18 @@ module V1
     end
 
     link_with_meta :clone, if: guard_user_authorized_to(:update), method: "POST" do |object, _params|
-      routes.clone_api_v1_reading_group_path(object)
+      ManifoldApi::Container["system.routes"].clone_api_v1_reading_group_path(object)
     end
 
     CAN_JOIN = ->(object, params) do
       next unless params[:current_user].present?
       next unless object.public?
 
-      !ReadingGroupMembership.where(reading_group: object, user: params[:current_user]).exists?
+      !ReadingGroupMembership.exists?(reading_group: object, user: params[:current_user])
     end
 
     link_with_meta :join, if: CAN_JOIN, method: "POST" do |object, _params|
-      routes.join_api_v1_reading_group_path(object)
+      ManifoldApi::Container["system.routes"].join_api_v1_reading_group_path(object)
     end
 
     SHOW_ARCHIVE_LINK = ->(reading_group, params) do
@@ -102,7 +115,7 @@ module V1
 
       next nil if membership.blank?
 
-      routes.archive_api_v1_reading_group_membership_path(membership)
+      ManifoldApi::Container["system.routes"].archive_api_v1_reading_group_membership_path(membership)
     end
   end
 end

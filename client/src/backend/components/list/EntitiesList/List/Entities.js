@@ -73,6 +73,7 @@ export default class ListEntitiesListEntities extends PureComponent {
         {this.entities.map((entity, index) => (
           <EntityComponent
             key={this.entityKey(index)}
+            index={index}
             entity={entity}
             {...this.entityComponentProps}
           />

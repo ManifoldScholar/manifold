@@ -17,7 +17,7 @@ export const featuredAndSubjectFilter = (filters, updateFilters, params, t) => {
   if (!options.length) return null;
 
   return {
-    label: t("filters.labels.filter_results"),
+    label: t("filters.labels.by_subject"),
     value: filters.featured ? "featured" : filters.subject || "",
     onChange: e => updateFilters(e, "subject"),
     options: [{ label: t("filters.show_all"), value: "" }, ...options]

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Ingestions
   class Compiler < AbstractInteraction
-
     hash :manifest, strip: false
 
     def execute

@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
-# rubocop:disable Style/StringLiteralsInInterpolation
 RSpec.describe Validator::HTML do
-
   html_config = Rails.configuration.manifold.html_validator
   excluded_css_properties = [
     'position',
@@ -14,13 +14,13 @@ RSpec.describe Validator::HTML do
     'max-width'
   ]
 
-  let(:validator) { Validator::HTML.new }
+  let(:validator) { described_class.new }
 
   it "handles ASCII encoding" do
-    pointer = File.open(Rails.root.join('spec','data','ingestion','fragments','ascii_section.html'))
+    pointer = Rails.root.join('spec', 'data', 'ingestion', 'fragments', 'ascii_section.html').open
     doc = Nokogiri::XML(pointer, nil)
     fragment = doc.css("body").children.to_s.strip
-    expect(validator.validate(fragment)).to_not eq ""
+    expect(validator.validate(fragment)).not_to eq ""
   end
 
   it "should wrap top level siblings in a div element" do
@@ -87,19 +87,19 @@ RSpec.describe Validator::HTML do
     html_config.attribute_exclusions.each do |attr|
       it "are removed: #{attr}" do
         fragment = "<div #{attr}=\"value\"></div>"
-        expect(validator.validate(fragment).include?("#{attr}=")).to eq(false)
+        expect(validator.validate(fragment).include?("#{attr}=")).to be(false)
       end
     end
   end
 
   it "removes height attributes" do
     fragment = "<div height=\"value\"></div>"
-    expect(validator.validate(fragment).include?("height=")).to eq(false)
+    expect(validator.validate(fragment).include?("height=")).to be(false)
   end
 
   it "allows exceptions to attribute removals" do
     fragment = "<iframe height=\"value\"></iframe>"
-    expect(validator.validate(fragment).include?("height=")).to eq(true)
+    expect(validator.validate(fragment).include?("height=")).to be(true)
   end
 
   excluded_css_properties.each do |prop|
@@ -187,5 +187,4 @@ RSpec.describe Validator::HTML do
     valid = "<image href=\"images/cover.jpg\" data-xlink-href=\"images/cover.jpg\"></image>"
     expect(validator.validate(fragment).delete("\n")).to eq(valid)
   end
-
 end

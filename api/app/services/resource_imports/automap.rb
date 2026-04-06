@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module ResourceImports
   class Automap < ActiveInteraction::Base
-
     PSEUDONYMS = {
       "attachment" => ["filename"].freeze,
       "kind" => ["type"].freeze,
@@ -51,7 +52,6 @@ module ResourceImports
       chunks
     end
 
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     def make_column_automap
       map = {}
       headers = ri.headers
@@ -84,7 +84,5 @@ module ResourceImports
       end
       map.sort { |a, b| a[0].to_i <=> b[0].to_i }.to_h
     end
-    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-
   end
 end

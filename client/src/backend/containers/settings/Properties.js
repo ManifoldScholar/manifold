@@ -93,25 +93,6 @@ export class SettingsPropertiesContainer extends PureComponent {
                     )}
                   />
                   <Form.TextInput
-                    label={t("settings.properties.share_label")}
-                    name="attributes[general][socialShareMessage]"
-                    instructions={t("settings.properties.share_instructions")}
-                  />
-                  <Form.TextInput
-                    label={t("settings.properties.twitter_label")}
-                    name="attributes[general][twitter]"
-                    placeholder={t("settings.properties.twitter_placeholder")}
-                    instructions={t("settings.properties.twitter_instructions")}
-                  />
-                  <Form.TextInput
-                    label={t("settings.properties.facebook_label")}
-                    name="attributes[general][facebook]"
-                    placeholder={t("settings.properties.facebook_placeholder")}
-                    instructions={t(
-                      "settings.properties.facebook_instructions"
-                    )}
-                  />
-                  <Form.TextInput
                     label={t("settings.properties.email_label")}
                     name="attributes[general][contactEmail]"
                     placeholder={t("settings.properties.email_placeholder")}

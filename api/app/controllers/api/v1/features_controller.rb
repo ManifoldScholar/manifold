@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # Features controller
     class FeaturesController < ApplicationController
-
       resourceful! Feature, authorize_options: { except: [:index, :show] } do
-        Feature.filtered(feature_filter_params || {})
+        Feature.filtered(**(feature_filter_params || {}))
       end
 
       def index

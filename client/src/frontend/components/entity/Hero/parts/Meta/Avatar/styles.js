@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { respond } from "theme/styles/mixins";
+import { breakpoints } from "theme/styles/variables/media";
 import IconComposer from "global/components/utility/IconComposer";
 
 export const Avatar = styled.figure`
@@ -32,4 +34,11 @@ export const Icon = styled(IconComposer)`
 
 export const Caption = styled.figcaption`
   display: inline-block;
+
+  ${respond(
+    `
+    font-size: 20px;
+  `,
+    breakpoints[60]
+  )}
 `;

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CachedExternalSource < ApplicationRecord
   include ExternalSourceUploader::Attachment.new(:asset)
 

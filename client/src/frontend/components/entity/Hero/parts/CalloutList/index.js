@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import partition from "lodash/partition";
 import Callout from "./Callout/index";
@@ -11,7 +11,8 @@ export default function HeroCalloutList({
   inline = false,
   mobileVisible = false,
   darkMode = false,
-  buttonSize = "lg"
+  buttonSize = "lg",
+  track
 }) {
   const visible = authorized
     ? callouts
@@ -22,31 +23,40 @@ export default function HeroCalloutList({
       );
   const [buttons, links] = partition(visible, "attributes.button");
 
+  const ButtonTag = buttons.length > 1 ? Styled.ButtonListItem : Fragment;
+  const LinkTag = links.length > 1 ? "li" : Fragment;
+
   return (
     <Styled.Wrapper $mobile={mobileVisible}>
       {buttons.length > 0 && (
-        <Styled.List $inline={inline}>
+        <Styled.List $inline={inline} as={buttons.length > 1 ? "ul" : "div"}>
           {buttons.map(callout => (
-            <Callout
-              showErrors={showErrors}
-              key={callout.id}
-              callout={callout}
-              darkMode={darkMode}
-              buttonSize={buttonSize}
-            />
+            <ButtonTag key={callout.id}>
+              <Callout
+                showErrors={showErrors}
+                key={callout.id}
+                callout={callout}
+                darkMode={darkMode}
+                buttonSize={buttonSize}
+                track={track}
+              />
+            </ButtonTag>
           ))}
         </Styled.List>
       )}
       {links.length > 0 && (
-        <Styled.List $inline={inline}>
+        <Styled.List $inline={inline} as={links.length > 1 ? "ul" : "div"}>
           {links.map(callout => (
-            <Callout
-              showErrors={showErrors}
-              key={callout.id}
-              callout={callout}
-              darkMode={darkMode}
-              isLink
-            />
+            <LinkTag key={callout.id}>
+              <Callout
+                showErrors={showErrors}
+                key={callout.id}
+                callout={callout}
+                darkMode={darkMode}
+                track={track}
+                isLink
+              />
+            </LinkTag>
           ))}
         </Styled.List>
       )}
@@ -63,5 +73,6 @@ HeroCalloutList.propTypes = {
   inline: PropTypes.bool,
   mobileVisible: PropTypes.bool,
   darkMode: PropTypes.bool,
-  buttonSize: PropTypes.oneOf(["sm", "lg"])
+  buttonSize: PropTypes.oneOf(["sm", "lg"]),
+  track: PropTypes.func
 };

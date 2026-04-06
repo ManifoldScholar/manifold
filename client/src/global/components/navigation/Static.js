@@ -40,7 +40,8 @@ export class NavigationStatic extends PureComponent {
   get userMenuClasses() {
     return classNames({
       "user-nav": true,
-      "show-82": true,
+      "show-82": this.props.mode === "frontend",
+      "show-100": this.props.mode === "backend",
       "user-nav--dark": this.props.darkTheme
     });
   }
@@ -48,7 +49,8 @@ export class NavigationStatic extends PureComponent {
   get siteNavClasses() {
     return classNames({
       "site-nav": true,
-      "show-82": true,
+      "show-82": this.props.mode === "frontend",
+      "show-100": this.props.mode === "backend",
       "site-nav--backend": this.props.mode === "backend"
     });
   }
@@ -164,6 +166,7 @@ export class NavigationStatic extends PureComponent {
           toggleVisibility={this.props.commonActions.toggleSearchPanel}
           visibility={this.props.visibility.uiPanels}
           bodyComponent={SearchMenu.Body}
+          bodyClassName="search-menu"
           searchType={projectId ? "project" : "library"}
           projectId={projectId}
           initialState={{
@@ -217,12 +220,13 @@ export class NavigationStatic extends PureComponent {
           className="site-nav__list"
         >
           {this.props.links.map((link, index) => {
-            if (link.ability)
+            if (link.ability || link.kind)
               return (
                 <Authorize
                   key={`${link.route}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
+                  kind={link.kind}
                 >
                   {this.renderStaticItem(link, index)}
                 </Authorize>

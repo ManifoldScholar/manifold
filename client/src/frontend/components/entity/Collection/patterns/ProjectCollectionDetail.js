@@ -25,7 +25,6 @@ function ProjectCollectionDetailEntityCollection({
   const headerLayout = getHeaderLayout(projectCollection);
   const image = getHeroImage(headerLayout, projectCollection);
   const imageAlt = projectCollection.attributes.heroAltText;
-  const showPagination = !isEmpty(projectsMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(projectsMeta) && !isEmpty(filterProps);
 
   const { t } = useTranslation();
@@ -43,10 +42,15 @@ function ProjectCollectionDetailEntityCollection({
       filterProps={showFilters ? filterProps : null}
       BodyComponent={props =>
         !!projects?.length && (
-          <ThumbnailGrid {...props}>
+          <ThumbnailGrid isList={projects.length > 1} {...props}>
             {({ stack }) =>
               projects.map(item => (
-                <EntityThumbnail key={item.id} entity={item} stack={stack} />
+                <EntityThumbnail
+                  key={item.id}
+                  entity={item}
+                  stack={stack}
+                  isListItem={projects.length > 1}
+                />
               ))
             }
           </ThumbnailGrid>
@@ -63,7 +67,7 @@ function ProjectCollectionDetailEntityCollection({
             }
       }
       paginationProps={
-        !showPagination
+        isEmpty(projectsMeta)
           ? {}
           : {
               pagination: get(projectsMeta, "pagination"),

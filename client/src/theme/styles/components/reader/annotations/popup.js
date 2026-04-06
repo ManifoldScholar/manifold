@@ -104,7 +104,7 @@ export default `
         outline: none;
       }
 
-      &.focus-visible {
+      &:focus-visible {
         ${outlineOnFocus("var(--menu-bg-color)")}
         outline-offset: 2px;
       }
@@ -198,7 +198,7 @@ export default `
       }
 
       &:hover,
-      &:focus,
+      &:focus-visible,
       &--selected {
         color: var(--menu-button-hover-color);
         background-color: var(--hover-color);
@@ -206,9 +206,13 @@ export default `
       }
 
       &--selected:hover,
-      &--selected:focus {
+      &--selected:focus-visible {
         color: var(--menu-selected-button-interaction-color);
         background-color: var(--menu-selected-button-interaction-background-color);
+      }
+
+      &:focus-visible {
+        text-decoration: underline;
       }
     }
 

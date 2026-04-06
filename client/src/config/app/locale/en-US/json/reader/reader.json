@@ -6,9 +6,7 @@
       "select_reading_group": "Select $t(glossary.reading_group_one)",
       "annotate_passage": "$t(actions.annotate) this passage",
       "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(glossary.page_title_case_one)",
-      "return_to_reader": "Return to Reader",
-      "manage_highlight": "Begin highlight; {{chunk}}; end highlight.",
-      "view_annotations": "Begin annotation; {{chunk}}; end annotation."
+      "return_to_reader": "Return to Reader"
     },
     "menus": {
       "appearance": {
@@ -20,10 +18,13 @@
         "increase_font": "Increase font size",
         "decrease_font": "Decrease font size",
         "adjust_font": "Adjust font size",
-        "color_scheme": "Color scheme",
+        "color_scheme": "Color Scheme",
         "margins": "Margins",
         "font": "Font",
         "font_style": "Font style",
+        "high_contrast": "Annotation contrast",
+        "high_contrast_false": "Low",
+        "high_contrast_true": "High",
         "appearance_reset": "Reader color scheme and typography reset to default settings.",
         "font_size_decreased": "Reader font size decreased.",
         "font_size_increased": "Reader font size increased.",
@@ -33,13 +34,12 @@
         "margin_size_increased": "Reader margins increased.",
         "margin_size_decreased_min": "Reader margins decreased to minimum size.",
         "margin_size_increased_max": "Reader margins increased to maximum size.",
-        "reset_option_message": "Reader {{appearanceType}} is set to {{option}}.",
-        "color_scheme": "color scheme",
-        "font": "font"
+        "reset_option_message": "Reader {{appearanceType}} is set to {{option}}."
       },
       "citation": {
         "citation_style": "Citation style:",
-        "copied": "Copied!"
+        "copied": "Copied!",
+        "custom_label": "Suggested citation"
       },
       "popup": {
         "cite": "Cite",
@@ -55,12 +55,16 @@
         "you_highlighted": "You Highlighted",
         "reader_highlighted": "A Reader Highlighted",
         "attach_resource": "Attach resource to $t(glossary.selection_one)",
-        "share_selection": "$t(actions.share) $t(glossary.selection_one)",
-        "follow_link": "Follow link"
+        "app_share": "External App",
+        "share_selection": "$t(actions.share) $t(glossary.selection_one) with external app",
+        "follow_link": "Follow link",
+        "copy": "Copy URL",
+        "copy_selection": "Copy link to selection"
       },
       "visibility": {
         "all_reading_groups": "All $t(glossary.reading_group_title_case_other)",
-        "show_the_following": "Show the following:"
+        "show_the_following": "Show the following:",
+        "highlights_label": "Your highlights"
       },
       "notes": {
         "delete_notation": "$t(actions.delete) $t(glossary.notation_title_case_other)",
@@ -92,6 +96,16 @@
     "my_public_annotations": "My Public $t(glossary.annotation_title_case_other)",
     "full_text": "Full Text",
     "section_description": "Start reading this text on {{appName}}",
-    "section_label": "Text Section"
+    "section_label": "Text Section",
+    "report_annotation": {
+      "header": "Report {{ type }}",
+      "instructions": "Administrators of this instance will be notified.",
+      "placeholder": "Optionally, include a message about why you are reporting this content.",
+      "message_input_label": "Message"
+    },
+    "annotated_passage": "Annotated passage",
+    "highlight_aria_label": "Begin highlight; {{chunk}}; end highlight.",
+    "annotation_aria_label": "Begin annotation; {{chunk}}; end annotation.",
+    "annotation_highlight_aria_label": "Begin highlight and annotation; {{chunk}}; end highlight and annotation."
   }
 }

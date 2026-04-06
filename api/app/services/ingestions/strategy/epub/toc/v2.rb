@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Strategy
     module Epub
@@ -45,10 +47,9 @@ module Ingestions
             ""
           end
 
-          # rubocop: disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
           def nodes_to_structure(nodes)
             items = []
-            if nodes.count.positive?
+            if nodes.any?
               nodes.each do |node|
                 item = {}
                 if node.at(".//xmlns:content")
@@ -64,7 +65,6 @@ module Ingestions
             end
             items
           end
-          # rubocop: enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
           def toc_nodes_to_structure(nodes)
             nodes_to_structure(nodes)

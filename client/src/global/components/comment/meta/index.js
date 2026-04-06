@@ -67,10 +67,12 @@ class CommentMeta extends PureComponent {
               {t("common.deleted_title_case")}
             </div>
           ) : null}
-          <Authorize kind="admin">
-            {comment.attributes.flagsCount > 0 ? (
+          <Authorize ability="create" entity="comment">
+            {comment.attributes.unresolvedFlagsCount > 0 ? (
               <div className="marker marker--secondary">
-                {t("counts.flag", { count: comment.attributes.flagsCount })}
+                {t("counts.flag", {
+                  count: comment.attributes.unresolvedFlagsCount
+                })}
               </div>
             ) : null}
           </Authorize>

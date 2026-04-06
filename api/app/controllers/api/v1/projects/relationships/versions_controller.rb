@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Projects
       module Relationships
         class VersionsController < AbstractProjectChildController
-
           resourceful! Version, authorize_options: { except: [:index] } do
             Version.filtered(
-              with_pagination!(version_filter_params),
+              **with_pagination!(version_filter_params),
               scope: Version.for_item(@project).with_actor
             )
           end
@@ -20,7 +21,6 @@ module API
               serializer: ::V1::VersionSerializer
             )
           end
-
         end
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CachedExternalSources
   class Pipeline
     include Dry::Transaction(container: CachedExternalSources::Container)

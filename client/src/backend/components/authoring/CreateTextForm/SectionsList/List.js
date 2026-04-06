@@ -1,30 +1,20 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import Section from "./Section";
-import { useUID } from "react-uid";
 
 export default function SectionList({ sections, setSectionOrder, onDelete }) {
-  const id = useUID();
-
   return (
-    <DragDropContext onDragEnd={setSectionOrder}>
-      <Droppable droppableId={id}>
-        {provided => (
-          <ul {...provided.droppableProps} ref={provided.innerRef}>
-            {sections.map((section, i) => (
-              <Section
-                key={section.id}
-                section={section}
-                index={i}
-                onDelete={onDelete}
-              />
-            ))}
-            {provided.placeholder}
-          </ul>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <ul>
+      {sections.map((section, i) => (
+        <Section
+          key={section.id}
+          section={section}
+          index={i}
+          onDelete={onDelete}
+          setSectionOrder={setSectionOrder}
+          sectionCount={sections.length}
+        />
+      ))}
+    </ul>
   );
 }
 

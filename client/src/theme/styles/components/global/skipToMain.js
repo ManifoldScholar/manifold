@@ -20,9 +20,12 @@ export default `
     transition: left var(--transition-duration-slow)
       var(--transition-timing-function);
 
-    &.focus-visible {
+    &:focus-visible {
       left: 0;
       outline-offset: -3px;
     }
+
+    &:hover {
+      color: var(--color-accent-primary-off-white)}
   }
 `;

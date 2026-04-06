@@ -38,7 +38,7 @@ export const Tile = styled.article`
       cursor: pointer;
 
       &:hover,
-      &.focus-visible {
+      &:focus-visible {
         --Icon-color: var(--color-interaction-light);
         --Icon-bg-color: var(--strong-color);
 
@@ -127,6 +127,18 @@ export const Footer = styled.span`
   flex-grow: 1;
   justify-content: flex-end;
   margin-top: 18px;
+`;
+
+export const Link = styled.a`
+  text-decoration: none;
+
+  &::after {
+    position: absolute;
+    display: block;
+    content: "";
+    inset-inline: -17px -17px;
+    inset-block: -19px -21px;
+  }
 `;
 
 export const Title = styled.h3`

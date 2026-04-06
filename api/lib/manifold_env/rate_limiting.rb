@@ -6,12 +6,13 @@ require "resolv"
 module ManifoldEnv
   class RateLimiting
     include DefinesRateLimits
-    include Redis::Objects
 
     DNS_SERVERS = %w[
       8.8.8.8
       8.8.4.4
     ].freeze
+
+    PUBLIC_IPS_CACHE_KEY = "rate_limiting:public_ips"
 
     map_throttle! :comment_creation, limit: 10, period: 3600
 
@@ -20,10 +21,6 @@ module ManifoldEnv
     map_throttle! :public_reading_group_creation, limit: 10, period: 3600
 
     map_throttle! :registration, limit: 5, period: 86_400
-
-    # We store the public IP(s) for the Manifold application
-    # so that the client does not accidentally get throttled.
-    set :public_ips
 
     def id
       1
@@ -37,6 +34,13 @@ module ManifoldEnv
       end
     end
 
+    # @return [Set<String>]
+    def public_ips
+      Rails.cache.read(PUBLIC_IPS_CACHE_KEY) || Set.new
+    rescue ActiveRecord::StatementInvalid
+      Set.new
+    end
+
     # @param [String] domain
     # @return [void]
     def derive_public_ips!(domain)
@@ -47,7 +51,7 @@ module ManifoldEnv
       end
     rescue Resolv::ResolvError
       # :nocov:
-      public_ips.clear
+      clear_public_ips!
       # :nocov:
     end
 
@@ -57,10 +61,15 @@ module ManifoldEnv
     # @return [void]
     def reset_public_ips!(new_ips)
       if new_ips.present?
-        self.public_ips = new_ips
+        Rails.cache.write(PUBLIC_IPS_CACHE_KEY, new_ips.to_set)
       else
-        public_ips.clear
+        clear_public_ips!
       end
+    end
+
+    # @return [void]
+    def clear_public_ips!
+      Rails.cache.delete(PUBLIC_IPS_CACHE_KEY)
     end
 
     # @api private

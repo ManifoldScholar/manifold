@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Legacy
   class AddFavorite
     def call(user:, params:)
@@ -36,8 +38,7 @@ module Legacy
 
       def call
         options = to_nested_operation_options
-
-        Collections::Operations::ValidateAndAssign.new(options).call
+        Collections::Operations::ValidateAndAssign.new(**options).call
       end
 
       private

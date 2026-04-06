@@ -5,8 +5,7 @@ export const initialState = {
   loginOverlay: false,
   userMenu: false,
   visibilityFilters: {
-    highlight: { yours: true, others: true },
-    annotation: { yours: true, others: true },
+    annotation: { yours: true, others: true, highlights: true },
     resource: { all: true },
     readingGroups: { all: true }
   },
@@ -36,7 +35,7 @@ const panelSolo = {
 const showMyNotes = state => {
   const yours = true;
   const highlight = { ...state.visibilityFilters.highlight, yours };
-  const annotation = { ...state.visibilityFilters.highlight, yours };
+  const annotation = { ...state.visibilityFilters.annotation, yours };
   const visibilityFilters = {
     ...state.visibilityFilters,
     highlight,

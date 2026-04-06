@@ -12,13 +12,12 @@ import { ArchiveGroup, EditGroup, JoinGroup, LeaveGroup } from "./actions";
 import { ListFilters } from "global/components/list";
 import lh from "helpers/linkHandler";
 import { useListFilters } from "hooks";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom-v5-compat";
 
 export default function GroupsTable(props) {
   const {
     readingGroups: groups,
     pagination,
-    onPageClick,
     filterProps,
     showStatusFilter = false,
     currentUser,
@@ -34,7 +33,7 @@ export default function GroupsTable(props) {
     options: { groupSort: true, groupStatus: showStatusFilter }
   });
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const userCanJoin = group => {
     if (group.attributes.currentUserRole !== "none") return false;
@@ -42,17 +41,16 @@ export default function GroupsTable(props) {
   };
 
   const handleJoinSuccess = group => {
-    history.push(lh.link("frontendReadingGroupDetail", group.id));
+    navigate(lh.link("frontendReadingGroupDetail", group.id));
   };
 
   return (
     <Table
       models={groups}
       pagination={pagination}
-      onPageClick={onPageClick}
       unit={t("glossary.group", { count: groups.length })}
       linkCreator={group => lh.link("frontendReadingGroupDetail", group.id)}
-      filters={<ListFilters {...listFilterProps} />}
+      filters={<ListFilters {...listFilterProps} containerWrapPoint="603px" />}
       filterCount={listFilterProps.filters?.length}
     >
       <Column
@@ -189,7 +187,6 @@ GroupsTable.displayName = "ReadingGroup.Table.Groups";
 GroupsTable.propTypes = {
   readingGroups: PropTypes.array.isRequired,
   pagination: PropTypes.object.isRequired,
-  onPageClick: PropTypes.func.isRequired,
   filterProps: PropTypes.object,
   currentUser: PropTypes.object,
   hideActions: PropTypes.bool,

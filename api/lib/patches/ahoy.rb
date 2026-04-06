@@ -1,12 +1,12 @@
+# frozen_string_literal: true
+
 module Patches
   module Ahoy
     module Tracker
-
-      def initialize(options)
-        super(options)
-        @visitor_token = options[:visitor_token]
+      def initialize(visitor_token: nil, **)
+        super
+        @visitor_token = visitor_token
       end
-
     end
   end
 end

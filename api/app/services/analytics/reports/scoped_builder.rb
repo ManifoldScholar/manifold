@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Analytics
   module Reports
     class ScopedBuilder < Analytics::Reports::Builder
-
-      RESOURCE_PLACEHOLDER = "{{ SCOPE ID }}".freeze
+      RESOURCE_PLACEHOLDER = "{{ SCOPE ID }}"
 
       string :record_id, default: nil
       string :record_type, default: nil
@@ -27,10 +28,9 @@ module Analytics
       end
 
       def sub_placeholders(sql)
-        sql = super(sql)
-        sql.gsub(RESOURCE_PLACEHOLDER, quote(respond_to?(:resource) ? valid_resource.id : nil))
+        subbed_sql = super
+        subbed_sql.gsub(RESOURCE_PLACEHOLDER, quote(respond_to?(:resource) ? valid_resource.id : nil))
       end
-
     end
   end
 end

@@ -8,11 +8,13 @@ import lh from "helpers/linkHandler";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "frontend/components/entity/Collection";
 import HeadContent from "global/components/HeadContent";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 
 export default function EventList({ project, journalBreadcrumbs }) {
   const { id } = useParams();
-  const [pagination, setPageNumber] = usePaginationState();
+
+  // API does not send meta for this list
+  const { pagination } = useListQueryParams();
   const { data: events, meta } = useFetch({
     request: [projectsAPI.events, id, null, pagination]
   });
@@ -52,13 +54,7 @@ export default function EventList({ project, journalBreadcrumbs }) {
         isProjectSubpage
       />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
-      <EntityCollection.Events
-        events={events}
-        eventsMeta={meta}
-        paginationProps={{
-          paginationClickHandler: page => () => setPageNumber(page)
-        }}
-      />
+      <EntityCollection.Events events={events} eventsMeta={meta} />
     </>
   );
 }

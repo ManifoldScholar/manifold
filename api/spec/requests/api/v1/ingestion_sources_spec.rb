@@ -1,52 +1,56 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Ingestion Sources", type: :request do
   let!(:text) { FactoryBot.create(:text) }
   let(:text_id) { text.id }
-  let(:attributes) { {
+  let(:attributes) do
+    {
     attachment: image_params,
     kind: "publication_resource",
     source_identifier: "test"
-  }}
+  }
+  end
 
   path "/texts/{text_id}/relationships/ingestion_sources" do
-    include_examples "an API index request",
+    it_behaves_like "an API index request",
                       parent: "text",
                       model: IngestionSource,
                       url_parameters: [:text_id]
 
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                      model: IngestionSource,
                      parent: :text,
                      url_parameters: [:text_id],
                      authorized_user: :admin do
-              let(:body) do
-                {
-                  data: {
-                    attributes: attributes
-                  }
-                }
-              end
-            end
+      let(:body) do
+        {
+          data: {
+            attributes: attributes
+          }
+        }
+      end
+    end
   end
 
   path "/ingestion_sources/{id}" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                      model: IngestionSource
 
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                      model: IngestionSource,
                      authorized_user: :admin do
-              let(:body) do
-                {
-                  data: {
-                    attributes: attributes
-                  }
-                }
-              end
-            end
+      let(:body) do
+        {
+          data: {
+            attributes: attributes
+          }
+        }
+      end
+    end
 
-    include_examples "an API destroy request",
+    it_behaves_like "an API destroy request",
                      model: IngestionSource,
                      authorized_user: :admin
   end

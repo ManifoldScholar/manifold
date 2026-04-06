@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module Validator
   # This class takes an HTML string input and validates it. In doing so, it will parse the
   # HTML and transform it into a valid HTML structure that can be consumed by the Manifold
   # frontend. This mainly involves insuring proper nesting, and making sure that the
   # structure will work with ReactDom.
   class HTML
-
     VOID_ELEMENTS = %w(area base br col embed hr img input keygen
                        link meta param source track wbr).freeze
 
@@ -41,8 +42,7 @@ module Validator
       fragment.traverse do |node|
         strip = false
         tag = node.name
-        ancestors = []
-        node.ancestors.each { |n| ancestors.push(n.name) }
+        ancestors = node.ancestors.map { |n| n.name }
         if tag == "p"
           strip = true if ancestors.include?("p")
         end
@@ -93,8 +93,6 @@ module Validator
       end
     end
 
-    # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/CyclomaticComplexity
     def tag_valid_with_parent?(tag, parent)
       case tag
       when "option"
@@ -114,7 +112,5 @@ module Validator
       end
       true
     end
-    # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

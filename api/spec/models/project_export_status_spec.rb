@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ProjectExportStatus, type: :model, packaging: true do
@@ -30,4 +32,3 @@ RSpec.describe ProjectExportStatus, type: :model, packaging: true do
     it { is_expected.to be_an_autoexport }
   end
 end
-

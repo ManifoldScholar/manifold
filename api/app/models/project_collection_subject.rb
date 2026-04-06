@@ -1,8 +1,10 @@
-class ProjectCollectionSubject < ApplicationRecord
+# frozen_string_literal: true
 
+class ProjectCollectionSubject < ApplicationRecord
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Association
@@ -12,5 +14,4 @@ class ProjectCollectionSubject < ApplicationRecord
   def to_s
     subject.title
   end
-
 end

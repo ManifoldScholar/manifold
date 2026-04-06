@@ -1,36 +1,22 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  useFetch,
-  usePaginationState,
-  useSetLocation,
-  useFromStore
-} from "hooks";
+import { useFetch, useListQueryParams, useFromStore } from "hooks";
 import { journalIssuesAPI } from "api";
-import EntityHeadContent from "frontend/components/entity/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
+import HeadContent from "global/components/HeadContent";
 import EntityMasthead from "frontend/components/entity/Masthead";
 import EntityCollection from "frontend/components/entity/Collection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import lh from "helpers/linkHandler";
 
 export default function JournalIssuesList({ journal }) {
-  const [pagination, setPageNumber] = usePaginationState();
-  const issuesFilter = useMemo(
-    () => ({ journal_id: journal.id, volume_is_nil: true }),
-    [journal.id]
-  );
-  const { data: issues, meta } = useFetch({
-    request: [journalIssuesAPI.index, issuesFilter, pagination]
+  const { pagination, filters } = useListQueryParams({
+    initFilters: { journal_id: journal.id, volume_is_nil: true }
   });
 
-  useSetLocation({ page: pagination.number });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
+  const { data: issues, meta } = useFetch({
+    request: [journalIssuesAPI.index, filters, pagination]
+  });
 
   const { t } = useTranslation();
   const settings = useFromStore("settings", "select");
@@ -63,22 +49,21 @@ export default function JournalIssuesList({ journal }) {
         ];
   }, [slug, t, titlePlaintext, libraryDisabled]);
 
+  const headContentProps = useEntityHeadContent(journal);
+
   if (!journal || !issues || !meta) return null;
 
   return (
     <>
       <h1 className="screen-reader-text">{containerTitle}</h1>
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
-      <EntityHeadContent entity={journal} />
+      <HeadContent {...headContentProps} />
       <EntityMasthead entity={journal} />
       <EntityCollection.Issues
         title={containerTitle}
         icon={null}
         issues={issues}
         issuesMeta={meta}
-        paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator
-        }}
         parentView
       />
     </>

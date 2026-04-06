@@ -6,15 +6,14 @@ import {
   draggable,
   dragging,
   textTruncate,
-  setHoverStyle
+  setHoverStyle,
+  revealOnFocus
 } from "theme/styles/mixins";
 
 const ITEM_INNER_PADDING = 10;
 
 export default `
   .project-collection-list {
-    margin-top: -5px;
-
     &.aside-wide {
       display: block;
 
@@ -26,25 +25,19 @@ export default `
         breakpointLessOne(75),
         "max"
       )}
+    }
 
-      ul {
-        max-height: 1150px;
-        overflow-y: auto;
-      }
+    .entity-list {
+      margin-top: -5px;
     }
 
     .actions {
-      margin-top: 18px;
-      margin-bottom: 18px;
+      margin-block-end: clamp(18px, 3.333vw, 25px);
       margin-left: 0;
 
-      ${respond(
-        `
-          margin-top: 37px;
-          margin-bottom: 25px;
-        `,
-        75
-      )}
+      &:not(:first-child) {
+        margin-block-start: clamp(18px, 5vw, 25px);
+      }
 
       ${respond(
         `
@@ -61,6 +54,9 @@ export default `
   }
 
   .project-collection-list-item {
+    --PopoverMenu-inset-block-start: calc(100% + 10px);
+    --PopoverMenu-inset-inline-end: -10px;
+
     padding-top: 5px;
     padding-bottom: 5px;
 
@@ -95,7 +91,7 @@ export default `
           color: inherit;
         }
 
-        &.focus-visible {
+        &:focus-visible {
           color: inherit;
           outline-color: var(--color-neutral-ui-dark);
         }
@@ -135,7 +131,7 @@ export default `
           color: inherit;
         }
 
-        &.focus-visible {
+        &:focus-visible {
           color: inherit;
           outline-color: var(--color-base-neutral70);
         }
@@ -147,6 +143,7 @@ export default `
       flex-shrink: 0;
       align-items: center;
       padding: ${ITEM_INNER_PADDING}px;
+      ${revealOnFocus(".project-collection-list-item__keyboard-buttons")}
     }
 
     &__icon-group-item {

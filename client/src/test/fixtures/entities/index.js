@@ -29,8 +29,6 @@ import subject from "./subject";
 import text from "./text";
 import textCategory from "./text-category";
 import textSection from "./text-section";
-import tweetEvent from "./tweet-event";
-import twitterQuery from "./twitter-query";
 import user from "./user";
 import version from "./version";
 
@@ -67,8 +65,6 @@ export default {
   text,
   textCategory,
   textSection,
-  tweetEvent,
-  twitterQuery,
   user,
   version
 };

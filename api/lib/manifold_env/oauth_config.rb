@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
   class OauthConfig
     include ManifoldEnv::HasConfigurationDSL
@@ -50,22 +52,22 @@ module ManifoldEnv
     end
 
     def as_json(options = nil)
-      each_with_object({}) do |provider, hsh|
-        hsh[provider.strategy_name] = provider.as_json(options)
+      to_h do |provider|
+        [provider.strategy_name, provider.as_json(options)]
       end
     end
 
     dsl do
       ivar_reader :providers
 
-      def provider(name, &config)
+      def provider(name, &)
         name = name.to_sym unless name.is_a?(Symbol)
 
         definition = ManifoldEnv::OauthProvider.new(name)
 
         providers.add?(definition) or raise DefinedProvider, "Already defined provider: #{name}"
 
-        definition.configure(&config)
+        definition.configure(&)
       end
     end
 
@@ -94,7 +96,7 @@ module ManifoldEnv
       raw_custom_oauth_configuration.each do |provider_name, provider_options|
         options = provider_options.merge(name: provider_name).symbolize_keys
 
-        @custom_providers[provider_name] = ManifoldEnv::CustomOauthProvider.new options
+        @custom_providers[provider_name] = ManifoldEnv::CustomOauthProvider.new(**options)
       end
     end
 

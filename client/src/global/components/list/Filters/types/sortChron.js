@@ -4,10 +4,6 @@ export const sortChronFilter = (filters, updateFilters, params, t) => ({
   onChange: e => updateFilters(e, "order"),
   options: [
     {
-      label: t("filters.sort_options.none_selected"),
-      value: ""
-    },
-    {
       label: t("filters.collection_sort_options.created_at_asc"),
       value: "created_at ASC"
     },

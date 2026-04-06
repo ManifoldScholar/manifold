@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentDecorator < ApplicationDecorator
   delegate_all
 
@@ -18,5 +20,4 @@ class CommentDecorator < ApplicationDecorator
                      annotation_anchor: "annotation-#{subject.id}")
     end
   end
-
 end

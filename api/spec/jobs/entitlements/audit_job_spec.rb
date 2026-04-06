@@ -33,7 +33,7 @@ RSpec.describe Entitlements::AuditJob, type: :job do
     it "fails loudly" do
       expect do
         described_class.perform_now
-      end.to raise_error /\AFailed Audit/
+      end.to raise_error(/\AFailed Audit/)
     end
   end
 end

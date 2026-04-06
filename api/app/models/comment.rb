@@ -13,6 +13,7 @@ class Comment < ApplicationRecord
   include FlaggableResource
   include TrackedCreator
   include Filterable
+  include SoftDeletable
 
   # Scopes
   scope :by_creator, ->(creator) { where(creator: creator) }
@@ -28,6 +29,27 @@ class Comment < ApplicationRecord
     where(id: ids)
   }
 
+  scope :with_flags, ->(value = nil) do
+    where(arel_table[:unresolved_flags_count].gteq(1)) if value.present?
+  end
+
+  scope :with_order, ->(by = nil) do
+    case by
+    when "created_at ASC"
+      reorder(created_at: :asc)
+    when "created_at DESC"
+      reorder(created_at: :desc)
+    when "created_by"
+      joins(:creator).reorder(User.arel_table[:last_name].asc)
+    when "subject"
+      reorder(subject_id: :desc)
+    else
+      reorder(created: :desc)
+    end
+  end
+
+  scope :by_keyword, ->(value) { build_keyword_scope(value) if value.present? }
+
   # Associations
   belongs_to :subject, polymorphic: true, counter_cache: :comments_count
   belongs_to :parent, class_name: "Comment", optional: true, inverse_of: :children,
@@ -39,8 +61,6 @@ class Comment < ApplicationRecord
           as: :subject,
           dependent: :destroy,
           inverse_of: :subject
-
-  delegate :project, to: :subject
 
   validates :body, presence: true, spam: { type: "comment" }
 
@@ -55,20 +75,38 @@ class Comment < ApplicationRecord
     subject.is_a? Annotation
   end
 
-  def subject_title
-    subject.title if subject.respond_to? :title
+  # @return [Project, nil]
+  def project
+    subject.try(:project)
   end
 
+  # @return [String, nil]
+  def project_slug
+    project.try(:slug)
+  end
+
+  # @return [String, nil]
+  def subject_title
+    subject.try(:title)
+  end
+
+  # @return [String, nil]
   def subject_text_title
-    subject.text_title if subject.respond_to? :text_title
+    subject.try(:text_title)
+  end
+
+  # @return [String, nil]
+  def subject_text_slug
+    subject.try(:text_slug)
+  end
+
+  # @return [String, nil]
+  def subject_text_section_id
+    subject.try(:text_section).try(:id)
   end
 
   def reply_to_self?
     parent && parent.creator_id == creator_id
-  end
-
-  def flagged_by?(user)
-    flags.where(creator: user).count.positive?
   end
 
   def author_created
@@ -85,5 +123,23 @@ class Comment < ApplicationRecord
 
   def enqueue_comment_notifications
     Notifications::EnqueueCommentNotificationsJob.perform_later id
+  end
+
+  class << self
+    def build_keyword_scope(value)
+      escaped = value.gsub("%", "\\%")
+
+      needle = "%#{escaped}%"
+
+      body_matches = where arel_table[:body].matches(needle)
+
+      creator_matches = left_outer_joins(:creator)
+        .where(User.arel_table[:first_name]
+        .matches(needle)
+        .or(User.arel_table[:last_name]
+          .matches(needle)))
+
+      creator_matches.or(body_matches).distinct
+    end
   end
 end

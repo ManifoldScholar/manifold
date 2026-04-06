@@ -22,10 +22,6 @@ export const Grid = styled.ul`
 `;
 
 export const Link = styled(LinkComponent)`
-  --Thumbnail-background-color: var(
-    --card-bg-color,
-    var(--color-base-neutral05)
-  );
   --Thumbnail-border-radius: var(--box-border-radius);
   --Thumbnail-Icon-background-color: transparent;
 
@@ -34,12 +30,12 @@ export const Link = styled(LinkComponent)`
   height: 100%;
   text-decoration: none;
   transition: none;
+  border-radius: var(--Thumbnail-border-radius);
+  outline-offset: 2px;
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     --Thumbnail-box-shadow: 0 20px 30px 2px ${rgba("neutralBlack", 0.13)};
-
-    outline: none;
 
     ${Thumbnail} {
       // need to define in Thumbnail so --hover-color respects .bg- class there

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Resource Collections", type: :request do
@@ -5,16 +7,16 @@ RSpec.describe "Resource Collections", type: :request do
   included_relationships = [:project, :resource]
 
   path "/resource_collections/{id}" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                      model: ResourceCollection,
                      included_relationships: included_relationships
 
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                      model: ResourceCollection,
                      included_relationships: included_relationships,
                      authorized_user: :admin
 
-    include_examples "an API destroy request",
+    it_behaves_like "an API destroy request",
                      model: ResourceCollection,
                      authorized_user: :admin
   end
@@ -24,13 +26,13 @@ RSpec.describe "Resource Collections", type: :request do
     let(:project_id) { parent.id }
 
     path "/projects/{project_id}/relationships/resource_collections" do
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
                        parent: "project",
                        model: ResourceCollection,
                        url_parameters: [:project_id],
                        authorized_user: :admin
 
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "project",
                        model: ResourceCollection,
                        url_parameters: [:project_id],
@@ -47,7 +49,7 @@ RSpec.describe "Resource Collections", type: :request do
     end
 
     path "/texts/{text_id}/relationships/text_sections/{text_section_id}/resource_collections" do
-      include_examples "an API index request",
+      it_behaves_like "an API index request",
                        parent: "text section",
                        model: ResourceCollection,
                        url_parameters: [:text_section_id, :text_id]

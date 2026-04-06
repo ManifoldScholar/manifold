@@ -1,4 +1,22 @@
+# frozen_string_literal: true
+
 require "json"
+
+INGESTION_FINISHED = ->(outcome, origin) do
+  if outcome.valid?
+    Manifold::Rake.logger.info "Ingested text: #{outcome.result.id}"
+  else
+    Manifold::Rake.logger.error "Could not ingest: #{origin}"
+
+    if outcome.uncaught_exception.present?
+      Manifold::Rake.logger.error "There was an uncaught exception."
+    end
+
+    outcome.errors.each do |error|
+      Manifold::Rake.logger.error error.message
+    end
+  end
+end
 
 namespace :manifold do
   namespace :project do
@@ -11,17 +29,21 @@ namespace :manifold do
     desc "Ingest a project text"
     task :ingest, [:project_id, :path] => :environment do |_t, args|
       Manifold::Rake.logger.info "Ingesting #{args[:path]}"
+
       project = Project.find(args[:project_id])
-      ingestion = Ingestions::CreateManually.run(project: project,
-                                                 source: File.open(args[:path]),
-                                                 creator: User.cli_user).result
-      outcome = Ingestions::Ingestor.run ingestion: ingestion,
-                                         logger: Logger.new($stdout)
-      if outcome.valid?
-        Manifold::Rake.logger.info "Ingested text: #{outcome.result.id}"
-      else
-        Manifold::Rake.logger.info "Could not ingest #{args[:path]}"
-      end
+
+      ingestion = Ingestions::CreateManually.run!(
+        project: project,
+        source: File.open(args[:path]),
+        creator: User.cli_user
+      )
+
+      outcome = Ingestions::Ingestor.run(
+        ingestion: ingestion,
+        logger: Logger.new($stdout)
+      )
+
+      INGESTION_FINISHED[outcome, args[:path]]
     end
 
     desc "Bulk ingest texts into a project"
@@ -67,7 +89,7 @@ namespace :manifold do
           Manifold::Rake.logger.info("Updating text from JSON data: #{touched_text.title}")
           text_data = JSON.parse(File.read(metadata_path))
           # Cast all metadata to strings.
-          touched_text.metadata = text_data["data"].transform_values { |v| v.to_s; }
+          touched_text.metadata = text_data["data"].transform_values { |v| v.to_s }
           # Set the slug if present.
           touched_text.pending_slug = text_data["slug"].to_s if text_data["slug"].present?
           if touched_text.valid?
@@ -86,18 +108,22 @@ namespace :manifold do
 
     desc "Ingest a project text from a URL"
     task :ingest_url, [:project_id, :url] => :environment do |_t, args|
-      Manifold::Rake.logger.info "Ingesting #{args[:path]}"
+      Manifold::Rake.logger.info "Ingesting #{args[:url]}"
+
       project = Project.find(args[:project_id])
-      ingestion = Ingestions::CreateManually.run(project: project,
-                                                 url: args[:url],
-                                                 creator: User.cli_user).result
-      outcome = Ingestions::Ingestor.run ingestion: ingestion,
-                                         logger: Logger.new($stdout)
-      if outcome.valid?
-        Manifold::Rake.logger.info "Ingested text: #{outcome.result.id}"
-      else
-        Manifold::Rake.logger.info "Could not ingest #{args[:path]}"
-      end
+
+      ingestion = Ingestions::CreateManually.run!(
+        project: project,
+        url: args[:url],
+        creator: User.cli_user
+      )
+
+      outcome = Ingestions::Ingestor.run(
+        ingestion: ingestion,
+        logger: Logger.new($stdout)
+      )
+
+      INGESTION_FINISHED[outcome, args[:url]]
     end
 
     desc "Import a project from a JSON definition"

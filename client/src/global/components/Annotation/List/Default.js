@@ -1,14 +1,22 @@
-import React from "react";
 import PropTypes from "prop-types";
 import Annotation from "../Annotation";
+import classNames from "classnames";
 
 function AnnotationListDefault({
   annotations,
   handleVisitAnnotation,
-  showCommentsToggleAsBlock
+  showCommentsToggleAsBlock,
+  refresh,
+  showMarkers,
+  markerIcons,
+  compact = false
 }) {
+  const className = classNames("notes-list", {
+    "notes-list--pad-top": !compact,
+    "notes-list--compact": compact
+  });
   return (
-    <ul className="notes-list notes-list--pad-top">
+    <ul className={className}>
       {annotations.map(annotation => {
         return (
           <li key={annotation.id} className="notes-list__item-outer">
@@ -17,6 +25,10 @@ function AnnotationListDefault({
               annotation={annotation}
               displayFormat="fullPage"
               showCommentsToggleAsBlock={showCommentsToggleAsBlock}
+              refresh={refresh}
+              showMarkers={showMarkers}
+              markerIcons={markerIcons}
+              compact={compact}
             />
           </li>
         );
@@ -29,7 +41,11 @@ AnnotationListDefault.displayName = "Annotation.List.Default";
 AnnotationListDefault.propTypes = {
   annotations: PropTypes.array,
   handleVisitAnnotation: PropTypes.func,
-  showCommentsToggleAsBlock: PropTypes.bool
+  showCommentsToggleAsBlock: PropTypes.bool,
+  refresh: PropTypes.func,
+  showMarkers: PropTypes.bool,
+  markerIcons: PropTypes.bool,
+  compact: PropTypes.bool
 };
 
 export default AnnotationListDefault;

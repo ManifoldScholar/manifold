@@ -1,25 +1,25 @@
-# A section in a text
+# frozen_string_literal: true
+
+# A section in a {Text}.
 class TextSection < ApplicationRecord
-
-  attribute :body_json, :indifferent_hash
-
-  # Misc. Concerns
-  include Citable
-  include SearchIndexable
-
-  # Constants
-  KIND_COVER_IMAGE = "cover_image".freeze
-  KIND_NAVIGATION = "navigation".freeze
-  KIND_SECTION = "section".freeze
-  ALLOWED_KINDS = [KIND_COVER_IMAGE, KIND_NAVIGATION, KIND_SECTION].freeze
-
-  # Authority
   include Authority::Abilities
+  include Attachments
+  include Citable
   include Collectable
   include Filterable
-  include SerializedAbilitiesFor
-  self.authorizer_name = "TextSectionAuthorizer"
   include FriendlyId
+  include Metadata
+  include HasKeywordSearch
+  include SearchIndexable
+  include SerializedAbilitiesFor
+  include SoftDeletionSupport
+
+  KIND_COVER_IMAGE = "cover_image"
+  KIND_NAVIGATION = "navigation"
+  KIND_SECTION = "section"
+  ALLOWED_KINDS = [KIND_COVER_IMAGE, KIND_NAVIGATION, KIND_SECTION].freeze
+
+  self.authorizer_name = "TextSectionAuthorizer"
 
   with_citation do |text_section|
     (text_section.text_citation_parts || {}).merge(
@@ -28,20 +28,27 @@ class TextSection < ApplicationRecord
     )
   end
 
-  # Ordering
+  with_metadata %w(
+    citation_override
+  )
+
   acts_as_list scope: :text
 
-  # Associations
   belongs_to :text, inverse_of: :text_sections
+
   has_one :project, through: :text
   has_one :text_started_by, class_name: "Text", foreign_key: "start_text_section_id",
           dependent: :nullify, inverse_of: :start_text_section
+
   belongs_to :ingestion_source, optional: true
+
+  has_one :journal, through: :project
+
   # We intentionally do not destroy annotations because we want to handle the orphans.
   has_many :annotations, dependent: :nullify
   has_many :resources, through: :annotations
   has_many :resource_collections, through: :annotations
-  has_many :text_section_nodes, inverse_of: :text_section, dependent: :destroy
+  has_many :text_section_nodes, inverse_of: :text_section, dependent: :delete_all
   has_many :text_section_stylesheets, dependent: :destroy
   has_many :stylesheets,
            -> { order(position: :asc) },
@@ -50,62 +57,38 @@ class TextSection < ApplicationRecord
            inverse_of: :text_sections
   has_many :ingestions, dependent: :nullify, inverse_of: :text_section
 
-  # Delegation
+  attribute :body_json, :indifferent_hash
+
   delegate :citation_parts, to: :text, prefix: true, allow_nil: true
   delegate :source_path, to: :ingestion_source, allow_nil: true
   delegate :project, to: :text, allow_nil: true
-  delegate :metadata, to: :text, allow_nil: true
+  delegate :metadata, to: :text, prefix: true, allow_nil: true
   delegate :title, to: :text, prefix: true, allow_nil: true
   delegate :creator_names_array, to: :text, prefix: true, allow_nil: true
   delegate :slug, to: :text, prefix: true
-  delegate :social_image, to: :text
+  delegate :social_image_data, to: :text, allow_nil: true
+  delegate :social_description, to: :text, allow_nil: true
 
-  # Validation
+  manifold_has_attached_file :social_image, :image
+
   validates :position, numericality: { only_integer: true }
   validates :kind, inclusion: { in: ALLOWED_KINDS }
   validates :name, presence: { on: :from_api }
   validates :slug, presence: true, allow_nil: true
 
-  # Callbacks
   before_validation :update_body_json
-  after_save :extrapolate_nodes!
+  after_destroy :remove_linked_toc_entries, unless: :skip_removal_of_toc_entries?
+  after_save_commit :asynchronously_index_nodes!
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
-  after_destroy :remove_linked_toc_entries
 
-  # Scopes
-  scope :in_texts, lambda { |texts|
-    where(text: texts)
-  }
+  scope :in_texts, ->(texts) { where(text: texts) }
   scope :ordered, -> { order(position: :asc) }
 
-  # Search
-  searchkick(
-    callbacks: :async,
-    batch_size: 25,
-    merge_mappings: true,
-    settings: {
-      index: {
-        mapping: {
-          nested_objects: {
-            limit: 20_000
-          }
-        }
-      }
-    },
-    mappings: {
-      properties: {
-        text_nodes: {
-          type: "nested"
-        }
-      }
-    }
-  )
+  scope :with_unindexed_nodes, -> { where(id: TextSectionNode.sans_search_indexed.select(:text_section_id).distinct) }
 
-  scope :search_import, lambda {
-    includes(
-      text: [:project, :makers]
-    )
-  }
+  multisearches! :body_text
+
+  alias_attribute :title, :name
 
   friendly_id :slug_candidates, use: :scoped, scope: :text
 
@@ -137,6 +120,10 @@ class TextSection < ApplicationRecord
     has_unique_source_identifier? ? source_identifier : slug
   end
 
+  def skip_removal_of_toc_entries?
+    destroyed_by_association || soft_deleting?
+  end
+
   def slug_candidates
     reserved_words = %w(all new edit session login logout users admin
                         stylesheets assets javascripts)
@@ -147,24 +134,16 @@ class TextSection < ApplicationRecord
     name
   end
 
+  def multisearchable_makers
+    []
+  end
+
+  def multisearchable_parent_keywords
+    []
+  end
+
   def should_index?
-    text.present? && text.should_index?
-  end
-
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: name,
-      parent_text: text&.id,
-      parent_project: project&.id,
-      parent_keywords: [],
-      makers: [],
-      text_nodes: properties_for_text_nodes
-    }.merge(search_hidden)
-  end
-
-  def search_hidden
-    text.present? ? text.search_hidden : { hidden: true }
+    project.present? && !project.draft? && super
   end
 
   def previous_section
@@ -173,10 +152,6 @@ class TextSection < ApplicationRecord
 
   def next_section
     text.section_after(position)
-  end
-
-  def title
-    name
   end
 
   def toc?
@@ -194,35 +169,6 @@ class TextSection < ApplicationRecord
   def to_section_map
     slice(:id, :name).merge(hidden: hidden_in_reader)
   end
-
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-  def properties_for_text_nodes
-    inline = Serializer::HTML::INLINE_ELEMENTS
-    *, nodes = text_nodes.reverse.inject([false, []]) do |(once_more, nodes), node|
-      next [once_more, nodes] if node["content"].strip.blank?
-
-      if (inline.include?(node["parent"]) && nodes[-1]) || once_more
-        # Append inline content to previous node
-        nodes[-1][:content] = nodes[-1][:content].dup.insert(0, node["content"] + " ")
-        # Collect wrapped up uuids
-        nodes[-1][:contains] << node[:node_uuid]
-        nodes[-1][:node_uuid] = node[:node_uuid]
-        # Inline nodes break up block nodes. When we collapse the inline node, we also
-        # need to collapse the next node, since it's the later half of the broken block
-        # node. The once_more variable stores this fact.
-        next [!once_more, nodes]
-      end
-      nodes.push(
-        content: node["content"],
-        contains: [node["node_uuid"]],
-        node_uuid: node["node_uuid"],
-        text_section_id: id
-      )
-      next [false, nodes]
-    end
-    nodes.reverse.map.with_index(1) { |node, index| node.merge(position: index) }
-  end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
   def text_nodes(node = body_json, nodes = [], parent = nil)
     if node["node_type"] == "text"
@@ -250,11 +196,60 @@ class TextSection < ApplicationRecord
     TextSectionJobs::EnqueueAdoptAnnotationsJob.perform_later annotations.pluck(:id)
   end
 
-  private
+  # @api private
+  # @return [void]
+  def asynchronously_index_current_node_content!
+    TextSections::IndexCurrentNodeContentJob.perform_later self
+  end
 
+  # @api private
+  # @return [void]
+  def asynchronously_index_nodes!
+    TextSections::IndexNodesJob.perform_later self
+  end
+
+  # @api private
   # @return [void]
   def extrapolate_nodes!
     ManifoldApi::Container["text_sections.extrapolate_nodes"].(text_section: self).value!
+  end
+
+  # @return [String]
+  def extracted_body_content
+    data = []
+
+    extract_content_from!(body_json, data: data)
+
+    data.join(" ")
+  end
+
+  # @return [void]
+  def index_contained_content!(**options)
+    ManifoldApi::Container["text_sections.index_contained_content"].(self, **options).value!
+  end
+
+  # @return [void]
+  def index_nodes!
+    ManifoldApi::Container["text_sections.index_nodes"].(self).value!
+  end
+
+  # @return [void]
+  def maintain_current_nodes!
+    ManifoldApi::Container["text_sections.maintain_current_nodes"].(self).value!
+  end
+
+  private
+
+  def extract_content_from!(source, data: [])
+    case source
+    when Array
+      source.each { |item| extract_content_from!(item, data: data) }
+    when Hash
+      extract_content_from!(source["content"], data: data)
+      extract_content_from!(source["children"], data: data)
+    when /\S+/
+      data << source.to_s.squish
+    end
   end
 
   def maybe_adopt_or_orphan_annotations!
@@ -267,10 +262,11 @@ class TextSection < ApplicationRecord
     return unless body_changed?
 
     self.body_json = Serializer::HTML.serialize_as_json(body)
+    self.body_text = extracted_body_content
   end
 
   def remove_linked_toc_entries
-    text.remove_toc_entry!(id)
+    text&.remove_toc_entry!(id)
   end
 
   class << self
@@ -279,6 +275,46 @@ class TextSection < ApplicationRecord
       find_each do |text_section|
         TextSections::ExtrapolateNodesJob.perform_later text_section
       end
+    end
+
+    # @api private
+    # @note Part of PG Search
+    def rebuild_pg_search_documents
+      connection.exec_update(<<~SQL)
+      INSERT INTO pg_search_documents
+      (
+        searchable_type, searchable_id,
+        journal_id, project_id, text_id, text_section_id,
+        search_result_type,
+        title, content,
+        created_at, updated_at
+      )
+      SELECT
+        'TextSection' AS searchable_type,
+        ts.id AS searchable_id,
+        ji.journal_id AS journal_id,
+        p.id AS project_id,
+        t.id AS text_id,
+        ts.id AS text_section_id,
+        'text_section' AS search_result_type,
+        ts.name AS title,
+        ts.body_text AS content,
+        ts.created_at, ts.updated_at
+      FROM text_sections ts
+      INNER JOIN texts t ON t.id = ts.text_id
+      INNER JOIN projects p ON p.id = t.project_id
+      LEFT OUTER JOIN journal_issues ji ON ji.id = p.journal_issue_id
+      WHERE NOT p.draft
+      ON CONFLICT (searchable_type, searchable_id) DO UPDATE SET
+        journal_id = EXCLUDED.journal_id,
+        project_id = EXCLUDED.project_id,
+        text_id = EXCLUDED.text_id,
+        text_section_id = EXCLUDED.text_section_id,
+        search_result_type = EXCLUDED.search_result_type,
+        title = EXCLUDED.title,
+        content = EXCLUDED.content,
+        updated_at = EXCLUDED.updated_at
+      SQL
     end
   end
 end

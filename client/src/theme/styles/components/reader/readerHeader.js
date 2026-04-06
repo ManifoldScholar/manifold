@@ -1,21 +1,19 @@
 import {
-  reactSlideTransition,
   respond,
   rgba,
-  listHorizontal,
+  listUnstyled,
   buttonUnstyled,
   utilityPrimary,
   defaultTransitionProps
 } from "theme/styles/mixins";
 
 export const ZOOM_BREAKPOINT = "290px";
+const BREAKPOINT = "505px";
 
 export default `
 .reader-header {
   --padding-lateral: var(--container-padding-inline-narrow);
   --padding-lateral-narrow: 11px;
-
-  ${reactSlideTransition("right", ".search-menu")}
 
   position: fixed;
   top: 0;
@@ -28,21 +26,15 @@ export default `
     display: grid;
     grid-template: "menu-group-left" 46px
                     "menu-group-right" 46px / 100%;
-    width: 100vw;
+    width: 100%;
     background-color: var(--box-bg-color);
     transition: transform var(--transition-duration-default) ease-out;
 
     ${respond(
       `grid-template: "menu-group-left title-bar menu-group-right" 46px / max-content 1fr max-content;
-      width: 200vw;
-
-      &--shifted {
-        transform: translateX(-100vw);
-      }
       `,
-      ZOOM_BREAKPOINT
+      BREAKPOINT
     )}
-    ${respond(`width: 100%;`, 50)}
   }
 
   &__menu-group {
@@ -52,28 +44,26 @@ export default `
       grid-area: menu-group-left;
       width: 100vw;
 
-      ${respond(`width: auto;`, 50)}
+      ${respond(`width: auto;`, BREAKPOINT)}
     }
 
     &--right {
       grid-area: menu-group-right;
       width: 100vw;
+      display: block;
 
-      ${respond(`width: auto;`, 50)}
+      ${respond(`width: auto;`, BREAKPOINT)}
     }
   }
 
   &__title-bar {
     font-family: var(--font-family-heading);
     position: relative;
-    display: none;
     grid-area: title-bar;
     height: 100%;
     overflow: hidden;
     font-size: 18px;
     font-weight: var(--font-weight-medium);
-
-    ${respond(`display: block;`, 75)}
   }
 
   &__title-bar-inner {
@@ -84,6 +74,9 @@ export default `
     padding-left: var(--padding-lateral);
     margin: 0;
     transition: transform 0.4s var(--transition-timing-function);
+    display: none;
+
+    ${respond(`display: block;`, 85)}
 
     .reader-header__title-bar--show-section & {
       transform: translateY(-100%);
@@ -106,7 +99,7 @@ export default `
   }
 
   &__title-bar-collecting-toggle {
-    margin-left: 12px;
+    margin-inline-start: 12px;
     transform: translateY(-3px);
   }
 
@@ -116,6 +109,8 @@ export default `
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     height: 100%;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -131,17 +126,17 @@ export default `
       outline: 0;
     }
 
-    &.button-active:not(.focus-visible),
+    &.button-active:not(:focus-visible),
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       background-color: var(--color-interaction-light);
     }
 
-    &.button-active.focus-visible {
-      background-color: var(--color-interaction-dark);
+    &.button-active:focus-visible {
+      background-color: var(--color-interaction-light);
     }
 
-    &.focus-visible {
+    &:focus-visible {
       color: var(--color-neutral-text-extra-dark);
       outline: 2px solid;
       outline-offset: -2px;
@@ -162,10 +157,8 @@ export default `
     }
   }
 
-  &__button-text {
-    &--dark {
-      color: var(--strong-color);
-    }
+  &__button:not(:focus-visible, :hover) &__button-text--dark {
+    color: var(--strong-color);
   }
 
   &__button-icon {
@@ -185,36 +178,15 @@ export default `
     }
   }
 
-  &__options-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: none;
-    align-items: center;
-    justify-content: flex-end;
-    width: fit-content;
-    padding-inline: 12px;
-
-    ${respond(`display: inline;`, ZOOM_BREAKPOINT)}
-    ${respond(`display: none;`, 50)}
-
-    > span {
-      display: none;
-      ${respond(`display: inline;`, 20)}
-    }
-  }
-
-  &__options-button-icon {
-    &--options {
-      ${respond(`display: none;`, 20)}
-    }
-  }
-
   &__nav-list {
-    ${listHorizontal}
     position: relative;
-    display: block;
+    display: flex;
     height: 100%;
+    ${listUnstyled}
+
+    > li {
+      flex-grow: 1;
+    }
   }
 
   &__nav-item {
@@ -222,7 +194,7 @@ export default `
     height: 100%;
     vertical-align: middle;
 
-    svg {
+    > svg {
       width: 28px;
       height: 28px;
 
@@ -232,6 +204,13 @@ export default `
         50
       )}
     }
+
+    > button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &__panels {
@@ -239,10 +218,14 @@ export default `
     width: 100%;
 
     &--left {
+      --Panel-starting-transform: translateX(-100%);
+
       left: 0;
     }
 
     &--right {
+      --Panel-starting-transform: translateX(100%);
+
       right: 0;
     }
   }

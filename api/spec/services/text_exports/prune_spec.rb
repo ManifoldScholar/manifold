@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe TextExports::Prune, interaction: true, packaging: true do
@@ -14,4 +16,3 @@ RSpec.describe TextExports::Prune, interaction: true, packaging: true do
     end
   end
 end
-

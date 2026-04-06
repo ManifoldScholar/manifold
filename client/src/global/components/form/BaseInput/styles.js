@@ -106,7 +106,7 @@ export const WrapperWithActions = styled.div`
 
       grid-template:
         "label label label" auto
-        "input notification actions" auto/1fr auto auto;
+        "input notification actions" auto / 1fr auto auto;
     `,
     60
   )}
@@ -117,7 +117,6 @@ export const WrapperWithActions = styled.div`
 
   input {
     grid-area: input;
-    width: auto;
   }
 
   .instructions {
@@ -137,6 +136,9 @@ export const ActionGroup = styled("div", transientOptions)`
 
   ${respond(
     `
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
       margin-top: 0;
       border-bottom: 1px solid;
       border-color: var(--border-color);
@@ -149,6 +151,7 @@ export const Action = styled.button`
   ${buttonUnstyled}
   ${utilityPrimary}
   ${fillOnFocus("var(--color-interaction-light)")}
+  flex-shrink: 0;
   padding: 0.333em 1em;
   font-size: 12px;
   font-weight: var(--font-weight-semibold);

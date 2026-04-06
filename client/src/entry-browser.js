@@ -2,10 +2,11 @@
 /**
  * THIS IS THE ENTRY POINT FOR THE CLIENT, JUST LIKE server.js IS THE ENTRY POINT FOR THE SERVER.
  */
-import "@babel/polyfill";
-import "focus-visible";
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "global/containers/App";
 import ch from "./helpers/consoleHelpers";
 import config from "config";
@@ -75,13 +76,22 @@ class EntryBrowser {
 
   render = () => {
     const cache = createCache({ key: "emotion" });
-    const renderMethod = this.ssrIsPresent ? ReactDOM.hydrate : ReactDOM.render;
-    renderMethod(
-      <CacheProvider value={cache}>
-        <App store={this.store} />
-      </CacheProvider>,
-      this.root
-    );
+    if (this.ssrIsPresent) {
+      // eslint-disable-next-line no-unused-vars
+      const hydrationRoot = hydrateRoot(
+        this.root,
+        <CacheProvider value={cache}>
+          <App store={this.store} />
+        </CacheProvider>
+      );
+    } else {
+      const renderRoot = createRoot(this.root);
+      renderRoot.render(
+        <CacheProvider value={cache}>
+          <App store={this.store} />
+        </CacheProvider>
+      );
+    }
     if (config.environment.isDevelopment) this.enableDevelopment();
   };
 

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe "Version Abilities", :authorizer do
   context 'when the subject is an admin' do
-    let(:subject) { FactoryBot.create(:user, :admin) }
+    subject { FactoryBot.create(:user, :admin) }
 
     abilities = { create: false, read: true, update: false, delete: false }
 
@@ -10,7 +12,7 @@ RSpec.describe "Version Abilities", :authorizer do
   end
 
   context 'when the subject is an editor' do
-    let(:subject) { FactoryBot.create(:user, :editor) }
+    subject { FactoryBot.create(:user, :editor) }
 
     abilities = { create: false, read: true, update: false, delete: false }
 

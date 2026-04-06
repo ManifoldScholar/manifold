@@ -67,32 +67,24 @@ class FilteredList extends PureComponent {
 
   renderHeading() {
     const { handleSeeAllClick, handleFilterChange } = this.props;
-    const { readingGroup, ...restFilters } = this.filters;
 
     return (
       <div className="notes-filtered-list__header">
-        <div className="notes-filtered-list__header-start">
-          <Partial.Filters
-            filterChangeHandler={handleFilterChange}
-            filters={restFilters}
-          />
-        </div>
         <div
           className={classNames({
             "notes-filtered-list__header-end": true,
             "notes-filtered-list__header-end--has-select": this.hasReadingGroups
           })}
         >
-          {this.hasReadingGroups && (
-            <Partial.GroupFilter
-              filterChangeHandler={handleFilterChange}
-              selectedGroup={this.selectedGroup}
-              readingGroups={this.readingGroups}
-              setAnnotationOverlayReadingGroup={
-                this.setAnnotationOverlayReadingGroup
-              }
-            />
-          )}
+          <Partial.GroupFilter
+            filterChangeHandler={handleFilterChange}
+            selectedGroup={this.selectedGroup}
+            readingGroups={this.readingGroups}
+            setAnnotationOverlayReadingGroup={
+              this.setAnnotationOverlayReadingGroup
+            }
+          />
+          {/* This button opens a global dialog, and most likely needs more a11y props. */}
           <button
             onClick={handleSeeAllClick}
             className="notes-filtered-list__see-all button-primary button-primary--dull button-primary--rounded"
@@ -104,10 +96,7 @@ class FilteredList extends PureComponent {
               icon="link24"
               size="default"
               className="notes-filtered-list__see-all-icon button-primary__icon"
-              svgProps={{
-                role: "img",
-                title: this.props.t("external_links.opens_in_new")
-              }}
+              svgProps={{ role: "presentation" }}
             />
           </button>
         </div>

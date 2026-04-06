@@ -1,0 +1,25 @@
+default: &default
+#  bucket: ""
+#  endpoint: ""
+#  access_key_id: ""
+#  secret_access_key: ""
+#  region: ""
+  force_path_style: false
+
+development:
+  <<: *default
+  endpoint: http://minio:9000
+  access_key_id: minio
+  secret_access_key: minio123
+  region: "us-east-1"
+  force_path_style: true
+  public: true
+
+test:
+  <<: *default
+  access_key_id: minio
+  secret_access_key: minio123
+  region: "us-east-1"
+
+production:
+  <<: *default

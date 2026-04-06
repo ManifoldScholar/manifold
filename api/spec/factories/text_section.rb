@@ -65,5 +65,13 @@ FactoryBot.define do
         }
       end
     end
+
+    trait :with_hydrated_nodes do
+      after(:create) do |text_section, _|
+        ts = TextSection.find(text_section.id)
+        ts.index_nodes!
+        ts.maintain_current_nodes!
+      end
+    end
   end
 end

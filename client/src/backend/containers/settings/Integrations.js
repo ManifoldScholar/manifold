@@ -35,38 +35,6 @@ export class SettingsIntegrationsContainer extends PureComponent {
             create={settingsAPI.update}
             className="form-secondary"
           >
-            <Form.FieldGroup label={"Facebook"}>
-              <Form.TextInput
-                focusOnMount
-                label={t("settings.integrations.facebook_id_label")}
-                name="attributes[integrations][facebookAppId]"
-              />
-              <Form.TextInput
-                label={t("settings.integrations.facebook_secret_label")}
-                name="attributes[secrets][facebookAppSecret]"
-                password
-              />
-            </Form.FieldGroup>
-            <Form.FieldGroup label="Twitter">
-              <Form.TextInput
-                label={t("settings.integrations.twitter_key_label")}
-                name="attributes[integrations][twitterAppId]"
-              />
-              <Form.TextInput
-                password
-                label={t("settings.integrations.twitter_secret_label")}
-                name="attributes[secrets][twitterAppSecret]"
-              />
-              <Form.TextInput
-                label={t("settings.integrations.twitter_token_label")}
-                name="attributes[integrations][twitterAccessToken]"
-              />
-              <Form.TextInput
-                password
-                label={t("settings.integrations.twitter_token_secret_label")}
-                name="attributes[secrets][twitterAccessTokenSecret]"
-              />
-            </Form.FieldGroup>
             <Form.FieldGroup label={t("settings.integrations.google_header")}>
               <Form.Upload
                 layout="square"
@@ -95,19 +63,6 @@ export class SettingsIntegrationsContainer extends PureComponent {
               <Form.TextInput
                 label={t("settings.integrations.google_client_id_label")}
                 name="attributes[integrations][googleClientId]"
-              />
-            </Form.FieldGroup>
-            <Form.FieldGroup
-              label={t("settings.integrations.google_oauth_header")}
-            >
-              <Form.TextInput
-                label={t("settings.integrations.google_oauth_id_label")}
-                name="attributes[integrations][googleOauthClientId]"
-              />
-              <Form.TextInput
-                label={t("settings.integrations.google_client_secret_label")}
-                password
-                name="attributes[secrets][googleOauthClientSecret]"
               />
             </Form.FieldGroup>
             <Form.FieldGroup

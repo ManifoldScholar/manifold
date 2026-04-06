@@ -16,7 +16,9 @@ class ProjectContentTypeFormTexts extends PureComponent {
     showSubtitles: true,
     showCategoryLabels: true,
     showCovers: true,
-    showUncategorized: true
+    showUncategorized: true,
+    showAuthors: false,
+    showDescriptions: false
   };
 
   get categories() {
@@ -100,5 +102,7 @@ class ProjectContentTypeFormTexts extends PureComponent {
     );
   }
 }
+
+export { ProjectContentTypeFormTexts as UnwrappedTexts };
 
 export default withTranslation()(ProjectContentTypeFormTexts);

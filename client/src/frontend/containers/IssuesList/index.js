@@ -1,13 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useSetLocation,
-  useListFilters
-  // useFromStore
-} from "hooks";
+import { useFetch, useListFilters, useListQueryParams } from "hooks";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
@@ -19,28 +12,21 @@ export default function IssuesListContainer() {
   // Add back in when api supports filters
   // const subjects = useFromStore("feSubjects", "select");
 
-  const [pagination, setPageNumber] = usePaginationState();
-  const baseFilters = { standaloneModeEnforced: false };
-  const [filters, setFilters] = useFilterState(baseFilters);
+  const filtersReset = useMemo(() => ({ standaloneModeEnforced: false }), []);
+
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initFilters: filtersReset
+  });
 
   const { data: issues, meta } = useFetch({
     request: [journalIssuesAPI.index, filters, pagination]
   });
 
-  useSetLocation({ filters, page: pagination.number });
-
   const filterProps = useListFilters({
-    onFilterChange: param => setFilters({ newState: param }),
+    onFilterChange: state => setFilters(state),
     initialState: filters,
-    resetState: baseFilters
+    resetState: filtersReset
   });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
 
   const { t } = useTranslation();
 
@@ -58,9 +44,6 @@ export default function IssuesListContainer() {
           issues={issues}
           issuesMeta={meta}
           filterProps={filterProps}
-          paginationProps={{
-            paginationClickHandler: paginationClickHandlerCreator
-          }}
           bgColor="neutral05"
           className="flex-grow"
         />

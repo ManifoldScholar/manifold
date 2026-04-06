@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Resource Imports", type: :request do
@@ -6,7 +8,7 @@ RSpec.describe "Resource Imports", type: :request do
   let(:project_id) { resource.project_id }
 
   path "/projects/{project_id}/relationships/resource_imports" do
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                      parent: "project",
                      model: ResourceImport,
                      url_parameters: [:project_id],
@@ -14,13 +16,13 @@ RSpec.describe "Resource Imports", type: :request do
   end
 
   path "/projects/{project_id}/relationships/resource_imports/{id}" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                      parent: "project",
                      model: ResourceImport,
                      url_parameters: [:project_id],
                      authorized_user: :admin
 
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                      parent: "project",
                      model: ResourceImport,
                      url_parameters: [:project_id],

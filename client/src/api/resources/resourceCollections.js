@@ -45,7 +45,7 @@ export default {
 
   collectionResources(id, filterParams = {}, page = {}) {
     const filter = filterParams;
-    filter.collection_order = id;
+    filter.resource_collection = id;
     return {
       endpoint: `/api/v1/resource_collections/${id}/relationships/resources`,
       method: "GET",
@@ -60,6 +60,16 @@ export default {
       endpoint: `/api/v1/texts/${textId}/relationships/text_sections/${sectionId}/resource_collections`,
       method: "GET",
       options: {}
+    };
+  },
+
+  annotations(collectionId, filter, page) {
+    return {
+      endpoint: `/api/v1/resource_collections/${collectionId}/relationships/annotations`,
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
     };
   }
 };

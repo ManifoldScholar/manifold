@@ -7,7 +7,7 @@ import {
 } from "theme/styles/mixins";
 import Utility from "global/components/utility";
 
-export const SelectLabel = styled.div`
+export const SelectLabel = styled.label`
   ${utilityPrimary}
   display: block;
   margin-bottom: 12px;
@@ -30,6 +30,7 @@ export const Select = styled.select`
   padding-left: 13px;
   overflow: hidden;
   font-size: 16px;
+  line-height: 1.5;
   font-weight: var(--font-weight-regular);
   text-overflow: ellipsis;
   text-transform: none;
@@ -40,17 +41,17 @@ export const Select = styled.select`
   border-radius: 8px;
   transition: border-color ${defaultTransitionProps};
 
-  &.focus-visible {
+  &:focus-visible {
     border-color: var(--highlight-color);
   }
 `;
 
 export const Icon = styled(Utility.IconComposer)`
   position: absolute;
-  top: 50%;
+  inset-block-end: calc(0.5 * 2.857em);
   right: 8px;
   width: 22px;
   height: 22px;
   pointer-events: none;
-  transform: translateY(-50%);
+  transform: translateY(50%);
 `;

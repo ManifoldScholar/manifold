@@ -10,6 +10,7 @@ import LabelSet from "./LabelSet";
 import { Link } from "react-router-dom";
 import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
+import PopoverMenu from "global/components/popover/Menu";
 import { withTranslation } from "react-i18next";
 
 class EntitiesListRow extends PureComponent {
@@ -40,7 +41,10 @@ class EntitiesListRow extends PureComponent {
     draggableProps: PropTypes.object,
     isDragging: PropTypes.bool,
     innerRef: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
+    index: PropTypes.number,
+    entityCount: PropTypes.number,
+    onKeyboardMove: PropTypes.func
   };
 
   static defaultProps = {
@@ -51,6 +55,12 @@ class EntitiesListRow extends PureComponent {
     figureShape: "square",
     active: false
   };
+
+  constructor(props) {
+    super(props);
+
+    this.popoverDisclosureRef = React.createRef();
+  }
 
   get title() {
     return this.props.title;
@@ -73,6 +83,10 @@ class EntitiesListRow extends PureComponent {
     if (isArray(label)) return label;
     if (!label) return [];
     return [label];
+  }
+
+  get prepend() {
+    return this.props.prepend;
   }
 
   get hasLabels() {
@@ -101,6 +115,10 @@ class EntitiesListRow extends PureComponent {
 
   get hasMeta() {
     return has(this.props, "meta");
+  }
+
+  get hasPrepend() {
+    return has(this.props, "prepend");
   }
 
   get utility() {
@@ -150,6 +168,13 @@ class EntitiesListRow extends PureComponent {
 
   get isDragging() {
     return this.props.isDragging;
+  }
+
+  get itemClassNames() {
+    return classNames({
+      "entity-row entity-list__entity": true,
+      "scheme-dark entity-row--bulk-actions": this.hasPrepend
+    });
   }
 
   get figureClassNames() {
@@ -237,7 +262,7 @@ class EntitiesListRow extends PureComponent {
     return this.props.rowClickMode;
   }
 
-  wrapWithAnchor(child, id, url, block = false) {
+  wrapWithAnchor(child, id, url, block = false, tabIndex = 0) {
     const className = classNames({
       "entity-row__row-link": true,
       "entity-row__row-link--block": block,
@@ -250,15 +275,16 @@ class EntitiesListRow extends PureComponent {
     return (
       <Link
         className={className}
-        to={{ pathname: url, state: this.props.linkState, hash: "test" }}
+        to={{ pathname: url, state: this.props.linkState }}
         aria-describedby={`${id}-describedby`}
+        tabIndex={tabIndex < 0 ? tabIndex : undefined}
       >
         {child}
       </Link>
     );
   }
 
-  wrapWithButton(child, onClick, block = false) {
+  wrapWithButton(child, onClick, block = false, tabIndex = 0) {
     const className = classNames({
       "entity-row__row-link": true,
       "entity-row__row-link--block": block,
@@ -268,7 +294,11 @@ class EntitiesListRow extends PureComponent {
       "entity-row__row-link--is-active": this.active
     });
     return (
-      <button className={className} onClick={onClick}>
+      <button
+        className={className}
+        onClick={onClick}
+        tabIndex={tabIndex < 0 ? tabIndex : undefined}
+      >
         {child}
       </button>
     );
@@ -288,24 +318,78 @@ class EntitiesListRow extends PureComponent {
     );
   }
 
-  wrapWithClickHandler(child, id, block = false) {
+  wrapWithClickHandler(child, id, block = false, tabIndex) {
     if (!this.onRowClick) return child;
     if (isString(this.onRowClick))
-      return this.wrapWithAnchor(child, id, this.onRowClick, block);
-    return this.wrapWithButton(child, this.onRowClick, block);
+      return this.wrapWithAnchor(child, id, this.onRowClick, block, tabIndex);
+    return this.wrapWithButton(child, this.onRowClick, block, tabIndex);
   }
 
-  inlineLink(child, id) {
+  inlineLink(child, id, tabIndex) {
     if (this.rowClickMode !== "inline") return child;
-    return this.wrapWithClickHandler(child, id, false);
+    return this.wrapWithClickHandler(child, id, false, tabIndex);
   }
+
+  onKeyboardMove = direction => {
+    const { title, index } = this.props;
+    const draggableId = this.props.draggableProps?.["data-rbd-draggable-id"];
+
+    if (!draggableId) return;
+
+    this.props.onKeyboardMove(
+      draggableId,
+      title,
+      index,
+      direction === "up" ? index - 1 : index + 1,
+      () => {
+        if (this.popoverDisclosureRef?.current) {
+          this.popoverDisclosureRef.current.focus();
+        }
+      }
+    );
+  };
 
   get dragHandle() {
     if (!this.isSortable) return null;
+
     return (
-      <span className="entity-row__utility-button entity-row__utility-button--handle">
-        <Utility.IconComposer icon="grabber32" size={26} />
-      </span>
+      <>
+        <span
+          className="entity-row__utility-button entity-row__utility-button--handle"
+          aria-hidden
+        >
+          <Utility.IconComposer icon="grabber32" size={26} />
+        </span>
+        <div className="entity-row__utility-keyboard-buttons">
+          <PopoverMenu
+            disclosure={
+              <button
+                ref={this.popoverDisclosureRef}
+                className="entity-row__utility-button"
+              >
+                <Utility.IconComposer icon="arrowUpDown32" size={26} />
+                <span className="screen-reader-text">
+                  {this.props.t("actions.dnd.reorder")}
+                </span>
+              </button>
+            }
+            actions={[
+              {
+                id: "up",
+                label: this.props.t("actions.dnd.move_up_position"),
+                onClick: () => this.onKeyboardMove("up"),
+                disabled: this.props.index === 0
+              },
+              {
+                id: "down",
+                label: this.props.t("actions.dnd.move_down_position"),
+                onClick: () => this.onKeyboardMove("down"),
+                disabled: this.props.index === this.props.entityCount - 1
+              }
+            ]}
+          />
+        </div>
+      </>
     );
   }
 
@@ -319,15 +403,20 @@ class EntitiesListRow extends PureComponent {
     return (
       <UIDConsumer>
         {id => (
-          <li className="entity-row entity-list__entity">
+          <li className={this.itemClassNames}>
+            {this.hasPrepend && <>{this.prepend}</>}
             {this.blockLink(
               <div className={this.rowClassNames}>
                 {this.figure &&
                   (this.props.figureHasWrapper ? (
-                    this.inlineLink(this.figure)
+                    this.inlineLink(this.figure, undefined, this.title ? -1 : 0)
                   ) : (
                     <div className={this.figureClassNames}>
-                      {this.inlineLink(this.figure)}
+                      {this.inlineLink(
+                        this.figure,
+                        undefined,
+                        this.title ? -1 : 0
+                      )}
                     </div>
                   ))}
                 <div className={this.textClassNames}>

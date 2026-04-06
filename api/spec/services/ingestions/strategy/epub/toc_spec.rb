@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Strategy::Epub::TOC do
-
   context "when v3" do
     let(:toc) do
       <<~HEREDOC
@@ -37,11 +38,8 @@ RSpec.describe Ingestions::Strategy::Epub::TOC do
     end
 
     it "correctly generates a toc structure" do
-      expected =  [{:label=>"Section 1", :anchor=>"", :source_path=>"", :type=>nil, :children=>
-                    [{:label=>"Section 2", :anchor=>"", :source_path=>"", :type=>nil, :children=>
-                      [{:label=>"Section 2.a", :anchor=>"", :source_path=>"", :type=>nil}]
-                     }]},
-                   {:label=>"Section 3", :anchor=>"", :source_path=>"", :type=>nil}]
+      expected =  [{ label: "Section 1", anchor: "", source_path: "", type: nil, children: [{ label: "Section 2", anchor: "", source_path: "", type: nil, children: [{ label: "Section 2.a", anchor: "", source_path: "", type: nil }] }] },
+                   { label: "Section 3", anchor: "", source_path: "", type: nil }]
       expect(inspector.toc_structure).to eq expected
     end
   end
@@ -87,13 +85,9 @@ RSpec.describe Ingestions::Strategy::Epub::TOC do
     end
 
     it "correctly generates a toc structure" do
-      expected =  [{:label=>"Section 1", :anchor=>"", :source_path=>"", :type=>nil, :children=>
-                    [{:label=>"Section 2", :anchor=>"", :source_path=>"", :type=>nil, :children=>
-                       [{:label=>"Section 2.a", :anchor=>"", :source_path=>"", :type=>nil}]
-                     }]},
-                   {:label=>"Section 3", :anchor=>"", :source_path=>"", :type=>nil}]
+      expected =  [{ label: "Section 1", anchor: "", source_path: "", type: nil, children: [{ label: "Section 2", anchor: "", source_path: "", type: nil, children: [{ label: "Section 2.a", anchor: "", source_path: "", type: nil }] }] },
+                   { label: "Section 3", anchor: "", source_path: "", type: nil }]
       expect(inspector.toc_structure).to eq expected
     end
   end
-
 end

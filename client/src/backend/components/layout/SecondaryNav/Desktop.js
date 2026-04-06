@@ -43,12 +43,13 @@ export default function NavigationSecondary(props) {
       <nav className={navClasses} aria-label={getAriaLabel()}>
         <ul>
           {links.map(link => {
-            if (link.ability)
+            if (link.ability || link.kind)
               return (
                 <Authorize
                   key={`${link.route}-wrapped`}
                   entity={link.entity}
                   ability={link.ability}
+                  kind={link.kind}
                 >
                   {renderItem(link)}
                 </Authorize>

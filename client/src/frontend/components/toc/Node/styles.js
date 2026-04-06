@@ -16,7 +16,7 @@ export const Link = styled(LinkComponent, transientOptions)`
     background-color ${defaultTransitionProps};
 
   &:hover,
-  &.focus-visible {
+  &:focus-visible {
     --Node-Title-color: inherit;
 
     background-color: var(--color-accent-primary-off-white);

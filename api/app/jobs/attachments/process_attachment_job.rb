@@ -3,8 +3,14 @@
 module Attachments
   class ProcessAttachmentJob < ApplicationJob
     include ExclusiveJob
+    include GoodJob::ActiveJobExtensions::Concurrency
 
-    concurrency 1, drop: false unless Rails.env.test?
+    good_job_control_concurrency_with(
+      perform_limit: 1,
+      key: -> { "ProcessAttachmentJob:#{arguments.slice(1, 2).flatten.join(':')}" }
+    )
+
+    discard_on ActiveJob::DeserializationError, ActiveRecord::RecordNotFound
 
     retry_on ::MiniMagick::Error, wait: 10.seconds, attempts: 3
 
@@ -33,7 +39,6 @@ module Attachments
       "#{super}:#{params[:klass]}:#{params[:id]}"
     end
 
-    # rubocop:disable Metrics/MethodLength
     # https://shrinerb.com/docs/upgrading-to-3#dual-support
     def normalize_args(args)
       if args.one?
@@ -57,6 +62,5 @@ module Attachments
         record: record
       }
     end
-    # rubocop:enable Metrics/MethodLength
   end
 end

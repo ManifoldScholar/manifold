@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'interaction testing' do
   let(:interaction_inputs) do
     build_interaction_inputs
   end
 
   let(:valid_outcome) do
-    double("valid interaction", :invalid? => false, :valid? => true, result: valid_outcome_result)
+    double("valid interaction", invalid?: false, valid?: true, result: valid_outcome_result)
   end
 
   let(:valid_outcome_result) do
@@ -25,7 +27,7 @@ module InteractionTesting
     end
 
     def perform_the_interaction!(**inputs)
-      described_class.run interaction_inputs.merge(inputs)
+      described_class.run(**interaction_inputs, **inputs)
     end
 
     def perform_within_expectation!(valid: true, raises: false, **inputs)

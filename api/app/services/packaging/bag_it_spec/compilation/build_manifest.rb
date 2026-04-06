@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Packaging
   module BagItSpec
     module Compilation
@@ -8,10 +10,12 @@ module Packaging
         # @param [Hash] state
         # @option state [Packaging::BagItSpec::Context] :context
         # @return [void]
-        def call(state)
+        def call
           bag = state[:context].bag
 
           bag.manifest! algo: "sha256"
+
+          Success()
         end
       end
     end

@@ -24,6 +24,8 @@
     "engagement": "Engagement",
     "highlights_made": "$t(glossary.highlight_title_case_other) made",
     "highlights_in_date_range": "$t(glossary.highlight_title_case_other) made in {{dateRange}}.",
+    "downloads": "Total times downloaded",
+    "downloads_in_date_range": "Times downloaded in {{dateRange}}.",
     "new_stars": "New Stars",
     "stars_received": "New stars $t(glossary.project_one) has received",
     "stars_in_date_range": "New stars $t(glossary.project_one) has received in {{dateRange}}.",

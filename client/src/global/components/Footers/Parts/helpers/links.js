@@ -74,36 +74,8 @@ export function emailLink({ settings }) {
   };
 }
 
-export function twitterLink({ settings }) {
-  if (!settings || !settings.attributes.general.twitter) return null;
-  const name = settings.attributes.general.twitter;
-  return {
-    href: `https://twitter.com/${name}`,
-    target: "_blank",
-    rel: "noopener noreferrer",
-    title: "Twitter",
-    icon: "socialTwitter32"
-  };
-}
-
-export function facebookLink({ settings }) {
-  if (!settings || !settings.attributes.general.facebook) return null;
-  const name = settings.attributes.general.facebook;
-  return {
-    href: `https://www.facebook.com/${name}`,
-    target: "_blank",
-    rel: "noopener noreferrer",
-    title: "Facebook",
-    icon: "socialFacebook32"
-  };
-}
-
 export function socialLinks({ settings }) {
-  return compact([
-    emailLink({ settings }),
-    twitterLink({ settings }),
-    facebookLink({ settings })
-  ]);
+  return compact([emailLink({ settings })]);
 }
 
 export default function defaultLinks(props) {

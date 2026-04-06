@@ -18,7 +18,6 @@ function ProjectResourcesEntityCollection({
 }) {
   const { t } = useTranslation();
 
-  const showPagination = !isEmpty(resourcesMeta) && !isEmpty(paginationProps);
   const showFilters = !isEmpty(resourcesMeta) && !isEmpty(filterProps);
 
   return resources && project ? (
@@ -26,6 +25,7 @@ function ProjectResourcesEntityCollection({
       title={t("pages.resources_all")}
       icon="resources64"
       filterProps={showFilters ? filterProps : null}
+      containerWrapPoint="1120px"
       BodyComponent={props => (
         <ResourceList.Cards
           project={project}
@@ -45,7 +45,7 @@ function ProjectResourcesEntityCollection({
             }
       }
       paginationProps={
-        !showPagination
+        isEmpty(resourcesMeta)
           ? {}
           : {
               pagination: get(resourcesMeta, "pagination"),

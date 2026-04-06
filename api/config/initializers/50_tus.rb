@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "storage/factory"
 require "tus/storage/filesystem"
 

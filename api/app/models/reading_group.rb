@@ -8,6 +8,7 @@ class ReadingGroup < ApplicationRecord
   include Filterable
   include ReceivesEntitlements
   include SerializedAbilitiesFor
+  include SoftDeletable
   include TrackedCreator
 
   resourcify
@@ -16,20 +17,23 @@ class ReadingGroup < ApplicationRecord
 
   belongs_to :reading_group_kind, optional: true, inverse_of: :reading_groups
 
-  has_many :reading_group_memberships, dependent: :destroy
+  has_many :reading_group_memberships, dependent: :destroy, inverse_of: :reading_group
   has_many :moderators, -> { merge(ReadingGroupMembership.moderators) }, through: :reading_group_memberships, source: :user
   has_many :users, -> { merge(ReadingGroupMembership.active) }, through: :reading_group_memberships
+
   # We intentionally leave out the :dependent option here because we apply out own logic
   # to child annotations on reading group delete in the :update_annotations_privacy
   # before_destroy callback below.
-  has_many :annotations
+  has_many_readonly :annotations
 
-  has_one :reading_group_collection, inverse_of: :reading_group
-  has_one :reading_group_count
-  has_many :reading_group_visibilities
-  has_many :reading_group_user_counts
+  has_one_readonly :reading_group_collection, inverse_of: :reading_group
+  has_one_readonly :reading_group_count
+  has_many_readonly :reading_group_visibilities
+  has_many_readonly :reading_group_user_counts
 
   has_many :annotated_texts, -> { distinct.reorder(nil) }, through: :annotations, source: :text
+
+  has_many :annotation_flags, through: :annotations, source: :flags
 
   has_many :reading_group_categories, -> { in_order }, inverse_of: :reading_group, dependent: :destroy
 
@@ -50,8 +54,8 @@ class ReadingGroup < ApplicationRecord
 
   before_validation :ensure_invitation_code
   before_validation :upcase_invitation_code
-  after_save :ensure_creator_membership
   before_destroy :update_annotations_privacy
+  after_save :ensure_creator_membership
 
   scope :for_serialization, -> { includes(:reading_group_kind, :reading_group_count, reading_group_memberships: :user) }
 
@@ -61,9 +65,17 @@ class ReadingGroup < ApplicationRecord
   scope :with_order, ->(by = nil) { by.present? ? order(by) : in_default_order }
   scope :non_public, -> { where.not(privacy: "public") }
   scope :visible_to_public, -> { where(privacy: "public") }
+  scope :with_privacy, ->(value = nil) { where(privacy: value) if value.present? }
   scope :visible_to, ->(user) do
     where(id: ReadingGroupVisibility.visible_to(user).select(:reading_group_id))
   end
+  scope :with_flags, ->(value = nil) {
+    if value.present?
+      joins(:annotations)
+        .where("annotations.unresolved_flags_count > 0")
+        .distinct
+    end
+  }
 
   def private?
     privacy == "private"
@@ -140,7 +152,6 @@ class ReadingGroup < ApplicationRecord
       end
     end
 
-    # rubocop:disable Metrics/AbcSize
     def apply_sort_order_scope_value(value)
       case value
       when /\A(?<attr>created_at|name)(?:_(?<dir>asc|desc))\z/i
@@ -161,7 +172,6 @@ class ReadingGroup < ApplicationRecord
         all
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     def build_sort_order_direction(value)
       /desc/i.match?(value) ? :desc : :asc
@@ -178,6 +188,10 @@ class ReadingGroup < ApplicationRecord
 
     def arel_id_is_null_or_within_scope(scope)
       arel_table[:id].eq(nil).or(arel_table[:id].in(Arel.sql(scope.to_sql)))
+    end
+
+    def soft_deletable_association?(assoc)
+      assoc.klass == ::Annotation || super
     end
   end
 end

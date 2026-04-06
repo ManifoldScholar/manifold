@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Updaters
   # Updates a {ReadingGroupCategory} model from JSON-API style params
   class ReadingGroupCategory

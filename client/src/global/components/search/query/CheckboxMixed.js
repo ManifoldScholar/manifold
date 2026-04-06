@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
@@ -9,10 +9,18 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
   const [checked, setChecked] = useState(initialState);
   const allChecked = checked.length === checkboxes.length;
 
+  const inputRef = useRef(null);
+
   const { t } = useTranslation();
 
   useEffect(() => {
     onChange(checked);
+
+    if (inputRef.current) {
+      const isIndeterminate =
+        checked.length > 0 && checked.length < checkboxes.length;
+      inputRef.current.indeterminate = isIndeterminate;
+    }
   }, [checked]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function updateChecked(key) {
@@ -36,11 +44,10 @@ function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
                 className="search-query__checkbox checkbox checkbox--gray"
               >
                 <input
+                  ref={inputRef}
                   id={`${id}[all]`}
                   type="checkbox"
                   checked={allChecked}
-                  indeterminate={`${checked.length > 0 &&
-                    checked.length < checkboxes.length}`}
                   aria-controls={checkboxes
                     .map(checkbox => `${id}[${checkbox.value}]`)
                     .join(" ")}

@@ -1,6 +1,8 @@
-class SerializerRegistry
+# frozen_string_literal: true
 
+class SerializerRegistry
   include Enumerable
+
   attr_reader :klass, :entries, :full, :active
 
   def initialize(klass, full: false)
@@ -10,42 +12,37 @@ class SerializerRegistry
     @active = false
   end
 
-  def each(&block)
-    entries.each(&block)
+  def each(&)
+    entries.each(&)
   end
 
-  # rubocop:disable Lint/UnusedMethodArgument
-  def typed_has_one(relationship_name, options = {}, &block)
+  def typed_has_one(relationship_name, options = {}, &)
     activate
     options = map_relationship_options(options)
     register_relationship(relationship_name, :has_one, options)
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-            has_one(relationship_name, options, &block)
+            has_one(relationship_name, options, &)
     RUBY
   end
   # rubocop:enable Lint/UnusedMethodArgument
 
-  # rubocop:disable Lint/UnusedMethodArgument
-  def typed_belongs_to(relationship_name, options = {}, &block)
+  def typed_belongs_to(relationship_name, options = {}, &)
     activate
     options = map_relationship_options(options)
     register_relationship(relationship_name, :belongs_to, options)
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-            belongs_to(relationship_name, options, &block)
+            belongs_to(relationship_name, options, &)
     RUBY
   end
-  # rubocop:enable Lint/UnusedMethodArgument
 
-  # rubocop:disable Lint/UnusedMethodArgument
-  def typed_has_many(relationship_name, options = {}, &block)
+  def typed_has_many(relationship_name, options = {}, &)
     activate
     options = map_relationship_options(options)
     register_relationship(relationship_name, :has_many, options)
     klass.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-            has_many(relationship_name, options, &block)
+            has_many(relationship_name, options, &)
     RUBY
   end
-  # rubocop:enable Lint/UnusedMethodArgument
 
   def typed_attribute(attribute, type, options = {}, &block)
     activate
@@ -74,11 +71,9 @@ class SerializerRegistry
     end
   end
 
-  # rubocop:disable Naming/PredicateName
   def has_one_creator
     typed_has_one :creator, serializer: ::V1::UserSerializer, record_type: :user
   end
-  # rubocop:enable Naming/PredicateName
 
   def metadata(metadata: true, formatted: true, properties: true)
     typed_attribute(:metadata, ::Types::Hash) if metadata
@@ -103,7 +98,7 @@ class SerializerRegistry
   private
 
   def filter_to_types(values)
-    values.map { |_, v| [v[:key], v[:type]] }.to_h
+    values.to_h { |_, v| [v[:key], v[:type]] }
   end
 
   def build_camelize_proc(attribute, block = nil)
@@ -167,5 +162,4 @@ class SerializerRegistry
     page = pagination.dig(relationship_name, :number) || 1
     [page, per]
   end
-
 end

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  config.cache_classes = false
+  config.enable_reloading = true
 
   # Do not eager load code on boot.
   config.eager_load = false
@@ -27,10 +29,13 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   Rails.application.configure do
+    config.hosts << "www.example.com"
+    config.hosts << "localhost"
+    config.hosts << "web"
     config.hosts << "manifold.lvh"
+    config.hosts << "web.manifold.orb.local"
     config.hosts << "manifold-api.ngrok.io"
     config.hosts << "manifold-dev.ngrok.io"
-    config.hosts << "manifold-cable.ngrok.io"
     config.hosts << ENV["DOMAIN"]
   end
 
@@ -39,5 +44,5 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
-  config.file_watcher = ENV["DISABLE_SPRING"].present? ? ActiveSupport::FileUpdateChecker : ActiveSupport::EventedFileUpdateChecker
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end

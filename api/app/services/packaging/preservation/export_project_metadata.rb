@@ -38,8 +38,8 @@ module Packaging
       # @param [Symbol, #to_json, nil] value
       # @yieldreturn [#to_json]
       # @return [ActiveSupport::HashWithIndifferentAccess]
-      def store(key, value = UNSET, &block)
-        metadata[key] = read_value(key, value, &block)
+      def store(key, value = UNSET, &)
+        metadata[key] = read_value(key, value, &)
 
         return metadata
       end

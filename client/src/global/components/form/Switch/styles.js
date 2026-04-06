@@ -15,6 +15,7 @@ const BOOLEAN_PADDING = 4;
 /* See note in renderSwitchIndicator, also checked and focus styles for InputCheckbox. */
 export const IndicatorSwitchOuter = styled.span`
   border-bottom: 1px solid var(--input-border-color);
+  pointer-events: none;
 `;
 
 export const IndicatorSwitchInner = styled.span`

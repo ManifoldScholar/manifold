@@ -8,6 +8,12 @@ export const Category = styled.div`
   &:not(:last-child) {
     --List-last-child-border-color: transparent;
   }
+
+  ${({ $hideCategoryLabels }) =>
+    $hideCategoryLabels &&
+    `& + & {
+      border-block-start: 1px solid ${DEFAULT_BORDER_COLOR};
+    }`}
 `;
 
 export const CategoryHeading = styled.h3`

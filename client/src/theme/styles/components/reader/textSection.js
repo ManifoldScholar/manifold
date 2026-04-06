@@ -3,7 +3,7 @@ import { resetWordWrap, defaultTransitionProps } from "theme/styles/mixins";
 export default `
   .reader-window {
     ${resetWordWrap}
-    padding: 60px 0;
+    padding: calc(60px + var(--reader-header-height, 0px)) 0 60px;
     overflow: hidden;
     color: var(--reader-color);
     background-color: var(--bg-color);
@@ -16,20 +16,50 @@ export default `
   }
 
   .text-section {
+
     font-family: var(--font-family-copy);
     font-weight: var(--font-weight-regular);
     line-height: 1.761;
 
     --selection-bg-color: var(--color-base-yellow20);
 
+    .high-contrast &  {
+      --selection-bg-color: var(--color-base-yellow75);
+    }
+
     &.scheme-dark,
     .scheme-dark & {
       --selection-bg-color: var(--color-base-yellow75);
+
+      .high-contrast &  {
+        --selection-bg-color: var(--color-base-yellow20);
+      }
     }
 
     *::selection,
     .annotation-locked-selected {
-      background-color: var(--selection-bg-color);
+      background-color: var(--selection-bg-color) !important;
+
+      .high-contrast &  {
+        color: var(--background-color);
+      }
+    }
+
+    *::target-text {
+      background-color: var(--color-base-violet20);
+
+      .high-contrast &  {
+        color: var(--background-color);
+        background-color: var(--color-base-violet75);
+      }
+
+      .scheme-dark & {
+        background-color: var(--color-base-violet75);
+
+        .high-contrast &  {
+          background-color: var(--color-base-violet20);
+        }
+      }
     }
 
     &.font-sans-serif {
@@ -107,5 +137,9 @@ export default `
     .notation-marker {
       cursor: pointer;
     }
+  }
+
+  #text-section-interactive-region {
+    scroll-margin-block-start: calc(60px + var(--reader-header-height, 0px));
   }
 `;

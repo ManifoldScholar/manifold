@@ -13,6 +13,7 @@ import Visitors from "./Visitors";
 import ShareClicks from "./ShareClicks";
 import Citations from "./Citations";
 import TextSectionViews from "./TextSectionViews";
+import Downloads from "./Downloads";
 
 export default {
   Annotations,
@@ -29,5 +30,6 @@ export default {
   Visitors,
   ShareClicks,
   Citations,
-  TextSectionViews
+  TextSectionViews,
+  Downloads
 };

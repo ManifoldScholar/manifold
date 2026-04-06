@@ -4,12 +4,10 @@ import Utility from "global/components/utility";
 import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
 import LabelSet from "../LabelSet";
-import { useUID } from "react-uid";
 import * as Styled from "./styles";
 
 export default function EntitlementImportRow({ entity: csv }) {
   const { t } = useTranslation();
-  const id = useUID();
 
   const { name, fileName, fileUrl, messages, currentState } =
     csv?.attributes ?? {};
@@ -36,9 +34,6 @@ export default function EntitlementImportRow({ entity: csv }) {
               <h3 className="entity-row__title entity-row__title--in-rows">
                 <span className="entity-row__title-inner">{name}</span>
                 <LabelSet labels={[currentState]} />
-                <span id={`${id}-describedby`} className="screen-reader-text">
-                  {name}
-                </span>
               </h3>
               <h4 className="entity-row__subtitle entity-row__subtitle--in-rows">
                 {fileName}

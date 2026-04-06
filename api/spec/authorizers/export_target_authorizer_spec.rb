@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe "Export Target Abilities", :authorizer do
@@ -21,6 +23,6 @@ RSpec.describe "Export Target Abilities", :authorizer do
     let(:user) { FactoryBot.create :user, :editor }
     let!(:export_target) { FactoryBot.create :export_target }
 
-    it { is_expected.to be_able_to(:read).on(export_target).and be_unable_to(:create, :update, :destroy).on(export_target) }
+    it { is_expected.to be_able_to(:read).on(export_target).and be_unable_to(:create, :update, :delete).on(export_target) }
   end
 end

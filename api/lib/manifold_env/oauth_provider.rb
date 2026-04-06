@@ -1,24 +1,25 @@
+# frozen_string_literal: true
+
 module ManifoldEnv
   class OauthProvider
     include Comparable
     include Equalizer.new(:name)
     include ManifoldEnv::HasConfigurationDSL
     include ActiveModel::Validations
-    include Redis::Objects
-
-    value :app_id
-    value :secret
 
     CREDENTIAL_KEYS = %i(id secret).freeze
 
     validates :credentials, presence: { message: "are unset" }
 
     attr_reader :name
+    attr_accessor :app_id, :secret
 
     alias id name
 
     def initialize(name)
       @name = name
+      @app_id = nil
+      @secret = nil
     end
 
     def <=>(other)
@@ -38,7 +39,7 @@ module ManifoldEnv
     def credentials
       return nil unless has_credentials?
 
-      custom? ? custom.credentials : [app_id.value, secret.value]
+      custom? ? custom.credentials : [app_id, secret]
     end
 
     # @!attribute [r] custom
@@ -69,7 +70,7 @@ module ManifoldEnv
       if custom?
         custom.client_id.present?
       else
-        app_id.value.present?
+        app_id.present?
       end
     end
 
@@ -81,7 +82,7 @@ module ManifoldEnv
       if custom?
         custom.client_secret.present?
       else
-        secret.value.present?
+        secret.present?
       end
     end
 
@@ -110,7 +111,6 @@ module ManifoldEnv
       end.presence
     end
 
-    # rubocop:disable Style/CaseEquality
     def indifferently_compare(left, right)
       if right.is_a?(String)
         left.to_s == right
@@ -118,7 +118,5 @@ module ManifoldEnv
         left === right
       end
     end
-    # rubocop:enable Style/CaseEquality
   end
-  # rubocop:enable
 end

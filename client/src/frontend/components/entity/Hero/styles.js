@@ -44,7 +44,6 @@ export const JournalWrapper = styled(Wrapper)`
   --left-column-width: 51.5%;
   --column-gap: ${fluidScale("180px", "60px")};
   --Meta-font-family: var(--font-family-heading);
-  --Social-icons-color: var(--color-base-neutral80);
   --link-color: var(--color-neutral-text-dark);
   --CalloutList-gutter: 16px;
   --CalloutList-margin: 22px;
@@ -57,7 +56,6 @@ export const JournalWrapper = styled(Wrapper)`
 `;
 
 export const IssueWrapper = styled(Wrapper)`
-  --Social-icons-color: var(--color-base-neutral80);
   --link-color: var(--color-neutral-text-dark);
 
   color: var(--color-neutral-text-extra-dark);

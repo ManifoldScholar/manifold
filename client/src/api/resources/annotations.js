@@ -1,6 +1,24 @@
 import isString from "lodash/isString";
 
 export default {
+  index(filter = {}, page = {}) {
+    return {
+      endpoint: "/api/v1/annotations",
+      method: "GET",
+      options: {
+        params: { filter, page }
+      }
+    };
+  },
+
+  show(id) {
+    return {
+      endpoint: `/api/v1/annotations/${id}`,
+      method: "GET",
+      options: {}
+    };
+  },
+
   forSection(sectionId, textId, filter = {}, page = {}) {
     const filterParams = { ...filter };
     filterParams.orphaned = false;
@@ -51,12 +69,14 @@ export default {
     };
   },
 
-  flag(annotation) {
+  flag(annotation, message) {
     const id = isString(annotation) ? annotation : annotation.id;
     return {
       endpoint: `/api/v1/annotations/${id}/relationships/flags`,
       method: "POST",
-      options: {}
+      options: {
+        body: JSON.stringify({ message })
+      }
     };
   },
 
@@ -64,6 +84,14 @@ export default {
     const id = isString(annotation) ? annotation : annotation.id;
     return {
       endpoint: `/api/v1/annotations/${id}/relationships/flags`,
+      method: "DELETE",
+      options: {}
+    };
+  },
+
+  resolveAllFlags(annotationId) {
+    return {
+      endpoint: `/api/v1/annotations/${annotationId}/relationships/flags/resolve_all`,
       method: "DELETE",
       options: {}
     };

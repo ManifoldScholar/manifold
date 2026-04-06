@@ -29,13 +29,15 @@ class ReaderDrawer extends PureComponent {
       open: this.props.visible,
       context: "reader",
       size: "wide",
+      position: "overlay",
       padding: "none",
       identifier: "notes-drawer",
       lockScroll: "always",
       includeDrawerFrontMatter: true,
       focusTrap: false,
       title: this.props.t("glossary.note_title_case_other"),
-      closeCallback: this.props.closeCallback
+      closeCallback: this.props.closeCallback,
+      additionalDrawerProps: { "aria-modal": true }
     };
 
     return (

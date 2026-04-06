@@ -7,7 +7,7 @@ module ManifoldEnv
   class Introspection
     EMPTY_PARAMS = {}.with_indifferent_access.freeze
 
-    JSON_MIME = %r{application/json}.freeze
+    JSON_MIME = %r{application/json}
 
     # @return [Boolean]
     attr_reader :authorized_admin

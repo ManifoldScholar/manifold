@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectDecorator < ApplicationDecorator
   delegate_all
   decorates_association :texts
@@ -29,5 +31,4 @@ class ProjectDecorator < ApplicationDecorator
   def creator_list
     creators.map(&:name).join(", ")
   end
-
 end

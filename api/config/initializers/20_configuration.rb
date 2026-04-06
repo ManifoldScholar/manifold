@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConfigMash < Hashie::Mash
   disable_warnings
 end
@@ -10,10 +12,9 @@ ssl_enabled = %w(1 true).include?(ENV["SSL_ENABLED"].to_s.downcase)
 m.ssl_enabled = ssl_enabled
 m.protocol = ssl_enabled ? "https" : "http"
 m.domain = ENV["DOMAIN"]
-m.domain ||= "manifold.lvh" if Rails.env.development? || Rails.env.test?
+m.domain ||= "manifold.lvh" if Rails.env.local?
 m.url ||= ENV["CLIENT_URL"] || "#{ssl_enabled ? 'https' : 'http'}://#{m.domain}"
 m.api_url ||= ENV["CLIENT_BROWSER_API_URL"] || m.url
-m.elastic_search_url ||= ENV["ELASTICSEARCH_URL"]
 m.mammoth_path ||= ENV["MAMMOTH_PATH"] || Rails.root.join("..", "client/node_modules/mammoth/bin/mammoth")
 
 m.url_options = {

@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 
 export const Label = styled.label`
   ${utilityPrimary}
-  font-size: 13px;
+  font-size: 12px;
   display: block;
   margin-block-end: 8px;
 `;
@@ -27,14 +27,13 @@ export const Select = styled.select`
   ${filterSelectBase}
   width: 100%;
   height: ${entityFilterForm.filterHeight};
-  padding-top: 11px;
-  padding-bottom: 12px;
-  font-size: 13px;
+  padding-top: 6px;
+  padding-bottom: 8px;
   ${borderStyles}
   transition: border-color ${defaultTransitionProps};
 
-  &.focus-visible {
-    border-color: var(--hover-color);
+  &:focus-visible {
+    outline: solid 2px var(--focus-color);
   }
 
   option {
@@ -44,11 +43,11 @@ export const Select = styled.select`
 
 export const Icon = styled(IconComposer)`
   position: absolute;
-  top: ${({ $visibleLabel }) => ($visibleLabel ? "70%" : "50%")};
+  inset-block-end: ${parseFloat(entityFilterForm.filterHeight) * 0.5}px;
   right: 12px;
   width: 24px;
   height: 24px;
   color: var(--select-border-color);
   pointer-events: none;
-  transform: translateY(-50%);
+  transform: translateY(50%);
 `;

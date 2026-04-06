@@ -24,6 +24,9 @@ class Journal < ApplicationRecord
   include WithPermittedUsers
   include WithProjectCollectionLayout
   include WithConfigurableAvatar
+  include HasKeywordSearch
+
+  multisearch_draftable true
 
   has_formatted_attributes :description, :subtitle, :image_credits
   has_formatted_attributes :title, include_wrap: false
@@ -31,11 +34,11 @@ class Journal < ApplicationRecord
   with_metadata %w(
     series_title container_title isbn issn doi original_publisher
     original_publisher_place original_title publisher publisher_place version
-    series_number edition issue volume rights rights_territory restrictions rights_holder
+    series_number edition issue volume rights rights_territory restrictions rights_holder citation_override
   )
 
   has_sort_title do |journal|
-    journal.title[/^((a|the|an) )?(?<title>.*)$/i, :title]
+    journal.title[/^(?:(?:a|the|an) )?(?<title>.*)$/i, :title]
   end
 
   has_many :journal_subjects, dependent: :destroy, inverse_of: :journal
@@ -43,10 +46,12 @@ class Journal < ApplicationRecord
   has_many :action_callouts,
            -> { order(:position) },
            dependent: :destroy,
-           as: :calloutable
-  has_many :journal_volumes, -> { in_reverse_order }, dependent: :destroy
-  has_many :journal_issues, -> { in_reverse_order },  dependent: :destroy
-  has_many :journal_project_links, -> { in_default_order }
+           as: :calloutable,
+           inverse_of: :calloutable
+  has_many :journal_volumes, -> { in_reverse_order }, dependent: :destroy, inverse_of: :journal
+  has_many :journal_issues, -> { in_reverse_order },  dependent: :destroy, inverse_of: :journal
+
+  has_many_readonly :journal_project_links, -> { in_default_order }
 
   has_many :projects, through: :journal_project_links
 
@@ -82,28 +87,18 @@ class Journal < ApplicationRecord
   scope :with_update_ability, ->(user = nil) { build_update_ability_scope_for user }
   scope :with_update_or_issue_update_ability, ->(user = nil) { build_update_or_issue_update_ability_for user }
 
-  scope :search_import, -> { includes(:collaborators, :makers) }
+  multisearches! :description_plaintext
 
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
-
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description_plaintext,
-      creator: creator&.full_name,
-      makers: makers.map(&:full_name),
-      metadata: metadata.values.reject(&:blank?)
-    }.merge(search_hidden)
-  end
-
-  def search_hidden
-    {
-      hidden: draft?
+  has_keyword_search!(
+    against: %i[title subtitle description],
+    associated_against: {
+      creator: %i[first_name last_name nickname],
+      makers: %i[first_name last_name display_name]
     }
+  )
+
+  def multisearch_full_text
+    description_plaintext
   end
 
   def to_s
@@ -147,7 +142,7 @@ class Journal < ApplicationRecord
 
   class << self
     def build_read_ability_scope_for(user = nil)
-      return published unless user.present?
+      return published unless authorized_user?(user)
 
       where(arel_build_read_case_statement_for(user))
     end
@@ -155,13 +150,13 @@ class Journal < ApplicationRecord
     # @param [User, nil] user
     # @return [ActiveRecord::Relation<Project>]
     def build_update_ability_scope_for(user = nil)
-      return none if user.blank?
+      return none unless authorized_user?(user)
 
-      where arel_with_roles_for(user, RoleName.for_journal_update)
+      where arel_with_roles_for(user, **RoleName.for_journal_update)
     end
 
     def build_update_or_issue_update_ability_for(user = nil)
-      return none if user.blank?
+      return none unless authorized_user?(user)
 
       include_journals = Journal
         .joins(journal_issues: :project)
@@ -171,16 +166,15 @@ class Journal < ApplicationRecord
                  }
                })
 
-      where(arel_with_roles_for(user, RoleName.for_journal_update)).or(where(id: include_journals))
+      where(arel_with_roles_for(user, **RoleName.for_journal_update)).or(where(id: include_journals))
     end
-
-    private
 
     # This creates a case statement to be supplied to `where`.
     #
     # * If the journal is a draft, only show for users with draft access roles
     #   access to it
     #
+    # @api private
     # @param [User, nil] user
     def arel_build_read_case_statement_for(user)
       arel_case.tap do |stmt|
@@ -189,16 +183,18 @@ class Journal < ApplicationRecord
       end
     end
 
+    # @api private
     # @see .arel_with_draft_access_from_issues
     # @see .arel_with_roles_for
     # @param [User] user
     # @return [Arel::Nodes::Or]
     def arel_with_draft_roles_for(user)
-      arel_with_roles_for(user, RoleName.for_draft_access).or(
+      arel_with_roles_for(user, **RoleName.for_draft_access).or(
         arel_with_draft_access_from_issues(user)
       )
     end
 
+    # @api private
     # @see RoleName.for_access
     # @param [User] user
     # @param [<Symbol, String>] global role names

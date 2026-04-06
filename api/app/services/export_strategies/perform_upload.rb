@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 module ExportStrategies
-  # rubocop:disable Metrics/MethodLength
   class PerformUpload < ActiveInteraction::Base
     include ExportStrategies::Import[attach_export_pipeline: "pipelines.export_and_attach", upload_pipeline: "pipelines.upload"]
 
@@ -21,7 +22,7 @@ module ExportStrategies
 
       attach_step_args = { export_and_attach_project: [{ force: force_new_export }] }
 
-      attach_export_pipeline.with_step_args(attach_step_args).call(exportation) do |m|
+      attach_export_pipeline.with_step_args(**attach_step_args).call(exportation) do |m|
         m.success do
           # continue
         end
@@ -42,5 +43,4 @@ module ExportStrategies
       end
     end
   end
-  # rubocop:enable Metrics/MethodLength
 end

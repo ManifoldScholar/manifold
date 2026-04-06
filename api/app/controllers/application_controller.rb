@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 # The base application controller
 class ApplicationController < ActionController::API
+  # Base error handler, before any concerns.
+  rescue_from StandardError, with: :render_error_response
 
   include ActiveSupport::Configurable
   include Authentication
@@ -11,6 +15,8 @@ class ApplicationController < ActionController::API
   before_action :set_paper_trail_whodunnit
 
   rescue_from APIExceptions::StandardError, with: :render_error_response
+  rescue_from Authority::SecurityViolation, with: :authority_forbidden
+  rescue_from ActiveRecord::RecordNotFound, with: :respond_with_resource_not_found
 
   config_accessor :pagination_enforced, instance_writer: false do
     false
@@ -65,7 +71,7 @@ class ApplicationController < ActionController::API
   # @return [Boolean]
   def skip_pagination
     RequestStore.fetch :skip_pagination do
-      !pagination_enforced && Types::SAFE_BOOL.(params.dig(:no_pagination))
+      !pagination_enforced && ::Types::SAFE_BOOL.(params[:no_pagination])
     end
   end
 
@@ -106,40 +112,40 @@ class ApplicationController < ActionController::API
     vars = { resource: error.resource.to_s.downcase.pluralize, action: error.action }
     options = {
       status: authorization_error_status,
-      title: I18n.t("controllers.errors.forbidden.class.title", vars).titlecase,
-      detail: I18n.t("controllers.errors.forbidden.class.detail", vars)
+      title: I18n.t("controllers.errors.forbidden.class.title", **vars).titlecase,
+      detail: I18n.t("controllers.errors.forbidden.class.detail", **vars)
     }
-    render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
+    render json: { errors: build_api_error(**options) }, status: authorization_error_status(symbol: true)
   end
 
   def authority_forbidden_resource_instance(error)
     vars = { resource: error.resource.to_s, action: error.action }
     options = {
       status: authorization_error_status,
-      title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
-      detail: I18n.t("controllers.errors.forbidden.instance.detail", vars),
+      title: I18n.t("controllers.errors.forbidden.instance.title", **vars).titlecase,
+      detail: I18n.t("controllers.errors.forbidden.instance.detail", **vars),
       project: error_project_details(error)
     }
-    render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
+    render json: { errors: build_api_error(**options) }, status: authorization_error_status(symbol: true)
   end
 
   def respond_with_forbidden(resource, action)
     vars = { resource: resource, action: action }
     options = {
       status: authorization_error_status,
-      title: I18n.t("controllers.errors.forbidden.instance.title", vars).titlecase,
-      detail: I18n.t("controllers.errors.forbidden.instance.detail", vars)
+      title: I18n.t("controllers.errors.forbidden.instance.title", **vars).titlecase,
+      detail: I18n.t("controllers.errors.forbidden.instance.detail", **vars)
     }
-    render json: { errors: build_api_error(options) }, status: authorization_error_status(symbol: true)
+    render json: { errors: build_api_error(**options) }, status: authorization_error_status(symbol: true)
   end
 
-  def respond_with_resource_not_found
+  def respond_with_resource_not_found(*)
     options = {
       status: 404,
       title: I18n.t("controllers.errors.not_found.title").titlecase,
       detail: I18n.t("controllers.errors.not_found.detail")
     }
-    render json: { errors: build_api_error(options) }, status: :not_found
+    render json: { errors: build_api_error(**options) }, status: :not_found
   end
 
   def respond_with_bad_request
@@ -148,7 +154,7 @@ class ApplicationController < ActionController::API
       title: I18n.t("controllers.errors.bad_request.title").titlecase,
       detail: I18n.t("controllers.errors.bad_request.detail")
     }
-    render json: { errors: build_api_error(options) }, status: :bad_request
+    render json: { errors: build_api_error(**options) }, status: :bad_request
   end
 
   def authority_forbidden(error)
@@ -159,12 +165,18 @@ class ApplicationController < ActionController::API
   end
 
   def render_error_response(error)
+    # :nocov:
+    raise error if Rails.env.test?
+    Rails.logger.error(["#{error.class.name} - #{error.message}", *error.backtrace].join("\n"))
+
     options = {
       status: 500,
       title: "Manifold encountered an error",
       detail: error.message
     }
-    render json: { errors: build_api_error(options) }, status: :internal_server_error
+
+    render json: { errors: build_api_error(**options) }, status: :internal_server_error
+    # :nocov:
   end
 
   private
@@ -192,7 +204,6 @@ class ApplicationController < ActionController::API
     # @param [Boolean] authorize
     # @yieldreturn [ActiveRecord::Relation]
     # @return [void]
-    # rubocop:disable Lint/UnusedMethodArgument
     def resourceful!(model, authorize: true, **other_options, &model_scope)
       include API::V1::Resourceful
 
@@ -205,6 +216,7 @@ class ApplicationController < ActionController::API
 
     def record_analytics_for!(model, record_getter: "@#{model.model_name.param_key}")
       include API::V1::RecordsAnalytics
+
       @analytics_record_getter = record_getter
 
       yield
@@ -216,5 +228,4 @@ class ApplicationController < ActionController::API
       yield
     end
   end
-
 end

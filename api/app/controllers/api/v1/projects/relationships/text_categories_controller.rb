@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module Projects
       module Relationships
         # Responds with categories in a project
         class TextCategoriesController < AbstractProjectChildController
-
           LOCATION = [:api, :v1, :project, :relationships, :text_categories].freeze
 
           resourceful! Category, authorize_options: { except: [:index] } do
@@ -19,13 +20,13 @@ module API
             )
           end
 
-          def create
-            @category = authorize_and_create_category(category_params)
+          def show
+            @category = load_and_authorize_category
             render_single_resource(@category, location: LOCATION)
           end
 
-          def show
-            @category = load_and_authorize_category
+          def create
+            @category = authorize_and_create_category(category_params)
             render_single_resource(@category, location: LOCATION)
           end
 
@@ -34,7 +35,6 @@ module API
           def scope_for_categories
             @project.text_categories
           end
-
         end
       end
     end

@@ -1,15 +1,19 @@
+# frozen_string_literal: true
+
 require "cssbeautify"
 
 # A stylesheet
 class Stylesheet < ApplicationRecord
-
   # Concerns
   include TrackedCreator
 
   # Authorization
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
+
+  self.filter_attributes = [/\Araw_styles\z/, /\Astyles\z/].freeze
 
   # Associations
   belongs_to :text
@@ -70,5 +74,4 @@ class Stylesheet < ApplicationRecord
   def set_hashed_content
     self.hashed_content = Digest::MD5.hexdigest raw_styles
   end
-
 end

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { requests } from "api";
 import { select, loaded } from "utils/entityUtils";
-import hoistStatics from "hoist-non-react-statics";
+import hoistStatics from "../hoist-non-react-statics";
 import { connect } from "react-redux";
 import { uiReadingGroupActions } from "actions";
 import { ReaderContext } from "helpers/contexts";
@@ -134,7 +134,25 @@ export default function withReadingGroups(WrappedComponent) {
     }
 
     get currentAnnotationOverlayReadingGroup() {
-      return this.props.currentAnnotationOverlayReadingGroup;
+      const {
+        currentAnnotationOverlayReadingGroup: overlay,
+        readingGroupsLoaded
+      } = this.props;
+      if (overlay === "me" || overlay === "orphaned") return overlay;
+
+      if (!readingGroupsLoaded) return overlay;
+
+      const validOverlay = this.adjustedReadingGroups.find(
+        group => group.id === overlay
+      );
+
+      if (validOverlay) return overlay;
+
+      this.props.dispatch(
+        uiReadingGroupActions.setAnnotationOverlayReadingGroup("me")
+      );
+
+      return "me";
     }
 
     setAnnotatingReadingGroup = id => {

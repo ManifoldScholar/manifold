@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Ingestions::Strategies::Epub do
@@ -59,7 +61,7 @@ RSpec.describe Ingestions::Strategies::Epub do
   context "when V3" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
 
-    include_examples "outcome assertions"
+    it_behaves_like "outcome assertions"
 
     it "has the correct unique identifier" do
       expect(manifest[:attributes][:metadata][:unique_identifier]).to eq "test-v3"
@@ -96,7 +98,7 @@ RSpec.describe Ingestions::Strategies::Epub do
   context "when V2" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v2.zip") }
 
-    include_examples "outcome assertions"
+    it_behaves_like "outcome assertions"
 
     it "has the correct unique identifier" do
       expect(manifest[:attributes][:metadata][:unique_identifier]).to eq "test-v2"
@@ -130,7 +132,6 @@ RSpec.describe Ingestions::Strategies::Epub do
   end
 
   context "when url", slow: true do
-
     let(:url) { "https://storage.googleapis.com/manifold-assets/spec/e-t-a-hoffmann_master-flea.epub3" }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, external_source_url: url }
 

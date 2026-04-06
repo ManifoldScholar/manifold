@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Entitlements", type: :request do
@@ -12,7 +14,7 @@ RSpec.describe "Entitlements", type: :request do
   let(:scoped_roles) { { read_access: true } }
 
   path "/entitlements" do
-    include_examples "an API create request",
+    it_behaves_like "an API create request",
                      model: Entitlement,
                      authorized_user: :admin do
       let(:body) do
@@ -28,22 +30,22 @@ RSpec.describe "Entitlements", type: :request do
       end
     end
 
-    include_examples "an API index request", model: Entitlement, authorized_user: :admin
+    it_behaves_like "an API index request", model: Entitlement, authorized_user: :admin
   end
 
   path "/entitlements/{id}" do
-    include_examples "an API destroy request", model: Entitlement, authorized_user: :admin
-    include_examples "an API show request", model: Entitlement, authorized_user: :admin
+    it_behaves_like "an API destroy request", model: Entitlement, authorized_user: :admin
+    it_behaves_like "an API show request", model: Entitlement, authorized_user: :admin
   end
 
   context "for a project" do
     path "/projects/{project_id}/relationships/entitlements" do
-      include_examples "an API create request",
+      it_behaves_like "an API create request",
                        parent: "project",
                        model: Entitlement,
                        url_parameters: [:project_id],
                        authorized_user: :admin,
-                       description: "Creates an entitlement to be associated with the project "\
+                       description: "Creates an entitlement to be associated with the project " \
                        "ID provided in the endpoint." do
         let(:body) do
           {
@@ -57,7 +59,7 @@ RSpec.describe "Entitlements", type: :request do
         end
       end
 
-      include_examples "an API index request", parent: "project", model: Entitlement, url_parameters: [:project_id], authorized_user: :admin
+      it_behaves_like "an API index request", parent: "project", model: Entitlement, url_parameters: [:project_id], authorized_user: :admin
     end
   end
 end

@@ -1,24 +1,19 @@
 import baseConfig from "./browser-base.config";
-import {
-  DefinePlugin,
-  HotModuleReplacementPlugin,
-  NamedModulesPlugin
-} from "webpack";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
-import { mergeWithRules} from "webpack-merge";
+import { mergeWithRules } from "webpack-merge";
 import environment from "../helpers/environment";
 import paths from "../helpers/paths";
 
+const allowedHosts = [
+  "manifold.lvh",
+  "localhost",
+  "127.0.0.1",
+  "manifold-dev.lvh",
+  "manifold-stable.lvh",
+];
+if (process.env.DOMAIN) allowedHosts.push(process.env.DOMAIN);
+
 const browserConfig = {
-  entry: {
-    "build/manifold-client-browser": [
-      "webpack/hot/only-dev-server",
-      `webpack-dev-server/client?http://0.0.0.0:${environment.devPort}`
-    ]
-  },
-
-  devtool: "cheap-module-eval-source-map",
-
   mode: "development",
   module: {
     rules: [
@@ -42,19 +37,30 @@ const browserConfig = {
 
   devServer: {
     hot: true,
+    liveReload: false,
+    client: {
+      overlay: false // use react-refresh overlay instead
+    },
+    host: process.env.WEBPACK_DEV_HOST || process.env.DOMAIN || "localhost",
+    allowedHosts,
+    port: environment.devPort,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
       "Access-Control-Allow-Headers":
         "X-Requested-With, content-type, Authorization"
+    },
+    static: {
+      directory: paths.root
     }
   },
-  plugins: [
-    new NamedModulesPlugin(),
-    new HotModuleReplacementPlugin(),
-    new ReactRefreshWebpackPlugin()
-  ]
-}
+  plugins: [new ReactRefreshWebpackPlugin()],
+
+  optimization: {
+    moduleIds: "named"
+    // runtimeChunk: "single"
+  }
+};
 
 const config = mergeWithRules({
   module: {
@@ -63,13 +69,10 @@ const config = mergeWithRules({
       exclude: "replace",
       use: {
         loader: "match",
-        options: "replace",
-      },
-    },
-  },
-})(baseConfig, browserConfig)
-
-// const util = require('util')
-// console.log(util.inspect(config, {showHidden: false, depth: null, colors: true}))
+        options: "replace"
+      }
+    }
+  }
+})(baseConfig, browserConfig);
 
 export default config;

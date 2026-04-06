@@ -69,13 +69,25 @@ class Navigation {
           },
           {
             label: "titles.project_collections",
-            route: "backendProjectCollections"
+            route: "backendProjectCollections",
+            entity: "projectCollection",
+            ability: "update"
           }
         ]
       },
       {
+        label: "titles.projects",
+        route: "backendProjectsAll"
+      },
+      {
         label: "titles.journals",
         route: "backendJournals"
+      },
+      {
+        label: "titles.groups",
+        route: "backendReadingGroups",
+        entity: "readingGroup",
+        kind: "admin"
       },
       {
         label: "titles.records",
@@ -111,6 +123,18 @@ class Navigation {
             label: "titles.entitlements",
             route: "backendRecordsEntitlements",
             entity: "entitlement",
+            ability: "update"
+          },
+          {
+            label: "titles.annotations",
+            route: "backendRecordsAnnotations",
+            entity: "annotation",
+            ability: "update"
+          },
+          {
+            label: "titles.comments",
+            route: "backendRecordsComments",
+            entity: "comment",
             ability: "update"
           }
         ]
@@ -270,13 +294,6 @@ class Navigation {
         args
       },
       {
-        label: "titles.social",
-        route: "backendProjectSocial",
-        entity: project,
-        ability: "manageSocials",
-        args
-      },
-      {
         label: "titles.exports",
         route: "backendProjectExportations",
         entity: project,
@@ -358,6 +375,33 @@ class Navigation {
     ];
   });
 
+  static readingGroup = memoize(group => {
+    const args = [group.id];
+    return [
+      {
+        label: "titles.details",
+        route: "backendReadingGroupDetails",
+        entity: group,
+        ability: "read",
+        args
+      },
+      {
+        label: "titles.members",
+        route: "backendReadingGroupMembers",
+        entity: group,
+        ability: "update",
+        args
+      },
+      {
+        label: "titles.annotations",
+        route: "backendReadingGroupAnnotations",
+        entity: group,
+        ability: "update",
+        args
+      }
+    ];
+  });
+
   static records = memoize(() => {
     return [
       {
@@ -389,6 +433,38 @@ class Navigation {
         route: "backendRecordsEntitlements",
         entity: "entitlementImport",
         ability: "update"
+      },
+      {
+        label: "titles.annotations",
+        route: "backendRecordsAnnotations",
+        entity: "annotation",
+        kind: "admin"
+      },
+      {
+        label: "titles.comments",
+        route: "backendRecordsComments",
+        entity: "comment",
+        kind: "admin"
+      }
+    ];
+  });
+
+  static user = memoize(user => {
+    const args = [user.id];
+    return [
+      {
+        label: "titles.properties",
+        route: "backendRecordsUserProperties",
+        entity: user,
+        ability: "update",
+        args
+      },
+      {
+        label: "titles.activity",
+        route: "backendRecordsUserActivity",
+        entity: user,
+        ability: "update",
+        args
       }
     ];
   });
@@ -424,6 +500,15 @@ class Navigation {
       out.splice(1, 0, {
         label: "titles.variants",
         route: "backendResourceVariants",
+        entity: project,
+        ability: "update",
+        args
+      });
+    }
+    if (kind === "video" && !externalVideo) {
+      out.push({
+        label: "titles.tracks",
+        route: "backendResourceTracks",
         entity: project,
         ability: "update",
         args

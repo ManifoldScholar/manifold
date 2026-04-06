@@ -22,7 +22,8 @@ export const getCalloutParams = (data, type, isLink, t) => {
         iconSize: 24,
         url: data.attributes.attachmentStyles.original,
         title: data.attributes.title || t("actions.download"),
-        as: "a"
+        as: "a",
+        analyticsEvent: "download"
       };
     case "LINK":
       return {
@@ -57,7 +58,8 @@ export const getCalloutParams = (data, type, isLink, t) => {
         iconSize: 24,
         url: data.attributes.url,
         title: data.attributes.title || "Share",
-        as: "a"
+        as: "a",
+        analyticsEvent: "share"
       };
     case "EMAIL":
       return {

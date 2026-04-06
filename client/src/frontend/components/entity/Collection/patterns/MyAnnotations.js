@@ -26,7 +26,8 @@ function MyAnnotationsEntityCollection({
     <EntityCollection
       title={t("pages.my_notes")}
       icon="NotesUnique"
-      filterProps={hasAnnotations ? filterProps : null}
+      filterProps={hasAnnotations || isFiltered ? filterProps : null}
+      containerWrapPoint="926px"
       countProps={
         isEmpty(annotationsMeta)
           ? {}
@@ -43,6 +44,8 @@ function MyAnnotationsEntityCollection({
             <Annotation.List.Default
               annotations={annotations}
               showCommentsToggleAsBlock
+              showMarkers
+              markerIcons
             />
           )}
           {!hasAnnotations && isFiltered && (

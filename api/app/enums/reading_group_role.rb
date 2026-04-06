@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReadingGroupRole < ClassyEnum::Base
   def to_role_name
     RoleName.fetch(to_s)

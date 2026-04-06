@@ -1,320 +1,245 @@
-import React, { PureComponent } from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import Helper from "global/components/helper";
 import Utility from "frontend/components/utility";
-import IconComposer from "global/components/utility/IconComposer";
 import Editor from "../../Editor";
 import Meta from "./Meta";
+import BlockToggle from "./BlockToggle";
+import InlineToggle from "./InlineToggle";
+import FlagToggle from "./Flag/Toggle";
 import CommentContainer from "global/containers/comment";
 import { annotationsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
-import pluralize from "pluralize";
 import Authorize from "hoc/Authorize";
+import { useCurrentUser, useDialog } from "hooks";
 import * as Styled from "./styles";
+import { useUID } from "react-uid";
 
 const { request } = entityStoreActions;
 
-class AnnotationDetail extends PureComponent {
-  static displayName = "Annotation.Annotation.UserContent";
+export default function AnnotationDetail({
+  includeComments = true,
+  includeMarkers,
+  markerIcons,
+  annotation,
+  showCommentsToggleAsBlock,
+  showLogin,
+  refresh
+}) {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const currentUser = useCurrentUser();
 
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    annotation: PropTypes.object.isRequired,
-    showLogin: PropTypes.func,
-    includeComments: PropTypes.bool.isRequired,
-    showCommentsToggleAsBlock: PropTypes.bool,
-    t: PropTypes.func
+  const { readingGroupPrivacy, commentsCount } = annotation?.attributes ?? {};
+  const isAnonymous = readingGroupPrivacy === "anonymous";
+
+  const [action, setAction] = useState();
+  const [showComments, setShowComments] = useState(
+    includeComments && !isAnonymous
+  );
+
+  const threadRef = useRef(null);
+  const replyToggleRef = useRef(null);
+  const editUID = useUID();
+  const editDialog = useDialog({ modal: false, dismissalMode: "explicit" });
+
+  const handleEditKeyDown = e => {
+    // Prevent the event from bubbling up to the main dialog
+    e.stopPropagation();
   };
 
-  static defaultProps = {
-    includeComments: true
+  const startReply = () => {
+    setAction("replying");
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      action: null,
-      includeComments: this.props.includeComments && this.canIncludeComments
-    };
-    this.threadRef = React.createRef();
-    this.replyToggleRef = React.createRef();
-    this.editToggleRef = React.createRef();
-  }
-
-  startReply = () => {
-    this.setState({
-      action: "replying"
-    });
+  const startEdit = () => {
+    editDialog.onToggleClick();
   };
 
-  startEdit = () => {
-    this.setState({
-      action: "editing"
-    });
+  const stopReply = () => {
+    setAction(null);
+
+    if (replyToggleRef.current) replyToggleRef.current.focus();
   };
 
-  stopReply = () => {
-    this.setState(
-      {
-        action: null
-      },
-      () => {
-        if (this.replyToggleRef.current) this.replyToggleRef.current.focus();
-      }
-    );
+  const stopEdit = () => {
+    editDialog.onCloseClick();
   };
 
-  stopEdit = () => {
-    this.setState(
-      {
-        action: null
-      },
-      () => {
-        if (this.editToggleRef.current) this.editToggleRef.current.focus();
-      }
-    );
-  };
-
-  handleFlag = () => {
-    const { annotation } = this.props;
-    const call = annotationsAPI.flag(annotation);
-    this.props.dispatch(request(call, requests.rAnnotationFlag));
-  };
-
-  handleUnflag = () => {
-    const { annotation } = this.props;
-    const call = annotationsAPI.unflag(annotation);
-    this.props.dispatch(request(call, requests.rAnnotationUnflag));
-  };
-
-  saveAnnotation = annotation => {
-    const call = annotationsAPI.update(annotation.id, annotation.attributes);
-    const res = this.props.dispatch(request(call, requests.rAnnotationUpdate));
+  const saveAnnotation = data => {
+    const call = annotationsAPI.update(data.id, data.attributes);
+    const res = dispatch(request(call, requests.rAnnotationUpdate));
     return res.promise;
   };
 
-  deleteAnnotation = () => {
-    const { annotation } = this.props;
+  const deleteAnnotation = () => {
     const call = annotationsAPI.destroy(annotation.id);
     const options = { removes: { type: "annotations", id: annotation.id } };
-    const res = this.props.dispatch(
-      request(call, requests.rAnnotationDestroy, options)
-    );
+    const res = dispatch(request(call, requests.rAnnotationDestroy, options));
     return res.promise;
   };
 
-  loadComments = () => {
-    this.setState({ includeComments: true });
+  const toggleComments = () => {
+    setShowComments(!showComments);
 
-    if (!this.threadRef?.current) return;
-    this.threadRef.current.focus();
+    if (!showComments && threadRef?.current) threadRef.current.focus();
   };
 
-  get commentsCount() {
-    return this.props.annotation.attributes.commentsCount;
-  }
+  const showCommentsToggle = !!commentsCount && !showComments;
 
-  get commentsCountLabel() {
-    const root = "comment";
-    return this.commentsCount === 1 ? root : pluralize(root);
-  }
+  const showBlockCommentsToggle = showCommentsToggleAsBlock && !!commentsCount;
+  const showInlineCommentsToggle =
+    !showBlockCommentsToggle && showCommentsToggle;
 
-  get canIncludeComments() {
-    const { annotation } = this.props;
-    if (!annotation) return false;
-    return annotation.attributes.readingGroupPrivacy !== "anonymous";
-  }
+  if (!annotation) return null;
 
-  get includeComments() {
-    return this.canIncludeComments && this.state.includeComments;
-  }
+  const creator = annotation.relationships?.creator;
 
-  get hasComments() {
-    return this.commentsCount > 0;
-  }
+  const verifiedUser = () => {
+    const established = currentUser?.attributes.established;
+    const trusted = currentUser?.attributes.trusted;
 
-  get showCommentsToggleAsBlock() {
-    return this.props.showCommentsToggleAsBlock;
-  }
+    return established || trusted;
+  };
 
-  get showInlineCommentsToggle() {
-    return (
-      !this.includeComments &&
-      this.hasComments &&
-      !this.showCommentsToggleAsBlock
-    );
-  }
+  const onReplySuccess = () => {
+    if (refresh) refresh();
+    setShowComments(true);
+  };
 
-  get showBlockCommentsToggle() {
-    return (
-      !this.includeComments &&
-      this.hasComments &&
-      this.showCommentsToggleAsBlock
-    );
-  }
-
-  renderInlineCommentsToggle() {
-    if (!this.showInlineCommentsToggle) return null;
-
-    return (
-      <li>
-        <Styled.Button
-          onClick={this.loadComments}
-          $active={this.state.action === "editing"}
-        >
-          {this.props.t("counts.comment", { count: this.commentsCount })}
-        </Styled.Button>
-      </li>
-    );
-  }
-
-  renderBlockCommentsToggle() {
-    if (!this.showBlockCommentsToggle) return null;
-
-    return (
-      <button className="annotation-footer-button" onClick={this.loadComments}>
-        <span className="annotation-footer-button__inner">
-          <span className="annotation-footer-button__icon-container">
-            <IconComposer icon="interactComment32" size="default" />
-          </span>
-          <span className="annotation-footer-button__text">
-            {this.props.t("counts.comment", { count: this.commentsCount })}
-          </span>
-          <IconComposer
-            icon="arrowLongRight16"
-            size={24}
-            className="annotation-footer-button__arrow-icon"
+  return (
+    <>
+      <li className="annotation-comments">
+        <Styled.Inner>
+          <Meta
+            annotation={annotation}
+            creator={creator}
+            includeMarkers={includeMarkers}
+            markerIcons={markerIcons}
           />
-        </span>
-      </button>
-    );
-  }
-
-  render() {
-    const { annotation, t } = this.props;
-    if (!annotation) return null;
-
-    const creator = this.props.annotation.relationships.creator;
-
-    return (
-      <>
-        <li className="annotation-comments">
-          <Styled.Inner>
-            <Meta
-              annotation={annotation}
-              creator={creator}
-              includeMarkers={this.props.includeMarkers}
-            />
-            {this.state.action === "editing" ? (
-              <Editor
-                annotation={annotation}
-                saveAnnotation={this.saveAnnotation}
-                cancel={this.stopEdit}
-              />
-            ) : (
-              <div>
-                <Styled.Body>
-                  <Helper.SimpleFormat text={annotation.attributes.body} />
-                </Styled.Body>
-                <Authorize kind={"any"}>
-                  <Styled.Utility>
-                    <Styled.UtilityList
-                      $isFlagged={annotation.attributes.flagged}
-                    >
-                      {this.includeComments ? (
-                        <Authorize entity={"comment"} ability={"create"}>
-                          <li>
-                            <Styled.Button
-                              ref={this.replyToggleRef}
-                              onClick={
-                                this.state.action === "replying"
-                                  ? this.stopReply
-                                  : this.startReply
-                              }
-                              aria-expanded={this.state.action === "replying"}
-                            >
-                              {t("actions.reply")}
-                            </Styled.Button>
-                          </li>
-                        </Authorize>
-                      ) : null}
-                      <Authorize entity={annotation} ability={"update"}>
-                        <li>
-                          <Styled.Button
-                            ref={this.editToggleRef}
-                            onClick={this.startEdit}
-                            aria-expanded={this.state.action === "editing"}
-                          >
-                            {t("actions.edit")}
-                          </Styled.Button>
-                        </li>
-                      </Authorize>
-                      <Authorize entity={annotation} ability={"delete"}>
-                        <li>
-                          <Utility.ConfirmableButton
-                            label={t("actions.delete")}
-                            confirmHandler={this.deleteAnnotation}
-                          />
-                        </li>
-                      </Authorize>
-                      <li>
-                        <Styled.SecondaryButton
-                          onClick={
-                            annotation.attributes.flagged
-                              ? this.handleUnflag
-                              : this.handleFlag
-                          }
-                          aria-pressed={annotation.attributes.flagged}
-                        >
-                          {annotation.attributes.flagged
-                            ? t("actions.unflag")
-                            : t("actions.flag")}
-                        </Styled.SecondaryButton>
-                      </li>
-                      {this.renderInlineCommentsToggle()}
-                    </Styled.UtilityList>
-                    {this.state.action === "replying" && (
-                      <CommentContainer.Editor
-                        subject={annotation}
-                        cancel={this.stopReply}
-                        initialOpen
-                      />
-                    )}
-                  </Styled.Utility>
-                </Authorize>
-                {this.props.showLogin && (
-                  <Authorize kind="unauthenticated">
-                    <Styled.Utility>
-                      <Styled.UtilityList>
-                        <li>
-                          <Styled.Button onClick={this.props.showLogin}>
-                            {t("actions.login_to_reply")}
-                          </Styled.Button>
-                        </li>
-                      </Styled.UtilityList>
-                    </Styled.Utility>
+          <div
+            {...(editDialog.open
+              ? { inert: "", className: "screen-reader-text" }
+              : {})}
+          >
+            <Styled.Body>
+              <Helper.SimpleFormat text={annotation.attributes.body} />
+            </Styled.Body>
+            <Authorize kind={"any"}>
+              <Styled.Utility>
+                <Styled.UtilityList $isFlagged={annotation.attributes.flagged}>
+                  <Authorize entity={"comment"} ability={"create"}>
+                    <li>
+                      <Styled.Button
+                        ref={replyToggleRef}
+                        onClick={action === "replying" ? stopReply : startReply}
+                        aria-expanded={action === "replying"}
+                      >
+                        {t("actions.reply")}
+                      </Styled.Button>
+                    </li>
                   </Authorize>
+
+                  <Authorize entity={annotation} ability={"update"}>
+                    <li>
+                      <Styled.Button
+                        className="confirmable-button"
+                        ref={editDialog.toggleRef}
+                        onClick={startEdit}
+                        aria-expanded={editDialog.open}
+                        aria-controls={editUID}
+                      >
+                        {t("actions.edit")}
+                      </Styled.Button>
+                    </li>
+                  </Authorize>
+                  <Authorize entity={annotation} ability={"delete"}>
+                    <li>
+                      <Utility.ConfirmableButton
+                        label={t("actions.delete")}
+                        confirmHandler={deleteAnnotation}
+                      />
+                    </li>
+                  </Authorize>
+                  {verifiedUser && (
+                    <li>
+                      <FlagToggle record={annotation} />
+                    </li>
+                  )}
+                  {showInlineCommentsToggle && (
+                    <InlineToggle
+                      active={action === "editing"}
+                      loadComments={toggleComments}
+                      commentsCount={commentsCount}
+                    />
+                  )}
+                </Styled.UtilityList>
+                {action === "replying" && (
+                  <CommentContainer.Editor
+                    subject={annotation}
+                    cancel={stopReply}
+                    onSuccess={onReplySuccess}
+                    initialOpen
+                  />
                 )}
-              </div>
+              </Styled.Utility>
+            </Authorize>
+            {showLogin && (
+              <Authorize kind="unauthenticated">
+                <Styled.Utility>
+                  <Styled.UtilityList>
+                    <li>
+                      <Styled.Button onClick={showLogin}>
+                        {t("actions.login_to_reply")}
+                      </Styled.Button>
+                    </li>
+                  </Styled.UtilityList>
+                </Styled.Utility>
+              </Authorize>
             )}
-            <div
-              ref={this.threadRef}
-              tabIndex={-1}
-              aria-label={t("glossary.comments__thread")}
-              className="annotation-comments__thread-container"
-            >
-              {this.includeComments && (
-                <CommentContainer.Thread subject={annotation} />
-              )}
-            </div>
-          </Styled.Inner>
-        </li>
-        {this.renderBlockCommentsToggle()}
-      </>
-    );
-  }
+          </div>
+          <Styled.EditDialog
+            ref={editDialog.dialogRef}
+            id={editUID}
+            onKeyDown={handleEditKeyDown}
+            {...(editDialog.open ? {} : { inert: "" })}
+          >
+            <Editor
+              annotation={annotation}
+              saveAnnotation={saveAnnotation}
+              cancel={stopEdit}
+            />
+          </Styled.EditDialog>
+          <div
+            ref={threadRef}
+            tabIndex={-1}
+            aria-label={t("glossary.comments__thread")}
+            className="annotation-comments__thread-container"
+          >
+            {showComments && <CommentContainer.Thread subject={annotation} />}
+          </div>
+        </Styled.Inner>
+      </li>
+      {showBlockCommentsToggle && (
+        <BlockToggle
+          toggleComments={toggleComments}
+          commentsCount={commentsCount}
+          expanded={showComments}
+        />
+      )}
+    </>
+  );
 }
 
-export default withTranslation()(connect()(AnnotationDetail));
+AnnotationDetail.displayName = "Annotation.Annotation.UserContent";
+
+AnnotationDetail.propTypes = {
+  annotation: PropTypes.object.isRequired,
+  showLogin: PropTypes.func,
+  includeComments: PropTypes.bool,
+  includeMarkers: PropTypes.bool,
+  markerIcons: PropTypes.bool,
+  showCommentsToggleAsBlock: PropTypes.bool
+};

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "pandoc-ruby"
 require "shellwords"
 
@@ -105,7 +107,6 @@ module Ingestions
           </html>
         HEREDOC
       end
-
     end
   end
 end

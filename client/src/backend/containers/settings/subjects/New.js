@@ -32,7 +32,10 @@ export class SettingsSubjectsNewContainer extends PureComponent {
           name="backend-create-subject"
           update={subjectsAPI.update}
           create={subjectsAPI.create}
-          options={{ adds: requests.beSubjects }}
+          options={{
+            adds: requests.beSubjects,
+            refreshes: requests.feSubjects
+          }}
           onSuccess={this.handleSuccess}
           className="form-secondary"
         >

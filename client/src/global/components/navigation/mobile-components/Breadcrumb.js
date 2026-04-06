@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import classNames from "classnames";
 import { matchPath } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -20,13 +21,14 @@ class MobileBreadcrumb extends PureComponent {
 
     const firstMatch = this.match(this.props.links);
     /* eslint-disable no-nested-ternary */
-    const first = journalIsActive
-      ? firstMatch.route === "frontendProjects"
-        ? { label: "titles.journals", route: "frontendJournals" }
-        : firstMatch.route === "backendProjects"
-        ? { label: "titles.journals", route: "backendJournals" }
-        : firstMatch
-      : firstMatch;
+    const first =
+      journalIsActive && firstMatch
+        ? firstMatch.route === "frontendProjects"
+          ? { label: "titles.journals", route: "frontendJournals" }
+          : firstMatch.route === "backendProjects"
+          ? { label: "titles.journals", route: "backendJournals" }
+          : firstMatch
+        : firstMatch;
     /* eslint-enable no-nested-ternary */
 
     if (first) {
@@ -39,6 +41,10 @@ class MobileBreadcrumb extends PureComponent {
     return segments;
   }
 
+  get isBackend() {
+    return this.props.location.pathname.includes("backend");
+  }
+
   match(links) {
     if (!links) return null;
     return links.find(link => {
@@ -47,7 +53,10 @@ class MobileBreadcrumb extends PureComponent {
       if (link.matchType === "link" || link.externalUrl) {
         return this.props.location.pathname === this.pathForLink(link);
       }
-      return matchPath(this.props.location.pathname, route) !== null;
+      return (
+        matchPath(this.props.location.pathname, route) !== null ||
+        this.props.location.pathname.startsWith(route.path)
+      );
     });
   }
 
@@ -64,7 +73,12 @@ class MobileBreadcrumb extends PureComponent {
     const size = segments.length;
 
     return (
-      <nav className="breadcrumb-list hide-82">
+      <nav
+        className={classNames("breadcrumb-list", {
+          "hide-100": this.isBackend,
+          "hide-82": !this.isBackend
+        })}
+      >
         {this.segments.map(link => {
           count += 1;
           return (

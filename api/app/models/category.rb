@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 # Used to group texts and resources in a project
 class Category < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Constants
-  ROLE_TEXT = "text".freeze
-  ROLE_RESOURCE = "resource".freeze
+  ROLE_TEXT = "text"
+  ROLE_RESOURCE = "resource"
 
   # Associations
   belongs_to :project
@@ -31,5 +33,4 @@ class Category < ApplicationRecord
   def to_s
     title
   end
-
 end

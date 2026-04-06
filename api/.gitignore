@@ -33,5 +33,12 @@ data/*
 !data/.gitkeep
 examples.txt
 .rspec-local
+dump.sql
 
 coverage
+backup*
+
+/config/*.local.yml
+/config/credentials/local.*
+
+.env

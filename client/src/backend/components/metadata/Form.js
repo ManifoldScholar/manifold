@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
-import humps from "humps";
+import humps from "utils/humps";
 import intersection from "lodash/intersection";
 import reduce from "lodash/reduce";
 import concat from "lodash/concat";
@@ -17,6 +17,10 @@ export default function MetadataForm({ model, ...restProps }) {
 
   const baseStructure = () => {
     return [
+      {
+        label: t("metadata.categories.citation"),
+        children: intersection(["citationOverride"], properties)
+      },
       {
         label: t("metadata.categories.copyright"),
         children: intersection(
@@ -114,6 +118,7 @@ export default function MetadataForm({ model, ...restProps }) {
   const componentAndPropsFor = prop => {
     switch (prop) {
       case "rights":
+      case "citationOverride":
         return { component: Form.TextArea, props: null };
       case "resourcesDoi":
         return { component: Form.MaskedTextInput, props: { mask: "doi" } };

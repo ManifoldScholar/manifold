@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Validator
   module Tags
     # This class is a placeholder to demonstrate how we can intervene in the validation of

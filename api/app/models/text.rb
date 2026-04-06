@@ -1,41 +1,43 @@
+# frozen_string_literal: true
+
 # A single Text
 class Text < ApplicationRecord
+  extend Memoist
 
-  TYPEAHEAD_ATTRIBUTES = [:title, :makers].freeze
-
-  # Concerns
   include Authority::Abilities
   include Collectable
   include SerializedAbilitiesFor
   include Sluggable
   include StoresFingerprints
-  extend Memoist
   include Collaborative
   include Citable
   include Filterable
+  include ProjectProperty
   include TrackedCreator
   include Metadata
   include Attachments
   include SearchIndexable
+  include SoftDeletable
   include TableOfContentsWithCollected
+  include TimestampScopes
+  include HasKeywordSearch
 
-  # PaperTrail
+  TYPEAHEAD_ATTRIBUTES = %i[title makers].freeze
+
   has_paper_trail meta: {
     parent_item_id: :project_id,
     parent_item_type: "Project",
     title_fallback: :title_plaintext
   }
 
-  # Default Scope
   default_scope { order(position: :asc).preload(:titles, :text_subjects, :category) }
 
-  # Magic
   has_formatted_attributes :description
   with_metadata %w(
     series_title container_title isbn issn doi unique_identifier language
     original_publisher original_publisher_place original_title publisher publisher_place
     version series_number edition issue volume rights rights_territory restrictions
-    rights_holder original_publication_date
+    rights_holder original_publication_date citation_override
   )
 
   with_citation do |text|
@@ -50,20 +52,18 @@ class Text < ApplicationRecord
   end
   with_citable_children :text_sections
 
-  attribute :structure_titles, :indifferent_hash, default: {}
-  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: []
-  attribute :landmarks, Texts::LandmarkEntry.to_array_type, default: []
+  attribute :structure_titles, :indifferent_hash, default: -> { {} }
+  attribute :toc, Texts::TableOfContentsEntry.to_array_type, default: -> { [] }
+  attribute :landmarks, Texts::LandmarkEntry.to_array_type, default: -> { [] }
 
   jsonb_accessor(
     :export_configuration,
     exports_as_epub_v3: [:boolean, { default: false, store_key: :epub_v3 }]
   )
 
-  # Acts as List
   acts_as_list scope: [:project_id, :category_id]
 
-  # Associations
-  belongs_to :project, optional: true, touch: true
+  belongs_to :project, inverse_of: :texts, optional: true, touch: true
   belongs_to :category, optional: true
   belongs_to :start_text_section, optional: true, class_name: "TextSection",
              inverse_of: :text_started_by
@@ -71,32 +71,33 @@ class Text < ApplicationRecord
   has_many :titles, class_name: "TextTitle", autosave: true, dependent: :destroy, inverse_of: :text
   has_many :text_subjects, dependent: :destroy
   has_many :subjects, through: :text_subjects
-  has_many :ingestion_sources, dependent: :destroy
+  has_many :ingestion_sources, dependent: :destroy, inverse_of: :text
   has_many :text_sections, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text, autosave: true
-  has_one :text_section_aggregation, inverse_of: :text
+  has_one_readonly :text_section_aggregation, inverse_of: :text
+  has_many :text_section_nodes, -> { reorder(nil) }, through: :text_sections
+  has_many :text_section_stylesheets, -> { reorder(nil) }, through: :text_sections
   has_many :stylesheets, -> { order(position: :asc) }, dependent: :destroy,
            inverse_of: :text
   has_many :favorites, as: :favoritable, dependent: :destroy, inverse_of: :favoritable
   has_many :annotations, through: :text_sections
   has_one :text_created_event, -> { where event_type: EventType[:text_added] },
           class_name: "Event", as: :subject, dependent: :destroy, inverse_of: :subject
-  has_one :toc_section,
+  has_one_readonly :toc_section,
           -> { where(kind: TextSection::KIND_NAVIGATION) },
           class_name: "TextSection",
           inverse_of: :text
-  has_one :last_finished_ingestion, -> { where(state: "finished").order(created_at: :desc) }, class_name: "Ingestion"
+  has_one_readonly :last_finished_ingestion, -> { where(state: "finished").order(created_at: :desc) }, class_name: "Ingestion"
   has_many :cached_external_source_links, inverse_of: :text, dependent: :destroy
   has_many :cached_external_sources, through: :cached_external_source_links
   has_many :text_exports, inverse_of: :text, dependent: :destroy
-  has_many :text_export_statuses, inverse_of: :text
-  has_one :current_text_export_status, -> { current }, class_name: "TextExportStatus"
-  has_one :current_text_export, through: :current_text_export_status, source: :text_export
+  has_many_readonly :text_export_statuses, inverse_of: :text
+  has_one_readonly :current_text_export_status, -> { current }, class_name: "TextExportStatus"
+  has_one_readonly :current_text_export, through: :current_text_export_status, source: :text_export
   has_many :action_callouts,
            dependent: :destroy,
            inverse_of: :text
 
-  # Delegations
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
   delegate :publication_date, to: :project, prefix: true, allow_nil: true
   delegate :title, to: :category, prefix: true
@@ -104,21 +105,17 @@ class Text < ApplicationRecord
   delegate :title_plaintext, to: :title_main, allow_nil: true
   delegate :subtitle_formatted, to: :title_subtitle, allow_nil: true
   delegate :subtitle_plaintext, to: :title_subtitle, allow_nil: true
-  delegate :social_image, to: :project
   delegate :auto_generated_toc, to: :text_section_aggregation, allow_nil: true
   delegate :texts_nav, to: :project, prefix: true, allow_nil: true
   delegate :journal_nav, to: :project, prefix: true, allow_nil: true
 
+  after_initialize :migrate_toc!
   before_validation :ensure_toc_uids!
 
-  after_initialize :migrate_toc!
-
-  # Validation
   validate :validate_start_text_section
   validate :validate_toc
   validate :ensure_main_title_present!, on: :from_api
 
-  # Scopes
   scope :published, ->(published) { where(published: published) if published.present? }
   scope :by_category, ->(category) { where(category: category) if category.present? }
   scope :uncategorized, -> { where(category: nil) }
@@ -128,53 +125,36 @@ class Text < ApplicationRecord
   scope :with_current_epub_v3_export, -> { where(id: TextExportStatus.current_text_ids) }
   scope :pending_epub_v3_export, -> { exports_as_epub_v3.sans_current_epub_v3_export }
 
-  # Attachments
   manifold_has_attached_file :cover, :image
+  manifold_has_attached_file :social_image, :image
 
-  # Callbacks
   after_commit :trigger_text_added_event, on: [:create, :update]
   after_commit :inject_global_stylesheet, on: :create
 
-  # Search
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
+  multisearches! :description, secondary_from: :description_plaintext
 
-  scope :search_import, lambda {
-    includes(
-      :makers,
-      :project,
-      :category,
-      :titles
-    )
-  }
+  has_keyword_search! associated_against: { titles: [:value] }, against: [:description]
 
   # During ingestion, texts can be created before they're added to a project.
   # We don't want to index those orphaned texts.
   def should_index?
-    project.present?
+    project.present? && !project.draft? && super
   end
 
   def age
     (Time.zone.today - created_at.to_date).to_i
   end
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description,
-      parent_project: project&.id,
-      keywords: titles.map(&:value),
-      parent_keywords: [project&.title],
-      makers: makers.map(&:full_name),
-      metadata: metadata.values
-    }.merge(search_hidden)
+  def multisearch_full_text
+    description_plaintext
   end
 
-  def search_hidden
-    project.present? ? project.search_hidden : { hidden: true }
+  def multisearch_keywords
+    titles.map(&:value)
+  end
+
+  def multisearch_parent_keywords
+    [project.try(:title)].compact
   end
 
   def title_main
@@ -287,8 +267,8 @@ class Text < ApplicationRecord
   end
 
   memoize def source_path_map
-    ingestion_sources.each_with_object({}) do |s, map|
-      map[s.source_path] = s.proxy_path
+    ingestion_sources.to_h do |s|
+      [s.packaging_key, s.proxy_path]
     end
   end
 
@@ -502,5 +482,4 @@ class Text < ApplicationRecord
 
     stylesheets.create global_stylesheet_attributes
   end
-
 end

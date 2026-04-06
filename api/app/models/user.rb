@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 # The User model
 class User < ApplicationRecord
-  TYPEAHEAD_ATTRIBUTES = [:title, :first_name, :last_name, :email].freeze
-
   include Authority::Abilities
   include Authority::UserAbilities
   include Collector
@@ -15,6 +15,10 @@ class User < ApplicationRecord
   include Attachments
   include WithParsedName
   include SearchIndexable
+  include SoftDeletable
+  include HasKeywordSearch
+
+  TYPEAHEAD_ATTRIBUTES = [:title, :first_name, :last_name, :email].freeze
 
   classy_enum_attr :role, enum: "RoleName", allow_blank: false, default: :reader
   classy_enum_attr :kind, enum: "RoleName", allow_blank: false, default: :reader
@@ -25,7 +29,7 @@ class User < ApplicationRecord
   has_many :annotations, -> { sans_orphaned_from_text }, foreign_key: "creator_id", dependent: :destroy,
            inverse_of: :creator
   has_many :annotated_texts, -> { distinct }, through: :annotations, source: :text
-  has_many :favorites
+  has_many_readonly :favorites, inverse_of: :user
   has_many :favorite_projects, through: :favorites, source: :favoritable,
            source_type: "Project"
   has_many :favorite_texts, through: :favorites, source: :favoritable, source_type: "Text"
@@ -39,23 +43,23 @@ class User < ApplicationRecord
            dependent: :nullify, inverse_of: :creator
   has_many :created_flags, class_name: "Flag", foreign_key: "creator_id",
            dependent: :destroy, inverse_of: :creator
-  has_many :reading_group_memberships, dependent: :destroy
+  has_many :reading_group_memberships, dependent: :destroy, inverse_of: :user
   has_many :reading_groups, -> { merge(ReadingGroupMembership.active) }, through: :reading_group_memberships
   has_many :archived_reading_groups, -> { merge(ReadingGroupMembership.archived) },
            through: :reading_group_memberships, source: :reading_group
-  has_many :reading_group_visibilities
-  has_many :reading_group_user_counts
+  has_many_readonly :reading_group_visibilities
+  has_many_readonly :reading_group_user_counts
   has_many :visible_reading_groups, -> { merge(ReadingGroupVisibility.visible) },
            through: :reading_group_visibilities, source: :reading_group
   has_many :entitlement_user_links, inverse_of: :user, dependent: :destroy
   has_many :granted_entitlements, through: :entitlement_user_links, source: :entitlement
-  has_many :permissions
+  has_many_readonly :permissions
 
-  has_one :user_collection, inverse_of: :user
+  has_one_readonly :user_collection, inverse_of: :user
 
   has_many_collectables!
 
-  has_one :derived_role, inverse_of: :user, class_name: "UserDerivedRole"
+  has_one_readonly :derived_role, inverse_of: :user, class_name: "UserDerivedRole"
 
   validates :password, length: { minimum: 8 }, allow_nil: true, confirmation: true
   validate :password_not_blank!
@@ -67,6 +71,8 @@ class User < ApplicationRecord
   before_validation :infer_kind!
   before_validation :infer_role!
   before_validation :infer_trusted!
+
+  before_soft_delete :prune_attached_records!
 
   after_save :sync_global_role!, if: :saved_change_to_role?
   after_save :prepare_email_confirmation!, if: :saved_change_to_email?
@@ -87,6 +93,7 @@ class User < ApplicationRecord
   scope :in_default_order, -> { order(:last_name, :first_name) }
   scope :with_order, ->(by) { by.present? ? order(by) : in_default_order }
   scope :by_role, ->(role) { RoleName[role].then { |r| with_role(r.to_sym) if r.present? } }
+  scope :by_role_name, ->(name) { by_role(name) }
   scope :by_cached_role, ->(*role) { where(role: role) }
   scope :email_confirmed, -> { where.not(email_confirmed_at: nil) }
   scope :email_unconfirmed, -> { where(email_confirmed_at: nil) }
@@ -97,7 +104,7 @@ class User < ApplicationRecord
   scope :untrusted, -> { where(trusted: false) }
 
   # Search
-  searchkick word_start: TYPEAHEAD_ATTRIBUTES, callbacks: :async
+  has_keyword_search! against: %i[first_name last_name email]
 
   delegate *RoleName.global_predicates, to: :role
   delegate *RoleName.scoped_predicates, to: :kind
@@ -122,18 +129,6 @@ class User < ApplicationRecord
 
   alias email_confirmed? email_confirmed
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: full_name,
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      keywords: [role],
-      hidden: true
-    }
-  end
-
   def email=(value)
     super(value.try(:strip))
   end
@@ -146,8 +141,8 @@ class User < ApplicationRecord
     has_role? :project_editor, resource
   end
 
-  def project_resource_editor_of?(resource)
-    has_role? :project_resource_editor, resource
+  def project_property_manager_of?(resource)
+    has_role? :project_property_manager, resource
   end
 
   # @return [Favorite]
@@ -304,6 +299,13 @@ class User < ApplicationRecord
     self.trusted = calculate_trusted
   end
 
+  # @see Users::PruneAttachedRecords
+  # @see Users::AttachedRecordsPruner
+  # @return [void]
+  def prune_attached_records!
+    ManifoldApi::Container["users.prune_attached_records"].(self).value!
+  end
+
   # @param [Role] role
   # @return [void]
   def recalculate_role_derivations!(role)
@@ -350,7 +352,7 @@ class User < ApplicationRecord
 
       classy_enum_attr :classification, enum: "UserClassification", allow_blank: false
 
-      delegate :anonymous?, :cli?, :command_line?, to: :classification
+      delegate :anonymous?, :cli?, :command_line?, :deleted?, to: :classification
     end
 
     def default_classification?
@@ -366,16 +368,20 @@ class User < ApplicationRecord
         value.in? UserClassification
       end
 
-      def anonymous_user(&block)
-        fetch_by_classification :anonymous, &block
+      def anonymous_user(&)
+        fetch_by_classification(:anonymous, &)
       end
 
-      def cli_user(&block)
-        fetch_by_classification :command_line, &block
+      def cli_user(&)
+        fetch_by_classification(:command_line, &)
       end
 
-      def testing_user(&block)
-        fetch_by_classification :testing, &block
+      def deleted_user(&)
+        fetch_by_classification(:deleted, &)
+      end
+
+      def testing_user(&)
+        fetch_by_classification(:testing, &)
       end
 
       # @api private

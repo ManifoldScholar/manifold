@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Packaging
   module EpubV3
     module TextSectionCompilation
       # Find referenced image assets, etc.
       class FindReferences
-        include Dry::Transaction::Operation
+        include ::Packaging::PipelineOperation
         include Packaging::EpubV3::Import["reference_selectors"]
 
         # @param [Hash] state
@@ -12,8 +14,8 @@ module Packaging
         # @option state [<Packaging::EpubV3::StylesheetItem>] :stylesheets
         # @option state [TextSection] :text_section
         # @return [Dry::Types::Result(Packaging::EpubV3::TextSectionItem)]
-        def call(state)
-          reference_selectors.flat_map do |reference_selector|
+        def call
+          result = reference_selectors.flat_map do |reference_selector|
             item_args = {
               selector: reference_selector
             }
@@ -24,6 +26,10 @@ module Packaging
               Packaging::EpubV3::ReferencedItem.new(item_args.merge(node: node, path: path))
             end
           end
+
+          pipeline_state[:referenced_items] = result
+
+          Success()
         end
       end
     end

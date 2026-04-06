@@ -1,26 +1,15 @@
-require "rails_helper"
+# frozen_string_literal: true
 
 RSpec.describe V1::ProjectSerializer do
   it_behaves_like "a serializer", partial_by_default: true
-
-  describe "when the collection is search results", elasticsearch: true do
-    let(:object) do
-      FactoryBot.create(:project, title: "test")
-      Project.filtered(keyword: "test")
-    end
-    let(:subject) { described_class.new(object, include: [:texts], params: { full: true }) }
-
-    it "successfully serializes the object to a String value" do
-      expect(subject.serialized_json).to be_instance_of String
-    end
-  end
+  it_behaves_like "a collaborative serializer"
 
   describe "when the object is a project summary and the serialization is partial" do
     let(:object) do
       FactoryBot.create(:project)
       return ProjectSummary.first
     end
-    let(:subject) { described_class.new(object) }
+    subject { described_class.new(object) }
 
     it "does not include attributes or relationships that are not supported by project summaries" do
       expect(subject.serialized_json).to be_instance_of String
@@ -56,7 +45,7 @@ RSpec.describe V1::ProjectSerializer do
       let(:included_cb) { hash[:included].find { |o| o[:id] == toc_cb_id } }
       let(:text) { object.texts.first }
       let(:included_text) { hash[:included].find { |o| o[:id] == text.id } }
-      let(:subject) { described_class.new(object, include: [:texts, :content_blocks], params: { full: true, include_toc: [text.id] }) }
+      subject { described_class.new(object, include: [:texts, :content_blocks], params: { full: true, include_toc: [text.id] }) }
 
       it "includes the content blocks" do
         expect(included_cb).to be_a Hash
@@ -86,7 +75,7 @@ RSpec.describe V1::ProjectSerializer do
     context "when params includes a authorized_user" do
       let(:admin) { FactoryBot.create(:user, :admin) }
       let(:params) { { authority_user: admin, full: true } }
-      let(:subject) { described_class.new(object, include: [:texts], params: params) }
+      subject { described_class.new(object, include: [:texts], params: params) }
 
       it "has a populated abilities hash" do
         hash = subject.serializable_hash

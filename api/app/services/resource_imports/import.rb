@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module ResourceImports
   class Import < ActiveInteraction::Base
     record :resource_import
     boolean :perform_now, default: false
 
     def execute
-      return complete_import if resource_import.data_rows.count.zero?
+      return complete_import if resource_import.data_rows.none?
 
       queue_rows
       resource_import.save!

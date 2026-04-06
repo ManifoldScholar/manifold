@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Attachments
   class Processor < ActiveInteraction::Base
     object :shrine_uploaded_file, class: Object
@@ -46,7 +48,7 @@ module Attachments
     end
 
     def mime_and_extension?
-      shrine_uploaded_file&.mime_type && shrine_uploaded_file&.extension
+      shrine_uploaded_file&.mime_type && shrine_uploaded_file.extension
     end
 
     # rubocop:disable Lint/Void

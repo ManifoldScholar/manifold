@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Notifications
   class FetchUsersForCommentNotification < ActiveInteraction::Base
     record :comment

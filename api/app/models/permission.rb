@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 class Permission < ApplicationRecord
   self.primary_key = :id
 
   include Authority::Abilities
   include SerializedAbilitiesFor
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :permissions
   belongs_to :resource, polymorphic: true
 
   scope :by_resource, ->(resource) { where resource: resource }
   scope :by_user, ->(user) { where(user: user) }
 
-  validates :user, :resource, presence: true
   validate :role_names_present!
 
   def readonly?

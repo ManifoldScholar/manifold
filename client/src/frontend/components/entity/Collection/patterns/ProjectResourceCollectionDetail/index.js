@@ -5,10 +5,10 @@ import { useTranslation } from "react-i18next";
 import isEmpty from "lodash/isEmpty";
 import ResourceList from "frontend/components/resource-list";
 import ResourceCollection from "frontend/components/resource-collection";
-import { useListFilters } from "hooks";
 import EntityCollection from "../../EntityCollection";
 import SlideshowSection from "./SlideshowSection";
 import * as shapes from "../../shapes";
+import * as Styled from "./styles";
 
 function ProjectResourceCollectionDetail({
   resourceCollection,
@@ -17,24 +17,13 @@ function ProjectResourceCollectionDetail({
   slideshowResourcesMeta,
   project,
   meta,
-  filterProps: passedFilterProps,
+  filterProps,
   paginationProps,
   dispatch,
   listHeaderId,
   ...passThroughProps
 }) {
   const { t } = useTranslation();
-
-  const showPagination = !isEmpty(meta) && !isEmpty(paginationProps);
-  const totalCount = resourceCollection.attributes.collectionResourcesCount;
-  const filterProps = useListFilters({
-    ...passedFilterProps,
-    options: {
-      sort: true,
-      kinds: resourceCollection.attributes.resourceKinds,
-      tags: resourceCollection.attributes.resourceTags
-    }
-  });
 
   return (
     <EntityCollection
@@ -51,27 +40,32 @@ function ProjectResourceCollectionDetail({
       headerLayout="title_description_image"
       headerWidth="100%"
       ImageComponent={props => (
-        <SlideshowSection
-          slideshowResourcesMeta={slideshowResourcesMeta}
-          resourceCollection={resourceCollection}
-          slideshowResources={slideshowResources}
-          dispatch={dispatch}
-          slug={project.attributes.slug}
-          totalCount={totalCount}
-          listHeaderId={listHeaderId}
-          {...props}
-        />
+        <>
+          <SlideshowSection
+            slideshowResourcesMeta={slideshowResourcesMeta}
+            resourceCollection={resourceCollection}
+            slideshowResources={slideshowResources}
+            dispatch={dispatch}
+            {...props}
+          />
+          <Styled.SectionHeader id={listHeaderId}>
+            {t("pages.subheaders.resource_list")}
+          </Styled.SectionHeader>
+        </>
       )}
       BodyComponent={props => (
-        <ResourceList.Cards
-          resourceCollection={resourceCollection}
-          project={project}
-          resources={resources}
-          itemHeadingLevel={3}
-          {...props}
-        />
+        <>
+          <ResourceList.Cards
+            resourceCollection={resourceCollection}
+            project={project}
+            resources={resources}
+            itemHeadingLevel={3}
+            {...props}
+          />
+        </>
       )}
       filterProps={filterProps}
+      containerWrapPoint="1200px"
       countProps={
         isEmpty(meta)
           ? {}
@@ -83,7 +77,7 @@ function ProjectResourceCollectionDetail({
             }
       }
       paginationProps={
-        !showPagination
+        isEmpty(meta)
           ? {}
           : {
               pagination: get(meta, "pagination"),

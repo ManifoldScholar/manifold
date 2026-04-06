@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "digest/md5"
 require "securerandom"
 
@@ -70,8 +72,6 @@ module Serializer
       MATHML_ELEMENTS.include?(representation[:tag])
     end
 
-    # rubocop:disable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/AbcSize
-    # rubocop:disable Metrics/CyclomaticComplexity
     def clean_empty_text_nodes!(representation)
       return unless representation[:node_type] == "element"
       return unless block_level_element?(representation)
@@ -80,7 +80,7 @@ module Serializer
       # Node is a block level element with children
       representation[:children].each_with_index do |child, index|
         next if child[:node_type] != "text"
-        next unless child[:content].blank?
+        next if child[:content].present?
 
         child[:delete] = true if index.zero?
         child[:delete] = true if (index + 1) == representation[:children].length
@@ -97,8 +97,6 @@ module Serializer
         child[:delete] == true
       end
     end
-    # rubocop:enable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/AbcSize
-    # rubocop:enable Metrics/CyclomaticComplexity
 
     def traverse(node)
       children = nil

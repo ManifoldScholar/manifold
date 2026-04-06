@@ -36,9 +36,10 @@ export const Term = styled.dt`
 `;
 
 export const Value = styled.dd`
-  display: inline;
+  display: ${({ $block }) => ($block ? "block" : "inline")};
   margin: 0;
   color: var(--strong-color);
+  margin-inline-start: ${({ $block }) => ($block ? "34px" : 0)};
 `;
 
 export const SectionLabel = styled.h3`
@@ -64,7 +65,8 @@ export const SectionList = styled("div", transientOptions)`
     $columns === 2 &&
     `${respond(
       `grid-template-rows: repeat(3, minmax(24px, auto));
-    grid-auto-flow: column;`,
+      grid-template-columns: repeat(2, auto);
+    grid-auto-flow: row;`,
       110
     )}`}
 `;

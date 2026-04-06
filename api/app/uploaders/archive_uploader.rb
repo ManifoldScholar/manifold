@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArchiveUploader < Shrine
   include SharedUploader
 
@@ -60,5 +62,4 @@ class ArchiveUploader < Shrine
       RUBY
     end
   end
-
 end

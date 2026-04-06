@@ -182,7 +182,7 @@ module Validator
     # @param declarations [String]
     # @return [CssParser::RuleSet]
     def parse_declarations(declarations)
-      parser = CssParser::RuleSet.new(nil, declarations)
+      parser = CssParser::RuleSet.new(block: declarations)
       parser.expand_shorthand!
       parser
     end
@@ -201,11 +201,11 @@ module Validator
     # @param declarations [Array]
     # @return [String]
     def compose_rule_set(selector, declarations)
-      <<~END
+      <<~CSS
         #{selector} {
         #{declarations.map { |d| "    #{d}" }.join("\n")}
         }
-      END
+      CSS
     end
 
     # Is the color in grayscale?
@@ -354,7 +354,7 @@ module Validator
       return clean if clean.blank?
 
       # Find last element in combinatory selectors, strip psuedo selectors.
-      clean.split(/(\s?[~>+]\s?|\s)/).last.split(/:/).first
+      clean.split(/(\s?[~>+]\s?|\s)/).last.split(':').first
     end
     memoize :tag_from_selector
 

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
@@ -8,46 +8,27 @@ import EntityCollectionPlaceholder from "global/components/entity/CollectionPlac
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import HeadContent from "global/components/HeadContent";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useSetLocation
-} from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 
 export default function ProjectCollectionsContainer() {
-  const baseFilters = { visible: true, order: "position ASC" };
-  const [filters] = useFilterState(baseFilters);
-  const projectsPagination = useMemo(
-    () => ({
+  const { pagination, filters } = useListQueryParams({
+    initSize: 8,
+    initFilters: { visible: true, order: "position ASC" },
+    collectionPagination: {
       size: 4,
       number: 1
-    }),
-    []
-  );
-  const [pagination, setPageNumber] = usePaginationState(
-    1,
-    8,
-    projectsPagination
-  );
+    }
+  });
+
   const { data: projectCollections, meta } = useFetch({
     request: [projectCollectionsAPI.index, filters, pagination]
   });
   const { t } = useTranslation();
 
   const showPagination = () => {
-    const totalPages = meta?.pagination ?? {};
+    const { totalPages } = meta?.pagination ?? {};
     if (!totalPages || totalPages === 1) return false;
     return true;
-  };
-
-  useSetLocation({ page: pagination.number });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
   };
 
   const renderProjectCollections = () => {
@@ -75,10 +56,7 @@ export default function ProjectCollectionsContainer() {
       {showPagination && (
         <section>
           <div className="container">
-            <GlobalUtility.Pagination
-              paginationClickHandler={paginationClickHandlerCreator}
-              pagination={meta.pagination}
-            />
+            <GlobalUtility.Pagination pagination={meta.pagination} />
           </div>
         </section>
       )}

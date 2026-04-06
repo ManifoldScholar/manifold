@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnalyticsReportType < ClassyEnum::Base
   def reporter; end
 end

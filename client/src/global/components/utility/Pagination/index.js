@@ -92,7 +92,6 @@ Pagination.propTypes = {
     totalCount: PropTypes.number,
     totalPages: PropTypes.number
   }),
-  paginationTarget: PropTypes.string,
   padding: PropTypes.number,
   paginationClickHandler: PropTypes.func,
   compact: PropTypes.bool

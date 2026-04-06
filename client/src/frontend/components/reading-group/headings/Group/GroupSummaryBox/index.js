@@ -45,16 +45,16 @@ function collectedIdsForCollectionByType(readingGroup) {
   );
 }
 
-function GroupSummaryBox({ readingGroup }) {
+function GroupSummaryBox({ readingGroup, isBackend }) {
   const uid = useUID();
   const { t } = useTranslation();
   const {
     privacy,
-    highlightsCount,
     annotationsCount,
     membershipsCount,
     currentUserRole,
-    currentUserCounts
+    currentUserCounts,
+    creatorName
   } = readingGroup.attributes;
   const collected = collectedIdsForCollectionByType(readingGroup);
 
@@ -68,55 +68,45 @@ function GroupSummaryBox({ readingGroup }) {
         {t("pages.subheaders.group_summary")}
       </h2>
       <Styled.List aria-labelledby={uid}>
-        <Section label={t("common.about")}>
+        <Section label={t("common.about")} columns={isBackend ? 2 : 1}>
           <Item labelText={t("common.type")}>
             {privacy}
             {privacy === "private" && <Styled.Icon icon="lock16" size={16} />}
           </Item>
+          {isBackend ? (
+            <>
+              <Item
+                labelText={t("glossary.annotation_other")}
+                icon="interactComment32"
+              >
+                {annotationsCount}
+              </Item>
+              <Item labelText={t("glossary.creator_one")} icon="avatar24" block>
+                {creatorName}
+              </Item>
+            </>
+          ) : (
+            <Item labelText={t("common.role_one")} icon="avatar24">
+              {currentUserRole}
+            </Item>
+          )}
           <Item labelText={t("glossary.member_other")} icon="readingGroup24">
             {membershipsCount}
           </Item>
-          <Item labelText={t("common.role")} icon="avatar24">
-            {currentUserRole}
-          </Item>
         </Section>
-        <Section label={t("glossary.group_one")}>
-          <Item
-            labelText={t("glossary.annotation_other")}
-            icon="interactAnnotate32"
-          >
-            {annotationsCount}
-          </Item>
-          <Item
-            labelText={t("glossary.highlight_other")}
-            icon="interactHighlight32"
-          >
-            {highlightsCount}
-          </Item>
-        </Section>
-        <Section label={t("common.yours")}>
-          <Item
-            labelText={t("glossary.annotation_other")}
-            icon="interactAnnotate32"
-          >
-            {currentUserCounts.annotationsCount}
-          </Item>
-          <Item
-            labelText={t("glossary.highlight_other")}
-            icon="interactHighlight32"
-          >
-            {currentUserCounts.highlightsCount}
-          </Item>
-        </Section>
+        {!isBackend && (
+          <Section label={t("glossary.annotation_other")}>
+            <Item labelText={t("glossary.group_one")} icon="interactComment32">
+              {annotationsCount}
+            </Item>
+            <Item labelText={t("common.yours")} icon="interactAnnotate32">
+              {currentUserCounts.annotationsCount}
+            </Item>
+          </Section>
+        )}
         <Section label={t("common.content")} columns={2}>
           <Item labelText={t("glossary.project_other")} icon="BELibrary64">
             {getCollectedCount("projects")}
-          </Item>
-          <Item labelText={t("glossary.text_other")} icon="textsLoosePages64">
-            {getCollectedCount("texts")}
-          </Item>
-          <Item labelText={t("glossary.text_section_other")} icon="toc64">
-            {getCollectedCount("textSections")}
           </Item>
           <Item
             labelText={t("glossary.collection_other")}
@@ -124,8 +114,14 @@ function GroupSummaryBox({ readingGroup }) {
           >
             {getCollectedCount("resourceCollections")}
           </Item>
+          <Item labelText={t("glossary.text_other")} icon="textsLoosePages64">
+            {getCollectedCount("texts")}
+          </Item>
           <Item labelText={t("glossary.resource_other")} icon="resources64">
             {getCollectedCount("resources")}
+          </Item>
+          <Item labelText={t("glossary.text_section_other")} icon="toc64">
+            {getCollectedCount("textSections")}
           </Item>
         </Section>
       </Styled.List>
@@ -136,7 +132,8 @@ function GroupSummaryBox({ readingGroup }) {
 GroupSummaryBox.displayName = "ReadingGroup.GroupSummaryBox";
 
 GroupSummaryBox.propTypes = {
-  readingGroup: PropTypes.object.isRequired
+  readingGroup: PropTypes.object.isRequired,
+  isBackend: PropTypes.bool
 };
 
 export default GroupSummaryBox;

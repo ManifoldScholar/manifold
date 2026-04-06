@@ -109,8 +109,8 @@ export class PermissionForm extends PureComponent {
                 value: "project_editor"
               },
               {
-                label: t("projects.permissions.modify_resource"),
-                value: "project_resource_editor"
+                label: t("projects.permissions.modify_project_properties"),
+                value: "project_property_manager"
               },
               {
                 label: t("projects.permissions.author"),

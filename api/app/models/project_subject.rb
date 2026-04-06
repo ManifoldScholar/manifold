@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # Tracks the relationship between projects and subjects
 class ProjectSubject < ApplicationRecord
-
   # Authority
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectChildAuthorizer"
 
   # Association
@@ -16,5 +18,4 @@ class ProjectSubject < ApplicationRecord
   def to_s
     subject.title
   end
-
 end

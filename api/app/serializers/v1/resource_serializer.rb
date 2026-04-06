@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class ResourceSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     metadata(metadata: false, properties: false, formatted: true)
@@ -22,6 +23,7 @@ module V1
     typed_attribute :project_slug, Types::String.meta(read_only: true)
     typed_attribute :slug, Types::String.meta(read_only: true)
     typed_attribute :sort_title, Types::String.meta(read_only: true)
+    typed_attribute :sort_order, Types::Integer.optional
     typed_attribute :sub_kind, Types::String.optional
     typed_attribute :title, Types::String
     typed_attribute :title_formatted, Types::String.meta(read_only: true)
@@ -34,6 +36,7 @@ module V1
     typed_attribute :variant_thumbnail_styles, Types::Serializer::Attachment.meta(read_only: true)
 
     typed_has_many :collection_resources
+    typed_has_many :text_tracks, serializer: V1::TextTrackSerializer, record_type: "textTrack"
 
     serialize_collectable_attributes!
 
@@ -59,6 +62,7 @@ module V1
       typed_attribute :transcript_content_type, Types::String.optional.meta(read_only: true)
       typed_attribute :transcript_file_name, Types::String.optional.meta(read_only: true)
       typed_attribute :transcript_file_size, Types::String.optional.meta(read_only: true)
+      typed_attribute :transcript_url, Types::String.optional.meta(read_only: true)
       typed_attribute :translation_content_type, Types::String.optional.meta(read_only: true)
       typed_attribute :translation_file_name, Types::String.optional.meta(read_only: true)
       typed_attribute :translation_file_size, Types::String.optional.meta(read_only: true)

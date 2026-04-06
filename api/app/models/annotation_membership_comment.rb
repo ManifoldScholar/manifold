@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnnotationMembershipComment < ApplicationRecord
   belongs_to :annotation
   belongs_to :comment

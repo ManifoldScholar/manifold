@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Definitions
     module Resource
       def update_request
         attributes = assign_required_attributes(
-          (update_attributes || request_attributes),
+          update_attributes || request_attributes,
           required_update_attributes
         )
 
@@ -15,7 +17,7 @@ module APIDocs
 
       def create_request
         attributes = assign_required_attributes(
-          (create_attributes || request_attributes),
+          create_attributes || request_attributes,
           required_create_attributes
         )
 
@@ -201,7 +203,11 @@ module APIDocs
       end
 
       def serializer
-        "V1::#{name.demodulize}Serializer".constantize
+        if name.demodulize == "SearchResult"
+          ::V1::PgSearchSerializer
+        else
+          "V1::#{name.demodulize}Serializer".constantize
+        end
       rescue NameError
         nil
       end
@@ -235,7 +241,7 @@ module APIDocs
       end
 
       def map_serializer_types(hash)
-        hash.map { |k, v| v == :has_many ? [k, ::Types::Serializer::Collection] : [k, ::Types::Serializer::Resource] }.to_h
+        hash.to_h { |k, v| v == :has_many ? [k, ::Types::Serializer::Collection] : [k, ::Types::Serializer::Resource] }
       end
 
       def relationships
@@ -260,12 +266,12 @@ module APIDocs
       def debug(callee, definition)
         return unless ENV["RSWAG_DEBUG"]
 
-        puts "-" * 80
-        puts "#{self}##{callee}"
-        puts "-" * 80
-        pp definition
-        puts "-" * 80
-        puts "\n"
+        Rails.logger.debug "-" * 80
+        Rails.logger.debug { "#{self}##{callee}" }
+        Rails.logger.debug "-" * 80
+        Rails.logger.debug definition
+        Rails.logger.debug "-" * 80
+        Rails.logger.debug "\n"
       end
     end
   end

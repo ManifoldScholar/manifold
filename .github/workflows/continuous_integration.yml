@@ -3,16 +3,20 @@ name: Continuous Integration
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
-
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
 env:
   BROWSERSLIST_IGNORE_OLD_DATA: beQuiet
-  DATABASE_URL: "postgres://postgres:postgres@localhost:5432/manifold_test"
   DISABLE_SPRING: yes
-  ELASTICSEARCH_URL: "http://localhost:9200"
   PATH: /usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:/usr/local/sbin
   RAILS_ENV: test
+  DATABASE_URL: "postgres://postgres:postgres@localhost:5432/manifold_test"
+  CACHE_DATABASE_URL: "postgres://postgres:postgres@localhost:5432/manifold_cache_test"
 
 jobs:
   client-lint:
@@ -21,13 +25,33 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
+      - run: corepack enable
       - uses: ./.github/actions/setup-node
 
       - name: "Lint client"
         working-directory: "./client"
         run: yarn lint
+
+      - name: "Check for unused dependencies"
+        working-directory: "./client"
+        run: yarn depcheck
+
+  client-build:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v6
+
+      - run: corepack enable
+      - uses: ./.github/actions/setup-node
+
+      - name: "Build client"
+        working-directory: "./client"
+        run: yarn build
 
   api-lint:
     if: github.event.pull_request.draft == false
@@ -36,11 +60,11 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - uses: ./.github/actions/setup-ruby
 
-      - name: "Run Rubopcop"
+      - name: "Run Rubocop"
         working-directory: "./api"
         run: bin/rubocop
 
@@ -56,23 +80,16 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: manifold_test
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
-      redis:
-        image: redis:6.2.7-alpine
-        ports: ["6379:6379"]
-        options: --entrypoint redis-server
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - uses: ./.github/actions/setup-ruby
 
+      - run: corepack enable
       - uses: ./.github/actions/setup-node
-
-      - uses: ./.github/actions/setup-elasticsearch
 
       - name: "Install Pandoc"
         run: |
@@ -81,7 +98,7 @@ jobs:
 
       - name: "Setup test database"
         working-directory: "./api"
-        run: bin/rails db:setup
+        run: bin/rails db:test:prepare
 
       - name: "Run API specs"
         working-directory: "./api"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "redcarpet/compat"
 require "image_processing/mini_magick"
 require "uber/inheritable_attr"
@@ -6,9 +8,10 @@ require "auth_token"
 require "middleware/omniauth_stack"
 require "our_types/indifferent_hash"
 require "scanf"
+require "stringio"
 require "zip"
 
-require "dry/core/memoizable"
+require "dry/core"
 require "dry/effects"
 require "dry/monads"
 require "dry/monads/do"
@@ -26,15 +29,6 @@ module ResultAttrPatch
 end
 
 Dry::Logic::Result.prepend ResultAttrPatch
-
-module TransactionCallablePatch
-  # We don't rely on this logic, and want our hashes to be provided as-is without splatting.
-  def ruby_27_last_arg_hash?(*)
-    false
-  end
-end
-
-Dry::Transaction::Callable.prepend TransactionCallablePatch
 
 Dry::Validation.load_extensions :predicates_as_macros
 

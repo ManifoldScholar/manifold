@@ -43,7 +43,8 @@ class FormGeneratedPasswordInput extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state !== prevState) this.setValueFromCurrentState();
+    if (this.state !== prevState || this.props.value === undefined)
+      this.setValueFromCurrentState();
   }
 
   get idPrefix() {
@@ -71,7 +72,7 @@ class FormGeneratedPasswordInput extends Component {
 
   handlePasswordChange(event) {
     event.preventDefault();
-    const value = event.target.value;
+    const value = event.target.value || null;
     this.setState({ password: value });
   }
 
@@ -125,8 +126,8 @@ class FormGeneratedPasswordInput extends Component {
               <Styled.Icon icon={icon} size="default" />
               <span className="screen-reader-text">
                 {this.state.showPassword
-                  ? t("forms.password_reset.hide_password")
-                  : t("forms.password_reset.show_password")}
+                  ? t("forms.password_reset.hide")
+                  : t("forms.password_reset.show")}
               </span>
             </Styled.Toggle>
             {this.renderInput(id)}

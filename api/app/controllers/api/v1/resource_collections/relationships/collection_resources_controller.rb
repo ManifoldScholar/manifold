@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module ResourceCollections
       module Relationships
         # Responds with resources in a collection
         class CollectionResourcesController < ApplicationController
-
           LOCATION = [:api, :v1, :resource_collection_relationships,
                       :collection_resources].freeze
 
@@ -41,7 +42,6 @@ module API
             @collection = ResourceCollection.friendly
               .find(params[:resource_collection_id])
           end
-
         end
       end
     end

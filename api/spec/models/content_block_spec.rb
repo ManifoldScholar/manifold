@@ -1,18 +1,25 @@
+# frozen_string_literal: true
+
 require "with_model"
 require "rails_helper"
 
-RSpec.describe ContentBlock do
-  class self::RenderBlock < ContentBlock
-    config.required_render_attributes = %i{render_attr_a render_attr_b}.freeze
+# :nocov:
+module TestHelpers
+  module BlockTests
+    class RenderBlock < ContentBlock
+      config.required_render_attributes = %i{render_attr_a render_attr_b}.freeze
 
-    has_configured_attributes render_attr_a: :string,
-                              render_attr_b: :boolean,
-                              req_attr: :string
+      has_configured_attributes render_attr_a: :string,
+                                render_attr_b: :boolean,
+                                req_attr: :string
 
-    validates :req_attr, presence: true
-
+      validates :req_attr, presence: true
+    end if Rails.env.test?
   end
+end
+# :nocov:
 
+RSpec.describe ContentBlock do
   let(:content_block) { FactoryBot.create(:content_block) }
 
   it "has a valid factory" do
@@ -26,7 +33,7 @@ RSpec.describe ContentBlock do
 
   describe "#reference_configurations" do
     it "returns an array of Content::ReferenceConfigurations" do
-      expect(content_block.reference_configurations).to all(is_a? Content::ReferenceConfiguration)
+      expect(content_block.reference_configurations).to all(is_a?(Content::ReferenceConfiguration))
     end
   end
 
@@ -40,8 +47,8 @@ RSpec.describe ContentBlock do
     let(:project) { FactoryBot.create(:project) }
 
     context "when required_render_attributes are all present" do
-      let(:subject) do
-        subject = self.class::RenderBlock.new
+      subject do
+        subject = TestHelpers::BlockTests::RenderBlock.new
         subject.render_attr_a = "Set"
         subject.render_attr_b = true
         subject.req_attr = "Set"
@@ -51,21 +58,21 @@ RSpec.describe ContentBlock do
       end
 
       it "is valid" do
-        expect(subject.renderable?).to eq true
+        expect(subject.renderable?).to be true
       end
     end
 
     context "when required_render_attributes are not all present" do
-      let(:subject) { self.class::RenderBlock.create(project: project) }
+      subject { TestHelpers::BlockTests::RenderBlock.create(project: project) }
 
       it "is invalid" do
-        expect(subject.renderable?).to eq false
+        expect(subject.renderable?).to be false
       end
     end
   end
 
   describe "#render_errors" do
-    let(:subject) { self.class::RenderBlock.create(project: FactoryBot.create(:project)) }
+    subject { TestHelpers::BlockTests::RenderBlock.create(project: FactoryBot.create(:project)) }
 
     it "returns a hash of errors" do
       expect(subject.render_errors).to be_a Hash
@@ -77,15 +84,15 @@ RSpec.describe ContentBlock do
 
     it "does not include non-render attribute errors" do
       expect(subject.errors.attribute_names).to include :req_attr
-      expect(subject.render_errors.keys).to_not include :req_attr
+      expect(subject.render_errors.keys).not_to include :req_attr
     end
   end
 
   describe "#incomplete_render_attributes" do
-    let(:subject) { self.class::RenderBlock.create(project: FactoryBot.create(:project)) }
+    subject { TestHelpers::BlockTests::RenderBlock.create(project: FactoryBot.create(:project)) }
 
     it "returns an array of incomplete render attributes" do
-      expect(subject.incomplete_render_attributes).to match_array [:render_attr_a, :render_attr_b]
+      expect(subject.incomplete_render_attributes).to contain_exactly(:render_attr_a, :render_attr_b)
     end
   end
 end

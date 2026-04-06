@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class SearchResultSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :score, Types::Float, &:_score
@@ -53,7 +54,6 @@ module V1
     typed_has_one :model, polymorphic: true
 
     class << self
-
       def camelized_type(object)
         object.search_result_type&.camelize(:lower)
       end
@@ -147,8 +147,6 @@ module V1
         end
         a.to_h
       end
-
     end
-
   end
 end

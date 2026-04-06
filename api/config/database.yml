@@ -1,5 +1,4 @@
 <%
-
   user = ENV["RAILS_DB_USER"]
   pass = ENV["RAILS_DB_PASS"]
   host = ENV["RAILS_DB_HOST"] || 'localhost'
@@ -7,17 +6,35 @@
   db   = ENV["RAILS_DB_NAME"] || 'manifold_development'
   test_db   = ENV["RAILS_TEST_DB_NAME"] || 'manifold_test'
 
+  cache_user = ENV["RAILS_CACHE_DB_USER"]
+  cache_pass = ENV["RAILS_CACHE_DB_PASS"]
+  cache_host = ENV["RAILS_CACHE_DB_HOST"] || 'localhost'
+  cache_port = ENV["RAILS_CACHE_DB_PORT"] || 5432
+  cache_db   = ENV["RAILS_CACHE_DB_NAME"] || 'manifold_cache_development'
+  cache_test_db   = ENV["RAILS_CACHE_TEST_DB_NAME"] || 'manifold_cache_test'
 %>
 
 common: &common
-  adapter: postgresql
-  host: <%= host %>
-  encoding: unicode
-  pool: 50
-  port: <%= port %>
-  user: <%= user %>
-  database: <%= db %>
-  password: "<%= pass %>"
+  primary: &primary
+    adapter: postgresql
+    host: <%= host %>
+    encoding: unicode
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 50 } %>
+    port: <%= port %>
+    user: <%= user %>
+    database: <%= db %>
+    password: "<%= pass %>"
+  cache: &cache
+    adapter: postgresql
+    host: <%= cache_host %>
+    encoding: unicode
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 50 } %>
+    port: <%= cache_port %>
+    user: <%= cache_user %>
+    database: <%= cache_db %>
+    password: "<%= cache_pass %>"
+    migrations_paths: db/cache_migrate
+
 
 production:
   <<: *common
@@ -32,5 +49,11 @@ development:
   <<: *common
 
 test:
-  <<: *common
-  database: <%= test_db %><%= ENV["TEST_ENV_NUMBER"] %>
+  primary:
+    <<: *primary
+    database: <%= test_db %><%= ENV["TEST_ENV_NUMBER"] %>
+  cache:
+    <<: *cache
+    database: <%= cache_test_db %><%= ENV["TEST_ENV_NUMBER"] %>
+
+  

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class TextSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     INCLUDE_TOC = proc do |object, params|
@@ -60,6 +61,10 @@ module V1
 
     typed_belongs_to :category
 
+    typed_attribute :marked_for_purge_at, Types::DateTime.optional.meta(read_only: true) do |object|
+      object.respond_to?(:marked_for_purge_at) ? object.marked_for_purge_at : object.text.marked_for_purge_at
+    end
+
     serialize_collectable_attributes!
 
     when_full do
@@ -102,7 +107,7 @@ module V1
       typed_attribute :spine, Types::Array.of(Types::Serializer::ID).meta(read_only: true)
       typed_attribute :pending_slug, Types::String
       typed_attribute :section_kind, Types::String.optional.meta(
-        description: "The label used for sections within the text. "\
+        description: "The label used for sections within the text. " \
         'Values might be, for example, "chapter" or "unit"'
       )
 
@@ -110,6 +115,9 @@ module V1
       typed_has_many :stylesheets
       typed_has_many :creators, serializer: MakerSerializer, record_type: "maker"
       typed_has_many :contributors, serializer: MakerSerializer, record_type: "maker"
+      typed_has_many :flattened_collaborators,
+                     serializer: FlattenedCollaboratorSerializer,
+                     record_type: "flattenedCollaborator"
       typed_has_many :text_sections
       typed_has_one :toc_section, serializer: TextSectionSerializer, record_type: "textSection"
 
@@ -123,6 +131,10 @@ module V1
         id: Types::Serializer::ID,
         label: Types::String
       ).meta(read_only: true).optional
+
+      typed_attribute :social_description, Types::String.optional
+      typed_attribute :social_title, Types::String.optional
+      typed_attribute :social_image_styles, Types::Serializer::Attachment.meta(read_only: true)
     end
 
     class << self
@@ -141,8 +153,6 @@ module V1
 
         object.last_finished_ingestion&.source_url
       end
-
-end
-
+    end
   end
 end

@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
-import { listUnstyled, utilityPrimary, fluidScale } from "theme/styles/mixins";
+import {
+  listUnstyled,
+  utilityPrimary,
+  fluidScale,
+  buttonUnstyled
+} from "theme/styles/mixins";
 
 const LINK_PADDING = 7;
 
@@ -45,11 +50,14 @@ export const Pages = styled.div`
 `;
 
 export const Link = styled.a`
+  ${buttonUnstyled}
   display: flex;
   align-items: center;
   gap: 8px;
   padding: ${LINK_PADDING}px;
   text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
 
   &[aria-disabled="true"] {
     pointer-events: none;
@@ -58,7 +66,12 @@ export const Link = styled.a`
 
   &[aria-current="page"] {
     pointer-events: none;
-    color: var(--color-interaction-light);
+    color: var(--highlight-color);
+
+    .browse &,
+    .scheme-light & {
+      text-decoration-line: underline;
+    }
   }
 `;
 

@@ -1,2 +1,0 @@
-class ReadingGroupCompositeEntryRanking < ApplicationRecord
-end

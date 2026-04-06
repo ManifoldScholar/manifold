@@ -1,13 +1,18 @@
+# frozen_string_literal: true
+
 # A resource is any asset our source document that is associated with a text.
 class ResourceImport < ApplicationRecord
-
-  include Statesman::Adapters::ActiveRecordQueries
+  include Statesman::Adapters::ActiveRecordQueries[
+    initial_state: :pending,
+    transition_class: ResourceImportTransition,
+  ]
   include TrackedCreator
   include Attachments
 
   # Authorization
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   belongs_to :project, inverse_of: :resource_imports
@@ -18,6 +23,7 @@ class ResourceImport < ApplicationRecord
   validates :source, inclusion: { in: %w(google_sheet attached_data) }
   validates :storage_type, inclusion: { in: ["google_drive", nil] }
   validates :header_row, presence: true
+  validates :creator, presence: true
   validates :url, presence: true, if: :google_sheet?
   validates :data, presence: true, if: :attached_data?
 
@@ -29,15 +35,6 @@ class ResourceImport < ApplicationRecord
       transition_class: ResourceImportTransition
     )
   end
-
-  def self.transition_class
-    ResourceImportTransition
-  end
-
-  def self.initial_state
-    :pending
-  end
-  private_class_method :initial_state
 
   def self.attachment_columns
     %w(attachment high_res variant_thumbnail variant_poster variant_format_one
@@ -96,7 +93,7 @@ class ResourceImport < ApplicationRecord
   end
 
   def google_drive_storage?
-    storage_type == "google_drive" && !storage_identifier.blank?
+    storage_type == "google_drive" && storage_identifier.present?
   end
 
   def import_errors_count
@@ -134,5 +131,4 @@ class ResourceImport < ApplicationRecord
     self.column_map = {}
     save
   end
-
 end

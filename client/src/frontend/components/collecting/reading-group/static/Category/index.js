@@ -8,6 +8,7 @@ import {
   CollectedResources,
   CollectedJournalIssues
 } from "frontend/components/collecting/collection-blocks";
+import { MD_TITLE_REGEX } from "../../edit/CollectionEditor/helpers/constants";
 import * as Styled from "./styles";
 
 function Category({ category, mappings, responses, onUncollect }) {
@@ -33,13 +34,15 @@ function Category({ category, mappings, responses, onUncollect }) {
   }
 
   const {
-    attributes: { title, descriptionFormatted }
+    attributes: { title, descriptionFormatted, markdownOnly }
   } = category;
 
+  const CategoryComponent = markdownOnly ? Styled.Markdown : Styled.Category;
+
   return (
-    <Styled.Category>
+    <CategoryComponent>
       <Styled.Header>
-        <Styled.Title>{title}</Styled.Title>
+        {!MD_TITLE_REGEX.test(title) && <Styled.Title>{title}</Styled.Title>}
         {descriptionFormatted && (
           <Styled.Description
             dangerouslySetInnerHTML={{ __html: descriptionFormatted }}
@@ -56,7 +59,7 @@ function Category({ category, mappings, responses, onUncollect }) {
         />
         <CollectedResources {...getCollectedProps("resources")} />
       </div>
-    </Styled.Category>
+    </CategoryComponent>
   );
 }
 

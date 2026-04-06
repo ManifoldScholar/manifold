@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { AsyncLocalStorage } from "async_hooks";
 import config from "config";
 import ch from "./helpers/consoleHelpers";
 import React from "react";
@@ -15,21 +16,16 @@ import exceptionRenderer from "./helpers/exceptionRenderer";
 import manifoldBootstrap from "./bootstrap";
 import has from "lodash/has";
 import FatalError from "global/components/FatalError";
-import { resetServerContext as resetDndServerContext } from "react-beautiful-dnd";
+import BodyClass from "hoc/BodyClass";
+import { resetServerContext as resetDndServerContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
 import { createServerFetchDataContext } from "hooks/api/contexts/InternalContext";
+import { setStoreGetter } from "helpers/ssrRequestContext";
 
-// Node 8.x on Ubuntu 18 leads to failed SSL handshakes. Setting this
-// default TLS value appears to fix this. I believe this issue has
-// been addressed in Node 10.x, and in theory we can remove this once
-// we no longer need to support Node 8 and 9.
-// See https://github.com/nodejs/node/issues/21513
-// See https://github.com/nodejs/node/issues/16196#issuecomment-393091912
-const tls = require("tls");
-
-tls.DEFAULT_ECDH_CURVE = "auto";
+const requestContext = new AsyncLocalStorage();
+setStoreGetter(() => requestContext.getStore());
 
 const socket = config.services.client.rescueEnabled
   ? null
@@ -46,16 +42,26 @@ const respondWithRedirect = (res, redirectLocation) => {
   res.end();
 };
 
-const fatalErrorOutput = (errorComponent, store) => {
-  const stats = readStats("Client");
+const renderComponentToBody = (component, stats, store, options = {}) => {
+  const content = component ? ReactDOM.renderToString(component) : null;
+  const bodyClasses = BodyClass.rewind() || [];
+  const bodyClass = bodyClasses.filter(Boolean).join(" ");
   return ReactDOM.renderToString(
     <HtmlBody
-      component={errorComponent}
-      disableBrowserRender
+      content={content}
+      bodyClass={bodyClass}
       stats={stats}
       store={store}
+      disableBrowserRender={options.disableBrowserRender}
     />
   );
+};
+
+const fatalErrorOutput = (errorComponent, store) => {
+  const stats = readStats("Client");
+  return renderComponentToBody(errorComponent, stats, store, {
+    disableBrowserRender: true
+  });
 };
 
 const render = async (req, res, store) => {
@@ -97,16 +103,14 @@ const render = async (req, res, store) => {
 
   try {
     ch.notice("Rendering application on server.", "floppy_disk");
-    ReactDOM.renderToString(
-      <HtmlBody component={appComponent} stats={stats} store={store} />
-    );
+    ReactDOM.renderToString(appComponent);
+    BodyClass.rewind();
 
     await isFetchingComplete();
     ch.notice("ResolveData completed.", "floppy_disk");
 
-    renderString = ReactDOM.renderToString(
-      <HtmlBody component={appComponent} stats={stats} store={store} />
-    );
+    resetDndServerContext();
+    renderString = renderComponentToBody(appComponent, stats, store);
   } catch (renderError) {
     isError = true;
     ch.error("Server-side render failed in server-react.js");
@@ -152,27 +156,31 @@ const performBootstrap = (req, res, store) => {
 
 // Handle requests
 const requestHandler = (req, res) => {
-  const store = createStore();
+  const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-  // Prior to the router upgrade, we handled these cases... may no
-  // longer be necessary.
-  // if (error) return respondWithRouterError(res, error);
-  // if (!props) return respondWithInternalServerError(res);
+  requestContext.run({ clientIp }, () => {
+    const store = createStore();
 
-  // 1. Run manifold bootstrap
-  // 2. Fetch any data, as the user
-  // 3. Send the response to the user
-  /* eslint-disable max-len */
-  performBootstrap(req, res, store).then(
-    () => {
-      ch.plain("App bootstrapped");
-      render(req, res, store);
-    },
-    () => {
-      ch.error("App bootstrap failed", "rain_cloud");
-      render(req, res, store);
-    }
-  );
+    // Prior to the router upgrade, we handled these cases... may no
+    // longer be necessary.
+    // if (error) return respondWithRouterError(res, error);
+    // if (!props) return respondWithInternalServerError(res);
+
+    // 1. Run manifold bootstrap
+    // 2. Fetch any data, as the user
+    // 3. Send the response to the user
+    /* eslint-disable max-len */
+    performBootstrap(req, res, store).then(
+      () => {
+        ch.plain("App bootstrapped");
+        render(req, res, store);
+      },
+      () => {
+        ch.error("App bootstrap failed", "rain_cloud");
+        render(req, res, store);
+      }
+    );
+  });
 };
 
 // Create the app and the server

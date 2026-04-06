@@ -29,7 +29,7 @@ export default `
     flex-wrap: wrap;
     gap: 18px;
     align-items: start;
-    padding-top: 20px;
+    padding-top: 42px;
     padding-bottom: 28px;
 
     ${respond(`gap: 36px`, 120)}
@@ -41,7 +41,7 @@ export default `
 
   &__header-end {
     display: flex;
-    flex-grow: 1;
+    flex-basis: 100%;
     flex-direction: column;
     align-items: end;
     gap: ${inputGap}px;
@@ -49,6 +49,7 @@ export default `
     ${respond(`flex-direction: row;`, 40)}
     ${respond(`flex-direction: column;`, 65)}
     ${respond(`flex-direction: row;`, 75)}
+    ${respond(`flex-basis: 70%;`, 120)}
   }
 
   &__see-all {
@@ -57,6 +58,7 @@ export default `
     font-size: 13px;
     border-color: var(--select-border-color);
     width: 100%;
+    margin-block-end: 13px;
 
     ${respond(`width: auto;`, 40)}
     ${respond(`width: 100%;`, 65)}
@@ -87,13 +89,13 @@ export default `
     transition: background-color ${defaultTransitionProps};
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       color: inherit;
       background-color: var(--box-medium-bg-color);
       outline: 0;
     }
 
-    &.focus-visible {
+    &:focus-visible {
       ${defaultFocusStyle}
       outline-offset: -2px;
     }
@@ -155,7 +157,7 @@ export default `
     transition: background-color ${defaultTransitionProps};
 
     &:hover,
-    &.focus-visible {
+    &:focus-visible {
       --darker-tag-bg-color: var(--box-strong-bg-color);
 
       color: inherit;
@@ -163,7 +165,7 @@ export default `
       outline: 0;
     }
 
-    &.focus-visible {
+    &:focus-visible {
       ${defaultFocusStyle}
       outline-offset: -2px;
     }

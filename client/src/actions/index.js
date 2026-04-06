@@ -13,7 +13,6 @@ export * as uiFrontendModeActions from "./ui/frontendMode";
 export * as uiReadingGroupActions from "./ui/readingGroup";
 export * as persistentUI from "./ui/persistentUi";
 export * as entityEditorActions from "./entityEditor";
-export * as websocketActions from "./websocket";
 export * as oauthActions from "./oauth";
 export * as loadingActions from "./loading";
 export * as routingActions from "./routing";

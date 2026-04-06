@@ -104,7 +104,8 @@ export const Creators = styled.div`
 
 export const CollectingToggle = styled("span", transientOptions)`
   flex-grow: 1;
-  transform: translateY(-0.238em);
+  line-height: 1;
+  transform: translateY(-0.08rem);
 
   ${({ $hasSubtitle }) => $hasSubtitle && `transform: translateY(-0.19em);`}
 `;

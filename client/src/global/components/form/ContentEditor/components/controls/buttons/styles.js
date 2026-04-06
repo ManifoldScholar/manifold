@@ -14,7 +14,7 @@ export const Button = styled.button`
   justify-content: center;
   height: 28px;
   width: 28px;
-  background-color: none;
+  background-color: transparent;
   transition: color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
   font-family: var(--font-family-sans);
@@ -69,6 +69,8 @@ export const Select = styled.select`
   padding-block-start: 2px;
   padding-block-end: 4px;
   padding-inline-start: 8px;
+  transition: color ${defaultTransitionProps},
+    background-color ${defaultTransitionProps};
 
   .backend & {
     color: var(--color);

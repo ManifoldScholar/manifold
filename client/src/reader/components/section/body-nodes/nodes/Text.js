@@ -190,9 +190,8 @@ class TextNode extends Component {
 
       const isDetail = this.props.openAnnotations.isDetail;
       const isInteractive =
-        !pending &&
-        !isDetail &&
-        (!!textAnnotationIds.length || removableHighlight);
+        removableHighlight ||
+        (!pending && !isDetail && !!textAnnotationIds.length);
 
       const classes = classNames({
         primary: isCreator,
@@ -222,16 +221,17 @@ class TextNode extends Component {
               tabIndex: removableHighlight ? 0 : undefined,
               role: removableHighlight ? "button" : undefined,
               "aria-haspopup": removableHighlight ? "menu" : "dialog",
-              "aria-label": removableHighlight
-                ? this.ariaLabelForHighlight(chunk)
-                : this.ariaLabelForAnnotation(chunk)
+              "aria-label": this.ariaLabelForAnnotations(
+                chunk,
+                !!textAnnotationIds.length,
+                highlighted
+              )
             }
           : {};
 
       const previousTabIndex = previous ? { tabIndex: -1 } : {};
 
       const props = {
-        key: index,
         className: classes,
         "data-removable-highlight-id": removableHighlightId,
         "data-text-annotation-ids": textAnnotationIds,
@@ -240,10 +240,17 @@ class TextNode extends Component {
         ...previousTabIndex
       };
 
-      const Tag = interactiveAttributes.href ? "a" : "span";
+      let Tag = "span";
+
+      if (interactiveAttributes.href) {
+        Tag = "a";
+      } else if (textAnnotationIds?.length > 0) {
+        Tag = "mark";
+      }
 
       return (
-        <Tag {...props}>
+        // eslint-disable-next-line react/no-array-index-key
+        <Tag key={index} {...props}>
           {chunk}
           {endingResources.length > 0 ? (
             <Notation.Marker annotations={endingResources} />
@@ -262,12 +269,14 @@ class TextNode extends Component {
     return Number.isInteger(count) ? count : null;
   }
 
-  ariaLabelForHighlight(chunk) {
-    return this.props.t("reader.actions.manage_highlight", { chunk });
-  }
+  ariaLabelForAnnotations(chunk, annotated, highlighted) {
+    if (annotated && highlighted)
+      return this.props.t("reader.annotation_highlight_aria_label", { chunk });
 
-  ariaLabelForAnnotation(chunk) {
-    return this.props.t("reader.actions.view_annotations", { chunk });
+    if (highlighted)
+      return this.props.t("reader.highlight_aria_label", { chunk });
+
+    return this.props.t("reader.annotation_aria_label", { chunk });
   }
 
   doScroll(withTimeout = false) {

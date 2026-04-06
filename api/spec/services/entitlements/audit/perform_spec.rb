@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe Entitlements::Audit::Perform do
@@ -15,7 +17,7 @@ RSpec.describe Entitlements::Audit::Perform do
 
   let!(:orphan_subscriber) { FactoryBot.create :user }
 
-  before(:each) do
+  before do
     [project_user, subscriber_user].each do |user|
       2.times do
         user.roles.each do |role|

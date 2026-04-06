@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Stores configuratoin for fetching a project tweets
 class TwitterQuery < ApplicationRecord
   ALLOWED_RESULT_TYPES = %w(most_recent popular).freeze
@@ -8,6 +10,7 @@ class TwitterQuery < ApplicationRecord
   # Authorization
   include Authority::Abilities
   include SerializedAbilitiesFor
+
   self.authorizer_name = "ProjectRestrictedChildAuthorizer"
 
   # Association
@@ -41,8 +44,8 @@ class TwitterQuery < ApplicationRecord
   end
 
   def display_name
-    parts = query.split(" ")
-    parts.length > 1 ? parts.first + "..." : query
+    parts = query.split
+    parts.length > 1 ? "#{parts.first}..." : query
   end
 
   private
@@ -50,5 +53,4 @@ class TwitterQuery < ApplicationRecord
   def reset_most_recent_tweet_id
     self.most_recent_tweet_id = nil
   end
-
 end

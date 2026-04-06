@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.shared_examples "toc items" do
-  before(:each) { described_class.run text: text, context: context }
+  before { described_class.run text: text, context: context }
 
   context "when item has hash" do
     it "has the right anchor" do
@@ -11,7 +13,7 @@ RSpec.shared_examples "toc items" do
 
   context "when item does not have hash" do
     it "has the right anchor" do
-      expect(unhashed["anchor"]).to eq nil
+      expect(unhashed["anchor"]).to be_nil
     end
   end
 
@@ -34,14 +36,13 @@ RSpec.describe Ingestions::PostProcessors::TOC do
   end
   let!(:text) { Ingestions::Compiler.run(manifest: manifest, context: context).result }
 
-
   describe "an epub ingestion" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "epubs", "minimal-v3.zip") }
     let(:strategy) { Ingestions::Strategies::Epub }
     let(:hashed) { text.toc.detect { |item| item["label"] == "Section 2#1" } }
     let(:unhashed) { text.toc.detect { |item| item["label"] == "Section 2" } }
 
-    include_examples "toc items"
+    it_behaves_like "toc items"
   end
 
   describe "a manifest ingestion" do
@@ -50,7 +51,7 @@ RSpec.describe Ingestions::PostProcessors::TOC do
     let(:hashed) { text.toc.detect { |item| item["label"] == "Section 1#1" } }
     let(:unhashed) { text.toc.detect { |item| item["label"] == "Title Set From TOC" } }
 
-    include_examples "toc items"
+    it_behaves_like "toc items"
   end
 
   describe "a document ingestion" do
@@ -58,7 +59,7 @@ RSpec.describe Ingestions::PostProcessors::TOC do
     let(:strategy) { Ingestions::Strategies::Document }
     let(:hashed) { text.toc.detect { |item| item["label"] == "Header 2" } }
 
-    before(:each) { described_class.run text: text, context: context }
+    before { described_class.run text: text, context: context }
 
     context "when item has hash" do
       it "has the right anchor" do

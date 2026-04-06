@@ -23,7 +23,7 @@ RSpec.describe "Pending Entitlements API", type: :request do
         get path, headers: admin_headers
       end.to execute_safely
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
 
     context "when filtering by currentState: success" do
@@ -63,7 +63,7 @@ RSpec.describe "Pending Entitlements API", type: :request do
         get path, headers: admin_headers
       end.to execute_safely
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 
@@ -89,7 +89,7 @@ RSpec.describe "Pending Entitlements API", type: :request do
     end
 
     def find_created!
-      resp = JSON.parse response.body
+      resp = response.parsed_body
 
       @created = PendingEntitlement.find resp.dig("data", "id") rescue nil
     end
@@ -102,7 +102,7 @@ RSpec.describe "Pending Entitlements API", type: :request do
           .and(have_enqueued_mail(EntitlementMailer, :pending).exactly(0).times)
           .and(have_enqueued_mail(EntitlementMailer, :created).exactly(0).times)
 
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
@@ -165,7 +165,7 @@ RSpec.describe "Pending Entitlements API", type: :request do
         pending_entitlement.reload
       end.to raise_error ActiveRecord::RecordNotFound
 
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(:no_content)
     end
   end
 end

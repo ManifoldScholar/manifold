@@ -1,48 +1,30 @@
 import styled from "@emotion/styled";
 import {
   transparentize,
-  defaultTransitionProps,
   respond,
   defaultFocusStyle,
   headerContainerPrimary,
-  containerPrototype
+  containerPrototype,
+  defaultTransitionProps
 } from "theme/styles/mixins";
 
 export const Dialog = styled.div`
-  --color: var(--color-neutral-text-light);
-  --highlight-color: var(--color-interaction-light);
-  --focus-color: var(--color-interaction-light);
-  --hover-color: var(--color-interaction-light);
-  --input-border-color: var(--color-base-neutral-white);
-
   position: fixed;
   top: 0;
   width: 100%;
   height: 100%;
   font-size: 18px;
   font-family: var(--font-family-copy);
-  color: var(--color);
   background-color: ${transparentize("neutral90", 0.025)};
-  opacity: 1;
-  transition: opacity 0s linear;
   z-index: 600;
+  transition: opacity ${defaultTransitionProps};
+
+  &[inert] {
+    opacity: 0;
+  }
 
   a {
     text-decoration: underline;
-  }
-
-  .overlay-full-enter > & {
-    opacity: 0;
-  }
-
-  .overlay-full-enter-active > & {
-    opacity: 1;
-    transition: opacity ${defaultTransitionProps};
-  }
-
-  .overlay-full-exit > & {
-    opacity: 0;
-    transition: opacity ${defaultTransitionProps};
   }
 `;
 
@@ -83,7 +65,7 @@ export const FormContainer = styled.div`
   ${respond(`padding-top: 126px;`, 90)}
 
   form {
-    &:focus:not(.focus-visible) {
+    &:focus:not(:focus-visible) {
       outline: 0;
     }
 

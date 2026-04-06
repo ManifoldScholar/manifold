@@ -18,7 +18,6 @@ import CollectionProjectRow from "./Entity/CollectionProjectRow";
 import ResourceRow from "./Entity/ResourceRow";
 import ResourceCollectionRow from "./Entity/ResourceCollectionRow";
 import SubjectRow from "./Entity/SubjectRow";
-import TwitterQueryRow from "./Entity/TwitterQueryRow";
 import UserRow from "./Entity/UserRow";
 import TagRow from "./Entity/TagRow";
 import StringRow from "./Entity/StringRow";
@@ -29,6 +28,14 @@ import JournalIssueRow from "./Entity/JournalIssueRow";
 import PendingEntitlementRow from "./Entity/PendingEntitlementRow";
 import EntitlementImportRow from "./Entity/EntitlementImportRow";
 import AssetRow from "./Entity/AssetRow";
+import ReadingGroupRow from "./Entity/ReadingGroupRow";
+import ReadingGroupMemberRow from "./Entity/ReadingGroupMemberRow";
+import ReadingGroupMembershipRow from "./Entity/ReadingGroupMembershipRow";
+import AnnotationRow from "./Entity/AnnotationRow";
+import CommentRow from "./Entity/CommentRow";
+import ContributorRow from "./Entity/ContributorRow";
+import JournalEditorRow from "./Entity/JournalEditorRow";
+import TextTrackRow from "./Entity/TextTrackRow";
 
 export default List;
 export {
@@ -51,7 +58,6 @@ export {
   ResourceRow,
   ResourceCollectionRow,
   SubjectRow,
-  TwitterQueryRow,
   UserRow,
   TagRow,
   StringRow,
@@ -61,5 +67,13 @@ export {
   JournalIssueRow,
   PendingEntitlementRow,
   EntitlementImportRow,
-  AssetRow
+  AssetRow,
+  ReadingGroupRow,
+  ReadingGroupMemberRow,
+  ReadingGroupMembershipRow,
+  AnnotationRow,
+  CommentRow,
+  ContributorRow,
+  JournalEditorRow,
+  TextTrackRow
 };

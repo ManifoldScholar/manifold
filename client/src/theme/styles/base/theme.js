@@ -2,6 +2,14 @@ import { lighten } from "theme/styles/mixins";
 
 // CSS color vars defined by context in Manifold
 export default `
+  html {
+    @supports (scrollbar-color: auto) {
+      scrollbar-color: var(--color-accent-primary)
+        var(--color-base-neutral90);
+      scrollbar-width: auto;
+    }
+  }
+
   body {
     color: var(--color);
     background-color: var(--background-color);
@@ -54,6 +62,7 @@ export default `
     --placeholder-icon-color: var(--strong-color);
 
     color: var(--color);
+    color-scheme: light;
   }
 
   .backend,
@@ -103,6 +112,7 @@ export default `
     --placeholder-icon-color: var(--highlight-color);
 
     color: var(--color);
+    color-scheme: dark;
 
     input[type="text"],
     input[type="number"],

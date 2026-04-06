@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { DefaultPlayer as Video } from "react-html5video";
 import withDispatch from "hoc/withDispatch";
 import { notificationActions } from "actions";
 import { withTranslation } from "react-i18next";
@@ -18,16 +17,7 @@ class ResourcePlayerVideo extends Component {
   constructor() {
     super();
     this.playerRef = React.createRef();
-    this.state = { inBrowser: false };
   }
-
-  /* eslint-disable react/no-did-mount-set-state */
-  componentDidMount() {
-    if (!this.state.inBrowser) {
-      this.setState({ inBrowser: true });
-    }
-  }
-  /* eslint-enable react/no-did-mount-set-state */
 
   get subKind() {
     return this.props.resource.attributes.subKind;
@@ -76,8 +66,20 @@ class ResourcePlayerVideo extends Component {
       src: this.iframeSrc,
       frameBorder: "0",
       allowFullScreen: true,
-      type: this.externalType === "youtube" ? "text/html" : null
+      type: this.externalType === "youtube" ? "text/html" : null,
+      loading: "lazy",
+      width: 560,
+      height: 315
     };
+  }
+
+  urlToRelativePath(url) {
+    const trackUrl = new URL(url);
+    return trackUrl.pathname;
+  }
+
+  get allowDownload() {
+    return this.props.resource.attributes.allowDownload;
   }
 
   renderVideoByService() {
@@ -85,19 +87,18 @@ class ResourcePlayerVideo extends Component {
 
     return (
       <Styled.VideoWrapper>
-        <Styled.Video title={this.iframeTitle} {...this.iframeProps} />
+        <Styled.Iframe title={this.iframeTitle} {...this.iframeProps} />
       </Styled.VideoWrapper>
     );
   }
 
   handleError = eventIgnored => {
-    const hasDownload = this.props.resource.attributes.allowDownload;
     const t = this.props.t;
     const notification = {
       level: 1,
       id: `VIDEO_PLAYBACK_ERROR`,
       heading: t("errors.video_playback.heading"),
-      body: `${t("errors.video_playback.body")} ${hasDownload &&
+      body: `${t("errors.video_playback.body")} ${this.allowDownload &&
         t("errors.video_playback.download")}`,
       expiration: 5000
     };
@@ -105,23 +106,41 @@ class ResourcePlayerVideo extends Component {
   };
 
   renderFileVideo() {
-    if (!this.state.inBrowser) return null;
-
     const {
       variantPosterStyles,
       attachmentStyles
     } = this.props.resource.attributes;
+    const { textTracks } = this.props.resource.relationships;
 
     return (
       <Styled.VideoWrapper>
-        <Video
-          ref={this.playerRef}
-          controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
+        <Styled.Video
+          controls
+          controlsList={!this.allowDownload ? "nodownload" : undefined}
           poster={variantPosterStyles.mediumLandscape}
           onError={this.handleError}
+          loading="lazy"
         >
           <source src={attachmentStyles.original} type="video/mp4" />
-        </Video>
+          {!!textTracks.length &&
+            textTracks.map(track => {
+              if (!track?.attributes) return null;
+              const {
+                id,
+                attributes: { kind, srclang, cuesUrl, label }
+              } = track;
+              if (!kind || !cuesUrl) return null;
+              return (
+                <track
+                  key={id}
+                  src={this.urlToRelativePath(cuesUrl)}
+                  kind={kind}
+                  label={label}
+                  srcLang={srclang}
+                />
+              );
+            })}
+        </Styled.Video>
       </Styled.VideoWrapper>
     );
   }

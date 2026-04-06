@@ -5,12 +5,16 @@ import IconComposer from "global/components/utility/IconComposer";
 import withConfirmation from "hoc/withConfirmation";
 import * as Styled from "./styles";
 
-function CategoryRemove({ onRemove, confirm }) {
+function CategoryRemove({ onRemove, confirm, isMarkdown }) {
   const { t } = useTranslation();
 
   function handleClick() {
-    const heading = t("modals.remove_category");
-    const message = t("modals.remove_category_body");
+    const heading = isMarkdown
+      ? t("modals.remove_markdown_block")
+      : t("modals.remove_category");
+    const message = isMarkdown
+      ? t("modals.confirm_body")
+      : t("modals.remove_category_body");
     confirm(heading, message, () => onRemove());
   }
 

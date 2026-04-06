@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Analytics
   class Event < ApplicationRecord
     include Ahoy::QueryMethods
 
-    PROJECT_VIEW_EVENT_NAME = "view project".freeze
-    SEARCH_EVENT_NAME = "search".freeze
+    PROJECT_VIEW_EVENT_NAME = "view project"
+    SEARCH_EVENT_NAME = "search"
 
     self.table_name = "analytics_events"
 

@@ -1,0 +1,212 @@
+name: manifold
+
+services:
+  postgres:
+    image: postgres:13-alpine
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all
+    shm_size: 2g
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: password
+      POSTGRES_DB: 'manifold_development'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  migrations:
+    build:
+      context: api
+    command: bin/ensure-db
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - ./docker/api/api.env
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: "no"
+    volumes:
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+  minio:
+    image: "minio/minio:RELEASE.2022-09-25T15-44-53Z"
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - "13115:9000"
+      - "13116:9001"
+    volumes:
+      - minio-storage:/data
+    env_file:
+      - ./docker/minio/minio.env
+    command: server --console-address ":9001" /data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+  minio-client:
+    entrypoint: "/root/.mc/initialize.sh"
+    image: "minio/mc:RELEASE.2022-09-16T09-16-47Z"
+    depends_on:
+      minio:
+        condition: service_healthy
+    env_file:
+      - ./docker/api/api.env
+      - ./docker/minio/minio.env
+    restart: "no"
+    volumes:
+      - ./docker/minio/client:/root/.mc
+  client:
+    tty: true
+    stdin_open: true
+    build:
+      context: client
+      target: development
+    ports:
+      - "13100:13100" # Rescue
+      - "13101:13101" # SSR
+      - "13102:13102" # Webpack dev server
+    env_file:
+      - ./docker/client/client.env
+    restart: unless-stopped
+    volumes:
+      - ./client:/srv/app
+      - node_modules:/srv/app/node_modules
+  web:
+    tty: true
+    stdin_open: true
+    build:
+      context: api
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+      minio-client:
+        condition: service_completed_successfully
+    env_file:
+      - ./docker/api/api.env
+    environment:
+      PUMA_APPLICATION: API
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-s", "-o", "/dev/null", "http://localhost:13110/api/v1/ping"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - "13110:13110"
+    restart: unless-stopped
+    volumes:
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+  worker:
+    build:
+      context: api
+    command: bin/good_job start --probe-port 7001
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+      web:
+        condition: service_healthy
+    env_file:
+      - ./docker/api/api.env
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: unless-stopped
+    volumes:
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-s", "-o", "/dev/null", "http://localhost:7001/status/started"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+  spec:
+    build:
+      context: api
+
+    command: tail -f /dev/null
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
+    env_file:
+      - ./docker/api/api.env
+    environment:
+      - RACK_ENV=test
+      - RAILS_ENV=test
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    restart: unless-stopped
+    volumes:
+      - ./api/:/srv/app
+      - bundle-cache:/bundle
+      - rails-data:/srv/app/data
+      - rails-log:/srv/app/log
+      - rails-tmp:/srv/app/tmp
+      - uploads:/srv/app/public/system
+
+volumes:
+  bundle-cache:
+    driver: local
+  minio-storage:
+    driver: local
+  postgres-data:
+    driver: local
+  rails-data:
+    driver: local
+  rails-log:
+    driver: local
+  rails-tmp:
+    driver: local
+  uploads:
+    driver: local
+  node_modules:
+    driver: local

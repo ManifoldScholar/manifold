@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Allows instance variables to be automatically cleared when a model is `#reload`ed.
 module HasReloadHooks
   extend ActiveSupport::Concern

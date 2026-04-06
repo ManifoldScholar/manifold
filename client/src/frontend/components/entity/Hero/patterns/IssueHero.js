@@ -1,13 +1,22 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import PropTypes from "prop-types";
-import { CalloutList, Cover, Credits, Meta, Social, Title } from "../parts";
+import { CalloutList, Cover, Credits, Meta, Title } from "../parts";
 import EntityMasthead from "frontend/components/entity/Masthead";
 import { getAuth, getPartsData } from "../helpers";
 import EntityHero from "../EntityHero";
 import Authorization from "helpers/authorization";
+import { useEventTracker } from "hooks";
 
 export default function IssueHero({ entity, mock }) {
   const authorization = useRef(new Authorization());
+
+  const trackEvent = useEventTracker();
+
+  const trackIssueEvent = useCallback(
+    eventType => trackEvent(eventType, entity.type, entity.id),
+    [entity, trackEvent]
+  );
+
   if (!entity) return null;
 
   const { showErrors, authorized } = getAuth(entity, authorization);
@@ -15,16 +24,12 @@ export default function IssueHero({ entity, mock }) {
     callouts,
     orderedCallouts,
     copy,
-    twitter,
-    instagram,
-    facebook,
-    hashtag,
-    social,
     description,
     creators,
-    contributors,
+    flattenedCollaborators,
     cover
   } = getPartsData(entity);
+
   return (
     <>
       <EntityMasthead entity={entity} />
@@ -35,15 +40,16 @@ export default function IssueHero({ entity, mock }) {
         )}
         TopLeftComponent={
           <>
-            {(creators || contributors || description) && (
+            {(flattenedCollaborators || description) && (
               <Meta
                 creators={creators}
-                contributors={contributors}
+                flattenedCollaborators={flattenedCollaborators}
                 description={description}
               />
             )}
             {callouts && (
               <CalloutList
+                track={trackIssueEvent}
                 authorized={authorized || mock}
                 callouts={orderedCallouts}
                 showErrors={showErrors || mock}
@@ -53,21 +59,12 @@ export default function IssueHero({ entity, mock }) {
             )}
           </>
         }
-        BottomLeftComponent={
-          social && (
-            <Social
-              twitter={twitter}
-              facebook={facebook}
-              instagram={instagram}
-              hashtag={hashtag}
-            />
-          )
-        }
         TopRightComponent={
           <>
             {cover && <Cover entity={entity} />}
             {callouts && (
               <CalloutList
+                track={trackIssueEvent}
                 authorized={authorized || mock}
                 callouts={callouts}
                 showErrors={showErrors || mock}

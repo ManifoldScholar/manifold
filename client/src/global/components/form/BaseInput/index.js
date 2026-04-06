@@ -33,7 +33,9 @@ export class FormBaseInput extends PureComponent {
     idForInstructions: PropTypes.string,
     renderValue: PropTypes.func,
     wide: PropTypes.bool,
-    defaultValue: PropTypes.string
+    defaultValue: PropTypes.string,
+    required: PropTypes.bool,
+    ariaRequired: PropTypes.bool
   };
 
   static contextType = FormContext;
@@ -98,7 +100,8 @@ export class FormBaseInput extends PureComponent {
       buttons,
       instructions,
       wide,
-      className
+      className,
+      ariaRequired
     } = this.props;
 
     const fieldClasses = classnames(className, {
@@ -143,6 +146,8 @@ export class FormBaseInput extends PureComponent {
           aria-describedby={`${idForError || ""} ${idForInstructions || ""}`}
           autoComplete={this.props.autoComplete}
           defaultValue={this.props.defaultValue}
+          required={this.props.required}
+          aria-required={ariaRequired}
         />
         {buttons && this.renderButtons(buttons)}
         {this.props.instructions && (

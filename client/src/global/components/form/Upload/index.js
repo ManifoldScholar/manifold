@@ -57,6 +57,10 @@ export class FormUpload extends Component {
       accepts: "application/json",
       extensions: "json"
     },
+    vtt: {
+      accepts: "text/vtt",
+      extensions: "vtt"
+    },
     any: {
       accepts: null,
       extensions: null

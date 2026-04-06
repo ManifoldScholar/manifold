@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class TwitterQuerySerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
@@ -12,6 +13,5 @@ module V1
     typed_attribute :display_name, Types::String.meta(read_only: true)
 
     typed_belongs_to :project
-
   end
 end

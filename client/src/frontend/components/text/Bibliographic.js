@@ -47,11 +47,12 @@ class TextBibliographic extends Component {
 
   get creatorNames() {
     if (!this.props.showAuthors) return null;
-    const creatorNames = this.attributes.creatorNames;
-    if (Array.isArray(creatorNames)) {
-      return creatorNames.map(n => `${n.firstName} ${n.lastName}`).join(", ");
+    const namesArray = this.attributes.creatorNames?.split(", ") ?? [];
+    if (namesArray.length > 6) {
+      const firstSix = namesArray.slice(0, 6).join(", ");
+      return this.props.t("common.et_al", { names: firstSix });
     }
-    return creatorNames;
+    return this.attributes.creatorNames;
   }
 
   get date() {
@@ -99,10 +100,7 @@ class TextBibliographic extends Component {
           </Styled.CollectingToggle>
         </Styled.Name>
         {this.creatorNames && (
-          <Styled.Creators>
-            <span style={{ fontStyle: "italic" }}>{t("common.by")} </span>
-            {this.creatorNames}
-          </Styled.Creators>
+          <Styled.Creators>{this.creatorNames}</Styled.Creators>
         )}
         {this.description && (
           <Styled.Description

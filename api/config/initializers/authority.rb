@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Authority.configure do |config|
   # USER_METHOD
   # ===========
@@ -27,6 +29,7 @@ Authority.configure do |config|
     edit: "update",
     update: "update",
     destroy: "delete",
+    resolve_flags: "resolve_flags",
     lookup: "lookup"
   }
 
@@ -43,12 +46,15 @@ Authority.configure do |config|
     read: "readable",
     update: "updatable",
     delete: "deletable",
-    destroy: "deleteable",
     read_deleted: "deleted_readable",
     read_drafts: "drafts_readable",
     fully_read: "fully_readable",
     list: "listable",
+    bulk_delete: "bulk_deletable",
+    resolve_flags: "flags_resolvable",
     manage: "manageable",
+    manage_properties: "properties_manageable",
+    create_properties: "properties_creatable",
     manage_project_exportations: "project_exportations_manageable",
     create_project_exportations: "project_exportations_creatable",
     manage_resources: "resources_manageable",

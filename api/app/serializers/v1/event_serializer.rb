@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class EventSerializer < ManifoldSerializer
-
     include ::V1::Concerns::ManifoldSerializer
 
     typed_attribute :event_type, Types::String.meta(read_only: true, example: "resource_collection_added")

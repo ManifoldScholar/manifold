@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { UIDConsumer } from "react-uid";
+import { withRouter } from "react-router-dom";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import Option from "global/components/form/Radio/Option";
@@ -23,7 +24,8 @@ class SearchQueryForm extends PureComponent {
     textId: PropTypes.string,
     sectionId: PropTypes.string,
     t: PropTypes.func,
-    autoFocus: PropTypes.bool
+    autoFocus: PropTypes.bool,
+    location: PropTypes.object
   };
 
   /* eslint-disable no-console */
@@ -103,7 +105,10 @@ class SearchQueryForm extends PureComponent {
 
   setFacets(facets) {
     facets.sort();
-    return this.setState({ facets }, this.doSearch);
+    const callback = this.props.location?.state?.fromMenu
+      ? null
+      : this.doSearch;
+    return this.setState({ facets }, callback);
   }
 
   get availableScopes() {
@@ -282,4 +287,4 @@ class SearchQueryForm extends PureComponent {
   }
 }
 
-export default withTranslation()(SearchQueryForm);
+export default withRouter(withTranslation()(SearchQueryForm));

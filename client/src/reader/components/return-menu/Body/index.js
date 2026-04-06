@@ -13,7 +13,9 @@ export default function ReturnMenuBody({
   isJournalArticle,
   projectTitle: entityTitle,
   toggleSignInUpOverlay,
-  moreLink
+  moreLink,
+  className,
+  hidePanel
 }) {
   const context = useContext(FrontendModeContext);
   const settings = useFromStore("settings", "select");
@@ -21,10 +23,10 @@ export default function ReturnMenuBody({
   const { t } = useTranslation();
 
   return (
-    <Styled.Menu>
+    <Styled.Menu className={className}>
       <Styled.List>
         <Styled.Item>
-          <Styled.ItemLink to={returnUrl}>
+          <Styled.ItemLink to={returnUrl} onClick={hidePanel}>
             <Styled.LinkIcon icon="circleArrowLeft64" size={36.923} />
             <Styled.LinkText>
               {isJournalArticle
@@ -44,6 +46,7 @@ export default function ReturnMenuBody({
                   ? "frontendJournalsList"
                   : "frontendProjectsAll"
               )}
+              onClick={hidePanel}
             >
               <Styled.LinkIcon
                 icon={isJournalArticle ? "journals64" : "projects64"}
@@ -93,5 +96,6 @@ ReturnMenuBody.propTypes = {
   projectTitle: PropTypes.string.isRequired,
   toggleSignInUpOverlay: PropTypes.func.isRequired,
   moreLink: PropTypes.string,
-  settings: PropTypes.object
+  settings: PropTypes.object,
+  className: PropTypes.string
 };

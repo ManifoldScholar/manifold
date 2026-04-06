@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { useFetch, usePaginationState } from "hooks";
+import { useFetch, useListQueryParams } from "hooks";
 import { journalsAPI } from "api";
 import withFilteredLists, { journalFilters } from "hoc/withFilteredLists";
 import HeadContent from "global/components/HeadContent";
@@ -12,18 +12,16 @@ import EntitiesList, {
 } from "backend/components/list/EntitiesList";
 
 function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
-  const [pagination, setPageNumber] = usePaginationState();
-
-  const journalFiltersWithDefaults = useMemo(
-    () => ({
+  const { pagination, filters, searchProps } = useListQueryParams({
+    initFilters: {
       withUpdateOrIssueUpdateAbility: true,
       ...entitiesListSearchParams.journals
-    }),
-    [entitiesListSearchParams?.journals]
-  );
+    },
+    initSearchProps: entitiesListSearchProps("journals")
+  });
 
   const { data, meta } = useFetch({
-    request: [journalsAPI.index, journalFiltersWithDefaults, pagination]
+    request: [journalsAPI.index, filters, pagination]
   });
 
   const { t } = useTranslation();
@@ -45,13 +43,10 @@ function JournalsList({ entitiesListSearchProps, entitiesListSearchParams }) {
         titleStyle="bar"
         entities={data}
         unit={t("glossary.journal", { count: meta.pagination.totalCount })}
-        search={<Search {...entitiesListSearchProps("journals")} />}
+        search={<Search {...searchProps} />}
         pagination={meta.pagination}
         showCount
         showCountInTitle
-        callbacks={{
-          onPageClick: page => () => setPageNumber(page)
-        }}
         buttons={[
           <Button
             path={lh.link("backendJournalsNew")}

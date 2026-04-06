@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module APIDocs
   module Helpers
     class Request
-
       include Helpers::Inflections
 
       attr_accessor :action, :options
@@ -61,7 +62,7 @@ module APIDocs
       def downcase_first(string)
         return nil if string.nil?
 
-        string[0, 1].downcase + string[1..-1]
+        string[0, 1].downcase + string[1..]
       end
 
       def transform_type(type)
@@ -88,7 +89,7 @@ module APIDocs
 
         type = action == :index ? human_resource_name_plural : human_resource_name
         key = @options[:parent].present? ? "swagger.#{@action}.summary_with_parent" : "swagger.#{@action}.summary"
-        I18n.t(key, string_vars(type))
+        I18n.t(key, **string_vars(type))
       end
 
       def response_description?
@@ -104,7 +105,7 @@ module APIDocs
         return nil if included.empty?
 
         docs = "Included relationships:\n* "
-        docs << included.join("\n* ")
+        "#{docs}#{included.join('\n* ')}"
       end
 
       def description
@@ -224,7 +225,7 @@ module APIDocs
       def merge_additional_parameters(parameters)
         return parameters unless @options.key?(:additional_parameters)
 
-        keys = @options[:additional_parameters].map { |p| p[:name] }
+        keys = @options[:additional_parameters].pluck(:name)
         parameters.reject { |p| keys.include? p } + @options[:additional_parameters]
       end
 
@@ -276,7 +277,7 @@ module APIDocs
         options = {
           paginated: paginated?
         }
-        resource_klass(resource_name).send(type_method(type_from_action(action, :response)), options)
+        resource_klass(resource_name).send(type_method(type_from_action(action, :response)), **options)
       end
     end
   end

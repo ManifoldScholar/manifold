@@ -1,44 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
-import MakerAvatar from "./Avatar";
+import capitalize from "lodash/capitalize";
+import Avatar from "./Avatar";
 import * as Styled from "./styles";
 
-export default function HeroMeta({ creators, contributors, description }) {
-  const { t } = useTranslation();
+export default function HeroMeta({ flattenedCollaborators, description }) {
   const showAvatars =
-    creators?.length <= 2 &&
-    creators.every(creator => creator.attributes?.avatarStyles?.smallSquare);
+    flattenedCollaborators?.length < 3 &&
+    flattenedCollaborators.every(c => c.attributes?.avatarStyles?.smallSquare);
+
+  const renderCollaboratorWithRoles = collaborator => (
+    <Styled.Name key={collaborator.id}>
+      {collaborator.attributes.makerName}
+      <Styled.Roles>
+        {collaborator.attributes.roles
+          .map(r => capitalize(r).replaceAll("_", " "))
+          .join(", ")}
+      </Styled.Roles>
+    </Styled.Name>
+  );
 
   return (
     <Styled.Wrapper>
-      {!!creators?.length && (
-        <Styled.Creators>
-          {!showAvatars && <span className="italic">{t("common.by")} </span>}
-          {creators.map(creator =>
+      {!!flattenedCollaborators?.length && (
+        <Styled.Contributors>
+          {flattenedCollaborators.map(collaborator =>
             showAvatars ? (
-              <MakerAvatar key={creator.id} maker={creator} />
+              <Avatar
+                key={collaborator.id}
+                url={collaborator.attributes?.avatarStyles?.smallSquare}
+                collaborator={renderCollaboratorWithRoles(collaborator)}
+              />
             ) : (
-              <Styled.Name key={creator.id}>
-                {creator.attributes?.fullName}
-              </Styled.Name>
+              renderCollaboratorWithRoles(collaborator)
             )
           )}
-        </Styled.Creators>
-      )}
-      {!!contributors?.length && (
-        <Styled.Contributors>
-          <span className="italic">
-            {t("glossary.contributor_title_case", {
-              count: contributors.length
-            })}
-            :{" "}
-          </span>
-          {contributors.map(contributor => (
-            <Styled.Name key={contributor.id}>
-              {contributor.attributes.fullName}
-            </Styled.Name>
-          ))}
         </Styled.Contributors>
       )}
       {description && (
@@ -51,7 +47,6 @@ export default function HeroMeta({ creators, contributors, description }) {
 HeroMeta.displayName = "Frontend.Entity.Hero.Parts.Meta";
 
 HeroMeta.propTypes = {
-  creators: PropTypes.array,
   contributors: PropTypes.array,
   description: PropTypes.string
 };

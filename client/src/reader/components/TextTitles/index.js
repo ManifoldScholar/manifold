@@ -5,7 +5,7 @@ import Collecting from "frontend/components/collecting";
 
 export default class TextTitles extends Component {
   static propTypes = {
-    text: PropTypes.object.isRequired,
+    text: PropTypes.object,
     section: PropTypes.object.isRequired,
     showSection: PropTypes.bool
   };
@@ -22,7 +22,7 @@ export default class TextTitles extends Component {
   }
 
   get textTitle() {
-    return this.text.attributes.titleFormatted;
+    return this.text?.attributes.titleFormatted;
   }
 
   get section() {
@@ -66,7 +66,7 @@ export default class TextTitles extends Component {
           {`${this.textTitle}: ${this.sectionTitle}`}
         </h1>
         <div className="reader-header__title-bar-inner">
-          <div className="reader-header__title-bar-text" aria-hidden="true">
+          <div className="reader-header__title-bar-text">
             <span
               className="reader-header__title-inner-text"
               dangerouslySetInnerHTML={{ __html: this.textTitle }}
@@ -75,7 +75,7 @@ export default class TextTitles extends Component {
               <Collecting.Toggle collectable={this.text} />
             </span>
           </div>
-          <div className="reader-header__title-bar-text" aria-hidden="true">
+          <div className="reader-header__title-bar-text">
             <span className="reader-header__title-inner-text">
               {this.sectionTitle}
             </span>

@@ -3,10 +3,12 @@
     "about": "about",
     "active": "Active",
     "archived": "archived",
+    "body": "Body",
     "by": "by",
     "content": "content",
     "current": "Current",
     "custom": "Custom",
+    "date": "Date",
     "default": "Default",
     "deleted": "deleted",
     "deleted_title_case": "Deleted",
@@ -27,7 +29,8 @@
     "private_title_case": "Private",
     "public": "public",
     "public_title_case": "Public",
-    "role": "role",
+    "role_one": "role",
+    "role_other": "roles",
     "settings": "Settings",
     "slug": "Slug",
     "title": "Title",
@@ -43,6 +46,7 @@
     "you_title_case": "You",
     "yours": "yours",
     "settings": "Settings",
-    "admin": "Admin"
+    "admin": "Admin",
+    "et_al": "{{names}}, et al."
   }
 }

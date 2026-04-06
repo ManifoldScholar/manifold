@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SerializableAuthorization
   extend ActiveSupport::Concern
   include ActiveSupport::Configurable
@@ -26,8 +28,8 @@ module SerializableAuthorization
   # @param [{ Symbol => Object }]
   # @return [{ Symbol => Boolean }]
   def to_serializable_hash_for(user, **options)
-    exposed_abilities.each_with_object({}) do |ability, h|
-      h[ability] = able_to?(ability, user, options)
+    exposed_abilities.index_with do |ability|
+      able_to?(ability, user, **options)
     end
   end
 
@@ -39,8 +41,8 @@ module SerializableAuthorization
     end
 
     def to_serializable_hash_for(user)
-      exposed_abilities.each_with_object({}) do |ability, h|
-        h[ability] = able_to?(ability, user)
+      exposed_abilities.index_with do |ability|
+        able_to?(ability, user)
       end
     end
 

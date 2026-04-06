@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import URI from "urijs";
 import { Link } from "react-router-dom";
 import validatedNode from "../higher-order/ValidatedNode";
 
@@ -11,39 +10,31 @@ class LinkNode extends Component {
     children: PropTypes.array
   };
 
-  hasUri() {
-    return this.props.attributes.hasOwnProperty("href");
+  get href() {
+    return this.props.attributes.href;
   }
 
-  isProxyUri() {
-    if (this.hasUri()) {
-      return /api\/proxy\//.test(this.props.attributes.href);
-    }
-    return false;
+  get hasHref() {
+    return !!("href" in this.props.attributes);
   }
 
-  isAbsoluteUri() {
-    if (!this.hasUri()) {
-      return false;
-    }
+  get isProxyURL() {
+    if (!this.hasHref) return false;
+    return /api\/proxy\//.test(this.href);
+  }
+
+  get isAbsoluteURL() {
+    if (!this.hasHref) return false;
 
     try {
-      return URI.parse(this.props.attributes.href).protocol;
-    } catch (e) {
+      // will only succeed if this.href is a full URL
+      // eslint-disable-next-line no-unused-vars
+      const url = new URL(this.href);
       return true;
+    } catch (_) {
+      // return false for relative links; otherwise treat malformed URLs as absolute
+      return !(this.href.startsWith("/") || this.href.startsWith("#"));
     }
-  }
-
-  adjustedAttributes() {
-    const parsedURI = URI.parse(this.props.attributes.href);
-    const pathname = parsedURI.path;
-    const query = parsedURI.query;
-    const adjustedAttributes = { to: { pathname, query } };
-    if (parsedURI.fragment) {
-      adjustedAttributes.to.hash = `#${parsedURI.fragment}`;
-    }
-    delete Object.assign(adjustedAttributes, this.props.attributes).href;
-    return adjustedAttributes;
   }
 
   renderChildren() {
@@ -57,7 +48,7 @@ class LinkNode extends Component {
   }
 
   render() {
-    if (!this.hasUri() || this.isAbsoluteUri() || this.isProxyUri()) {
+    if (!this.hasHref || this.isAbsoluteURL || this.isProxyURL) {
       const Tag = this.props.tag;
       return (
         <Tag
@@ -70,7 +61,12 @@ class LinkNode extends Component {
       );
     }
 
-    return <Link {...this.adjustedAttributes()}>{this.renderChildren()}</Link>;
+    const { href, ...attrs } = this.props.attributes;
+    return (
+      <Link {...attrs} to={href}>
+        {this.renderChildren()}
+      </Link>
+    );
   }
 }
 

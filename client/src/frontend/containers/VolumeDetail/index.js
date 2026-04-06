@@ -6,7 +6,8 @@ import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import lh from "helpers/linkHandler";
 import { journalVolumesAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import EntityHeadContent from "frontend/components/entity/HeadContent";
+import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
+import HeadContent from "global/components/HeadContent";
 import EntityMasthead from "frontend/components/entity/Masthead";
 import Journal from "frontend/components/journal";
 import { useFetch, useFromStore } from "hooks";
@@ -51,15 +52,17 @@ function VolumeDetailContainer({ journal }) {
     libraryDisabled
   ]);
 
+  const headContentProps = useEntityHeadContent(
+    volume,
+    journal,
+    t("glossary.volume_title_case_one")
+  );
+
   return journal && volume ? (
     <>
       <CheckFrontendMode debugLabel="VolumeDetail" isProjectSubpage />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
-      <EntityHeadContent
-        entity={volume}
-        type={t("glossary.volume_title_case_one")}
-        parentEntity={journal}
-      />
+      <HeadContent {...headContentProps} />
       <h1 className="screen-reader-text">
         {`${journal.attributes.title}: ${t("glossary.volume_title_case_one")} ${
           volume.attributes.number

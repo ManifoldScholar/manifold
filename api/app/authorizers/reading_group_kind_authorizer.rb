@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReadingGroupKindAuthorizer < ApplicationAuthorizer
   def default(user, *)
     admin_permissions?(user)

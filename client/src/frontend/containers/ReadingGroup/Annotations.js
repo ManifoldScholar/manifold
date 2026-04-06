@@ -3,13 +3,7 @@ import PropTypes from "prop-types";
 import { readingGroupsAPI } from "api";
 import { useParams } from "react-router-dom";
 import EntityCollection from "frontend/components/entity/Collection";
-import {
-  useFetch,
-  usePaginationState,
-  useFilterState,
-  useSetLocation,
-  useListFilters
-} from "hooks";
+import { useFetch, useListFilters, useListQueryParams } from "hooks";
 import * as Styled from "./styles";
 
 function ReadingGroupAnnotationsContainer({
@@ -17,14 +11,15 @@ function ReadingGroupAnnotationsContainer({
   refresh,
   fetchVersion
 }) {
-  const [pagination, setPageNumber] = usePaginationState();
-  const baseFilters = {};
-  const [filters, setFilters] = useFilterState(baseFilters);
-  useSetLocation({ filters, page: pagination.number });
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initFilters: {
+      formats: ["annotation"]
+    }
+  });
 
   const { id } = useParams();
 
-  const { data: annotations, meta } = useFetch({
+  const { data: annotations, meta, refresh: refreshAnnotations } = useFetch({
     request: [readingGroupsAPI.annotations, id, filters, pagination],
     dependencies: [fetchVersion]
   });
@@ -33,18 +28,11 @@ function ReadingGroupAnnotationsContainer({
     readingGroup?.relationships ?? {};
 
   const filterProps = useListFilters({
-    onFilterChange: param => setFilters({ newState: param }),
+    onFilterChange: state => setFilters(state),
     initialState: filters,
-    resetState: baseFilters,
+    resetState: null,
     options: { sortChron: true, memberships, texts }
   });
-
-  const paginationClickHandlerCreator = page => {
-    return event => {
-      event.preventDefault();
-      setPageNumber(page);
-    };
-  };
 
   return readingGroup ? (
     <Styled.Body>
@@ -54,10 +42,8 @@ function ReadingGroupAnnotationsContainer({
         annotationsMeta={meta}
         filterProps={{ ...filterProps, hideSearch: true }}
         isFiltered={!!Object.keys(filters).length}
-        paginationProps={{
-          paginationClickHandler: paginationClickHandlerCreator
-        }}
-        refresh={refresh}
+        refreshGroup={refresh}
+        refreshAnnotations={refreshAnnotations}
         nested
       />
     </Styled.Body>

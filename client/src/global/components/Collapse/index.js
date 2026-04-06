@@ -1,11 +1,12 @@
 import React, { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useUIDSeed } from "react-uid";
+import useResizeObserver from "use-resize-observer";
 import { CollapseContext } from "helpers/contexts";
 import Toggle from "./Toggle";
 import Content from "./Content";
 
-function Collapse({ initialVisible, children }) {
+function Collapse({ initialVisible, children, stubHeight, label }) {
   const [visible, setVisible] = useState(initialVisible);
   const toggleVisible = () => setVisible(!visible);
   const idSeed = useUIDSeed();
@@ -18,10 +19,14 @@ function Collapse({ initialVisible, children }) {
   const labelProps = {
     id: idSeed("label")
   };
+  const { ref: resizeRef, height } = useResizeObserver();
   const contentProps = {
     id: idSeed("content"),
     role: "region",
-    "aria-labelledby": idSeed("label")
+    "aria-label": label,
+    "aria-labelledby": !label ? idSeed("label") : undefined,
+    inert: !visible && (!stubHeight || stubHeight < height) ? "" : undefined,
+    resizeRef
   };
 
   const value = useMemo(
@@ -30,9 +35,11 @@ function Collapse({ initialVisible, children }) {
       toggleProps,
       labelProps,
       contentProps,
-      toggleVisible
+      toggleVisible,
+      height,
+      stubHeight
     }),
-    [visible, idSeed] // eslint-disable-line react-hooks/exhaustive-deps
+    [visible, idSeed, height, stubHeight] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   useEffect(() => {
@@ -50,6 +57,8 @@ Collapse.displayName = "Global.Collapse";
 
 Collapse.propTypes = {
   initialVisible: PropTypes.bool,
+  stubHeight: PropTypes.number,
+  label: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 

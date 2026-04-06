@@ -14,12 +14,12 @@ RSpec.describe "Project Permissions API", type: :request do
       describe "the response" do
         it "has a 200 status code" do
           get path, headers: headers
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
 
         it "has a data attribute" do
           get path, headers: headers
-          api_response = JSON.parse(response.body)
+          api_response = response.parsed_body
           expect(api_response).to be_a Hash
         end
       end
@@ -30,14 +30,14 @@ RSpec.describe "Project Permissions API", type: :request do
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
           get path, headers: headers
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
   end
 
   describe "sends a single project permission query" do
-    before(:each) do
+    before do
       user.add_role :project_author, project
       permission = Permission.fetch(project, user)
       @path = api_v1_project_relationships_permission_path(project, permission)
@@ -48,7 +48,7 @@ RSpec.describe "Project Permissions API", type: :request do
       describe "the response" do
         it "has a 200 status code" do
           get @path, headers: headers
-          expect(response).to have_http_status(200)
+          expect(response).to have_http_status(:ok)
         end
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe "Project Permissions API", type: :request do
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
           get @path, headers: headers
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
@@ -72,7 +72,7 @@ RSpec.describe "Project Permissions API", type: :request do
       describe "the response" do
         it "has a 201 CREATED status code" do
           post path, headers: headers, params: params
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(:created)
         end
       end
     end
@@ -82,18 +82,19 @@ RSpec.describe "Project Permissions API", type: :request do
       describe "the response" do
         it "has a 403 FORBIDDEN status code" do
           post path, headers: headers, params: params
-          expect(response).to have_http_status(403)
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
   end
 
   describe "updates a project permission" do
-    before(:each) do
+    before do
       user.add_role :project_author, project
       @permission = Permission.fetch(project, user)
       @path = api_v1_project_relationships_permission_path(project, @permission)
     end
+
     let(:valid_params) { build_json_payload(attributes: { role_names: %w[project_editor project_author] }) }
 
     context "when the user is an admin" do
@@ -101,7 +102,7 @@ RSpec.describe "Project Permissions API", type: :request do
 
       it "has a 200 SUCCESS status code" do
         put @path, headers: headers, params: valid_params
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it "updates a permission successfully" do
@@ -115,13 +116,13 @@ RSpec.describe "Project Permissions API", type: :request do
       let(:headers) { reader_headers }
       it "has a 403 FORBIDDEN status code" do
         put @path, headers: headers, params: valid_params
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end
 
   describe "destroys a project permission" do
-    before(:each) do
+    before do
       user.add_role :project_author, project
       @permission = Permission.fetch(project, user)
       @path = api_v1_project_relationships_permission_path(project, @permission)
@@ -132,13 +133,13 @@ RSpec.describe "Project Permissions API", type: :request do
 
       it "has a 204 NO CONTENT status code" do
         delete @path, headers: headers
-        expect(response).to have_http_status(204)
+        expect(response).to have_http_status(:no_content)
       end
 
       it "destroys a permission successfully" do
         expect do
           delete @path, headers: headers
-        end.to change { Permission.count }.by(-1)
+        end.to change(Permission, :count).by(-1)
       end
     end
 
@@ -146,7 +147,7 @@ RSpec.describe "Project Permissions API", type: :request do
       let(:headers) { reader_headers }
       it "has a 403 FORBIDDEN status code" do
         delete @path, headers: headers
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status(:forbidden)
       end
     end
   end

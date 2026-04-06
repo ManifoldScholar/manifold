@@ -14,13 +14,13 @@ class JournalIssue < ApplicationRecord
   include HasFormattedAttributes
   include SearchIndexable
   include HasSortTitle
+  include HasKeywordSearch
 
-  belongs_to :journal, counter_cache: true
-  belongs_to :journal_volume, optional: true, counter_cache: true
+  belongs_to :journal, counter_cache: true, inverse_of: :journal_issues
+  belongs_to :journal_volume, optional: true, counter_cache: true, inverse_of: :journal_issues
 
   has_one :project, required: true, inverse_of: :journal_issue, dependent: :destroy
 
-  validates :journal_id, presence: true
   validates :number, presence: true
 
   include TrackedCreator
@@ -52,7 +52,7 @@ class JournalIssue < ApplicationRecord
   end
 
   scope :with_read_ability, ->(user = nil) do
-    where(project: Project.with_read_ability(user)).or(where(journal: Journal.with_update_ability(user)))
+    build_read_ability_scope_for(user)
   end
 
   scope :for_nav, ->(user = nil) do
@@ -92,40 +92,31 @@ class JournalIssue < ApplicationRecord
   delegate :metadata, to: :project
   delegate :finished, to: :project
   delegate :draft, to: :project
+  delegate :marked_for_purge_at, to: :project, prefix: true, allow_nil: true
 
-  # Search
-  scope :search_import, -> {
-    includes(
-      :journal,
-      :project
-    )
+  has_keyword_search! associated_against: {
+    journal: [:title],
+    journal_volume: [:number],
+    project: [:description]
   }
 
-  searchkick(word_start: TYPEAHEAD_ATTRIBUTES,
-             callbacks: :async,
-             batch_size: 500,
-             highlight: [:title, :body])
+  multisearch_parent_name :journal
+
+  multisearch_secondary_attr :description_plaintext
 
   def sort_title_candidate
     pending_sort_title.blank? ? number.to_i : pending_sort_title.to_i
   end
 
-  def search_data
-    {
-      search_result_type: search_result_type,
-      title: title,
-      full_text: description_plaintext,
-      keywords: (tag_list + texts.map(&:title) + hashtag).reject(&:blank?),
-      creator: creator&.full_name,
-      makers: makers.map(&:full_name),
-      metadata: metadata.values.reject(&:blank?)
-    }.merge(search_hidden)
+  def multisearch_full_text
+    description_plaintext
   end
 
-  def search_hidden
-    {
-      hidden: journal.draft?
-    }
+  def multisearch_keywords
+    super.tap do |kw|
+      kw.concat(texts.map(&:title))
+      kw << hashtag
+    end.compact_blank
   end
 
   def title
@@ -143,7 +134,7 @@ class JournalIssue < ApplicationRecord
   end
 
   def recently_updated?
-    updated? && updated_at >= Time.current - 1.week
+    updated? && updated_at >= 1.week.ago
   end
 
   def content_blocks
@@ -161,7 +152,54 @@ class JournalIssue < ApplicationRecord
     # @see Journal.arel_with_draft_access_from_issues
     # @return [ActiveRecord::Relation<JournalIssue>] `SELECT DISTINCT journal_id FROM journal_issues`
     def accessible_journal_ids_for(user)
-      where(project: Project.with_update_ability(user)).distinct.select(:journal_id)
+      reorder(nil).where(project: Project.with_update_ability(user)).distinct.select(:journal_id)
+    end
+
+    def build_read_ability_scope_for(user)
+      left_outer_joins(:project).joins(:journal).where(arel_build_read_case_statement_for(user))
+    end
+
+    # This creates a case statement to be supplied to `where`.
+    #
+    # * If the journal issue's project OR journal is a draft, only show for users
+    #   with draft access roles access to it
+    #
+    # @param [User, nil] user
+    # @return [Arel::Nodes::Case]
+    def arel_build_read_case_statement_for(user)
+      arel_case.tap do |stmt|
+        stmt.when(arel_draft_access).then(arel_with_draft_roles_for(user))
+        stmt.else(arel_published_access_for(user))
+      end
+    end
+
+    def arel_draft_access
+      project_draft = arel_grouping(Project.arel_table[:draft].then { it.not_eq(nil).and(it.eq(true)) })
+      journal_draft = arel_grouping(Journal.arel_table[:draft].then { it.not_eq(nil).and(it.eq(true)) })
+
+      project_draft.or(journal_draft)
+    end
+
+    def arel_published_access_for(user)
+      project_ids = Project.with_read_ability(user).select(:id)
+      journal_ids = Journal.with_read_ability(user).select(:id)
+
+      project_access = arel_attr_in_query(Project.arel_table[:id], project_ids)
+      journal_access = arel_attr_in_query(arel_table[:journal_id], journal_ids)
+
+      project_access.or(journal_access)
+    end
+
+    # @see .arel_with_draft_access_from_issues
+    # @see .arel_with_roles_for
+    # @param [User] user
+    # @return [Arel::Nodes::Or]
+    def arel_with_draft_roles_for(user)
+      # :nocov:
+      return arel_quote(false) unless authorized_user?(user)
+      # :nocov:
+
+      Journal.arel_with_draft_roles_for(user)
     end
   end
 end

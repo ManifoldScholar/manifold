@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe OmniauthStack, middleware: true do
@@ -7,18 +9,18 @@ RSpec.describe OmniauthStack, middleware: true do
 
   subject { middleware }
 
-  before(:each) do
+  before do
     allow(middleware).to receive(:call_with_stack)
   end
 
-  context '#skip?' do
+  describe '#skip?' do
     it 'skips any path with /api' do
-      expect(middleware.skip?(env_for('/api/v1/categories'))).to be_truthy
+      expect(middleware).to be_skip(env_for('/api/v1/categories'))
     end
 
     it 'does not skip any omniauth paths' do
-      expect(middleware.skip?(env_for('/auth/facebook/callback'))).to be_falsey
-      expect(middleware.skip?(env_for('/auth/facebook'))).to be_falsey
+      expect(middleware).not_to be_skip(env_for('/auth/facebook/callback'))
+      expect(middleware).not_to be_skip(env_for('/auth/facebook'))
     end
   end
 

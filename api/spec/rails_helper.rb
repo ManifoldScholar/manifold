@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= "test"
 require "spec_helper"
@@ -102,13 +104,14 @@ Dry::Effects.load_extensions :rspec
 # require only the support files necessary.
 #
 # Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each { |f| require f }
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.maintain_test_schema!
+# Rails 7.1+ added Object#with which conflicts with RSpec matcher chain methods.
+Object.remove_method(:with) if Object.method_defined?(:with)
 
-ActiveJob::Uniqueness.test_mode!
+ActiveRecord::Migration.maintain_test_schema!
 
 TestProf::FactoryDefault.configure do |config|
   config.preserve_attributes = true
@@ -117,6 +120,16 @@ end
 
 Rails.application.eager_load!
 
+# Ensure imagemagick is loaded and accessible. If it's not, there is no sense
+# in running the test suite because dozens of tests are gonna fail.
+begin
+  MiniMagick.cli_version
+rescue MiniMagick::Error => e
+  # :nocov:
+  raise "Failed to load MiniMagick CLI, aborting tests: #{e.message}"
+  # :nocov:
+end
+
 RSpec.configure do |config|
   config.include TestHelpers
   config.extend WithModel
@@ -124,7 +137,7 @@ RSpec.configure do |config|
   config.alias_it_should_behave_like_to :the_subject_behaves_like, "the subject's"
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -149,16 +162,16 @@ RSpec.configure do |config|
   config.include ActiveJob::TestHelper
 
   # Clean up any jobs before each run.
-  config.before(:each) do
+  config.before do
     clear_enqueued_jobs
+  end
+
+  config.before(:all, type: :request) do
+    host! ENV['DOMAIN']
   end
 
   config.after do
     RequestStore.clear!
-  end
-
-  config.before(:suite) do
-    ManifoldApi::Container.enable_stubs!
   end
 
   # Set up jsonapi request encoder
@@ -173,10 +186,7 @@ RSpec.configure do |config|
   # Truncate all test database tables before running tests.
   config.before(:suite) do
     DatabaseCleaner[:active_record].strategy = :transaction
-    DatabaseCleaner[:redis].strategy = :deletion
-
     DatabaseCleaner[:active_record].clean_with(:truncation)
-    DatabaseCleaner[:redis].clean_with(:deletion)
 
     Scenic.database.views.select(&:materialized).each do |view|
       Scenic.database.refresh_materialized_view view.name, concurrently: false, cascade: false
@@ -191,32 +201,8 @@ RSpec.configure do |config|
     ingestion_dir.each_child(&:rmtree)
   end
 
-  config.before(:suite) do
-    Searchkick.disable_callbacks
-  end
-
-  allowed_net_connect = [
-    /googleapis\.com/
-  ]
-
-  # config.around(:each, elasticsearch: true) do |example|
-  #   WebMock.allow_net_connect!
-  #   Searchkick.callbacks(nil) do
-  #     example.run
-  #   end
-  #   WebMock.disable_net_connect!(allow: allowed_net_connect)
-  # end
-
-  # Allow elastic search for tests tagged with elasticsearch
-
-  config.around(:example) do |example|
-    disable_web_connect = !example.metadata[:elasticsearch]
-
-    if disable_web_connect
-      WebMock.disable_net_connect!(allow: allowed_net_connect)
-    else
-      WebMock.allow_net_connect!
-    end
+  config.around do |example|
+    WebMock.disable_net_connect!(allow: [/googleapis\.com/])
 
     example.run
   end

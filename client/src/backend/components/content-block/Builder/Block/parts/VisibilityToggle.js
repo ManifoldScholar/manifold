@@ -24,13 +24,17 @@ class ProjectContentBlockVisibilityToggle extends PureComponent {
 
   render() {
     const baseClass = "backend-content-block";
+    const translatedTitle = this.props.t(this.props.blockTitle);
+
     if (!this.props.visible) return null;
 
     if (this.isVisible)
       return (
         <button
           className={`${baseClass}__button`}
-          aria-label={this.props.t("layout.hide_block")}
+          aria-label={this.props.t("layout.hide_block", {
+            blockTitle: translatedTitle
+          })}
           onClick={this.props.entityCallbacks.hideBlock}
         >
           <Utility.IconComposer

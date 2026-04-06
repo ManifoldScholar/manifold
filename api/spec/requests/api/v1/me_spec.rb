@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require "swagger_helper"
 
 RSpec.describe "Me", type: :request do
   path "/me" do
-    include_examples "an API show request",
+    it_behaves_like "an API show request",
                      model: User,
                      resource_name: "CurrentUser",
                      tags: "Me",
@@ -12,7 +14,7 @@ RSpec.describe "Me", type: :request do
                      success_description: "Returns the user currently logged in",
                      authorized_user: :admin
 
-    include_examples "an API update request",
+    it_behaves_like "an API update request",
                      model: User,
                      resource_name: "CurrentUser",
                      request_id: false,

@@ -136,6 +136,143 @@ COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UU
 
 
 --
+-- Name: ingestion_message_severity; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.ingestion_message_severity AS ENUM (
+    'unknown',
+    'debug',
+    'info',
+    'warn',
+    'error',
+    'fatal'
+);
+
+
+--
+-- Name: manifold_lang; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.manifold_lang AS ENUM (
+    'simple',
+    'english'
+);
+
+
+--
+-- Name: extract_ingestion_message_severity(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.extract_ingestion_message_severity(jsonb) RETURNS public.ingestion_message_severity
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT
+CASE
+WHEN jsonb_typeof($1) = 'array' THEN public.normalize_ingestion_message_severity($1->>0)
+ELSE 'unknown'::public.ingestion_message_severity
+END;
+$_$;
+
+
+--
+-- Name: extract_ingestion_message_text(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.extract_ingestion_message_text(jsonb) RETURNS text
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT
+CASE
+WHEN jsonb_typeof($1) = 'array' THEN $1->>1
+ELSE NULL
+END;
+$_$;
+
+
+--
+-- Name: extract_text_section_content(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.extract_text_section_content(jsonb) RETURNS text
+    LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
+    AS $_$
+SELECT
+  pg_catalog.string_agg(TRIM(content #>> '{}'), ' ' ORDER BY idx ASC) FILTER (WHERE content #>> '{}' ~ '[^[:space:]]+')
+FROM
+  pg_catalog.jsonb_path_query($1, 'strict $.**.content') WITH ORDINALITY AS t(content, idx)
+;
+$_$;
+
+
+--
+-- Name: immutable_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.immutable_unaccent(text) RETURNS text
+    LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
+    AS $_$
+SELECT public.unaccent('public.unaccent'::regdictionary, $1);
+$_$;
+
+
+--
+-- Name: FUNCTION immutable_unaccent(text); Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON FUNCTION public.immutable_unaccent(text) IS 'An expression-indexable version of unaccent that uses the default dictionary.';
+
+
+--
+-- Name: jsonb_extract_strings(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.jsonb_extract_strings(jsonb) RETURNS SETOF text
+    LANGUAGE sql IMMUTABLE STRICT PARALLEL SAFE
+    AS $_$
+WITH RECURSIVE extracted_objects(path, value) AS (
+  SELECT
+    key AS path,
+    value
+  FROM pg_catalog.jsonb_each(jsonb_build_object('input', $1)) AS t(key, value)
+  UNION ALL
+  SELECT
+  path || '.' || COALESCE(obj_key, (arr_key- 1)::text),
+  COALESCE(obj_value, arr_value)
+  FROM extracted_objects
+  LEFT JOIN LATERAL
+  jsonb_each(case jsonb_typeof(value) when 'object' then value end)
+  AS o(obj_key, obj_value)
+  ON jsonb_typeof(value) = 'object'
+  LEFT JOIN LATERAL
+  jsonb_array_elements(CASE jsonb_typeof(value) WHEN 'array' THEN value END)
+  WITH ORDINALITY AS a(arr_value, arr_key)
+  ON jsonb_typeof(value) = 'array'
+  WHERE obj_key IS NOT NULL or arr_key IS NOT NULL
+)
+SELECT
+  value #>> '{}'
+FROM extracted_objects
+  WHERE jsonb_typeof(value) = 'string'
+;
+$_$;
+
+
+--
+-- Name: lang2dictionary(public.manifold_lang); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.lang2dictionary(public.manifold_lang) RETURNS regconfig
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT CASE $1
+WHEN 'english' THEN 'pg_catalog.english'::regconfig
+ELSE
+  'pg_catalog.simple'::regconfig
+END;
+$_$;
+
+
+--
 -- Name: manifold_slugify(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -162,6 +299,70 @@ CREATE FUNCTION public.manifold_slugify(text) RETURNS text
     FROM "hyphenated"
   )
   SELECT NULLIF("value", '') FROM "trimmed";
+$_$;
+
+
+--
+-- Name: normalize_ingestion_message_severity(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.normalize_ingestion_message_severity(text) RETURNS public.ingestion_message_severity
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT
+CASE LOWER($1)
+WHEN 'debug' THEN 'debug'::public.ingestion_message_severity
+WHEN 'info' THEN 'info'::public.ingestion_message_severity
+WHEN 'warn' THEN 'warn'::public.ingestion_message_severity
+WHEN 'error' THEN 'error'::public.ingestion_message_severity
+WHEN 'fatal' THEN 'fatal'::public.ingestion_message_severity
+ELSE 'unknown'::public.ingestion_message_severity
+END;
+$_$;
+
+
+--
+-- Name: to_unaccented_tsv(jsonb); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.to_unaccented_tsv(jsonb) RETURNS tsvector
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT pg_catalog.to_tsvector('pg_catalog.english'::regconfig, COALESCE(pg_catalog.STRING_AGG(public.immutable_unaccent(str), ' '), ''))
+FROM public.jsonb_extract_strings($1) AS t(str);
+$_$;
+
+
+--
+-- Name: to_unaccented_tsv(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.to_unaccented_tsv(text) RETURNS tsvector
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT pg_catalog.to_tsvector('pg_catalog.english'::regconfig, COALESCE(public.immutable_unaccent($1), ''));
+$_$;
+
+
+--
+-- Name: to_unaccented_weighted_tsv(jsonb, "char"); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.to_unaccented_weighted_tsv(jsonb, "char") RETURNS tsvector
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT pg_catalog.setweight(public.to_unaccented_tsv($1), $2);
+$_$;
+
+
+--
+-- Name: to_unaccented_weighted_tsv(text, "char"); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.to_unaccented_weighted_tsv(text, "char") RETURNS tsvector
+    LANGUAGE sql IMMUTABLE PARALLEL SAFE
+    AS $_$
+SELECT pg_catalog.setweight(public.to_unaccented_tsv($1), $2);
 $_$;
 
 
@@ -261,8 +462,14 @@ CREATE TABLE public.annotations (
     resource_collection_id uuid,
     events_count integer DEFAULT 0,
     orphaned boolean DEFAULT false NOT NULL,
-    flags_count integer DEFAULT 0,
-    reading_group_id uuid
+    flags_count bigint DEFAULT 0 NOT NULL,
+    reading_group_id uuid,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone,
+    resolved_flags_count bigint DEFAULT 0 NOT NULL,
+    unresolved_flags_count bigint DEFAULT 0 NOT NULL,
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
+    reader_display_format text
 );
 
 
@@ -281,9 +488,14 @@ CREATE TABLE public.comments (
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false,
     children_count integer DEFAULT 0,
-    flags_count integer DEFAULT 0,
+    flags_count bigint DEFAULT 0 NOT NULL,
     sort_order integer,
-    events_count integer DEFAULT 0
+    events_count integer DEFAULT 0,
+    resolved_flags_count bigint DEFAULT 0 NOT NULL,
+    unresolved_flags_count bigint DEFAULT 0 NOT NULL,
+    flagger_ids uuid[] DEFAULT '{}'::uuid[] NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -350,7 +562,13 @@ CREATE TABLE public.text_section_nodes (
     extrapolated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    intermediate boolean DEFAULT false NOT NULL
+    intermediate boolean DEFAULT false NOT NULL,
+    contained_node_uuids text[] DEFAULT '{}'::text[] NOT NULL,
+    contained_content text,
+    tsv_contained_content tsvector GENERATED ALWAYS AS (public.to_unaccented_weighted_tsv(contained_content, 'A'::"char")) STORED NOT NULL,
+    search_indexed_at timestamp(6) without time zone,
+    search_indexed boolean DEFAULT false NOT NULL,
+    current boolean DEFAULT false NOT NULL
 );
 
 
@@ -377,6 +595,9 @@ CREATE TABLE public.text_sections (
     node_root public.ltree GENERATED ALWAYS AS (public.text2ltree(((md5((id)::text) || '.'::text) || md5((COALESCE(hashtextextended((body_json)::text, (0)::bigint), (0)::bigint))::text)))) STORED NOT NULL,
     slug text,
     hidden_in_reader boolean DEFAULT false NOT NULL,
+    metadata jsonb DEFAULT '{}'::jsonb,
+    body_text text,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     CONSTRAINT text_sections_body_json_must_be_object CHECK ((jsonb_typeof(body_json) = 'object'::text))
 );
 
@@ -486,7 +707,10 @@ CREATE TABLE public.collaborators (
     updated_at timestamp without time zone NOT NULL,
     "position" integer,
     collaboratable_type character varying,
-    collaboratable_id uuid
+    collaboratable_id uuid,
+    other_description character varying,
+    priority integer,
+    importance integer
 );
 
 
@@ -632,7 +856,14 @@ CREATE TABLE public.projects (
     open_access boolean DEFAULT false NOT NULL,
     disable_engagement boolean DEFAULT false,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    journal_issue_id uuid
+    journal_issue_id uuid,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone,
+    social_image_data jsonb,
+    social_description text,
+    social_title text,
+    orphaned_journal_issue_id uuid,
+    orphaned_journal_issue boolean DEFAULT false NOT NULL
 );
 
 
@@ -864,8 +1095,8 @@ CREATE TABLE public.journal_issues (
     journal_id uuid NOT NULL,
     journal_volume_id uuid,
     creator_id uuid,
-    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     number character varying DEFAULT ''::character varying NOT NULL,
+    fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     sort_title integer DEFAULT 0 NOT NULL,
     pending_sort_title integer
 );
@@ -1131,7 +1362,9 @@ CREATE TABLE public.reading_groups (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     reading_group_kind_id uuid,
-    course jsonb DEFAULT '{}'::jsonb NOT NULL
+    course jsonb DEFAULT '{}'::jsonb NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone
 );
 
 
@@ -1171,7 +1404,10 @@ CREATE TABLE public.users (
     email_confirmed_at timestamp(6) without time zone,
     verified_by_admin_at timestamp without time zone,
     established boolean DEFAULT false NOT NULL,
-    trusted boolean DEFAULT false NOT NULL
+    trusted boolean DEFAULT false NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone,
+    cached_full_name text
 );
 
 
@@ -1362,12 +1598,50 @@ CREATE TABLE public.features (
 
 CREATE TABLE public.flags (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
-    creator_id uuid,
-    flaggable_id uuid,
-    flaggable_type character varying,
+    creator_id uuid NOT NULL,
+    flaggable_id uuid NOT NULL,
+    flaggable_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    message text,
+    resolved_by_creator boolean DEFAULT false NOT NULL,
+    resolved_at timestamp without time zone
 );
+
+
+--
+-- Name: flag_statuses; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.flag_statuses AS
+ SELECT flags.flaggable_type,
+    flags.flaggable_id,
+    COALESCE(array_agg(DISTINCT flags.creator_id) FILTER (WHERE (NOT flags.resolved_by_creator)), '{}'::uuid[]) AS flagger_ids,
+    count(DISTINCT flags.id) AS flags_count,
+    count(DISTINCT flags.id) FILTER (WHERE (flags.resolved_at IS NOT NULL)) AS resolved_flags_count,
+    count(DISTINCT flags.id) FILTER (WHERE (flags.resolved_at IS NULL)) AS unresolved_flags_count
+   FROM public.flags
+  GROUP BY flags.flaggable_type, flags.flaggable_id;
+
+
+--
+-- Name: flattened_collaborators; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.flattened_collaborators AS
+ SELECT (((collaborators.collaboratable_id)::text || '-'::text) || (collaborators.maker_id)::text) AS id,
+    collaborators.collaboratable_id,
+    collaborators.collaboratable_type,
+    collaborators.maker_id,
+    array_agg(collaborators.role ORDER BY collaborators.priority) AS roles,
+    min(collaborators.priority) AS priority,
+    min(collaborators.importance) AS importance,
+    array_agg(collaborators.id) AS collaborators,
+    min(collaborators."position") AS min_position
+   FROM public.collaborators
+  WHERE (collaborators.maker_id IS NOT NULL)
+  GROUP BY collaborators.collaboratable_id, collaborators.collaboratable_type, collaborators.maker_id
+  ORDER BY (min(collaborators."position"));
 
 
 --
@@ -1402,6 +1676,107 @@ CREATE SEQUENCE public.friendly_id_slugs_id_seq
 --
 
 ALTER SEQUENCE public.friendly_id_slugs_id_seq OWNED BY public.friendly_id_slugs.id;
+
+
+--
+-- Name: good_job_batches; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_batches (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    description text,
+    serialized_properties jsonb,
+    on_finish text,
+    on_success text,
+    on_discard text,
+    callback_queue_name text,
+    callback_priority integer,
+    enqueued_at timestamp(6) without time zone,
+    discarded_at timestamp(6) without time zone,
+    finished_at timestamp(6) without time zone
+);
+
+
+--
+-- Name: good_job_executions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_executions (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    active_job_id uuid NOT NULL,
+    job_class text,
+    queue_name text,
+    serialized_params jsonb,
+    scheduled_at timestamp(6) without time zone,
+    finished_at timestamp(6) without time zone,
+    error text,
+    error_event smallint,
+    error_backtrace text[],
+    process_id uuid,
+    duration interval
+);
+
+
+--
+-- Name: good_job_processes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_processes (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    state jsonb,
+    lock_type smallint
+);
+
+
+--
+-- Name: good_job_settings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_job_settings (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    key text,
+    value jsonb
+);
+
+
+--
+-- Name: good_jobs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.good_jobs (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    queue_name text,
+    priority integer,
+    serialized_params jsonb,
+    scheduled_at timestamp(6) without time zone,
+    performed_at timestamp(6) without time zone,
+    finished_at timestamp(6) without time zone,
+    error text,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    active_job_id uuid,
+    concurrency_key text,
+    cron_key text,
+    retried_good_job_id uuid,
+    cron_at timestamp(6) without time zone,
+    batch_id uuid,
+    batch_callback_id uuid,
+    is_discrete boolean,
+    executions_count integer,
+    job_class text,
+    error_event smallint,
+    labels text[],
+    locked_by_id uuid,
+    locked_at timestamp(6) without time zone
+);
 
 
 --
@@ -1458,6 +1833,21 @@ CREATE TABLE public.import_selections (
 
 
 --
+-- Name: ingestion_messages; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ingestion_messages (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    ingestion_id uuid NOT NULL,
+    kind text NOT NULL,
+    payload jsonb NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    severity public.ingestion_message_severity DEFAULT 'unknown'::public.ingestion_message_severity NOT NULL
+);
+
+
+--
 -- Name: ingestion_sources; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1500,7 +1890,8 @@ CREATE TABLE public.ingestions (
     source_updated_at timestamp without time zone,
     source_data jsonb,
     text_section_id uuid,
-    target_kind text NOT NULL
+    target_kind text NOT NULL,
+    processing_failed boolean DEFAULT false NOT NULL
 );
 
 
@@ -1729,6 +2120,36 @@ CREATE VIEW public.permissions AS
 
 
 --
+-- Name: pg_search_documents; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pg_search_documents (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    searchable_type character varying,
+    searchable_id uuid,
+    journal_id uuid,
+    project_id uuid,
+    text_id uuid,
+    text_section_id uuid,
+    lang public.manifold_lang DEFAULT 'english'::public.manifold_lang NOT NULL,
+    search_result_type text,
+    title text,
+    primary_data jsonb,
+    secondary text,
+    secondary_data jsonb,
+    tertiary text,
+    tertiary_data jsonb,
+    content text,
+    metadata jsonb,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    tsv_composite tsvector GENERATED ALWAYS AS ((((((((public.to_unaccented_weighted_tsv(title, 'A'::"char") || public.to_unaccented_weighted_tsv(primary_data, 'A'::"char")) || public.to_unaccented_weighted_tsv(secondary, 'B'::"char")) || public.to_unaccented_weighted_tsv(secondary_data, 'B'::"char")) || public.to_unaccented_weighted_tsv(tertiary, 'C'::"char")) || public.to_unaccented_weighted_tsv(tertiary_data, 'C'::"char")) || public.to_unaccented_weighted_tsv(content, 'D'::"char")) || public.to_unaccented_weighted_tsv(metadata, 'D'::"char"))) STORED NOT NULL,
+    journal_issue_id uuid,
+    journal_content boolean DEFAULT false NOT NULL
+);
+
+
+--
 -- Name: project_collection_subjects; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1904,7 +2325,8 @@ CREATE TABLE public.reading_group_categories (
     slug text NOT NULL,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    markdown_only boolean DEFAULT false
 );
 
 
@@ -1926,8 +2348,47 @@ CREATE TABLE public.reading_group_composite_entries (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     reading_group_text_section_id uuid,
-    reading_group_journal_issue_id uuid
+    reading_group_journal_issue_id uuid,
+    "position" bigint
 );
+
+
+--
+-- Name: reading_group_collections; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.reading_group_collections AS
+ WITH category_type_ids AS (
+         SELECT x.reading_group_id,
+            COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text) AS category_id,
+            x.collectable_jsonapi_type,
+            jsonb_agg(x.collectable_id ORDER BY x."position") AS ids
+           FROM public.reading_group_composite_entries x
+          GROUP BY x.reading_group_id, COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text), x.collectable_jsonapi_type
+        ), category_mappings AS (
+         SELECT cti.reading_group_id,
+            cti.category_id,
+            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
+           FROM category_type_ids cti
+          GROUP BY cti.reading_group_id, cti.category_id
+        ), collection_mappings AS (
+         SELECT cm_1.reading_group_id,
+            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
+           FROM category_mappings cm_1
+          GROUP BY cm_1.reading_group_id
+        ), category_lists AS (
+         SELECT rgc.reading_group_id,
+            jsonb_agg(jsonb_build_object('id', rgc.id, 'title', (rgc.fa_cache -> 'title'::text), 'description', (rgc.fa_cache -> 'description'::text), 'position', rgc."position") ORDER BY rgc."position") AS categories
+           FROM public.reading_group_categories rgc
+          GROUP BY rgc.reading_group_id
+        )
+ SELECT ((rg.id)::text || '-collection'::text) AS id,
+    rg.id AS reading_group_id,
+    COALESCE(cl.categories, '[]'::jsonb) AS categories,
+    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
+   FROM ((public.reading_groups rg
+     LEFT JOIN category_lists cl ON ((cl.reading_group_id = rg.id)))
+     LEFT JOIN collection_mappings cm ON ((cm.reading_group_id = rg.id)));
 
 
 --
@@ -2012,55 +2473,17 @@ CREATE VIEW public.reading_group_composite_entry_rankings AS
 
 
 --
--- Name: reading_group_collections; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW public.reading_group_collections AS
- WITH category_type_ids AS (
-         SELECT x.reading_group_id,
-            COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text) AS category_id,
-            x.collectable_jsonapi_type,
-            jsonb_agg(x.collectable_id ORDER BY x."position") AS ids
-           FROM public.reading_group_composite_entry_rankings x
-          GROUP BY x.reading_group_id, COALESCE((x.reading_group_category_id)::text, '$uncategorized$'::text), x.collectable_jsonapi_type
-        ), category_mappings AS (
-         SELECT cti.reading_group_id,
-            cti.category_id,
-            jsonb_object_agg(cti.collectable_jsonapi_type, cti.ids) AS mapping
-           FROM category_type_ids cti
-          GROUP BY cti.reading_group_id, cti.category_id
-        ), collection_mappings AS (
-         SELECT cm_1.reading_group_id,
-            jsonb_object_agg(cm_1.category_id, cm_1.mapping) AS mapping
-           FROM category_mappings cm_1
-          GROUP BY cm_1.reading_group_id
-        ), category_lists AS (
-         SELECT rgc.reading_group_id,
-            jsonb_agg(jsonb_build_object('id', rgc.id, 'title', (rgc.fa_cache -> 'title'::text), 'description', (rgc.fa_cache -> 'description'::text), 'position', rgc."position") ORDER BY rgc."position") AS categories
-           FROM public.reading_group_categories rgc
-          GROUP BY rgc.reading_group_id
-        )
- SELECT ((rg.id)::text || '-collection'::text) AS id,
-    rg.id AS reading_group_id,
-    COALESCE(cl.categories, '[]'::jsonb) AS categories,
-    COALESCE(cm.mapping, '{}'::jsonb) AS category_mappings
-   FROM ((public.reading_groups rg
-     LEFT JOIN category_lists cl ON ((cl.reading_group_id = rg.id)))
-     LEFT JOIN collection_mappings cm ON ((cm.reading_group_id = rg.id)));
-
-
---
 -- Name: reading_group_counts; Type: VIEW; Schema: public; Owner: -
 --
 
 CREATE VIEW public.reading_group_counts AS
  SELECT rg.id AS reading_group_id,
     count(DISTINCT rgm.id) AS memberships_count,
-    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS annotations_count,
     count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS highlights_count,
     count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
-    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE ((NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS comments_count,
     count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
    FROM (((public.reading_groups rg
      LEFT JOIN public.annotations a ON ((a.reading_group_id = rg.id)))
@@ -2103,11 +2526,11 @@ CREATE TABLE public.reading_group_kinds (
 
 CREATE VIEW public.reading_group_membership_counts AS
  SELECT rgm.id AS reading_group_membership_id,
-    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS annotations_count,
     count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS highlights_count,
     count(DISTINCT a.id) FILTER (WHERE ((a.creator_id = rgm.user_id) AND ((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
-    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE ((NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS comments_count,
     count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
    FROM ((public.reading_group_memberships rgm
      LEFT JOIN public.annotations a ON ((a.reading_group_id = rgm.reading_group_id)))
@@ -2137,11 +2560,11 @@ CREATE TABLE public.reading_group_text_sections (
 CREATE VIEW public.reading_group_user_counts AS
  SELECT rg.id AS reading_group_id,
     rgm.user_id,
-    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned))) AS annotations_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS annotations_count,
     count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'annotation'::text) AND a.orphaned)) AS orphaned_annotations_count,
-    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned))) AS highlights_count,
+    count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND (NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS highlights_count,
     count(DISTINCT a.id) FILTER (WHERE (((a.format)::text = 'highlight'::text) AND a.orphaned)) AS orphaned_highlights_count,
-    count(DISTINCT c.id) FILTER (WHERE (NOT a.orphaned)) AS comments_count,
+    count(DISTINCT c.id) FILTER (WHERE ((NOT a.orphaned) AND (a.text_section_id IS NOT NULL))) AS comments_count,
     count(DISTINCT c.id) FILTER (WHERE a.orphaned) AS orphaned_comments_count
    FROM (((public.reading_groups rg
      LEFT JOIN public.annotations a ON ((a.reading_group_id = rg.id)))
@@ -2382,7 +2805,8 @@ CREATE TABLE public.resources (
     variant_poster_data jsonb,
     pending_sort_title character varying,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    iframe_allows character varying[] DEFAULT '{fullscreen}'::character varying[] NOT NULL
+    iframe_allows character varying[] DEFAULT '{fullscreen}'::character varying[] NOT NULL,
+    sort_order integer
 );
 
 
@@ -2614,7 +3038,12 @@ CREATE TABLE public.texts (
     toc jsonb DEFAULT '[]'::jsonb NOT NULL,
     page_list jsonb DEFAULT '[]'::jsonb NOT NULL,
     landmarks jsonb DEFAULT '[]'::jsonb NOT NULL,
-    structure_titles jsonb DEFAULT '{}'::jsonb NOT NULL
+    structure_titles jsonb DEFAULT '{}'::jsonb NOT NULL,
+    deleted_at timestamp without time zone,
+    marked_for_purge_at timestamp without time zone,
+    social_image_data jsonb,
+    social_description text,
+    social_title text
 );
 
 
@@ -2654,14 +3083,15 @@ CREATE VIEW public.text_section_aggregations AS
 --
 
 CREATE VIEW public.text_section_node_links AS
- SELECT parent.id AS parent_id,
+ SELECT parent.text_section_id,
+    parent.id AS parent_id,
     child.id AS child_id,
     parent.depth AS parent_depth,
     parent.node_index AS parent_node_index,
     child.depth AS child_depth,
     child.node_index AS child_node_index
    FROM (public.text_section_nodes parent
-     JOIN public.text_section_nodes child ON (((parent.node_path OPERATOR(public.@>) child.node_path) AND (child.depth > parent.depth))));
+     JOIN public.text_section_nodes child ON (((parent.text_section_id = child.text_section_id) AND (parent.node_path OPERATOR(public.@>) child.node_path) AND (child.depth > parent.depth))));
 
 
 --
@@ -2793,6 +3223,22 @@ CREATE VIEW public.text_summaries AS
            FROM (public.collaborators c
              JOIN public.makers m ON ((m.id = c.maker_id)))
           WHERE (((c.collaboratable_type)::text = 'Text'::text) AND (c.collaboratable_id = t.id))) tm ON (true));
+
+
+--
+-- Name: text_tracks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.text_tracks (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    resource_id uuid NOT NULL,
+    kind character varying NOT NULL,
+    srclang character varying,
+    label character varying,
+    cues_data jsonb
+);
 
 
 --
@@ -2988,7 +3434,7 @@ CREATE VIEW public.user_derived_roles AS
             WHEN 'project_creator'::text THEN 3
             WHEN 'marketeer'::text THEN 4
             WHEN 'project_editor'::text THEN 5
-            WHEN 'project_resource_editor'::text THEN 6
+            WHEN 'project_property_manager'::text THEN 6
             WHEN 'project_author'::text THEN 7
             WHEN 'reader'::text THEN 8
             ELSE 20
@@ -3367,6 +3813,46 @@ ALTER TABLE ONLY public.friendly_id_slugs
 
 
 --
+-- Name: good_job_batches good_job_batches_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_batches
+    ADD CONSTRAINT good_job_batches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_executions good_job_executions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_executions
+    ADD CONSTRAINT good_job_executions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_processes good_job_processes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_processes
+    ADD CONSTRAINT good_job_processes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_job_settings good_job_settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_job_settings
+    ADD CONSTRAINT good_job_settings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: good_jobs good_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.good_jobs
+    ADD CONSTRAINT good_jobs_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: identities identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3388,6 +3874,14 @@ ALTER TABLE ONLY public.import_selection_matches
 
 ALTER TABLE ONLY public.import_selections
     ADD CONSTRAINT import_selections_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ingestion_messages ingestion_messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ingestion_messages
+    ADD CONSTRAINT ingestion_messages_pkey PRIMARY KEY (id);
 
 
 --
@@ -3484,6 +3978,14 @@ ALTER TABLE ONLY public.pending_entitlement_transitions
 
 ALTER TABLE ONLY public.pending_entitlements
     ADD CONSTRAINT pending_entitlements_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: pg_search_documents pg_search_documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT pg_search_documents_pkey PRIMARY KEY (id);
 
 
 --
@@ -3791,6 +4293,14 @@ ALTER TABLE ONLY public.text_titles
 
 
 --
+-- Name: text_tracks text_tracks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.text_tracks
+    ADD CONSTRAINT text_tracks_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: texts texts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4030,10 +4540,24 @@ CREATE INDEX index_annotations_on_creator_id ON public.annotations USING btree (
 
 
 --
+-- Name: index_annotations_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_annotations_on_deleted_at ON public.annotations USING btree (deleted_at);
+
+
+--
 -- Name: index_annotations_on_format; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_annotations_on_format ON public.annotations USING btree (format);
+
+
+--
+-- Name: index_annotations_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_annotations_on_marked_for_purge_at ON public.annotations USING btree (marked_for_purge_at);
 
 
 --
@@ -4107,6 +4631,13 @@ CREATE INDEX index_collaborators_on_maker_id ON public.collaborators USING btree
 
 
 --
+-- Name: index_collaborators_sort_order; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_collaborators_sort_order ON public.collaborators USING btree (collaboratable_id, collaboratable_type, priority, role, importance);
+
+
+--
 -- Name: index_collabs_on_collabable_type_and_collabable_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4167,6 +4698,20 @@ CREATE INDEX index_comments_on_created_at ON public.comments USING brin (created
 --
 
 CREATE INDEX index_comments_on_creator_id ON public.comments USING btree (creator_id);
+
+
+--
+-- Name: index_comments_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_deleted_at ON public.comments USING btree (deleted_at);
+
+
+--
+-- Name: index_comments_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_marked_for_purge_at ON public.comments USING btree (marked_for_purge_at);
 
 
 --
@@ -4485,6 +5030,20 @@ CREATE INDEX index_flags_on_flaggable_type_and_flaggable_id ON public.flags USIN
 
 
 --
+-- Name: index_flags_on_resolved_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_flags_on_resolved_at ON public.flags USING btree (resolved_at);
+
+
+--
+-- Name: index_flags_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_flags_uniqueness ON public.flags USING btree (creator_id, flaggable_type, flaggable_id);
+
+
+--
 -- Name: index_friendly_id_slugs_on_slug_and_sluggable_type; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4510,6 +5069,125 @@ CREATE INDEX index_friendly_id_slugs_on_sluggable_id ON public.friendly_id_slugs
 --
 
 CREATE INDEX index_friendly_id_slugs_on_sluggable_type ON public.friendly_id_slugs USING btree (sluggable_type);
+
+
+--
+-- Name: index_good_job_executions_on_active_job_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_job_executions_on_active_job_id_and_created_at ON public.good_job_executions USING btree (active_job_id, created_at);
+
+
+--
+-- Name: index_good_job_executions_on_process_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_job_executions_on_process_id_and_created_at ON public.good_job_executions USING btree (process_id, created_at);
+
+
+--
+-- Name: index_good_job_jobs_for_candidate_lookup; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_job_jobs_for_candidate_lookup ON public.good_jobs USING btree (priority, created_at) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_job_settings_on_key; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_good_job_settings_on_key ON public.good_job_settings USING btree (key);
+
+
+--
+-- Name: index_good_jobs_jobs_on_finished_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_jobs_on_finished_at ON public.good_jobs USING btree (finished_at) WHERE ((retried_good_job_id IS NULL) AND (finished_at IS NOT NULL));
+
+
+--
+-- Name: index_good_jobs_jobs_on_priority_created_at_when_unfinished; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_jobs_on_priority_created_at_when_unfinished ON public.good_jobs USING btree (priority DESC NULLS LAST, created_at) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_jobs_on_active_job_id_and_created_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_active_job_id_and_created_at ON public.good_jobs USING btree (active_job_id, created_at);
+
+
+--
+-- Name: index_good_jobs_on_batch_callback_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_batch_callback_id ON public.good_jobs USING btree (batch_callback_id) WHERE (batch_callback_id IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_batch_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_batch_id ON public.good_jobs USING btree (batch_id) WHERE (batch_id IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_concurrency_key_when_unfinished; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_concurrency_key_when_unfinished ON public.good_jobs USING btree (concurrency_key) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_jobs_on_cron_key_and_created_at_cond; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_cron_key_and_created_at_cond ON public.good_jobs USING btree (cron_key, created_at) WHERE (cron_key IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_cron_key_and_cron_at_cond; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_good_jobs_on_cron_key_and_cron_at_cond ON public.good_jobs USING btree (cron_key, cron_at) WHERE (cron_key IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_labels; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_labels ON public.good_jobs USING gin (labels) WHERE (labels IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_locked_by_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_locked_by_id ON public.good_jobs USING btree (locked_by_id) WHERE (locked_by_id IS NOT NULL);
+
+
+--
+-- Name: index_good_jobs_on_priority_scheduled_at_unfinished_unlocked; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_priority_scheduled_at_unfinished_unlocked ON public.good_jobs USING btree (priority, scheduled_at) WHERE ((finished_at IS NULL) AND (locked_by_id IS NULL));
+
+
+--
+-- Name: index_good_jobs_on_queue_name_and_scheduled_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_queue_name_and_scheduled_at ON public.good_jobs USING btree (queue_name, scheduled_at) WHERE (finished_at IS NULL);
+
+
+--
+-- Name: index_good_jobs_on_scheduled_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_good_jobs_on_scheduled_at ON public.good_jobs USING btree (scheduled_at) WHERE (finished_at IS NULL);
 
 
 --
@@ -4573,6 +5251,20 @@ CREATE INDEX index_import_selections_on_source_text_id ON public.import_selectio
 --
 
 CREATE INDEX index_import_selections_on_text_id ON public.import_selections USING btree (text_id);
+
+
+--
+-- Name: index_ingestion_messages_on_extracted_text; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ingestion_messages_on_extracted_text ON public.ingestion_messages USING btree (public.extract_ingestion_message_text(payload)) WHERE (kind = 'log'::text);
+
+
+--
+-- Name: index_ingestion_messages_on_ingestion_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ingestion_messages_on_ingestion_id ON public.ingestion_messages USING btree (ingestion_id);
 
 
 --
@@ -4793,6 +5485,55 @@ CREATE INDEX index_pending_entitlements_on_user_id ON public.pending_entitlement
 
 
 --
+-- Name: index_pg_search_documents_on_journal_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_journal_id ON public.pg_search_documents USING btree (journal_id);
+
+
+--
+-- Name: index_pg_search_documents_on_journal_issue_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_journal_issue_id ON public.pg_search_documents USING btree (journal_issue_id);
+
+
+--
+-- Name: index_pg_search_documents_on_project_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_project_id ON public.pg_search_documents USING btree (project_id);
+
+
+--
+-- Name: index_pg_search_documents_on_searchable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_pg_search_documents_on_searchable ON public.pg_search_documents USING btree (searchable_type, searchable_id);
+
+
+--
+-- Name: index_pg_search_documents_on_text_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_text_id ON public.pg_search_documents USING btree (text_id);
+
+
+--
+-- Name: index_pg_search_documents_on_text_section_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_text_section_id ON public.pg_search_documents USING btree (text_section_id);
+
+
+--
+-- Name: index_pg_search_documents_on_tsv_composite; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_pg_search_documents_on_tsv_composite ON public.pg_search_documents USING gin (tsv_composite);
+
+
+--
 -- Name: index_project_collection_subjects_on_project_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4933,6 +5674,13 @@ CREATE INDEX index_projects_export_configuration_exports_as_bag_it ON public.pro
 
 
 --
+-- Name: index_projects_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_projects_on_deleted_at ON public.projects USING btree (deleted_at);
+
+
+--
 -- Name: index_projects_on_fingerprint; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4944,6 +5692,13 @@ CREATE INDEX index_projects_on_fingerprint ON public.projects USING btree (finge
 --
 
 CREATE UNIQUE INDEX index_projects_on_journal_issue_id ON public.projects USING btree (journal_issue_id);
+
+
+--
+-- Name: index_projects_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_projects_on_marked_for_purge_at ON public.projects USING btree (marked_for_purge_at);
 
 
 --
@@ -5199,10 +5954,24 @@ CREATE INDEX index_reading_groups_on_creator_id ON public.reading_groups USING b
 
 
 --
+-- Name: index_reading_groups_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reading_groups_on_deleted_at ON public.reading_groups USING btree (deleted_at);
+
+
+--
 -- Name: index_reading_groups_on_invitation_code; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_reading_groups_on_invitation_code ON public.reading_groups USING btree (invitation_code);
+
+
+--
+-- Name: index_reading_groups_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_reading_groups_on_marked_for_purge_at ON public.reading_groups USING btree (marked_for_purge_at);
 
 
 --
@@ -5577,13 +6346,6 @@ CREATE INDEX index_text_section_nodes_actual_ancestors ON public.text_section_no
 
 
 --
--- Name: index_text_section_nodes_by_id_and_hash; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_text_section_nodes_by_id_and_hash ON public.text_section_nodes USING btree (text_section_id, body_hash);
-
-
---
 -- Name: index_text_section_nodes_by_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5598,6 +6360,20 @@ CREATE INDEX index_text_section_nodes_child_ordering ON public.text_section_node
 
 
 --
+-- Name: index_text_section_nodes_contained_content_indexing; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_section_nodes_contained_content_indexing ON public.text_section_nodes USING gist (text_section_id, body_hash, node_path public.gist_ltree_ops (siglen='24'), id) WITH (fillfactor='90');
+
+
+--
+-- Name: index_text_section_nodes_currency; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_section_nodes_currency ON public.text_section_nodes USING btree (text_section_id, body_hash, current);
+
+
+--
 -- Name: index_text_section_nodes_extrapolation; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5605,10 +6381,10 @@ CREATE INDEX index_text_section_nodes_extrapolation ON public.text_section_nodes
 
 
 --
--- Name: index_text_section_nodes_on_node_path; Type: INDEX; Schema: public; Owner: -
+-- Name: index_text_section_nodes_missing_search_index; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_text_section_nodes_on_node_path ON public.text_section_nodes USING gist (node_path);
+CREATE INDEX index_text_section_nodes_missing_search_index ON public.text_section_nodes USING btree (id) WHERE (NOT search_indexed);
 
 
 --
@@ -5619,10 +6395,10 @@ CREATE INDEX index_text_section_nodes_on_text_section_id ON public.text_section_
 
 
 --
--- Name: index_text_section_nodes_pairing; Type: INDEX; Schema: public; Owner: -
+-- Name: index_text_section_nodes_searching; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_text_section_nodes_pairing ON public.text_section_nodes USING btree (node_path) INCLUDE (path);
+CREATE INDEX index_text_section_nodes_searching ON public.text_section_nodes USING gin (id, text_section_id, public.immutable_unaccent(COALESCE(contained_content, ''::text)) public.gin_trgm_ops, tsv_contained_content) WITH (fastupdate='on') WHERE current;
 
 
 --
@@ -5710,6 +6486,13 @@ CREATE INDEX index_text_titles_on_text_id ON public.text_titles USING btree (tex
 
 
 --
+-- Name: index_text_tracks_on_resource_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_tracks_on_resource_id ON public.text_tracks USING btree (resource_id);
+
+
+--
 -- Name: index_texts_export_configuration_exports_as_epub_v3; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -5731,10 +6514,24 @@ CREATE INDEX index_texts_on_created_at ON public.texts USING brin (created_at);
 
 
 --
+-- Name: index_texts_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_texts_on_deleted_at ON public.texts USING btree (deleted_at);
+
+
+--
 -- Name: index_texts_on_fingerprint; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_texts_on_fingerprint ON public.texts USING btree (fingerprint);
+
+
+--
+-- Name: index_texts_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_texts_on_marked_for_purge_at ON public.texts USING btree (marked_for_purge_at);
 
 
 --
@@ -5983,6 +6780,13 @@ CREATE INDEX index_user_collected_texts_on_user_id ON public.user_collected_text
 
 
 --
+-- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_deleted_at ON public.users USING btree (deleted_at);
+
+
+--
 -- Name: index_users_on_email_confirmed_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6008,6 +6812,13 @@ CREATE UNIQUE INDEX index_users_on_import_source_id ON public.users USING btree 
 --
 
 CREATE INDEX index_users_on_kind ON public.users USING btree (kind);
+
+
+--
+-- Name: index_users_on_marked_for_purge_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_marked_for_purge_at ON public.users USING btree (marked_for_purge_at);
 
 
 --
@@ -6123,6 +6934,27 @@ CREATE UNIQUE INDEX udx_users_cli ON public.users USING btree (classification) W
 
 
 --
+-- Name: udx_users_deleted; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX udx_users_deleted ON public.users USING btree (classification) WHERE ((classification)::text = 'deleted'::text);
+
+
+--
+-- Name: text_section_nodes_body_hash_stats; Type: STATISTICS; Schema: public; Owner: -
+--
+
+CREATE STATISTICS public.text_section_nodes_body_hash_stats (ndistinct, dependencies) ON text_section_id, body_hash FROM public.text_section_nodes;
+
+
+--
+-- Name: text_section_nodes_depth_stats; Type: STATISTICS; Schema: public; Owner: -
+--
+
+CREATE STATISTICS public.text_section_nodes_depth_stats (ndistinct, dependencies) ON node_path, depth FROM public.text_section_nodes;
+
+
+--
 -- Name: entitlement_user_links fk_rails_02d4c48235; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6163,6 +6995,14 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 
 
 --
+-- Name: pg_search_documents fk_rails_114aa6d248; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_114aa6d248 FOREIGN KEY (project_id) REFERENCES public.projects(id) ON DELETE CASCADE;
+
+
+--
 -- Name: entitlement_import_row_transitions fk_rails_121d85ff30; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6176,6 +7016,22 @@ ALTER TABLE ONLY public.entitlement_import_row_transitions
 
 ALTER TABLE ONLY public.user_collected_texts
     ADD CONSTRAINT fk_rails_127b46870c FOREIGN KEY (text_id) REFERENCES public.texts(id) ON DELETE CASCADE;
+
+
+--
+-- Name: journal_issues fk_rails_159f2e66d4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.journal_issues
+    ADD CONSTRAINT fk_rails_159f2e66d4 FOREIGN KEY (journal_id) REFERENCES public.journals(id) ON DELETE RESTRICT;
+
+
+--
+-- Name: journal_issues fk_rails_15a20a3530; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.journal_issues
+    ADD CONSTRAINT fk_rails_15a20a3530 FOREIGN KEY (journal_volume_id) REFERENCES public.journal_volumes(id) ON DELETE RESTRICT;
 
 
 --
@@ -6235,6 +7091,14 @@ ALTER TABLE ONLY public.pending_entitlement_transitions
 
 
 --
+-- Name: projects fk_rails_2a006842be; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.projects
+    ADD CONSTRAINT fk_rails_2a006842be FOREIGN KEY (journal_issue_id) REFERENCES public.journal_issues(id) ON DELETE RESTRICT;
+
+
+--
 -- Name: reading_group_composite_entries fk_rails_313af69a44; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6291,6 +7155,14 @@ ALTER TABLE ONLY public.resource_imports
 
 
 --
+-- Name: flags fk_rails_4a17c6b2e1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.flags
+    ADD CONSTRAINT fk_rails_4a17c6b2e1 FOREIGN KEY (creator_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
 -- Name: users_roles fk_rails_4a41696df6; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6312,6 +7184,14 @@ ALTER TABLE ONLY public.entitlement_import_rows
 
 ALTER TABLE ONLY public.annotations
     ADD CONSTRAINT fk_rails_4b66951387 FOREIGN KEY (reading_group_id) REFERENCES public.reading_groups(id) ON DELETE SET NULL;
+
+
+--
+-- Name: pg_search_documents fk_rails_4b852ed946; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_4b852ed946 FOREIGN KEY (journal_id) REFERENCES public.journals(id) ON DELETE SET NULL;
 
 
 --
@@ -6360,6 +7240,14 @@ ALTER TABLE ONLY public.user_collected_composite_entries
 
 ALTER TABLE ONLY public.reading_group_resource_collections
     ADD CONSTRAINT fk_rails_5548b5884a FOREIGN KEY (reading_group_id) REFERENCES public.reading_groups(id) ON DELETE CASCADE;
+
+
+--
+-- Name: ingestion_messages fk_rails_589512f280; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ingestion_messages
+    ADD CONSTRAINT fk_rails_589512f280 FOREIGN KEY (ingestion_id) REFERENCES public.ingestions(id) ON DELETE CASCADE;
 
 
 --
@@ -6456,6 +7344,14 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 
 ALTER TABLE ONLY public.text_section_nodes
     ADD CONSTRAINT fk_rails_7f8f8051f7 FOREIGN KEY (text_section_id) REFERENCES public.text_sections(id) ON DELETE CASCADE;
+
+
+--
+-- Name: pg_search_documents fk_rails_811918d20d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_811918d20d FOREIGN KEY (text_section_id) REFERENCES public.text_sections(id) ON DELETE CASCADE;
 
 
 --
@@ -6611,6 +7507,14 @@ ALTER TABLE ONLY public.reading_group_projects
 
 
 --
+-- Name: pg_search_documents fk_rails_b02f365b4d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_b02f365b4d FOREIGN KEY (journal_issue_id) REFERENCES public.journal_issues(id) ON DELETE SET NULL;
+
+
+--
 -- Name: import_selection_matches fk_rails_b3b5d1b78b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6664,6 +7568,14 @@ ALTER TABLE ONLY public.user_collected_journal_issues
 
 ALTER TABLE ONLY public.entitlement_user_links
     ADD CONSTRAINT fk_rails_c63fa4df49 FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: pg_search_documents fk_rails_cba4da74d4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pg_search_documents
+    ADD CONSTRAINT fk_rails_cba4da74d4 FOREIGN KEY (text_id) REFERENCES public.texts(id) ON DELETE CASCADE;
 
 
 --
@@ -6760,6 +7672,14 @@ ALTER TABLE ONLY public.reading_groups
 
 ALTER TABLE ONLY public.user_collected_composite_entries
     ADD CONSTRAINT fk_rails_e03a5be0da FOREIGN KEY (project_id) REFERENCES public.projects(id) ON DELETE CASCADE;
+
+
+--
+-- Name: journal_volumes fk_rails_e11de3191d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.journal_volumes
+    ADD CONSTRAINT fk_rails_e11de3191d FOREIGN KEY (journal_id) REFERENCES public.journals(id) ON DELETE RESTRICT;
 
 
 --
@@ -6873,327 +7793,371 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20151005200100'),
-('20151005200105'),
-('20151007162414'),
-('20151109192408'),
-('20151120195625'),
-('20151126164228'),
-('20151202000148'),
-('20151209182138'),
-('20151217174519'),
-('20151218173132'),
-('20151230173806'),
-('20160228232735'),
-('20160322153256'),
-('20160511152744'),
-('20160511233642'),
-('20160614204914'),
-('20160615005354'),
-('20160915191239'),
-('20161018153203'),
-('20161018154421'),
-('20161018201521'),
-('20161020182356'),
-('20161020224435'),
-('20161024155913'),
-('20161024183400'),
-('20161024191606'),
-('20161024193939'),
-('20161026154719'),
-('20161026161041'),
-('20161026163346'),
-('20161026163434'),
-('20161027163107'),
-('20161027175554'),
-('20161104222831'),
-('20161105231153'),
-('20161112145302'),
-('20161123014447'),
-('20161202190930'),
-('20161211201312'),
-('20161227224627'),
-('20161229203236'),
-('20161229205954'),
-('20170106171648'),
-('20170110234653'),
-('20170126191544'),
-('20170131172250'),
-('20170206224347'),
-('20170208200747'),
-('20170213172354'),
-('20170213172355'),
-('20170213172356'),
-('20170213172357'),
-('20170213172358'),
-('20170213172359'),
-('20170213233714'),
-('20170217000641'),
-('20170303234856'),
-('20170307182231'),
-('20170313162232'),
-('20170314165538'),
-('20170316185017'),
-('20170316225038'),
-('20170316231203'),
-('20170316234542'),
-('20170320182809'),
-('20170320200902'),
-('20170321194756'),
-('20170322152031'),
-('20170322212627'),
-('20170329234935'),
-('20170330185847'),
-('20170403202550'),
-('20170404222122'),
-('20170406200143'),
-('20170407201955'),
-('20170407212731'),
-('20170410182659'),
-('20170414235108'),
-('20170419193252'),
-('20170425220220'),
-('20170426230747'),
-('20170503180816'),
-('20170512190317'),
-('20170606175305'),
-('20170607190058'),
-('20170609180425'),
-('20170609231523'),
-('20170612150126'),
-('20170612204527'),
-('20170714204543'),
-('20170727171226'),
-('20170803164607'),
-('20170803195751'),
-('20170803204651'),
-('20170910234415'),
-('20170912223135'),
-('20170913144218'),
-('20170914170358'),
-('20170919132226'),
-('20170919202122'),
-('20170925190220'),
-('20171103000221'),
-('20171115172119'),
-('20171120190035'),
-('20171122213742'),
-('20171128173833'),
-('20171209154604'),
-('20171216152125'),
-('20180102232442'),
-('20180113140606'),
-('20180119191616'),
-('20180122200740'),
-('20180122200750'),
-('20180124162413'),
-('20180125215003'),
-('20180126181358'),
-('20180126230432'),
-('20180202210107'),
-('20180202211536'),
-('20180202213000'),
-('20180202214000'),
-('20180209231903'),
-('20180214201011'),
-('20180219200744'),
-('20180312192903'),
-('20180329220543'),
-('20180406215931'),
-('20180510161730'),
-('20180511173451'),
-('20180525215619'),
-('20180625212825'),
-('20180627183445'),
-('20180710155830'),
-('20180711222315'),
-('20180711222801'),
-('20180724182553'),
-('20180724210709'),
-('20180725163014'),
-('20180726223400'),
-('20180727145952'),
-('20180731223301'),
-('20180809232509'),
-('20180814175936'),
-('20180821150400'),
-('20180821160457'),
-('20180824221343'),
-('20180824222144'),
-('20180824222219'),
-('20180824222247'),
-('20180824222313'),
-('20180921160539'),
-('20180924214439'),
-('20180924214502'),
-('20181019151113'),
-('20181025175439'),
-('20181025181234'),
-('20181109165055'),
-('20181112224435'),
-('20181113223336'),
-('20181113223412'),
-('20181114164356'),
-('20181114164450'),
-('20181114170950'),
-('20181114185600'),
-('20181207201023'),
-('20181208111111'),
-('20190117181637'),
-('20190117215354'),
-('20190122232351'),
-('20190122232410'),
-('20190122232547'),
-('20190122232712'),
-('20190125203527'),
-('20190125204011'),
-('20190125222928'),
-('20190128190055'),
-('20190129201051'),
-('20190201200513'),
-('20190205175552'),
-('20190206180103'),
-('20190314125115'),
-('20190426214507'),
-('20190506192451'),
-('20190506192655'),
-('20190730220353'),
-('20190808201859'),
-('20190830185652'),
-('20190910144954'),
-('20190923205942'),
-('20191025200842'),
-('20191106005028'),
-('20191107232807'),
-('20191112221025'),
-('20191115192839'),
-('20191120014130'),
-('20191120014230'),
-('20191126185303'),
-('20191127181532'),
-('20191130132100'),
-('20191130132659'),
-('20191130212914'),
-('20191209193649'),
-('20191209195300'),
-('20191209215334'),
-('20191218221540'),
-('20191220214406'),
-('20191220215058'),
-('20191229155846'),
-('20191229172230'),
-('20191229172231'),
-('20191229200459'),
-('20200225183511'),
-('20200225183655'),
-('20200225183735'),
-('20200225185704'),
-('20200225231521'),
-('20200225231542'),
-('20200225231554'),
-('20200225231650'),
-('20200225232558'),
-('20200226094748'),
-('20200226095204'),
-('20200304231921'),
-('20200305014032'),
-('20200305023111'),
-('20200319023714'),
-('20200327050921'),
-('20200327193955'),
-('20200415231420'),
-('20200416205400'),
-('20200416220303'),
-('20200421182131'),
-('20200504201500'),
-('20200512192527'),
-('20200709224833'),
-('20200722225133'),
-('20200731180104'),
-('20200806214908'),
-('20200806215946'),
-('20201006191008'),
-('20201008203503'),
-('20201207011646'),
-('20201207011717'),
-('20201207011750'),
-('20201229202853'),
-('20201229210032'),
-('20201229210159'),
-('20201229210214'),
-('20201231001706'),
-('20210127061247'),
-('20210127061502'),
-('20210127061532'),
-('20210127061716'),
-('20210127061750'),
-('20210127191020'),
-('20210127191036'),
-('20210127191113'),
-('20210203181747'),
-('20210203182901'),
-('20210203192954'),
-('20210204223216'),
-('20210204224709'),
-('20210204224916'),
-('20210205095130'),
-('20210208103220'),
-('20210310012319'),
-('20210310012330'),
-('20210310015102'),
-('20210406161945'),
-('20210408214317'),
-('20210413160540'),
-('20210430182454'),
-('20210512053226'),
-('20210608162317'),
-('20210608203933'),
-('20220112202835'),
-('20220204185651'),
-('20220214190623'),
-('20220224204310'),
-('20220405224056'),
-('20220405230839'),
-('20220405233127'),
-('20220412160459'),
-('20220908192014'),
-('20221116211558'),
-('20221117235556'),
-('20221118185230'),
-('20221118185842'),
-('20221118191954'),
-('20221118192018'),
-('20221122200717'),
-('20221123202620'),
-('20221123205731'),
-('20221206170542'),
-('20221206213455'),
-('20221206214829'),
-('20221207002431'),
-('20221207004938'),
-('20221207034410'),
-('20230125004558'),
-('20230213143027'),
-('20230213165037'),
-('20230213165542'),
-('20230213201744'),
-('20230214172717'),
-('20230313215126'),
-('20230406164035'),
-('20230410195543'),
-('20230425172153'),
-('20230519033907'),
-('20230607190750'),
-('20230607191531'),
-('20230816233543'),
-('20230817212021'),
-('20230823232509'),
-('20230921024546'),
-('20231005175407'),
-('20231010184158'),
-('20231129172116'),
-('20240220212417'),
+('20251203231940'),
+('20251203230443'),
+('20251121202033'),
+('20251105165521'),
+('20251103180007'),
+('20251103175949'),
+('20251103175506'),
+('20251022183946'),
+('20251020225421'),
+('20251017211501'),
+('20251017174417'),
+('20251016204352'),
+('20250723210143'),
+('20250609192241'),
+('20250609191642'),
+('20250603192547'),
+('20250603170620'),
+('20250530205742'),
+('20250528002025'),
+('20250527180248'),
+('20250521211043'),
+('20250514190334'),
+('20250513002532'),
+('20250507234914'),
+('20250506201306'),
+('20250410201712'),
+('20250410180020'),
+('20250312204629'),
+('20250306230246'),
+('20250210230256'),
+('20250210192150'),
+('20250129200019'),
+('20250128220613'),
+('20250122221150'),
+('20250115224908'),
+('20250115214357'),
+('20250115212958'),
+('20241218232725'),
+('20241218212943'),
+('20241212214525'),
+('20241212183245'),
+('20241210200353'),
+('20241206175512'),
+('20241025000218'),
+('20241001182627'),
+('20240327194259'),
 ('20240223163849'),
-('20240327194259');
-
+('20240220212417'),
+('20231129172116'),
+('20231010184158'),
+('20231005175407'),
+('20230921024546'),
+('20230823232509'),
+('20230817212021'),
+('20230816233543'),
+('20230607191531'),
+('20230607190750'),
+('20230519033907'),
+('20230425172153'),
+('20230410195543'),
+('20230406164035'),
+('20230313215126'),
+('20230214172717'),
+('20230213201744'),
+('20230213165542'),
+('20230213165037'),
+('20230213143027'),
+('20230125004558'),
+('20221207034410'),
+('20221207004938'),
+('20221207002431'),
+('20221206214829'),
+('20221206213455'),
+('20221206170542'),
+('20221123205731'),
+('20221123202620'),
+('20221122200717'),
+('20221118192018'),
+('20221118191954'),
+('20221118185842'),
+('20221118185230'),
+('20221117235556'),
+('20221116211558'),
+('20220908192014'),
+('20220412160459'),
+('20220405233127'),
+('20220405230839'),
+('20220405224056'),
+('20220224204310'),
+('20220214190623'),
+('20220204185651'),
+('20220112202835'),
+('20210608203933'),
+('20210608162317'),
+('20210512053226'),
+('20210430182454'),
+('20210413160540'),
+('20210408214317'),
+('20210406161945'),
+('20210310015102'),
+('20210310012330'),
+('20210310012319'),
+('20210208103220'),
+('20210205095130'),
+('20210204224916'),
+('20210204224709'),
+('20210204223216'),
+('20210203192954'),
+('20210203182901'),
+('20210203181747'),
+('20210127191113'),
+('20210127191036'),
+('20210127191020'),
+('20210127061750'),
+('20210127061716'),
+('20210127061532'),
+('20210127061502'),
+('20210127061247'),
+('20201231001706'),
+('20201229210214'),
+('20201229210159'),
+('20201229210032'),
+('20201229202853'),
+('20201207011750'),
+('20201207011717'),
+('20201207011646'),
+('20201008203503'),
+('20201006191008'),
+('20200806215946'),
+('20200806214908'),
+('20200731180104'),
+('20200722225133'),
+('20200709224833'),
+('20200512192527'),
+('20200504201500'),
+('20200421182131'),
+('20200416220303'),
+('20200416205400'),
+('20200415231420'),
+('20200327193955'),
+('20200327050921'),
+('20200319023714'),
+('20200305023111'),
+('20200305014032'),
+('20200304231921'),
+('20200226095204'),
+('20200226094748'),
+('20200225232558'),
+('20200225231650'),
+('20200225231554'),
+('20200225231542'),
+('20200225231521'),
+('20200225185704'),
+('20200225183735'),
+('20200225183655'),
+('20200225183511'),
+('20191229200459'),
+('20191229172231'),
+('20191229172230'),
+('20191229155846'),
+('20191220215058'),
+('20191220214406'),
+('20191218221540'),
+('20191209215334'),
+('20191209195300'),
+('20191209193649'),
+('20191130212914'),
+('20191130132659'),
+('20191130132100'),
+('20191127181532'),
+('20191126185303'),
+('20191120014230'),
+('20191120014130'),
+('20191115192839'),
+('20191112221025'),
+('20191107232807'),
+('20191106005028'),
+('20191025200842'),
+('20190923205942'),
+('20190910144954'),
+('20190830185652'),
+('20190808201859'),
+('20190730220353'),
+('20190506192655'),
+('20190506192451'),
+('20190426214507'),
+('20190314125115'),
+('20190206180103'),
+('20190205175552'),
+('20190201200513'),
+('20190129201051'),
+('20190128190055'),
+('20190125222928'),
+('20190125204011'),
+('20190125203527'),
+('20190122232712'),
+('20190122232547'),
+('20190122232410'),
+('20190122232351'),
+('20190117215354'),
+('20190117181637'),
+('20181208111111'),
+('20181207201023'),
+('20181114185600'),
+('20181114170950'),
+('20181114164450'),
+('20181114164356'),
+('20181113223412'),
+('20181113223336'),
+('20181112224435'),
+('20181109165055'),
+('20181025181234'),
+('20181025175439'),
+('20181019151113'),
+('20180924214502'),
+('20180924214439'),
+('20180921160539'),
+('20180824222313'),
+('20180824222247'),
+('20180824222219'),
+('20180824222144'),
+('20180824221343'),
+('20180821160457'),
+('20180821150400'),
+('20180814175936'),
+('20180809232509'),
+('20180731223301'),
+('20180727145952'),
+('20180726223400'),
+('20180725163014'),
+('20180724210709'),
+('20180724182553'),
+('20180711222801'),
+('20180711222315'),
+('20180710155830'),
+('20180627183445'),
+('20180625212825'),
+('20180525215619'),
+('20180511173451'),
+('20180510161730'),
+('20180406215931'),
+('20180329220543'),
+('20180312192903'),
+('20180219200744'),
+('20180214201011'),
+('20180209231903'),
+('20180202214000'),
+('20180202213000'),
+('20180202211536'),
+('20180202210107'),
+('20180126230432'),
+('20180126181358'),
+('20180125215003'),
+('20180124162413'),
+('20180122200750'),
+('20180122200740'),
+('20180119191616'),
+('20180113140606'),
+('20180102232442'),
+('20171216152125'),
+('20171209154604'),
+('20171128173833'),
+('20171122213742'),
+('20171120190035'),
+('20171115172119'),
+('20171103000221'),
+('20170925190220'),
+('20170919202122'),
+('20170919132226'),
+('20170914170358'),
+('20170913144218'),
+('20170912223135'),
+('20170910234415'),
+('20170803204651'),
+('20170803195751'),
+('20170803164607'),
+('20170727171226'),
+('20170714204543'),
+('20170612204527'),
+('20170612150126'),
+('20170609231523'),
+('20170609180425'),
+('20170607190058'),
+('20170606175305'),
+('20170512190317'),
+('20170503180816'),
+('20170426230747'),
+('20170425220220'),
+('20170419193252'),
+('20170414235108'),
+('20170410182659'),
+('20170407212731'),
+('20170407201955'),
+('20170406200143'),
+('20170404222122'),
+('20170403202550'),
+('20170330185847'),
+('20170329234935'),
+('20170322212627'),
+('20170322152031'),
+('20170321194756'),
+('20170320200902'),
+('20170320182809'),
+('20170316234542'),
+('20170316231203'),
+('20170316225038'),
+('20170316185017'),
+('20170314165538'),
+('20170313162232'),
+('20170307182231'),
+('20170303234856'),
+('20170217000641'),
+('20170213233714'),
+('20170213172359'),
+('20170213172358'),
+('20170213172357'),
+('20170213172356'),
+('20170213172355'),
+('20170213172354'),
+('20170208200747'),
+('20170206224347'),
+('20170131172250'),
+('20170126191544'),
+('20170110234653'),
+('20170106171648'),
+('20161229205954'),
+('20161229203236'),
+('20161227224627'),
+('20161211201312'),
+('20161202190930'),
+('20161123014447'),
+('20161112145302'),
+('20161105231153'),
+('20161104222831'),
+('20161027175554'),
+('20161027163107'),
+('20161026163434'),
+('20161026163346'),
+('20161026161041'),
+('20161026154719'),
+('20161024193939'),
+('20161024191606'),
+('20161024183400'),
+('20161024155913'),
+('20161020224435'),
+('20161020182356'),
+('20161018201521'),
+('20161018154421'),
+('20161018153203'),
+('20160915191239'),
+('20160615005354'),
+('20160614204914'),
+('20160511233642'),
+('20160511152744'),
+('20160322153256'),
+('20160228232735'),
+('20151230173806'),
+('20151218173132'),
+('20151217174519'),
+('20151209182138'),
+('20151202000148'),
+('20151126164228'),
+('20151120195625'),
+('20151109192408'),
+('20151007162414'),
+('20151005200105'),
+('20151005200100');
 

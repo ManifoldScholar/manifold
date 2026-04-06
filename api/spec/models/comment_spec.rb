@@ -13,7 +13,7 @@ RSpec.describe Comment, type: :model do
 
   it "does not enqueues a COMMENT_CREATED when subject is private" do
     subject = FactoryBot.create(:annotation, private: true)
-    expect(CreateEventJob).to_not receive(:perform_later).with(EventType[:comment_created], any_args)
+    expect(CreateEventJob).not_to receive(:perform_later).with(EventType[:comment_created], any_args)
     FactoryBot.create(:comment, subject: subject)
   end
 
@@ -28,12 +28,12 @@ RSpec.describe Comment, type: :model do
 
     it "body is blank" do
       comment.body = ""
-      expect(comment).to_not be_valid
+      expect(comment).not_to be_valid
     end
 
     it "subject is blank" do
       comment.subject = nil
-      expect(comment).to_not be_valid
+      expect(comment).not_to be_valid
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe Comment, type: :model do
     end
 
     context "assigning the sort order" do
-      before(:each) do
+      before do
         @comment = FactoryBot.create(:comment)
       end
 

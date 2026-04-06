@@ -21,11 +21,14 @@ export class FormTextArea extends Component {
     errors: PropTypes.array,
     name: PropTypes.string,
     instructions: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    required: PropTypes.bool,
+    instructionsPosition: PropTypes.oneOf(["above", "below"])
   };
 
   static defaultProps = {
-    height: 100
+    height: 100,
+    instructionsPosition: "above"
   };
 
   static contextType = FormContext;
@@ -64,12 +67,13 @@ export class FormTextArea extends Component {
               label={this.props.label}
               styleType={this.context?.styleType}
             />
-            {this.props.instructions && (
-              <Instructions
-                instructions={this.props.instructions}
-                id={`${this.idForInstructionsPrefix}-${id}`}
-              />
-            )}
+            {this.props.instructions &&
+              this.props.instructionsPosition !== "below" && (
+                <Instructions
+                  instructions={this.props.instructions}
+                  id={`${this.idForInstructionsPrefix}-${id}`}
+                />
+              )}
             <TextAreaInput
               id={`${this.idPrefix}-${id}`}
               name={this.props.name}
@@ -78,7 +82,15 @@ export class FormTextArea extends Component {
               placeholder={this.props.placeholder}
               onChange={this.props.onChange}
               value={this.props.value || ""}
+              required={this.props.required}
             />
+            {this.props.instructions &&
+              this.props.instructionsPosition === "below" && (
+                <Instructions
+                  instructions={this.props.instructions}
+                  id={`${this.idForInstructionsPrefix}-${id}`}
+                />
+              )}
           </Errorable>
         )}
       </UIDConsumer>

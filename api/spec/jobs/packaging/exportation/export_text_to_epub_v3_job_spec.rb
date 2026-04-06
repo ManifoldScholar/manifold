@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Packaging::Exportation::ExportTextToEpubV3Job, packaging: true, type: :job do
@@ -14,11 +16,11 @@ RSpec.describe Packaging::Exportation::ExportTextToEpubV3Job, packaging: true, t
     end
   end
 
-  include_examples "a called interaction"
+  it_behaves_like "a called interaction"
 
   context "when forced" do
     let(:force) { true }
 
-    include_examples "a called interaction"
+    it_behaves_like "a called interaction"
   end
 end

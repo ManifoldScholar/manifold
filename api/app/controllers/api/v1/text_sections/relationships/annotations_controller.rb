@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module API
   module V1
     module TextSections
       module Relationships
         # Annotations controller
         class AnnotationsController < ApplicationController
-          before_action :set_annotation, only: [:update, :destroy]
+          before_action :set_annotation, only: [:update]
           before_action :set_text_section, only: [:create]
 
           config.pagination_enforced = true
@@ -14,7 +16,7 @@ module API
             scope = scope.with_read_ability(current_user, exclude_public_annotations?)
             scope = scope.includes(:reading_group, :reading_group_membership, :text, :creator)
             Annotation.filtered(
-              with_pagination!(annotation_filter_params),
+              **with_pagination!(annotation_filter_params),
               scope: scope
             )
           end
@@ -40,11 +42,6 @@ module API
               @annotation,
               location: location
             )
-          end
-
-          def destroy
-            @annotation = load_and_authorize_annotation
-            @annotation.destroy
           end
 
           private

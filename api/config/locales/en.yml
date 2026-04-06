@@ -79,6 +79,7 @@ en:
     user_classification:
       anonymous: "Anonymous"
       command_line: "CLI"
+      deleted: Deleted
   controllers:
     errors:
       project_exportation:

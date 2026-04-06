@@ -32,11 +32,11 @@ export const defaultHoverStyle = `color: var(--hover-color);`;
 
 export function setFocusStyle(property = "outline", value = "solid 2px") {
   return `
-    &:focus:not(.focus-visible) {
+    &:focus:not(:focus-visible) {
       outline: 0;
     }
 
-    &.focus-visible {
+    &:focus-visible {
       ${property}: ${value};
     }
   `;
@@ -64,7 +64,7 @@ export function fillOnFocus(color = "var(--hover-color)") {
   return `
     ${setFocusStyle("background-color", color)}
 
-    &.focus-visible {
+    &:focus-visible {
       outline: 0;
     }
   `;
@@ -115,7 +115,6 @@ export const buttonUnstyled = `
   background: transparent;
   border: 0;
   border-radius: 0;
-  outline: none;
   appearance: none;
 `;
 
@@ -158,7 +157,7 @@ export const buttonTrimPrimary = `
     color: var(--color-accent-primary-medium);
   }
 
-  &.focus-visible {
+  &:focus-visible {
     color: var(--color-base-neutral95);
     outline: 0;
   }
@@ -203,7 +202,7 @@ export const unstyledSelect = `
   outline: 0;
   appearance: none;
 
-  &.focus-visible:-moz-focusring {
+  &:focus-visible:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 var(--medium-color);
   }
@@ -225,7 +224,7 @@ export const selectPrimary = `
     line-height: var(--line-height);
     border: 2px solid var(--color-neutral40);
 
-    &.focus-visible {
+    &:focus-visible {
       border-color: var(--focus-color);
     }
   }
@@ -251,7 +250,7 @@ const inputBase = `
   background-color: var(--input-bg-color);
   border-color: var(--input-border-color);
 
-  &.focus-visible {
+  &:focus-visible {
     outline: none;
     border-color: var(--focus-color);
   }
@@ -284,7 +283,7 @@ export const inputQuaternary = `
   appearance: none;
   outline: none;
 
-  &.focus-visible {
+  &:focus-visible {
     outline: none;
 
     &::placeholder {
@@ -295,7 +294,8 @@ export const inputQuaternary = `
 
 export const filterSelectBase = `
   ${unstyledSelect}
-  ${utilityPrimary}
+  font-family: var(--input-font-family);
+  font-size: 16px;
   padding-right: 36px;
   padding-left: 13px;
   overflow: hidden;
@@ -394,28 +394,33 @@ export const dragging = `
   box-shadow: 0 31px 26px -13px rgba(0 0 0 / 0.33);
 `;
 
-export function reactSlideTransition(
-  from = "right",
-  selector = "&",
-  prefix = "panel"
-) {
+export function revealOnFocus(selector) {
   return `
-    .${prefix}-enter ${selector} {
-      transform: translateX(${from === "right" ? "100%" : "-100%"});
+    @supports selector(:has(a)) {
+      &:has(${selector}) {
+        margin-inline-end: -40px;
+        transition: margin-inline-end var(--transition-duration-default)
+          ${defaultTransitionProps};
+      }
+
+      &:has(${selector}:focus-within) {
+        transition: margin-inline-end ${defaultTransitionProps};
+        margin-inline-end: 0;
+      }
     }
 
-    .${prefix}-enter-active ${selector} {
-      transition: transform ${defaultTransitionProps};
-      transform: translateX(0);
-    }
+    ${selector} {
+      @supports selector(:has(a)) {
+        opacity: 0;
+        transition: opacity ${defaultTransitionProps};
 
-    .${prefix}-exit ${selector} {
-      transform: translateX(0);
-    }
-
-    .${prefix}-exit.${prefix}-exit-active ${selector} {
-      transition: transform ${defaultTransitionProps};
-      transform: translateX(${from === "right" ? "100%" : "-100%"});
+        &:focus-within {
+          opacity: 1;
+          transition: opacity var(--transition-duration-default)
+              calc(var(--transition-duration-default) / 2)
+              var(--transition-timing-function);
+        }
+      }
     }
   `;
 }

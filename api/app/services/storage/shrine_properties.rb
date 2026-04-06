@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 module Storage
   class ShrineProperties
-
     class << self
-
       def fetch
         models_with_shrine_properties.inject({}) { |memo, model| memo.tap { |m| m[model.name.to_sym] = shrine_attributes_for(model) } }
       end
@@ -23,21 +23,21 @@ module Storage
 
       def models
         tables.map do |table|
-          table.classify.constantize
-        rescue StandardError
-          nil
-        end.compact + plural_models
+          table.classify.safe_constantize
+        end.compact + plural_models - excluded_models
       end
 
       def plural_models
         [Settings]
       end
 
+      def excluded_models
+        [GoodJob]
+      end
+
       def tables
         ActiveRecord::Base.connection.tables - %w(schema_migrations comment_hierarchies comments) + %w(settings)
       end
-
     end
-
   end
 end

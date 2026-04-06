@@ -24,7 +24,6 @@ import {
   entityStoreActions
 } from "actions";
 import { setPersistentUI } from "actions/ui/persistentUi";
-import { CSSTransition } from "react-transition-group";
 import get from "lodash/get";
 import ScrollAware from "hoc/ScrollAware";
 import BodyClass from "hoc/BodyClass";
@@ -40,7 +39,7 @@ const {
   decrementMargins,
   resetTypography
 } = uiTypographyActions;
-const { setColorScheme } = uiColorActions;
+const { setColorScheme, setHighContrast } = uiColorActions;
 const { request, flush } = entityStoreActions;
 
 export class ReaderContainer extends Component {
@@ -54,7 +53,8 @@ export class ReaderContainer extends Component {
       const { promise: one } = dispatch(request(textCall, requests.rText));
       promises.push(one);
     }
-    return Promise.all(promises);
+    /*  Catch errors here, so project redirects work correctly */
+    return Promise.all(promises).catch(e => console.error(e));
   };
 
   static mapStateToProps = (state, ownProps) => {
@@ -143,14 +143,8 @@ export class ReaderContainer extends Component {
   get bodyClass() {
     let colorScheme = get(this.props, "appearance.colors.colorScheme");
     colorScheme = colorScheme ? `scheme-${colorScheme}` : "scheme-light";
-    return `reader ${colorScheme}`;
-  }
-
-  get transitionProps() {
-    return {
-      classNames: "overlay-full",
-      timeout: { enter: 200, exit: 200 }
-    };
+    const highContrast = get(this.props, "appearance.colors.highContrast");
+    return `reader ${colorScheme} ${highContrast ? "high-contrast" : ""}`;
   }
 
   setPersistentUI = props => {
@@ -160,6 +154,8 @@ export class ReaderContainer extends Component {
   };
 
   shouldRedirect(props) {
+    if (!this.props.text) return false;
+
     const matches = matchRoutes(
       props.route.routes,
       this.props.location.pathname
@@ -177,6 +173,7 @@ export class ReaderContainer extends Component {
       decrementMargins: b(decrementMargins, dispatch),
       resetTypography: b(resetTypography, dispatch),
       setColorScheme: b(el => setColorScheme(el), dispatch),
+      setHighContrast: b(setHighContrast, dispatch),
       setPersistentUI: b(userUi => setPersistentUI(userUi), dispatch)
     };
   };
@@ -199,30 +196,26 @@ export class ReaderContainer extends Component {
   renderTextMetaOverlay() {
     const text = this.props.text;
     return (
-      <CSSTransition {...this.transitionProps}>
-        <Overlay closeCallback={this.toggleMeta} appearance="overlay-full">
-          <TextMeta
-            title={text.attributes.titlePlaintext}
-            subtitle={text.attributes.subtitle}
-            meta={text.attributes.metadataFormatted}
-          />
-        </Overlay>
-      </CSSTransition>
+      <Overlay open closeCallback={this.toggleMeta} appearance="overlay-full">
+        <TextMeta
+          title={text.attributes.titlePlaintext}
+          subtitle={text.attributes.subtitle}
+          meta={text.attributes.metadataFormatted}
+        />
+      </Overlay>
     );
   }
 
   renderNotesOverlay() {
     return (
       <Authorize kind="any">
-        <CSSTransition {...this.transitionProps}>
-          <ReaderFullNotes
-            text={this.props.text}
-            match={this.props.match}
-            history={this.props.history}
-            dispatch={this.props.dispatch}
-            closeCallback={this.props.history.goBack}
-          />
-        </CSSTransition>
+        <ReaderFullNotes
+          text={this.props.text}
+          match={this.props.match}
+          history={this.props.history}
+          dispatch={this.props.dispatch}
+          closeCallback={this.props.history.goBack}
+        />
       </Authorize>
     );
   }
@@ -247,7 +240,6 @@ export class ReaderContainer extends Component {
   }
 
   render() {
-    if (!this.props.text) return null;
     if (this.shouldRedirect(this.props)) return this.renderRedirect(this.props);
 
     return (
@@ -259,10 +251,9 @@ export class ReaderContainer extends Component {
           />
           <CheckFrontendMode
             debugLabel="ReaderWrapper"
-            project={this.props.text.relationships.project}
+            project={this.props.text?.relationships.project}
           />
           <ScrollAware>
-            {/* Header inside ScrollAware HOC */}
             <Header
               // Props required by body component
               text={this.props.text}

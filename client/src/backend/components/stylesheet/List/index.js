@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Droppable
+} from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import Stylesheet from "./Stylesheet";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import { withTranslation } from "react-i18next";
 
-export default class CategoryList extends Component {
+class StylesheetList extends Component {
   static displayName = "Stylesheet.List";
 
   static propTypes = {
@@ -44,6 +49,26 @@ export default class CategoryList extends Component {
     this.callbacks.updatePosition(stylesheet, index + 1);
   };
 
+  onKeyboardMove = ({ id, title, index, direction, ...rest }) => {
+    const stylesheet = this.findStylesheet(id);
+    const newIndex = direction === "down" ? index + 1 : index - 1;
+
+    this.updateInternalState(stylesheet, newIndex);
+
+    const announcement = this.props.t("actions.dnd.moved_to_position", {
+      title,
+      position: newIndex + 1
+    });
+    const callback = () => {
+      this.props.setScreenReaderStatus(announcement);
+
+      if (rest.callback && typeof rest.callback === "function") {
+        rest.callback();
+      }
+    };
+    this.callbacks.updatePosition(stylesheet, newIndex + 1, callback);
+  };
+
   get stylesheets() {
     return this.state.stylesheets;
   }
@@ -68,36 +93,46 @@ export default class CategoryList extends Component {
 
   render() {
     return (
-      <DragDropContext
-        onDragStart={this.onDragStart}
-        onDragEnd={this.onDragEnd}
-      >
-        <section className="ordered-records">
-          <Droppable type="category" droppableId="categories">
-            {provided => (
-              <div
-                className={classNames({
-                  "ordered-records__dropzone": true,
-                  "ordered-records__dropzone--active": this.state.dragging
-                })}
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                {this.stylesheets.map((stylesheet, index) => (
-                  <Stylesheet
-                    index={index}
-                    text={this.text}
-                    callbacks={this.callbacks}
-                    stylesheet={stylesheet}
-                    key={stylesheet.id}
-                  />
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </section>
-      </DragDropContext>
+      <>
+        <DragDropContext
+          onDragStart={this.onDragStart}
+          onDragEnd={this.onDragEnd}
+        >
+          <section className="ordered-records rbd-migration-resets">
+            <Droppable type="category" droppableId="categories">
+              {(provided, snapshot) => (
+                <div
+                  className={classNames({
+                    "ordered-records__dropzone": true,
+                    "ordered-records__dropzone--active": this.state.dragging
+                  })}
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {this.stylesheets.map((stylesheet, index) => (
+                    <Stylesheet
+                      index={index}
+                      text={this.text}
+                      callbacks={this.callbacks}
+                      stylesheet={stylesheet}
+                      key={stylesheet.id}
+                      isDragging={
+                        snapshot.draggingFromThisWith === stylesheet.id
+                      }
+                      stylesheetCount={this.stylesheets.length}
+                      onKeyboardMove={this.onKeyboardMove}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </section>
+        </DragDropContext>
+        {this.props.renderLiveRegion("alert")}
+      </>
     );
   }
 }
+
+export default withTranslation()(withScreenReaderStatus(StylesheetList, false));

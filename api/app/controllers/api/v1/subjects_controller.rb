@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 module API
   module V1
     # subjects controller
     class SubjectsController < ApplicationController
-
       resourceful! Subject, authorize_options: { except: [:index, :show] } do
-        Subject.filtered(filter_options)
+        Subject.filtered(**filter_options)
       end
 
       def index
@@ -38,11 +39,8 @@ module API
       private
 
       def filter_options
-        return subject_filter_params if params&.dig(:unpaginated)
-
         with_pagination!(subject_filter_params)
       end
-
     end
   end
 end

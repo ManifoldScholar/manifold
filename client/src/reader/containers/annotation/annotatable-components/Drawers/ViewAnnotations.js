@@ -27,6 +27,7 @@ export default class ViewAnnotations extends PureComponent {
         annotationIds={this.props.annotationIds}
         createHandler={actions.createAnnotation}
         loginHandler={actions.showLogin}
+        focusHandler={actions.focusHandler}
       />
     );
   }

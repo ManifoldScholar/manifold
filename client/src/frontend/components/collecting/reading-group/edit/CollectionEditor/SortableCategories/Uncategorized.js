@@ -12,7 +12,7 @@ function Uncategorized(props) {
     attributes: { title: t("common.uncategorized_title_case") }
   };
 
-  return <Category category={category} {...props} />;
+  return <Category id={CATEGORY_ID} category={category} isStatic {...props} />;
 }
 
 Uncategorized.displayName =
@@ -21,8 +21,7 @@ Uncategorized.displayName =
 Uncategorized.propTypes = {
   mappings: PropTypes.object.isRequired,
   responses: PropTypes.object.isRequired,
-  callbacks: PropTypes.object.isRequired,
-  activeType: PropTypes.string
+  callbacks: PropTypes.object.isRequired
 };
 
 export default Uncategorized;

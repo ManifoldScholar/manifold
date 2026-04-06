@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Ingestions
   module Concerns
     # This class provides a set of file operations used during the ingestion process.
@@ -123,6 +125,11 @@ module Ingestions
         File.join(WORKING_DIR_BASE, identifier)
       end
 
+      # @return [void]
+      def prune_root_path!
+        FileUtils.remove_entry_secure(root_path)
+      end
+
       def source_root
         source_root_dir? ? top_level_entities[:dirs].first : source_root_path
       end
@@ -152,7 +159,7 @@ module Ingestions
         absolute = path.absolute?
         abs_dir = absolute ? dir : abs(dir)
         validate_path(abs_dir)
-        FileUtils.mkdir_p(abs_dir) unless File.exist?(abs_dir)
+        FileUtils.mkdir_p(abs_dir)
         abs_dir
       end
 
@@ -174,7 +181,7 @@ module Ingestions
       end
 
       def ensure_root
-        FileUtils.mkdir_p(root_path) unless File.exist?(root_path)
+        FileUtils.mkdir_p(root_path)
       end
 
       def source_root_path
@@ -186,8 +193,8 @@ module Ingestions
       end
 
       def ensure_working_dirs
-        FileUtils.mkdir_p(source_root_path) unless File.exist?(source_root_path)
-        FileUtils.mkdir_p(build_root_path) unless File.exist?(build_root_path)
+        FileUtils.mkdir_p(source_root_path)
+        FileUtils.mkdir_p(build_root_path)
       end
 
       def reject_extracted?(zip_path)
@@ -216,6 +223,7 @@ module Ingestions
 
             target_file = extract_path.join zip_path
             target_path = target_file.dirname
+
             next if target_file.exist?
 
             target_path.mkpath
@@ -228,7 +236,7 @@ module Ingestions
 
       def source_root_dir?(path = source_root_path)
         entities = top_level_entities(path)
-        entities[:dirs].count == 1 && entities[:files].count.zero?
+        entities[:dirs].one? && entities[:files].none?
       end
 
       def top_level_entities(path = source_root_path)

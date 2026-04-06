@@ -36,10 +36,19 @@ export const nestableElements = [
 ];
 
 // These elements are rendered in the RTE, but can't be created there. Their text children are editable, and these elements can be deleted in the RTE like any other block.
-export const renderedElements = ["br", "hr", "abbr", "sub", "sup", "cite"];
+export const renderedElements = [
+  "br",
+  "hr",
+  "abbr",
+  "sub",
+  "sup",
+  "cite",
+  "wbr",
+  "i"
+];
 
 // These elements are applied as marks to text leaves in Slate. They can be added and removed in the RTE. This probably needs some adjustment. For example, currently both del and s become "strikethrough" when serialized to Slate and there's no way to tell what the original tag was.
-export const markElements = ["i", "del", "em", "s", "strong", "u", "code"];
+export const markElements = ["del", "em", "s", "strong", "u", "code"];
 
 // All other elements are Slate void elements and are rendered as preview only in the RTE.
 
@@ -72,7 +81,9 @@ export const inlineNodes = [
   "input",
   "label",
   "select",
-  "textarea"
+  "textarea",
+  "wbr",
+  "i"
 ];
 
 // Also duplicated from the api. These elements are removed during serialization and are never saved.

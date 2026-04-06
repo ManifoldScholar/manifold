@@ -1,24 +1,25 @@
-import React, { PureComponent } from "react";
+import { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
 import connectAndFetch from "utils/connectAndFetch";
 import { collectionProjectsAPI, projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import { select } from "utils/entityUtils";
-import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import ProjectCollection from "backend/components/project-collection";
-import New from "./New";
-import Drawer from "global/components/drawer";
 import { childRoutes } from "helpers/router";
 import size from "lodash/size";
 import lh from "helpers/linkHandler";
 import classnames from "classnames";
 import HeadContent from "global/components/HeadContent";
+import IconComposer from "global/components/utility/IconComposer";
 import withConfirmation from "hoc/withConfirmation";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { fluidScale } from "theme/styles/mixins";
 
 import Authorize from "hoc/Authorize";
+import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 const { request, flush } = entityStoreActions;
 
@@ -54,11 +55,6 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     t: PropTypes.func
   };
 
-  constructor(props) {
-    super(props);
-    this.state = { showNew: false, newFormDirty: false };
-  }
-
   componentDidMount() {
     this.fetchProjectCollections();
     this.fetchProjectCollection();
@@ -73,7 +69,10 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params.id !== this.props.match.params.id) {
+    if (
+      prevProps.match.params.id !== this.props.match.params.id &&
+      this.props.match.params.id !== "new"
+    ) {
       this.fetchProjectCollection();
       this.fetchCollectionProjects();
     }
@@ -92,7 +91,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 
   fetchProjectCollection = (page = 1, perPage = 12) => {
     const id = this.props.match.params.id;
-    if (!id) return Promise.resolve();
+    if (!id || id === "new") return Promise.resolve();
 
     const pageParams = { number: page, size: perPage };
     const pagination = { collectionProjects: pageParams };
@@ -106,7 +105,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 
   fetchCollectionProjects = () => {
     const id = this.props.match.params.id;
-    if (!id) return Promise.resolve();
+    if (!id || id === "new") return Promise.resolve();
     const call = collectionProjectsAPI.index(id);
     const { promise } = this.props.dispatch(
       request(call, requests.beCollectionProjects)
@@ -178,12 +177,24 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
   };
 
   handleCollectionOrderChange = result => {
-    const changes = { attributes: { position: result.position } };
-    this.updateProjectCollection(
-      changes,
-      { noTouch: true },
-      { id: result.id }
-    ).then(this.fetchProjectCollections);
+    const { id, title, position, announce, callback } = result;
+    const changes = { attributes: { position } };
+    const announcement = this.props.t("actions.dnd.moved_to_position", {
+      title,
+      position
+    });
+
+    this.updateProjectCollection(changes, { noTouch: true }, { id }).then(() =>
+      this.fetchProjectCollections().then(() => {
+        if (announce) {
+          this.props.setScreenReaderStatus(announcement);
+        }
+
+        if (callback && typeof callback === "function") {
+          callback();
+        }
+      })
+    );
   };
 
   handleCollectionSelect = collection => {
@@ -191,28 +202,10 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     this.props.history.push(url);
   };
 
-  handleShowNew = event => {
-    if (event) event.preventDefault();
-    this.setState({ showNew: true });
-  };
-
-  handleHideNew = event => {
-    if (event) event.preventDefault();
-    if (this.state.newFormDirty) {
-      const heading = this.props.t("messages.confirm");
-      const message = this.props.t("messages.unsaved_changes");
-      return this.props.confirm(heading, message, () =>
-        this.setState({ showNew: false })
-      );
-    }
-    this.setState({ showNew: false });
-  };
-
   handleNewSuccess = projectCollection => {
     this.fetchProjectCollections();
     const path = lh.link("backendProjectCollection", projectCollection.id);
     this.props.history.push(path);
-    this.handleHideNew();
   };
 
   handleToggleVisibility = (projectCollection, visible) => {
@@ -233,15 +226,27 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
       refreshProjectCollection: this.fetchProjectCollection,
       refreshProjectCollections: this.fetchProjectCollections,
       refreshCollectionProjects: this.fetchCollectionProjects,
-      drawerProps: {
-        closeUrl: lh.link("backendProjectCollections")
-      }
+      handleNewSuccess: this.handleNewSuccess
     };
   }
 
   renderChildRoutes() {
+    const id = this.props.match.params.id;
+
+    if (id && id !== "new")
+      return childRoutes(this.props.route, {
+        childProps: this.childProps
+      });
+
     return childRoutes(this.props.route, {
-      childProps: this.childProps
+      childProps: this.childProps,
+      drawer: true,
+      drawerProps: {
+        size: "flexible",
+        padding: "default",
+        lockScroll: "always",
+        closeUrl: lh.link("backendProjectCollections")
+      }
     });
   }
 
@@ -260,7 +265,7 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
     if (!projectCollections) return null;
 
     const wrapperClasses = classnames("project-collections", {
-      "active-collection": this.props.match.params.id || this.state.showNew,
+      "active-collection": this.props.match.params.id,
       empty: this.noProjectCollections
     });
 
@@ -310,43 +315,46 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
               className="container"
               style={{ marginBlockStart: fluidScale("30px", "20px") }}
             >
-              {this.hasProjectCollections && (
-                <ProjectCollection.List
-                  projectCollection={projectCollection}
-                  projectCollections={projectCollections}
-                  onCollectionSelect={this.handleCollectionSelect}
-                  onCollectionOrderChange={this.handleCollectionOrderChange}
-                  onToggleVisibility={this.handleToggleVisibility}
-                  onShowNew={this.handleShowNew}
-                />
-              )}
+              <aside className="aside-wide project-collection-list">
+                {this.hasProjectCollections && (
+                  <>
+                    <ProjectCollection.List
+                      projectCollection={projectCollection}
+                      projectCollections={projectCollections}
+                      onCollectionSelect={this.handleCollectionSelect}
+                      onCollectionOrderChange={this.handleCollectionOrderChange}
+                      onToggleVisibility={this.handleToggleVisibility}
+                    />
+                    {this.props.renderLiveRegion("alert")}
+                  </>
+                )}
+                <div className="actions">
+                  <Link
+                    className="button-icon-secondary button-icon-secondary--full"
+                    to={lh.link("backendProjectCollectionsNew")}
+                  >
+                    <IconComposer
+                      icon="plus16"
+                      size={20}
+                      className={classNames(
+                        "button-icon-secondary__icon",
+                        "button-icon-secondary__icon--large"
+                      )}
+                    />
+                    <span>{t("project_collections.create_collection")}</span>
+                  </Link>
+                </div>
+                <p className="instructional-copy">
+                  {t("project_collections.create_collection_instructions")}
+                </p>
+              </aside>
               <div className="panel">
                 {this.hasProjectCollections && (
                   <ProjectCollection.Header
                     projectCollection={collectionForHeader}
                   />
                 )}
-                <Drawer.Wrapper
-                  closeCallback={this.handleHideNew}
-                  open={this.state.showNew}
-                  context="backend"
-                  size="flexible"
-                  padding="large"
-                  lockScroll="always"
-                >
-                  <New
-                    successHandler={this.handleNewSuccess}
-                    setDirty={val => this.setState({ newFormDirty: val })}
-                    {...this.childProps}
-                  />
-                </Drawer.Wrapper>
-                {this.noProjectCollections ? (
-                  <EntityCollectionPlaceholder.ProjectCollectionsBackend
-                    onClick={this.handleShowNew}
-                  />
-                ) : (
-                  this.renderChildRoutes()
-                )}
+                <div>{this.renderChildRoutes()}</div>
               </div>
             </div>
           </div>
@@ -357,5 +365,8 @@ export class ProjectCollectionWrapperContainer extends PureComponent {
 }
 
 export default withTranslation()(
-  withConfirmation(connectAndFetch(ProjectCollectionWrapperContainer))
+  withScreenReaderStatus(
+    withConfirmation(connectAndFetch(ProjectCollectionWrapperContainer)),
+    false
+  )
 );

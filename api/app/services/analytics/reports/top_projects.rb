@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Analytics
   module Reports
     class TopProjects < Analytics::Reports::PaginatedBuilder
-
       register_base_cte! :project_views, <<~SQL
         SELECT
           projects.id AS project_id,

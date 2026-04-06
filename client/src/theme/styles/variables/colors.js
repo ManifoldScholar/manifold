@@ -152,6 +152,14 @@ export const annotationHighlightColors = {
     .desaturate(13.25)
     .lighten(20.59)
     .toHexString(), // #99e3f5
+  primaryLightHighContrast: colorHelper(highlightPrimaryBase)
+    .saturate(100)
+    .lighten(20.59)
+    .toHexString(), // #8fe9ff
+  primaryDarkHighContrast: colorHelper(highlightPrimaryBase)
+    .saturate(100)
+    .darken(34)
+    .toHexString(), // #006078
   primaryPaleLowContrast: colorHelper(highlightPrimaryBase)
     .spin(15)
     .desaturate(83.5)
@@ -161,16 +169,26 @@ export const annotationHighlightColors = {
   secondaryLight: "#c6eaac",
   secondaryPale: "#eaf7e0",
   secondaryPaleLowContrast: "#677b61",
+  secondaryLightHighContrast: colorHelper("#70c930")
+    .saturate(100)
+    .lighten(20.59)
+    .toHexString(), // #a4ff63
+  secondaryDarkHighContrast: colorHelper("#70c930")
+    .saturate(100)
+    .darken(22)
+    .toHexString(), // #398900
   tertiaryBase: "#ff12ff",
   tertiaryLight: "#edaaed",
   tertiaryPale: "#f4dcf4",
   tertiaryPaleLowContrast: "#775e77",
-  get mixed() {
-    return colorHelper
-      .mix(this.primaryPale, this.secondaryPale)
-      .darken(20)
-      .toHexString();
-  }
+  tertiaryLightHighContrast: colorHelper("#ff12ff")
+    .saturate(100)
+    .lighten(20.59)
+    .toHexString(), // #8fe9ff
+  tertiaryDarkHighContrast: colorHelper("#ff12ff")
+    .saturate(100)
+    .darken(22)
+    .toHexString() // #006078
 };
 
 // global defaults

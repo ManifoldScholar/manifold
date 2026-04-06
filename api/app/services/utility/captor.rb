@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Utility
   # Small class to deal with awkward cases where a library's block method
   # doesn't pass through the return value from within the block, but we
@@ -13,10 +15,10 @@ module Utility
     # @yieldparam [Utility::Captor::CaptureAttempt] captor
     # @yieldreturn [void]
     # @return [Object] (@see #store!)
-    def capture
+    def capture(&)
       raise "Block required" unless block_given?
 
-      CaptureAttempt.new(self).call(&Proc.new)
+      CaptureAttempt.new(self).call(&)
     end
 
     class << self
@@ -24,10 +26,10 @@ module Utility
       # @yield [captor]
       # @yieldparam [Utility::Captor::CaptureAttempt] captor
       # @return [Object]
-      def capture(**options)
+      def capture(**options, &)
         raise "Block required" unless block_given?
 
-        new(options).capture(&Proc.new)
+        new(**options).capture(&)
       end
     end
 

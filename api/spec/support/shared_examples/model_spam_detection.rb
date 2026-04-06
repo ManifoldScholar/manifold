@@ -7,7 +7,9 @@ RSpec.shared_examples_for "a model with spam detection" do
 
   before do
     # sanity check
+    # rubocop:disable RSpec/ExpectInHook
     expect(instance).to be_new_record
+    # rubocop:enable RSpec/ExpectInHook
   end
 
   def instance_has_spam!

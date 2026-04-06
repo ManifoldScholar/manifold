@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module API
   module V1
     class PermissionsController < ApplicationController
-
       resourceful! Permission, authorize_options: {
         except: [:index, :create, :show, :update, :destroy]
       }
@@ -56,15 +57,15 @@ module API
       end
 
       # Include conditional for every resource type added
-      # rubocop:disable Style/GuardClause
       def find_parent_resource
         if params.key?(:project_id)
           Project.friendly.find params[:project_id]
+        elsif params.key?(:journal_id)
+          Journal.friendly.find params[:journal_id]
         else
           raise "cannot derive parent resource for permissions"
         end
       end
-      # rubocop:enable Style/GuardClause
 
       # @return [ActiveRecord::Relation<Permission>
       def permissions_scope

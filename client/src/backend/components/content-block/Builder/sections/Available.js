@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Header from "./parts/Header";
 import Block from "../Block";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import resolver from "../../helpers/resolver";
 import { withTranslation } from "react-i18next";
 
@@ -47,7 +47,7 @@ class ProjectContentSectionsAvailable extends PureComponent {
               isDropDisabled
               direction="horizontal"
             >
-              {provided => (
+              {(provided, snapshot) => (
                 <div ref={provided.innerRef}>
                   <Block
                     currentBlocks={this.props.currentBlocks}
@@ -55,6 +55,7 @@ class ProjectContentSectionsAvailable extends PureComponent {
                     type={type}
                     index={index}
                     onClickAdd={this.props.onClickAdd}
+                    isDragging={snapshot.draggingFromThisWith === type}
                   />
                   {provided.placeholder}
                 </div>

@@ -2,13 +2,13 @@ import ActivityComments64 from "./64/ActivityComments";
 import ActivityEgg64 from "./64/ActivityEgg";
 import ActivityResource64 from "./64/ActivityResource";
 import ActivityText64 from "./64/ActivityText";
-import ActivityTweet64 from "./64/ActivityTweet";
 import Annotate24 from "./24/Annotate";
 import Annotate32 from "./32/Annotate";
 import AnnotationGroup24 from "./24/AnnotationGroup";
 import AnnotationGroupAlt24 from "./24/AnnotationGroupAlt";
 import Archive24 from "./24/Archive";
 import Arrow24 from "./24/Arrow";
+import ArrowCardinals32 from "./32/ArrowCardinals";
 import ArrowDown16 from "./16/ArrowDown";
 import ArrowDown24 from "./24/ArrowDown";
 import ArrowDown32 from "./32/ArrowDown";
@@ -21,6 +21,7 @@ import ArrowRight24 from "./24/ArrowRight";
 import ArrowRight32 from "./32/ArrowRight";
 import ArrowUp16 from "./16/ArrowUp";
 import ArrowUp32 from "./32/ArrowUp";
+import ArrowUpDown32 from "./32/ArrowUpDown";
 import Avatar16 from "./16/Avatar";
 import Avatar24 from "./24/Avatar";
 import Avatar64 from "./64/Avatar";
@@ -141,13 +142,10 @@ import Share24 from "./24/Share";
 import Share32 from "./32/Share";
 import SocialCite32 from "./32/SocialCite";
 import SocialEmail32 from "./32/SocialEmail";
-import SocialFacebook32 from "./32/SocialFacebook";
 import SocialGithub32 from "./32/SocialGithub";
 import SocialGoogle32 from "./32/SocialGoogle";
-import SocialInstagram32 from "./32/SocialInstagram";
 import SocialLinkedIn32 from "./32/SocialLinkedIn";
 import SocialSlack32 from "./32/SocialSlack";
-import SocialTwitter32 from "./32/SocialTwitter";
 import Speaker24 from "./24/Speaker";
 import SpeakerMuted24 from "./24/SpeakerMuted";
 import StarSquircle32 from "./32/StarSquircle";
@@ -192,13 +190,13 @@ export default {
   ActivityEgg64,
   ActivityResource64,
   ActivityText64,
-  ActivityTweet64,
   Annotate24,
   Annotate32,
   AnnotationGroup24,
   AnnotationGroupAlt24,
   Archive24,
   Arrow24,
+  ArrowCardinals32,
   ArrowDown16,
   ArrowDown24,
   ArrowDown32,
@@ -211,6 +209,7 @@ export default {
   ArrowRight32,
   ArrowUp16,
   ArrowUp32,
+  ArrowUpDown32,
   Avatar16,
   Avatar24,
   Avatar64,
@@ -346,13 +345,10 @@ export default {
   Share32,
   SocialCite32,
   SocialEmail32,
-  SocialFacebook32,
   SocialGithub32,
   SocialGoogle32,
-  SocialInstagram32,
   SocialLinkedIn32,
   SocialSlack32,
-  SocialTwitter32,
   Speaker24,
   SpeakerMuted24,
   StarSquircle32,

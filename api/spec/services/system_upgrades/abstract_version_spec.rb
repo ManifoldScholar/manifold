@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
-RSpec.describe SystemUpgrades::AbstractVersion do
-  class Test000100 < SystemUpgrades::AbstractVersion
-    def perform!
-      logger.debug "Test"
-    end
+# :nocov:
+class Test000100 < SystemUpgrades::AbstractVersion
+  def perform!
+    logger.debug "Test"
   end
+end if Rails.env.test?
+# :nocov:
 
+RSpec.describe SystemUpgrades::AbstractVersion do
   it "creates an UpgradeResult record on first execution" do
-    expect { Test000100.run }.to change { UpgradeResult.count }.by 1
+    expect { Test000100.run }.to change(UpgradeResult, :count).by 1
   end
 
   context "the corresponding UpgradeResult" do
@@ -39,7 +43,5 @@ RSpec.describe SystemUpgrades::AbstractVersion do
       expect_any_instance_of(Test000100).to receive(:perform!)
       Test000100.run force: true
     end
-
   end
-
 end

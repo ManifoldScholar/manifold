@@ -9,7 +9,7 @@ module Validation
     persistent_ui = {
       persistent_ui: {
         reader: {
-          colors: [:color_scheme],
+          colors: [:color_scheme, :high_contrast],
           typography: [
             :font,
             { font_size: [:current, :max, :min] },
@@ -80,7 +80,9 @@ module Validation
                   :standalone_mode, :standalone_mode_press_bar_text, :restricted_access,
                   :standalone_mode_press_bar_url, :finished, :restricted_access_heading,
                   :restricted_access_body, :open_access, :disable_engagement,
-                  :journal_issue_pending_sort_title, :journal_issue_number, :pending_slug]
+                  :journal_issue_pending_sort_title, :journal_issue_number, :pending_slug,
+                  :social_title, attachment(:social_image), :remove_social_image,
+                  :social_description]
     relationships = [:collaborators, :creators, :contributors, :subjects, :journal_volume]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -255,12 +257,13 @@ module Validation
                   attachment(:variant_format_two), :remove_variant_format_two,
                   attachment(:variant_thumbnail), :remove_variant_thumbnail,
                   attachment(:variant_poster), :remove_variant_poster,
+                  attachment(:transcript), :remove_transcript,
                   :title, :caption, :description, { tag_list: [] }, :kind, :sub_kind,
                   :alt_text, :copyright_status, :credit,
                   :allow_download, :external_type, :external_url, :external_id,
                   :embed_code, :minimum_width, :minimum_height, { iframe_allows: [] },
                   metadata(Resource),
-                  :fingerprint, :pending_slug, :pending_sort_title]
+                  :fingerprint, :pending_slug, :pending_sort_title, :sort_order]
     relationships = [:project, :creators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -277,6 +280,14 @@ module Validation
     map_keys = (1..100).to_a.map(&:to_s)
     attributes = [attachment(:data), :source, :url, :storage_type,
                   :storage_identifier, :state, :header_row, { column_map: map_keys }]
+    relationships = []
+    param_config = structure_params(attributes: attributes, relationships: relationships)
+    params.permit(param_config)
+  end
+
+  def text_track_params
+    params.require(:data)
+    attributes = [:kind, :srclang, :label, attachment(:cues), :remove_cues]
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -337,6 +348,10 @@ module Validation
     params.permit(param_config)
   end
 
+  def flag_params
+    params.permit(:message)
+  end
+
   def category_params
     params.require(:data)
     attributes = [:title, :role, :position]
@@ -370,15 +385,17 @@ module Validation
     attributes = [:title, :position, :description, :publication_date,
                   metadata(Text), :section_kind, :subtitle, :published,
                   :pending_slug, attachment(:cover), :remove_cover,
-                  :ignore_access_restrictions, :start_text_section_id, { toc: nested_toc }, { section_names: [] }]
-    relationships = [:category, :contributors, :creators]
+                  :ignore_access_restrictions, :start_text_section_id, { toc: nested_toc },
+                  { section_names: [] }, :social_title, attachment(:social_image),
+                  :remove_social_image, :social_description]
+    relationships = [:category, :contributors, :creators, :collaborators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
   end
 
   def text_section_params
     params.require(:data)
-    attributes = [:name, :body, :position, :kind, :slug, :hidden_in_reader]
+    attributes = [:name, :body, :position, :kind, :slug, :hidden_in_reader, metadata(TextSection)]
     param_config = structure_params(attributes: attributes)
     params.permit(param_config)
   end
@@ -507,7 +524,7 @@ module Validation
   end
 
   def reading_group_filter_params
-    params.permit(filter: [:keyword, :sort_order, :archived])[:filter] || {}
+    params.permit(filter: [:keyword, :sort_order, :archived, :privacy, :flags])[:filter] || {}
   end
 
   def reading_group_membership_filter_params
@@ -519,19 +536,17 @@ module Validation
   end
 
   def resource_filter_params
-    params.with_defaults(
-      filter: { order: "sort_title ASC" }
-    ).permit(filter: [:keyword,
-                      :kind,
-                      :tag,
-                      :order,
-                      :collection_order,
-                      :project,
-                      :resource_collection])[:filter]
+    params.permit(filter: [:keyword,
+                           :kind,
+                           :tag,
+                           :order,
+                           :collection_order,
+                           :project,
+                           :resource_collection])[:filter]
   end
 
   def comment_filter_params
-    params.permit(filter: [])[:filter]
+    params.permit(filter: [:order, :flags, :keyword])[:filter]
   end
 
   def version_filter_params
@@ -548,7 +563,7 @@ module Validation
   end
 
   def user_filter_params
-    params.permit(filter: [:keyword, :typeahead, :role, :order])[:filter]
+    params.permit(filter: [:keyword, :typeahead, :role_name, :order])[:filter]
   end
 
   def event_filter_params
@@ -564,7 +579,7 @@ module Validation
   end
 
   def search_params
-    params[:facets] = params[:facets].values if params.dig(:facets).respond_to? :values
+    params[:facets] = params[:facets].values if params[:facets].respond_to? :values
     params.permit(
       :keyword,
       :project,
@@ -584,7 +599,7 @@ module Validation
     coerce_filter_to_hash(:filter, :formats)
     params.permit(
       filter: [
-        :orphaned, :text, :text_section, :reading_group_membership, :order,
+        :orphaned, :text, :text_section, :reading_group_membership, :reading_group, :order, :privacy, :flags, :keyword,
         { ids: [] },
         [{ formats: [] }]
       ]
@@ -592,7 +607,11 @@ module Validation
   end
 
   def subject_filter_params
-    params.permit(filter: [:featured, :keyword, :typeahead, :used])[:filter]
+    params.permit(filter: [:featured, :keyword, :typeahead, :used])[:filter] || {}
+  end
+
+  def collaborator_filter_params
+    params.permit(filter: [:maker])[:filter] || {}
   end
 
   def entitlement_filter_params
@@ -666,8 +685,8 @@ module Validation
     data << { meta: allowed_meta }
     data << { attributes: attributes } unless attributes.nil?
     unless relationships.nil?
-      relationships_config = relationships.each_with_object({}) do |relationship, config|
-        config[relationship] = { data: [:type, :id, :_remove] }
+      relationships_config = relationships.index_with do |relationship|
+        { data: [:type, :id, :_remove] }
       end
       data << { relationships: relationships_config }
     end
@@ -682,7 +701,7 @@ module Validation
     def filter_param_method_for(klass)
       prefix = klass.model_name.singular
 
-      :"#{prefix}_filter_params".yield_self do |filter_method|
+      :"#{prefix}_filter_params".then do |filter_method|
         filter_method if method_defined? filter_method
       end
     end

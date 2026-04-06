@@ -2,22 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Tile from "./Tile/index";
 import lh from "helpers/linkHandler";
-import Loadable from "@docusaurus/react-loadable";
-
-/* eslint-disable react/prop-types */
-const autolinkTweet = props => {
-  const Loaded = Loadable({
-    loader: () => import(/* webpackChunkName: "autolinker" */ "autolinker"),
-    render(Autolinker) {
-      const excerpt = Autolinker.default.link(props.excerpt, props.options);
-      return <p dangerouslySetInnerHTML={{ __html: excerpt }} />;
-    },
-    loading: () => <p dangerouslySetInnerHTML={{ __html: props.excerpt }} />
-  });
-
-  return <Loaded {...props} />;
-};
-/* eslint-enable react/prop-types */
 
 export default class Event extends PureComponent {
   static displayName = "Event.Event";
@@ -37,8 +21,6 @@ export default class Event extends PureComponent {
     switch (type) {
       case "annotation_created":
         return this.propsForAnnotationCreated(attributes);
-      case "tweet":
-        return this.propsForTweet(attributes);
       case "resource_added":
         return this.propsForResourceAdded(attributes);
       case "text_added":
@@ -57,33 +39,6 @@ export default class Event extends PureComponent {
       type: attr.eventType,
       postAttribution: attr.attribution,
       icon: "activityComments64"
-    };
-  }
-
-  propsForTweet(attr) {
-    const contentProps = {
-      excerpt: attr.excerpt,
-      options: { hashtag: "twitter", mention: "twitter" }
-    };
-
-    return {
-      italicizeContent: true,
-      icon: "activityTweet64",
-      type: attr.eventType,
-      preAttribution: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={`https://twitter.com/${attr.attributionIdentifier}`}
-        >
-          {"@" + attr.attributionIdentifier}
-        </a>
-      ),
-      content: autolinkTweet(contentProps),
-      date: attr.createdAt,
-      dateFormat: "MMMM dd, yyyy",
-      linkHref: attr.eventUrl,
-      linkTarget: "_blank"
     };
   }
 
