@@ -26,7 +26,7 @@ module Search
     # @see FACETS
     # @see Search::Faceter
     Facets = Coercible::Array.of(Facet).constructor do |value|
-      ::Kernel.Array(value).map { SafeFacet[_1] }.compact.uniq.sort
+      ::Kernel.Array(value).map { SafeFacet[it] }.compact.uniq.sort
     end
 
     KeywordSearchOptions = ::Types::Hash.map(::Types::Symbol, ::Types::Any)
