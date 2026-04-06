@@ -1,126 +1,105 @@
-import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import withPluginReplacement from "hoc/withPluginReplacement";
 import Utility from "global/components/utility";
-import { FrontendModeContext } from "helpers/contexts";
 import * as Styled from "./styles";
 import withSettings from "hoc/withSettings";
 
-class PoweredBy extends PureComponent {
-  static displayName = "Global.Footers.Parts.PoweredBy";
+function PoweredBy({
+  type = "library",
+  dull = false,
+  withVersion,
+  settings,
+  t,
+  children
+}) {
+  const isReaderFooter = type === "reader";
+  const isStandaloneFooter = type === "standalone";
+  const isLibraryFooter = type === "library";
 
-  static contextType = FrontendModeContext;
-
-  static propTypes = {
-    dull: PropTypes.bool,
-    withVersion: PropTypes.bool,
-    t: PropTypes.func
+  const manifoldLinkProps = {
+    href: "http://manifoldapp.org",
+    target: "_blank",
+    rel: "noopener noreferrer"
   };
 
-  static defaultProps = {
-    type: "library",
-    dull: false
+  const directoryLinkProps = {
+    href: "http://manifoldapp.org/directory",
+    target: "_blank",
+    rel: "noopener noreferrer"
   };
 
-  get dull() {
-    return this.props.dull;
-  }
+  const version = withVersion
+    ? settings?.attributes?.calculated?.manifoldVersion?.version
+    : null;
 
-  get isReaderFooter() {
-    return this.props.type === "reader";
-  }
+  const readerInner = (
+    <>
+      <Utility.IconComposer icon="manifoldLogo32" size="default" />
+      <Styled.Copyright>
+        {children}
+        <Styled.LogoText as="div" $tiny>
+          <Trans
+            i18nKey="powered_by.reader_text"
+            components={{
+              mlink: <a {...manifoldLinkProps}>#</a>,
+              dlink: <a {...directoryLinkProps}>#</a>,
+              srtext: <span className="screen-reader-text" />
+            }}
+          />
+        </Styled.LogoText>
+      </Styled.Copyright>
+    </>
+  );
 
-  get isStandaloneFooter() {
-    return this.props.type === "standalone";
-  }
-
-  get isLibraryFooter() {
-    return this.props.type === "library";
-  }
-
-  get manifoldLinkProps() {
-    return {
-      href: "http://manifoldapp.org",
-      target: "_blank",
-      rel: "noopener noreferrer"
-    };
-  }
-
-  get wrapWithLink() {
-    return this.isLibraryFooter;
-  }
-
-  get wrapLogoWithLink() {
-    return this.isStandaloneFooter;
-  }
-
-  render() {
-    const wrapperProps = this.wrapWithLink ? this.manifoldLinkProps : {};
-    const logoWrapperProps = this.wrapLogoWithLink
-      ? this.manifoldLinkProps
-      : {};
-
-    const version = this.props.withVersion
-      ? this.props.settings?.attributes?.calculated?.manifoldVersion?.version
-      : null;
-
-    const { t } = this.props;
-
-    return (
-      <Styled.Wrapper
-        as={this.wrapWithLink ? "a" : "div"}
-        $reader={this.isReaderFooter}
-        $library={this.isLibraryFooter}
-        {...wrapperProps}
-      >
-        <section>
-          <div className="container flush">
-            <Styled.LogoWrapper
-              as={this.wrapLogoWithLink ? "a" : "span"}
-              $standalone={this.isStandaloneFooter}
-              $reader={this.isReaderFooter}
-              $dull={this.dull}
-              {...logoWrapperProps}
-            >
-              <Utility.IconComposer icon="manifoldLogo32" size="default" />
-              {this.isReaderFooter && (
-                <Styled.Copyright>
-                  {this.props.children}
-                  <Styled.LogoText as="div" $tiny>
-                    {t("powered_by.reader_text")}
-                  </Styled.LogoText>
-                  <Styled.LogoText as="a" $tiny {...this.manifoldLinkProps}>
-                    <span className="screen-reader-text">
-                      {t("external_links.opens_in_new")}
-                    </span>
-                    manifoldapp.org
-                  </Styled.LogoText>
-                </Styled.Copyright>
-              )}
-              {(this.isStandaloneFooter || this.isLibraryFooter) && (
-                <Styled.LogoText>
-                  <Styled.LogoText $neutral>
-                    {t("powered_by.frontend_text")}
-                  </Styled.LogoText>
-                  <Styled.LogoText $white>{t("app.manifold")}</Styled.LogoText>
-                  {version && (
-                    <Styled.LogoText $white>
-                      {t("powered_by.version", { number: version })}
-                    </Styled.LogoText>
-                  )}
+  return (
+    <Styled.Wrapper $reader={isReaderFooter}>
+      <section>
+        <div className="container flush">
+          <Styled.LogoWrapper $reader={isReaderFooter} $dull={dull}>
+            {isReaderFooter && readerInner}
+            {isStandaloneFooter || isLibraryFooter ? (
+              <>
+                <span>
+                  <Utility.IconComposer icon="manifoldLogo32" size="default" />
+                  <Trans
+                    i18nKey={"powered_by.frontend_text"}
+                    components={{
+                      neutral: <Styled.LogoText $neutral />,
+                      mlink: (
+                        <Styled.LogoText $white as="a" {...manifoldLinkProps} />
+                      ),
+                      version: <Styled.LogoText $white $hidden={!version} />,
+                      srtext: <span className="screen-reader-text" />
+                    }}
+                    values={{ number: version }}
+                  />
+                </span>
+                <Styled.LogoText as="a" {...directoryLinkProps}>
+                  <span className="screen-reader-text">
+                    {t("external_links.opens_in_new")}
+                  </span>
+                  {t("app.manifold_directory")}
                 </Styled.LogoText>
-              )}
-            </Styled.LogoWrapper>
-            {this.isStandaloneFooter && this.props.children && (
-              <Styled.PostScript>{this.props.children}</Styled.PostScript>
-            )}
-          </div>
-        </section>
-      </Styled.Wrapper>
-    );
-  }
+              </>
+            ) : null}
+          </Styled.LogoWrapper>
+          {isStandaloneFooter && children && (
+            <Styled.PostScript>{children}</Styled.PostScript>
+          )}
+        </div>
+      </section>
+    </Styled.Wrapper>
+  );
 }
+
+PoweredBy.displayName = "Global.Footers.Parts.PoweredBy";
+
+PoweredBy.propTypes = {
+  dull: PropTypes.bool,
+  withVersion: PropTypes.bool,
+  t: PropTypes.func
+};
 
 export default withSettings(
   withPluginReplacement(
