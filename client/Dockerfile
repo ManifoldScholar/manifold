@@ -39,6 +39,7 @@ COPY --from=build /srv/app/webpack/transforms /srv/app/webpack/transforms
 COPY --from=build /srv/app/webpack/templates /srv/app/webpack/templates
 COPY --from=build /srv/app/src/config /srv/app/src/config
 COPY --from=build /srv/app/package.json /srv/app/package.json
+COPY --from=build /srv/app/yarn.lock /srv/app/yarn.lock
 COPY --from=build /srv/app/.yarnrc.yml /srv/app/.yarnrc.yml
 
 CMD ["yarn", "run", "start-docker"]
