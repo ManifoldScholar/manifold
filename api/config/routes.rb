@@ -22,11 +22,17 @@ Rails.application.routes.draw do
   get "up" => "health#show"
   get "api/up" => "health#show"
 
-  # SAML POST callbacks
-  # Omniauth
-  get "auth/:provider/redirect", to: "oauth#redirect"
-  post "auth/:provider/callback", to: "oauth#authorize"
-  get "auth/:provider/callback", to: "oauth#authorize"
+  namespace :auth do
+    get ":provider/redirect", to: "omniauth#redirect", as: :redirect
+    post ":provider/callback", to: "omniauth#authorize", as: :callback
+    get ":provider/callback", to: "omniauth#authorize"
+
+    get "jwks", to: "omniauth#jwks"
+
+    namespace :lti do
+      resource :registration
+    end
+  end
 
   namespace :api do
     mount Tus::Server => "/files"
