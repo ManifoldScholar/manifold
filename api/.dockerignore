@@ -1,9 +1,3 @@
-backup-*.tar
-bin/console
-bin/dbconsole
+.git
+spec
 coverage
-data
-dump.sql
-log
-public/system
-tmp

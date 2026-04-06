@@ -27,6 +27,7 @@ services:
   migrations:
     build:
       context: api
+      target: development
     command: bin/ensure-db
     depends_on:
       postgres:
@@ -100,6 +101,7 @@ services:
     stdin_open: true
     build:
       context: api
+      target: development
     depends_on:
       postgres:
         condition: service_healthy
@@ -135,6 +137,7 @@ services:
   worker:
     build:
       context: api
+      target: development
     command: bin/good_job start --probe-port 7001
     depends_on:
       postgres:
@@ -167,6 +170,7 @@ services:
   spec:
     build:
       context: api
+      target: development
 
     command: tail -f /dev/null
     depends_on:
