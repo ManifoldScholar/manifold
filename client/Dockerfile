@@ -33,4 +33,4 @@ RUN corepack enable
 
 COPY --from=build /srv/app /srv/app
 
-CMD ["yarn", "run", "start-docker"]
+CMD ["./node_modules/.bin/npm-run-all", "_build:browser-config", "_serve:ssr"]
