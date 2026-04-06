@@ -4,6 +4,14 @@ module Auth
     class Registrar
       include Rails.application.routes.url_helpers
 
+      SCOPE_MAP = {
+        "https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly" => "nrps_membership_readonly",
+        "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem" => "ags_lineitem",
+        "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly" => "ags_lineitem_readonly",
+        "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly" => "ags_result_readonly",
+        "https://purl.imsglobal.org/spec/lti-ags/scope/score" => "ags_score"
+      }.freeze
+
       attr_reader :errors, :openid_configuration_url, :referrer, :registration_token
 
       def initialize(params)
@@ -36,7 +44,11 @@ module Auth
       end
 
       def configure_platform!
-        platform_configuration
+        persist_registration!
+      end
+
+      def lti_tool_configuration
+        platform_configuration[:"https://purl.imsglobal.org/spec/lti-tool-configuration"] || {}
       end
 
       def openid_configuration
@@ -134,6 +146,35 @@ module Auth
 
       def settings
         @settings ||= Settings.instance
+      end
+
+      private
+
+      def persist_registration!
+        registration = LtiRegistration.create!(
+          name: URI.parse(openid_configuration[:issuer]).host,
+          issuer: openid_configuration[:issuer],
+          client_id: platform_configuration[:client_id],
+          authorization_endpoint: openid_configuration[:authorization_endpoint],
+          token_endpoint: openid_configuration[:token_endpoint],
+          jwks_uri: openid_configuration[:jwks_uri],
+          token_endpoint_auth_method: platform_configuration[:token_endpoint_auth_method],
+          grant_types: platform_configuration[:grant_types] || [],
+          scopes: normalize_scopes(platform_configuration[:scope]),
+          registration_access_token: platform_configuration[:registration_access_token]
+        )
+
+        registration.lti_deployments.create!(
+          deployment_id: lti_tool_configuration[:deployment_id]
+        )
+      rescue ActiveRecord::RecordInvalid => e
+        @errors.concat(e.record.errors.full_messages)
+      end
+
+      def normalize_scopes(scope_string)
+        return [] if scope_string.blank?
+
+        scope_string.to_s.split.filter_map { |uri| SCOPE_MAP[uri] }
       end
 
     end
