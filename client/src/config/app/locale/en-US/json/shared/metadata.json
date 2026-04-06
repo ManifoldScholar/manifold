@@ -17,6 +17,9 @@
       "publisher": "Publisher",
       "citation": "Citation"
     },
+    "cc_license": "CC License",
+    "cc_license_instructions": "CC license selected here is included in the OAI-PMH feed and used for filtering in the Manifold Directory.",
+    "cc_license_placeholder": "Select a license if applicable",
     "citation": "Citation",
     "citation_override": "Citation override",
     "citation_override_instructions": "Add a suggested citation. If set, will override any auto-generated citations for this entity. Accepts markdown.",
