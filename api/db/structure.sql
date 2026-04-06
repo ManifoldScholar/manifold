@@ -150,6 +150,39 @@ CREATE TYPE public.ingestion_message_severity AS ENUM (
 
 
 --
+-- Name: lti_grant_type; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.lti_grant_type AS ENUM (
+    'implicit',
+    'client_credentials'
+);
+
+
+--
+-- Name: lti_scope; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.lti_scope AS ENUM (
+    'nrps_membership_readonly',
+    'ags_lineitem',
+    'ags_lineitem_readonly',
+    'ags_result_readonly',
+    'ags_score'
+);
+
+
+--
+-- Name: lti_token_endpoint_auth_method; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.lti_token_endpoint_auth_method AS ENUM (
+    'private_key_jwt',
+    'client_secret_post'
+);
+
+
+--
 -- Name: manifold_lang; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -1993,6 +2026,42 @@ CREATE TABLE public.legacy_favorites (
     user_id uuid,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lti_deployments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lti_deployments (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    lti_registration_id uuid NOT NULL,
+    deployment_id text NOT NULL,
+    enabled boolean DEFAULT true NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: lti_registrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lti_registrations (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name text NOT NULL,
+    issuer text NOT NULL,
+    client_id text NOT NULL,
+    authorization_endpoint text NOT NULL,
+    token_endpoint text NOT NULL,
+    jwks_uri text NOT NULL,
+    token_endpoint_auth_method public.lti_token_endpoint_auth_method DEFAULT 'private_key_jwt'::public.lti_token_endpoint_auth_method NOT NULL,
+    grant_types public.lti_grant_type[] DEFAULT '{}'::public.lti_grant_type[] NOT NULL,
+    scopes public.lti_scope[] DEFAULT '{}'::public.lti_scope[] NOT NULL,
+    registration_access_token text,
+    enabled boolean DEFAULT true NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -4004,6 +4073,22 @@ ALTER TABLE ONLY public.legacy_favorites
 
 
 --
+-- Name: lti_deployments lti_deployments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_deployments
+    ADD CONSTRAINT lti_deployments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lti_registrations lti_registrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_registrations
+    ADD CONSTRAINT lti_registrations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: makers makers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5499,6 +5584,27 @@ CREATE INDEX index_legacy_favorites_on_favoritable_type_and_favoritable_id ON pu
 --
 
 CREATE INDEX index_legacy_favorites_on_user_id ON public.legacy_favorites USING btree (user_id);
+
+
+--
+-- Name: index_lti_deployments_on_lti_registration_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lti_deployments_on_lti_registration_id ON public.lti_deployments USING btree (lti_registration_id);
+
+
+--
+-- Name: index_lti_deployments_on_registration_and_deployment; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lti_deployments_on_registration_and_deployment ON public.lti_deployments USING btree (lti_registration_id, deployment_id);
+
+
+--
+-- Name: index_lti_registrations_on_issuer_and_client_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lti_registrations_on_issuer_and_client_id ON public.lti_registrations USING btree (issuer, client_id);
 
 
 --
@@ -7256,6 +7362,14 @@ ALTER TABLE ONLY public.projects
 
 
 --
+-- Name: lti_deployments fk_rails_30a6d7195c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_deployments
+    ADD CONSTRAINT fk_rails_30a6d7195c FOREIGN KEY (lti_registration_id) REFERENCES public.lti_registrations(id);
+
+
+--
 -- Name: reading_group_composite_entries fk_rails_313af69a44; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7950,6 +8064,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260406000001'),
 ('20260209183815'),
 ('20251203231940'),
 ('20251203230443'),
