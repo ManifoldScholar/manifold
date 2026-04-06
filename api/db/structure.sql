@@ -1515,6 +1515,20 @@ CREATE TABLE public.export_targets (
 
 
 --
+-- Name: external_identifiers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.external_identifiers (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    identifier character varying NOT NULL,
+    identifiable_type character varying,
+    identifiable_id uuid,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: user_collected_composite_entries; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3446,6 +3460,47 @@ CREATE VIEW public.user_derived_roles AS
 
 
 --
+-- Name: user_group_entitleables; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_group_entitleables (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_group_id uuid NOT NULL,
+    entitleable_type character varying NOT NULL,
+    entitleable_id uuid NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: user_group_memberships; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_group_memberships (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    user_id uuid NOT NULL,
+    user_group_id uuid NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: user_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.user_groups (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name text NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
 -- Name: version_associations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3786,6 +3841,14 @@ ALTER TABLE ONLY public.events
 
 ALTER TABLE ONLY public.export_targets
     ADD CONSTRAINT export_targets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: external_identifiers external_identifiers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.external_identifiers
+    ADD CONSTRAINT external_identifiers_pkey PRIMARY KEY (id);
 
 
 --
@@ -4394,6 +4457,30 @@ ALTER TABLE ONLY public.user_collected_text_sections
 
 ALTER TABLE ONLY public.user_collected_texts
     ADD CONSTRAINT user_collected_texts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_group_entitleables user_group_entitleables_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_group_entitleables
+    ADD CONSTRAINT user_group_entitleables_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_group_memberships user_group_memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_group_memberships
+    ADD CONSTRAINT user_group_memberships_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_groups user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.user_groups
+    ADD CONSTRAINT user_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -5020,6 +5107,20 @@ CREATE UNIQUE INDEX index_export_targets_on_slug ON public.export_targets USING 
 --
 
 CREATE INDEX index_export_targets_on_strategy ON public.export_targets USING btree (strategy);
+
+
+--
+-- Name: index_external_identifiers_on_identifiable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_external_identifiers_on_identifiable ON public.external_identifiers USING btree (identifiable_type, identifiable_id);
+
+
+--
+-- Name: index_external_identifiers_on_identifier; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_external_identifiers_on_identifier ON public.external_identifiers USING btree (identifier);
 
 
 --
@@ -6824,11 +6925,12 @@ CREATE INDEX index_user_group_memberships_on_user_id ON public.user_group_member
 --
 -- Name: index_user_group_memberships_on_user_id_and_user_group_id; Type: INDEX; Schema: public; Owner: -
 --
+
 CREATE UNIQUE INDEX index_user_group_memberships_on_user_id_and_user_group_id ON public.user_group_memberships USING btree (user_id, user_group_id);
 
 
 --
--- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+-- Name: index_user_groups_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_user_groups_on_name ON public.user_groups USING btree (name);
@@ -6836,6 +6938,8 @@ CREATE UNIQUE INDEX index_user_groups_on_name ON public.user_groups USING btree 
 
 --
 -- Name: index_users_on_deleted_at; Type: INDEX; Schema: public; Owner: -
+--
+
 CREATE INDEX index_users_on_deleted_at ON public.users USING btree (deleted_at);
 
 
@@ -7846,9 +7950,12 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260209183815'),
 ('20251203231940'),
 ('20251203230443'),
 ('20251121202033'),
+('20251120233556'),
+('20251117204731'),
 ('20251105165521'),
 ('20251103180007'),
 ('20251103175949'),
