@@ -4,6 +4,7 @@ module Auth
 
       skip_after_action :set_content_type
 
+      before_action :require_autoregistration!
       after_action :set_frame_options
 
       def show
@@ -28,6 +29,14 @@ module Auth
       end
 
       private
+
+      def lti_settings
+        Settings.current.lti
+      end
+
+      def require_autoregistration!
+        return head :forbidden unless lti_settings.enabled? && lti_settings.autoregistration?
+      end
 
       def set_frame_options
         response.headers["X-Frame-Options"] = "ALLOW-FROM #{request.referrer}"
