@@ -6,10 +6,39 @@
   <meta name="viewport" content="width=device-width" />
   <title>A Manifold Page</title>
   <link href="mail_styles.css" rel="stylesheet" />
-</head>
 
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .press-logo {
+      height: auto;
+      max-width: 300px;
+    }
+  </style>
+</head>
 <body>
-Yar be Manifolds here
-<%= yield %>
+  <div class="logos">
+    <img width="300px" src="<%= Rails.application.config.manifold.url %>/static/images/manifold-mail-logo-secondary.jpg" alt="Manifold logo and text: Manifold Scholarship. Click to visit manifoldapp.org"/>
+    <% if Settings.current.press_logo.present? %>
+      <%= image_tag Settings.current.press_logo_styles[:small], class: "press-logo" %>
+    <% end %>
+  </div>
+  <%= yield %>
+  </div>
 </body>
 </html>

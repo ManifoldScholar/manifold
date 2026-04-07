@@ -6,9 +6,9 @@ module ManagesOauthCookie
   OAUTH_CACHE_KEY_PREFIX = "_oauth"
   OAUTH_COOKIE_NAME = "_oauth_auth_code"
 
-  included do
-    include ActionController::Cookies
-  end
+  # included do
+  #   include ActionController::Cookies
+  # end
 
   def auth_code_cache_key(code = params[:auth_code])
     "#{OAUTH_CACHE_KEY_PREFIX}_#{code}"
