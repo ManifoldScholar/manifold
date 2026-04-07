@@ -37,8 +37,9 @@ module Auth
 
       def valid?
         # errors << "invalid host" if openid_uri.host != referrer_uri.host
-        errors << "invalid issuer" if openid_uri.host != URI.parse(openid_configuration[:issuer]).host
         errors << "unable to fetch openid configuration" if openid_configuration.blank?
+        errors << "invalid issuer" if openid_configuration.present? && openid_uri.host != URI.parse(openid_configuration[:issuer]).host
+        errors << "autoregistration for this platform is not allowed" unless issuer_allowed?
 
         errors.none?
       end
@@ -145,16 +146,27 @@ module Auth
       end
 
       def settings
-        @settings ||= Settings.instance
+        @settings ||= Settings.current
       end
 
-      private
+      def lti_registration
+        @lti_registration ||= LtiRegistration.find_or_initialize_by(
+          issuer: openid_configuration[:issuer],
+          client_id: platform_configuration[:client_id]
+        )
+      end
+
+      def lti_deployment
+        @lti_deployment ||= lti_registration.lti_deployments.find_or_create_by!(
+          deployment_id: lti_tool_configuration[:deployment_id]
+        )
+      rescue ActiveRecord::RecordInvalid => e
+        @errors.concat(e.record.errors.full_messages)
+      end
 
       def persist_registration!
-        registration = LtiRegistration.create!(
-          name: URI.parse(openid_configuration[:issuer]).host,
-          issuer: openid_configuration[:issuer],
-          client_id: platform_configuration[:client_id],
+        lti_registration.update!(
+          name: lti_registration.name || URI.parse(openid_configuration[:issuer]).host,
           authorization_endpoint: openid_configuration[:authorization_endpoint],
           token_endpoint: openid_configuration[:token_endpoint],
           jwks_uri: openid_configuration[:jwks_uri],
@@ -164,9 +176,6 @@ module Auth
           registration_access_token: platform_configuration[:registration_access_token]
         )
 
-        registration.lti_deployments.create!(
-          deployment_id: lti_tool_configuration[:deployment_id]
-        )
       rescue ActiveRecord::RecordInvalid => e
         @errors.concat(e.record.errors.full_messages)
       end
@@ -175,6 +184,14 @@ module Auth
         return [] if scope_string.blank?
 
         scope_string.to_s.split.filter_map { |uri| SCOPE_MAP[uri] }
+      end
+
+      def issuer_allowed?
+        return false if openid_configuration.blank?
+
+        allowlist = Settings.current.lti.issuer_allowlist
+
+        allowlist.blank? || allowlist.include?(openid_configuration[:issuer])
       end
 
     end

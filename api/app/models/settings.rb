@@ -16,6 +16,7 @@ class Settings < ApplicationRecord
   attribute :email, SettingSections::Email.to_type, default: -> { {} }
   attribute :ingestion, SettingSections::Ingestion.to_type, default: -> { {} }
   attribute :integrations, SettingSections::Integrations.to_type, default: -> { {} }
+  attribute :lti, SettingSections::Lti.to_type, default: -> { {} }
   attribute :rate_limiting, SettingSections::RateLimiting.to_type, default: -> { {} }
   attribute :secrets, SettingSections::Secrets.to_type, default: -> { {} }
   attribute :theme, SettingSections::Theme.to_type, default: -> { {} }
