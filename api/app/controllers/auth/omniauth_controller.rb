@@ -1,22 +1,15 @@
 # frozen_string_literal: true
 
 module Auth
-  class OmniauthController < ApplicationController
-    include ActionController::RequestForgeryProtection
-
+  class OmniauthController < ActionController::Base
     include ManagesOauthCookie
 
     POST_AUTH_REDIRECT_PATH = "/oauth"
     AUTH_ERROR_STRING = "An error has occurred logging you in"
 
-    skip_after_action :set_content_type
+    layout "auth"
 
-    # In order to prevent CSRF,
-    def redirect
-      # Sets the CSRF token in session, which sets the cookie in the response
-      real_csrf_token(session)
-      render html: redirect_body.html_safe, layout: false
-    end
+    def redirect; end
 
     def authorize
       outcome = ExternalAuth::FindUser.run(
@@ -62,33 +55,6 @@ module Auth
 
     def redirect_resource_query_string
       redirect_resource.map { _1.join("=") }.join("&")
-    end
-
-    def redirect_body
-      scrubbed_provider_name = Loofah.scrub_html5_fragment(params[:provider], :prune).to_s
-
-      <<~HEREDOC
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>Redirecting</title>
-            <style></style>
-          </head>
-          <body>
-            <div style="margin-top: 100px; text-align: center;">
-              <h1>Redirecting, Please Wait</h1>
-              <form id="auth_redirect_form" action="/auth/#{scrubbed_provider_name}" method="POST">
-                <input type="hidden" name="authenticity_token" value="#{session["_csrf_token"]}" />
-                <input type="submit" id="auth_redirect_submit" value="Click here if you're not automatically redirected" />
-              </form>
-            </div>
-            <script type="text/javascript">
-              document.getElementById("auth_redirect_submit").style.visibility = "hidden";
-              document.getElementById("auth_redirect_form").submit();
-            </script>
-          </body>
-        </html>
-      HEREDOC
     end
 
     def omniauth_hash
