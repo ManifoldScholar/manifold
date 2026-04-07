@@ -9,7 +9,7 @@ class Identity < ApplicationRecord
 
   has_many :user_group_memberships, as: :source, dependent: :destroy
 
-  validates :provider, inclusion: { in: ->(_) { (AuthConfig.provider_names) } }
+  validates :provider, inclusion: { in: ->(_) { AuthConfig.provider_names + %w[lti] } }
   validates :uid, :provider, presence: true
   validates :uid, uniqueness: { scope: %i(provider) }
 
