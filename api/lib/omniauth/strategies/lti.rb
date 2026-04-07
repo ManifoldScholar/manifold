@@ -43,6 +43,7 @@ module OmniAuth
 
         claims = decode_and_verify!(id_token, lti_session)
         @claims = claims
+        @target_link_uri = lti_session["target_link_uri"]
 
         env["omniauth.auth"] = auth_hash
         call_app!
@@ -67,8 +68,9 @@ module OmniAuth
       extra do
         {
           raw_info: @claims,
-          lti: extract_lti_claims(@claims)
-        }
+          lti: extract_lti_claims(@claims),
+          target_link_uri: @target_link_uri
+        }.compact
       end
 
       private
