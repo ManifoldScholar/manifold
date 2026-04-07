@@ -15,6 +15,7 @@ module SettingSections
     :general,
     :ingestion,
     :integrations,
+    :lti,
     :rate_limiting,
     :secrets,
     :theme,

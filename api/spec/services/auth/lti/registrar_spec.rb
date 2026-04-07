@@ -58,9 +58,8 @@ RSpec.describe Auth::Lti::Registrar do
 
     it "persists the correct registration attributes" do
       registrar.configure_platform!
-      registration = LtiRegistration.last
 
-      expect(registration).to have_attributes(
+      expect(LtiRegistration.last).to have_attributes(
         issuer: issuer,
         client_id: "10000000000001",
         authorization_endpoint: "#{issuer}/api/lti/authorize_redirect",
@@ -75,9 +74,8 @@ RSpec.describe Auth::Lti::Registrar do
 
     it "persists the correct deployment attributes" do
       registrar.configure_platform!
-      deployment = LtiDeployment.last
 
-      expect(deployment).to have_attributes(
+      expect(LtiDeployment.last).to have_attributes(
         deployment_id: "deploy_1",
         lti_registration_id: LtiRegistration.last.id
       )
@@ -85,7 +83,13 @@ RSpec.describe Auth::Lti::Registrar do
 
     context "when the registration is invalid" do
       let(:openid_config_response) do
-        super().merge(issuer: issuer, authorization_endpoint: nil)
+        {
+          issuer: issuer,
+          authorization_endpoint: nil,
+          token_endpoint: "#{issuer}/login/oauth2/token",
+          jwks_uri: "#{issuer}/api/lti/security/jwks",
+          registration_endpoint: "#{issuer}/api/lti/registrations"
+        }
       end
 
       it "captures errors and reports failure" do
@@ -93,9 +97,85 @@ RSpec.describe Auth::Lti::Registrar do
         expect(registrar).to be_failure
       end
     end
+
+    context "when a registration already exists for the issuer and client_id" do
+      let!(:existing_registration) do
+        FactoryBot.create(:lti_registration,
+          issuer: issuer,
+          client_id: "10000000000001",
+          name: "Custom Name",
+          authorization_endpoint: "#{issuer}/old/authorize"
+        )
+      end
+
+      it "does not create a new registration" do
+        expect { registrar.configure_platform! }.not_to change(LtiRegistration, :count)
+      end
+
+      it "updates the mutable registration fields" do
+        registrar.configure_platform!
+        existing_registration.reload
+
+        expect(existing_registration.authorization_endpoint).to eq "#{issuer}/api/lti/authorize_redirect"
+      end
+
+      it "preserves the existing name" do
+        registrar.configure_platform!
+        existing_registration.reload
+
+        expect(existing_registration.name).to eq "Custom Name"
+      end
+
+      it "creates a new deployment" do
+        expect { registrar.configure_platform! }.to change(LtiDeployment, :count).by(1)
+      end
+
+      context "when the deployment already exists" do
+        let!(:existing_deployment) do
+          FactoryBot.create(:lti_deployment, lti_registration: existing_registration, deployment_id: "deploy_1")
+        end
+
+        it "does not create a duplicate deployment" do
+          expect { registrar.configure_platform! }.not_to change(LtiDeployment, :count)
+        end
+      end
+    end
   end
 
-  describe "#normalize_scopes" do
+  describe "#valid?" do
+    context "when the issuer allowlist is defined" do
+      before do
+        Settings.instance.update!(lti: { enabled: true, autoregistration: true, issuer_allowlist: [issuer] })
+      end
+
+      it "allows an issuer in the allowlist" do
+        expect(registrar).to be_valid
+      end
+    end
+
+    context "when the issuer is not in the allowlist" do
+      before do
+        Settings.instance.update!(lti: { enabled: true, autoregistration: true, issuer_allowlist: ["https://other.example.com"] })
+      end
+
+      it "rejects the issuer" do
+        expect(registrar).not_to be_valid
+        expect(registrar.errors).to include("autoregistration for this platform is not allowed")
+      end
+    end
+
+    context "when the allowlist is empty" do
+      before do
+        Settings.instance.update!(lti: { enabled: true, autoregistration: true, issuer_allowlist: [] })
+      end
+
+      it "allows any issuer" do
+        expect(registrar).to be_valid
+      end
+    end
+  end
+
+  describe "scope normalization" do
     it "maps known LTI scope URIs to enum values" do
       registrar.configure_platform!
       expect(LtiRegistration.last.scopes).to eq %w[nrps_membership_readonly ags_lineitem]
