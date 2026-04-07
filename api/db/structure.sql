@@ -2934,7 +2934,8 @@ CREATE TABLE public.settings (
     favicon_data jsonb,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     ingestion jsonb DEFAULT '{}'::jsonb,
-    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL
+    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL,
+    lti jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 
@@ -8066,6 +8067,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20260507182648'),
 ('20260507182640'),
+('20260406000002'),
 ('20260406000001'),
 ('20251203231940'),
 ('20251203230443'),
