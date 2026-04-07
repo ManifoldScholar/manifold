@@ -33,10 +33,7 @@
 </head>
 <body>
   <div class="logos">
-    <img width="300px" src="<%= Rails.application.config.manifold.url %>/static/images/manifold-mail-logo-secondary.jpg" alt="Manifold logo and text: Manifold Scholarship. Click to visit manifoldapp.org"/>
-    <% if Settings.current.press_logo.present? %>
-      <%= image_tag Settings.current.press_logo_styles[:small], class: "press-logo" %>
-    <% end %>
+    <img width="300px" src="<%= Rails.application.config.manifold.url %>/static/images/manifold-mail-logo-secondary.jpg" alt="Manifold logo and text: Manifold Scholarship."/>
   </div>
   <%= yield %>
   </div>
