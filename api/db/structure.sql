@@ -2988,7 +2988,8 @@ CREATE TABLE public.settings (
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     ingestion jsonb DEFAULT '{}'::jsonb,
     rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL,
-    oai jsonb DEFAULT '{"admin_email": "admin@manifold.app", "repository_name": "Manifold", "directory_enabled": true}'::jsonb
+    oai jsonb DEFAULT '{"admin_email": "admin@manifold.app", "repository_name": "Manifold", "directory_enabled": true}'::jsonb,
+    lti jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 
@@ -8195,6 +8196,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20260507182648'),
 ('20260507182640'),
+('20260406000002'),
 ('20260406000001'),
 ('20260305225814'),
 ('20260127185424'),
