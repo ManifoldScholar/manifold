@@ -1,0 +1,15 @@
+<h1>Redirecting, Please Wait</h1>
+<%= form_with id: "auth_redirect_form", url: "/auth/#{strip_tags params[:provider]}", method: :post do |f| %>
+  <% params.except(:provider, :controller, :action, :authenticity_token).each do |k, v| %>
+    <%= f.hidden_field sanitize(k), value: sanitize(v) %>
+  <% end %>
+  <%= f.submit "Click here if you're not automatically redirected", id: "auth_redirect_submit" %>
+<% end %>
+
+<script type="text/javascript">
+  const params = new URLSearchParams(document.location.search);
+  if(params.get("autoredirect") !== "false") {
+    document.getElementById("auth_redirect_submit").style.visibility = "hidden";
+    document.getElementById("auth_redirect_form").submit();
+  }
+</script>
