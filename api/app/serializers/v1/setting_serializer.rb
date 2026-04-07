@@ -138,6 +138,12 @@ module V1
       object.calculated(params[:current_user])
     end
 
+    typed_section_attribute :lti, Types::Hash.schema(
+      enabled: Types::Bool,
+      autoregistration: Types::Bool,
+      issuer_allowlist: Types::Array.of(Types::String)
+    )
+
     typed_section_attribute :secrets, Types::Hash.schema(
       akismet_api_key: Types::String,
       google_private_key: Types::String,
