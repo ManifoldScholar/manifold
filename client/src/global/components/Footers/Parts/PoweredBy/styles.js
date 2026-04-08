@@ -78,7 +78,6 @@ export const Copyright = styled.div`
 
 export const LogoText = styled.span`
   color: var(--PoweredBy-text-color);
-  margin-inline-end: .25em;
   text-decoration: none;
 
   ${({ $neutral }) =>
@@ -93,13 +92,12 @@ export const LogoText = styled.span`
   ${({ $tiny }) =>
     $tiny &&
     `
-      margin-top: 11px;
+      margin-top: 1em;
       font-size: 12px;
-      line-height: 1.4em;
+      line-height: 1.4;
       ${respond(
         `
-          margin-top: 0;
-          font-size: 13px;
+          font-size: 14px;
         `,
         65
       )}
@@ -116,4 +114,12 @@ export const LogoText = styled.span`
 
 export const PostScript = styled.div`
   margin-top: 20px;
+`;
+
+export const AddtlLinks = styled.span`
+  --PoweredBy-text-color: var(--color-base-neutral30);
+
+  > * + * {
+    margin-inline-start: 1rem;
+  }
 `;
