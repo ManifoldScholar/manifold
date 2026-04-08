@@ -46,9 +46,11 @@ class List extends Component {
       return (short[key] = value);
     });
 
+    const license = this.props.license ? { license: this.props.license } : {};
+
     return {
       long,
-      short
+      short: { ...short, ...license }
     };
   }
 
