@@ -22,7 +22,14 @@ Rails.application.routes.draw do
   get "up" => "health#show"
   get "api/up" => "health#show"
 
-  get "auth/:provider/callback", to: "oauth#authorize"
+  # SAML POST callbacks
+  # Omniauth
+  get "auth/:provider/redirect", to: "oauth#redirect"
+  post "auth/:provider/callback", to: "oauth#authorize"
+
+  # Omniauth tests issue a redirect to the callback, and require a GET endpoint
+  # Real world callbacks will be POSTs
+  get "auth/:provider/callback", to: "oauth#authorize" if Rails.env.test?
 
   namespace :api do
     mount Tus::Server => "/files"
@@ -38,7 +45,7 @@ Rails.application.routes.draw do
         resources :resources, only: [:index]
         resources :resource_collections, only: [:index]
         resources :texts, only: [:index]
-        resources :text_sections, only: %[index]
+        resources :text_sections, only: %i[index]
       end
 
       scope as: :bulk_delete, controller: :bulk_deletions, path: "bulk_delete" do
@@ -284,6 +291,15 @@ Rails.application.routes.draw do
       namespace :notification_preferences do
         namespace :relationships do
           resource :unsubscribe, controller: "unsubscribe", only: [:create]
+        end
+      end
+
+      resources :user_groups do
+        scope module: :user_groups do
+          namespace :relationships do
+            resources :user_group_memberships, only: %i[index create destroy]
+            resources :user_group_entitleables, only: %i[index create destroy]
+          end
         end
       end
 

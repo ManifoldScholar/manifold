@@ -14,7 +14,7 @@ class Entitlement < ApplicationRecord
   attribute :scoped_roles, Entitlements::ScopedRoleMapping.to_type
 
   belongs_to :entitler, inverse_of: :entitlements
-  belongs_to :target,   polymorphic: true
+  belongs_to :target, polymorphic: true
   belongs_to :subject, polymorphic: true
 
   has_one :entitling_user, through: :entitler, source: :entity, source_type: "User"
@@ -25,9 +25,12 @@ class Entitlement < ApplicationRecord
 
   scope :active, -> { in_state(:active) }
   scope :by_target, ->(target) { where(target: target) }
+  scope :by_subject, ->(subject) { where(subject: subject) }
   scope :expirable, -> { where.not(expires_on: nil) }
   scope :expired, -> { where.not(expired_at: nil) }
   scope :maybe_soon_to_expire, -> { expirable.in_state(:active) }
+  scope :by_entitler, ->(entitler) { where(entitler: entitler) }
+  scope :by_entitling_entity, ->(entity) { where(entitler: entity.to_upsertable_entitler) }
 
   scope :by_keyword, ->(keyword) {
                        joins("LEFT JOIN entitlement_targets et
