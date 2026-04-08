@@ -59,7 +59,7 @@ module ManifoldOAI
           xml["dc"].publisher(metadata[:publisher]) if metadata[:publisher].present?
 
           if source.license.present?
-            xml["dc"].rights(source.license.name)
+            xml["dc"].rights(source.license.label)
           elsif metadata[:rights].present?
             xml["dc"].rights(metadata[:rights])
           end

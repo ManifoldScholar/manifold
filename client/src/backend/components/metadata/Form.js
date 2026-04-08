@@ -160,8 +160,6 @@ export default function MetadataForm({ model, ...restProps }) {
                   label={t("metadata.license")}
                   name="attributes.license"
                   options={licensesAPI.index}
-                  optionToLabel={o => o[0]}
-                  optionToValue={o => o[1]}
                   placeholder={t("metadata.license_placeholder")}
                 />
               )}
