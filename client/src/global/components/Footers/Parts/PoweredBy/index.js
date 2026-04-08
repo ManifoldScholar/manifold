@@ -18,13 +18,19 @@ function PoweredBy({
   const isLibraryFooter = type === "library";
 
   const manifoldLinkProps = {
-    href: "http://manifoldapp.org",
+    href: "https://manifoldapp.org",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  };
+
+  const docsLinkProps = {
+    href: "https://manifoldscholar.github.io/manifold-docusaurus/docs",
     target: "_blank",
     rel: "noopener noreferrer"
   };
 
   const directoryLinkProps = {
-    href: "http://manifoldapp.org/directory",
+    href: "https://manifoldapp.org/directory",
     target: "_blank",
     rel: "noopener noreferrer"
   };
@@ -43,7 +49,8 @@ function PoweredBy({
             i18nKey="powered_by.reader_text"
             components={{
               mlink: <a {...manifoldLinkProps}>#</a>,
-              dlink: <a {...directoryLinkProps}>#</a>,
+              docslink: <a {...docsLinkProps}>#</a>,
+              dirlink: <a {...directoryLinkProps}>#</a>,
               srtext: <span className="screen-reader-text" />
             }}
           />
@@ -75,12 +82,20 @@ function PoweredBy({
                     values={{ number: version }}
                   />
                 </span>
-                <Styled.LogoText as="a" {...directoryLinkProps}>
-                  <span className="screen-reader-text">
-                    {t("external_links.opens_in_new")}
-                  </span>
-                  {t("app.manifold_directory")}
-                </Styled.LogoText>
+                <Styled.AddtlLinks>
+                  <Styled.LogoText $dull $tiny as="a" {...directoryLinkProps}>
+                    <span className="screen-reader-text">
+                      {t("external_links.opens_in_new")}
+                    </span>
+                    {t("app.manifold_directory")}
+                  </Styled.LogoText>
+                  <Styled.LogoText $dull $tiny as="a" {...docsLinkProps}>
+                    <span className="screen-reader-text">
+                      {t("external_links.opens_in_new")}
+                    </span>
+                    {t("app.manifold_docs")}
+                  </Styled.LogoText>
+                </Styled.AddtlLinks>
               </>
             ) : null}
           </Styled.LogoWrapper>
