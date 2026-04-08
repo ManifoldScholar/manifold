@@ -157,13 +157,12 @@ export default function MetadataForm({ model, ...restProps }) {
               })}
               {group.label === "Copyright" && showLicense && (
                 <Form.Picker
-                  label={t("metadata.cc_license")}
+                  label={t("metadata.license")}
                   name="attributes.license"
                   options={licensesAPI.index}
                   optionToLabel={o => o[0]}
                   optionToValue={o => o[1]}
-                  placeholder={t("metadata.cc_license_placeholder")}
-                  instructions={t("metadata.cc_license_instructions")}
+                  placeholder={t("metadata.license_placeholder")}
                 />
               )}
             </Form.FieldGroup>
