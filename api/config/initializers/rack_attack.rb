@@ -70,6 +70,18 @@ ActiveSupport::Reloader.to_prepare do
     [429, {}, ["Rate Limit Exceeded\n"]]
     # :nocov:
   end
-rescue ActiveRecord::NoDatabaseError, ActiveRecord::StatementInvalid
+# Guards against db-not-ready states on first deploy. This initializer loads
+# in db:prepare before migrations run, so Rails.cache.write above may hit a
+# cache database that is missing or empty. Skipping is safe — the initializer
+# reloads later in the boot sequence once migrations have completed.
+#
+#   NoDatabaseError  - cache database doesn't exist (fresh local deploys)
+#   StatementInvalid - cache database exists but a queried table is missing
+#   ArgumentError    - cache database exists but solid_cache_entries is not
+#                      yet migrated; solid_cache's upsert_all raises this
+#                      from its unique-index lookup before any SQL is issued
+#                      (happens on fresh external-DB deploys, where we ask
+#                      the operator to pre-create the cache database)
+rescue ActiveRecord::NoDatabaseError, ActiveRecord::StatementInvalid, ArgumentError
   warn "Skipping rate limiting setup, no database yet."
 end
