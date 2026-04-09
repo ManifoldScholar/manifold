@@ -58,7 +58,7 @@ module V1
       typed_attribute :pending_slug, Types::String
       typed_attribute :license, Types::String.optional
       typed_attribute :license_label, Types::String.optional do |object|
-        object.license.label
+        object.license.presence&.label
       end
 
       typed_attribute :available_journal_issues_without_volume_count, Types::Integer.meta(read_only: true) do |object, params|

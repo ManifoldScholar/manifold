@@ -85,7 +85,7 @@ module V1
           typed_attribute :exclude_from_directory, Types::Bool
           typed_attribute :license, Types::String.optional
           typed_attribute :license_label, Types::String.optional do |object|
-            object.license.label
+            object.license.presence&.label
           end
 
           typed_has_one :journal
