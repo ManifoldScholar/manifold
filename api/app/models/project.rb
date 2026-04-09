@@ -288,6 +288,10 @@ class Project < ApplicationRecord
   end
 
   def resources_for_project_detail
+    resources_block = content_blocks.find_by(type: "Content::ResourcesBlock")
+    featured = resources_block&.featured_resources
+    return featured if featured.present?
+
     resources.limit(10)
   end
 
