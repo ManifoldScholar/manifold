@@ -1,107 +1,93 @@
-import React, { PureComponent } from "react";
+import { useCallback } from "react";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { projectsAPI } from "api";
 
-class ProjectContentTypeFormResources extends PureComponent {
-  static displayName = "Project.Content.TypeForm.Types.Resources";
+function ProjectContentTypeFormResources({ project, getModelValue }) {
+  const { t } = useTranslation();
 
-  static propTypes = {
-    project: PropTypes.object.isRequired,
-    getModelValue: PropTypes.func.isRequired,
-    t: PropTypes.func
-  };
+  const showAllCollections = getModelValue("attributes[showAllCollections]");
+  const showResources = getModelValue("attributes[showResources]");
+  const collections = project.relationships.resourceCollections;
 
-  get showAllCollections() {
-    return this.props.getModelValue("attributes[showAllCollections]");
-  }
+  const fetchResources = useCallback(() => projectsAPI.resources(project.id), [
+    project.id
+  ]);
 
-  get showResources() {
-    return this.props.getModelValue("attributes[showResources]");
-  }
-
-  get collections() {
-    return this.props.project.relationships.resourceCollections;
-  }
-
-  get resources() {
-    return this.props.project.relationships.resources;
-  }
-
-  render() {
-    return (
-      <>
-        <Form.TextInput
-          label={this.props.t("common.title")}
-          name="attributes[title]"
-          instructions={this.props.t(
-            "content_blocks.resources.default_title_message"
-          )}
-          focusOnMount
-          wide
-        />
-        <Form.TextArea
-          label={this.props.t("common.description")}
-          name="attributes[description]"
-          wide
-        />
-        <Form.Switch
-          label={this.props.t("content_blocks.resources.collections_switch")}
-          instructions={this.props.t(
-            "content_blocks.resources.collections_switch_info"
-          )}
-          name="attributes[showAllCollections]"
-          wide
-          isPrimary
-        />
-        {!this.showAllCollections ? (
-          <>
-            <Form.Picker
-              placeholder={this.props.t(
-                "content_blocks.resources.select_collection_placeholder"
-              )}
-              label={this.props.t("content_blocks.resources.select_collection")}
-              optionToLabel={rc => rc.attributes.title}
-              name="relationships[featuredCollections]"
-              options={this.collections}
-              listStyle="rows"
-              showAddRemoveAll
-              reorderable
-              listRowComponent="FormOptionRow"
-            />
-          </>
-        ) : null}
-        <Form.Switch
-          label={this.props.t("content_blocks.resources.resources_switch")}
-          instructions={this.props.t(
-            "content_blocks.resources.resources_switch_info"
-          )}
-          name="attributes[showResources]"
-          wide
-          isPrimary
-        />
-        {this.showResources ? (
-          <>
-            <Form.Picker
-              placeholder={this.props.t(
-                "content_blocks.resources.select_resource_placeholder"
-              )}
-              label={this.props.t("content_blocks.resources.select_resources")}
-              instructions={this.props.t(
-                "content_blocks.resources.select_resources_info"
-              )}
-              optionToLabel={r => r.attributes.title}
-              name="relationships[featuredResources]"
-              options={this.resources}
-              listStyle="rows"
-              reorderable
-              listRowComponent="FormOptionRow"
-            />
-          </>
-        ) : null}
-      </>
-    );
-  }
+  return (
+    <>
+      <Form.TextInput
+        label={t("common.title")}
+        name="attributes[title]"
+        instructions={t("content_blocks.resources.default_title_message")}
+        focusOnMount
+        wide
+      />
+      <Form.TextArea
+        label={t("common.description")}
+        name="attributes[description]"
+        wide
+      />
+      <Form.Switch
+        label={t("content_blocks.resources.collections_switch")}
+        instructions={t("content_blocks.resources.collections_switch_info")}
+        name="attributes[showAllCollections]"
+        wide
+        isPrimary
+      />
+      {!showAllCollections ? (
+        <>
+          <Form.Picker
+            placeholder={t(
+              "content_blocks.resources.select_collection_placeholder"
+            )}
+            label={t("content_blocks.resources.select_collection")}
+            optionToLabel={rc => rc.attributes.title}
+            name="relationships[featuredCollections]"
+            options={collections}
+            listStyle="rows"
+            showAddRemoveAll
+            reorderable
+            listRowComponent="FormOptionRow"
+          />
+        </>
+      ) : null}
+      <Form.Switch
+        label={t("content_blocks.resources.resources_switch")}
+        instructions={t("content_blocks.resources.resources_switch_info")}
+        name="attributes[showResources]"
+        wide
+        isPrimary
+      />
+      {showResources ? (
+        <>
+          <Form.Picker
+            placeholder={t(
+              "content_blocks.resources.select_resource_placeholder"
+            )}
+            label={t("content_blocks.resources.select_resources")}
+            instructions={t("content_blocks.resources.select_resources_info")}
+            optionToLabel={r => r.attributes.title}
+            name="relationships[featuredResources]"
+            options={fetchResources}
+            listStyle="rows"
+            reorderable
+            predictive
+            listRowComponent="FormOptionRow"
+          />
+        </>
+      ) : null}
+    </>
+  );
 }
 
-export default withTranslation()(ProjectContentTypeFormResources);
+ProjectContentTypeFormResources.displayName =
+  "Project.Content.TypeForm.Types.Resources";
+
+ProjectContentTypeFormResources.propTypes = {
+  project: PropTypes.object.isRequired,
+  getModelValue: PropTypes.func.isRequired
+};
+
+export default ProjectContentTypeFormResources;
