@@ -1,72 +1,53 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import Controls from "./controls";
 
-export default class ResourceImportState extends PureComponent {
-  static displayName = "ResourceImport.State";
+export default function ResourceImportControl({
+  resourceImport,
+  updateImportState,
+  projectId,
+  importId,
+  fetch
+}) {
+  if (!resourceImport) return null;
 
-  static propTypes = {
-    resourceImport: PropTypes.object,
-    updateImportState: PropTypes.func.isRequired,
-    match: PropTypes.object,
-    fetch: PropTypes.func.isRequired
-  };
+  const finishUrl = `/backend/projects/${projectId}/resources`;
+  const backLinkUrl = `/backend/projects/${projectId}/resource-import/${importId}/map`;
 
-  get finishUrl() {
-    const { match } = this.props;
-    return `/backend/projects/${match.params.projectId}/resources`;
-  }
-
-  get backLinkUrl() {
-    const { match } = this.props;
-    return `/backend/projects/${match.params.projectId}/resource-import/${match.params.id}/map`;
-  }
-
-  resetImport = event => {
+  const resetImport = event => {
     event.preventDefault();
-    this.props.updateImportState("mapped");
+    updateImportState("mapped");
   };
 
-  startImport = event => {
+  const startImport = event => {
     event.preventDefault();
-    this.props.updateImportState("importing");
+    updateImportState("importing");
   };
 
-  refreshResults = () => {
-    this.props.fetch();
-  };
-
-  render() {
-    const resourceImport = this.props.resourceImport;
-    if (!resourceImport) return null;
-
-    switch (resourceImport.attributes.state) {
-      case "importing":
-        return (
-          <Controls.Importing
-            resourceImport={resourceImport}
-            refreshResults={this.refreshResults}
-          />
-        );
-      case "imported":
-        return (
-          <Controls.Imported
-            resourceImport={resourceImport}
-            finishUrl={this.finishUrl}
-            resetImport={this.resetImport}
-          />
-        );
-      case "parsed":
-      case "mapped":
-        return (
-          <Controls.Parsed
-            resourceImport={resourceImport}
-            backLinkUrl={this.backLinkUrl}
-            startImport={this.startImport}
-          />
-        );
-      default:
-        return null;
-    }
+  switch (resourceImport.attributes.state) {
+    case "importing":
+      return (
+        <Controls.Importing
+          resourceImport={resourceImport}
+          refreshResults={fetch}
+        />
+      );
+    case "imported":
+      return (
+        <Controls.Imported
+          resourceImport={resourceImport}
+          finishUrl={finishUrl}
+          resetImport={resetImport}
+        />
+      );
+    case "parsed":
+    case "mapped":
+      return (
+        <Controls.Parsed
+          resourceImport={resourceImport}
+          backLinkUrl={backLinkUrl}
+          startImport={startImport}
+        />
+      );
+    default:
+      return null;
   }
 }

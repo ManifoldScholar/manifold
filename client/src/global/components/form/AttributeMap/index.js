@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext } from "react";
+import { useState, useCallback, useContext, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import {
@@ -37,44 +37,37 @@ export default function FormColumnMap({
 }) {
   const { t } = useTranslation();
   const { value, set } = useFormField(name);
-  const context = useContext(FormContext);
-  const { getModelValue } = context || {};
+  const { getModelValue } = useContext(FormContext);
+  const [isMounted, setIsMounted] = useState(false);
 
-  const [sortedHeaders] = useState(() =>
-    getModelValue ? sortHeaders(getModelValue, headersPath, t) : []
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const sortedHeaders = useMemo(
+    () => sortHeaders(getModelValue, headersPath, t),
+    [getModelValue, headersPath, t]
   );
 
   const [sortedAttributes, setSortedAttributes] = useState(() =>
-    getModelValue ? sortAttributes(getModelValue, attributesPath, value) : []
+    sortAttributes(getModelValue, attributesPath, value)
   );
 
-  // Update sorted attributes when value changes
-  const updateSortedAttributes = useCallback(() => {
-    if (!getModelValue) return;
+  useEffect(() => {
     const nextAttributes = sortAttributes(getModelValue, attributesPath, value);
-    if (difference(sortedAttributes, nextAttributes).length > 0) {
-      setSortedAttributes(nextAttributes);
-    }
-  }, [getModelValue, attributesPath, value, sortedAttributes]);
+    setSortedAttributes(prev =>
+      difference(prev, nextAttributes).length > 0 ? nextAttributes : prev
+    );
+  }, [getModelValue, attributesPath, value]);
 
-  // Call update on render
-  updateSortedAttributes();
+  const getHeaderPosition = header => {
+    const headers = getModelValue(headersPath);
+    return Object.keys(headers).find(key => headers[key] === header);
+  };
 
-  const getHeaderPosition = useCallback(
-    header => {
-      if (!getModelValue) return null;
-      const headers = getModelValue(headersPath);
-      return Object.keys(headers).find(key => headers[key] === header);
-    },
-    [getModelValue, headersPath]
-  );
-
-  const getCurrentMapping = useCallback(
-    position => {
-      return value?.[position] || null;
-    },
-    [value]
-  );
+  const getCurrentMapping = position => {
+    return value?.[position] || null;
+  };
 
   const onDragEnd = useCallback(
     result => {
@@ -91,20 +84,20 @@ export default function FormColumnMap({
   const autoMap = useCallback(
     event => {
       event.preventDefault();
-      if (getModelValue) {
-        set(getModelValue("attributes[columnAutomap]"));
-      }
+      set(getModelValue("attributes[columnAutomap]"));
     },
     [getModelValue, set]
   );
 
   const unLinkMatch = useCallback(
-    (mapping, column) => {
+    (_mapping, column) => {
       const updated = omitBy(value, v => v === column);
       set(updated);
     },
     [value, set]
   );
+
+  if (!isMounted) return null;
 
   return (
     <>
@@ -131,7 +124,7 @@ export default function FormColumnMap({
                   const position = getHeaderPosition(header);
                   const id = position || (index + 1).toString();
                   return (
-                    <li key={index}>
+                    <li key={id}>
                       <Mapping
                         index={index}
                         name={header}

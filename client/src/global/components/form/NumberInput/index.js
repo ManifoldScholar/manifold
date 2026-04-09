@@ -10,7 +10,7 @@ export default function FormNumberInput({
   label,
   name,
   onChange,
-  afterChange,
+
   value,
   focusOnMount = false,
   errors,
@@ -53,7 +53,7 @@ FormNumberInput.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
-  afterChange: PropTypes.func,
+
   value: PropTypes.any,
   focusOnMount: PropTypes.bool,
   errors: PropTypes.array,

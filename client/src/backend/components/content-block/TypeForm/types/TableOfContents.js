@@ -8,7 +8,6 @@ class ProjectContentTypeFormTableOfContents extends PureComponent {
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    setOther: PropTypes.func.isRequired,
     t: PropTypes.func
   };
 

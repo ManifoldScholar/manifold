@@ -123,7 +123,9 @@
       "step_four": "Step 4. Import Resources",
       "import_complete": "This import is complete. You may go back, edit the mapping, and rerun the import. Or, if the source is a google sheet, you can reset the import, which will allow you to make changes to mapping or source data, and then rerun the import.",
       "import_in_progress": "The import is in progress. Each resource is updated in the background. This list below will refresh every 5 seconds, or you can press the refresh button to manually update the results.",
-      "import_ready": "The import is ready to begin. The list below is a preview of what will happen. Press the \"start import\" button below to begin."
+      "import_ready": "The import is ready to begin. The list below is a preview of what will happen. Press the \"start import\" button below to begin.",
+      "pending_heading": "This import is still pending.",
+      "pending_body": "Click Continue in the form below to parse the import before mapping the data."
     }
   }
 }

@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import typeResolver from "../helpers/resolver";
-import Form from "../../../../global/components/form";
+import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import { FormContext } from "helpers/contexts";
 import { brackets2dots } from "utils/string";
@@ -56,7 +56,6 @@ export default function ProjectContentTypeForm({ contentBlock, project }) {
         contentBlock={contentBlock}
         project={project}
         getModelValue={getModelValue}
-        setOther={(value, name) => setValue?.(brackets2dots(name), value)}
       />
     </>
   );

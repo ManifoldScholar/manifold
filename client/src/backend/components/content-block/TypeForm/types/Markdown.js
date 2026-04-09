@@ -7,7 +7,6 @@ class ProjectContentTypeFormMarkdown extends PureComponent {
   static displayName = "Project.Content.TypeForm.Types.Markdown";
 
   static propTypes = {
-    setOther: PropTypes.func.isRequired,
     t: PropTypes.func
   };
 
