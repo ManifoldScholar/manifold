@@ -1,25 +1,20 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import SectionsList from "./SectionsList";
 import { useUIDSeed } from "react-uid";
-import { textsAPI } from "api";
-
-import { useNavigate } from "react-router-dom";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 function CreateTextForm({
   cancelUrl,
-  projectId,
-  refresh,
+  fetcher,
   renderLiveRegion,
   setScreenReaderStatus
 }) {
   const { t } = useTranslation();
   const uidSeed = useUIDSeed();
-  const navigate = useNavigate();
 
   const [sectionName, setSectionName] = useState();
   const [sections, setSections] = useState([]);
@@ -66,22 +61,11 @@ function CreateTextForm({
     };
   };
 
-  const createText = model => {
-    return textsAPI.create(projectId, model);
-  };
-
-  const onSuccess = useCallback(() => {
-    if (refresh) refresh();
-    navigate(`/backend/projects/${projectId}/texts`);
-  }, [navigate, projectId, refresh]);
-
   return (
     <FormContainer.Form
-      create={createText}
+      fetcher={fetcher}
       formatData={addSectionsToRequest}
-      name="backend-text-create"
       className="form-secondary"
-      onSuccess={onSuccess}
     >
       <Form.TextInput
         focusOnMount
@@ -150,8 +134,7 @@ CreateTextForm.displayName = "Project.Texts.CreateForm";
 
 CreateTextForm.propTypes = {
   cancelUrl: PropTypes.string,
-  projectId: PropTypes.string.isRequired,
-  onSuccess: PropTypes.func,
+  fetcher: PropTypes.object,
   renderLiveRegion: PropTypes.func,
   setScreenReaderStatus: PropTypes.func
 };

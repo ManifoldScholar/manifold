@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useRevalidator } from "react-router";
 import PropTypes from "prop-types";
 import EntitiesList from "backend/components/list/EntitiesList";
 import Section from "./SectionListItem";
@@ -12,11 +13,12 @@ function SectionsList({
   sections = [],
   textId,
   startSectionId,
-  refresh,
+  confirm,
   renderLiveRegion,
   setScreenReaderStatus
 }) {
   const { t } = useTranslation();
+  const { revalidate } = useRevalidator();
   const updateSection = useApiCallback(sectionsAPI.update);
   const [error, setError] = useState(null);
 
@@ -32,21 +34,20 @@ function SectionsList({
   const onReorder = async ({ id, title, position, ...rest }) => {
     setError(null);
     const res = await updateSection(id, { attributes: { position } });
-    if (res?.errors) setError("reorder");
-
-    const announcement = t("actions.dnd.moved_to_position", {
-      title,
-      position
-    });
-    const callback = () => {
+    if (res?.errors) {
+      setError("reorder");
+      revalidate();
+    } else {
+      const announcement = t("actions.dnd.moved_to_position", {
+        title,
+        position
+      });
       setScreenReaderStatus(announcement);
+    }
 
-      if (rest.callback && typeof rest.callback === "function") {
-        rest.callback();
-      }
-    };
-
-    refresh(callback);
+    if (rest.callback && typeof rest.callback === "function") {
+      rest.callback();
+    }
   };
 
   return sections.length ? (
@@ -57,7 +58,7 @@ function SectionsList({
         entityComponentProps={{
           startSectionId,
           textId,
-          refresh,
+          confirm,
           setError,
           sectionCount: sections.length,
           onReorder
@@ -76,8 +77,9 @@ SectionsList.displayName = "Text.Sections.List";
 SectionsList.propTypes = {
   textId: PropTypes.string.isRequired,
   sections: PropTypes.array,
-  startTextSectionId: PropTypes.string,
-  refresh: PropTypes.func
+  startSectionId: PropTypes.string,
+  revalidate: PropTypes.func,
+  confirm: PropTypes.func
 };
 
 export default withScreenReaderStatus(SectionsList, false);

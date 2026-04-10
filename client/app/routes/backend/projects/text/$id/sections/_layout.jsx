@@ -1,70 +1,51 @@
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import { Link, useOutletContext, useMatches } from "react-router-dom";
-import lh from "helpers/linkHandler";
+import { Link, useOutletContext } from "react-router";
 import IconComposer from "global/components/utility/IconComposer";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import SectionsList from "backend/components/authoring/SectionsList";
+import useConfirmation from "hooks/useConfirmation";
+import Dialog from "global/components/dialog";
 import * as Styled from "./styles";
 
-export default function TextSectionsContainer() {
+export default function TextSectionsLayout() {
   const { t } = useTranslation();
-  const { text, refresh } = useOutletContext() || {};
-  const matches = useMatches();
+  const text = useOutletContext();
+  const { confirm, confirmation } = useConfirmation();
 
-  if (!text) return null;
+  const closeUrl = `/backend/projects/text/${text.id}/sections`;
 
-  const closeUrl = lh.link("backendTextSections", text.id);
-  const currentMatch = matches[matches.length - 1];
-  const isEditorRoute = currentMatch?.handle?.editor;
-  const isIngestRoute = currentMatch?.handle?.ingest;
-
-  const appliesToAllStylesheets = text.relationships.stylesheets
-    ?.filter(s => s.attributes.appliesToAllTextSections)
-    .map(s => s.id);
-
-  const getDrawerProps = () => {
-    if (isEditorRoute) {
-      return {
-        lockScroll: "always",
-        wide: true,
-        closeUrl,
-        padding: "xl",
-        context: "editor",
-        entrySide: "top",
-        fullScreenTitle: t("texts.edit_section"),
-        icon: "annotate32"
-      };
-    }
-    if (isIngestRoute) {
-      return {
-        lockScroll: "always",
-        closeUrl,
-        size: "default",
-        padding: "default",
-        context: "ingestion"
-      };
-    }
-    return {
+  const drawerProps = [
+    {
+      lockScroll: "always",
+      wide: true,
+      closeUrl,
+      padding: "xl",
+      context: "editor",
+      entrySide: "top",
+      fullScreenTitle: t("texts.edit_section"),
+      icon: "annotate32"
+    },
+    {
       lockScroll: "always",
       closeUrl,
       size: "default",
-      padding: "default"
-    };
-  };
-
-  const context = {
-    textId: text.id,
-    appliesToAllStylesheets,
-    nextPosition: text.attributes?.sectionsMap?.length + 1,
-    startSectionId: text?.attributes?.startTextSectionId,
-    sectionIngest: true,
-    refresh
-  };
+      padding: "default",
+      context: "ingestion"
+    },
+    {
+      lockScroll: "always",
+      closeUrl,
+      size: "default",
+      padding: "default",
+      context: "backend"
+    }
+  ];
 
   return (
     <section>
-      <OutletWithDrawer drawerProps={getDrawerProps()} context={context} />
+      {confirmation && <Dialog.Confirm {...confirmation} />}
+      <OutletWithDrawers drawerProps={drawerProps} context={text} />
       <Styled.Form
         className="form-secondary"
         doNotWarn
@@ -78,7 +59,7 @@ export default function TextSectionsContainer() {
         />
         <div className="entity-list__button-set-flex full-width">
           <Link
-            to={lh.link("backendTextSectionIngest", text.id)}
+            to={`/backend/projects/text/${text.id}/sections/ingestion/new`}
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
@@ -94,7 +75,7 @@ export default function TextSectionsContainer() {
             </span>
           </Link>
           <Link
-            to={lh.link("backendTextSectionNew", text.id)}
+            to={`/backend/projects/text/${text.id}/sections/new`}
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">
@@ -114,11 +95,9 @@ export default function TextSectionsContainer() {
           textId={text?.id}
           sections={text?.attributes?.sectionsMap}
           startSectionId={text?.attributes?.startTextSectionId}
-          refresh={refresh}
+          confirm={confirm}
         />
       </Styled.Form>
     </section>
   );
 }
-
-TextSectionsContainer.displayName = "Text.Sections";

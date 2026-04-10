@@ -44,20 +44,6 @@ export const TitleWrapper = styled.div`
   ${respond(`max-width: ${fluidScale("650px", "250px", 120, 65)};`, 65)}
 `;
 
-export const BG = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -10;
-  background-color: var(--box-bg-color);
-  border-radius: var(--box-border-radius);
-
-  ${({ $isDragging }) =>
-    $isDragging && `background-color: var(--drawer-bg-color)`}
-`;
-
 export const KeyboardButtons = styled.div``;
 
 export const ButtonGroup = styled.div`
@@ -68,10 +54,6 @@ export const ButtonGroup = styled.div`
 
   &:hover ~ ${TitleWrapper} {
     color: var(--highlight-color);
-  }
-
-  &:hover ~ ${BG} {
-    background-color: var(--drawer-bg-color);
   }
 `;
 
@@ -85,10 +67,14 @@ export const Inner = styled.div`
   align-items: center;
   justify-content: space-between;
   cursor: default;
-  background-color: transparent;
+  background-color: var(--box-bg-color);
   position: relative;
 
   ${({ $isDragging }) => $isDragging && dragging}
+
+  &:has(${ButtonGroup}:hover) {
+    background-color: var(--drawer-bg-color);
+  }
 `;
 
 export const Button = styled.button`

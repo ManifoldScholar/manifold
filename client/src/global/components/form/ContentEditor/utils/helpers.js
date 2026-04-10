@@ -1,6 +1,8 @@
 /* eslint-disable camelcase */
-import { html_beautify } from "js-beautify";
+import jsBeautify from "js-beautify";
 import { markElements } from "./elements";
+
+const { html_beautify } = jsBeautify;
 
 export const formatHtml = html => {
   const options = {

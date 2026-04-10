@@ -1,17 +1,15 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import { useTranslation } from "react-i18next";
-
-import { Link } from "react-router-dom";
+import { Link, useRevalidator } from "react-router";
 import Tooltip from "global/components/atomic/Tooltip";
 import { textsAPI, sectionsAPI } from "api";
 import { useApiCallback } from "hooks";
-import withConfirmation from "hoc/withConfirmation";
 import PopoverMenu from "global/components/popover/Menu";
 import * as Styled from "./styles";
 
-function SectionListItem(props) {
+export default function SectionListItem(props) {
   const {
     entity: section,
     textId,
@@ -21,7 +19,6 @@ function SectionListItem(props) {
     isDragging,
     innerRef,
     confirm,
-    refresh,
     setError,
     index,
     sectionCount,
@@ -29,6 +26,7 @@ function SectionListItem(props) {
   } = props;
 
   const { t } = useTranslation();
+  const { revalidate } = useRevalidator();
 
   const popoverDisclosureRef = useRef(null);
 
@@ -44,6 +42,7 @@ function SectionListItem(props) {
       attributes: { startTextSectionId: id }
     });
     if (res?.errors) setError(res.errors);
+    revalidate();
   };
 
   const isStart = startSectionId === section.id;
@@ -54,20 +53,29 @@ function SectionListItem(props) {
     setError(null);
     const res = await deleteSection(section.id);
     if (res?.errors) setError(res.errors);
-    refresh();
+    revalidate();
   };
 
   const onDelete = () => {
     const heading = t("modals.delete_text");
     const message = t("modals.confirm_body");
-    if (confirm) confirm(heading, message, doDelete);
+    if (confirm) {
+      confirm({
+        heading,
+        message,
+        callback: async closeDialog => {
+          await doDelete();
+          closeDialog();
+        }
+      });
+    }
   };
 
   const onKeyboardMove = direction => {
     const newIndex = direction === "down" ? index + 1 : index - 1;
     const callback = () => {
       setTimeout(() => {
-        // refs are unreliably here due to rerendering caused by ancestor components
+        // refs are unreliable here due to rerendering caused by ancestor components
         const disclosureToggleEl = document.querySelector(
           `[data-disclosure-toggle-for="${section.id}"]`
         );
@@ -174,7 +182,6 @@ function SectionListItem(props) {
             <Styled.Tag>{t("texts.section.start_tag_label")}</Styled.Tag>
           )}
         </Styled.TitleWrapper>
-        <Styled.BG $isDragging={isDragging} />
       </Styled.Inner>
     </Styled.Item>
   ) : null;
@@ -191,10 +198,7 @@ SectionListItem.propTypes = {
   textId: PropTypes.string.isRequired,
   startSectionId: PropTypes.string.isRequired,
   confirm: PropTypes.func,
-  refresh: PropTypes.func,
   index: PropTypes.number,
   sectionCount: PropTypes.number,
   onReorder: PropTypes.func
 };
-
-export default withConfirmation(SectionListItem);

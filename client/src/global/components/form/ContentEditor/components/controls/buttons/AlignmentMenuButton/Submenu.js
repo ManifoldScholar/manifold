@@ -1,4 +1,5 @@
 import { Menu as ReakitMenu, MenuItem as ReakitMenuItem } from "reakit/Menu";
+import { useTranslation } from "react-i18next";
 import { useSlate, ReactEditor } from "slate-react";
 import { Range, Node } from "slate";
 import Utility from "global/components/utility";
@@ -11,6 +12,7 @@ import {
 import * as Styled from "./styles";
 
 export default function Submenu({ menu, activeAlignment, block, path }) {
+  const { t } = useTranslation();
   const editor = useSlate();
   const { selection } = editor ?? {};
 
@@ -55,7 +57,11 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
   };
 
   return (
-    <ReakitMenu as={Styled.Content} {...menu}>
+    <ReakitMenu
+      as={Styled.Content}
+      aria-label={t("editor.controls.labels.alignment")}
+      {...menu}
+    >
       <ReakitMenuItem
         as={Styled.InnerButton}
         onClick={onClick("left")}

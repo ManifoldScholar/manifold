@@ -32,7 +32,8 @@
         "layout_block_select_placeholder": "Container",
         "show_html": "Show all HTML element outlines",
         "hide_html": "Hide all HTML element outlines",
-        "lift": "Move node up one level in the HTML hierarchy"
+        "lift": "Move node up one level in the HTML hierarchy",
+        "alignment": "Text alignment"
       },
       "toggles": {
         "html_label": "HTML Editor",

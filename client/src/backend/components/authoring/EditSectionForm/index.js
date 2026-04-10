@@ -1,20 +1,11 @@
-import React, {
-  useCallback,
-  useState,
-  useRef,
-  useMemo,
-  useEffect
-} from "react";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import ContentEditor from "global/components/form/ContentEditor";
 import { useTranslation } from "react-i18next";
 
-import { sectionsAPI } from "api";
-import { useNavigate } from "react-router-dom";
 import { serializeToSlate } from "global/components/form/ContentEditor/serializers";
 import { formatHtml } from "global/components/form/ContentEditor/utils/helpers";
-import { useFromStore } from "hooks";
 import has from "lodash/has";
 import * as Styled from "./styles";
 
@@ -45,11 +36,11 @@ const getInitialHtmlValue = value => {
 export default function EditSectionForm({
   section,
   textId,
-  appliesToAllStylesheets,
-  refresh
+  fetcher,
+  stylesheets
 }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const intentRef = useRef(null);
 
   const initialSlateValue = useMemo(() => {
     return getInitialSlateValue(section?.attributes.body);
@@ -63,28 +54,23 @@ export default function EditSectionForm({
     const { body, name } = data.attributes ?? {};
     const { position, kind, body: lastSavedBody, name: lastSavedName } =
       model.attributes ?? {};
-    // Ensure we never clear out body if the user clicks Save multiple times without dirtying the form
-    if (body === undefined)
-      return {
-        attributes: {
-          position,
-          kind,
-          name: name ?? lastSavedName,
-          body: lastSavedBody ?? null
-        }
-      };
-    return {
-      attributes: { position, kind, name, body }
-    };
+    const formatted =
+      body === undefined
+        ? {
+            attributes: {
+              position,
+              kind,
+              name: name ?? lastSavedName,
+              body: lastSavedBody ?? null
+            }
+          }
+        : { attributes: { position, kind, name, body } };
+    if (intentRef.current) {
+      formatted.intent = intentRef.current;
+      intentRef.current = null;
+    }
+    return formatted;
   };
-
-  const [closeOnSave, setCloseOnSave] = useState(false);
-
-  const onSuccess = useCallback(() => {
-    if (!closeOnSave) return;
-    if (refresh) refresh();
-    navigate(`/backend/projects/text/${textId}/sections`);
-  }, [navigate, textId, refresh, closeOnSave]);
 
   const [hasErrors, setHasErrors] = useState(false);
   const [warnErrors, setWarnErrors] = useState(false);
@@ -107,25 +93,12 @@ export default function EditSectionForm({
     }
   }, [initialSlateValue, t]);
 
-  const stylesheetData = useFromStore({
-    path: `entityStore.entities.stylesheets`
-  });
-  const stylesheetDataKeys = stylesheetData ? Object.keys(stylesheetData) : [];
-
-  const appliedStylesheets = stylesheetDataKeys
-    .filter(id => appliesToAllStylesheets.find(s => s === id))
-    .map(id => stylesheetData[id]);
-
-  const stylesheets = Array.isArray(section?.relationships.stylesheets)
-    ? [...section?.relationships.stylesheets, ...appliedStylesheets]
-    : [...appliedStylesheets];
-
   const handleSaveAndCloseClick = e => {
     if (hasErrors) {
       e.preventDefault();
       return setWarnErrors("save");
     }
-    setCloseOnSave(true);
+    intentRef.current = "close";
   };
 
   const saveRef = useRef();
@@ -135,9 +108,8 @@ export default function EditSectionForm({
       model={section}
       name={"be-text-section-update"}
       className="form-secondary"
-      onSuccess={onSuccess}
       formatData={formatData}
-      update={sectionsAPI.update}
+      fetcher={fetcher}
     >
       <Form.TextInput
         focusOnMount
@@ -172,6 +144,6 @@ EditSectionForm.displayName = "Text.Sections.EditForm";
 EditSectionForm.propTypes = {
   textId: PropTypes.string.isRequired,
   section: PropTypes.object,
-  refresh: PropTypes.func,
-  nextPosition: PropTypes.number
+  fetcher: PropTypes.object.isRequired,
+  stylesheets: PropTypes.array
 };

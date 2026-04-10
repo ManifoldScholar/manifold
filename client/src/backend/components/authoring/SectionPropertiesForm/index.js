@@ -1,24 +1,16 @@
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { sectionsAPI } from "api";
 
 import * as Styled from "./styles";
 
 export default function SectionPropertiesForm({
   section,
   textId,
-  refreshText,
+  fetcher,
   startSectionId
 }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const onSuccess = () => {
-    if (refreshText) refreshText();
-    navigate(`/backend/projects/text/${textId}/sections`);
-  };
 
   const disableHide = startSectionId === section?.id;
   const hideInstructions = disableHide
@@ -26,13 +18,7 @@ export default function SectionPropertiesForm({
     : t("texts.section.hide_instructions");
 
   return (
-    <Styled.Form
-      model={section}
-      className="form-secondary"
-      name="be-text-section-properties"
-      update={sectionsAPI.update}
-      onSuccess={onSuccess}
-    >
+    <Styled.Form model={section} className="form-secondary" fetcher={fetcher}>
       <Form.TextInput
         focusOnMount
         label={t("texts.properties.slug_label")}
@@ -64,5 +50,6 @@ SectionPropertiesForm.displayName = "Text.Sections.PropertiesForm";
 SectionPropertiesForm.propTypes = {
   textId: PropTypes.string.isRequired,
   section: PropTypes.object,
-  refreshText: PropTypes.func.isRequired
+  fetcher: PropTypes.object.isRequired,
+  startSectionId: PropTypes.string
 };

@@ -1,19 +1,16 @@
-import { useCallback, useMemo, useState } from "react";
+import { useRef, useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 
-import { sectionsAPI } from "api";
-import { useNavigate } from "react-router-dom";
 import * as Styled from "./styles";
 
-export default function AddSectionForm({ textId, nextPosition, refresh }) {
+export default function AddSectionForm({ textId, nextPosition, fetcher }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const [openInEditor, setOpenInEditor] = useState(false);
+  const intentRef = useRef(null);
 
   const defaultModel = useMemo(
     () => ({
@@ -22,49 +19,27 @@ export default function AddSectionForm({ textId, nextPosition, refresh }) {
     [nextPosition]
   );
 
-  const createSection = model => {
-    return sectionsAPI.create(textId, model);
-  };
-
   const formatData = (data, model) => {
     const { name } = data.attributes ?? {};
     const { position, kind } = model.attributes ?? {};
-    return { attributes: { position, kind, name } };
+    const formatted = { attributes: { position, kind, name } };
+    if (intentRef.current) {
+      formatted.intent = intentRef.current;
+      intentRef.current = null;
+    }
+    return formatted;
   };
-
-  const onSuccess = useCallback(
-    res => {
-      if (refresh) refresh();
-
-      if (openInEditor)
-        return navigate(
-          `/backend/projects/text/${textId}/sections/${res.id}/edit`
-        );
-
-      navigate(`/backend/projects/text/${textId}/sections`);
-    },
-    [navigate, textId, refresh, openInEditor]
-  );
 
   const buttonClasses = "button-secondary button-secondary--outlined";
-
-  const handleCancelClick = e => {
-    e.preventDefault();
-    navigate(`/backend/projects/text/${textId}/sections`);
-  };
-
-  const handleEditorClick = () => {
-    setOpenInEditor(true);
-  };
+  const cancelUrl = `/backend/projects/text/${textId}/sections`;
 
   return (
     <FormContainer.Form
       model={defaultModel}
       name={"be-text-section-create"}
       className="form-secondary"
-      onSuccess={onSuccess}
       formatData={formatData}
-      create={createSection}
+      fetcher={fetcher}
     >
       <Form.TextInput
         focusOnMount
@@ -76,7 +51,9 @@ export default function AddSectionForm({ textId, nextPosition, refresh }) {
         <button
           type="submit"
           className={buttonClasses}
-          onClick={handleEditorClick}
+          onClick={() => {
+            intentRef.current = "editor";
+          }}
         >
           <span>{t("texts.section.save_and_open_label")}</span>
         </button>
@@ -87,12 +64,12 @@ export default function AddSectionForm({ textId, nextPosition, refresh }) {
           >
             <span>{t("actions.save")}</span>
           </button>
-          <button
-            onClick={handleCancelClick}
+          <Link
+            to={cancelUrl}
             className={classNames(buttonClasses, "button-secondary--dull")}
           >
             <span>{t("actions.cancel")}</span>
-          </button>
+          </Link>
         </Styled.ButtonRow>
       </Styled.ButtonGroup>
     </FormContainer.Form>
@@ -103,6 +80,6 @@ AddSectionForm.displayName = "Text.Sections.AddForm";
 
 AddSectionForm.propTypes = {
   textId: PropTypes.string.isRequired,
-  refresh: PropTypes.func,
+  fetcher: PropTypes.object.isRequired,
   nextPosition: PropTypes.number
 };
