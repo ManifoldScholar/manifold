@@ -7,7 +7,7 @@ function ChildNav({ readingGroup }) {
   const { t } = useTranslation();
 
   const homePaths = {
-    static: `/groups/${readingGroup.id}`,
+    static: `/groups/${readingGroup.id}/home`,
     edit: `/groups/${readingGroup.id}/edit`
   };
   const { abilities, currentUserRole } = readingGroup.attributes;

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import { collaboratorsAPI, textsAPI } from "api";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   ContributorRow
@@ -68,7 +68,7 @@ export default function TextCollaboratorsLayout() {
   return (
     <section>
       {confirmation && <Dialog.Confirm {...confirmation} />}
-      <OutletWithDrawer drawerProps={{ closeUrl }} context={text} />
+      <OutletWithDrawers drawerProps={{ closeUrl }} context={text} />
       <EntitiesList
         className="full-width"
         title={t("projects.contributors_header")}

@@ -6,7 +6,7 @@ import formAction from "app/routes/utility/helpers/formAction";
 import Layout from "backend/components/layout";
 import Ingestion from "backend/components/ingestion";
 
-export const handle = { drawer: true };
+export const handle = { drawer: "backend" };
 
 export const loader = async ({ params, request, context }) => {
   return loadEntity({

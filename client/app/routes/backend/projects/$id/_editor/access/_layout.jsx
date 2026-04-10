@@ -3,7 +3,7 @@ import { useOutletContext, useParams } from "react-router";
 import { permissionsAPI, entitlementsAPI, projectsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitlementsList from "backend/components/entitlements/List";
 import EntitiesList, {
   Button,
@@ -96,7 +96,7 @@ export default function ProjectAccessLayout({ loaderData }) {
           meta={entitlements.meta}
         />
       </Layout.BackendPanel>
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{ closeUrl, lockScroll: "always" }}
         context={permissions}
       />

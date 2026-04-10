@@ -5,7 +5,7 @@ import formAction from "app/routes/utility/helpers/formAction";
 import Layout from "backend/components/layout";
 import Ingestion from "backend/components/ingestion";
 
-export const handle = { drawer: true };
+export const handle = { drawer: "backend" };
 
 export const action = formAction({
   mutation: ({ data, params }) => ingestionsAPI.create(params.id, data),

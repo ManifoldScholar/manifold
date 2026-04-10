@@ -3,7 +3,7 @@ import { meAPI } from "api";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import HeadContent from "global/components/HeadContent";
 import List from "frontend/components/reading-group-list/List";
 
@@ -37,7 +37,7 @@ export default function MyReadingGroupsLayout({ loaderData }) {
         meta={meta}
         defaultFilters={FILTERS_RESET}
       />
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           context: "frontend",
           size: "wide",

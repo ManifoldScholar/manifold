@@ -6,7 +6,7 @@ import { useListQueryParams, useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Form from "global/components/form";
 import Dialog from "global/components/dialog";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   Search,
@@ -73,7 +73,7 @@ export default function TextAssetsLayout({ loaderData }) {
   return (
     <Styled.Wrapper>
       {confirmation && <Dialog.Confirm {...confirmation} />}
-      <OutletWithDrawer drawerProps={drawerProps} context={text} />
+      <OutletWithDrawers drawerProps={drawerProps} context={text} />
       <Form.Header
         label={t("texts.assets.header")}
         instructions={t("texts.assets.instructions")}

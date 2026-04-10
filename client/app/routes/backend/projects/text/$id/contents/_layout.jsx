@@ -3,7 +3,7 @@ import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
 import { Link, useOutletContext } from "react-router";
 import IconComposer from "global/components/utility/IconComposer";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import TOCList from "backend/components/authoring/TOCList";
 import { formatTreeData } from "backend/components/authoring/TOCList/treeHelpers";
 import { textsAPI } from "api";
@@ -60,7 +60,7 @@ export default function TextTOCLayout() {
   return (
     <section>
       {confirmation && <Dialog.Confirm {...confirmation} />}
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           lockScroll: "always",
           wide: true,

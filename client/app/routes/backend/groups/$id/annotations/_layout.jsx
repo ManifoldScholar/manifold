@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useOutletContext, useRevalidator } from "react-router";
 import { readingGroupsAPI, bulkDeleteAPI, annotationsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { useListQueryParams, useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "global/components/dialog";
@@ -121,7 +121,7 @@ export default function GroupAnnotationsLayout({ loaderData }) {
   return (
     <>
       {confirmation && <Dialog.Confirm {...confirmation} />}
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           lockScroll: "always",
           closeUrl

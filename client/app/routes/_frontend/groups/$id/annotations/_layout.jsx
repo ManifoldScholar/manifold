@@ -4,7 +4,7 @@ import createListClientLoader from "app/routes/utility/loaders/createListClientL
 import loadList from "app/routes/utility/loaders/loadList";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useListFilters, useListSearchParams } from "hooks";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import * as Styled from "./styles";
 
 const DEFAULT_FILTERS = { formats: ["annotation"] };
@@ -64,7 +64,7 @@ export default function ReadingGroupAnnotationsRoute({ loaderData }) {
 
   return (
     <Styled.Body>
-      <OutletWithDrawer
+      <OutletWithDrawers
         context={readingGroup}
         drawerProps={{
           context: "frontend",

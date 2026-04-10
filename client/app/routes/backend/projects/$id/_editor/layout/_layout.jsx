@@ -1,7 +1,7 @@
 import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import { projectsAPI } from "api";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import Hero from "backend/components/hero";
 import ContentBlock from "backend/components/content-block";
 
@@ -38,7 +38,7 @@ export default function ProjectLayoutContainer({ loaderData }) {
       />
       <ContentBlock.Builder project={project} contentBlocks={contentBlocks}>
         {(pendingBlock, clearPendingBlock) => (
-          <OutletWithDrawer
+          <OutletWithDrawers
             drawerProps={{
               closeUrl,
               lockScroll: "always",

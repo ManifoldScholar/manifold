@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useOutletContext, useParams } from "react-router";
 import { journalVolumesAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   JournalVolumeRow
@@ -30,7 +30,7 @@ export default function JournalVolumesLayout({ loaderData }) {
 
   return (
     <>
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           closeUrl,
           lockScroll: "always",

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { useOutletContext, useMatches } from "react-router";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import { useOutletContext } from "react-router";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import Dialog from "global/components/dialog";
 import TextsList from "backend/components/project/TextsList";
 import { useAuthorizeRoute } from "hooks";
@@ -18,36 +18,30 @@ function ProjectTextsLayout({ setScreenReaderStatus, renderLiveRegion }) {
     })
   });
 
-  const matches = useMatches();
   const { confirm, confirmation } = useConfirmation();
 
   const closeUrl = `/backend/projects/${project.id}/texts`;
 
-  const currentMatch = matches[matches.length - 1];
-  const isIngestRoute = currentMatch?.handle?.ingest;
-
-  const getDrawerProps = () => {
-    if (isIngestRoute) {
-      return {
-        lockScroll: "always",
-        wide: true,
-        lockScrollClickCloses: false,
-        closeUrl,
-        context: "ingestion"
-      };
-    }
-    return {
+  const drawerProps = [
+    {
+      lockScroll: "always",
+      wide: true,
+      lockScrollClickCloses: false,
+      closeUrl,
+      context: "ingestion"
+    },
+    {
       lockScroll: "always",
       wide: true,
       lockScrollClickCloses: false,
       closeUrl
-    };
-  };
+    }
+  ];
 
   return (
     <section>
       {confirmation && <Dialog.Confirm {...confirmation} />}
-      <OutletWithDrawer drawerProps={getDrawerProps()} context={project} />
+      <OutletWithDrawers drawerProps={drawerProps} context={project} />
       <TextsList
         project={project}
         confirm={confirm}

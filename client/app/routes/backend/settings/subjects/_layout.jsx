@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 import { subjectsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   SubjectRow
@@ -32,7 +32,7 @@ export default function SettingsSubjectsLayout({ loaderData }) {
 
   return (
     <>
-      <OutletWithDrawer drawerProps={drawerProps} />
+      <OutletWithDrawers drawerProps={drawerProps} />
       {subjects && (
         <EntitiesList
           entityComponent={SubjectRow}

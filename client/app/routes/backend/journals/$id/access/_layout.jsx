@@ -3,7 +3,7 @@ import { permissionsAPI, entitlementsAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitlementsList from "backend/components/entitlements/List";
 import Authorization from "helpers/authorization";
 import Layout from "backend/components/layout";
@@ -90,7 +90,7 @@ export default function JournalAccessLayout({ loaderData }) {
           meta={entitlements.meta}
         />
       </Layout.BackendPanel>
-      <OutletWithDrawer drawerProps={{ closeUrl, lockScroll: "always" }} />
+      <OutletWithDrawers drawerProps={{ closeUrl, lockScroll: "always" }} />
     </>
   );
 }

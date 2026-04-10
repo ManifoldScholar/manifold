@@ -8,7 +8,7 @@ import {
   CollectionCategory,
   CollectionPlaceholder
 } from "frontend/components/collecting/reading-group";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 
 export const loader = async ({ params, context }) => {
   // Fetch collected items in parallel
@@ -96,7 +96,7 @@ export default function ReadingGroupHomepageWrapper({ loaderData }) {
           )}
         </>
       )}
-      <OutletWithDrawer
+      <OutletWithDrawers
         context={readingGroup}
         drawerProps={{
           context: "frontend",

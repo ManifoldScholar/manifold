@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 import { makersAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { useListQueryParams } from "hooks";
 import EntitiesList, {
   Search,
@@ -37,7 +37,7 @@ export default function MakersLayout({ loaderData }) {
 
   return (
     <>
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           closeUrl: "/backend/records/makers",
           lockScroll: "always"

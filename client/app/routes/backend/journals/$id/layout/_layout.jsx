@@ -1,7 +1,7 @@
 import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import { journalsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import Hero from "backend/components/hero";
 
 export const loader = async ({ params, request, context }) => {
@@ -42,7 +42,7 @@ export default function JournalLayoutContainer({ loaderData }) {
           `/backend/journals/${modelId}/layout/action-callout/new`
         }
       />
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           closeUrl,
           lockScroll: "always",

@@ -3,7 +3,7 @@ import { useParams, useRevalidator } from "react-router";
 import { annotationsAPI, bulkDeleteAPI } from "api";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { useListQueryParams, useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "global/components/dialog";
@@ -122,7 +122,7 @@ export default function AnnotationsLayout({ loaderData }) {
   return (
     <>
       {confirmation && <Dialog.Confirm {...confirmation} />}
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           lockScroll: "always",
           closeUrl: "/backend/records/annotations"

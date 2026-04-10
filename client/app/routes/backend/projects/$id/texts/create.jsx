@@ -5,7 +5,7 @@ import formAction from "app/routes/utility/helpers/formAction";
 import Layout from "backend/components/layout";
 import CreateTextForm from "backend/components/authoring/CreateTextForm";
 
-export const handle = { drawer: true };
+export const handle = { drawer: "backend" };
 
 export const action = formAction({
   mutation: ({ data, params }) => textsAPI.create(params.id, data),

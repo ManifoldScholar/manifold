@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 import { exportTargetsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   ExportTargetRow
@@ -30,7 +30,7 @@ export default function SettingsExportTargetsLayout({ loaderData }) {
 
   return (
     <>
-      <OutletWithDrawer drawerProps={drawerProps} />
+      <OutletWithDrawers drawerProps={drawerProps} />
       {exportTargets && (
         <EntitiesList
           entityComponent={ExportTargetRow}

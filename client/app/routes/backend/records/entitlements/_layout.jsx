@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useRevalidator } from "react-router";
 import { pendingEntitlementsAPI } from "api";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { useListQueryParams, useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "global/components/dialog";
@@ -84,7 +84,7 @@ export default function PendingEntitlementsLayout({ loaderData }) {
   return (
     <>
       {confirmation && <Dialog.Confirm {...confirmation} />}
-      <OutletWithDrawer drawerProps={drawerProps} />
+      <OutletWithDrawers drawerProps={drawerProps} />
       {entitlements && (
         <>
           <PageHeader

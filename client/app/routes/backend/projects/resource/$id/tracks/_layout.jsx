@@ -9,7 +9,7 @@ import { useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import { useRevalidator } from "react-router";
 import PageHeader from "backend/components/layout/PageHeader";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import Dialog from "global/components/dialog";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 
@@ -64,7 +64,7 @@ export default function TracksLayout({ loaderData: tracks }) {
   return (
     <>
       {confirmation && <Dialog.Confirm {...confirmation} />}
-      <OutletWithDrawer drawerProps={drawerProps} context={resource} />
+      <OutletWithDrawers drawerProps={drawerProps} context={resource} />
       <PageHeader type="list" title={t("titles.tracks")} hideBreadcrumbs />
       {!!tracks && (
         <EntitiesList

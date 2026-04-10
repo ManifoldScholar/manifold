@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { Outlet, useParams, useMatches } from "react-router";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import { useParams } from "react-router";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import classNames from "classnames";
 import { projectCollectionsAPI } from "api";
 import ProjectCollection from "backend/components/project-collection";
@@ -32,12 +32,8 @@ export const loader = async ({ request, context }) => {
 export default function ProjectCollectionWrapperContainer({ loaderData }) {
   const { t } = useTranslation();
   const { id } = useParams();
-  const matches = useMatches();
 
   const projectCollections = loaderData.data;
-
-  const currentMatch = matches[matches.length - 1];
-  const isNewRoute = currentMatch?.handle?.drawer === true && !id;
 
   const wrapperClasses = classNames("project-collections", {
     "active-collection": id,
@@ -73,18 +69,15 @@ export default function ProjectCollectionWrapperContainer({ loaderData }) {
                 <ProjectCollection.Header projectCollection={null} />
               )}
               <div>
-                {isNewRoute ? (
-                  <OutletWithDrawer
-                    drawerProps={{
-                      size: "flexible",
-                      padding: "default",
-                      lockScroll: "always",
-                      closeUrl: "/backend/projects/project-collections"
-                    }}
-                  />
-                ) : (
-                  <Outlet />
-                )}
+                <OutletWithDrawers
+                  drawerProps={{
+                    size: "flexible",
+                    padding: "default",
+                    lockScroll: "always",
+                    closeUrl: "/backend/projects/project-collections"
+                  }}
+                  drawerCondition={!id}
+                />
               </div>
             </div>
           </div>

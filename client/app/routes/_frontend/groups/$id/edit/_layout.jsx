@@ -15,7 +15,7 @@ import authorize from "app/routes/utility/loaders/authorize";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import { CollectionEditor } from "frontend/components/collecting/reading-group";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import SearchDialog from "frontend/components/collecting/SearchDialog";
 import * as Styled from "./styles";
 
@@ -181,7 +181,7 @@ export default function ReadingGroupHomepageEdit({ loaderData }) {
           responses={responses}
         />
       </Styled.Body>
-      <OutletWithDrawer
+      <OutletWithDrawers
         context={readingGroup}
         drawerProps={{
           context: "frontend",
