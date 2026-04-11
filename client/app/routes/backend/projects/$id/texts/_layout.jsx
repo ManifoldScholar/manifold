@@ -34,7 +34,8 @@ function ProjectTextsLayout({ setScreenReaderStatus, renderLiveRegion }) {
       lockScroll: "always",
       wide: true,
       lockScrollClickCloses: false,
-      closeUrl
+      closeUrl,
+      context: "backend"
     }
   ];
 

@@ -12,6 +12,6 @@ export const loader = async ({ params, request, context }) => {
   });
 };
 
-export default function IngestionIngest({ loaderData: ingestion }) {
-  return <IngestContainer ingestion={ingestion} />;
+export default function TextSectionIngestionIngest({ loaderData: ingestion }) {
+  return <IngestContainer ingestion={ingestion} section />;
 }

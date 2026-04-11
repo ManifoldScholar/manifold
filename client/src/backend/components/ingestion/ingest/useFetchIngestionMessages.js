@@ -1,12 +1,11 @@
 import { useRef, useCallback, useEffect, useState } from "react";
+import { useRevalidator } from "react-router";
 import { useApiCallback } from "hooks";
 import { ingestionsAPI } from "api";
 
-export default function useFetchIngestionMessages(
-  id,
-  setLog,
-  setContainerFetch
-) {
+export default function useFetchIngestionMessages(id, setLog) {
+  const { revalidate } = useRevalidator();
+
   const intervalRef = useRef(null);
   const ingestionIntervalRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -21,7 +20,8 @@ export default function useFetchIngestionMessages(
     }
     setLoading(false);
     logIds.current = [];
-  }, [setLoading, logIds]);
+    revalidate();
+  }, [setLoading, logIds, revalidate]);
 
   const appendToLog = useCallback(
     message => {
@@ -63,7 +63,6 @@ export default function useFetchIngestionMessages(
           if (state === "finished") {
             clearInterval(ingestionIntervalRef.current);
             ingestionIntervalRef.current = null;
-            setContainerFetch(false);
             setTimeout(() => {
               endPolling();
             }, 8000);
@@ -74,7 +73,7 @@ export default function useFetchIngestionMessages(
         console.debug(error);
       }
     }, 3000);
-  }, [fetchIngestion, id, endPolling, setContainerFetch]);
+  }, [fetchIngestion, id, endPolling]);
 
   const startPolling = useCallback(() => {
     if (intervalRef.current) return;

@@ -20,23 +20,25 @@ export const action = formAction({
   mutation: ({ data, params }) =>
     ingestionsAPI.update(params.ingestionId, data),
   redirectTo: ({ params }) =>
-    `/backend/projects/${params.id}/texts/ingestions/${params.ingestionId}/ingest`
+    `/backend/projects/text/${params.id}/sections/ingestions/${params.ingestionId}/ingest`
 });
 
-export default function IngestionEdit({ loaderData: ingestion }) {
+export default function SectionIngestionEdit({ loaderData: ingestion }) {
   const { t } = useTranslation();
-  const project = useOutletContext();
+  const text = useOutletContext();
   const fetcher = useFetcher();
 
+  const cancelUrl = `/backend/projects/text/${text.id}/sections`;
+
   return (
-    <section>
-      <Layout.DrawerHeader title={t("texts.ingest_button_label")} />
+    <>
+      <Layout.DrawerHeader title={t("texts.section.ingest_button_label")} />
       <Ingestion.Form.Wrapper
-        cancelUrl={`/backend/projects/${project.id}/texts`}
-        ingestion={ingestion}
-        project={project}
         fetcher={fetcher}
+        ingestion={ingestion}
+        sectionIngest
+        cancelUrl={cancelUrl}
       />
-    </section>
+    </>
   );
 }

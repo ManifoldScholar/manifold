@@ -1,39 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams, useOutletContext, useRevalidator } from "react-router";
+import { useParams, useRevalidator } from "react-router";
 import NavigationBlocker from "global/components/router/NavigationBlocker";
 import Heading from "./Heading";
 import Actions from "./Actions";
 import Log from "./Log";
-import { useFetch, useApiCallback, useNotifications } from "hooks";
+import { useApiCallback, useNotifications } from "hooks";
 import { ingestionsAPI } from "api";
 import useFetchIngestionMessages from "./useFetchIngestionMessages";
 
-export default function IngestContainer() {
+export default function IngestContainer({ ingestion, section }) {
   const { ingestionId } = useParams();
   const { t } = useTranslation();
-  const { sectionIngest } = useOutletContext() || {};
   const { revalidate } = useRevalidator();
-
-  useEffect(() => {
-    return () => {
-      revalidate();
-    };
-  }, [revalidate]);
-
-  const [shouldFetch, setShouldFetch] = useState(true);
-
-  const { data: ingestion } = useFetch({
-    request: [ingestionsAPI.show, ingestionId],
-    condition: shouldFetch
-  });
 
   const [log, setLog] = useState("Ready to ingest...");
 
   const { loading, startPolling } = useFetchIngestionMessages(
     ingestionId,
-    setLog,
-    setShouldFetch
+    setLog
   );
 
   const doProcess = useApiCallback(ingestionsAPI.process);
@@ -48,7 +33,7 @@ export default function IngestContainer() {
 
     if (!errors) {
       setLog("Ready to ingest...");
-      setShouldFetch(true);
+      revalidate();
     } else {
       addNotification({
         level: 0,
@@ -97,13 +82,13 @@ export default function IngestContainer() {
         <Heading
           ingestion={ingestion}
           reingestion={state !== "sleeping"}
-          sectionIngest={sectionIngest}
+          sectionIngest={section}
           loading={loading}
         />
         <Actions
           ingestion={ingestion}
           onStart={onStart}
-          isSection={!!sectionIngest}
+          isSection={section}
           loading={loading}
         />
         <Log

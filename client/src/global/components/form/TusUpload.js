@@ -1,4 +1,4 @@
-import { useState, useCallback, useId } from "react";
+import { useState, useCallback, useId, useRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useFormField } from "hooks";
@@ -6,10 +6,17 @@ import Base from "./Upload/Base";
 import { Upload } from "tus-js-client";
 import config from "config";
 
-export function FormTusUpload({ name, layout = "square", ...baseProps }) {
+export function FormTusUpload({
+  name,
+  layout = "square",
+  readFrom,
+  ...baseProps
+}) {
   const id = useId();
   const { t } = useTranslation();
-  const { value, initialValue, set, errors } = useFormField(name);
+  const { value, set, errors } = useFormField(name, { readFrom });
+  const initialValueRef = useRef(value);
+  const initialValue = initialValueRef.current;
   const [progress, setProgress] = useState(null);
   const [error, setError] = useState(null);
 
@@ -114,7 +121,8 @@ FormTusUpload.propTypes = {
     "embed"
   ]),
   placeholder: PropTypes.string,
-  remove: PropTypes.string
+  remove: PropTypes.string,
+  readFrom: PropTypes.string
 };
 
 export default FormTusUpload;

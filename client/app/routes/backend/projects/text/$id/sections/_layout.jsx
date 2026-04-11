@@ -59,7 +59,7 @@ export default function TextSectionsLayout() {
         />
         <div className="entity-list__button-set-flex full-width">
           <Link
-            to={`/backend/projects/text/${text.id}/sections/ingestion/new`}
+            to={`/backend/projects/text/${text.id}/sections/ingestions/new`}
             className="entity-list__button button-lozenge-secondary"
           >
             <span className="screen-reader-text">

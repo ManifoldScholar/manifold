@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import Form from "global/components/form";
 import { Trans, useTranslation } from "react-i18next";
-import { useFormField } from "hooks";
 
 export default function IngestionFormUpload({
   cancelUrl,
@@ -10,19 +9,6 @@ export default function IngestionFormUpload({
   sectionId
 }) {
   const { t } = useTranslation();
-  const source = useFormField("attributes[source]");
-  const sourceFileName = useFormField("attributes[sourceFileName]");
-  const externalSourceUrl = useFormField("attributes[externalSourceUrl]");
-
-  const onSourceChange = value => {
-    source.set(value);
-    externalSourceUrl.set(null);
-  };
-
-  const onUrlChange = event => {
-    externalSourceUrl.set(event.target.value);
-    source.set(null);
-  };
 
   const fileInstructionsText = (
     <Trans
@@ -78,9 +64,8 @@ export default function IngestionFormUpload({
       <Form.FieldGroup label={formHeader} instructions={fileInstructions}>
         <Form.TusUpload
           layout="landscape"
-          value={source.value}
-          initialValue={sourceFileName.value}
-          set={onSourceChange}
+          name="attributes[source]"
+          readFrom="attributes[sourceFileName]"
           accepts="any"
         />
       </Form.FieldGroup>
@@ -91,8 +76,7 @@ export default function IngestionFormUpload({
         <Form.TextInput
           label={t("texts.ingestion.url")}
           focusOnMount
-          value={externalSourceUrl.value}
-          onChange={event => onUrlChange(event)}
+          name="attributes[externalSourceUrl]"
         />
       </Form.FieldGroup>
       <Form.DrawerButtons
