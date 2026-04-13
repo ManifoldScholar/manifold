@@ -36,7 +36,6 @@ Rails.application.configure do
     config.hosts << "web.manifold.orb.local"
     config.hosts << "manifold-api.ngrok.io"
     config.hosts << "manifold-dev.ngrok.io"
-    config.hosts << "web.manifold.orb.local"
     config.hosts << ENV["DOMAIN"]
   end
 
