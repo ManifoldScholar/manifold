@@ -1,7 +1,7 @@
 import { useId, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ingestionSourcesAPI } from "api";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useFetch, usePaginationState } from "hooks";
 import Button from "global/components/atomic/Button";
 import BrowseList from "./BrowseList";

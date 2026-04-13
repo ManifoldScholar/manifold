@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import queryString from "query-string";
 
 export default function usePaginationState(

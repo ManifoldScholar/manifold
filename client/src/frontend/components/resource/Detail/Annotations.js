@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useFetch, usePaginationState } from "hooks";
 import { resourcesAPI } from "api";
 import Utility from "global/components/utility";

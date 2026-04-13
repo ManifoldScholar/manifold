@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useSearchContext } from "hooks/useSearch/context";
 import Query from "../query";
 

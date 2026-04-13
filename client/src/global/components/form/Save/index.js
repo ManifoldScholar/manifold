@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";

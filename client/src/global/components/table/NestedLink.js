@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Utility from "global/components/utility";
 
 export default class NestedLink extends React.PureComponent {

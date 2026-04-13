@@ -2,7 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import ThumbnailGrid from "global/components/entity/ThumbnailGrid";
 import EntityThumbnail from "global/components/atomic/EntityThumbnail";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import * as Styled from "./styles";
 
 export default function EntityGroup({

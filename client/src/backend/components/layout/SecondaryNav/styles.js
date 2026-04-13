@@ -5,7 +5,7 @@ import {
   defaultHoverStyle,
   defaultTransitionProps
 } from "theme/styles/mixins";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import IconComposer from "global/components/utility/IconComposer";
 
 export const Nav = styled.nav`

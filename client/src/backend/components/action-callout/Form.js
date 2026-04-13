@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { actionCalloutsAPI } from "api";
 import { useApiCallback } from "hooks";
 import FormContainer from "global/containers/form";

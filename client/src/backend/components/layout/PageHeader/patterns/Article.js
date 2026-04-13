@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import Issue from "./Issue";
 import Utility from "../utility";
 import { getTextLinks } from "../utility/helpers";

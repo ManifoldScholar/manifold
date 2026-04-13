@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 import Button from "global/components/atomic/Button";
 
 function Link({ to, label, icon }) {

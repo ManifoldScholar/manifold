@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import * as Styled from "./styles";
 
 export default function Splash(props) {

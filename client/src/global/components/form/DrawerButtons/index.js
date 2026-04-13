@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";

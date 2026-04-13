@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Utility from "global/components/utility";
 import Row from "./Row";
 import RowSort from "./RowSort";

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import classnames from "classnames";
 
 import Authorize from "hoc/Authorize";

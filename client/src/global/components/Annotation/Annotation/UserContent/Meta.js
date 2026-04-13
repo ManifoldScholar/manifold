@@ -6,7 +6,7 @@ import classNames from "classnames";
 import Authorize from "hoc/Authorize";
 import Avatar from "global/components/avatar/index";
 import IconComposer from "global/components/utility/IconComposer";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 class AnnotationMeta extends PureComponent {
   static displayName = "Annotation.Meta";

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { ErrorBoundary } from "react-error-boundary";
 import AppFatalError from "./AppWrapper";
 

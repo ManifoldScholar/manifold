@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Link as LinkComponent } from "react-router-dom";
+import { Link as LinkComponent } from "react-router";
 import { respond, listUnstyled, rgba, fluidScale } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
 import { Wrapper as Thumbnail } from "frontend/components/resource/Thumbnail/styles";

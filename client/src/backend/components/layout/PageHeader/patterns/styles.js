@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { respond, fluidScale, defaultHoverStyle } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
 import UniqueIcons from "global/components/icon/unique";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { transientOptions } from "helpers/emotionHelpers";
 
 export const Row = styled.div`

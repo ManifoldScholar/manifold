@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { useLocation, Navigate } from "react-router-dom";
+import { useLocation, Navigate } from "react-router";
 import { useAuthentication } from "hooks";
 import FatalErrorRender from ".";
 

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { respond, buttonUnstyled, utilityPrimary } from "theme/styles/mixins";
-import { Link as LinkComponent } from "react-router-dom";
+import { Link as LinkComponent } from "react-router";
 import Collapse from "global/components/Collapse";
 
 export const Result = styled.li`

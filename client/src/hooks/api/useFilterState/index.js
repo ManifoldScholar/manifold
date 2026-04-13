@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import queryString from "query-string";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 export default function useFilterState(baseFilters = {}) {
   const location = useLocation();

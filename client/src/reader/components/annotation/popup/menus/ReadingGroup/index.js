@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Menu from "../../parts/Menu";
 import RGMenuItem from "../../parts/RGMenuItem";
 import IconComposer from "global/components/utility/IconComposer";

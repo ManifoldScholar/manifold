@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { transientOptions } from "helpers/emotionHelpers";
 
 export const ItemLink = styled(Link, transientOptions)`

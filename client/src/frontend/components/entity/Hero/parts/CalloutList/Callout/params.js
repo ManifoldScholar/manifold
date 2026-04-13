@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export const getCalloutParams = (data, type, isLink, t) => {
   const slug = data.relationships?.text?.attributes?.slug ?? null;

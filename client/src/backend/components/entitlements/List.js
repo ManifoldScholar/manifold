@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useTranslation, Trans } from "react-i18next";
 import { entitlementsAPI } from "api";
 import EntitiesList, {

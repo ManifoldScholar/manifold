@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useMemo, useState, useRef } from "react";
 import queryString from "query-string";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 
 export default function useListQueryParams({
   initPage = 1,

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { tocDrawer } from "../styles";
 import { defaultTransitionProps, defaultFocusStyle } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";

@@ -3,7 +3,7 @@ import List, * as EntitiesList from "backend/components/list/EntitiesList";
 import Utility from "global/components/utility";
 import has from "lodash/has";
 import isFunction from "lodash/isFunction";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export default class PickerListComponent extends PureComponent {
   static displayName = "Form.Picker.List";

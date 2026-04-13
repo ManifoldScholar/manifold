@@ -6,7 +6,7 @@ import isString from "lodash/isString";
 import isEmpty from "lodash/isEmpty";
 import isFunction from "lodash/isFunction";
 import LabelSet from "./LabelSet";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Utility from "global/components/utility";
 import PopoverMenu from "global/components/popover/Menu";
 import { useTranslation } from "react-i18next";

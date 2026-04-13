@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import isNil from "lodash/isNil";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export default class ListEntitiesListTextTitle extends PureComponent {
   static displayName = "List.Entities.List.TextTitle";

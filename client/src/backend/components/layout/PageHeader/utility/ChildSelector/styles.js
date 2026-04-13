@@ -8,7 +8,7 @@ import {
   fluidScale
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import { transientOptions } from "helpers/emotionHelpers";
 
 export const Button = styled.button`

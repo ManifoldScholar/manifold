@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import IconComposer from "global/components/utility/IconComposer";
 import Button from "global/components/atomic/Button";
 import { defaultTransitionProps, defaultHoverStyle } from "theme/styles/mixins";

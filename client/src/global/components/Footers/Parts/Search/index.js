@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import queryString from "query-string";
 import Utility from "global/components/utility";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import * as Styled from "./styles";
 
 export default function Search({ withTopMargin }) {

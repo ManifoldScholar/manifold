@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 import Authorize from "hoc/Authorize";

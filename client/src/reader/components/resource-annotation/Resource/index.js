@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import Resource from "frontend/components/resource";
 import IconComputed from "global/components/icon-computed";
 import isEmpty from "lodash/isEmpty";

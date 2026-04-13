@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { bulkActionsReducer } from "./reducer";
 import isEqual from "lodash/isEqual";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import queryString from "query-string";
 
 export default function useBulkActions(records, filters) {

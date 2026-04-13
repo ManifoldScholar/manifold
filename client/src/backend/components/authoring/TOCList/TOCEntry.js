@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";

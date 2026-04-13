@@ -1,7 +1,7 @@
 import { useState, useContext, useMemo, Children } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { TableHeaderContext } from "helpers/contexts";
 import Cell from "./Cell";
 import isFunction from "lodash/isFunction";

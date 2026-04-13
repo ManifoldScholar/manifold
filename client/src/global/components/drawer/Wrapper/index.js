@@ -1,6 +1,6 @@
 import { useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useNotifications } from "hooks";
 import Content from "../Content";
 import * as Styled from "./styles";

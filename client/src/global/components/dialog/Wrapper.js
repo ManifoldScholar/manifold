@@ -2,7 +2,7 @@ import { useState, useCallback, Children, cloneElement } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import classnames from "classnames";
 import { FocusTrap } from "focus-trap-react";
 import isString from "lodash/isString";

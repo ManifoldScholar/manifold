@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import * as Styled from "./styles";
 
 function UserMenuBodyItem({ as = "a", to, title, icon, onClick }) {

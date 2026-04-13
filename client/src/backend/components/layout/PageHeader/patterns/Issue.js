@@ -1,10 +1,10 @@
 import React from "react";
 import Journal from "./Journal";
 import ChildSelector from "../utility/ChildSelector";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import Utility from "../utility";
 import { getTextLinks } from "../utility/helpers";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 
 import * as Styled from "./styles";
 

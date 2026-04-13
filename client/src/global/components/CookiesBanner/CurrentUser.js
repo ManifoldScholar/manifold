@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useAuthentication, useSettings, useApiCallback } from "hooks";
 import { meAPI } from "api";
 import NarrowBanner from "./NarrowBanner";

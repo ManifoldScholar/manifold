@@ -1,6 +1,6 @@
 import React from "react";
 import * as Styled from "./styles";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export default function HeaderLogo({ children, as = "a", href = "/", to }) {
   const linkProps = { href, to };

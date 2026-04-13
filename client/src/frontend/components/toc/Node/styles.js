@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Link as LinkComponent } from "react-router-dom";
+import { Link as LinkComponent } from "react-router";
 import { defaultTransitionProps } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 

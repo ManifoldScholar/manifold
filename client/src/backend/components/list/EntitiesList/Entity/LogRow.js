@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "global/components/FormattedDate";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import humps from "utils/humps";
 import EntityRow from "./Row";
