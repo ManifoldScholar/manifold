@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import Authorize from "hoc/Authorize";
 import { useSettings, useFrontendMode, useSignInUpOverlay } from "hooks";
@@ -41,11 +40,7 @@ export default function ReturnMenuBody({
         {context.isLibrary && !isLibraryDisabled && (
           <Styled.Item>
             <Styled.ItemLink
-              to={lh.link(
-                isJournalArticle
-                  ? "frontendJournalsList"
-                  : "frontendProjectsAll"
-              )}
+              to={isJournalArticle ? "/journals" : "/projects"}
               onClick={hidePanel}
             >
               <Styled.LinkIcon

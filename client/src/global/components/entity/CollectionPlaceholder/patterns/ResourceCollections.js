@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
@@ -35,7 +34,7 @@ function ResourceCollectionsPlaceholder({ id }) {
             children: (
               <Authorize entity="project" ability="create">
                 <Link
-                  to={lh.link("backendProjectResourceCollectionsNew", id)}
+                  to={`/backend/projects/${id}/resource-collections/new`}
                   className="button-tertiary"
                 >
                   {t("actions.create_collection")}

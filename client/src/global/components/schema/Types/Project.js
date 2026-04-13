@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import { renderOffer, renderSeries, renderNamesList } from "../helpers";
 import BaseSchema from "../BaseSchema";
 import config from "config";
@@ -85,7 +84,7 @@ export default class Project extends PureComponent {
       "@type": "Book",
       "@id": metadata.isbn ?? metadata.doi,
       name: title,
-      url: `${hostname}${lh.link("frontendProjectDetail", slug)}`,
+      url: `${hostname}/projects/${slug}`,
       isbn: metadata.isbn,
       doi: metadata.doi,
       author: renderNamesList(creators),

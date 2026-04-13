@@ -1,6 +1,5 @@
 import { useContext, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import ControlMenu from "reader/components/control-menu";
 import Notes from "reader/components/notes";
 import TextTitles from "reader/components/TextTitles";
@@ -201,10 +200,7 @@ export default function Header() {
               id="readerReturn"
               visibility={panels}
               bodyComponent={ReturnMenu.Body}
-              returnUrl={lh.link(
-                "frontendProjectDetail",
-                text?.relationships.project.attributes.slug
-              )}
+              returnUrl={`/projects/${text?.relationships.project.attributes.slug}`}
               projectId={text?.relationships.project.id}
               projectTitle={
                 text?.relationships.project.attributes.titleFormatted

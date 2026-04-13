@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
-import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 import { useLoaderEntity } from "hooks";
 import { ReaderContext } from "app/contexts";
@@ -61,7 +60,7 @@ export default function Toc({ showMeta }) {
       <TocNode
         key={node.label}
         node={node}
-        linkTo={lh.link("readerSection", slug, node.id, anchor)}
+        linkTo={`/read/${slug}/section/${node.id}${anchor}`}
         onClick={hideTocDrawer}
         active={active}
       >

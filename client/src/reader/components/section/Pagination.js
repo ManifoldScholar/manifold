@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import IconComposer from "global/components/utility/IconComposer";
 import { withTranslation } from "react-i18next";
@@ -15,11 +14,7 @@ class Pagination extends Component {
   };
 
   getSectionPath(section) {
-    return lh.link(
-      "readerSection",
-      this.props.text.attributes.slug,
-      section.id
-    );
+    return `/read/${this.props.text.attributes.slug}/section/${section.id}`;
   }
 
   getPreviousLink() {

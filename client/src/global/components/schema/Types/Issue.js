@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import {
   renderOffer,
   renderNamesList,
@@ -39,7 +38,7 @@ export default function Issue({ issue }) {
     "@id": metadata.issn ?? metadata.doi,
     name: title,
     issueNumber: number,
-    url: `${hostname}${lh.link("frontendProjectDetail", slug)}`,
+    url: `${hostname}/projects/${slug}`,
     issn: metadata.issn,
     identifier: metadata.doi
       ? {

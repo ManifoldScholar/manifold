@@ -1,7 +1,6 @@
 import { useMenuState, MenuItem } from "reakit/Menu";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 import { useSettings, useFrontendMode, useSignInUpOverlay } from "hooks";
 import Authorize from "hoc/Authorize";
 import * as Styled from "./styles";
@@ -34,12 +33,7 @@ export default function SiteNav({
           </Styled.Item>
         </MenuItem>
         {context.isLibrary && !isLibraryDisabled && (
-          <MenuItem
-            {...menu}
-            as={Link}
-            to={lh.link("frontend")}
-            className="reakit-menu-item"
-          >
+          <MenuItem {...menu} as={Link} to="/" className="reakit-menu-item">
             <Styled.Item>
               <Styled.LinkIcon icon="projects64" size={36.923} />
               <Styled.LinkText>{"Projects"}</Styled.LinkText>

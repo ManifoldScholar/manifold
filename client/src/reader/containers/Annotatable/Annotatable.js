@@ -10,7 +10,6 @@ import CaptureClick from "./handlers/CaptureClick";
 import selectionHelpers from "./helpers/selectionHelpers";
 import locationHelper from "helpers/location";
 import isEqual from "lodash/isEqual";
-import lh from "helpers/linkHandler";
 
 export class Annotatable extends Component {
   static contextType = SignInUpOverlayContext;
@@ -506,13 +505,7 @@ export class Annotatable extends Component {
     if (!this.state.activeEvent?.annotationIds?.length) return undefined;
 
     const annotationId = this.state.activeEvent.annotationIds[0];
-    const url = lh.link(
-      "readerSection",
-      this.props.textId,
-      this.props.sectionId,
-      `#annotation-${annotationId}`
-    );
-    return url;
+    return `/read/${this.props.textId}/section/${this.props.sectionId}#annotation-${annotationId}`;
   };
 
   render() {

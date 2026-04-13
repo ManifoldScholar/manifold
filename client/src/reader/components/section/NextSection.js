@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { getNextVisible } from "./helpers/hiddenSections";
@@ -15,7 +14,7 @@ class NextSection extends PureComponent {
   };
 
   getSectionPath(id) {
-    return lh.link("readerSection", this.props.text.attributes.slug, id);
+    return `/read/${this.props.text.attributes.slug}/section/${id}`;
   }
 
   renderSectionLink() {

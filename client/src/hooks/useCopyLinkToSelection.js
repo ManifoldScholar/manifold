@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 
 export const urlWithTextFragment = (url, fragment) => {
   const prefix = fragment.prefix
@@ -27,12 +26,7 @@ export default function useCopyLinkToSelection(
 
   const getBaseUrl = useCallback(() => {
     if (typeof window === "undefined") return null;
-    const readerUrl = lh.link(
-      "readerSection",
-      text.attributes.slug,
-      section.id
-    );
-    return `${window.location.origin}${readerUrl}`;
+    return `${window.location.origin}/read/${text.attributes.slug}/section/${section.id}`;
   }, [text, section]);
 
   const generateUrl = useCallback(() => {

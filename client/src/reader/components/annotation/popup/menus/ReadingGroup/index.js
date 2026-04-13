@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Menu from "../../parts/Menu";
 import RGMenuItem from "../../parts/RGMenuItem";
 import IconComposer from "global/components/utility/IconComposer";
-import lh from "helpers/linkHandler";
 import { useAuthentication, useLoaderEntity } from "hooks";
 import * as Styled from "./styles";
 
@@ -85,7 +84,7 @@ function ReadingGroupMenu({
               {...menu}
               visible={visible}
               as={Link}
-              to={lh.link("frontendMyReadingGroups")}
+              to="/my/groups"
             >
               <span>{t("reader.menus.popup.manage_groups")}</span>
               <IconComposer icon="link24" size="default" />

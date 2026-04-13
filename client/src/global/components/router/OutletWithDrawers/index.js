@@ -57,7 +57,7 @@ export default function OutletWithDrawers({
             : drawer.context === "backend"
           : false;
         return (
-          <Drawer.Wrapper open={open} {...drawer}>
+          <Drawer.Wrapper key={drawer.context} open={open} {...drawer}>
             {renderOutlet && <Outlet context={context} {...outletProps} />}
           </Drawer.Wrapper>
         );

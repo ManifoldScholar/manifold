@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
 import { Link } from "react-router-dom";
 import Utility from "global/components/utility";
-import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
@@ -34,7 +33,7 @@ function ProjectCollectionsFrontendPlaceholder({ bgColor = "neutral05" }) {
               <Trans
                 i18nKey="placeholders.project_collections.authorized.body"
                 components={[
-                  <Link to={lh.link("backendProjectCollections")} />,
+                  <Link to={"/backend/projects/project-collections"} />,
                   <em />,
                   <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
                     #
@@ -55,7 +54,7 @@ function ProjectCollectionsFrontendPlaceholder({ bgColor = "neutral05" }) {
             children: (
               <Authorize entity="project" ability="create">
                 <Link
-                  to={lh.link("backendProjectCollections")}
+                  to={"/backend/projects/project-collections"}
                   className="button-tertiary"
                 >
                   {t("actions.create_collection")}

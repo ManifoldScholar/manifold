@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import Animation from "./Animation";
 import { Actions, Body, Title, Wrapper } from "../../parts";
 
@@ -18,10 +17,7 @@ function MyStarredPlaceholder() {
         actions={[
           {
             children: (
-              <Link
-                to={lh.link("frontendProjects")}
-                className="button-tertiary"
-              >
+              <Link to="/projects" className="button-tertiary">
                 {t("navigation.browse_projects")}
               </Link>
             )

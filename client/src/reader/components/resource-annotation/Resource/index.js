@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Resource from "frontend/components/resource";
 import IconComputed from "global/components/icon-computed";
-import lh from "helpers/linkHandler";
 import isEmpty from "lodash/isEmpty";
 import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
@@ -33,11 +32,7 @@ class ResourceDetail extends PureComponent {
 
   buildRedirectUrl(resource) {
     if (!resource) return null;
-    return lh.link(
-      "frontendProjectResource",
-      resource.attributes.projectSlug,
-      resource.attributes.slug
-    );
+    return `/projects/${resource.attributes.projectSlug}/resource/${resource.attributes.slug}`;
   }
 
   render() {

@@ -6,7 +6,6 @@ import useApiCallback from "hooks/api/useApiCallback";
 import TextAnnotation from "./TextAnnotation";
 import HighlightAnnotation from "./HighlightAnnotation";
 import ResourceAnnotation from "./ResourceAnnotation";
-import lh from "helpers/linkHandler";
 import { annotationsAPI } from "api";
 
 export default function Annotation({
@@ -38,12 +37,7 @@ export default function Annotation({
         attributes: { textSlug, textSectionId }
       } = annotation;
       return navigate(
-        lh.link(
-          "readerSection",
-          textSlug,
-          textSectionId,
-          `#annotation-${annotation.id}`
-        )
+        `/read/${textSlug}/section/${textSectionId}#annotation-${annotation.id}`
       );
     },
     [annotation, visitHandler, navigate]

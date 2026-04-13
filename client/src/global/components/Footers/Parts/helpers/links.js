@@ -1,4 +1,3 @@
-import lh from "helpers/linkHandler";
 import compact from "lodash/compact";
 
 function visiblePages(pages = []) {
@@ -20,11 +19,11 @@ function sortedPages(pages = []) {
 export function manifoldLinks() {
   const links = [
     {
-      to: lh.link("frontendProjectsAll"),
+      to: "/projects",
       title: "Projects"
     },
     {
-      to: lh.link("frontend"),
+      to: "/",
       title: "Home"
     }
   ];
@@ -43,7 +42,7 @@ export function pageLinks({ pages }) {
       externalLink
     } = page.attributes;
     const title = navTitle || pageTitle;
-    const to = isExternalLink ? null : lh.link("frontendPage", slug);
+    const to = isExternalLink ? null : `/page/${slug}`;
     const href = isExternalLink ? externalLink : null;
     return { title, to, openInNewTab, href };
   });
@@ -68,7 +67,7 @@ export function emailLink({ settings }) {
   if (!settings || !settings.attributes.general.contactEmail) return null;
   return {
     title: "Email",
-    to: lh.link("frontendContact"),
+    to: "/contact",
     icon: "socialEmail32"
   };
 }

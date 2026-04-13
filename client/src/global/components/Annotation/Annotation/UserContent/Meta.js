@@ -6,7 +6,6 @@ import classNames from "classnames";
 import Authorize from "hoc/Authorize";
 import Avatar from "global/components/avatar/index";
 import IconComposer from "global/components/utility/IconComposer";
-import lh from "helpers/linkHandler";
 import { Link } from "react-router-dom";
 
 class AnnotationMeta extends PureComponent {
@@ -124,13 +123,7 @@ class AnnotationMeta extends PureComponent {
         )}
         {annotation.attributes.readingGroupId && (
           <Link
-            to={lh.link(
-              "frontendReadingGroupDetail",
-              annotation.attributes.readingGroupId,
-              {
-                text: annotation.attributes.textId
-              }
-            )}
+            to={`/groups/${annotation.attributes.readingGroupId}`}
             className="annotation-tag__inner"
           >
             <div className="annotation-tag__text">

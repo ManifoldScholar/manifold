@@ -4,7 +4,6 @@ import Utility from "global/components/utility";
 import has from "lodash/has";
 import isFunction from "lodash/isFunction";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 
 export default class PickerListComponent extends PureComponent {
   static displayName = "Form.Picker.List";
@@ -30,7 +29,7 @@ export default class PickerListComponent extends PureComponent {
   }
 
   get canEdit() {
-    return this.props.rowEditRoute;
+    return this.props.getRowEditLink;
   }
 
   get canReorder() {
@@ -44,7 +43,7 @@ export default class PickerListComponent extends PureComponent {
   }
 
   editUrl(entity) {
-    return lh.link(this.props.rowEditRoute, entity.id);
+    return this.props.getRowEditLink(entity.id);
   }
 
   wrappedRowComponent = props => {

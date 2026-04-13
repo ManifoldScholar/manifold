@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
 import { Link } from "react-router-dom";
 import Utility from "global/components/utility";
-import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
@@ -36,7 +35,7 @@ function ProjectsPlaceholder({
               <Trans
                 i18nKey="placeholders.projects.authorized.body"
                 components={[
-                  <Link to={lh.link("backend")} />,
+                  <Link to="/backend" />,
                   <em />,
                   <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
                     #
@@ -56,10 +55,7 @@ function ProjectsPlaceholder({
           {
             children: (
               <Authorize entity="project" ability="create">
-                <Link
-                  to={lh.link("backendProjectsNew")}
-                  className="button-tertiary"
-                >
+                <Link to="/backend/projects/new" className="button-tertiary">
                   {t("actions.publish_project")}
                 </Link>
               </Authorize>

@@ -113,7 +113,7 @@ export default function FormPicker({
   listStyle,
   listRowComponent = "FormOptionRow",
   listRowProps = { namePath: "attributes.name" },
-  listRowEditRoute,
+  getRowEditLink,
   placeholder,
   wide = false,
   allowNew = false,
@@ -968,7 +968,7 @@ export default function FormPicker({
               ...listRowProps,
               options: optionsMeta.allOptions
             }}
-            rowEditRoute={listRowEditRoute}
+            getRowEditLink={getRowEditLink}
             callbacks={callbacks}
             entities={rawValue}
           />
@@ -987,7 +987,7 @@ FormPicker.propTypes = {
   listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
   listRowComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   listRowProps: PropTypes.object,
-  listRowEditRoute: PropTypes.func,
+  getRowEditLink: PropTypes.func,
   placeholder: PropTypes.string,
   wide: PropTypes.bool,
   allowNew: PropTypes.oneOfType([

@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
-import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
@@ -28,7 +27,7 @@ function JournalsPlaceholder({ bgColor = "neutral05" }) {
               <Trans
                 i18nKey="placeholders.journals.authorized.body"
                 components={[
-                  <Link to={lh.link("backend")} />,
+                  <Link to="/backend" />,
                   <em />,
                   <a href={HELP_LINK} target="_blank" rel="noopener noreferrer">
                     #
@@ -47,10 +46,7 @@ function JournalsPlaceholder({ bgColor = "neutral05" }) {
           {
             children: (
               <Authorize entity="journal" ability="create">
-                <Link
-                  to={lh.link("backendJournalsNew")}
-                  className="button-tertiary"
-                >
+                <Link to="/backend/journals/new" className="button-tertiary">
                   {t("actions.create_journal")}
                 </Link>
               </Authorize>

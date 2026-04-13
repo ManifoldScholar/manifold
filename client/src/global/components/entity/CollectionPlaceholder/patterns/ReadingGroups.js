@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import lh from "helpers/linkHandler";
 import { useAuthentication } from "hooks";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
@@ -18,7 +17,7 @@ function ReadingGroupsPlaceholder({ isPublic }) {
         actions: [
           {
             children: (
-              <Link to={lh.link("frontendLogin")} className="button-tertiary">
+              <Link to="/login" className="button-tertiary">
                 {t("navigation.user.log_in")}
               </Link>
             )
@@ -34,10 +33,7 @@ function ReadingGroupsPlaceholder({ isPublic }) {
         actions: [
           {
             children: (
-              <Link
-                to={lh.link("frontendMyReadingGroupsNew")}
-                className="button-tertiary"
-              >
+              <Link to="/my/groups/new" className="button-tertiary">
                 {t("navigation.reading_group.create")}
               </Link>
             )
@@ -51,10 +47,7 @@ function ReadingGroupsPlaceholder({ isPublic }) {
       actions: [
         {
           children: (
-            <Link
-              to={lh.link("frontendMyReadingGroupsNew")}
-              className="button-tertiary"
-            >
+            <Link to="/my/groups/new" className="button-tertiary">
               {t("navigation.reading_group.create")}
             </Link>
           )

@@ -2,7 +2,6 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import queryString from "query-string";
 import Utility from "global/components/utility";
-import lh from "helpers/linkHandler";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import * as Styled from "./styles";
@@ -18,10 +17,9 @@ export default function Search({ withTopMargin }) {
 
   const doSearch = event => {
     event.preventDefault();
-    const path = lh.link("frontendSearch");
     const search = queryString.stringify({ keyword });
     navigate({
-      pathname: path,
+      pathname: "/search",
       search
     });
     setKeyword("");
