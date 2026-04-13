@@ -83,70 +83,18 @@ module Auth
           jwks_uri:,
           logo_uri: settings.press_logo&.url,
           "https://purl.imsglobal.org/spec/lti-tool-configuration" => {
-            domain: api_uri.host,
-            target_link_uri: api_uri.to_s,
+            domain: client_host,
+            target_link_uri: client_uri.to_s,
             claims: %w[iss sub name given_name family_name email],
             messages: [
               {
                 type: "LtiResourceLinkRequest",
-                target_link_uri: api_uri.to_s,
-                label: "Resource Link"
+                target_link_uri: client_uri.to_s,
+                label: "Link to #{settings.general.installation_name}"
               }
             ]
           }
         }.compact
-      end
-
-      def api_uri
-        URI.parse(Rails.application.config.manifold.api_url)
-      end
-
-      # TODO: Maybe set default_url_options
-      def initiate_login_uri
-        auth_redirect_url(:lti, host: api_uri.host)
-      end
-
-      def redirect_uris
-        [auth_callback_url(:lti, host: api_uri.host)]
-      end
-
-      def jwks_uri
-        auth_jwks_url(host: api_uri.host)
-      end
-
-      def render_success_html
-        <<~HTML.html_safe
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <title>Manifold LTI Registration</title>
-              <style></style>
-            </head>
-            <body>
-              <div style="margin-top: 100px; text-align: center;">
-                <h1>Registration Complete</h1>
-                <button onclick="(window.opener || window.parent).postMessage({subject:'org.imsglobal.lti.close'}, '*')">Click here to continue</button>
-              </div>
-              <script type="text/javascript">
-                function close() {
-                  (window.opener || window.parent).postMessage({subject:'org.imsglobal.lti.close'}, '*');
-                }
-              </script>
-            </body>
-          </html>
-        HTML
-      end
-
-      def openid_uri
-        @openid_uri ||= URI.parse(openid_configuration_url)
-      end
-
-      def referrer_uri
-        @referrer_uri ||= URI.parse(referrer)
-      end
-
-      def settings
-        @settings ||= Settings.current
       end
 
       def lti_registration
@@ -158,10 +106,8 @@ module Auth
 
       def lti_deployment
         @lti_deployment ||= lti_registration.lti_deployments.find_or_create_by!(
-          deployment_id: lti_tool_configuration[:deployment_id]
+          deployment_id: platform_configuration[:deployment_id]
         )
-      rescue ActiveRecord::RecordInvalid => e
-        @errors.concat(e.record.errors.full_messages)
       end
 
       def persist_registration!
@@ -176,6 +122,7 @@ module Auth
           registration_access_token: platform_configuration[:registration_access_token]
         )
 
+        lti_deployment
       rescue ActiveRecord::RecordInvalid => e
         @errors.concat(e.record.errors.full_messages)
       end
@@ -192,6 +139,51 @@ module Auth
         allowlist = Settings.current.lti.issuer_allowlist
 
         allowlist.blank? || allowlist.include?(openid_configuration[:issuer])
+      end
+
+      def api_uri
+        URI.parse(Rails.application.config.manifold.api_url)
+      end
+
+      def client_uri
+        URI.parse(Rails.application.config.manifold.url)
+      end
+
+      # TODO: Maybe set default_url_options
+      def initiate_login_uri
+        auth_redirect_url(:lti, host: api_host)
+      end
+
+      def redirect_uris
+        [auth_callback_url(:lti, host: api_host)]
+      end
+
+      def jwks_uri
+        auth_jwks_url(host: api_host)
+      end
+
+      def openid_uri
+        @openid_uri ||= URI.parse(openid_configuration_url)
+      end
+
+      def referrer_uri
+        @referrer_uri ||= URI.parse(referrer)
+      end
+
+      def api_host
+        return api_uri.host unless api_uri.host == "localhost"
+
+        "#{api_uri.host}:#{api_uri.port}"
+      end
+
+      def client_host
+          return client_uri.host unless client_uri.host == "localhost"
+
+        "#{client_uri.host}:#{client_uri.port}"
+      end
+
+      def settings
+        @settings ||= Settings.current
       end
 
     end
