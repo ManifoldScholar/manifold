@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import { UIDConsumer } from "react-uid";
 import { isBefore } from "date-fns/isBefore";
 import { addDays } from "date-fns/addDays";
 import { subDays } from "date-fns/subDays";
@@ -69,6 +68,7 @@ function RangePicker({
   const [startDate, setStartDate] = useState(initialStart);
   const [endDate, setEndDate] = useState(initialEnd);
   const { t } = useTranslation();
+  const id = useId();
 
   const humanReadableDate = date => {
     return t("dates.date", {
@@ -118,48 +118,44 @@ function RangePicker({
   };
 
   return (
-    <UIDConsumer>
-      {id => (
-        <div className={`range-picker ${className}`}>
-          <div className="range-picker__section">
-            <DatePicker
-              parentId={id}
-              inputId={`range-picker-${id}-start-date`}
-              value={startDate}
-              onChange={validateAndSetStart}
-              label={t("dates.start_date")}
-            />
+    <div className={`range-picker ${className}`}>
+      <div className="range-picker__section">
+        <DatePicker
+          parentId={id}
+          inputId={`range-picker-${id}-start-date`}
+          value={startDate}
+          onChange={validateAndSetStart}
+          label={t("dates.start_date")}
+        />
+      </div>
+      <div className="range-picker__section">
+        <DatePicker
+          parentId={id}
+          inputId={`range-picker-${id}-end-date`}
+          value={endDate}
+          onChange={validateAndSetEnd}
+          label={t("dates.end_date")}
+        />
+      </div>
+      <div className="range-picker__section">
+        <fieldset className="range-picker__preset-group">
+          <legend className="range-picker__label">
+            {t("analytics.choose_date_preset")}
+          </legend>
+          <div className="range-picker__preset-group-inner">
+            {presets.map(({ key, label, count, ...dateProps }) => (
+              <button
+                key={key}
+                onClick={() => handlePresetClick(dateProps)}
+                className="range-picker__preset button-lozenge-secondary"
+              >
+                <span>{t(label, count && { count })}</span>
+              </button>
+            ))}
           </div>
-          <div className="range-picker__section">
-            <DatePicker
-              parentId={id}
-              inputId={`range-picker-${id}-end-date`}
-              value={endDate}
-              onChange={validateAndSetEnd}
-              label={t("dates.end_date")}
-            />
-          </div>
-          <div className="range-picker__section">
-            <fieldset className="range-picker__preset-group">
-              <legend className="range-picker__label">
-                {t("analytics.choose_date_preset")}
-              </legend>
-              <div className="range-picker__preset-group-inner">
-                {presets.map(({ key, label, count, ...dateProps }) => (
-                  <button
-                    key={key}
-                    onClick={() => handlePresetClick(dateProps)}
-                    className="range-picker__preset button-lozenge-secondary"
-                  >
-                    <span>{t(label, count && { count })}</span>
-                  </button>
-                ))}
-              </div>
-            </fieldset>
-          </div>
-        </div>
-      )}
-    </UIDConsumer>
+        </fieldset>
+      </div>
+    </div>
   );
 }
 

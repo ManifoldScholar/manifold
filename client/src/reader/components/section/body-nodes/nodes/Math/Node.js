@@ -1,25 +1,26 @@
-import React from "react";
+import { useId, createElement } from "react";
 import PropTypes from "prop-types";
 import {
   getAnnotationProps,
   formatLocalAnnotations
 } from "../../helpers/annotation";
 import { useTranslation } from "react-i18next";
-import { uid } from "react-uid";
 import values from "lodash/values";
 import { useErrorHandler } from "react-error-boundary";
 
-const createNode = n => {
+const createNode = (n, index, baseId) => {
   const { style, ...attrs } = n.attributes ?? {};
-  return React.createElement(
+  return createElement(
     n.tag,
     {
       ...attrs,
-      key: n.nodeUuid ?? uid(n),
+      key: n.nodeUuid ?? `${baseId}-node-${index}`,
       "data-node-uuid": n.nodeUuid,
       "data-text-digest": n.textDigest
     },
-    n.content ? n.content : n.children?.map(child => createNode(child))
+    n.content
+      ? n.content
+      : n.children?.map((child, i) => createNode(child, i, baseId))
   );
 };
 
@@ -32,10 +33,11 @@ function MathNode({
 }) {
   const { t } = useTranslation();
   const handleError = useErrorHandler();
+  const baseId = useId();
 
   const childNodes = () => {
     try {
-      return children.map(child => createNode(child));
+      return children.map((child, index) => createNode(child, index, baseId));
     } catch (e) {
       handleError();
     }

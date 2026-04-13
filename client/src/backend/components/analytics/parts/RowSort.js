@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useId } from "react";
 import PropTypes from "prop-types";
-import { UIDConsumer } from "react-uid";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
 function RowSort({ options, active, onChange }) {
   const { t } = useTranslation();
+  const id = useId();
 
   return (
     <div className="analytics-block__sort">
@@ -13,27 +13,23 @@ function RowSort({ options, active, onChange }) {
         onSubmit={event => event.preventDefault()}
         className="analytics-block__sort-form"
       >
-        <UIDConsumer name={id => `rowSort-${id}`}>
-          {id => (
-            <div>
-              <Styled.Label htmlFor={id}>{t("analytics.sort_by")}</Styled.Label>
-              <Styled.SelectWrapper>
-                <Styled.Select
-                  id={id}
-                  onChange={event => onChange(event.target.value)}
-                  value={active.value}
-                >
-                  {options.map(({ key, value, label }) => (
-                    <option key={key} value={value}>
-                      {label}
-                    </option>
-                  ))}
-                </Styled.Select>
-                <Styled.Icon icon="disclosureDown16" size={22} />
-              </Styled.SelectWrapper>
-            </div>
-          )}
-        </UIDConsumer>
+        <div>
+          <Styled.Label htmlFor={id}>{t("analytics.sort_by")}</Styled.Label>
+          <Styled.SelectWrapper>
+            <Styled.Select
+              id={id}
+              onChange={event => onChange(event.target.value)}
+              value={active.value}
+            >
+              {options.map(({ key, value, label }) => (
+                <option key={key} value={value}>
+                  {label}
+                </option>
+              ))}
+            </Styled.Select>
+            <Styled.Icon icon="disclosureDown16" size={22} />
+          </Styled.SelectWrapper>
+        </div>
       </form>
     </div>
   );

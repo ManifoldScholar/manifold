@@ -1,163 +1,87 @@
-import React, { PureComponent } from "react";
+import { useState, useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 import Collapse from "global/components/Collapse";
 import classNames from "classnames";
-import has from "lodash/has";
 import isPlainObject from "lodash/isPlainObject";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
-class ListEntitiesListSearch extends PureComponent {
-  static displayName = "List.Entities.List.Search";
+const RESERVED_NAMES = ["order", "keyword"];
 
-  static propTypes = {
-    params: PropTypes.array,
-    values: PropTypes.object,
-    setParam: PropTypes.func.isRequired,
-    onReset: PropTypes.func.isRequired,
-    searchStyle: PropTypes.oneOf(["horizontal", "vertical"]),
-    onFilterChange: PropTypes.func,
-    t: PropTypes.func
-  };
+function ListEntitiesListSearch({
+  params = [],
+  values = {},
+  setParam,
+  onReset,
+  searchStyle = "horizontal",
+  onFilterChange
+}) {
+  const id = useId();
+  const { t } = useTranslation();
+  const [keyword, setKeyword] = useState("");
 
-  static defaultProps = {
-    params: [],
-    values: {},
-    searchStyle: "horizontal"
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      keyword: ""
-    };
-  }
-
-  componentDidMount() {
-    if (!has(this.props, "values.keyword")) return;
-    this.updateKeywordFromProps();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (has(prevProps, "values.keyword") || has(this.props, "values.keyword")) {
-      if (prevProps.values.keyword !== this.props.values.keyword) {
-        this.updateKeywordFromProps();
-      }
+  useEffect(() => {
+    if (values.keyword !== undefined) {
+      setKeyword(values.keyword);
     }
+  }, [values.keyword]);
+
+  function ensureParamObject(param) {
+    return isPlainObject(param) ? param : params.find(p => p.name === param);
   }
 
-  onSubmit = event => {
-    event.preventDefault();
-  };
-
-  get filterParams() {
-    return this.params.filter(
-      p => !this.reservedNames.includes(p.name) && !p.hidden
-    );
+  function paramValue(paramLike) {
+    const param = ensureParamObject(paramLike);
+    return values[param.name] || "";
   }
 
-  get reservedNames() {
-    return ["order", "keyword"];
-  }
-
-  get hasFilterParams() {
-    return this.filterParams.length > 0;
-  }
-
-  get hasOptions() {
-    return this.hasFilterParams || this.hasOrderParam;
-  }
-
-  get params() {
-    return this.props.params;
-  }
-
-  get values() {
-    return this.props.values;
-  }
-
-  get keywordParam() {
-    return this.paramByName("keyword");
-  }
-
-  get orderParam() {
-    return this.paramByName("order");
-  }
-
-  get hasOrderParam() {
-    return this.hasParam(this.orderParam);
-  }
-
-  get hasKeywordParam() {
-    return this.hasParam(this.keywordParam);
-  }
-
-  get searchStyle() {
-    return this.props.searchStyle;
-  }
-
-  get idPrefix() {
-    return "list-search";
-  }
-
-  updateKeywordFromProps() {
-    this.setState({ keyword: this.props.values.keyword });
-  }
-
-  setKeywordState(event) {
-    const value = event.target.value;
-    this.setState({ keyword: value });
-  }
-
-  setParam(event, paramLike) {
-    const param = this.ensureParamObject(paramLike);
-    const value = event.target.value;
-    const { setParam } = this.props;
-    setParam(param, value);
-    if (this.props.onFilterChange) this.props.onFilterChange();
-  }
-
-  submitKeywordForm = event => {
-    event.preventDefault();
-    const { setParam } = this.props;
-    setParam(this.keywordParam, this.state.keyword);
-    if (this.props.onFilterChange) this.props.onFilterChange();
-  };
-
-  ensureParamObject(param) {
-    return isPlainObject(param) ? param : this.paramByName(param);
-  }
-
-  paramValue(paramLike) {
-    const param = this.ensureParamObject(paramLike);
-    return this.values[param.name] || "";
-  }
-
-  paramLabel(paramLike) {
-    const param = this.ensureParamObject(paramLike);
+  function paramLabel(paramLike) {
+    const param = ensureParamObject(paramLike);
     return param.label || "";
   }
 
-  paramOptions(paramLike) {
-    const param = this.ensureParamObject(paramLike);
+  function paramOptions(paramLike) {
+    const param = ensureParamObject(paramLike);
     return param.options || [];
   }
 
-  paramByName(paramName) {
-    return this.params.find(p => p.name === paramName);
-  }
-
-  hasParam(paramLike) {
-    const param = this.ensureParamObject(paramLike);
+  function hasParam(paramLike) {
+    const param = ensureParamObject(paramLike);
     return isPlainObject(param);
   }
 
-  translatedParamLabel(paramLabel) {
-    const t = this.props.t;
+  const keywordParam = params.find(p => p.name === "keyword");
+  const orderParam = params.find(p => p.name === "order");
+  const hasOrderParam = hasParam(orderParam);
+  const hasKeywordParam = hasParam(keywordParam);
+  const filterParams = params.filter(
+    p => !RESERVED_NAMES.includes(p.name) && !p.hidden
+  );
+  const hasFilterParams = filterParams.length > 0;
+  const hasOptions = hasFilterParams || hasOrderParam;
 
-    switch (paramLabel) {
+  function handleSetParam(event, paramLike) {
+    const param = ensureParamObject(paramLike);
+    const value = event.target.value;
+    setParam(param, value);
+    if (onFilterChange) onFilterChange();
+  }
+
+  function submitKeywordForm(event) {
+    event.preventDefault();
+    setParam(keywordParam, keyword);
+    if (onFilterChange) onFilterChange();
+  }
+
+  function resetSearch(event) {
+    event.preventDefault();
+    setKeyword("");
+    onReset();
+  }
+
+  function translatedParamLabel(label) {
+    switch (label) {
       case "Draft":
         return t("filters.labels.by_draft");
       case "Creator":
@@ -181,171 +105,138 @@ class ListEntitiesListSearch extends PureComponent {
     }
   }
 
-  resetSearch = event => {
-    event.preventDefault();
-    this.setState({ keyword: "" });
-    this.props.onReset();
-  };
-
-  classNameWithStyle(className) {
+  function classNameWithStyle(className) {
     return classNames({
       [className]: true,
-      [`${className}--horizontal`]: this.searchStyle === "horizontal",
-      [`${className}--vertical`]: this.searchStyle === "vertical"
+      [`${className}--horizontal`]: searchStyle === "horizontal",
+      [`${className}--vertical`]: searchStyle === "vertical"
     });
   }
 
+  const baseClass = "entity-list-search";
+
   /* eslint-disable react/no-array-index-key */
   /* these filters never change after render */
-  render() {
-    const baseClass = "entity-list-search";
-    const t = this.props.t;
-
-    return (
-      <div className={`entity-list__search ${baseClass}`}>
-        <Collapse>
-          {this.hasKeywordParam && (
-            <form role="search" onSubmit={this.submitKeywordForm}>
-              <div className={`${baseClass}__keyword-row`}>
-                <button className={`${baseClass}__search-button`}>
-                  <Utility.IconComposer icon="search16" size={20} />
-                  <span className="screen-reader-text">
-                    {t("search.title")}
-                  </span>
-                </button>
-                <div className={`${baseClass}__keyword-input-wrapper`}>
-                  <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
-                    {id => (
-                      <>
-                        <label htmlFor={id} className="screen-reader-text">
-                          {t("search.instructions")}
-                        </label>
-                        <input
-                          className={`${baseClass}__keyword-input`}
-                          id={id}
-                          value={this.state.keyword}
-                          type="text"
-                          placeholder={this.paramLabel(this.keywordParam)}
-                          onChange={e => this.setKeywordState(e)}
-                        />
-                      </>
-                    )}
-                  </UIDConsumer>
-                </div>
-                <button
-                  type="reset"
-                  onClick={this.resetSearch}
-                  className={`${baseClass}__text-button`}
-                >
-                  {t("actions.reset")}
-                </button>
-                {this.hasOptions && (
-                  <Collapse.Toggle
-                    className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
-                  >
-                    {t("glossary.option_title_case_other")}
-                  </Collapse.Toggle>
-                )}
+  return (
+    <div className={`entity-list__search ${baseClass}`}>
+      <Collapse>
+        {hasKeywordParam && (
+          <form role="search" onSubmit={submitKeywordForm}>
+            <div className={`${baseClass}__keyword-row`}>
+              <button className={`${baseClass}__search-button`}>
+                <Utility.IconComposer icon="search16" size={20} />
+                <span className="screen-reader-text">{t("search.title")}</span>
+              </button>
+              <div className={`${baseClass}__keyword-input-wrapper`}>
+                <label htmlFor={id} className="screen-reader-text">
+                  {t("search.instructions")}
+                </label>
+                <input
+                  className={`${baseClass}__keyword-input`}
+                  id={id}
+                  value={keyword}
+                  type="text"
+                  placeholder={paramLabel(keywordParam)}
+                  onChange={e => setKeyword(e.target.value)}
+                />
               </div>
-            </form>
-          )}
-          {this.hasOptions && (
-            <Collapse.Content>
-              <UIDConsumer name={id => `${this.idPrefix}-${id}`}>
-                {id => (
-                  <>
-                    <div
-                      className={this.classNameWithStyle(
-                        `${baseClass}__options`
-                      )}
-                    >
-                      {this.filterParams.map((param, i) => {
-                        return (
-                          <div
-                            key={i}
-                            className={this.classNameWithStyle(
-                              `${baseClass}__option`
-                            )}
-                          >
-                            <div>
-                              <div className="rel">
-                                <Styled.SelectLabel
-                                  htmlFor={`${id}-filter-${i}`}
-                                >
-                                  {this.translatedParamLabel(param.label)}
-                                </Styled.SelectLabel>
-                                <Styled.Select
-                                  id={`${id}-filter-${i}`}
-                                  onChange={e => this.setParam(e, param)}
-                                  value={this.paramValue(param)}
-                                >
-                                  {this.paramOptions(param).map(
-                                    (option, optionIndex) => (
-                                      <option
-                                        key={optionIndex}
-                                        value={option.value || ""}
-                                      >
-                                        {option.label}
-                                      </option>
-                                    )
-                                  )}
-                                </Styled.Select>
-                                <Styled.Icon icon="disclosureDown24" />
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                      {this.hasOrderParam && (
-                        <div
-                          className={this.classNameWithStyle(
-                            `${baseClass}__option`
-                          )}
+              <button
+                type="reset"
+                onClick={resetSearch}
+                className={`${baseClass}__text-button`}
+              >
+                {t("actions.reset")}
+              </button>
+              {hasOptions && (
+                <Collapse.Toggle
+                  className={`${baseClass}__text-button ${baseClass}__text-button--foregrounded`}
+                >
+                  {t("glossary.option_title_case_other")}
+                </Collapse.Toggle>
+              )}
+            </div>
+          </form>
+        )}
+        {hasOptions && (
+          <Collapse.Content>
+            <div className={classNameWithStyle(`${baseClass}__options`)}>
+              {filterParams.map((param, i) => {
+                return (
+                  <div
+                    key={i}
+                    className={classNameWithStyle(`${baseClass}__option`)}
+                  >
+                    <div>
+                      <div className="rel">
+                        <Styled.SelectLabel htmlFor={`${id}-filter-${i}`}>
+                          {translatedParamLabel(param.label)}
+                        </Styled.SelectLabel>
+                        <Styled.Select
+                          id={`${id}-filter-${i}`}
+                          onChange={e => handleSetParam(e, param)}
+                          value={paramValue(param)}
                         >
-                          <div>
-                            <Styled.SelectLabel>
-                              {t("filters.labels.sort_results")}
-                            </Styled.SelectLabel>
-                            <div className="rel">
-                              <label
-                                htmlFor={`${id}-order`}
-                                className="screen-reader-text"
-                              >
-                                {t("filters.labels.sort_results")}
-                              </label>
-                              <Styled.Select
-                                id={`${id}-order`}
-                                onChange={e =>
-                                  this.setParam(e, this.orderParam)
-                                }
-                                value={this.paramValue(this.orderParam)}
-                              >
-                                {this.paramOptions(this.orderParam).map(
-                                  (option, optionIndex) => (
-                                    <option
-                                      key={optionIndex}
-                                      value={option.value || ""}
-                                    >
-                                      {option.label}
-                                    </option>
-                                  )
-                                )}
-                              </Styled.Select>
-                              <Styled.Icon icon="disclosureDown24" />
-                            </div>
-                          </div>
-                        </div>
-                      )}
+                          {paramOptions(param).map((option, optionIndex) => (
+                            <option
+                              key={optionIndex}
+                              value={option.value || ""}
+                            >
+                              {option.label}
+                            </option>
+                          ))}
+                        </Styled.Select>
+                        <Styled.Icon icon="disclosureDown24" />
+                      </div>
                     </div>
-                  </>
-                )}
-              </UIDConsumer>
-            </Collapse.Content>
-          )}
-        </Collapse>
-      </div>
-    );
-  }
+                  </div>
+                );
+              })}
+              {hasOrderParam && (
+                <div className={classNameWithStyle(`${baseClass}__option`)}>
+                  <div>
+                    <Styled.SelectLabel>
+                      {t("filters.labels.sort_results")}
+                    </Styled.SelectLabel>
+                    <div className="rel">
+                      <label
+                        htmlFor={`${id}-order`}
+                        className="screen-reader-text"
+                      >
+                        {t("filters.labels.sort_results")}
+                      </label>
+                      <Styled.Select
+                        id={`${id}-order`}
+                        onChange={e => handleSetParam(e, orderParam)}
+                        value={paramValue(orderParam)}
+                      >
+                        {paramOptions(orderParam).map((option, optionIndex) => (
+                          <option key={optionIndex} value={option.value || ""}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </Styled.Select>
+                      <Styled.Icon icon="disclosureDown24" />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </Collapse.Content>
+        )}
+      </Collapse>
+    </div>
+  );
 }
 
-export default withTranslation()(ListEntitiesListSearch);
+ListEntitiesListSearch.displayName = "List.Entities.List.Search";
+
+ListEntitiesListSearch.propTypes = {
+  params: PropTypes.array,
+  values: PropTypes.object,
+  setParam: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
+  searchStyle: PropTypes.oneOf(["horizontal", "vertical"]),
+  onFilterChange: PropTypes.func
+};
+
+export default ListEntitiesListSearch;

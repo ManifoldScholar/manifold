@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useId } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import SectionsList from "./SectionsList";
-import { useUIDSeed } from "react-uid";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
 function CreateTextForm({
@@ -14,7 +13,7 @@ function CreateTextForm({
   setScreenReaderStatus
 }) {
   const { t } = useTranslation();
-  const uidSeed = useUIDSeed();
+  const baseId = useId();
 
   const [sectionName, setSectionName] = useState();
   const [sections, setSections] = useState([]);
@@ -48,7 +47,7 @@ function CreateTextForm({
   const handleAddSection = (e, el) => {
     const duplicate = sections.filter(s => s.name === el.value);
     const id = duplicate.length ? `${el.value}_${duplicate.length}` : el.value;
-    setSections([...sections, { id: uidSeed(id), name: el.value }]);
+    setSections([...sections, { id: `${baseId}-${id}`, name: el.value }]);
     setSectionName(null);
   };
 

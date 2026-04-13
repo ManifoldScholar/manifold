@@ -1,11 +1,10 @@
-import React from "react";
-import { useUID } from "react-uid";
+import { useId } from "react";
 import IconComposer from "global/components/utility/IconComposer";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 export default function BulkActionsCheckbox({ onSelect, onClear, checked }) {
-  const uid = useUID();
+  const uid = useId();
 
   const handleChange = () => {
     const isClear = checked;
