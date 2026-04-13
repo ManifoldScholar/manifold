@@ -1,8 +1,6 @@
-import { projectFilters } from "hoc/withFilteredLists";
+import { FILTER_PARAMS } from "app/routes/backend/projects/filters";
 
-const defaultProjectFilters = projectFilters();
-
-export const FILTER_PARAMS = defaultProjectFilters.params;
+export { FILTER_PARAMS };
 
 export const INIT_FILTERS = FILTER_PARAMS.reduce((acc, p) => {
   if (p.value) acc[p.name] = p.value;
