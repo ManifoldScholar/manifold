@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import IconComposer from "global/components/utility/IconComposer";
-import Drawer from "global/components/drawer";
+import IconComposer from "components/global/utility/IconComposer";
+import Drawer from "components/global/drawer";
 import {
   headingSecondary,
   respond,

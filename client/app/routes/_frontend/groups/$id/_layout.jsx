@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { redirect } from "react-router";
 import { readingGroupsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import { hasItemsInCollection } from "frontend/components/collecting/helpers";
-import HeadContent from "global/components/HeadContent";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import { GroupHeading } from "frontend/components/reading-group/headings";
+import { hasItemsInCollection } from "components/frontend/collecting/helpers";
+import HeadContent from "components/global/HeadContent";
+import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
+import { GroupHeading } from "components/frontend/reading-group/headings";
 
 export const loader = async ({ params, context, request }) => {
   const fetchFn = () => readingGroupsAPI.show(params.id);

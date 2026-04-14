@@ -2,9 +2,9 @@ import { useOutletContext, useParams } from "react-router";
 import { readingGroupsAPI } from "api";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import EntityCollection from "frontend/components/entity/Collection";
+import EntityCollection from "components/frontend/entity/Collection";
 import { useListFilters, useListSearchParams } from "hooks";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import * as Styled from "./styles";
 
 const DEFAULT_FILTERS = { formats: ["annotation"] };

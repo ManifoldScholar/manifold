@@ -3,8 +3,8 @@ import GroupItem from "./GroupItem";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import debounce from "lodash/debounce";
-import Collapse from "global/components/Collapse";
-import IconComposer from "global/components/utility/IconComposer";
+import Collapse from "components/global/Collapse";
+import IconComposer from "components/global/utility/IconComposer";
 
 export default function Group(props) {
   const {

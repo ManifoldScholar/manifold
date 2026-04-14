@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import useCollapseContext from "global/components/Collapse/useCollapseContext";
-import Form from "global/components/form";
-import Collapse from "global/components/Collapse";
+import useCollapseContext from "components/global/Collapse/useCollapseContext";
+import Form from "components/global/form";
+import Collapse from "components/global/Collapse";
 import * as Styled from "./styles";
 
 export default function SectionFields({ visible, options }) {

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useRevalidator } from "react-router";
 import { useListFilters } from "hooks";
 import { projectCollectionsAPI } from "api";
-import { Toggle } from "global/components/form/Switch/ToggleOnly";
+import { Toggle } from "components/global/form/Switch/ToggleOnly";
 import { useTranslation } from "react-i18next";
 import { useApiCallback } from "hooks";
 import * as Styled from "./styles";

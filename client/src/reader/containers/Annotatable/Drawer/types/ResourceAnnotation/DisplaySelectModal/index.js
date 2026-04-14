@@ -1,8 +1,8 @@
 import { useState, useId, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import DisplayOption from "./DisplayOption";
-import Utility from "global/components/utility";
-import Button from "global/components/atomic/Button";
+import Utility from "components/global/utility";
+import Button from "components/global/atomic/Button";
 import * as Styled from "./styles";
 
 export default function DisplaySelectModal({

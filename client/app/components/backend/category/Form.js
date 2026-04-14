@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 
 export default function CategoryForm({ model, fetcher }) {

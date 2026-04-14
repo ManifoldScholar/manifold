@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import isPlainObject from "lodash/isPlainObject";
 import { Navigate, useLocation } from "react-router";
 import Authorization from "helpers/authorization";
-import FatalErrorRender from "global/components/FatalError";
+import FatalErrorRender from "components/global/FatalError";
 import { useAuthentication, useNotifications } from "hooks";
 
 const authorization = new Authorization();

@@ -4,7 +4,7 @@ import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import Layout from "components/backend/layout";
 import { useTranslation } from "react-i18next";
-import { GroupSettingsForm } from "frontend/components/reading-group/forms";
+import { GroupSettingsForm } from "components/frontend/reading-group/forms";
 
 export const handle = {
   drawer: true

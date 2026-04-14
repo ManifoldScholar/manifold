@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import { withTranslation } from "react-i18next";
 import { getNextVisible, getPrevVisible } from "./helpers/hiddenSections";
 

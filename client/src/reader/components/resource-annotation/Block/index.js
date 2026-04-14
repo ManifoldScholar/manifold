@@ -1,6 +1,6 @@
 import { useContext, useCallback } from "react";
-import ResourcePreview from "frontend/components/resource/Preview";
-import ResourceCollectionPreview from "frontend/components/resource-collection/Preview";
+import ResourcePreview from "components/frontend/resource/Preview";
+import ResourceCollectionPreview from "components/frontend/resource-collection/Preview";
 import { ResourceMarkerContext } from "../Marker/context";
 import useLoaderCollection from "hooks/useLoaderCollection";
 import * as Styled from "./styles";

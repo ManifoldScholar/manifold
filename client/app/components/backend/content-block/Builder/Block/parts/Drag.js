@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
-import PopoverMenu from "global/components/popover/Menu";
+import Utility from "components/global/utility";
+import PopoverMenu from "components/global/popover/Menu";
 import { withTranslation } from "react-i18next";
 
 class ProjectContentBlockInListPartsDrag extends PureComponent {

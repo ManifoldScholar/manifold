@@ -12,8 +12,8 @@ import { resourceImportsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import { useNotifications } from "hooks";
 import FormContainer from "global/containers/form";
-import Form from "global/components/form";
-import IconComposer from "global/components/utility/IconComposer";
+import Form from "components/global/form";
+import IconComposer from "components/global/utility/IconComposer";
 
 const formatData = data => ({
   ...data,

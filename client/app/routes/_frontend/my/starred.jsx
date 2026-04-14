@@ -2,10 +2,10 @@ import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
-import HeadContent from "global/components/HeadContent";
-import MyStarredEntityCollection from "frontend/components/entity/Collection/patterns/MyStarred";
-import CollectionNavigation from "frontend/components/CollectionNavigation";
-import { getEntityCollection } from "frontend/components/collecting/helpers";
+import HeadContent from "components/global/HeadContent";
+import MyStarredEntityCollection from "components/frontend/entity/Collection/patterns/MyStarred";
+import CollectionNavigation from "components/frontend/CollectionNavigation";
+import { getEntityCollection } from "components/frontend/collecting/helpers";
 import { useAuthentication } from "hooks";
 
 export const loader = async ({ request, context }) => {

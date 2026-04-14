@@ -3,11 +3,11 @@ import { journalVolumesAPI } from "api";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadList from "app/routes/utility/loaders/loadList";
 import { useSettings } from "hooks";
-import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
-import HeadContent from "global/components/HeadContent";
-import EntityMasthead from "frontend/components/entity/Masthead";
-import EntityCollection from "frontend/components/entity/Collection";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
+import HeadContent from "components/global/HeadContent";
+import EntityMasthead from "components/frontend/entity/Masthead";
+import EntityCollection from "components/frontend/entity/Collection";
+import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { useTranslation } from "react-i18next";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };

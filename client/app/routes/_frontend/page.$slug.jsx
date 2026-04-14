@@ -1,5 +1,5 @@
 import { pagesAPI } from "api";
-import HeadContent from "global/components/HeadContent";
+import HeadContent from "components/global/HeadContent";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 
 export const loader = async ({ params, request, context }) => {

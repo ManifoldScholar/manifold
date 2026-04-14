@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import AnnotationEditor from "global/components/Annotation/Editor/index";
-import AnnotationSelectionWrapper from "global/components/Annotation/Annotation/TextContent/index";
+import AnnotationEditor from "components/global/Annotation/Editor/index";
+import AnnotationSelectionWrapper from "components/global/Annotation/Annotation/TextContent/index";
 
 export default function NewAnnotation({ pendingAnnotation, actions }) {
   const saveAnnotation = annotation => {

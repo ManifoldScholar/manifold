@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import KindPicker from "./KindPicker";
 import KindAttributes from "./KindAttributes";
 import { tagsAPI } from "api";

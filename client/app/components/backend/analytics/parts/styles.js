@@ -4,7 +4,7 @@ import {
   defaultTransitionProps,
   unstyledSelect
 } from "theme/styles/mixins";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 
 export const Label = styled.label`
   ${utilityPrimary}

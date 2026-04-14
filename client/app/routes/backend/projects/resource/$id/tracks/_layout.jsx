@@ -9,8 +9,8 @@ import { useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import { useRevalidator } from "react-router";
 import PageHeader from "components/backend/layout/PageHeader";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
-import Dialog from "global/components/dialog";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
+import Dialog from "components/global/dialog";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 
 export const loader = async ({ params, context }) => {

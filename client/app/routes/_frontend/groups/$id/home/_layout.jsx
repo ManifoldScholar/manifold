@@ -2,13 +2,13 @@ import { useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useRevalidator } from "react-router";
 import { readingGroupsAPI } from "api";
-import { getEntityCollection } from "frontend/components/collecting/helpers";
+import { getEntityCollection } from "components/frontend/collecting/helpers";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
 import {
   CollectionCategory,
   CollectionPlaceholder
-} from "frontend/components/collecting/reading-group";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+} from "components/frontend/collecting/reading-group";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 
 export const loader = async ({ params, context }) => {
   // Fetch collected items in parallel

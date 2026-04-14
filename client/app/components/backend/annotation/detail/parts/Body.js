@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Collapse from "global/components/Collapse";
-import Form from "global/components/form";
+import Collapse from "components/global/Collapse";
+import Form from "components/global/form";
 import * as Styled from "./styles";
 
 export default function AnnotationBody({ body }) {

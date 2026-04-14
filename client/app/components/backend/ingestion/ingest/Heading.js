@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import truncate from "lodash/truncate";
 import classNames from "classnames";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 
 const Property = ({ label, value }) => (
   <div className="ingestion-output__item">

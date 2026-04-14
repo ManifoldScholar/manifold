@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { pagesAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Layout from "components/backend/layout";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import PageHeader from "components/backend/layout/PageHeader";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 

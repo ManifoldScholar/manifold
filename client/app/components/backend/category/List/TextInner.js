@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
 
-import FormattedDate from "global/components/FormattedDate";
-import Text from "global/components/text";
-import Utility from "global/components/utility";
-import PopoverMenu from "global/components/popover/Menu";
+import FormattedDate from "components/global/FormattedDate";
+import Text from "components/global/text";
+import Utility from "components/global/utility";
+import PopoverMenu from "components/global/popover/Menu";
 import { withTranslation } from "react-i18next";
 
 class TextInner extends Component {

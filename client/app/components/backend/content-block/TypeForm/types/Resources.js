@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 

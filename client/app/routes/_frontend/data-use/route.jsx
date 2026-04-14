@@ -1,6 +1,6 @@
 import { routerContext } from "app/contexts";
 import { useTranslation } from "react-i18next";
-import HeadContent from "global/components/HeadContent";
+import HeadContent from "components/global/HeadContent";
 import * as Styled from "./styles";
 
 export const loader = async ({ context }) => {

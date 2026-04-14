@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import { withTranslation } from "react-i18next";
 
 class ResourceFormKindFile extends PureComponent {

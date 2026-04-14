@@ -9,7 +9,7 @@ import { subWeeks } from "date-fns/subWeeks";
 import { startOfMonth } from "date-fns/startOfMonth";
 import { endOfMonth } from "date-fns/endOfMonth";
 import { subMonths } from "date-fns/subMonths";
-import DatePicker from "global/components/form/DatePicker/PickerComponent";
+import DatePicker from "components/global/form/DatePicker/PickerComponent";
 
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import { useTranslation } from "react-i18next";

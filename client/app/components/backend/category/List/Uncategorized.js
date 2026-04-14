@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Texts from "./Texts";
-import Tooltip from "global/components/atomic/Tooltip";
+import Tooltip from "components/global/atomic/Tooltip";
 import { withTranslation } from "react-i18next";
 
 class CategoryListUncategorized extends PureComponent {

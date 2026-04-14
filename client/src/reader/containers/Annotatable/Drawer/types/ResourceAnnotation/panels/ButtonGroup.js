@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Button from "global/components/atomic/Button";
+import Button from "components/global/atomic/Button";
 import * as Styled from "./styles";
 
 export default function ButtonGroup({ selected, handleSave, handleClose }) {

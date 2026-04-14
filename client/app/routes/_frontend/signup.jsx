@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import Login from "frontend/components/login";
-import HeadContent from "global/components/HeadContent";
+import Login from "components/frontend/login";
+import HeadContent from "components/global/HeadContent";
 
 export default function SignUpRoute() {
   const { t } = useTranslation();

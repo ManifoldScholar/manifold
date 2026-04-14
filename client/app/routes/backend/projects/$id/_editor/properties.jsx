@@ -3,7 +3,7 @@ import { useFetcher, useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 import Project from "components/backend/project";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 import { subjectsAPI, journalVolumesAPI, projectsAPI, tagsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";

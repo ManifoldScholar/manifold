@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FormContainer from "global/containers/form";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import { useTranslation } from "react-i18next";
-import Upload from "global/components/form/Upload";
+import Upload from "components/global/form/Upload";
 
 export default function AddEditForm({ resource, track, fetcher }) {
   const { t } = useTranslation();

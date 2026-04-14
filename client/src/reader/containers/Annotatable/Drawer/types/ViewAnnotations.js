@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useFetch } from "hooks";
 import { annotationsAPI } from "api";
-import Annotation from "global/components/Annotation";
+import Annotation from "components/global/Annotation";
 
 export default function ViewAnnotations({
   actions,

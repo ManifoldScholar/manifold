@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { utilityPrimary } from "theme/styles/mixins/typography";
-import Tabs from "frontend/components/layout/Tabs";
+import Tabs from "components/frontend/layout/Tabs";
 
 export const Wrapper = styled.section`
   margin-block-start: 24px;

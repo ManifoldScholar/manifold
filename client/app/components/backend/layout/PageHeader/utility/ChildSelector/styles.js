@@ -7,7 +7,7 @@ import {
   respond,
   fluidScale
 } from "theme/styles/mixins";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import { NavLink } from "react-router";
 import { transientOptions } from "helpers/emotionHelpers";
 

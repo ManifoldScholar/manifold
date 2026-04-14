@@ -1,7 +1,7 @@
 import { useId } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import { useTranslation } from "react-i18next";
 
 function ColorPicker({ onChange, getModelValue, label }) {

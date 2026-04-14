@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router";
 import classNames from "classnames";
 import Authorize from "hoc/Authorize";
-import Button from "global/components/atomic/Button";
+import Button from "components/global/atomic/Button";
 
 export default class ListEntitiesListButtonSet extends PureComponent {
   static displayName = "List.Entities.List.Button";

@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
-import EntityThumbnail from "global/components/entity-thumbnail";
+import EntityThumbnail from "components/global/entity-thumbnail";
 import EntityRow from "./Row";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import { useAuthentication } from "hooks";
 import Authorization from "helpers/authorization";
 import capitalize from "lodash/capitalize";

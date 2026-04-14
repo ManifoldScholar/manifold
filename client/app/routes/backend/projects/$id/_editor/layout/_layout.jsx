@@ -1,7 +1,7 @@
 import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import { projectsAPI } from "api";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import Hero from "components/backend/hero";
 import ContentBlock from "components/backend/content-block";
 

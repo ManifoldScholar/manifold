@@ -1,12 +1,12 @@
 import { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import ColorPicker from "./ColorPicker";
-import UniqueIcons from "global/components/icon/unique";
+import UniqueIcons from "components/global/icon/unique";
 import classNames from "classnames";
 import { FormContext } from "helpers/contexts";
 import { brackets2dots } from "utils/string";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import useConfirmation from "hooks/useConfirmation";
 
 export default function AvatarBuilder({ wide, label: labelProp }) {

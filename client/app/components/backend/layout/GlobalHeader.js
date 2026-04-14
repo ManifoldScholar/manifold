@@ -1,13 +1,13 @@
-import Navigation from "global/components/navigation";
-import PressLogo from "global/components/PressLogo";
-import HeaderNotifications from "global/components/HeaderNotifications";
+import Navigation from "components/global/navigation";
+import PressLogo from "components/global/PressLogo";
+import HeaderNotifications from "components/global/HeaderNotifications";
 
 import navigation from "helpers/router/navigation";
-import Utility from "global/components/utility";
-import HeaderLogo from "global/components/atomic/HeaderLogo";
+import Utility from "components/global/utility";
+import HeaderLogo from "components/global/atomic/HeaderLogo";
 import { useTranslation } from "react-i18next";
-import ProjectsToggle from "global/components/navigation/projects-dropdown/Toggle";
-import ProjectsDropdown from "global/components/navigation/projects-dropdown";
+import ProjectsToggle from "components/global/navigation/projects-dropdown/Toggle";
+import ProjectsDropdown from "components/global/navigation/projects-dropdown";
 import Authorization from "helpers/authorization";
 import { useAuthentication } from "hooks";
 

@@ -4,7 +4,7 @@ import {
   WrapperWithActions,
   Action,
   ActionGroup
-} from "global/components/form/BaseInput/styles";
+} from "components/global/form/BaseInput/styles";
 import { respond } from "theme/styles/mixins";
 
 export const ReadOnlyInput = styled(SecondaryInput)`

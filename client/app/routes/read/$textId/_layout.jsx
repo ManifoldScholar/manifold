@@ -1,12 +1,12 @@
 import { useReducer, useMemo } from "react";
 import { Outlet, redirect } from "react-router";
 import Layout from "reader/components/layout";
-import Footers from "global/components/Footers";
+import Footers from "components/global/Footers";
 import Header from "reader/components/Header";
 import { textsAPI } from "api";
 import { useBodyClass } from "hooks";
 import { ReaderContext } from "app/contexts";
-import EventTracker, { EVENTS } from "global/components/EventTracker";
+import EventTracker, { EVENTS } from "components/global/EventTracker";
 import { SearchProvider } from "hooks/useSearch/context";
 import { useAuthentication, useReaderLocationChange } from "hooks";
 import { readerReducer, initialReaderState } from "app/contexts/readerReducer";

@@ -13,7 +13,7 @@ import EntitiesList, {
   ReadingGroupMembershipRow,
   AnnotationRow
 } from "components/backend/list/EntitiesList";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 
 export default function UserActivityRoute() {
   const { user } = useOutletContext();

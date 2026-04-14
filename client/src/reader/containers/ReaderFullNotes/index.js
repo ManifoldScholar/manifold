@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router";
 import groupBy from "lodash/groupBy";
 import isEqual from "lodash/isEqual";
 import { meAPI, readingGroupsAPI } from "api";
-import Overlay from "global/components/Overlay";
+import Overlay from "components/global/Overlay";
 import {
   useFetch,
   useFilterState,
@@ -14,7 +14,7 @@ import {
   useLoaderEntity
 } from "hooks";
 import { ReaderContext } from "app/contexts";
-import EntityCollection from "frontend/components/entity/Collection";
+import EntityCollection from "components/frontend/entity/Collection";
 
 const INITIAL_FORMATS = ["annotation"];
 const INITIAL_VISIBLE_FILTER_STATE = {

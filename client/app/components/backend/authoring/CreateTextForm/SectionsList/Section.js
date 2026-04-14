@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import IconComposer from "global/components/utility/IconComposer";
-import PopoverMenu from "global/components/popover/Menu";
+import IconComposer from "components/global/utility/IconComposer";
+import PopoverMenu from "components/global/popover/Menu";
 import * as Styled from "./styles";
 import { useTranslation } from "react-i18next";
 

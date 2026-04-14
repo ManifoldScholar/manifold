@@ -4,10 +4,10 @@ import { useSubmit } from "react-router";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import { meAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import NotificationsForm from "frontend/components/preferences/NotificationsForm";
-import Form from "global/components/form";
+import NotificationsForm from "components/frontend/preferences/NotificationsForm";
+import Form from "components/global/form";
 import { useAuthentication, useNotifications } from "hooks";
-import HeadContent from "global/components/HeadContent";
+import HeadContent from "components/global/HeadContent";
 import * as Styled from "./styles";
 
 export const loader = async ({ request, context }) => {

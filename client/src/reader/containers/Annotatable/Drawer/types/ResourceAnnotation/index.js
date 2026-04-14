@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import ResourceList from "./panels/Resources";
 import CollectionList from "./panels/Collections";
 import CreateForm from "./panels/Create";
-import IconComposer from "global/components/utility/IconComposer";
-import Tabs from "frontend/components/layout/Tabs";
+import IconComposer from "components/global/utility/IconComposer";
+import Tabs from "components/frontend/layout/Tabs";
 import * as Styled from "./styles";
 
 export default function NewResourceAnnotation({

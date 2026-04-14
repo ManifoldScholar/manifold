@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router";
-import HeadContent from "global/components/HeadContent";
+import HeadContent from "components/global/HeadContent";
 
 export default function AnalyticsWrapperContainer() {
   const { t } = useTranslation();

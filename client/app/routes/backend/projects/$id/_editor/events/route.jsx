@@ -4,7 +4,7 @@ import { projectsAPI, eventsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
 import { useListQueryParams, useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import EntitiesList, {
   Search,
   EventRow

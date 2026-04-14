@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useMatches } from "react-router";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import { collectionProjectsAPI, projectCollectionsAPI } from "api";
 import ProjectCollection from "components/backend/project-collection";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import HeadContent from "global/components/HeadContent";
+import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
+import HeadContent from "components/global/HeadContent";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import loadList from "app/routes/utility/loaders/loadList";

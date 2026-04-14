@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Form from "global/components/form";
-import FormattedDate from "global/components/FormattedDate";
+import Form from "components/global/form";
+import FormattedDate from "components/global/FormattedDate";
 import * as Styled from "./styles";
 
 export default function FlagsList({

@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { sectionsAPI } from "api";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
-import Collapse from "global/components/Collapse";
+import Collapse from "components/global/Collapse";
 import SectionFields from "./SectionFields";
 
 export default function StylesheetForm({

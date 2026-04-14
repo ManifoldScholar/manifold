@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Identity from "../parts/Identity";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import { withTranslation } from "react-i18next";
 
 class ProjectContentBlockInListAvailable extends PureComponent {

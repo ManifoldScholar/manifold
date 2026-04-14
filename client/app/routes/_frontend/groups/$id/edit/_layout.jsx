@@ -13,10 +13,10 @@ import handleActionError from "app/routes/utility/helpers/handleActionError";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
-import ActionBox from "frontend/components/reading-group/ActionBox";
-import { CollectionEditor } from "frontend/components/collecting/reading-group";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
-import SearchDialog from "frontend/components/collecting/SearchDialog";
+import ActionBox from "components/frontend/reading-group/ActionBox";
+import { CollectionEditor } from "components/frontend/collecting/reading-group";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
+import SearchDialog from "components/frontend/collecting/SearchDialog";
 import * as Styled from "./styles";
 
 export async function action({ request, context, params }) {

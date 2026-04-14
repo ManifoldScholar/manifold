@@ -5,7 +5,7 @@ import { textsAPI, textCategoriesAPI } from "api";
 import Category from "components/backend/category";
 import cloneDeep from "lodash/cloneDeep";
 import classNames from "classnames";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import { useApiCallback, useNotifications } from "hooks";
 
 export default function TextsList({ project, confirm, setScreenReaderStatus }) {

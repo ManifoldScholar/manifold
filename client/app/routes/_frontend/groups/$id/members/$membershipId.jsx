@@ -8,8 +8,8 @@ import handleActionError from "app/routes/utility/helpers/handleActionError";
 import Layout from "components/backend/layout";
 import { useTranslation } from "react-i18next";
 import { useConfirmation } from "hooks";
-import Dialog from "global/components/dialog";
-import { MemberSettingsForm } from "frontend/components/reading-group/forms";
+import Dialog from "components/global/dialog";
+import { MemberSettingsForm } from "components/frontend/reading-group/forms";
 
 export const handle = {
   drawer: true

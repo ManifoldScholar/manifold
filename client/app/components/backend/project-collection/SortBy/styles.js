@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { ListFilters as ListFiltersComponent } from "global/components/list";
-import Form from "global/components/form";
+import { ListFilters as ListFiltersComponent } from "components/global/list";
+import Form from "components/global/form";
 import { respond, formInstructions } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`

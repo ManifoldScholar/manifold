@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Menu from "../parts/Menu";
 import MenuItem from "../parts/MenuItem";
 import { useEventTracker, useShare, useCopyLinkToSelection } from "hooks";
-import { useMetaTitle } from "frontend/components/entity/useEntityHeadContent";
+import { useMetaTitle } from "components/frontend/entity/useEntityHeadContent";
 import { t } from "i18next";
 import { Back as BackButton } from "./ReadingGroup/styles";
 import * as Styled from "./styles";

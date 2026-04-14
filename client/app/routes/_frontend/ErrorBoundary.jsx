@@ -7,12 +7,12 @@ import {
 } from "react-router";
 import classNames from "classnames";
 import { FrontendContext } from "app/contexts";
-import Footers from "global/components/Footers";
-import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
-import Layout from "frontend/components/layout";
+import Footers from "components/global/Footers";
+import { BreadcrumbsProvider } from "components/global/atomic/Breadcrumbs";
+import Layout from "components/frontend/layout";
 import { SearchProvider } from "hooks/useSearch/context";
 import { useScrollToTop } from "hooks";
-import FatalError from "global/components/FatalError";
+import FatalError from "components/global/FatalError";
 import formatError from "app/routes/utility/helpers/formatError";
 
 const STATUSES = [404, 401, 403, 500];

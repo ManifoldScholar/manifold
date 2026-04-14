@@ -3,9 +3,9 @@ import { meAPI } from "api";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
-import HeadContent from "global/components/HeadContent";
-import List from "frontend/components/reading-group-list/List";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
+import HeadContent from "components/global/HeadContent";
+import List from "components/frontend/reading-group-list/List";
 
 const FILTERS_RESET = { sort_order: "created_at_asc", archived: "false" };
 

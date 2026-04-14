@@ -1,8 +1,8 @@
 import { useId } from "react";
 import { useTranslation } from "react-i18next";
-import GlobalForm from "global/components/form";
+import GlobalForm from "components/global/form";
 import classNames from "classnames";
-import IconComputed from "global/components/icon-computed";
+import IconComputed from "components/global/icon-computed";
 import { useFormField } from "hooks";
 
 export default function IconPicker() {

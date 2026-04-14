@@ -5,11 +5,11 @@ import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
 import get from "lodash/get";
 import Analytics from "./contexts/Analytics";
-import Utility from "global/components/utility";
-import LoadingBar from "global/components/LoadingBar";
-import CookiesBanner from "global/components/CookiesBanner";
-import { NavigationBlockerProvider } from "global/components/router/NavigationBlockerContext";
-import { SignInUpOverlayProvider } from "global/components/sign-in-up/Overlay/context";
+import Utility from "components/global/utility";
+import LoadingBar from "components/global/LoadingBar";
+import CookiesBanner from "components/global/CookiesBanner";
+import { NavigationBlockerProvider } from "components/global/router/NavigationBlockerContext";
+import { SignInUpOverlayProvider } from "components/global/sign-in-up/Overlay/context";
 import { useColorScheme } from "hooks";
 import { ErrorBoundary } from "./RootErrorBoundary";
 

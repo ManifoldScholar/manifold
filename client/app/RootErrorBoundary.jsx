@@ -10,7 +10,7 @@ import { CacheProvider } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
 import get from "lodash/get";
 import formatError from "app/routes/utility/helpers/formatError";
-import FatalError from "global/components/FatalError";
+import FatalError from "components/global/FatalError";
 import { createEmotionCache } from "./utils/emotion-stream";
 
 // Root ErrorBoundary - catches loader errors and uncaught render errors

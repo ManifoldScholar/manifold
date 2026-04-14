@@ -5,7 +5,7 @@ import {
   unstyledSelect,
   respond
 } from "theme/styles/mixins";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 
 export const SelectLabel = styled.label`
   ${utilityPrimary}

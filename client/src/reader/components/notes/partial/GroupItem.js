@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import get from "lodash/get";
 import classNames from "classnames";
-import IconComposer from "global/components/utility/IconComposer";
-import Tag from "global/components/Annotation/Tag";
-import Avatar from "global/components/avatar";
+import IconComposer from "components/global/utility/IconComposer";
+import Tag from "components/global/Annotation/Tag";
+import Avatar from "components/global/avatar";
 
 import { withTranslation } from "react-i18next";
 

@@ -4,8 +4,8 @@ import { Link } from "react-router";
 
 import Texts from "./Texts";
 import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
-import Utility from "global/components/utility";
-import PopoverMenu from "global/components/popover/Menu";
+import Utility from "components/global/utility";
+import PopoverMenu from "components/global/popover/Menu";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
 

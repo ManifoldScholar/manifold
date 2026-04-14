@@ -46,4 +46,4 @@ export { default as useScrollToTop } from "./useScrollToTop";
 export { default as useHasMounted } from "./useHasMounted";
 export { default as useReaderLocationChange } from "./useReaderLocationChange";
 
-export { useSignInUpOverlay } from "global/components/sign-in-up/Overlay/context";
+export { useSignInUpOverlay } from "components/global/sign-in-up/Overlay/context";

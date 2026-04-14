@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import {
   fluidScale,
   rgba,

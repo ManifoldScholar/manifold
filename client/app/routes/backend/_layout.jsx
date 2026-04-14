@@ -1,8 +1,8 @@
 import { Outlet } from "react-router";
-import Footers from "global/components/Footers";
+import Footers from "components/global/Footers";
 import Layout from "components/backend/layout";
 import { useBodyClass } from "hooks";
-import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
+import { BreadcrumbsProvider } from "components/global/atomic/Breadcrumbs";
 import { useScrollToTop } from "hooks";
 import authorize from "app/routes/utility/loaders/authorize";
 import { ErrorBoundary } from "./ErrorBoundary";

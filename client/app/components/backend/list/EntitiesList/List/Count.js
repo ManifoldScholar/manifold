@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import PropTypes from "prop-types";
 import isBoolean from "lodash/isBoolean";
 

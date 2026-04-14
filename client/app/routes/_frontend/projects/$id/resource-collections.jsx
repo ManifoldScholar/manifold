@@ -5,11 +5,11 @@ import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadList from "app/routes/utility/loaders/loadList";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import { useSettings } from "hooks";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
-import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
-import HeadContent from "global/components/HeadContent";
-import EntityCollection from "frontend/components/entity/Collection";
+import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
+import EntityCollectionPlaceholder from "components/global/entity/CollectionPlaceholder";
+import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
+import HeadContent from "components/global/HeadContent";
+import EntityCollection from "components/frontend/entity/Collection";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };

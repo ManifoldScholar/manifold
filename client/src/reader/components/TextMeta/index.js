@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Meta from "global/components/meta";
+import Meta from "components/global/meta";
 
 export default function TextMeta({ title, subtitle, meta }) {
   return (

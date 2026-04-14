@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import { useTranslation } from "react-i18next";
 import { Link, useRevalidator } from "react-router";
-import Tooltip from "global/components/atomic/Tooltip";
+import Tooltip from "components/global/atomic/Tooltip";
 import { textsAPI, sectionsAPI } from "api";
 import { useApiCallback } from "hooks";
-import PopoverMenu from "global/components/popover/Menu";
+import PopoverMenu from "components/global/popover/Menu";
 import * as Styled from "./styles";
 
 export default function SectionListItem(props) {

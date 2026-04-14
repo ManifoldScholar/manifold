@@ -7,8 +7,8 @@ import useConfirmation from "hooks/useConfirmation";
 import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import FormContainer from "global/containers/form";
-import Form from "global/components/form";
-import Dialog from "global/components/dialog";
+import Form from "components/global/form";
+import Dialog from "components/global/dialog";
 import ContentBlock from "components/backend/content-block";
 
 export const handle = { drawer: true };

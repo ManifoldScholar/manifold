@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import { useTranslation } from "react-i18next";
-import Collapse from "global/components/Collapse";
+import Collapse from "components/global/Collapse";
 import LabelSet from "../LabelSet";
 import * as Styled from "./styles";
 

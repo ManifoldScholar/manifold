@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import { Trans, useTranslation } from "react-i18next";
 
 export default function IngestionFormUpload({

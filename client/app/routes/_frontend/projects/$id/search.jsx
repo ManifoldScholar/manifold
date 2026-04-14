@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { projectsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import searchLoader from "app/routes/utility/loaders/search";
-import SearchQuery from "global/components/search/query";
-import SearchResults from "global/components/search/results";
-import HeadContent from "global/components/HeadContent";
+import SearchQuery from "components/global/search/query";
+import SearchResults from "components/global/search/results";
+import HeadContent from "components/global/HeadContent";
 import { useSearchContext } from "hooks/useSearch/context";
 import * as Styled from "app/routes/utility/search/styles";
 

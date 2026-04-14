@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router";
 import Menu from "../../parts/Menu";
 import RGMenuItem from "../../parts/RGMenuItem";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import { useAuthentication, useLoaderEntity } from "hooks";
 import * as Styled from "./styles";
 

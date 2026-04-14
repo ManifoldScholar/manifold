@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import AdminDashboard from "components/backend/dashboard";
-import HeadContent from "global/components/HeadContent";
+import HeadContent from "components/global/HeadContent";
 
 export default function DashboardRoute() {
   const { t } = useTranslation();

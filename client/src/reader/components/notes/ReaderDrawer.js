@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FilteredList from "./FilteredList";
 import ReaderNotes from "reader/containers/ReaderNotes";
-import GlobalDrawer from "global/components/drawer";
+import GlobalDrawer from "components/global/drawer";
 
 export default function ReaderDrawer({ visible, closeCallback }) {
   const { t } = useTranslation();

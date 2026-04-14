@@ -5,12 +5,12 @@ import {
   useLocation
 } from "react-router";
 import Layout from "reader/components/layout";
-import Footers from "global/components/Footers";
+import Footers from "components/global/Footers";
 import Header from "reader/components/Header";
 import { useBodyClass } from "hooks";
 import { ReaderContext } from "app/contexts";
 import { SearchProvider } from "hooks/useSearch/context";
-import FatalError from "global/components/FatalError";
+import FatalError from "components/global/FatalError";
 import formatError from "app/routes/utility/helpers/formatError";
 
 const STATUSES = [404, 401, 403, 500];

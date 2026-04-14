@@ -4,9 +4,9 @@ import requireLogin from "app/routes/utility/loaders/requireLogin";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
-import HeadContent from "global/components/HeadContent";
-import MyAnnotationsEntityCollection from "frontend/components/entity/Collection/patterns/MyAnnotations";
-import CollectionNavigation from "frontend/components/CollectionNavigation";
+import HeadContent from "components/global/HeadContent";
+import MyAnnotationsEntityCollection from "components/frontend/entity/Collection/patterns/MyAnnotations";
+import CollectionNavigation from "components/frontend/CollectionNavigation";
 import { useListFilters, useListSearchParams } from "hooks";
 import intersection from "lodash/intersection";
 

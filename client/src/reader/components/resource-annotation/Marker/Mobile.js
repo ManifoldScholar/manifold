@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useEffect, useContext } from "react";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import ThumbnailMobile from "./Thumbnail/Mobile";
 import { ReaderContext } from "app/contexts";
 import * as Styled from "./styles";

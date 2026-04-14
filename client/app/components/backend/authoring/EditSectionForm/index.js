@@ -1,11 +1,11 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
-import Form from "global/components/form";
-import ContentEditor from "global/components/form/ContentEditor";
+import Form from "components/global/form";
+import ContentEditor from "components/global/form/ContentEditor";
 import { useTranslation } from "react-i18next";
 
-import { serializeToSlate } from "global/components/form/ContentEditor/serializers";
-import { formatHtml } from "global/components/form/ContentEditor/utils/helpers";
+import { serializeToSlate } from "components/global/form/ContentEditor/serializers";
+import { formatHtml } from "components/global/form/ContentEditor/utils/helpers";
 import has from "lodash/has";
 import * as Styled from "./styles";
 

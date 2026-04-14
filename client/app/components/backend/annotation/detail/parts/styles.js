@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Collapse from "global/components/Collapse";
+import Collapse from "components/global/Collapse";
 import {
   listUnstyled,
   buttonUnstyled,

@@ -1,8 +1,8 @@
 import { useNavigate, useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
-import Overlay from "global/components/Overlay";
-import SearchQuery from "global/components/search/query";
-import SearchResults from "global/components/search/results";
+import Overlay from "components/global/Overlay";
+import SearchQuery from "components/global/search/query";
+import SearchResults from "components/global/search/results";
 import { useSearchContext } from "hooks/useSearch/context";
 import searchLoader from "app/routes/utility/loaders/search";
 

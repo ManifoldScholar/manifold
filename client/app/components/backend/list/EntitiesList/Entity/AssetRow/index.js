@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import EntityThumbnail from "global/components/entity-thumbnail";
-import Utility from "global/components/utility";
+import EntityThumbnail from "components/global/entity-thumbnail";
+import Utility from "components/global/utility";
 import EntityRow from "../Row";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";

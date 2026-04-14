@@ -8,7 +8,7 @@ import DraggableEventHelper from "../helpers/draggableEvent";
 import { contentBlocksAPI } from "api";
 import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import withConfirmation from "hoc/withConfirmation";
-import ClientOnly from "global/components/utility/ClientOnly";
+import ClientOnly from "components/global/utility/ClientOnly";
 
 import configHelper from "../helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";

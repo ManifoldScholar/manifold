@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { projectsAPI } from "api";
 import { useFetch, usePaginationState, useListFilters } from "hooks";
-import Utility from "global/components/utility";
-import ResourceList from "frontend/components/resource-list/List";
+import Utility from "components/global/utility";
+import ResourceList from "components/frontend/resource-list/List";
 import ButtonGroup from "./ButtonGroup";
 import * as Styled from "./styles";
 

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import SectionLabel from "global/components/form/SectionLabel";
+import SectionLabel from "components/global/form/SectionLabel";
 import * as Styled from "./styles";
 
 export default class ProjectContentSectionsPartsHeader extends PureComponent {

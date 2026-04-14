@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useId } from "react";
 import Block from "./Block";
 import ActionCallouts from "./ActionCallouts";
-import SectionLabel from "global/components/form/SectionLabel";
+import SectionLabel from "components/global/form/SectionLabel";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 

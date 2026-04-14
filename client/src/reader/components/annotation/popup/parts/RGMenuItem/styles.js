@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { buttonUnstyled } from "theme/styles/mixins";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 
 export const RGMenuItem = styled.button`
   ${buttonUnstyled}

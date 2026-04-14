@@ -6,7 +6,7 @@ import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Layout from "components/backend/layout";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import ExportTargetForm from "components/backend/export-targets/Form";
 
 export const handle = { drawer: true };

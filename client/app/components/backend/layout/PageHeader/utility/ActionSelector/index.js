@@ -1,5 +1,5 @@
 import React from "react";
-import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigationMenu";
+import DisclosureNavigationMenu from "components/global/atomic/DisclosureNavigationMenu";
 import MenuBody from "./MenuBody";
 import Button from "./Button";
 import * as Styled from "./styles";

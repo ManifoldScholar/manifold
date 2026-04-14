@@ -1,7 +1,7 @@
 import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import { journalsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import Hero from "components/backend/hero";
 
 export const loader = async ({ params, request, context }) => {

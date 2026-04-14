@@ -2,9 +2,9 @@ import { useTranslation } from "react-i18next";
 import { Link, useOutletContext, useRevalidator } from "react-router";
 import classNames from "classnames";
 import { stylesheetsAPI } from "api";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import Stylesheet from "components/backend/stylesheet";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 

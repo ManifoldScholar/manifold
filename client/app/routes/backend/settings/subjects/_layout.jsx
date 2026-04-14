@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 import { subjectsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   SubjectRow

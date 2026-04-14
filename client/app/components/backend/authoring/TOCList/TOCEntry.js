@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import { Link } from "react-router";
 
 import { useTranslation } from "react-i18next";

@@ -1,9 +1,9 @@
 import { useId } from "react";
 import { useTranslation } from "react-i18next";
 import { useFormField } from "hooks";
-import IconComputed from "global/components/icon-computed";
-import Form from "global/components/form";
-import FormSelect from "global/components/form/Select/index";
+import IconComputed from "components/global/icon-computed";
+import Form from "components/global/form";
+import FormSelect from "components/global/form/Select/index";
 import * as Styled from "./styles";
 
 const KIND_LIST = [

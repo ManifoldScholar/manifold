@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "global/components/FormattedDate";
+import FormattedDate from "components/global/FormattedDate";
 
-import EntityThumbnail from "global/components/entity-thumbnail";
+import EntityThumbnail from "components/global/entity-thumbnail";
 import EntityRow from "./Row";
 import { withTranslation } from "react-i18next";
 /* Importing directly rather than from form/index to prevent circular import in Picker. */
-import { Toggle } from "global/components/form/Switch/ToggleOnly";
+import { Toggle } from "components/global/form/Switch/ToggleOnly";
 
 class ResourceRow extends PureComponent {
   static displayName = "EntitiesList.Entity.ResourceRow";

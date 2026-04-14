@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { breakpoints } from "theme/styles/variables/media";
 import { fluidScale, containerPrototype, respond } from "theme/styles/mixins";
-import { Wrapper as ResultsList } from "global/components/search/results/styles";
+import { Wrapper as ResultsList } from "components/global/search/results/styles";
 
 export const FormWrapper = styled.div`
   padding: 60px 0 40px;

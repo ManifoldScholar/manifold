@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { utilityPrimary, buttonUnstyled } from "theme/styles/mixins";
 import { MenuItem as ReakitMenuItem } from "reakit/Menu";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 
 export const Icon = styled(IconComposer)`
   transform: rotate(90deg);

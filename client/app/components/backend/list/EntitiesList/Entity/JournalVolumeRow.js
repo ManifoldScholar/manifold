@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import EntityRow from "./Row";
-import EntityThumbnail from "global/components/entity-thumbnail";
+import EntityThumbnail from "components/global/entity-thumbnail";
 import { useTranslation } from "react-i18next";
 
 function JournalVolumeRow({

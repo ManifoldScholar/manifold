@@ -5,7 +5,7 @@ import { usersAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Layout from "components/backend/layout";
 import PageHeader from "components/backend/layout/PageHeader";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import navigation from "helpers/router/navigation";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 

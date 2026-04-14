@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Event from "frontend/components/event";
+import Event from "components/frontend/event";
 
 export default class EventRow extends PureComponent {
   static displayName = "EntitiesList.Entity.EventRow";

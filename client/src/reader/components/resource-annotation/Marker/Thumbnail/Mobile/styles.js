@@ -3,8 +3,8 @@ import { respond } from "theme/styles/mixins";
 import { readerContainerWidths } from "theme/styles/utility/layout";
 import { thumbnailBreakpoints } from "../../styles";
 import { unselectable } from "../../Sidebar/styles";
-import IconComposer from "global/components/utility/IconComposer";
-import Button from "global/components/atomic/Button";
+import IconComposer from "components/global/utility/IconComposer";
+import Button from "components/global/atomic/Button";
 
 const mediaQueries = thumbnailBreakpoints
   .map(

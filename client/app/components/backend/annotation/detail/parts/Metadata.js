@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Form from "global/components/form";
-import EntityThumbnail from "global/components/entity-thumbnail";
-import FormattedDate from "global/components/FormattedDate";
+import Form from "components/global/form";
+import EntityThumbnail from "components/global/entity-thumbnail";
+import FormattedDate from "components/global/FormattedDate";
 import * as Styled from "./styles";
 
 export default function AnnotationMetadata({

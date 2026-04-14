@@ -5,7 +5,7 @@ import { settingsAPI, testMailsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import { useApiCallback, useNotifications } from "hooks";
 import Layout from "components/backend/layout";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 import PageHeader from "components/backend/layout/PageHeader";
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import startsWith from "lodash/startsWith";
 import classNames from "classnames";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import { withTranslation } from "react-i18next";
 
 class ProjectCollectionAddButton extends Component {

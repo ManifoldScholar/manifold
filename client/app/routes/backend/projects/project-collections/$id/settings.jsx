@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext, useNavigate } from "react-router";
 import ProjectCollection from "components/backend/project-collection";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 import { projectCollectionsAPI } from "api";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import formAction from "app/routes/utility/helpers/formAction";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 

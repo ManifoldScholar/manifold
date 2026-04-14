@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import EntityThumbnail from "global/components/entity-thumbnail";
+import EntityThumbnail from "components/global/entity-thumbnail";
 import EntityRow from "./Row";
-import FormattedDate from "global/components/FormattedDate";
+import FormattedDate from "components/global/FormattedDate";
 import { useTranslation } from "react-i18next";
 
 function JournalRow({

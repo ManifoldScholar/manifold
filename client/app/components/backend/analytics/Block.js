@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 
 function Block({ icon, title, description, children, width }) {
   const blockClassName = classNames({

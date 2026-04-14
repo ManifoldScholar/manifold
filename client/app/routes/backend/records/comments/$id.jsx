@@ -5,7 +5,7 @@ import loadEntity from "app/routes/utility/loaders/loadEntity";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Layout from "components/backend/layout";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 
 import {
   FlagsList,

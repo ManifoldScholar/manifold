@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import { useTranslation } from "react-i18next";
 import { doViewTransition } from "utils/domUtils";

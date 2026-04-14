@@ -5,7 +5,7 @@ import authorize from "app/routes/utility/loaders/authorize";
 import loadList from "app/routes/utility/loaders/loadList";
 import { useListQueryParams, useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import EntitiesList, {
   Search,
   ReadingGroupRow

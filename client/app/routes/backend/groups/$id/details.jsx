@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
-import GroupSummaryBox from "frontend/components/reading-group/headings/Group/GroupSummaryBox";
-import FormSectionLabel from "global/components/form/SectionLabel";
+import GroupSummaryBox from "components/frontend/reading-group/headings/Group/GroupSummaryBox";
+import FormSectionLabel from "components/global/form/SectionLabel";
 
 export default function GroupDetails() {
   const { t } = useTranslation();

@@ -2,12 +2,12 @@ import { useRef } from "react";
 import PropTypes from "prop-types";
 import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import FormattedDate from "global/components/FormattedDate";
-import PopoverMenu from "global/components/popover/Menu";
+import FormattedDate from "components/global/FormattedDate";
+import PopoverMenu from "components/global/popover/Menu";
 
 export default function Stylesheet({
   stylesheet,

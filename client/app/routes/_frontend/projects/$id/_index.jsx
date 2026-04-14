@@ -1,14 +1,14 @@
 import { useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
-import Project from "frontend/components/project";
-import Schema from "global/components/schema";
-import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
-import HeadContent from "global/components/HeadContent";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import Issue from "frontend/components/issue";
+import Project from "components/frontend/project";
+import Schema from "components/global/schema";
+import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
+import HeadContent from "components/global/HeadContent";
+import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
+import Issue from "components/frontend/issue";
 import { useSettings } from "hooks";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
-import EventTracker, { EVENTS } from "global/components/EventTracker";
+import EventTracker, { EVENTS } from "components/global/EventTracker";
 
 export const handle = { frontendMode: { isProjectHomepage: true } };
 

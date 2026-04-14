@@ -4,7 +4,7 @@ import { annotationsAPI } from "api";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Layout from "components/backend/layout";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import { FlagsList, Body, Metadata } from "./parts";
 
 export { FlagsList, Body, Metadata };

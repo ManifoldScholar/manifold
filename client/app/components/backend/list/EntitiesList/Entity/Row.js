@@ -7,8 +7,8 @@ import isEmpty from "lodash/isEmpty";
 import isFunction from "lodash/isFunction";
 import LabelSet from "./LabelSet";
 import { Link } from "react-router";
-import Utility from "global/components/utility";
-import PopoverMenu from "global/components/popover/Menu";
+import Utility from "components/global/utility";
+import PopoverMenu from "components/global/popover/Menu";
 import { useTranslation } from "react-i18next";
 
 function EntitiesListRow({

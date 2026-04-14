@@ -3,10 +3,10 @@ import { useParams, useRevalidator } from "react-router";
 import { commentsAPI, bulkDeleteAPI } from "api";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import { useListQueryParams, useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import EntitiesList, {
   Search,
   CommentRow

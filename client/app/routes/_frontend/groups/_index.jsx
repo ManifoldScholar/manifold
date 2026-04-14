@@ -3,8 +3,8 @@ import { readingGroupsAPI } from "api";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import HeadContent from "global/components/HeadContent";
-import List from "frontend/components/reading-group-list/List";
+import HeadContent from "components/global/HeadContent";
+import List from "components/frontend/reading-group-list/List";
 
 const FILTERS_RESET = { sort_order: "created_at_asc" };
 

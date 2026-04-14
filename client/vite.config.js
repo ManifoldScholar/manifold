@@ -64,7 +64,6 @@ export default defineConfig(() => ({
       contexts: path.resolve(__dirname, "app/contexts"),
       components: path.resolve(__dirname, "app/components"),
       global: path.resolve(__dirname, "src/global"),
-      frontend: path.resolve(__dirname, "src/frontend"),
       reader: path.resolve(__dirname, "src/reader"),
       helpers: path.resolve(__dirname, "src/helpers"),
       hooks: path.resolve(__dirname, "src/hooks"),

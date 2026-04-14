@@ -1,5 +1,5 @@
 import { useId } from "react";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 

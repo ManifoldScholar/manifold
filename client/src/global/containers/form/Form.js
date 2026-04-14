@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Developer from "global/components/developer";
+import Developer from "components/global/developer";
 import get from "lodash/get";
 import has from "lodash/has";
 import set from "lodash/set";
@@ -9,7 +9,7 @@ import unset from "lodash/unset";
 import isFunction from "lodash/isFunction";
 import isPlainObject from "lodash/isPlainObject";
 import { brackets2dots } from "utils/string";
-import NavigationBlocker from "global/components/router/NavigationBlocker";
+import NavigationBlocker from "components/global/router/NavigationBlocker";
 import { FormContext } from "helpers/contexts";
 import { useNotifications } from "hooks";
 import { areValuesEqualish, hasChanges, adjustRelationships } from "./helpers";

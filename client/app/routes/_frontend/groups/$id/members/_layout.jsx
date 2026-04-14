@@ -9,9 +9,9 @@ import loadList from "app/routes/utility/loaders/loadList";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import { useConfirmation } from "hooks";
 import { useTranslation } from "react-i18next";
-import Dialog from "global/components/dialog";
-import MembersTable from "frontend/components/reading-group/tables/Members";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import Dialog from "components/global/dialog";
+import MembersTable from "components/frontend/reading-group/tables/Members";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import * as Styled from "./styles";
 
 const DEFAULT_PAGINATION = { page: 1, perPage: 10 };

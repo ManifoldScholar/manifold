@@ -1,11 +1,11 @@
 import { useOutletContext } from "react-router";
 import { journalVolumesAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
-import HeadContent from "global/components/HeadContent";
-import EntityMasthead from "frontend/components/entity/Masthead";
-import Journal from "frontend/components/journal";
+import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
+import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
+import HeadContent from "components/global/HeadContent";
+import EntityMasthead from "components/frontend/entity/Masthead";
+import Journal from "components/frontend/journal";
 import { useSettings } from "hooks";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";

@@ -5,10 +5,10 @@ import { useNavigate } from "react-router";
 import { actionCalloutsAPI } from "api";
 import { useApiCallback } from "hooks";
 import FormContainer from "global/containers/form";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import Layout from "components/backend/layout";
 import useConfirmation from "hooks/useConfirmation";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 
 function ActionCalloutForm({ calloutable, closeUrl, fetcher, actionCallout }) {
   const { t } = useTranslation();

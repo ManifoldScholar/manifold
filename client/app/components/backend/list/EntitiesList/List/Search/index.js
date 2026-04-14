@@ -1,7 +1,7 @@
 import { useState, useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
-import Collapse from "global/components/Collapse";
+import Utility from "components/global/utility";
+import Collapse from "components/global/Collapse";
 import classNames from "classnames";
 import isPlainObject from "lodash/isPlainObject";
 import { useTranslation } from "react-i18next";

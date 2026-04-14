@@ -6,7 +6,7 @@ import Slot from "./Slot";
 import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import { actionCalloutsAPI } from "api";
 import { useApiCallback } from "hooks";
-import ClientOnly from "global/components/utility/ClientOnly";
+import ClientOnly from "components/global/utility/ClientOnly";
 import * as Styled from "./styles";
 
 const slots = {

@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import { resourceCollectionsAPI } from "api";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
-import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
-import HeadContent from "global/components/HeadContent";
-import EntityCollection from "frontend/components/entity/Collection";
-import ResourceCollectionAnnotations from "frontend/components/resource-collection/Annotations";
+import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
+import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
+import HeadContent from "components/global/HeadContent";
+import EntityCollection from "components/frontend/entity/Collection";
+import ResourceCollectionAnnotations from "components/frontend/resource-collection/Annotations";
 import { useListSearchParams, useListFilters } from "hooks";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadList from "app/routes/utility/loaders/loadList";

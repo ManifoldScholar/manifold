@@ -9,7 +9,7 @@ import EntitiesList, {
   ProjectRow
 } from "components/backend/list/EntitiesList";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import { useListQueryParams, useApiCallback } from "hooks";
 import loadList from "app/routes/utility/loaders/loadList";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";

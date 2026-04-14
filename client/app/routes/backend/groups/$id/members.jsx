@@ -4,7 +4,7 @@ import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import EntitiesList, {
   ReadingGroupMemberRow
 } from "components/backend/list/EntitiesList";

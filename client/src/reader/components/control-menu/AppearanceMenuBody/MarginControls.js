@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import Section from "./Section";
 
 const BUTTON_CLASS = classNames(

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
-import { getRangeValues } from "global/components/utility/EntityCount/Range";
+import { getRangeValues } from "components/global/utility/EntityCount/Range";
 import * as Styled from "./styles";
 
 export default function SelectAll({

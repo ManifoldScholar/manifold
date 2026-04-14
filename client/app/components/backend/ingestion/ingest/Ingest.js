@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams, useRevalidator } from "react-router";
-import NavigationBlocker from "global/components/router/NavigationBlocker";
+import NavigationBlocker from "components/global/router/NavigationBlocker";
 import Heading from "./Heading";
 import Actions from "./Actions";
 import Log from "./Log";

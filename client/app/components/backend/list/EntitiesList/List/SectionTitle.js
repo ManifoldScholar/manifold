@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import isNil from "lodash/isNil";
-import FormSectionLabel from "global/components/form/SectionLabel";
+import FormSectionLabel from "components/global/form/SectionLabel";
 
 export default class ListEntitiesListSectionTitle extends PureComponent {
   static displayName = "List.Entities.List.SectionTitle";

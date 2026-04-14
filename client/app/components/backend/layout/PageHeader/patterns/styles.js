@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { respond, fluidScale, defaultHoverStyle } from "theme/styles/mixins";
-import IconComposer from "global/components/utility/IconComposer";
-import UniqueIcons from "global/components/icon/unique";
+import IconComposer from "components/global/utility/IconComposer";
+import UniqueIcons from "components/global/icon/unique";
 import { Link } from "react-router";
 import { transientOptions } from "helpers/emotionHelpers";
 

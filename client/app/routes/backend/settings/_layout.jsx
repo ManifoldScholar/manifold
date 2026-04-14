@@ -4,7 +4,7 @@ import { settingsAPI } from "api";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Layout from "components/backend/layout";
-import HeadContent from "global/components/HeadContent";
+import HeadContent from "components/global/HeadContent";
 import navigation from "helpers/router/navigation";
 
 export const loader = async ({ request, context }) => {

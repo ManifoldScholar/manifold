@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import Utility from "global/components/utility";
-import PopoverMenu from "global/components/popover/Menu";
+import Utility from "components/global/utility";
+import PopoverMenu from "components/global/popover/Menu";
 
 export default function ProjectCollectionListItem({
   entity,

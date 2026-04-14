@@ -2,8 +2,8 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Citation from "./Citation";
-import FromNodes from "global/components/Annotation/Annotation/TextContent/FromNodes";
-import IconComposer from "global/components/utility/IconComposer";
+import FromNodes from "components/global/Annotation/Annotation/TextContent/FromNodes";
+import IconComposer from "components/global/utility/IconComposer";
 
 export default class AnnotationShareWrapper extends PureComponent {
   static displayName = "Annotation.Share.Wrapper";

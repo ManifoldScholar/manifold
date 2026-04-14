@@ -6,9 +6,9 @@ import {
   resourcesAPI,
   resourceCollectionsAPI
 } from "api";
-import HeadContent from "global/components/HeadContent";
-import useEntityHeadContent from "frontend/components/entity/useEntityHeadContent";
-import EventTracker, { EVENTS } from "global/components/EventTracker";
+import HeadContent from "components/global/HeadContent";
+import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
+import EventTracker, { EVENTS } from "components/global/EventTracker";
 import { useContext } from "react";
 import { ReaderContext } from "app/contexts";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";

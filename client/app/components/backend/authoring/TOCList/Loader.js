@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import ClientOnly from "global/components/utility/ClientOnly";
+import ClientOnly from "components/global/utility/ClientOnly";
 import * as Styled from "./styles";
 
 const TOCList = lazy(() => import("./List"));

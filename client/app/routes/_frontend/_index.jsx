@@ -7,9 +7,9 @@ import {
 import { routerContext } from "app/contexts";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
-import Content from "frontend/components/home/Content";
-import EventTracker, { EVENTS } from "global/components/EventTracker";
-import HeadContent from "global/components/HeadContent";
+import Content from "components/frontend/home/Content";
+import EventTracker, { EVENTS } from "components/global/EventTracker";
+import HeadContent from "components/global/HeadContent";
 
 const COLLECTION_FILTERS = {
   visibleOnHomepage: true,

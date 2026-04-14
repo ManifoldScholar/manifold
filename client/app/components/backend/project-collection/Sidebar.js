@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import List from "./List";
 
 export default function Sidebar({ projectCollections }) {

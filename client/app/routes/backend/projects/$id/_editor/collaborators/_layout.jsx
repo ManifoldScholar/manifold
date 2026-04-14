@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import { collaboratorsAPI, projectsAPI } from "api";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   ContributorRow
 } from "components/backend/list/EntitiesList";
 import Authorization from "helpers/authorization";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 

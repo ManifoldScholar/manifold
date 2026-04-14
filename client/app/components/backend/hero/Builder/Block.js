@@ -1,6 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import Collapse from "global/components/Collapse";
+import Collapse from "components/global/Collapse";
 import HeaderDetail from "./BlockHeaderDetail";
 
 const Block = props => {

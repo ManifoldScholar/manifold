@@ -3,12 +3,12 @@ import { useFetcher, useNavigate } from "react-router";
 import { subjectsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 import Layout from "components/backend/layout";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 
 export const handle = { drawer: true };
 

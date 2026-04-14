@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import Layout from "components/backend/layout";
 import { FormContext } from "helpers/contexts";
-import Form from "global/components/form";
-import Dialog from "global/components/dialog";
+import Form from "components/global/form";
+import Dialog from "components/global/dialog";
 import { usersAPI } from "api";
 import { useConfirmation } from "hooks";
 

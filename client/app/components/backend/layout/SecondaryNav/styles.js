@@ -6,7 +6,7 @@ import {
   defaultTransitionProps
 } from "theme/styles/mixins";
 import { NavLink } from "react-router";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 
 export const Nav = styled.nav`
   font-family: var(--font-family-sans);

@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "global/components/FormattedDate";
+import FormattedDate from "components/global/FormattedDate";
 
 import EntityRow from "./Row";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import Checkbox from "../List/bulkActions/Checkbox";
 import { useTranslation } from "react-i18next";
 

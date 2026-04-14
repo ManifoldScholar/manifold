@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import capitalize from "lodash/capitalize";
 import { ReaderContext } from "app/contexts";
 import { ResourceMarkerContext } from "./context";

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import capitalize from "lodash/capitalize";
 import classNames from "classnames";
 import has from "lodash/has";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import { useTranslation } from "react-i18next";
 import { useAuthentication, useReadingGroups, useLoaderEntity } from "hooks";
 

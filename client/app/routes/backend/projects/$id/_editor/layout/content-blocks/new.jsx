@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { contentBlocksAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import FormContainer from "global/containers/form";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import ContentBlock from "components/backend/content-block";
 
 export const handle = { drawer: true };

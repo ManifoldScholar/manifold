@@ -5,7 +5,7 @@ import {
   subtitlePrimary,
   respond
 } from "theme/styles/mixins";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 
 export const Header = styled.header`
   padding-bottom: ${({ $small }) =>

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import SetCSSProperty from "global/components/utility/SetCSSProperty";
-import PressLogo from "global/components/PressLogo";
-import HeaderLogo from "global/components/atomic/HeaderLogo";
-import IconComposer from "global/components/utility/IconComposer";
+import SetCSSProperty from "components/global/utility/SetCSSProperty";
+import PressLogo from "components/global/PressLogo";
+import HeaderLogo from "components/global/atomic/HeaderLogo";
+import IconComposer from "components/global/utility/IconComposer";
 
 const DEFAULTS = {
   accentColor: "#52e3ac",

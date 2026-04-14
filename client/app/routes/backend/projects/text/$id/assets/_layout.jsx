@@ -4,9 +4,9 @@ import { ingestionSourcesAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
 import { useListQueryParams, useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import Form from "global/components/form";
-import Dialog from "global/components/dialog";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import Form from "components/global/form";
+import Dialog from "components/global/dialog";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   Search,

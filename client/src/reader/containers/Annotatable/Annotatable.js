@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { SignInUpOverlayContext } from "global/components/sign-in-up/Overlay/context";
+import { SignInUpOverlayContext } from "components/global/sign-in-up/Overlay/context";
 import AnnotatableDebug from "./handlers/Debug";
 import AnnotatableDrawer from "./Drawer";
 import { DisplaySelectModal } from "./Drawer/types";

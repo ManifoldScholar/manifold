@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { useParams, useLocation, useNavigate } from "react-router";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 
 export default function IngestionActions({
   onStart,

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 import { usersAPI } from "api";
-import EntityThumbnail from "global/components/entity-thumbnail";
+import EntityThumbnail from "components/global/entity-thumbnail";
 import * as Styled from "./styles";
 
 const fetchUsers = () => usersAPI.index({ order: "first_name, last_name" });

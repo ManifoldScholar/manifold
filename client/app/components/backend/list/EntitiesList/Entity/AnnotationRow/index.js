@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
-import FormattedDate from "global/components/FormattedDate";
+import FormattedDate from "components/global/FormattedDate";
 import LabelSet from "../LabelSet";
 import Checkbox from "../../List/bulkActions/Checkbox";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";

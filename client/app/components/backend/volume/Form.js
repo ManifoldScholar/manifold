@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 import { useTranslation } from "react-i18next";
 

@@ -5,8 +5,8 @@ import { contactsAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import GlobalForm from "global/containers/form";
-import Form from "global/components/form";
-import HeadContent from "global/components/HeadContent";
+import Form from "components/global/form";
+import HeadContent from "components/global/HeadContent";
 
 export async function action({ request, context }) {
   const data = await request.json();

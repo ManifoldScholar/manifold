@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import Overlay from "global/components/Overlay";
+import Overlay from "components/global/Overlay";
 import TextMeta from "reader/components/TextMeta";
 import ReaderFullNotes from "reader/containers/ReaderFullNotes";
 import Toc from "reader/components/Toc";

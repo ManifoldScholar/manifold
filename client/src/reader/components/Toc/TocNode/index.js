@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Collecting from "frontend/components/collecting";
+import Collecting from "components/frontend/collecting";
 import * as Styled from "./styles";
 
 function TocNode({ node, onClick, linkTo, active, children }) {

@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import classNames from "classnames";
 import { projectCollectionsAPI } from "api";
 import ProjectCollection from "components/backend/project-collection";
-import HeadContent from "global/components/HeadContent";
-import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
+import HeadContent from "components/global/HeadContent";
+import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { fluidScale } from "theme/styles/mixins";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadList from "app/routes/utility/loaders/loadList";

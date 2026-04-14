@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import classNames from "classnames";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 
 const ControlMenuDisclosureButton = (props, ref) => {
   const { label, visible, icon, ...rest } = props;

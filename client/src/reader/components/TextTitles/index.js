@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Collecting from "frontend/components/collecting";
+import Collecting from "components/frontend/collecting";
 
 export default class TextTitles extends Component {
   static propTypes = {

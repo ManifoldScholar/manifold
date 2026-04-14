@@ -1,6 +1,6 @@
-import Dialog from "global/components/NativeDialog";
-import ResourcePreview from "frontend/components/resource/Preview";
-import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow/Fetcher";
+import Dialog from "components/global/NativeDialog";
+import ResourcePreview from "components/frontend/resource/Preview";
+import ResourceCollectionSlideshow from "components/frontend/resource-list/SlideShow/Fetcher";
 import useLoaderCollection from "hooks/useLoaderCollection";
 
 export default function ResourceAnnotationDialog({

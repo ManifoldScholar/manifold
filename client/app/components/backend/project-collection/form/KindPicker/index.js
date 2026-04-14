@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Utility from "frontend/components/utility";
+import Utility from "components/frontend/utility";
 import { useFormField } from "hooks";
 import * as Styled from "./styles";
 

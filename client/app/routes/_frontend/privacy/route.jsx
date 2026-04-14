@@ -3,10 +3,10 @@ import { useSubmit } from "react-router";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import { meAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import AccountData from "frontend/components/privacy/AccountData";
-import CookiesForm from "frontend/components/privacy/CookiesForm";
-import Form from "global/components/form";
-import HeadContent from "global/components/HeadContent";
+import AccountData from "components/frontend/privacy/AccountData";
+import CookiesForm from "components/frontend/privacy/CookiesForm";
+import Form from "components/global/form";
+import HeadContent from "components/global/HeadContent";
 import * as Styled from "./styles";
 
 export const loader = async ({ request, context }) => {

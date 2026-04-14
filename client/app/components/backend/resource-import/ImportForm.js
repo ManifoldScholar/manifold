@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
-import Form from "global/components/form";
-import IconComposer from "global/components/utility/IconComposer";
+import Form from "components/global/form";
+import IconComposer from "components/global/utility/IconComposer";
 
 const buttonClasses = classNames(
   "buttons-icon-horizontal__button",

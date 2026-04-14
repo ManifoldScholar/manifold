@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import { useTranslation } from "react-i18next";
 import throttle from "lodash/throttle";
 

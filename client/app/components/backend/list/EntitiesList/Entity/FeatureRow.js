@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import FormattedDate from "global/components/FormattedDate";
+import FormattedDate from "components/global/FormattedDate";
 
 import truncate from "lodash/truncate";
 import EntityRow from "./Row";
-import EntityThumbnail from "global/components/entity-thumbnail";
-import Utility from "global/components/utility";
+import EntityThumbnail from "components/global/entity-thumbnail";
+import Utility from "components/global/utility";
 import { withTranslation } from "react-i18next";
 
 class FeatureRow extends PureComponent {

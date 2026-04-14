@@ -1,7 +1,7 @@
 import { useId } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import ClientOnly from "global/components/utility/ClientOnly";
+import ClientOnly from "components/global/utility/ClientOnly";
 import Title from "./Title";
 import Instructions from "./Instructions";
 import Pagination from "./Pagination";

@@ -4,10 +4,10 @@ import { makersAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import { useApiCallback, useConfirmation } from "hooks";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 import Layout from "components/backend/layout";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 
 export const handle = { drawer: true };
 

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import Breadcrumbs, {
   BreadcrumbsContext
-} from "global/components/atomic/Breadcrumbs";
+} from "components/global/atomic/Breadcrumbs";
 import {
   Text,
   Project,

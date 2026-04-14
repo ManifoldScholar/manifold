@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { annotationsAPI } from "api";
-import Annotation from "global/components/Annotation";
+import Annotation from "components/global/Annotation";
 import { useFetch, useAuthentication } from "hooks";
 
 export default function AnnotationList({

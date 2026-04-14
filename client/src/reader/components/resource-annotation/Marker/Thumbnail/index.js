@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useContext, useState, useMemo } from "react";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import { ReaderContext } from "app/contexts";
 import { useWindowSize } from "usehooks-ts";
 import capitalize from "lodash/capitalize";

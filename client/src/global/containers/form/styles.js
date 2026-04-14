@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import GlobalForm from "global/components/form";
+import GlobalForm from "components/global/form";
 
 export const ErrorGroup = styled(GlobalForm.Errorable)`
   margin-bottom: 15px;

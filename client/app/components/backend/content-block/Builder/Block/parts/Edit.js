@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import { withTranslation } from "react-i18next";
 
 class ProjectContentBlockInListPartsEdit extends PureComponent {

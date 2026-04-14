@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 
 export default function FeaturesProperties({ feature, fetcher, onDirty }) {

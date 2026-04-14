@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import EntityRow from "./Row";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 
 export default function TextTrackRow({
   entity,

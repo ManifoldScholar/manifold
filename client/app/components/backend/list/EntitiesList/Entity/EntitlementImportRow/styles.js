@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Collapse from "global/components/Collapse";
+import Collapse from "components/global/Collapse";
 import { buttonUnstyled, formLabelPrimary, rgba } from "theme/styles/mixins";
 
 export const Toggle = styled(Collapse.Toggle)`

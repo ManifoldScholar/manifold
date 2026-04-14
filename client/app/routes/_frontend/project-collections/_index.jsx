@@ -3,10 +3,10 @@ import { projectCollectionsAPI } from "api";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import CollectionNavigation from "frontend/components/CollectionNavigation";
-import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
-import EntityCollection from "frontend/components/entity/Collection";
-import HeadContent from "global/components/HeadContent";
+import CollectionNavigation from "components/frontend/CollectionNavigation";
+import EntityCollectionPlaceholder from "components/global/entity/CollectionPlaceholder";
+import EntityCollection from "components/frontend/entity/Collection";
+import HeadContent from "components/global/HeadContent";
 import { useListFilters, useListSearchParams } from "hooks";
 
 const FILTER_RESET = { visible: "true", order: "position ASC" };

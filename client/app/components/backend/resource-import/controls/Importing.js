@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import IconComposer from "global/components/utility/IconComposer";
-import SectionLabel from "global/components/form/SectionLabel";
+import IconComposer from "components/global/utility/IconComposer";
+import SectionLabel from "components/global/form/SectionLabel";
 import { withTranslation } from "react-i18next";
 
 class ResourceImportControlsImporting extends PureComponent {

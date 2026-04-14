@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
 import MaskedInput from "react-text-mask";
-import Header from "global/components/form/DatePicker/Header";
-import Utility from "global/components/utility";
-import ClientOnly from "global/components/utility/ClientOnly";
+import Header from "components/global/form/DatePicker/Header";
+import Utility from "components/global/utility";
+import ClientOnly from "components/global/utility/ClientOnly";
 
 function DatePicker({ parentId, inputId, value, onChange, label }) {
   const [pickerOpen, setPickerOpen] = useState(false);

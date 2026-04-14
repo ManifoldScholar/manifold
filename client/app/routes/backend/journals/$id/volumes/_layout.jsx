@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useOutletContext, useParams } from "react-router";
 import { journalVolumesAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
-import OutletWithDrawers from "global/components/router/OutletWithDrawers";
+import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   JournalVolumeRow

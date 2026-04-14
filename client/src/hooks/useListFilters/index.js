@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import filterTypes from "global/components/list/Filters/types";
+import filterTypes from "components/global/list/Filters/types";
 import isEqual from "lodash/isEqual";
 import { useTranslation } from "react-i18next";
 

@@ -1,5 +1,5 @@
 import { useSubmit, useOutletContext } from "react-router";
-import ReadingGroupSettings from "frontend/components/reading-group/Settings";
+import ReadingGroupSettings from "components/frontend/reading-group/Settings";
 
 export default function ReadingGroupSettingsRoute({ actionData }) {
   const submit = useSubmit();

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ReaderContext } from "app/contexts";
 
-import { ListFilters } from "global/components/list";
+import { ListFilters } from "components/global/list";
 import { withTranslation } from "react-i18next";
 
 class GroupFilter extends Component {

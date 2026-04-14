@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import Section from "./Section";
 
 const FONT_STYLE_OPTIONS = [

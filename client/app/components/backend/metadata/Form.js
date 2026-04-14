@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import humps from "utils/humps";
 import intersection from "lodash/intersection";
 import reduce from "lodash/reduce";

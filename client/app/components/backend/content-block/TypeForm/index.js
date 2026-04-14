@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import typeResolver from "../helpers/resolver";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import { useTranslation } from "react-i18next";
 import { FormContext } from "helpers/contexts";
 import { brackets2dots } from "utils/string";

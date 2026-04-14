@@ -19,7 +19,7 @@ import {
   SelectAll,
   BulkActionButtons
 } from "components/backend/list/EntitiesList/List/bulkActions";
-import Dialog from "global/components/dialog";
+import Dialog from "components/global/dialog";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
 export const loader = async ({ request, context }) => {

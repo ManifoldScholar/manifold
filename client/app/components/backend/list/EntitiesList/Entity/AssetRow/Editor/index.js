@@ -1,4 +1,4 @@
-import EntityThumbnail from "global/components/entity-thumbnail";
+import EntityThumbnail from "components/global/entity-thumbnail";
 import * as Styled from "./styles";
 
 export default function EditorAssetRow({

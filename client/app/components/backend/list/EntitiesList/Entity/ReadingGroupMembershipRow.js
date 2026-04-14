@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import EntityRow from "./Row";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 import { useTranslation } from "react-i18next";
 
 function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FormContext } from "helpers/contexts";
-import Form from "global/components/form";
-import InputError from "global/components/form/InputError";
+import Form from "components/global/form";
+import InputError from "components/global/form/InputError";
 import { useTranslation, Trans } from "react-i18next";
 import { makersAPI, collaboratorsAPI } from "api";
 import { useApiCallback } from "hooks";

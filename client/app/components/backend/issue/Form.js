@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import PropTypes from "prop-types";
-import Form from "global/components/form";
+import Form from "components/global/form";
 import FormContainer from "global/containers/form";
 import { journalVolumesAPI, projectsAPI } from "api";
 import EntitiesList, { ProjectRow } from "components/backend/list/EntitiesList";

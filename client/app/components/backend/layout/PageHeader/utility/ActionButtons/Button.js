@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import classNames from "classnames";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import Authorize from "hoc/Authorize";
 import { getLinkOrButtonProps } from "../helpers";
 import { useTranslation } from "react-i18next";

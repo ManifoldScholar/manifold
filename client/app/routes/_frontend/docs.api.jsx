@@ -1,8 +1,8 @@
 import { routerContext } from "app/contexts";
-import ApiDocs from "frontend/components/ApiDocs";
-import EntityCollection from "frontend/components/entity/Collection/EntityCollection";
+import ApiDocs from "components/frontend/ApiDocs";
+import EntityCollection from "components/frontend/entity/Collection/EntityCollection";
 import { useAuthentication } from "hooks";
-import HeadContent from "global/components/HeadContent";
+import HeadContent from "components/global/HeadContent";
 
 const API_DOCS_URL = `${
   import.meta.env.VITE_API_URL
