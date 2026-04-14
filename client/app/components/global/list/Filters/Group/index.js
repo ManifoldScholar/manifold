@@ -5,7 +5,7 @@ import Search from "../Search";
 import Filter from "../Filter";
 import * as Styled from "./styles";
 
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 
 function FiltersGroup(props) {
   const {

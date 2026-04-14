@@ -7,7 +7,7 @@ import { useThread } from "../Thread/Context";
 import useApiCallback from "hooks/api/useApiCallback";
 import * as Styled from "./styles";
 import GlobalForm from "components/global/form";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 
 const idPrefix = "comment-textarea";
 const idForErrorPrefix = "comment-textarea-error";

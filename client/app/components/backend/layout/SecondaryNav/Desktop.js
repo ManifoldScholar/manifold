@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router";
 import classnames from "classnames";
 
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useTranslation } from "react-i18next";
 
 export default function NavigationSecondary(props) {

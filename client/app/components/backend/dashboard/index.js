@@ -1,5 +1,5 @@
 import { useAuthentication } from "hooks";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import DashboardComponents from "./parts";
 import PageHeader from "components/backend/layout/PageHeader";
 import Authorization from "helpers/authorization";

@@ -4,7 +4,7 @@ import Overlay from "components/global/Overlay";
 import TextMeta from "components/reader/TextMeta";
 import ReaderFullNotes from "reader/containers/ReaderFullNotes";
 import Toc from "components/reader/Toc";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useLoaderEntity } from "hooks";
 
 export default function ReaderOverlay() {

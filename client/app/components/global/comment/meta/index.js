@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import FormattedDate from "components/global/FormattedDate";
 import classNames from "classnames";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import Avatar from "components/global/avatar/index";
 
 class CommentMeta extends PureComponent {

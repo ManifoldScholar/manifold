@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Dialog from "components/global/dialog";
-import hoistStatics from "../hoist-non-react-statics";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -58,7 +57,7 @@ function withConfirmation(WrappedComponent) {
     }
   }
 
-  return hoistStatics(WithConfirmation, WrappedComponent);
+  return WithConfirmation;
 }
 
 export default withConfirmation;

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import FromNodes from "./FromNodes";
 import classNames from "classnames";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import IconComposer from "components/global/utility/IconComposer";
 import SourceSummary from "../SourceSummary";
 

@@ -6,7 +6,7 @@ import {
   Draggable
 } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 import { withTranslation } from "react-i18next";
 
 class SortableEntities extends PureComponent {

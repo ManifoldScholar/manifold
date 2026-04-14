@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import Button from "components/global/atomic/Button";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useLoaderEntity } from "hooks";
 import * as Styled from "components/frontend/resource/Preview/EditorActions/styles";
 

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
 import classNames from "classnames";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import Button from "components/global/atomic/Button";
 
 export default class ListEntitiesListButtonSet extends PureComponent {

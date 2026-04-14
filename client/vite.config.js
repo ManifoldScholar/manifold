@@ -67,7 +67,6 @@ export default defineConfig(() => ({
       reader: path.resolve(__dirname, "src/reader"),
       helpers: path.resolve(__dirname, "src/helpers"),
       hooks: path.resolve(__dirname, "src/hooks"),
-      hoc: path.resolve(__dirname, "src/hoc"),
       api: path.resolve(__dirname, "app/lib/api"),
       utils: path.resolve(__dirname, "src/utils"),
       theme: path.resolve(__dirname, "app/theme")

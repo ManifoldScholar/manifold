@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useAuthentication } from "hooks";
 import * as Styled from "./styles";
 

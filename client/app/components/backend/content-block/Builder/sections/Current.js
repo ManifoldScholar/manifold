@@ -6,7 +6,7 @@ import Block from "../Block";
 import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 
 class ProjectContentSectionsCurrent extends PureComponent {
   static displayName = "Project.Content.Sections.Current";

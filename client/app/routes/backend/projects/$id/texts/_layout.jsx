@@ -5,7 +5,7 @@ import Dialog from "components/global/dialog";
 import TextsList from "components/backend/project/TextsList";
 import { useAuthorizeRoute } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 
 function ProjectTextsLayout({ setScreenReaderStatus, renderLiveRegion }) {
   const { t } = useTranslation();

@@ -7,7 +7,7 @@ import { sectionsAPI } from "api";
 import { useApiCallback } from "hooks";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 
 function SectionsList({
   sections = [],

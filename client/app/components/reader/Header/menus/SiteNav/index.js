@@ -2,7 +2,7 @@ import { useMenuState, MenuItem } from "reakit/Menu";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
 import { useSettings, useFrontendMode, useSignInUpOverlay } from "hooks";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import * as Styled from "./styles";
 
 export default function SiteNav({

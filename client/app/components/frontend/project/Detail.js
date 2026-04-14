@@ -5,7 +5,7 @@ import EntityCollection from "components/frontend/entity/Collection/EntityCollec
 import CollectionNavigation from "components/frontend/CollectionNavigation";
 import ContentBlockList from "components/frontend/content-block-list/List";
 import { Warning } from "components/frontend/content-block/parts";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useSettings, useFrontendMode } from "hooks";
 
 function Detail({ project }) {

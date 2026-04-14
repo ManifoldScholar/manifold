@@ -10,7 +10,7 @@ import EntitiesList, {
   ProjectExportationRow
 } from "components/backend/list/EntitiesList";
 import Form from "components/global/form";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { StyledForm } from "./styles";
 
 export const loader = async ({ params, request, context }) => {

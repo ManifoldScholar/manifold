@@ -7,7 +7,7 @@ import {
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import Stylesheet from "./Stylesheet";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 import ClientOnly from "components/global/utility/ClientOnly";
 
 function StylesheetList({

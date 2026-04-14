@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
 import Form from "components/global/form";
 import SectionsList from "./SectionsList";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 
 function CreateTextForm({
   cancelUrl,

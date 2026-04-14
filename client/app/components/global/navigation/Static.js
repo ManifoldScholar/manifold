@@ -8,7 +8,7 @@ import UserMenuButton from "components/global/UserMenuButton";
 import UserMenuBody from "components/global/UserMenuBody";
 import UIPanel from "components/global/UIPanel";
 import DisclosureNavigationMenu from "components/global/atomic/DisclosureNavigationMenu";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import {
   useShowJournalsActive,
   useSettings,

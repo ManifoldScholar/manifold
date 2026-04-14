@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import IconComposer from "components/global/utility/IconComposer";
 import SourceSummary from "../SourceSummary/index";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import FromNodes from "../TextContent/FromNodes";
 
 export default function ResourceAnnotation({

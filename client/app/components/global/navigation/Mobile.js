@@ -10,7 +10,7 @@ import MobileSearch from "./mobile-components/Search";
 import MobileBreadcrumb from "./mobile-components/Breadcrumb";
 import { FocusTrap } from "focus-trap-react";
 import IconComposer from "components/global/utility/IconComposer";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useBodyClass } from "hooks";
 
 export default function NavigationMobile({ links, backendButton, mode }) {

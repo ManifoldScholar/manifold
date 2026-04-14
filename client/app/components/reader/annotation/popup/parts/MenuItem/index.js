@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import * as Styled from "./styles";
 
 function MenuItem({

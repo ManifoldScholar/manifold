@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import withConfirmation from "hoc/withConfirmation";
+import withConfirmation from "components/hoc/withConfirmation";
 import * as Styled from "./styles";
 
 function Remove({ id, type, onRemove, confirm }) {

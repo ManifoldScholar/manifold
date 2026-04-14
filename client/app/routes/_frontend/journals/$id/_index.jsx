@@ -7,7 +7,7 @@ import EntityCollection from "components/frontend/entity/Collection";
 import { FooterLink } from "components/frontend/entity/Collection/parts";
 import Journal from "components/frontend/journal";
 import { useSettings } from "hooks";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import Schema from "components/global/schema";
 

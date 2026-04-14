@@ -4,7 +4,7 @@ import PrimaryMenu from "./PrimaryMenu";
 import LinkMenu from "./LinkMenu";
 import LoginMenu from "./LoginMenu";
 import HighlightMenu from "./HighlightMenu";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import usePositioner from "./usePositioner";
 import { generateFragmentFromRange } from "../helpers/text-fragments-polyfill/fragment-generation-utils";
 import * as Styled from "./styles";

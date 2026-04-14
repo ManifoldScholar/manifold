@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import ListItem from "./ListItem";
 import EntitiesList from "components/backend/list/EntitiesList";
 import { useParams } from "react-router";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 import { projectCollectionsAPI } from "api";
 import { useApiCallback } from "hooks";
 

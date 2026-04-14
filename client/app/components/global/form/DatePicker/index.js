@@ -7,7 +7,7 @@ import PickerComponent from "./PickerComponent";
 import isDate from "lodash/isDate";
 import { format } from "date-fns/format";
 import Instructions from "../Instructions";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 
 function DatePicker({
   name,

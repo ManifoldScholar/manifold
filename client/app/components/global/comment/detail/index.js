@@ -10,7 +10,7 @@ import Deleted from "../deleted";
 import Helper from "components/global/helper";
 import FlagToggle from "components/global/Annotation/Annotation/UserContent/Flag/Toggle";
 import * as Styled from "components/global/Annotation/Annotation/UserContent/styles";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 
 export default function CommentDetail({ comment, parent }) {
   const { t } = useTranslation();

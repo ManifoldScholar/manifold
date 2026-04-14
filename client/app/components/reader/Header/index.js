@@ -14,7 +14,7 @@ import classNames from "classnames";
 import isEmpty from "lodash/isEmpty";
 import Utility from "components/global/utility";
 import DisclosureNavigationMenu from "components/global/atomic/DisclosureNavigationMenu";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useLogout, useLoaderEntity } from "hooks";
 import useScrollAware from "hooks/useScrollAware";
 import { ReaderContext } from "app/contexts";

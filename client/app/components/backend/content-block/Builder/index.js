@@ -7,7 +7,7 @@ import CurrentSection from "./sections/Current";
 import DraggableEventHelper from "../helpers/draggableEvent";
 import { contentBlocksAPI } from "api";
 import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
-import withConfirmation from "hoc/withConfirmation";
+import withConfirmation from "components/hoc/withConfirmation";
 import ClientOnly from "components/global/utility/ClientOnly";
 
 import configHelper from "../helpers/configurations";

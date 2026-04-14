@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 

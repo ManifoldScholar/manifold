@@ -11,7 +11,7 @@ import { endOfMonth } from "date-fns/endOfMonth";
 import { subMonths } from "date-fns/subMonths";
 import DatePicker from "components/global/form/DatePicker/PickerComponent";
 
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 import { useTranslation } from "react-i18next";
 
 const today = new Date();

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
 import { Link } from "react-router";
 import Utility from "components/global/utility";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
 const HELP_LINK =

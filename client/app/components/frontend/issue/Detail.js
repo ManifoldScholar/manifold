@@ -6,7 +6,7 @@ import EntityHero from "components/frontend/entity/Hero";
 import ContentBlockList from "components/frontend/content-block-list/List";
 import { Warning } from "components/frontend/content-block/parts";
 import { useSettings, useFrontendMode } from "hooks";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 
 function Detail({ issue }) {
   const { isStandalone } = useFrontendMode();

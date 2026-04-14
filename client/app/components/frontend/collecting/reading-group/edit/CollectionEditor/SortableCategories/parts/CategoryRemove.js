@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconComposer from "components/global/utility/IconComposer";
-import withConfirmation from "hoc/withConfirmation";
+import withConfirmation from "components/hoc/withConfirmation";
 import * as Styled from "./styles";
 
 function CategoryRemove({ onRemove, confirm, isMarkdown }) {

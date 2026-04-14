@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
 function ResourceCollectionsPlaceholder({ id }) {

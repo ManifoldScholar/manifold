@@ -8,7 +8,7 @@ import EntitiesList, {
   Search,
   ProjectRow
 } from "components/backend/list/EntitiesList";
-import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 import IconComposer from "components/global/utility/IconComposer";
 import { useListQueryParams, useApiCallback } from "hooks";
 import loadList from "app/routes/utility/loaders/loadList";

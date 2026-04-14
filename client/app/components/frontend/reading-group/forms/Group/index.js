@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Collapse from "components/global/Collapse";
 import Form from "components/global/form";
-import withConfirmation from "hoc/withConfirmation";
+import withConfirmation from "components/hoc/withConfirmation";
 import { ClassNames } from "@emotion/react";
 import { useSettings, useAuthentication } from "hooks";
 import * as Styled from "./styles";

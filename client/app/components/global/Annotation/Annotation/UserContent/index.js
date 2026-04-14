@@ -11,7 +11,7 @@ import InlineToggle from "./InlineToggle";
 import FlagToggle from "./Flag/Toggle";
 import Comment from "components/global/comment";
 import { annotationsAPI } from "api";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { useRevalidator } from "react-router";
 import { useAuthentication } from "hooks";
 import useApiCallback from "hooks/api/useApiCallback";

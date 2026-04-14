@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { getLinkOrButtonProps } from "../helpers";
 import * as Styled from "./styles";
 

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router";
 import { useTranslation, Trans } from "react-i18next";
-import Authorize from "hoc/Authorize";
+import Authorize from "components/hoc/Authorize";
 import { Actions, Body, Title, Wrapper } from "../parts";
 
 const HELP_LINK = "https://manifoldscholar.github.io/manifold-docusaurus/docs";
