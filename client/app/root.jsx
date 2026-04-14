@@ -4,7 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
 import get from "lodash/get";
-import Analytics from "./contexts/Analytics";
+import Analytics from "contexts/Analytics";
 import Utility from "components/global/utility";
 import LoadingBar from "components/global/LoadingBar";
 import CookiesBanner from "components/global/CookiesBanner";
@@ -15,8 +15,8 @@ import { ErrorBoundary } from "./RootErrorBoundary";
 
 // Middleware and contexts
 import { bootstrapMiddleware } from "lib/middleware/bootstrap.server";
-import { routerContext, AppContext } from "./contexts";
-import NotificationProvider from "./contexts/NotificationProvider";
+import { routerContext, AppContext } from "contexts";
+import NotificationProvider from "contexts/NotificationProvider";
 
 // Export middleware
 export const middleware = [bootstrapMiddleware];

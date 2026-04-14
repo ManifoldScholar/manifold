@@ -66,7 +66,7 @@ export default defineConfig(() => ({
       helpers: path.resolve(__dirname, "app/lib/helpers"),
       hooks: path.resolve(__dirname, "app/hooks"),
       api: path.resolve(__dirname, "app/lib/api"),
-      utils: path.resolve(__dirname, "app/utils"),
+      utils: path.resolve(__dirname, "app/lib/utils"),
       theme: path.resolve(__dirname, "app/theme")
     }
   },
