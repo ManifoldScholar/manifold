@@ -36,6 +36,7 @@ export default function FormSwitch({
   const formField = useFormField(name || "");
 
   // Use controlled props if provided, otherwise use form field
+  // eslint-disable-next-line no-nested-ternary
   const value = isControlled ? valueProp : name ? formField.value : undefined;
   const set = formField.set;
 

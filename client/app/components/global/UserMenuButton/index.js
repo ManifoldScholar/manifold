@@ -14,8 +14,8 @@ const UserMenuButton = forwardRef(
     function handleClick(event) {
       event.stopPropagation();
       if (authenticated) {
-        callbacks?.toggleUserPanel();
-        onClick?.(event);
+        if (callbacks?.toggleUserPanel) callbacks.toggleUserPanel();
+        if (onClick) onClick(event);
       } else {
         toggleSignInUpOverlay();
       }
