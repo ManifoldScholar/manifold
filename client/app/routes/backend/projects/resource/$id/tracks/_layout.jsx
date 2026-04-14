@@ -4,11 +4,11 @@ import textTracksAPI from "api/resources/textTracks";
 import EntitiesList, {
   Button,
   TextTrackRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import { useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import { useRevalidator } from "react-router";
-import PageHeader from "backend/components/layout/PageHeader";
+import PageHeader from "components/backend/layout/PageHeader";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import Dialog from "global/components/dialog";
 import { queryApi } from "app/routes/utility/helpers/queryApi";

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import Footers from "global/components/Footers";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import { useBodyClass } from "hooks";
 import { BreadcrumbsProvider } from "global/components/atomic/Breadcrumbs";
 import { useScrollToTop } from "hooks";

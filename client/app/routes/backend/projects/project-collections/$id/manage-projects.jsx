@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { useOutletContext, useNavigate, useRevalidator } from "react-router";
-import ProjectCollection from "backend/components/project-collection";
+import ProjectCollection from "components/backend/project-collection";
 import { projectsAPI, collectionProjectsAPI } from "api";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import EntitiesList, {
   Search,
   ProjectRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import IconComposer from "global/components/utility/IconComposer";
 import { useListQueryParams, useApiCallback } from "hooks";

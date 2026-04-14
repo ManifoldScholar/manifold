@@ -2,8 +2,8 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext } from "react-router";
 import { textsAPI } from "api";
-import Layout from "backend/components/layout";
-import AddEditTOCEntryForm from "backend/components/authoring/AddEditTOCEntryForm";
+import Layout from "components/backend/layout";
+import AddEditTOCEntryForm from "components/backend/authoring/AddEditTOCEntryForm";
 import formAction from "app/routes/utility/helpers/formAction";
 
 export const handle = { drawer: true };

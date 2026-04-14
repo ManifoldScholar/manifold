@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext, useParams } from "react-router";
 import { textsAPI } from "api";
-import Layout from "backend/components/layout";
-import AddEditTOCEntryForm from "backend/components/authoring/AddEditTOCEntryForm";
-import { formatTOCData } from "backend/components/authoring/TOCList/treeHelpers";
+import Layout from "components/backend/layout";
+import AddEditTOCEntryForm from "components/backend/authoring/AddEditTOCEntryForm";
+import { formatTOCData } from "components/backend/authoring/TOCList/treeHelpers";
 import formAction from "app/routes/utility/helpers/formAction";
 
 export const handle = { drawer: true };

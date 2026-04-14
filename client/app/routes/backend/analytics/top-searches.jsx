@@ -4,8 +4,8 @@ import {
   AnalyticsFactory,
   Grid,
   RangePicker
-} from "backend/components/analytics";
-import PageHeader from "backend/components/layout/PageHeader";
+} from "components/backend/analytics";
+import PageHeader from "components/backend/layout/PageHeader";
 import useAnalyticsReport from "hooks/useAnalyticsReport";
 import { Link } from "react-router";
 

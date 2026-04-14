@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { exportTargetsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Layout from "backend/components/layout";
-import ExportTargetForm from "backend/components/export-targets/Form";
+import Layout from "components/backend/layout";
+import ExportTargetForm from "components/backend/export-targets/Form";
 
 export const handle = { drawer: true };
 

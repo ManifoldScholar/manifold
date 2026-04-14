@@ -12,13 +12,13 @@ import EntitiesList, {
   Button,
   Search,
   UserRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
   SelectAll,
   BulkActionButtons
-} from "backend/components/list/EntitiesList/List/bulkActions";
+} from "components/backend/list/EntitiesList/List/bulkActions";
 import Dialog from "global/components/dialog";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 

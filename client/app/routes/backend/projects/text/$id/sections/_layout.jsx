@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useOutletContext } from "react-router";
 import IconComposer from "global/components/utility/IconComposer";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
-import SectionsList from "backend/components/authoring/SectionsList";
+import SectionsList from "components/backend/authoring/SectionsList";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "global/components/dialog";
 import * as Styled from "./styles";

@@ -7,9 +7,9 @@ import {
 } from "react-router";
 import { permissionsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import Dialog from "global/components/dialog";
-import PermissionForm from "backend/components/permission/Form";
+import PermissionForm from "components/backend/permission/Form";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 

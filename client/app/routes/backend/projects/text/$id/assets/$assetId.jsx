@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext } from "react-router";
 import { ingestionSourcesAPI } from "api";
-import Layout from "backend/components/layout";
-import AddEditAssetForm from "backend/components/authoring/AddEditAssetForm";
+import Layout from "components/backend/layout";
+import AddEditAssetForm from "components/backend/authoring/AddEditAssetForm";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import formAction from "app/routes/utility/helpers/formAction";
 

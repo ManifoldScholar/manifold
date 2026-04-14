@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { pendingEntitlementsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Layout from "backend/components/layout";
-import { AddEditForm } from "backend/components/pending-entitlements";
+import Layout from "components/backend/layout";
+import { AddEditForm } from "components/backend/pending-entitlements";
 
 export const handle = { drawer: true };
 

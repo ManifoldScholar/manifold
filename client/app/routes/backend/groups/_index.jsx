@@ -9,13 +9,13 @@ import Dialog from "global/components/dialog";
 import EntitiesList, {
   Search,
   ReadingGroupRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
   SelectAll,
   BulkActionButtons
-} from "backend/components/list/EntitiesList/List/bulkActions";
+} from "components/backend/list/EntitiesList/List/bulkActions";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
 export const loader = async ({ request, context }) => {

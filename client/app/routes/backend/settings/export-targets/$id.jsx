@@ -3,11 +3,11 @@ import { useFetcher, useNavigate } from "react-router";
 import { exportTargetsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "global/components/dialog";
-import ExportTargetForm from "backend/components/export-targets/Form";
+import ExportTargetForm from "components/backend/export-targets/Form";
 
 export const handle = { drawer: true };
 

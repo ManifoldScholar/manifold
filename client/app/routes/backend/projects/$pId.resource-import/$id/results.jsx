@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useParams, useOutletContext, useRevalidator } from "react-router";
 import { resourceImportsAPI } from "api";
 import { useApiCallback } from "hooks";
-import ResourceImport from "backend/components/resource-import";
+import ResourceImport from "components/backend/resource-import";
 
 export default function ResourceImportResults() {
   const { pId, id } = useParams();

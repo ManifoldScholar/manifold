@@ -2,7 +2,7 @@ import { useOutletContext, useFetcher } from "react-router";
 import { ingestionsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import formAction from "app/routes/utility/helpers/formAction";
-import Ingestion from "backend/components/ingestion";
+import Ingestion from "components/backend/ingestion";
 
 export const loader = async ({ params, request, context }) => {
   return loadEntity({

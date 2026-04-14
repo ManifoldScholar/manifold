@@ -3,7 +3,7 @@ import { Link, useOutletContext, useRevalidator } from "react-router";
 import classNames from "classnames";
 import { stylesheetsAPI } from "api";
 import IconComposer from "global/components/utility/IconComposer";
-import Stylesheet from "backend/components/stylesheet";
+import Stylesheet from "components/backend/stylesheet";
 import Dialog from "global/components/dialog";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";

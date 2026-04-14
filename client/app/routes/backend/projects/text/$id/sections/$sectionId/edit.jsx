@@ -3,7 +3,7 @@ import { sectionsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
-import EditSectionForm from "backend/components/authoring/EditSectionForm";
+import EditSectionForm from "components/backend/authoring/EditSectionForm";
 
 export const handle = { drawer: "editor" };
 

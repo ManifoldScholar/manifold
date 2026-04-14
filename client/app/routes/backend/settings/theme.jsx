@@ -2,11 +2,11 @@ import { useOutletContext, useFetcher } from "react-router";
 import { useTranslation } from "react-i18next";
 import { settingsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import PageHeader from "backend/components/layout/PageHeader";
-import HeaderPreview from "backend/components/theme/HeaderPreview";
+import PageHeader from "components/backend/layout/PageHeader";
+import HeaderPreview from "components/backend/theme/HeaderPreview";
 
 export const action = formAction({
   mutation: ({ data }) => settingsAPI.update(null, data)

@@ -11,8 +11,8 @@ import EntitiesList, {
   Button,
   Search,
   PendingEntitlementRow
-} from "backend/components/list/EntitiesList";
-import PageHeader from "backend/components/layout/PageHeader";
+} from "components/backend/list/EntitiesList";
+import PageHeader from "components/backend/layout/PageHeader";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
 export const loader = async ({ request, context }) => {

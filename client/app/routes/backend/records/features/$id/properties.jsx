@@ -4,12 +4,12 @@ import { useTranslation } from "react-i18next";
 import { featuresAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import formAction from "app/routes/utility/helpers/formAction";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import Dialog from "global/components/dialog";
 import Form from "global/components/form";
 import FrontendLayout from "frontend/components/layout";
-import PageHeader from "backend/components/layout/PageHeader";
-import Properties from "backend/components/feature/Properties";
+import PageHeader from "components/backend/layout/PageHeader";
+import Properties from "components/backend/feature/Properties";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 
 export const loader = async ({ params, context, request }) => {

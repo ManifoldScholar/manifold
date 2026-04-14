@@ -9,7 +9,7 @@ import EntitiesList, {
   Button,
   Search,
   ResourceRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import { INIT_SEARCH_PROPS } from "./filters";
 
 export const loader = async ({ params, request, context }) => {

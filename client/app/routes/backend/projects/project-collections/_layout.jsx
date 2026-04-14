@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import classNames from "classnames";
 import { projectCollectionsAPI } from "api";
-import ProjectCollection from "backend/components/project-collection";
+import ProjectCollection from "components/backend/project-collection";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { fluidScale } from "theme/styles/mixins";

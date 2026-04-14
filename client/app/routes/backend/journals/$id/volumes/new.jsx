@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { journalVolumesAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Volume from "backend/components/volume";
-import Layout from "backend/components/layout";
+import Volume from "components/backend/volume";
+import Layout from "components/backend/layout";
 
 export const handle = { drawer: true };
 

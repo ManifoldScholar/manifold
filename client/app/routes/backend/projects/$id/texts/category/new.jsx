@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { textCategoriesAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Layout from "backend/components/layout";
-import Category from "backend/components/category";
+import Layout from "components/backend/layout";
+import Category from "components/backend/category";
 
 export const handle = { drawer: true };
 

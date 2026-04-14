@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import { useArchiveOrActivateGroup } from "frontend/components/reading-group/hooks";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
 import { readingGroupsAPI } from "api";

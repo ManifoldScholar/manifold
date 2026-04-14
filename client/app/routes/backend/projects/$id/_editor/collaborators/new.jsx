@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useOutletContext, useFetcher } from "react-router";
 import { collaboratorsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Layout from "backend/components/layout";
-import AddCollaboratorForm from "backend/components/collaborator/AddForm";
+import Layout from "components/backend/layout";
+import AddCollaboratorForm from "components/backend/collaborator/AddForm";
 
 export const handle = { drawer: true };
 

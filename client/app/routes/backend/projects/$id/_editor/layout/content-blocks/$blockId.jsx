@@ -9,7 +9,7 @@ import loadEntity from "app/routes/utility/loaders/loadEntity";
 import FormContainer from "global/containers/form";
 import Form from "global/components/form";
 import Dialog from "global/components/dialog";
-import ContentBlock from "backend/components/content-block";
+import ContentBlock from "components/backend/content-block";
 
 export const handle = { drawer: true };
 

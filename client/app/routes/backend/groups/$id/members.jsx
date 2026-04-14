@@ -7,7 +7,7 @@ import useConfirmation from "hooks/useConfirmation";
 import Dialog from "global/components/dialog";
 import EntitiesList, {
   ReadingGroupMemberRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 
 export const loader = async ({ params, request, context }) => {
   return loadList({

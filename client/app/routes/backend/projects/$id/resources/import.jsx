@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext } from "react-router";
-import Layout from "backend/components/layout";
-import PageHeader from "backend/components/layout/PageHeader";
+import Layout from "components/backend/layout";
+import PageHeader from "components/backend/layout/PageHeader";
 import { resourceImportsAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getResourceBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
 import formAction from "app/routes/utility/helpers/formAction";
-import ImportForm from "backend/components/resource-import/ImportForm";
+import ImportForm from "components/backend/resource-import/ImportForm";
 
 export const action = formAction({
   mutation: ({ data, params }) => resourceImportsAPI.create(params.id, data),

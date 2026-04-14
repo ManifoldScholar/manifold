@@ -4,7 +4,7 @@ import loadList from "app/routes/utility/loaders/loadList";
 import EntitiesList, {
   Button,
   PageRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 
 export const loader = async ({ request, context }) => {
   return loadList({ request, context, fetchFn: pagesAPI.index });

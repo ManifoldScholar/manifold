@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router";
-import Layout from "backend/components/layout";
-import PageHeader from "backend/components/layout/PageHeader";
+import Layout from "components/backend/layout";
+import PageHeader from "components/backend/layout/PageHeader";
 import { projectsAPI, resourceImportsAPI } from "api";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";

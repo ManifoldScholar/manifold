@@ -5,8 +5,8 @@ import formAction from "app/routes/utility/helpers/formAction";
 import authorize from "app/routes/utility/loaders/authorize";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import PageHeader from "backend/components/layout/PageHeader";
-import Layout from "backend/components/layout";
+import PageHeader from "components/backend/layout/PageHeader";
+import Layout from "components/backend/layout";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
 const DEFAULT_PROJECT = {

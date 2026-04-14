@@ -4,14 +4,14 @@ import { permissionsAPI, entitlementsAPI, projectsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import loadList from "app/routes/utility/loaders/loadList";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
-import EntitlementsList from "backend/components/entitlements/List";
+import EntitlementsList from "components/backend/entitlements/List";
 import EntitiesList, {
   Button,
   PermissionRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import Authorization from "helpers/authorization";
-import Layout from "backend/components/layout";
-import AccessForm from "backend/components/project/access/AccessForm";
+import Layout from "components/backend/layout";
+import AccessForm from "components/backend/project/access/AccessForm";
 import { useAuthentication } from "hooks";
 
 const authorization = new Authorization();

@@ -4,7 +4,7 @@ import {
   AnalyticsFactory,
   Grid,
   RangePicker
-} from "backend/components/analytics";
+} from "components/backend/analytics";
 import useAnalyticsReport from "hooks/useAnalyticsReport";
 
 export default function ProjectAnalytics() {

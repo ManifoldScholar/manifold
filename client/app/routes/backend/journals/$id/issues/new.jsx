@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useFetcher, useParams } from "react-router";
 import { journalIssuesAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Issue from "backend/components/issue";
-import Layout from "backend/components/layout";
+import Issue from "components/backend/issue";
+import Layout from "components/backend/layout";
 
 export const handle = { drawer: true };
 

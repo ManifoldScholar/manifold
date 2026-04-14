@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { entitlementsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Layout from "backend/components/layout";
-import EntitlementForm from "backend/components/entitlements/Form";
+import Layout from "components/backend/layout";
+import EntitlementForm from "components/backend/entitlements/Form";
 
 export const handle = { drawer: true };
 

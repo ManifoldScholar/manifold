@@ -8,7 +8,7 @@ import { useListQueryParams, useApiCallback } from "hooks";
 import EntitiesList, {
   Button,
   ProjectExportationRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import Form from "global/components/form";
 import Authorize from "hoc/Authorize";
 import { StyledForm } from "./styles";

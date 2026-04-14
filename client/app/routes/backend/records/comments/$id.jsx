@@ -4,14 +4,14 @@ import { commentsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import Dialog from "global/components/dialog";
 
 import {
   FlagsList,
   Body,
   Metadata
-} from "backend/components/annotation/detail";
+} from "components/backend/annotation/detail";
 
 export const handle = { drawer: true };
 

@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useMatches } from "react-router";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { collectionProjectsAPI, projectCollectionsAPI } from "api";
-import ProjectCollection from "backend/components/project-collection";
+import ProjectCollection from "components/backend/project-collection";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import HeadContent from "global/components/HeadContent";
 import authorize from "app/routes/utility/loaders/authorize";

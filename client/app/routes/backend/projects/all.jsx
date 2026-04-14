@@ -6,7 +6,7 @@ import EntitiesList, {
   Button,
   Search,
   ProjectRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
 export const loader = async ({ request, context }) => {

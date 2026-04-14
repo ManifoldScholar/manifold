@@ -3,8 +3,8 @@ import { redirect, useOutletContext, useFetcher } from "react-router";
 import { sectionsAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
-import Layout from "backend/components/layout";
-import AddSectionForm from "backend/components/authoring/AddSectionForm";
+import Layout from "components/backend/layout";
+import AddSectionForm from "components/backend/authoring/AddSectionForm";
 
 export const handle = { drawer: "backend" };
 

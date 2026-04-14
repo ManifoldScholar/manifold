@@ -5,7 +5,7 @@ import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "global/components/dialog";

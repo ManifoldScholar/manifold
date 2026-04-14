@@ -3,9 +3,9 @@ import { useFetcher } from "react-router";
 import { featuresAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import authorize from "app/routes/utility/loaders/authorize";
-import PageHeader from "backend/components/layout/PageHeader";
-import Layout from "backend/components/layout";
-import Properties from "backend/components/feature/Properties";
+import PageHeader from "components/backend/layout/PageHeader";
+import Layout from "components/backend/layout";
+import Properties from "components/backend/feature/Properties";
 
 export const loader = ({ request, context }) => {
   return authorize({ request, context, ability: "create", entity: "feature" });

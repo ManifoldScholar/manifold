@@ -10,14 +10,14 @@ import Dialog from "global/components/dialog";
 import EntitiesList, {
   Search,
   CommentRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
   SelectAll,
   BulkActionButtons
-} from "backend/components/list/EntitiesList/List/bulkActions";
-import PageHeader from "backend/components/layout/PageHeader";
+} from "components/backend/list/EntitiesList/List/bulkActions";
+import PageHeader from "components/backend/layout/PageHeader";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
 export const loader = async ({ request, context }) => {

@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import Dialog from "global/components/dialog";
-import TextsList from "backend/components/project/TextsList";
+import TextsList from "components/backend/project/TextsList";
 import { useAuthorizeRoute } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext } from "react-router";
 import textTracksAPI from "api/resources/textTracks";
-import Layout from "backend/components/layout";
-import AddEditForm from "backend/components/resource/tracks/AddEditForm";
+import Layout from "components/backend/layout";
+import AddEditForm from "components/backend/resource/tracks/AddEditForm";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import formAction from "app/routes/utility/helpers/formAction";
 

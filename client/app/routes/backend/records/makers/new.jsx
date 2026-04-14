@@ -5,7 +5,7 @@ import formAction from "app/routes/utility/helpers/formAction";
 import authorize from "app/routes/utility/loaders/authorize";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 
 export const handle = { drawer: true };
 

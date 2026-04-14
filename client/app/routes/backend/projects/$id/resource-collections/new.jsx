@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext } from "react-router";
 import FormContainer from "global/containers/form";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import Form from "global/components/form";
-import PageHeader from "backend/components/layout/PageHeader";
+import PageHeader from "components/backend/layout/PageHeader";
 import { resourceCollectionsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";

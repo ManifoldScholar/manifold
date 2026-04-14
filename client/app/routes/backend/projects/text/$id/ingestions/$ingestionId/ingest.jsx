@@ -1,6 +1,6 @@
 import { ingestionsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import IngestContainer from "backend/components/ingestion/ingest";
+import IngestContainer from "components/backend/ingestion/ingest";
 
 export const loader = async ({ params, request, context }) => {
   return loadEntity({

@@ -6,7 +6,7 @@ import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   SubjectRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 
 export const loader = async ({ request, context }) => {
   return loadList({

@@ -5,7 +5,7 @@ import { useListQueryParams, useApiCallback } from "hooks";
 import EntitiesList, {
   Search,
   ResourceRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import isNil from "lodash/isNil";
 import loadList from "app/routes/utility/loaders/loadList";
 import loadEntity from "app/routes/utility/loaders/loadEntity";

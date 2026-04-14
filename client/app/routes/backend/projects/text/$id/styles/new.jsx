@@ -1,7 +1,7 @@
 import { useOutletContext, useFetcher } from "react-router";
 import { stylesheetsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import StylesheetForm from "backend/components/stylesheet/Form";
+import StylesheetForm from "components/backend/stylesheet/Form";
 
 const DEFAULT_STYLESHEET = {
   attributes: {},

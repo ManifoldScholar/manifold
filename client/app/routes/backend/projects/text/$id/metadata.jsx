@@ -1,5 +1,5 @@
 import { useFetcher, useOutletContext } from "react-router";
-import Metadata from "backend/components/metadata";
+import Metadata from "components/backend/metadata";
 import { textsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 

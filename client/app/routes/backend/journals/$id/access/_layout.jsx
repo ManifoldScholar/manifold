@@ -4,11 +4,11 @@ import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import loadList from "app/routes/utility/loaders/loadList";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
-import EntitlementsList from "backend/components/entitlements/List";
+import EntitlementsList from "components/backend/entitlements/List";
 import Authorization from "helpers/authorization";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import { useAuthentication } from "hooks";
-import Permissions from "backend/components/journal/Permissions";
+import Permissions from "components/backend/journal/Permissions";
 
 const authorization = new Authorization();
 

@@ -4,8 +4,8 @@ import authorize from "app/routes/utility/loaders/authorize";
 import loadList from "app/routes/utility/loaders/loadList";
 import EntitiesList, {
   EntitlementImportRow
-} from "backend/components/list/EntitiesList";
-import PageHeader from "backend/components/layout/PageHeader";
+} from "components/backend/list/EntitiesList";
+import PageHeader from "components/backend/layout/PageHeader";
 
 export const loader = async ({ request, context }) => {
   await authorize({

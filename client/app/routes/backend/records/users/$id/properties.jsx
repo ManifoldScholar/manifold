@@ -1,7 +1,7 @@
 import { useOutletContext, useFetcher } from "react-router";
 import { usersAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Properties from "backend/components/user/Properties";
+import Properties from "components/backend/user/Properties";
 
 export const action = formAction({
   mutation: ({ data, params }) => usersAPI.update(params.id, data)

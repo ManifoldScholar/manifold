@@ -2,9 +2,9 @@ import { Outlet, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { pagesAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import Dialog from "global/components/dialog";
-import PageHeader from "backend/components/layout/PageHeader";
+import PageHeader from "components/backend/layout/PageHeader";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 
 export const loader = async ({ params, context, request }) => {

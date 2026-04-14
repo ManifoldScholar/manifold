@@ -2,8 +2,8 @@ import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import { projectsAPI } from "api";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
-import Hero from "backend/components/hero";
-import ContentBlock from "backend/components/content-block";
+import Hero from "components/backend/hero";
+import ContentBlock from "components/backend/content-block";
 
 export const loader = async ({ params, context }) => {
   return loadParallelLists({

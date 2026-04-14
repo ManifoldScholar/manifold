@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { settingsAPI } from "api";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import HeadContent from "global/components/HeadContent";
 import navigation from "helpers/router/navigation";
 

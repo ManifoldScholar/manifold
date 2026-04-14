@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useOutletContext, useFetcher } from "react-router";
 import { ingestionsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Ingestion from "backend/components/ingestion";
+import Ingestion from "components/backend/ingestion";
 
 export const action = formAction({
   mutation: ({ data }) => {

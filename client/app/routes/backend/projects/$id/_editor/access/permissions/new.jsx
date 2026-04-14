@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { permissionsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import Layout from "backend/components/layout";
-import PermissionForm from "backend/components/permission/Form";
+import Layout from "components/backend/layout";
+import PermissionForm from "components/backend/permission/Form";
 
 export const handle = { drawer: true };
 

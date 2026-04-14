@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { projectsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
 import { useListQueryParams } from "hooks";
-import EntitiesList, { LogRow } from "backend/components/list/EntitiesList";
+import EntitiesList, { LogRow } from "components/backend/list/EntitiesList";
 
 export const loader = async ({ params, request, context }) => {
   return loadList({

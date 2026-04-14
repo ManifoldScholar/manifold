@@ -4,8 +4,8 @@ import { journalVolumesAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
-import Volume from "backend/components/volume";
-import Layout from "backend/components/layout";
+import Volume from "components/backend/volume";
+import Layout from "components/backend/layout";
 import Dialog from "global/components/dialog";
 
 export const handle = { drawer: true };

@@ -6,7 +6,7 @@ import { useApiCallback } from "hooks";
 import EntitiesList, {
   Button,
   FeatureRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 
 export const loader = async ({ request, context }) => {
   return loadList({ request, context, fetchFn: featuresAPI.index });

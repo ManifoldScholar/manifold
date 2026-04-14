@@ -8,11 +8,11 @@ import {
   useApiCallback,
   useConfirmation
 } from "hooks";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import EntitiesList, {
   ReadingGroupMembershipRow,
   AnnotationRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import Dialog from "global/components/dialog";
 
 export default function UserActivityRoute() {

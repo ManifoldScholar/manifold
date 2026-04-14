@@ -5,7 +5,7 @@ import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   ContributorRow
-} from "backend/components/list/EntitiesList";
+} from "components/backend/list/EntitiesList";
 import Authorization from "helpers/authorization";
 import Dialog from "global/components/dialog";
 import { useApiCallback } from "hooks";

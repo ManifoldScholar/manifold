@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import List, * as EntitiesList from "backend/components/list/EntitiesList";
+import List, * as EntitiesList from "components/backend/list/EntitiesList";
 import Utility from "global/components/utility";
 import has from "lodash/has";
 import isFunction from "lodash/isFunction";

@@ -1,5 +1,5 @@
 import { useRouteError, isRouteErrorResponse, useLocation } from "react-router";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import { useBodyClass } from "hooks";
 import Footers from "global/components/Footers";
 import FatalError from "global/components/FatalError";

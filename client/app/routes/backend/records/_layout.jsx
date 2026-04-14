@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Outlet, useLocation } from "react-router";
-import Layout from "backend/components/layout";
+import Layout from "components/backend/layout";
 import navigation from "helpers/router/navigation";
 import HeadContent from "global/components/HeadContent";
 import authorize from "app/routes/utility/loaders/authorize";

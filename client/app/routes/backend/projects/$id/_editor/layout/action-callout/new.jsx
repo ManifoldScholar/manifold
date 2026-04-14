@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useLocation, useOutletContext, useFetcher } from "react-router";
 import { actionCalloutsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
-import ActionCalloutForm from "backend/components/action-callout/Form";
+import ActionCalloutForm from "components/backend/action-callout/Form";
 
 export const handle = { drawer: true };
 
