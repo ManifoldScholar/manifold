@@ -64,9 +64,9 @@ export default defineConfig(() => ({
       contexts: path.resolve(__dirname, "app/contexts"),
       components: path.resolve(__dirname, "app/components"),
       helpers: path.resolve(__dirname, "src/helpers"),
-      hooks: path.resolve(__dirname, "src/hooks"),
+      hooks: path.resolve(__dirname, "app/hooks"),
       api: path.resolve(__dirname, "app/lib/api"),
-      utils: path.resolve(__dirname, "src/utils"),
+      utils: path.resolve(__dirname, "app/utils"),
       theme: path.resolve(__dirname, "app/theme")
     }
   },

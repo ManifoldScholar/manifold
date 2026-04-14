@@ -11,7 +11,7 @@ import styles from "theme/styles/globalStyles";
 import get from "lodash/get";
 import formatError from "app/routes/utility/helpers/formatError";
 import FatalError from "components/global/FatalError";
-import { createEmotionCache } from "./utils/emotion-stream";
+import { createEmotionCache } from "utils/react-router/emotion-stream";
 
 // Root ErrorBoundary - catches loader errors and uncaught render errors
 export function ErrorBoundary() {

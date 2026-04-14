@@ -23,8 +23,6 @@ export { default as useBodyClass } from "./useBodyClass";
 export { default as useHtmlClass } from "./useHtmlClass";
 export { default as useColorScheme } from "./useColorScheme";
 
-export { default as useBlurOnLocationChange } from "./useBlurOnLocationChange";
-
 export { default as useConfirmation } from "./useConfirmation";
 
 export { default as useShowJournalsActive } from "./useShowJournalsActive";
