@@ -11,13 +11,13 @@ export default function ScrollToTop() {
     if (isFirstMount.current) {
       isFirstMount.current = false;
       if (!locationHelper.preventsScroll(location)) {
-        if (!__BROWSER__) return;
+        if (import.meta.env.SSR) return;
         window.scrollTo(0, 0);
       }
     } else if (
       locationHelper.triggersScrollToTop(location, prevLocationRef.current)
     ) {
-      if (!__BROWSER__) return;
+      if (import.meta.env.SSR) return;
       window.scrollTo(0, 0);
     }
     prevLocationRef.current = location;

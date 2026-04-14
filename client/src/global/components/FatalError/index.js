@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import config from "config";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import * as Styled from "./styles";
@@ -57,7 +56,7 @@ export default function FatalError(props) {
                     : t(userMessage)}
                 </Styled.ErrorBody>
               ) : null}
-              {config.environment.isDevelopment && (dismiss || error.body) ? (
+              {import.meta.env.DEV && (dismiss || error.body) ? (
                 <Styled.ErrorBody>
                   API Error Body (dev only): {error.body}
                   {dismiss ? (
@@ -76,7 +75,7 @@ export default function FatalError(props) {
               ) : null}
             </div>
           </Styled.Container>
-          {config.environment.isDevelopment ? (
+          {import.meta.env.DEV ? (
             <div>
               {error.apiTrace ? <ApiTrace trace={error.apiTrace} /> : null}
               {error.clientTrace ? (

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import get from "lodash/get";
 import CookieHelper from "helpers/cookie/Browser";
-import config from "config";
 import ch from "helpers/consoleHelpers";
 import { v1 as uuidv1 } from "uuid";
 import { analyticEventsAPI } from "api";
@@ -53,7 +52,7 @@ export default function useManifoldAnalytics(location, settings) {
 
   useEffect(() => {
     if (manifoldAnalyticsEnabled(settings) && consentManifoldAnalytics) {
-      if (config.environment.isDevelopment) {
+      if (import.meta.env.DEV) {
         ch.notice(
           `Manifold analytics initialized.`,
           "chart_with_upwards_trend"
@@ -66,7 +65,7 @@ export default function useManifoldAnalytics(location, settings) {
     const { visitToken, visitorToken } = getTokens();
     const { resourceType, resourceId, event } = trackedEvent;
 
-    if (config.environment.isDevelopment) {
+    if (import.meta.env.DEV) {
       ch.notice(
         `Tracking Manifold Analytics event: ${event}/${resourceType}/${resourceId}.`,
         "chart_with_upwards_trend"

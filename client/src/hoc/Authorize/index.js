@@ -132,7 +132,7 @@ export default function Authorize(props) {
 
     if (redirectPath) {
       // For SSR, throw a Response object for redirect
-      if (__SERVER__) {
+      if (import.meta.env.SSR) {
         const redirectUrl = `/login?redirect_uri=${encodeURIComponent(
           postLoginUri
         )}`;

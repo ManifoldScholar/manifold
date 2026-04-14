@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { respond, formInstructions } from "theme/styles/mixins";
-import { Link as BaseLink } from "react-router-dom";
+import { Link as BaseLink } from "react-router";
 
 export const FormWrapper = styled.div`
   --Form-row-gap: 40px;

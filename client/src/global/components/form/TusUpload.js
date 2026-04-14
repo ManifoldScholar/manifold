@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useFormField } from "hooks";
 import Base from "./Upload/Base";
 import { Upload } from "tus-js-client";
-import config from "config";
 
 export function FormTusUpload({
   name,
@@ -64,7 +63,7 @@ export function FormTusUpload({
         const { type: mimeType, name: filename } = attachment;
         const upload = new Upload(attachment, {
           chunkSize: 5 * 1024 * 1024,
-          endpoint: config.services.api + "/api/files",
+          endpoint: import.meta.env.VITE_API_URL + "/api/files",
           retryDelays: [0, 1000, 3000, 5000],
           metadata: {
             filename,

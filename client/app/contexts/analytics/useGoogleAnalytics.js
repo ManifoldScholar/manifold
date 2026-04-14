@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import get from "lodash/get";
 import ReactGA from "react-ga4";
 import ch from "helpers/consoleHelpers";
-import config from "config";
 import { useAuthentication } from "hooks";
 import CookieHelper from "helpers/cookie/Browser";
 
@@ -47,7 +46,7 @@ export default function useGoogleAnalytics(location, settings) {
 
     if (!gaInitialized && googleAnalyticsEnabled(settings)) {
       ReactGA.initialize(googleAnalyticsId, { debug: false });
-      if (config.environment.isDevelopment) {
+      if (import.meta.env.DEV) {
         ch.notice(
           `Google Analytics initialized for ${googleAnalyticsId}.`,
           "chart_with_upwards_trend"
@@ -65,7 +64,7 @@ export default function useGoogleAnalytics(location, settings) {
     if (googleAnalyticsEnabled(settings)) {
       const path = location.pathname + location.search;
       ReactGA.send({ hitType: "pageview", path });
-      if (config.environment.isDevelopment) {
+      if (import.meta.env.DEV) {
         ch.notice(`Tracking GA pageview: ${path}.`, "chart_with_upwards_trend");
       }
     }

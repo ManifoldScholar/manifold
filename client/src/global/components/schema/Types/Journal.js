@@ -7,7 +7,6 @@ import {
   renderIssues
 } from "../helpers";
 import BaseSchema from "../BaseSchema";
-import config from "config";
 
 export default function Journal({ journal }) {
   const { attributes, relationships } = journal;
@@ -15,7 +14,7 @@ export default function Journal({ journal }) {
   const { journalIssuesWithoutVolumeCount: uncategorizedCount } =
     attributes ?? {};
 
-  const hostname = config.services.client.url;
+  const hostname = import.meta.env.VITE_CLIENT_URL;
 
   const renderVolumesAndIssues = () => {
     if (!journalVolumes.length && !uncategorizedCount) return null;

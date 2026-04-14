@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Collapse from "global/components/Collapse";
 import Form from "global/components/form";
-import config from "config";
 import withConfirmation from "hoc/withConfirmation";
 import { ClassNames } from "@emotion/react";
 import { useSettings, useAuthentication } from "hooks";
@@ -20,7 +19,7 @@ const generateToken = (length = 8) => {
 };
 
 const urlForToken = token =>
-  `${config.services.client.url}/my/groups?join=${token}`;
+  `${import.meta.env.VITE_CLIENT_URL}/my/groups?join=${token}`;
 
 function ReadingGroupForm({
   mode = "new",

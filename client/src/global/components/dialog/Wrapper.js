@@ -132,7 +132,7 @@ export default function DialogWrapper({
     </FocusTrap>
   );
 
-  if (__SERVER__) return output;
+  if (import.meta.env.SSR) return output;
 
   const domTarget = document.getElementById("global-overlay-container");
   return ReactDOM.createPortal(output, domTarget);

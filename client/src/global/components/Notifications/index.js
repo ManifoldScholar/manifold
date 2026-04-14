@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Notification from "./Notification";
 import classNames from "classnames";
 import { useNotifications } from "hooks";
-import config from "config";
 
 function Notifications({ scope = "global", style = "header", noDismiss }) {
   const {
@@ -33,7 +32,7 @@ function Notifications({ scope = "global", style = "header", noDismiss }) {
   );
 
   useEffect(() => {
-    if (config.environment.isDevelopment) {
+    if (import.meta.env.DEV) {
       window.addEventListener("keyup", handleNotifications);
       return () => window.removeEventListener("keyup", handleNotifications);
     }

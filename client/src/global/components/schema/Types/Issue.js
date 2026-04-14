@@ -7,14 +7,13 @@ import {
   renderJournal
 } from "../helpers";
 import BaseSchema from "../BaseSchema";
-import config from "config";
 import partition from "lodash/partition";
 
 export default function Issue({ issue }) {
   const { attributes, relationships } = issue;
   const { journalVolume, journal } = relationships ?? {};
 
-  const hostname = config.services.client.url;
+  const hostname = import.meta.env.VITE_CLIENT_URL;
 
   const {
     slug,

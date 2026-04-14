@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 import Utility from "../utility";
 import unescape from "lodash/unescape";
 import get from "lodash/get";
-import config from "config";
 import { useSettings } from "hooks";
 
 const addMeta = (meta, key, value, overrideKey = null) => {
@@ -21,9 +20,9 @@ export function HeadContentComponent({
   imageWidth,
   imageHeight,
   locale,
-  charset = config.app.head.meta.charset,
+  charset = "utf-8",
   description: descriptionProp,
-  appendDefaultTitle = config.app.head.meta.appendDefaultTitle
+  appendDefaultTitle
 }) {
   const settings = useSettings();
 
@@ -39,7 +38,7 @@ export function HeadContentComponent({
   const image =
     imageProp ||
     get(settings, "attributes.pressLogoStyles.medium") ||
-    `${config.services.client.url}/static/logo.jpg`;
+    `${import.meta.env.VITE_CLIENT_URL}/static/logo.jpg`;
 
   const meta = [];
   meta.push({ charset });

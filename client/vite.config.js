@@ -6,24 +6,6 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Custom plugin to replace __BROWSER__ and __SERVER__ with runtime checks
-function webpackGlobalsPlugin() {
-  return {
-    name: "webpack-globals",
-    transform(code, id) {
-      if (id.includes("node_modules")) return null;
-      if (!code.includes("__BROWSER__") && !code.includes("__SERVER__"))
-        return null;
-
-      const transformed = code
-        .replace(/\b__BROWSER__\b/g, "(typeof window !== 'undefined')")
-        .replace(/\b__SERVER__\b/g, "(typeof window === 'undefined')");
-
-      return { code: transformed, map: null };
-    }
-  };
-}
-
 // Plugin to transform JSX in .js files BEFORE import analysis
 function jsxInJsPlugin() {
   return {
@@ -44,66 +26,42 @@ function jsxInJsPlugin() {
   };
 }
 
-export default defineConfig(({ mode }) => ({
-  assetsInclude: ["**/*.woff", "**/*.woff2"],
-  define: {
-    // Make process.env variables available
-    "process.env.CLIENT_SERVER_API_URL": JSON.stringify(
-      process.env.CLIENT_SERVER_API_URL || "http://localhost:13110"
-    ),
-    "process.env.CLIENT_BROWSER_API_URL": JSON.stringify(
-      process.env.CLIENT_BROWSER_API_URL || "http://127.0.0.1:13110"
-    ),
-    "process.env.CLIENT_BROWSER_API_CABLE_URL": JSON.stringify(
-      process.env.CLIENT_BROWSER_API_CABLE_URL || "http://127.0.0.1:13120/cable"
-    ),
-    "process.env.DOMAIN": JSON.stringify(
-      process.env.DOMAIN || "127.0.0.1:13100"
-    ),
-    "process.env.SSL_ENABLED": JSON.stringify(
-      process.env.SSL_ENABLED || "false"
-    ),
-    "process.env.CLIENT_SERVER_PORT": JSON.stringify(
-      process.env.CLIENT_SERVER_PORT || "5173"
-    ),
-    "process.env.NODE_ENV": JSON.stringify(mode)
-  },
-  plugins: [
-    jsxInJsPlugin(),
-    webpackGlobalsPlugin(),
-    // Custom Emotion transform plugin
-    {
-      name: "emotion-transform",
-      async transform(code, id) {
-        // Only process JS/JSX files in src/ that might use Emotion
-        if (!/\.(js|jsx)$/.test(id) || id.includes("node_modules")) {
-          return null;
-        }
-        // Skip if no styled or css imports
-        if (!code.includes("@emotion") && !code.includes("styled")) {
-          return null;
-        }
-
-        const result = await babel.transformAsync(code, {
-          filename: id,
-          babelrc: false,
-          configFile: false,
-          plugins: ["@emotion"],
-          sourceMaps: true,
-          sourceType: "module"
-        });
-
-        if (result?.code) {
-          return { code: result.code, map: result.map };
-        }
+function emotionTransformPlugin() {
+  return {
+    name: "emotion-transform",
+    async transform(code, id) {
+      if (!/\.(js|jsx)$/.test(id) || id.includes("node_modules")) {
         return null;
       }
-    },
-    reactRouter()
-  ],
+      if (!code.includes("@emotion") && !code.includes("styled")) {
+        return null;
+      }
+
+      const result = await babel.transformAsync(code, {
+        filename: id,
+        babelrc: false,
+        configFile: false,
+        plugins: ["@emotion"],
+        sourceMaps: true,
+        sourceType: "module"
+      });
+
+      if (result?.code) {
+        return { code: result.code, map: result.map };
+      }
+      return null;
+    }
+  };
+}
+
+export default defineConfig(() => ({
+  assetsInclude: ["**/*.woff", "**/*.woff2"],
+  plugins: [jsxInJsPlugin(), emotionTransformPlugin(), reactRouter()],
   resolve: {
     alias: {
       app: path.resolve(__dirname, "app"),
+      lib: path.resolve(__dirname, "app/lib"),
+      contexts: path.resolve(__dirname, "app/contexts"),
       global: path.resolve(__dirname, "src/global"),
       frontend: path.resolve(__dirname, "src/frontend"),
       backend: path.resolve(__dirname, "src/backend"),
@@ -111,10 +69,9 @@ export default defineConfig(({ mode }) => ({
       helpers: path.resolve(__dirname, "src/helpers"),
       hooks: path.resolve(__dirname, "src/hooks"),
       hoc: path.resolve(__dirname, "src/hoc"),
-      api: path.resolve(__dirname, "app/api"),
+      api: path.resolve(__dirname, "app/lib/api"),
       utils: path.resolve(__dirname, "src/utils"),
-      theme: path.resolve(__dirname, "src/theme"),
-      config: path.resolve(__dirname, "src/config")
+      theme: path.resolve(__dirname, "src/theme")
     }
   },
   optimizeDeps: {
@@ -126,7 +83,7 @@ export default defineConfig(({ mode }) => ({
     }
   },
   ssr: {
-    external: ["lodash", "redux-promise"]
+    external: ["lodash"]
   },
   server: {
     proxy: {

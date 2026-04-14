@@ -64,7 +64,7 @@ function DatePickerComponent({ parentId, inputId, value, onChange, label }) {
       onChange={onChange}
       onCalendarOpen={() => setPickerOpen(true)}
       onCalendarClose={() => setPickerOpen(false)}
-      customInput={__BROWSER__ ? <CustomInput /> : undefined}
+      customInput={!import.meta.env.SSR ? <CustomInput /> : undefined}
       dropdownMode="scroll"
       dateformat="P"
       locale={i18n.language}

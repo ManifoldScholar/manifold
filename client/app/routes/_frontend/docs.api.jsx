@@ -1,11 +1,12 @@
 import { routerContext } from "app/contexts";
 import ApiDocs from "frontend/components/ApiDocs";
-import config from "config";
 import EntityCollection from "frontend/components/entity/Collection/EntityCollection";
 import { useAuthentication } from "hooks";
 import HeadContent from "global/components/HeadContent";
 
-const API_DOCS_URL = `${config.services.api}/api/static/docs/v1/swagger.json`;
+const API_DOCS_URL = `${
+  import.meta.env.VITE_API_URL
+}/api/static/docs/v1/swagger.json`;
 
 const adjustedSchema = schema => {
   const newSchema = { ...schema };
@@ -55,9 +56,9 @@ export default function ApiDocsRoute({ loaderData }) {
         description={`
             <p className="description">
               Nearly all changes to data stored in a Manifold installation occur over
-              Manifold's API with a base URL of <em>${config.services.api}${
-          schema.basePath
-        }</em>.
+              Manifold's API with a base URL of <em>${
+                import.meta.env.VITE_API_URL
+              }${schema.basePath}</em>.
               The API is a <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">
                 REST API
               </a>
@@ -72,8 +73,8 @@ export default function ApiDocsRoute({ loaderData }) {
               }
               Any requests you send to this instance using the documentation below
               will be sent with your current authorization token and will operate on the current data for
-              <a href="${config.services.api}">${
-          config.services.api
+              <a href="${import.meta.env.VITE_API_URL}">${
+          import.meta.env.VITE_API_URL
         }</a> so proceed with caution.
             </p>
             <p className="description">

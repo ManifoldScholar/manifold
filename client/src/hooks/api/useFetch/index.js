@@ -1,11 +1,10 @@
 import { useEffect, useCallback, useState, useRef, useId } from "react";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
-import config from "config";
 import ch from "helpers/consoleHelpers";
 import isFunction from "lodash/isFunction";
 
 function log(type, key) {
-  if (config.environment.isDevelopment) {
+  if (import.meta.env.DEV) {
     ch.notice(`${type}: ${key}`, "floppy_disk");
   }
 }

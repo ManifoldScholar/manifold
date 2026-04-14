@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import * as emoji from "node-emoji";
-import endsWith from "lodash/endsWith";
 
 function baseString(emojiKey) {
   let out = "";
@@ -11,7 +10,7 @@ function baseString(emojiKey) {
 }
 
 function log(string, color, bold) {
-  if (endsWith(process.title, "node")) {
+  if (import.meta.env.SSR) {
     let colorCode = "";
     if (color === "yellow") colorCode = "\x1b[33m";
     if (color === "blue") colorCode = "\x1b[34m";
@@ -54,7 +53,7 @@ export function notice(string, emojiKey = "ok_hand") {
 }
 
 export function plain(string) {
-  if (__SERVER__) {
+  if (import.meta.env.SSR) {
     console.log(`[SSR] ${string}`);
   } else {
     console.log(string);

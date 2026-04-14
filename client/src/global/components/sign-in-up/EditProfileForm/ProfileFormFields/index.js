@@ -25,7 +25,7 @@ export default function ProfileFormFields({ mode }) {
           autoComplete="nickname"
         />
       </div>
-      {__BROWSER__ ? (
+      {!import.meta.env.SSR ? (
         <Form.Upload
           isUserAvatar
           readFrom="attributes[avatarStyles][smallSquare]"

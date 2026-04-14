@@ -3,7 +3,7 @@ import Notifications from "global/components/Notifications";
 
 export default function HeaderNotification(props) {
   const output = <Notifications {...props} />;
-  if (__SERVER__) return output;
+  if (import.meta.env.SSR) return output;
 
   const domTarget = document.getElementById("global-notification-container");
   if (domTarget) {

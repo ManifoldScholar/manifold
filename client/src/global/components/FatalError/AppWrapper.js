@@ -60,7 +60,7 @@ export default function FatalErrorAppWrapper(props) {
       ? `/login?redirect_uri=${redirectPath}`
       : "/login";
 
-    if (__SERVER__) {
+    if (import.meta.env.SSR) {
       throw new Response(null, {
         status: 302,
         headers: { Location: loginPath }

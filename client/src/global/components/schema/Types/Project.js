@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { renderOffer, renderSeries, renderNamesList } from "../helpers";
 import BaseSchema from "../BaseSchema";
-import config from "config";
 import partition from "lodash/partition";
 
 export default class Project extends PureComponent {
@@ -73,7 +72,7 @@ export default class Project extends PureComponent {
       avatarStyles
     } = this.attributes;
     const { creators, flattenedCollaborators } = this.relationships;
-    const hostname = config.services.client.url;
+    const hostname = import.meta.env.VITE_CLIENT_URL;
 
     /* eslint-disable-next-line no-unused-vars */
     const [authors, others] = partition(flattenedCollaborators, fc =>
