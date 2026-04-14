@@ -1,4 +1,3 @@
-import config from "config";
 import qs from "qs";
 import humps from "utils/humps";
 
@@ -19,7 +18,10 @@ export default class LowLevelApiClient {
   }
 
   _adjustedEndpoint(endpoint) {
-    return config.services.api + endpoint;
+    const apiUrl = import.meta.env.SSR
+      ? import.meta.env.VITE_SERVER_API_URL
+      : import.meta.env.VITE_API_URL;
+    return apiUrl + endpoint;
   }
 
   _endpointWithParams(endpoint, params) {

@@ -1,5 +1,5 @@
 import { ApiClient, settingsAPI, meAPI, pagesAPI } from "api";
-import { routerContext } from "../contexts";
+import { routerContext } from "contexts";
 
 const getCookie = (request, name) => {
   const cookieHeader = request.headers.get("cookie") || "";

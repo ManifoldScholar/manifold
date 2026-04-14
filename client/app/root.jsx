@@ -14,7 +14,7 @@ import { useColorScheme } from "hooks";
 import { ErrorBoundary } from "./RootErrorBoundary";
 
 // Middleware and contexts
-import { bootstrapMiddleware } from "./middleware/bootstrap.server";
+import { bootstrapMiddleware } from "lib/middleware/bootstrap.server";
 import { routerContext, AppContext } from "./contexts";
 import NotificationProvider from "./contexts/NotificationProvider";
 
@@ -50,9 +50,24 @@ export default function Root({ loaderData }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="96x96"
+          href="/favicon-96x96.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         {typekitId && (
           <>
             <link
