@@ -2,9 +2,9 @@ import { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router";
 import { useSettings } from "hooks";
-import { ManifoldAnalyticsContext } from "helpers/contexts";
-import useGoogleAnalytics from "./analytics/useGoogleAnalytics";
-import useManifoldAnalytics from "./analytics/useManifoldAnalytics";
+import { ManifoldAnalyticsContext } from "contexts";
+import useGoogleAnalytics from "hooks/analytics/useGoogleAnalytics";
+import useManifoldAnalytics from "hooks/analytics/useManifoldAnalytics";
 
 export default function Analytics({ children }) {
   const location = useLocation();

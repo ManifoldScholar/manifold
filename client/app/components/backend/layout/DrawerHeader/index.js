@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { DrawerContext } from "helpers/contexts";
+import { DrawerContext } from "contexts";
 import Button from "../PageHeader/utility/ActionButtons/Button";
 import * as Styled from "./styles";
 

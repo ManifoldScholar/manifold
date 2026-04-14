@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CollapseContext } from "helpers/contexts";
+import { CollapseContext } from "contexts";
 import { useTranslation } from "react-i18next";
 
 export default function useCollapseContext() {

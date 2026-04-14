@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ManifoldAnalyticsContext } from "helpers/contexts";
+import { ManifoldAnalyticsContext } from "contexts";
 
 export default function useAnalyticsContext() {
   const context = useContext(ManifoldAnalyticsContext);

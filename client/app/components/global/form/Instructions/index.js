@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import PropTypes from "prop-types";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import * as Styled from "./styles";
 
 export default function Instructions({

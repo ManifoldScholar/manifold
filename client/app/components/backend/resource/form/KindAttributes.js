@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import Kind from "./kind";
 
 export default class KindAttributes extends PureComponent {

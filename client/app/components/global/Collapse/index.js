@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useId } from "react";
 import PropTypes from "prop-types";
 import useResizeObserver from "use-resize-observer";
-import { CollapseContext } from "helpers/contexts";
+import { CollapseContext } from "contexts";
 import Toggle from "./Toggle";
 import Content from "./Content";
 

@@ -6,7 +6,7 @@ import {
   Droppable
 } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import { useFormField } from "hooks";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import Mapping from "./Mapping";
 import Instructions from "../Instructions";
 import Attribute from "./Attribute";

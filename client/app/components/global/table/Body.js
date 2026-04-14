@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import TableHeaders from "./Headers";
 import Row from "./Row";
-import { TableHeaderContext } from "helpers/contexts";
+import { TableHeaderContext } from "contexts";
 
 class TableBody extends React.PureComponent {
   static displayName = "GenericTable.Body";

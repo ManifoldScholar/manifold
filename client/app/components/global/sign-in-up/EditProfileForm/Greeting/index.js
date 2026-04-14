@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import ResendEmailConfirm from "../ResendEmailConfirm";
 import * as Styled from "./styles";
 

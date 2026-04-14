@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import withSearchResultHelper from "../searchResultHelper";
 import Collapse from "components/global/Collapse";
-import { CollapseContext } from "helpers/contexts";
+import { CollapseContext } from "contexts";
 import * as Styled from "./styles";
 
 function GenericExcerpts({ excerpts, joinHighlightedFragments }) {

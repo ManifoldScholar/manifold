@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { usersAPI } from "api";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import BaseInput from "components/global/form/BaseInput";
 import { useApiCallback } from "hooks";
 import * as Styled from "./styles";

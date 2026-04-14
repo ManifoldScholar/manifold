@@ -6,7 +6,7 @@ import classnames from "classnames";
 import isString from "lodash/isString";
 import Instructions from "../Instructions";
 import BaseLabel from "../BaseLabel";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import * as Styled from "./styles";
 
 export default function BaseInput({

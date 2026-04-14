@@ -1,5 +1,5 @@
 import React from "react";
-import { ManifoldAnalyticsContext } from "helpers/contexts";
+import { ManifoldAnalyticsContext } from "contexts";
 
 export const EVENTS = {
   VIEW_RESOURCE: "view resource",

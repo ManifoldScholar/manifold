@@ -22,7 +22,7 @@ import isNil from "lodash/isNil";
 import has from "lodash/has";
 import keyBy from "lodash/keyBy";
 import startsWith from "lodash/startsWith";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import { isPromise } from "utils/promise";
 import Authorization from "helpers/authorization";

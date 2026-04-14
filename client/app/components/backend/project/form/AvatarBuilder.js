@@ -4,7 +4,7 @@ import Form from "components/global/form";
 import ColorPicker from "./ColorPicker";
 import UniqueIcons from "components/global/icon/unique";
 import classNames from "classnames";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import { brackets2dots } from "utils/string";
 import Dialog from "components/global/dialog";
 import useConfirmation from "hooks/useConfirmation";

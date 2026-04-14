@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { useFormField } from "hooks";
 import Instructions from "../Instructions";
 import FieldWrapper from "../FieldWrapper";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import * as Styled from "./styles";
 
 export default function FormSwitch({

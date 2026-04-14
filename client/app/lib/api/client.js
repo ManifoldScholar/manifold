@@ -2,7 +2,7 @@
 import isPlainObject from "lodash/isPlainObject";
 import has from "lodash/has";
 import LowLevelApiClient from "./LowLevelApiClient";
-import denormalize from "helpers/api/denormalize";
+import denormalize from "api/denormalize";
 
 export default class ApiClient {
   constructor(

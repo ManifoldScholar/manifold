@@ -1,7 +1,7 @@
 import { useContext, useId } from "react";
 import PropTypes from "prop-types";
 import { useFormField } from "hooks";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import Errorable from "../Errorable";
 import isString from "lodash/isString";
 import Instructions from "../Instructions";

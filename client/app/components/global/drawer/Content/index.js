@@ -4,7 +4,7 @@ import { FocusTrap } from "focus-trap-react";
 import classNames from "classnames";
 import Notifications from "components/global/Notifications";
 import FrontMatter from "../FrontMatter";
-import { DrawerContext } from "helpers/contexts";
+import { DrawerContext } from "contexts";
 import { usePreventBodyScroll } from "hooks";
 import * as Styled from "./styles";
 

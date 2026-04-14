@@ -10,7 +10,7 @@ import isFunction from "lodash/isFunction";
 import isPlainObject from "lodash/isPlainObject";
 import { brackets2dots } from "utils/string";
 import NavigationBlocker from "components/global/router/NavigationBlocker";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import { useNotifications } from "hooks";
 import { areValuesEqualish, hasChanges, adjustRelationships } from "./helpers";
 import * as Styled from "./styles";

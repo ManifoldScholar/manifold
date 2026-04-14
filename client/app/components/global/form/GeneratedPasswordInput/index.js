@@ -5,7 +5,7 @@ import { useFormField } from "hooks";
 import Errorable from "components/global/form/Errorable";
 import generatePassword from "helpers/passwordGenerator";
 import BaseLabel from "../BaseLabel";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import * as Styled from "./styles";
 
 export default function FormGeneratedPasswordInput({
