@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { urlWithTextFragment } from "./useCopyLinkToSelection";
 import useSettings from "./useSettings";
+import useHasMounted from "./useHasMounted";
 
 export default function useShare({
   title,
@@ -14,11 +15,7 @@ export default function useShare({
   const { t } = useTranslation();
 
   const [copied, setCopied] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const hasMounted = useHasMounted();
 
   useEffect(() => {
     if (copied) {
@@ -30,7 +27,7 @@ export default function useShare({
 
   const shareIcon = size === "sm" ? "share24" : "share32";
 
-  if (!isMounted)
+  if (!hasMounted)
     return {
       canRender: true,
       disabled: true,

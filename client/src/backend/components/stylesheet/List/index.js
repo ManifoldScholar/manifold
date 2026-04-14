@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import {
   DragDropContext,
@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import Stylesheet from "./Stylesheet";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import ClientOnly from "global/components/utility/ClientOnly";
 
 function StylesheetList({
   text,
@@ -18,11 +19,8 @@ function StylesheetList({
 }) {
   const { t } = useTranslation();
 
-  const [isMounted, setIsMounted] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [stylesheets, setStylesheets] = useState(stylesheetsProp);
-
-  useEffect(() => setIsMounted(true), []);
 
   const findStylesheet = id => stylesheets.find(ss => ss.id === id);
 
@@ -70,7 +68,7 @@ function StylesheetList({
 
   return (
     <>
-      {isMounted && (
+      <ClientOnly>
         <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
           <section className="ordered-records rbd-migration-resets">
             <Droppable type="category" droppableId="categories">
@@ -103,7 +101,7 @@ function StylesheetList({
             </Droppable>
           </section>
         </DragDropContext>
-      )}
+      </ClientOnly>
       {renderLiveRegion("alert")}
     </>
   );

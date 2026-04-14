@@ -1,5 +1,6 @@
-import React, { lazy, Suspense, useState, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import ClientOnly from "global/components/utility/ClientOnly";
 import * as Styled from "./styles";
 
 const TOCList = lazy(() => import("./List"));
@@ -14,16 +15,13 @@ const Fallback = ({ error }) => {
 };
 
 export default function Loader(props) {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => setIsMounted(true), []);
-
-  if (!isMounted) return null;
-
   return (
-    <ErrorBoundary FallbackComponent={Fallback}>
-      <Suspense fallback={null}>
-        <TOCList {...props} />
-      </Suspense>
-    </ErrorBoundary>
+    <ClientOnly>
+      <ErrorBoundary FallbackComponent={Fallback}>
+        <Suspense fallback={null}>
+          <TOCList {...props} />
+        </Suspense>
+      </ErrorBoundary>
+    </ClientOnly>
   );
 }

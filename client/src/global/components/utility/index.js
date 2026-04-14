@@ -6,6 +6,7 @@ import SetCSSProperty from "./SetCSSProperty";
 import SkipLink from "./SkipLink";
 import LabelWithIcon from "./LabelWithIcon";
 import RouteAnnouncer from "./RouteAnnouncer";
+import ClientOnly from "./ClientOnly";
 
 export default {
   Pagination,
@@ -15,5 +16,6 @@ export default {
   SkipLink,
   LabelWithIcon,
   SetCSSProperty,
-  RouteAnnouncer
+  RouteAnnouncer,
+  ClientOnly
 };

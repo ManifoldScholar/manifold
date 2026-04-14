@@ -8,6 +8,7 @@ import DraggableEventHelper from "../helpers/draggableEvent";
 import { contentBlocksAPI } from "api";
 import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import withConfirmation from "hoc/withConfirmation";
+import ClientOnly from "global/components/utility/ClientOnly";
 
 import configHelper from "../helpers/configurations";
 import cloneDeep from "lodash/cloneDeep";
@@ -23,13 +24,8 @@ function ProjectContent({ project, contentBlocks, confirm, children }) {
   const navigate = useNavigate();
   const { revalidate } = useRevalidator();
 
-  const [isMounted, setIsMounted] = useState(false);
   const [blocks, setBlocks] = useState(cloneBlocks(contentBlocks));
   const [activeDraggableType, setActiveDraggableType] = useState(null);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     setBlocks(prev => {
@@ -183,7 +179,7 @@ function ProjectContent({ project, contentBlocks, confirm, children }) {
         aria-labelledby={`${id}-header`}
         aria-describedby={`${id}-instructions`}
       >
-        {isMounted && (
+        <ClientOnly>
           <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
             <AvailableSection
               onClickAdd={handleAddEntity}
@@ -197,7 +193,7 @@ function ProjectContent({ project, contentBlocks, confirm, children }) {
               currentBlocks={blocks}
             />
           </DragDropContext>
-        )}
+        </ClientOnly>
         {children(pendingBlock, clearPendingBlock)}
       </div>
     </section>

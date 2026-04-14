@@ -1,6 +1,7 @@
-import { useState, useEffect, useId } from "react";
+import { useId } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import ClientOnly from "global/components/utility/ClientOnly";
 import Title from "./Title";
 import Instructions from "./Instructions";
 import Pagination from "./Pagination";
@@ -101,11 +102,6 @@ function ListEntities({
   ...rest
 }) {
   const id = useId();
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const buttonsList = Array.isArray(buttons) ? buttons : [];
   const isSortable = isFunction(callbacks.onReorder);
@@ -200,12 +196,14 @@ function ListEntities({
             idForInstructions={`${idForInstructionsPrefix}-${id}`}
           />
         )}
-        {isSortable && isMounted && (
-          <SortableEntities
-            {...passProps}
-            className={listClassNames}
-            idForInstructions={`${idForInstructionsPrefix}-${id}`}
-          />
+        {isSortable && (
+          <ClientOnly>
+            <SortableEntities
+              {...passProps}
+              className={listClassNames}
+              idForInstructions={`${idForInstructionsPrefix}-${id}`}
+            />
+          </ClientOnly>
         )}
         {pagination && (
           <Pagination

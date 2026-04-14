@@ -6,6 +6,7 @@ import Slot from "./Slot";
 import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import { actionCalloutsAPI } from "api";
 import { useApiCallback } from "hooks";
+import ClientOnly from "global/components/utility/ClientOnly";
 import * as Styled from "./styles";
 
 const slots = {
@@ -52,12 +53,6 @@ export default function ActionCallouts({
   const { t } = useTranslation();
   const { revalidate } = useRevalidator();
   const updateCallout = useApiCallback(actionCalloutsAPI.update);
-
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const [slotCallouts, setSlotCallouts] = useState(() =>
     computeSlotCallouts(actionCallouts)
@@ -229,32 +224,32 @@ export default function ActionCallouts({
     [srMessage]
   );
 
-  if (!isMounted) return null;
-
   return (
-    <Styled.CalloutsContainer className="rbd-migration-resets">
-      <DragDropContext onDragStart={() => {}} onDragEnd={onDragEnd}>
-        {slotIds
-          .filter(slot => actionCalloutSlots.includes(slot))
-          .map((slotId, index) => {
-            return (
-              <Slot
-                key={slotId}
-                id={slotId}
-                {...slots[slotId]}
-                model={model}
-                actionCalloutEditRoute={actionCalloutEditRoute}
-                actionCalloutNewRoute={actionCalloutNewRoute}
-                actionCallouts={slotCallouts[slotId]}
-                index={index}
-                slotCount={slotIds.length}
-                onKeyboardMove={onKeyboardMove}
-              />
-            );
-          })}
-      </DragDropContext>
-      {renderLiveRegion("alert")}
-    </Styled.CalloutsContainer>
+    <ClientOnly>
+      <Styled.CalloutsContainer className="rbd-migration-resets">
+        <DragDropContext onDragStart={() => {}} onDragEnd={onDragEnd}>
+          {slotIds
+            .filter(slot => actionCalloutSlots.includes(slot))
+            .map((slotId, index) => {
+              return (
+                <Slot
+                  key={slotId}
+                  id={slotId}
+                  {...slots[slotId]}
+                  model={model}
+                  actionCalloutEditRoute={actionCalloutEditRoute}
+                  actionCalloutNewRoute={actionCalloutNewRoute}
+                  actionCallouts={slotCallouts[slotId]}
+                  index={index}
+                  slotCount={slotIds.length}
+                  onKeyboardMove={onKeyboardMove}
+                />
+              );
+            })}
+        </DragDropContext>
+        {renderLiveRegion("alert")}
+      </Styled.CalloutsContainer>
+    </ClientOnly>
   );
 }
 

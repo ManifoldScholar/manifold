@@ -1,6 +1,7 @@
-import { lazy, Suspense, useCallback, useState, useEffect } from "react";
+import { lazy, Suspense, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useFormField } from "hooks";
+import ClientOnly from "global/components/utility/ClientOnly";
 
 const CodeAreaInput = lazy(() => import("./AceEditor"));
 
@@ -13,9 +14,6 @@ export default function FormCodeArea({
   mode
 }) {
   const { value, set, errors } = useFormField(name);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => setIsMounted(true), []);
 
   const onChange = useCallback(
     newValue => {
@@ -24,25 +22,25 @@ export default function FormCodeArea({
     [set]
   );
 
-  if (!isMounted) return null;
-
   return (
-    <Suspense fallback={null}>
-      <CodeAreaInput
-        name={name}
-        label={label}
-        instructions={instructions}
-        errors={errors}
-        height={height}
-        readOnly={readOnly}
-        mode={mode}
-        theme="idle_fingers"
-        editorProps={{ $blockScrolling: true }}
-        onChange={onChange}
-        value={value || ""}
-        width="100%"
-      />
-    </Suspense>
+    <ClientOnly>
+      <Suspense fallback={null}>
+        <CodeAreaInput
+          name={name}
+          label={label}
+          instructions={instructions}
+          errors={errors}
+          height={height}
+          readOnly={readOnly}
+          mode={mode}
+          theme="idle_fingers"
+          editorProps={{ $blockScrolling: true }}
+          onChange={onChange}
+          value={value || ""}
+          width="100%"
+        />
+      </Suspense>
+    </ClientOnly>
   );
 }
 

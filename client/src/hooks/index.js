@@ -43,6 +43,7 @@ export { default as useReadingGroups } from "./useReadingGroups";
 export { default as useLoaderEntity } from "./useLoaderEntity";
 export { default as useLoaderCollection } from "./useLoaderCollection";
 export { default as useScrollToTop } from "./useScrollToTop";
+export { default as useHasMounted } from "./useHasMounted";
 export { default as useReaderLocationChange } from "./useReaderLocationChange";
 
 export { useSignInUpOverlay } from "global/components/sign-in-up/Overlay/context";

@@ -13,6 +13,7 @@ import Attribute from "./Attribute";
 import omitBy from "lodash/omitBy";
 import difference from "lodash/difference";
 import FieldWrapper from "../FieldWrapper";
+import ClientOnly from "global/components/utility/ClientOnly";
 import * as Styled from "./styles";
 
 const sortAttributes = (getModelValue, attributesPath, currentValue) => {
@@ -38,11 +39,6 @@ export default function FormColumnMap({
   const { t } = useTranslation();
   const { value, set } = useFormField(name);
   const { getModelValue } = useContext(FormContext);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const sortedHeaders = useMemo(
     () => sortHeaders(getModelValue, headersPath, t),
@@ -97,10 +93,8 @@ export default function FormColumnMap({
     [value, set]
   );
 
-  if (!isMounted) return null;
-
   return (
-    <>
+    <ClientOnly>
       <div>
         <Instructions instructions={instructions} />
       </div>
@@ -164,7 +158,7 @@ export default function FormColumnMap({
           </Styled.ColumnMap>
         </FieldWrapper>
       </DragDropContext>
-    </>
+    </ClientOnly>
   );
 }
 
