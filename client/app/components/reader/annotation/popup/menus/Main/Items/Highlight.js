@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import MenuItem from "reader/components/annotation/popup/parts/MenuItem";
+import MenuItem from "components/reader/annotation/popup/parts/MenuItem";
 
 function Highlight({ menu, actions, activeAnnotation }) {
   const { t } = useTranslation();

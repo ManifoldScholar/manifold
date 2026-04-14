@@ -5,7 +5,7 @@ import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 import Annotation from "components/global/Annotation";
 import EntityCollection from "../EntityCollection";
-import EmptyMessage from "reader/components/notes/EmptyMessage";
+import EmptyMessage from "components/reader/notes/EmptyMessage";
 
 function ReaderFullNotesEntityCollection({
   groupedAnnotations,

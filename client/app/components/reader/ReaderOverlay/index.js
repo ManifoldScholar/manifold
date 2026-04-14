@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import Overlay from "components/global/Overlay";
-import TextMeta from "reader/components/TextMeta";
+import TextMeta from "components/reader/TextMeta";
 import ReaderFullNotes from "reader/containers/ReaderFullNotes";
-import Toc from "reader/components/Toc";
+import Toc from "components/reader/Toc";
 import Authorize from "hoc/Authorize";
 import { useLoaderEntity } from "hooks";
 

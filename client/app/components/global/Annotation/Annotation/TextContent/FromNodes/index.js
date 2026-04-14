@@ -1,5 +1,5 @@
 import { memo, useRef } from "react";
-import BodyNodes from "reader/components/section/body-nodes";
+import BodyNodes from "components/reader/section/body-nodes";
 import Wrapper from "./Wrapper";
 import { maybeTruncateChildren } from "./helpers";
 import blacklist from "./elementBlacklist";

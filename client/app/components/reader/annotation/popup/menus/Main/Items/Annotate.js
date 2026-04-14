@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import MenuItem from "reader/components/annotation/popup/parts/MenuItem";
+import MenuItem from "components/reader/annotation/popup/parts/MenuItem";
 
 function Annotate({ menu, actions }) {
   const { t } = useTranslation();

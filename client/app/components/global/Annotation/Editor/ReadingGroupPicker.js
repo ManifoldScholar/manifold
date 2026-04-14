@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ReaderContext } from "app/contexts";
 import IconComposer from "components/global/utility/IconComposer";
 import classNames from "classnames";
-import RGMenuItem from "reader/components/annotation/popup/parts/RGMenuItem";
+import RGMenuItem from "components/reader/annotation/popup/parts/RGMenuItem";
 
 export default function ReadingGroupPicker({
   adjustedReadingGroups = [],

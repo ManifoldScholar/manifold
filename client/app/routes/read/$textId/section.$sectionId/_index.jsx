@@ -1,5 +1,5 @@
 import { useOutletContext, Outlet, data } from "react-router";
-import Section from "reader/components/section";
+import Section from "components/reader/section";
 import {
   sectionsAPI,
   annotationsAPI,

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Annotation from "reader/components/annotation";
+import Annotation from "components/reader/annotation";
 
 export default function Citation({ closeDrawer, annotation, section }) {
   return (

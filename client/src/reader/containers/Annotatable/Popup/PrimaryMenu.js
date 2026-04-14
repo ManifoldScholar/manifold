@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Menus } from "reader/components/annotation/popup";
-import { useAnnotationMenu } from "reader/components/annotation/popup/hooks";
+import { Menus } from "components/reader/annotation/popup";
+import { useAnnotationMenu } from "components/reader/annotation/popup/hooks";
 import { useReadingGroups } from "hooks";
 
 function PrimaryMenu({

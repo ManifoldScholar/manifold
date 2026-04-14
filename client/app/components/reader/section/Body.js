@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import PropTypes from "prop-types";
 import BodyNodes from "./body-nodes";
-import ResourceMarkerContextProvider from "reader/components/resource-annotation/Marker/context";
+import ResourceMarkerContextProvider from "components/reader/resource-annotation/Marker/context";
 
 export default function Body(props) {
   const {

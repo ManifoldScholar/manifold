@@ -4,7 +4,7 @@ import has from "lodash/has";
 import upperFirst from "lodash/upperFirst";
 import selectionHelpers from "reader/containers/Annotatable/helpers/selectionHelpers";
 import { ErrorBoundary } from "react-error-boundary";
-import ResourceAnnotationFactory from "reader/components/resource-annotation";
+import ResourceAnnotationFactory from "components/reader/resource-annotation";
 import { formatLocalAnnotations, getUuids } from "./annotation";
 import * as Styled from "./styles";
 
