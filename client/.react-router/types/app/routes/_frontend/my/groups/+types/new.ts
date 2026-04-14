@@ -16,6 +16,9 @@ type Matches = [{
   id: "routes/_frontend";
   module: typeof import("../../../_layout.js");
 }, {
+  id: "routes/_frontend/my/groups";
+  module: typeof import("../_layout.js");
+}, {
   id: "routes/_frontend/my/groups/new";
   module: typeof import("../new.js");
 }];
