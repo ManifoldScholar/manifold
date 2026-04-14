@@ -71,7 +71,7 @@ export default defineConfig(() => ({
       hoc: path.resolve(__dirname, "src/hoc"),
       api: path.resolve(__dirname, "app/lib/api"),
       utils: path.resolve(__dirname, "src/utils"),
-      theme: path.resolve(__dirname, "src/theme")
+      theme: path.resolve(__dirname, "app/theme")
     }
   },
   optimizeDeps: {
