@@ -3,7 +3,7 @@ import { useFetcher, useOutletContext } from "react-router";
 import { projectsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
 import Layout from "components/backend/layout";
 

@@ -6,7 +6,7 @@ import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
 import Dialog from "components/global/dialog";
 import ContentBlock from "components/backend/content-block";

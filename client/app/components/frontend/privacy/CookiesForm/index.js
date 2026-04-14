@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import CookiesFields from "./CookiesFormFields";
-import GlobalForm from "global/containers/form";
+import GlobalForm from "components/global/form/Container";
 import { useSettings, useAuthentication, useNotifications } from "hooks";
 import * as Styled from "./styles";
 

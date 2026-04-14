@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { sectionsAPI } from "api";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Collapse from "components/global/Collapse";
 import SectionFields from "./SectionFields";
 

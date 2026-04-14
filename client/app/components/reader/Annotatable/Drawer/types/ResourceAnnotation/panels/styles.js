@@ -6,7 +6,7 @@ import {
   buttonUnstyled,
   utilityPrimary
 } from "theme/styles/mixins";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 
 export const Search = styled.div`
   padding-block-end: 24px;

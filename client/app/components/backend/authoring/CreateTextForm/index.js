@@ -1,7 +1,7 @@
 import { useState, useId } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
 import SectionsList from "./SectionsList";
 import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";

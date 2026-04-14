@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext } from "react-router";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import { textsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";

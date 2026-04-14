@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import { panelRounded, respond, styledUnderline } from "theme/styles/mixins";
 import { transientOptions } from "helpers/emotionHelpers";
 

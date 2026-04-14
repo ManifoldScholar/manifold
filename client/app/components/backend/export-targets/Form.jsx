@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import camelCase from "lodash/camelCase";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 
 export default function ExportTargetForm({ fetcher, model }) {
   const { t } = useTranslation();

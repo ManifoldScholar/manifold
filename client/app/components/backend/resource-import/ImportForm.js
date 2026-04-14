@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
 import IconComposer from "components/global/utility/IconComposer";
 

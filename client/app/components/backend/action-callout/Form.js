@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { actionCalloutsAPI } from "api";
 import { useApiCallback } from "hooks";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
 import Layout from "components/backend/layout";
 import useConfirmation from "hooks/useConfirmation";

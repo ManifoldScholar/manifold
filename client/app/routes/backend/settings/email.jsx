@@ -6,7 +6,7 @@ import formAction from "app/routes/utility/helpers/formAction";
 import { useApiCallback, useNotifications } from "hooks";
 import Layout from "components/backend/layout";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import PageHeader from "components/backend/layout/PageHeader";
 
 export const action = formAction({

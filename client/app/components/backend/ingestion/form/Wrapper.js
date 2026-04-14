@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Upload from "./Upload";
 
 function formatData(dirty, source) {

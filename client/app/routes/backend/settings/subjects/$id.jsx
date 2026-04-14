@@ -4,7 +4,7 @@ import { subjectsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Layout from "components/backend/layout";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";

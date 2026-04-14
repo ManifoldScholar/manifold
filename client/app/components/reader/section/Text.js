@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router";
 import classNames from "classnames";
 import Body from "./Body";
-import Annotatable from "reader/containers/Annotatable";
+import Annotatable from "components/reader/Annotatable";
 import lh from "helpers/location";
 import filterAnnotations from "./helpers/filter-annotations";
 import { useHtmlClass } from "hooks";

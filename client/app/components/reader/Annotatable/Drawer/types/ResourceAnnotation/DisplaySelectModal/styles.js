@@ -6,7 +6,7 @@ import {
   utilityPrimary,
   fluidScale
 } from "theme/styles/mixins";
-import { Form as BaseForm } from "global/containers/form/styles";
+import { Form as BaseForm } from "components/global/form/Container/styles";
 
 export const Dialog = styled.dialog`
   padding: ${fluidScale("60px", "30px")};

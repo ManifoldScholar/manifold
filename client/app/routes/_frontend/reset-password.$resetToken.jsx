@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
 import { passwordsAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
-import GlobalForm from "global/containers/form";
+import GlobalForm from "components/global/form/Container";
 import Form from "components/global/form";
 import HeadContent from "components/global/HeadContent";
 

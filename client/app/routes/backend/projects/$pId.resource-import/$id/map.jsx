@@ -11,7 +11,7 @@ import {
 import { resourceImportsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import { useNotifications } from "hooks";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
 import IconComposer from "components/global/utility/IconComposer";
 

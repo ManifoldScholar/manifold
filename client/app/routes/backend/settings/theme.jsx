@@ -4,7 +4,7 @@ import { settingsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import Layout from "components/backend/layout";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import PageHeader from "components/backend/layout/PageHeader";
 import HeaderPreview from "components/backend/theme/HeaderPreview";
 

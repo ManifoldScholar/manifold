@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext } from "react-router";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Layout from "components/backend/layout";
 import Form from "components/global/form";
 import PageHeader from "components/backend/layout/PageHeader";

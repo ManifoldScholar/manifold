@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
 import HeroBlock from "components/backend/hero/Builder/Block";
 import { useSettings } from "hooks";

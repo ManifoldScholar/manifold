@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import GlobalForm from "global/containers/form";
+import GlobalForm from "components/global/form/Container";
 import { buttonUnstyled } from "theme/styles/mixins";
 
 export const Form = styled(GlobalForm.Form)`

@@ -4,7 +4,7 @@ import { useSubmit } from "react-router";
 import { contactsAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
-import GlobalForm from "global/containers/form";
+import GlobalForm from "components/global/form/Container";
 import Form from "components/global/form";
 import HeadContent from "components/global/HeadContent";
 

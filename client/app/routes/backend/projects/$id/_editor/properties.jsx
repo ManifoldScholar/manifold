@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 import Project from "components/backend/project";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import { subjectsAPI, journalVolumesAPI, projectsAPI, tagsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import { useApiCallback } from "hooks";

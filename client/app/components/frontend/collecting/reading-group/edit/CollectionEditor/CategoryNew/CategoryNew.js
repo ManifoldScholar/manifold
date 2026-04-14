@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useFetcher } from "react-router";
 import { useTranslation } from "react-i18next";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import Dialog from "components/global/dialog";
 import { useConfirmation } from "hooks";
 import * as Styled from "../SortableCategories/parts/styles";

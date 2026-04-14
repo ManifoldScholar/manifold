@@ -3,7 +3,7 @@ import { useOutletContext, useFetcher } from "react-router";
 import { pagesAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 
 export const action = formAction({
   mutation: ({ data, params }) => pagesAPI.update(params.id, data)

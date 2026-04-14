@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import * as Styled from "./styles";
 
 const DEFAULT_USER = { attributes: { role: "reader" } };

@@ -4,7 +4,7 @@ import { pagesAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import authorize from "app/routes/utility/loaders/authorize";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import PageHeader from "components/backend/layout/PageHeader";
 import Layout from "components/backend/layout";
 

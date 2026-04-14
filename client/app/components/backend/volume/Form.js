@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import { useTranslation } from "react-i18next";
 
 function VolumeForm({ model, fetcher }) {

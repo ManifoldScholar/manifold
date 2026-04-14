@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext, useNavigate } from "react-router";
 import ProjectCollection from "components/backend/project-collection";
 import Form from "components/global/form";
-import FormContainer from "global/containers/form";
+import FormContainer from "components/global/form/Container";
 import { projectCollectionsAPI } from "api";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";

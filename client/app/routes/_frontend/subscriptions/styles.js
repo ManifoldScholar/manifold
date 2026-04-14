@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { respond } from "theme/styles/mixins";
-import GlobalForm from "global/containers/form";
+import GlobalForm from "components/global/form/Container";
 
 export const Form = styled(GlobalForm.Form)`
   margin: auto;

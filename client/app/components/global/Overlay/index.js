@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router";
 import { FocusTrap } from "focus-trap-react";
 import Header from "./Header";
-import helpers from "reader/containers/Annotatable/helpers/selectionHelpers";
+import helpers from "components/reader/Annotatable/helpers/selectionHelpers";
 
 import { useBodyClass } from "hooks";
 
