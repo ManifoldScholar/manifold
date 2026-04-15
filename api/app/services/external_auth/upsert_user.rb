@@ -22,6 +22,7 @@ module ExternalAuth
       return user if mode == :ignore
 
       attach_identity!
+      maybe_autoconfirm_email!
 
       save_user!
     end
@@ -55,6 +56,19 @@ module ExternalAuth
 
     def attach_identity!
       user.identities << identity
+    end
+
+    # Autoconfirm email unless the provider config specifically disallows it
+    # Default to true - we generally trust our identity providers
+    def autoconfirm_email?
+      return false if user.email_confirmed?
+      return true if identity.provider_config.nil?
+
+      identity.provider_config.trust_email?
+    end
+
+    def maybe_autoconfirm_email!
+      user.email_confirmed_at ||= Time.current if autoconfirm_email?
     end
 
     # @return [User]
