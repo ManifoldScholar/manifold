@@ -71,6 +71,7 @@ export default defineConfig(({ isSsrBuild }) => ({
     }
   },
   optimizeDeps: {
+    entries: ["app/routes/*.{js}", "app/components*.{js}"],
     include: ["@emotion/react", "@emotion/styled"],
     esbuildOptions: {
       loader: {
