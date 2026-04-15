@@ -1,0 +1,20 @@
+<h1><%= Settings.current.general.installation_name %> LTI Tool Registration</h1>
+
+<% if @consent.valid? %>
+  <!-- LTI options can go here -->
+
+  <%= form_with do |f| %>
+    <%= f.hidden_field :issuer, value: @consent.referrer %>
+    <%= f.hidden_field :registration_token, value: @consent.registration_token %>
+    <%= f.hidden_field :openid_configuration, value: @consent.openid_configuration_url %>
+    <%= f.submit "Continue" %>
+  <% end %>
+<% else %>
+  <ul>
+    <h2>One or more errors have occurred:</h2>
+    <% @consent.errors.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
