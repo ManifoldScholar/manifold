@@ -54,7 +54,7 @@ function emotionTransformPlugin() {
   };
 }
 
-export default defineConfig(() => ({
+export default defineConfig(({ isSsrBuild }) => ({
   assetsInclude: ["**/*.woff", "**/*.woff2"],
   plugins: [jsxInJsPlugin(), emotionTransformPlugin(), reactRouter()],
   resolve: {
@@ -79,7 +79,8 @@ export default defineConfig(() => ({
     }
   },
   ssr: {
-    external: ["lodash"]
+    external: ["lodash"],
+    noExternal: isSsrBuild ? true : undefined
   },
   server: {
     proxy: {
