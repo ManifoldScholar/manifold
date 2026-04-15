@@ -7,9 +7,7 @@ export const handle = {
     const title = loaderData?.attributes?.titlePlaintext;
     const trail = location?.state?.trail;
     const base =
-      Array.isArray(trail) && trail.length > 0
-        ? trail
-        : [{ label: "Resources", to: "/lti/resources" }];
+      Array.isArray(trail) && trail.length > 0 ? trail : [];
     return [
       ...base,
       title ? { label: title, to: `/lti/resources/${params.id}` } : null
@@ -37,12 +35,14 @@ export default function LtiResourceDetail({ loaderData: resource }) {
   return (
     <>
       <h1>{titlePlaintext}</h1>
-      <Styled.Meta>
+      <Styled.MetaLine>
         {kind}
         {subKind ? ` · ${subKind}` : ""}
-      </Styled.Meta>
-      {descriptionPlaintext ? <p>{descriptionPlaintext}</p> : null}
-      {captionPlaintext ? <p>{captionPlaintext}</p> : null}
+      </Styled.MetaLine>
+      <Styled.DetailText>
+        {descriptionPlaintext ? <p>{descriptionPlaintext}</p> : null}
+        {captionPlaintext ? <p>{captionPlaintext}</p> : null}
+      </Styled.DetailText>
     </>
   );
 }

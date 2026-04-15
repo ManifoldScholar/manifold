@@ -6,6 +6,9 @@ import {
   useMatches,
   useSearchParams
 } from "react-router";
+import Button from "components/global/atomic/Button";
+import IconComposer from "components/global/utility/IconComposer";
+import { useBodyClass } from "hooks";
 import * as Styled from "./styles";
 import { SelectionProvider, useSelection } from "./selectionContext";
 
@@ -34,7 +37,7 @@ function SidebarContents({ onClose }) {
       <Styled.SidebarHeader>
         <h2>Selected</h2>
         <button type="button" aria-label="Close sidebar" onClick={onClose}>
-          →
+          <IconComposer icon="arrowRight16" size={20} />
         </button>
       </Styled.SidebarHeader>
       {items.length === 0 ? (
@@ -53,7 +56,7 @@ function SidebarContents({ onClose }) {
                       aria-label={`Remove ${item.title}`}
                       onClick={() => remove(item)}
                     >
-                      ×
+                      <IconComposer icon="close16" size={14} />
                     </button>
                   </li>
                 ))}
@@ -62,8 +65,14 @@ function SidebarContents({ onClose }) {
           ) : null
         )
       )}
-      <Styled.AddToCourseButton type="button" disabled={items.length === 0}>
-        Add to Course
+      <Styled.AddToCourseButton>
+        <Button
+          type="button"
+          size="md"
+          background="accent"
+          label="Add to Course"
+          disabled={items.length === 0}
+        />
       </Styled.AddToCourseButton>
     </>
   );
@@ -100,12 +109,17 @@ function SidebarDrawer({ open, onOpen, onClose }) {
 }
 
 export default function LtiLayout() {
+  useBodyClass("browse");
+
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const matches = useMatches();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const isLanding =
     location.pathname === "/lti" || location.pathname === "/lti/";
+  const isSearch =
+    location.pathname === "/lti/search" ||
+    location.pathname === "/lti/search/";
   const keyword = searchParams.get("keyword") ?? "";
 
   const crumbs = matches.flatMap(match => {
@@ -130,7 +144,7 @@ export default function LtiLayout() {
               const isLast = i === crumbs.length - 1;
               return (
                 <span key={`${crumb.to ?? crumb.label}-${i}`}>
-                  <Styled.CrumbSep aria-hidden="true">›</Styled.CrumbSep>
+                  <Styled.CrumbSep aria-hidden="true">/</Styled.CrumbSep>
                   {isLast || !crumb.to ? (
                     <span aria-current={isLast ? "page" : undefined}>
                       {crumb.label}
@@ -142,7 +156,7 @@ export default function LtiLayout() {
               );
             })}
           </Styled.Breadcrumbs>
-          {!isLanding && (
+          {!isLanding && !isSearch && (
             <form action="/lti/search" method="get" role="search">
               <input
                 type="search"
@@ -151,7 +165,13 @@ export default function LtiLayout() {
                 defaultValue={keyword}
                 aria-label="Search"
               />
-              <button type="submit">Search</button>
+              <Button
+                type="submit"
+                size="sm"
+                background="neutral"
+                label="Search"
+                preIcon="search16"
+              />
             </form>
           )}
         </Styled.TopBar>
