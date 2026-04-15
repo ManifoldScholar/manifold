@@ -16,7 +16,7 @@ class Identity < ApplicationRecord
   scope :provider, ->(name) { rewhere(provider: name) }
   scope :uid, ->(uid) { rewhere(uid: uid) }
 
-  delegate :facebook?, :google_oauth2?, :twitter?, to: :provider
+  delegate :facebook?, :google_oauth2?, :twitter?, :lti?, to: :provider
 
   alias google? google_oauth2?
 
@@ -32,5 +32,14 @@ class Identity < ApplicationRecord
 
   def name
     "#{provider} identity for #{user.name}"
+  end
+
+  # @return [AbstractAuthProvider, nil]
+  def provider_config
+    AuthConfig.providers.find { _1.provider_name == provider}
+  end
+
+  def trust_email?
+    provider_config&.trust_email?
   end
 end
