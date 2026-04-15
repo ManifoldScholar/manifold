@@ -9,6 +9,10 @@ module Auth
 
     layout "auth"
 
+    skip_before_action :verify_authenticity_token, only: :redirect
+    # LTI request forgery detection happens in the OmniAuth strategy
+    skip_before_action :verify_authenticity_token, only: :authorize, if: -> { lti? }
+
     def redirect; end
 
     def authorize
@@ -36,11 +40,7 @@ module Auth
     def post_authorize_redirect_uri(error: false)
       URI.parse(Rails.configuration.manifold.url).tap do |uri|
         uri.path = POST_AUTH_REDIRECT_PATH
-        uri.query = if error
-                      "error=#{AUTH_ERROR_STRING}"
-                    else
-                      post_authorize_query_string
-                    end
+        uri.query = error ? "error=#{AUTH_ERROR_STRING}" : post_authorize_query_string
       end
     end
 
@@ -53,7 +53,7 @@ module Auth
     end
 
     def target_path
-      url_string = if params[:provider] == "lti"
+      url_string = if lti?
         omniauth_hash&.dig("extra", "target_link_uri")
       elsif params[:RelayState] || params[:relay_state]
         relay_state = params[:RelayState] || params[:relay_state]
@@ -63,10 +63,9 @@ module Auth
       return unless url_string
 
       uri = URI.parse(url_string)
-      return unless uri.host == Rails.application.config.manifold.domain
+      return unless uri.host == Rails.application.config.manifold.domain.gsub(/:\d+/, "")
 
       { redirect_path: "#{uri.path}?#{uri.query}".delete_suffix("?") }
-      end
     rescue URI::BadURIError, URI::InvalidURIError
       nil
     end
@@ -86,6 +85,10 @@ module Auth
 
     def omniauth_hash
       request.env["omniauth.auth"]
+    end
+
+    def lti?
+      params[:provider] == "lti"
     end
   end
 end
