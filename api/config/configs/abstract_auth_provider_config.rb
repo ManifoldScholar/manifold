@@ -19,7 +19,8 @@ class AbstractAuthProviderConfig < ApplicationConfig
               :logo,
               enabled: false,
               hidden: false,
-              default: false
+              default: false,
+              trust_email: true
 
   coerce_types enabled: :boolean, hidden: :boolean, default: :boolean
 
