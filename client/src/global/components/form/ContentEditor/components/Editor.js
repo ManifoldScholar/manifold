@@ -208,7 +208,7 @@ export default function Editor({
       {theme && !htmlMode && (
         <style
           dangerouslySetInnerHTML={{
-            __html: `@layer stylesheets {${theme}}`
+            __html: `@layer custom-styles {${theme}}`
           }}
         />
       )}

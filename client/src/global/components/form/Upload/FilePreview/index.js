@@ -7,7 +7,8 @@ import * as Styled from "./styles";
 export default class FormUploadFilePreview extends PureComponent {
   static propTypes = {
     fileName: PropTypes.string,
-    handleRemove: PropTypes.func.isRequired
+    handleRemove: PropTypes.func.isRequired,
+    instructionsSingleLine: PropTypes.bool
   };
 
   static defaultProps = {};
@@ -26,7 +27,8 @@ export default class FormUploadFilePreview extends PureComponent {
                   type="button"
                   onClick={this.props.handleRemove}
                 />,
-                <Prompt />
+                <Prompt />,
+                ...(this.props.instructionsSingleLine ? [] : [<br />])
               ]}
             />
           </Styled.SecondaryText>

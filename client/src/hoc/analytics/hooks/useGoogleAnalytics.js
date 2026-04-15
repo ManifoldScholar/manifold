@@ -21,13 +21,20 @@ function googleAnalyticsEnabled(settings) {
 export default function useGoogleAnalytics(location, settings) {
   const googleAnalyticsId = getGoogleAnalyticsId(settings);
   const [gaInitialized, setGaInitialized] = useState(false);
-  const { currentUser } = useFromStore("authentication") ?? {};
+  const { currentUser } = useFromStore({ path: "authentication" }) ?? {};
+  const [consentGoogleAnalytics, setConsentGoogleAnalytics] = useState(
+    currentUser?.attributes?.consentGoogleAnalytics || false
+  );
 
-  const anonConsent = JSON.parse(cookie.read("anonAnalyticsConsent") ?? "{}");
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-  const consentGoogleAnalytics =
-    currentUser?.attributes?.consentGoogleAnalytics ||
-    anonConsent?.consentGoogleAnalytics;
+    const anonConsent = JSON.parse(cookie.read("anonAnalyticsConsent") ?? "{}");
+    const consent =
+      currentUser?.attributes?.consentGoogleAnalytics ||
+      anonConsent?.consentGoogleAnalytics;
+    setConsentGoogleAnalytics(consent);
+  }, [currentUser]);
 
   useEffect(() => {
     const setConsentState = () => {

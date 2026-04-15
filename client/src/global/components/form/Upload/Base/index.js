@@ -38,7 +38,8 @@ export default class FormUpload extends Component {
     progress: PropTypes.string,
     fileNameFrom: PropTypes.string,
     uploadError: PropTypes.string,
-    getModelValue: PropTypes.func
+    getModelValue: PropTypes.func,
+    instructionsSingleLine: PropTypes.bool
   };
 
   static defaultProps = {
@@ -51,7 +52,8 @@ export default class FormUpload extends Component {
     super(props);
     this.state = {
       removed: false,
-      attachment: null
+      attachment: null,
+      clearAlt: false
     };
   }
 
@@ -61,6 +63,9 @@ export default class FormUpload extends Component {
       this.state.removed !== prevState.removed
     ) {
       this.props.updateValue(this.state);
+      this.setState({ clearAlt: true });
+    } else if (this.state.clearAlt) {
+      this.setState({ clearAlt: false });
     }
   }
 
@@ -144,6 +149,7 @@ export default class FormUpload extends Component {
                     handleRemove={this.handleRemove}
                     fileName={this.fileName}
                     isBuilder={this.props.isBuilder}
+                    instructionsSingleLine={this.props.instructionsSingleLine}
                   />
                 ) : (
                   <Empty
@@ -151,6 +157,7 @@ export default class FormUpload extends Component {
                     progress={this.props.progress}
                     uploadError={this.props.uploadError}
                     placeholder={this.props.placeholder}
+                    instructionsSingleLine={this.props.instructionsSingleLine}
                   />
                 )}
               </InputWrapper>
@@ -164,8 +171,11 @@ export default class FormUpload extends Component {
           )}
           {showAltTextInput && (
             <Styled.AltTextInput
+              inputType="text"
               name={this.props.altTextName}
               label={this.props.altTextLabel}
+              reset={this.state.clearAlt}
+              resetOnMount
             />
           )}
         </Errorable>

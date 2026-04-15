@@ -1,192 +1,146 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useParams, useLocation, useNavigate, Outlet } from "react-router-dom";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
-import { entityStoreActions } from "actions";
-import { select } from "utils/entityUtils";
 import { projectsAPI, requests } from "api";
-import { childRoutes, RedirectToFirstMatch } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
-import get from "lodash/get";
 import HeadContent from "global/components/HeadContent";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { getBreadcrumbs } from "./breadcrumbs";
 import PageHeader from "backend/components/layout/PageHeader";
+import { useFetch, useApiCallback, useNotification } from "hooks";
 
-const { request, flush } = entityStoreActions;
+function ProjectWrapperContainer({ confirm }) {
+  const { t } = useTranslation();
+  const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-export class ProjectWrapperContainer extends PureComponent {
-  static mapStateToProps = state => {
-    return {
-      projectResponse: get(state.entityStore.responses, requests.beProject),
-      project: select(requests.beProject, state.entityStore)
-    };
-  };
+  const { data: project, response: projectResponse, refresh } = useFetch({
+    request: [projectsAPI.show, id]
+  });
 
-  static displayName = "Project.Wrapper";
+  const destroy = useApiCallback(projectsAPI.destroy, {
+    requestKey: requests.beProjectDestroy,
+    removes: project
+  });
 
-  static propTypes = {
-    projectResponse: PropTypes.object,
-    project: PropTypes.object,
-    dispatch: PropTypes.func,
-    match: PropTypes.object,
-    history: PropTypes.object,
-    confirm: PropTypes.func.isRequired,
-    route: PropTypes.object,
-    location: PropTypes.object,
-    t: PropTypes.func
-  };
+  const notifyDestroy = useNotification(p => ({
+    level: 0,
+    id: `PROJECT_DESTROYED_${p.id}`,
+    heading: t("notifications.project_delete"),
+    body: t("notifications.delete_entity_body", {
+      title: p?.attributes?.titlePlaintext
+    }),
+    expiration: 5000
+  }));
 
-  static defaultProps = {
-    confirm: (heading, message, callback) => callback()
-  };
+  const destroyAndRedirect = useCallback(async () => {
+    if (!project) return;
+    try {
+      await destroy(project.id);
+      notifyDestroy(project);
+      navigate(lh.link("backend"));
+    } catch {
+      navigate(lh.link("backend"));
+    }
+  }, [destroy, project, notifyDestroy, navigate]);
 
-  componentDidMount() {
-    this.fetchProject();
-  }
-
-  componentDidUpdate() {
-    const {
-      params: { id: nextId }
-    } = this.props.match ?? {};
-    const prevId = this.props.project?.id;
-    if (nextId && prevId && nextId !== prevId) this.fetchProject();
-  }
-
-  componentWillUnmount() {
-    this.props.dispatch(flush(requests.beProject));
-  }
-
-  fetchProject = () => {
-    const call = projectsAPI.show(this.props.match.params.id);
-    const options = { force: true };
-    const projectRequest = request(call, requests.beProject, options);
-    this.props.dispatch(projectRequest);
-  };
-
-  doDestroy = () => {
-    const call = projectsAPI.destroy(this.props.project.id);
-    const options = { removes: this.props.project };
-    const projectRequest = request(call, requests.beProjectDestroy, options);
-    this.props.dispatch(projectRequest).promise.then(() => {
-      this.redirectToDashboard();
-    });
-  };
-
-  redirectToDashboard() {
-    this.props.history.push(lh.link("backend"));
-  }
-
-  handleProjectDestroy = () => {
-    const { t } = this.props;
+  const handleProjectDestroy = useCallback(() => {
     const heading = t("modals.delete_project");
     const message = t("modals.confirm_body");
-    this.props.confirm(heading, message, this.doDestroy);
-  };
+    confirm(heading, message, destroyAndRedirect);
+  }, [confirm, destroyAndRedirect, t]);
 
-  get utility() {
-    return [
-      {
-        label: "actions.view",
-        route: "frontendProjectDetail",
-        slug: this.props.project.attributes.slug,
-        icon: "eyeOpen32"
-      },
-      {
-        label: "actions.delete",
-        authorize: "delete",
-        icon: "delete32",
-        onClick: this.handleProjectDestroy
+  if (!project) return null;
+
+  const utility = [
+    {
+      label: "actions.view",
+      route: "frontendProjectDetail",
+      slug: project.attributes.slug,
+      icon: "eyeOpen32"
+    },
+    {
+      label: "actions.delete",
+      authorize: "delete",
+      icon: "delete32",
+      onClick: handleProjectDestroy
+    }
+  ];
+
+  const updateProject = projectsAPI.update;
+
+  const secondaryLinks = navigation.project(project);
+  const isJournalIssue = project.attributes.isJournalIssue;
+
+  const breadcrumbs = getBreadcrumbs(
+    project,
+    location.state,
+    isJournalIssue,
+    t
+  );
+
+  const subpage = location.pathname.split("/")[4]?.replace("-", "_");
+
+  const parentProps = isJournalIssue
+    ? {
+        parentTitle: project.relationships.journal.attributes.titleFormatted,
+        parentSubtitle: project.relationships.journal.attributes.subtitle,
+        parentId: project.relationships.journal.id,
+        issues: project.attributes.journalIssuesNav
       }
-    ];
-  }
+    : {};
 
-  renderRoutes() {
-    const { project, projectResponse } = this.props;
-    const refresh = this.fetchProject;
-    const updateProject = projectsAPI.update;
-    return childRoutes(this.props.route, {
-      childProps: { refresh, updateProject, project, projectResponse }
-    });
-  }
-
-  render() {
-    if (!this.props.project) return null;
-    const { project, t } = this.props;
-    const secondaryLinks = navigation.project(project);
-    const isJournalIssue = project.attributes.isJournalIssue;
-
-    const breadcrumbs = getBreadcrumbs(
-      project,
-      this.props.location.state,
-      isJournalIssue,
-      t
-    );
-
-    const subpage = location.pathname.split("/")[4]?.replace("-", "_");
-
-    const parentProps = isJournalIssue
-      ? {
-          parentTitle: project.relationships.journal.attributes.titleFormatted,
-          parentSubtitle: project.relationships.journal.attributes.subtitle,
-          parentId: project.relationships.journal.id,
-          issues: project.attributes.journalIssuesNav
-        }
-      : {};
-
-    return (
-      <Authorize
-        entity={project}
-        failureFatalError={{
-          detail: t("projects.unauthorized_edit")
-        }}
-        ability={["update", "manageResources"]}
-      >
-        {subpage && (
-          <HeadContent
-            title={`${t(`titles.${subpage}`)} | ${
-              project.attributes.titlePlaintext
-            } | ${t("common.admin")}`}
-            appendDefaultTitle
+  return (
+    <Authorize
+      entity={project}
+      failureNotification={{
+        body: t("projects.unauthorized_edit")
+      }}
+      failureRedirect
+      ability={["update", "manageResources"]}
+    >
+      {subpage && (
+        <HeadContent
+          title={`${t(`titles.${subpage}`)} | ${
+            project.attributes.titlePlaintext
+          } | ${t("common.admin")}`}
+          appendDefaultTitle
+        />
+      )}
+      <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
+      <PageHeader
+        type={isJournalIssue ? "issue" : "project"}
+        title={project.attributes.titleFormatted}
+        subtitle={project.attributes.subtitle}
+        texts={project.attributes.textsNav}
+        actions={utility}
+        secondaryLinks={secondaryLinks}
+        {...parentProps}
+      />
+      <Layout.BackendPanel
+        sidebar={
+          <Layout.SecondaryNav
+            links={secondaryLinks}
+            panel
+            ariaLabel={t("projects.settings")}
           />
-        )}
-        <RedirectToFirstMatch
-          route={"backendProject"}
-          id={project.id}
-          slug={project.attributes.slug}
-          candidates={secondaryLinks}
-          state={this.props.location.state}
-        />
-        <RegisterBreadcrumbs breadcrumbs={breadcrumbs ?? []} />
-        <PageHeader
-          type={isJournalIssue ? "issue" : "project"}
-          title={project.attributes.titleFormatted}
-          subtitle={project.attributes.subtitle}
-          texts={project.attributes.textsNav}
-          actions={this.utility}
-          secondaryLinks={secondaryLinks}
-          {...parentProps}
-        />
-        <Layout.BackendPanel
-          sidebar={
-            <Layout.SecondaryNav
-              links={secondaryLinks}
-              panel
-              ariaLabel={t("projects.settings")}
-            />
-          }
-        >
-          <div>{this.renderRoutes()}</div>
-        </Layout.BackendPanel>
-      </Authorize>
-    );
-  }
+        }
+      >
+        <div>
+          <Outlet
+            context={{ refresh, updateProject, project, projectResponse }}
+          />
+        </div>
+      </Layout.BackendPanel>
+    </Authorize>
+  );
 }
 
-export default withTranslation()(
-  withConfirmation(connectAndFetch(ProjectWrapperContainer))
-);
+ProjectWrapperContainer.displayName = "Project.Wrapper";
+
+export default withConfirmation(ProjectWrapperContainer);

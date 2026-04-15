@@ -36,7 +36,7 @@ const maybePrepend = (entityTitle, prepend) => {
 
 export const useMetaTitle = (entity, parent, prepend) => {
   const { t } = useTranslation();
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   if (!entity?.attributes) return undefined;
 

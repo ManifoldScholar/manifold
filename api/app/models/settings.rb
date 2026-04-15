@@ -18,6 +18,7 @@ class Settings < ApplicationRecord
   attribute :rate_limiting, SettingSections::RateLimiting.to_type, default: -> { {} }
   attribute :secrets, SettingSections::Secrets.to_type, default: -> { {} }
   attribute :theme, SettingSections::Theme.to_type, default: -> { {} }
+  attribute :oai, SettingSections::OAI.to_type, default: -> { {} }
 
   validates :singleton_guard, inclusion: [0], uniqueness: true
 
@@ -34,6 +35,8 @@ class Settings < ApplicationRecord
   delegate :default_restricted_access_heading, :default_restricted_access_body, :public_reading_groups_disabled?, to: :general
 
   after_update :update_oauth_providers!
+  after_update :enqueue_directory_sync, if: :oai_directory_enabled?
+  after_update :delete_directory_set, if: :oai_directory_disabled?
 
   # @!group Derived Settings
 
@@ -183,5 +186,29 @@ class Settings < ApplicationRecord
     def update_from_environment?
       manage_from_env? && table_exists?
     end
+  end
+
+  private
+
+  def oai_directory_enabled?
+    return false unless saved_change_to_oai?
+
+    old_oai, new_oai = saved_change_to_oai
+    new_oai.directory_enabled_changed_to_true?(old_oai)
+  end
+
+  def oai_directory_disabled?
+    return false unless saved_change_to_oai?
+
+    old_oai, new_oai = saved_change_to_oai
+    new_oai.directory_enabled_changed_to_false?(old_oai)
+  end
+
+  def enqueue_directory_sync
+    OAI::SyncDirectorySetJob.perform_later
+  end
+
+  def delete_directory_set
+    ManifoldOAISet.where(spec: "directory").destroy_all
   end
 end

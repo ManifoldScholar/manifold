@@ -3,6 +3,7 @@
 class CollectionProject < ApplicationRecord
   include Authority::Abilities
   include SerializedAbilitiesFor
+  include ManifoldOAISetLinkSource
 
   self.authorizer_name = "ProjectChildAuthorizer"
 
@@ -13,6 +14,7 @@ class CollectionProject < ApplicationRecord
 
   has_many :creators, through: :project, source: "makers"
   has_many :contributors, through: :project, source: "makers"
+  has_many :subjects, through: :project
 
   # Ordering
   acts_as_list scope: :project_collection
@@ -29,4 +31,16 @@ class CollectionProject < ApplicationRecord
   validates :project, uniqueness: { scope: :project_collection }
 
   alias_attribute :project_summary_id, :project_id
+
+  def should_have_oai_set_link?
+    project.should_have_oai_record? && project_collection.should_have_oai_set?
+  end
+
+  def oai_set
+    project_collection.manifold_oai_set
+  end
+
+  def oai_record
+    project.manifold_oai_record
+  end
 end

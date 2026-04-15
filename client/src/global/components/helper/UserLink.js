@@ -1,6 +1,5 @@
-import React, { PureComponent } from "react";
+import { useMemo } from "react";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
 import Url from "url-parse";
 import memoize from "lodash/memoize";
 import config from "config";
@@ -8,64 +7,36 @@ import { Link } from "react-router-dom";
 
 const urlFactory = memoize(url => new Url(url));
 
-class UserLink extends PureComponent {
-  static propTypes = {
-    url: PropTypes.string.isRequired
-  };
+export default function UserLink({ url, className, children }) {
+  const parsedUrl = useMemo(() => urlFactory(url), [url]);
 
-  get isReactRouterLink() {
-    return this.isLocalUrl;
-  }
+  const isAbsoluteUrl = /^[a-z][a-z\d+.-]*:/.test(url);
+  const isLocalUrl = !isAbsoluteUrl
+    ? true
+    : parsedUrl.hostname === config.services.client.domain;
+  const renderUrl = isLocalUrl
+    ? `${parsedUrl.pathname}${parsedUrl.query}${parsedUrl.hash}`
+    : url;
 
-  get linkComponent() {
-    return this.isReactRouterLink ? Link : "a";
-  }
+  const LinkComponent = isLocalUrl ? Link : "a";
 
-  get linkProps() {
-    const baseProps = {
-      className: this.props.className
-    };
-    if (this.isReactRouterLink) {
-      return Object.assign(baseProps, {
-        to: this.renderUrl
-      });
-    }
-    return Object.assign(baseProps, {
-      href: this.renderUrl,
-      target: "_blank",
-      rel: "noopener noreferrer"
-    });
-  }
+  const baseProps = { className };
+  const linkProps = isLocalUrl
+    ? { ...baseProps, to: renderUrl }
+    : {
+        ...baseProps,
+        href: renderUrl,
+        target: "_blank",
+        rel: "noopener noreferrer"
+      };
 
-  get isAbsoluteUrl() {
-    return /^[a-z][a-z\d+.-]*:/.test(this.rawUrl);
-  }
-
-  get isLocalUrl() {
-    if (!this.isAbsoluteUrl) return true;
-    return this.parsedUrl.hostname === config.services.client.domain;
-  }
-
-  get rawUrl() {
-    return this.props.url;
-  }
-
-  get parsedUrl() {
-    return urlFactory(this.rawUrl);
-  }
-
-  get renderUrl() {
-    if (this.isLocalUrl)
-      return `${this.parsedUrl.pathname}${this.parsedUrl.query}${this.parsedUrl.hash}`;
-    return this.rawUrl;
-  }
-
-  render() {
-    const LinkComponent = this.linkComponent;
-    const linkProps = this.linkProps;
-
-    return <LinkComponent {...linkProps}>{this.props.children}</LinkComponent>;
-  }
+  return <LinkComponent {...linkProps}>{children}</LinkComponent>;
 }
 
-export default withRouter(UserLink);
+UserLink.displayName = "Helper.UserLink";
+
+UserLink.propTypes = {
+  url: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node
+};

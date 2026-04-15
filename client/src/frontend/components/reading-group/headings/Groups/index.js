@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
@@ -26,7 +25,7 @@ function GroupsHeading({ currentUser }) {
     attributes: {
       general: { disablePublicReadingGroups }
     }
-  } = useFromStore("settings", "select");
+  } = useFromStore({ requestKey: "settings", action: "select" });
 
   return (
     <header>
@@ -55,7 +54,6 @@ function GroupsHeading({ currentUser }) {
               <Styled.CreateButton
                 to={lh.link("frontendMyReadingGroupsNew")}
                 className="button-tertiary"
-                activeClassName="button-tertiary--active"
               >
                 {t("navigation.reading_group.create")}
               </Styled.CreateButton>

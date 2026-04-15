@@ -49,7 +49,7 @@ export class PickerComponent extends PureComponent {
     listRowEditUrlGenerator: PropTypes.func,
     /* The path to the attribute on the model that's being updated in bracket   */
     /* notation. For example: "attributes[tagList]"                             */
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     /* The options that should appear in the picker. These will be passed on to */
     /* the withFormOptions HOC, which is responsible for managing options and */
     /* the current value. You may pass a function to this component. The        */
@@ -82,7 +82,7 @@ export class PickerComponent extends PureComponent {
     updateOptions: PropTypes.func,
     /* This function is used to transform an option, or the results of an       */
     /* options function into a label. By default, simply option values are cast */
-    /* to strings. Labels for resourceish options will generate the label from  */
+    /* to strings. Labels for resource options will generate the label from  */
     /* the type and ID attribute.                                               */
     optionToLabel: PropTypes.func,
     /* By default, whatever is passed in as an option is the value that's set   */

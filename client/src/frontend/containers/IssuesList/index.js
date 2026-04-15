@@ -1,36 +1,53 @@
-import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useFetch, useListFilters, useListQueryParams } from "hooks";
+import {
+  useFetch,
+  useListFilters,
+  useListQueryParams,
+  useFromStore
+} from "hooks";
 import EntityCollectionPlaceholder from "global/components/entity/CollectionPlaceholder";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
 import HeadContent from "global/components/HeadContent";
+import { journalIssuesAPI, requests } from "api";
 
-import { journalIssuesAPI } from "api";
+const FILTERS_RESET = {
+  standaloneModeEnforced: false,
+  order: "sort_title DESC"
+};
 
 export default function IssuesListContainer() {
-  // Add back in when api supports filters
-  // const subjects = useFromStore("feSubjects", "select");
-
-  const filtersReset = useMemo(() => ({ standaloneModeEnforced: false }), []);
-
-  const { pagination, filters, setFilters } = useListQueryParams({
-    initFilters: filtersReset
+  const subjects = useFromStore({
+    requestKey: requests.feSubjects,
+    action: "select"
   });
 
-  const { data: issues, meta } = useFetch({
+  const { pagination, filters, setFilters } = useListQueryParams({
+    initFilters: FILTERS_RESET
+  });
+
+  const { data: issues, meta, loaded } = useFetch({
     request: [journalIssuesAPI.index, filters, pagination]
   });
 
   const filterProps = useListFilters({
     onFilterChange: state => setFilters(state),
     initialState: filters,
-    resetState: filtersReset
+    resetState: FILTERS_RESET,
+    options: {
+      entityType: "journalIssue",
+      sort: true,
+      subjects,
+      hideFeatured: true
+    }
   });
 
   const { t } = useTranslation();
 
-  const showPlaceholder = "keyword" in filters ? false : !issues?.length;
+  const showPlaceholder =
+    "keyword" in filters || "subject" in filters || loaded
+      ? false
+      : !issues?.length;
 
   if (!issues || !meta) return null;
 

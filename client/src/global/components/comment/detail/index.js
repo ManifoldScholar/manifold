@@ -141,19 +141,21 @@ class CommentDetail extends PureComponent {
           <Styled.Utility>
             {this.state.editor !== "edit" && (
               <Styled.UtilityList $isFlagged={comment.attributes.flagged}>
-                <li>
-                  <Styled.Button
-                    ref={this.replyToggleRef}
-                    onClick={
-                      this.state.editor === "reply"
-                        ? this.stopReply
-                        : this.startReply
-                    }
-                    aria-expanded={this.state.editor === "reply"}
-                  >
-                    {t("actions.reply")}
-                  </Styled.Button>
-                </li>
+                <Authorize entity={comment} ability={"create"}>
+                  <li>
+                    <Styled.Button
+                      ref={this.replyToggleRef}
+                      onClick={
+                        this.state.editor === "reply"
+                          ? this.stopReply
+                          : this.startReply
+                      }
+                      aria-expanded={this.state.editor === "reply"}
+                    >
+                      {t("actions.reply")}
+                    </Styled.Button>
+                  </li>
+                </Authorize>
                 <Authorize entity={comment} ability={"update"}>
                   <li>
                     <Styled.Button

@@ -1,27 +1,28 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
+import { useParams, useNavigate, useLocation, Outlet } from "react-router-dom";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import { journalsAPI } from "api";
-import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import navigation from "helpers/router/navigation";
 import Authorize from "hoc/Authorize";
-import {
-  useFetch,
-  useApiCallback,
-  useNotification,
-  useRedirectToFirstMatch
-} from "hooks";
+import { useFetch, useApiCallback, useNotification } from "hooks";
 import { useTranslation } from "react-i18next";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 
-function JournalWrapper({ match, route, history, confirm, location }) {
+function JournalWrapper({ confirm }) {
   const { t } = useTranslation();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const { data: journal, refresh } = useFetch({
-    request: [journalsAPI.show, match.params.id]
+    request: [journalsAPI.show, id],
+    condition: !!id
   });
+
   const destroy = useApiCallback(journalsAPI.destroy, { removes: journal });
 
   const notifyDestroy = useNotification(j => ({
@@ -35,7 +36,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
   }));
 
   const destroyAndRedirect = useCallback(() => {
-    const redirect = () => history.push(lh.link("backendJournals"));
+    const redirect = () => navigate(lh.link("backendJournals"));
     destroy(journal.id).then(
       () => {
         notifyDestroy(journal);
@@ -43,7 +44,7 @@ function JournalWrapper({ match, route, history, confirm, location }) {
       },
       () => redirect()
     );
-  }, [destroy, history, journal, notifyDestroy]);
+  }, [destroy, navigate, journal, notifyDestroy]);
 
   const handleJournalDestroy = useCallback(() => {
     const heading = t("modals.delete_journal");
@@ -66,19 +67,6 @@ function JournalWrapper({ match, route, history, confirm, location }) {
     }
   ];
 
-  const renderRoutes = () => {
-    return childRoutes(route, {
-      childProps: { refresh, journal }
-    });
-  };
-
-  useRedirectToFirstMatch({
-    route: "backendJournal",
-    id: journal?.id,
-    slug: journal?.attributes.slug,
-    candidates: journal ? navigation.journal(journal) : []
-  });
-
   if (!journal) return null;
 
   const subpage = location.pathname.split("/")[4]?.replace("-", "_");
@@ -98,9 +86,10 @@ function JournalWrapper({ match, route, history, confirm, location }) {
     <div>
       <Authorize
         entity={journal}
-        failureFatalError={{
-          detail: t("journals.unauthorized_edit")
+        failureNotification={{
+          body: t("journals.unauthorized_edit")
         }}
+        failureRedirect
         ability={["read"]}
       >
         {subpage && (
@@ -129,7 +118,9 @@ function JournalWrapper({ match, route, history, confirm, location }) {
             />
           }
         >
-          <div>{renderRoutes()}</div>
+          <div>
+            <Outlet context={{ refresh, journal }} />
+          </div>
         </Layout.BackendPanel>
       </Authorize>
     </div>

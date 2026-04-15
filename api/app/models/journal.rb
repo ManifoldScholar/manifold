@@ -25,6 +25,7 @@ class Journal < ApplicationRecord
   include WithProjectCollectionLayout
   include WithConfigurableAvatar
   include HasKeywordSearch
+  include ManifoldOAIRecordSource
 
   multisearch_draftable true
 
@@ -54,6 +55,8 @@ class Journal < ApplicationRecord
   has_many_readonly :journal_project_links, -> { in_default_order }
 
   has_many :projects, through: :journal_project_links
+
+  classy_enum_attr :license, class_name: "License", allow_nil: true
 
   validates :title, presence: true
   validates :draft, inclusion: { in: [true, false] }
@@ -86,6 +89,14 @@ class Journal < ApplicationRecord
   scope :by_show_on_homepage, ->(show = true) { where(show_on_homepage: show).order(home_page_priority: :desc) if show.present? }
   scope :with_update_ability, ->(user = nil) { build_update_ability_scope_for user }
   scope :with_update_or_issue_update_ability, ->(user = nil) { build_update_or_issue_update_ability_for user }
+
+  scope :by_subject, ->(subject = nil) {
+    next all unless subject.present?
+
+    joins(:journal_subjects)
+    .merge(JournalSubject.by_subject(subject))
+    .distinct
+  }
 
   multisearches! :description_plaintext
 
@@ -123,6 +134,12 @@ class Journal < ApplicationRecord
 
   def journal_issues_without_volume_count
     journal_issues.where(journal_volume: nil).count
+  end
+
+  def should_have_oai_record?
+    return false if draft?
+
+    super
   end
 
   # This method is named a little oddly, as it actually returns references to projects.

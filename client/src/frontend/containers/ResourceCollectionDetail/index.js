@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { resourceCollectionsAPI } from "api";
 import { entityStoreActions as store } from "actions";
@@ -23,10 +22,8 @@ import {
 import config from "config";
 import * as Styled from "./styles";
 
-export default function ResourceCollectionDetailContainer({
-  project,
-  journalBreadcrumbs
-}) {
+export default function ResourceCollectionDetailContainer() {
+  const { project, journalBreadcrumbs } = useOutletContext() || {};
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -46,9 +43,6 @@ export default function ResourceCollectionDetailContainer({
       filters,
       pagination
     ]
-  });
-  const { data: slideshowResources, meta: slideshowMeta } = useFetch({
-    request: [resourceCollectionsAPI.collectionResources, resourceCollectionId]
   });
 
   const [annotationsPagination, setAnnotationsPage] = usePaginationState(1, 5);
@@ -121,8 +115,6 @@ export default function ResourceCollectionDetailContainer({
         resources={resources ?? []}
         project={project}
         meta={meta}
-        slideshowResources={slideshowResources}
-        slideshowResourcesMeta={slideshowMeta}
         filterProps={filterProps}
       />
       <Styled.Annotations>
@@ -163,20 +155,6 @@ export default function ResourceCollectionDetailContainer({
     </>
   );
 }
-
-ResourceCollectionDetailContainer.propTypes = {
-  location: PropTypes.object,
-  dispatch: PropTypes.func,
-  slideshowResources: PropTypes.array,
-  slideshowResourcesMeta: PropTypes.object,
-  project: PropTypes.object,
-  resourceCollection: PropTypes.object,
-  resources: PropTypes.array,
-  resourcesMeta: PropTypes.object,
-  history: PropTypes.object,
-  journalBreadcrumbs: PropTypes.array,
-  t: PropTypes.func
-};
 
 ResourceCollectionDetailContainer.displayName =
   "Frontend.Containers.ResourceCollectionDetail";

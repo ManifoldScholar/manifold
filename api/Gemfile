@@ -80,6 +80,7 @@ gem "naught", "~> 1.0"
 gem "net-sftp", "~> 4.0"
 gem "net-ssh", "~> 7.3"
 gem "nokogiri", "~> 1.19.1"
+gem "oai", "~> 1.3.0"
 gem "observer"
 gem "ostruct"
 gem "oj", "~> 3.16"
@@ -126,7 +127,7 @@ gem "uber", "~> 0.1.0", require: %w(uber/inheritable_attr)
 gem "uuid", "~> 2.3"
 gem "validates_email_format_of", "~> 1.0"
 gem "validate_url", "~> 1.0"
-gem "with_advisory_lock", "~> 4.0"
+gem "with_advisory_lock", "~> 5.3.0"
 gem "zaru", "~> 1.0.0"
 
 group :development, :test do
@@ -161,7 +162,7 @@ end
 group :test do
   gem "database_cleaner-active_record", "~> 2.2"
   gem "test-prof", "~> 1.0"
-  gem "with_model", "~> 2.1"
+  gem "with_model", "~> 2.2.0"
 end
 
 gem "good_job", "~> 3.99"

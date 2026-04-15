@@ -82,7 +82,7 @@ module Validation
                   :restricted_access_body, :open_access, :disable_engagement,
                   :journal_issue_pending_sort_title, :journal_issue_number, :pending_slug,
                   :social_title, attachment(:social_image), :remove_social_image,
-                  :social_description]
+                  :social_description, :exclude_from_oai, :exclude_from_directory, :license]
     relationships = [:collaborators, :creators, :contributors, :subjects, :journal_volume]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -97,7 +97,8 @@ module Validation
                   { tag_list: [] }, :image_credits, :social_description,
                   attachment(:custom_icon), :hero_layout, :remove_custom_icon,
                   :social_title, attachment(:social_image), :remove_social_image,
-                  :hero_background_color, :show_on_homepage, :home_page_priority]
+                  :hero_background_color, :show_on_homepage, :home_page_priority,
+                  :exclude_from_oai, :exclude_from_directory, :license]
 
     relationships = [:collaborators, :creators, :contributors, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
@@ -173,7 +174,7 @@ module Validation
                   :pending_slug, :homepage_start_date, :homepage_end_date,
                   :homepage_count, :social_description, attachment(:custom_icon),
                   attachment(:hero), :hero_layout, :remove_hero, :remove_custom_icon,
-                  :social_title, attachment(:social_image), :remove_social_image]
+                  :social_title, attachment(:social_image), :remove_social_image, :exclude_from_oai]
     relationships = [:projects, :subjects]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -328,7 +329,7 @@ module Validation
 
   def ingestion_source_filter_params
     params[:filter] = params[:filter].except(:kind) if !params[:filter].nil? && params[:filter][:kind] == ""
-    params.permit(filter: [:order, :keyword, :kind])[:filter]
+    params.permit(filter: [:order, :keyword, :kind, :format])[:filter]
   end
 
   def stylesheet_params
@@ -342,7 +343,7 @@ module Validation
   def annotation_params
     params.require(:data)
     attributes = [:start_node, :end_node, :start_char, :end_char, :section_id, :format,
-                  :subject, :body, :private, :reading_group_id]
+                  :subject, :body, :private, :reading_group_id, :reader_display_format]
     relationships = [:resource, :resource_collection]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)
@@ -558,7 +559,7 @@ module Validation
   end
 
   def project_collection_filter_params
-    params.permit(filter: [:visible, :show_on_homepage, :projects, :order,
+    params.permit(filter: [:keyword, :visible, :show_on_homepage, :projects, :order,
                            :visible_on_homepage])[:filter]
   end
 
@@ -607,7 +608,7 @@ module Validation
   end
 
   def subject_filter_params
-    params.permit(filter: [:featured, :keyword, :typeahead, :used])[:filter] || {}
+    params.permit(filter: [:featured, :keyword, :typeahead, :used, :used_journal])[:filter] || {}
   end
 
   def collaborator_filter_params
@@ -629,13 +630,13 @@ module Validation
   def journal_issue_filter_params
     params.permit(
       filter: [:keyword, :order, :typeahead, :journal_id, :journal_volume_id,
-               :volume_is_nil, :with_update_ability]
+               :volume_is_nil, :with_update_ability, :subject]
     )[:filter]
   end
 
   def journal_filter_params
     params.permit(
-      filter: [:draft, :keyword, :order, :typeahead, :show_on_homepage, :with_update_ability, :with_update_or_issue_update_ability]
+      filter: [:draft, :keyword, :order, :typeahead, :show_on_homepage, :with_update_ability, :with_update_or_issue_update_ability, :subject]
     )[:filter]
   end
 

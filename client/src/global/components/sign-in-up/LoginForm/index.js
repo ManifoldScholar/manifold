@@ -22,7 +22,7 @@ export default function LoginForm({
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const authentication = useFromStore("authentication");
+  const authentication = useFromStore({ path: "authentication" });
   const error = authentication?.error?.body;
 
   const formatData = data => {
@@ -73,6 +73,7 @@ export default function LoginForm({
             scope="authentication"
             style="drawer"
             animate={false}
+            noDismiss
           />
         </Styled.NotificationsWrapper>
       )}

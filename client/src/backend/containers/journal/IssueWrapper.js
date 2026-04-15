@@ -1,16 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { childRoutes } from "helpers/router";
-import { withRouter } from "react-router-dom";
+import { Outlet, useOutletContext } from "react-router-dom";
 
-function JournalIssueWrapper({ route, ...props }) {
-  return <div>{childRoutes(route, { childProps: props })}</div>;
+export default function JournalIssueWrapper() {
+  const context = useOutletContext() || {};
+  return <Outlet context={context} />;
 }
-
-JournalIssueWrapper.propTypes = {
-  journal: PropTypes.object,
-  history: PropTypes.object,
-  route: PropTypes.object
-};
-
-export default withRouter(JournalIssueWrapper);

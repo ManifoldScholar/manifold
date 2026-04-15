@@ -1,31 +1,75 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
-import { childRoutes } from "helpers/router";
+import { useRef } from "react";
+import { Navigate, useOutletContext, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import lh from "helpers/linkHandler";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import ReadingGroupMembersList from "./List";
+import withConfirmation from "hoc/withConfirmation";
 
-function ReadingGroupsMembersContainer({ route, readingGroup, ...restProps }) {
-  const { abilities, currentUserRole } = readingGroup.attributes;
-  const canUpdateGroup = abilities.update;
+function ReadingGroupsMembersContainer({ confirm }) {
+  const { readingGroup } = useOutletContext() || {};
+  const navigate = useNavigate();
+  const refreshRef = useRef(null);
+  const dispatch = useDispatch();
+
+  const { abilities, currentUserRole } = readingGroup?.attributes || {};
+  const canUpdateGroup = abilities?.update;
   const userIsGroupMember = canUpdateGroup || currentUserRole !== "none";
 
+  const membersRoute = lh.link("frontendReadingGroupMembers", readingGroup.id);
+  const closeDrawer = () => navigate(membersRoute);
+
+  const handleEditSuccess = () => {
+    navigate(membersRoute);
+    if (refreshRef.current?.refresh) {
+      refreshRef.current.refresh();
+    }
+  };
+
   if (!userIsGroupMember) {
-    return (
-      <Redirect to={lh.link("frontendReadingGroupDetail", readingGroup.id)} />
-    );
+    const redirectUrl = lh.link("frontendReadingGroupDetail", readingGroup.id);
+
+    if (__SERVER__) {
+      throw new Response(null, {
+        status: 302,
+        headers: { Location: redirectUrl }
+      });
+    }
+
+    return <Navigate to={redirectUrl} replace />;
   }
 
-  return childRoutes(route, {
-    childProps: {
-      readingGroup,
-      ...restProps
-    }
-  });
+  return (
+    <>
+      <ReadingGroupMembersList
+        ref={refreshRef}
+        readingGroup={readingGroup}
+        dispatch={dispatch}
+        confirm={confirm}
+      />
+      <OutletWithDrawer
+        drawerProps={{
+          closeUrl: membersRoute,
+          context: "frontend",
+          size: "wide",
+          position: "overlay",
+          lockScroll: "always"
+        }}
+        context={{
+          readingGroup,
+          confirm,
+          onEditSuccess: handleEditSuccess,
+          closeDrawer,
+          onArchive: () => {
+            if (refreshRef.current?.refresh) {
+              refreshRef.current.refresh();
+            }
+            closeDrawer();
+          }
+        }}
+      />
+    </>
+  );
 }
 
-ReadingGroupsMembersContainer.propTypes = {
-  route: PropTypes.object.isRequired,
-  readingGroup: PropTypes.object.isRequired
-};
-
-export default ReadingGroupsMembersContainer;
+export default withConfirmation(ReadingGroupsMembersContainer);

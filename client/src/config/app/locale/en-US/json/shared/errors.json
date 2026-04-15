@@ -35,6 +35,17 @@
     "section_reorder": "There was an error updating the section order. This list has been reset.",
     "toc_reorder": "There was an error updating the TOC order. This list has been reset",
     "invalid_html_save": "HTML is invalid. Fix errors indicated in editor and try saving again.",
-    "invalid_html_switch": "HTML is invalid. Fix errors indicated in editor before switching to RTE mode."
+    "invalid_html_switch": "HTML is invalid. Fix errors indicated in editor before switching to RTE mode.",
+    "access_denied": {
+      "header": "Access Denied",
+      "authentication": "Please login to proceed. After logging in, you will be automatically redirected.",
+      "authorization": "You are not authorized to view {{title}}.",
+      "authorization_reading_group": "You are not authorized to view this reading group.",
+      "authorization_reading_group_edit": "You are not authorized to edit this reading group.",
+      "no_admin_access": "Your account does not have admin access.",
+      "authorization_admin": "You are not authorized to manage the requested resource.",
+      "authorization_admin_type": "You are not authorized to manage {{type}}.",
+      "authorization_admin_reading_group": "You are not authorized to manage reading groups."
+    }
   }
 }

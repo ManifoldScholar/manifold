@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
-import connectAndFetch from "utils/connectAndFetch";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { entityEditorActions, entityStoreActions } from "actions";
 import GlobalForm from "global/components/form";
 import Developer from "global/components/developer";
@@ -12,7 +12,7 @@ import forEach from "lodash/forEach";
 import isFunction from "lodash/isFunction";
 import pick from "lodash/pick";
 import { brackets2dots } from "utils/string";
-import { Prompt } from "react-router-dom";
+import NavigationBlocker from "global/components/router/NavigationBlocker";
 import { FormContext } from "helpers/contexts";
 import isArray from "lodash/isArray";
 import isNil from "lodash/isNil";
@@ -22,14 +22,6 @@ const { request, flush } = entityStoreActions;
 const { close, open, set } = entityEditorActions;
 
 export class FormContainer extends PureComponent {
-  static mapStateToProps = (state, ownProps) => {
-    return {
-      session: get(state.entityEditor.sessions, ownProps.name),
-      response: get(state.entityStore.responses, ownProps.name),
-      errors: get(state.entityStore.responses, `${ownProps.name}.errors`)
-    };
-  };
-
   static displayName = "Form.Form";
 
   static propTypes = {
@@ -59,7 +51,8 @@ export class FormContainer extends PureComponent {
     options: PropTypes.object,
     flushOnUnmount: PropTypes.bool,
     notificationScope: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
+    handleSubmitOverride: PropTypes.func
   };
 
   static defaultProps = {
@@ -129,7 +122,10 @@ export class FormContainer extends PureComponent {
   handleSubmit = (event = null) => {
     if (event) event.preventDefault();
     this.setState({ submitKey: this.createKey() });
-    if (this.props.session.source.id) {
+    if (this.props.handleSubmitOverride) {
+      const { dirty, source } = this.props.session;
+      this.props.handleSubmitOverride(dirty, source);
+    } else if (this.props.session.source.id) {
       this.update();
     } else {
       this.create();
@@ -324,7 +320,7 @@ export class FormContainer extends PureComponent {
       <>
         {this.renderDebugger()}
 
-        <Prompt
+        <NavigationBlocker
           when={this.isBlocking()}
           message={this.props.t("messages.unsaved_changes")}
         />
@@ -349,4 +345,27 @@ export class FormContainer extends PureComponent {
   }
 }
 
-export default withTranslation()(connectAndFetch(FormContainer));
+function FormContainerWrapper(props) {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const { name } = props;
+
+  const session = useSelector(state => get(state.entityEditor.sessions, name));
+  const response = useSelector(state => get(state.entityStore.responses, name));
+  const errors = useSelector(state =>
+    get(state.entityStore.responses, `${name}.errors`)
+  );
+
+  return (
+    <FormContainer
+      {...props}
+      dispatch={dispatch}
+      t={t}
+      session={session}
+      response={response}
+      errors={errors}
+    />
+  );
+}
+
+export default FormContainerWrapper;

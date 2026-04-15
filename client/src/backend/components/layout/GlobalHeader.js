@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import Navigation from "global/components/navigation";
 import PressLogo from "global/components/PressLogo";
 import HeaderNotifications from "global/components/HeaderNotifications";
@@ -8,24 +6,33 @@ import navigation from "helpers/router/navigation";
 import Utility from "global/components/utility";
 import HeaderLogo from "global/components/atomic/HeaderLogo";
 import { useTranslation } from "react-i18next";
-import ProjectsNav from "./SecondaryNav/Projects";
-import ProjectsButton from "./SecondaryNav/Projects/Button";
+import ProjectsToggle from "global/components/navigation/projects-dropdown/Toggle";
+import ProjectsDropdown from "global/components/navigation/projects-dropdown";
 import Authorization from "helpers/authorization";
-import { useShowJournalsActive } from "hooks";
+import { useFromStore } from "hooks";
 
-export default function LayoutHeader({
-  commonActions,
-  authentication,
-  visibility
-}) {
+export default function LayoutHeader() {
   const { t } = useTranslation();
-  const journalIsActive = useShowJournalsActive();
+  const authentication = useFromStore({ path: "authentication" });
 
   const authorization = new Authorization();
   const canUpdateProjectCollections = authorization.authorizeAbility({
     authentication,
     entity: "projectCollection",
     ability: "update"
+  });
+
+  const hasAnyAdminAccess = authorization.authorizeKind({
+    authentication,
+    kind: [
+      "admin",
+      "editor",
+      "marketeer",
+      "project_creator",
+      "project_editor",
+      "project_property_manager",
+      "journal_editor"
+    ]
   });
 
   const baseLinks = navigation.backend();
@@ -35,9 +42,9 @@ export default function LayoutHeader({
   if (canUpdateProjectCollections) {
     const projectsLink = baseLinks.find(l => l.route === "backendProjects");
     projectsLink.dropdownContent = (
-      <ProjectsNav links={projectsLink.children} />
+      <ProjectsDropdown links={projectsLink.children} />
     );
-    projectsLink.toggle = ProjectsButton;
+    projectsLink.toggle = ProjectsToggle;
     links = baseLinks.filter(
       l => l.route !== "backendProjects" && l.route !== "backendProjectsAll"
     );
@@ -61,11 +68,7 @@ export default function LayoutHeader({
               <PressLogo aria-hidden="true" />
             </HeaderLogo>
             <Navigation.Primary
-              links={links}
-              journalIsActive={journalIsActive}
-              commonActions={commonActions}
-              authentication={authentication}
-              visibility={visibility}
+              links={hasAnyAdminAccess ? links : []}
               mode="backend"
               darkTheme
             />
@@ -79,9 +82,3 @@ export default function LayoutHeader({
 }
 
 LayoutHeader.displayName = "Layout.Header";
-
-LayoutHeader.propTypes = {
-  visibility: PropTypes.object,
-  authentication: PropTypes.object,
-  commonActions: PropTypes.object
-};
