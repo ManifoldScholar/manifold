@@ -10,7 +10,7 @@ module ExternalAuth
       object :auth_hash, class: "OmniAuth::AuthHash", converter: :new
 
       validates :provider,
-                inclusion: { in: ->(_) { AuthConfig.provider_names } },
+                inclusion: { in: ->(_) { AuthConfig.provider_names + %w[lti]} },
                 presence: true
 
       delegate :info, to: :auth_hash, prefix: :auth

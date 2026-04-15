@@ -22,10 +22,7 @@ module ExternalAuth
       end
 
       def first_and_last_name
-        # TODO: should use assign_attributes
-        auth_hash.info.slice("first_name", "last_name").each do |(attr, value)|
-          user[attr] = value
-        end
+        user.assign_attributes(auth_hash.info.slice(*%w[first_name last_name]))
       end
 
       def twitter_details
