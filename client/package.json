@@ -13,9 +13,9 @@
     "dev": "react-router dev",
     "build": "react-router build",
     "start": "react-router-serve ./build/server/index.js",
-    "fix": "./script/lint-javascript --fix",
-    "fix:force": "./script/lint-javascript --no-ignore --fix",
-    "lint": "./script/lint-javascript",
+    "fix": "eslint --color --max-warnings=0 --cache --cache-location=tmp/.eslint-cache-full --fix .",
+    "fix:force": "eslint --color --max-warnings=0 --no-ignore --fix .",
+    "lint": "eslint --color --max-warnings=0 --cache --cache-location=tmp/.eslint-cache-full .",
     "depcheck": "depcheck"
   },
   "dependencies": {
