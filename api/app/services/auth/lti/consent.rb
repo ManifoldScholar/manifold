@@ -3,6 +3,8 @@ module Auth
   module Lti
     class Consent
 
+      attr_reader :errors, :openid_configuration_url, :registration_token, :referrer
+
       def initialize(request, params)
         @request = request
         @registration_token = params[:registration_token]
@@ -11,56 +13,34 @@ module Auth
       end
 
       def valid?
+        return false if @errors.any?
+
+        @errors << "LTI registration is disabled or blocked for this domain" unless autoregistration_allowed?
+
         @errors.none?
       end
 
-      def render_consent_html
-        <<~HTML.html_safe
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <title>Manifold LTI Registration</title>
-              <style></style>
-            </head>
-            <body>
-              <div style="margin-top: 100px; text-align: center;">
-                <h1>Welcome to Manifold LTI Tool Registration</h1>
-                <!-- LTI options can go here -->
-                <form method="POST">
-                  <input type="hidden" name="issuer" value="#{@request.referrer}" />
-                  <input type="hidden" name="registration_token" value="#{@registration_token}" />
-                  <input type="hidden" name="openid_configuration" value="#{@openid_configuration_url}" />
-                  <input type="submit" name="Submit" />
-                </form>
-              </div>
-            </body>
-          </html>
-        HTML
+      def invalid?
+        !valid?
       end
 
-      def render_error_page
-        <<~HTML.html_safe
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <title>Manifold LTI Registration</title>
-              <style></style>
-            </head>
-            <body>
-              <div style="margin-top: 100px; text-align: center;">
-                <h1>Welcome to Manifold LTI Tool Registration</h1>
-                <div>Something went wrong...</div>
-                <ul>
-                  <li>#{@errors.join("</li><li>")}</li>
-                </ul>
-              </div>
-            </body>
-          </html>
-        HTML
+      def lti_settings
+        @lti_settings ||= Settings.current.lti
+      end
+
+      def autoregistration_allowed?
+        return false unless lti_settings.enabled? && lti_settings.autoregistration?
+        return true if lti_settings.issuer_allowlist.blank?
+
+        lti_settings.issuer_allowlist.include?(referrer_uri.host)
       end
 
       def referrer_uri
-        @referrer_uri ||= URI.parse(@request.referrer)
+        @referrer_uri ||= URI.parse(referrer)
+      end
+
+      def referrer
+        @referrer ||= @request.referrer
       end
 
     end
