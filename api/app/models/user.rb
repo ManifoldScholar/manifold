@@ -77,7 +77,7 @@ class User < ApplicationRecord
   before_soft_delete :prune_attached_records!
 
   after_save :sync_global_role!, if: :saved_change_to_role?
-  after_save :prepare_email_confirmation!, if: :saved_change_to_email?
+  after_save :prepare_email_confirmation!, if: -> { saved_change_to_email? && identities.none?(&:trust_email?) }
   after_touch :synchronize_established!
 
   # Attachments
