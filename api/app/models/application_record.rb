@@ -27,6 +27,11 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   class << self
+    # Gets the most recently created record
+    def latest
+      order(created_at: :desc).first
+    end
+
     # @param [AnonymousUser, User, nil] user
     def authorized_user?(user = nil)
       user.present? && user.try(:persisted?).present?

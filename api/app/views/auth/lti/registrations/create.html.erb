@@ -1,0 +1,20 @@
+<% if @registrar.valid? %>
+  <h1>Registration Complete</h1>
+
+  <div>
+    <button onclick="(window.opener || window.parent).postMessage({subject:'org.imsglobal.lti.close'}, '*')">Return to Learning Platform</button>
+  </div>
+  <script type="application/javascript">
+    function close() {
+      (window.opener || window.parent).postMessage({subject:'org.imsglobal.lti.close'}, '*');
+    }
+  </script>
+<% else %>
+  <h1>Ooooooooops</h1>
+  <ul>
+    <h2>One or more errors have occurred:</h2>
+    <% @registrar.errors.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>

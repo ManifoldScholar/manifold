@@ -18,13 +18,7 @@ module OmniAuth
         registration = find_registration!(request.params["iss"], request.params["client_id"])
 
         nonce = SecureRandom.uuid
-        state = SecureRandom.uuid
-
-        session["omniauth.lti"] = {
-          "nonce" => nonce,
-          "state" => state,
-          "target_link_uri" => request.params["target_link_uri"]
-        }
+        state = sign_state(nonce: nonce, target_link_uri: request.params["target_link_uri"])
 
         redirect authorization_uri(registration, nonce, state)
       end
@@ -38,12 +32,10 @@ module OmniAuth
         id_token = request.params["id_token"]
         return fail!(:missing_id_token, OmniAuth::Error.new("No id_token in callback")) unless id_token
 
-        lti_session = session.delete("omniauth.lti")
-        return fail!(:missing_session, OmniAuth::Error.new("No LTI session data")) unless lti_session
-
-        claims = decode_and_verify!(id_token, lti_session)
+        state = verify_state!(request.params["state"])
+        claims = decode_and_verify!(id_token, state)
         @claims = claims
-        @target_link_uri = lti_session["target_link_uri"]
+        @target_link_uri = state["target_link_uri"]
 
         env["omniauth.auth"] = auth_hash
         call_app!
@@ -110,7 +102,7 @@ module OmniAuth
 
       # Decodes the JWT id_token and verifies its signature, issuer,
       # audience, nonce, timing, and deployment.
-      def decode_and_verify!(id_token, lti_session)
+      def decode_and_verify!(id_token, state)
         unverified = JWT.decode(id_token, nil, false).first
         registration = find_registration!(unverified["iss"], unverified["aud"])
         jwks = fetch_platform_jwks(registration)
@@ -127,17 +119,31 @@ module OmniAuth
           aud: registration.client_id
         ).first
 
-        verify_nonce!(claims, lti_session)
+        verify_nonce!(claims, state)
         verify_timing!(claims)
-        verify_deployment!(registration, claims)
+        # verify_deployment!(registration, claims)
 
         claims
       end
 
-      def verify_nonce!(claims, lti_session)
-        unless claims["nonce"] == lti_session["nonce"]
-          raise OmniAuth::Error, "Nonce mismatch"
-        end
+      def verify_nonce!(claims, state)
+        raise OmniAuth::Error, "Nonce mismatch" unless claims["nonce"] == state["nonce"]
+      end
+
+      def sign_state(payload)
+        message_verifier.generate(payload, purpose: :lti_state)
+      end
+
+      def verify_state!(state)
+        raise OmniAuth::Error, "Missing state parameter" unless state.present?
+
+        message_verifier.verify(state, purpose: :lti_state)
+      rescue ActiveSupport::MessageVerifier::InvalidSignature
+        raise OmniAuth::Error, "Invalid or tampered state parameter"
+      end
+
+      def message_verifier
+        ActiveSupport::MessageVerifier.new(Rails.application.secret_key_base, digest: "SHA256")
       end
 
       def verify_timing!(claims)

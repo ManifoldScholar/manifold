@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   namespace :auth do
     get ":provider/redirect", to: "omniauth#redirect", as: :redirect
+    post ":provider/redirect", to: "omniauth#redirect"
     post ":provider/callback", to: "omniauth#authorize", as: :callback
     get ":provider/callback", to: "omniauth#authorize"
 

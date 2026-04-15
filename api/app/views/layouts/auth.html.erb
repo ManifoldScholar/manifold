@@ -9,6 +9,7 @@
 
   <style>
     body {
+      font-family: Arial, sans-serif;
       display: flex;
       height: 100vh;
       flex-direction: column;
@@ -21,21 +22,36 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 15px;
+      gap: 30px;
+    }
+
+    .logos img {
+      max-height: 50px;
     }
 
     .press-logo {
       height: auto;
       max-width: 300px;
     }
+
+    button, input[type='submit'] {
+      color: black;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: none;
+      padding: 0.875em;
+      border: 1px solid gray;
+      border-radius: 6px;
+      transition: background-color 0.1s linear, color 0.1s linear;
+    }
+
+    button:hover, input[type='submit']:hover {
+      background-color: gainsboro;
+    }
   </style>
 </head>
 <body>
-  <div class="logos">
-    <img width="300px" src="<%= Rails.application.config.manifold.url %>/static/images/manifold-mail-logo-secondary.jpg" alt="Manifold logo and text: Manifold Scholarship."/>
-  </div>
+  <img width="300px" src="<%= Rails.application.config.manifold.url %>/static/images/manifold-mail-logo-secondary.jpg" alt="Manifold logo and text: Manifold Scholarship."/>
   <%= yield %>
-  </div>
 </body>
 </html>
