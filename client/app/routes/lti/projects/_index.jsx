@@ -1,41 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router";
+import { Link } from "react-router";
 import { projectsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
+import IconComposer from "components/global/utility/IconComposer";
+import LinkToggle from "components/lti/LinkToggle";
+import LtiRow from "components/lti/Row";
+import LtiPager from "components/lti/Pager";
 import * as Styled from "../styles";
 import { useSelection } from "../selectionContext";
-
-function Pager({ meta }) {
-  const [searchParams] = useSearchParams();
-  const pagination = meta?.pagination ?? {};
-  const { currentPage, totalPages, prevPage, nextPage } = pagination;
-  if (!totalPages || totalPages < 2) return null;
-
-  const linkFor = page => {
-    const params = new URLSearchParams(searchParams);
-    params.set("page", page);
-    return `?${params.toString()}`;
-  };
-
-  return (
-    <Styled.Pager aria-label="Pagination">
-      {prevPage ? (
-        <Link to={linkFor(prevPage)}>← Previous</Link>
-      ) : (
-        <span className="pager-disabled">← Previous</span>
-      )}
-      <span className="pager-current">
-        Page {currentPage} of {totalPages}
-      </span>
-      {nextPage ? (
-        <Link to={linkFor(nextPage)}>Next →</Link>
-      ) : (
-        <span className="pager-disabled">Next →</span>
-      )}
-    </Styled.Pager>
-  );
-}
 
 export const handle = {
   breadcrumb: () => ({ label: "Projects", to: "/lti/projects" })
@@ -52,7 +25,7 @@ export const loader = async ({ request, context }) => {
 function ProjectRow({ project }) {
   const { add, remove, has } = useSelection();
   const [expanded, setExpanded] = useState(false);
-  const { titlePlaintext, subtitle } = project.attributes ?? {};
+  const { titlePlaintext } = project.attributes ?? {};
   const initialTexts = project.attributes?.textsNav ?? null;
   const [texts, setTexts] = useState(initialTexts);
   const [loading, setLoading] = useState(false);
@@ -94,22 +67,18 @@ function ProjectRow({ project }) {
           }
           $expanded={expanded}
         >
-          ›
+          <IconComposer icon="disclosureDown16" size={16} />
         </Styled.ExpandToggle>
-        <Link to={`/lti/projects/${project.id}`}>
-          {titlePlaintext}
-          {subtitle ? <Styled.ItemSub>{subtitle}</Styled.ItemSub> : null}
-        </Link>
-        <Styled.AddButton
-          type="button"
-          onClick={() => (selected ? remove(item) : add(item))}
-          $selected={selected}
-          aria-label={
-            selected ? `Remove ${titlePlaintext}` : `Add ${titlePlaintext}`
-          }
-        >
-          {selected ? "✓" : "+"}
-        </Styled.AddButton>
+        <Styled.RowBody>
+          <LtiRow
+            as="div"
+            entity={project}
+            kind="project"
+            to={`/lti/projects/${project.id}`}
+            selected={selected}
+            onToggle={() => (selected ? remove(item) : add(item))}
+          />
+        </Styled.RowBody>
       </Styled.RowMain>
       {expanded && (
         <Styled.ExpandedChildren>
@@ -135,6 +104,30 @@ function ProjectRow({ project }) {
   );
 }
 
+function ExpandedTextRow({ text, trail, add, remove, has }) {
+  const [hovered, setHovered] = useState(false);
+  const item = { type: "text", id: text.id, title: text.label };
+  const selected = has(item);
+  return (
+    <Styled.ExpandedChildRow
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+    >
+      <Link to={`/lti/texts/${text.id}`} state={{ trail }}>
+        {text.label}
+      </Link>
+      <LinkToggle
+        selected={selected}
+        onToggle={() => (selected ? remove(item) : add(item))}
+        hiddenIfUnlinked={!hovered}
+        srLabel={selected ? `Remove ${text.label}` : `Add ${text.label}`}
+      />
+    </Styled.ExpandedChildRow>
+  );
+}
+
 function ExpandedTexts({ texts, project }) {
   const { add, remove, has } = useSelection();
   const trail = [
@@ -144,30 +137,16 @@ function ExpandedTexts({ texts, project }) {
 
   return (
     <ul>
-      {texts.map(text => {
-        const item = { type: "text", id: text.id, title: text.label };
-        const selected = has(item);
-        return (
-          <li key={text.id}>
-            <Link
-              to={`/lti/texts/${text.id}`}
-              state={{ trail }}
-            >
-              {text.label}
-            </Link>
-            <Styled.AddButton
-              type="button"
-              onClick={() => (selected ? remove(item) : add(item))}
-              $selected={selected}
-              aria-label={
-                selected ? `Remove ${text.label}` : `Add ${text.label}`
-              }
-            >
-              {selected ? "✓" : "+"}
-            </Styled.AddButton>
-          </li>
-        );
-      })}
+      {texts.map(text => (
+        <ExpandedTextRow
+          key={text.id}
+          text={text}
+          trail={trail}
+          add={add}
+          remove={remove}
+          has={has}
+        />
+      ))}
     </ul>
   );
 }
@@ -183,12 +162,14 @@ export default function LtiProjectsList({ loaderData }) {
         <Styled.Empty>No projects.</Styled.Empty>
       ) : (
         <>
-          <Styled.SelectableList>
+          <Styled.ExpandableList>
             {projects.map(project => (
               <ProjectRow key={project.id} project={project} />
             ))}
-          </Styled.SelectableList>
-          <Pager meta={meta} />
+          </Styled.ExpandableList>
+          <Styled.PagerWrap>
+            <LtiPager meta={meta} />
+          </Styled.PagerWrap>
         </>
       )}
     </>

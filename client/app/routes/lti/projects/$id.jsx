@@ -1,7 +1,8 @@
-import { Link } from "react-router";
 import { projectsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import LinkToggle from "components/lti/LinkToggle";
+import LtiRow from "components/lti/Row";
 import * as Styled from "../styles";
 import { useSelection } from "../selectionContext";
 
@@ -56,20 +57,17 @@ export default function LtiProjectDetail({ loaderData }) {
     <>
       <Styled.HeaderRow>
         <h1>{titlePlaintext}</h1>
-        <Styled.AddButton
-          type="button"
-          onClick={() =>
+        <LinkToggle
+          selected={projectSelected}
+          onToggle={() =>
             projectSelected ? remove(projectItem) : add(projectItem)
           }
-          $selected={projectSelected}
-          aria-label={
+          srLabel={
             projectSelected
               ? `Remove ${titlePlaintext}`
               : `Add ${titlePlaintext}`
           }
-        >
-          {projectSelected ? "✓ Added" : "+ Add project"}
-        </Styled.AddButton>
+        />
       </Styled.HeaderRow>
       {subtitle ? <Styled.Subtitle>{subtitle}</Styled.Subtitle> : null}
 
@@ -77,68 +75,58 @@ export default function LtiProjectDetail({ loaderData }) {
       {texts.length === 0 ? (
         <Styled.Empty>No texts.</Styled.Empty>
       ) : (
-        <Styled.SelectableList>
+        <Styled.List>
           {texts.map(text => {
             const item = { type: "text", id: text.id, title: text.label };
             const selected = has(item);
             return (
-              <Styled.SelectableItem key={text.id} $selected={selected}>
-                <Link
-                  to={`/lti/texts/${text.id}`}
-                  state={{ trail: projectTrail }}
-                >
-                  {text.label}
-                </Link>
-                <Styled.AddButton
-                  type="button"
-                  onClick={() => (selected ? remove(item) : add(item))}
-                  $selected={selected}
-                  aria-label={
-                    selected ? `Remove ${text.label}` : `Add ${text.label}`
+              <LtiRow
+                key={text.id}
+                entity={{
+                  id: text.id,
+                  type: "text",
+                  attributes: {
+                    titlePlaintext: text.label,
+                    coverStyles: {}
                   }
-                >
-                  {selected ? "✓" : "+"}
-                </Styled.AddButton>
-              </Styled.SelectableItem>
+                }}
+                kind="text"
+                to={`/lti/texts/${text.id}`}
+                linkState={{ trail: projectTrail }}
+                selected={selected}
+                onToggle={() => (selected ? remove(item) : add(item))}
+              />
             );
           })}
-        </Styled.SelectableList>
+        </Styled.List>
       )}
 
       <h2>Resources</h2>
       {resources.length === 0 ? (
         <Styled.Empty>No resources.</Styled.Empty>
       ) : (
-        <Styled.SelectableList>
+        <Styled.List>
           {resources.map(resource => {
-            const { titlePlaintext: title, kind } = resource.attributes ?? {};
+            const { titlePlaintext: rTitle } = resource.attributes ?? {};
             const item = {
               type: "resource",
               id: resource.id,
-              title: titlePlaintext ? `${titlePlaintext} — ${title}` : title
+              title: rTitle
             };
             const selected = has(item);
             return (
-              <Styled.SelectableItem key={resource.id} $selected={selected}>
-                <Link
-                  to={`/lti/resources/${resource.id}`}
-                  state={{ trail: projectTrail }}
-                >
-                  {title}
-                  {kind ? <Styled.ItemSub>{kind}</Styled.ItemSub> : null}
-                </Link>
-                <Styled.AddButton
-                  type="button"
-                  onClick={() => (selected ? remove(item) : add(item))}
-                  $selected={selected}
-                  aria-label={selected ? `Remove ${title}` : `Add ${title}`}
-                >
-                  {selected ? "✓" : "+"}
-                </Styled.AddButton>
-              </Styled.SelectableItem>
+              <LtiRow
+                key={resource.id}
+                entity={resource}
+                kind="resource"
+                to={`/lti/resources/${resource.id}`}
+                linkState={{ trail: projectTrail }}
+                selected={selected}
+                onToggle={() => (selected ? remove(item) : add(item))}
+              />
             );
           })}
-        </Styled.SelectableList>
+        </Styled.List>
       )}
     </>
   );
