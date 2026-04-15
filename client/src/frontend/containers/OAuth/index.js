@@ -28,21 +28,24 @@ export default function OAuth() {
   const cookieHelper = new BrowserCookieHelper();
   const authCode = cookieHelper.read("_oauth_auth_code");
 
+  let redirectPath = params.get("redirect_path")
   const entityType = params.get("redirect_type");
   const entitySlug = params.get("redirect_id");
-  let redirectPath;
-  switch (entityType) {
-    case "Journal":
-      redirectPath = lh.link("frontendJournal", entitySlug);
-      break;
-    case "Project":
-      redirectPath = lh.link("frontendProject", entitySlug);
-      break;
-    case "ProjectCollection":
-      redirectPath = lh.link("frontendProjectCollection", entitySlug);
-      break;
-    default:
-      redirectPath = lh.link("frontend");
+
+  if(!redirectPath) {
+    switch (entityType) {
+      case "Journal":
+        redirectPath = lh.link("frontendJournal", entitySlug);
+        break;
+      case "Project":
+        redirectPath = lh.link("frontendProject", entitySlug);
+        break;
+      case "ProjectCollection":
+        redirectPath = lh.link("frontendProjectCollection", entitySlug);
+        break;
+      default:
+        redirectPath = lh.link("frontend");
+    }
   }
 
   useEffect(() => {
