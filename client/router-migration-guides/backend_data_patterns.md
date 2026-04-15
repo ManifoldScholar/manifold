@@ -559,7 +559,7 @@ The `withFilteredLists` HOC managed filter params and wired them to `useListQuer
 ### Before (with HOC)
 
 ```js
-import withFilteredLists, { makerFilters } from "hoc/withFilteredLists";
+import withFilteredLists, { makerFilters } from "components/hoc/withFilteredLists";
 
 function MakersList({ entitiesListSearchProps, entitiesListSearchParams }) {
   const { pagination, filters, searchProps } = useListQueryParams({
@@ -797,7 +797,7 @@ For components that used `setter` without a `name` prop (like `AvatarBuilder`), 
 
 ```js
 import { useContext } from "react";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import { brackets2dots } from "utils/string";
 
 function MyFormComponent() {

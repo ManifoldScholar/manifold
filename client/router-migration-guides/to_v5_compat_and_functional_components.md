@@ -904,7 +904,7 @@ The `withFormSession` HOC provides a `form` prop with `getModelValue()` for acce
 **Before:**
 
 ```javascript
-import withFormSession from "hoc/withFormSession";
+import withFormSession from "components/hoc/withFormSession";
 
 class MyComponent extends Component {
   render() {
