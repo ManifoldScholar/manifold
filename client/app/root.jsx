@@ -14,6 +14,7 @@ import { useColorScheme } from "hooks";
 import { ErrorBoundary } from "./RootErrorBoundary";
 
 // Middleware and contexts
+// eslint-disable-next-line import/extensions
 import { bootstrapMiddleware } from "lib/middleware/bootstrap.server";
 import { routerContext, AppContext } from "contexts";
 import NotificationProvider from "contexts/NotificationProvider";

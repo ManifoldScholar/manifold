@@ -10,7 +10,8 @@ export const handle = { drawer: true };
 
 export const action = formAction({
   mutation: ({ data }) => exportTargetsAPI.create(data),
-  redirectTo: ({ result }) => `/backend/settings/export-targets/${result.data.id}`
+  redirectTo: ({ result }) =>
+    `/backend/settings/export-targets/${result.data.id}`
 });
 
 export default function SettingsExportTargetsNew() {

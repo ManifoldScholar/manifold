@@ -19,7 +19,8 @@ export const loader = async ({ params, context, request }) => {
 };
 
 export const action = formAction({
-  mutation: ({ data, params }) => journalVolumesAPI.update(params.volumeId, data)
+  mutation: ({ data, params }) =>
+    journalVolumesAPI.update(params.volumeId, data)
 });
 
 export default function JournalVolumeEdit({ loaderData: volume }) {

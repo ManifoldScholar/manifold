@@ -17,7 +17,8 @@ export const loader = async ({ params, context, request }) => {
 };
 
 export const action = formAction({
-  mutation: ({ data, params }) => pendingEntitlementsAPI.update(params.id, data),
+  mutation: ({ data, params }) =>
+    pendingEntitlementsAPI.update(params.id, data),
   redirectTo: () => "/backend/records/entitlements"
 });
 

@@ -70,12 +70,12 @@ export default function CommentsLayout({ loaderData }) {
   const destroyComment = useApiCallback(commentsAPI.destroy);
   const bulkDelete = useApiCallback(bulkDeleteAPI.comments);
 
-  const onDelete = id => {
+  const onDelete = annotationId => {
     confirm({
       heading: t("modals.delete_comment"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
-        await destroyComment(id);
+        await destroyComment(annotationId);
         closeDialog();
         revalidate();
       }

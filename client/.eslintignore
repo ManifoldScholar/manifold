@@ -1,7 +1,3 @@
-tmp
-!tmp/.gitkeep
-codeshifts
-
 app/lib/utils/react-router/*
 
 build

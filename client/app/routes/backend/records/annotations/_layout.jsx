@@ -71,12 +71,12 @@ export default function AnnotationsLayout({ loaderData }) {
   const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
   const bulkDelete = useApiCallback(bulkDeleteAPI.annotations);
 
-  const onDelete = id => {
+  const onDelete = annotationId => {
     confirm({
       heading: t("modals.delete_annotation"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
-        await destroyAnnotation(id);
+        await destroyAnnotation(annotationId);
         closeDialog();
         revalidate();
       }
