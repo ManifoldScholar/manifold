@@ -16,6 +16,7 @@ function LoginContainer({ projectBackLink }) {
     <>
       <HeadContent title={t("titles.login")} appendDefaultTitle />
       <Styled.Section className="bg-neutral05">
+        <h1 className="screen-reader-text">{t("titles.login")}</h1>
         {projectBackLink}
         <Styled.FormContainer className="container">
           <SignInUp.Interface

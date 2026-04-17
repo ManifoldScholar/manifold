@@ -74,6 +74,7 @@ export class ContactContainer extends Component {
       <>
         <HeadContent title={t("titles.contact")} appendDefaultTitle />
         <section>
+          <h1 className="screen-reader-text">{t("titles.contact")}</h1>
           <div className="container">
             <form method="post" onSubmit={this.sendMessage}>
               <Form.Header
