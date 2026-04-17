@@ -5,6 +5,8 @@ WORKDIR /srv/app
 
 COPY package.json yarn.lock .yarnrc.yml ./
 
+ENV BROWSERSLIST_IGNORE_OLD_DATA=beQuiet
+
 RUN corepack enable && yarn install
 
 COPY ./ /srv/app
@@ -16,11 +18,14 @@ LABEL service=manifold-client
 
 EXPOSE 3010 3011 3012
 
+ENV BROWSERSLIST_IGNORE_OLD_DATA=beQuiet
+
 CMD ["yarn", "run", "watch"]
 
 # Stage 3: Production build on slim image
 FROM base AS build
 
+ENV BROWSERSLIST_IGNORE_OLD_DATA=beQuiet
 ENV BUILD_IN=""
 
 RUN yarn build:prod
@@ -30,6 +35,8 @@ FROM node:22.17.1-slim AS production
 LABEL service=manifold-client
 
 WORKDIR /srv/app
+
+ENV BROWSERSLIST_IGNORE_OLD_DATA=beQuiet
 
 RUN corepack enable
 
