@@ -2,6 +2,8 @@
 
 # Responsible for encoding and decoding authentication tokens.
 class AuthToken
+  ALGORITHM = "HS256"
+
   # ~ 1 month in minutes
   DEFAULT_TTL = 60 * 24 * 30
 
@@ -10,7 +12,7 @@ class AuthToken
     def encode(payload, ttl_in_minutes = DEFAULT_TTL)
       payload[:exp] = ttl_in_minutes.minutes.from_now.to_i
 
-      JWT.encode(payload, Rails.application.secret_key_base)
+      JWT.encode(payload, Rails.application.secret_key_base, ALGORITHM)
     end
 
     # @param [User] user
@@ -26,7 +28,10 @@ class AuthToken
     # Decode a token and return the payload inside
     # If will throw an error if expired or invalid. See the docs for the JWT gem.
     def decode(token, leeway = nil)
-      payload, = JWT.decode(token, Rails.application.secret_key_base, leeway: leeway)
+      options = { algorithms: [ALGORITHM] }
+      options[:exp_leeway] = leeway if leeway
+
+      payload, = JWT.decode(token, Rails.application.secret_key_base, true, options)
 
       payload.with_indifferent_access
     end
