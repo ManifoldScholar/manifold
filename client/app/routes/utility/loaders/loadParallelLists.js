@@ -1,4 +1,4 @@
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 
 /**
  * Loads multiple lists in parallel, gracefully handling partial failures.

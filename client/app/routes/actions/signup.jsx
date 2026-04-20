@@ -1,5 +1,5 @@
 import { usersAPI, tokensAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 
 export async function action({ request, context }) {

@@ -1,7 +1,7 @@
 import { redirect, useOutletContext, useFetcher } from "react-router";
 import { sectionsAPI } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import EditSectionForm from "components/backend/authoring/EditSectionForm";
 

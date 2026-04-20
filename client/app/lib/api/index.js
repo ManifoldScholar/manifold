@@ -31,6 +31,7 @@ export { default as searchResultsAPI } from "./resources/searchResults";
 export { default as testMailsAPI } from "./resources/testMails";
 export { default as permissionsAPI } from "./resources/permissions";
 export { default as ApiClient } from "./client";
+export { queryApi } from "./queryApi";
 export { default as resourceImportsAPI } from "./resources/resourceImports";
 export { default as contactsAPI } from "./resources/contacts";
 export { default as notificationPreferencesAPI } from "./resources/notificationPreferences";

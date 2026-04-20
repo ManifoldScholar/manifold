@@ -1,5 +1,5 @@
 import { tokensAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 
 const getErrorMessage = status => {
   if (status >= 500) {

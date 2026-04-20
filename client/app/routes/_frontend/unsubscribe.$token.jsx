@@ -1,6 +1,6 @@
 import { redirect } from "react-router";
 import { notificationPreferencesAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 
 export const loader = async ({ params, context }) => {
   try {

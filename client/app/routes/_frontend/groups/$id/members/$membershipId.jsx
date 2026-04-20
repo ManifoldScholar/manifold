@@ -2,7 +2,7 @@ import { useOutletContext, useSubmit } from "react-router";
 import { redirect } from "react-router";
 import { readingGroupMembershipsAPI } from "api";
 import { routerContext } from "app/contexts";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import unauthorizedError from "app/routes/utility/helpers/unauthorizedError";

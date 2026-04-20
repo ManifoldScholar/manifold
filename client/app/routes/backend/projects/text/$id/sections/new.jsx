@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { redirect, useOutletContext, useFetcher } from "react-router";
 import { sectionsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import Layout from "components/backend/layout";
 import AddSectionForm from "components/backend/authoring/AddSectionForm";

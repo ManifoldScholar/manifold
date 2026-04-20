@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useRevalidator } from "react-router";
 import { readingGroupsAPI, collectingAPI } from "api";
 import { routerContext } from "app/contexts";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import authorize from "app/routes/utility/loaders/authorize";

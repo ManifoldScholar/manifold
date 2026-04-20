@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState, useRef, useId } from "react";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import ch from "helpers/consoleHelpers";
 import isFunction from "lodash/isFunction";
 

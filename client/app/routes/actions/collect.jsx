@@ -1,6 +1,6 @@
 import { collectingAPI } from "api";
 import { routerContext } from "app/contexts";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
 import unauthorizedError from "app/routes/utility/helpers/unauthorizedError";
 

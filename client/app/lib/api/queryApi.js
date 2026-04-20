@@ -1,4 +1,4 @@
-import { ApiClient } from "api";
+import ApiClient from "./client";
 import { routerContext } from "app/contexts";
 import cookie from "js-cookie";
 

@@ -10,7 +10,7 @@ import { useListSearchParams, useListFilters } from "hooks";
 import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
 import loadList from "app/routes/utility/loaders/loadList";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import { useSettings } from "hooks";
 import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
 

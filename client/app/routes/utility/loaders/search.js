@@ -1,5 +1,5 @@
 import { searchResultsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import handleLoaderError from "app/routes/utility/helpers/handleLoaderError";
 import { hasSearchableQuery, parseQueryFromUrl } from "hooks/useSearch/helpers";
 

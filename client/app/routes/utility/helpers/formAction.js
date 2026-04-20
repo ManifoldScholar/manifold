@@ -1,6 +1,6 @@
 import { redirect } from "react-router";
 import { routerContext } from "app/contexts";
-import { queryApi } from "./queryApi";
+import { queryApi } from "api";
 import handleActionError from "./handleActionError";
 import unauthorizedError from "./unauthorizedError";
 
