@@ -11,11 +11,16 @@ import { useRevalidator } from "react-router";
 import PageHeader from "components/backend/layout/PageHeader";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import Dialog from "components/global/dialog";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import loadList from "app/routes/utility/loaders/loadList";
 
-export const loader = async ({ params, context }) => {
-  const response = await queryApi(textTracksAPI.index(params.id), context);
-  return response?.data ?? [];
+export const loader = async ({ params, request, context }) => {
+  const result = await loadList({
+    request,
+    context,
+    fetchFn: () => textTracksAPI.index(params.id),
+    options: { skipFilters: true, skipPagination: true }
+  });
+  return result?.data ?? [];
 };
 
 export default function TracksLayout({ loaderData: tracks }) {

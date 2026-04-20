@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useFetcher } from "react-router";
-import { tokensAPI } from "api";
-import { useRevalidator } from "react-router";
+import { useFetcher, useRevalidator } from "react-router";
 import { useAuthentication } from "hooks";
 import { AppContext } from "app/contexts";
 import CreateFormFields from "./CreateFormFields";
@@ -26,7 +24,6 @@ export default function CreateUserForm({
   const { currentUser } = useAuthentication();
   const { revalidate } = useRevalidator();
   const { pages } = useContext(AppContext);
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const termsPage = pages?.find(
     p => p.attributes.purpose === "terms_and_conditions"
@@ -45,37 +42,15 @@ export default function CreateUserForm({
   };
 
   useEffect(() => {
-    if (
-      fetcher.data?.success &&
-      fetcher.data?.email &&
-      fetcher.data?.password
-    ) {
-      const authenticateUser = async () => {
-        setIsAuthenticating(true);
-        try {
-          const response = await tokensAPI.createToken(
-            fetcher.data.email,
-            fetcher.data.password
-          );
-          const authToken = response?.meta?.authToken;
-          if (authToken) {
-            cookie.write("authToken", authToken);
-            revalidate();
-          }
-        } catch {
-          // If login fails after account creation, still trigger revalidation
-          // The user account was created successfully
-          revalidate();
-        } finally {
-          setIsAuthenticating(false);
-        }
-      };
-      authenticateUser();
+    if (!fetcher.data?.success) return;
+    if (fetcher.data.authToken) {
+      cookie.write("authToken", fetcher.data.authToken);
     }
+    revalidate();
   }, [fetcher.data, revalidate]);
 
   useEffect(() => {
-    if (currentUser && !isAuthenticating) {
+    if (currentUser) {
       if (!willRedirect && !redirectToHomeOnSignup)
         handleViewChange("create-update");
       if (redirectToHomeOnSignup && !location?.state?.postLoginRedirect) {
@@ -91,8 +66,7 @@ export default function CreateUserForm({
     willRedirect,
     redirectToHomeOnSignup,
     navigate,
-    location,
-    isAuthenticating
+    location
   ]);
 
   return (

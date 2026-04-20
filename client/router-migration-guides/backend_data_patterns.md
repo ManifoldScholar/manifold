@@ -272,7 +272,7 @@ Drop the legacy `create`/`update` API props from `FormContainer.Form` — the ro
 
 #### `formAction` helper
 
-Most route actions follow an identical pattern: parse JSON, call an API via `queryApi`, return errors or success/redirect. The `formAction` helper (`app/routes/utility/helpers/formAction.js`) encapsulates this. Use it for any action that does a single mutation — only write a manual action when the route needs multi-intent dispatching, auth checks, data mutation before the API call, or custom return values.
+Most route actions follow an identical pattern: parse JSON, call an API via `queryApi`, return errors or success/redirect. The `formAction` helper (`app/routes/utility/helpers/formAction.js`) encapsulates this. Use it for any action that does a single mutation — only write a manual action when the route needs multi-intent dispatching or custom return values. Auth gating and fallback error messages are supported via options (see below).
 
 ```js
 import formAction from "app/routes/utility/helpers/formAction";
@@ -317,14 +317,49 @@ export const action = formAction({
 
 When `redirectTo` is omitted, the helper returns `{ success: true }` — React Router auto-revalidates the parent layout loader after the action, refreshing the entity data.
 
+**Auth-gated actions (`requireAuth`):**
+
+Pass `requireAuth: true` to reject unauthenticated requests before the mutation runs. The helper reads the auth token from `routerContext` and, if absent, returns the canonical unauthorized response from `unauthorizedError()` (`app/routes/utility/helpers/unauthorizedError.js`) — `{ errors: [{ detail: "Authentication required", source: { pointer: "/data" } }] }`. Use the same helper in manual actions so both paths produce an identical shape for clients.
+
+```js
+export const action = formAction({
+  mutation: ({ data }) => meAPI.update(data),
+  requireAuth: true
+});
+```
+
+**Custom fallback message (`errorMessage`):**
+
+Pass `errorMessage` to override the default "An unexpected error occurred" detail used by `handleActionError` when the thrown error carries no detail of its own (network error, non-JSON response, etc.). API-level validation errors — which carry their own `{ errors: [...] }` payload — still surface through untouched; this only affects the fallback branch.
+
+```js
+export const action = formAction({
+  mutation: ({ data }) => readingGroupsAPI.create(data),
+  redirectTo: () => "/my/groups",
+  errorMessage: "Failed to create reading group"
+});
+```
+
+Both options compose: a create-with-auth-and-message action is a one-liner.
+
 #### Manual actions
 
 Write a manual action (instead of `formAction`) when the route needs:
 - Multi-intent dispatching (`if (intent === "delete") ...`)
-- Auth checks before the API call
-- Custom error handling (e.g. custom message arg to `handleActionError`)
 - Custom return values (not `{ success: true }` or redirect)
 - `return redirect()` instead of `throw redirect()` (rare edge case)
+
+Manual actions should use `unauthorizedError()` for their auth gate to match the shape `formAction({ requireAuth: true })` produces:
+
+```js
+import unauthorizedError from "app/routes/utility/helpers/unauthorizedError";
+
+export async function action({ request, context, params }) {
+  const { auth } = context.get(routerContext) ?? {};
+  if (!auth?.authToken) return unauthorizedError();
+  // ...
+}
+```
 
 ```js
 import { redirect } from "react-router";

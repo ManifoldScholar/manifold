@@ -1,49 +1,21 @@
-import { redirect } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
 import { passwordsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import formAction from "app/routes/utility/helpers/formAction";
 import GlobalForm from "components/global/form/Container";
 import Form from "components/global/form";
 import HeadContent from "components/global/HeadContent";
 
-export async function action({ request, context, params }) {
-  const data = await request.json();
-  const { password, passwordConfirmation } = data.attributes || {};
-  const resetToken = params.resetToken;
-
-  try {
-    const result = await queryApi(
-      passwordsAPI.update(password, passwordConfirmation, resetToken),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    // After successful password reset, user should be logged in
-    // Redirect to home - login will happen automatically via token
-    throw redirect("/");
-  } catch (error) {
-    if (
-      error instanceof Response &&
-      error.status >= 300 &&
-      error.status < 400
-    ) {
-      throw error;
-    }
-
-    return {
-      errors: error?.body?.errors || [
-        {
-          detail: error.message || "Failed to reset password",
-          source: { pointer: "/data" }
-        }
-      ]
-    };
-  }
-}
+export const action = formAction({
+  mutation: ({ data, params }) =>
+    passwordsAPI.update(
+      data.attributes?.password,
+      data.attributes?.passwordConfirmation,
+      params.resetToken
+    ),
+  redirectTo: () => "/",
+  errorMessage: "Failed to reset password"
+});
 
 export default function PasswordResetRoute({ actionData }) {
   const { t } = useTranslation();

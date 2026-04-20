@@ -6,8 +6,7 @@ import Layout from "components/backend/layout";
 import { useArchiveOrActivateGroup } from "components/frontend/reading-group/hooks";
 import useCollapseContext from "components/global/Collapse/useCollapseContext";
 import { readingGroupsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import { useConfirmation } from "hooks";
+import { useApiCallback, useConfirmation } from "hooks";
 import Dialog from "components/global/dialog";
 
 export default function DrawerHeader({ readingGroup }) {
@@ -28,6 +27,8 @@ export default function DrawerHeader({ readingGroup }) {
     membership
   });
 
+  const destroyGroup = useApiCallback(readingGroupsAPI.destroy);
+
   const handleDelete = useCallback(() => {
     const heading = t("messages.reading_group.destroy_heading");
     const message = t("messages.reading_group.destroy_message");
@@ -36,7 +37,7 @@ export default function DrawerHeader({ readingGroup }) {
       message,
       callback: async closeDialog => {
         try {
-          await queryApi(readingGroupsAPI.destroy(readingGroup.id));
+          await destroyGroup(readingGroup.id);
           navigate("/my/groups");
           closeDialog();
         } catch (err) {
@@ -44,7 +45,7 @@ export default function DrawerHeader({ readingGroup }) {
         }
       }
     });
-  }, [confirmDelete, t, readingGroup.id, navigate]);
+  }, [confirmDelete, t, readingGroup.id, navigate, destroyGroup]);
 
   const { toggleProps } = useCollapseContext();
 

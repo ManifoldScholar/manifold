@@ -3,6 +3,7 @@
     "bulk_delete_success": "Bulk delete completed.",
     "bulk_delete_success_body_one": "{{count}} {{entity}} has been removed.",
     "bulk_delete_success_body_other": "{{count}} {{entity}} have been removed.",
+    "contact_sent_heading": "Message sent successfully!",
     "delete_entity_body": "{{title}} has passed into the endless night.",
     "delete_record_body": "And we're sorry to see it go.",
     "delete_failure": "Error removing {{entity}}",

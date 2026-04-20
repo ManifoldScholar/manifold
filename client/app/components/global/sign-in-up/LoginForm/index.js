@@ -97,8 +97,8 @@ export default function LoginForm({
             </Form.FieldGroup>
             <Form.InputError
               errors={
-                fetcher.data?.error && fetcher.state !== "loading"
-                  ? [{ detail: fetcher.data.error }]
+                fetcher.data?.errors && fetcher.state !== "loading"
+                  ? fetcher.data.errors
                   : []
               }
             />

@@ -2,13 +2,10 @@ import { tokensAPI } from "api";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 
 const getErrorMessage = status => {
-  switch (status) {
-    case 502:
-    case 500:
-      return "The server was unreachable, or unable to fulfill your request.";
-    default:
-      return "The username or password you entered is incorrect";
+  if (status >= 500) {
+    return "The server was unreachable, or unable to fulfill your request.";
   }
+  return "The username or password you entered is incorrect";
 };
 
 export async function action({ request }) {
@@ -23,9 +20,7 @@ export async function action({ request }) {
 
     const authToken = result?.meta?.authToken;
     if (!authToken) {
-      return {
-        error: getErrorMessage(500)
-      };
+      return { errors: [{ detail: getErrorMessage(500) }] };
     }
 
     return { authToken };
@@ -35,8 +30,6 @@ export async function action({ request }) {
       error?.status ||
       error?.body?.status ||
       500;
-    return {
-      error: getErrorMessage(status)
-    };
+    return { errors: [{ detail: getErrorMessage(status) }] };
   }
 }

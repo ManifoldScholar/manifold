@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNotifications, useAuthentication, useLogout } from "hooks";
+import {
+  useApiCallback,
+  useNotifications,
+  useAuthentication,
+  useLogout
+} from "hooks";
 import { meAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
 import Form from "components/global/form";
 import * as Styled from "./styles";
 
@@ -16,10 +20,11 @@ export default function DeleteConfirm() {
   const [errors, setErrors] = useState(null);
 
   const { addNotification } = useNotifications();
+  const destroyMe = useApiCallback(meAPI.destroy);
 
   const deleteAndRedirect = async () => {
     try {
-      const res = await queryApi(meAPI.destroy());
+      const res = await destroyMe();
       if (res?.errors) return setErrors(res.errors);
       addNotification({
         level: 0,

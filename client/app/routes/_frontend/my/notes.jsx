@@ -3,7 +3,7 @@ import { meAPI } from "api";
 import requireLogin from "app/routes/utility/loaders/requireLogin";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
 import HeadContent from "components/global/HeadContent";
 import MyAnnotationsEntityCollection from "components/frontend/entity/Collection/patterns/MyAnnotations";
 import CollectionNavigation from "components/frontend/CollectionNavigation";
@@ -29,22 +29,18 @@ export const loader = async ({ request, context }) => {
     }
   });
 
-  // Fetch annotated texts and reading groups in parallel (for filters)
-  const [annotatedTextsResult, readingGroupsResult] = await Promise.allSettled([
-    queryApi(meAPI.annotatedTexts(), context),
-    queryApi(meAPI.readingGroups(), context)
-  ]);
+  const { annotatedTexts, readingGroups } = await loadParallelLists({
+    context,
+    fetchFns: {
+      annotatedTexts: () => meAPI.annotatedTexts(),
+      readingGroups: () => meAPI.readingGroups()
+    }
+  });
 
   return {
     ...annotationsData,
-    annotatedTexts:
-      annotatedTextsResult.status === "fulfilled"
-        ? annotatedTextsResult.value?.data ?? []
-        : [],
-    readingGroups:
-      readingGroupsResult.status === "fulfilled"
-        ? readingGroupsResult.value?.data ?? []
-        : []
+    annotatedTexts: annotatedTexts ?? [],
+    readingGroups: readingGroups ?? []
   };
 };
 

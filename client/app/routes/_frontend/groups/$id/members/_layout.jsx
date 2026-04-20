@@ -3,11 +3,9 @@ import { useOutletContext, useParams } from "react-router";
 import { useRevalidator } from "react-router";
 import { redirect } from "react-router";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import loadList from "app/routes/utility/loaders/loadList";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import { useConfirmation } from "hooks";
+import { useApiCallback, useConfirmation } from "hooks";
 import { useTranslation } from "react-i18next";
 import Dialog from "components/global/dialog";
 import MembersTable from "components/frontend/reading-group/tables/Members";
@@ -17,24 +15,11 @@ import * as Styled from "./styles";
 const DEFAULT_PAGINATION = { page: 1, perPage: 10 };
 
 export const loader = async ({ params, request, context }) => {
-  const fetchFn = () => readingGroupsAPI.show(params.id);
-  const readingGroup = await loadEntity({ context, fetchFn, request });
-
-  const { abilities, currentUserRole } = readingGroup.attributes || {};
-  const canUpdateGroup = abilities?.update;
-  const userIsGroupMember = canUpdateGroup || currentUserRole !== "none";
-
-  if (!userIsGroupMember) {
-    throw redirect(`/groups/${params.id}`);
-  }
-
-  const membersFetchFn = (filters, pagination) =>
-    readingGroupsAPI.members(params.id, filters, pagination);
-
   return loadList({
     request,
     context,
-    fetchFn: membersFetchFn,
+    fetchFn: (filters, pagination) =>
+      readingGroupsAPI.members(params.id, filters, pagination),
     options: { defaultPagination: DEFAULT_PAGINATION }
   });
 };
@@ -55,10 +40,15 @@ export const clientLoader = ({ params, request, serverLoader }) => {
 function ReadingGroupMembersRoute({ loaderData }) {
   const { data: members = [], meta } = loaderData;
   const readingGroup = useOutletContext();
+  const { abilities, currentUserRole } = readingGroup.attributes || {};
+  const userIsGroupMember = abilities?.update || currentUserRole !== "none";
+  if (!userIsGroupMember) throw redirect(`/groups/${readingGroup.id}`);
+
   const { id } = useParams();
   const { revalidate } = useRevalidator();
   const { t } = useTranslation();
   const { confirm, confirmation } = useConfirmation();
+  const destroyMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
 
   const removeMember = useCallback(
     membership => {
@@ -69,7 +59,7 @@ function ReadingGroupMembersRoute({ loaderData }) {
         message,
         callback: async closeDialog => {
           try {
-            await queryApi(readingGroupMembershipsAPI.destroy(membership.id));
+            await destroyMembership(membership.id);
             revalidate();
             closeDialog();
           } catch (err) {
@@ -78,7 +68,7 @@ function ReadingGroupMembersRoute({ loaderData }) {
         }
       });
     },
-    [confirm, t, revalidate]
+    [confirm, t, revalidate, destroyMembership]
   );
 
   const closeUrl = `/groups/${id}/members`;

@@ -8,7 +8,6 @@ import Layout from "components/reader/layout";
 import Footers from "components/global/Footers";
 import Header from "components/reader/Header";
 import { useBodyClass } from "hooks";
-import { ReaderContext } from "app/contexts";
 import { SearchProvider } from "hooks/useSearch/context";
 import FatalError from "components/global/FatalError";
 import formatError from "app/routes/utility/helpers/formatError";
@@ -29,7 +28,7 @@ export function ErrorBoundary() {
     const errorProps = formatError(error, location.pathname);
 
     return (
-      <ReaderContext.Provider>
+      <>
         <SearchProvider>
           <Header text={text} />
           <main
@@ -42,7 +41,7 @@ export function ErrorBoundary() {
         </SearchProvider>
         <Footers.ReaderFooter text={text} />
         <Layout.PostFooter />
-      </ReaderContext.Provider>
+      </>
     );
   }
 

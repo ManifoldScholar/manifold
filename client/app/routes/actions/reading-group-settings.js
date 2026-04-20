@@ -1,8 +1,9 @@
 import { redirect } from "react-router";
 import { readingGroupsAPI } from "api";
 import { routerContext } from "app/contexts";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
+import unauthorizedError from "app/routes/utility/helpers/unauthorizedError";
 
 /**
  * Shared action for reading group settings routes.
@@ -14,29 +15,26 @@ import handleActionError from "app/routes/utility/helpers/handleActionError";
  * @param {Object} params.params - Route params
  * @returns {Promise<Object>} Action result with success/errors or redirect
  */
-export default async function readingGroupSettings({
-  request,
-  context,
-  params
-}) {
+export async function action({ request, context, params }) {
   const { auth } = context.get(routerContext) ?? {};
-  if (!auth?.authToken) {
-    return { errors: [{ detail: "Unauthorized" }] };
-  }
+  if (!auth?.authToken) return unauthorizedError();
 
   const requestData = await request.json();
   const { intent, ...data } = requestData;
 
-  // Determine parent route from request URL
+  // The action is mounted at /groups/$id/<section>/settings for each drawer.
+  // Extract <section> to pick the post-submit redirect; unknown sections fall
+  // back to the group root.
   const url = new URL(request.url);
-  const pathname = url.pathname;
-  let parentRoute = `/groups/${params.id}`;
-
-  if (pathname.includes("/annotations/settings")) {
-    parentRoute = `/groups/${params.id}/annotations`;
-  } else if (pathname.includes("/members/settings")) {
-    parentRoute = `/groups/${params.id}/members`;
-  }
+  const segmentMatch = url.pathname.match(
+    /\/groups\/[^/]+\/([^/]+)\/settings\/?$/
+  );
+  const section = segmentMatch?.[1];
+  const PARENT_ROUTES = {
+    annotations: `/groups/${params.id}/annotations`,
+    members: `/groups/${params.id}/members`
+  };
+  const parentRoute = PARENT_ROUTES[section] ?? `/groups/${params.id}`;
 
   try {
     if (intent === "duplicate") {

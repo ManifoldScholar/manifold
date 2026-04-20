@@ -25,7 +25,8 @@ export default function FormSelect({
   focusOnMount,
   value: valueProp,
   onChange: onChangeProp,
-  errors: errorsProp
+  errors: errorsProp,
+  beforeOnChange
 }) {
   const id = useId();
   const inputRef = useRef(null);
@@ -55,7 +56,8 @@ export default function FormSelect({
     controlledValue: valueProp,
     controlledOnChange: onChangeProp,
     controlledErrors: errorsProp,
-    transformValue
+    transformValue,
+    beforeOnChange
   });
 
   useEffect(() => {
@@ -150,5 +152,6 @@ FormSelect.propTypes = {
   focusOnMount: PropTypes.bool,
   value: PropTypes.any,
   onChange: PropTypes.func,
-  errors: PropTypes.array
+  errors: PropTypes.array,
+  beforeOnChange: PropTypes.func
 };

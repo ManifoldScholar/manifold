@@ -3,9 +3,13 @@
  * or re-throws redirects.
  *
  * @param {Error|Object|Response} error - The error to handle
+ * @param {string} [fallbackMessage] - Used when the error carries no detail of its own
  * @returns {Object} Object with errors array, or throws Response for redirects
  */
-export default function handleActionError(error) {
+export default function handleActionError(
+  error,
+  fallbackMessage = "An unexpected error occurred"
+) {
   // Re-throw redirects (3xx) - these need to trigger navigation
   if (error instanceof Response && error.status >= 300 && error.status < 400) {
     throw error;
@@ -24,7 +28,7 @@ export default function handleActionError(error) {
           error?.body?.exception ||
           error?.body?.error ||
           error?.message ||
-          "An unexpected error occurred",
+          fallbackMessage,
         status: error?.body?.status
       }
     ]

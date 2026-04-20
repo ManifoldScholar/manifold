@@ -2,6 +2,7 @@ import { annotationsAPI, commentsAPI } from "api";
 import { routerContext } from "app/contexts";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
+import unauthorizedError from "app/routes/utility/helpers/unauthorizedError";
 
 /**
  * Shared action for flagging/unflagging annotations and comments.
@@ -14,9 +15,7 @@ import handleActionError from "app/routes/utility/helpers/handleActionError";
  */
 export async function action({ request, context }) {
   const { auth } = context.get(routerContext) ?? {};
-  if (!auth?.authToken) {
-    return { errors: [{ detail: "Unauthorized" }] };
-  }
+  if (!auth?.authToken) return unauthorizedError();
 
   const data = await request.json();
   const { intent, type, id, message = "" } = data;

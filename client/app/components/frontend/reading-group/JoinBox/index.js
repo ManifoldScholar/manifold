@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback, useId } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useFetcher } from "react-router";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import { useAuthentication, useConfirmation } from "hooks";
+import { useApiCallback, useAuthentication, useConfirmation } from "hooks";
 import { readingGroupsAPI } from "api";
 import template from "lodash/template";
 import Dialog from "components/global/dialog";
@@ -19,6 +18,7 @@ function JoinBox({ readingGroup }) {
   const { confirm, confirmation } = useConfirmation();
   const [code, setCode] = useState("");
   const id = useId();
+  const fetchGroup = useApiCallback(readingGroupsAPI.show);
 
   const messages = t("messages.reading_group.join", {
     name: readingGroup,
@@ -95,8 +95,7 @@ function JoinBox({ readingGroup }) {
     if (has(query, "join")) {
       const joinCode = query.join;
       setCode(joinCode);
-      // Fetch group immediately with the code from query
-      queryApi(readingGroupsAPI.show(joinCode))
+      fetchGroup(joinCode)
         .then(response => {
           setTimeout(() => {
             openConfirmation(response?.data ?? response);
@@ -106,7 +105,7 @@ function JoinBox({ readingGroup }) {
           openNotFound();
         });
     }
-  }, [location.search, openConfirmation, openNotFound]);
+  }, [location.search, openConfirmation, openNotFound, fetchGroup]);
 
   const updateCode = event => {
     if (event) {
@@ -124,7 +123,7 @@ function JoinBox({ readingGroup }) {
       event.stopPropagation();
       event.nativeEvent.stopImmediatePropagation();
     }
-    queryApi(readingGroupsAPI.show(code))
+    fetchGroup(code)
       .then(response => {
         setTimeout(() => {
           openConfirmation(response?.data ?? response);

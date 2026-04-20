@@ -45,8 +45,7 @@ LeaveGroup.displayName = "GroupsTable.Group.Edit";
 
 LeaveGroup.propTypes = {
   membership: PropTypes.object.isRequired,
-  readingGroup: PropTypes.object.isRequired,
-  onLeave: PropTypes.func.isRequired
+  readingGroup: PropTypes.object.isRequired
 };
 
 export default LeaveGroup;

@@ -9,7 +9,6 @@ import EntitiesList, {
 import isNil from "lodash/isNil";
 import loadList from "app/routes/utility/loaders/loadList";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import { INIT_FILTERS, dynamicSearchProps } from "./filters";
 
 const LIST_OPTIONS = {
@@ -18,47 +17,34 @@ const LIST_OPTIONS = {
 };
 
 export const loader = async ({ params, request, context }) => {
+  // The parent layout already fetches the resource collection and provides
+  // it via outlet context, but the project id isn't in the URL, so we have
+  // to re-fetch here to look it up before we can hit projectsAPI.resources.
+  // A route restructure (e.g. /backend/projects/$projectId/resource-collection/$id/...)
+  // would eliminate the duplicate fetch.
   const resourceCollection = await loadEntity({
     context,
     fetchFn: () => resourceCollectionsAPI.show(params.id),
     request
   });
   const projectId = resourceCollection.relationships.project.id;
-  const project = await loadEntity({
-    context,
-    fetchFn: () => projectsAPI.show(projectId),
-    request
-  });
 
-  const list = await loadList({
-    request,
-    context,
-    fetchFn: (filters, pagination) =>
-      projectsAPI.resources(projectId, filters, pagination),
-    options: LIST_OPTIONS
-  });
+  const [project, list] = await Promise.all([
+    loadEntity({
+      context,
+      fetchFn: () => projectsAPI.show(projectId),
+      request
+    }),
+    loadList({
+      request,
+      context,
+      fetchFn: (filters, pagination) =>
+        projectsAPI.resources(projectId, filters, pagination),
+      options: LIST_OPTIONS
+    })
+  ]);
 
   return { ...list, projectId, project };
-};
-
-export const clientLoader = async ({ request, serverLoader }) => {
-  const serverData = await serverLoader();
-  const { projectId, project } = serverData;
-
-  const fetchFn = (filters, pagination) =>
-    projectsAPI.resources(projectId, filters, pagination);
-
-  const clientLoaderFn = createListClientLoader({
-    hydrateKey: "__rcResourcesHydrated",
-    fetchFn,
-    options: LIST_OPTIONS
-  });
-
-  const result = await clientLoaderFn({
-    request,
-    serverLoader: () => serverData
-  });
-  return { ...result, projectId, project };
 };
 
 export default function ResourceCollectionResources({ loaderData }) {

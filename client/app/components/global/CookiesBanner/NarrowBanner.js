@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
@@ -50,7 +49,7 @@ NarrowBanner.propTypes = {
   message: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   acceptAll: PropTypes.func.isRequired,
   settingsLinkProps: PropTypes.exact({
-    as: PropTypes.instanceOf(Link),
+    as: PropTypes.elementType,
     to: PropTypes.string
   }),
   onClickSettings: PropTypes.func

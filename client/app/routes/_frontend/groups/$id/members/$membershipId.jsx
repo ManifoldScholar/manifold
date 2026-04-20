@@ -5,6 +5,7 @@ import { routerContext } from "app/contexts";
 import { queryApi } from "app/routes/utility/helpers/queryApi";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
+import unauthorizedError from "app/routes/utility/helpers/unauthorizedError";
 import Layout from "components/backend/layout";
 import { useTranslation } from "react-i18next";
 import { useConfirmation } from "hooks";
@@ -22,9 +23,7 @@ export const loader = async ({ params, request, context }) => {
 
 export async function action({ request, context, params }) {
   const { auth } = context.get(routerContext) ?? {};
-  if (!auth?.authToken) {
-    return { errors: [{ detail: "Unauthorized" }] };
-  }
+  if (!auth?.authToken) return unauthorizedError();
 
   const requestData = await request.json();
   const { intent, ...data } = requestData;

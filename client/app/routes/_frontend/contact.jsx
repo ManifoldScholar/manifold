@@ -1,37 +1,21 @@
-import { redirect } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useSubmit } from "react-router";
+import { useFetcher } from "react-router";
 import { contactsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import GlobalForm from "components/global/form/Container";
 import Form from "components/global/form";
 import HeadContent from "components/global/HeadContent";
 
-export async function action({ request, context }) {
-  const data = await request.json();
-  const contact = data.attributes || {};
+export const action = formAction({
+  mutation: ({ data }) =>
+    contactsAPI.create({ attributes: data.attributes || {} }),
+  errorMessage: "Failed to send message"
+});
 
-  try {
-    const result = await queryApi(
-      contactsAPI.create({ attributes: contact }),
-      context
-    );
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    throw redirect("/");
-  } catch (error) {
-    return handleActionError(error, "Failed to send message");
-  }
-}
-
-export default function ContactRoute({ actionData }) {
+export default function ContactRoute() {
   const { t } = useTranslation();
-  const submit = useSubmit();
-  const errors = actionData?.errors || [];
+  const fetcher = useFetcher();
+  const errors = fetcher.data?.errors || [];
 
   return (
     <>
@@ -39,10 +23,13 @@ export default function ContactRoute({ actionData }) {
       <section>
         <div className="container">
           <GlobalForm.Form
-            submit={submit}
+            fetcher={fetcher}
             errors={errors}
             model={{ attributes: {} }}
             className="form-primary"
+            notifyOnSuccess={{
+              heading: t("notifications.contact_sent_heading")
+            }}
           >
             <Form.Header styleType="primary" label={t("forms.contact.title")} />
             <Form.FieldGroup>

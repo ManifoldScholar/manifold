@@ -1,7 +1,6 @@
-import { useSubmit, redirect } from "react-router";
+import { useSubmit } from "react-router";
 import { readingGroupsAPI } from "api";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import formAction from "app/routes/utility/helpers/formAction";
 import Layout from "components/backend/layout";
 import { useTranslation } from "react-i18next";
 import { GroupSettingsForm } from "components/frontend/reading-group/forms";
@@ -10,21 +9,11 @@ export const handle = {
   drawer: true
 };
 
-export async function action({ request, context }) {
-  const data = await request.json();
-
-  try {
-    const result = await queryApi(readingGroupsAPI.create(data), context);
-
-    if (result?.errors) {
-      return { errors: result.errors };
-    }
-
-    return redirect("/my/groups");
-  } catch (error) {
-    return handleActionError(error, "Failed to create reading group");
-  }
-}
+export const action = formAction({
+  mutation: ({ data }) => readingGroupsAPI.create(data),
+  redirectTo: () => "/my/groups",
+  errorMessage: "Failed to create reading group"
+});
 
 export default function ReadingGroupsNewRoute({ actionData }) {
   const submit = useSubmit();
