@@ -14,7 +14,16 @@ import Errorable from "../Errorable";
 import Instructions from "../Instructions";
 import Developer from "components/global/developer";
 import IconComposer from "components/global/utility/IconComposer";
-import { has, isBoolean, isFunction, isNil, isNumber, isString, keyBy, startsWith } from "lodash-es";
+import {
+  has,
+  isBoolean,
+  isFunction,
+  isNil,
+  isNumber,
+  isString,
+  keyBy,
+  startsWith
+} from "lodash-es";
 import { FormContext } from "contexts";
 import { queryApi } from "api";
 import { isPromise } from "utils/promise";

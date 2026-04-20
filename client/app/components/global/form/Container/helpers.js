@@ -1,4 +1,12 @@
-import { flatMapDeep, forEach, isArray, isEqual, isNil, isPlainObject, pick } from "lodash-es";
+import {
+  flatMapDeep,
+  forEach,
+  isArray,
+  isEqual,
+  isNil,
+  isPlainObject,
+  pick
+} from "lodash-es";
 
 // Check if value has an id property (is an entity reference)
 function hasIdentity(value) {

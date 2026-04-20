@@ -1,4 +1,6 @@
-app/lib/utils/react-router/*
+// Router utils that are mainly vendor code
+app/lib/react-router/emotion-stream.js
+app/lib/react-router/recursiveFlatRoutes.js
 
 build
 router-migration-guides
