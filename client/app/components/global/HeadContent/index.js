@@ -38,7 +38,7 @@ export function HeadContentComponent({
   const image =
     imageProp ||
     get(settings, "attributes.pressLogoStyles.medium") ||
-    `${import.meta.env.VITE_CLIENT_URL}/static/logo.jpg`;
+    `${import.meta.env.VITE_CLIENT_URL}/logo.jpg`;
 
   const meta = [];
   meta.push({ charset });

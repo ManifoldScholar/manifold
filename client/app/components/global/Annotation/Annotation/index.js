@@ -66,7 +66,7 @@ export default function Annotation({
     return (
       <ResourceAnnotation
         annotation={annotation}
-        visitHandler={visitHandler}
+        visitHandler={handleVisit}
         showCommentsToggleAsBlock={showCommentsToggleAsBlock}
         showMarkers={showMarkers}
         markerIcons={markerIcons}

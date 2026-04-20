@@ -23,7 +23,7 @@ class ResourceCollectionCover extends Component {
   }
 
   render() {
-    const collectionsBackground = "/static/images/resource-collection.jpg";
+    const collectionsBackground = "/images/resource-collection.jpg";
     const { resourceCollection } = this.props;
     const attr = resourceCollection.attributes;
     const bgImage = attr.thumbnailStyles.medium

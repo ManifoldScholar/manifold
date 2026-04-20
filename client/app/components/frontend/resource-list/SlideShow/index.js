@@ -161,7 +161,7 @@ class ResourceSlideshow extends PureComponent {
   }
 
   async updatePosition(newPosition) {
-    if (!this.isLoaded(newPosition)) {
+    if (!this.isLoaded(newPosition - 1)) {
       this.handleUnloadedSlide(newPosition);
     }
 

@@ -29,8 +29,7 @@ export default function useShare({
 
   if (!hasMounted)
     return {
-      canRender: true,
-      disabled: true,
+      canRender: false,
       icon: shareIcon,
       label: t("actions.share")
     };

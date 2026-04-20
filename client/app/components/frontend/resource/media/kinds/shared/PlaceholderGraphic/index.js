@@ -5,7 +5,7 @@ import * as Styled from "./styles";
 function ResourceMediaPlaceholderGraphic({ resource, isCollection, loading }) {
   const { t } = useTranslation();
 
-  const src = "/static/images/resource-splash.jpg";
+  const src = "/images/resource-splash.jpg";
 
   return (
     <Styled.Wrapper aria-hidden="true" className="bg-neutral90">

@@ -1,9 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { resourceCollectionsAPI } from "api";
-import { ApiClient } from "api";
-import cookie from "js-cookie";
+import { useApiCallback } from "hooks";
 import Utility from "components/global/utility";
 import AnnotationList from "components/global/Annotation/List/Default";
 import * as Styled from "./styles";
@@ -19,29 +18,25 @@ export default function ResourceCollectionAnnotations({
     initialAnnotationsMeta
   );
 
-  const loadAnnotations = useCallback(
-    async page => {
-      try {
-        const authToken = cookie.get("authToken");
-        const client = new ApiClient(authToken, { denormalize: true });
-        const result = await client.call(
-          resourceCollectionsAPI.annotations(collection.id, undefined, {
-            number: page,
-            size: 5
-          })
-        );
-        setAnnotations(prev => [...prev, ...(result ?? [])]);
-        setAnnotationsMeta(result?.meta ?? null);
-      } catch (error) {
-        console.error("Failed to load annotations", error);
-      }
-    },
-    [collection.id]
-  );
+  const fetchAnnotations = useApiCallback(resourceCollectionsAPI.annotations);
+
+  const loadPage = async page => {
+    try {
+      const result = await fetchAnnotations(collection.id, undefined, {
+        number: page,
+        size: 5
+      });
+      setAnnotations(prev => [...prev, ...(result?.data ?? [])]);
+      setAnnotationsMeta(result?.meta ?? null);
+    } catch (error) {
+      console.error("Failed to load annotations", error);
+    }
+  };
 
   useEffect(() => {
-    if (!initialAnnotations) loadAnnotations(1);
-  }, [initialAnnotations, loadAnnotations]);
+    if (!initialAnnotations) loadPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialAnnotations]);
 
   const afterDelete = id =>
     setAnnotations(annotations.filter(a => a.id !== id));
@@ -67,9 +62,7 @@ export default function ResourceCollectionAnnotations({
           {!!annotationsMeta?.pagination?.nextPage && (
             <button
               className="comment-more"
-              onClick={() =>
-                loadAnnotations(annotationsMeta?.pagination?.nextPage)
-              }
+              onClick={() => loadPage(annotationsMeta?.pagination?.nextPage)}
             >
               {t("actions.see_next_annotation", {
                 count: nextAnnotationsCount

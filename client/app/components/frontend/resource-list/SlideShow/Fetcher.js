@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
-import { resourceCollectionsAPI, ApiClient } from "api";
-import cookie from "js-cookie";
+import { resourceCollectionsAPI } from "api";
+import { useFetch } from "hooks";
 import ResourceCollectionSlideshow from "components/frontend/resource-list/SlideShow";
 import ResourceCollectionEmpty from "components/frontend/resource-collection/Preview/Empty";
 
@@ -10,53 +10,34 @@ export default function ResourceSlideshowFetcher({
   initialResources,
   initialMeta
 }) {
-  const [slideshowResources, setSlideshowResources] = useState(
-    initialResources ?? []
-  );
-  const [slideshowMeta, setSlideshowMeta] = useState(initialMeta);
-  const [loaded, setLoaded] = useState(!!initialResources);
+  const [page, setPage] = useState(initialResources ? null : 1);
 
-  const loadResources = useCallback(
-    async page => {
-      try {
-        setLoaded(false);
-        const authToken = cookie.get("authToken");
-        const client = new ApiClient(authToken, { denormalize: true });
-        const result = await client.call(
-          resourceCollectionsAPI.collectionResources(
-            resourceCollection.id,
-            {},
-            { number: page, size: 20 }
-          )
-        );
-        setSlideshowResources(result?.data ?? []);
-        setSlideshowMeta(result?.meta ?? null);
-        setLoaded(true);
-      } catch (error) {
-        console.error("Failed to load slideshow resources", error);
-        setLoaded(true);
-      }
-    },
-    [resourceCollection.id]
-  );
+  const { response, loaded } = useFetch({
+    request: [
+      resourceCollectionsAPI.collectionResources,
+      resourceCollection.id,
+      {},
+      { number: page ?? 1, size: 20 }
+    ],
+    condition: page !== null,
+    dependencies: [page]
+  });
 
-  useEffect(() => {
-    if (!initialResources) {
-      loadResources(1);
-    }
-  }, [initialResources, loadResources]);
+  const resources = response?.data ?? initialResources ?? [];
+  const meta = response?.meta ?? initialMeta;
+  const isLoaded = page === null ? true : loaded;
 
-  return !slideshowMeta?.pagination?.totalCount ? (
+  return !meta?.pagination?.totalCount ? (
     <ResourceCollectionEmpty
       resourceCollection={resourceCollection}
-      loading={!loaded}
+      loading={!isLoaded}
     />
   ) : (
     <ResourceCollectionSlideshow
       resourceCollection={resourceCollection}
-      collectionResources={slideshowResources}
-      pagination={slideshowMeta?.pagination}
-      setPageNumber={loadResources}
+      collectionResources={resources}
+      pagination={meta?.pagination}
+      setPageNumber={setPage}
     />
   );
 }

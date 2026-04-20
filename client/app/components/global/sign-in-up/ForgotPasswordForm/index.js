@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
@@ -11,8 +11,10 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const fetcher = useFetcher();
 
   const { addNotification } = useNotifications();
+  const submittedEmailRef = useRef("");
 
   const formatData = useCallback(data => {
+    submittedEmailRef.current = data.email ?? "";
     return data.email;
   }, []);
 
@@ -22,7 +24,7 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
         level: 0,
         id: "PASSWORD_RESET_SENT",
         heading: t("forms.signin_overlay.send_reset_success", {
-          email: fetcher.data.email || "your email"
+          email: submittedEmailRef.current || "your email"
         }),
         expiration: 3000
       });
