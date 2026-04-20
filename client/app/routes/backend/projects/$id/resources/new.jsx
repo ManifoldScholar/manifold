@@ -8,7 +8,7 @@ import Resource from "components/backend/resource";
 import { resourcesAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
-import { getResourceBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getResourceBreadcrumbs } from "helpers/breadcrumbs";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 
 const DEFAULT_RESOURCE = { attributes: { kind: "image" } };

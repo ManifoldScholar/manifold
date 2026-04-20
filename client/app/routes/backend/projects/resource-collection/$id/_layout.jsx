@@ -7,9 +7,9 @@ import Layout from "components/backend/layout";
 import PageHeader from "components/backend/layout/PageHeader";
 import HeadContent from "components/global/HeadContent";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
-import { getResourceCollectionBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getResourceCollectionBreadcrumbs } from "helpers/breadcrumbs";
 import Dialog from "components/global/dialog";
-import navigation from "helpers/router/navigation";
+import navigation from "helpers/navigation";
 import { useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 

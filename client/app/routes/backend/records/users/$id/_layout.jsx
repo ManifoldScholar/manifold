@@ -6,7 +6,7 @@ import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Layout from "components/backend/layout";
 import PageHeader from "components/backend/layout/PageHeader";
 import Dialog from "components/global/dialog";
-import navigation from "helpers/router/navigation";
+import navigation from "helpers/navigation";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 
 export const loader = async ({ params, context, request }) => {

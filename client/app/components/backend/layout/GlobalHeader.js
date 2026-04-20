@@ -2,7 +2,7 @@ import Navigation from "components/global/navigation";
 import PressLogo from "components/global/PressLogo";
 import HeaderNotifications from "components/global/HeaderNotifications";
 
-import navigation from "helpers/router/navigation";
+import navigation from "helpers/navigation";
 import Utility from "components/global/utility";
 import HeaderLogo from "components/global/atomic/HeaderLogo";
 import { useTranslation } from "react-i18next";

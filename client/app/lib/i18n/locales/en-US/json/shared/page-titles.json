@@ -1,6 +1,6 @@
 {
   "titles": {
-    "__note": "These page titles are used for HTML head content and SR route announcements. See /helpers/router/navigation.js",
+    "__note": "These page titles are used for HTML head content and SR route announcements. See /helpers/navigation.js",
     "access": "Access",
     "activity": "Activity",
     "analytics": "Analytics",

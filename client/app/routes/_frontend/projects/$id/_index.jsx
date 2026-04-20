@@ -7,7 +7,7 @@ import HeadContent from "components/global/HeadContent";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import Issue from "components/frontend/issue";
 import { useSettings } from "hooks";
-import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getJournalBreadcrumbs } from "helpers/breadcrumbs";
 import EventTracker, { EVENTS } from "components/global/EventTracker";
 
 export const handle = { frontendMode: { isProjectHomepage: true } };

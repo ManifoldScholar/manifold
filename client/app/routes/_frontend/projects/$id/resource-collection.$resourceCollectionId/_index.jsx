@@ -12,7 +12,7 @@ import loadList from "app/routes/utility/loaders/loadList";
 import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
 import { queryApi } from "api";
 import { useSettings } from "hooks";
-import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getJournalBreadcrumbs } from "helpers/breadcrumbs";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };
 

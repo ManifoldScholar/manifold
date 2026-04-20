@@ -5,7 +5,7 @@ import PageHeader from "components/backend/layout/PageHeader";
 import { projectsAPI, resourceImportsAPI } from "api";
 import HeadContent from "components/global/HeadContent";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
-import { getResourceBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getResourceBreadcrumbs } from "helpers/breadcrumbs";
 import authorize from "app/routes/utility/loaders/authorize";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 

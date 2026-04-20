@@ -4,7 +4,7 @@ import Layout from "components/backend/layout";
 import PageHeader from "components/backend/layout/PageHeader";
 import { resourceImportsAPI } from "api";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
-import { getResourceBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getResourceBreadcrumbs } from "helpers/breadcrumbs";
 import formAction from "app/routes/utility/helpers/formAction";
 import ImportForm from "components/backend/resource-import/ImportForm";
 

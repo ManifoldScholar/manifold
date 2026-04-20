@@ -5,7 +5,7 @@ import authorize from "app/routes/utility/loaders/authorize";
 import loadEntity from "app/routes/utility/loaders/loadEntity";
 import Layout from "components/backend/layout";
 import HeadContent from "components/global/HeadContent";
-import navigation from "helpers/router/navigation";
+import navigation from "helpers/navigation";
 
 export const loader = async ({ request, context }) => {
   await authorize({

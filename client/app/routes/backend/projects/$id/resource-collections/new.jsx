@@ -7,7 +7,7 @@ import PageHeader from "components/backend/layout/PageHeader";
 import { resourceCollectionsAPI } from "api";
 import formAction from "app/routes/utility/helpers/formAction";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
-import { getResourceCollectionBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getResourceCollectionBreadcrumbs } from "helpers/breadcrumbs";
 import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
 
 const formatData = data => ({

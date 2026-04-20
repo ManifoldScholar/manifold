@@ -9,7 +9,7 @@ import HeadContent from "components/global/HeadContent";
 import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import EntityCollection from "components/frontend/entity/Collection";
-import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getJournalBreadcrumbs } from "helpers/breadcrumbs";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };
 

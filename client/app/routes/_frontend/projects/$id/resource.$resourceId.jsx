@@ -7,7 +7,7 @@ import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import HeadContent from "components/global/HeadContent";
 import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
 import EventTracker, { EVENTS } from "components/global/EventTracker";
-import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getJournalBreadcrumbs } from "helpers/breadcrumbs";
 import { useSettings } from "hooks";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };

@@ -10,7 +10,7 @@ import EntityCollectionPlaceholder from "components/global/entity/CollectionPlac
 import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
 import HeadContent from "components/global/HeadContent";
 import EntityCollection from "components/frontend/entity/Collection";
-import { getJournalBreadcrumbs } from "app/routes/utility/helpers/breadcrumbs";
+import { getJournalBreadcrumbs } from "helpers/breadcrumbs";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };
 
