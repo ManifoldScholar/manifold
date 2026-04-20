@@ -10,9 +10,9 @@ import { readingGroupsAPI, collectingAPI } from "api";
 import { routerContext } from "app/contexts";
 import { queryApi } from "api";
 import handleActionError from "app/routes/utility/helpers/handleActionError";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import authorize from "app/routes/utility/loaders/authorize";
+import unauthorizedError from "app/routes/utility/helpers/unauthorizedError";
 import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import { useAuthorizeRoute } from "hooks";
 import ActionBox from "components/frontend/reading-group/ActionBox";
 import { CollectionEditor } from "components/frontend/collecting/reading-group";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
@@ -21,90 +21,60 @@ import * as Styled from "./styles";
 
 export async function action({ request, context, params }) {
   const { auth } = context.get(routerContext) ?? {};
-  if (!auth?.authToken) return { errors: [{ detail: "Unauthorized" }] };
+  if (!auth?.authToken) return unauthorizedError();
 
   const requestData = await request.json();
   const { intent, ...data } = requestData;
 
+  const mutate = async apiCall => {
+    const result = await queryApi(apiCall, context);
+    if (result?.errors) return { errors: result.errors };
+    return { success: true };
+  };
+
   try {
-    if (intent === "create-category") {
-      const result = await queryApi(
-        readingGroupsAPI.createCategory(params.id, data),
-        context
-      );
-      if (result?.errors) return { errors: result.errors };
-      return { success: true };
-    }
+    switch (intent) {
+      case "create-category":
+        return mutate(readingGroupsAPI.createCategory(params.id, data));
 
-    if (intent === "update-category") {
-      const { categoryId, ...updateData } = data;
-      const result = await queryApi(
-        readingGroupsAPI.updateCategory(params.id, categoryId, updateData),
-        context
-      );
-      if (result?.errors) return { errors: result.errors };
-      return { success: true };
-    }
+      case "update-category": {
+        const { categoryId, ...updateData } = data;
+        return mutate(
+          readingGroupsAPI.updateCategory(params.id, categoryId, updateData)
+        );
+      }
 
-    if (intent === "update-category-position") {
-      const { categoryId, position } = data;
-      const result = await queryApi(
-        readingGroupsAPI.updateCategory(params.id, categoryId, {
-          attributes: { position }
-        }),
-        context
-      );
-      if (result?.errors) return { errors: result.errors };
-      return { success: true };
-    }
+      case "update-category-position": {
+        const { categoryId, position } = data;
+        return mutate(
+          readingGroupsAPI.updateCategory(params.id, categoryId, {
+            attributes: { position }
+          })
+        );
+      }
 
-    if (intent === "delete-category") {
-      const { categoryId } = data;
-      const result = await queryApi(
-        readingGroupsAPI.destroyCategory(params.id, categoryId),
-        context
-      );
-      if (result?.errors) return { errors: result.errors };
-      return { success: true };
-    }
+      case "delete-category":
+        return mutate(
+          readingGroupsAPI.destroyCategory(params.id, data.categoryId)
+        );
 
-    if (intent === "update-collectables") {
-      const { collectables, collection } = data;
-      const result = await queryApi(
-        collectingAPI.collect(collectables, collection),
-        context
-      );
-      if (result?.errors) return { errors: result.errors };
-      return { success: true };
-    }
+      case "update-collectables":
+        return mutate(
+          collectingAPI.collect(data.collectables, data.collection)
+        );
 
-    if (intent === "remove-collectable") {
-      const { collectables, collection } = data;
-      const result = await queryApi(
-        collectingAPI.remove(collectables, collection),
-        context
-      );
-      if (result?.errors) return { errors: result.errors };
-      return { success: true };
-    }
+      case "remove-collectable":
+        return mutate(collectingAPI.remove(data.collectables, data.collection));
 
-    return { errors: [{ detail: "Unknown intent" }] };
+      default:
+        return { errors: [{ detail: "Unknown intent" }] };
+    }
   } catch (error) {
     return handleActionError(error, "Category operation failed");
   }
 }
 
-export const loader = async ({ params, request, context }) => {
-  const fetchFn = () => readingGroupsAPI.show(params.id);
-  const readingGroup = await loadEntity({ context, fetchFn, request });
-
-  await authorize({
-    request,
-    context,
-    ability: "update",
-    entity: readingGroup
-  });
-
+export const loader = async ({ params, context }) => {
   const results = await loadParallelLists({
     context,
     fetchFns: {
@@ -137,6 +107,7 @@ export const loader = async ({ params, request, context }) => {
 export default function ReadingGroupHomepageEdit({ loaderData }) {
   const { responses, categories } = loaderData;
   const readingGroup = useOutletContext();
+  useAuthorizeRoute({ entity: readingGroup, ability: "update" });
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { revalidate } = useRevalidator();
