@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useRevalidator } from "react-router";
 import { pendingEntitlementsAPI } from "api";
-import authorize from "app/routes/utility/loaders/authorize";
-import loadList from "app/routes/utility/loaders/loadList";
+import authorize from "lib/react-router/loaders/authorize";
+import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import { useListQueryParams, useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";

@@ -2,8 +2,8 @@ import { redirect } from "react-router";
 import { readingGroupsAPI } from "api";
 import { routerContext } from "app/contexts";
 import { queryApi } from "api";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
-import unauthorizedError from "app/routes/utility/helpers/unauthorizedError";
+import handleActionError from "lib/react-router/helpers/handleActionError";
+import unauthorizedError from "lib/react-router/helpers/unauthorizedError";
 
 /**
  * Shared action for reading group settings routes.

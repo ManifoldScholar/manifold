@@ -6,9 +6,9 @@ import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import EntityCollection from "components/frontend/entity/Collection";
 import HeadContent from "components/global/HeadContent";
 import { useSettings } from "hooks";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
-import loadList from "app/routes/utility/loaders/loadList";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
+import loadList from "lib/react-router/loaders/loadList";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
 import { getJournalBreadcrumbs } from "helpers/breadcrumbs";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };

@@ -7,8 +7,8 @@ import ProjectCollection from "components/backend/project-collection";
 import HeadContent from "components/global/HeadContent";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { fluidScale } from "theme/styles/mixins";
-import authorize from "app/routes/utility/loaders/authorize";
-import loadList from "app/routes/utility/loaders/loadList";
+import authorize from "lib/react-router/loaders/authorize";
+import loadList from "lib/react-router/loaders/loadList";
 
 export const loader = async ({ request, context }) => {
   await authorize({

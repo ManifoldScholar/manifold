@@ -6,7 +6,7 @@
  * - Form submissions
  *
  * Use by exporting from route modules:
- *   export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
+ *   export { shouldRevalidate } from "lib/react-router/loaders/shouldRevalidate";
  */
 export const shouldRevalidate = ({
   currentUrl,

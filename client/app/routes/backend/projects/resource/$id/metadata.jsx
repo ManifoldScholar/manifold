@@ -1,7 +1,7 @@
 import { useFetcher, useOutletContext } from "react-router";
 import Metadata from "components/backend/metadata";
 import { resourcesAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 
 export const action = formAction({
   mutation: ({ data, params }) => resourcesAPI.update(params.id, data)

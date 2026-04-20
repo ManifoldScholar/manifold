@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useParams } from "react-router";
 import { journalIssuesAPI } from "api";
-import loadList from "app/routes/utility/loaders/loadList";
+import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import EntitiesList, {
   Button,

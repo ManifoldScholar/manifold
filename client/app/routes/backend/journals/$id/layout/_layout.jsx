@@ -1,6 +1,6 @@
 import { useOutletContext, useNavigate, useRevalidator } from "react-router";
 import { journalsAPI } from "api";
-import loadList from "app/routes/utility/loaders/loadList";
+import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import Hero from "components/backend/hero";
 

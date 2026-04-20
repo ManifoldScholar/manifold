@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useRevalidator } from "react-router";
 import { readingGroupsAPI } from "api";
 import { getEntityCollection } from "components/frontend/collecting/helpers";
-import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
 import {
   CollectionCategory,
   CollectionPlaceholder

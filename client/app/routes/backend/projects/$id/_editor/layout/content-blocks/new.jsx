@@ -7,7 +7,7 @@ import {
 } from "react-router";
 import { useTranslation } from "react-i18next";
 import { contentBlocksAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
 import ContentBlock from "components/backend/content-block";

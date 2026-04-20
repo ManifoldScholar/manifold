@@ -11,7 +11,7 @@ import useEntityHeadContent from "components/frontend/entity/useEntityHeadConten
 import EventTracker, { EVENTS } from "components/global/EventTracker";
 import { useContext } from "react";
 import { ReaderContext } from "app/contexts";
-import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
 
 export const loader = async ({ params, context }) => {
   const { textId, sectionId } = params;

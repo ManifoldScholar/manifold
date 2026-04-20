@@ -1,5 +1,5 @@
 import { annotationsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import AnnotationDetail from "components/backend/annotation/detail";
 
 export const handle = { drawer: true };

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { entitlementImportsAPI } from "api";
-import authorize from "app/routes/utility/loaders/authorize";
-import loadList from "app/routes/utility/loaders/loadList";
+import authorize from "lib/react-router/loaders/authorize";
+import loadList from "lib/react-router/loaders/loadList";
 import EntitiesList, {
   EntitlementImportRow
 } from "components/backend/list/EntitiesList";

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { exportTargetsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import Layout from "components/backend/layout";
 import ExportTargetForm from "components/backend/export-targets/Form";
 

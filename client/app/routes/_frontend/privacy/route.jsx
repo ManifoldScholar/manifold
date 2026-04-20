@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
-import requireLogin from "app/routes/utility/loaders/requireLogin";
+import requireLogin from "lib/react-router/loaders/requireLogin";
 import { meAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import AccountData from "components/frontend/privacy/AccountData";
 import CookiesForm from "components/frontend/privacy/CookiesForm";
 import Form from "components/global/form";

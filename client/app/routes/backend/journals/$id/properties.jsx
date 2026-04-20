@@ -1,11 +1,11 @@
 import { useFetcher, useOutletContext } from "react-router";
 import { useTranslation } from "react-i18next";
-import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
+import mergeImageAltText from "lib/react-router/helpers/mergeImageAltText";
 import Project from "components/backend/project";
 import Form from "components/global/form";
 import FormContainer from "components/global/form/Container";
 import { subjectsAPI, tagsAPI, journalsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import { useApiCallback } from "hooks";
 
 export const action = formAction({

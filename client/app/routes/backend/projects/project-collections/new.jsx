@@ -4,8 +4,8 @@ import ProjectCollection from "components/backend/project-collection";
 import Form from "components/global/form";
 import FormContainer from "components/global/form/Container";
 import { projectCollectionsAPI } from "api";
-import authorize from "app/routes/utility/loaders/authorize";
-import formAction from "app/routes/utility/helpers/formAction";
+import authorize from "lib/react-router/loaders/authorize";
+import formAction from "lib/react-router/helpers/formAction";
 
 export const handle = { drawer: true };
 

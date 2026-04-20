@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import { projectsAPI } from "api";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
-import loadList from "app/routes/utility/loaders/loadList";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
+import loadList from "lib/react-router/loaders/loadList";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
 import { useListFilters, useListSearchParams, useSettings } from "hooks";
 import HeadContent from "components/global/HeadContent";
 import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";

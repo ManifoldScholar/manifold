@@ -1,7 +1,7 @@
 import { redirect } from "react-router";
 import { Outlet } from "react-router";
 import { journalsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import EventTracker, { EVENTS } from "components/global/EventTracker";
 
 export const loader = async ({ params, request, context }) => {

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useNavigate } from "react-router";
 import { subjectsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import formAction from "lib/react-router/helpers/formAction";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import Form from "components/global/form";
 import FormContainer from "components/global/form/Container";
 import Layout from "components/backend/layout";

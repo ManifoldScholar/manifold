@@ -7,8 +7,8 @@ import EntitiesList, {
   ResourceRow
 } from "components/backend/list/EntitiesList";
 import { isNil } from "lodash-es";
-import loadList from "app/routes/utility/loaders/loadList";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadList from "lib/react-router/loaders/loadList";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import { INIT_FILTERS, dynamicSearchProps } from "./filters";
 
 const LIST_OPTIONS = {

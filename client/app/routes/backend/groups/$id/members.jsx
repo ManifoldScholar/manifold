@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useRevalidator } from "react-router";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
-import loadList from "app/routes/utility/loaders/loadList";
+import loadList from "lib/react-router/loaders/loadList";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "components/global/dialog";

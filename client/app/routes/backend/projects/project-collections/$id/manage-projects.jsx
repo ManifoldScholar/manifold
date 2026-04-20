@@ -11,8 +11,8 @@ import EntitiesList, {
 import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 import IconComposer from "components/global/utility/IconComposer";
 import { useListQueryParams, useApiCallback } from "hooks";
-import loadList from "app/routes/utility/loaders/loadList";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import loadList from "lib/react-router/loaders/loadList";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
 export const handle = { drawer: true, manageProjects: true };

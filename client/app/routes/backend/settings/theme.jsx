@@ -1,7 +1,7 @@
 import { useOutletContext, useFetcher } from "react-router";
 import { useTranslation } from "react-i18next";
 import { settingsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import Layout from "components/backend/layout";
 import Form from "components/global/form";
 import FormContainer from "components/global/form/Container";

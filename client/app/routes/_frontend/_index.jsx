@@ -5,8 +5,8 @@ import {
   featuresAPI
 } from "api";
 import { routerContext } from "app/contexts";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
-import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
 import Content from "components/frontend/home/Content";
 import EventTracker, { EVENTS } from "components/global/EventTracker";
 import HeadContent from "components/global/HeadContent";
@@ -29,7 +29,7 @@ const JOURNAL_FILTERS = {
 
 const FEATURES_FILTERS = { home: true };
 
-export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
+export { shouldRevalidate } from "lib/react-router/loaders/shouldRevalidate";
 
 export const loader = async ({ request, context }) => {
   checkLibraryMode({ request, context });

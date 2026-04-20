@@ -4,7 +4,7 @@ import Form from "components/global/form";
 import FormContainer from "components/global/form/Container";
 import Resource from "components/backend/resource";
 import { resourcesAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 
 export const action = formAction({
   mutation: ({ data, params }) => resourcesAPI.update(params.id, data)

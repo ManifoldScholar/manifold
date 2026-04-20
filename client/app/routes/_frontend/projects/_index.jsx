@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { projectsAPI } from "api";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
-import loadList from "app/routes/utility/loaders/loadList";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
+import loadList from "lib/react-router/loaders/loadList";
 import CollectionNavigation from "components/frontend/CollectionNavigation";
 import EntityCollectionPlaceholder from "components/global/entity/CollectionPlaceholder";
 import EntityCollection from "components/frontend/entity/Collection";

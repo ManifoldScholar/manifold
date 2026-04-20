@@ -1,10 +1,10 @@
 import { useContext, useMemo } from "react";
 import { redirect, useParams } from "react-router";
 import { projectCollectionsAPI, projectsAPI } from "api";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
-import loadList from "app/routes/utility/loaders/loadList";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
+import loadList from "lib/react-router/loaders/loadList";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
 import CollectionNavigation from "components/frontend/CollectionNavigation";
 import EntityCollection from "components/frontend/entity/Collection";
 import { useTranslation } from "react-i18next";

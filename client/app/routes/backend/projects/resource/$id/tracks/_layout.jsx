@@ -11,7 +11,7 @@ import { useRevalidator } from "react-router";
 import PageHeader from "components/backend/layout/PageHeader";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import Dialog from "components/global/dialog";
-import loadList from "app/routes/utility/loaders/loadList";
+import loadList from "lib/react-router/loaders/loadList";
 
 export const loader = async ({ params, request, context }) => {
   const result = await loadList({

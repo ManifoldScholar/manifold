@@ -13,7 +13,7 @@ import Layout from "components/frontend/layout";
 import { SearchProvider } from "hooks/useSearch/context";
 import { useScrollToTop } from "hooks";
 import FatalError from "components/global/FatalError";
-import formatError from "app/routes/utility/helpers/formatError";
+import formatError from "lib/react-router/helpers/formatError";
 
 const STATUSES = [404, 401, 403, 500];
 

@@ -5,7 +5,7 @@ import PageHeader from "components/backend/layout/PageHeader";
 import { resourceImportsAPI } from "api";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { getResourceBreadcrumbs } from "helpers/breadcrumbs";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import ImportForm from "components/backend/resource-import/ImportForm";
 
 export const action = formAction({

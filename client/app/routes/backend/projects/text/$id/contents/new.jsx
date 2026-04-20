@@ -4,7 +4,7 @@ import { useFetcher, useOutletContext } from "react-router";
 import { textsAPI } from "api";
 import Layout from "components/backend/layout";
 import AddEditTOCEntryForm from "components/backend/authoring/AddEditTOCEntryForm";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 
 export const handle = { drawer: true };
 

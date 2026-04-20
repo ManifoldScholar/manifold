@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { textCategoriesAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import formAction from "app/routes/utility/helpers/formAction";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import formAction from "lib/react-router/helpers/formAction";
 import Layout from "components/backend/layout";
 import Category from "components/backend/category";
 

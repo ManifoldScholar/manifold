@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { permissionsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import Layout from "components/backend/layout";
 import PermissionForm from "components/backend/permission/Form";
 

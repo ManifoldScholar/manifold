@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useSearchContext } from "hooks/useSearch/context";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
-import searchLoader from "app/routes/utility/loaders/search";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
+import searchLoader from "lib/react-router/loaders/search";
 import SearchQuery from "components/global/search/query";
 import SearchResults from "components/global/search/results";
 import HeadContent from "components/global/HeadContent";

@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { pagesAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import Layout from "components/backend/layout";
 import Dialog from "components/global/dialog";
 import PageHeader from "components/backend/layout/PageHeader";

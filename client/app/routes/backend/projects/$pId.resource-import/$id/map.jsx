@@ -9,7 +9,7 @@ import {
   Link
 } from "react-router";
 import { resourceImportsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import { useNotifications } from "hooks";
 import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";

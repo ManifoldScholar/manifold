@@ -1,6 +1,6 @@
 import { useOutletContext, useFetcher } from "react-router";
 import { usersAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import Properties from "components/backend/user/Properties";
 
 export const action = formAction({

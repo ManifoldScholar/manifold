@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 import classNames from "classnames";
 import { subjectsAPI } from "api";
 import { FrontendContext } from "app/contexts";
-import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
 import Footers from "components/global/Footers";
 import { BreadcrumbsProvider } from "components/global/atomic/Breadcrumbs";
 import Layout from "components/frontend/layout";
@@ -12,7 +12,7 @@ import { get } from "lodash-es";
 import { SearchProvider } from "hooks/useSearch/context";
 import { ErrorBoundary } from "./ErrorBoundary";
 
-export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
+export { shouldRevalidate } from "lib/react-router/loaders/shouldRevalidate";
 
 const SUBJECT_FILTERS = { used: true };
 const JOURNAL_SUBJECT_FILTERS = { usedJournal: true };

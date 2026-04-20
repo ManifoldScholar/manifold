@@ -1,6 +1,6 @@
 import { useOutletContext } from "react-router";
 import { journalVolumesAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
 import HeadContent from "components/global/HeadContent";

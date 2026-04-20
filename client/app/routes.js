@@ -1,4 +1,4 @@
-import { recursiveFlatRoutes } from "./lib/utils/react-router/recursiveFlatRoutes";
+import { recursiveFlatRoutes } from "./lib/react-router/recursiveFlatRoutes";
 
 const ignoredRouteFiles = [
   "**/styles.js",
@@ -9,6 +9,6 @@ const ignoredRouteFiles = [
 export default [
   ...(await recursiveFlatRoutes({
     rootDirectory: "routes",
-    ignoredRouteFiles: [...ignoredRouteFiles, "utility/**"]
+    ignoredRouteFiles
   }))
 ];

@@ -5,10 +5,10 @@ import Layout from "components/backend/layout";
 import Form from "components/global/form";
 import PageHeader from "components/backend/layout/PageHeader";
 import { resourceCollectionsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { getResourceCollectionBreadcrumbs } from "helpers/breadcrumbs";
-import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
+import mergeImageAltText from "lib/react-router/helpers/mergeImageAltText";
 
 const formatData = data => ({
   ...data,

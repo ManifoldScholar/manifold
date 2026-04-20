@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useParams } from "react-router";
 import { journalIssuesAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import Issue from "components/backend/issue";
 import Layout from "components/backend/layout";
 

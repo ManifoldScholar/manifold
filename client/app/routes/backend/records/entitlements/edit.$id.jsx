@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { pendingEntitlementsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import formAction from "lib/react-router/helpers/formAction";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import Layout from "components/backend/layout";
 import { AddEditForm } from "components/backend/pending-entitlements";
 

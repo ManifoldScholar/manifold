@@ -6,10 +6,10 @@ import Form from "components/global/form";
 import PageHeader from "components/backend/layout/PageHeader";
 import Resource from "components/backend/resource";
 import { resourcesAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { getResourceBreadcrumbs } from "helpers/breadcrumbs";
-import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
+import mergeImageAltText from "lib/react-router/helpers/mergeImageAltText";
 
 const DEFAULT_RESOURCE = { attributes: { kind: "image" } };
 

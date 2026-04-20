@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import { capitalize } from "lodash-es";
 import { projectsAPI } from "api";
-import loadList from "app/routes/utility/loaders/loadList";
+import loadList from "lib/react-router/loaders/loadList";
 import { useListQueryParams } from "hooks";
 import EntitiesList, {
   Button,

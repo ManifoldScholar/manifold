@@ -1,8 +1,8 @@
 import { useOutletContext } from "react-router";
 import { journalIssuesAPI } from "api";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
-import loadList from "app/routes/utility/loaders/loadList";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
+import loadList from "lib/react-router/loaders/loadList";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
 import { useListFilters, useListSearchParams, useSettings } from "hooks";
 import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
 import HeadContent from "components/global/HeadContent";

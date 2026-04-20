@@ -3,7 +3,7 @@ import { Outlet, useLocation } from "react-router";
 import Layout from "components/backend/layout";
 import navigation from "helpers/navigation";
 import HeadContent from "components/global/HeadContent";
-import authorize from "app/routes/utility/loaders/authorize";
+import authorize from "lib/react-router/loaders/authorize";
 
 export const loader = ({ request, context }) => {
   return authorize({

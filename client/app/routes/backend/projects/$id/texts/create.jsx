@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useFetcher } from "react-router";
 import { textsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import Layout from "components/backend/layout";
 import CreateTextForm from "components/backend/authoring/CreateTextForm";
 

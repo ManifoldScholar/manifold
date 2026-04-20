@@ -4,7 +4,7 @@ import Overlay from "components/global/Overlay";
 import SearchQuery from "components/global/search/query";
 import SearchResults from "components/global/search/results";
 import { useSearchContext } from "hooks/useSearch/context";
-import searchLoader from "app/routes/utility/loaders/search";
+import searchLoader from "lib/react-router/loaders/search";
 
 export const loader = async ({ request, context }) => {
   return searchLoader({ request, context });

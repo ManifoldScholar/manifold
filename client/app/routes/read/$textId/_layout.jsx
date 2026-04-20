@@ -10,7 +10,7 @@ import EventTracker, { EVENTS } from "components/global/EventTracker";
 import { SearchProvider } from "hooks/useSearch/context";
 import { useAuthentication, useReaderLocationChange } from "hooks";
 import { readerReducer, initialReaderState } from "app/contexts/readerReducer";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import { ErrorBoundary } from "./ErrorBoundary";
 import ReaderOverlay from "components/reader/ReaderOverlay";
 

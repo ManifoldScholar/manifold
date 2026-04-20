@@ -1,5 +1,5 @@
 import { meAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 
 export const action = formAction({
   mutation: ({ data }) => meAPI.update(data),

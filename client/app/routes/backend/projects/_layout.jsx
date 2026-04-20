@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import authorize from "app/routes/utility/loaders/authorize";
+import authorize from "lib/react-router/loaders/authorize";
 
 export const loader = ({ request, context }) => {
   return authorize({

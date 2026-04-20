@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
-import requireLogin from "app/routes/utility/loaders/requireLogin";
-import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import requireLogin from "lib/react-router/loaders/requireLogin";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
 import HeadContent from "components/global/HeadContent";
 import MyStarredEntityCollection from "components/frontend/entity/Collection/patterns/MyStarred";
 import CollectionNavigation from "components/frontend/CollectionNavigation";

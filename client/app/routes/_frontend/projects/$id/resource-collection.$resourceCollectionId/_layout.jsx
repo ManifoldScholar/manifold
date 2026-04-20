@@ -1,7 +1,7 @@
 import { Outlet, useOutletContext } from "react-router";
 import { resourceCollectionsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
 import EventTracker, { EVENTS } from "components/global/EventTracker";
 
 export const loader = async ({ params, request, context }) => {

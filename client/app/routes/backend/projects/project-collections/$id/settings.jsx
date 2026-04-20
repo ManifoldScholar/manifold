@@ -7,8 +7,8 @@ import { projectCollectionsAPI } from "api";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "components/global/dialog";
-import formAction from "app/routes/utility/helpers/formAction";
-import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
+import formAction from "lib/react-router/helpers/formAction";
+import mergeImageAltText from "lib/react-router/helpers/mergeImageAltText";
 
 export const handle = { drawer: true };
 

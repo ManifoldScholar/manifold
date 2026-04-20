@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useFetcher } from "react-router";
 import { sectionsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import formAction from "app/routes/utility/helpers/formAction";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import formAction from "lib/react-router/helpers/formAction";
 import Layout from "components/backend/layout";
 import SectionPropertiesForm from "components/backend/authoring/SectionPropertiesForm";
 

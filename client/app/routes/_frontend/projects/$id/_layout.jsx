@@ -1,7 +1,7 @@
 import { redirect } from "react-router";
 import { Outlet } from "react-router";
 import { projectsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 
 export const loader = async ({ params, request, context }) => {
   if (params.id === "all") {

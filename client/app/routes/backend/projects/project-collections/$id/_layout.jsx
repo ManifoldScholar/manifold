@@ -5,9 +5,9 @@ import { collectionProjectsAPI, projectCollectionsAPI } from "api";
 import ProjectCollection from "components/backend/project-collection";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import HeadContent from "components/global/HeadContent";
-import authorize from "app/routes/utility/loaders/authorize";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import loadList from "app/routes/utility/loaders/loadList";
+import authorize from "lib/react-router/loaders/authorize";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import loadList from "lib/react-router/loaders/loadList";
 
 export const loader = async ({ params, context, request }) => {
   const projectCollection = await loadEntity({

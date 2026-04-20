@@ -9,9 +9,9 @@ import {
   createEmotionStyleExtractorStream,
   createEmotionCache,
   EMOTION_CACHE_KEY
-} from "utils/react-router/emotion-stream";
+} from "lib/react-router/emotion-stream";
 import FatalError from "components/global/FatalError";
-import formatError from "app/routes/utility/helpers/formatError";
+import formatError from "lib/react-router/helpers/formatError";
 import styles from "theme/styles/globalStyles";
 
 import "utils/i18n";

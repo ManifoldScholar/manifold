@@ -2,7 +2,7 @@ import { useLocation, Outlet } from "react-router";
 import { useTranslation } from "react-i18next";
 import { redirect } from "react-router";
 import { readingGroupsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import { hasItemsInCollection } from "components/frontend/collecting/helpers";
 import HeadContent from "components/global/HeadContent";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";

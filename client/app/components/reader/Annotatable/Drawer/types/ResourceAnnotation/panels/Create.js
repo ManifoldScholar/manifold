@@ -4,7 +4,7 @@ import { useFetcher } from "react-router";
 import { useFormField } from "hooks";
 import Form from "components/global/form";
 import IconComputed from "components/global/icon-computed";
-import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
+import mergeImageAltText from "lib/react-router/helpers/mergeImageAltText";
 import ButtonGroup from "./ButtonGroup";
 import * as Styled from "./styles";
 

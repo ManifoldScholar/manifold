@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSubmit } from "react-router";
-import requireLogin from "app/routes/utility/loaders/requireLogin";
+import requireLogin from "lib/react-router/loaders/requireLogin";
 import { meAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import NotificationsForm from "components/frontend/preferences/NotificationsForm";
 import Form from "components/global/form";
 import { useAuthentication, useNotifications } from "hooks";

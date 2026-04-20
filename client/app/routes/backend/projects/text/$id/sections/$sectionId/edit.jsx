@@ -1,8 +1,8 @@
 import { redirect, useOutletContext, useFetcher } from "react-router";
 import { sectionsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import { queryApi } from "api";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import handleActionError from "lib/react-router/helpers/handleActionError";
 import EditSectionForm from "components/backend/authoring/EditSectionForm";
 
 export const handle = { drawer: "editor" };

@@ -1,6 +1,6 @@
 import { usersAPI, tokensAPI } from "api";
 import { queryApi } from "api";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import handleActionError from "lib/react-router/helpers/handleActionError";
 
 export async function action({ request, context }) {
   const data = await request.json();

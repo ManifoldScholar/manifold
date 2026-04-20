@@ -1,8 +1,8 @@
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { resourceCollectionsAPI } from "api";
-import authorize from "app/routes/utility/loaders/authorize";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import authorize from "lib/react-router/loaders/authorize";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import Layout from "components/backend/layout";
 import PageHeader from "components/backend/layout/PageHeader";
 import HeadContent from "components/global/HeadContent";

@@ -1,7 +1,7 @@
 import { useOutletContext, useParams } from "react-router";
 import { readingGroupsAPI } from "api";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
-import loadList from "app/routes/utility/loaders/loadList";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
+import loadList from "lib/react-router/loaders/loadList";
 import EntityCollection from "components/frontend/entity/Collection";
 import { useListFilters, useListSearchParams } from "hooks";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";

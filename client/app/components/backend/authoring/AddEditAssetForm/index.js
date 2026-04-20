@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import PropTypes from "prop-types";
 import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
-import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
+import mergeImageAltText from "lib/react-router/helpers/mergeImageAltText";
 import { useTranslation } from "react-i18next";
 
 import * as Styled from "./styles";

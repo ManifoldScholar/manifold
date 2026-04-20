@@ -9,9 +9,9 @@ import { useMemo, useLayoutEffect } from "react";
 import { CacheProvider } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
 import { get } from "lodash-es";
-import formatError from "app/routes/utility/helpers/formatError";
+import formatError from "lib/react-router/helpers/formatError";
 import FatalError from "components/global/FatalError";
-import { createEmotionCache } from "utils/react-router/emotion-stream";
+import { createEmotionCache } from "lib/react-router/emotion-stream";
 
 // Root ErrorBoundary - catches loader errors and uncaught render errors
 export function ErrorBoundary() {

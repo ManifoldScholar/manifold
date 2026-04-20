@@ -3,8 +3,8 @@ import { useFetcher, useOutletContext } from "react-router";
 import { ingestionSourcesAPI } from "api";
 import Layout from "components/backend/layout";
 import AddEditAssetForm from "components/backend/authoring/AddEditAssetForm";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import formAction from "app/routes/utility/helpers/formAction";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import formAction from "lib/react-router/helpers/formAction";
 
 export const handle = { drawer: true };
 

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useParams } from "react-router";
 import { permissionsAPI, entitlementsAPI, projectsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
-import loadList from "app/routes/utility/loaders/loadList";
+import formAction from "lib/react-router/helpers/formAction";
+import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import EntitlementsList from "components/backend/entitlements/List";
 import EntitiesList, {

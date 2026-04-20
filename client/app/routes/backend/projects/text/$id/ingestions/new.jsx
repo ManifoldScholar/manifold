@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useFetcher } from "react-router";
 import { ingestionsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import Ingestion from "components/backend/ingestion";
 
 export const action = formAction({

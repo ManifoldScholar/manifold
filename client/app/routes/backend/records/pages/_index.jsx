@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { pagesAPI } from "api";
-import loadList from "app/routes/utility/loaders/loadList";
+import loadList from "lib/react-router/loaders/loadList";
 import EntitiesList, {
   Button,
   PageRow

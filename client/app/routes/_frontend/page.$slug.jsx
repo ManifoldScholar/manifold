@@ -1,6 +1,6 @@
 import { pagesAPI } from "api";
 import HeadContent from "components/global/HeadContent";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 
 export const loader = async ({ params, request, context }) => {
   const fetchFn = () => pagesAPI.show(params.slug);

@@ -1,6 +1,6 @@
 import { useSubmit } from "react-router";
 import { readingGroupsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import Layout from "components/backend/layout";
 import { useTranslation } from "react-i18next";
 import { GroupSettingsForm } from "components/frontend/reading-group/forms";

@@ -1,5 +1,5 @@
 import { queryApi } from "api";
-import handleLoaderError from "app/routes/utility/helpers/handleLoaderError";
+import handleLoaderError from "lib/react-router/helpers/handleLoaderError";
 import parseListParams from "./parseListParams";
 
 export default async function ListLoader({

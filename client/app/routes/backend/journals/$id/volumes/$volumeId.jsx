@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useNavigate, useParams } from "react-router";
 import { journalVolumesAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import formAction from "lib/react-router/helpers/formAction";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 import Volume from "components/backend/volume";
 import Layout from "components/backend/layout";

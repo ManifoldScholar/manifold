@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router";
 import { resourcesAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import ResourceDetail from "components/frontend/resource/Detail";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import HeadContent from "components/global/HeadContent";

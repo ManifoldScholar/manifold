@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { readingGroupsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import Layout from "components/backend/layout";
 import PageHeader from "components/backend/layout/PageHeader";
 import HeadContent from "components/global/HeadContent";

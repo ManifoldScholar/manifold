@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext, useRevalidator } from "react-router";
 import { isArray } from "lodash-es";
 import { projectsAPI, exportTargetsAPI, projectExportationsAPI } from "api";
-import loadList from "app/routes/utility/loaders/loadList";
-import formAction from "app/routes/utility/helpers/formAction";
+import loadList from "lib/react-router/loaders/loadList";
+import formAction from "lib/react-router/helpers/formAction";
 import { useListQueryParams, useApiCallback } from "hooks";
 import EntitiesList, {
   Button,

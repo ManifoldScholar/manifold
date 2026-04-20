@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router";
 import { journalVolumesAPI } from "api";
-import checkLibraryMode from "app/routes/utility/loaders/checkLibraryMode";
-import loadList from "app/routes/utility/loaders/loadList";
+import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
+import loadList from "lib/react-router/loaders/loadList";
 import { useSettings } from "hooks";
 import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
 import HeadContent from "components/global/HeadContent";

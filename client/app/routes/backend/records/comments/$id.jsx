@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate, useRevalidator } from "react-router";
 import { commentsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 import { useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Layout from "components/backend/layout";

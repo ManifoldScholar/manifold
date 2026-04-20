@@ -1,6 +1,6 @@
 import { searchResultsAPI } from "api";
 import { queryApi } from "api";
-import handleLoaderError from "app/routes/utility/helpers/handleLoaderError";
+import handleLoaderError from "lib/react-router/helpers/handleLoaderError";
 import { hasSearchableQuery, parseQueryFromUrl } from "hooks/useSearch/helpers";
 
 /**

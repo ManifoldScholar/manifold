@@ -1,8 +1,8 @@
 import { useOutletContext } from "react-router";
 import { permissionsAPI, entitlementsAPI } from "api";
 import { queryApi } from "api";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
-import loadList from "app/routes/utility/loaders/loadList";
+import handleActionError from "lib/react-router/helpers/handleActionError";
+import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import EntitlementsList from "components/backend/entitlements/List";
 import Authorization from "helpers/authorization";

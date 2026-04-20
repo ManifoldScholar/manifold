@@ -3,7 +3,7 @@ import Layout from "components/backend/layout";
 import { useBodyClass } from "hooks";
 import Footers from "components/global/Footers";
 import FatalError from "components/global/FatalError";
-import formatError from "app/routes/utility/helpers/formatError";
+import formatError from "lib/react-router/helpers/formatError";
 import { useScrollToTop } from "hooks";
 
 const STATUSES = [404, 401, 403, 500];

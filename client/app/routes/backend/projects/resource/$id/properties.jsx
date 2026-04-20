@@ -5,8 +5,8 @@ import Form from "components/global/form";
 import FormContainer from "components/global/form/Container";
 import Resource from "components/backend/resource";
 import { resourcesAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
-import mergeImageAltText from "app/routes/utility/helpers/mergeImageAltText";
+import formAction from "lib/react-router/helpers/formAction";
+import mergeImageAltText from "lib/react-router/helpers/mergeImageAltText";
 
 const formatData = (data, resourceKind) => {
   const { attributes, relationships } = data ?? {};

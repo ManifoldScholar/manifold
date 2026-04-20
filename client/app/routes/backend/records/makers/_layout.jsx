@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 import { makersAPI } from "api";
-import loadList from "app/routes/utility/loaders/loadList";
+import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import { useListQueryParams } from "hooks";
 import EntitiesList, {

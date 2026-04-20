@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
-import requireLogin from "app/routes/utility/loaders/requireLogin";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
-import loadList from "app/routes/utility/loaders/loadList";
-import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import requireLogin from "lib/react-router/loaders/requireLogin";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
+import loadList from "lib/react-router/loaders/loadList";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
 import HeadContent from "components/global/HeadContent";
 import MyAnnotationsEntityCollection from "components/frontend/entity/Collection/patterns/MyAnnotations";
 import CollectionNavigation from "components/frontend/CollectionNavigation";

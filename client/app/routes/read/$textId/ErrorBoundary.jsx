@@ -10,7 +10,7 @@ import Header from "components/reader/Header";
 import { useBodyClass } from "hooks";
 import { SearchProvider } from "hooks/useSearch/context";
 import FatalError from "components/global/FatalError";
-import formatError from "app/routes/utility/helpers/formatError";
+import formatError from "lib/react-router/helpers/formatError";
 
 const STATUSES = [404, 401, 403, 500];
 

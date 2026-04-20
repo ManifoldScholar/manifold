@@ -6,8 +6,8 @@ import { projectsAPI, resourceImportsAPI } from "api";
 import HeadContent from "components/global/HeadContent";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { getResourceBreadcrumbs } from "helpers/breadcrumbs";
-import authorize from "app/routes/utility/loaders/authorize";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import authorize from "lib/react-router/loaders/authorize";
+import loadEntity from "lib/react-router/loaders/loadEntity";
 
 export const loader = async ({ params, context, request }) => {
   const project = await loadEntity({

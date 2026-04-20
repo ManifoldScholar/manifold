@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useOutletContext, useFetcher } from "react-router";
 import { useTranslation } from "react-i18next";
 import { settingsAPI, testMailsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import { useApiCallback, useNotifications } from "hooks";
 import Layout from "components/backend/layout";
 import Form from "components/global/form";

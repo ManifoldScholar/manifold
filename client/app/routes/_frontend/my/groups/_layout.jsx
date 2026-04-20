@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { meAPI } from "api";
-import requireLogin from "app/routes/utility/loaders/requireLogin";
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
-import loadList from "app/routes/utility/loaders/loadList";
+import requireLogin from "lib/react-router/loaders/requireLogin";
+import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
+import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import HeadContent from "components/global/HeadContent";
 import List from "components/frontend/reading-group-list/List";

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
 import { usersAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
-import authorize from "app/routes/utility/loaders/authorize";
+import formAction from "lib/react-router/helpers/formAction";
+import authorize from "lib/react-router/loaders/authorize";
 import Layout from "components/backend/layout";
 import PageHeader from "components/backend/layout/PageHeader";
 import Properties from "components/backend/user/Properties";

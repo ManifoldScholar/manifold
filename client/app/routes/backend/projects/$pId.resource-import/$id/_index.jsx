@@ -1,6 +1,6 @@
 import { useFetcher, useOutletContext } from "react-router";
 import { resourceImportsAPI } from "api";
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "lib/react-router/helpers/formAction";
 import ImportForm from "components/backend/resource-import/ImportForm";
 
 export const action = formAction({

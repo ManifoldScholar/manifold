@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useRevalidator } from "react-router";
 import { projectsAPI, eventsAPI } from "api";
-import loadList from "app/routes/utility/loaders/loadList";
+import loadList from "lib/react-router/loaders/loadList";
 import { useListQueryParams, useApiCallback } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "components/global/dialog";
