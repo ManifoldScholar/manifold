@@ -1,0 +1,51 @@
+{
+  "entitlements": {
+    "expires": "Scadenza {{val, datetime}}",
+    "header": "{{ entity }} Diritti",
+    "instructions_project": "<0>Le abilitazioni danno agli utenti e/o ai gruppi di lettura l'accesso a questo progetto. In Manifold, tutti i progetti sono aperti per impostazione predefinita. Abilitare le restrizioni di accesso qui sotto per limitare l'accesso al progetto.</0><2/><0>ID per l'importazione dei diritti CSV:</0></2><1>{{gid}}</1>",
+    "instructions_journal": "<0>I diritti della rivista danno agli utenti e/o ai gruppi di lettura l'accesso a tutti i numeri di questa rivista. Si puè anche configurare l'accesso a singoli numeri concedendo diritti sul progetto di un numero.</0><2/><0>ID per l'importazione di diritti CSV:</0></2><1>{{gid}}</1>",
+    "button_label": "Diritto alla sovvenzione",
+    "new": {
+      "header": "Diritto alla sovvenzione",
+      "user_select_label": "A chi spetta il diritto?",
+      "user_select_placeholder": "Selezionare un utente o un gruppo di lettura",
+      "expiration_label": "Scadenza",
+      "expiration_instructions": "Inserire YYYY/MM/DD o una stringa leggibile, ad esempio 'in un anno'",
+      "submit_label": "Salva il diritto"
+    },
+    "pending": {
+      "header": "Gestire i diritti in sospeso",
+      "add_button_label": "Aggiungi diritto",
+      "add_header": "Aggiungere un diritto in sospeso",
+      "add_instructions": "Crea un diritto per un utente che non ha ancora creato un account su questa istanza Manifold. Quando l'utente si registra, questo diritto verrè aggiunto automaticamente al suo account",
+      "edit_header": "Modifica del diritto in sospeso",
+      "user_group_label": "Dettagli utente",
+      "email": "Email",
+      "email_instructions": "L'indirizzo e-mail viene utilizzato per associare i nuovi account creati ai diritti in sospeso..",
+      "first_name": "Nome",
+      "last_name": "Cognome",
+      "entitlement_group_label": "Dettagli sui diritti",
+      "type_label": "Tipo",
+      "type_instructions": "Questo diritto è per un progetto o per un giornale?",
+      "entity_id": "ID progetto o giornale",
+      "id_instructions": "L'ID del progetto o della rivista a cui si ha diritto. Questo ID si trova nell'url del progetto",
+      "id_placeholder": "00000000-0000-0000-0000-00000000",
+      "expiration": "Scadenza",
+      "expiration_instructions": "Facoltativamente, impostare la data di scadenza di questo diritto",
+      "save_label": "Salva il diritto",
+      "import_button_label": "Importazione da CSV",
+      "import_header": "Importazione di diritti CSV",
+      "upload_label": "Caricare un CSV",
+      "upload_instructions": "Manifold può importare i diritti da un file CSV, compresi i diritti in sospeso per gli utenti non ancora registrati. Vedere la documentazione per il formato CSV.",
+      "name_label": "Nome",
+      "name_instructions": "Facoltativamente, assegnare un nome all'importazione per un riferimento successivo",
+      "submit_label": "Importa"
+    },
+    "imports": {
+      "header": "Importazioni CSV dei diritti",
+      "view_pending_label": "Visualizza i diritti in sospeso",
+      "view_imports_label": "Visualizza le importazioni CSV",
+      "results_header": "Risultati:"
+    }
+  }
+}
