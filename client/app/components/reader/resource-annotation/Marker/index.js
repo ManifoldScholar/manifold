@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import IconComposer from "components/global/utility/IconComposer";
-import capitalize from "lodash/capitalize";
+import { capitalize } from "lodash-es";
 import { ReaderContext } from "app/contexts";
 import { ResourceMarkerContext } from "./context";
 import useLoaderCollection from "hooks/useLoaderCollection";

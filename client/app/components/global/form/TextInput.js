@@ -1,6 +1,6 @@
 import { useId } from "react";
 import PropTypes from "prop-types";
-import isArray from "lodash/isArray";
+import { isArray } from "lodash-es";
 import BaseInput from "./BaseInput";
 
 export default function FormTextInput({

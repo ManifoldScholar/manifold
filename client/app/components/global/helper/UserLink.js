@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import PropTypes from "prop-types";
 import Url from "url-parse";
-import memoize from "lodash/memoize";
+import { memoize } from "lodash-es";
 import { Link } from "react-router";
 
 const urlFactory = memoize(url => new Url(url));

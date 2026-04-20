@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import ContentBlock from "components/frontend/content-block/Block";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 
 function Metadata({ journal }) {
   const { t } = useTranslation();

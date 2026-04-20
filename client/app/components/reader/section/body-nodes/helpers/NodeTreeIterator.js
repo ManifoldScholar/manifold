@@ -1,7 +1,6 @@
 import { Fragment, createElement } from "react";
 import Nodes from "../nodes";
-import has from "lodash/has";
-import upperFirst from "lodash/upperFirst";
+import { has, upperFirst } from "lodash-es";
 import selectionHelpers from "components/reader/Annotatable/helpers/selectionHelpers";
 import { ErrorBoundary } from "react-error-boundary";
 import ResourceAnnotationFactory from "components/reader/resource-annotation";

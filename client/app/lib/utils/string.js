@@ -1,4 +1,4 @@
-import isString from "lodash/isString";
+import { isString } from "lodash-es";
 
 export function repeat(str, times) {
   return new Array(times + 1).join(str);

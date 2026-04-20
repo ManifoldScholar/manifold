@@ -1,4 +1,4 @@
-import values from "lodash/values";
+import { values } from "lodash-es";
 import classNames from "classnames";
 
 export const getlocalAnnotationsArray = annotations => {

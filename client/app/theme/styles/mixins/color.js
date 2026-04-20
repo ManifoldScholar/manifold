@@ -1,4 +1,4 @@
-import get from "lodash/get";
+import { get } from "lodash-es";
 import colorHelper from "tinycolor2";
 import { baseColors } from "../variables/colors";
 

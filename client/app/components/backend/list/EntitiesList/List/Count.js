@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import Utility from "components/global/utility";
 import PropTypes from "prop-types";
-import isBoolean from "lodash/isBoolean";
+import { isBoolean } from "lodash-es";
 
 export default class ListEntitiesListSearch extends PureComponent {
   static displayName = "List.Entities.List.Count";

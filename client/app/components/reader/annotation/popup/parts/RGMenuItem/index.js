@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 import { MenuItemRadio } from "reakit/Menu";
 import * as Styled from "./styles";
 

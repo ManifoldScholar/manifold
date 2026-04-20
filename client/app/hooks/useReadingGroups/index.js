@@ -2,7 +2,7 @@ import { useContext, useMemo, useEffect, useRef, useCallback } from "react";
 import { ReaderContext } from "app/contexts";
 import useAuthentication from "hooks/useAuthentication";
 import useLoaderEntity from "hooks/useLoaderEntity";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "lodash-es";
 
 const DEFAULT_ANNOTATING_GROUP = "private";
 

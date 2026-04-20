@@ -2,8 +2,7 @@ import { Component } from "react";
 import PropTypes from "prop-types";
 import TagList from "../TagList";
 import { filesize } from "filesize";
-import pickBy from "lodash/pickBy";
-import isNull from "lodash/isNull";
+import { isNull, pickBy } from "lodash-es";
 import Meta from "components/global/meta";
 import * as Styled from "./styles";
 

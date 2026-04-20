@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 import { useLoaderEntity } from "hooks";
 import { ReaderContext } from "app/contexts";
 import TocNode from "./TocNode";

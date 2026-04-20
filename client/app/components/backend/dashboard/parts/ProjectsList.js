@@ -7,9 +7,7 @@ import EntitiesList, {
 import { useFetch, usePaginationState, useAuthentication } from "hooks";
 import { projectsAPI } from "api";
 import Authorization from "helpers/authorization";
-import pickBy from "lodash/pickBy";
-import identity from "lodash/identity";
-import isEqual from "lodash/isEqual";
+import { identity, isEqual, pickBy } from "lodash-es";
 import { useTranslation } from "react-i18next";
 
 const FILTER_PARAMS = [

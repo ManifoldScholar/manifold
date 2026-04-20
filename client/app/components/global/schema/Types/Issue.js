@@ -7,7 +7,7 @@ import {
   renderJournal
 } from "../helpers";
 import BaseSchema from "../BaseSchema";
-import partition from "lodash/partition";
+import { partition } from "lodash-es";
 
 export default function Issue({ issue }) {
   const { attributes, relationships } = issue;

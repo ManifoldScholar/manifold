@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import capitalize from "lodash/capitalize";
+import { capitalize } from "lodash-es";
 import * as Styled from "./styles";
 
 const errorString = error => {

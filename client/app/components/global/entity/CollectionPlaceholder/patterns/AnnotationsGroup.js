@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useRevalidator } from "react-router";
 import { useTranslation } from "react-i18next";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 import { Link } from "react-router";
 import { JoinGroup } from "components/frontend/reading-group/tables/Groups/actions";
 import { useAuthentication } from "hooks";

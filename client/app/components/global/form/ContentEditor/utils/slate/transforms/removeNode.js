@@ -1,7 +1,6 @@
 import { Transforms, Editor, Node, Element } from "slate";
 import { ReactEditor } from "slate-react";
-import has from "lodash/has";
-import isEqual from "lodash/isEqual";
+import { has, isEqual } from "lodash-es";
 import { isEmptyAndChildless } from "../getters";
 
 // This function removes a specific node at any point in the selection hierarchy, not just the lowest one like the other transforms. It is used to handle delete via the html element labels.

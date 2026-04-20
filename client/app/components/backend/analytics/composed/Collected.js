@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Block from "../Block";
 import Figure from "../parts/Figure";
-import round from "lodash/round";
+import { round } from "lodash-es";
 import { withTranslation } from "react-i18next";
 
 class Collected extends Component {

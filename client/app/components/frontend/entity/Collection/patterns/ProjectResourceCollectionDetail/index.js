@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import get from "lodash/get";
+import { get, isEmpty } from "lodash-es";
 import { useTranslation } from "react-i18next";
-import isEmpty from "lodash/isEmpty";
 import ResourceList from "components/frontend/resource-list/List";
 import SlideShow from "components/frontend/resource-list/SlideShow/Fetcher";
 import Description from "components/frontend/resource-collection/Description";

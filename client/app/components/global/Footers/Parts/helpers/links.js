@@ -1,4 +1,4 @@
-import compact from "lodash/compact";
+import { compact } from "lodash-es";
 
 function visiblePages(pages = []) {
   return pages.filter(p => {

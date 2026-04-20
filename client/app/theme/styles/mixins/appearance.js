@@ -1,4 +1,4 @@
-import get from "lodash/get";
+import { get } from "lodash-es";
 import { breakpoints } from "../variables/media";
 import { containerWidth } from "../variables/layout";
 import { respond } from "./common";

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import selectionHelpers from "../helpers/selectionHelpers";
 import { isMathMLNode } from "../helpers/mathHelpers";
-import isString from "lodash/isString";
+import { isString } from "lodash-es";
 
 export default class AnnotatableCaptureClick extends Component {
   static propTypes = {

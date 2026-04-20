@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { serializeToSlate } from "components/global/form/ContentEditor/serializers";
 import { formatHtml } from "components/global/form/ContentEditor/utils/helpers";
-import has from "lodash/has";
+import { has } from "lodash-es";
 import * as Styled from "./styles";
 
 const defaultValue = [

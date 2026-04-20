@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useFetcher } from "react-router";
-import template from "lodash/template";
+import { template } from "lodash-es";
 import classNames from "classnames";
 import { useConfirmation } from "hooks";
 import Dialog from "components/global/dialog";

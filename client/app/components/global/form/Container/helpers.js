@@ -1,10 +1,4 @@
-import forEach from "lodash/forEach";
-import pick from "lodash/pick";
-import isArray from "lodash/isArray";
-import isNil from "lodash/isNil";
-import isPlainObject from "lodash/isPlainObject";
-import isEqual from "lodash/isEqual";
-import flatMapDeep from "lodash/flatMapDeep";
+import { flatMapDeep, forEach, isArray, isEqual, isNil, isPlainObject, pick } from "lodash-es";
 
 // Check if value has an id property (is an entity reference)
 function hasIdentity(value) {

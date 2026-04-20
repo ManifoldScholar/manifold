@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 import classNames from "classnames";
 import Box from "components/global/atomic/Box";
 import Utility from "components/global/utility";

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router";
 import Resource from "components/frontend/resource";
 import IconComputed from "components/global/icon-computed";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 import classNames from "classnames";
 import IconComposer from "components/global/utility/IconComposer";
 import { withTranslation } from "react-i18next";

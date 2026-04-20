@@ -9,10 +9,7 @@ import Count from "./Count";
 import ButtonSet from "./ButtonSet";
 import Entities from "./Entities";
 import SortableEntities from "./SortableEntities";
-import isPlainObject from "lodash/isPlainObject";
-import isFunction from "lodash/isFunction";
-import isBoolean from "lodash/isBoolean";
-import isNil from "lodash/isNil";
+import { isBoolean, isFunction, isNil, isPlainObject } from "lodash-es";
 import * as Styled from "./styles";
 
 const errors = {

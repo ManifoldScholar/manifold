@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useFormField } from "hooks";
 import Base from "./Base";
 import UserAvatar from "./UserAvatar";
-import get from "lodash/get";
+import { get } from "lodash-es";
 
 const UPLOAD_TYPES = {
   images: {

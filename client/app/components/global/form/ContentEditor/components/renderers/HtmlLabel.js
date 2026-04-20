@@ -5,7 +5,7 @@ import { formatNodeLabel } from "../../utils/slate/general";
 import { removeNode } from "../../utils/slate/transforms/removeNode";
 import { unwrapNode } from "../../utils/slate/transforms";
 import IconComposer from "components/global/utility/IconComposer";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash-es";
 import { useSlateStatic, ReactEditor } from "slate-react";
 import { Transforms, Editor } from "slate";
 import { useHtmlBreadcrumbs } from "../../contexts/htmlBreadcrumbsContext";

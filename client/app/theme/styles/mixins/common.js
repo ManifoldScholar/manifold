@@ -1,4 +1,4 @@
-import get from "lodash/get";
+import { get } from "lodash-es";
 import { fluidScaleBase } from "@castiron/style-mixins";
 import { breakpoints } from "../variables/media";
 

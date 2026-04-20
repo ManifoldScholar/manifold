@@ -8,7 +8,7 @@ import Footers from "components/global/Footers";
 import { BreadcrumbsProvider } from "components/global/atomic/Breadcrumbs";
 import Layout from "components/frontend/layout";
 import { useSettings, useBodyClass, useScrollToTop } from "hooks";
-import get from "lodash/get";
+import { get } from "lodash-es";
 import { SearchProvider } from "hooks/useSearch/context";
 import { ErrorBoundary } from "./ErrorBoundary";
 

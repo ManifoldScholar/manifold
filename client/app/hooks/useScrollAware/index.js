@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import throttle from "lodash/throttle";
+import { throttle } from "lodash-es";
 
 export default function useScrollAware({ threshold = 200 } = {}) {
   const [top, setTop] = useState(true);

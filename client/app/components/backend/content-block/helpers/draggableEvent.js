@@ -1,7 +1,5 @@
-import startsWith from "lodash/startsWith";
+import { cloneDeep, startsWith, sumBy } from "lodash-es";
 import resolver from "./resolver";
-import sumBy from "lodash/sumBy";
-import cloneDeep from "lodash/cloneDeep";
 
 export default class DraggableEventHelper {
   static syntheticDraggable = (blockType, opts = {}) => {

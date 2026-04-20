@@ -1,6 +1,6 @@
 import { Transforms, Editor, Range } from "slate";
 import { ReactEditor } from "slate-react";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "lodash-es";
 import { nestableElements } from "../../elements";
 import { isMarkActive, getCommonBlock } from "../getters";
 import { toggleTextBlock } from "./textBlocks";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import GroupItem from "./GroupItem";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash-es";
 import Collapse from "components/global/Collapse";
 import IconComposer from "components/global/utility/IconComposer";
 

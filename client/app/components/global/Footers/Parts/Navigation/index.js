@@ -1,6 +1,5 @@
 import React from "react";
-import chunk from "lodash/chunk";
-import has from "lodash/has";
+import { chunk, has } from "lodash-es";
 import * as Styled from "./styles";
 
 export default function FooterPartNavigation({ children }) {

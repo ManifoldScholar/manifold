@@ -1,7 +1,6 @@
 import { Transforms, Editor, Path, Node } from "slate";
 import { ReactEditor } from "slate-react";
-import isEqual from "lodash/isEqual";
-import has from "lodash/has";
+import { has, isEqual } from "lodash-es";
 import { isEmptyAndChildless } from "../getters";
 
 export const insertOrWrapSpan = (editor, isCollapsed) => {

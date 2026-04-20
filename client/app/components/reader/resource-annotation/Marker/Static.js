@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import IconComposer from "components/global/utility/IconComposer";
-import capitalize from "lodash/capitalize";
+import { capitalize } from "lodash-es";
 import useLoaderCollection from "hooks/useLoaderCollection";
 import * as Styled from "./styles";
 

@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { format as formatDate } from "date-fns/format";
-import { parseISO } from "date-fns/parseISO";
-import { formatDistance } from "date-fns/formatDistance";
-import isDate from "lodash/isDate";
+import { format as formatDate, parseISO, formatDistance } from "date-fns";
+import { isDate } from "lodash-es";
 
 export default function FormattedDate({
   date,

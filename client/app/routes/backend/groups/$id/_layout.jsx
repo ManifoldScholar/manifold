@@ -10,7 +10,7 @@ import Dialog from "components/global/dialog";
 import navigation from "helpers/router/navigation";
 import { useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
-import capitalize from "lodash/capitalize";
+import { capitalize } from "lodash-es";
 
 export const loader = async ({ params, context, request }) => {
   return loadEntity({

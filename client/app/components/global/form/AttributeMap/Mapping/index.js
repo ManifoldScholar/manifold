@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import Attribute from "../Attribute";
-import isNil from "lodash/isNil";
+import { isNil } from "lodash-es";
 import * as Styled from "./styles";
 
 class FormColumnMapMapping extends PureComponent {

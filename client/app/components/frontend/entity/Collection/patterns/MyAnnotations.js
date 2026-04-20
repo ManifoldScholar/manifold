@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import isEmpty from "lodash/isEmpty";
-import get from "lodash/get";
+import { get, isEmpty } from "lodash-es";
 import Annotation from "components/global/Annotation";
 import EntityCollectionPlaceholder from "components/global/entity/CollectionPlaceholder";
 import EntityCollection from "../EntityCollection";

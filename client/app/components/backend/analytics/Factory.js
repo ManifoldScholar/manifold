@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import ComposedAnalytics from "./composed";
-import isString from "lodash/isString";
-import isArray from "lodash/isArray";
+import { isArray, isString } from "lodash-es";
 
 function Factory({
   view,

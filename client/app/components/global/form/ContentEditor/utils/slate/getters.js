@@ -1,6 +1,6 @@
 import { Editor, Node, Element } from "slate";
 import { ReactEditor } from "slate-react";
-import has from "lodash/has";
+import { has } from "lodash-es";
 import { formatNodeLabel } from "./general";
 
 export const getListItemNode = (editor, path) =>

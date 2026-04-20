@@ -8,7 +8,7 @@ import HeadContent from "components/global/HeadContent";
 import MyAnnotationsEntityCollection from "components/frontend/entity/Collection/patterns/MyAnnotations";
 import CollectionNavigation from "components/frontend/CollectionNavigation";
 import { useListFilters, useListSearchParams } from "hooks";
-import intersection from "lodash/intersection";
+import { intersection } from "lodash-es";
 
 const INIT_FILTER_STATE = {
   formats: ["highlight", "annotation"],

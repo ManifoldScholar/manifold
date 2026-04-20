@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Icons from "components/global/icon";
 import UniqueIcons from "components/global/icon/unique";
-import endsWith from "lodash/endsWith";
+import { endsWith } from "lodash-es";
 import humps from "utils/humps";
 import MissingIcon from "./MissingIcon";
 

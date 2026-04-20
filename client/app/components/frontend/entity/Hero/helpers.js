@@ -1,4 +1,4 @@
-import orderBy from "lodash/orderBy";
+import { orderBy } from "lodash-es";
 
 export const getAuth = (entity, authorization) => {
   const showErrors = authorization.current.authorizeAbility({

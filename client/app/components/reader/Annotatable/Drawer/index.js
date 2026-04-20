@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Drawer from "components/global/drawer";
 import Drawers from "./types";
-import upperFirst from "lodash/upperFirst";
+import { upperFirst } from "lodash-es";
 
 export default function AnnotatableDrawer(props) {
   const { t } = useTranslation();

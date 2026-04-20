@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import startsWith from "lodash/startsWith";
+import { startsWith } from "lodash-es";
 import classNames from "classnames";
 import IconComposer from "components/global/utility/IconComposer";
 import { withTranslation } from "react-i18next";

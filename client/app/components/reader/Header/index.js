@@ -11,7 +11,7 @@ import UserMenuButton from "components/global/UserMenuButton";
 import UIPanel from "components/global/UIPanel";
 import Layout from "components/reader/layout";
 import classNames from "classnames";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 import Utility from "components/global/utility";
 import DisclosureNavigationMenu from "components/global/atomic/DisclosureNavigationMenu";
 import Authorize from "components/hoc/Authorize";

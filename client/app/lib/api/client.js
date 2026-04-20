@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-import isPlainObject from "lodash/isPlainObject";
-import has from "lodash/has";
+import { has, isPlainObject } from "lodash-es";
 import LowLevelApiClient from "./LowLevelApiClient";
 import denormalize from "api/denormalize";
 

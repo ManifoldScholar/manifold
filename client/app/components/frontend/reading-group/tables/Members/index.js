@@ -9,7 +9,7 @@ import InlineValue from "components/global/table/InlineValue";
 import IconComposer from "components/global/utility/IconComposer";
 import NoteStyle from "./NoteStyle";
 import { RemoveMember, EditMember } from "./actions";
-import get from "lodash/get";
+import { get } from "lodash-es";
 import classNames from "classnames";
 import Authorization from "helpers/authorization";
 

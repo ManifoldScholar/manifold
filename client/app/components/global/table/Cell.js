@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Utility from "components/global/utility";
 import { TableHeaderContext } from "contexts";
-import isNil from "lodash/isNil";
+import { isNil } from "lodash-es";
 
 export default class TableCell extends React.PureComponent {
   static propTypes = {

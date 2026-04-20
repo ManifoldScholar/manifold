@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import TextList from "components/frontend/text-list/List";
-import pick from "lodash/pick";
+import { pick } from "lodash-es";
 
 export default class ProjectContentBlockTextsBlock extends PureComponent {
   static displayName = "Project.Content.Block.Texts";

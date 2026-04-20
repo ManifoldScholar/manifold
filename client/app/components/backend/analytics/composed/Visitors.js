@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Block from "../Block";
 import Chart from "../parts/Chart";
 import { withTranslation } from "react-i18next";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "lodash-es";
 
 class Visitors extends Component {
   static displayName = "Analytics.Composed.Visitors";

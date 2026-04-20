@@ -1,8 +1,7 @@
 import { useContext, useCallback, useMemo } from "react";
 import { FormContext } from "contexts";
 import { brackets2dots } from "utils/string";
-import get from "lodash/get";
-import has from "lodash/has";
+import { get, has } from "lodash-es";
 
 /**
  * Hook for connecting a form input to the Form container.

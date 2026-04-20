@@ -1,8 +1,4 @@
-import flatMapDepth from "lodash/flatMapDepth";
-import identity from "lodash/identity";
-import has from "lodash/has";
-import get from "lodash/get";
-import isEmpty from "lodash/isEmpty";
+import { flatMapDepth, get, has, identity, isEmpty } from "lodash-es";
 
 export function getEntityCollection(entity, relationship = "collection") {
   const result = get(entity, `relationships.${relationship}`);

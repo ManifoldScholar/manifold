@@ -6,7 +6,7 @@ import { MenuButton as ReakitMenuButton, useMenuState } from "reakit/Menu";
 import AlignmentSubmenu from "./Submenu";
 import { getCommonBlock } from "../../../../utils/slate/getters";
 import { getActiveAlignment } from "./helpers";
-import capitalize from "lodash/capitalize";
+import { capitalize } from "lodash-es";
 import * as SharedStyled from "../styles";
 import * as Styled from "./styles";
 

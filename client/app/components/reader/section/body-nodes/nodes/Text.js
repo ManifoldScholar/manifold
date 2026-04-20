@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
-import values from "lodash/values";
-import union from "lodash/union";
+import { isEmpty, union, values } from "lodash-es";
 import ResourceAnnotationFactory from "components/reader/resource-annotation";
 import smoothScroll from "utils/smoothScroll";
 import { withTranslation } from "react-i18next";

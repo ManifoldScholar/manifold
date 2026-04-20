@@ -3,7 +3,7 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { HelmetProvider } from "react-helmet-async";
 import { Global as GlobalStyles } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
-import get from "lodash/get";
+import { get } from "lodash-es";
 import Analytics from "contexts/Analytics";
 import Utility from "components/global/utility";
 import LoadingBar from "components/global/LoadingBar";

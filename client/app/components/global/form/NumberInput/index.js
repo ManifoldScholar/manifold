@@ -1,7 +1,6 @@
 import { useId } from "react";
 import PropTypes from "prop-types";
-import isNull from "lodash/isNull";
-import isUndefined from "lodash/isUndefined";
+import { isNull, isUndefined } from "lodash-es";
 import * as Styled from "./styles";
 
 export default function FormNumberInput({

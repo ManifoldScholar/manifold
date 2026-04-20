@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import PageHeader from "components/backend/layout/PageHeader";
-import isNil from "lodash/isNil";
+import { isNil } from "lodash-es";
 
 export default class ListEntitiesListBarTitle extends PureComponent {
   static displayName = "List.Entities.List.BarTitle";

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
-import get from "lodash/get";
+import { get, isEmpty } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import Event from "components/frontend/event";
 import EntityCollection from "../EntityCollection";

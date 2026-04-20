@@ -5,7 +5,7 @@ import {
   formatLocalAnnotations
 } from "../../helpers/annotation";
 import { useTranslation } from "react-i18next";
-import values from "lodash/values";
+import { values } from "lodash-es";
 import { useErrorHandler } from "react-error-boundary";
 
 const createNode = (n, index, baseId) => {

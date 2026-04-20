@@ -7,7 +7,7 @@ import React, {
   useRef
 } from "react";
 import { bulkActionsReducer } from "./reducer";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "lodash-es";
 import { useLocation } from "react-router";
 import queryString from "query-string";
 

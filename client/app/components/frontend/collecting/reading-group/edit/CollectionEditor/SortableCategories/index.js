@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "lodash-es";
 import useSortableCategories from "./useSortableCategories";
 import useAccessibleSort from "./useAccessibleSort";
 import Uncategorized from "./Uncategorized";

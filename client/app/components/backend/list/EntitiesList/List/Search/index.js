@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Utility from "components/global/utility";
 import Collapse from "components/global/Collapse";
 import classNames from "classnames";
-import isPlainObject from "lodash/isPlainObject";
+import { isPlainObject } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 

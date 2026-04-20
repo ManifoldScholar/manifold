@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import Utility from "components/global/utility";
-import isNil from "lodash/isNil";
+import { isNil } from "lodash-es";
 import { Link } from "react-router";
 
 export default class ListEntitiesListTextTitle extends PureComponent {

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import get from "lodash/get";
+import { get } from "lodash-es";
 import { camelize } from "utils/humps";
 
 export { default as openPopup } from "./popup";

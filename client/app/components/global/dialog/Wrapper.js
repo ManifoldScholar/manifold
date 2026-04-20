@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import classnames from "classnames";
 import { FocusTrap } from "focus-trap-react";
-import isString from "lodash/isString";
+import { isString } from "lodash-es";
 import IconComposer from "components/global/utility/IconComposer";
 import { useBodyClass } from "hooks";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import Utility from "components/global/utility";
-import has from "lodash/has";
+import { has } from "lodash-es";
 import classNames from "classnames";
 
 export default function FooterPartsNavigationLink({

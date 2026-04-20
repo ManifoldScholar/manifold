@@ -5,7 +5,7 @@ import {
   nestableElements,
   rteVoids
 } from "../utils/elements";
-import has from "lodash/has";
+import { has } from "lodash-es";
 
 const isHtmlVideo = element => {
   const { htmlAttrs, children } = element ?? {};

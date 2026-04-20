@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import InputError from "../InputError";
 import { brackets2dots } from "utils/string";
-import has from "lodash/has";
+import { has } from "lodash-es";
 import FieldWrapper from "../FieldWrapper";
 
 const pointerFor = name => {

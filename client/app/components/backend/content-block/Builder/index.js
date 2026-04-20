@@ -11,7 +11,7 @@ import withConfirmation from "components/hoc/withConfirmation";
 import ClientOnly from "components/global/utility/ClientOnly";
 
 import configHelper from "../helpers/configurations";
-import cloneDeep from "lodash/cloneDeep";
+import { cloneDeep } from "lodash-es";
 import { useApiCallback } from "hooks";
 
 const cloneBlocks = contentBlocks => {

@@ -3,11 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useFetcher } from "react-router";
 import { useApiCallback, useAuthentication, useConfirmation } from "hooks";
 import { readingGroupsAPI } from "api";
-import template from "lodash/template";
+import { has, template } from "lodash-es";
 import Dialog from "components/global/dialog";
 import ActionBox from "components/frontend/reading-group/ActionBox";
 import queryString from "query-string";
-import has from "lodash/has";
 import * as Styled from "./styles";
 
 function JoinBox({ readingGroup }) {

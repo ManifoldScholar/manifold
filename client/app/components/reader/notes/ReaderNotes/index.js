@@ -2,8 +2,7 @@ import { cloneElement, useMemo, useContext } from "react";
 import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router";
 import { readingGroupsAPI, meAPI } from "api";
-import groupBy from "lodash/groupBy";
-import isString from "lodash/isString";
+import { groupBy, isString } from "lodash-es";
 import {
   useFetch,
   useFilterState,

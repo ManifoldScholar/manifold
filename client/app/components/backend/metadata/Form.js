@@ -4,10 +4,7 @@ import { useTranslation } from "react-i18next";
 import FormContainer from "components/global/form/Container";
 import Form from "components/global/form";
 import humps from "utils/humps";
-import intersection from "lodash/intersection";
-import reduce from "lodash/reduce";
-import concat from "lodash/concat";
-import difference from "lodash/difference";
+import { concat, difference, intersection, reduce } from "lodash-es";
 
 export default function MetadataForm({ model, ...restProps }) {
   const { t } = useTranslation();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import get from "lodash/get";
+import { get } from "lodash-es";
 import CookieHelper from "helpers/cookie/Browser";
 import ch from "helpers/consoleHelpers";
 import { v1 as uuidv1 } from "uuid";

@@ -1,6 +1,6 @@
 import { Children, cloneElement } from "react";
 import PropTypes from "prop-types";
-import isString from "lodash/isString";
+import { isString } from "lodash-es";
 import { useId } from "react";
 import SectionLabel from "../SectionLabel";
 import Instructions from "../Instructions";

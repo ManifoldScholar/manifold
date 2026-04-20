@@ -22,7 +22,7 @@ import { getAncestors } from "../../utils/slate/getters";
 import { useHtmlBreadcrumbs } from "../../contexts/htmlBreadcrumbsContext";
 import { rteElements, inlineNodes } from "../../utils/elements";
 import IconComposer from "components/global/utility/IconComposer";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 import * as Styled from "./styles";
 
 export default function ToolbarRTE({ onClickUndo, onClickRedo, darkMode }) {

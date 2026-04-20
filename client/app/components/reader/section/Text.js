@@ -7,7 +7,7 @@ import Annotatable from "components/reader/Annotatable";
 import lh from "helpers/location";
 import filterAnnotations from "./helpers/filter-annotations";
 import { useHtmlClass } from "hooks";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "lodash-es";
 import { ReaderContext } from "app/contexts";
 
 export default function Text({ text, section, annotations }) {

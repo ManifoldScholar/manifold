@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 import { useTranslation, Trans } from "react-i18next";
 import EntityCollectionPlaceholder from "components/global/entity/CollectionPlaceholder";
 import {

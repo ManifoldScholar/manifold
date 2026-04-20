@@ -1,4 +1,4 @@
-import capitalize from "lodash/capitalize";
+import { capitalize } from "lodash-es";
 
 export const FILTER_PARAMS = [
   { label: "Search...", name: "keyword", value: "" },

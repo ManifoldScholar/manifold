@@ -6,8 +6,7 @@ import EntitiesList, {
 } from "components/backend/list/EntitiesList";
 import { useFetch, usePaginationState } from "hooks";
 import { journalsAPI } from "api";
-import pickBy from "lodash/pickBy";
-import identity from "lodash/identity";
+import { identity, pickBy } from "lodash-es";
 import { useTranslation } from "react-i18next";
 
 const FILTER_PARAMS = [

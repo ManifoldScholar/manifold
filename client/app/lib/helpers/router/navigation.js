@@ -1,4 +1,4 @@
-import memoize from "lodash/memoize";
+import { memoize } from "lodash-es";
 
 // Labels reference i18n keys in /shared/page-titles.json.
 

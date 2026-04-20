@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import isNil from "lodash/isNil";
+import { isNil } from "lodash-es";
 import IconComposer from "components/global/utility/IconComposer";
 
 export default class InlineValue extends React.PureComponent {

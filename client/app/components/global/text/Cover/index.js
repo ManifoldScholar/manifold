@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import get from "lodash/get";
+import { get } from "lodash-es";
 import Utility from "components/global/utility";
 import * as Styled from "./styles";
 

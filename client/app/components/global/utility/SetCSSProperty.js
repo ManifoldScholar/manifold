@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash-es";
 
 export default class SetCSSProperty extends PureComponent {
   static propTypes = {

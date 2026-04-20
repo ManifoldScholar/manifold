@@ -5,7 +5,7 @@ import classNames from "classnames";
 import Current from "./in-list/Current";
 import Available from "./in-list/Available";
 import typeResolver from "../../helpers/resolver";
-import isFunction from "lodash/isFunction";
+import { isFunction } from "lodash-es";
 
 export default class ProjectContentBlock extends PureComponent {
   static displayName = "Project.Content.Blocks.Block";

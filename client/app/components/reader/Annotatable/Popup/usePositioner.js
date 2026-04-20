@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import throttle from "lodash/throttle";
+import { throttle } from "lodash-es";
 
 function combineBoundingRects(firstEl, secondEl) {
   const rect1 = firstEl.getBoundingClientRect();

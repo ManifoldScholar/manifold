@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Dropzone from "react-dropzone";
 import Errorable from "../../Errorable";
-import isString from "lodash/isString";
+import { isString } from "lodash-es";
 import Instructions from "../../Instructions";
 import Empty from "../Empty";
 import Preview from "../Preview";

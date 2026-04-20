@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import PropTypes from "prop-types";
-import isPlainObject from "lodash/isPlainObject";
+import { isPlainObject } from "lodash-es";
 import { Navigate, useLocation } from "react-router";
 import Authorization from "helpers/authorization";
 import FatalErrorRender from "components/global/FatalError";

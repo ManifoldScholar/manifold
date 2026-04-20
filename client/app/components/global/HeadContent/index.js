@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet-async";
 import Utility from "../utility";
-import unescape from "lodash/unescape";
-import get from "lodash/get";
+import { get, unescape } from "lodash-es";
 import { useSettings } from "hooks";
 
 const addMeta = (meta, key, value, overrideKey = null) => {

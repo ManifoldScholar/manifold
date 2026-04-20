@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router";
-import groupBy from "lodash/groupBy";
-import isEqual from "lodash/isEqual";
+import { groupBy, isEqual } from "lodash-es";
 import { meAPI, readingGroupsAPI } from "api";
 import Overlay from "components/global/Overlay";
 import {

@@ -71,8 +71,15 @@ export default defineConfig(({ isSsrBuild }) => ({
     }
   },
   optimizeDeps: {
-    entries: ["app/routes/*.{js}", "app/components*.{js}"],
-    include: ["@emotion/react", "@emotion/styled"],
+    entries: ["app/**/*.{js,jsx}"],
+    include: [
+      "@emotion/react",
+      "@emotion/styled",
+      "@emotion/styled/base",
+      "lodash-es",
+      "date-fns",
+      "date-fns/locale/en-US"
+    ],
     esbuildOptions: {
       loader: {
         ".js": "jsx"
@@ -80,7 +87,6 @@ export default defineConfig(({ isSsrBuild }) => ({
     }
   },
   ssr: {
-    external: ["lodash"],
     noExternal: isSsrBuild ? true : undefined
   },
   server: {

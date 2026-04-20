@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useState, useRef, useId } from "react";
 import { queryApi } from "api";
 import ch from "helpers/consoleHelpers";
-import isFunction from "lodash/isFunction";
+import { isFunction } from "lodash-es";
 
 function log(type, key) {
   if (import.meta.env.DEV) {

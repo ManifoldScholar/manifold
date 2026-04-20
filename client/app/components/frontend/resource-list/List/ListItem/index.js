@@ -1,4 +1,4 @@
-import capitalize from "lodash/capitalize";
+import { capitalize } from "lodash-es";
 import { useTranslation } from "react-i18next";
 import FormattedDate from "components/global/FormattedDate";
 import Badge from "components/frontend/resource/Badge";

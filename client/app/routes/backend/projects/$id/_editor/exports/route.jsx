@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useFetcher, useOutletContext, useRevalidator } from "react-router";
-import isArray from "lodash/isArray";
+import { isArray } from "lodash-es";
 import { projectsAPI, exportTargetsAPI, projectExportationsAPI } from "api";
 import loadList from "app/routes/utility/loaders/loadList";
 import formAction from "app/routes/utility/helpers/formAction";

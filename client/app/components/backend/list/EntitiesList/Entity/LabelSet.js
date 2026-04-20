@@ -1,8 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import isString from "lodash/isString";
-import isPlainObject from "lodash/isPlainObject";
-import has from "lodash/has";
+import { has, isPlainObject, isString } from "lodash-es";
 import classNames from "classnames";
 
 export default class LabelSet extends PureComponent {

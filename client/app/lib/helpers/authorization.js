@@ -1,7 +1,4 @@
-import isArray from "lodash/isArray";
-import isPlainObject from "lodash/isPlainObject";
-import isString from "lodash/isString";
-import get from "lodash/get";
+import { get, isArray, isPlainObject, isString } from "lodash-es";
 
 class Authorization {
   isAuthenticated(options) {

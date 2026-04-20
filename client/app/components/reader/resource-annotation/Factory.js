@@ -1,4 +1,4 @@
-import partition from "lodash/partition";
+import { partition } from "lodash-es";
 import { useLoaderEntity } from "hooks";
 import ResourceBlock from "./Block";
 import ResourceMarker from "./Marker";

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { Trans, withTranslation } from "react-i18next";
-import isString from "lodash/isString";
+import { isString } from "lodash-es";
 import { Prompt } from "../Base/styles";
 import * as Styled from "./styles";
 

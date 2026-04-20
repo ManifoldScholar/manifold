@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 import List, * as EntitiesList from "components/backend/list/EntitiesList";
 import Utility from "components/global/utility";
-import has from "lodash/has";
-import isFunction from "lodash/isFunction";
+import { has, isFunction } from "lodash-es";
 import { Link } from "react-router";
 
 export default class PickerListComponent extends PureComponent {

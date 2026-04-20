@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import get from "lodash/get";
+import { get } from "lodash-es";
 import EntityThumbnail from "components/global/atomic/EntityThumbnail";
 import ThumbnailGrid from "components/global/entity/ThumbnailGrid";
 import EntityCollection from "../EntityCollection";

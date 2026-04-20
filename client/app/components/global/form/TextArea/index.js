@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useFormField } from "hooks";
 import { FormContext } from "contexts";
 import Errorable from "../Errorable";
-import isString from "lodash/isString";
+import { isString } from "lodash-es";
 import Instructions from "../Instructions";
 import BaseLabel from "../BaseLabel";
 import * as Styled from "./styles";

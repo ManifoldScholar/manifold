@@ -1,5 +1,5 @@
 import { isValidElement } from "react";
-import has from "lodash/has";
+import { has } from "lodash-es";
 
 const htmlRegex = /(<([^>]+)>)|(&#)|(&[a-z]*;)/gi;
 

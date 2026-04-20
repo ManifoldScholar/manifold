@@ -1,5 +1,5 @@
 import React from "react";
-import isString from "lodash/isString";
+import { isString } from "lodash-es";
 import IconComposer from "components/global/utility/IconComposer";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";

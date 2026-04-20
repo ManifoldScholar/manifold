@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 import Meta from "components/global/meta";
 
 export default class ProjectContentBlockMetadataBlock extends PureComponent {

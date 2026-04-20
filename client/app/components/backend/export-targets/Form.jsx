@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import camelCase from "lodash/camelCase";
+import { camelCase } from "lodash-es";
 import Form from "components/global/form";
 import FormContainer from "components/global/form/Container";
 

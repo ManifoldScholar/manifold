@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import get from "lodash/get";
+import { get } from "lodash-es";
 import classNames from "classnames";
 import IconComposer from "components/global/utility/IconComposer";
 import Tag from "components/global/Annotation/Tag";

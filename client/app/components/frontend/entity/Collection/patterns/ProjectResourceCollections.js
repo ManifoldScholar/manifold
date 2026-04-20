@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import get from "lodash/get";
-import isEmpty from "lodash/isEmpty";
+import { get, isEmpty } from "lodash-es";
 import ResourceCollectionListGrid from "components/frontend/resource-collection-list/Grid";
 import EntityCollection from "../EntityCollection";
 import * as shapes from "../shapes";

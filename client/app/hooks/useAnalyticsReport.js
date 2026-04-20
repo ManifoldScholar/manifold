@@ -1,12 +1,7 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { useApiCallback } from "hooks";
 import { statisticsAPI, analyticReportsAPI } from "api";
-import { subDays } from "date-fns/subDays";
-import { intervalToDuration } from "date-fns/intervalToDuration";
-import { formatDuration } from "date-fns/formatDuration";
-import { startOfDay } from "date-fns/startOfDay";
-import { endOfDay } from "date-fns/endOfDay";
-import { sub } from "date-fns/sub";
+import { subDays, intervalToDuration, formatDuration, startOfDay, endOfDay, sub } from "date-fns";
 
 const defaultAnalyticsEnd = () => new Date();
 const defaultAnalyticsStart = () => subDays(defaultAnalyticsEnd(), 30);

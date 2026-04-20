@@ -6786,7 +6786,7 @@ __metadata:
     i18next: "npm:^25.3.2"
     js-beautify: "npm:^1.15.4"
     js-cookie: "npm:^3.0.5"
-    lodash: "npm:^4.17.21"
+    lodash-es: "npm:^4.17.21"
     mammoth: "npm:^1.9.1"
     node-emoji: "npm:^2.2.0"
     path-browserify: "npm:^1.0.1"

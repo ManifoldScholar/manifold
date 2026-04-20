@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import truncate from "lodash/truncate";
+import { truncate } from "lodash-es";
 import classNames from "classnames";
 import IconComposer from "components/global/utility/IconComposer";
 

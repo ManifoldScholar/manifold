@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import capitalize from "lodash/capitalize";
+import { capitalize, has } from "lodash-es";
 import classNames from "classnames";
-import has from "lodash/has";
 import IconComposer from "components/global/utility/IconComposer";
 import { useTranslation } from "react-i18next";
 import { useAuthentication, useReadingGroups, useLoaderEntity } from "hooks";

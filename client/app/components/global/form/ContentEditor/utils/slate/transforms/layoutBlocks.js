@@ -1,7 +1,7 @@
 import { Transforms, Node } from "slate";
 import { ReactEditor } from "slate-react";
 import { rteElements } from "../../elements";
-import has from "lodash/has";
+import { has } from "lodash-es";
 
 export const wrapLayoutBlock = ({
   editor,

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import partition from "lodash/partition";
+import { partition } from "lodash-es";
 import Callout from "./Callout/index";
 import * as Styled from "./styles";
 

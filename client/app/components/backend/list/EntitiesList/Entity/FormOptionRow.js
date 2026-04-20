@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import EntityRow from "./Row";
-import isObject from "lodash/isObject";
-import isString from "lodash/isString";
+import { isObject, isString } from "lodash-es";
 
 export default class FormOptionRow extends PureComponent {
   static displayName = "EntitiesList.Entity.FormOptions";

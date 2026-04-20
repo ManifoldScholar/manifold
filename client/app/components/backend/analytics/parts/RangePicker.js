@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useId } from "react";
 import PropTypes from "prop-types";
-import { isBefore } from "date-fns/isBefore";
-import { addDays } from "date-fns/addDays";
-import { subDays } from "date-fns/subDays";
-import { startOfWeek } from "date-fns/startOfWeek";
-import { endOfWeek } from "date-fns/endOfWeek";
-import { subWeeks } from "date-fns/subWeeks";
-import { startOfMonth } from "date-fns/startOfMonth";
-import { endOfMonth } from "date-fns/endOfMonth";
-import { subMonths } from "date-fns/subMonths";
+import { isBefore, addDays, subDays, startOfWeek, endOfWeek, subWeeks, startOfMonth, endOfMonth, subMonths } from "date-fns";
 import DatePicker from "components/global/form/DatePicker/PickerComponent";
 
 import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";

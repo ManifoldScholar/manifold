@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { renderOffer, renderSeries, renderNamesList } from "../helpers";
 import BaseSchema from "../BaseSchema";
-import partition from "lodash/partition";
+import { partition } from "lodash-es";
 
 export default class Project extends PureComponent {
   static displayName = "Schema.Project";

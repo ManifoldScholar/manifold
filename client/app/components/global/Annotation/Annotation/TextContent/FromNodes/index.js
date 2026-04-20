@@ -5,7 +5,7 @@ import { maybeTruncateChildren } from "./helpers";
 import blacklist from "./elementBlacklist";
 import { useLoaderEntity, useReadingGroups } from "hooks";
 import { nl2br } from "utils/string";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 
 function AnnotationWithNodes({
   annotation,

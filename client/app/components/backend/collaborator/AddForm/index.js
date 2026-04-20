@@ -6,7 +6,7 @@ import InputError from "components/global/form/InputError";
 import { useTranslation, Trans } from "react-i18next";
 import { makersAPI, collaboratorsAPI } from "api";
 import { useApiCallback } from "hooks";
-import capitalize from "lodash/capitalize";
+import { capitalize } from "lodash-es";
 import * as Styled from "./styles";
 
 export default function AddCollaboratorForm({

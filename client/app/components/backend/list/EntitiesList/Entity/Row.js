@@ -1,10 +1,7 @@
 import { useRef, useId } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import isArray from "lodash/isArray";
-import isString from "lodash/isString";
-import isEmpty from "lodash/isEmpty";
-import isFunction from "lodash/isFunction";
+import { isArray, isEmpty, isFunction, isString } from "lodash-es";
 import LabelSet from "./LabelSet";
 import { Link } from "react-router";
 import Utility from "components/global/utility";

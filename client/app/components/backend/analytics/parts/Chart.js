@@ -1,8 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
-import cloneDeep from "lodash/cloneDeep";
-import merge from "lodash/merge";
-import { isDate } from "date-fns/isDate";
+import { cloneDeep, merge } from "lodash-es";
+import { isDate } from "date-fns";
 import { useTranslation } from "react-i18next";
 import chartOptions from "./chartOptions";
 

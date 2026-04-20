@@ -1,7 +1,4 @@
-import has from "lodash/has";
-import get from "lodash/get";
-import isString from "lodash/isString";
-import startsWith from "lodash/startsWith";
+import { get, has, isString, startsWith } from "lodash-es";
 
 class LocationHelper {
   equals(location, anotherLocation) {

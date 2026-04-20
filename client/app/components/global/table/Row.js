@@ -4,8 +4,7 @@ import classNames from "classnames";
 import { useNavigate } from "react-router";
 import { TableHeaderContext } from "contexts";
 import Cell from "./Cell";
-import isFunction from "lodash/isFunction";
-import isPlainObject from "lodash/isPlainObject";
+import { isFunction, isPlainObject } from "lodash-es";
 
 export default function TableRow({ linkCreator, model, children }) {
   const navigate = useNavigate();

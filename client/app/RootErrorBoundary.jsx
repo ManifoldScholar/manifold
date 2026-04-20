@@ -8,7 +8,7 @@ import {
 import { useMemo, useLayoutEffect } from "react";
 import { CacheProvider } from "@emotion/react";
 import styles from "theme/styles/globalStyles";
-import get from "lodash/get";
+import { get } from "lodash-es";
 import formatError from "app/routes/utility/helpers/formatError";
 import FatalError from "components/global/FatalError";
 import { createEmotionCache } from "utils/react-router/emotion-stream";

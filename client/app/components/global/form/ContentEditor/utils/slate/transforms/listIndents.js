@@ -4,7 +4,7 @@ import { getListNode, getListItemNode } from "../getters";
 import { setSelectionAtPoint } from "../general";
 import { unwrapNode } from "./shared";
 import { rteElements } from "../../elements";
-import has from "lodash/has";
+import { has } from "lodash-es";
 
 const getTextLocation = (editor, iterator, path, str = "") => {
   const { value } = iterator.next();

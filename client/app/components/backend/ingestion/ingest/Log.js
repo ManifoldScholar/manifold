@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import Utility from "components/global/utility";
 import { useTranslation } from "react-i18next";
-import throttle from "lodash/throttle";
+import { throttle } from "lodash-es";
 
 export default function Log({ log, onReset, canReset }) {
   const { t } = useTranslation();

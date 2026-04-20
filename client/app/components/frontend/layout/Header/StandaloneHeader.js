@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import get from "lodash/get";
+import { get, throttle } from "lodash-es";
 import Navigation from "components/global/navigation";
 import HeaderNotifications from "components/global/HeaderNotifications";
-import throttle from "lodash/throttle";
 import { Link } from "react-router";
 import SetCSSProperty from "components/global/utility/SetCSSProperty";
 import { useSettings, useFrontendMode } from "hooks";

@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useFormField } from "hooks";
 import Errorable from "components/global/form/Errorable";
 import PickerComponent from "./PickerComponent";
-import isDate from "lodash/isDate";
-import { format } from "date-fns/format";
+import { isDate } from "lodash-es";
+import { format } from "date-fns";
 import Instructions from "../Instructions";
 import withScreenReaderStatus from "components/hoc/withScreenReaderStatus";
 

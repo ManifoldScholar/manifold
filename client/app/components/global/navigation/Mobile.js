@@ -4,7 +4,7 @@ import { useLocation, NavLink } from "react-router";
 import classnames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useShowJournalsActive, useFrontendMode } from "hooks";
-import memoize from "lodash/memoize";
+import { memoize } from "lodash-es";
 import UserLinks from "./mobile-components/UserLinks";
 import MobileSearch from "./mobile-components/Search";
 import MobileBreadcrumb from "./mobile-components/Breadcrumb";

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import SetCSSProperty from "components/global/utility/SetCSSProperty";
 import { useFrontendMode, useSettings } from "hooks";
-import get from "lodash/get";
+import { get } from "lodash-es";
 
 const WHITE = "#ffffff";
 const BLACK = "#2e2e2e";

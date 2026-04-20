@@ -1,7 +1,7 @@
 import { Document, Element, Text } from "domhandler";
 import serializer from "dom-serializer";
 import { Text as SlateText } from "slate";
-import isEmpty from "lodash/isEmpty";
+import { isEmpty } from "lodash-es";
 
 import { isOnlyFormat, nestMarkElements, replaceLineBreaks } from "./utils";
 

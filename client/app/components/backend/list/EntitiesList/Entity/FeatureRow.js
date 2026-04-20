@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import FormattedDate from "components/global/FormattedDate";
 
-import truncate from "lodash/truncate";
+import { truncate } from "lodash-es";
 import EntityRow from "./Row";
 import EntityThumbnail from "components/global/entity-thumbnail";
 import Utility from "components/global/utility";

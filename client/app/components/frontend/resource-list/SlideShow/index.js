@@ -1,6 +1,6 @@
 import { PureComponent, createRef } from "react";
 import PropTypes from "prop-types";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash-es";
 import ResourceMediaFactory from "components/frontend/resource/media/Factory";
 import SlidePlaceholder from "./SlidePlaceholder";
 import Footer from "./Footer";

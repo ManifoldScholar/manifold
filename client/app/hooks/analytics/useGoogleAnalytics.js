@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import get from "lodash/get";
+import { get } from "lodash-es";
 import ReactGA from "react-ga4";
 import ch from "helpers/consoleHelpers";
 import { useAuthentication } from "hooks";

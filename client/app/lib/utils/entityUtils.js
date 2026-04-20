@@ -1,9 +1,4 @@
-import get from "lodash/get";
-import isObject from "lodash/isObject";
-import isString from "lodash/isString";
-import has from "lodash/has";
-import setWith from "lodash/setWith";
-import memoize from "lodash/memoize";
+import { get, has, isObject, isString, memoize, setWith } from "lodash-es";
 
 function hydrateEntity({ id, type }, entities, hydrationMap = {}) {
   const entityPath = `${type}.${id}`;

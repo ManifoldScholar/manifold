@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import isNull from "lodash/isNull";
+import { isNull } from "lodash-es";
 import { useFormField } from "hooks";
 
 export default function FormHiddenInput({ name }) {

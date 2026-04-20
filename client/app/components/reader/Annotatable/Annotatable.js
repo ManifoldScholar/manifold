@@ -9,7 +9,7 @@ import CaptureSelection from "./handlers/CaptureSelection";
 import CaptureClick from "./handlers/CaptureClick";
 import selectionHelpers from "./helpers/selectionHelpers";
 import locationHelper from "helpers/location";
-import isEqual from "lodash/isEqual";
+import { isEqual } from "lodash-es";
 
 export class Annotatable extends Component {
   static contextType = SignInUpOverlayContext;

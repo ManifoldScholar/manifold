@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { Trans } from "react-i18next";
-import has from "lodash/has";
+import { has } from "lodash-es";
 
 export function generateError(key, block) {
   const type = block.attributes.type;

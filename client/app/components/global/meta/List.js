@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import isEmpty from "lodash/isEmpty";
+import { endsWith, isEmpty } from "lodash-es";
 import DOI from "components/global/meta/DOI";
 import Item from "components/global/meta/Item";
-import endsWith from "lodash/endsWith";
 import FormattedDate from "components/global/FormattedDate";
 import * as Styled from "./styles";
 
