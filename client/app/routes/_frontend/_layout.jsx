@@ -12,7 +12,7 @@ import get from "lodash/get";
 import { SearchProvider } from "hooks/useSearch/context";
 import { ErrorBoundary } from "./ErrorBoundary";
 
-export const shouldRevalidate = false;
+export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
 
 const SUBJECT_FILTERS = { used: true };
 const JOURNAL_SUBJECT_FILTERS = { usedJournal: true };
