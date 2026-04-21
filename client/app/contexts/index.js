@@ -42,3 +42,8 @@ export { default as TableHeaderContext } from "./TableHeaderContext";
 export { default as BackLinkContext } from "./BackLinkContext";
 export { default as DrawerContext } from "./DrawerContext";
 export { default as CollapseContext } from "./CollapseContext";
+export {
+  default as SelectionContext,
+  SelectionProvider,
+  useSelection
+} from "./SelectionContext";

@@ -1,0 +1,88 @@
+{
+  "lti": {
+    "home": "$t(actions.add) $t(app.manifold) Links",
+    "setup": {
+      "title": "Before you begin...",
+      "description": "You'll need to decide whether to setup a $t(app.manifold) reading group for this course. If you choose a reading group, $t(app.manifold) can automatically add permissions for students in the course to view any protected resources that you link. You can also use $t(app.manifold) reading group features, like annotation, for the course. If you're only using $t(app.manifold) for source materials and would prefer not to have a course group visible in $t(app.manifold), select links only.",
+      "create_reading_group": "Create Reading Group",
+      "links_only": "Links Only"
+    },
+    "landing": {
+      "title": "$t(actions.add) $t(app.manifold) Links",
+      "placeholder": "Search $t(glossary.project_other) and $t(glossary.text_other)…",
+      "browse_projects": "$t(actions.browse) $t(glossary.project_title_case_other)",
+      "browse_texts": "$t(actions.browse) $t(glossary.text_title_case_other)"
+    },
+    "search": {
+      "title": "Search",
+      "title_with_keyword": "Search results for",
+      "placeholder": "Search $t(glossary.project_other), $t(glossary.text_other), $t(glossary.section_other), and $t(glossary.resource_other)…",
+      "submit": "Search",
+      "empty_prompt": "Enter a keyword in the search box above to find $t(glossary.project_other) and $t(glossary.text_other).",
+      "no_results": "No results for \u201C{{keyword}}\u201D.",
+      "result_count_one": "{{count}} result",
+      "result_count_other": "{{count}} results",
+      "filter_label": "Filter by type",
+      "everything": "Everything"
+    },
+    "lists": {
+      "projects_heading": "$t(glossary.project_title_case_other)",
+      "projects_empty": "No $t(glossary.project_other).",
+      "texts_heading": "$t(glossary.text_title_case_other)",
+      "texts_empty": "No $t(glossary.text_other).",
+      "resources_heading": "$t(glossary.resource_title_case_other)",
+      "resources_empty": "No $t(glossary.resource_other)."
+    },
+    "text_detail": {
+      "toc_heading": "Table of contents",
+      "toc_empty": "This $t(glossary.text_one) does not have a table of contents."
+    },
+    "project_row": {
+      "expand": "Expand {{title}}",
+      "collapse": "Collapse {{title}}",
+      "texts_in": "$t(glossary.text_title_case_other) in {{title}}",
+      "loading": "Loading $t(glossary.text_other)…",
+      "empty": "This $t(glossary.project_one) has no $t(glossary.text_other)."
+    },
+    "toggle": {
+      "link": "Link",
+      "linked": "Linked",
+      "remove": "$t(actions.remove)",
+      "add_item": "$t(actions.add) {{title}}",
+      "remove_item": "$t(actions.remove) {{title}}"
+    },
+    "sidebar": {
+      "heading": "Selected",
+      "empty": "Nothing selected yet.",
+      "selected_count": "Selected ({{count}})",
+      "selected_none": "Selected",
+      "close": "Close sidebar",
+      "open_selected": "Open selected ({{count}})",
+      "add_to_course": "$t(actions.add) to Course",
+      "group": {
+        "project": "$t(glossary.project_title_case_other)",
+        "text": "$t(glossary.text_title_case_other)",
+        "section": "$t(glossary.section_title_case_other)",
+        "resource": "$t(glossary.resource_title_case_other)"
+      }
+    },
+    "facets": {
+      "project": "$t(glossary.project_title_case_other)",
+      "text": "$t(glossary.text_title_case_other)",
+      "section": "$t(glossary.section_title_case_other)",
+      "resource": "$t(glossary.resource_title_case_other)",
+      "filter_label": "Filter by type"
+    },
+    "breadcrumb": {
+      "projects": "$t(glossary.project_title_case_other)",
+      "texts": "$t(glossary.text_title_case_other)",
+      "search": "Search"
+    },
+    "types": {
+      "project": "$t(glossary.project_title_case_one)",
+      "text": "$t(glossary.text_title_case_one)",
+      "section": "$t(glossary.section_title_case_one)",
+      "resource": "$t(glossary.resource_title_case_one)"
+    }
+  }
+}

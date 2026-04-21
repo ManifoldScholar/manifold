@@ -13,8 +13,7 @@ export default function FacetCheckboxes({
   const allRef = useRef(null);
 
   const allValues = checkboxes.map(c => c.value);
-  const allSelected =
-    value.length === 0 || value.length === checkboxes.length;
+  const allSelected = value.length === 0 || value.length === checkboxes.length;
   const effective = allSelected ? allValues : value;
 
   useEffect(() => {
