@@ -55,7 +55,11 @@ export default function UserActivityRoute() {
 
   const [rgPagination, setRgPageNumber] = usePaginationState(1, 5);
 
-  const { data: rgMemberships, meta: rgMeta, refresh: refreshRgs } = useFetch(
+  const {
+    data: rgMemberships,
+    meta: rgMeta,
+    refresh: refreshRgs
+  } = useFetch(
     () => usersAPI.readingGroupMemberships(user.id, null, rgPagination),
     [user.id, rgPagination]
   );

@@ -11,9 +11,9 @@ export default function useFetch(fetchFn, deps = [], options = {}) {
   const fetchFnRef = useRef(fetchFn);
   fetchFnRef.current = fetchFn;
 
-  /* eslint-disable @eslint-react/exhaustive-deps */
+  /* eslint-disable react-hooks/exhaustive-deps */
   const triggerFetchData = useCallback(async () => {
-    controllerRef.current?.abort();
+    if (controllerRef.current) controllerRef.current.abort();
     const controller = new AbortController();
     controllerRef.current = controller;
     const { signal } = controller;
@@ -43,7 +43,7 @@ export default function useFetch(fetchFn, deps = [], options = {}) {
       throw err;
     }
   }, [...deps, condition]);
-  /* eslint-enable @eslint-react/exhaustive-deps */
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {
     triggerFetchData().catch(() => {
@@ -57,6 +57,6 @@ export default function useFetch(fetchFn, deps = [], options = {}) {
     meta: result?.meta ?? null,
     loaded,
     refresh: triggerFetchData,
-    error,
+    error
   };
 }
