@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useCallback, useMemo } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useMemo
+} from "react";
 
 const SelectionContext = createContext(null);
 
@@ -24,10 +30,9 @@ export function SelectionProvider({ children }) {
     });
   }, []);
 
-  const has = useCallback(
-    item => items.some(i => keyFor(i) === keyFor(item)),
-    [items]
-  );
+  const has = useCallback(item => items.some(i => keyFor(i) === keyFor(item)), [
+    items
+  ]);
 
   const value = useMemo(() => ({ items, add, remove, has }), [
     items,
@@ -45,6 +50,9 @@ export function SelectionProvider({ children }) {
 
 export function useSelection() {
   const ctx = useContext(SelectionContext);
-  if (!ctx) throw new Error("useSelection must be used within SelectionProvider");
+  if (!ctx)
+    throw new Error("useSelection must be used within SelectionProvider");
   return ctx;
 }
+
+export default SelectionContext;

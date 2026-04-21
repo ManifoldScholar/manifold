@@ -1,19 +1,18 @@
+import { useTranslation } from "react-i18next";
 import { projectsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
 import LinkToggle from "components/lti/LinkToggle";
 import LtiRow from "components/lti/Row";
-import * as Styled from "../styles";
-import { useSelection } from "../selectionContext";
+import * as Styled from "./styles";
+import { useSelection } from "contexts";
 
 export const handle = {
-  breadcrumb: ({ loaderData, params }) => {
+  breadcrumb: ({ loaderData, params }, location, t) => {
     const title = loaderData?.project?.attributes?.titlePlaintext;
     return [
-      { label: "Projects", to: "/lti/projects" },
-      title
-        ? { label: title, to: `/lti/projects/${params.id}` }
-        : null
+      { label: t("lti.breadcrumb.projects"), to: "/lti/projects" },
+      title ? { label: title, to: `/lti/projects/${params.id}` } : null
     ].filter(Boolean);
   }
 };
@@ -35,9 +34,11 @@ export const loader = async ({ params, request, context }) => {
   return { project, resources: lists.resources ?? [] };
 };
 
-export default function LtiProjectDetail({ loaderData }) {
-  const { project, resources } = loaderData;
-  const { titlePlaintext, subtitle, textsNav } = project.attributes ?? {};
+export default function LtiStyledDetail({
+  loaderData: { project, resources }
+}) {
+  const { t } = useTranslation();
+  const { titlePlaintext, subtitle, textsNav } = project.attributes;
   const texts = textsNav ?? [];
   const { add, remove, has } = useSelection();
 
@@ -49,7 +50,7 @@ export default function LtiProjectDetail({ loaderData }) {
   const projectSelected = has(projectItem);
 
   const projectTrail = [
-    { label: "Projects", to: "/lti/projects" },
+    { label: t("lti.breadcrumb.projects"), to: "/lti/projects" },
     { label: titlePlaintext, to: `/lti/projects/${project.id}` }
   ];
 
@@ -64,16 +65,16 @@ export default function LtiProjectDetail({ loaderData }) {
           }
           srLabel={
             projectSelected
-              ? `Remove ${titlePlaintext}`
-              : `Add ${titlePlaintext}`
+              ? t("lti.toggle.remove_item", { title: titlePlaintext })
+              : t("lti.toggle.add_item", { title: titlePlaintext })
           }
         />
       </Styled.HeaderRow>
       {subtitle ? <Styled.Subtitle>{subtitle}</Styled.Subtitle> : null}
 
-      <h2>Texts</h2>
+      <h2>{t("lti.lists.texts_heading")}</h2>
       {texts.length === 0 ? (
-        <Styled.Empty>No texts.</Styled.Empty>
+        <Styled.Empty>{t("lti.lists.texts_empty")}</Styled.Empty>
       ) : (
         <Styled.List>
           {texts.map(text => {
@@ -101,13 +102,13 @@ export default function LtiProjectDetail({ loaderData }) {
         </Styled.List>
       )}
 
-      <h2>Resources</h2>
+      <h2>{t("lti.lists.resources_heading")}</h2>
       {resources.length === 0 ? (
-        <Styled.Empty>No resources.</Styled.Empty>
+        <Styled.Empty>{t("lti.lists.resources_empty")}</Styled.Empty>
       ) : (
         <Styled.List>
           {resources.map(resource => {
-            const { titlePlaintext: rTitle } = resource.attributes ?? {};
+            const { titlePlaintext: rTitle } = resource.attributes;
             const item = {
               type: "resource",
               id: resource.id,

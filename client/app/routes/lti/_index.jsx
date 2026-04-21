@@ -1,42 +1,32 @@
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 import Button from "components/global/atomic/Button";
+import SearchForm from "components/lti/SearchForm";
 import * as Styled from "./styles";
 
 export default function LtiLanding() {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Styled.Landing>
-      <h1>Add Manifold Links</h1>
-      <form action="/lti/search" method="get" role="search">
-        <Styled.SearchInput
-          type="search"
-          name="keyword"
-          placeholder="Search projects and texts..."
-          aria-label="Search"
-        />
-        <Button
-          type="submit"
-          size="md"
-          background="accent"
-          label="Search"
-          preIcon="search16"
-        />
-      </form>
+      <h1>{t("lti.landing.title")}</h1>
+      <Styled.LandingSearch>
+        <SearchForm size="md" placeholder={t("lti.landing.placeholder")} />
+      </Styled.LandingSearch>
       <Styled.BrowseButtons>
         <Button
-          type="button"
+          as={Link}
+          to="/lti/projects"
           size="md"
           background="outline"
-          label="Browse Projects"
-          onClick={() => navigate("/lti/projects")}
+          label={t("lti.landing.browse_projects")}
         />
         <Button
-          type="button"
+          as={Link}
+          to="/lti/texts"
           size="md"
           background="outline"
-          label="Browse Texts"
-          onClick={() => navigate("/lti/texts")}
+          label={t("lti.landing.browse_texts")}
         />
       </Styled.BrowseButtons>
     </Styled.Landing>

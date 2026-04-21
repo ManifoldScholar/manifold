@@ -1,27 +1,10 @@
 import { useState } from "react";
-import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 import EntityThumbnail from "components/global/entity-thumbnail";
 import LinkToggle from "components/lti/LinkToggle";
 import * as GenericStyled from "components/global/search/results/Types/Generic/styles";
 import * as TypeStyled from "components/global/search/results/Types/styles";
-
-const Subtitle = styled.div`
-  margin-top: 4px;
-  font-family: var(--font-family-sans);
-  font-size: 15px;
-  font-weight: var(--font-weight-regular);
-  color: var(--color-neutral-text-dark);
-`;
-
-const CoverWrap = styled.div`
-  position: relative;
-
-  .collecting-toggle.collecting-toggle--project-cover {
-    top: 6px;
-    left: auto;
-    right: 6px;
-  }
-`;
+import * as Styled from "./styles";
 
 function safeEntity(entity, attachmentKey) {
   const attrs = entity?.attributes ?? {};
@@ -131,6 +114,7 @@ export default function LtiRow({
   onToggle,
   as = "li"
 }) {
+  const { t } = useTranslation();
   const attrs = entity?.attributes ?? {};
   const title =
     titleOverride ?? attrs.titlePlaintext ?? attrs.title ?? attrs.name ?? "";
@@ -152,7 +136,7 @@ export default function LtiRow({
     >
       <GenericStyled.Inner>
         <GenericStyled.ImageCol>
-          <CoverWrap>
+          <Styled.CoverWrap>
             {to ? (
               <GenericStyled.Link
                 to={to}
@@ -175,10 +159,14 @@ export default function LtiRow({
                 selected={selected}
                 onToggle={onToggle}
                 hiddenIfUnlinked={!rowHovered}
-                srLabel={selected ? `Remove ${title}` : `Add ${title}`}
+                srLabel={
+                  selected
+                    ? t("lti.toggle.remove_item", { title })
+                    : t("lti.toggle.add_item", { title })
+                }
               />
             ) : null}
-          </CoverWrap>
+          </Styled.CoverWrap>
         </GenericStyled.ImageCol>
         <GenericStyled.TextCol>
           <GenericStyled.TextTop>
@@ -196,21 +184,21 @@ export default function LtiRow({
                 <GenericStyled.Link to={to} state={linkState}>
                   <GenericStyled.Title>{title}</GenericStyled.Title>
                   {resolvedSubtitle ? (
-                    <Subtitle>{resolvedSubtitle}</Subtitle>
+                    <Styled.Subtitle>{resolvedSubtitle}</Styled.Subtitle>
                   ) : null}
                 </GenericStyled.Link>
               ) : (
                 <>
                   <GenericStyled.Title>{title}</GenericStyled.Title>
                   {resolvedSubtitle ? (
-                    <Subtitle>{resolvedSubtitle}</Subtitle>
+                    <Styled.Subtitle>{resolvedSubtitle}</Styled.Subtitle>
                   ) : null}
                 </>
               )}
               {resolvedAttribution ? (
                 <GenericStyled.Attribution>
                   <span>
-                    <em>by</em> {resolvedAttribution}
+                    <em>{t("common.by")}</em> {resolvedAttribution}
                   </span>
                 </GenericStyled.Attribution>
               ) : null}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 import IconComposer from "components/global/utility/IconComposer";
 
 function determineView(selected, hovered) {
@@ -7,17 +8,17 @@ function determineView(selected, hovered) {
   return hovered ? "add-active" : "add";
 }
 
-function textForView(view) {
+function textKeyForView(view) {
   switch (view) {
     case "add":
     case "add-active":
-      return "Link";
+      return "lti.toggle.link";
     case "remove":
-      return "Linked";
+      return "lti.toggle.linked";
     case "remove-active":
-      return "Remove";
+      return "lti.toggle.remove";
     default:
-      return "";
+      return null;
   }
 }
 
@@ -29,8 +30,10 @@ export default function LinkToggle({
   outlined = false,
   hiddenIfUnlinked = false
 }) {
+  const { t } = useTranslation();
   const [hovered, setHovered] = useState(false);
   const view = determineView(selected, hovered);
+  const textKey = textKeyForView(view);
 
   return (
     <button
@@ -74,11 +77,13 @@ export default function LinkToggle({
           />
           <IconComposer
             icon="PlusUnique"
-            size="default"
+            size={28}
             className="collecting-toggle__icon collecting-toggle__icon--add"
           />
         </div>
-        <span className="collecting-toggle__text">{textForView(view)}</span>
+        <span className="collecting-toggle__text">
+          {textKey ? t(textKey) : ""}
+        </span>
       </div>
     </button>
   );

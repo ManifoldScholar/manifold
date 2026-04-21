@@ -1,13 +1,12 @@
 import { resourcesAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import * as Styled from "../styles";
+import loadEntity from "lib/react-router/loaders/loadEntity";
+import * as Resource from "./styles";
 
 export const handle = {
   breadcrumb: ({ loaderData, params }, location) => {
     const title = loaderData?.attributes?.titlePlaintext;
     const trail = location?.state?.trail;
-    const base =
-      Array.isArray(trail) && trail.length > 0 ? trail : [];
+    const base = Array.isArray(trail) && trail.length > 0 ? trail : [];
     return [
       ...base,
       title ? { label: title, to: `/lti/resources/${params.id}` } : null
@@ -30,19 +29,19 @@ export default function LtiResourceDetail({ loaderData: resource }) {
     subKind,
     descriptionPlaintext,
     captionPlaintext
-  } = resource.attributes ?? {};
+  } = resource.attributes;
 
   return (
     <>
       <h1>{titlePlaintext}</h1>
-      <Styled.MetaLine>
+      <Resource.MetaLine>
         {kind}
         {subKind ? ` · ${subKind}` : ""}
-      </Styled.MetaLine>
-      <Styled.DetailText>
+      </Resource.MetaLine>
+      <Resource.DetailText>
         {descriptionPlaintext ? <p>{descriptionPlaintext}</p> : null}
         {captionPlaintext ? <p>{captionPlaintext}</p> : null}
-      </Styled.DetailText>
+      </Resource.DetailText>
     </>
   );
 }
