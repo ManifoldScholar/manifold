@@ -30,9 +30,10 @@ export default function ResourcesList({
 
   const [pagination, setPage] = usePaginationState(1, 5);
 
-  const { data: resources, meta: resourcesMeta } = useFetch({
-    request: [projectsAPI.resources, projectId, filters, pagination]
-  });
+  const { data: resources, meta: resourcesMeta } = useFetch(
+    () => projectsAPI.resources(projectId, filters, pagination),
+    [projectId, filters, pagination]
+  );
 
   const onPageChange = page => e => {
     e.preventDefault();

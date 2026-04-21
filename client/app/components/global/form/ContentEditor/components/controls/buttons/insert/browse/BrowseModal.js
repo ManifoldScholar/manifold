@@ -31,10 +31,11 @@ export default function BrowseModal(props) {
 
   const filters = useMemo(() => ({ format }), [format]);
 
-  const { data: assets, meta: assetsMeta, loaded } = useFetch({
-    request: [ingestionSourcesAPI.index, id, filters, pagination],
-    condition: !!id
-  });
+  const { data: assets, meta: assetsMeta, loaded } = useFetch(
+    () => ingestionSourcesAPI.index(id, filters, pagination),
+    [id, filters, pagination],
+    { condition: !!id }
+  );
 
   return loaded ? (
     <Styled.Modal

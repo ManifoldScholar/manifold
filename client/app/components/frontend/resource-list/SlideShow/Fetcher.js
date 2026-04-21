@@ -12,19 +12,19 @@ export default function ResourceSlideshowFetcher({
 }) {
   const [page, setPage] = useState(initialResources ? null : 1);
 
-  const { response, loaded } = useFetch({
-    request: [
-      resourceCollectionsAPI.collectionResources,
-      resourceCollection.id,
-      {},
-      { number: page ?? 1, size: 20 }
-    ],
-    condition: page !== null,
-    dependencies: [page]
-  });
+  const { data, meta: fetchedMeta, loaded } = useFetch(
+    () =>
+      resourceCollectionsAPI.collectionResources(
+        resourceCollection.id,
+        {},
+        { number: page ?? 1, size: 20 }
+      ),
+    [resourceCollection.id, page],
+    { condition: page !== null }
+  );
 
-  const resources = response?.data ?? initialResources ?? [];
-  const meta = response?.meta ?? initialMeta;
+  const resources = data ?? initialResources ?? [];
+  const meta = fetchedMeta ?? initialMeta;
   const isLoaded = page === null ? true : loaded;
 
   return !meta?.pagination?.totalCount ? (

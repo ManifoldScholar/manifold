@@ -53,13 +53,13 @@ function ReaderFullNotesContainer({ closeCallback }) {
   const [filters, setFilters] = useFilterState(initialFilters);
 
   const isMe = currentGroupId === "me" || currentGroupId === "orphaned";
-  const endpoint = isMe ? meAPI.annotations : readingGroupsAPI.annotations;
-  const args = isMe
-    ? [filters, pagination]
-    : [currentGroupId, filters, pagination];
-  const { data: annotations, meta, refresh } = useFetch({
-    request: [endpoint, ...args]
-  });
+  const { data: annotations, meta, refresh } = useFetch(
+    () =>
+      isMe
+        ? meAPI.annotations(filters, pagination)
+        : readingGroupsAPI.annotations(currentGroupId, filters, pagination),
+    [isMe, currentGroupId, filters, pagination]
+  );
 
   const readingGroup =
     readingGroups.find(group => group.id === currentGroupId) || currentGroupId;

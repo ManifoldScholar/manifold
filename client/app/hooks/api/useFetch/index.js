@@ -1,96 +1,62 @@
-import { useEffect, useCallback, useState, useRef, useId } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import { queryApi } from "api";
-import ch from "helpers/consoleHelpers";
-import { isFunction } from "lodash-es";
 
-function log(type, key) {
-  if (import.meta.env.DEV) {
-    ch.notice(`${type}: ${key}`, "floppy_disk");
-  }
-}
-
-export default function useFetch({
-  request,
-  afterFetch,
-  options = {},
-  dependencies = [],
-  condition = true
-}) {
-  const uid = `fetch_${useId()}`;
-  const [requestKey] = useState(options.requestKey ?? `fetch_${useId()}`);
-  const countRef = useRef(0);
+export default function useFetch(fetchFn, deps = [], options = {}) {
+  const { condition = true } = options;
+  const controllerRef = useRef(null);
   const [result, setResult] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
 
-  if (!Array.isArray(request)) {
-    throw new Error(
-      `useFetch expects the 'request' property to be an array. In most cases, the first
-       element in the array is the Manifold API function and subsequent elements are the
-       arguments that will be passed to that method.`
-    );
-  }
+  const fetchFnRef = useRef(fetchFn);
+  fetchFnRef.current = fetchFn;
 
-  const [apiCall, ...apiCallArgs] = request;
+  /* eslint-disable @eslint-react/exhaustive-deps */
+  const triggerFetchData = useCallback(async () => {
+    controllerRef.current?.abort();
+    const controller = new AbortController();
+    controllerRef.current = controller;
+    const { signal } = controller;
 
-  /* eslint-disable react-hooks/exhaustive-deps */
-  const triggerFetchData = useCallback(
-    async signal => {
-      if (!condition) {
-        setResult(null);
-        setLoaded(false);
-        return Promise.resolve();
-      }
-
-      countRef.current += 1;
-      if (countRef.current > 25) {
-        throw new Error(
-          `useFetch tried to fetch data more than 25 times. This suggests that an input to
-        useFetch needs to be memoized.`
-        );
-      }
-
-      log("useFetch", requestKey);
+    if (!condition) {
+      setResult(null);
       setLoaded(false);
       setError(null);
+      return;
+    }
 
-      try {
-        const apiFetch = apiCall(...apiCallArgs);
-        const response = await queryApi(apiFetch, null, signal);
-        if (signal?.aborted) return;
-        setResult(response);
-        setLoaded(true);
-        if (isFunction(afterFetch)) afterFetch();
-        return response;
-      } catch (err) {
-        if (signal?.aborted) return;
-        setError(err);
-        setResult(null);
-        setLoaded(true);
-        throw err;
-      }
-    },
-    [apiCall, ...apiCallArgs, requestKey, condition, afterFetch]
-  );
-  /* eslint-enable react-hooks/exhaustive-deps */
+    setLoaded(false);
+    setError(null);
 
-  /* eslint-disable react-hooks/exhaustive-deps */
+    try {
+      const request = fetchFnRef.current();
+      const response = await queryApi(request, null, signal);
+      if (signal.aborted) return;
+      setResult(response);
+      setLoaded(true);
+      return response;
+    } catch (err) {
+      if (signal.aborted) return;
+      setError(err);
+      setResult(null);
+      setLoaded(true);
+      throw err;
+    }
+  }, [...deps, condition]);
+  /* eslint-enable @eslint-react/exhaustive-deps */
+
   useEffect(() => {
-    const controller = new AbortController();
-    triggerFetchData(controller.signal).catch(() => {
+    triggerFetchData().catch(() => {
       // Error already handled in triggerFetchData
     });
-    return () => controller.abort();
-  }, [triggerFetchData, ...dependencies]);
-  /* eslint-enable react-hooks/exhaustive-deps */
+    return () => controllerRef.current?.abort();
+  }, [triggerFetchData]);
 
   return {
     data: result?.data ?? null,
     meta: result?.meta ?? null,
     loaded,
-    uid,
-    response: result,
     refresh: triggerFetchData,
-    error
+    error,
   };
 }

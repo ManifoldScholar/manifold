@@ -25,11 +25,11 @@ export default function CommentProvider({
   const activatedRef = useRef(condition);
   if (condition) activatedRef.current = true;
 
-  const { data, meta: commentsMeta } = useFetch({
-    request: [commentsAPI.index, subject, EMPTY_FILTER, paginationParams],
-    condition: !!subject && activatedRef.current,
-    dependencies: [page]
-  });
+  const { data, meta: commentsMeta } = useFetch(
+    () => commentsAPI.index(subject, EMPTY_FILTER, paginationParams),
+    [subject, paginationParams],
+    { condition: !!subject && activatedRef.current }
+  );
 
   useEffect(() => {
     if (!data) return;

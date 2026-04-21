@@ -31,9 +31,10 @@ export default function CollectionsList({
 
   const [pagination, setPage] = usePaginationState(1, 5);
 
-  const { data: collections, meta: collectionsMeta } = useFetch({
-    request: [projectsAPI.resourceCollections, projectId, filters, pagination]
-  });
+  const { data: collections, meta: collectionsMeta } = useFetch(
+    () => projectsAPI.resourceCollections(projectId, filters, pagination),
+    [projectId, filters, pagination]
+  );
 
   const onPageChange = page => e => {
     e.preventDefault();

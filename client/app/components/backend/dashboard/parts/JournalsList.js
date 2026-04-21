@@ -77,9 +77,10 @@ export default function JournalsList() {
     [searchParams]
   );
 
-  const { data: journals, meta: journalsMeta } = useFetch({
-    request: [journalsAPI.index, filtersWithDefaults, pagination]
-  });
+  const { data: journals, meta: journalsMeta } = useFetch(
+    () => journalsAPI.index(filtersWithDefaults, pagination),
+    [filtersWithDefaults, pagination]
+  );
 
   if (!journals) return null;
 

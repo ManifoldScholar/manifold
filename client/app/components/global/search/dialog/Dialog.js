@@ -16,10 +16,11 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
     return { ...query, page: { number: pagination.number } };
   }, [query, pagination.number]);
 
-  const { data: results, meta: resultsMeta } = useFetch({
-    request: [searchResultsAPI.index, queryWithPagination],
-    condition: !!queryWithPagination
-  });
+  const { data: results, meta: resultsMeta } = useFetch(
+    () => searchResultsAPI.index(queryWithPagination),
+    [queryWithPagination],
+    { condition: !!queryWithPagination }
+  );
 
   const { t } = useTranslation();
 

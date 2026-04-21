@@ -48,14 +48,16 @@ function ReaderNotesContainer({ children }) {
   }, [filters]);
   const showMyAnnotations = groupId === "me";
 
-  const { data: myAnnotations, meta: myMeta, loaded: myLoaded } = useFetch({
-    request: [meAPI.annotations, fetchFilters],
-    condition: showMyAnnotations
-  });
-  const { data: rgAnnotations, meta: rgMeta, loaded: rgLoaded } = useFetch({
-    request: [readingGroupsAPI.annotations, groupId, fetchFilters],
-    condition: !showMyAnnotations
-  });
+  const { data: myAnnotations, meta: myMeta, loaded: myLoaded } = useFetch(
+    () => meAPI.annotations(fetchFilters),
+    [fetchFilters],
+    { condition: showMyAnnotations }
+  );
+  const { data: rgAnnotations, meta: rgMeta, loaded: rgLoaded } = useFetch(
+    () => readingGroupsAPI.annotations(groupId, fetchFilters),
+    [groupId, fetchFilters],
+    { condition: !showMyAnnotations }
+  );
 
   const annotations = showMyAnnotations ? myAnnotations : rgAnnotations;
   const meta = showMyAnnotations ? myMeta : rgMeta;

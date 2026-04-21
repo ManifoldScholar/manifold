@@ -19,15 +19,15 @@ function ResourceDetailAnnotations() {
     data: annotations,
     meta: annotationsMeta,
     refresh: refreshAnnotations
-  } = useFetch({
-    request: [
-      resourcesAPI.annotations,
-      resourceId,
-      ANNOTATION_FILTERS,
-      annotationsPagination
-    ],
-    dependencies: [resourceId]
-  });
+  } = useFetch(
+    () =>
+      resourcesAPI.annotations(
+        resourceId,
+        ANNOTATION_FILTERS,
+        annotationsPagination
+      ),
+    [resourceId, annotationsPagination]
+  );
 
   const remainingAnnotations =
     annotationsMeta?.pagination?.totalCount -

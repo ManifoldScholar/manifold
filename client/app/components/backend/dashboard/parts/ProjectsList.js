@@ -89,9 +89,10 @@ export default function ProjectsList() {
     [searchParams]
   );
 
-  const { data: projects, meta: projectsMeta } = useFetch({
-    request: [projectsAPI.index, filtersWithDefaults, pagination]
-  });
+  const { data: projects, meta: projectsMeta } = useFetch(
+    () => projectsAPI.index(filtersWithDefaults, pagination),
+    [filtersWithDefaults, pagination]
+  );
 
   const authorization = new Authorization();
   const canCreateProjects = authorization.authorizeAbility({

@@ -10,14 +10,10 @@ export default function ViewAnnotations({
   annotationIds,
   close: closeDrawer
 }) {
-  const { data: annotations } = useFetch({
-    request: [
-      annotationsAPI.forSection,
-      sectionId,
-      textId,
-      { ids: annotationIds }
-    ]
-  });
+  const { data: annotations } = useFetch(
+    () => annotationsAPI.forSection(sectionId, textId, { ids: annotationIds }),
+    [sectionId, textId, annotationIds]
+  );
 
   const saveAnnotation = (model, group) => {
     const attributes = { ...group.selection, ...model.attributes };

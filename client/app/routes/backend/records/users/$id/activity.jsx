@@ -34,9 +34,10 @@ export default function UserActivityRoute() {
     data: annotations,
     meta: annotationsMeta,
     refresh: refreshAnnotations
-  } = useFetch({
-    request: [usersAPI.annotations, user.id, filters, annotationsPagination]
-  });
+  } = useFetch(
+    () => usersAPI.annotations(user.id, filters, annotationsPagination),
+    [user.id, filters, annotationsPagination]
+  );
 
   const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
 
@@ -54,9 +55,10 @@ export default function UserActivityRoute() {
 
   const [rgPagination, setRgPageNumber] = usePaginationState(1, 5);
 
-  const { data: rgMemberships, meta: rgMeta, refresh: refreshRgs } = useFetch({
-    request: [usersAPI.readingGroupMemberships, user.id, null, rgPagination]
-  });
+  const { data: rgMemberships, meta: rgMeta, refresh: refreshRgs } = useFetch(
+    () => usersAPI.readingGroupMemberships(user.id, null, rgPagination),
+    [user.id, rgPagination]
+  );
 
   const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
 
