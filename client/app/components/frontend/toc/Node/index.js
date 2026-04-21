@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 function TOCListNode({ id, anchor, title, textSlug, textTitle, children }) {
   const { t } = useTranslation();
 
-  const to = `/read/${textSlug}/${id}${anchor ? `#${anchor}` : ""}`;
+  const to = `/read/${textSlug}/section/${id}${anchor ? `#${anchor}` : ""}`;
 
   return (
     <>
