@@ -7,6 +7,8 @@ module OmniAuth
 
       option :name, "lti"
 
+      LTI_CLAIM_PREFIX = "https://purl.imsglobal.org/spec/lti/claim/"
+
       # The request phase handles the platform-initiated OIDC login.
       # The platform sends iss, client_id, login_hint, lti_message_hint,
       # and target_link_uri. We generate a nonce and state, store them
@@ -40,6 +42,7 @@ module OmniAuth
         env["omniauth.auth"] = auth_hash
         call_app!
       rescue JWT::DecodeError, OmniAuth::Error => e
+        Rails.logger.warn("LTI JWT verification failed: #{e.class} — #{e.message}")
         fail!(:invalid_id_token, e)
       end
 
@@ -68,18 +71,16 @@ module OmniAuth
       private
 
       def find_registration!(issuer, client_id)
-        LtiRegistration.find_by_issuer_and_client_id!(issuer, client_id)
+        LtiRegistration.find_by!(issuer: issuer, client_id: client_id)
       rescue ActiveRecord::RecordNotFound
         raise OmniAuth::Error, "No enabled LTI registration found for issuer #{issuer} and client_id #{client_id}"
       end
 
       def verify_deployment!(registration, claims)
-        deployment_id = claims.dig("https://purl.imsglobal.org/spec/lti/claim/deployment_id")
+        deployment_id = claims["https://purl.imsglobal.org/spec/lti/claim/deployment_id"]
         raise OmniAuth::Error, "Missing deployment_id claim" unless deployment_id
 
-        unless registration.lti_deployments.enabled.exists?(deployment_id: deployment_id)
-          raise OmniAuth::Error, "Unknown deployment #{deployment_id} for registration #{registration.id}"
-        end
+        raise OmniAuth::Error, "Deployment #{deployment_id} is disabled" if deployment.disabled?
       end
 
       # Builds the authorization redirect URI with all required OIDC parameters.
@@ -105,14 +106,14 @@ module OmniAuth
       def decode_and_verify!(id_token, state)
         unverified = JWT.decode(id_token, nil, false).first
         registration = find_registration!(unverified["iss"], unverified["aud"])
-        jwks = fetch_platform_jwks(registration)
+        jwks_loader = Auth::Lti::PlatformJwksLoader.new(registration)
 
         claims = JWT.decode(
           id_token,
           nil,
           true,
           algorithms: ["RS256"],
-          jwks: jwks,
+          jwks: jwks_loader.to_proc,
           verify_iss: true,
           iss: registration.issuer,
           verify_aud: true,
@@ -121,7 +122,7 @@ module OmniAuth
 
         verify_nonce!(claims, state)
         verify_timing!(claims)
-        # verify_deployment!(registration, claims)
+        verify_deployment!(registration, claims)
 
         claims
       end
@@ -152,8 +153,6 @@ module OmniAuth
         raise OmniAuth::Error, "Token has expired" if claims["exp"] && claims["exp"] < now - 5
       end
 
-      LTI_CLAIM_PREFIX = "https://purl.imsglobal.org/spec/lti/claim/"
-
       def extract_lti_claims(claims)
         lti = {}
 
@@ -165,11 +164,6 @@ module OmniAuth
         end
 
         lti
-      end
-
-      def fetch_platform_jwks(registration)
-        response = HTTParty.get(registration.jwks_uri)
-        JWT::JWK::Set.new(response.parsed_response)
       end
 
       def lti_enabled?
