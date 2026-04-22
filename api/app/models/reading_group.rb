@@ -17,6 +17,8 @@ class ReadingGroup < ApplicationRecord
 
   belongs_to :reading_group_kind, optional: true, inverse_of: :reading_groups
 
+  has_many :lti_course_contexts, dependent: :nullify
+
   has_many :reading_group_memberships, dependent: :destroy, inverse_of: :reading_group
   has_many :moderators, -> { merge(ReadingGroupMembership.moderators) }, through: :reading_group_memberships, source: :user
   has_many :users, -> { merge(ReadingGroupMembership.active) }, through: :reading_group_memberships
