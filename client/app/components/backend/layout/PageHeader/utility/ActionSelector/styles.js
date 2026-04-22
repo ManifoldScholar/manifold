@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import {
   buttonUnstyled,
   formLabelPrimary,
@@ -9,7 +9,6 @@ import {
 } from "theme/styles/mixins";
 import IconComposer from "components/global/utility/IconComposer";
 import { NavLink } from "react-router";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const Button = styled.button`
   ${buttonUnstyled}
@@ -97,7 +96,7 @@ export const LinkText = styled.span`
   }
 `;
 
-export const Link = styled(NavLink, transientOptions)`
+export const Link = styled(NavLink)`
   display: flex !important;
   align-items: center;
   gap: 12px;

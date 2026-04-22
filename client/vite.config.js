@@ -26,14 +26,20 @@ function jsxInJsPlugin() {
   };
 }
 
-function emotionTransformPlugin() {
+function styledComponentsTransformPlugin() {
   return {
-    name: "emotion-transform",
+    name: "styled-components-transform",
+    // Run before reactRouter's react-refresh-babel pass so Fast Refresh
+    // operates on our final output and isn't clobbered by a later Babel
+    // round-trip. `babel-plugin-styled-components` is not foldable into
+    // reactRouter's own Babel call (no public hook in @react-router/dev
+    // v7), so we stay as a standalone transform.
+    enforce: "pre",
     async transform(code, id) {
       if (!/\.(js|jsx)$/.test(id) || id.includes("node_modules")) {
         return null;
       }
-      if (!code.includes("@emotion") && !code.includes("styled")) {
+      if (!/from ['"]styled-components['"]/.test(code)) {
         return null;
       }
 
@@ -41,7 +47,12 @@ function emotionTransformPlugin() {
         filename: id,
         babelrc: false,
         configFile: false,
-        plugins: ["@emotion"],
+        plugins: [
+          [
+            "babel-plugin-styled-components",
+            { ssr: true, displayName: true, fileName: true, pure: true }
+          ]
+        ],
         sourceMaps: true,
         sourceType: "module"
       });
@@ -56,7 +67,7 @@ function emotionTransformPlugin() {
 
 export default defineConfig(({ isSsrBuild }) => ({
   assetsInclude: ["**/*.woff", "**/*.woff2"],
-  plugins: [jsxInJsPlugin(), emotionTransformPlugin(), reactRouter()],
+  plugins: [jsxInJsPlugin(), styledComponentsTransformPlugin(), reactRouter()],
   resolve: {
     alias: {
       app: path.resolve(__dirname, "app"),
@@ -73,9 +84,9 @@ export default defineConfig(({ isSsrBuild }) => ({
   optimizeDeps: {
     entries: ["app/**/*.{js,jsx}"],
     include: [
-      "@emotion/react",
-      "@emotion/styled",
-      "@emotion/styled/base",
+      "styled-components",
+      "@emotion/is-prop-valid",
+      "stylis",
       "lodash-es",
       "date-fns",
       "date-fns/locale/en-US"
@@ -87,7 +98,7 @@ export default defineConfig(({ isSsrBuild }) => ({
     }
   },
   ssr: {
-    noExternal: isSsrBuild ? true : undefined
+    noExternal: isSsrBuild ? true : ["styled-components"]
   },
   server: {
     proxy: {

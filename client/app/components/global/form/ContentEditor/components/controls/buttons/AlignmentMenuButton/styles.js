@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { defaultTransitionProps } from "theme/styles/mixins";
 import { Button } from "../styles";
 

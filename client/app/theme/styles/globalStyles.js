@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { createGlobalStyle } from "styled-components";
 import fonts from "./base/fonts";
 import rootVariables from "./variables";
 import vendorStyles from "./vendor";
@@ -8,7 +8,10 @@ import utilityStyles from "./utility";
 import printStyles from "./print";
 import rteStyles from "./utility/rte";
 
-export default css`
+// Raw CSS string — consumed by RootErrorBoundary and entry.server's error
+// path via a virtual-DOM <style> element, which survives React's singleton
+// head reconciliation when createGlobalStyle's injected rules may not.
+export const rawCss = `
 @layer manifold, custom-styles, editor;
 
 @layer manifold {
@@ -25,3 +28,5 @@ export default css`
   ${rteStyles}
 }
 `;
+
+export default createGlobalStyle`${rawCss}`;

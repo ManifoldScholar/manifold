@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { panelRounded, listUnstyled, fluidScale } from "theme/styles/mixins";
 
 const DEFAULT_BORDER_COLOR = "var(--color-neutral-ui-dull-dark)";
@@ -30,7 +29,7 @@ export const CategoryHeading = styled.h3`
   background-color: var(--box-medium-bg-color);
 `;
 
-export const List = styled("ul", transientOptions)`
+export const List = styled("ul")`
   ${listUnstyled}
   display: flex;
   flex-direction: column;

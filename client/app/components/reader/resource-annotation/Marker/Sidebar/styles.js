@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { readerContainerWidths } from "theme/styles/utility/layout";
 import { mediaQueries } from "../styles";
 

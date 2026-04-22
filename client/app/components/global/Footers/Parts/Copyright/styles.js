@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { respond } from "theme/styles/mixins";
 
-export const Section = styled("section", transientOptions)`
+export const Section = styled("section")`
   position: relative;
   padding-block-start: ${({ $standalone }) => ($standalone ? "0" : "8px")};
   font-size: 14px;

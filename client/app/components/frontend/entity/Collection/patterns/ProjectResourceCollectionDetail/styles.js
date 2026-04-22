@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { fluidScale, panelRounded } from "theme/styles/mixins";
 
 export const SectionHeader = styled.h2`

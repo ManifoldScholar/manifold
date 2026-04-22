@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { respond, utilityPrimary } from "theme/styles/mixins";
 
 export const categoryVerticalPadding = `14px`;

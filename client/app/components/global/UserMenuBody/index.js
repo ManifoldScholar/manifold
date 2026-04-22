@@ -7,7 +7,15 @@ import * as Styled from "./styles";
 
 const UserMenuBody = forwardRef(
   (
-    { callbacks, context = "frontend", visible = false, className, ...props },
+    {
+      callbacks,
+      context = "frontend",
+      visible = false,
+      toggleVisible,
+      logout,
+      className,
+      ...props
+    },
     ref
   ) => {
     const { currentUser } = useAuthentication();

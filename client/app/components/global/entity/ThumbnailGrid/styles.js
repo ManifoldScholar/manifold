@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { respond, listUnstyled } from "theme/styles/mixins";
 
 const gridStyles = `
@@ -22,7 +22,6 @@ const emptyStyles = `
   text-align: left;
 `;
 
-// transientOptions is not needed here because Grid passes no props to the underlying component.
 export const Grid = styled.div`
   --list-item-padding: ${({ $grid }) => ($grid ? 0 : "14px")};
   --list-item-border: ${({ $grid }) =>

@@ -82,6 +82,7 @@ export default function Content({
 
   return (
     <>
+      <div>hello</div>
       <Feature features={features} />
       {showProjects ? renderProjects : renderCollections}
       {!!filteredJournals?.length &&

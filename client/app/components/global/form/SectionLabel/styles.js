@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { roundedFormHeader, panelRounded } from "theme/styles/mixins";
 
 export const Label = styled.header`

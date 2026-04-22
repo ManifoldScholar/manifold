@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import {
   listUnstyled,
   respond,
@@ -7,7 +6,7 @@ import {
   fluidScale
 } from "theme/styles/mixins";
 
-export const PrimaryList = styled("ul", transientOptions)`
+export const PrimaryList = styled("ul")`
   ${listUnstyled}
 
   ${({ $columnar }) =>
@@ -22,7 +21,7 @@ export const PrimaryList = styled("ul", transientOptions)`
   }
 `;
 
-export const SecondaryList = styled("ul", transientOptions)`
+export const SecondaryList = styled("ul")`
   ${listUnstyled}
 
   ${({ $columnar }) =>

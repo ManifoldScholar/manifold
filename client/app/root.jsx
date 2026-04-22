@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { HelmetProvider } from "react-helmet-async";
-import { Global as GlobalStyles } from "@emotion/react";
-import styles from "theme/styles/globalStyles";
+import GlobalStyles from "theme/styles/globalStyles";
 import { get } from "lodash-es";
 import Analytics from "contexts/Analytics";
 import Utility from "components/global/utility";
@@ -91,7 +90,7 @@ export default function Root({ loaderData }) {
         <Links />
       </head>
       <body>
-        <GlobalStyles styles={styles} />
+        <GlobalStyles />
         <div id="content">
           <AppContext.Provider value={appContextValue}>
             <NotificationProvider>

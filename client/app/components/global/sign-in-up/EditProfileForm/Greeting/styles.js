@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { headingPrimary } from "theme/styles/mixins";
 
 export const Nickname = styled.span`

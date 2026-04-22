@@ -1,9 +1,8 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { dropzoneStyled } from "theme/styles/mixins";
 import { collectableTypeVerticalPadding } from "../styles";
 
-export const Type = styled("section", transientOptions)`
+export const Type = styled("section")`
   ${({ $active }) => dropzoneStyled("18px", $active)};
 
   padding-block-start: ${collectableTypeVerticalPadding};

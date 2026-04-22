@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const Header = styled.div`
   background-color: var(--color-base-neutral110);

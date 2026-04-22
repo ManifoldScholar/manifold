@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import {
   respond,
   listUnstyled,
@@ -7,7 +6,7 @@ import {
 } from "theme/styles/mixins";
 import NavigationLink from "../NavigationLink/index";
 
-export const Nav = styled("nav", transientOptions)`
+export const Nav = styled("nav")`
   ${({ $mobile }) =>
     $mobile
       ? respond(`display: none;`, 85)

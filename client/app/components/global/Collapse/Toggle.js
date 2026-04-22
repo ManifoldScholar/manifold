@@ -1,11 +1,21 @@
 import { isValidElement } from "react";
 import PropTypes from "prop-types";
-import { ClassNames } from "@emotion/react";
+import styled, { css } from "styled-components";
+import classNames from "classnames";
 import useCollapseContext from "./useCollapseContext";
 
 export const inertToggleClass = `
   cursor: default;
   pointer-events: none;
+`;
+
+const inertRules = css`
+  cursor: default;
+  pointer-events: none;
+`;
+
+const StyledToggle = styled.button`
+  ${({ $inert }) => ($inert ? inertRules : null)}
 `;
 
 function Toggle({ children, className, activeClassName, as }) {
@@ -23,25 +33,24 @@ function Toggle({ children, className, activeClassName, as }) {
     ...(applyLabelPropsToToggle ? labelProps : {})
   };
 
-  const ToggleComponent = as ?? height <= stubHeight ? "div" : "button";
+  const inert = height <= stubHeight;
+  const elementAs = as ?? inert ? "div" : "button";
+  const mergedClassName = classNames({
+    [className]: !!className,
+    [activeClassName]: activeClassName ? visible : false
+  });
 
   return (
-    <ClassNames>
-      {({ cx, css }) => (
-        <ToggleComponent
-          className={cx({
-            [className]: !!className,
-            [activeClassName]: activeClassName ? visible : false,
-            [css(inertToggleClass)]: height <= stubHeight
-          })}
-          {...mergedToggleProps}
-        >
-          {typeof children === "function"
-            ? children(visible, labelProps)
-            : children}
-        </ToggleComponent>
-      )}
-    </ClassNames>
+    <StyledToggle
+      as={elementAs}
+      $inert={inert}
+      className={mergedClassName || undefined}
+      {...mergedToggleProps}
+    >
+      {typeof children === "function"
+        ? children(visible, labelProps)
+        : children}
+    </StyledToggle>
   );
 }
 

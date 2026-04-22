@@ -1,18 +1,13 @@
-import { PassThrough } from "node:stream";
+import { PassThrough, Transform } from "node:stream";
 import { createReadableStreamFromReadable } from "@react-router/node";
 import { ServerRouter } from "react-router";
 import { renderToPipeableStream, renderToString } from "react-dom/server";
-import { CacheProvider, Global as GlobalStyles } from "@emotion/react";
-import createEmotionServer from "@emotion/server/create-instance";
-import {
-  createEmotionStyleFixerStream,
-  createEmotionStyleExtractorStream,
-  createEmotionCache,
-  EMOTION_CACHE_KEY
-} from "lib/react-router/emotion-stream";
+import { ServerStyleSheet } from "styled-components";
 import FatalError from "components/global/FatalError";
 import formatError from "lib/react-router/helpers/formatError";
-import styles from "theme/styles/globalStyles";
+import GlobalStyles, {
+  rawCss as globalRawCss
+} from "theme/styles/globalStyles";
 
 import "utils/i18n";
 
@@ -24,69 +19,87 @@ export default async function handleRequest(
   responseHeaders,
   routerContext
 ) {
-  // Create Emotion cache and server instance for advanced SSR
-  const cache = createEmotionCache();
-  const {
-    extractCriticalToChunks,
-    constructStyleTagsFromChunks
-  } = createEmotionServer(cache);
-
   return new Promise((resolve, reject) => {
     let shellRendered = false;
     let currentStatusCode = responseStatusCode;
+    const sheet = new ServerStyleSheet();
 
-    // Create emotion style extractor/injector stream
-    const emotionExtractor = createEmotionStyleExtractorStream({
-      cacheKey: EMOTION_CACHE_KEY,
-      extractCriticalToChunks,
-      constructStyleTagsFromChunks,
-      cache
-    });
+    const jsx = sheet.collectStyles(
+      <ServerRouter context={routerContext} url={request.url} />
+    );
 
-    // Create emotion style fixer stream to remove inline styles from all chunks
-    const emotionFixer = createEmotionStyleFixerStream({
-      cacheKey: EMOTION_CACHE_KEY
-    });
+    const { pipe, abort } = renderToPipeableStream(jsx, {
+      onShellReady() {
+        shellRendered = true;
+        const body = new PassThrough();
 
-    const { pipe, abort } = renderToPipeableStream(
-      <CacheProvider value={cache}>
-        <ServerRouter context={routerContext} url={request.url} />
-      </CacheProvider>,
-      {
-        onShellReady() {
-          shellRendered = true;
-          const body = new PassThrough();
+        // `interleaveWithNodeStream` prepends a <style> tag before <html>,
+        // which the browser's parser reparents to the first position of
+        // <head>, breaking React's expected head ordering and causing
+        // hydration mismatches. Instead, buffer the stream until </head>
+        // and inject collected style tags there — same pattern the prior
+        // Emotion extractor used.
+        let headInjected = false;
+        let buffer = "";
+        const injector = new Transform({
+          transform(chunk, _enc, cb) {
+            if (headInjected) {
+              this.push(chunk);
+              cb();
+              return;
+            }
+            buffer += chunk.toString("utf8");
+            const headCloseIdx = buffer.indexOf("</head>");
+            if (headCloseIdx === -1) {
+              cb();
+              return;
+            }
+            const styleTags = sheet.getStyleTags();
+            this.push(buffer.slice(0, headCloseIdx));
+            this.push(styleTags);
+            this.push(buffer.slice(headCloseIdx));
+            buffer = "";
+            headInjected = true;
+            cb();
+          },
+          flush(cb) {
+            if (!headInjected && buffer) this.push(buffer);
+            cb();
+          }
+        });
 
-          responseHeaders.set("Content-Type", "text/html");
+        const output = new PassThrough();
+        output.write("<!DOCTYPE html>");
+        body.pipe(injector).pipe(output);
 
-          // Pipe through: extract/inject styles -> remove inline styles from Suspense chunks
-          const readableStream = createReadableStreamFromReadable(body);
-          const transformedStream = readableStream
-            .pipeThrough(emotionExtractor)
-            .pipeThrough(emotionFixer);
+        const webStream = createReadableStreamFromReadable(output);
 
-          resolve(
-            new Response(transformedStream, {
-              headers: responseHeaders,
-              status: currentStatusCode
-            })
-          );
+        const sealOnce = () => {
+          sheet.seal();
+        };
+        output.once("close", sealOnce);
+        output.once("error", sealOnce);
 
-          pipe(body);
-        },
-        onShellError(error) {
-          // Render a styled error page when shell fails to render
-          // This happens before React Router's error boundary can catch it
+        responseHeaders.set("Content-Type", "text/html");
+        resolve(
+          new Response(webStream, {
+            headers: responseHeaders,
+            status: currentStatusCode
+          })
+        );
+
+        pipe(body);
+      },
+      onShellError(error) {
+        // Render a styled error page when the shell fails to render,
+        // before React Router's error boundary can catch it.
+        try {
+          const errorProps = formatError(error);
+          const errorSheet = new ServerStyleSheet();
+
           try {
-            const errorCache = createEmotionCache();
-            const errorServer = createEmotionServer(errorCache);
-
-            // Format the error
-            const errorProps = formatError(error);
-
-            // Render error page with styles
             const errorHtml = renderToString(
-              <CacheProvider value={errorCache}>
+              errorSheet.collectStyles(
                 <html lang="en">
                   <head>
                     <meta charSet="utf-8" />
@@ -94,41 +107,22 @@ export default async function handleRequest(
                       name="viewport"
                       content="width=device-width, initial-scale=1"
                     />
+                    {/* Raw CSS in a virtual-DOM <style> survives React's
+                        singleton head reconciliation where createGlobalStyle's
+                        imperatively injected rules may not. */}
+                    <style>{globalRawCss}</style>
                   </head>
                   <body className="browse">
-                    <GlobalStyles styles={styles} />
+                    <GlobalStyles />
                     <div id="content">
                       <FatalError {...errorProps} />
                     </div>
                   </body>
                 </html>
-              </CacheProvider>
+              )
             );
 
-            // Extract and inject styles
-            const chunks = errorServer.extractCriticalToChunks(errorHtml);
-            let styleTags = errorServer.constructStyleTagsFromChunks(chunks);
-
-            // Also get styles from cache.inserted (for GlobalStyles)
-            if (
-              errorCache.inserted &&
-              typeof errorCache.inserted === "object"
-            ) {
-              const insertedKeys = Object.keys(errorCache.inserted);
-              const cacheStyles = insertedKeys
-                .map(key => {
-                  const inserted = errorCache.inserted[key];
-                  return typeof inserted === "string" ? inserted : "";
-                })
-                .filter(Boolean)
-                .join("\n");
-
-              if (cacheStyles) {
-                styleTags += `<style data-emotion="${EMOTION_CACHE_KEY}">${cacheStyles}</style>`;
-              }
-            }
-
-            // Inject styles into head
+            const styleTags = errorSheet.getStyleTags();
             const styledErrorHtml = errorHtml.replace(
               "</head>",
               `${styleTags}</head>`
@@ -141,20 +135,22 @@ export default async function handleRequest(
                 status: 500
               })
             );
-          } catch (renderError) {
-            // If rendering the error page fails, fall back to plain error
-            console.error("Failed to render error page:", renderError);
-            reject(error);
+          } finally {
+            errorSheet.seal();
           }
-        },
-        onError(error) {
-          currentStatusCode = 500;
-          if (shellRendered) {
-            console.error(error);
-          }
+        } catch (renderError) {
+          console.error("Failed to render error page:", renderError);
+          sheet.seal();
+          reject(error);
+        }
+      },
+      onError(error) {
+        currentStatusCode = 500;
+        if (shellRendered) {
+          console.error(error);
         }
       }
-    );
+    });
 
     setTimeout(abort, ABORT_DELAY);
   });

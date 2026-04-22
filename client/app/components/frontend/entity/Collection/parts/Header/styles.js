@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import IconComposer from "components/global/utility/IconComposer";
-import { transientOptions } from "helpers/emotionHelpers";
 import {
   fluidScale,
   respond,
@@ -76,7 +75,7 @@ function getImageStyles({ $layout }) {
   }
 }
 
-export const Header = styled("header", transientOptions)`
+export const Header = styled("header")`
   flex-grow: 999;
   flex-basis: ${({ $width }) => $width};
   display: grid;

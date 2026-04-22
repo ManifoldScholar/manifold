@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import Form from "components/global/form";
 
 export const FieldGroup = styled(Form.FieldGroup)`

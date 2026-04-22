@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Row } from "../patterns/styles";
 import { respond, fluidScale } from "theme/styles/mixins";
 

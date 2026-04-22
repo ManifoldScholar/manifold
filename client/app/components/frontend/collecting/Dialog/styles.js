@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import Dialog from "components/global/dialog";
 import IconComposer from "components/global/utility/IconComposer";
 

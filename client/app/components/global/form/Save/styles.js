@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import FieldWrapper from "../FieldWrapper";
 
 export const FormButtonsWrapper = styled(FieldWrapper)`

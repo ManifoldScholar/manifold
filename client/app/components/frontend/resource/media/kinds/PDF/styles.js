@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const Image = styled.img`
   aspect-ratio: var(--Media-aspect-ratio, auto);

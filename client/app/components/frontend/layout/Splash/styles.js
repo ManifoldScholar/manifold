@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import {
   containerPrototype,
   respond,
@@ -6,7 +6,6 @@ import {
   headingSecondary,
   defaultTransitionProps
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const previewStyles = `
   margin-bottom: 40px;
@@ -32,7 +31,7 @@ const lightStyles = `
   }
 `;
 
-export const Wrapper = styled("section", transientOptions)`
+export const Wrapper = styled("section")`
   position: relative;
   font-size: 17px;
 
@@ -88,7 +87,7 @@ export const Left = styled.div`
   }
 `;
 
-export const Heading = styled("h1", transientOptions)`
+export const Heading = styled("h1")`
   ${headingPrimary}
   font-size: 22px;
   margin-bottom: 0;
@@ -109,7 +108,7 @@ export const Heading = styled("h1", transientOptions)`
   )}
 `;
 
-export const Subheading = styled("h2", transientOptions)`
+export const Subheading = styled("h2")`
   ${headingSecondary}
   font-size: 1.29em;
   margin-bottom: 0;
@@ -120,7 +119,7 @@ export const Subheading = styled("h2", transientOptions)`
   }
 `;
 
-export const Body = styled("div", transientOptions)`
+export const Body = styled("div")`
   margin-top: 1.5em;
   color: ${({ $color }) => $color || "inherit"};
 
@@ -163,7 +162,7 @@ export const Right = styled.figure`
   )}
 `;
 
-export const Image = styled("img", transientOptions)`
+export const Image = styled("img")`
   position: ${({ $position }) => $position || "relative"};
   top: ${({ $top }) => $top ?? `4em`};
   left: ${({ $left }) => $left};

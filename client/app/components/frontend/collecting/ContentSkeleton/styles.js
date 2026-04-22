@@ -1,7 +1,6 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 
-export const Skeleton = styled("div", transientOptions)`
+export const Skeleton = styled("div")`
   width: 100%;
   height: 100%;
   min-height: 20px;

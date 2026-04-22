@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { fluidScale } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
-export const Wrapper = styled("div", transientOptions)`
+export const Wrapper = styled("div")`
   position: relative;
   max-height: 310px;
   min-height: 180px;

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   --FieldGroup-child-flex-basis: calc(50% - var(--FieldGroup-column-gap));

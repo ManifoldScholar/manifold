@@ -5,14 +5,13 @@ import {
   defaultLayoutIcons,
   DefaultVideoLayout
 } from "@vidstack/react/player/layouts/default";
-import { Global as GlobalStyles } from "@emotion/react";
-import vdsStyles from "./vdsStyles";
+import VdsGlobalStyles from "./vdsStyles";
 import * as Styled from "./styles";
 
 function DefaultPlayer({ title, src, tracks, poster, viewType }) {
   return (
     <>
-      <GlobalStyles styles={vdsStyles} />
+      <VdsGlobalStyles />
       <Styled.MediaPlayer
         title={title}
         src={src}

@@ -1,10 +1,9 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link as LinkComponent } from "react-router";
 import IconComposer from "components/global/utility/IconComposer";
-import { transientOptions } from "helpers/emotionHelpers";
 import { respond, defaultTransitionProps } from "theme/styles/mixins";
 
-export const Wrapper = styled("div", transientOptions)`
+export const Wrapper = styled("div")`
   --EntityListTotal-margin-block-end: 25px;
 
   padding-block: 5px;

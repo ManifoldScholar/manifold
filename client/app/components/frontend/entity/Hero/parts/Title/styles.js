@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { respond } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const BREAKPOINT = breakpoints[60];
 
-export const Header = styled("header", transientOptions)`
+export const Header = styled("header")`
   position: relative;
   z-index: 50;
   hyphens: none;
@@ -21,7 +20,7 @@ export const TitleWrapper = styled.div`
   display: flex;
 `;
 
-export const Title = styled("h1", transientOptions)`
+export const Title = styled("h1")`
   font-family: var(--font-family-heading);
   margin: 0;
   font-size: 22px;

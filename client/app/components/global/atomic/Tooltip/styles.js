@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { subtitlePrimary, dragging } from "theme/styles/mixins";
 
 export const Tooltip = styled.div`

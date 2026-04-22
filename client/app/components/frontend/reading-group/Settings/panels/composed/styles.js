@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { SecondaryInput } from "components/global/form/BaseInput/styles";
 
 export const Inputs = styled.div`

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { containerPrototype } from "theme/styles/mixins";
 
 const containerGap = "50px";

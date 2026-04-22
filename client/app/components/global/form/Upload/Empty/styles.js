@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { utilityPrimary, formLabelPrimary } from "theme/styles/mixins";
 import IconComposer from "components/global/utility/IconComposer";
 import { Prompt } from "../Base/styles";

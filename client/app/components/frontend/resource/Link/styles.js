@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import Button from "components/global/atomic/Button";
 
 export const ExternalLink = styled(Button)`

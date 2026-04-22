@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { utilityPrimary, buttonUnstyled } from "theme/styles/mixins";
 import { MenuItem as ReakitMenuItem } from "reakit/Menu";
 import IconComposer from "components/global/utility/IconComposer";

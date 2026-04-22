@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { respond } from "theme/styles/mixins";
 import { Outer, Inner, Breadcrumb } from "../Frontend/styles";
 import IconComposer from "components/global/utility/IconComposer";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const BackendOuter = styled(Outer)`
   --Breadcrumb-margin-inline: 0.5em;
@@ -36,7 +35,7 @@ export const Label = styled.span`
   white-space: nowrap;
 `;
 
-export const BackendBreadcrumb = styled(Breadcrumb, transientOptions)`
+export const BackendBreadcrumb = styled(Breadcrumb)`
   &:last-of-type:not(span) {
     color: var(--input-color);
     padding-inline-end: 24px;

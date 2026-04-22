@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link } from "react-router";
 import { tocDrawer } from "../styles";
 import { defaultTransitionProps, defaultFocusStyle } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const toggleWidth = "24px";
 const togglePadding = "40px";
@@ -14,7 +13,7 @@ export const Inner = styled.div`
   display: flex;
 `;
 
-export const ItemLink = styled(Link, transientOptions)`
+export const ItemLink = styled(Link)`
   flex-grow: 1;
   width: 100%;
   padding: 0.773em ${inlineEndPadding} 0.773em var(--toc-inline-start-padding);

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import {
   respond,
   utilityPrimary,
@@ -9,7 +9,6 @@ import {
   buttonUnstyled,
   panelRounded
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const Container = styled.section`
   ${containerPrototype}
@@ -69,7 +68,7 @@ export const CommentsWrapper = styled.div`
   align-self: start;
 `;
 
-export const CommentsSection = styled("div", transientOptions)`
+export const CommentsSection = styled("div")`
   --CommentEditor-Label-margin-block-start: 30px;
 
   margin-block-start: 50px;
