@@ -2030,6 +2030,24 @@ CREATE TABLE public.legacy_favorites (
 
 
 --
+-- Name: lti_course_contexts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lti_course_contexts (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    lti_deployment_id uuid NOT NULL,
+    context_id text NOT NULL,
+    reading_group_id uuid,
+    context_title text,
+    context_label text,
+    context_type text,
+    last_synced_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
 -- Name: lti_deployments; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4074,6 +4092,14 @@ ALTER TABLE ONLY public.legacy_favorites
 
 
 --
+-- Name: lti_course_contexts lti_course_contexts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_course_contexts
+    ADD CONSTRAINT lti_course_contexts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: lti_deployments lti_deployments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5585,6 +5611,27 @@ CREATE INDEX index_legacy_favorites_on_favoritable_type_and_favoritable_id ON pu
 --
 
 CREATE INDEX index_legacy_favorites_on_user_id ON public.legacy_favorites USING btree (user_id);
+
+
+--
+-- Name: index_lti_course_contexts_on_deployment_and_context; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lti_course_contexts_on_deployment_and_context ON public.lti_course_contexts USING btree (lti_deployment_id, context_id);
+
+
+--
+-- Name: index_lti_course_contexts_on_lti_deployment_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lti_course_contexts_on_lti_deployment_id ON public.lti_course_contexts USING btree (lti_deployment_id);
+
+
+--
+-- Name: index_lti_course_contexts_on_reading_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lti_course_contexts_on_reading_group_id ON public.lti_course_contexts USING btree (reading_group_id);
 
 
 --
@@ -7651,6 +7698,14 @@ ALTER TABLE ONLY public.project_exportations
 
 
 --
+-- Name: lti_course_contexts fk_rails_8c9393d274; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_course_contexts
+    ADD CONSTRAINT fk_rails_8c9393d274 FOREIGN KEY (reading_group_id) REFERENCES public.reading_groups(id) ON DELETE SET NULL;
+
+
+--
 -- Name: reading_group_journal_issues fk_rails_8f8b2db847; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7963,6 +8018,14 @@ ALTER TABLE ONLY public.user_collected_text_sections
 
 
 --
+-- Name: lti_course_contexts fk_rails_e6398a50a9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_course_contexts
+    ADD CONSTRAINT fk_rails_e6398a50a9 FOREIGN KEY (lti_deployment_id) REFERENCES public.lti_deployments(id) ON DELETE CASCADE;
+
+
+--
 -- Name: project_exportations fk_rails_e7048bd40f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8065,6 +8128,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260420000001'),
 ('20260406000002'),
 ('20260406000001'),
 ('20260209183815'),
