@@ -69,3 +69,4 @@ backup-local*.tar
 !/docker/minio/client/initialize.sh
 
 CLAUDE.md
+.planning/
