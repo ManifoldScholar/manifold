@@ -1,10 +1,10 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Outlet, useLocation } from "react-router";
 import useDialog from "@castiron/hooks/useDialog";
 import Breadcrumbs from "components/lti/Breadcrumbs";
 import SearchForm from "components/lti/SearchForm";
 import SelectionSidebar from "components/lti/SelectionSidebar";
-import SetupChoice from "components/lti/SetupChoice";
+// import SetupChoice from "components/lti/SetupChoice";
 import { useBodyClass } from "hooks";
 import { SelectionProvider } from "contexts";
 import * as Styled from "./styles";
@@ -16,15 +16,14 @@ export default function LtiLayout() {
   const sidebarDialog = useDialog({ modal: false, dismissalMode: "explicit" });
 
   // TODO: replace with course info fetched from the LTI API once available.
-  const [courseInfo, setCourseInfo] = useState({ hasRG: null });
-  const needsSetup = courseInfo.hasRG === null;
+  // const [courseInfo, setCourseInfo] = useState({ hasRG: null });
+  // const needsSetup = courseInfo.hasRG === null;
 
   const lastSegment = location.pathname.split("/").pop();
-  const hideSearch =
-    needsSetup || lastSegment === "lti" || lastSegment === "search";
+  const hideSearch = lastSegment === "lti" || lastSegment === "search";
 
-  const handleChoose = choice =>
-    setCourseInfo(prev => ({ ...prev, hasRG: choice }));
+  // const handleChoose = choice =>
+  //   setCourseInfo(prev => ({ ...prev, hasRG: choice }));
 
   return (
     <SelectionProvider>
@@ -34,9 +33,9 @@ export default function LtiLayout() {
           {!hideSearch && <SearchForm size="sm" />}
         </Styled.TopBar>
         <Styled.Main>
-          {needsSetup ? <SetupChoice onChoose={handleChoose} /> : <Outlet />}
+          <Outlet />
         </Styled.Main>
-        {!needsSetup && <SelectionSidebar dialog={sidebarDialog} />}
+        <SelectionSidebar dialog={sidebarDialog} />
       </Styled.Wrapper>
     </SelectionProvider>
   );
