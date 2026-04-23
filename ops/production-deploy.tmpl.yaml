@@ -14,6 +14,7 @@ readinessProbe:
   enabled: false
 
 ingress:
+  className: "nginx-ingress"
   enabled: true
   hosts:
     - host: openpublishing.princeton.edu
@@ -21,9 +22,8 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod-nginx-ingress"
   tls:
     - hosts:
         - openpublishing.princeton.edu
