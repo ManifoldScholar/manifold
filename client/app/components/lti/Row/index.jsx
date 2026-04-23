@@ -77,6 +77,20 @@ function Figure({ kind, entity }) {
       />
     );
   }
+  if (kind === "resourceCollection") {
+    const safe = safeEntity(entity, "thumbnailStyles");
+    const hasImg = Boolean(safe.attributes.thumbnailStyles?.smallLandscape);
+    return (
+      <TypeStyled.Thumbnail
+        as={EntityThumbnail.ResourceCollection}
+        entity={safe}
+        variant="smallLandscape"
+        width="100%"
+        height={null}
+        $isImg={hasImg}
+      />
+    );
+  }
   const safe = safeEntity(entity, "avatarStyles");
   return (
     <TypeStyled.Thumbnail

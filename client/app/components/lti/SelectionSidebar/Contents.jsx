@@ -4,7 +4,13 @@ import IconComposer from "components/global/utility/IconComposer";
 import { useSelection } from "contexts";
 import * as Styled from "./styles";
 
-const SIDEBAR_TYPES = ["project", "text", "section", "resource"];
+const SIDEBAR_TYPES = [
+  "project",
+  "text",
+  "section",
+  "resource",
+  "resourceCollection"
+];
 
 export default function SelectionSidebarContents({ onClose }) {
   const { t } = useTranslation();

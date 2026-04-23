@@ -31,7 +31,10 @@
       "texts_heading": "$t(glossary.text_title_case_other)",
       "texts_empty": "No $t(glossary.text_other).",
       "resources_heading": "$t(glossary.resource_title_case_other)",
-      "resources_empty": "No $t(glossary.resource_other)."
+      "resources_empty": "No $t(glossary.resource_other).",
+      "resource_collections_heading": "$t(glossary.resource_collection_title_case_other)",
+      "resource_collections_empty": "No $t(glossary.resource_collection_other).",
+      "empty": "No results"
     },
     "text_detail": {
       "toc_heading": "Table of contents",
@@ -63,7 +66,8 @@
         "project": "$t(glossary.project_title_case_other)",
         "text": "$t(glossary.text_title_case_other)",
         "section": "$t(glossary.section_title_case_other)",
-        "resource": "$t(glossary.resource_title_case_other)"
+        "resource": "$t(glossary.resource_title_case_other)",
+        "resourceCollection": "$t(glossary.resource_collection_title_case_other)"
       }
     },
     "facets": {
@@ -76,6 +80,7 @@
     "breadcrumb": {
       "projects": "$t(glossary.project_title_case_other)",
       "texts": "$t(glossary.text_title_case_other)",
+      "resource_collections": "$t(glossary.resource_collection_title_case_other)",
       "search": "Search"
     },
     "types": {

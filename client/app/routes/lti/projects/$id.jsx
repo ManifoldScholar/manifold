@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { projectsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
-import loadList from "lib/react-router/loaders/loadList";
+import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
 import LtiRow from "components/lti/Row";
 import BrowseList from "components/lti/BrowseList";
 import EntityHeader from "components/lti/EntityHeader";
@@ -24,19 +24,25 @@ export const loader = async ({ params, request, context }) => {
     request
   });
 
-  const resources = await loadList({
-    request,
+  const { resources, collections } = await loadParallelLists({
     context,
-    fetchFn: (filters, pagination) =>
-      projectsAPI.resources(params.id, filters, pagination),
-    options: { defaultPagination: { page: 1, perPage: 50 } }
+    fetchFns: {
+      resources: () =>
+        projectsAPI.resources(params.id, {}, { number: 1, size: 50 }),
+      collections: () =>
+        projectsAPI.resourceCollections(params.id, {}, { number: 1, size: 50 })
+    }
   });
 
-  return { project, resources: resources.data, resourcesMeta: resources.meta };
+  return {
+    project,
+    resources: resources ?? [],
+    collections: collections ?? []
+  };
 };
 
 export default function LtiStyledDetail({
-  loaderData: { project, resources, resourcesMeta }
+  loaderData: { project, resources, collections }
 }) {
   const { t } = useTranslation();
   const { titlePlaintext, subtitle, textsNav } = project.attributes;
@@ -81,8 +87,35 @@ export default function LtiStyledDetail({
           );
         })}
       </BrowseList>
+      <h2>{t("lti.lists.resource_collections_heading")}</h2>
+      <BrowseList noPagination>
+        {collections.map(collection => {
+          const {
+            titlePlaintext: cTitle,
+            title: cTitleFallback
+          } = collection.attributes;
+          const title = cTitle ?? cTitleFallback;
+          const item = {
+            type: "resourceCollection",
+            id: collection.id,
+            title
+          };
+          const selected = has(item);
+          return (
+            <LtiRow
+              key={collection.id}
+              entity={collection}
+              kind="resourceCollection"
+              to={`/lti/resource-collections/${collection.id}`}
+              linkState={{ trail: projectTrail }}
+              selected={selected}
+              onToggle={() => (selected ? remove(item) : add(item))}
+            />
+          );
+        })}
+      </BrowseList>
       <h2>{t("lti.lists.resources_heading")}</h2>
-      <BrowseList meta={resourcesMeta}>
+      <BrowseList noPagination>
         {resources.map(resource => {
           const { titlePlaintext: rTitle } = resource.attributes;
           const item = {
@@ -96,7 +129,6 @@ export default function LtiStyledDetail({
               key={resource.id}
               entity={resource}
               kind="resource"
-              to={`/lti/resources/${resource.id}`}
               linkState={{ trail: projectTrail }}
               selected={selected}
               onToggle={() => (selected ? remove(item) : add(item))}

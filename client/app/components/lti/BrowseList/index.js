@@ -8,7 +8,7 @@ export default function BrowseList({ children, meta, noPagination = false }) {
   const empty = noPagination ? !children : !meta?.pagination?.totalCount;
 
   return empty ? (
-    <Styled.Empty>{t("lti.lists.projects_empty")}</Styled.Empty>
+    <Styled.Empty>{t("lti.lists.empty")}</Styled.Empty>
   ) : (
     <>
       <Styled.List>{children}</Styled.List>
