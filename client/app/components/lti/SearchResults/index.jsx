@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import LtiPager from "components/lti/Pager";
 import SearchResultRow from "components/lti/SearchResultRow";
-import * as Shared from "app/routes/lti/styles";
 import * as Styled from "./styles";
 
 export default function SearchResults({
@@ -14,12 +13,12 @@ export default function SearchResults({
   const totalCount = meta?.pagination?.totalCount;
 
   if (results === null || !keyword) {
-    return <Shared.Empty>{t("lti.search.empty_prompt")}</Shared.Empty>;
+    return <Styled.Empty>{t("lti.search.empty_prompt")}</Styled.Empty>;
   }
 
   if (results.length === 0) {
     return (
-      <Shared.Empty>{t("lti.search.no_results", { keyword })}</Shared.Empty>
+      <Styled.Empty>{t("lti.search.no_results", { keyword })}</Styled.Empty>
     );
   }
 
@@ -30,14 +29,14 @@ export default function SearchResults({
           {t("lti.search.result_count", { count: totalCount })}
         </Styled.ResultsCount>
       ) : null}
-      <Shared.List>
+      <Styled.List>
         {results.map(result => (
           <SearchResultRow key={result.id} result={result} />
         ))}
-      </Shared.List>
-      <Shared.PagerWrap>
+      </Styled.List>
+      <Styled.PagerWrap>
         <LtiPager meta={meta} paginationClickHandler={onPageChange} />
-      </Shared.PagerWrap>
+      </Styled.PagerWrap>
     </>
   );
 }

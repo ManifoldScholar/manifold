@@ -2,8 +2,7 @@ import { useTranslation } from "react-i18next";
 import { textsAPI } from "api";
 import loadList from "lib/react-router/loaders/loadList";
 import LtiRow from "components/lti/Row";
-import LtiPager from "components/lti/Pager";
-import * as Styled from "./styles";
+import BrowseList from "components/lti/BrowseList";
 import { useSelection } from "contexts";
 
 export const handle = {
@@ -21,43 +20,34 @@ export const loader = async ({ request, context }) => {
   });
 };
 
-export default function LtiStyledsList({ loaderData: { data: texts, meta } }) {
+export default function LtiStyledsList({ loaderData: { data: texts } }) {
   const { t } = useTranslation();
   const { add, remove, has } = useSelection();
 
   return (
     <>
       <h1>{t("lti.lists.texts_heading")}</h1>
-      {texts.length === 0 ? (
-        <Styled.Empty>{t("lti.lists.texts_empty")}</Styled.Empty>
-      ) : (
-        <>
-          <Styled.List>
-            {texts.map(text => {
-              const { titlePlaintext } = text.attributes;
-              const item = {
-                type: "text",
-                id: text.id,
-                title: titlePlaintext
-              };
-              const selected = has(item);
-              return (
-                <LtiRow
-                  key={text.id}
-                  entity={text}
-                  kind="text"
-                  to={`/lti/texts/${text.id}`}
-                  selected={selected}
-                  onToggle={() => (selected ? remove(item) : add(item))}
-                />
-              );
-            })}
-          </Styled.List>
-          <Styled.PagerWrap>
-            <LtiPager meta={meta} />
-          </Styled.PagerWrap>
-        </>
-      )}
+      <BrowseList noPagination>
+        {texts.map(text => {
+          const { titlePlaintext } = text.attributes;
+          const item = {
+            type: "text",
+            id: text.id,
+            title: titlePlaintext
+          };
+          const selected = has(item);
+          return (
+            <LtiRow
+              key={text.id}
+              entity={text}
+              kind="text"
+              to={`/lti/texts/${text.id}`}
+              selected={selected}
+              onToggle={() => (selected ? remove(item) : add(item))}
+            />
+          );
+        })}
+      </BrowseList>
     </>
   );
 }
