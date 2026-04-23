@@ -16,8 +16,18 @@ readinessProbe:
 ingress:
   className: "nginx-ingress"
   enabled: true
+  className: nginx-ingress
   hosts:
     - host: openpublishing.princeton.edu
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+    # TODO: This origin hostname is currently required because Cloudflare Custom Hostnames
+    # sends the custom origin hostname as upstream SNI. Our ingress/origin certificate
+    # must continue to serve this hostname until the Cloudflare custom origin/SNI behavior
+    # is changed or the fallback/origin hostname strategy is removed.
+    # https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/start/advanced-settings/custom-origin/
+    - host: princeton-manifold-origin.notch8.cloud
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -25,10 +35,13 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     cert-manager.io/cluster-issuer: "letsencrypt-prod-nginx-ingress"
   tls:
+    # TODO: We can remove princeton-manifold-origin.notch8.cloud only after Cloudflare
+    # no longer sends that hostname as the upstream SNI value for this custom hostname.
+    # For now, the origin certificate must cover both:
     - hosts:
         - openpublishing.princeton.edu
+        - princeton-manifold-origin.notch8.cloud
       secretName: production-princeton-manifold-tls
-
 api:
   rails:
     replicaCount: 2
