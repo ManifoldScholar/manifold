@@ -1,8 +1,7 @@
-import { useTranslation } from "react-i18next";
 import { textsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
-import TocNode from "components/lti/TocNode";
-import * as Styled from "./styles";
+import Toc from "components/lti/Toc";
+import EntityHeader from "components/lti/EntityHeader";
 
 export const handle = {
   breadcrumb: ({ loaderData, params }, location, t) => {
@@ -28,31 +27,17 @@ export const loader = async ({ params, request, context }) => {
 };
 
 export default function LtiStyledDetail({ loaderData: text }) {
-  const { t } = useTranslation();
   const { titlePlaintext, subtitle, toc } = text.attributes;
 
   return (
     <>
-      <h1>{titlePlaintext}</h1>
-      {subtitle ? <Styled.Subtitle>{subtitle}</Styled.Subtitle> : null}
-
-      <h2>{t("lti.text_detail.toc_heading")}</h2>
-      {toc?.length ? (
-        <Styled.Toc>
-          <Styled.TocList>
-            {toc.map(node => (
-              <TocNode
-                key={node.id}
-                node={node}
-                depth={0}
-                textTitle={titlePlaintext}
-              />
-            ))}
-          </Styled.TocList>
-        </Styled.Toc>
-      ) : (
-        <Styled.TocEmpty>{t("lti.text_detail.toc_empty")}</Styled.TocEmpty>
-      )}
+      <EntityHeader
+        id={text.id}
+        type="text"
+        title={titlePlaintext}
+        subtitle={subtitle}
+      />
+      <Toc toc={toc} textTitle={titlePlaintext} />
     </>
   );
 }

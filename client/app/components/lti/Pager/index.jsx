@@ -1,4 +1,5 @@
 import Pagination from "components/global/utility/Pagination";
+import * as Styled from "./styles";
 
 export default function LtiPager({
   meta,
@@ -10,10 +11,12 @@ export default function LtiPager({
     return null;
   }
   return (
-    <Pagination
-      pagination={pagination}
-      wide={wide}
-      paginationClickHandler={paginationClickHandler}
-    />
+    <Styled.Wrapper>
+      <Pagination
+        pagination={pagination}
+        wide={wide}
+        paginationClickHandler={paginationClickHandler}
+      />
+    </Styled.Wrapper>
   );
 }

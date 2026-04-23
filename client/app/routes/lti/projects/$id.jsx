@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { projectsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
-import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
-import LinkToggle from "components/lti/LinkToggle";
+import loadList from "lib/react-router/loaders/loadList";
 import LtiRow from "components/lti/Row";
-import * as Styled from "./styles";
+import BrowseList from "components/lti/BrowseList";
+import EntityHeader from "components/lti/EntityHeader";
 import { useSelection } from "contexts";
 
 export const handle = {
@@ -24,30 +24,24 @@ export const loader = async ({ params, request, context }) => {
     request
   });
 
-  const lists = await loadParallelLists({
+  const resources = await loadList({
+    request,
     context,
-    fetchFns: {
-      resources: () => projectsAPI.resources(params.id, {}, { size: 50 })
-    }
+    fetchFn: (filters, pagination) =>
+      projectsAPI.resources(params.id, filters, pagination),
+    options: { defaultPagination: { page: 1, perPage: 50 } }
   });
 
-  return { project, resources: lists.resources ?? [] };
+  return { project, resources: resources.data, resourcesMeta: resources.meta };
 };
 
 export default function LtiStyledDetail({
-  loaderData: { project, resources }
+  loaderData: { project, resources, resourcesMeta }
 }) {
   const { t } = useTranslation();
   const { titlePlaintext, subtitle, textsNav } = project.attributes;
   const texts = textsNav ?? [];
   const { add, remove, has } = useSelection();
-
-  const projectItem = {
-    type: "project",
-    id: project.id,
-    title: titlePlaintext
-  };
-  const projectSelected = has(projectItem);
 
   const projectTrail = [
     { label: t("lti.breadcrumb.projects"), to: "/lti/projects" },
@@ -56,79 +50,60 @@ export default function LtiStyledDetail({
 
   return (
     <>
-      <Styled.HeaderRow>
-        <h1>{titlePlaintext}</h1>
-        <LinkToggle
-          selected={projectSelected}
-          onToggle={() =>
-            projectSelected ? remove(projectItem) : add(projectItem)
-          }
-          srLabel={
-            projectSelected
-              ? t("lti.toggle.remove_item", { title: titlePlaintext })
-              : t("lti.toggle.add_item", { title: titlePlaintext })
-          }
-        />
-      </Styled.HeaderRow>
-      {subtitle ? <Styled.Subtitle>{subtitle}</Styled.Subtitle> : null}
-
+      <EntityHeader
+        id={project.id}
+        type="project"
+        title={titlePlaintext}
+        subtitle={subtitle}
+      />
       <h2>{t("lti.lists.texts_heading")}</h2>
-      {texts.length === 0 ? (
-        <Styled.Empty>{t("lti.lists.texts_empty")}</Styled.Empty>
-      ) : (
-        <Styled.List>
-          {texts.map(text => {
-            const item = { type: "text", id: text.id, title: text.label };
-            const selected = has(item);
-            return (
-              <LtiRow
-                key={text.id}
-                entity={{
-                  id: text.id,
-                  type: "text",
-                  attributes: {
-                    titlePlaintext: text.label,
-                    coverStyles: {}
-                  }
-                }}
-                kind="text"
-                to={`/lti/texts/${text.id}`}
-                linkState={{ trail: projectTrail }}
-                selected={selected}
-                onToggle={() => (selected ? remove(item) : add(item))}
-              />
-            );
-          })}
-        </Styled.List>
-      )}
-
+      <BrowseList noPagination>
+        {texts.map(text => {
+          const item = { type: "text", id: text.id, title: text.label };
+          const selected = has(item);
+          return (
+            <LtiRow
+              key={text.id}
+              entity={{
+                id: text.id,
+                type: "text",
+                attributes: {
+                  titlePlaintext: text.label,
+                  coverStyles: {}
+                }
+              }}
+              kind="text"
+              to={`/lti/texts/${text.id}`}
+              linkState={{ trail: projectTrail }}
+              selected={selected}
+              onToggle={() => (selected ? remove(item) : add(item))}
+            />
+          );
+        })}
+      </BrowseList>
       <h2>{t("lti.lists.resources_heading")}</h2>
-      {resources.length === 0 ? (
-        <Styled.Empty>{t("lti.lists.resources_empty")}</Styled.Empty>
-      ) : (
-        <Styled.List>
-          {resources.map(resource => {
-            const { titlePlaintext: rTitle } = resource.attributes;
-            const item = {
-              type: "resource",
-              id: resource.id,
-              title: rTitle
-            };
-            const selected = has(item);
-            return (
-              <LtiRow
-                key={resource.id}
-                entity={resource}
-                kind="resource"
-                to={`/lti/resources/${resource.id}`}
-                linkState={{ trail: projectTrail }}
-                selected={selected}
-                onToggle={() => (selected ? remove(item) : add(item))}
-              />
-            );
-          })}
-        </Styled.List>
-      )}
+      <BrowseList meta={resourcesMeta}>
+        {resources.map(resource => {
+          const { titlePlaintext: rTitle } = resource.attributes;
+          const item = {
+            type: "resource",
+            id: resource.id,
+            title: rTitle
+          };
+          const selected = has(item);
+          return (
+            <LtiRow
+              key={resource.id}
+              entity={resource}
+              kind="resource"
+              to={`/lti/resources/${resource.id}`}
+              linkState={{ trail: projectTrail }}
+              selected={selected}
+              onToggle={() => (selected ? remove(item) : add(item))}
+            />
+          );
+        })}
+      </BrowseList>
     </>
   );
 }
