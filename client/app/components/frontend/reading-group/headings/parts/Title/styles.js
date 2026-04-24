@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import IconComposer from "components/global/utility/IconComposer";
 import AtomicTag from "components/global/atomic/Tag";
 import { respond } from "theme/styles/mixins";

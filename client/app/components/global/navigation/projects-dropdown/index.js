@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 
 function ProjectsDropdown(props, ref) {
-  const { links, visible, ...dropDownProps } = props;
+  const { links, visible, toggleVisible, ...dropDownProps } = props;
   const { t } = useTranslation();
 
   const pathForLink = link => {
@@ -26,7 +26,7 @@ function ProjectsDropdown(props, ref) {
         <Styled.Link
           to={pathForLink(link)}
           className={({ isActive }) => (isActive ? "active" : undefined)}
-          onClick={dropDownProps.toggleVisible}
+          onClick={toggleVisible}
         >
           <Styled.LinkIcon icon={icon} size={24} />
           <Styled.LinkText>{t(link.label)}</Styled.LinkText>

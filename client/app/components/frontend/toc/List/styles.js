@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { respond, listUnstyled, fluidScale } from "theme/styles/mixins";
 
 const firstLevelPadding = "1em";
@@ -38,7 +37,7 @@ export const TextSubtitle = styled.span`
   letter-spacing: 0.017em;
 `;
 
-export const List = styled("ul", transientOptions)`
+export const List = styled("ul")`
   ${listUnstyled}
   display: flex;
   flex-direction: column;

@@ -1,9 +1,8 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { respond, fluidScale, defaultHoverStyle } from "theme/styles/mixins";
 import IconComposer from "components/global/utility/IconComposer";
 import UniqueIcons from "components/global/icon/unique";
 import { Link } from "react-router";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const Row = styled.div`
   padding: ${fluidScale("22px", "24px")} ${fluidScale("28px", "16px")}
@@ -133,7 +132,7 @@ export const TitleWrapper = styled.div`
   )}
 `;
 
-export const Title = styled("h1", transientOptions)`
+export const Title = styled("h1")`
   margin: 0;
   font-size: ${fluidScale("23px", "17px")};
   font-family: var(--font-family-sans);

@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import IconComposer from "components/global/utility/IconComposer";
-import { transientOptions } from "helpers/emotionHelpers";
 import {
   respond,
   panelRounded,
@@ -159,7 +158,7 @@ export const Subtitle = styled.span`
   font-size: 15px;
 `;
 
-export const Content = styled("div", transientOptions)`
+export const Content = styled("div")`
   font-family: var(--font-family-copy);
   font-size: 13px;
   line-height: 1.313em;

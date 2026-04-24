@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { listUnstyled, respond } from "theme/styles/mixins";
 import { eventEntity } from "theme/styles/variables/crossComponent";
 

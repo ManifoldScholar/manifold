@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { formInputMessage } from "theme/styles/mixins";
 
 export const Error = styled.span`

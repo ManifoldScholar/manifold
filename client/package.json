@@ -27,11 +27,7 @@
     "@atlaskit/tree": "^9.0.1",
     "@castiron/hooks": "^3.1.0",
     "@castiron/style-mixins": "^2.0.0",
-    "@emotion/babel-plugin": "^11.13.5",
-    "@emotion/cache": "^11.14.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/server": "^11.11.0",
-    "@emotion/styled": "^11.14.1",
+    "@emotion/is-prop-valid": "^1.4.0",
     "@melloware/coloris": "^0.25.0",
     "@react-router/dev": "^7.10.1",
     "@react-router/node": "^7.10.1",
@@ -77,6 +73,7 @@
     "slate-hyperscript": "^0.100.0",
     "slate-react": "^0.117.4",
     "stream-browserify": "^3.0.0",
+    "styled-components": "^6",
     "swagger-ui": "5.x",
     "swagger-ui-react": "5.x",
     "text-mask-addons": "^3.8.0",
@@ -93,6 +90,7 @@
     "@types/react": "^18.x",
     "@types/react-dom": "^18.x",
     "babel-eslint": "^10",
+    "babel-plugin-styled-components": "^2.1.4",
     "depcheck": "^1.4.7",
     "eslint": "^6.x",
     "eslint-config-airbnb": "18.x",
@@ -102,7 +100,8 @@
     "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "vite-plugin-babel": "^1.6.0"
   },
   "engines": {
     "node": "22.x",

@@ -1,9 +1,8 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 
 const containerGap = "30px";
 
-export const GroupHeader = styled("header", transientOptions)`
+export const GroupHeader = styled("header")`
   ${({ $canUpdate }) =>
     $canUpdate &&
     `

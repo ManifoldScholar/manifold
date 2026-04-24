@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link } from "react-router";
-import { transientOptions } from "helpers/emotionHelpers";
 import {
   respond,
   panelRounded,
@@ -10,7 +9,7 @@ import {
   fluidScale
 } from "theme/styles/mixins";
 
-export const Cover = styled("div", transientOptions)`
+export const Cover = styled("div")`
   --hover-color: var(--color-interaction-light);
 
   ${panelRounded}

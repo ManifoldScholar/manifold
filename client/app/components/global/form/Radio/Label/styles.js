@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { formLabelPrimary, utilityPrimary } from "theme/styles/mixins";
 
 export const Legend = styled.legend`

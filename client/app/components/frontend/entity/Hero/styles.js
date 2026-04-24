@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { breakpoints } from "theme/styles/variables/media";
 import { respond, containerPrototype, fluidScale } from "theme/styles/mixins";
 
 const BREAKPOINT = breakpoints[60];
 
-export const Wrapper = styled("section", transientOptions)`
+export const Wrapper = styled("section")`
   position: relative;
   padding-block-start: 20px;
   padding-block-end: 35px;

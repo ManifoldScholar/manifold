@@ -1,6 +1,6 @@
-import { css } from "@emotion/react";
+import { createGlobalStyle } from "styled-components";
 import apiDocsStyles from "./apiDocs";
 
-export default css`
-  ${apiDocsStyles}
-`;
+export const rawCss = apiDocsStyles;
+
+export default createGlobalStyle`${apiDocsStyles}`;

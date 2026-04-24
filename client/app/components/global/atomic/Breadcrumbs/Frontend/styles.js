@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link } from "react-router";
 import {
   respond,
@@ -6,7 +6,6 @@ import {
   containerPrototype,
   defaultTransitionProps
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const Outer = styled.nav`
   --Breadcrumb-margin-inline: 16px;
@@ -36,7 +35,7 @@ export const Inner = styled.div`
   align-items: center;
 `;
 
-export const Breadcrumb = styled(Link, transientOptions)`
+export const Breadcrumb = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none !important;

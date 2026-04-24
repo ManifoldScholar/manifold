@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { transparentize, defaultTransitionProps } from "theme/styles/mixins";
 
 export const Overlay = styled.div`

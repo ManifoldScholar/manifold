@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { utilityPrimary, respond } from "theme/styles/mixins";
 
 export const Divider = styled.div`

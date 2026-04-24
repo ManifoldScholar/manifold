@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { fluidScale } from "theme/styles/mixins";
 import { Columns } from "./Parts/Columns/styles";
 

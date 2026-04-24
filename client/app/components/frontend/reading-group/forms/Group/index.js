@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import Collapse from "components/global/Collapse";
 import Form from "components/global/form";
 import withConfirmation from "components/hoc/withConfirmation";
-import { ClassNames } from "@emotion/react";
 import { useSettings, useAuthentication } from "hooks";
 import * as Styled from "./styles";
 
@@ -177,30 +176,27 @@ function ReadingGroupForm({
                 }
               ]}
             />
-            <ClassNames>
-              {({ css }) => (
-                <Form.Radios
-                  label={t("forms.reading_group.course")}
-                  name="attributes[course][enabled]"
-                  defaultValue={false}
-                  instructions={t("forms.reading_group.course_instructions")}
-                  options={[
-                    {
-                      label: t("forms.reading_group.course_options.yes"),
-                      value: true
-                    },
-                    {
-                      label: t("forms.reading_group.course_options.no"),
-                      value: false
-                    }
-                  ]}
-                  beforeOnChange={handleCourseChange}
-                  inputClasses={css(`padding-block-end: 20px;`)}
-                  inline
-                  wide
-                />
-              )}
-            </ClassNames>
+            <Styled.CourseRadios>
+              <Form.Radios
+                label={t("forms.reading_group.course")}
+                name="attributes[course][enabled]"
+                defaultValue={false}
+                instructions={t("forms.reading_group.course_instructions")}
+                options={[
+                  {
+                    label: t("forms.reading_group.course_options.yes"),
+                    value: true
+                  },
+                  {
+                    label: t("forms.reading_group.course_options.no"),
+                    value: false
+                  }
+                ]}
+                beforeOnChange={handleCourseChange}
+                inline
+                wide
+              />
+            </Styled.CourseRadios>
             <Collapse initialVisible={courseEnabled}>
               <Collapse.Content>
                 <Styled.DatesInner>

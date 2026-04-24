@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import AtomicTag from "components/global/atomic/Tag";
 
 export const Tag = styled(AtomicTag)`

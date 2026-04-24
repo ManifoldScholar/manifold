@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { NavLink } from "react-router";
 
 const textGap = "20px";

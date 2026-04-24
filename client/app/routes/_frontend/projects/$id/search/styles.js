@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { breakpoints } from "theme/styles/variables/media";
 import { fluidScale, containerPrototype, respond } from "theme/styles/mixins";
 import { Wrapper as ResultsList } from "components/global/search/results/styles";

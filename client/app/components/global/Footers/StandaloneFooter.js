@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import FooterParts from "./Parts";
 import { socialLinks } from "./Parts/helpers/links";
 // import LanguageSelect from "components/global/LanguageSelect";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import * as Styled from "./styles";
 
 const StyledSocialColumn = styled(FooterParts.Column)`

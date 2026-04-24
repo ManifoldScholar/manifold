@@ -1,9 +1,8 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link } from "react-router";
 import IconComposer from "components/global/utility/IconComposer";
 import Button from "components/global/atomic/Button";
 import { defaultTransitionProps, defaultHoverStyle } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const ErrorButton = styled(Button)`
   background-color: var(--color-notification-warning-light);
@@ -22,7 +21,7 @@ export const LinkIcon = styled(IconComposer)`
   transition: color ${defaultTransitionProps};
 `;
 
-export const LinkCallout = styled(Link, transientOptions)`
+export const LinkCallout = styled(Link)`
   min-height: 17.33px;
   letter-spacing: 0.104em;
   display: flex;

@@ -195,7 +195,6 @@ export default function Editor({
         {!htmlMode && (
           <Styled.Editable
             id={"content-editable"}
-            as="div"
             renderElement={renderElement}
             renderLeaf={renderLeaf}
             placeholder={t("editor.elements.placeholder")}

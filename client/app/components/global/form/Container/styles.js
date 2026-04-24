@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import GlobalForm from "components/global/form";
+import styled from "styled-components";
+import Errorable from "components/global/form/Errorable";
 
-export const ErrorGroup = styled(GlobalForm.Errorable)`
+export const ErrorGroup = styled(Errorable)`
   margin-bottom: 15px;
 
   .dialog & {

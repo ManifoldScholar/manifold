@@ -134,10 +134,9 @@ export default function BaseInput({
   return (
     <Wrapper
       className={buttons ? undefined : fieldClasses}
-      name={errorName ?? name}
-      errors={errors}
-      label={label}
-      idForError={idForError}
+      {...(buttons
+        ? {}
+        : { name: errorName ?? name, errors, label, idForError })}
     >
       <BaseLabel
         id={id}

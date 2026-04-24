@@ -1,7 +1,6 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import FormContainer from "components/global/form/Container";
 import { panelRounded, respond, styledUnderline } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const Form = styled(FormContainer.Form)`
   margin-block-start: 30px;
@@ -34,6 +33,6 @@ export const Preview = styled.div`
   }
 `;
 
-export const Underline = styled("span", transientOptions)`
+export const Underline = styled("span")`
   ${({ $style }) => styledUnderline($style)}
 `;

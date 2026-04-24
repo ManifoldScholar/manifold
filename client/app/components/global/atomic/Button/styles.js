@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { defaultTransitionProps, buttonUnstyled } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 import IconComposer from "components/global/utility/IconComposer";
 
 function getSizeStyles(size) {
@@ -84,7 +83,7 @@ function getColorStyles(background) {
   }
 }
 
-export const Button = styled("button", transientOptions)`
+export const Button = styled("button")`
   ${({ $size }) => getSizeStyles($size)}
   ${({ $shape }) => getShapeStyles($shape)}
   ${({ $background }) => getColorStyles($background)}

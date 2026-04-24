@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { listUnstyled, respond, formLabelPrimary } from "theme/styles/mixins";
 
 export const MappableList = styled.ul`

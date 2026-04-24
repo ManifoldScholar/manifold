@@ -1,9 +1,8 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { panelRounded } from "theme/styles/mixins";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 
-export const Container = styled("div", transientOptions)`
+export const Container = styled("div")`
   container-type: inline-size;
   display: flex;
   flex-wrap: wrap;

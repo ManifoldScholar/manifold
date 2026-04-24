@@ -46,7 +46,7 @@ export default function ProjectCollectionSortBy({ projectCollection }) {
     return (
       <Styled.Toggle>
         <Styled.Label
-          as="div"
+          forwardedAs="div"
           label={t("project_collections.order_manually")}
         />
         <div className="toggle-indicator">
