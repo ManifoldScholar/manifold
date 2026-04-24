@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link } from "react-router";
-import { transientOptions } from "helpers/emotionHelpers";
 import {
   respond,
   fluidScale,
@@ -9,7 +8,7 @@ import {
   listUnstyled
 } from "theme/styles/mixins";
 
-export const Block = styled("div", transientOptions)`
+export const Block = styled("div")`
   display: flex;
   flex-direction: column;
 
@@ -102,7 +101,7 @@ export const Creators = styled.div`
   ${respond(`padding-top: 0.6em;`, 80)}
 `;
 
-export const CollectingToggle = styled("span", transientOptions)`
+export const CollectingToggle = styled("span")`
   flex-grow: 1;
   line-height: 1;
   transform: translateY(-0.08rem);
@@ -119,7 +118,7 @@ export const Description = styled.div`
   letter-spacing: 0.013em;
 `;
 
-export const Status = styled("div", transientOptions)`
+export const Status = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: flex-start;

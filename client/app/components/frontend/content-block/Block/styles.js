@@ -1,7 +1,6 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 
-export const BodyWrapper = styled("div", transientOptions)`
+export const BodyWrapper = styled("div")`
   ${({ $hideBottomBorder }) =>
     $hideBottomBorder &&
     `

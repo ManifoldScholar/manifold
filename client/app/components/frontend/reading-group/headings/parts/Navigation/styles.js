@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { NavLink } from "react-router";
 import {
   respond,
   utilityPrimary,
   defaultTransitionProps
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const linkLateralPadding = "12px";
 const count2Breakpoint = "600px";
@@ -61,7 +60,7 @@ const getDesktopLayout = (count, layout) => {
     : `${respond(`display: flex;`, count3Breakpoint)}`;
 };
 
-export const ChildNav = styled("nav", transientOptions)`
+export const ChildNav = styled("nav")`
   ${utilityPrimary}
   display: grid;
   grid-template-columns: 1fr;
@@ -81,7 +80,7 @@ export const ChildNav = styled("nav", transientOptions)`
   ${({ $count, $layout }) => getDesktopLayout($count, $layout)}
 `;
 
-export const Link = styled(NavLink, transientOptions)`
+export const Link = styled(NavLink)`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,7 +1,6 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import Utility from "components/global/utility";
 import { panelRounded, formLabelPrimary, respond } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const gap = "30px";
 
@@ -53,7 +52,7 @@ export const SectionLabel = styled.h3`
   }
 `;
 
-export const SectionList = styled("div", transientOptions)`
+export const SectionList = styled("div")`
   display: grid;
   grid-template-rows: minmax(24px, auto);
   grid-template-columns: auto;

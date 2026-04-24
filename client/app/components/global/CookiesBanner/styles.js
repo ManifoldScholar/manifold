@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import {
   headingPrimary,
   respond,
@@ -7,7 +7,6 @@ import {
   formInputMessage
 } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const Banner = styled.div`
   position: fixed;
@@ -79,7 +78,7 @@ export const ButtonWrapper = styled.div`
   row-gap: 12px;
 `;
 
-export const Button = styled("button", transientOptions)`
+export const Button = styled("button")`
   flex-shrink: 0;
   color: var(--color-base-neutral-white);
   border-color: ${({ $dull }) =>

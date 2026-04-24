@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { defaultTransitionProps, respond } from "theme/styles/mixins";
 
-export const Wrapper = styled("div", transientOptions)`
+export const Wrapper = styled("div")`
   display: block;
   padding-block: ${({ $reader }) => ($reader ? "34px" : "22px")};
   background-color: var(--color-base-neutral110);
@@ -26,7 +25,7 @@ export const Wrapper = styled("div", transientOptions)`
   `}
 `;
 
-export const LogoWrapper = styled("div", transientOptions)`
+export const LogoWrapper = styled("div")`
   display: block;
   font-size: 17px;
   font-family: var(--font-family-sans);
@@ -103,7 +102,7 @@ export const Copyright = styled.div`
   )}
 `;
 
-export const LogoText = styled("span", transientOptions)`
+export const LogoText = styled("span")`
   display: inline-block;
   color: var(--PoweredBy-text-color);
   margin-inline-end: .25em;

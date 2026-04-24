@@ -1,13 +1,12 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import {
   listUnstyled,
   utilityPrimary,
   defaultTransitionProps,
   respond
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
-export const Container = styled("nav", transientOptions)`
+export const Container = styled("nav")`
   ${({ $isCard }) =>
     $isCard &&
     `

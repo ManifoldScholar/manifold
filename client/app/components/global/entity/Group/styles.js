@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import {
   headingPrimary,
   defaultTransitionProps,
@@ -7,7 +7,6 @@ import {
 } from "theme/styles/mixins";
 import IconComposer from "components/global/utility/IconComposer";
 import AtomicBox from "components/global/atomic/Box";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const Box = styled(AtomicBox)`
   --Box-Background-padding-block-start: 20px;
@@ -26,7 +25,7 @@ export const Icon = styled(IconComposer)`
   }
 `;
 
-export const GroupHeader = styled("div", transientOptions)`
+export const GroupHeader = styled("div")`
   background-color: var(--box-bg-color);
   color: var(--strong-color);
   padding-block: 22px;

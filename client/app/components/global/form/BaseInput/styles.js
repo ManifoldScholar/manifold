@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import {
   formInputBase,
   buttonUnstyled,
@@ -8,7 +8,6 @@ import {
   respond,
   fillOnFocus
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const BaseInput = styled.input`
   ${formInputBase}
@@ -127,7 +126,7 @@ export const WrapperWithActions = styled.div`
   }
 `;
 
-export const ActionGroup = styled("div", transientOptions)`
+export const ActionGroup = styled("div")`
   --border-color: ${({ $secondary }) =>
     $secondary ? `var(--input-border-color)` : `var(--color-base-neutral80)`};
 

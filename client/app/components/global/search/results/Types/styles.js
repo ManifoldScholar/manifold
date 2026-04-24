@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import EntityThumbnail from "components/global/entity-thumbnail";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const Avatar = styled.img`
   border: 2px solid var(--color-base-neutral50);
@@ -24,7 +23,7 @@ export const AnnotationTitle = styled.span`
   color: var(--color-neutral-text-dark);
 `;
 
-export const ThumbnailNarrow = styled(EntityThumbnail.Text, transientOptions)`
+export const ThumbnailNarrow = styled(EntityThumbnail.Text)`
   ${({ $isSvg }) =>
     $isSvg &&
     `
@@ -34,7 +33,7 @@ export const ThumbnailNarrow = styled(EntityThumbnail.Text, transientOptions)`
   `}
 `;
 
-export const Thumbnail = styled(EntityThumbnail.Project, transientOptions)`
+export const Thumbnail = styled(EntityThumbnail.Project)`
   max-width: 56px;
   max-height: 56px;
   color: var(--color-neutral-ui-dark);

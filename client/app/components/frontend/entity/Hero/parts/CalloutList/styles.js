@@ -1,12 +1,11 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { respond } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const BREAKPOINT = breakpoints[60];
 const GUTTER = "20px";
 
-export const Wrapper = styled("div", transientOptions)`
+export const Wrapper = styled("div")`
   ${({ $mobile }) =>
     $mobile
       ? `display: block; ${respond(`display: none;`, BREAKPOINT)}`
@@ -17,11 +16,11 @@ export const Wrapper = styled("div", transientOptions)`
   }
 `;
 
-export const ButtonListItem = styled("li", transientOptions)`
+export const ButtonListItem = styled("li")`
   min-inline-size: min(200px, 100%);
 `;
 
-export const List = styled("div", transientOptions)`
+export const List = styled("div")`
   display: flex;
   flex-direction: column;
   width: 100%;

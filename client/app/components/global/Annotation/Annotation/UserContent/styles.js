@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import {
   drawerIndent,
   listHorizontal,
@@ -27,7 +26,7 @@ export const Utility = styled.div`
   margin-top: 10px;
 `;
 
-export const UtilityList = styled("ul", transientOptions)`
+export const UtilityList = styled("ul")`
   ${listHorizontal}
   ${drawerIndent("padding-left")}
   display: flex;

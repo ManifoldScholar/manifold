@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import {
   respond,
   fluidScale,
@@ -7,7 +6,7 @@ import {
   defaultTransitionProps
 } from "theme/styles/mixins";
 
-export const Wrapper = styled("article", transientOptions)`
+export const Wrapper = styled("article")`
   position: relative;
   display: flex;
   justify-content: space-between;

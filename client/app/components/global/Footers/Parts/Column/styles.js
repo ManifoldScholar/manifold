@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { respond } from "theme/styles/mixins";
 
 function getPositionStyles(position) {
@@ -29,7 +28,7 @@ function getPositionStyles(position) {
   }
 }
 
-export const Column = styled("div", transientOptions)`
+export const Column = styled("div")`
   ${({ $position }) => getPositionStyles($position)}
   ${({ $footerType }) =>
     $footerType === "branded" &&

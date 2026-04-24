@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link } from "react-router";
-import { transientOptions } from "helpers/emotionHelpers";
 
-export const ItemLink = styled(Link, transientOptions)`
+export const ItemLink = styled(Link)`
   --Avatar-width: ${({ $stack }) => ($stack ? "auto" : "50px")};
   --Avatar-height: ${({ $stack }) => ($stack ? "100%" : "auto")};
   --Cover-width: ${({ $stack }) => ($stack ? "100%" : "50px")};
@@ -40,7 +39,7 @@ export const ItemLink = styled(Link, transientOptions)`
   `}
 `;
 
-export const Cover = styled("figure", transientOptions)`
+export const Cover = styled("figure")`
   position: relative;
   width: var(--Cover-width);
   padding-top: 0;

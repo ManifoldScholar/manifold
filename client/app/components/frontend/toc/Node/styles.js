@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link as LinkComponent } from "react-router";
 import { defaultTransitionProps } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const nestedLevelPadding = "1.611em";
 
-export const Link = styled(LinkComponent, transientOptions)`
+export const Link = styled(LinkComponent)`
   display: block;
   padding-top: 0.444em;
   padding-bottom: 0.5em;

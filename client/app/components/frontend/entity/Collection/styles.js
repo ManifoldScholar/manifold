@@ -1,10 +1,9 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { fluidScale } from "theme/styles/mixins";
 
 const GAP = "20px";
 
-export const Wrapper = styled("section", transientOptions)`
+export const Wrapper = styled("section")`
   --Box-padding-inline: 0;
 
   overflow: ${({ $nested, $boxed }) =>
@@ -59,7 +58,7 @@ export const Inner = styled.div`
   gap: ${GAP};
 `;
 
-export const CountWrapper = styled("div", transientOptions)`
+export const CountWrapper = styled("div")`
   flex-basis: 100%;
   margin-block-start: ${GAP};
 
