@@ -69,9 +69,7 @@ function CollectionBlockTemplate({
                   responses={responses}
                   {...props}
                 >
-                  {response => (
-                    <ResponseComponent response={response} {...props} />
-                  )}
+                  {response => ResponseComponent({ response, ...props })}
                 </DeferredCollectable>
               </li>
             ))

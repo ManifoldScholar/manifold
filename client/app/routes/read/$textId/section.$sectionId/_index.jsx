@@ -1,17 +1,13 @@
-import { useOutletContext, Outlet, data } from "react-router";
+import { useOutletContext } from "react-router";
 import Section from "components/reader/section";
-import {
-  sectionsAPI,
-  annotationsAPI,
-  resourcesAPI,
-  resourceCollectionsAPI
-} from "api";
+import { annotationsAPI, resourcesAPI, resourceCollectionsAPI } from "api";
 import HeadContent from "components/global/HeadContent";
 import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
 import EventTracker, { EVENTS } from "components/global/EventTracker";
 import { useContext } from "react";
 import { ReaderContext } from "app/contexts";
 import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
+import loadAllPages from "lib/react-router/loaders/loadAllPages";
 
 export const loader = async ({ params, context }) => {
   const { textId, sectionId } = params;
@@ -19,7 +15,6 @@ export const loader = async ({ params, context }) => {
   const results = await loadParallelLists({
     context,
     fetchFns: {
-      section: () => sectionsAPI.show(sectionId, textId),
       annotations: () => annotationsAPI.forSection(sectionId, textId),
       resources: () => resourcesAPI.forSection(sectionId, textId),
       resourceCollections: () =>
@@ -27,22 +22,34 @@ export const loader = async ({ params, context }) => {
     }
   });
 
-  if (!results.section) {
-    throw data(null, { status: 404 });
-  }
-
   return {
-    section: results.section,
-    annotations: results.annotations ?? [],
-    resources: results.resources ?? [],
-    resourceCollections: results.resourceCollections ?? []
+    annotations: results.annotations,
+    resources: results.resources.data,
+    resourceCollections: results.resourceCollections.data
   };
 };
 
-export default function SectionRoute({ loaderData }) {
-  const { section, annotations } = loaderData;
+export const clientLoader = async ({ params, request, serverLoader }) => {
+  const server = await serverLoader();
+  const { textId, sectionId } = params;
 
-  const text = useOutletContext();
+  const annotations = await loadAllPages({
+    request: annotationsAPI.forSection(sectionId, textId),
+    initial: server.annotations,
+    signal: request.signal
+  });
+
+  return { ...server, annotations };
+};
+
+clientLoader.hydrate = true;
+
+export default function SectionRoute({ loaderData }) {
+  const {
+    annotations: { data: annotations }
+  } = loaderData;
+
+  const { text, section } = useOutletContext();
 
   const { typography } = useContext(ReaderContext);
 
@@ -72,7 +79,6 @@ export default function SectionRoute({ loaderData }) {
         />
       ))}
       <HeadContent {...headContentProps} />
-      <Outlet context={{ text, section }} />
       <Section.Text text={text} section={section} annotations={annotations} />
       <div>
         <Section.NextSection

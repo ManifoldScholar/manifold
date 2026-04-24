@@ -1,7 +1,8 @@
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useAuthentication, useSignInUpOverlay } from "hooks";
+import { useAuthentication } from "hooks";
+import { useSignInUpOverlay } from "components/global/sign-in-up/Overlay/context";
 import Item from "./Item";
 import * as Styled from "./styles";
 

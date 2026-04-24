@@ -2,6 +2,7 @@ export default {
   ssr: true,
   appDirectory: "app",
   future: {
-    v8_middleware: true
+    v8_middleware: true,
+    unstable_optimizeDeps: true
   }
 };

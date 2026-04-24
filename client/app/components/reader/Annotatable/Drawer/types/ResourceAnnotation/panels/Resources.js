@@ -22,6 +22,7 @@ export default function ResourcesList({
   const filterProps = useListFilters({
     onFilterChange: param => setFilters(param),
     initialState: filters,
+    resetState: {},
     options: {
       entityType: "resource",
       sort: true

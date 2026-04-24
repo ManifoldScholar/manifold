@@ -47,6 +47,8 @@ export default class LowLevelApiClient {
       "VISITOR-TOKEN": options.visitorToken,
       ...(clientIp && { "X-Forwarded-For": clientIp })
     };
+    if (options.visitToken) headers["VISIT-TOKEN"] = options.visitToken;
+    if (options.visitorToken) headers["VISITOR-TOKEN"] = options.visitorToken;
 
     const fetchConfig = {
       method,

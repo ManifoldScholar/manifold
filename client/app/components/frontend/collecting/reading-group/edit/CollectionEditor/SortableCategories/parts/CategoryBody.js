@@ -24,8 +24,7 @@ export default function CategoryBody({
   }
 
   function getResponsesByType(type) {
-    if (!responses || !responses[type]) return [];
-    return responses[type];
+    return responses?.[type]?.data ?? [];
   }
 
   function getCollectedProps(type) {

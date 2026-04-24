@@ -20,8 +20,7 @@ function Category({ category, mappings, responses, onUncollect }) {
   }
 
   function getResponsesByType(type) {
-    if (!responses || !responses[type]) return [];
-    return responses[type];
+    return responses?.[type]?.data ?? [];
   }
 
   function getCollectedProps(type) {

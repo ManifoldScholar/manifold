@@ -145,8 +145,9 @@ window.ace.define(
         background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
       }
     `;
-    const dom = acequire("../lib/dom");
-    dom.importCssString(exports.cssText, exports.cssClass);
-  }
-);
-/* eslint-enable max-len, no-unused-vars */
+      const dom = acequire("../lib/dom");
+      dom.importCssString(exports.cssText, exports.cssClass);
+    }
+  );
+  /* eslint-enable max-len, no-unused-vars */
+}
