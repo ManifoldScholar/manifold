@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { MediaPlayer as BaseMediaPlayer } from "@vidstack/react";
 
 // See https://vidstack.io/docs/player/components/layouts/default-layout/?styling=default-theme#css-variables for all variables

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const Section = styled.div`
   --FieldGroup-column-gap: 40px;

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import GlobalForm from "components/global/form/Container";
 import { buttonUnstyled } from "theme/styles/mixins";
 

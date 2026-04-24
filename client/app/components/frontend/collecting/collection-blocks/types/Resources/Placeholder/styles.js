@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import * as StyledThumbnail from "components/frontend/resource/Thumbnail/styles";
 import { respond } from "theme/styles/mixins";
 

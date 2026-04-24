@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { defaultFocusStyle } from "theme/styles/mixins";
 import IconComposer from "components/global/utility/IconComposer";
 

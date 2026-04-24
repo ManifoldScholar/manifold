@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { headingTertiary } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`

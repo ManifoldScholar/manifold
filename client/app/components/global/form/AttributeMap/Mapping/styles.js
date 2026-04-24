@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { clearfix, respond } from "theme/styles/mixins";
 
 export const Mapping = styled.div`

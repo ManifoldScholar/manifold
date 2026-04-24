@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { respond, buttonUnstyled, utilityPrimary } from "theme/styles/mixins";
 import { Link as LinkComponent } from "react-router";
 import Collapse from "components/global/Collapse";

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link as LinkComponent } from "react-router";
 import { respond, listUnstyled, rgba, fluidScale } from "theme/styles/mixins";
 import { breakpoints } from "theme/styles/variables/media";

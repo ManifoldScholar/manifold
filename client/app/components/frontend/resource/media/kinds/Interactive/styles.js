@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const Interactive = styled.iframe`
   aspect-ratio: var(--Media-aspect-ratio, auto);

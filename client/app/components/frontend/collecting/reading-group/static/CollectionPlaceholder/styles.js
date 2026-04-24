@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { panelRounded, headingQuaternary } from "theme/styles/mixins";
 
 const innerMaxWidth = `740px`;

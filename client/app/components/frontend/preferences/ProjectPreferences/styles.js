@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import Collapse from "components/global/Collapse";
 
 // This isn't ideal, but I think it's a special case. Collapse.Content already adds two wrapping divs around the radio groups, so I didn't want to add a third to set the spacing. -LD

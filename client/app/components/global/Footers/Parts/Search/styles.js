@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 import {
   buttonUnstyled,

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link as LinkComponent } from "react-router";
 import IconComposer from "components/global/utility/IconComposer";
 import { utilityPrimary } from "theme/styles/mixins";

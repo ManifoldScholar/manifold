@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { outlineOnFocus } from "theme/styles/mixins";
 import { Menu as ReakitMenu } from "reakit/Menu";
 

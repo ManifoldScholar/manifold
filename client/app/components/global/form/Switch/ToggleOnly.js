@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { IndicatorSwitchInner } from "./styles";
 
 const BOOLEAN_HEIGHT = 26;

@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { ListFilters as ListFiltersComponent } from "components/global/list";
 import Form from "components/global/form";
 import { respond, formInstructions } from "theme/styles/mixins";

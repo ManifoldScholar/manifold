@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { unselectable } from "../Marker/Sidebar/styles";
 import { thumbnailBreakpoints } from "../Marker/styles";
 
