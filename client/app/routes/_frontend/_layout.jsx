@@ -29,8 +29,8 @@ export const loader = async ({ context }) => {
   });
 
   return {
-    subjects: results.subjects ?? [],
-    journalSubjects: results.journalSubjects ?? []
+    subjects: results.subjects.data,
+    journalSubjects: results.journalSubjects.data
   };
 };
 

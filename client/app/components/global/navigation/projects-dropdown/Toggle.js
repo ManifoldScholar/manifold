@@ -6,15 +6,7 @@ import Utility from "components/global/utility";
 import * as Styled from "./styles";
 
 function ProjectsToggle(
-  {
-    className,
-    link,
-    index,
-    toggleVisible,
-    journalIsActive,
-    visible,
-    ...props
-  },
+  { className, link, index, toggleVisible, journalIsActive, visible, ...props },
   ref
 ) {
   const { t } = useTranslation();

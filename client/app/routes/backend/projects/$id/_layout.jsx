@@ -19,6 +19,9 @@ export const loader = async ({ params, context, request }) => {
     fetchFn: () => projectsAPI.show(params.id),
     request
   });
+  // in this root project layout we check that the user has some access
+  // the grouped child route layouts use useAuthorizeRoute to narrow
+  // this check without refetching the project
   await authorize({
     request,
     context,

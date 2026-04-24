@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import InputError from "../InputError";
 import { brackets2dots } from "utils/string";
-import { has } from "lodash-es";
 import FieldWrapper from "../FieldWrapper";
 
 const pointerFor = name => {
@@ -19,18 +18,11 @@ export default function Errorable({
   children,
   idForError
 }) {
-  // If name = "*" this component will show all errors, rather than a specific
-  // field error.
-  const allErrors = () => {
-    if (!errors) return [];
-    return errors.filter(error => {
-      return has(error, "source");
-    });
-  };
-
   const fieldErrors = () => {
     if (!errors) return [];
-    if (name === "*") return allErrors();
+    // Wildcard renders every error passed in, including ones without a
+    // source.pointer (general failures like 500s).
+    if (name === "*") return errors;
     let names = name;
     let fieldErrorsList = [];
     if (!Array.isArray(names)) {

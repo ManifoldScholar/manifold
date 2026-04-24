@@ -22,6 +22,7 @@ export default function ResourcesList({
   const filterProps = useListFilters({
     onFilterChange: param => setFilters(param),
     initialState: filters,
+    resetState: {},
     options: {
       entityType: "resource",
       sort: true
@@ -43,7 +44,7 @@ export default function ResourcesList({
   return (
     <div>
       <Styled.Search>
-        <Styled.Filters as="div" {...filterProps} />
+        <Styled.Filters {...filterProps} />
       </Styled.Search>
       <Styled.ListWrapper>
         <Styled.Count>

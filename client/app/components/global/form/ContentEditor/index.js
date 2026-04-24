@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import PropTypes from "prop-types";
 import { useFormField } from "hooks";
+import ClientOnly from "components/global/utility/ClientOnly";
 
 const Editor = lazy(() => import("./components/Wrapper"));
 
@@ -8,9 +9,11 @@ export default function ContentEditor({ name, ...props }) {
   const { set } = useFormField(name);
 
   return (
-    <Suspense fallback={null}>
-      <Editor set={set} {...props} />
-    </Suspense>
+    <ClientOnly>
+      <Suspense fallback={null}>
+        <Editor set={set} {...props} />
+      </Suspense>
+    </ClientOnly>
   );
 }
 

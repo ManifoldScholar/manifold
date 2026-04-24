@@ -45,7 +45,7 @@ export const Breadcrumb = styled(Link)`
     ::before {
       content: " / ";
       display: inline;
-      margin-inline-start: var(--Breadcrumb-margin-inline);
+      margin-inline: var(--Breadcrumb-margin-inline);
     }
 
     &:last-child {
@@ -58,6 +58,10 @@ export const Breadcrumb = styled(Link)`
     }
   }
 
+  svg {
+    margin-inline-end: var(--Breadcrumb-margin-inline);
+  }
+
   ${({ $noLink }) =>
     !$noLink &&
     `&:hover {
@@ -67,6 +71,5 @@ export const Breadcrumb = styled(Link)`
 `;
 
 export const Label = styled.span`
-  margin-inline-start: var(--Breadcrumb-margin-inline);
   white-space: nowrap;
 `;

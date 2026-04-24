@@ -1,20 +1,21 @@
 import { config } from "ace-builds";
 import idleFingersUrl from "ace-builds/src-noconflict/theme-idle_fingers";
 
-config.setModuleUrl(
-  "ace-builds/src-noconflict/theme-idle_fingers",
-  idleFingersUrl
-);
+if (typeof window !== "undefined") {
+  config.setModuleUrl(
+    "ace-builds/src-noconflict/theme-idle_fingers",
+    idleFingersUrl
+  );
 
-/* eslint-disable max-len, no-unused-vars */
-window.ace.define(
-  "ace-builds/src-noconflict/theme-idle_fingers",
-  ["require", "exports", "module", "ace/lib/dom"],
-  (acequire, _exports, module) => {
-    exports = _exports;
-    exports.isDark = true;
-    exports.cssClass = "ace-idle-fingers";
-    exports.cssText = `
+  /* eslint-disable max-len, no-unused-vars */
+  window.ace.define(
+    "ace-builds/src-noconflict/theme-idle_fingers",
+    ["require", "exports", "module", "ace/lib/dom"],
+    (acequire, _exports, module) => {
+      exports = _exports;
+      exports.isDark = true;
+      exports.cssClass = "ace-idle-fingers";
+      exports.cssText = `
       .ace-idle-fingers .ace_gutter {
         background: #3b3b3b;
         color: rgb(153,153,153);
@@ -128,8 +129,9 @@ window.ace.define(
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMwMjLyZYiPj/8PAAreAwAI1g0AAAAAElFTkSuQmCC) right repeat-y
       }
     `;
-    const dom = acequire("../lib/dom");
-    dom.importCssString(exports.cssText, exports.cssClass);
-  }
-);
-/* eslint-enable max-len, no-unused-vars */
+      const dom = acequire("../lib/dom");
+      dom.importCssString(exports.cssText, exports.cssClass);
+    }
+  );
+  /* eslint-enable max-len, no-unused-vars */
+}
