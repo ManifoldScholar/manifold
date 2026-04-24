@@ -42,7 +42,7 @@ export default function Callout({
     return isLink ? (
       <Styled.ErrorLink as="span">{t("errors.text_missing")}</Styled.ErrorLink>
     ) : (
-      <Styled.ErrorButton as="span" size={buttonSize}>
+      <Styled.ErrorButton as="span">
         {t("errors.text_missing")}
       </Styled.ErrorButton>
     );
