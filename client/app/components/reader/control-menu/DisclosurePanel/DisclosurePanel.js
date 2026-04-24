@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 const ControlMenuDisclosurePanel = forwardRef((props, ref) => {
-  const { id, visible, direction, children, ...rest } = props;
+  const { id, visible, toggleVisible, direction, children, ...rest } = props;
   return (
     <Styled.Panel
       id={id}
