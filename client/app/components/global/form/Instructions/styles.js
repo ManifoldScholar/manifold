@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { formInstructions, respond } from "theme/styles/mixins";
 
 // There are still a number of classnames to disentangle in here.

@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { utilityPrimary, buttonUnstyled } from "theme/styles/mixins";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 
 const { gap, selectMinWidth } = entityFilterForm;
 
-export const Wrapper = styled("div", transientOptions)`
+export const Wrapper = styled("div")`
   ${({ $count, $searchCount, $containerWrapPoint }) => `
     flex-basis:
       ${entityFilterForm.flexBasis($count, $searchCount)};
@@ -33,7 +32,7 @@ export const Wrapper = styled("div", transientOptions)`
   `};
 `;
 
-export const SelectGroup = styled("div", transientOptions)`
+export const SelectGroup = styled("div")`
   --min-width: var(--SelectGroup-min-width, ${selectMinWidth}px);
 
   position: relative;

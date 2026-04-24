@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import IconComposer from "components/global/utility/IconComposer";
 import { respond, fluidScale } from "theme/styles/mixins";
 

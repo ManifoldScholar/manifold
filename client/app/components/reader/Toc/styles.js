@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import IconComposer from "components/global/utility/IconComposer";
 import Drawer from "components/global/drawer";
 import {
@@ -11,7 +11,6 @@ import {
   listUnstyled,
   defaultFocusStyle
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const paddingIncrement = "20px";
 export const tocDrawer = {
@@ -50,7 +49,13 @@ export const Empty = styled.div`
   ${respond(`padding: 60px 85px;`, 50)}
 `;
 
-export const Toc = styled.nav`
+export const Toc = styled.nav.withConfig({
+  // Drawer.Content clones its child with a `closeDrawer` callback for
+  // in-drawer React components that need it. This styled.nav is the
+  // direct drawer child here and does not consume it, so filter to
+  // keep it off the DOM.
+  shouldForwardProp: prop => prop !== "closeDrawer"
+})`
   font-family: var(--font-family-heading);
   padding-block-start: 10px;
   overflow: hidden;
@@ -68,7 +73,7 @@ export const List = styled.ol`
   font-size: var(--toc-font-size);
 `;
 
-export const Sublist = styled(List, transientOptions)`
+export const Sublist = styled(List)`
   --toc-font-size: 16px;
 
   ${respond(`--toc-font-size: 18px;`, 50)}

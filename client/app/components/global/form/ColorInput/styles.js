@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { FormBaseInput } from "../BaseInput";
 
 export const ColorInput = styled(FormBaseInput)`

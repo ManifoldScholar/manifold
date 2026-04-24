@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import UniqueIcons from "components/global/icon/unique";
 
 export const Avatar = styled.img`

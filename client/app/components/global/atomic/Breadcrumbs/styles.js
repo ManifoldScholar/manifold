@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link } from "react-router";
 import IconComposer from "components/global/utility/IconComposer";
 import {
@@ -7,7 +7,6 @@ import {
   containerPrototype,
   defaultTransitionProps
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
 export const Outer = styled.nav`
   --Breadcrumb-margin-inline: 16px;
@@ -32,7 +31,7 @@ export const Outer = styled.nav`
   )}
 `;
 
-export const BackendOuter = styled(Outer, transientOptions)`
+export const BackendOuter = styled(Outer)`
   --Breadcrumb-margin-inline: 0.5em;
 
   color: var(--color);

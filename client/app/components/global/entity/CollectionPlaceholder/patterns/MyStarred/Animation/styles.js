@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { respond, fluidShrink } from "theme/styles/mixins";
 
 const maxWidth = `640px`;
@@ -22,7 +21,7 @@ const blocks = blockArray.map(
   `
 );
 
-export const Animation = styled("div", transientOptions)`
+export const Animation = styled("div")`
   --block-opacity: 0;
   --type-icon-color: var(--color);
   --collecting-icon-foreground-color: var(--color-base-neutral-white);

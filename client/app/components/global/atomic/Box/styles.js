@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { containerPrototype, fluidScale } from "theme/styles/mixins";
 import { containerPaddingInline } from "theme/styles/variables/layout";
 

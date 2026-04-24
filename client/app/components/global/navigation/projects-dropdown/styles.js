@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { NavLink } from "react-router";
 import IconComposer from "components/global/utility/IconComposer";
 import {
@@ -114,7 +114,7 @@ export const ButtonText = styled.div`
       &::before {
         ${({ $active }) =>
           $active &&
-          ` {
+          `
           position: absolute;
           bottom: -5.25px;
           left: 0;
@@ -126,7 +126,8 @@ export const ButtonText = styled.div`
 
           .site-nav--backend & {
             display: none;
-          }`}
+          }
+        `}
       }
     }
   }

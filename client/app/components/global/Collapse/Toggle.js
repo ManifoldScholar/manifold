@@ -1,11 +1,16 @@
 import { isValidElement } from "react";
 import PropTypes from "prop-types";
-import { ClassNames } from "@emotion/react";
+import styled from "styled-components";
+import classNames from "classnames";
 import useCollapseContext from "./useCollapseContext";
 
 export const inertToggleClass = `
   cursor: default;
   pointer-events: none;
+`;
+
+const StyledToggle = styled.button`
+  ${({ $inert }) => ($inert ? inertToggleClass : null)}
 `;
 
 function Toggle({
@@ -33,27 +38,24 @@ function Toggle({
     ...(applyLabelPropsToToggle ? labelProps : {})
   };
 
-  const ToggleComponent = as ?? height <= stubHeight ? "div" : "button";
+  const ToggleComponent = as ?? (height <= stubHeight ? "div" : "button");
 
   return (
-    <ClassNames>
-      {({ cx, css }) => (
-        <ToggleComponent
-          className={cx({
-            [className]: !!className,
-            [activeClassName]: activeClassName ? visible : false,
-            [css(inertToggleClass)]: height <= stubHeight
-          })}
-          // if changing the toggle text on expand/collapse, don't use aria-expanded
-          aria-expanded={hideAriaExpanded ? undefined : dynamicAriaExpanded}
-          {...mergedToggleProps}
-        >
-          {typeof children === "function"
-            ? children(visible, labelProps)
-            : children}
-        </ToggleComponent>
-      )}
-    </ClassNames>
+    <StyledToggle
+      as={ToggleComponent}
+      $inert={height <= stubHeight}
+      className={classNames({
+        [className]: !!className,
+        [activeClassName]: activeClassName ? visible : false
+      })}
+      // if changing the toggle text on expand/collapse, don't use aria-expanded
+      aria-expanded={hideAriaExpanded ? undefined : dynamicAriaExpanded}
+      {...mergedToggleProps}
+    >
+      {typeof children === "function"
+        ? children(visible, labelProps)
+        : children}
+    </StyledToggle>
   );
 }
 

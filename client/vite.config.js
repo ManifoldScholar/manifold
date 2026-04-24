@@ -1,7 +1,7 @@
 import { reactRouter } from "@react-router/dev/vite";
+import babel from "vite-plugin-babel";
 import { defineConfig, transformWithEsbuild } from "vite";
 import path from "path";
-import * as babel from "@babel/core";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -26,37 +26,32 @@ function jsxInJsPlugin() {
   };
 }
 
-function emotionTransformPlugin() {
-  return {
-    name: "emotion-transform",
-    async transform(code, id) {
-      if (!/\.(js|jsx)$/.test(id) || id.includes("node_modules")) {
-        return null;
-      }
-      if (!code.includes("@emotion") && !code.includes("styled")) {
-        return null;
-      }
-
-      const result = await babel.transformAsync(code, {
-        filename: id,
-        babelrc: false,
-        configFile: false,
-        plugins: ["@emotion"],
-        sourceMaps: true,
-        sourceType: "module"
-      });
-
-      if (result?.code) {
-        return { code: result.code, map: result.map };
-      }
-      return null;
-    }
-  };
-}
-
 export default defineConfig(({ isSsrBuild }) => ({
   assetsInclude: ["**/*.woff", "**/*.woff2"],
-  plugins: [jsxInJsPlugin(), emotionTransformPlugin(), reactRouter()],
+  plugins: [
+    jsxInJsPlugin(),
+    reactRouter(),
+    babel({
+      filter: /\.(js|jsx)$/,
+      exclude: [/node_modules/],
+      babelConfig: {
+        babelrc: false,
+        configFile: false,
+        plugins: [
+          [
+            "babel-plugin-styled-components",
+            {
+              displayName: true,
+              fileName: true,
+              ssr: true,
+              pure: true,
+              meaninglessFileNames: ["index", "styles"]
+            }
+          ]
+        ]
+      }
+    })
+  ],
   resolve: {
     alias: {
       app: path.resolve(__dirname, "app"),
@@ -73,12 +68,15 @@ export default defineConfig(({ isSsrBuild }) => ({
   optimizeDeps: {
     entries: ["app/**/*.{js,jsx}"],
     include: [
-      "@emotion/react",
-      "@emotion/styled",
-      "@emotion/styled/base",
+      "styled-components",
+      "@emotion/is-prop-valid",
+      "stylis",
       "lodash-es",
       "date-fns",
-      "date-fns/locale/en-US"
+      "date-fns/locale/en-US",
+      "recharts",
+      "react-ace",
+      "slate"
     ],
     esbuildOptions: {
       loader: {
@@ -87,7 +85,7 @@ export default defineConfig(({ isSsrBuild }) => ({
     }
   },
   ssr: {
-    noExternal: isSsrBuild ? true : undefined
+    noExternal: isSsrBuild ? true : ["styled-components"]
   },
   server: {
     proxy: {

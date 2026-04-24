@@ -1,13 +1,12 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import {
   buttonUnstyled,
   utilityPrimary,
   respond,
   defaultTransitionProps
 } from "theme/styles/mixins";
-import { transientOptions } from "helpers/emotionHelpers";
 
-export const Button = styled("button", transientOptions)`
+export const Button = styled("button")`
   ${buttonUnstyled}
   ${utilityPrimary}
   position: relative;

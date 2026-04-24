@@ -1,8 +1,7 @@
-import styled from "@emotion/styled";
-import { transientOptions } from "helpers/emotionHelpers";
+import styled from "styled-components";
 import { respond, defaultTransitionProps } from "theme/styles/mixins";
 
-export const Cover = styled("figure", transientOptions)`
+export const Cover = styled("figure")`
   position: relative;
   display: none;
   padding-top: 0;

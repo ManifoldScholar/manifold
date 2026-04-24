@@ -1,6 +1,5 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link } from "react-router";
-import { transientOptions } from "helpers/emotionHelpers";
 import {
   respond,
   panelRounded,
@@ -11,7 +10,7 @@ import {
 } from "theme/styles/mixins";
 import { defaultFocusStyle } from "../../../../theme/styles/mixins/appearance";
 
-export const Cover = styled("div", transientOptions)`
+export const Cover = styled("div")`
   --hover-color: var(--color-interaction-light);
 
   ${panelRounded}

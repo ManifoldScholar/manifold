@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import {
   defaultFocusStyle,
   formLabelPrimary,
@@ -6,7 +6,6 @@ import {
   formInputSecondary
 } from "theme/styles/mixins";
 import IconComposer from "components/global/utility/IconComposer";
-import { transientOptions } from "helpers/emotionHelpers";
 
 const BOOLEAN_HEIGHT = 26;
 const BOOLEAN_WIDTH = BOOLEAN_HEIGHT * 2;
@@ -114,7 +113,7 @@ export const InputCheckbox = styled(BaseInput)`
   }
 `;
 
-export const LabelTextPrimary = styled("span", transientOptions)`
+export const LabelTextPrimary = styled("span")`
   ${formLabelPrimary}
   flex-basis: var(--Switch-child-flex-basis, 100%);
   margin-block-start: 0;

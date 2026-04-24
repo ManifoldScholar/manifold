@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { linkUnstyled, respond } from "theme/styles/mixins";
 import { Link as RouterLink } from "react-router";
 
