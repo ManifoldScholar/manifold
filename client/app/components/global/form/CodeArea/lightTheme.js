@@ -1,17 +1,18 @@
 import { config } from "ace-builds";
 import kuroirUrl from "ace-builds/src-noconflict/theme-kuroir";
 
-config.setModuleUrl("ace-builds/src-noconflict/theme-kuroir", kuroirUrl);
+if (typeof window !== "undefined") {
+  config.setModuleUrl("ace-builds/src-noconflict/theme-kuroir", kuroirUrl);
 
-/* eslint-disable max-len, no-unused-vars */
-window.ace.define(
-  "ace-builds/src-noconflict/theme-kuroir",
-  ["require", "exports", "module", "ace/lib/dom"],
-  (acequire, _exports, module) => {
-    exports = _exports;
-    exports.isDark = false;
-    exports.cssClass = "ace-kuroir";
-    exports.cssText = `
+  /* eslint-disable max-len, no-unused-vars */
+  window.ace.define(
+    "ace-builds/src-noconflict/theme-kuroir",
+    ["require", "exports", "module", "ace/lib/dom"],
+    (acequire, _exports, module) => {
+      exports = _exports;
+      exports.isDark = false;
+      exports.cssClass = "ace-kuroir";
+      exports.cssText = `
       .ace-kuroir .ace_gutter {
         background: var(--color-base-neutral30);
         color: var(--color-base-neutral100);
@@ -150,8 +151,9 @@ window.ace.define(
         background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
       }
     `;
-    const dom = acequire("../lib/dom");
-    dom.importCssString(exports.cssText, exports.cssClass);
-  }
-);
-/* eslint-enable max-len, no-unused-vars */
+      const dom = acequire("../lib/dom");
+      dom.importCssString(exports.cssText, exports.cssClass);
+    }
+  );
+  /* eslint-enable max-len, no-unused-vars */
+}
