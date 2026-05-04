@@ -80,7 +80,13 @@ module OmniAuth
         deployment_id = claims["https://purl.imsglobal.org/spec/lti/claim/deployment_id"]
         raise OmniAuth::Error, "Missing deployment_id claim" unless deployment_id
 
-        raise OmniAuth::Error, "Deployment #{deployment_id} is disabled" if deployment.disabled?
+        deployment = LtiDeployment.find_by(
+          lti_registration: registration,
+          deployment_id: deployment_id
+        )
+
+        raise OmniAuth::Error, "Deployment #{deployment_id} is not registered" unless deployment
+        raise OmniAuth::Error, "Deployment #{deployment_id} is disabled" unless deployment.enabled?
       end
 
       # Builds the authorization redirect URI with all required OIDC parameters.
