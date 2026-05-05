@@ -19,6 +19,11 @@ RSpec.describe ContentBlockReference do
     expect(association.macro).to eq :belongs_to
   end
 
+  it "is destroyed when the referenceable is destroyed" do
+    content_block_reference.referencable.destroy!
+    expect { content_block_reference.reload }.to raise_error ActiveRecord::RecordNotFound
+  end
+
   it "is invalid without a kind" do
     expect(FactoryBot.build(:content_block_reference, kind: nil)).not_to be_valid
   end
