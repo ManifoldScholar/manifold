@@ -136,4 +136,65 @@ RSpec.describe "Oauth", type: :request do
       end.to change(Identity, :count).by(1)
     end
   end
+
+  # Regression: the DL branch added in Plan 02-03 must not intercept resource link launches.
+  # An LtiResourceLinkRequest callback must continue to redirect to /oauth on the React client.
+  context "as a mocked LTI resource link launch (regression for the DL branch)" do
+    # Override `provider` so the outer before block does not raise when it tries to set
+    # OmniAuth.config.mock_auth[provider]. Our inner before block overwrites with the full
+    # LTI auth hash before the request is made.
+    let(:provider) { :lti }
+
+    let!(:registration) do
+      FactoryBot.create(:lti_registration,
+                        issuer: "https://canvas.example.com",
+                        client_id: "tool-client-id")
+    end
+    let!(:deployment) do
+      FactoryBot.create(:lti_deployment,
+                        lti_registration: registration,
+                        deployment_id: "deploy-1")
+    end
+    let(:user) { FactoryBot.create(:user) }
+    let!(:identity) { FactoryBot.create(:identity, user: user, provider: "lti", uid: "https://canvas.example.com|user-1") }
+
+    let(:lti_auth_hash) do
+      OmniAuth::AuthHash.new(
+        "provider" => "lti",
+        "uid"      => "https://canvas.example.com|user-1",
+        "info"     => { "email" => user.email },
+        "extra"    => {
+          "raw_info" => {
+            "iss"   => registration.issuer,
+            "aud"   => registration.client_id,
+            "sub"   => "user-1",
+            "email" => user.email
+          },
+          "lti"             => {
+            "message_type"  => "LtiResourceLinkRequest",
+            "deployment_id" => deployment.deployment_id
+          },
+          "target_link_uri" => Rails.configuration.manifold.url
+        }
+      )
+    end
+
+    before do
+      OmniAuth.config.mock_auth[:lti] = lti_auth_hash
+      Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:lti]
+    end
+
+    after do
+      OmniAuth.config.mock_auth[:lti] = nil
+      Rails.application.env_config["omniauth.auth"] = nil
+    end
+
+    it "redirects to /oauth on the React client (not to /lti/picker)" do
+      post "/auth/lti/callback"
+
+      expect(response).to have_http_status(:redirect)
+      expect(response.location).to include("#{Rails.configuration.manifold.url}/oauth")
+      expect(response.location).not_to include("/lti/picker")
+    end
+  end
 end
