@@ -150,7 +150,7 @@ class Annotation < ApplicationRecord
         .maybe_sans_public_annotations_not_owned_by(exclude_public, user)
         .where(arel_reading_groups_for_user(user, with_membership_only: exclude_public))
     else
-      return only_resource_annotations if exclude_public
+      return only_notation_annotations if exclude_public
 
       left_outer_joins(:reading_group)
         .sans_archived_reading_group_memberships
@@ -163,7 +163,7 @@ class Annotation < ApplicationRecord
   scope :with_orphaned, ->(orphaned) { where.not(text_section: nil).where(orphaned: orphaned) if orphaned.present? }
   scope :with_existing_text, -> { where.not(text_section: nil) }
 
-  scope :only_resource_annotations, -> { where(format: TYPE_RESOURCE) }
+  scope :only_notation_annotations, -> { where(format: NOTATION_TYPES) }
   scope :sans_public_annotations_not_owned_by, ->(user) { where(arel_exclude_public_annotations_not_owned_by(user)) }
   scope :sans_private_annotations_not_owned_by, ->(user) { where(arel_exclude_private_annotations_not_owned_by(user)) }
   scope :non_private, -> { where(private: false) }
@@ -221,7 +221,7 @@ class Annotation < ApplicationRecord
     # @return [Arel::Nodes::Not]
     def arel_exclude_public_annotations_not_owned_by(user)
       Arel::Nodes::Not.new(arel_table[:creator_id].not_eq(user&.id)
-                               .and(Arel::Nodes::Not.new(arel_table[:format].eq(TYPE_RESOURCE)))
+                               .and(Arel::Nodes::Not.new(arel_table[:format].in(NOTATION_TYPES)))
                                .and(arel_table[:reading_group_id].eq(nil))
                                .and(arel_table[:private].eq(false)))
     end

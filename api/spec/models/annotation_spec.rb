@@ -177,6 +177,7 @@ RSpec.describe Annotation, type: :model do
     let_it_be(:public_annotation, refind: true) { FactoryBot.create(:annotation, private: false, reading_group: nil) }
     let_it_be(:private_annotation, refind: true) { FactoryBot.create(:annotation, private: true, reading_group: nil) }
     let_it_be(:resource_annotation, refind: true) { FactoryBot.create(:annotation, private: false, format: Annotation::TYPE_RESOURCE, resource: FactoryBot.create(:resource)) }
+    let_it_be(:collection_annotation, refind: true) { FactoryBot.create(:collection_annotation, private: false) }
     let_it_be(:all_groups_member_private_annotation, refind: true) { FactoryBot.create(:annotation, private: true, reading_group: nil, creator: all_groups_member) }
 
     let_it_be(:reader, refind: true) { FactoryBot.create(:user) }
@@ -217,6 +218,7 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a readable annotation", "public group annotation authored by the user who does not belong to the public group", :public_group_annotation_by_former_group_member
         it_behaves_like "a readable annotation", "anonymous group annotation authored by the user who does not belong to the anonymous group", :anonymous_group_annotation_by_former_group_member
         it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+        it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
 
         context "when public annotations are excluded" do
           it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
@@ -228,6 +230,7 @@ RSpec.describe Annotation, type: :model do
           it_behaves_like "a readable annotation", "public group annotation authored by the user who does not belong to the public group", :public_group_annotation_by_former_group_member, true
           it_behaves_like "a readable annotation", "anonymous group annotation authored by the user who does not belong to the anonymous group", :anonymous_group_annotation_by_former_group_member, true
           it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+          it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
         end
       end
 
@@ -248,6 +251,7 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation
         it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation
         it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+        it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
 
         context "when public annotations are excluded" do
           it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
@@ -256,6 +260,7 @@ RSpec.describe Annotation, type: :model do
           it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation, true
           it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation, true
           it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+          it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
         end
       end
 
@@ -267,6 +272,7 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
         it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation
         it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+        it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
 
         context "when public annotations are excluded" do
           it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
@@ -275,6 +281,7 @@ RSpec.describe Annotation, type: :model do
           it_behaves_like "a non-readable annotation", "private annotation", :private_annotation, true
           it_behaves_like "a non-readable annotation", "anonymous group annotation", :anonymous_group_annotation, true
           it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+          it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
         end
       end
 
@@ -286,6 +293,7 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
         it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation
         it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+        it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
 
         context "when public annotations are excluded" do
           it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
@@ -294,6 +302,7 @@ RSpec.describe Annotation, type: :model do
           it_behaves_like "a non-readable annotation", "private annotation", :private_annotation, true
           it_behaves_like "a non-readable annotation", "private group annotation", :private_group_annotation, true
           it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+          it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
         end
       end
 
@@ -305,6 +314,7 @@ RSpec.describe Annotation, type: :model do
         it_behaves_like "a readable annotation", "private group annotation", :private_group_annotation
         it_behaves_like "a non-readable annotation", "private annotation", :private_annotation
         it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+        it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
 
         context "when public annotations are excluded" do
           it_behaves_like "a non-readable annotation", "public annotation", :public_annotation, true
@@ -313,6 +323,7 @@ RSpec.describe Annotation, type: :model do
           it_behaves_like "a readable annotation", "private group annotation", :private_group_annotation, true
           it_behaves_like "a non-readable annotation", "private annotation", :private_annotation, true
           it_behaves_like "a readable annotation", "resource annotation", :resource_annotation, true
+          it_behaves_like "a readable annotation", "collection annotation", :collection_annotation, true
         end
       end
     end
