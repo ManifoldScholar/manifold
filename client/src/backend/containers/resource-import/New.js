@@ -33,35 +33,9 @@ export class ResourceImportNew extends PureComponent {
     );
   }
 
-  afterUrlChange = (value, set, setOther) => {
-    if (value) {
-      setOther("google_sheet", "attributes[source]");
-      setOther(null, "attributes[data]");
-    }
-  };
-
-  afterSourceChange = (value, set, setOther) => {
-    if (value) {
-      setOther("attached_data", "attributes[source]");
-      setOther(null, "attributes[url]");
-    }
-  };
-
-  create = model => {
-    return this.props.create(this.preSave(model));
-  };
-
   update = (id, model) => {
-    return this.props.update(id, this.preSave(model));
+    return this.props.update(id, model);
   };
-
-  /* eslint-disable no-param-reassign */
-  preSave = model => {
-    model.attributes.state = "parsing";
-    model.attributes.storageType = "google_drive";
-    return model;
-  };
-  /* eslint-enable no-param-reassign */
 
   headerRowOptions = () => {
     return [1, 2, 3, 4, 5, 6].map(i => {
@@ -69,13 +43,28 @@ export class ResourceImportNew extends PureComponent {
     });
   };
 
+  formatData(dirty, source) {
+    const attributes = { ...source.attributes, ...dirty.attributes };
+    attributes.state = "parsing";
+    attributes.storageType = "google_drive";
+    if (attributes.data) {
+      attributes.source = "attached_data";
+      delete attributes.url;
+    } else if (attributes.url) {
+      attributes.source = "google_sheet";
+      delete attributes.data;
+    }
+    return { attributes };
+  }
+
   render() {
     const { resourceImport, t } = this.props;
     return (
       <FormContainer.Form
         model={resourceImport || null}
         name="backend-resource-import-create"
-        create={this.create}
+        formatData={this.formatData}
+        create={this.props.create}
         update={this.update}
         onSuccess={this.onSuccess}
         groupErrors
@@ -96,7 +85,6 @@ export class ResourceImportNew extends PureComponent {
             label={t("resources.import.upload_instructions")}
             accepts="csv"
             layout="horizontal"
-            afterChange={this.afterSourceChange}
             name="attributes[data]"
             readFrom="attributes[dataFilename]"
           />
@@ -104,7 +92,6 @@ export class ResourceImportNew extends PureComponent {
           <Form.TextInput
             wide
             label={t("resources.import.sheets_url")}
-            afterChange={this.afterUrlChange}
             instructions={t("resources.import.sheets_instructions")}
             name="attributes[url]"
           />
