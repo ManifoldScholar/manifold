@@ -52,12 +52,17 @@ export default function AssetRow({ entity: asset, onDelete, onEdit, ...rest }) {
 
   const src = `/api/proxy/ingestion_sources/${asset.id}`;
 
+  const isImage =
+    attachmentContentType && typeof attachmentContentType === "string"
+      ? attachmentContentType.includes("image")
+      : false;
+
   const figure = (
     <Styled.IconWrapper>
       <EntityThumbnail.Asset
         entity={asset}
         icon={extToTag(attachmentExtension)}
-        isImage={attachmentContentType.includes("image")}
+        isImage={isImage}
       />
     </Styled.IconWrapper>
   );
