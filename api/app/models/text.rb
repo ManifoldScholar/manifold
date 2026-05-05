@@ -97,6 +97,7 @@ class Text < ApplicationRecord
   has_many :action_callouts,
            dependent: :destroy,
            inverse_of: :text
+  has_many :content_block_references, as: :referencable, dependent: :destroy
 
   delegate :creator_names_array, to: :project, prefix: true, allow_nil: true
   delegate :publication_date, to: :project, prefix: true, allow_nil: true

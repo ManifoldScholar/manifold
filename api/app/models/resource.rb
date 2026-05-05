@@ -52,6 +52,7 @@ class Resource < ApplicationRecord
   has_many :comments, as: :subject, dependent: :destroy, inverse_of: :subject
   has_many :annotations, dependent: :destroy, inverse_of: :resource
   has_many :text_tracks, dependent: :destroy, inverse_of: :resource
+  has_many :content_block_references, as: :referencable, dependent: :destroy
 
   delegate :slug, to: :project, prefix: true
 
