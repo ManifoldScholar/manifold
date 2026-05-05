@@ -5,7 +5,9 @@ module Auth
     include ManagesOauthCookie
 
     POST_AUTH_REDIRECT_PATH = "/oauth"
-    AUTH_ERROR_STRING = "An error has occurred logging you in"
+    PICKER_REDIRECT_PATH    = "/lti/picker"
+    PICKER_TOKEN_PARAM      = "lti_context"
+    AUTH_ERROR_STRING       = "An error has occurred logging you in"
 
     layout "auth"
 
@@ -26,6 +28,8 @@ module Auth
         set_auth_code(outcome.user)
       end
 
+      return handle_deep_linking_request(outcome.user) if outcome.valid? && lti? && deep_linking_request?
+
       redirect_to post_authorize_redirect_uri(error: outcome.invalid?).to_s, allow_other_host: true
     end
 
@@ -36,6 +40,29 @@ module Auth
     end
 
     private
+
+    def handle_deep_linking_request(user)
+      result = Auth::Lti::DeepLinkingHandler.new(omniauth_hash, user).call
+
+      if result.ok
+        redirect_to picker_redirect_uri(result.token).to_s, allow_other_host: true
+      else
+        @error_message = result.message
+        status = result.log_level == :error ? :internal_server_error : :bad_request
+        render "auth/lti/deep_linking/error", layout: "auth", status: status
+      end
+    end
+
+    def picker_redirect_uri(token)
+      URI.parse(Rails.configuration.manifold.url).tap do |uri|
+        uri.path  = PICKER_REDIRECT_PATH
+        uri.query = "#{PICKER_TOKEN_PARAM}=#{token}"
+      end
+    end
+
+    def deep_linking_request?
+      omniauth_hash&.dig("extra", "lti", "message_type") == Auth::Lti::Registrar::DL_MESSAGE_TYPE
+    end
 
     def post_authorize_redirect_uri(error: false)
       URI.parse(Rails.configuration.manifold.url).tap do |uri|
