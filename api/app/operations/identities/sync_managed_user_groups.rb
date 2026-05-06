@@ -41,7 +41,7 @@ module Identities
     end
 
     def existing_identifiers
-      @existing_identifiers ||= existing_user_groups.map { _1.external_identifier&.identifier }.compact
+      @existing_identifiers ||= existing_user_groups.map { it.external_identifier&.identifier }.compact
     end
   end
 end

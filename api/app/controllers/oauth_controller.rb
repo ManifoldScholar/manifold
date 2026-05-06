@@ -54,7 +54,7 @@ class OauthController < ApplicationController
   end
 
   def redirect_resource_query_string
-    redirect_resource.map { _1.join("=") }.join("&")
+    redirect_resource.map { it.join("=") }.join("&")
   end
 
   def redirect_body

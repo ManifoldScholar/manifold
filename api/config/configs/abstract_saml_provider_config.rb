@@ -135,8 +135,8 @@ class AbstractSamlProviderConfig < ApplicationConfig
   end
 
   def attribute_mappings
-    saml_attributes.each_with_object({}) do |attr, memo|
-      memo[attr[:name].to_s.downcase.to_sym] = [attr[:name].to_s]
+    saml_attributes.to_h do |attr|
+      [attr[:name].to_s.downcase.to_sym, [attr[:name].to_s]]
     end
   end
 end
