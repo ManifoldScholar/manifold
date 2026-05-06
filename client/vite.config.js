@@ -2,6 +2,7 @@ import { reactRouter } from "@react-router/dev/vite";
 import babel from "vite-plugin-babel";
 import { defineConfig, transformWithEsbuild } from "vite";
 import path from "path";
+import fs from "node:fs/promises";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -66,7 +67,6 @@ export default defineConfig(({ isSsrBuild }) => ({
     }
   },
   optimizeDeps: {
-    entries: ["app/**/*.{js,jsx}"],
     include: [
       "styled-components",
       "@emotion/is-prop-valid",
@@ -79,9 +79,38 @@ export default defineConfig(({ isSsrBuild }) => ({
       "slate"
     ],
     esbuildOptions: {
+      // The loader map REPLACES esbuild defaults rather than merging, so
+      // the .jsx/.ts/.tsx entries are required even though they look
+      // tautological — without them, those extensions fall through to the
+      // unknown-extension fallback ("js") and fail to parse.
       loader: {
-        ".js": "jsx"
-      }
+        ".js": "jsx",
+        ".jsx": "jsx",
+        ".ts": "ts",
+        ".tsx": "tsx"
+      },
+      // The optimizeDeps scanner runs its own bare esbuild that does not
+      // honor the loader option for files it parses while crawling for
+      // imports — only for files it loads. This plugin forces app .js
+      // files (not node_modules) to be loaded as JSX during the scan,
+      // eliminating "JSX syntax not enabled" noise on cold-cache startup.
+      plugins: [
+        {
+          name: "load-app-js-as-jsx",
+          setup(build) {
+            build.onLoad(
+              { filter: /\.jsx?$/, namespace: "file" },
+              async args => {
+                if (args.path.includes("/node_modules/")) return null;
+                return {
+                  loader: "jsx",
+                  contents: await fs.readFile(args.path, "utf8")
+                };
+              }
+            );
+          }
+        }
+      ]
     }
   },
   ssr: {
