@@ -11,6 +11,7 @@ import DisclosureNavigationMenu from "global/components/atomic/DisclosureNavigat
 import lh from "helpers/linkHandler";
 import { FrontendModeContext } from "helpers/contexts";
 import withSettings from "hoc/withSettings";
+import { useCurrentUser } from "hooks";
 import Authorize from "hoc/Authorize";
 
 function NavigationStatic({
@@ -27,6 +28,7 @@ function NavigationStatic({
 }) {
   const { t } = useTranslation();
   const context = useContext(FrontendModeContext);
+  const currentUser = useCurrentUser();
 
   const userMenuClasses = classNames({
     "user-nav": true,
@@ -187,7 +189,7 @@ function NavigationStatic({
           )}
           {renderSearch()}
           <li className="user-nav__item">
-            {defaultIdpUrl ? (
+            {defaultIdpUrl && !currentUser ? (
               <a className="mode-button" href={defaultIdpUrl}>
                 {t("forms.signin_overlay.log_in")}
               </a>
