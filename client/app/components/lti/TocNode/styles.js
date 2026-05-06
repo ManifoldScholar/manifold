@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 const tocBaseInlineStartPadding = "32px";
 const tocInlineEndPadding = "140px";

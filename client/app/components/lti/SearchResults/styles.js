@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const ResultsCount = styled.p`
   font-family: var(--font-family-sans);

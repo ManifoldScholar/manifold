@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const Empty = styled.p`
   color: var(--color-neutral-text-dark);

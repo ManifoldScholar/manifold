@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const Toc = styled.nav`
   font-family: var(--font-family-heading);
