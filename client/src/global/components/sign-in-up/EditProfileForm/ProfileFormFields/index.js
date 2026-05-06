@@ -2,10 +2,15 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
+import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
 export default function ProfileFormFields({ mode }) {
   const { t } = useTranslation();
+
+  const settings = useFromStore("settings", "select");
+
+  const { hideLocalLogin } = settings?.attributes?.authentication;
 
   return (
     <>
@@ -64,26 +69,30 @@ export default function ProfileFormFields({ mode }) {
         idForError="update-email-error"
         label={t("forms.signin_overlay.email")}
       />
-      <Form.TextInput
-        password
-        id="update-password"
-        aria-describedby="update-password-error"
-        placeholder={t("forms.signin_overlay.new_password")}
-        name="attributes[password]"
-        idForError="update-password-error"
-        label={t("forms.signin_overlay.password")}
-        autoComplete="new-password"
-      />
-      <Form.TextInput
-        password
-        id="update-passwordConfirmation"
-        aria-describedby="update-passwordConfirmation-error"
-        placeholder={t("forms.signin_overlay.confirm_new_password")}
-        name="attributes[passwordConfirmation]"
-        idForError="update-passwordConfirmation-error"
-        label={t("forms.signin_overlay.confirm_password")}
-        autoComplete="new-password"
-      />
+      {!hideLocalLogin && (
+        <>
+          <Form.TextInput
+            password
+            id="update-password"
+            aria-describedby="update-password-error"
+            placeholder={t("forms.signin_overlay.new_password")}
+            name="attributes[password]"
+            idForError="update-password-error"
+            label={t("forms.signin_overlay.password")}
+            autoComplete="new-password"
+          />
+          <Form.TextInput
+            password
+            id="update-passwordConfirmation"
+            aria-describedby="update-passwordConfirmation-error"
+            placeholder={t("forms.signin_overlay.confirm_new_password")}
+            name="attributes[passwordConfirmation]"
+            idForError="update-passwordConfirmation-error"
+            label={t("forms.signin_overlay.confirm_password")}
+            autoComplete="new-password"
+          />
+        </>
+      )}
     </>
   );
 }
