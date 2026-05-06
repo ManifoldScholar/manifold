@@ -2,5 +2,13 @@
 app/lib/react-router/emotion-stream.js
 app/lib/react-router/recursiveFlatRoutes.js
 
+// new build output destination
 build
+
+// keep ignoring old build output until not using other branches
+tmp
+
+// React-router types files
+.react-router
+
 router-migration-guides

@@ -117,9 +117,7 @@ export default async function handleRequest(
                         — without it, `"` becomes `&quot;` inside <style> and
                         the browser does not decode entities for CSS, which
                         invalidates the stylesheet. */}
-                    <style
-                      dangerouslySetInnerHTML={{ __html: globalRawCss }}
-                    />
+                    <style dangerouslySetInnerHTML={{ __html: globalRawCss }} />
                   </head>
                   <body className="browse">
                     <GlobalStyles />
