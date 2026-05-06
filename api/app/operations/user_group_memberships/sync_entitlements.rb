@@ -20,7 +20,7 @@ module UserGroupMemberships
     end
 
     def create_missing_entitlements
-      subjects = entitlements_to_create.map { _1[:subject_type].constantize.find _1[:subject_id] }
+      subjects = entitlements_to_create.map { it[:subject_type].constantize.find it[:subject_id] }
       subjects.each do |subject|
         Entitlements::Create.run(
           subject:,

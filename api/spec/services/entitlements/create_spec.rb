@@ -31,14 +31,14 @@ RSpec.describe Entitlements::Create, interaction: true do
         let_input!(:subject_url) { nil }
         let_input!(:subject) { entitled_subject }
 
-        include_examples "a successful entitlement"
+        it_behaves_like "a successful entitlement"
       end
 
       context "with target passed as an object" do
         let_input!(:target_url) { nil }
         let_input!(:target) { target_user }
 
-        include_examples "a successful entitlement"
+        it_behaves_like "a successful entitlement"
       end
     end
 
