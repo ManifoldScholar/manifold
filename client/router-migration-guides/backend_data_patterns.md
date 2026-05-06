@@ -6,7 +6,7 @@ Data flows through four layers:
 
 1. **Middleware** (`app/middleware/bootstrap.server.js`) runs on every request. It loads settings, current user (auth), pages, and reading groups into `routerContext`, making them available to all loaders and components.
 
-2. **Loaders** run before render (server + client). They fetch route-specific data using shared utilities in `app/routes/utility/loaders/`. All API calls go through `queryApi`, which reads the auth token from `routerContext` (server) or cookies (client).
+2. **Loaders** run before render (server + client). They fetch route-specific data using shared utilities in `app/lib/react-router/loaders/`. All API calls go through `queryApi`, which reads the auth token from `routerContext` (server) or cookies (client).
 
 3. **Components** receive data via the `loaderData` prop (route components) or `useOutletContext()` (children of layout routes).
 
@@ -16,7 +16,7 @@ Data flows through four layers:
 
 ## 2. Loader Utilities
 
-All utilities live in `app/routes/utility/loaders/`.
+All utilities live in `app/lib/react-router/loaders/`.
 
 ### `loadEntity({ context, fetchFn, request })`
 
@@ -25,7 +25,7 @@ Fetches a single entity. Returns `entity.data` or throws 404. Handles 401 by cal
 **Default export** from `loadEntity.js`.
 
 ```js
-import loadEntity from "app/routes/utility/loaders/loadEntity";
+import loadEntity from "app/lib/react-router/loaders/loadEntity";
 
 export const loader = async ({ params, request, context }) => {
   return loadEntity({
@@ -45,7 +45,7 @@ Fetches a paginated/filtered list. Parses URL search params automatically via `p
 **Default export** from `loadList.js`.
 
 ```js
-import loadList from "app/routes/utility/loaders/loadList";
+import loadList from "app/lib/react-router/loaders/loadList";
 
 export const loader = async ({ request, context }) => {
   return loadList({
@@ -66,7 +66,7 @@ Loads multiple lists in parallel via `Promise.allSettled`. Failed requests retur
 **Default export** from `loadParallelLists.js`.
 
 ```js
-import loadParallelLists from "app/routes/utility/loaders/loadParallelLists";
+import loadParallelLists from "app/lib/react-router/loaders/loadParallelLists";
 
 const results = await loadParallelLists({
   context,
@@ -94,8 +94,8 @@ Checks authorization in a loader. Calls `requireLogin` first, then uses the `Aut
 **Default export** from `authorize.js`.
 
 ```js
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import authorize from "app/routes/utility/loaders/authorize";
+import loadEntity from "app/lib/react-router/loaders/loadEntity";
+import authorize from "app/lib/react-router/loaders/authorize";
 
 export const loader = async ({ params, request, context }) => {
   const project = await loadEntity({
@@ -160,7 +160,7 @@ Returns a `clientLoader` for list routes. On first load it uses server data; aft
 **Default export** from `createListClientLoader.js`.
 
 ```js
-import createListClientLoader from "app/routes/utility/loaders/createListClientLoader";
+import createListClientLoader from "app/lib/react-router/loaders/createListClientLoader";
 
 export const clientLoader = createListClientLoader({
   hydrateKey: "__projectsHydrated",
@@ -193,18 +193,18 @@ Revalidates on form submissions and same-URL navigations (explicit `revalidate()
 **Named export** from `shouldRevalidate.js`.
 
 ```js
-export { shouldRevalidate } from "app/routes/utility/loaders/shouldRevalidate";
+export { shouldRevalidate } from "app/lib/react-router/loaders/shouldRevalidate";
 ```
 
 ---
 
 ## 3. API Helpers
 
-All helpers live in `app/routes/utility/helpers/`.
+Action/loader-flow helpers live in `app/lib/react-router/helpers/`. `queryApi` is the exception — it lives at `app/lib/api/queryApi.js` and is imported via the `api` alias.
 
 ### `queryApi(fetchFn, context?, signal?)`
 
-**Named export** from `queryApi.js`.
+**Named export** from `app/lib/api/queryApi.js`. Imported as `import { queryApi } from "api";`.
 
 Core helper for all API calls in loaders and actions. Gets the auth token from `routerContext` (server) or cookies (client). All loader utilities use this internally.
 
@@ -230,8 +230,8 @@ A complete backend route module:
 // app/routes/backend/projects/$id/_layout.jsx
 import { Outlet } from "react-router";
 import { projectsAPI } from "api";
-import loadEntity from "app/routes/utility/loaders/loadEntity";
-import authorize from "app/routes/utility/loaders/authorize";
+import loadEntity from "app/lib/react-router/loaders/loadEntity";
+import authorize from "app/lib/react-router/loaders/authorize";
 
 export const loader = async ({ params, request, context }) => {
   const project = await loadEntity({
@@ -272,10 +272,10 @@ Drop the legacy `create`/`update` API props from `FormContainer.Form` — the ro
 
 #### `formAction` helper
 
-Most route actions follow an identical pattern: parse JSON, call an API via `queryApi`, return errors or success/redirect. The `formAction` helper (`app/routes/utility/helpers/formAction.js`) encapsulates this. Use it for any action that does a single mutation — only write a manual action when the route needs multi-intent dispatching or custom return values. Auth gating and fallback error messages are supported via options (see below).
+Most route actions follow an identical pattern: parse JSON, call an API via `queryApi`, return errors or success/redirect. The `formAction` helper (`app/lib/react-router/helpers/formAction.js`) encapsulates this. Use it for any action that does a single mutation — only write a manual action when the route needs multi-intent dispatching or custom return values. Auth gating and fallback error messages are supported via options (see below).
 
 ```js
-import formAction from "app/routes/utility/helpers/formAction";
+import formAction from "app/lib/react-router/helpers/formAction";
 ```
 
 **Update (stays on same page):**
@@ -319,7 +319,7 @@ When `redirectTo` is omitted, the helper returns `{ success: true }` — React R
 
 **Auth-gated actions (`requireAuth`):**
 
-Pass `requireAuth: true` to reject unauthenticated requests before the mutation runs. The helper reads the auth token from `routerContext` and, if absent, returns the canonical unauthorized response from `unauthorizedError()` (`app/routes/utility/helpers/unauthorizedError.js`) — `{ errors: [{ detail: "Authentication required", source: { pointer: "/data" } }] }`. Use the same helper in manual actions so both paths produce an identical shape for clients.
+Pass `requireAuth: true` to reject unauthenticated requests before the mutation runs. The helper reads the auth token from `routerContext` and, if absent, returns the canonical unauthorized response from `unauthorizedError()` (`app/lib/react-router/helpers/unauthorizedError.js`) — `{ errors: [{ detail: "Authentication required", source: { pointer: "/data" } }] }`. Use the same helper in manual actions so both paths produce an identical shape for clients.
 
 ```js
 export const action = formAction({
@@ -352,7 +352,7 @@ Write a manual action (instead of `formAction`) when the route needs:
 Manual actions should use `unauthorizedError()` for their auth gate to match the shape `formAction({ requireAuth: true })` produces:
 
 ```js
-import unauthorizedError from "app/routes/utility/helpers/unauthorizedError";
+import unauthorizedError from "app/lib/react-router/helpers/unauthorizedError";
 
 export async function action({ request, context, params }) {
   const { auth } = context.get(routerContext) ?? {};
@@ -363,8 +363,8 @@ export async function action({ request, context, params }) {
 
 ```js
 import { redirect } from "react-router";
-import { queryApi } from "app/routes/utility/helpers/queryApi";
-import handleActionError from "app/routes/utility/helpers/handleActionError";
+import { queryApi } from "api";
+import handleActionError from "app/lib/react-router/helpers/handleActionError";
 
 export async function action({ request, context, params }) {
   const data = await request.json();
@@ -423,7 +423,7 @@ function MyComponent() {
 Use when you need the context object or don't want to use `useApiCallback`.
 
 ```js
-import { queryApi } from "app/routes/utility/helpers/queryApi";
+import { queryApi } from "api";
 import { useRevalidator } from "react-router";
 
 function MyComponent() {
