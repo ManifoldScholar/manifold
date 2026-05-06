@@ -4,7 +4,8 @@ import Comment from "components/global/comment";
 import Meta from "../Meta";
 import VariantList from "../VariantList";
 import Annotations from "./Annotations";
-import { useAuthentication, useSignInUpOverlay } from "hooks";
+import { useAuthentication } from "hooks";
+import { useSignInUpOverlay } from "components/global/sign-in-up/Overlay/context";
 import * as Styled from "./styles";
 import Preview from "../Preview";
 

@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { maybeHtml, maybeReactNode } from "helpers/maybeHtml";
 import Authorize from "components/hoc/Authorize";
-import { useSettings, useFrontendMode, useSignInUpOverlay } from "hooks";
+import { useSettings, useFrontendMode } from "hooks";
+import { useSignInUpOverlay } from "components/global/sign-in-up/Overlay/context";
 import * as Styled from "./styles";
 import { Trans, useTranslation } from "react-i18next";
 

@@ -116,6 +116,9 @@ export default defineConfig(({ isSsrBuild }) => ({
   ssr: {
     noExternal: isSsrBuild ? true : ["styled-components"]
   },
+  build: {
+    chunkSizeWarningLimit: 1500
+  },
   server: {
     proxy: {
       "/api": {

@@ -1,11 +1,7 @@
 import { useContext } from "react";
 import FooterParts from "./Parts";
-import {
-  useAuthentication,
-  useSettings,
-  useLogout,
-  useSignInUpOverlay
-} from "hooks";
+import { useAuthentication, useSettings, useLogout } from "hooks";
+import { useSignInUpOverlay } from "components/global/sign-in-up/Overlay/context";
 import { AppContext } from "app/contexts";
 import links from "./Parts/helpers/links";
 // import LanguageSelect from "components/global/LanguageSelect";

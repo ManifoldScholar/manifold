@@ -4,6 +4,7 @@
   "author": "Zach Davis <zach@castironcoding.com>",
   "license": "GPL-3.0",
   "version": "0.0.1",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/manifoldScholar/manifold"
