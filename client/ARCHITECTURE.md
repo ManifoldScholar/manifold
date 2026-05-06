@@ -197,7 +197,7 @@ All in [`app/lib/react-router/loaders/`](./app/lib/react-router/loaders/). One-l
 | `requireLogin` | 302 to `/login?redirect_uri=...` if unauthed. |
 | `parseListParams` | Pull `filters` + `pagination` out of a URL. |
 | `createListClientLoader` | Build a `clientLoader` for list routes (sets `hydrate = true`). |
-| `shouldRevalidate` | Default policy: revalidate on form submits and same-URL navigations. |
+| `shouldRevalidate` | Used sparingly — primarily on the frontend layout to skip refetching reference data (e.g. subjects) that doesn't change within a session. Most routes rely on RR's default revalidation. |
 
 ### Component-side data access
 
@@ -229,14 +229,68 @@ Add `redirectTo: ({ result }) => "/path"` when the action should navigate; omit 
 - `requireAuth: true` — reject unauthenticated requests with the canonical [`unauthorizedError()`](./app/lib/react-router/helpers/unauthorizedError.js) shape.
 - `errorMessage: "..."` — fallback message for errors that don't carry their own `errors` payload.
 
-Form components hook in via `FormContainer.Form` with the `fetcher` prop; submit state, errors, and the navigation blocker all wire up automatically.
+### Wiring `FormContainer.Form` to a route action
+
+`FormContainer.Form` accepts two new props that connect it to a route action — pick whichever fits the calling pattern.
+
+**`fetcher` — when the form lives directly in the route component.** Submit state, errors, and the navigation blocker all wire up automatically; success notifications come from the optional `notifyOnSuccess` prop.
+
+```jsx
+const fetcher = useFetcher();
+
+<FormContainer.Form
+  model={settings}
+  fetcher={fetcher}
+  notifyOnSuccess={{
+    heading: t("notifications.settings_save_success_heading"),
+    body: t("notifications.settings_save_success_body")
+  }}
+>
+  {/* fields */}
+</FormContainer.Form>
+```
+
+**`submit` + `errors` — when the form is in a child component or you need more control over submission.** Pair `useSubmit()` (called in the route) with `actionData?.errors` (read from the action's return value) and pass both down. The form serializes its model to JSON and submits via the supplied `submit` function.
+
+```jsx
+// in the route component
+const submit = useSubmit();
+return <GroupSettingsForm submit={submit} errors={actionData?.errors || []} />;
+
+// in the form component
+<FormContainer.Form model={group} submit={submit} errors={errors}>
+  {/* fields */}
+</FormContainer.Form>
+```
+
+In both cases the route's `action` (typically built with `formAction`) is what actually runs the mutation — these props are just how the form connects to it.
+
+### Reshaping submission data with `formatData`
+
+`FormContainer.Form` accepts a `formatData` function that runs against the model just before submission — useful any time the form's shape doesn't match what the API expects. One pattern worth flagging is the [`mergeImageAltText`](./app/lib/react-router/helpers/mergeImageAltText.js) helper, which reconciles the form's flat alt-text fields (`thumbnailAltText`, `heroAltText`, etc.) with the API's nested shape (`thumbnail: { altText }`). Pair it with any image `<Form.Upload>` that exposes `altTextName`:
+
+```js
+const formatData = data => ({
+  ...data,
+  attributes: mergeImageAltText(data?.attributes, "thumbnail")
+});
+
+<FormContainer.Form model={resourceCollection} fetcher={fetcher} formatData={formatData}>
+  <Form.Upload name="attributes[thumbnail]" altTextName="attributes[thumbnailAltText]" />
+</FormContainer.Form>
+```
+
+The helper takes any number of image-field names — `mergeImageAltText(attrs, "hero", "avatar")` — and is a no-op for fields that don't have a paired `*AltText` value.
+
+### Toast notifications
+
+The app exposes a global notification system through [`NotificationProvider`](./app/contexts/NotificationProvider.jsx) (mounted in `root.jsx`). Components read it with the `useNotifications` hook to get `addNotification`, `removeNotification`, and `removeNotifications` (scoped). For form success toasts, just pass `notifyOnSuccess={{ heading, body }}` to `FormContainer.Form` — the wiring runs automatically when the action returns `{ success: true }`. For imperative cases (post-delete confirmation, async-failure feedback) call `addNotification({ level, id, heading, body, expiration, scope })` directly. Notifications de-dupe by `id`, auto-dismiss on `expiration` (default 5s), and accept a `scope` (`"global"` by default; `"drawer"` to render inside an open drawer instead of the global container). Toast strings live in `shared/notifications.json` and are referenced as `t("notifications.*")`.
 
 ### When to write a manual action
 
 Only when you need:
 - Multi-intent dispatch (`if (intent === "delete") ...`)
 - A return value other than `{ success: true }` or a redirect
-- `return redirect()` (rare — see below)
 
 Use `unauthorizedError()` for auth gating to keep response shapes consistent with `formAction`.
 
@@ -292,7 +346,63 @@ See [`backend_data_patterns.md` §2](./router-migration-guides/backend_data_patt
 
 ---
 
-## 8. Section conventions: frontend / backend / reader
+## 8. Drawer routes
+
+Some flows render a child route as a slide-in drawer over its parent (new/edit overlays in admin records, the group editor, the section editor). The pattern uses a single component, [`OutletWithDrawers`](./app/components/global/router/OutletWithDrawers/index.js), in the parent layout and a `handle` export on each drawer-eligible child.
+
+**Enabling the drawer in a child route:**
+
+```js
+export const handle = { drawer: true };
+```
+
+**Parent layout — single-drawer case** (one drawer config for all drawer children):
+
+```jsx
+<OutletWithDrawers
+  context={readingGroup}
+  drawerProps={{
+    context: "frontend",
+    size: "wide",
+    position: "overlay",
+    lockScroll: "always",
+    closeUrl: editRoute
+  }}
+/>
+```
+
+**Parent layout — multi-drawer case** (different drawers need different focus-trap or animation settings, which can't be reconfigured after mount). Pass `drawerProps` as an array; the matching child sets a string in its handle:
+
+```jsx
+// in the layout
+<OutletWithDrawers
+  context={text}
+  drawerProps={[
+    { context: "editor", size: "wide", entrySide: "top", padding: "xl" },
+    { context: "ingestion", size: "default", padding: "default" }
+  ]}
+/>
+
+// in the child route
+export const handle = { drawer: "editor" };
+```
+
+### Options
+
+| Prop | Purpose |
+|---|---|
+| `drawerProps` | Single object or array of configs. Each config is forwarded to `Drawer.Wrapper` and supports `size`, `position`, `padding`, `lockScroll`, `closeUrl`, `entrySide`, `fullScreenTitle`, `icon`, `wide`, etc. |
+| `drawerCondition` | Boolean (default `true`). When `false`, drawers don't render at all and the bare outlet renders instead. Useful when the layout sometimes shows its child inline (e.g. `drawerCondition={!id}`). |
+| `context` | Forwarded to the rendered `<Outlet>`. Children read it with `useOutletContext()`. |
+
+Behaviour notes:
+- Only one drawer is open at a time. With an array, the open drawer is the one whose `context` matches the child's `handle.drawer` string; with `handle.drawer: true`, the drawer with `context: "backend"` (the default) opens.
+- All drawers in the array stay mounted off-screen so animations survive route changes — that's why multi-drawer configs are an array rather than conditionally-rendered components.
+- For mixed layouts where some children are drawers and others aren't, `OutletWithDrawers` renders both: the bare outlet for non-drawer children plus the drawer wrappers for drawer children.
+
+---
+
+## 9. Section conventions: frontend / backend / reader
 
 The three sections look similar at the file level but have meaningfully different data strategies. Pick the right one before you start writing.
 
@@ -307,19 +417,51 @@ The three sections look similar at the file level but have meaningfully differen
 
 - **Server loaders only.** Every action's revalidation goes through the server, keeping cache coherence simple.
 - Heavy use of `_layout.jsx`: parent fetches the entity + runs `authorize`, children consume via outlet context.
-- Drawer routes (`export const handle = { drawer: true }`) for new/edit overlays — see [`backend_data_patterns.md` §9](./router-migration-guides/backend_data_patterns.md).
+- Heavy use of drawer routes for new/edit overlays — see §8.
 - No `clientLoader` — there's nothing to gain from it given the data is already auth-gated and revalidated per-mutation.
 
 ### `read/$textId/` — reader
 
 - One text per URL, with section/annotation routes nested under it.
-- Minimal loader logic; the bulk of state lives in `ReaderContext` (a reducer-based context that persists to user preferences).
-- Text metadata is server-loaded; section content and per-user interactive state load client-side.
-- The migration here is incremental — see [`reader_migration.md`](./router-migration-guides/reader_migration.md).
+- Loaders fetch text and section data server-side, often in parallel via `loadParallelLists` (e.g. section + annotations + resources + resource collections together).
+- Per-user UI state — typography, color scheme, and other reading preferences — lives in `ReaderContext` (a reducer-based context backed by user preferences).
 
 ---
 
-## 9. Error boundaries
+## 10. Code splitting & lazy loading
+
+§4 introduced `<ClientOnly>` for SSR opt-out. The same wrapper is also used to keep heavy, admin-only libraries out of the main bundle — the difference is that those are paired with `React.lazy` so the JS itself doesn't ship until a route that needs it renders.
+
+Three components account for almost all of the lazy-loaded weight:
+
+| Component | Approx. chunk size | Loaded on |
+|---|---|---|
+| `SwaggerUI` ([`components/frontend/ApiDocs/SwaggerUi.js`](./app/components/frontend/ApiDocs/SwaggerUi.js)) | ~1.3 MB | `/docs.api` only |
+| `ContentEditor` ([`components/global/form/ContentEditor/components/Wrapper.js`](./app/components/global/form/ContentEditor/components/Wrapper.js)) | ~1 MB | Admin section/text editing (Slate) |
+| `CodeArea` ([`components/global/form/CodeArea/AceEditor.js`](./app/components/global/form/CodeArea/AceEditor.js)) | ~600 KB | Admin code/CSS/HTML fields (Ace) |
+
+The pattern in each:
+
+```jsx
+const Editor = lazy(() => import("./components/Wrapper"));
+
+<ClientOnly>
+  <Suspense fallback={null}>
+    <Editor {...props} />
+  </Suspense>
+</ClientOnly>
+```
+
+Why both `lazy` and `<ClientOnly>`:
+
+- **`lazy` + `<Suspense>`** splits the component into its own bundle. The chunk only ships when a route renders the component, so users browsing the public site never download the admin editors.
+- **`<ClientOnly>`** ([`app/components/global/utility/ClientOnly.js`](./app/components/global/utility/ClientOnly.js)) returns `null` on the server and only renders children after `useHasMounted()` flips post-hydration. Necessary because Slate, Ace, and Swagger UI all touch browser APIs during render and would crash or mismatch under SSR.
+
+These three chunks are the reason `vite.config.js` raises `chunkSizeWarningLimit` to 1500 KB — they're working as intended, not regressions. Other components use `<ClientOnly>` *without* `lazy` (date pickers, drag-drop builders) when SSR mismatch is the only concern and the bundle weight is already acceptable.
+
+---
+
+## 11. Error boundaries
 
 Three layers, each catching errors at a different scope:
 
@@ -339,7 +481,7 @@ The ErrorBoundary inspects `error.status` to decide what to render. Runtime erro
 
 ---
 
-## 10. Cheat sheet for new contributors
+## 12. Cheat sheet for new contributors
 
 Before writing a new route, work through this:
 
