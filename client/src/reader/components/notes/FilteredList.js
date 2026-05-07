@@ -5,6 +5,7 @@ import IconComposer from "global/components/utility/IconComposer";
 import Partial from "./partial";
 import EmptyMessage from "./EmptyMessage";
 import { withTranslation } from "react-i18next";
+import withSettings from "hoc/withSettings";
 
 class FilteredList extends PureComponent {
   static displayName = "Notes.FilteredList";
@@ -22,6 +23,7 @@ class FilteredList extends PureComponent {
     loaded: PropTypes.bool,
     readingGroups: PropTypes.array,
     setAnnotationOverlayReadingGroup: PropTypes.func,
+    settings: PropTypes.object.isRequired,
     t: PropTypes.func
   };
 
@@ -65,6 +67,10 @@ class FilteredList extends PureComponent {
     return this.props.setAnnotationOverlayReadingGroup;
   }
 
+  get readingGroupsDisabled() {
+    return this.props.settings?.attributes?.general.disableReadingGroups;
+  }
+
   renderHeading() {
     const { handleSeeAllClick, handleFilterChange } = this.props;
 
@@ -77,6 +83,7 @@ class FilteredList extends PureComponent {
           })}
         >
           <Partial.GroupFilter
+            readingGroupsDisabled={this.readingGroupsDisabled}
             filterChangeHandler={handleFilterChange}
             selectedGroup={this.selectedGroup}
             readingGroups={this.readingGroups}
@@ -85,20 +92,22 @@ class FilteredList extends PureComponent {
             }
           />
           {/* This button opens a global dialog, and most likely needs more a11y props. */}
-          <button
-            onClick={handleSeeAllClick}
-            className="notes-filtered-list__see-all button-primary button-primary--dull button-primary--rounded"
-          >
-            <span className="button-primary__text">
-              {this.props.t("actions.see_all")}
-            </span>
-            <IconComposer
-              icon="link24"
-              size="default"
-              className="notes-filtered-list__see-all-icon button-primary__icon"
-              svgProps={{ role: "presentation" }}
-            />
-          </button>
+          {!this.readingGroupsDisabled && (
+            <button
+              onClick={handleSeeAllClick}
+              className="notes-filtered-list__see-all button-primary button-primary--dull button-primary--rounded"
+            >
+              <span className="button-primary__text">
+                {this.props.t("actions.see_all")}
+              </span>
+              <IconComposer
+                icon="link24"
+                size="default"
+                className="notes-filtered-list__see-all-icon button-primary__icon"
+                svgProps={{ role: "presentation" }}
+              />
+            </button>
+          )}
         </div>
       </div>
     );
@@ -149,4 +158,4 @@ class FilteredList extends PureComponent {
   }
 }
 
-export default withTranslation()(FilteredList);
+export default withTranslation()(withSettings(FilteredList));
