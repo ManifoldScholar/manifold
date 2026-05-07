@@ -30,14 +30,14 @@ const UserMenuBody = forwardRef(
             onClick={() => callbacks.hideUserPanel()}
           />
         )}
+        <Item
+          to={lh.link("frontendAnnotations")}
+          title={t("pages.my_notes")}
+          icon="notes24"
+          onClick={() => callbacks.hideUserPanel()}
+        />
         {currentUser?.attributes.classAbilities.readingGroup.read && (
           <>
-            <Item
-              to={lh.link("frontendAnnotations")}
-              title={t("pages.my_notes")}
-              icon="notes24"
-              onClick={() => callbacks.hideUserPanel()}
-            />
             <Item
               to={lh.link("frontendMyReadingGroups")}
               title={t("pages.my_groups")}

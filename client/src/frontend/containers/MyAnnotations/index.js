@@ -5,7 +5,12 @@ import { meAPI } from "api";
 import HeadContent from "global/components/HeadContent";
 import EntityCollection from "frontend/components/entity/Collection";
 import CollectionNavigation from "frontend/components/CollectionNavigation";
-import { useFetch, useListFilters, useListQueryParams } from "hooks";
+import {
+  useFetch,
+  useListFilters,
+  useListQueryParams,
+  useFromStore
+} from "hooks";
 import intersection from "lodash/intersection";
 
 const INIT_FILTER_STATE = {
@@ -13,6 +18,10 @@ const INIT_FILTER_STATE = {
 };
 
 export default function MyAnnotationsContainer() {
+  const settings = useFromStore("settings", "select");
+
+  const allRGsDisabled = settings?.attributes?.general.disableReadingGroups;
+
   const { pagination, filters, setFilters } = useListQueryParams({
     initSize: 10,
     initFilters: INIT_FILTER_STATE
@@ -25,7 +34,8 @@ export default function MyAnnotationsContainer() {
     request: [meAPI.annotatedTexts]
   });
   const { data: readingGroups } = useFetch({
-    request: [meAPI.readingGroups]
+    request: [meAPI.readingGroups],
+    condition: !allRGsDisabled
   });
 
   const setFiltersWithHighlights = useCallback(
@@ -46,8 +56,8 @@ export default function MyAnnotationsContainer() {
     resetState: INIT_FILTER_STATE,
     options: {
       texts: annotatedTexts,
-      readingGroup: readingGroups,
-      privacy: true
+      privacy: true,
+      ...(readingGroups ? { readingGroup: readingGroups } : {})
     }
   });
 
