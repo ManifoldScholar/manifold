@@ -35,7 +35,6 @@ common: &common
     password: "<%= cache_pass %>"
     migrations_paths: db/cache_migrate
 
-
 production:
   <<: *common
 
@@ -55,5 +54,3 @@ test:
   cache:
     <<: *cache
     database: <%= cache_test_db %><%= ENV["TEST_ENV_NUMBER"] %>
-
-  
