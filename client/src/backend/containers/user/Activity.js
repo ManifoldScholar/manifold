@@ -1,7 +1,12 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { usersAPI, readingGroupMembershipsAPI, annotationsAPI } from "api";
-import { useFetch, usePaginationState, useApiCallback } from "hooks";
+import {
+  useFetch,
+  usePaginationState,
+  useApiCallback,
+  useFromStore
+} from "hooks";
 import Layout from "backend/components/layout";
 import EntitiesList, {
   ReadingGroupMembershipRow,
@@ -44,8 +49,12 @@ function UserActivityContainer({ user, confirm }) {
 
   const [rgPagination, setRgPageNumber] = usePaginationState(1, 5);
 
+  const settings = useFromStore("settings", "select");
+  const rgsDisabled = settings?.attributes?.general.disableReadingGroups;
+
   const { data: rgMemberships, meta: rgMeta, refresh: refreshRgs } = useFetch({
-    request: [usersAPI.readingGroupMemberships, user.id, null, rgPagination]
+    request: [usersAPI.readingGroupMemberships, user.id, null, rgPagination],
+    condition: !rgsDisabled
   });
 
   const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
@@ -85,7 +94,7 @@ function UserActivityContainer({ user, confirm }) {
         </Layout.BackendPanel>
       )}
       {!!annotations && (
-        <Layout.BackendPanel>
+        <Layout.BackendPanel flush={!rgMemberships}>
           <EntitiesList
             entityComponent={AnnotationRow}
             entityComponentProps={{
