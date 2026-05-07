@@ -6363,7 +6363,7 @@ CREATE INDEX index_text_section_nodes_child_ordering ON public.text_section_node
 -- Name: index_text_section_nodes_contained_content_indexing; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_text_section_nodes_contained_content_indexing ON public.text_section_nodes USING gist (text_section_id, body_hash, node_path public.gist_ltree_ops (siglen='24'), id) WITH (fillfactor='90');
+CREATE INDEX index_text_section_nodes_contained_content_indexing ON public.text_section_nodes USING gist (text_section_id, body_hash, node_path public.gist_ltree_ops (siglen='24')) WITH (fillfactor='90');
 
 
 --
@@ -7793,6 +7793,8 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20260507182648'),
+('20260507182640'),
 ('20251203231940'),
 ('20251203230443'),
 ('20251121202033'),
