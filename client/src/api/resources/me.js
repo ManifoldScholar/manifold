@@ -25,8 +25,9 @@ export default {
     };
   },
 
-  annotations(filter = {}, page = {}) {
+  annotations(filter = {}, page = {}, eagerLoad = false) {
     return {
+      eagerLoad,
       endpoint: `/api/v1/me/relationships/annotations`,
       method: "GET",
       options: {
