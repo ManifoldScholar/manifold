@@ -45,8 +45,9 @@ export default {
     };
   },
 
-  annotations(id, filter = {}, page = {}) {
+  annotations(id, filter = {}, page = {}, eagerLoad = false) {
     return {
+      eagerLoad,
       endpoint: `/api/v1/reading_groups/${id}/relationships/annotations`,
       method: "GET",
       options: {

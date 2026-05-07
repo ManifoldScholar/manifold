@@ -53,13 +53,20 @@ function ReaderNotesContainer({
   }, [filters]);
   const showMyAnnotations = groupId === "me";
 
+  const initPageParam = useMemo(() => ({ size: 20, number: 1 }), []);
+
   const { data: myAnnotations, meta: myMeta } = useFetch({
-    request: [meAPI.annotations, fetchFilters],
-    condition: showMyAnnotations,
-    options: { fetchKey: requests.rMyFilteredAnnotationsForText }
+    request: [meAPI.annotations, fetchFilters, initPageParam, true],
+    condition: showMyAnnotations
   });
   const { data: rgAnnotations, meta: rgMeta } = useFetch({
-    request: [readingGroupsAPI.annotations, groupId, fetchFilters],
+    request: [
+      readingGroupsAPI.annotations,
+      groupId,
+      fetchFilters,
+      initPageParam,
+      true
+    ],
     condition: !showMyAnnotations,
     options: { fetchKey: requests.rReadingGroupFilteredAnnotationsForText }
   });
