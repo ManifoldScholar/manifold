@@ -32,7 +32,7 @@ module Packaging
 
           item.toc_text section.toc_text
 
-          item.landmark section.landmark if section.has_landmark?
+          item.landmark **section.landmark if section.has_landmark?
 
           item.set_media_type CoreMediaTypeKind::XHTML
 
