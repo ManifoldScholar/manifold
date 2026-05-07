@@ -13,6 +13,7 @@ class GroupFilter extends Component {
     filterChangeHandler: PropTypes.func,
     setAnnotationOverlayReadingGroup: PropTypes.func,
     selectedGroup: PropTypes.string,
+    readingGroupsDisabled: PropTypes.bool,
     t: PropTypes.func
   };
 
@@ -45,7 +46,9 @@ class GroupFilter extends Component {
 
   get groupFilter() {
     return {
-      label: this.props.t("glossary.reading_group_title_case_one"),
+      label: this.props.readingGroupsDisabled
+        ? this.props.t("common.show")
+        : this.props.t("glossary.reading_group_title_case_one"),
       value: this.selectedGroup,
       options: [
         {
