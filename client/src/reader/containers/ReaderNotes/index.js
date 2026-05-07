@@ -57,7 +57,8 @@ function ReaderNotesContainer({
 
   const { data: myAnnotations, meta: myMeta } = useFetch({
     request: [meAPI.annotations, fetchFilters, initPageParam, true],
-    condition: showMyAnnotations
+    condition: showMyAnnotations,
+    options: { fetchKey: requests.rMyFilteredAnnotationsForText }
   });
   const { data: rgAnnotations, meta: rgMeta } = useFetch({
     request: [
