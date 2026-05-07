@@ -102,16 +102,16 @@ export const getAnnotationStyles = (
 
   const ariaLabel = () => {
     if (!!textAnnotationIds.length && highlighted)
-      return this.props.t("reader.annotation_highlight_aria_label", {
+      return t("reader.annotation_highlight_aria_label", {
         chunk: "mathematical content"
       });
 
     if (highlighted)
-      return this.props.t("reader.highlight_aria_label", {
+      return t("reader.highlight_aria_label", {
         chunk: "mathematical content"
       });
 
-    return this.props.t("reader.annotation_aria_label", {
+    return t("reader.annotation_aria_label", {
       chunk: "mathematical content"
     });
   };

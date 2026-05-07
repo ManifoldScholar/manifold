@@ -99,14 +99,14 @@ class UserLinks extends PureComponent {
             onClick={() => this.props.closeNavigation()}
           />
         )}
+        <Link
+          to={lh.link("frontendAnnotations")}
+          title={t("pages.my_notes")}
+          icon="notes24"
+          onClick={() => this.props.closeNavigation()}
+        />
         {this.canAccessReadingGroups && (
           <>
-            <Link
-              to={lh.link("frontendAnnotations")}
-              title={t("pages.my_notes")}
-              icon="notes24"
-              onClick={() => this.props.closeNavigation()}
-            />
             <Link
               to={lh.link("frontendMyReadingGroups")}
               title={t("pages.my_groups")}
