@@ -1,6 +1,5 @@
 bin/console
 bin/dbconsole
-config/database.yml
 data
 dump.sql
 log
