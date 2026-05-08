@@ -40,10 +40,10 @@ export default class LowLevelApiClient {
     const headers = {
       ...baseHeaders,
       "Content-Type": "application/json",
-      Authorization: `Bearer ${options.authToken}`,
-      "VISIT-TOKEN": options.visitToken,
-      "VISITOR-TOKEN": options.visitorToken
+      Authorization: `Bearer ${options.authToken}`
     };
+    if (options.visitToken) headers["VISIT-TOKEN"] = options.visitToken;
+    if (options.visitorToken) headers["VISITOR-TOKEN"] = options.visitorToken;
 
     const fetchConfig = {
       method,
