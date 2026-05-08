@@ -29,8 +29,7 @@ module Packaging
       # @return [(File, String)]
       # @return [(Tempfile, String)]
       def maybe_convert
-        file_reference = uploaded_file.to_io
-
+        file_reference = uploaded_file.tempfile
         return [file_reference, content_type] if content_type.in? ACCEPTABLE_CONTENT_TYPES
 
         [
