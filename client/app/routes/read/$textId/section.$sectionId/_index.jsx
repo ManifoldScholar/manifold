@@ -12,6 +12,7 @@ import EventTracker, { EVENTS } from "components/global/EventTracker";
 import { useContext } from "react";
 import { ReaderContext } from "app/contexts";
 import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
+import loadAllPages from "lib/react-router/loaders/loadAllPages";
 
 export const loader = async ({ params, context }) => {
   const { textId, sectionId } = params;
@@ -27,20 +28,38 @@ export const loader = async ({ params, context }) => {
     }
   });
 
-  if (!results.section) {
+  if (!results.section.data) {
     throw data(null, { status: 404 });
   }
 
   return {
-    section: results.section,
-    annotations: results.annotations ?? [],
-    resources: results.resources ?? [],
-    resourceCollections: results.resourceCollections ?? []
+    section: results.section.data,
+    annotations: results.annotations,
+    resources: results.resources.data,
+    resourceCollections: results.resourceCollections.data
   };
 };
 
+export const clientLoader = async ({ params, request, serverLoader }) => {
+  const server = await serverLoader();
+  const { textId, sectionId } = params;
+
+  const annotations = await loadAllPages({
+    request: annotationsAPI.forSection(sectionId, textId),
+    initial: server.annotations,
+    signal: request.signal
+  });
+
+  return { ...server, annotations };
+};
+
+clientLoader.hydrate = true;
+
 export default function SectionRoute({ loaderData }) {
-  const { section, annotations } = loaderData;
+  const {
+    section,
+    annotations: { data: annotations }
+  } = loaderData;
 
   const text = useOutletContext();
 

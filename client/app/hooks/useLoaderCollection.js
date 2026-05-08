@@ -6,10 +6,17 @@ export default function useLoaderCollection(type) {
   matches.some(match => {
     const { data } = match;
     if (!data || typeof data !== "object") return false;
-    found = Object.values(data).find(
-      v => Array.isArray(v) && v.length > 0 && v[0]?.type === type
-    );
-    return !!found;
+    return Object.values(data).some(v => {
+      if (Array.isArray(v) && v[0]?.type === type) {
+        found = v;
+        return true;
+      }
+      if (Array.isArray(v?.data) && v.data[0]?.type === type) {
+        found = v.data;
+        return true;
+      }
+      return false;
+    });
   });
   return found || [];
 }

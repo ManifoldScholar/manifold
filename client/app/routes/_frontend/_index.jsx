@@ -53,10 +53,10 @@ export const loader = async ({ request, context }) => {
   });
 
   return {
-    journals: results.journals ?? [],
-    features: results.features ?? [],
-    projects: showProjects ? results.projectsOrCollections ?? null : null,
-    collections: !showProjects ? results.projectsOrCollections ?? null : null,
+    journals: results.journals.data,
+    features: results.features.data,
+    projects: showProjects ? results.projectsOrCollections.data : null,
+    collections: !showProjects ? results.projectsOrCollections.data : null,
     showProjects,
     hasVisibleProjects
   };

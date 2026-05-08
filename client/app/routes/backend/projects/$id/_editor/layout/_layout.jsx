@@ -6,13 +6,18 @@ import Hero from "components/backend/hero";
 import ContentBlock from "components/backend/content-block";
 
 export const loader = async ({ params, context }) => {
-  return loadParallelLists({
+  const results = await loadParallelLists({
     context,
     fetchFns: {
       actionCallouts: () => projectsAPI.actionCallouts(params.id),
       contentBlocks: () => projectsAPI.contentBlocks(params.id)
     }
   });
+
+  return {
+    actionCallouts: results.actionCallouts.data,
+    contentBlocks: results.contentBlocks.data
+  };
 };
 
 export default function ProjectLayoutContainer({ loaderData }) {

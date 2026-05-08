@@ -39,8 +39,8 @@ export const loader = async ({ request, context }) => {
 
   return {
     ...annotationsData,
-    annotatedTexts: annotatedTexts ?? [],
-    readingGroups: readingGroups ?? []
+    annotatedTexts: annotatedTexts.data,
+    readingGroups: readingGroups.data
   };
 };
 
