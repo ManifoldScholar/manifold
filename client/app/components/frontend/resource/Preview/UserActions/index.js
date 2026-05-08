@@ -31,8 +31,8 @@ function ResourcePreviewUserActions({
   } = resource.attributes;
 
   const detailUrl = resourceCollection
-    ? `/projects/${projectSlug}/resource-collections/${resourceCollection.attributes.slug}/resources/${slug}`
-    : `/projects/${projectSlug}/resources/${slug}`;
+    ? `/projects/${projectSlug}/resource-collections/${resourceCollection.attributes.slug}/resource/${slug}`
+    : `/projects/${projectSlug}/resource/${slug}`;
 
   return (
     <Styled.List>
