@@ -26,7 +26,8 @@ export default function FormContainer({
   groupErrorsStyle,
   className = "form-secondary",
   style = {},
-  formRef
+  formRef,
+  notificationScope
 }) {
   const { t } = useTranslation();
   const { addNotification } = useNotifications();
@@ -77,7 +78,11 @@ export default function FormContainer({
         ? { ...defaultNotification, ...notifyOnSuccess }
         : defaultNotification;
 
-    addNotification({ id: `FORM_SUCCESS_${Date.now()}`, ...notification });
+    addNotification({
+      id: `FORM_SUCCESS_${Date.now()}`,
+      ...notification,
+      ...(notificationScope ? { scope: notificationScope } : {})
+    });
   }, [fetcher?.data?.success, fetcher?.state]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setValue = useCallback(
@@ -157,6 +162,7 @@ export default function FormContainer({
 
   // Errors from fetcher.data or passed prop (from actionData)
   const errors = fetcher?.data?.errors || errorsProp;
+  const globalErrors = errors?.filter(e => !e?.source?.pointer) ?? null;
 
   const contextValue = useMemo(
     () => ({
@@ -184,6 +190,13 @@ export default function FormContainer({
 
   const isBlocking = !doNotWarn && !fetcher?.data?.success && changed;
 
+  /* eslint-disable no-nested-ternary */
+  const errorsToRender = errors?.length
+    ? groupErrors
+      ? errors
+      : globalErrors
+    : null;
+
   return (
     <>
       {debug && <Developer.Debugger object={{ source, dirty, errors }} />}
@@ -191,11 +204,11 @@ export default function FormContainer({
         when={isBlocking}
         message={t("messages.unsaved_changes")}
       />
-      {groupErrors && errors?.length > 0 && (
+      {!!errorsToRender && (
         <Styled.ErrorGroup
           containerStyle={groupErrorsStyle}
           name="*"
-          errors={errors}
+          errors={errorsToRender}
         />
       )}
       <Styled.Form
@@ -242,5 +255,6 @@ FormContainer.propTypes = {
   formRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.any })
-  ])
+  ]),
+  notificationScope: PropTypes.string
 };
