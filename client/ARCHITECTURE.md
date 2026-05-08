@@ -192,7 +192,9 @@ All in [`app/lib/react-router/loaders/`](./app/lib/react-router/loaders/). One-l
 |---|---|
 | `loadEntity` | Fetch a single entity. 404 on miss, redirect to login on 401. |
 | `loadList` | Fetch a paginated list. Parses URL search params via `parseListParams`. |
-| `loadParallelLists` | Fetch several lists in parallel; failed requests return `undefined`, not throw. |
+| `loadParallelLists` | Fetch several lists in parallel. Each key resolves to `{ data, meta }` (never `undefined`), so failed requests degrade to `{ data: [], meta: null }` rather than throw. |
+| `loadAllPages` | Eagerly fetch every page of a paginated request and merge them into one `{ data, meta }`. Pass `initial` to skip refetching page 1. Used in `clientLoader` to recreate the old `eagerLoad` Redux behavior. |
+| `loadAllPagesParallel` | `loadAllPages` across multiple keys in parallel. Returns `{ [key]: { data, meta } }` (matches `loadParallelLists`) and accepts an `initials` map — typically the server loader's `loadParallelLists` output — so page 1 isn't refetched per key. |
 | `authorize` | Run an ability check. Pass the **entity**, not a type string. |
 | `requireLogin` | 302 to `/login?redirect_uri=...` if unauthed. |
 | `parseListParams` | Pull `filters` + `pagination` out of a URL. |
@@ -489,7 +491,8 @@ Before writing a new route, work through this:
 - **What data does this route need?**
   - Single entity → `loadEntity`.
   - List → `loadList`. Add `clientLoader` via `createListClientLoader` if it's a frontend list with filters.
-  - Multiple unrelated lists → `loadParallelLists`.
+  - Multiple unrelated lists → `loadParallelLists`. Pair with `loadAllPagesParallel` in a `clientLoader` (passing the server result as `initials`) when the route needs every page eagerly loaded.
+  - Single paginated list that needs every page → `loadAllPages` in a `clientLoader`, passing the server loader's page-1 result as `initial`.
 - **Does the parent already fetch what I need?** If yes, use `useOutletContext()` and skip the loader.
 - **Auth?**
   - Loader fetches the entity → `authorize()` in loader.
