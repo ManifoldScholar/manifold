@@ -10,6 +10,7 @@ import CookiesBanner from "components/global/CookiesBanner";
 import { NavigationBlockerProvider } from "components/global/router/NavigationBlockerContext";
 import { SignInUpOverlayProvider } from "components/global/sign-in-up/Overlay/context";
 import { useColorScheme } from "hooks";
+import useReattachStyleTag from "lib/styled-components/useReattachStyleTag";
 import { ErrorBoundary } from "./RootErrorBoundary";
 
 // Middleware and contexts
@@ -32,6 +33,7 @@ export default function Root({ loaderData }) {
   const { auth, settings, pages } = loaderData;
 
   useColorScheme();
+  useReattachStyleTag();
 
   const typekitId = get(settings, "attributes.theme.typekitId");
 

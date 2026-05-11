@@ -8,6 +8,7 @@ import {
 import { rawCss as globalRawCss } from "theme/styles/globalStyles";
 import { get } from "lodash-es";
 import formatError from "lib/react-router/helpers/formatError";
+import useReattachStyleTag from "lib/styled-components/useReattachStyleTag";
 import FatalError from "components/global/FatalError";
 
 // Root ErrorBoundary - catches loader errors and uncaught render errors
@@ -22,6 +23,8 @@ export function ErrorBoundary() {
     : null;
 
   const errorProps = formatError(error, location.pathname);
+
+  useReattachStyleTag();
 
   return (
     <html lang="en">
