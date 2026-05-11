@@ -28,6 +28,11 @@ function getSizeStyles(size) {
         --_padding: 6px 14px 8px;
         --_font-size: 12px;
       `;
+    case "xSm":
+      return `
+          --_padding: 7px 16px 7px 14px;
+          --_font-size: 14px;
+        `;
     default:
       return ``;
   }
