@@ -14,6 +14,8 @@ module Packaging
           remote_resources, text = state.values_at :remote_resources, :text
 
           remote_resources.each do |remote_resource|
+            next if remote_resource.external_source.blank?
+
             remote_resource.external_source.links.by_text(text).build.upsert!
           end
 
