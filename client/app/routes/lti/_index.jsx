@@ -1,7 +1,6 @@
-import { Link } from "react-router";
-import { useTranslation } from "react-i18next";
-import Button from "components/global/atomic/Button";
-import SearchForm from "components/lti/SearchForm";
+import { useTranslation, Trans } from "react-i18next";
+import SearchQuery from "components/global/search/query";
+import IconComposer from "components/global/utility/IconComposer";
 import * as Styled from "./styles";
 
 export default function LtiLanding() {
@@ -9,26 +8,18 @@ export default function LtiLanding() {
 
   return (
     <Styled.Landing>
-      <h1>{t("lti.landing.title")}</h1>
-      <Styled.LandingSearch>
-        <SearchForm size="md" placeholder={t("lti.landing.placeholder")} />
-      </Styled.LandingSearch>
-      <Styled.BrowseButtons>
-        <Button
-          as={Link}
-          to="/lti/projects"
-          size="md"
-          background="outline"
-          label={t("lti.landing.browse_projects")}
+      <IconComposer icon="DeepLinkingLogoUnique" size={100} />
+      <Styled.Title>{t("lti.landing.title")}</Styled.Title>
+      <Styled.Subtitle>{t("lti.landing.subtitle")}</Styled.Subtitle>
+      <Styled.Search>
+        <SearchQuery.Form
+          action="/lti/search"
+          placeholder={t("lti.landing.placeholder")}
         />
-        <Button
-          as={Link}
-          to="/lti/texts"
-          size="md"
-          background="outline"
-          label={t("lti.landing.browse_texts")}
-        />
-      </Styled.BrowseButtons>
+      </Styled.Search>
+      <Styled.Message title={t("lti.landing.message_heading")}>
+        <Trans i18nKey="lti.landing.message_body" components={[<p />]} />
+      </Styled.Message>
     </Styled.Landing>
   );
 }

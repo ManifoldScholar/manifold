@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { defaultTransitionProps } from "theme/styles/mixins";
 
 export const Background = styled.div`
-  height: 100px;
-  width: 100px;
+  height: ${({ $size }) => ($size ? `${$size}px` : "100px")};
+  width: ${({ $size }) => ($size ? `${$size}px` : "100px")};
   border-radius: 50%;
   display: flex;
   justify-content: center;

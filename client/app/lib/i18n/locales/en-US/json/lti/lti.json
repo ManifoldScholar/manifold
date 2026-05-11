@@ -9,9 +9,10 @@
     },
     "landing": {
       "title": "$t(actions.add) $t(app.manifold) Links",
+      "subtitle": "Subhead description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
       "placeholder": "Search by title, author, keyword …",
-      "browse_projects": "$t(actions.browse) $t(glossary.project_title_case_other)",
-      "browse_texts": "$t(actions.browse) $t(glossary.text_title_case_other)"
+      "message_heading": "Additional information or instructions go here",
+      "message_body": "<0>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</0><0>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</0>"
     },
     "search": {
       "title": "Search",

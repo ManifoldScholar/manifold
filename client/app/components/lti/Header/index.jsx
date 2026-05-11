@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import useSettings from "hooks/useSettings";
-import Icon from "../Icon";
+import IconComposer from "components/global/utility/IconComposer";
 import Button from "components/global/atomic/Button";
 import * as Styled from "./styles";
 
@@ -16,14 +16,9 @@ export default function LtiHeader({ dialog }) {
 
   return (
     <Styled.Header>
-      <Styled.Logo>
-        <Icon
-          icon="touch64"
-          iconSize={40}
-          transform="rotate(40deg) translate(-1px, 5px)"
-          bgSize={44}
-        />
-        <span>Add Manifold Links</span>
+      <Styled.Logo to="/lti">
+        <IconComposer icon="DeepLinkingLogoUnique" size={44} />
+        <span>{t("lti.landing.title")}</span>
       </Styled.Logo>
       <Styled.Instance>
         {settings.attributes.general.installationName}

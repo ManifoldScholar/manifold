@@ -1,9 +1,19 @@
 import IconComposer from "components/global/utility/IconComposer";
 import * as Styled from "./styles";
 
-export default function LtiMessage({ dismissable, noBorder, title, children }) {
+export default function LtiMessage({
+  dismissable,
+  noBorder,
+  title,
+  children,
+  className
+}) {
   return (
-    <Styled.Box $dismissable={dismissable} $noBorder={noBorder}>
+    <Styled.Box
+      className={className}
+      $dismissable={dismissable}
+      $noBorder={noBorder}
+    >
       {dismissable && (
         <Styled.Close>
           <IconComposer icon="close16" size={20} />

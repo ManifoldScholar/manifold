@@ -47,8 +47,12 @@ export const Title = styled.h3`
 export const Body = styled.div`
   font-size: 15px;
   font-weight: var(--font-weight-regular);
-  line-height: 1.25;
+  line-height: 1.27;
   color: var(--color-base-neutral75);
+
+  > * + * {
+    margin-block-start: var(--_Title-margin-block-end);
+  }
 `;
 
 export const Close = styled.button`

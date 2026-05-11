@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router";
+import { linkUnstyled } from "theme/styles/mixins";
 
 export const Header = styled.header`
   position: sticky;
@@ -13,11 +15,13 @@ export const Header = styled.header`
   border-bottom: 1px solid var(--color-base-neutral40);
 `;
 
-export const Logo = styled.div`
+export const Logo = styled(Link)`
+  ${linkUnstyled}
   display: flex;
   align-items: center;
   gap: 13px;
   font-weight: var(--font-weight-bold);
+  width: max-content;
 `;
 
 export const Instance = styled.div`
