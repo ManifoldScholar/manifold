@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useFetcher } from "react-router";
@@ -56,7 +56,6 @@ function CollectingToggle({
   hiddenIfUncollected
 }) {
   const [hovered, setHovered] = useState(false);
-  const [isCollecting, setIsCollecting] = useState(false);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [lastIntent, setLastIntent] = useState(null);
 
@@ -67,27 +66,27 @@ function CollectingToggle({
     : readingGroups.filter(rg => rg?.attributes?.abilities?.update);
 
   useEffect(() => {
-    if (!dialogVisible || (!onDialogOpen && !onDialogClose)) return;
-    onDialogOpen();
-  }, [dialogVisible]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (dialogVisible && onDialogOpen) onDialogOpen();
+  }, [dialogVisible, onDialogOpen]);
 
   const { currentUser } = useAuthentication();
   const fetcher = useFetcher();
+  const handledFetcherDataRef = useRef(null);
 
   const collected = inCollections(collectable, currentUser, ...readingGroups);
+  const isCollecting = fetcher.state !== "idle" && lastIntent === "collect";
 
   useEffect(() => {
-    setIsCollecting(false);
-  }, [collected]);
-
-  useEffect(() => {
-    if (fetcher.data?.success && lastIntent === "remove" && onUncollect) {
+    if (fetcher.state !== "idle") return;
+    if (!fetcher.data || fetcher.data === handledFetcherDataRef.current) return;
+    handledFetcherDataRef.current = fetcher.data;
+    if (fetcher.data.success && lastIntent === "remove" && onUncollect) {
       onUncollect();
     }
-    if (fetcher.data?.errors) {
+    if (fetcher.data.errors) {
       console.error("Collection operation failed:", fetcher.data.errors);
     }
-  }, [fetcher.data]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fetcher.state, fetcher.data, lastIntent, onUncollect]);
 
   const view = determineView(collected, hovered, isCollecting);
   const hasReadingGroups = myCollectableReadingGroups?.length > 0;
@@ -105,7 +104,6 @@ function CollectingToggle({
   const doCollect = useCallback(
     (collection = currentUser) => {
       setHovered(false);
-      setIsCollecting(true);
       setLastIntent("collect");
       fetcher.submit(
         JSON.stringify({
