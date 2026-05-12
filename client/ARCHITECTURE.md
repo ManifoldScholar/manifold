@@ -152,6 +152,14 @@ Loaders read it via `context.get(routerContext)`. The result is also exposed to 
 
 [`app/entry.client.jsx`](./app/entry.client.jsx) hydrates with `hydrateRoot(document, ...)`, wraps the tree in `StyleSheetManager` with a `shouldForwardProp` filter ([`app/lib/styled-components/shouldForwardProp.js`](./app/lib/styled-components/shouldForwardProp.js)) so styled-components doesn't pass our `$`-prefixed transient props through to the DOM. Note: **no `StrictMode`** — `@atlaskit/pragmatic-drag-and-drop` is not strict-mode safe.
 
+#### Why styled-components?
+
+Emotion does not support streaming SSR. The initial migration approach involved attempting a workaround as described [here](https://github.com/emotion-js/emotion/issues/2800#issuecomment-2644448182), but while this works with a Vite dev server, there was no reasonable way to prevent FOUC in a build. This motivated the switch from Emotion to styled-components, since styled-components supports streaming. The switch was largely mechanical, with a couple of caveats, in addition to the `shouldForwardProp` difference mentioned above:
+
+1. The parser used by styled-components is stricter than Emotion's. Small style regressions are possible in places where Emotion's parser let a missing piece of punctuation in a style template literal slide. It also seems a little slower to render in dev.
+
+2. There are HMR tradeoffs: babel-plugin-styled-components assigns each styled.X() call a stable componentId derived from filename + position-in-file (displayName: true, fileName: true in the plugin config). When you only change the underlying tag — styled.div → styled.p, or swap \<p> for an existing <Styled.P> — the componentId and the generated class names are unchanged, so React Refresh's heuristic decides "same component, no remount needed" and never re-evaluates the element type. Previously, these sorts of changes were picked up in HMR, since no stable componentIds were maintained for SSR.
+
 ### Token flow
 
 - **Server**: cookie → middleware → `routerContext` → `queryApi` reads `context.get(routerContext)?.auth?.authToken`.
@@ -249,7 +257,7 @@ const fetcher = useFetcher();
   }}
 >
   {/* fields */}
-</FormContainer.Form>
+</FormContainer.Form>;
 ```
 
 **`submit` + `errors` — when the form is in a child component or you need more control over submission.** Pair `useSubmit()` (called in the route) with `actionData?.errors` (read from the action's return value) and pass both down. The form serializes its model to JSON and submits via the supplied `submit` function.
@@ -262,7 +270,7 @@ return <GroupSettingsForm submit={submit} errors={actionData?.errors || []} />;
 // in the form component
 <FormContainer.Form model={group} submit={submit} errors={errors}>
   {/* fields */}
-</FormContainer.Form>
+</FormContainer.Form>;
 ```
 
 In both cases the route's `action` (typically built with `formAction`) is what actually runs the mutation — these props are just how the form connects to it.
@@ -277,9 +285,16 @@ const formatData = data => ({
   attributes: mergeImageAltText(data?.attributes, "thumbnail")
 });
 
-<FormContainer.Form model={resourceCollection} fetcher={fetcher} formatData={formatData}>
-  <Form.Upload name="attributes[thumbnail]" altTextName="attributes[thumbnailAltText]" />
-</FormContainer.Form>
+<FormContainer.Form
+  model={resourceCollection}
+  fetcher={fetcher}
+  formatData={formatData}
+>
+  <Form.Upload
+    name="attributes[thumbnail]"
+    altTextName="attributes[thumbnailAltText]"
+  />
+</FormContainer.Form>;
 ```
 
 The helper takes any number of image-field names — `mergeImageAltText(attrs, "hero", "avatar")` — and is a no-op for fields that don't have a paired `*AltText` value.
@@ -383,7 +398,7 @@ export const handle = { drawer: true };
     { context: "editor", size: "wide", entrySide: "top", padding: "xl" },
     { context: "ingestion", size: "default", padding: "default" }
   ]}
-/>
+/>;
 
 // in the child route
 export const handle = { drawer: "editor" };
