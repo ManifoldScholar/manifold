@@ -10,34 +10,39 @@ export default function useSearch() {
     location.search
   ]);
 
-  const setQueryState = useCallback(
-    (params, path) => {
-      const urlParams = serializeQueryToUrl(params);
+  const setQuery = useCallback(
+    (patch, path) =>
       navigate(
         {
           pathname: path ?? location.pathname,
-          search: urlParams
+          search: serializeQueryToUrl({
+            ...searchQueryState,
+            page: 1,
+            ...patch
+          })
+        },
+        { replace: true }
+      ),
+    [searchQueryState, navigate, location.pathname]
+  );
+
+  const setPage = useCallback(
+    page => event => {
+      if (event) event.preventDefault();
+      navigate(
+        {
+          pathname: location.pathname,
+          search: serializeQueryToUrl({ ...searchQueryState, page })
         },
         { replace: true }
       );
     },
-    [navigate, location.pathname]
-  );
-
-  const setPage = useCallback(
-    page => {
-      return event => {
-        if (event) event.preventDefault();
-        const newQuery = { ...searchQueryState, page };
-        setQueryState(newQuery);
-      };
-    },
-    [searchQueryState, setQueryState]
+    [searchQueryState, navigate, location.pathname]
   );
 
   return {
     searchQueryState,
-    setQueryState,
+    setQuery,
     setPage
   };
 }

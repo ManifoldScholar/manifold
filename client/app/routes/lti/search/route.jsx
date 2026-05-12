@@ -4,7 +4,7 @@ import { parseQueryFromUrl } from "hooks/useSearch/helpers";
 import useSearch from "hooks/useSearch";
 import searchLoader from "lib/react-router/loaders/search";
 import FacetCheckboxes from "components/lti/FacetCheckboxes";
-import SearchForm from "components/lti/SearchForm";
+import SearchQuery from "components/global/search/query";
 import SearchResults from "components/lti/SearchResults";
 import * as Styled from "./styles";
 
@@ -41,7 +41,7 @@ export const loader = async ({ request, context }) => {
 
 export default function LtiSearch({ loaderData: { results, meta } }) {
   const { t } = useTranslation();
-  const { searchQueryState, setQueryState, setPage } = useSearch();
+  const { searchQueryState, setQuery, setPage } = useSearch();
   const { keyword } = searchQueryState;
   const [draft, setDraft] = useState(keyword);
 
@@ -58,21 +58,11 @@ export default function LtiSearch({ loaderData: { results, meta } }) {
     ALLOWED_FACETS.includes(f)
   );
 
-  const setFacets = nextFacets => {
-    setQueryState({
-      ...searchQueryState,
-      facets: nextFacets,
-      page: 1
-    });
-  };
+  const setFacets = nextFacets => setQuery({ facets: nextFacets });
 
   const onSubmit = e => {
     e.preventDefault();
-    setQueryState({
-      ...searchQueryState,
-      keyword: draft,
-      page: 1
-    });
+    setQuery({ keyword: draft });
   };
 
   return (
@@ -87,12 +77,11 @@ export default function LtiSearch({ loaderData: { results, meta } }) {
         )}
       </h1>
       <Styled.SearchFormWrap>
-        <SearchForm
-          size="md"
-          placeholder={t("lti.search.placeholder")}
-          value={draft}
-          onChange={e => setDraft(e.target.value)}
+        <SearchQuery.ControlledForm
+          query={{ keyword: draft }}
+          onQueryChange={next => setDraft(next.keyword ?? "")}
           onSubmit={onSubmit}
+          placeholder={t("lti.search.placeholder")}
           autoFocus={!keyword}
         />
       </Styled.SearchFormWrap>

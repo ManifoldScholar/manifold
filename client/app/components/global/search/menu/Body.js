@@ -1,8 +1,9 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router";
-import { useSearchContext } from "hooks/useSearch/context";
+import { useNavigate, useParams } from "react-router";
+import { serializeQueryToUrl } from "hooks/useSearch/helpers";
 import Query from "../query";
+import * as Styled from "./styles";
 
 export default function SearchMenuBody({
   afterSubmit = () => {},
@@ -10,15 +11,14 @@ export default function SearchMenuBody({
   facets,
   scopes,
   initialState,
-  description,
   projectId,
   textId,
   sectionId,
-  className
+  className,
+  description
 }) {
   const { sectionId: sectionIdParam, textId: textIdParam } = useParams();
-
-  const { searchQueryState, setQueryState } = useSearchContext();
+  const navigate = useNavigate();
 
   let searchPath;
   if (searchType === "reader") {
@@ -31,31 +31,59 @@ export default function SearchMenuBody({
     searchPath = "/search";
   }
 
-  const handleSetQueryState = useCallback(
-    state => {
-      afterSubmit();
-      setQueryState(state, searchPath);
+  const [query, setQuery] = useState(initialState ?? {});
+
+  const sortedFacets = arr =>
+    (arr ?? [])
+      .slice()
+      .sort()
+      .join(",");
+
+  const handleQueryChange = useCallback(
+    next => {
+      const facetsChanged =
+        sortedFacets(query.facets) !== sortedFacets(next.facets);
+      setQuery(next);
+      if (facetsChanged) {
+        afterSubmit();
+        navigate(
+          { pathname: searchPath, search: serializeQueryToUrl(next) },
+          { replace: true }
+        );
+      }
     },
-    [searchPath, afterSubmit, setQueryState]
+    [query.facets, afterSubmit, searchPath, navigate]
+  );
+
+  const handleSubmit = useCallback(
+    event => {
+      if (event?.preventDefault) event.preventDefault();
+      afterSubmit();
+      navigate(
+        { pathname: searchPath, search: serializeQueryToUrl(query) },
+        { replace: true }
+      );
+    },
+    [query, afterSubmit, searchPath, navigate]
   );
 
   return (
-    <div className={className}>
-      <Query.Form
-        projectId={projectId}
-        sectionId={sectionId}
-        textId={textId}
+    <Styled.Wrapper className={className}>
+      <Query.ControlledForm
+        query={query}
+        onQueryChange={handleQueryChange}
+        onSubmit={handleSubmit}
         facets={facets}
         scopes={scopes}
-        searchType={searchType}
-        initialState={initialState}
-        searchQueryState={searchQueryState}
-        setQueryState={handleSetQueryState}
-        description={description}
-        searchOnScopeChange={false}
         autoFocus
+        className="search-query"
       />
-    </div>
+      {description && (
+        <div className="search-query__footer">
+          <div className="search-query__description">{description}</div>
+        </div>
+      )}
+    </Styled.Wrapper>
   );
 }
 

@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import useSearch from "hooks/useSearch";
 import { scopeToPatch } from "hooks/useSearch/helpers";
 import KeywordInput from "./KeywordInput";
 import CheckboxMixed from "./CheckboxMixed";
 import ScopeRadios from "./ScopeRadios";
 
-export default function SearchQueryForm({
-  action,
+export default function ControlledSearchQueryForm({
+  query,
+  onQueryChange,
+  onSubmit,
   placeholder,
   autoFocus,
   facets,
@@ -17,25 +18,36 @@ export default function SearchQueryForm({
   className
 }) {
   const { t } = useTranslation();
-  const { searchQueryState, setQuery } = useSearch();
-  const { keyword, facets: facetValues, scope: scopeValue } = searchQueryState;
+  const keyword = query?.keyword ?? "";
+  const facetValues = query?.facets ?? [];
+  const scopeValue = query?.scope ?? "";
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    if (onSubmit) onSubmit(event);
+  };
+
+  const update = next => onQueryChange({ ...query, ...next, page: 1 });
 
   return (
-    <form action={action} method="get" role="search" className={className}>
+    <form role="search" onSubmit={handleSubmit} className={className}>
       <KeywordInput
-        inputKey={keyword}
-        inputProps={{ name: "keyword", defaultValue: keyword }}
+        inputProps={{
+          name: "keyword",
+          value: keyword,
+          onChange: event => update({ keyword: event.target.value })
+        }}
         placeholder={placeholder}
         autoFocus={autoFocus}
         showClear={!!keyword}
-        onClear={() => setQuery({ keyword: "" })}
+        onClear={() => update({ keyword: "" })}
       />
       {!!scopes?.length && (
         <ScopeRadios
           label={scopeLabel ?? t("search.scopes_label")}
           scopes={scopes}
-          value={scopeValue ?? ""}
-          onChange={next => setQuery(scopeToPatch(next, scopes))}
+          value={scopeValue}
+          onChange={next => update(scopeToPatch(next, scopes))}
         />
       )}
       {!!facets?.length && (
@@ -43,17 +55,19 @@ export default function SearchQueryForm({
           label={facetLabel ?? t("search.result_types_label")}
           checkboxes={facets}
           value={facetValues}
-          onChange={next => setQuery({ facets: next })}
+          onChange={next => update({ facets: next })}
         />
       )}
     </form>
   );
 }
 
-SearchQueryForm.displayName = "Search.Query.Form";
+ControlledSearchQueryForm.displayName = "Search.Query.ControlledForm";
 
-SearchQueryForm.propTypes = {
-  action: PropTypes.string,
+ControlledSearchQueryForm.propTypes = {
+  query: PropTypes.object,
+  onQueryChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
   facets: PropTypes.array,

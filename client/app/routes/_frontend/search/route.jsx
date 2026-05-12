@@ -13,7 +13,7 @@ export const loader = async ({ request, context }) => {
 };
 
 export default function SearchRoute({ loaderData: { results, meta } }) {
-  const { searchQueryState, setQueryState, setPage } = useSearchContext();
+  const { setPage } = useSearchContext();
   const { t } = useTranslation();
 
   const facets = [
@@ -32,11 +32,7 @@ export default function SearchRoute({ loaderData: { results, meta } }) {
       <Styled.FormWrapper>
         <Styled.Inner>
           <h2 className="screen-reader-text">{t("search.form")}</h2>
-          <SearchQuery.Form
-            searchQueryState={searchQueryState}
-            setQueryState={setQueryState}
-            facets={facets}
-          />
+          <SearchQuery.Form action="/search" facets={facets} />
         </Styled.Inner>
       </Styled.FormWrapper>
       {results && (

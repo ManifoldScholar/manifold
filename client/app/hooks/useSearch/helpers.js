@@ -24,6 +24,19 @@ export const parseQueryFromUrl = search => {
   return query;
 };
 
+export const scopeToPatch = (scope, scopes) => {
+  const cleared = scopes.reduce((acc, s) => {
+    if (s.paramName) acc[s.paramName] = null;
+    return acc;
+  }, {});
+  const selected = scopes.find(s => s.value === scope);
+  const set =
+    selected?.paramName && selected?.paramValue
+      ? { [selected.paramName]: selected.paramValue }
+      : {};
+  return { scope, ...cleared, ...set };
+};
+
 export const serializeQueryToUrl = query => {
   const params = {};
   if (query.keyword) params.keyword = query.keyword;

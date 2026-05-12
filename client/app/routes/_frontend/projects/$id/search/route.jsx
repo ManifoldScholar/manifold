@@ -27,7 +27,7 @@ export const handle = { frontendMode: { isProjectSubpage: true } };
 export default function ProjectSearch({ loaderData }) {
   const { results, meta } = loaderData;
   const project = useOutletContext();
-  const { searchQueryState, setQueryState, setPage } = useSearchContext();
+  const { setPage } = useSearchContext();
   const { t } = useTranslation();
 
   const facets = [
@@ -53,9 +53,7 @@ export default function ProjectSearch({ loaderData }) {
         <Styled.Inner>
           <h2 className="screen-reader-text">{t("search.form")}</h2>
           <SearchQuery.Form
-            projectId={project.id}
-            searchQueryState={searchQueryState}
-            setQueryState={setQueryState}
+            action={`/projects/${project?.attributes?.slug}/search`}
             facets={facets}
           />
         </Styled.Inner>

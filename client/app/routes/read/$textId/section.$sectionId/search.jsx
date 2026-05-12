@@ -15,7 +15,7 @@ export default function ReaderSearch({ loaderData }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { text, section } = useOutletContext();
-  const { searchQueryState, setQueryState, setPage } = useSearchContext();
+  const { setPage } = useSearchContext();
 
   const facets = [
     { label: t("reader.full_text"), value: "TextSection" },
@@ -25,6 +25,27 @@ export default function ReaderSearch({ loaderData }) {
   const projectId = text.relationships.project.id;
   const textId = text.id;
   const sectionId = section.id;
+
+  const scopes = [
+    {
+      label: t("glossary.chapter_one"),
+      value: "section",
+      paramName: "textSection",
+      paramValue: sectionId
+    },
+    {
+      label: t("glossary.text_one"),
+      value: "text",
+      paramName: "text",
+      paramValue: textId
+    },
+    {
+      label: t("glossary.project_one"),
+      value: "project",
+      paramName: "project",
+      paramValue: projectId
+    }
+  ];
 
   const close = () => {
     navigate(`/read/${textId}/section/${sectionId}`, {
@@ -43,12 +64,9 @@ export default function ReaderSearch({ loaderData }) {
     >
       <div>
         <SearchQuery.Form
-          searchQueryState={searchQueryState}
-          setQueryState={setQueryState}
+          action={`/read/${textId}/section/${sectionId}/search`}
           facets={facets}
-          projectId={projectId}
-          textId={textId}
-          sectionId={sectionId}
+          scopes={scopes}
         />
         {results ? (
           <SearchResults.List

@@ -5,6 +5,7 @@
     "results": "Search Results",
     "instructions": "Enter search criteria",
     "placeholder": "Search…",
+    "placeholder_long": "Search by title, author, keyword…",
     "no_results": "No results were found.",
     "show_all_excerpts": "Show all excerpts",
     "show_only_relevant": "Only show most relevant excerpts",
