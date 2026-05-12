@@ -30,8 +30,10 @@ function getSizeStyles(size) {
       `;
     case "xSm":
       return `
-          --_padding: 7px 16px 7px 14px;
+          --_padding: 7px 14px 7px 12px;
           --_font-size: 14px;
+          --_hover-color: var(--color-base-neutral-white);
+          --_hover-background-color: var(--color-base-neutral90);
         `;
     default:
       return ``;
@@ -89,9 +91,9 @@ function getColorStyles(background) {
 }
 
 export const Button = styled("button")`
-  ${({ $size }) => getSizeStyles($size)}
   ${({ $shape }) => getShapeStyles($shape)}
   ${({ $background }) => getColorStyles($background)}
+  ${({ $size }) => getSizeStyles($size)}
 
   ${buttonUnstyled}
   min-inline-size: var(--Button-min-inline-size);

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import LtiPager from "components/lti/Pager";
-import SearchResultRow from "components/lti/SearchResultRow";
+import Result from "./Result";
 import * as Styled from "./styles";
 
 export default function SearchResults({
@@ -31,7 +31,12 @@ export default function SearchResults({
       ) : null}
       <Styled.List>
         {results.map(result => (
-          <SearchResultRow key={result.id} result={result} />
+          <Result
+            key={result.id}
+            type={result?.attributes?.searchableType}
+            entity={result?.relationships?.model}
+            parents={result?.attributes?.parents}
+          />
         ))}
       </Styled.List>
       <Styled.PagerWrap>

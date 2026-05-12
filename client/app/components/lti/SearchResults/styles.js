@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { listUnstyled } from "theme/styles/mixins";
 
 export const ResultsCount = styled.p`
   font-family: var(--font-family-sans);
@@ -15,12 +16,11 @@ export const Empty = styled.p`
 `;
 
 export const List = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid var(--color-neutral-ui-dull-dark);
-  border-radius: 4px;
-  overflow: hidden;
+  ${listUnstyled}
+
+  > li + li {
+    margin-block-start: 16px;
+  }
 `;
 
 export const PagerWrap = styled.div`

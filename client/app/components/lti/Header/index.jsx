@@ -35,7 +35,6 @@ export default function LtiHeader({ dialog }) {
           preIcon="rTELink24"
           background="neutral"
           onClick={dialog.onToggleClick}
-          aria-label={t("lti.sidebar.open_selected")}
           {...BUTTON_STYLE_PROPS}
         />
       </Styled.Buttons>

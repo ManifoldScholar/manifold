@@ -5,9 +5,13 @@ import BaseMessage from "components/lti/Message";
 export const Wrapper = styled.div`
   color: var(--color);
   font-family: var(--font-family-sans);
-  font-weight: var(--font-weight-medium);
   background-color: var(--color-base-neutral05);
   min-height: 100dvh;
+  font-weight: var(--font-weight-medium);
+
+  button > span {
+    font-weight: var(--font-weight-regular);
+  }
 `;
 
 export const Main = styled.main`
@@ -20,6 +24,7 @@ export const Main = styled.main`
 `;
 
 export const List = styled.div`
+  inline-size: 100%;
   max-inline-size: 900px;
 `;
 

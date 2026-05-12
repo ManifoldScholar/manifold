@@ -7,9 +7,12 @@ export const Wrapper = styled.div`
   ${utilityPrimary}
   font-size: 11px;
   /* fallbacks if light-dark not supported */
-  color: var(--color-base-neutral80);
+  color: var(--Badge-color, --color-base-neutral80);
   background-color: var(--box-bg-color);
-  color: light-dark(var(--color-base-neutral80), var(--color-base-neutral50));
+  color: light-dark(
+    var(--Badge-color, --color-base-neutral80),
+    var(--color-base-neutral50)
+  );
   background-color: var(
     --Badge-bg-color,
     light-dark(var(--color-base-neutral10), var(--color-base-neutral100))

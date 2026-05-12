@@ -189,6 +189,7 @@ import RTEAlignLeft32 from "./32/RTEAlignLeft";
 import RTEAlignRight32 from "./32/RTEAlignRight";
 import RTEAlignCenter32 from "./32/RTEAlignCenter";
 import RTEAlignJustify32 from "./32/RTEAlignJustify";
+import PlusCircle16 from "./16/PlusCircle";
 
 export default {
   ActivityComments64,
@@ -316,6 +317,7 @@ export default {
   PlayOutline24,
   Plus16,
   Plus24,
+  PlusCircle16,
   Privacy24,
   ProjectCollections64,
   ProjectCollection32,

@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 export const ICON_MAP = {
   project: "projects64",
   text: "textsBook64",
-  section: "toc64",
+  textSection: "toc64",
   resource: "resources64",
   resourceCollection: "resourceCollection64"
 };
