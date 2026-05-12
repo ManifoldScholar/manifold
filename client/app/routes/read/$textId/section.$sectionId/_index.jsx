@@ -1,11 +1,6 @@
-import { useOutletContext, Outlet, data } from "react-router";
+import { useOutletContext } from "react-router";
 import Section from "components/reader/section";
-import {
-  sectionsAPI,
-  annotationsAPI,
-  resourcesAPI,
-  resourceCollectionsAPI
-} from "api";
+import { annotationsAPI, resourcesAPI, resourceCollectionsAPI } from "api";
 import HeadContent from "components/global/HeadContent";
 import useEntityHeadContent from "components/frontend/entity/useEntityHeadContent";
 import EventTracker, { EVENTS } from "components/global/EventTracker";
@@ -20,7 +15,6 @@ export const loader = async ({ params, context }) => {
   const results = await loadParallelLists({
     context,
     fetchFns: {
-      section: () => sectionsAPI.show(sectionId, textId),
       annotations: () => annotationsAPI.forSection(sectionId, textId),
       resources: () => resourcesAPI.forSection(sectionId, textId),
       resourceCollections: () =>
@@ -28,12 +22,7 @@ export const loader = async ({ params, context }) => {
     }
   });
 
-  if (!results.section.data) {
-    throw data(null, { status: 404 });
-  }
-
   return {
-    section: results.section.data,
     annotations: results.annotations,
     resources: results.resources.data,
     resourceCollections: results.resourceCollections.data
@@ -57,11 +46,10 @@ clientLoader.hydrate = true;
 
 export default function SectionRoute({ loaderData }) {
   const {
-    section,
     annotations: { data: annotations }
   } = loaderData;
 
-  const text = useOutletContext();
+  const { text, section } = useOutletContext();
 
   const { typography } = useContext(ReaderContext);
 
@@ -91,7 +79,6 @@ export default function SectionRoute({ loaderData }) {
         />
       ))}
       <HeadContent {...headContentProps} />
-      <Outlet context={{ text, section }} />
       <Section.Text text={text} section={section} annotations={annotations} />
       <div>
         <Section.NextSection

@@ -991,6 +991,10 @@ type RouteFiles = {
     id: "routes/read/$textId";
     page: "/read/:textId" | "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search";
   };
+  "routes/read/$textId/section.$sectionId/_layout.jsx": {
+    id: "routes/read/$textId/section.$sectionId";
+    page: "/read/:textId/section/:sectionId" | "/read/:textId/section/:sectionId/search";
+  };
   "routes/read/$textId/section.$sectionId/_index.jsx": {
     id: "routes/read/$textId/section.$sectionId/_index";
     page: "/read/:textId/section/:sectionId";
@@ -1886,6 +1890,7 @@ type RouteModules = {
   "routes/actions/signup": typeof import("./app/routes/actions/signup.jsx");
   "routes/actions/login": typeof import("./app/routes/actions/login.jsx");
   "routes/read/$textId": typeof import("./app/routes/read/$textId/_layout.jsx");
+  "routes/read/$textId/section.$sectionId": typeof import("./app/routes/read/$textId/section.$sectionId/_layout.jsx");
   "routes/read/$textId/section.$sectionId/_index": typeof import("./app/routes/read/$textId/section.$sectionId/_index.jsx");
   "routes/read/$textId/section.$sectionId/search": typeof import("./app/routes/read/$textId/section.$sectionId/search.jsx");
   "routes/_frontend": typeof import("./app/routes/_frontend/_layout.jsx");

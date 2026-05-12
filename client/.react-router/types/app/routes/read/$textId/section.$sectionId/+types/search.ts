@@ -16,6 +16,9 @@ type Matches = [{
   id: "routes/read/$textId";
   module: typeof import("../../_layout.js");
 }, {
+  id: "routes/read/$textId/section.$sectionId";
+  module: typeof import("../_layout.js");
+}, {
   id: "routes/read/$textId/section.$sectionId/search";
   module: typeof import("../search.js");
 }];
