@@ -2,7 +2,8 @@ import styled from "styled-components";
 import {
   respond,
   defaultFocusStyle,
-  buttonUnstyled
+  buttonUnstyled,
+  defaultTransitionProps
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
@@ -18,8 +19,8 @@ export const Wrapper = styled.div`
   position: relative;
   font-family: var(--font-family-sans);
   color: var(--color-base-neutral90);
-  transition: border-color 0.2s ease, background-color 0.2s ease,
-    color 0.2s ease;
+  transition: background-color ${defaultTransitionProps},
+    color ${defaultTransitionProps};
 
   svg {
     color: var(--color-base-neutral90);
@@ -31,7 +32,8 @@ export const Wrapper = styled.div`
 
   &:focus-within {
     background-color: var(--color-base-neutral-white);
-    border: 2px solid var(--color-base-neutral90);
+    border-color: var(--color-base-neutral-white);
+    outline: 2px solid var(--color-base-neutral90);
 
     svg {
       color: var(--color-base-neutral90);

@@ -18,8 +18,9 @@ export const Main = styled.main`
   display: flex;
   justify-content: center;
   padding-inline: 24px;
-  padding-block-start: 40px;
-  padding-right: ${p => (p.$sidebarOpen ? "394px" : "0")};
+  padding-block-start: 70px;
+  padding-block-end: 120px;
+  padding-right: ${p => (p.$sidebarOpen ? "394px" : "24px")};
   transition: padding-right 0.25s ease;
 `;
 
@@ -32,7 +33,6 @@ export const Landing = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 0 32px;
 `;
 
 export const Message = styled(BaseMessage)`

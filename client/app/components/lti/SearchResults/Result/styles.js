@@ -27,10 +27,10 @@ export const Box = styled.li`
       105px
     );
   gap: 24px;
-  transition: border-color ${defaultTransitionProps};
 
   &:has(${Title}:hover) {
-    border: 2px solid var(--color-base-neutral90);
+    outline: 2px solid var(--color-base-neutral90);
+    border-color: var(--color-base-neutral-white);
   }
 `;
 

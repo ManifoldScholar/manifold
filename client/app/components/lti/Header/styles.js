@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router";
-import { linkUnstyled } from "theme/styles/mixins";
+import { linkUnstyled, defaultTransitionProps } from "theme/styles/mixins";
 
 export const Header = styled.header`
   position: sticky;
@@ -22,6 +22,18 @@ export const Logo = styled(Link)`
   gap: 13px;
   font-weight: var(--font-weight-bold);
   width: max-content;
+  transition: color ${defaultTransitionProps};
+
+  &:hover {
+    --__deep-linking-logo-bg: var(--color-base-neutral90);
+    --__deep-linking-logo-fg: var(--color-base-neutral-white);
+
+    color: var(--color-base-neutral70);
+  }
+
+  > svg {
+    transition: color ${defaultTransitionProps};
+  }
 `;
 
 export const Instance = styled.div`
