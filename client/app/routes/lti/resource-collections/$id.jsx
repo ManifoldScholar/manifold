@@ -2,8 +2,6 @@ import { useTranslation } from "react-i18next";
 import { resourceCollectionsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 import loadList from "lib/react-router/loaders/loadList";
-import LtiRow from "components/lti/Row";
-import BrowseList from "components/lti/BrowseList";
 import EntityHeader from "components/lti/EntityHeader";
 import { useSelection } from "contexts";
 
@@ -63,7 +61,7 @@ export default function LtiResourceCollectionDetail({
         subtitle={subtitle}
       />
       <h2>{t("lti.lists.resources_heading")}</h2>
-      <BrowseList meta={resourcesMeta}>
+      {/* <BrowseList meta={resourcesMeta}>
         {resources.map(resource => {
           const { titlePlaintext: rTitle } = resource.attributes;
           const item = {
@@ -82,7 +80,7 @@ export default function LtiResourceCollectionDetail({
             />
           );
         })}
-      </BrowseList>
+      </BrowseList> */}
     </>
   );
 }

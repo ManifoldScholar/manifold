@@ -2,8 +2,6 @@ import { useTranslation } from "react-i18next";
 import { projectsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
-import LtiRow from "components/lti/Row";
-import BrowseList from "components/lti/BrowseList";
 import EntityHeader from "components/lti/EntityHeader";
 import { useSelection } from "contexts";
 
@@ -63,7 +61,7 @@ export default function LtiStyledDetail({
         subtitle={subtitle}
       />
       <h2>{t("lti.lists.texts_heading")}</h2>
-      <BrowseList noPagination>
+      {/* <BrowseList noPagination>
         {texts.map(text => {
           const item = { type: "text", id: text.id, title: text.label };
           const selected = has(item);
@@ -86,9 +84,9 @@ export default function LtiStyledDetail({
             />
           );
         })}
-      </BrowseList>
+      </BrowseList> */}
       <h2>{t("lti.lists.resource_collections_heading")}</h2>
-      <BrowseList noPagination>
+      {/* <BrowseList noPagination>
         {collections.map(collection => {
           const {
             titlePlaintext: cTitle,
@@ -113,9 +111,9 @@ export default function LtiStyledDetail({
             />
           );
         })}
-      </BrowseList>
+      </BrowseList> */}
       <h2>{t("lti.lists.resources_heading")}</h2>
-      <BrowseList noPagination>
+      {/* <BrowseList noPagination>
         {resources.map(resource => {
           const { titlePlaintext: rTitle } = resource.attributes;
           const item = {
@@ -135,7 +133,7 @@ export default function LtiStyledDetail({
             />
           );
         })}
-      </BrowseList>
+      </BrowseList> */}
     </>
   );
 }

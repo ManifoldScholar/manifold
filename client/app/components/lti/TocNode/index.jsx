@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import LinkToggle from "components/lti/LinkToggle";
 import { useSelection } from "contexts";
 import * as Styled from "./styles";
 
@@ -29,7 +28,7 @@ export default function TocNode({ node, depth, textTitle }) {
         <Styled.Label>{node.label}</Styled.Label>
         {!isAnchor ? (
           <Styled.AddSlot>
-            <LinkToggle
+            {/*<LinkToggle
               selected={selected}
               onToggle={() => (selected ? remove(item) : add(item))}
               hiddenIfUnlinked={!hovered}
