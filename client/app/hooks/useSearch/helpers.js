@@ -20,7 +20,8 @@ export const parseQueryFromUrl = search => {
     perPage: params.perPage ? parseInt(params.perPage, 10) : 20,
     project: params.project || null,
     text: params.text || null,
-    textSection: params.textSection || null
+    textSection: params.textSection || null,
+    sort: params.sort || "updated"
   };
   return query;
 };
@@ -50,5 +51,6 @@ export const serializeQueryToUrl = query => {
   if (query.project) params.project = query.project;
   if (query.text) params.text = query.text;
   if (query.textSection) params.textSection = query.textSection;
+  if (query.sort && query.sort !== "updated") params.sort = query.sort;
   return queryString.stringify(params);
 };

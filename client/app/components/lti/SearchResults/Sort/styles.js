@@ -7,17 +7,16 @@ export const Wrapper = styled.div`
   gap: 0.75rem;
   position: relative;
   width: fit-content;
-  justify-self: end;
-  grid-area: size;
 `;
 
 export const Select = styled.select`
+  appearance: none;
   padding: 6px 32px 9px 10px;
   background-color: var(--color-base-neutral05);
-  border: 1px solid var(--color-base-neutral90);
+  border: 1px solid var(--color-base-neutral70);
   border-radius: 6px;
   cursor: pointer;
-  appearance: none;
+  font-size: 14px;
   transition: color ${defaultTransitionProps},
     background-color ${defaultTransitionProps};
 
@@ -38,6 +37,6 @@ export const Select = styled.select`
 export const Icon = styled.div`
   position: absolute;
   right: 10px;
-  top: 6px;
+  top: 4px;
   pointer-events: none;
 `;

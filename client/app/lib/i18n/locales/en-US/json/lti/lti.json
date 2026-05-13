@@ -20,8 +20,8 @@
       "submit": "Search",
       "empty_prompt": "Enter a keyword in the search box above to find $t(glossary.project_other) and $t(glossary.text_other).",
       "no_results": "No results for \u201C{{keyword}}\u201D.",
-      "result_count_one": "{{count}} result",
-      "result_count_other": "{{count}} results",
+      "result_count_one": "{{count}} Item",
+      "result_count_other": "{{count}} Items",
       "filter_label": "Filter by type",
       "everything": "Everything"
     },
@@ -86,6 +86,12 @@
       "textSection": "$t(glossary.text_section_title_case_one)",
       "resource": "$t(glossary.resource_title_case_one)",
       "resourceCollection": "$t(glossary.resource_collection.title_case_one)"
+    },
+    "sort": {
+      "label": "Sort by",
+      "recently_updated": "Recently Updated",
+      "recently_published": "Recently Published",
+      "alphabetical": "Alphabetical"
     },
     "pagination": {
       "previous_page": "Previous page",
