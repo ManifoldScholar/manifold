@@ -36,8 +36,8 @@ export const loader = async ({ params, request, context }) => {
 
   return {
     project,
-    resources: resources ?? [],
-    collections: collections ?? []
+    resources: resources.data,
+    collections: collections.data
   };
 };
 

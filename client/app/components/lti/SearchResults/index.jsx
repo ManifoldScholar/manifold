@@ -1,14 +1,9 @@
 import { useTranslation } from "react-i18next";
-import LtiPager from "components/lti/Pager";
+import Pagination from "components/lti/Pagination";
 import Result from "./Result";
 import * as Styled from "./styles";
 
-export default function SearchResults({
-  results,
-  meta,
-  keyword,
-  onPageChange
-}) {
+export default function SearchResults({ results, meta, keyword }) {
   const { t } = useTranslation();
   const totalCount = meta?.pagination?.totalCount;
 
@@ -40,7 +35,7 @@ export default function SearchResults({
         ))}
       </Styled.List>
       <Styled.PagerWrap>
-        <LtiPager meta={meta} paginationClickHandler={onPageChange} />
+        <Pagination meta={meta} />
       </Styled.PagerWrap>
     </>
   );

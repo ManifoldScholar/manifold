@@ -40,9 +40,26 @@ export default function useSearch() {
     [searchQueryState, navigate, location.pathname]
   );
 
+  const setPerPage = useCallback(
+    perPage =>
+      navigate(
+        {
+          pathname: location.pathname,
+          search: serializeQueryToUrl({
+            ...searchQueryState,
+            page: 1,
+            perPage: parseInt(perPage, 10)
+          })
+        },
+        { replace: true }
+      ),
+    [searchQueryState, navigate, location.pathname]
+  );
+
   return {
     searchQueryState,
     setQuery,
-    setPage
+    setPage,
+    setPerPage
   };
 }

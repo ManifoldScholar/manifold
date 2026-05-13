@@ -17,6 +17,7 @@ export const parseQueryFromUrl = search => {
         : params.facets.split(",")
       : [],
     page: params.page ? parseInt(params.page, 10) : 1,
+    perPage: params.perPage ? parseInt(params.perPage, 10) : 20,
     project: params.project || null,
     text: params.text || null,
     textSection: params.textSection || null
@@ -45,6 +46,7 @@ export const serializeQueryToUrl = query => {
     params.facets = query.facets.join(",");
   }
   if (query.page && query.page > 1) params.page = query.page;
+  if (query.perPage && query.perPage !== 20) params.perPage = query.perPage;
   if (query.project) params.project = query.project;
   if (query.text) params.text = query.text;
   if (query.textSection) params.textSection = query.textSection;

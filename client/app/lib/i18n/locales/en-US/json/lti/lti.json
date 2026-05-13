@@ -86,6 +86,17 @@
       "textSection": "$t(glossary.text_section_title_case_one)",
       "resource": "$t(glossary.resource_title_case_one)",
       "resourceCollection": "$t(glossary.resource_collection.title_case_one)"
+    },
+    "pagination": {
+      "previous_page": "Previous page",
+      "next_page": "Next page",
+      "current_page": "Current page",
+      "of_total": "of {{totalPages}}",
+      "per_page_label": "Items per page:",
+      "count_one": "{{startItem}} - {{endItem}} of {{totalCount}} Item",
+      "count_other": "{{startItem}} - {{endItem}} of {{totalCount}} Items",
+      "screen_reader_count_one": "{{totalCount}} result. Showing items {{startItem}} through {{endItem}}.",
+      "screen_reader_count_other": "{{totalCount}} results. Showing items {{startItem}} through {{endItem}}."
     }
   }
 }
