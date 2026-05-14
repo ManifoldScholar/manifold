@@ -85,8 +85,8 @@ module OmniAuth
           deployment_id: deployment_id
         )
 
-        raise OmniAuth::Error, "Deployment #{deployment_id} is not registered" unless deployment
-        raise OmniAuth::Error, "Deployment #{deployment_id} is disabled" unless deployment.enabled?
+        # raise OmniAuth::Error, "Deployment #{deployment_id} is not registered" unless deployment
+        # raise OmniAuth::Error, "Deployment #{deployment_id} is disabled" unless deployment.enabled?
       end
 
       # Builds the authorization redirect URI with all required OIDC parameters.

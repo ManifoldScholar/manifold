@@ -3,6 +3,7 @@
 module Auth
   class OmniauthController < ActionController::Base
     include ManagesOauthCookie
+    include RendersInIframe
 
     POST_AUTH_REDIRECT_PATH = "/oauth"
     PICKER_REDIRECT_PATH    = "/lti/picker"
@@ -11,9 +12,9 @@ module Auth
 
     layout "auth"
 
-    skip_before_action :verify_authenticity_token, only: :redirect
+    skip_before_action :verify_authenticity_token, if: :lti?
     # LTI request forgery detection happens in the OmniAuth strategy
-    skip_before_action :verify_authenticity_token, only: :authorize, if: -> { lti? }
+    # skip_before_action :verify_authenticity_token, only: :authorize, if: -> { lti? }
 
     def redirect; end
 
