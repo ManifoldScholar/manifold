@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { projectsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
-import EntityHeader from "components/lti/EntityHeader";
+import SearchResult from "components/lti/Search/Results/Result";
 import { useSelection } from "contexts";
 
 export const handle = {
@@ -54,12 +54,7 @@ export default function LtiStyledDetail({
 
   return (
     <>
-      <EntityHeader
-        id={project.id}
-        type="project"
-        title={titlePlaintext}
-        subtitle={subtitle}
-      />
+      <SearchResult type="project" entity={project} parents={[]} />
       <h2>{t("lti.lists.texts_heading")}</h2>
       {/* <BrowseList noPagination>
         {texts.map(text => {

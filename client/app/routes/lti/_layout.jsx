@@ -2,7 +2,7 @@
 import { Outlet } from "react-router";
 import useDialog from "@castiron/hooks/useDialog";
 import Cart from "components/lti/Cart";
-import Header from "components/lti/Header";
+import Header from "components/lti/layout/Header";
 import { useBodyClass } from "hooks";
 import { SelectionProvider } from "contexts";
 import * as Styled from "./styles";

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { listUnstyled } from "theme/styles/mixins";
-import Message from "components/lti/Message";
+import Message from "components/lti/atomics/Message";
 
 export const EmptyMessage = styled(Message)`
   margin-block-start: 20px;

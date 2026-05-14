@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import TocNode from "components/lti/TocNode";
+import TocNode from "components/lti/Detail/TocNode";
 import * as Styled from "./styles";
 
 export default function Toc({ toc, textTitle }) {

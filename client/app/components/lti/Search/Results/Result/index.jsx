@@ -1,6 +1,6 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
-import Badge from "components/lti/Badge";
+import Badge from "components/lti/atomics/Badge";
 import Button from "components/global/atomic/Button";
 import Thumbnail from "./Thumbnail";
 import { useSelection } from "contexts";
@@ -24,11 +24,20 @@ const ACCEPTED_TYPES = [
 
 export default function Result({ entity, type, parents }) {
   const { t } = useTranslation();
+  const location = useLocation();
   const { add, remove, has } = useSelection();
 
   if (!entity || !ACCEPTED_TYPES.includes(type)) {
     return null;
   }
+
+  const trail = [
+    {
+      label: t("lti.breadcrumb.search"),
+      to: `/lti/search${location.search}`
+    }
+  ];
+  const linkState = { trail };
 
   const { attributes } = entity ?? {};
   const {
@@ -71,7 +80,9 @@ export default function Result({ entity, type, parents }) {
               )}
             </Styled.Parent>
           ) : null}
-          <Styled.Title to={to}>{title}</Styled.Title>
+          <Styled.Title to={to} state={linkState}>
+            {title}
+          </Styled.Title>
         </Styled.TitleGroup>
         {subtitlePlaintext ? (
           <Styled.Subtitle>{subtitlePlaintext}</Styled.Subtitle>
@@ -92,9 +103,11 @@ export default function Result({ entity, type, parents }) {
           aria-pressed={selected}
           {...BUTTON_STYLE_PROPS}
         />
-        {to && (
+        {to && to !== location.pathname && (
           <Button
             as={Link}
+            to={to}
+            state={linkState}
             label={"Contents"}
             postIcon="arrowRight16"
             background="outline"

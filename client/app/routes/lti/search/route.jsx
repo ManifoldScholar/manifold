@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import useSearch from "hooks/useSearch";
 import searchLoader from "lib/react-router/loaders/search";
-import SearchForm from "components/lti/SearchForm";
+import SearchForm from "components/lti/Search";
 import { resolveFacets } from "./filters";
 
 export const handle = {

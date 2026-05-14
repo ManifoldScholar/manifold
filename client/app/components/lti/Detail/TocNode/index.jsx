@@ -9,7 +9,7 @@ export default function TocNode({ node, depth, textTitle }) {
   const [hovered, setHovered] = useState(false);
   const isAnchor = Boolean(node.anchor);
   const item = {
-    type: "section",
+    type: "textSection",
     id: node.id,
     title: textTitle ? `${textTitle} — ${node.label}` : node.label
   };
@@ -28,7 +28,7 @@ export default function TocNode({ node, depth, textTitle }) {
         <Styled.Label>{node.label}</Styled.Label>
         {!isAnchor ? (
           <Styled.AddSlot>
-            {/*<LinkToggle
+            {/* <LinkToggle
               selected={selected}
               onToggle={() => (selected ? remove(item) : add(item))}
               hiddenIfUnlinked={!hovered}
@@ -37,7 +37,7 @@ export default function TocNode({ node, depth, textTitle }) {
                   ? t("lti.toggle.remove_item", { title: node.label })
                   : t("lti.toggle.add_item", { title: node.label })
               }
-            />
+            /> */}
           </Styled.AddSlot>
         ) : null}
       </Styled.Row>

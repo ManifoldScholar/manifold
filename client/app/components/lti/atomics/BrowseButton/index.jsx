@@ -1,4 +1,4 @@
-import Icon from "components/lti/Icon";
+import Icon from "components/lti/atomics/Icon";
 import * as Styled from "./styles";
 
 export default function BrowseButton({ to, icon, label, description }) {

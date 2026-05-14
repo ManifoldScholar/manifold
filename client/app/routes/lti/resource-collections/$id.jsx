@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { resourceCollectionsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 import loadList from "lib/react-router/loaders/loadList";
-import EntityHeader from "components/lti/EntityHeader";
+import SearchResult from "components/lti/Search/Results/Result";
 import { useSelection } from "contexts";
 
 export const handle = {
@@ -54,11 +54,10 @@ export default function LtiResourceCollectionDetail({
 
   return (
     <>
-      <EntityHeader
-        id={collection.id}
+      <SearchResult
         type="resourceCollection"
-        title={headerTitle}
-        subtitle={subtitle}
+        entity={collection}
+        parents={[]}
       />
       <h2>{t("lti.lists.resources_heading")}</h2>
       {/* <BrowseList meta={resourcesMeta}>

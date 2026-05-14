@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { headingQuaternary } from "theme/styles/mixins";
-import BaseMessage from "components/lti/Message";
+import BaseMessage from "components/lti/atomics/Message";
 
 export const Wrapper = styled.div`
   color: var(--color);

@@ -5,7 +5,7 @@ import { useLocation, useNavigation } from "react-router";
 import useSearch from "hooks/useSearch";
 import SearchQuery from "components/global/search/query";
 import Filters from "./Filters";
-import SearchResults from "components/lti/SearchResults";
+import SearchResults from "./Results";
 import { resolveFacets } from "routes/lti/search/filters";
 import * as Styled from "./styles";
 

@@ -1,7 +1,7 @@
 import { textsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
-import Toc from "components/lti/Toc";
-import EntityHeader from "components/lti/EntityHeader";
+import Toc from "components/lti/Detail/Toc";
+import SearchResult from "components/lti/Search/Results/Result";
 
 export const handle = {
   breadcrumb: ({ loaderData, params }, location, t) => {
@@ -31,12 +31,7 @@ export default function LtiStyledDetail({ loaderData: text }) {
 
   return (
     <>
-      <EntityHeader
-        id={text.id}
-        type="text"
-        title={titlePlaintext}
-        subtitle={subtitle}
-      />
+      <SearchResult type="text" entity={text} />
       <Toc toc={toc} textTitle={titlePlaintext} />
     </>
   );

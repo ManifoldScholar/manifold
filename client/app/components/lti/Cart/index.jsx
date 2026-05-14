@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSelection } from "contexts";
 import Button from "components/global/atomic/Button";
 import Group from "./Group";
-import Message from "components/lti/Message";
+import Message from "components/lti/atomics/Message";
 import IconComposer from "components/global/utility/IconComposer";
 import * as Styled from "./styles";
 

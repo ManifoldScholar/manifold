@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { defaultFocusStyle } from "theme/styles/mixins";
 
 export const Nav = styled.nav`
   display: flex;
@@ -21,6 +22,10 @@ export const Nav = styled.nav`
   a:hover {
     color: var(--color-interaction-dark);
     text-decoration: underline;
+  }
+
+  a:focus-visible {
+    ${defaultFocusStyle}
   }
 
   > span {
