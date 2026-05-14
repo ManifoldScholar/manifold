@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import useSearch from "hooks/useSearch";
@@ -6,22 +7,33 @@ import KeywordInput from "./KeywordInput";
 import CheckboxMixed from "./CheckboxMixed";
 import ScopeRadios from "./ScopeRadios";
 
-export default function SearchQueryForm({
-  action,
-  placeholder,
-  autoFocus,
-  facets,
-  facetLabel,
-  scopes,
-  scopeLabel,
-  className
-}) {
+const SearchQueryForm = forwardRef(function SearchQueryForm(
+  {
+    action,
+    placeholder,
+    autoFocus,
+    facets,
+    facetLabel,
+    scopes,
+    scopeLabel,
+    className,
+    onSubmit
+  },
+  ref
+) {
   const { t } = useTranslation();
   const { searchQueryState, setQuery } = useSearch();
   const { keyword, facets: facetValues, scope: scopeValue } = searchQueryState;
 
   return (
-    <form action={action} method="get" role="search" className={className}>
+    <form
+      ref={ref}
+      action={action}
+      onSubmit={onSubmit}
+      method="get"
+      role="search"
+      className={className}
+    >
       <KeywordInput
         inputKey={keyword}
         inputProps={{ name: "keyword", defaultValue: keyword }}
@@ -48,9 +60,11 @@ export default function SearchQueryForm({
       )}
     </form>
   );
-}
+});
 
 SearchQueryForm.displayName = "Search.Query.Form";
+
+export default SearchQueryForm;
 
 SearchQueryForm.propTypes = {
   action: PropTypes.string,
@@ -60,5 +74,6 @@ SearchQueryForm.propTypes = {
   facetLabel: PropTypes.string,
   scopes: PropTypes.array,
   scopeLabel: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  onSubmit: PropTypes.func
 };

@@ -37,7 +37,10 @@ export default async function searchLoader({
     };
   }
 
-  const pagination = { number: searchQueryState.page || 1 };
+  const pagination = {
+    number: searchQueryState.page || 1,
+    size: searchQueryState.perPage || 20
+  };
   const query = { ...searchQueryState };
   query.page = pagination;
 
