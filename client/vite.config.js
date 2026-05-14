@@ -56,6 +56,7 @@ export default defineConfig(({ isSsrBuild }) => ({
   resolve: {
     alias: {
       app: path.resolve(__dirname, "app"),
+      routes: path.resolve(__dirname, "app/routes"),
       lib: path.resolve(__dirname, "app/lib"),
       contexts: path.resolve(__dirname, "app/contexts"),
       components: path.resolve(__dirname, "app/components"),

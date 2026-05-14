@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { utilityPrimary, defaultTransitionProps } from "theme/styles/mixins";
 
 export const Circle = styled.div`
@@ -13,13 +13,13 @@ export const Circle = styled.div`
 `;
 
 const baseHoverStyles = `
-color: var(--color-base-neutral-white);
-background-color: var(--color-base-neutral90);
-border-color: var(--color-base-neutral90);
+  color: var(--color-base-neutral-white);
+  background-color: var(--color-base-neutral90);
+  border-color: var(--color-base-neutral90);
 `;
 
-export const Toggle = styled.div`
-  padding: 9px 10px;
+const pillBase = css`
+  padding: 7px 10px;
   border-radius: 6px;
   border: 1px solid var(--color-base-neutral70);
   background-color: var(--color-base-neutral05);
@@ -32,6 +32,10 @@ export const Toggle = styled.div`
   transition: color ${defaultTransitionProps},
     background-color ${defaultTransitionProps},
     border-color ${defaultTransitionProps};
+`;
+
+export const Toggle = styled.div`
+  ${pillBase}
 
   input:not(:checked) + & {
     svg[data-check-indicator] {

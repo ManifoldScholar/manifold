@@ -21,7 +21,7 @@ export const parseQueryFromUrl = search => {
     project: params.project || null,
     text: params.text || null,
     textSection: params.textSection || null,
-    sort: params.sort || "updated"
+    order: params.order || "updated"
   };
   return query;
 };
@@ -51,6 +51,6 @@ export const serializeQueryToUrl = query => {
   if (query.project) params.project = query.project;
   if (query.text) params.text = query.text;
   if (query.textSection) params.textSection = query.textSection;
-  if (query.sort && query.sort !== "updated") params.sort = query.sort;
+  if (query.order && query.order !== "updated") params.order = query.order;
   return queryString.stringify(params);
 };

@@ -3,28 +3,28 @@ import IconComposer from "components/global/utility/IconComposer";
 import useSearch from "hooks/useSearch";
 import * as Styled from "./styles";
 
-export default function Sort() {
+export default function Order() {
   const { t } = useTranslation();
   const {
-    searchQueryState: { sort },
+    searchQueryState: { order },
     setQuery
   } = useSearch();
 
   const options = [
-    { label: t("lti.sort.recently_updated"), value: "updated" },
-    { label: t("lti.sort.recently_published"), value: "published" },
-    { label: t("lti.sort.alphabetical"), value: "alpha" }
+    { label: t("lti.order.recently_updated"), value: "updated" },
+    { label: t("lti.order.recently_published"), value: "published" },
+    { label: t("lti.order.alphabetical"), value: "alpha" }
   ];
 
   return (
     <Styled.Wrapper>
-      <label htmlFor="sort" className="screen-reader-text">
-        {t("lti.sort.label")}
+      <label htmlFor="order" className="screen-reader-text">
+        {t("lti.order.label")}
       </label>
       <Styled.Select
-        id="sort"
-        value={sort}
-        onChange={e => setQuery({ sort: e.target.value })}
+        id="order"
+        value={order}
+        onChange={e => setQuery({ order: e.target.value })}
       >
         {options.map(option => (
           <option key={option.value} value={option.value}>
@@ -39,4 +39,4 @@ export default function Sort() {
   );
 }
 
-Sort.propTypes = {};
+Order.propTypes = {};

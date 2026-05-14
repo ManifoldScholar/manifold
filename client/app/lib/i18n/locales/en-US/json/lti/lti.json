@@ -16,14 +16,18 @@
     },
     "search": {
       "title": "Search",
-      "title_with_keyword": "Search results for",
+      "title_with_keyword": "Search results for {{keyword}}",
       "submit": "Search",
       "empty_prompt": "Enter a keyword in the search box above to find $t(glossary.project_other) and $t(glossary.text_other).",
       "no_results": "No results for \u201C{{keyword}}\u201D.",
+      "no_facets_selected": "Select at least one result type to see results.",
       "result_count_one": "{{count}} Item",
       "result_count_other": "{{count}} Items",
       "filter_label": "Filter by type",
-      "everything": "Everything"
+      "everything": "Everything",
+      "results_include": "Search results include:",
+      "more": "More",
+      "less": "Less"
     },
     "lists": {
       "projects_heading": "$t(glossary.project_title_case_other)",
@@ -87,7 +91,7 @@
       "resource": "$t(glossary.resource_title_case_one)",
       "resourceCollection": "$t(glossary.resource_collection.title_case_one)"
     },
-    "sort": {
+    "order": {
       "label": "Sort by",
       "recently_updated": "Recently Updated",
       "recently_published": "Recently Published",
