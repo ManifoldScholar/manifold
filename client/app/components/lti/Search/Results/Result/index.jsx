@@ -75,7 +75,7 @@ export default function Result({ entity, type, parents }) {
               )}
             </Styled.Parent>
           ) : null}
-          <Styled.Title to={to} state={linkState}>
+          <Styled.Title as={!to ? "span" : undefined} to={to} state={linkState}>
             {title}
           </Styled.Title>
         </Styled.TitleGroup>

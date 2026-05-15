@@ -28,7 +28,7 @@ export const Box = styled.li`
     );
   gap: 24px;
 
-  &:has(${Title}:hover) {
+  &:has(a${Title}:hover) {
     outline: 2px solid var(--color-base-neutral90);
     border-color: var(--color-base-neutral-white);
   }
