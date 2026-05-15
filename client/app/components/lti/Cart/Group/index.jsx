@@ -20,7 +20,7 @@ export default function Group({ type, items }) {
     <Styled.Group key={type}>
       <Styled.Header>
         <IconComposer icon={ICON_MAP[type]} size={20} />
-        <h3>{t(`lti.cart.group.${type}`)}</h3>
+        <h3>{t(`lti.types_plural.${type}`)}</h3>
       </Styled.Header>
       <ul>
         {items.map(item => (

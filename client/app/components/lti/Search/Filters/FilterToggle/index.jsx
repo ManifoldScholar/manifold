@@ -23,7 +23,7 @@ export default function FilterToggle({ checked, onChange, disabled, type }) {
           <IconComposer icon="checkCircle16" size={18} />
         </Styled.Circle>
         <IconComposer icon={ICON_MAP[type]} size={20} />
-        <Styled.Label>{t(`lti.cart.group.${type}`)}</Styled.Label>
+        <Styled.Label>{t(`lti.types_plural.${type}`)}</Styled.Label>
       </Styled.Toggle>
     </label>
   );

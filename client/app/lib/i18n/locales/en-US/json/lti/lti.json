@@ -1,11 +1,12 @@
 {
   "lti": {
-    "home": "$t(actions.add) $t(app.manifold) Links",
-    "setup": {
-      "title": "Before you begin...",
-      "description": "You'll need to decide whether to setup a $t(app.manifold) reading group for this course. If you choose a reading group, $t(app.manifold) can automatically add permissions for students in the course to view any protected resources that you link. You can also use $t(app.manifold) reading group features, like annotation, for the course. If you're only using $t(app.manifold) for source materials and would prefer not to have a course group visible in $t(app.manifold), select links only.",
-      "create_reading_group": "Create Reading Group",
-      "links_only": "Links Only"
+    "header": {
+      "help": "Help",
+      "my_links": "My Links"
+    },
+    "actions": {
+      "back_to_search": "Back to Search Results",
+      "view_contents": "Contents"
     },
     "landing": {
       "title": "$t(actions.add) $t(app.manifold) Links",
@@ -17,44 +18,21 @@
     "search": {
       "title": "Search",
       "title_with_keyword": "Search results for {{keyword}}",
-      "submit": "Search",
       "empty_prompt": "Enter a keyword in the search box above to find $t(glossary.project_other) and $t(glossary.text_other).",
-      "no_results": "No results for \u201C{{keyword}}\u201D.",
+      "no_results": "No results for “{{keyword}}”.",
       "no_facets_selected": "Select at least one result type to see results.",
       "result_count_one": "{{count}} Item",
       "result_count_other": "{{count}} Items",
-      "filter_label": "Filter by type",
-      "everything": "Everything",
       "results_include": "Search results include:",
       "more": "More",
       "less": "Less"
     },
-    "lists": {
-      "projects_heading": "$t(glossary.project_title_case_other)",
-      "projects_empty": "No $t(glossary.project_other).",
-      "texts_heading": "$t(glossary.text_title_case_other)",
-      "texts_empty": "No $t(glossary.text_other).",
-      "resources_heading": "$t(glossary.resource_title_case_other)",
-      "resources_empty": "No $t(glossary.resource_other).",
-      "resource_collections_heading": "$t(glossary.resource_collection_title_case_other)",
-      "resource_collections_empty": "No $t(glossary.resource_collection_other).",
-      "empty": "No results"
-    },
     "text_detail": {
-      "toc_heading": "Table of contents",
       "toc_empty": "This $t(glossary.text_one) does not have a table of contents."
-    },
-    "project_row": {
-      "expand": "Expand {{title}}",
-      "collapse": "Collapse {{title}}",
-      "texts_in": "$t(glossary.text_title_case_other) in {{title}}",
-      "loading": "Loading $t(glossary.text_other)…",
-      "empty": "This $t(glossary.project_one) has no $t(glossary.text_other)."
     },
     "toggle": {
       "link": "Add Link",
       "linked": "Added",
-      "remove": "$t(actions.remove)",
       "add_item": "$t(actions.add) {{title}}",
       "remove_item": "$t(actions.remove) {{title}}"
     },
@@ -62,34 +40,27 @@
       "heading": "My Links",
       "empty_heading": "No links selected.",
       "empty_body": "Search the list to find links to add to this collection.",
-      "add_to_course": "Save Links to [App]",
-      "group": {
-        "project": "$t(glossary.project_title_case_other)",
-        "text": "$t(glossary.text_title_case_other)",
-        "textSection": "Text Sections",
-        "resource": "$t(glossary.resource_title_case_other)",
-        "resourceCollection": "$t(glossary.resource_collection_title_case_other)"
-      }
-    },
-    "facets": {
-      "project": "$t(glossary.project_title_case_other)",
-      "text": "$t(glossary.text_title_case_other)",
-      "section": "$t(glossary.section_title_case_other)",
-      "resource": "$t(glossary.resource_title_case_other)",
-      "filter_label": "Filter by type"
+      "add_to_course": "Save Links to [App]"
     },
     "breadcrumb": {
-      "projects": "$t(glossary.project_title_case_other)",
-      "texts": "$t(glossary.text_title_case_other)",
-      "resource_collections": "$t(glossary.resource_collection_title_case_other)",
-      "search": "Search"
+      "search": "Search Results",
+      "project": "$t(glossary.project_title_case_one): {{title}}",
+      "text": "$t(glossary.text_title_case_one): {{title}}",
+      "resourceCollection": "$t(glossary.resource_collection_title_case_one): {{title}}"
     },
-    "types": {
+    "types_one": {
       "project": "$t(glossary.project_title_case_one)",
       "text": "$t(glossary.text_title_case_one)",
       "textSection": "$t(glossary.text_section_title_case_one)",
       "resource": "$t(glossary.resource_title_case_one)",
-      "resourceCollection": "$t(glossary.resource_collection.title_case_one)"
+      "resourceCollection": "$t(glossary.resource_collection_title_case_one)"
+    },
+    "types_plural": {
+      "project": "$t(glossary.project_title_case_other)",
+      "text": "$t(glossary.text_title_case_other)",
+      "textSection": "$t(glossary.text_section_title_case_other)",
+      "resource": "$t(glossary.resource_title_case_other)",
+      "resourceCollection": "$t(glossary.resource_collection_title_case_other)"
     },
     "order": {
       "label": "Sort by",

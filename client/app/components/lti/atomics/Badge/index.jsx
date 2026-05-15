@@ -11,7 +11,7 @@ export default function LtiBadge({ type, resourceKind }) {
     <Styled.Wrapper style={{ "--Badge-color": "var(--color-base-neutral90)" }}>
       <span>
         <IconComposer icon={ICON_MAP[type]} size={20} />
-        <span>{t(`lti.types.${type}`)}</span>
+        <span>{t(`lti.types_one.${type}`)}</span>
       </span>
       {resourceKind && (
         <Styled.Kind>

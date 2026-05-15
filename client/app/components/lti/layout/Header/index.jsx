@@ -25,13 +25,13 @@ export default function LtiHeader({ dialog }) {
       </Styled.Instance>
       <Styled.Buttons>
         <Button
-          label={"Help"}
+          label={t("lti.header.help")}
           preIcon="info16"
           background="outline"
           {...BUTTON_STYLE_PROPS}
         />
         <Button
-          label={"My Links"}
+          label={t("lti.header.my_links")}
           preIcon="rTELink24"
           background="neutral"
           onClick={dialog.onToggleClick}

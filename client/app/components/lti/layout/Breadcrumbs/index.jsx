@@ -1,45 +1,80 @@
-import { Link, useLocation, useMatches } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
-import ClientOnly from "components/global/utility/ClientOnly";
+import IconComposer from "components/global/utility/IconComposer";
 import * as Styled from "./styles";
 
-export default function Breadcrumbs() {
+export default function Breadcrumbs({ project, entity, type }) {
   const { t } = useTranslation();
   const location = useLocation();
-  const matches = useMatches();
+  const search = location.state?.search;
 
-  const crumbs = matches.flatMap(match => {
-    const fn = match.handle?.breadcrumb;
-    if (!fn) return [];
-    try {
-      const result = fn(match, location, t);
-      if (!result) return [];
-      return Array.isArray(result) ? result : [result];
-    } catch {
-      return [];
+  const searchCrumb = {
+    label: t("lti.breadcrumb.search"),
+    to: `/lti/search${search ?? ""}`
+  };
+
+  const projectCrumb = project
+    ? {
+        label: t("lti.breadcrumb.project", {
+          title: project.attributes.titlePlaintext
+        }),
+        to: `/lti/projects/${project.id}`
+      }
+    : undefined;
+
+  const getEntityCrumb = () => {
+    switch (type) {
+      case "project":
+        return {
+          label: t("lti.breadcrumb.project", {
+            title: entity.attributes.titlePlaintext
+          }),
+          to: `/lti/projects/${entity.id}`,
+          current: true
+        };
+      case "text":
+        return {
+          label: t("lti.breadcrumb.text", {
+            title: entity.attributes.title
+          }),
+          to: `/lti/texts/${entity.id}`,
+          current: true
+        };
+      case "resourceCollection":
+        return {
+          label: t("lti.breadcrumb.resourceCollection", {
+            title: entity.attributes.title
+          }),
+          to: `/lti/resource-collections/${entity.id}`,
+          current: true
+        };
+      default:
+        return undefined;
     }
-  });
+  };
+
+  const crumbs = [searchCrumb, projectCrumb, getEntityCrumb()].filter(Boolean);
 
   return (
-    <ClientOnly>
-      <Styled.Nav>
-        <Link to="/lti">{t("lti.home")}</Link>
-        {crumbs.map((crumb, i) => {
-          const isLast = i === crumbs.length - 1;
-          return (
-            <span key={`${crumb.to ?? crumb.label}-${i}`}>
-              <Styled.Separator aria-hidden="true">/</Styled.Separator>
-              {isLast || !crumb.to ? (
-                <span aria-current={isLast ? "page" : undefined}>
-                  {crumb.label}
-                </span>
-              ) : (
-                <Link to={crumb.to}>{crumb.label}</Link>
-              )}
-            </span>
-          );
-        })}
-      </Styled.Nav>
-    </ClientOnly>
+    <Styled.Nav data-lti-breadcrumb>
+      {crumbs.map((crumb, i) => {
+        return (
+          <span key={crumb.to}>
+            {i > 0 && (
+              <Styled.Separator aria-hidden="true">
+                <IconComposer icon="disclosureDown16" size={16} />
+              </Styled.Separator>
+            )}
+            {crumb.current ? (
+              <span aria-current="page">{crumb.label}</span>
+            ) : (
+              <Link to={crumb.to} state={{ search }}>
+                {crumb.label}
+              </Link>
+            )}
+          </span>
+        );
+      })}
+    </Styled.Nav>
   );
 }

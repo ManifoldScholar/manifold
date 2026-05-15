@@ -22,6 +22,10 @@ export const Main = styled.main`
   padding-block-end: 120px;
   padding-right: ${p => (p.$sidebarOpen ? "394px" : "24px")};
   transition: padding-right 0.25s ease;
+
+  &:has(nav[data-lti-breadcrumb]) {
+    padding-block-start: 30px;
+  }
 `;
 
 export const List = styled.div`

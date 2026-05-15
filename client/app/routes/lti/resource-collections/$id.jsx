@@ -1,22 +1,7 @@
-import { useTranslation } from "react-i18next";
 import { resourceCollectionsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 import loadList from "lib/react-router/loaders/loadList";
-import SearchResult from "components/lti/Search/Results/Result";
-import { useSelection } from "contexts";
-
-export const handle = {
-  breadcrumb: ({ loaderData, params }, location) => {
-    const title = loaderData?.collection?.attributes?.title;
-    const trail = location?.state?.trail ?? [];
-    return [
-      ...trail,
-      title
-        ? { label: title, to: `/lti/resource-collections/${params.id}` }
-        : null
-    ].filter(Boolean);
-  }
-};
+import DetailLayout from "components/lti/Detail";
 
 export const loader = async ({ params, request, context }) => {
   const collection = await loadEntity({
@@ -39,47 +24,20 @@ export const loader = async ({ params, request, context }) => {
 
   return {
     collection,
-    resources: resources.data,
-    resourcesMeta: resources.meta
+    resources: resources.data
   };
 };
 
 export default function LtiResourceCollectionDetail({
-  loaderData: { collection, resources, resourcesMeta }
+  loaderData: { collection, resources }
 }) {
-  const { t } = useTranslation();
-  const { titlePlaintext, title, subtitle } = collection.attributes;
-  const headerTitle = titlePlaintext ?? title;
-  const { add, remove, has } = useSelection();
+  const categories = [{ type: "resource", collection: resources }];
 
   return (
-    <>
-      <SearchResult
-        type="resourceCollection"
-        entity={collection}
-        parents={[]}
-      />
-      <h2>{t("lti.lists.resources_heading")}</h2>
-      {/* <BrowseList meta={resourcesMeta}>
-        {resources.map(resource => {
-          const { titlePlaintext: rTitle } = resource.attributes;
-          const item = {
-            type: "resource",
-            id: resource.id,
-            title: rTitle
-          };
-          const selected = has(item);
-          return (
-            <LtiRow
-              key={resource.id}
-              entity={resource}
-              kind="resource"
-              selected={selected}
-              onToggle={() => (selected ? remove(item) : add(item))}
-            />
-          );
-        })}
-      </BrowseList> */}
-    </>
+    <DetailLayout
+      type="resourceCollection"
+      entity={collection}
+      categories={categories}
+    />
   );
 }

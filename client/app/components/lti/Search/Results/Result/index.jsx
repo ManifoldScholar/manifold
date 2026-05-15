@@ -31,17 +31,12 @@ export default function Result({ entity, type, parents }) {
     return null;
   }
 
-  const trail = [
-    {
-      label: t("lti.breadcrumb.search"),
-      to: `/lti/search${location.search}`
-    }
-  ];
-  const linkState = { trail };
+  const linkState = { search: location.search };
 
   const { attributes } = entity ?? {};
   const {
     titlePlaintext,
+    title: collectionTitle,
     name,
     subtitlePlaintext,
     creatorNames,
@@ -52,7 +47,7 @@ export default function Result({ entity, type, parents }) {
   const { to, parent, thumbnail } =
     buildResultProps(type, entity, parents) ?? {};
 
-  const title = titlePlaintext ?? name;
+  const title = titlePlaintext ?? name ?? collectionTitle;
   const selectionTitle =
     type === "textSection" && parent?.label
       ? `${parent.label} — ${title}`
@@ -108,7 +103,7 @@ export default function Result({ entity, type, parents }) {
             as={Link}
             to={to}
             state={linkState}
-            label={"Contents"}
+            label={t("lti.actions.view_contents")}
             postIcon="arrowRight16"
             background="outline"
             {...BUTTON_STYLE_PROPS}

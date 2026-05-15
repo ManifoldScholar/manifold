@@ -38,6 +38,7 @@ export const Actions = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 16px;
 `;
 
 export const TextContent = styled.div`

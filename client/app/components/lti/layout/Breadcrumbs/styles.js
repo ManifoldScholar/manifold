@@ -1,26 +1,33 @@
 import styled from "styled-components";
-import { defaultFocusStyle } from "theme/styles/mixins";
+import { defaultFocusStyle, defaultTransitionProps } from "theme/styles/mixins";
 
 export const Nav = styled.nav`
   display: flex;
   align-items: center;
-  gap: 0.35rem;
   flex-wrap: wrap;
+  gap: 6px;
+  padding-block-start: 2px;
   font-family: var(--font-family-sans);
-  font-size: 13px;
-  min-width: 0;
+  font-weight: var(--font-weight-medium);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--color-base-neutral90);
+
+  > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
 
   a {
-    color: var(--color-neutral-text-dark);
+    color: inherit;
     text-decoration: none;
-    white-space: nowrap;
-    max-width: 18rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    transition: color ${defaultTransitionProps};
   }
 
   a:hover {
-    color: var(--color-interaction-dark);
+    color: var(--color-base-neutral90);
     text-decoration: underline;
   }
 
@@ -28,24 +35,21 @@ export const Nav = styled.nav`
     ${defaultFocusStyle}
   }
 
-  > span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    min-width: 0;
+  > span a {
+    color: var(--color-base-neutral75);
   }
 
-  > span > span[aria-current="page"] {
-    color: var(--color-neutral-text-extra-dark);
-    font-weight: var(--font-weight-semibold);
-    white-space: nowrap;
-    max-width: 22rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  span[aria-current="page"] {
+    color: var(--color-base-neutral90);
   }
 `;
 
 export const Separator = styled.span`
-  color: var(--color-neutral-ui-dark);
-  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-base-neutral75);
+
+  > svg {
+    transform: rotate(-90deg);
+  }
 `;
