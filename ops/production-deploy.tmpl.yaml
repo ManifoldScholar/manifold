@@ -16,7 +16,6 @@ readinessProbe:
 ingress:
   className: "nginx-ingress"
   enabled: true
-  className: nginx-ingress
   hosts:
     - host: openpublishing.princeton.edu
       paths:
@@ -32,7 +31,7 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.org/client-max-body-size: "0"
     cert-manager.io/cluster-issuer: "letsencrypt-prod-nginx-ingress"
   tls:
     # TODO: We can remove princeton-manifold-origin.notch8.cloud only after Cloudflare
