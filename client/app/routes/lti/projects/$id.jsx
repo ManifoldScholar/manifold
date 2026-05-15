@@ -1,6 +1,6 @@
 import { projectsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
-import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
+import loadAllPagesParallel from "lib/react-router/loaders/loadAllPagesParallel";
 import DetailLayout from "components/lti/Detail";
 
 export const loader = async ({ params, request, context }) => {
@@ -10,13 +10,11 @@ export const loader = async ({ params, request, context }) => {
     request
   });
 
-  const { resources, collections } = await loadParallelLists({
+  const { resources, collections } = await loadAllPagesParallel({
     context,
     fetchFns: {
-      resources: () =>
-        projectsAPI.resources(params.id, {}, { number: 1, size: 50 }),
-      collections: () =>
-        projectsAPI.resourceCollections(params.id, {}, { number: 1, size: 50 })
+      resources: () => projectsAPI.resources(params.id),
+      collections: () => projectsAPI.resourceCollections(params.id)
     }
   });
 

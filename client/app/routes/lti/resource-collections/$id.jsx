@@ -1,6 +1,6 @@
 import { resourceCollectionsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
-import loadList from "lib/react-router/loaders/loadList";
+import loadAllPages from "lib/react-router/loaders/loadAllPages";
 import DetailLayout from "components/lti/Detail";
 
 export const loader = async ({ params, request, context }) => {
@@ -10,16 +10,9 @@ export const loader = async ({ params, request, context }) => {
     request
   });
 
-  const resources = await loadList({
-    request,
+  const resources = await loadAllPages({
     context,
-    fetchFn: (filters, pagination) =>
-      resourceCollectionsAPI.collectionResources(
-        params.id,
-        filters,
-        pagination
-      ),
-    options: { defaultPagination: { page: 1, perPage: 50 } }
+    request: resourceCollectionsAPI.collectionResources(params.id)
   });
 
   return {
