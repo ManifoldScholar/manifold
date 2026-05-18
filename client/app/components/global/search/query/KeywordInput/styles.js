@@ -63,6 +63,12 @@ export const SearchIcon = styled.button`
   &:focus-visible {
     ${defaultFocusStyle}
   }
+
+  &:hover {
+    svg {
+      color: var(--color-base-neutral70);
+    }
+  }
 `;
 
 export const SearchInput = styled.input`

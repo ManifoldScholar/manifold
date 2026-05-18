@@ -18,6 +18,8 @@ export default function Filters({ value, onChange }) {
   const renderToggle = facet => (
     <FilterToggle
       key={facet}
+      name="facet"
+      value={facet}
       type={camelize(facet)}
       checked={value.includes(facet)}
       onChange={() => toggle(facet)}
@@ -25,7 +27,7 @@ export default function Filters({ value, onChange }) {
   );
 
   return (
-    <fieldset>
+    <Styled.Fieldset>
       <Styled.Legend>{t("lti.search.results_include")}</Styled.Legend>
       <Styled.Row>
         {PRIMARY_FACETS.map(renderToggle)}
@@ -45,6 +47,6 @@ export default function Filters({ value, onChange }) {
           <Styled.Row>{SECONDARY_FACETS.map(renderToggle)}</Styled.Row>
         </details>
       </Styled.Row>
-    </fieldset>
+    </Styled.Fieldset>
   );
 }

@@ -34,25 +34,21 @@ export default function LtiSearchForm({ ...resultsProps }) {
   const urlFacets = resolveFacets(location.search);
   const filterValue = facetsCleared ? [] : urlFacets;
 
-  // Uses a function to prevent stale closure in setFacets
-  const latestKeyword = () =>
-    formRef?.current
-      ? new FormData(formRef.current).get("keyword") ?? ""
-      : keyword;
-
   const setFacets = nextFacets => {
     if (!nextFacets.length) {
       setFacetsCleared(true);
       setAwaitingResults(false);
       return;
     }
-    setQuery({ facets: nextFacets, keyword: latestKeyword() });
+    if (formRef.current) formRef.current.requestSubmit();
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (facetsCleared) return;
-    setQuery({ keyword: latestKeyword(), facets: urlFacets });
+    const formData = new FormData(event.currentTarget);
+    const facets = formData.getAll("facet");
+    if (facetsCleared && !facets.length) return;
+    setQuery({ keyword: formData.get("keyword") ?? "", facets });
   };
 
   return (
@@ -62,8 +58,9 @@ export default function LtiSearchForm({ ...resultsProps }) {
         onSubmit={handleSubmit}
         placeholder={t("search.placeholder_long")}
         autoFocus={!keyword}
-      />
-      <Filters value={filterValue} onChange={setFacets} />
+      >
+        <Filters value={filterValue} onChange={setFacets} />
+      </SearchQuery.Form>
       <SearchResults facetsCleared={facetsCleared} {...resultsProps} />
     </Styled.Wrapper>
   );

@@ -17,7 +17,8 @@ const SearchQueryForm = forwardRef(function SearchQueryForm(
     scopes,
     scopeLabel,
     className,
-    onSubmit
+    onSubmit,
+    children
   },
   ref
 ) {
@@ -58,6 +59,7 @@ const SearchQueryForm = forwardRef(function SearchQueryForm(
           onChange={next => setQuery({ facets: next })}
         />
       )}
+      {children}
     </form>
   );
 });
@@ -75,5 +77,6 @@ SearchQueryForm.propTypes = {
   scopes: PropTypes.array,
   scopeLabel: PropTypes.string,
   className: PropTypes.string,
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  children: PropTypes.node
 };

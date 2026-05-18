@@ -19,7 +19,7 @@
     "search": {
       "title": "Search",
       "title_with_keyword": "Search results for {{keyword}}",
-      "empty_prompt": "Enter a keyword in the search box above to find $t(glossary.project_other) and $t(glossary.text_other).",
+      "empty_prompt": "Enter a keyword in the search box above to find Manifold resources to link.",
       "no_results": "No results for “{{keyword}}”.",
       "no_facets_selected": "Select at least one result type to see results.",
       "result_count_one": "{{count}} Item",

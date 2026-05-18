@@ -39,6 +39,10 @@ export const Disclosure = styled(Button)`
   }
 `;
 
+export const Fieldset = styled.fieldset`
+  margin-block-start: 24px;
+`;
+
 export const Legend = styled.legend`
   ${utilityPrimary}
   font-size: 12px;

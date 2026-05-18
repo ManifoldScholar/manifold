@@ -4,7 +4,14 @@ import IconComposer from "components/global/utility/IconComposer";
 import { ICON_MAP } from "components/lti/Cart/Group/index";
 import * as Styled from "./styles";
 
-export default function FilterToggle({ checked, onChange, disabled, type }) {
+export default function FilterToggle({
+  name,
+  value,
+  checked,
+  onChange,
+  disabled,
+  type
+}) {
   const id = useId();
   const { t } = useTranslation();
 
@@ -14,6 +21,8 @@ export default function FilterToggle({ checked, onChange, disabled, type }) {
         id={id}
         type="checkbox"
         className="screen-reader-text"
+        name={name}
+        value={value}
         checked={checked}
         onChange={onChange}
         disabled={disabled}
