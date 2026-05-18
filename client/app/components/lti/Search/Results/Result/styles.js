@@ -8,7 +8,7 @@ export const Title = styled(Link)`
   line-height: 1.21;
   transition: color ${defaultTransitionProps};
 
-  &:hover {
+  &:is(a):hover {
     color: var(--color-base-neutral70);
     text-decoration: underline;
     text-underline-offset: 4px;

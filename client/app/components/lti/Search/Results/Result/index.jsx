@@ -55,6 +55,9 @@ export default function Result({ entity, type, parents }) {
   const item = { type, id: entity.id, title: selectionTitle };
   const selected = has(item);
 
+  const linkable = to && to !== location.pathname;
+  const linkProps = linkable ? { to, state: linkState } : {};
+
   return (
     <Styled.Box>
       <Thumbnail
@@ -75,7 +78,7 @@ export default function Result({ entity, type, parents }) {
               )}
             </Styled.Parent>
           ) : null}
-          <Styled.Title as={!to ? "span" : undefined} to={to} state={linkState}>
+          <Styled.Title as={!linkable ? "span" : undefined} {...linkProps}>
             {title}
           </Styled.Title>
         </Styled.TitleGroup>
@@ -98,14 +101,13 @@ export default function Result({ entity, type, parents }) {
           aria-pressed={selected}
           {...BUTTON_STYLE_PROPS}
         />
-        {to && to !== location.pathname && (
+        {linkable && (
           <Button
             as={Link}
-            to={to}
-            state={linkState}
             label={t("lti.actions.view_contents")}
             postIcon="arrowRight16"
             background="outline"
+            {...linkProps}
             {...BUTTON_STYLE_PROPS}
           />
         )}
