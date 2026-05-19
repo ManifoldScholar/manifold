@@ -1,21 +1,21 @@
-import { useCallback, useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router";
 import { serializeQueryToUrl } from "hooks/useSearch/helpers";
-import Query from "../query";
+import SearchQuery from "../query";
 import * as Styled from "./styles";
 
 export default function SearchMenuBody({
-  afterSubmit = () => {},
+  afterSubmit,
   searchType,
-  facets,
   scopes,
   initialState,
   projectId,
   textId,
   sectionId,
   className,
-  description
+  description,
+  visible
 }) {
   const { sectionId: sectionIdParam, textId: textIdParam } = useParams();
   const navigate = useNavigate();
@@ -33,51 +33,21 @@ export default function SearchMenuBody({
 
   const [query, setQuery] = useState(initialState ?? {});
 
-  const sortedFacets = arr =>
-    (arr ?? [])
-      .slice()
-      .sort()
-      .join(",");
-
-  const handleQueryChange = useCallback(
-    next => {
-      const facetsChanged =
-        sortedFacets(query.facets) !== sortedFacets(next.facets);
-      setQuery(next);
-      if (facetsChanged) {
-        afterSubmit();
-        navigate(
-          { pathname: searchPath, search: serializeQueryToUrl(next) },
-          { replace: true }
-        );
-      }
-    },
-    [query.facets, afterSubmit, searchPath, navigate]
-  );
-
-  const handleSubmit = useCallback(
-    event => {
-      if (event?.preventDefault) event.preventDefault();
-      afterSubmit();
+  useEffect(() => {
+    if (visible && query?.keyword) {
+      if (afterSubmit) afterSubmit();
       navigate(
         { pathname: searchPath, search: serializeQueryToUrl(query) },
         { replace: true }
       );
-    },
-    [query, afterSubmit, searchPath, navigate]
-  );
+    }
+  }, [query, afterSubmit, searchPath, navigate, visible]);
 
   return (
     <Styled.Wrapper className={className}>
-      <Query.ControlledForm
-        query={query}
-        onQueryChange={handleQueryChange}
-        onSubmit={handleSubmit}
-        facets={facets}
-        scopes={scopes}
-        autoFocus
-        className="search-query"
-      />
+      <SearchQuery.ControlledProvider query={query} setQuery={setQuery}>
+        <SearchQuery.Form scopes={scopes} autoFocus className="search-query" />
+      </SearchQuery.ControlledProvider>
       {description && (
         <div className="search-query__footer">
           <div className="search-query__description">{description}</div>
@@ -92,7 +62,6 @@ SearchMenuBody.displayName = "Search.Menu.Body";
 SearchMenuBody.propTypes = {
   afterSubmit: PropTypes.func,
   searchType: PropTypes.string.isRequired,
-  facets: PropTypes.array,
   scopes: PropTypes.array,
   initialState: PropTypes.object,
   description: PropTypes.string,

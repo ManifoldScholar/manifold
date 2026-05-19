@@ -1,20 +1,17 @@
 import { useTranslation } from "react-i18next";
+import { useSearchQueryContext } from "components/global/search/query/Context";
 import Pagination from "./Pagination";
 import Result from "./Result";
 import Order from "./Order";
 import * as Styled from "./styles";
 
-export default function SearchResults({
-  results,
-  meta,
-  keyword,
-  facetsCleared
-}) {
+export default function SearchResults({ results, meta, keyword }) {
   const { t } = useTranslation();
+  const { facets } = useSearchQueryContext("LtiSearchResults");
   const totalCount = meta?.pagination?.totalCount;
 
   /* eslint-disable no-nested-ternary */
-  const emptyMessage = facetsCleared
+  const emptyMessage = facets.cleared
     ? t("lti.search.no_facets_selected")
     : !results || !keyword
     ? t("lti.search.empty_prompt")

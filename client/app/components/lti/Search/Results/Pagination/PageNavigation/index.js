@@ -8,7 +8,7 @@ import * as Styled from "./styles";
 const PageNavigation = ({ totalPages }) => {
   const { t } = useTranslation();
   const {
-    searchQueryState: { page },
+    query: { page },
     setPage
   } = useSearch();
   const pageInputRef = useRef(null);

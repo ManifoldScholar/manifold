@@ -29,13 +29,13 @@ export default function SearchRoute({ loaderData: { results, meta } }) {
     <>
       <HeadContent title={t("search.title")} appendDefaultTitle />
       <h1 className="screen-reader-text">{t("search.title")}</h1>
-      <Styled.FormWrapper>
-        <Styled.Inner>
-          <h2 className="screen-reader-text">{t("search.form")}</h2>
-          <SearchQuery.Form action="/search" facets={facets} />
-        </Styled.Inner>
-      </Styled.FormWrapper>
-      {results && (
+      <SearchQuery.Provider>
+        <Styled.FormWrapper>
+          <Styled.Inner>
+            <h2 className="screen-reader-text">{t("search.form")}</h2>
+            <SearchQuery.Form action="/search" facets={facets} />
+          </Styled.Inner>
+        </Styled.FormWrapper>
         <Styled.ResultsWrapper>
           <Styled.Inner>
             <h2 className="screen-reader-text">{t("search.results")}</h2>
@@ -47,7 +47,7 @@ export default function SearchRoute({ loaderData: { results, meta } }) {
             />
           </Styled.Inner>
         </Styled.ResultsWrapper>
-      )}
+      </SearchQuery.Provider>
     </>
   );
 }

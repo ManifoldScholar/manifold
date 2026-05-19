@@ -30,8 +30,9 @@ export const clientLoader = async ({ request }) => {
 
 export default function LtiSearch({ loaderData: { results, meta } }) {
   const { t } = useTranslation();
-  const { searchQueryState } = useSearch();
-  const { keyword } = searchQueryState;
+  const {
+    query: { keyword }
+  } = useSearch();
 
   return (
     <>

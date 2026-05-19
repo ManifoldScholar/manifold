@@ -74,6 +74,8 @@ function CheckboxMixed({ label: groupLabel, checkboxes, value, onChange }) {
                   <input
                     id={`${baseId}[${optionValue}]`}
                     type="checkbox"
+                    name="facet"
+                    value={optionValue}
                     checked={checked}
                     onChange={() => toggle(optionValue)}
                   />

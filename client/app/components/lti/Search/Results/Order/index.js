@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 export default function Order() {
   const { t } = useTranslation();
   const {
-    searchQueryState: { order },
+    query: { order },
     setQuery
   } = useSearch();
 

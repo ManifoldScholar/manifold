@@ -1,17 +1,28 @@
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
 import FilterToggle from "./FilterToggle";
-import { PRIMARY_FACETS, SECONDARY_FACETS } from "routes/lti/search/filters";
+import { useSearchQueryContext } from "components/global/search/query/Context";
+import {
+  PRIMARY_FACETS,
+  SECONDARY_FACETS,
+  resolveFacets
+} from "routes/lti/search/filters";
 import { camelize } from "lib/utils/humps";
 import * as Styled from "./styles";
 
-export default function Filters({ value, onChange }) {
+export default function Filters() {
   const { t } = useTranslation();
+  const location = useLocation();
+  const { facets } = useSearchQueryContext("Filters");
+
+  const urlFacets = resolveFacets(location.search);
+  const value = facets.cleared ? [] : urlFacets;
 
   const toggle = v => {
     if (value.includes(v)) {
-      onChange(value.filter(x => x !== v));
+      facets.set(value.filter(x => x !== v));
     } else {
-      onChange([...value, v]);
+      facets.set([...value, v]);
     }
   };
 

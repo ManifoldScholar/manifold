@@ -24,8 +24,7 @@ export const loader = async ({ params, request, context }) => {
 
 export const handle = { frontendMode: { isProjectSubpage: true } };
 
-export default function ProjectSearch({ loaderData }) {
-  const { results, meta } = loaderData;
+export default function ProjectSearch({ loaderData: { results, meta } }) {
   const project = useOutletContext();
   const { setPage } = useSearchContext();
   const { t } = useTranslation();
@@ -49,16 +48,16 @@ export default function ProjectSearch({ loaderData }) {
       <HeadContent title={t("search.title")} appendDefaultTitle />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <h1 className="screen-reader-text">{t("search.title")}</h1>
-      <Styled.FormWrapper>
-        <Styled.Inner>
-          <h2 className="screen-reader-text">{t("search.form")}</h2>
-          <SearchQuery.Form
-            action={`/projects/${project?.attributes?.slug}/search`}
-            facets={facets}
-          />
-        </Styled.Inner>
-      </Styled.FormWrapper>
-      {results && (
+      <SearchQuery.Provider>
+        <Styled.FormWrapper>
+          <Styled.Inner>
+            <h2 className="screen-reader-text">{t("search.form")}</h2>
+            <SearchQuery.Form
+              action={`/projects/${project?.attributes?.slug}/search`}
+              facets={facets}
+            />
+          </Styled.Inner>
+        </Styled.FormWrapper>
         <Styled.ResultsWrapper>
           <Styled.Inner>
             <h2 className="screen-reader-text">{t("search.results")}</h2>
@@ -71,7 +70,7 @@ export default function ProjectSearch({ loaderData }) {
             />
           </Styled.Inner>
         </Styled.ResultsWrapper>
-      )}
+      </SearchQuery.Provider>
     </>
   );
 }

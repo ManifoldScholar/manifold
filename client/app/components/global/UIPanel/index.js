@@ -26,6 +26,7 @@ export default function UIPanel(props) {
       <Styled.Panel id={props.id} inert={!visible ? "" : undefined}>
         {React.createElement(props.bodyComponent, {
           ...props,
+          visible,
           closeCallback: props.hidePanel,
           className: classNames(props.bodyClassName, "panel")
         })}

@@ -18,6 +18,7 @@ export const Wrapper = styled.div`
   border-radius: 12px;
   position: relative;
   font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
   color: var(--color-base-neutral90);
   transition: background-color ${defaultTransitionProps},
     color ${defaultTransitionProps};

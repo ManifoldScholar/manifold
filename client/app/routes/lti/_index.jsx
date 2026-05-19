@@ -12,10 +12,12 @@ export default function LtiLanding() {
       <Styled.Title>{t("lti.landing.title")}</Styled.Title>
       <Styled.Subtitle>{t("lti.landing.subtitle")}</Styled.Subtitle>
       <Styled.Search>
-        <SearchQuery.Form
-          action="/lti/search"
-          placeholder={t("lti.landing.placeholder")}
-        />
+        <SearchQuery.Provider>
+          <SearchQuery.Form
+            action="/lti/search"
+            placeholder={t("lti.landing.placeholder")}
+          />
+        </SearchQuery.Provider>
       </Styled.Search>
       <Styled.Message title={t("lti.landing.message_heading")}>
         <Trans i18nKey="lti.landing.message_body" components={[<p />]} />

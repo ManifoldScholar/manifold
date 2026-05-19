@@ -6,7 +6,7 @@ export default function useSearch() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const searchQueryState = useMemo(() => parseQueryFromUrl(location.search), [
+  const query = useMemo(() => parseQueryFromUrl(location.search), [
     location.search
   ]);
 
@@ -16,14 +16,14 @@ export default function useSearch() {
         {
           pathname: path ?? location.pathname,
           search: serializeQueryToUrl({
-            ...searchQueryState,
+            ...query,
             page: 1,
             ...patch
           })
         },
         { replace: true }
       ),
-    [searchQueryState, navigate, location.pathname]
+    [query, navigate, location.pathname]
   );
 
   const setPage = useCallback(
@@ -32,12 +32,12 @@ export default function useSearch() {
       navigate(
         {
           pathname: location.pathname,
-          search: serializeQueryToUrl({ ...searchQueryState, page })
+          search: serializeQueryToUrl({ ...query, page })
         },
         { replace: true }
       );
     },
-    [searchQueryState, navigate, location.pathname]
+    [query, navigate, location.pathname]
   );
 
   const setPerPage = useCallback(
@@ -46,18 +46,18 @@ export default function useSearch() {
         {
           pathname: location.pathname,
           search: serializeQueryToUrl({
-            ...searchQueryState,
+            ...query,
             page: 1,
             perPage: parseInt(perPage, 10)
           })
         },
         { replace: true }
       ),
-    [searchQueryState, navigate, location.pathname]
+    [query, navigate, location.pathname]
   );
 
   return {
-    searchQueryState,
+    query,
     setQuery,
     setPage,
     setPerPage

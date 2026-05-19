@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 export default function Count({ totalCount }) {
   const { t, i18n } = useTranslation();
   const {
-    searchQueryState: { page, perPage }
+    query: { page, perPage }
   } = useSearch();
   const startItem = (page - 1) * perPage + 1;
   const endItem = Math.min(page * perPage, totalCount);

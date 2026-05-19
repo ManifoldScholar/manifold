@@ -10,9 +10,9 @@ import { hasSearchableQuery, parseQueryFromUrl } from "hooks/useSearch/helpers";
  * @param {Object} options - Configuration options
  * @param {Object} options.request - React Router request object
  * @param {Object} options.context - React Router context object
- * @param {Object} options.params - Optional extra fields to merge into searchQueryState
+ * @param {Object} options.params - Optional extra fields to merge into query
  * @param {Function} options.beforeLoad - Optional async function to run before processing (e.g., checkLibraryMode)
- * @returns {Promise<Object>} Object with results, meta, and optionally searchQueryState
+ * @returns {Promise<Object>} Object with results, meta, and optionally query
  */
 export default async function searchLoader({
   request,
@@ -25,12 +25,12 @@ export default async function searchLoader({
   }
 
   const url = new URL(request.url);
-  const searchQueryState = {
+  const query = {
     ...parseQueryFromUrl(url.search),
     ...params
   };
 
-  if (!hasSearchableQuery(searchQueryState)) {
+  if (!hasSearchableQuery(query)) {
     return {
       results: null,
       meta: null
@@ -38,10 +38,9 @@ export default async function searchLoader({
   }
 
   const pagination = {
-    number: searchQueryState.page || 1,
-    size: searchQueryState.perPage || 20
+    number: query.page || 1,
+    size: query.perPage || 20
   };
-  const query = { ...searchQueryState };
   query.page = pagination;
 
   try {

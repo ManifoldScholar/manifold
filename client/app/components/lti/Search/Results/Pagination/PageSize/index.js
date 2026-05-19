@@ -6,7 +6,7 @@ import * as Styled from "./styles";
 export default function PageSize() {
   const { t } = useTranslation();
   const {
-    searchQueryState: { perPage },
+    query: { perPage },
     setPerPage
   } = useSearch();
   const options = [20, 40, 60, 100];

@@ -1,7 +1,8 @@
 import Form from "./Form";
-import ControlledForm from "./ControlledForm";
+import { SearchQueryProvider, SearchQueryControlledProvider } from "./Context";
 
 export default {
   Form,
-  ControlledForm
+  Provider: SearchQueryProvider,
+  ControlledProvider: SearchQueryControlledProvider
 };

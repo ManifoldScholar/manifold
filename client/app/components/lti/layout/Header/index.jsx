@@ -32,7 +32,7 @@ export default function LtiHeader({ dialog }) {
         />
         <Button
           label={t("lti.header.my_links")}
-          preIcon="rTELink24"
+          preIcon="link16"
           background="neutral"
           onClick={dialog.onToggleClick}
           {...BUTTON_STYLE_PROPS}

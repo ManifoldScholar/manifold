@@ -10,12 +10,11 @@ export const loader = async ({ request, context }) => {
   return searchLoader({ request, context });
 };
 
-export default function ReaderSearch({ loaderData }) {
-  const { results, meta } = loaderData || {};
+export default function ReaderSearch({ loaderData: { results, meta } }) {
   const { t } = useTranslation();
+  const { setPage } = useSearchContext();
   const navigate = useNavigate();
   const { text, section } = useOutletContext();
-  const { setPage } = useSearchContext();
 
   const facets = [
     { label: t("reader.full_text"), value: "TextSection" },
@@ -63,19 +62,19 @@ export default function ReaderSearch({ loaderData }) {
       appearance="overlay-full bg-white"
     >
       <div>
-        <SearchQuery.Form
-          action={`/read/${textId}/section/${sectionId}/search`}
-          facets={facets}
-          scopes={scopes}
-        />
-        {results ? (
+        <SearchQuery.Provider>
+          <SearchQuery.Form
+            action={`/read/${textId}/section/${sectionId}/search`}
+            facets={facets}
+            scopes={scopes}
+          />
           <SearchResults.List
             pagination={meta?.pagination}
             paginationClickHandler={setPage}
             results={results}
             context="project"
           />
-        ) : null}
+        </SearchQuery.Provider>
       </div>
     </Overlay>
   );
