@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router";
-import { linkUnstyled, defaultTransitionProps } from "theme/styles/mixins";
+import {
+  linkUnstyled,
+  defaultTransitionProps,
+  respond
+} from "theme/styles/mixins";
 
 export const Header = styled.header`
   position: sticky;
@@ -10,9 +14,11 @@ export const Header = styled.header`
   background-color: var(--color-base-neutral-white);
   color: var(--color-base-neutral90);
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto auto;
   gap: 16px;
   border-bottom: 1px solid var(--color-base-neutral40);
+
+  ${respond(`grid-template-columns: 1fr auto 1fr;`, 60)}
 `;
 
 export const Logo = styled(Link)`
@@ -39,6 +45,9 @@ export const Logo = styled(Link)`
 export const Instance = styled.div`
   font-size: 19px;
   align-self: center;
+  display: none;
+
+  ${respond(`display: inline;`, 60)}
 `;
 
 export const Buttons = styled.div`

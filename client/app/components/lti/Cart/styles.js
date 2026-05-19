@@ -4,7 +4,8 @@ import {
   utilityPrimary,
   buttonUnstyled,
   defaultHoverStyle,
-  defaultFocusStyle
+  defaultFocusStyle,
+  respond
 } from "theme/styles/mixins";
 
 export const Cart = styled.dialog`
@@ -12,7 +13,7 @@ export const Cart = styled.dialog`
   inset-block: 77px;
   inset-inline-end: 0;
   inset-inline-start: auto;
-  width: min(370px, 100%);
+  width: 100%;
   height: calc(100dvh - 77px);
   margin: 0;
   background: var(--color-base-neutral-white);
@@ -29,6 +30,8 @@ export const Cart = styled.dialog`
   > button {
     width: 100%;
   }
+
+  ${respond(`width: 370px;`, 90)}
 `;
 
 export const Header = styled.div`

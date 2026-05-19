@@ -20,7 +20,7 @@ export default function LtiLayout() {
       <HeadContent title={t("lti.title")} appendDefaultTitle />
       <Styled.Wrapper>
         <Header dialog={dialog} />
-        <Styled.Main $sidebarOpen={dialog.open}>
+        <Styled.Main $cartOpen={dialog.open}>
           <Styled.List>
             <Outlet />
           </Styled.List>

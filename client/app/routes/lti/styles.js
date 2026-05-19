@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { headingQuaternary } from "theme/styles/mixins";
+import { headingQuaternary, respond } from "theme/styles/mixins";
 import BaseMessage from "components/lti/atomics/Message";
 
 export const Wrapper = styled.div`
@@ -20,12 +20,14 @@ export const Main = styled.main`
   padding-inline: 24px;
   padding-block-start: 70px;
   padding-block-end: 120px;
-  padding-right: ${p => (p.$sidebarOpen ? "394px" : "24px")};
-  transition: padding-right 0.25s ease;
+  padding-right: 24px;
+  transition: padding-right 0.25s ease, transform 0.25s ease;
 
   &:has(nav[data-lti-breadcrumb]) {
     padding-block-start: 30px;
   }
+
+  ${({ $cartOpen }) => $cartOpen && respond(`padding-right: 394px`, 90)}
 `;
 
 export const List = styled.div`
