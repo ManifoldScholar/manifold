@@ -18,6 +18,10 @@ export default function MobileSearch({ closeNavigation }) {
       projectId={projectId}
       visibility={{ search: true }}
       className="nested-nav__search-menu"
+      initialState={{
+        keyword: "",
+        facets: ["Project", "Journal", "Resource", "Text"]
+      }}
     />
   );
 }

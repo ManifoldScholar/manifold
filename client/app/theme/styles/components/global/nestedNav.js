@@ -37,7 +37,6 @@ export default `
     width: 100%;
     padding: 0;
     margin-top: 20px;
-    border: 1px solid var(--color-header-foreground);
 
     .search-query {
       input[type='text'] {

@@ -17,8 +17,12 @@ export default function ReaderSearch({ loaderData: { results, meta } }) {
   const { text, section } = useOutletContext();
 
   const facets = [
-    { label: t("reader.full_text"), value: "TextSection" },
-    { label: t("glossary.annotation_title_case_other"), value: "Annotation" }
+    { label: t("reader.full_text"), value: "TextSection", default: true },
+    {
+      label: t("glossary.annotation_title_case_other"),
+      value: "Annotation",
+      default: true
+    }
   ];
 
   const projectId = text.relationships.project.id;

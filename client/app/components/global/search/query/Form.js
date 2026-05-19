@@ -19,11 +19,11 @@ export default function SearchQueryForm({
   const { t } = useTranslation();
   const ctx = useSearchQueryContext("SearchQuery.Form");
 
-  const allFacetValues = facets?.map(f => f.value) ?? [];
+  const defaultFacets = facets?.filter(f => f.default).map(f => f.value) ?? [];
   // Default to all checked when first landing on search form
   const selectedFacets = ctx.facets.value?.length
     ? ctx.facets.value
-    : allFacetValues;
+    : defaultFacets;
   // API treats [] as all, so we track if user explicitly cleared all
   // to sync filter state with returned results
   const facetValue = ctx.facets.cleared ? [] : selectedFacets;

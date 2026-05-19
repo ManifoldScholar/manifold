@@ -85,6 +85,27 @@ export default function Header() {
   };
 
   const renderOptionsNav = () => {
+    const scopes = [
+      {
+        label: t("glossary.chapter_one"),
+        value: "section",
+        paramName: "textSection",
+        paramValue: section.id
+      },
+      {
+        label: t("glossary.text_one"),
+        value: "text",
+        paramName: "text",
+        paramValue: text.id
+      },
+      {
+        label: t("glossary.project_one"),
+        value: "project",
+        paramName: "project",
+        paramValue: text.relationships.project.id
+      }
+    ];
+
     return (
       <ul
         aria-label={t("reader.header.reader_settings_search")}
@@ -144,17 +165,22 @@ export default function Header() {
             }
           >
             <ControlMenu.DisclosurePanel direction="right">
-              <SearchMenu.Body
-                initialState={{
-                  keyword: "",
-                  scope: "text"
-                }}
-                projectId={text?.relationships?.project?.id}
-                textId={text?.id}
-                sectionId={section?.id}
-                searchType="reader"
-                className="panel search-menu"
-              />
+              {visible => (
+                <SearchMenu.Body
+                  initialState={{
+                    keyword: "",
+                    scope: "text",
+                    facets: ["TextSection", "Annotation"]
+                  }}
+                  projectId={text?.relationships?.project?.id}
+                  textId={text?.id}
+                  sectionId={section?.id}
+                  searchType="reader"
+                  className="panel search-menu"
+                  visible={visible}
+                  scopes={scopes}
+                />
+              )}
             </ControlMenu.DisclosurePanel>
           </DisclosureNavigationMenu>
         </li>

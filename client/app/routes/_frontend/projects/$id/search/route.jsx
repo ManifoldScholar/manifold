@@ -30,8 +30,8 @@ export default function ProjectSearch({ loaderData: { results, meta } }) {
   const { t } = useTranslation();
 
   const facets = [
-    { label: t("glossary.resource_other"), value: "Resource" },
-    { label: t("glossary.text_other"), value: "Text" },
+    { label: t("glossary.resource_other"), value: "Resource", default: true },
+    { label: t("glossary.text_other"), value: "Text", default: true },
     { label: t("glossary.annotation_other"), value: "Annotation" },
     { label: t("glossary.full_text_one"), value: "TextSection" }
   ];

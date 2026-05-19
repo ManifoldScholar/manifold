@@ -17,10 +17,10 @@ export default function SearchRoute({ loaderData: { results, meta } }) {
   const { t } = useTranslation();
 
   const facets = [
-    { label: t("glossary.project_other"), value: "Project" },
-    { label: t("glossary.journal_other"), value: "Journal" },
-    { label: t("glossary.resource_other"), value: "Resource" },
-    { label: t("glossary.text_other"), value: "Text" },
+    { label: t("glossary.project_other"), value: "Project", default: true },
+    { label: t("glossary.journal_other"), value: "Journal", default: true },
+    { label: t("glossary.resource_other"), value: "Resource", default: true },
+    { label: t("glossary.text_other"), value: "Text", default: true },
     { label: t("glossary.annotation_other"), value: "Annotation" },
     { label: t("glossary.full_text_other"), value: "TextSection" }
   ];

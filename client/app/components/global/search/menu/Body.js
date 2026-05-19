@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router";
 import { serializeQueryToUrl } from "hooks/useSearch/helpers";
@@ -31,17 +31,22 @@ export default function SearchMenuBody({
     searchPath = "/search";
   }
 
-  const [query, setQuery] = useState(initialState ?? {});
+  // Allow callers to pass initialState as plain, unmemoized object
+  const initialStateRef = useRef(initialState ?? {});
+  const [query, setQuery] = useState(initialStateRef.current);
 
   useEffect(() => {
-    if (visible && query?.keyword) {
-      if (afterSubmit) afterSubmit();
-      navigate(
-        { pathname: searchPath, search: serializeQueryToUrl(query) },
-        { replace: true }
-      );
-    }
+    if (!visible || !query?.keyword) return;
+    if (afterSubmit) afterSubmit();
+    navigate(
+      { pathname: searchPath, search: serializeQueryToUrl(query) },
+      { replace: true }
+    );
   }, [query, afterSubmit, searchPath, navigate, visible]);
+
+  useEffect(() => {
+    if (!visible) setQuery(initialStateRef.current);
+  }, [visible]);
 
   return (
     <Styled.Wrapper className={className}>

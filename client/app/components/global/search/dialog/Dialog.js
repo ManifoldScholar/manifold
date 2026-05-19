@@ -24,9 +24,9 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
   }
 
   const facets = [
-    { label: t("glossary.project_other"), value: "Project" },
-    { label: t("glossary.resource_other"), value: "Resource" },
-    { label: t("glossary.text_other"), value: "Text" },
+    { label: t("glossary.project_other"), value: "Project", default: true },
+    { label: t("glossary.resource_other"), value: "Resource", default: true },
+    { label: t("glossary.text_other"), value: "Text", default: true },
     { label: t("glossary.full_text_other"), value: "TextSection" }
   ];
 
