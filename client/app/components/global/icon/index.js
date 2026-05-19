@@ -191,6 +191,7 @@ import RTEAlignCenter32 from "./32/RTEAlignCenter";
 import RTEAlignJustify32 from "./32/RTEAlignJustify";
 import PlusCircle16 from "./16/PlusCircle";
 import CheckCircle16 from "./16/CheckCircle";
+import Link16 from "./16/Link";
 
 export default {
   ActivityComments64,
@@ -297,6 +298,7 @@ export default {
   LanguageGlobe24,
   LightMode16,
   Lightning24,
+  Link16,
   Link24,
   Lock16,
   Lock32,
