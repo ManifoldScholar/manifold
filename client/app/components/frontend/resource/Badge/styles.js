@@ -35,4 +35,6 @@ export const Kind = styled.span`
     --Badge-Kind-bg-color,
     light-dark(var(--color-base-neutral05), var(--color-base-neutral95))
   );
+  border-top-right-radius: calc(0.5 * var(--box-border-radius));
+  border-bottom-right-radius: calc(0.5 * var(--box-border-radius));
 `;

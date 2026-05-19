@@ -13,7 +13,7 @@ export default function LtiBadge({ type, resourceKind }) {
         <IconComposer icon={ICON_MAP[type]} size={20} />
         <span>{t(`lti.types_one.${type}`)}</span>
       </span>
-      {resourceKind && (
+      {type === "resource" && resourceKind && (
         <Styled.Kind>
           <IconComputed.Resource icon={resourceKind} size={20} />
           <span>{resourceKind}</span>
