@@ -189,6 +189,9 @@ import RTEAlignLeft32 from "./32/RTEAlignLeft";
 import RTEAlignRight32 from "./32/RTEAlignRight";
 import RTEAlignCenter32 from "./32/RTEAlignCenter";
 import RTEAlignJustify32 from "./32/RTEAlignJustify";
+import PlusCircle16 from "./16/PlusCircle";
+import CheckCircle16 from "./16/CheckCircle";
+import Link16 from "./16/Link";
 
 export default {
   ActivityComments64,
@@ -233,6 +236,7 @@ export default {
   Bookmark32,
   Calendar24,
   Checkmark16,
+  CheckCircle16,
   CircleArrowDown64,
   CircleArrowLeft64,
   CircleArrowRight64,
@@ -294,6 +298,7 @@ export default {
   LanguageGlobe24,
   LightMode16,
   Lightning24,
+  Link16,
   Link24,
   Lock16,
   Lock32,
@@ -316,6 +321,7 @@ export default {
   PlayOutline24,
   Plus16,
   Plus24,
+  PlusCircle16,
   Privacy24,
   ProjectCollections64,
   ProjectCollection32,

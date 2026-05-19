@@ -192,7 +192,8 @@ export default function NavigationStatic({
           searchType={projectId ? "project" : "library"}
           projectId={projectId}
           initialState={{
-            keyword: ""
+            keyword: "",
+            facets: ["Project", "Journal", "Resource", "Text"]
           }}
           description={description}
           hidePanel={hidePanel}

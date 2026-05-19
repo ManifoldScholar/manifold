@@ -24,15 +24,14 @@ export const loader = async ({ params, request, context }) => {
 
 export const handle = { frontendMode: { isProjectSubpage: true } };
 
-export default function ProjectSearch({ loaderData }) {
-  const { results, meta } = loaderData;
+export default function ProjectSearch({ loaderData: { results, meta } }) {
   const project = useOutletContext();
-  const { searchQueryState, setQueryState, setPage } = useSearchContext();
+  const { setPage } = useSearchContext();
   const { t } = useTranslation();
 
   const facets = [
-    { label: t("glossary.resource_other"), value: "Resource" },
-    { label: t("glossary.text_other"), value: "Text" },
+    { label: t("glossary.resource_other"), value: "Resource", default: true },
+    { label: t("glossary.text_other"), value: "Text", default: true },
     { label: t("glossary.annotation_other"), value: "Annotation" },
     { label: t("glossary.full_text_one"), value: "TextSection" }
   ];
@@ -49,18 +48,16 @@ export default function ProjectSearch({ loaderData }) {
       <HeadContent title={t("search.title")} appendDefaultTitle />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <h1 className="screen-reader-text">{t("search.title")}</h1>
-      <Styled.FormWrapper>
-        <Styled.Inner>
-          <h2 className="screen-reader-text">{t("search.form")}</h2>
-          <SearchQuery.Form
-            projectId={project.id}
-            searchQueryState={searchQueryState}
-            setQueryState={setQueryState}
-            facets={facets}
-          />
-        </Styled.Inner>
-      </Styled.FormWrapper>
-      {results && (
+      <SearchQuery.Provider>
+        <Styled.FormWrapper>
+          <Styled.Inner>
+            <h2 className="screen-reader-text">{t("search.form")}</h2>
+            <SearchQuery.Form
+              action={`/projects/${project?.attributes?.slug}/search`}
+              facets={facets}
+            />
+          </Styled.Inner>
+        </Styled.FormWrapper>
         <Styled.ResultsWrapper>
           <Styled.Inner>
             <h2 className="screen-reader-text">{t("search.results")}</h2>
@@ -73,7 +70,7 @@ export default function ProjectSearch({ loaderData }) {
             />
           </Styled.Inner>
         </Styled.ResultsWrapper>
-      )}
+      </SearchQuery.Provider>
     </>
   );
 }

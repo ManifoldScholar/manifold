@@ -41,6 +41,10 @@ export const FormWrapper = styled.div`
 
 export const ResultsWrapper = styled.div`
   padding-bottom: ${fluidScale("110px", "48px")};
+
+  &:not(:has(${ResultsList})) {
+    display: none;
+  }
 `;
 
 export const Inner = styled.div`

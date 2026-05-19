@@ -17,8 +17,9 @@ const Button = forwardRef(
     },
     ref
   ) => {
-    /* eslint-disable-next-line no-nested-ternary */
-    const iconSize = size === "lg" ? 32 : size === "md" ? 24 : 20;
+    /* eslint-disable no-nested-ternary */
+    const iconSize =
+      size === "lg" ? 32 : size === "md" ? 24 : size === "sm" ? 20 : 16;
 
     return (
       <Styled.Button
@@ -48,7 +49,7 @@ const Button = forwardRef(
 );
 
 export const stylePropTypes = {
-  size: PropTypes.oneOf(["sm", "md", "lg"]),
+  size: PropTypes.oneOf(["xSm", "sm", "md", "lg"]),
   shape: PropTypes.oneOf(["rectangle", "lozenge"]),
   background: PropTypes.oneOf([
     "neutral",

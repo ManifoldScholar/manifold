@@ -13,14 +13,14 @@ export const loader = async ({ request, context }) => {
 };
 
 export default function SearchRoute({ loaderData: { results, meta } }) {
-  const { searchQueryState, setQueryState, setPage } = useSearchContext();
+  const { setPage } = useSearchContext();
   const { t } = useTranslation();
 
   const facets = [
-    { label: t("glossary.project_other"), value: "Project" },
-    { label: t("glossary.journal_other"), value: "Journal" },
-    { label: t("glossary.resource_other"), value: "Resource" },
-    { label: t("glossary.text_other"), value: "Text" },
+    { label: t("glossary.project_other"), value: "Project", default: true },
+    { label: t("glossary.journal_other"), value: "Journal", default: true },
+    { label: t("glossary.resource_other"), value: "Resource", default: true },
+    { label: t("glossary.text_other"), value: "Text", default: true },
     { label: t("glossary.annotation_other"), value: "Annotation" },
     { label: t("glossary.full_text_other"), value: "TextSection" }
   ];
@@ -29,17 +29,13 @@ export default function SearchRoute({ loaderData: { results, meta } }) {
     <>
       <HeadContent title={t("search.title")} appendDefaultTitle />
       <h1 className="screen-reader-text">{t("search.title")}</h1>
-      <Styled.FormWrapper>
-        <Styled.Inner>
-          <h2 className="screen-reader-text">{t("search.form")}</h2>
-          <SearchQuery.Form
-            searchQueryState={searchQueryState}
-            setQueryState={setQueryState}
-            facets={facets}
-          />
-        </Styled.Inner>
-      </Styled.FormWrapper>
-      {results && (
+      <SearchQuery.Provider>
+        <Styled.FormWrapper>
+          <Styled.Inner>
+            <h2 className="screen-reader-text">{t("search.form")}</h2>
+            <SearchQuery.Form action="/search" facets={facets} />
+          </Styled.Inner>
+        </Styled.FormWrapper>
         <Styled.ResultsWrapper>
           <Styled.Inner>
             <h2 className="screen-reader-text">{t("search.results")}</h2>
@@ -51,7 +47,7 @@ export default function SearchRoute({ loaderData: { results, meta } }) {
             />
           </Styled.Inner>
         </Styled.ResultsWrapper>
-      )}
+      </SearchQuery.Provider>
     </>
   );
 }

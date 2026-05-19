@@ -6,38 +6,60 @@ export default function useSearch() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const searchQueryState = useMemo(() => parseQueryFromUrl(location.search), [
+  const query = useMemo(() => parseQueryFromUrl(location.search), [
     location.search
   ]);
 
-  const setQueryState = useCallback(
-    (params, path) => {
-      const urlParams = serializeQueryToUrl(params);
+  const setQuery = useCallback(
+    (patch, path) =>
       navigate(
         {
           pathname: path ?? location.pathname,
-          search: urlParams
+          search: serializeQueryToUrl({
+            ...query,
+            page: 1,
+            ...patch
+          })
+        },
+        { replace: true }
+      ),
+    [query, navigate, location.pathname]
+  );
+
+  const setPage = useCallback(
+    page => event => {
+      if (event) event.preventDefault();
+      navigate(
+        {
+          pathname: location.pathname,
+          search: serializeQueryToUrl({ ...query, page })
         },
         { replace: true }
       );
     },
-    [navigate, location.pathname]
+    [query, navigate, location.pathname]
   );
 
-  const setPage = useCallback(
-    page => {
-      return event => {
-        if (event) event.preventDefault();
-        const newQuery = { ...searchQueryState, page };
-        setQueryState(newQuery);
-      };
-    },
-    [searchQueryState, setQueryState]
+  const setPerPage = useCallback(
+    perPage =>
+      navigate(
+        {
+          pathname: location.pathname,
+          search: serializeQueryToUrl({
+            ...query,
+            page: 1,
+            perPage: parseInt(perPage, 10)
+          })
+        },
+        { replace: true }
+      ),
+    [query, navigate, location.pathname]
   );
 
   return {
-    searchQueryState,
-    setQueryState,
-    setPage
+    query,
+    setQuery,
+    setPage,
+    setPerPage
   };
 }

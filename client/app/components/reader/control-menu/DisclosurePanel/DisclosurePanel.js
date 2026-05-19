@@ -15,7 +15,7 @@ const ControlMenuDisclosurePanel = forwardRef((props, ref) => {
       tabIndex={-1}
       {...rest}
     >
-      {children}
+      {typeof children === "function" ? children(visible) : children}
     </Styled.Panel>
   );
 });

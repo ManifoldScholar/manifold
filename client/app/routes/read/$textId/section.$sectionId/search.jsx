@@ -10,21 +10,45 @@ export const loader = async ({ request, context }) => {
   return searchLoader({ request, context });
 };
 
-export default function ReaderSearch({ loaderData }) {
-  const { results, meta } = loaderData || {};
+export default function ReaderSearch({ loaderData: { results, meta } }) {
   const { t } = useTranslation();
+  const { setPage } = useSearchContext();
   const navigate = useNavigate();
   const { text, section } = useOutletContext();
-  const { searchQueryState, setQueryState, setPage } = useSearchContext();
 
   const facets = [
-    { label: t("reader.full_text"), value: "TextSection" },
-    { label: t("glossary.annotation_title_case_other"), value: "Annotation" }
+    { label: t("reader.full_text"), value: "TextSection", default: true },
+    {
+      label: t("glossary.annotation_title_case_other"),
+      value: "Annotation",
+      default: true
+    }
   ];
 
   const projectId = text.relationships.project.id;
   const textId = text.id;
   const sectionId = section.id;
+
+  const scopes = [
+    {
+      label: t("glossary.chapter_one"),
+      value: "section",
+      paramName: "textSection",
+      paramValue: sectionId
+    },
+    {
+      label: t("glossary.text_one"),
+      value: "text",
+      paramName: "text",
+      paramValue: textId
+    },
+    {
+      label: t("glossary.project_one"),
+      value: "project",
+      paramName: "project",
+      paramValue: projectId
+    }
+  ];
 
   const close = () => {
     navigate(`/read/${textId}/section/${sectionId}`, {
@@ -42,22 +66,19 @@ export default function ReaderSearch({ loaderData }) {
       appearance="overlay-full bg-white"
     >
       <div>
-        <SearchQuery.Form
-          searchQueryState={searchQueryState}
-          setQueryState={setQueryState}
-          facets={facets}
-          projectId={projectId}
-          textId={textId}
-          sectionId={sectionId}
-        />
-        {results ? (
+        <SearchQuery.Provider>
+          <SearchQuery.Form
+            action={`/read/${textId}/section/${sectionId}/search`}
+            facets={facets}
+            scopes={scopes}
+          />
           <SearchResults.List
             pagination={meta?.pagination}
             paginationClickHandler={setPage}
             results={results}
             context="project"
           />
-        ) : null}
+        </SearchQuery.Provider>
       </div>
     </Overlay>
   );
