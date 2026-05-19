@@ -25,3 +25,16 @@ export const Image = styled.figure`
     object-position: left top;
   }
 `;
+
+export const ResourceImage = styled.figure`
+  border-radius: 6px;
+
+  > img {
+    border-radius: 6px;
+    max-height: 80px;
+    max-width: 80px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+  }
+`;

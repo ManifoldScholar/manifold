@@ -19,8 +19,12 @@ export default function LtiThumbnail({
   const { url, alt, width, height } = thumbnail ?? {};
 
   if (url) {
+    const Component =
+      type === "resource" || type === "resourceCollection"
+        ? Styled.ResourceImage
+        : Styled.Image;
     return (
-      <Styled.Image>
+      <Component>
         <img
           src={url}
           alt={alt ?? ""}
@@ -28,7 +32,7 @@ export default function LtiThumbnail({
           height={height}
           loading="lazy"
         />
-      </Styled.Image>
+      </Component>
     );
   }
 
