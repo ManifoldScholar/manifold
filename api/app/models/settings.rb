@@ -62,7 +62,8 @@ class Settings < ApplicationRecord
     {
       identity_providers:,
       default_identity_provider:,
-      hide_local_login:
+      hide_local_login:,
+      disallow_email_change:
     }
   end
 
@@ -92,6 +93,10 @@ class Settings < ApplicationRecord
   # @todo Move this into a more generic config, it's not specific to SAML
   def hide_local_login
     SamlConfig.disable_password_auth
+  end
+
+  def disallow_email_change
+    SamlConfig.disallow_email_change
   end
 
   # @!endgroup

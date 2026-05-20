@@ -7,6 +7,7 @@ module SettingSections
   class Authentication < Base
     attribute :identity_providers, :string
     attribute :default_identity_provider, :string
-    attribute :show_local_login, :boolean, default: true
+    attribute :hide_local_login, :boolean, default: false
+    attribute :disallow_email_change, :boolean, default: false
   end
 end

@@ -17,7 +17,10 @@ module API
       end
 
       def update
-        ::Updaters::User.new(user_params).update(current_user)
+        # Disallow self-update of email unless permitted
+        params = user_params.to_h
+        params.dig(:data, :attributes)&.delete(:email) if Settings.current.disallow_email_change
+        ::Updaters::User.new(params).update(current_user)
         if current_user.valid?
           render_jsonapi current_user,
                          serializer: ::V1::CurrentUserSerializer,

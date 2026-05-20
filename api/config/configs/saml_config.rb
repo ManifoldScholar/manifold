@@ -3,9 +3,13 @@
 class SamlConfig < ApplicationConfig
   PROVIDER_NAME_FORMAT = /[a-z]/
 
-  attr_config provider_names: [], disable_password_auth: false
+  attr_config disable_password_auth: false,
+              disallow_email_change: false,
+              provider_names: []
 
-  coerce_types disable_password_auth: :boolean, provider_names: { type: :string, array: true }
+  coerce_types disable_password_auth: :boolean,
+               disallow_email_change: :boolean,
+               provider_names: { type: :string, array: true }
 
   on_load :validate_provider_names!
 
