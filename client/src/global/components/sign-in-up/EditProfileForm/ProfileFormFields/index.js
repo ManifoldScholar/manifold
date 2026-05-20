@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import PropTypes from "prop-types";
+import { FormContext } from "helpers/contexts";
 import { useFromStore } from "hooks";
 import * as Styled from "./styles";
 
@@ -9,12 +10,24 @@ export default function ProfileFormFields({ mode }) {
   const { t } = useTranslation();
 
   const settings = useFromStore("settings", "select");
+  const formData = useContext(FormContext);
+  const email = formData.getModelValue("attributes[email]");
 
-  const { hideLocalLogin } = settings?.attributes?.authentication;
+  const { disallowEmailChange, hideLocalLogin } = settings?.attributes?.authentication;
 
   return (
     <>
       <div>
+        {disallowEmailChange && (
+          <>
+            <Styled.EmailLabel>
+              {t("forms.signin_overlay.registered_email")}
+            </Styled.EmailLabel>
+            <Styled.TextBlock>
+              {email}
+            </Styled.TextBlock>
+          </>
+        )}
         <Styled.Text>
           {mode === "new"
             ? t("forms.signin_overlay.familiar_name")
@@ -60,15 +73,17 @@ export default function ProfileFormFields({ mode }) {
         label={t("forms.signin_overlay.last_name")}
         autoComplete="family-name"
       />
-      <Form.TextInput
-        inputType="email"
-        id="update-email"
-        aria-describedby="update-email-error"
-        placeholder={t("forms.signin_overlay.email")}
-        name="attributes[email]"
-        idForError="update-email-error"
-        label={t("forms.signin_overlay.email")}
-      />
+      {!disallowEmailChange && (
+        <Form.TextInput
+          inputType="email"
+          id="update-email"
+          aria-describedby="update-email-error"
+          placeholder={t("forms.signin_overlay.email")}
+          name="attributes[email]"
+          idForError="update-email-error"
+          label={t("forms.signin_overlay.email")}
+        />
+      )}
       {!hideLocalLogin && (
         <>
           <Form.TextInput
