@@ -122,7 +122,7 @@ RSpec.describe ::APIDocumentation::DryTypesParser do
         expect(
           described_class.convert(types['string'].enum('one', 'two'))
         ).to eq({
-          type: 'string(one|two)',
+          type: 'string',
           enum: ['one', 'two']
         })
       end

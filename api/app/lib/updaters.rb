@@ -11,12 +11,13 @@ module Updaters
     define_model_callbacks :update_attributes, :update_relationships, :update, :save
   end
 
-  attr_accessor :id, :type, :data, :attributes, :relationships, :context
+  attr_accessor :id, :type, :data, :attributes, :relationships, :context, :actor
 
-  def initialize(params, context = nil)
+  def initialize(params, context = nil, actor: nil)
     @attributes = params.dig(:data, :attributes).to_h
     @relationships = params.dig(:data, :relationships).to_h
     @context = context
+    @actor = actor
   end
 
   def update_without_save(model, creator: nil)
