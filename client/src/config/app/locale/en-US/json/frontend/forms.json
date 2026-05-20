@@ -185,6 +185,7 @@
       "update_nickname": "Would you like to update your Nickname?",
       "nickname": "Nickname",
       "familiar_name": "Would you like me to call you something else?",
+      "registered_email": "Your registered email address is:",
       "profile_img": "Profile image",
       "profile_img_instructions": "While you're here, why not upload a profile image?",
       "remove_avatar": "Remove current avatar",
