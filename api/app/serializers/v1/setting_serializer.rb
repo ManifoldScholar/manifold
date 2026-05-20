@@ -103,7 +103,8 @@ module V1
         )
       ),
       default_identity_provider: Types::String.optional,
-      show_local_login: Types::Bool
+      hide_local_login: Types::Bool,
+      allow_email_change: Types::Bool.optional
     )
 
     typed_attribute :press_logo_styles, Types::Serializer::Attachment.meta(read_only: true)
