@@ -13,7 +13,10 @@ export default function ProfileFormFields({ mode }) {
   const formData = useContext(FormContext);
   const email = formData.getModelValue("attributes[email]");
 
-  const { disallowEmailChange, hideLocalLogin } = settings?.attributes?.authentication;
+  const {
+    disallowEmailChange,
+    hideLocalLogin
+  } = settings?.attributes?.authentication;
 
   return (
     <>
@@ -23,9 +26,7 @@ export default function ProfileFormFields({ mode }) {
             <Styled.EmailLabel>
               {t("forms.signin_overlay.registered_email")}
             </Styled.EmailLabel>
-            <Styled.TextBlock>
-              {email}
-            </Styled.TextBlock>
+            <Styled.TextBlock>{email}</Styled.TextBlock>
           </>
         )}
         <Styled.Text>

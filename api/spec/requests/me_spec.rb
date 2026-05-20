@@ -6,8 +6,9 @@ RSpec.describe "Me API", type: :request do
   describe "updates the current user" do
     let(:first_name) { "John" }
     let(:last_name) { "Rambozo" }
+    let(:email) { "john.rambozo@example.com" }
     let(:update_params) do
-      build_json_payload(attributes: { firstName: first_name, lastName: last_name })
+      build_json_payload(attributes: { firstName: first_name, lastName: last_name, email: email })
     end
     let(:api_response) { response.parsed_body }
 
@@ -32,8 +33,10 @@ RSpec.describe "Me API", type: :request do
 
       describe "the current user" do
         let(:headers) { reader_headers }
-        it("contains the updated first name") { expect_updated_param("firstName", "Janko") }
-        it("contains the updated last name") { expect_updated_param("lastName", "Rambozo") }
+
+        it("contains the updated first name") { expect_updated_param("firstName", first_name) }
+        it("contains the updated last name") { expect_updated_param("lastName", last_name) }
+        it("contains the updated email") { expect_updated_param("email", email) }
 
         describe "the avatar" do
           let(:params) { build_json_payload(attributes: { avatar: image_params }) }
@@ -43,6 +46,14 @@ RSpec.describe "Me API", type: :request do
             reader.reload
             expect(reader.avatar.present?).to be true
           }
+        end
+
+        describe "with email changes disallowed" do
+          before do
+            allow_any_instance_of(Settings).to receive(:disallow_email_change).and_return(true)
+          end
+
+          it("does not update the email") { expect_updated_param("email", email) }
         end
       end
     end

@@ -18,6 +18,7 @@ module Updaters
 
       clone = attributes.clone
       clone.delete(:unsubscribe)
+      clone.delete(:email) if disallow_email_change?
       clone
     end
 
@@ -38,6 +39,12 @@ module Updaters
       return unless attributes[:unsubscribe].present?
 
       @model.unsubscribe_all
+    end
+
+    def disallow_email_change?
+      return false if !actor || !actor.admin?
+
+      ::Settings.current.disallow_email_change
     end
   end
 end

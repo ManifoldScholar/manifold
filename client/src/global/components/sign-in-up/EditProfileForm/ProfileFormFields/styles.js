@@ -12,4 +12,4 @@ export const TextBlock = styled.p`
   font-size: clamp(17px, calc(17px + 3 * (100vw - 620px) / 404), 20px);
   margin-block-end: 25px;
   color: var(--highlight-color);
-`
+`;
