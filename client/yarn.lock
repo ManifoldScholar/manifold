@@ -9023,6 +9023,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-cookie@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "js-cookie@npm:3.0.7"
+  checksum: 10c0/c921c43014e98bb94a1765663a1a10d693048d61444e374c1ecf459eba92320381f9c406e724df9aa44e819c4b606e6a7240f2abe2d5c54ad1e73a3002b191c2
+  languageName: node
+  linkType: hard
+
 "js-file-download@npm:^0.4.12":
   version: 0.4.12
   resolution: "js-file-download@npm:0.4.12"
@@ -9659,7 +9666,7 @@ __metadata:
     i18next: "npm:^25.3.2"
     immutability-helper: "npm:^3.x"
     js-beautify: "npm:^1.15.4"
-    js-cookie: "npm:^3.0.5"
+    js-cookie: "npm:^3.0.7"
     lint-staged: "npm:^16.1.2"
     lodash: "npm:^4.18.0"
     mammoth: "npm:^1.11.0"
