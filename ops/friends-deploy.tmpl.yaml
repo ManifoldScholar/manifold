@@ -1,4 +1,7 @@
-replicaCount: 1
+autoscaling:
+  enabled: true
+  minReplicas: 0
+  maxReplicas: 2
 
 imagePullSecrets:
   - name: github
@@ -59,10 +62,10 @@ api:
   sidekiq:
     resources:
       limits:
-        memory: "10Gi"
+        memory: "16Gi"
         cpu: "1000m"
       requests:
-        memory: "7Gi"
+        memory: "2Gi"
         cpu: "800m"
 
 client:
