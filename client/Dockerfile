@@ -1,6 +1,8 @@
 # Stage 1: Install dependencies and copy source
 FROM node:22.17.1 AS base
 
+LABEL service=manifold-client
+
 WORKDIR /srv/app
 
 COPY package.json yarn.lock .yarnrc.yml ./
