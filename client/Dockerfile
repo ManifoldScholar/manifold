@@ -1,8 +1,6 @@
 # Stage 1: Install dependencies and copy source
 FROM node:22.17.1 AS base
 
-LABEL service=manifold-client
-
 WORKDIR /srv/app
 
 COPY package.json yarn.lock .yarnrc.yml ./
@@ -13,6 +11,8 @@ COPY ./ /srv/app
 
 # Stage 2: Development build
 FROM base AS development
+
+LABEL service=manifold-client
 
 RUN yarn build:dev
 
@@ -28,6 +28,8 @@ ENV BUILD_IN=""
 RUN yarn build:prod
 
 FROM node:22.17.1-slim AS production
+
+LABEL service=manifold-client
 
 WORKDIR /srv/app
 
