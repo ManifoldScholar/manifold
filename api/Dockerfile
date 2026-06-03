@@ -1,6 +1,8 @@
 # Stage 1: Build gems with native extensions
 FROM ruby:3.4-bookworm AS builder
 
+LABEL service=manifold-api
+
 RUN mkdir -pv /bundle/bin
 
 ENV BUNDLE_PATH=/bundle \
