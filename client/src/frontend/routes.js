@@ -1,275 +1,309 @@
+import { Outlet } from "react-router-dom";
+
 import queryString from "query-string";
+import requireAuth from "helpers/router/requireAuth";
+import checkLibraryMode from "helpers/router/checkLibraryMode";
+
 import NotFound from "global/containers/NotFound";
 
-const routes = {
-  component: "Frontend",
-  path: "/",
-  isLibrary: true,
-  routes: [
-    {
-      name: "frontendProjects",
-      exact: false,
-      component: "ProjectsWrapper",
-      path: "/projects",
-      isLibrary: true,
-      helper: () => "/projects",
-      routes: [
-        {
-          name: "frontendProjectsAll",
-          exact: true,
-          component: "Projects",
-          path: "/projects",
+import ApiDocs from "frontend/containers/Api";
+import Frontend from "frontend/containers/Frontend";
+import Projects from "frontend/containers/Projects";
+import ProjectCollections from "frontend/containers/ProjectCollections";
+import ProjectCollectionDetail from "frontend/containers/ProjectCollectionDetail";
+import ProjectWrapper from "frontend/containers/ProjectWrapper";
+import ProjectDetail from "frontend/containers/ProjectDetail";
+import ProjectSearch from "frontend/containers/ProjectSearch";
+import ProjectResources from "frontend/containers/ProjectResources";
+import ResourceDetail from "frontend/containers/ResourceDetail";
+import ProjectResourceCollections from "frontend/containers/ProjectResourceCollections";
+import ResourceCollectionDetail from "frontend/containers/ResourceCollectionDetail";
+import EventList from "frontend/containers/EventList";
+import Search from "frontend/containers/Search";
+import Contact from "frontend/containers/Contact";
+import PasswordReset from "frontend/containers/PasswordReset";
+import Page from "frontend/containers/Page";
+import Subscriptions from "frontend/containers/Subscriptions";
+import Unsubscribe from "frontend/containers/Unsubscribe";
+import Home from "frontend/containers/Home";
+import MyReadingGroups from "frontend/containers/MyReadingGroups";
+import PublicReadingGroups from "frontend/containers/PublicReadingGroups";
+import ReadingGroup from "frontend/containers/ReadingGroup";
+import ReadingGroupMembers from "frontend/containers/ReadingGroup/Members";
+import ReadingGroupAnnotations from "frontend/containers/ReadingGroup/Annotations";
+import ReadingGroupHomepage from "frontend/containers/ReadingGroup/Homepage";
+import Login from "frontend/containers/Login";
+import MyStarred from "frontend/containers/MyStarred";
+import MyAnnotations from "frontend/containers/MyAnnotations";
+import IssuesList from "frontend/containers/IssuesList";
+import Journals from "frontend/containers/Journals";
+import JournalWrapper from "frontend/containers/JournalWrapper";
+import JournalDetail from "frontend/containers/JournalDetail";
+import VolumeDetail from "frontend/containers/VolumeDetail";
+import JournalVolumesList from "frontend/containers/JournalVolumesList";
+import JournalIssuesList from "frontend/containers/JournalIssuesList";
+import PrivacySettings from "frontend/containers/PrivacySettings";
+import DataUse from "frontend/containers/DataUse";
+import OAuth from "frontend/containers/OAuth";
+import ReadingGroupSettings from "frontend/components/reading-group/Settings";
+
+const routes = [
+  {
+    element: <Frontend />,
+    path: "",
+    handle: { isLibrary: true },
+    children: [
+      {
+        element: <Outlet />,
+        path: "projects",
+        handle: {
+          name: "frontendProjects",
           isLibrary: true,
-          helper: (params = {}) => {
-            const query = queryString.stringify(params);
-            if (!query) return "/projects";
-            return `/projects?${query}`;
-          }
+          helper: () => "/projects"
         },
-        {
-          name: "frontendProjectCollectionsRedirect",
-          exact: true,
-          component: "ProjectCollectionsRedirect",
-          path: "/projects/project-collections",
-          isLibrary: true,
-          helper: (params = {}) => {
-            const query = queryString.stringify(params);
-            if (!query) return "/projects/project-collections";
-            return `/projects/project-collections?${query}`;
-          }
-        },
-        {
-          name: "frontendProjectCollectionRedirect",
-          exact: true,
-          component: "ProjectCollectionsRedirect",
-          path: "/projects/project-collection/:id",
-          isLibrary: true,
-          helper: (pc, params = {}) => {
-            const query = queryString.stringify(params);
-            if (!query) return `/projects/project-collection/${pc}`;
-            return `/projects/project-collection/${pc}?${query}`;
-          }
-        },
-        {
-          name: "frontendProject",
-          exact: false,
-          component: "ProjectWrapper",
-          path: "/projects/:id",
-          helper: p => `/projects/${p}`,
-          routes: [
-            {
-              name: "frontendProjectDetail",
-              exact: true,
-              component: "ProjectDetail",
-              path: "/projects/:id",
+        children: [
+          {
+            element: <Projects />,
+            index: true,
+            loader: checkLibraryMode,
+            handle: {
+              name: "frontendProjectsAll",
+              isLibrary: true,
+              helper: (params = {}) => {
+                const query = queryString.stringify(params);
+                if (!query) return "/projects";
+                return `/projects?${query}`;
+              }
+            }
+          },
+          {
+            element: <ProjectWrapper />,
+            path: ":id",
+            handle: {
+              name: "frontendProject",
               helper: p => `/projects/${p}`
             },
-            {
-              name: "frontendProjectSearch",
-              exact: true,
-              component: "ProjectSearch",
-              path: "/projects/:id/search",
-              helper: (p, params = {}) => {
+            children: [
+              {
+                index: true,
+                element: <ProjectDetail />,
+                handle: {
+                  name: "frontendProjectDetail",
+                  helper: p => `/projects/${p}`
+                }
+              },
+              {
+                element: <ProjectSearch />,
+                path: "search",
+                handle: {
+                  name: "frontendProjectSearch",
+                  helper: (p, params = {}) => {
+                    const query = queryString.stringify(params);
+                    if (!query) return `/projects/${p}/search`;
+                    return `/projects/${p}/search/?${query}`;
+                  }
+                }
+              },
+              {
+                element: <ProjectResources />,
+                path: "resources",
+                handle: {
+                  name: "frontendProjectResources",
+                  helper: (p, params = {}) => {
+                    const query = queryString.stringify(params);
+                    if (!query) return `/projects/${p}/resources`;
+                    return `/projects/${p}/resources/?${query}`;
+                  }
+                }
+              },
+              {
+                element: <ProjectResourceCollections />,
+                path: "resource-collections",
+                handle: {
+                  name: "frontendProjectResourceCollections",
+                  helper: p => `/projects/${p}/resource-collections`
+                }
+              },
+              {
+                element: <ResourceDetail />,
+                path:
+                  "resource-collection/:resourceCollectionId/resource/:resourceId",
+                handle: {
+                  name: "frontendProjectCollectionResource",
+                  helper: (p, c, r) =>
+                    `/projects/${p}/resource-collection/${c}/resource/${r}`
+                }
+              },
+              {
+                element: <ResourceDetail />,
+                path: "resource/:resourceId",
+                handle: {
+                  name: "frontendProjectResource",
+                  helpers: {
+                    frontendProjectResource: (p, r) =>
+                      `/projects/${p}/resource/${r}`,
+                    frontendProjectResourceRelative: r => `resource/${r}`
+                  }
+                }
+              },
+              {
+                element: <ResourceCollectionDetail />,
+                path: "resource-collection/:resourceCollectionId",
+                handle: {
+                  name: "frontendProjectResourceCollection",
+                  helpers: {
+                    frontendProjectResourceCollection: (p, c, params = {}) => {
+                      const query = queryString.stringify(params);
+                      if (!query)
+                        return `/projects/${p}/resource-collection/${c}`;
+                      return `/projects/${p}/resource-collection/${c}?${query}`;
+                    },
+                    frontendProjectResourceCollectionRelative: c =>
+                      `resource-collection/${c}`
+                  }
+                }
+              },
+              {
+                element: <EventList />,
+                path: "events",
+                handle: {
+                  name: "frontendProjectEvents",
+                  helper: p => `/projects/${p}/events`
+                }
+              },
+              {
+                element: <NotFound />,
+                path: "*"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        element: <Outlet />,
+        path: "project-collections",
+        handle: {
+          name: "frontendProjectCollections",
+          isLibrary: true,
+          helper: () => "/project-collections"
+        },
+        children: [
+          {
+            element: <ProjectCollections />,
+            index: true,
+            loader: checkLibraryMode,
+            handle: {
+              name: "frontendProjectCollectionsAll",
+              isLibrary: true,
+              helper: (params = {}) => {
                 const query = queryString.stringify(params);
-                if (!query) return `/projects/${p}/search`;
-                return `/projects/${p}/search/?${query}`;
+                if (!query) return "/project-collections";
+                return `/project-collections?${query}`;
               }
-            },
-            {
-              name: "frontendProjectResources",
-              exact: true,
-              component: "ProjectResources",
-              path: "/projects/:id/resources",
-              helper: (p, params = {}) => {
-                const query = queryString.stringify(params);
-                if (!query) return `/projects/${p}/resources`;
-                return `/projects/${p}/resources/?${query}`;
-              }
-            },
-            {
-              name: "frontendProjectResourceCollections",
-              exact: true,
-              component: "ProjectResourceCollections",
-              path: "/projects/:id/resource-collections",
-              helper: p => {
-                return `/projects/${p}/resource-collections`;
-              }
-            },
-            {
-              name: "frontendProjectCollectionResource",
-              exact: true,
-              component: "ResourceDetail",
-              path:
-                "/projects/:id/resource-collection/:resourceCollectionId/resource/:resourceId",
-              helper: (p, c, r) =>
-                `/projects/${p}/resource-collection/${c}/resource/${r}`
-            },
-            {
-              name: "frontendProjectResource",
-              exact: true,
-              component: "ResourceDetail",
-              path: "/projects/:id/resource/:resourceId",
-              helpers: {
-                frontendProjectResource: (p, r) =>
-                  `/projects/${p}/resource/${r}`,
-                frontendProjectResourceRelative: r => `resource/${r}`
-              }
-            },
-            {
-              name: "frontendProjectResourceCollection",
-              exact: true,
-              component: "ResourceCollectionDetail",
-              path: "/projects/:id/resource-collection/:resourceCollectionId",
-              helpers: {
-                frontendProjectResourceCollection: (p, c, params = {}) => {
-                  const query = queryString.stringify(params);
-                  if (!query) return `/projects/${p}/resource-collection/${c}`;
-                  return `/projects/${p}/resource-collection/${c}?${query}`;
-                },
-                frontendProjectResourceCollectionRelative: c =>
-                  `resource-collection/${c}`
-              }
-            },
-            {
-              name: "frontendProjectEvents",
-              exact: true,
-              component: "EventList",
-              path: "/projects/:id/events/:page?",
-              helpers: {
-                frontendProjectEvents: p => `/projects/${p}/events`,
-                frontendProjectEventsPage: (pr, pg) =>
-                  `/projects/${pr}/events/${pg}`
-              }
-            },
-            {
-              component: NotFound
             }
-          ]
-        }
-      ]
-    },
-    {
-      name: "frontendProjectCollections",
-      exact: false,
-      component: "ProjectCollectionsWrapper",
-      path: "/project-collections",
-      isLibrary: true,
-      helper: () => "/project-collections",
-      routes: [
-        {
-          name: "frontendProjectCollectionsAll",
-          exact: true,
-          component: "ProjectCollections",
-          path: "/project-collections",
-          isLibrary: true,
-          helper: (params = {}) => {
-            const query = queryString.stringify(params);
-            if (!query) return "/project-collections";
-            return `/project-collections?${query}`;
+          },
+          {
+            element: <ProjectCollectionDetail />,
+            path: ":id",
+            loader: checkLibraryMode,
+            handle: {
+              name: "frontendProjectCollection",
+              isLibrary: true,
+              helper: (pc, params = {}) => {
+                const query = queryString.stringify(params);
+                if (!query) return `/project-collections/${pc}`;
+                return `/project-collections/${pc}?${query}`;
+              }
+            }
           }
+        ]
+      },
+      {
+        element: <Outlet />,
+        path: "journals",
+        handle: {
+          name: "frontendJournals",
+          isLibrary: true,
+          helper: () => "/journals"
         },
-        {
-          name: "frontendProjectCollection",
-          exact: true,
-          component: "ProjectCollectionDetail",
-          path: "/project-collections/:id",
-          isLibrary: true,
-          helper: (pc, params = {}) => {
-            const query = queryString.stringify(params);
-            if (!query) return `/project-collections/${pc}`;
-            return `/project-collections/${pc}?${query}`;
-          }
-        }
-      ]
-    },
-    {
-      name: "frontendJournals",
-      exact: false,
-      component: "JournalsWrapper",
-      path: "/journals",
-      isLibrary: true,
-      helper: () => "/journals",
-      routes: [
-        {
-          name: "frontendJournalsList",
-          exact: true,
-          component: "Journals",
-          path: "/journals",
-          isLibrary: true,
-          helper: (params = {}) => {
-            const query = queryString.stringify(params);
-            if (!query) return "/journals";
-            return `/journals?${query}`;
-          }
-        },
-        {
-          name: "frontendIssuesList",
-          exact: true,
-          component: "IssuesList",
-          path: "/journals/issues",
-          isLibrary: true,
-          helper: (params = {}) => {
-            const query = queryString.stringify(params);
-            if (!query) return "/journals/issues";
-            return `/journals/issues?${query}`;
-          }
-        },
-        {
-          name: "frontendJournal",
-          exact: false,
-          component: "JournalWrapper",
-          path: "/journals/:id",
-          helper: j => `/journals/${j}`,
-          routes: [
-            {
-              name: "frontendJournalDetail",
-              exact: true,
-              component: "JournalDetail",
-              path: "/journals/:id",
+        children: [
+          {
+            element: <Journals />,
+            index: true,
+            loader: checkLibraryMode,
+            handle: {
+              name: "frontendJournalsList",
+              isLibrary: true,
+              helper: (params = {}) => {
+                const query = queryString.stringify(params);
+                if (!query) return "/journals";
+                return `/journals?${query}`;
+              }
+            }
+          },
+          {
+            element: <IssuesList />,
+            path: "issues",
+            loader: checkLibraryMode,
+            handle: {
+              name: "frontendIssuesList",
+              isLibrary: true,
+              helper: (params = {}) => {
+                const query = queryString.stringify(params);
+                if (!query) return "/journals/issues";
+                return `/journals/issues?${query}`;
+              }
+            }
+          },
+          {
+            element: <JournalWrapper />,
+            path: ":id",
+            handle: {
+              name: "frontendJournal",
               helper: j => `/journals/${j}`
             },
-            {
-              name: "frontendJournalAllIssues",
-              exact: true,
-              component: "JournalIssuesList",
-              path: "/journals/:id/issues",
-              helper: j => `/journals/${j}/issues`
-            },
-            {
-              name: "frontendJournalAllVolumes",
-              exact: true,
-              component: "JournalVolumesList",
-              path: "/journals/:id/volumes",
-              helper: j => `/journals/${j}/volumes`
-            },
-            {
-              name: "frontendVolumeDetail",
-              exact: true,
-              component: "VolumeDetail",
-              path: "/journals/:id/volumes/:volumeSlug",
-              helper: (j, v) => `/journals/${j}/volumes/${v}`
-            }
-          ]
-        }
-      ]
-    },
-    {
-      name: "frontendPublicReadingGroups",
-      exact: false,
-      component: "PublicReadingGroups",
-      path: "/groups",
-      helper: (params = {}) => {
-        const query = queryString.stringify(params);
-        const base = `/groups`;
-        if (!query) return base;
-        return `${base}?${query}`;
+            children: [
+              {
+                index: true,
+                element: <JournalDetail />,
+                handle: {
+                  name: "frontendJournalDetail",
+                  helper: j => `/journals/${j}`
+                }
+              },
+              {
+                element: <JournalIssuesList />,
+                path: "issues",
+                handle: {
+                  name: "frontendJournalAllIssues",
+                  helper: j => `/journals/${j}/issues`
+                }
+              },
+              {
+                element: <JournalVolumesList />,
+                path: "volumes",
+                handle: {
+                  name: "frontendJournalAllVolumes",
+                  helper: j => `/journals/${j}/volumes`
+                }
+              },
+              {
+                element: <VolumeDetail />,
+                path: "volumes/:volumeSlug",
+                handle: {
+                  name: "frontendVolumeDetail",
+                  helper: (j, v) => `/journals/${j}/volumes/${v}`
+                }
+              }
+            ]
+          }
+        ]
       },
-      routes: [
-        {
-          name: "frontendPublicReadingGroupsList",
-          exact: true,
-          component: "PublicReadingGroupsList",
-          path: "/groups",
+      {
+        element: <PublicReadingGroups.Wrapper />,
+        path: "groups",
+        handle: {
+          name: "frontendPublicReadingGroups",
           helper: (params = {}) => {
             const query = queryString.stringify(params);
             const base = `/groups`;
@@ -277,230 +311,332 @@ const routes = {
             return `${base}?${query}`;
           }
         },
-        {
-          name: "frontendReadingGroupDetail",
-          exact: false,
-          component: "ReadingGroup",
-          path: "/groups/:id",
-          helper: (rg, params = {}) => {
-            const query = queryString.stringify(params);
-            const base = `/groups/${rg}`;
-            if (!query) return base;
-            return `${base}?${query}`;
+        children: [
+          {
+            index: true,
+            element: <PublicReadingGroups.List />,
+            handle: {
+              name: "frontendPublicReadingGroupsList",
+              helper: (params = {}) => {
+                const query = queryString.stringify(params);
+                const base = `/groups`;
+                if (!query) return base;
+                return `${base}?${query}`;
+              }
+            }
           },
-          routes: [
-            {
-              name: "frontendReadingGroupAnnotations",
-              exact: true,
-              component: "ReadingGroupAnnotations",
-              path: "/groups/:id/annotations",
+          {
+            element: <ReadingGroup />,
+            path: ":id",
+            handle: {
+              name: "frontendReadingGroupDetail",
               helper: (rg, params = {}) => {
                 const query = queryString.stringify(params);
-                const base = `/groups/${rg}/annotations`;
+                const base = `/groups/${rg}`;
                 if (!query) return base;
                 return `${base}?${query}`;
               }
             },
-            {
-              name: "frontendReadingGroupMembers",
-              exact: false,
-              component: "ReadingGroupMembers",
-              path: "/groups/:id/members",
-              helper: rg => `/groups/${rg}/members`,
-              routes: [
-                {
-                  exact: true,
-                  component: "ReadingGroupMembersList",
-                  path: "/groups/:id/members/:membershipId?",
-                  routes: [
-                    {
+            children: [
+              {
+                element: <ReadingGroupAnnotations />,
+                path: "annotations",
+                handle: {
+                  name: "frontendReadingGroupAnnotations",
+                  helper: (rg, params = {}) => {
+                    const query = queryString.stringify(params);
+                    const base = `/groups/${rg}/annotations`;
+                    if (!query) return base;
+                    return `${base}?${query}`;
+                  }
+                },
+                children: [
+                  {
+                    index: true,
+                    element: null
+                  },
+                  {
+                    element: <ReadingGroupSettings />,
+                    path: "settings",
+                    handle: {
+                      name: "frontendReadingGroupSettings",
+                      helper: rg => `/groups/${rg}/annotations/settings`,
+                      drawer: true
+                    }
+                  }
+                ]
+              },
+              {
+                element: <ReadingGroupMembers.Wrapper />,
+                path: "members",
+                handle: {
+                  name: "frontendReadingGroupMembers",
+                  helper: rg => `/groups/${rg}/members`
+                },
+                children: [
+                  {
+                    index: true,
+                    element: null
+                  },
+                  {
+                    element: <ReadingGroupMembers.MemberEdit />,
+                    path: ":membershipId",
+                    handle: {
                       name: "frontendReadingGroupMember",
-                      exact: true,
-                      component: "ReadingGroupMemberEdit",
-                      path: "/groups/:id/members/:membershipId",
-                      helper: (rg, m) => `/groups/${rg}/members/${m}`
+                      helper: (rg, m) => `/groups/${rg}/members/${m}`,
+                      drawer: true
                     }
-                  ]
-                }
-              ]
-            },
-            {
-              exact: false,
-              component: "ReadingGroupHomepage",
-              path: "/groups/:id",
-              routes: [
-                {
-                  exact: false,
-                  component: "ReadingGroupHomepageFetch",
-                  path: "/groups/:id",
-                  routes: [
-                    {
-                      name: "frontendReadingGroupHomepageStatic",
-                      exact: true,
-                      component: "ReadingGroupHomepageStatic",
-                      path: "/groups/:id",
-                      helper: rg => `/groups/${rg}`
-                    },
-                    {
-                      name: "frontendReadingGroupHomepageEdit",
-                      exact: true,
-                      component: "ReadingGroupHomepageEdit",
-                      path: "/groups/:id/edit",
-                      helper: rg => `/groups/${rg}/edit`
+                  },
+                  {
+                    element: <ReadingGroupSettings />,
+                    path: "settings",
+                    handle: {
+                      name: "frontendReadingGroupMembersSettings",
+                      helper: rg => `/groups/${rg}/members/settings`,
+                      drawer: true
                     }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      name: "frontendMyReadingGroups",
-      exact: false,
-      component: "MyReadingGroups",
-      path: "/my/groups",
-      helper: (params = {}) => {
-        const query = queryString.stringify(params);
-        const base = `/my/groups`;
-        if (!query) return base;
-        return `${base}?${query}`;
+                  }
+                ]
+              },
+              {
+                element: <ReadingGroupHomepage.Wrapper />,
+                path: "",
+                children: [
+                  {
+                    element: <ReadingGroupHomepage.Fetch />,
+                    path: "",
+                    children: [
+                      {
+                        element: <ReadingGroupHomepage.Static />,
+                        path: "",
+                        handle: {
+                          name: "frontendReadingGroupHomepageStatic",
+                          helper: rg => `/groups/${rg}`
+                        },
+                        children: [
+                          {
+                            index: true,
+                            element: null
+                          },
+                          {
+                            element: <ReadingGroupSettings />,
+                            path: "settings",
+                            handle: {
+                              name: "frontendReadingGroupDetailSettings",
+                              helper: rg => `/groups/${rg}/settings`,
+                              drawer: true
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        element: <ReadingGroupHomepage.Edit />,
+                        path: "edit",
+                        handle: {
+                          name: "frontendReadingGroupHomepageEdit",
+                          helper: rg => `/groups/${rg}/edit`
+                        },
+                        children: [
+                          {
+                            element: <ReadingGroupSettings />,
+                            path: "settings",
+                            handle: {
+                              name: "frontendReadingGroupEditSettings",
+                              helper: rg => `/groups/${rg}/edit/settings`,
+                              drawer: true
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
-      routes: [
-        {
-          exact: true,
-          component: "MyReadingGroupsList",
-          path: "/my/groups/:new(new)?",
-          routes: [
-            {
+      {
+        element: <MyReadingGroups.Wrapper />,
+        path: "my/groups",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
+        handle: {
+          name: "frontendMyReadingGroups",
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            const base = `/my/groups`;
+            if (!query) return base;
+            return `${base}?${query}`;
+          }
+        },
+        children: [
+          {
+            index: true,
+            element: null
+          },
+          {
+            element: <MyReadingGroups.New />,
+            path: "new",
+            handle: {
               name: "frontendMyReadingGroupsNew",
-              exact: true,
-              path: "/my/groups/new",
-              component: "MyReadingGroupsNew",
-              helper: () => "/my/groups/new"
+              helper: () => "/my/groups/new",
+              drawer: true
             }
-          ]
+          }
+        ]
+      },
+      {
+        element: <MyStarred />,
+        path: "my/starred",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
+        handle: {
+          name: "frontendStarred",
+          helper: () => "/my/starred"
         }
-      ]
-    },
-    {
-      name: "frontendStarred",
-      exact: true,
-      component: "MyStarred",
-      path: "/my/starred",
-      helper: () => "/my/starred"
-    },
-    {
-      name: "frontendAnnotations",
-      exact: true,
-      component: "MyAnnotations",
-      path: "/my/notes",
-      helper: () => "/my/notes"
-    },
-    {
-      name: "frontendSearch",
-      exact: true,
-      component: "Search",
-      path: "/search",
-      isLibrary: true,
-      helper: () => `/search`
-    },
-    {
-      name: "frontendLogin",
-      exact: true,
-      component: "Login",
-      path: "/login",
-      helper: () => `/login`
-    },
-    {
-      name: "frontendSignUp",
-      exact: true,
-      component: "Login",
-      path: "/signup",
-      helper: () => `/signup`
-    },
-    {
-      name: "oauth",
-      exact: true,
-      component: "OAuth",
-      path: "/oauth",
-      helper: (params = {}) => {
-        const query = queryString.stringify(params);
-        if (!query) return "/oauth";
-        return `/oauth?${query}`;
+      },
+      {
+        element: <MyAnnotations />,
+        path: "my/notes",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
+        handle: {
+          name: "frontendAnnotations",
+          helper: () => "/my/notes"
+        }
+      },
+      {
+        element: <Search />,
+        path: "search",
+        loader: checkLibraryMode,
+        handle: {
+          name: "frontendSearch",
+          isLibrary: true,
+          helper: () => `/search`
+        }
+      },
+      {
+        element: <Login />,
+        path: "login",
+        handle: {
+          name: "frontendLogin",
+          helper: () => `/login`
+        }
+      },
+      {
+        element: <Login />,
+        path: "signup",
+        handle: {
+          name: "frontendSignUp",
+          helper: () => `/signup`
+        }
+      },
+      {
+        element: <OAuth />,
+        path: "oauth",
+        handle: {
+          name: "oauth",
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            return query ? `/oauth?${query}` : "/oauth";
+          }
+        }
+      },
+      {
+        element: <Contact />,
+        path: "contact",
+        handle: {
+          name: "frontendContact",
+          helper: () => "/contact"
+        }
+      },
+      {
+        element: <PasswordReset />,
+        path: "reset-password/:resetToken"
+      },
+      {
+        element: <Page />,
+        path: "page/:slug",
+        handle: {
+          name: "frontendPage",
+          helper: p => `/page/${p}`
+        }
+      },
+      {
+        element: <Subscriptions />,
+        path: "subscriptions",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
+        handle: {
+          name: "subscriptions",
+          helper: () => "/subscriptions"
+        }
+      },
+      {
+        element: <PrivacySettings />,
+        path: "privacy",
+        loader: async ({ context, request }) => {
+          const url = new URL(request.url);
+          return requireAuth(context, url.pathname);
+        },
+        handle: {
+          name: "privacy",
+          helper: () => "/privacy"
+        }
+      },
+      {
+        element: <DataUse />,
+        path: "data-use",
+        handle: {
+          name: "dataUse",
+          helper: () => "/data-use"
+        }
+      },
+      {
+        element: <Unsubscribe />,
+        path: "unsubscribe/:token",
+        handle: {
+          name: "unsubscribe",
+          helper: token => `/unsubscribe/${token}`
+        }
+      },
+      {
+        element: <ApiDocs />,
+        path: "docs/api",
+        handle: {
+          name: "api",
+          helper: () => "/docs/api"
+        }
+      },
+      {
+        index: true,
+        element: <Home />,
+        loader: checkLibraryMode,
+        handle: {
+          name: "frontend",
+          isLibrary: true,
+          helper: (params = {}) => {
+            const query = queryString.stringify(params);
+            if (!query) return "/";
+            return `/?${query}`;
+          }
+        }
+      },
+      {
+        element: <NotFound />,
+        path: "*"
       }
-    },
-    {
-      name: "frontendContact",
-      exact: true,
-      component: "Contact",
-      path: "/contact",
-      helper: () => "/contact"
-    },
-    {
-      exact: true,
-      component: "PasswordReset",
-      path: "/reset-password/:resetToken"
-    },
-    {
-      name: "frontendPage",
-      exact: true,
-      component: "Page",
-      path: "/page/:slug",
-      helper: p => `/page/${p}`
-    },
-    {
-      name: "subscriptions",
-      exact: true,
-      component: "Subscriptions",
-      path: "/subscriptions",
-      helper: () => "/subscriptions"
-    },
-    {
-      name: "privacy",
-      exact: true,
-      component: "PrivacySettings",
-      path: "/privacy",
-      helper: () => "/privacy"
-    },
-    {
-      name: "dataUse",
-      exact: true,
-      component: "DataUse",
-      path: "/data-use",
-      helper: () => "/data-use"
-    },
-    {
-      name: "unsubscribe",
-      exact: true,
-      component: "Unsubscribe",
-      path: "/unsubscribe/:token",
-      helper: token => `/unsubscribe/${token}`
-    },
-    {
-      name: "api",
-      exact: true,
-      component: "ApiDocs",
-      path: "/docs/api",
-      helper: () => "/docs/api"
-    },
-    {
-      name: "frontend",
-      exact: true,
-      component: "Home",
-      isLibrary: true,
-      path: "/",
-      helper: (params = {}) => {
-        const query = queryString.stringify(params);
-        if (!query) return "/";
-        return `/?${query}`;
-      }
-    },
-    {
-      component: NotFound
-    }
-  ]
-};
+    ]
+  }
+];
 
 export default routes;
