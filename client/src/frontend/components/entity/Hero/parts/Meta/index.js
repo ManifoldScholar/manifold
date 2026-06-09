@@ -11,7 +11,7 @@ export default function HeroMeta({ flattenedCollaborators, description }) {
 
   const renderCollaboratorWithRoles = collaborator => (
     <Styled.Name key={collaborator.id}>
-      {collaborator.attributes.makerName}
+      {collaborator.attributes.makerFullName}
       <Styled.Roles>
         {collaborator.attributes.roles
           .map(r => capitalize(r).replaceAll("_", " "))

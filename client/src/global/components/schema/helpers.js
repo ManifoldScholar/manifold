@@ -27,7 +27,7 @@ export const renderNamesList = persons => {
   return persons?.length
     ? persons.map(p => ({
         "@type": "Person",
-        name: p.attributes.fullName ?? p.attributes.makerName
+        name: p.attributes.fullName ?? p.attributes.makerFullName
       }))
     : null;
 };
