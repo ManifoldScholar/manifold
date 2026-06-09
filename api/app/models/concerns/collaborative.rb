@@ -39,6 +39,10 @@ module Collaborative
     creators.map(&:full_name)
   end
 
+  def ordered_collaborator_names
+    flattened_collaborators.map(&:maker_full_name).join(", ")
+  end
+
   def collaborator_packaging_metadata
     collaborators.map(&:packaging_metadata)
   end

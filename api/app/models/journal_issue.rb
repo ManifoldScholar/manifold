@@ -86,6 +86,7 @@ class JournalIssue < ApplicationRecord
   delegate :text_category_ids, to: :project
   delegate :creators, to: :project
   delegate :creator_names, to: :project
+  delegate :ordered_collaborator_names, to: :project
   delegate :creator_ids, to: :project
   delegate :makers, to: :project
   delegate :maker_ids, to: :project

@@ -30,6 +30,7 @@ module V1
     typed_attribute :project_slug, Types::String.meta(read_only: true)
     typed_attribute :publication_date, Types::DateTime.optional
     typed_attribute :creator_names, Types::String.meta(read_only: true)
+    typed_attribute :ordered_collaborator_names, Types::String.meta(read_only: true)
 
     typed_belongs_to :journal_volume, record_type: "journalVolume"
     typed_belongs_to :journal
