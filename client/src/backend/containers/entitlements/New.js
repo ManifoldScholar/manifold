@@ -5,14 +5,18 @@ import Layout from "backend/components/layout";
 
 export default function EntitlementNew() {
   const { t } = useTranslation();
-  const { entity, closeUrl } = useOutletContext() || {};
+  const { entity, closeUrl, refreshEntitlements } = useOutletContext() || {};
 
   if (!entity) return null;
 
   return (
     <section>
       <Layout.DrawerHeader title={t("entitlements.new.header")} />
-      <Form entity={entity} redirectAfterSuccess={closeUrl} />
+      <Form
+        entity={entity}
+        redirectAfterSuccess={closeUrl}
+        onSuccess={refreshEntitlements}
+      />
     </section>
   );
 }

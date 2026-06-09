@@ -9,7 +9,7 @@ import * as Styled from "./styles";
 export default function ProfileFormFields({ mode }) {
   const { t } = useTranslation();
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const formData = useContext(FormContext);
   const email = formData.getModelValue("attributes[email]");
 
