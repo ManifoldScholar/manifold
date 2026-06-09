@@ -4,22 +4,17 @@ import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { journalsAPI, projectsAPI, userGroupEntitlementsAPI } from "api";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
-export default function UserGroupEntitlementForm({
-  userGroup,
-  refresh,
-  refreshUserGroup
-}) {
+export default function UserGroupEntitlementForm({ userGroup, refresh }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
-    if (refreshUserGroup) refreshUserGroup();
     navigate(lh.link("backendRecordsUserGroupEntitlements", userGroup.id));
-  }, [navigate, refresh, refreshUserGroup, userGroup]);
+  }, [navigate, refresh, userGroup]);
 
   const create = data =>
     userGroupEntitlementsAPI.create({ data, userGroupId: userGroup.id });
@@ -87,6 +82,5 @@ UserGroupEntitlementForm.displayName = "UserGroupEntitlements.Form";
 
 UserGroupEntitlementForm.propTypes = {
   userGroup: PropTypes.object.isRequired,
-  refresh: PropTypes.func,
-  refreshUserGroup: PropTypes.func
+  refresh: PropTypes.func
 };

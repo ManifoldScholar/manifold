@@ -1,16 +1,12 @@
-import frontendRoutesV6 from "frontend/routes-v6";
-import backendRoutesV6 from "backend/routes-v6";
-import readerRoutesV6 from "reader/routes-v6";
+import frontendRoutes from "frontend/routes";
+import backendRoutes from "backend/routes";
+import readerRoutes from "reader/routes";
 import Manifold from "global/containers/Manifold";
 import linkHandler from "helpers/linkHandler";
 import RouteError from "global/components/FatalError/RouteError";
 
 export default function createRouter() {
-  const allRoutes = [
-    ...readerRoutesV6,
-    ...frontendRoutesV6,
-    ...backendRoutesV6
-  ];
+  const allRoutes = [...readerRoutes, ...frontendRoutes, ...backendRoutes];
 
   const routes = [
     {

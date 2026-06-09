@@ -1,3 +1,4 @@
+import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router-dom";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
@@ -17,6 +18,10 @@ const authorization = new Authorization();
 export default function ProjectAccessWrapper() {
   const { t } = useTranslation();
   const { project, updateProject } = useOutletContext() || {};
+  const entitlementsRefresh = useRef(null);
+  const setEntitlementsRefresh = useCallback(refresh => {
+    entitlementsRefresh.current = refresh;
+  }, []);
   const authentication = useFromStore({ path: "authentication" });
   const settings = useFromStore({
     requestKey: "settings",
@@ -55,6 +60,7 @@ export default function ProjectAccessWrapper() {
         <Layout.BackendPanel flush={!canGrantPermissions}>
           <EntitlementsContainer.List
             entity={project}
+            buildFormRefreshHandler={setEntitlementsRefresh}
             preList={
               <div style={{ marginBottom: 44, marginTop: 22 }}>
                 <Hero.Block
@@ -113,7 +119,8 @@ export default function ProjectAccessWrapper() {
         }}
         context={{
           entity: project,
-          closeUrl
+          closeUrl,
+          refreshEntitlements: () => entitlementsRefresh.current?.()
         }}
       />
     </>

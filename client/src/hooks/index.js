@@ -1,4 +1,3 @@
-export { default as useDeprecatedFetchData } from "./api/useDeprecatedFetchData";
 export { default as useApiCallback } from "./api/useApiCallback";
 export { default as useFetch } from "./api/useFetch";
 export { default as usePaginationState } from "./api/usePaginationState";
