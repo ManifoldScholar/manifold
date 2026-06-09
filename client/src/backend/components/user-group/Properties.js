@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom-v5-compat";
+import { useNavigate } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { userGroupsAPI } from "api";
 import Form from "global/components/form";
