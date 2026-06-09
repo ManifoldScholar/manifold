@@ -61,6 +61,8 @@ const fatalErrorReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_FATAL_ERROR":
       return setError(state, action);
+    case "CLEAR_FATAL_ERROR":
+      return clearError(state, action);
     default:
       return state;
   }
