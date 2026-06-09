@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, Redirect } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   handleAuthenticationSuccess,
@@ -71,7 +71,7 @@ export default function OAuth() {
     if (!errorParam) loginUser();
   }, [dispatch, errorParam, authCode]);
 
-  if (shouldRedirect) return <Redirect to={redirectPath || "/"} />;
+  if (shouldRedirect) return <Navigate to={redirectPath || "/"} replace />;
 
   return (
     <Styled.Section className="bg-neutral05">
