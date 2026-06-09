@@ -4,11 +4,16 @@ import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { entitlementTargetsAPI, entitlementsAPI, requests } from "api";
 
-export default function EntitlementForm({ entity, redirectAfterSuccess }) {
+export default function EntitlementForm({
+  entity,
+  redirectAfterSuccess,
+  onSuccess
+}) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleSuccess = () => {
+    if (onSuccess) onSuccess();
     if (redirectAfterSuccess) {
       navigate(redirectAfterSuccess, { state: { keepNotifications: true } });
     }
@@ -24,7 +29,6 @@ export default function EntitlementForm({ entity, redirectAfterSuccess }) {
         model={{ attributes: { scopedRoles: { readAccess: true } } }}
         doNotWarn
         name={requests.beProjectEntitlementCreate}
-        options={{ refreshes: requests.beProjectEntitlements }}
         create={createEntitlement}
         onSuccess={handleSuccess}
         className="form-secondary"

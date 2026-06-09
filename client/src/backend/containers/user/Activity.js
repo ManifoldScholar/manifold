@@ -52,7 +52,7 @@ function UserActivityContainer({ confirm }) {
 
   const [rgPagination, setRgPageNumber] = usePaginationState(1, 5);
 
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const rgsDisabled = settings?.attributes?.general.disableReadingGroups;
 
   const { data: rgMemberships, meta: rgMeta, refresh: refreshRgs } = useFetch({

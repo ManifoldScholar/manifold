@@ -1,3 +1,4 @@
+import { useCallback, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import OutletWithDrawer from "global/components/router/OutletWithDrawer";
@@ -10,6 +11,10 @@ import Permissions from "./Permissions";
 
 export default function JournalAccessWrapper() {
   const { journal } = useOutletContext() || {};
+  const entitlementsRefresh = useRef(null);
+  const setEntitlementsRefresh = useCallback(refresh => {
+    entitlementsRefresh.current = refresh;
+  }, []);
 
   const closeUrl = lh.link("backendJournalAccess", journal?.id);
 
@@ -34,14 +39,18 @@ export default function JournalAccessWrapper() {
       >
         {canGrantPermissions && <Permissions journal={journal} />}
         <Layout.BackendPanel flush={!canGrantPermissions}>
-          <EntitlementsContainer.List entity={journal} />
+          <EntitlementsContainer.List
+            entity={journal}
+            buildFormRefreshHandler={setEntitlementsRefresh}
+          />
         </Layout.BackendPanel>
       </Authorize>
       <OutletWithDrawer
         drawerProps={{ closeUrl, lockScroll: "always" }}
         context={{
           entity: journal,
-          closeUrl
+          closeUrl,
+          refreshEntitlements: () => entitlementsRefresh.current?.()
         }}
       />
     </>
