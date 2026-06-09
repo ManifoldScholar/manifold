@@ -58,6 +58,7 @@ module V1
       typed_attribute :pending_slug, Types::String
       typed_attribute :external_identifier, Types::String.optional do |object, params|
         object.external_identifier&.identifier
+      end
       typed_attribute :license, Types::String.optional
       typed_attribute :license_label, Types::String.optional do |object|
         object.license.presence&.label

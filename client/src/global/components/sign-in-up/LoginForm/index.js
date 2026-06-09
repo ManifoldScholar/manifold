@@ -25,7 +25,7 @@ export default function LoginForm({
   const [isLoading, setIsLoading] = useState(false);
   const authentication = useFromStore({ path: "authentication" });
   const error = authentication?.error?.body;
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
   const {
     hideLocalLogin,
     identityProviders
