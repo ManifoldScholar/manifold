@@ -77,8 +77,8 @@ export default function Wrapper({
     const subtitle = data.subtitle;
     const description = !hideDescription && data.description;
 
-    const namesArray = data?.creatorNames
-      ? data.creatorNames.split(", ")
+    const namesArray = data?.orderedCollaboratorNames
+      ? data.orderedCollaboratorNames.split(", ")
       : null;
 
     let additionalData = null;
@@ -88,7 +88,7 @@ export default function Wrapper({
         const firstThree = namesArray.slice(0, 3).join(", ");
         additionalData = t("common.et_al", { names: firstThree });
       } else {
-        additionalData = data.creatorNames;
+        additionalData = data.orderedCollaboratorNames;
       }
     }
 

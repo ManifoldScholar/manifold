@@ -23,6 +23,7 @@ module V1
         typed_attribute :draft, Types::Bool
         typed_attribute :finished, Types::Bool
         typed_attribute :creator_names, Types::String.meta(read_only: true)
+        typed_attribute :ordered_collaborator_names, Types::String.meta(read_only: true)
         typed_attribute :recently_updated, Types::Bool.meta(read_only: true), &:recently_updated?
         typed_attribute :updated, Types::Bool.meta(read_only: true), &:updated?
         typed_attribute :avatar_styles, Types::Serializer::Attachment.meta(read_only: true)
