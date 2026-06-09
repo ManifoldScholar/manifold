@@ -16,7 +16,7 @@ const INIT_FILTER_STATE = {
 };
 
 export default function MyAnnotationsContainer() {
-  const settings = useFromStore("settings", "select");
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
 
   const allRGsDisabled = settings?.attributes?.general.disableReadingGroups;
 

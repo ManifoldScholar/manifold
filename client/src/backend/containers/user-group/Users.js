@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import { usersAPI, userGroupMembershipsAPI, userGroupsAPI } from "api";
 import EntitiesList, {
   UserRow,
@@ -10,12 +11,12 @@ import withFilteredLists, { userFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 
 function UserGroupUsers({
-  userGroup,
   entitiesListSearchProps,
   entitiesListSearchParams,
   confirm
 }) {
   const { t } = useTranslation();
+  const { userGroup } = useOutletContext();
 
   const [allVisible, setAllVisible] = useState(false);
 

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { userGroupEntitlementsAPI, userGroupsAPI } from "api";
 import EntitiesList, {
@@ -7,31 +8,21 @@ import EntitiesList, {
   UserGroupEntitlementRow
 } from "backend/components/list/EntitiesList";
 import { useFetch, useApiCallback } from "hooks";
-import { childRoutes } from "helpers/router";
+import OutletWithDrawer from "global/components/router/OutletWithDrawer";
 import withConfirmation from "hoc/withConfirmation";
 
-function UserGroupEntitlements({ userGroup, route, confirm }) {
+function UserGroupEntitlements({ confirm }) {
   const { t } = useTranslation();
+  const { userGroup } = useOutletContext();
 
   const { data: entitlements, refresh } = useFetch({
     request: [userGroupsAPI.entitlements, userGroup.id]
   });
 
-  const renderChildRoutes = () => {
-    const closeUrl = lh.link(
-      "backendRecordsUserGroupEntitlements",
-      userGroup.id
-    );
-
-    return childRoutes(route, {
-      drawer: true,
-      drawerProps: {
-        lockScroll: "always",
-        wide: true,
-        closeUrl
-      },
-      childProps: { refresh, userGroup }
-    });
+  const drawerProps = {
+    lockScroll: "always",
+    wide: true,
+    closeUrl: lh.link("backendRecordsUserGroupEntitlements", userGroup.id)
   };
 
   const destroyEntitlement = useApiCallback(userGroupEntitlementsAPI.destroy);
@@ -52,7 +43,10 @@ function UserGroupEntitlements({ userGroup, route, confirm }) {
 
   return (
     <>
-      {renderChildRoutes()}
+      <OutletWithDrawer
+        drawerProps={drawerProps}
+        context={{ refresh, userGroup }}
+      />
       {entitlements && (
         <div>
           <EntitiesList
@@ -85,10 +79,5 @@ export default withConfirmation(UserGroupEntitlements);
 UserGroupEntitlements.displayName = "UserGroupEntitlements";
 
 UserGroupEntitlements.propTypes = {
-  userGroup: PropTypes.object.isRequired,
-  refresh: PropTypes.func,
-  route: PropTypes.object.isRequired,
-  confirm: PropTypes.func,
-  entitiesListSearchProps: PropTypes.func,
-  entitiesListSearchParams: PropTypes.object
+  confirm: PropTypes.func
 };

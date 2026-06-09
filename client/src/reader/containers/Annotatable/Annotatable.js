@@ -376,7 +376,7 @@ export class Annotatable extends Component {
     if (!this.props.history) return;
     if (!locationHelper.hashTypeMatch(this.props.location, "annotation"))
       return;
-    this.props.history.push({ hash: "", state: { noScroll: true } });
+    this.props.history.push({ hash: "" }, { noScroll: true });
   }
 
   openDrawer = (drawerState, event = null, lock = true) => {

@@ -1,6 +1,7 @@
-import { useTranslation, Trans } from "react-i18next";
+import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { entitlementsAPI, requests } from "api";
+import { useTranslation, Trans } from "react-i18next";
+import { entitlementsAPI } from "api";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
@@ -15,6 +16,7 @@ const PER_PAGE = 20;
 function EntitlementsList({
   entity,
   preList,
+  buildFormRefreshHandler,
   entitiesListSearchProps,
   entitiesListSearchParams
 }) {
@@ -29,14 +31,16 @@ function EntitlementsList({
 
   const { data: entitlements, meta: entitlementsMeta, refresh } = useFetch({
     request: [entitlementsAPI.index, entity, filters, pagination],
-    options: { requestKey: requests.beProjectEntitlements },
     condition: !!entity
   });
 
-  const deleteEntitlement = useApiCallback(entitlementsAPI.destroy, {
-    requestKey: requests.beProjectEntitlementDestroy,
-    refreshes: requests.beProjectEntitlements
-  });
+  // Expose refresh to the parent wrapper so the New form (rendered in a sibling
+  // drawer outlet) can refresh this list on submit.
+  useEffect(() => {
+    if (buildFormRefreshHandler) buildFormRefreshHandler(refresh);
+  }, [buildFormRefreshHandler, refresh]);
+
+  const deleteEntitlement = useApiCallback(entitlementsAPI.destroy);
 
   const onDelete = entitlement => {
     deleteEntitlement(entitlement.id).then(() => {
