@@ -1,30 +1,26 @@
 import { useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, useLocation, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
 import HeadContent from "global/components/HeadContent";
 import PageHeader from "backend/components/layout/PageHeader";
 import withConfirmation from "hoc/withConfirmation";
 import { userGroupsAPI } from "api";
-import { childRoutes } from "helpers/router";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
 import navigation from "helpers/router/navigation";
-import {
-  useFetch,
-  useApiCallback,
-  useNotification,
-  useRedirectToFirstMatch
-} from "hooks";
+import { useFetch, useApiCallback, useNotification } from "hooks";
 
-function UserGroupWrapper({ route, history, confirm, location }) {
+function UserGroupWrapper({ confirm }) {
   const { t } = useTranslation();
   const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { data: userGroup, refresh } = useFetch({
     request: [userGroupsAPI.show, id],
     dependencies: [id],
-    condition: id !== "new"
+    condition: !!id
   });
 
   const destroy = useApiCallback(userGroupsAPI.destroy, {
@@ -41,7 +37,7 @@ function UserGroupWrapper({ route, history, confirm, location }) {
   }));
 
   const destroyAndRedirect = useCallback(() => {
-    const redirect = () => history.push(lh.link("backendRecordsUserGroups"));
+    const redirect = () => navigate(lh.link("backendRecordsUserGroups"));
     destroy(userGroup.id).then(
       () => {
         notifyDestroy(userGroup);
@@ -49,7 +45,7 @@ function UserGroupWrapper({ route, history, confirm, location }) {
       },
       () => redirect()
     );
-  }, [destroy, history, userGroup, notifyDestroy]);
+  }, [destroy, navigate, userGroup, notifyDestroy]);
 
   const handleUserGroupDestroy = useCallback(() => {
     const heading = t("modals.delete_user_group");
@@ -66,19 +62,7 @@ function UserGroupWrapper({ route, history, confirm, location }) {
     }
   ];
 
-  const renderRoutes = () => {
-    return childRoutes(route, {
-      childProps: { refresh, userGroup }
-    });
-  };
-
-  useRedirectToFirstMatch({
-    route: "backendRecordsUserGroup",
-    id: userGroup?.id,
-    candidates: userGroup ? navigation.userGroup(userGroup) : []
-  });
-
-  if (!userGroup || id === "new") return null;
+  if (!userGroup) return null;
 
   const subpage = location.pathname.split("/")[5]?.replace("-", "_");
 
@@ -114,7 +98,7 @@ function UserGroupWrapper({ route, history, confirm, location }) {
             />
           }
         >
-          <div>{renderRoutes()}</div>
+          <Outlet context={{ refresh, userGroup }} />
         </Layout.BackendPanel>
       </Authorize>
     </div>
