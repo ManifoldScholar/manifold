@@ -5,7 +5,6 @@ import get from "lodash/get";
 import { commonActions } from "actions/helpers";
 import connectAndFetch from "utils/connectAndFetch";
 import Navigation from "global/components/navigation";
-import HeaderNotifications from "global/components/HeaderNotifications";
 import { FrontendModeContext } from "helpers/contexts";
 import { throttle } from "lodash";
 import lh from "helpers/linkHandler";
@@ -233,7 +232,6 @@ class StandaloneHeader extends PureComponent {
         {this.alwaysVisible && (
           <div className="standalone-header__shim" ref={this.shimRef} />
         )}
-        <HeaderNotifications scope="global" />
       </>
     );
   }
