@@ -10,6 +10,8 @@ export const setFatalError = createAction("SET_FATAL_ERROR", (error, type) => {
   return { error, type };
 });
 
+export const clearFatalError = createAction("CLEAR_FATAL_ERROR");
+
 export const trigger404 = createAction("SET_FATAL_ERROR", () => {
   return {
     error: {

@@ -1,6 +1,6 @@
 import { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { withTranslation } from "react-i18next";
 import { Global as GlobalStyles } from "@emotion/react";
@@ -23,6 +23,9 @@ class FatalError extends PureComponent {
     headerLineTwo: PropTypes.string,
     dismiss: PropTypes.func,
     dispatch: PropTypes.func,
+    history: PropTypes.object,
+    location: PropTypes.object,
+    t: PropTypes.func,
     i18n: PropTypes.object
   };
 
@@ -54,6 +57,31 @@ class FatalError extends PureComponent {
     return has(this.error, "project.id");
   }
 
+  get projectDetailUrl() {
+    if (!this.isProjectAuthorizationError) return null;
+    return lh.link("frontendProjectDetail", this.error.project.slug);
+  }
+
+  get shouldReturnToProjectDetail() {
+    if (!this.isProjectAuthorizationError) return false;
+    return this.props.location?.pathname !== this.projectDetailUrl;
+  }
+
+  // True when multiple parallel fetches 401, e.g. from a TOC link to the Reader,
+  // and the first 401 has already triggered the redirect.
+  get isAdditionalProjectErrorAfterReturn() {
+    if (!this.isProjectAuthorizationError) return false;
+    if (this.shouldReturnToProjectDetail) return false;
+    return has(this.props.location, "state.projectAuthorizationError");
+  }
+
+  get handlingProjectAuthorizationError() {
+    return (
+      this.shouldReturnToProjectDetail ||
+      this.isAdditionalProjectErrorAfterReturn
+    );
+  }
+
   get apiTrace() {
     if (!this.error || !this.error.apiTrace) return null;
     return this.error.apiTrace;
@@ -69,8 +97,24 @@ class FatalError extends PureComponent {
     return this.error.clientTraceTruncate;
   }
 
-  renderProjectAuthorizationRedirect() {
-    const url = lh.link("frontendProjectDetail", this.error.project.slug);
+  componentDidMount() {
+    this.maybeHandleProjectAuthorizationError();
+  }
+
+  componentDidUpdate() {
+    this.maybeHandleProjectAuthorizationError();
+  }
+
+  // Handle project-authorization errors imperatively so multiple 401s
+  // don't trigger multiple redirects
+  maybeHandleProjectAuthorizationError() {
+    if (
+      !this.handlingProjectAuthorizationError ||
+      this.handledProjectAuthorization
+    )
+      return;
+    this.handledProjectAuthorization = true;
+
     if (this.props.dispatch) {
       this.props.dispatch(
         notificationActions.addNotification({
@@ -83,20 +127,22 @@ class FatalError extends PureComponent {
       );
     }
 
-    return (
-      <Redirect
-        to={{
-          pathname: url,
-          state: { projectAuthorizationError: this.error }
-        }}
-      />
-    );
+    if (this.shouldReturnToProjectDetail) {
+      this.props.history.replace({
+        pathname: this.projectDetailUrl,
+        state: { projectAuthorizationError: this.error }
+      });
+    } else {
+      // Redirect already happened; just clear the error
+      if (!this.props.dispatch) return;
+      this.props.dispatch(fatalErrorActions.clearFatalError());
+    }
   }
 
   render() {
     if (!this.props.fatalError) return null;
-    if (this.isProjectAuthorizationError)
-      return this.renderProjectAuthorizationRedirect();
+    if (this.handlingProjectAuthorizationError) return null;
+
     const { error } = this.props.fatalError;
     const showDetail = config.environment.isDevelopment;
     const t = this.props.i18n.t;
@@ -167,4 +213,4 @@ class FatalError extends PureComponent {
   }
 }
 
-export default withTranslation()(FatalError);
+export default withRouter(withTranslation()(FatalError));
