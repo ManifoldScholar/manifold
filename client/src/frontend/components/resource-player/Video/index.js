@@ -73,11 +73,6 @@ class ResourcePlayerVideo extends Component {
     };
   }
 
-  urlToRelativePath(url) {
-    const trackUrl = new URL(url);
-    return trackUrl.pathname;
-  }
-
   get allowDownload() {
     return this.props.resource.attributes.allowDownload;
   }
@@ -116,6 +111,7 @@ class ResourcePlayerVideo extends Component {
       <Styled.VideoWrapper>
         <Styled.Video
           controls
+          crossOrigin="anonymous"
           controlsList={!this.allowDownload ? "nodownload" : undefined}
           poster={variantPosterStyles.mediumLandscape}
           onError={this.handleError}
@@ -133,7 +129,7 @@ class ResourcePlayerVideo extends Component {
               return (
                 <track
                   key={id}
-                  src={this.urlToRelativePath(cuesUrl)}
+                  src={cuesUrl}
                   kind={kind}
                   label={label}
                   srcLang={srclang}
