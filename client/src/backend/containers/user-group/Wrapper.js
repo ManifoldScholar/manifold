@@ -100,7 +100,7 @@ function UserGroupWrapper({ route, history, confirm, location }) {
         )}
         <PageHeader
           type="userGroup"
-          icon="Privacy24"
+          icon="Users32"
           title={userGroup.attributes.name || userGroup.id}
           actions={utility}
           secondaryLinks={navigation.userGroup(userGroup)}
