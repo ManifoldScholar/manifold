@@ -1,10 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { withTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { withTranslation, Trans } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
 import { entitlementTargetsAPI, entitlementsAPI, requests } from "api";
 import { withRouter } from "react-router-dom";
+import lh from "helpers/linkHandler";
 
 export class EntitlementForm extends PureComponent {
   static displayName = "Entitlement.Form";
@@ -52,6 +54,13 @@ export class EntitlementForm extends PureComponent {
             optionToValue={et => et.id}
             optionToLabel={et => et.attributes.name}
             placeholder={t("entitlements.new.user_select_placeholder")}
+            instructions={
+              <Trans
+                i18nKey="entitlements.instructions_user_groups"
+                components={[<Link to={lh.link("backendRecordsUserGroups")} />]}
+              />
+            }
+            instructionsBelow
             predictive
           />
           {/* Date placholder is not localized in first pass, since the api needs this format to parse the date. -LD */}

@@ -230,7 +230,7 @@ export default `
       }
 
       &--warning {
-        background-color: var(--color-notification-warning-light);
+        background-color: var(--color-base-orange45);
       }
 
       &--error {

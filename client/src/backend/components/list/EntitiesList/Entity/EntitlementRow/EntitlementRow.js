@@ -1,10 +1,14 @@
 import React, { PureComponent } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { get } from "lodash";
 import EntityThumbnail from "global/components/entity-thumbnail";
 import Utility from "global/components/utility";
-import EntityRow from "./Row";
+import EntityRow from "../Row";
+import Authorize from "hoc/Authorize";
 import { withTranslation } from "react-i18next";
+import lh from "helpers/linkHandler";
+import { isUserGroupEntitlement, getEntitlementUserGroup } from "./helpers";
 
 class EntitlementRow extends PureComponent {
   static displayName = "EntitiesList.Entity.EntitlementRow";
@@ -13,6 +17,7 @@ class EntitlementRow extends PureComponent {
     entity: PropTypes.object,
     active: PropTypes.string,
     linkName: PropTypes.string.isRequired,
+    authentication: PropTypes.object,
     t: PropTypes.func
   };
 
@@ -32,8 +37,24 @@ class EntitlementRow extends PureComponent {
     return this.entitlement.id;
   }
 
+  get fromGroup() {
+    return isUserGroupEntitlement(this.entitlement);
+  }
+
   get label() {
-    const labels = [this.currentState];
+    const labels = [
+      this.currentState,
+      ...(this.fromGroup
+        ? [
+            {
+              text: `User Group: ${
+                getEntitlementUserGroup(this.entitlement).name
+              }`,
+              level: "warning"
+            }
+          ]
+        : [])
+    ];
     return labels;
   }
 
@@ -54,7 +75,7 @@ class EntitlementRow extends PureComponent {
   }
 
   get subtitle() {
-    if (this.entitlement.attributes.expiration) {
+    if (this.entitlement.attributes?.expiration) {
       const date = new Date(this.entitlement.attributes.expiration);
       return this.props.t("entitlements.expires", {
         val: date,
@@ -67,6 +88,21 @@ class EntitlementRow extends PureComponent {
   }
 
   get utility() {
+    if (this.fromGroup)
+      return (
+        <Authorize entity="userGroup" ability="update">
+          <Link
+            className="entity-row__utility-button"
+            to={lh.link(
+              "backendRecordsUserGroupEntitlements",
+              getEntitlementUserGroup(this.entitlement).id
+            )}
+          >
+            <Utility.IconComposer icon="annotate32" size={26} />
+          </Link>
+        </Authorize>
+      );
+
     return (
       <button
         className="entity-row__utility-button"
@@ -84,7 +120,35 @@ class EntitlementRow extends PureComponent {
     this.props.onDelete(this.entitlement);
   };
 
+  renderUserGroupRow = group => {
+    const rowProps = {
+      ...this.props,
+      title: group.name,
+      label: [
+        { text: this.props.t("glossary.user_group_one"), level: "notice" },
+        this.props.t("common.active")
+      ],
+      figureSize: "small",
+      figureShape: "square",
+      figure: <Utility.IconComposer icon="users32" />
+    };
+    const utility = (
+      <Authorize entity="userGroup" ability="update">
+        <Link
+          className="entity-row__utility-button"
+          to={lh.link("backendRecordsUserGroupEntitlements", group.id)}
+        >
+          <Utility.IconComposer icon="annotate32" size={26} />
+        </Link>
+      </Authorize>
+    );
+    return <EntityRow {...rowProps} utility={utility} />;
+  };
+
   render() {
+    if (this.props.entity.type === "userGroup")
+      return this.renderUserGroupRow(this.props.entity);
+
     const { active, title, label } = this;
 
     const rowProps = { ...this.props, active, title, label };

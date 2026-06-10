@@ -23,6 +23,10 @@ export const InputWrapper = styled.div`
   .backend & {
     background-color: var(--color-base-neutral90);
   }
+
+  label + & {
+    margin-block-start: var(--Instructions-margin-block-start, 1em);
+  }
 `;
 
 export const ComboBox = styled.div`
