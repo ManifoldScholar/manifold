@@ -12,8 +12,9 @@ RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
     libglib2.0-dev \
     libicu-dev \
     libsndfile1-dev \
-    libvips-dev \
-    && rm -rf /var/lib/apt/lists/*
+    libvips-dev
+
+RUN rm -rf /var/lib/apt/lists/*
 
 COPY Gemfile /srv/app/Gemfile
 COPY Gemfile.lock /srv/app/Gemfile.lock
@@ -61,14 +62,14 @@ RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
     mediainfo \
     nodejs \
     pandoc \
-    postgresql-common \
-    && rm -rf /var/lib/apt/lists/*
+    postgresql-common
 
 RUN DEBIAN_FRONTEND=noninteractive /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y
 
 RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
-    postgresql-client-13 \
-    && rm -rf /var/lib/apt/lists/*
+    postgresql-client-13
+
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g mammoth@^1.4.16
 
@@ -101,7 +102,8 @@ RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
     libglib2.0-dev \
     libicu-dev \
     libsndfile1-dev \
-    libvips-dev \
-    && rm -rf /var/lib/apt/lists/*
+    libvips-dev
+
+RUN rm -rf /var/lib/apt/lists/*
 
 FROM base AS production
