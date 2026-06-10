@@ -5,22 +5,13 @@ module SettingsService
   #
   # @see Settings.manifold_version
   class ReadManifoldVersion < ActiveInteraction::Base
-    DEFAULT_FILE = Rails.root.join("..", "MANIFOLD_VERSION").cleanpath
+    VERSION_FILE = Rails.root.join("version.rb").cleanpath
 
-    record :version_file, class: "Pathname", finder: :new, default: DEFAULT_FILE
+    require VERSION_FILE
 
     # @return [Gem::Version]
     def execute
-      Gem::Version.new(read_version_file || "0.0.0")
-    end
-
-    private
-
-    def read_version_file
-      return nil unless version_file.exist?
-
-      # read and strip the initial v, breaks Gem::Version
-      version_file.read.sub(/\Av/, "")
+      Gem::Version.new(Manifold::VERSION)
     end
   end
 end
