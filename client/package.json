@@ -186,6 +186,9 @@
     "yarn": "4.x"
   },
   "packageManager": "yarn@4.9.2",
+  "resolutions": {
+    "shell-quote": "^1.8.4"
+  },
   "browserslist": [
     "defaults",
     "not IE 11",
