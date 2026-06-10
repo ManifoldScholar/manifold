@@ -1,0 +1,72 @@
+{
+  "messages": {
+    "empty_journal_heading": "Questa rivista non ha contenuti.",
+    "empty_journal_body": "Aggiungi <0>volumi</0> o <1>fascicoli</1> per vedere questa pagina.",
+    "cannot_move_up": "Non è possibile passare alla categoria superiore. L'articolo è già nella prima categoria.",
+    "cannot_move_down": "Impossibile spostarsi verso il basso. L'articolo si trova già nell'ultima categoria.",
+    "item_moved_category": "Articolo spostato nella categoria {{category}}",
+    "collected": "Hai raccolto {{title}}",
+    "uncollected": "Non avete raccolto {{title}}",
+    "confirm": "Sei sicuro?",
+    "content_block_warning_heading": "Questo blocco di contenuto richiede la vostra attenzione prima di essere visualizzato.",
+    "content_block_warning_note": "Nota: questo messaggio è visibile solo ai redattori del progetto.",
+    "showing_resource": "Mostrare {{type}} risorsa: {{title}}",
+    "unsaved_changes": "È possibile che le modifiche non siano state salvate. Volete andarvene senza salvare le modifiche?",
+    "no_results": "Ci dispiace, non sono stati trovati risultati.",
+    "no_sections": "This text doesn’t contain any sections.",
+    "annotation_summary": {
+      "highlight": "{{creator}} highlighted \"{{section}}\" in <text></text> on <date></date>.",
+      "annotation": "{{creator}} annotated \"{{section}}\" in <text></text> on <date></date>.",
+      "source": "\"{{section}}\" in <text></text>"
+    },
+    "reading_group": {
+      "privacy_change": {
+        "heading": "Confermare la modifica della privacy",
+        "private_to_public": "Se si cambia questo gruppo da privato a pubblico, tutte le annotazioni del gruppo saranno immediatamente visibili a tutti i lettori. Siete sicuri di volerlo fare?",
+        "anonymous_to_public": "La modifica di questo gruppo da anonimo a pubblico renderà immediatamente visibili a tutti i lettori tutte le annotazioni del gruppo e rivelerà gli autori delle annotazioni. Siete sicuri di volerlo fare?",
+        "anonymous_to_private": "Se si cambia questo gruppo da anonimo a privato, si rivelerà l'identità degli autori delle annotazioni. Siete sicuri di volerlo fare?"
+      },
+      "join": {
+        "heading": "Confermare",
+        "message": "Si sta per entrare nel gruppo di lettura <%= readingGroup.attributes.name %>. Fare clic su Sì per confermare.",
+        "join_not_found_heading": "Gruppo di lettura non trovato",
+        "join_not_found_message": "Nessun gruppo di lettura corrisponde al codice inserito. Ricontrollare e riprovare.",
+        "join_failure_heading": "Adesione fallita",
+        "join_failure_message": "LediBooks non è riuscito ad aggiungerti al gruppo di lettura. Verificate che non facciate già parte del gruppo."
+      },
+      "destroy_heading": "Sei sicuro di voler cancellare questo gruppo di lettura?",
+      "destroy_message": "Se il gruppo di lettura è anonimo o privato, tutte le annotazioni all'interno del gruppo saranno private e visibili solo al creatore dell'annotazione. Se il gruppo è pubblico, le annotazioni saranno pubbliche. Questa azione non può essere annullata.",
+      "archive_heading": "Siete sicuri di voler archiviare questo gruppo?",
+      "archive_message": "Le annotazioni di questo gruppo saranno nascoste nel lettore. I gruppi possono essere riattivati in qualsiasi momento.",
+      "admin_warning": "I privilegi di amministratore consentono di modificare questo gruppo, ma non ne fai parte."
+    },
+    "membership": {
+      "destroy_heading": "Siete sicuri di voler rimuovere questo utente dal gruppo?",
+      "destroy_message": "Premendo sì, l'utente viene rimosso dal gruppo. Le annotazioni dell'utente rimarranno nel gruppo.",
+      "leave_heading": "Sei sicuro di voler lasciare questo gruppo di lettura?",
+      "leave_message": "Premendo sì, si viene rimossi da questo gruppo. Le annotazioni rimarranno nel gruppo finché non verranno modificate e salvate.",
+      "role_change": {
+        "heading": "Confermare il cambio di ruolo",
+        "member_to_moderator": "I moderatori possono gestire i membri e modificare le impostazioni del gruppo. Siete sicuri di volerlo fare?",
+        "moderator_to_member": "Dopo questa modifica, l'utente non sarà più in grado di gestire i membri e le impostazioni del gruppo. Siete sicuri di volerlo fare?"
+      }
+    },
+    "project_authorization_warning": {
+      "heading": "Solo gli utenti autorizzati possono accedere a questo progetto.",
+      "body": "Solo gli utenti autorizzati possono visualizzare i testi, le risorse e gli altri contenuti di questo progetto."
+    },
+    "project_authorization_notice": {
+      "heading": "L'accesso a questo progetto è limitato.",
+      "body": "Solo gli utenti autorizzati possono visualizzare i testi, le risorse e gli altri contenuti di questo progetto."
+    },
+    "cookies_banner": {
+      "header": "LediBooks utilizza i cookies",
+      "body": "Utilizziamo i cookie per analizzare il nostro traffico. Decidete se siete disposti ad accettare i cookie dal nostro sito web. È possibile modificare questa impostazione in qualsiasi momento nei <0>Privacy Settings</0>.",
+      "body_annonymous_user": "Utilizziamo i cookie per analizzare il nostro traffico. Decidete se siete disposti ad accettare i cookie dal nostro sito web. Se desiderate aggiornare le vostre impostazioni per le visite future, <0>create un account.</0>",
+      "settings_button_label": "Impostazioni",
+      "accept_button_label": "Accettare tutti",
+      "accept_label_truncated": "Accettare",
+      "decline_button_label": "Decline all"
+    }
+  }
+}

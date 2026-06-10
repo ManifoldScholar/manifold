@@ -1,0 +1,82 @@
+{
+  "navigation": {
+    "user": {
+      "sign_in": "Iscriviti",
+      "sign_out": "Esci",
+      "log_in": "Accedi",
+      "login": "Accesso",
+      "login_to_manifold": "$(t.user.navigation.login) a Manifold",
+      "log_out": "Disconnettersi",
+      "logout": "Disconnessione",
+      "my_starred": "I miei preferiti",
+      "my_notes_comments": "Le mie note + Commenti",
+      "back": "Indietro",
+      "notifications": "Notifiche",
+      "notifications_sr_title": "Modifica le impostazioni di notifica",
+      "edit_profile": "Modifica profilo",
+      "edit_profile_sr_title": "Modifica profilo",
+      "settings": "Impostazioni utente",
+      "privacy": "Privacy"
+    },
+    "reading_group": {
+      "label": "Sottopagine del gruppo di lettura",
+      "annotations": "Note + commenti",
+      "home": "Home",
+      "members": "Membri",
+      "details": "Dettagli",
+      "my_groups": "I miei gruppi di lettura",
+      "public_groups": "Gruppi di lettura pubblici",
+      "create": "Creare un nuovo gruppo",
+      "my_private_annotations": "Le mie annotazioni private",
+      "my_public_annotations": "Le mie annotazioni pubbliche"
+    },
+    "breadcrumbs": {
+      "aria_label": "Breadcrumb",
+      "all_journals": "Tutti $t(glossary.journal_other)",
+      "issues": "$t(glossary.issue_truncated_other)",
+      "all_project_collections": "Tutti $t(glossary.project_collection_other)",
+      "all_projects": "Tutti $t(glossary.project_other)"
+    },
+    "mobile": {
+      "aria_label": "Navigazione da mobile",
+      "toggle_open": "$t(actions.open) menu di navigazione da mobile",
+      "toggle_closed": "$t(actions.close) menu di navigazione da mobile",
+      "open_submenu": "$t(actions.open) submenu",
+      "close_submenu": "$t(actions.close) submenu"
+    },
+    "backend": {
+      "enter_admin": "Entrare in modalit� amministratore",
+      "exit_admin": "Uscire dalla modalit� amministratore",
+      "enter_editor": "Accedere alla modalit� Editor",
+      "exit_editor": "Uscire dalla modalit� Editor",
+      "exit_author": "Uscire dalla modalit� Autore"
+    },
+    "library_links": "Link alla biblioteca",
+    "browse_library": "$t(actions.browse) biblioteca",
+    "browse_projects": "$t(actions.browse) progetti",
+    "see_full_collection": "Scopri la collezione completa",
+    "see_all_projects": "$t(actions.see_all) $t(glossary.project_other)",
+    "search_by_keyword": "Ricerca per parola chiave",
+    "see_all_activity": "$t(actions.see_all) attività",
+    "return_home": "Ritorna alla home",
+    "visit_page": "Visita la pagina",
+    "view_interactive_resource": "$t(actions.view) Risorsa interattiva",
+    "see_all_issues": "$t(actions.see_all) $t(glossary.issue_truncated_other)",
+    "see_all_volumes": "$t(actions.see_all) $t(glossary.volume_other)",
+    "back": "Indietro",
+    "menu": "Menu",
+    "next_entity": "Avanti {{entity}}",
+    "primary": "Navigazione primaria",
+    "secondary": "Navigazione secondaria",
+    "page_links": "Collegamenti alla pagina",
+    "user_links": "Link utente",
+    "skip_to_main": "Vai al contenuto principale",
+    "return_to_reader": "Ritorno al lettore",
+    "visit_collection": "Visita la pagina della collezione"
+  },
+  "external_links": {
+    "view_on_social": "Visualizza questo progetto su{{service}}",
+    "share_on_social": "Condividi su{{service}}",
+    "opens_in_new": "Si apre in una nuova scheda o finestra"
+  }
+}
