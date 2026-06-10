@@ -187,6 +187,7 @@
   },
   "packageManager": "yarn@4.9.2",
   "resolutions": {
+    "@xmldom/xmldom": "^0.8.13",
     "shell-quote": "^1.8.4"
   },
   "browserslist": [
