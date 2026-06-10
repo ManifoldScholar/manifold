@@ -1,0 +1,15 @@
+{
+  "bootstrap-sha": "219062ba6ca13ada40780cc21dd0dc4c2a3948b2",
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "version-file": "MANIFOLD_VERSION",
+      "include-component-in-tag": false,
+      "include-v-in-tag": false,
+      "extra-files": [
+        { "type": "generic", "path": "api/version.rb" },
+        { "type": "json", "path": "client/package.json", "jsonpath": "$.version" }
+      ]
+    }
+  }
+}
