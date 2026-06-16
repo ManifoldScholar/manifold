@@ -70,3 +70,4 @@ backup-local*.tar
 
 CLAUDE.md
 .planning/
+claude/

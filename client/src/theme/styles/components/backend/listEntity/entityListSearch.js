@@ -2,7 +2,8 @@ import {
   buttonUnstyled,
   utilityPrimary,
   respond,
-  inputQuaternary
+  inputQuaternary,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export default `
@@ -15,6 +16,11 @@ export default `
       justify-content: space-between;
       border: 1px solid var(--color-neutral-ui-dull-light);
       border-radius: var(--box-border-radius);
+
+      &:has(input:focus-visible) {
+        ${defaultFocusStyle}
+        outline-offset: -2px;
+      }
     }
 
     &__search-button {
@@ -47,6 +53,8 @@ export default `
       &:focus-visible {
         color: var(--color-accent-primary-pale);
         outline: 0;
+        text-decoration-line: underline;
+        text-underline-offset: 3px;
       }
     }
 

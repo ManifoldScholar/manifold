@@ -9,6 +9,7 @@ import {
   transparentize,
   fluidScale
 } from "theme/styles/mixins";
+import { defaultFocusStyle } from "../../../../theme/styles/mixins/appearance";
 
 export const Cover = styled("div", transientOptions)`
   --hover-color: var(--color-interaction-light);
@@ -64,8 +65,7 @@ export const TitleLink = styled(Link)`
   }
 
   &:focus-visible::after {
-    outline: solid 2px var(--focus-color);
-    outline-offset: 2px;
+    ${defaultFocusStyle}
   }
 `;
 

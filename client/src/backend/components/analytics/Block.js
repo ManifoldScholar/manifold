@@ -15,7 +15,7 @@ function Block({ icon, title, description, children, width }) {
     return value;
   };
   return (
-    <article aria-live="polite" aria-atomic className={blockClassName}>
+    <article className={blockClassName}>
       <header className="analytics-block__heading">
         <h3 className="analytics-block__title">
           <Utility.IconComposer

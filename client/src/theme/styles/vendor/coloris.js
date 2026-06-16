@@ -380,6 +380,10 @@ export default `
     white-space: nowrap;
     overflow: hidden;
     pointer-events: none;
+
+    &:focus-visible {
+      outline-offset: 2px;
+    }
   }
 
   .clr-field.clr-rtl button {

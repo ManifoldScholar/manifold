@@ -63,11 +63,8 @@ class ColorPicker extends Component {
     return (
       <UIDConsumer name={id => `${this.idForPrefix}-${id}`}>
         {id => (
-          <div
-            className="color-picker__list"
-            role="group"
-            aria-label={this.label()}
-          >
+          <fieldset className="color-picker__list">
+            <legend className="screen-reader-text">{this.label()}</legend>
             {avatarColors.map(color => {
               const checked =
                 this.props.getModelValue("attributes[avatarColor]") ===
@@ -107,7 +104,7 @@ class ColorPicker extends Component {
                 </label>
               );
             })}
-          </div>
+          </fieldset>
         )}
       </UIDConsumer>
     );

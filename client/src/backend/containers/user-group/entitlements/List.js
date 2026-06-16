@@ -7,7 +7,7 @@ import EntitiesList, {
   Button,
   UserGroupEntitlementRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, useApiCallback } from "hooks";
+import { useFetch, useApiCallback, useFocusAfterRemoval } from "hooks";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import withConfirmation from "hoc/withConfirmation";
 
@@ -27,11 +27,14 @@ function UserGroupEntitlements({ confirm }) {
 
   const destroyEntitlement = useApiCallback(userGroupEntitlementsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(entitlements);
+
   const onDelete = entitlementId => {
     const heading = t("modals.delete_entitlement");
     const message = t("modals.confirm_body");
     if (confirm) {
       confirm(heading, message, async () => {
+        rememberRemoval(entitlementId);
         await destroyEntitlement({
           id: entitlementId,
           userGroupId: userGroup.id
@@ -50,6 +53,7 @@ function UserGroupEntitlements({ confirm }) {
       {entitlements && (
         <div>
           <EntitiesList
+            wrapperRef={listRef}
             title={t("records.user_groups.entitlements.header")}
             titleStyle="bar"
             entities={entitlements}

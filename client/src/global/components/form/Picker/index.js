@@ -447,9 +447,26 @@ export class PickerComponent extends PureComponent {
       this.makeListBoxHidden();
   };
 
-  removeSelection = selection => {
+  removeSelection = (selection, targetEl) => {
+    // Removing a selection unmounts its remove button, which drops focus to
+    // the document body. Capture where focus should land before deselecting,
+    // then move it there so keyboard users keep their place in the list.
+    const nextFocusEl = this.nextFocusAfterRemoval(targetEl);
     this.props.optionsHandlers.deselect(selection);
+    if (nextFocusEl) nextFocusEl.focus();
+    else this.focusOnSearchInput();
   };
+
+  nextFocusAfterRemoval(targetEl) {
+    const button = targetEl?.closest?.("button");
+    if (!button) return null;
+    const buttonClass = button.classList.value;
+    const buttons = Array.from(
+      button.closest("ul")?.querySelectorAll(`button.${buttonClass}`) ?? []
+    );
+    const index = buttons.indexOf(button);
+    return buttons[index + 1] || buttons[index - 1] || null;
+  }
 
   reorderSelection = (selection, newPosition) => {
     this.props.optionsHandlers.reorderSelection(selection, newPosition);
@@ -469,7 +486,7 @@ export class PickerComponent extends PureComponent {
 
   activeOptionId(formId) {
     if (!this.activeOptionFromState) return null;
-    return `${this.ids(formId).option}-${this.activeOptionFromState.key}`;
+    return this.formatOptionId(formId, this.activeOptionFromState.key);
   }
 
   updateSearchInputValue(searchInputValue) {
@@ -528,6 +545,10 @@ export class PickerComponent extends PureComponent {
     this.props.optionsHandlers.filterOptions(searchWord);
   }
 
+  formatOptionId(formId, optionKey) {
+    return `${this.ids(formId).option}-${optionKey.replace(/\s/g, "-")}`;
+  }
+
   render() {
     const {
       wide,
@@ -578,6 +599,7 @@ export class PickerComponent extends PureComponent {
               <Styled.Wrapper>
                 <BaseLabel
                   id={ids.textBox}
+                  labelId={ids.label}
                   label={label}
                   styleType={this.context?.styleType}
                 />
@@ -585,14 +607,7 @@ export class PickerComponent extends PureComponent {
                   <Instructions instructions={this.props.instructions} />
                 )}
                 <Styled.InputWrapper>
-                  <Styled.ComboBox
-                    ref={this.inputWrapperRef}
-                    // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
-                    role="combobox"
-                    aria-expanded={this.isListBoxVisible}
-                    aria-owns={ids.listBox}
-                    aria-haspopup="listbox"
-                  >
+                  <Styled.ComboBox ref={this.inputWrapperRef}>
                     <TextInput
                       ref={this.searchInputRef}
                       id={ids.textBox}
@@ -605,7 +620,8 @@ export class PickerComponent extends PureComponent {
                       placeholder={placeholder}
                       onKeyDown={this.listenForListBoxNavigation}
                       onKeyUp={this.stopEscapePropagation}
-                      aria-labelledby={ids.label}
+                      role="combobox"
+                      aria-expanded={this.isListBoxVisible}
                       aria-autocomplete="list"
                       aria-controls={ids.listBox}
                       aria-activedescendant={this.activeOptionId(id)}
@@ -660,15 +676,18 @@ export class PickerComponent extends PureComponent {
                       <Styled.Result
                         key={option.key}
                         role="option"
-                        id={`${ids.option}-${option.key}`}
+                        id={this.formatOptionId(id, option.key)}
                         aria-selected={active}
                         onClick={() => {
                           this.callbacks.selectOrToggleOption(option.value);
                         }}
                         $active={active}
-                        $selected={selected}
+                        data-selected={selected}
                       >
-                        {option.label}
+                        {selected && (
+                          <IconComposer icon="checkmark16" size="default" />
+                        )}
+                        <span>{option.label}</span>
                       </Styled.Result>
                     );
                   })}

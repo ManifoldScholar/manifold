@@ -19,6 +19,8 @@ export const Tooltip = styled.div`
   border: 1px solid var(--color-base-neutral90);
   box-shadow: 0px 12px 32px 3px rgba(0, 0, 0, 0.3);
 
+  &:hover,
+  [aria-describedby]:focus-visible + &,
   [aria-describedby]:hover + & {
     visibility: visible;
     transition-delay: ${({ $delay }) => `${$delay}s`};

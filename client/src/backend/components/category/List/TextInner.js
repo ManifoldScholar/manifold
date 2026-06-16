@@ -144,6 +144,7 @@ class TextInner extends Component {
         </Link>
         <div className="texts-list__utility texts-list__utility--draggable">
           <button
+            data-id="destroy"
             className="texts-list__button texts-list__button--notice"
             onClick={event => {
               this.onDelete(event);
@@ -168,10 +169,11 @@ class TextInner extends Component {
             ref={this.props.dragHandleRef}
             className="texts-list__button texts-list__drag-handle"
             tabIndex={-1}
+            aria-hidden
           >
             <Utility.IconComposer icon="grabber32" size={26} />
             <span className="screen-reader-text">
-              {this.props.t("projects.category.drag")}
+              {this.props.t("projects.category.drag_text")}
             </span>
           </div>
           <div className="texts-list__keyboard-buttons">

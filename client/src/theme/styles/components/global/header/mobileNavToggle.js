@@ -1,6 +1,7 @@
 import {
   buttonUnstyled,
   defaultHoverStyle,
+  defaultFocusStyle,
   respond
 } from "theme/styles/mixins";
 
@@ -17,7 +18,7 @@ export default `
 
     &:focus-visible {
       ${defaultHoverStyle}
-      outline: 0;
+      ${defaultFocusStyle}
     }
   }
 `;

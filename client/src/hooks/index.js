@@ -5,6 +5,10 @@ export { default as useFilterState } from "./api/useFilterState";
 export { default as useListQueryParams } from "./useListQueryParams";
 
 export { default as useReorderableItem } from "./useReorderableItem";
+export {
+  default as useFocusAfterRemoval,
+  ENTITY_LIST_ITEM_SELECTOR
+} from "./useFocusAfterRemoval";
 
 export { default as useCurrentUser } from "./useCurrentUser";
 
