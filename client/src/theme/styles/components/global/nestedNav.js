@@ -6,6 +6,7 @@ import {
   buttonUnstyled,
   defaultTransitionProps
 } from "theme/styles/mixins";
+import { defaultFocusStyle } from "../../mixins/appearance";
 
 export default `
 .nested-nav {
@@ -156,6 +157,15 @@ export default `
   }
 
   &__link,
+  &__button {
+    --outline-width: 0px;
+
+    &:focus-visible {
+      text-decoration-line: underline;
+    }
+  }
+
+  &__link,
   &__button-text {
     display: block;
     grid-area: link;
@@ -168,7 +178,6 @@ export default `
   &__disclosure-button {
     &:focus-visible {
       ${defaultHoverStyle}
-      outline: 0;
     }
   }
 
@@ -194,6 +203,9 @@ export default `
 
   &__disclosure-button {
     height: 100%;
+    &:focus-visible {
+      ${defaultFocusStyle}
+    }
   }
 
   &__disclosure-icon {
