@@ -149,6 +149,7 @@ export class FormBaseInput extends PureComponent {
         errors={this.props.errors}
         label={this.props.label}
         idForError={idForError}
+        idForInput={id}
       >
         <BaseLabel
           id={id}

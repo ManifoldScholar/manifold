@@ -18,9 +18,9 @@ export const List = styled.ul`
   flex-direction: column;
   padding-top: 11px;
   padding-bottom: 15px;
-  color: var(--color-neutral-text-dark);
+  color: var(--_color, var(--color-neutral-text-dark));
+  background-color: var(--_bg-color, var(--color-base-neutral05));
   white-space: nowrap;
-  background-color: var(--color-base-neutral05);
   overflow: auto;
   max-block-size: calc(100vh - var(--reader-header-height) * 2);
   transition: opacity ${defaultTransitionProps},
@@ -39,6 +39,12 @@ export const List = styled.ul`
 
       ${respond(`transform: translateX(100%)`, 50)}
     }
+  }
+
+  &[data-context="backend"],
+  .scheme-dark & {
+    --_color: var(--strong-color);
+    --_bg-color: var(--color-base-neutral100);
   }
 
   &:not([data-context="reader"]) {

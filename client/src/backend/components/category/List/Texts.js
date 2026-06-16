@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import classNames from "classnames";
+import { useFocusAfterRemoval } from "hooks";
 import TextsInner from "./TextsInner";
 
 const UNCATEGORIZED = "uncategorized";
+
+const TEXT_SELECTOR = ".texts-list__text:not(.texts-list__text--placeholder)";
 
 export default function CategoryListTexts({
   activeType,
@@ -19,6 +22,27 @@ export default function CategoryListTexts({
   const categoryId = category?.id ?? UNCATEGORIZED;
   const [element, setElement] = useState(null);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(texts, {
+    itemSelector: TEXT_SELECTOR
+  });
+
+  const setListElement = useCallback(
+    node => {
+      setElement(node);
+      listRef.current = node;
+    },
+    [listRef]
+  );
+
+  const listCallbacks = useMemo(
+    () => ({
+      ...callbacks,
+      destroyText: text =>
+        callbacks.destroyText(text, () => rememberRemoval(text.id))
+    }),
+    [callbacks, rememberRemoval]
+  );
+
   useEffect(() => {
     if (!element) return undefined;
 
@@ -32,7 +56,8 @@ export default function CategoryListTexts({
 
   return (
     <div
-      ref={setElement}
+      ref={setListElement}
+      tabIndex={-1}
       className={classNames({
         "texts-list": true,
         "texts-list--active": activeType === "text",
@@ -40,7 +65,7 @@ export default function CategoryListTexts({
       })}
     >
       <TextsInner
-        callbacks={callbacks}
+        callbacks={listCallbacks}
         texts={texts}
         category={category}
         categoryId={categoryId}

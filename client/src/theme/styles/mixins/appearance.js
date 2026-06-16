@@ -27,20 +27,12 @@ export function fluidShrink(maxWidth, breakpoint = containerWidth.inner) {
 
 // Interactions
 // --------------------
-export const defaultFocusStyle = `outline: solid 2px var(--focus-color);`;
+export const defaultFocusStyle = `
+  outline: var(--outline-width, 2px) solid var(--focus-color);
+  outline-offset: var(--outline-offset, 0px);
+`;
+
 export const defaultHoverStyle = `color: var(--hover-color);`;
-
-export function setFocusStyle(property = "outline", value = "solid 2px") {
-  return `
-    &:focus:not(:focus-visible) {
-      outline: 0;
-    }
-
-    &:focus-visible {
-      ${property}: ${value};
-    }
-  `;
-}
 
 export function setHoverStyle(
   property = "color",
@@ -57,15 +49,19 @@ export function setHoverStyle(
 }
 
 export function outlineOnFocus(color = "var(--focus-color)") {
-  return setFocusStyle("outline", `solid 2px ${color}`);
+  return `
+    &:focus-visible {
+      outline: var(--outline-width, 2px) solid ${color};
+      outline-offset: var(--outline-offset, 0px);
+    }
+  `;
 }
 
 export function fillOnFocus(color = "var(--hover-color)") {
   return `
-    ${setFocusStyle("background-color", color)}
-
     &:focus-visible {
       outline: 0;
+      background-color: ${color};
     }
   `;
 }
@@ -394,8 +390,6 @@ export const dragging = `
   box-shadow: 0 31px 26px -13px rgba(0 0 0 / 0.33);
 `;
 
-// A closest-edge drop indicator: a thin line with a leading dot. The caller is
-// responsible for positioning the edge (e.g. `top`/`bottom`) on the element.
 export const dropIndicator = ({
   color = "var(--color-accent-primary)",
   startInset = "0",
