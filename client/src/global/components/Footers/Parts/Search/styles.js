@@ -4,7 +4,8 @@ import {
   buttonUnstyled,
   inputQuaternary,
   outlineOnFocus,
-  defaultTransitionProps
+  defaultTransitionProps,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 
 export const Form = styled.form`
@@ -53,7 +54,8 @@ export const SearchButton = styled.div`
 
     &:focus-visible {
       color: var(--color-base-neutral-white);
-      border-color: var(--focus-color);
+      ${defaultFocusStyle}
+      outline-offset: -2px;
     }
   }
 `;
