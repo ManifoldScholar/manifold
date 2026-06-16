@@ -27,7 +27,8 @@ function SectionListItem(props) {
     setError,
     index,
     sectionCount,
-    onReorder
+    onReorder,
+    onBeforeDestroy
   } = props;
 
   const { t } = useTranslation();
@@ -58,6 +59,7 @@ function SectionListItem(props) {
 
   const doDelete = async () => {
     setError(null);
+    if (onBeforeDestroy) onBeforeDestroy(section.id);
     const res = await deleteSection(section.id);
     if (res?.errors) setError(res.errors);
     refresh();
@@ -100,19 +102,26 @@ function SectionListItem(props) {
           <Tooltip
             content={t("texts.section.start_tooltip_content")}
             xOffset="-100px"
-            yOffset="43px"
+            yOffset="36px"
           >
-            <Styled.Button onClick={() => onSetStart(section.id)}>
+            <Styled.Button
+              onClick={() => onSetStart(section.id)}
+              aria-label={t("texts.section.start_tooltip_label")}
+            >
               <Utility.IconComposer size={24} icon="playOutline24" />
             </Styled.Button>
           </Tooltip>
-          <Styled.Button onClick={onDelete} aria-label={t("actions.delete")}>
+          <Styled.Button
+            data-id="destroy"
+            onClick={onDelete}
+            aria-label={t("actions.delete")}
+          >
             <Utility.IconComposer size={24} icon="delete24" />
           </Styled.Button>
           <Tooltip
             content={"Edit section in Manifold editor."}
             xOffset="-100px"
-            yOffset="43px"
+            yOffset="36px"
           >
             <Styled.Button
               as={Link}
@@ -132,7 +141,7 @@ function SectionListItem(props) {
           <Tooltip
             content={"Reingest section from source document."}
             xOffset="-100px"
-            yOffset="43px"
+            yOffset="36px"
           >
             <Styled.Button
               as={Link}
@@ -209,7 +218,8 @@ SectionListItem.propTypes = {
   refresh: PropTypes.func,
   index: PropTypes.number,
   sectionCount: PropTypes.number,
-  onReorder: PropTypes.func
+  onReorder: PropTypes.func,
+  onBeforeDestroy: PropTypes.func
 };
 
 export default withConfirmation(SectionListItem);
