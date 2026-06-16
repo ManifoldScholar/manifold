@@ -1,6 +1,5 @@
 import { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { withTranslation } from "react-i18next";
 import { Global as GlobalStyles } from "@emotion/react";
@@ -9,6 +8,7 @@ import config from "config";
 import { fatalErrorActions, notificationActions } from "actions";
 import lh from "helpers/linkHandler";
 import styles from "theme/styles/globalStyles";
+import withOptionalRouter from "hoc/withOptionalRouter";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import * as Styled from "./styles";
@@ -213,4 +213,4 @@ class FatalError extends PureComponent {
   }
 }
 
-export default withRouter(withTranslation()(FatalError));
+export default withOptionalRouter(withTranslation()(FatalError));
