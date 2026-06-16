@@ -4,6 +4,7 @@ import {
   listUnstyled,
   formInputBase,
   defaultTransitionProps,
+  defaultFocusStyle,
   fluidScale
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
@@ -58,6 +59,8 @@ export const TextInputSecondary = styled(TextInput)`
 
   &:focus-visible {
     border: 0;
+    ${defaultFocusStyle}
+    outline-offset: -1px;
   }
 
   &::placeholder {

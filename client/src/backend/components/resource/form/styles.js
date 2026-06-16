@@ -48,10 +48,13 @@ export const Item = styled.label`
       var(--transition-timing-function),
     border-color ${defaultTransitionProps};
 
-  &:hover,
-  &:focus-within {
+  &:hover {
     border-color: var(--hover-color);
-    outline: 0;
+  }
+
+  &:focus-within {
+    outline: 2px solid var(--hover-color);
+    outline-offset: -2px;
   }
 
   ${({ $active }) =>

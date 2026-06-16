@@ -81,18 +81,22 @@ export const ButtonWrapper = styled.div`
 
 export const Button = styled("button", transientOptions)`
   flex-shrink: 0;
-  color: var(--color-base-neutral-white);
-  border-color: ${({ $dull }) =>
-    $dull ? `var(--color-base-neutral70)` : `var(--color-accent-primary)`};
 
-  &:hover,
-  &:focus-visible {
-    color: var(--color-base-neutral110);
-    background-color: ${({ $dull }) =>
-      $dull ? `var(--color-base-neutral70)` : `var(--color-accent-primary)`};
-    outline: 0;
+  &:not(:hover, :focus-visible) {
+    color: var(--color-base-neutral-white);
   }
 `;
+
+// color: var(--color-base-neutral-white);
+//   border-color: ${({ $dull }) =>
+//     $dull ? `var(--color-base-neutral70)` : `var(--color-accent-primary)`};
+
+//   &:hover,
+//   &:focus-visible {
+//     color: var(--color-base-neutral110);
+//     background-color: ${({ $dull }) =>
+//       $dull ? `var(--color-base-neutral70)` : `var(--color-accent-primary)`};
+//   }
 
 export const Checkboxes = styled.div`
   margin-block-start: 32px;
