@@ -10,7 +10,8 @@ import {
   useFetch,
   useApiCallback,
   useListQueryParams,
-  useNotification
+  useNotification,
+  useFocusAfterRemoval
 } from "hooks";
 import withFilteredLists, { readingGroupFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -62,11 +63,15 @@ function ReadingGroupsList({
 
   const destroyRG = useApiCallback(readingGroupsAPI.destroy);
 
+  /* Singled deletes only */
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(readingGroups);
+
   const onDelete = (id, name) => {
     const heading = t("modals.delete_reading_group", { name });
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
+        rememberRemoval(id);
         await destroyRG(id);
         refresh();
       });
@@ -113,6 +118,8 @@ function ReadingGroupsList({
     readingGroups && (
       <>
         <EntitiesList
+          wrapperRef={listRef}
+          aria-label={t("titles.groups")}
           entityComponent={ReadingGroupRow}
           entityComponentProps={{
             onDelete,

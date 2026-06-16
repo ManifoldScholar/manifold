@@ -31,8 +31,10 @@ class ProjectContentBlockInListAvailable extends PureComponent {
               aria-label={this.props.t("layout.add_block", {
                 blockTitle: this.props.t(block.title)
               })}
-              onClick={this.props.onClickAdd}
-              disabled={this.props.disabled}
+              onClick={event => {
+                if (!this.props.disabled) this.props.onClickAdd(event);
+              }}
+              aria-disabled={this.props.disabled || undefined}
             >
               <Utility.IconComposer
                 icon="circlePlus32"

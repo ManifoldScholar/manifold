@@ -1,11 +1,14 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
 import { useTranslation } from "react-i18next";
 import throttle from "lodash/throttle";
+import { Toggle } from "global/components/form/Switch/ToggleOnly";
 
 export default function Log({ log, onReset, canReset }) {
   const { t } = useTranslation();
+
+  const [announce, setAnnounce] = useState(true);
 
   const logRef = useRef(null);
 
@@ -21,10 +24,32 @@ export default function Log({ log, onReset, canReset }) {
   return (
     <>
       <div className="ingestion-output__log">
-        <p className="ingestion-output__label">
-          {t("texts.ingestion.log_label")}
-        </p>
-        <div className="ingestion-output__log-value" ref={logRef}>
+        <div className="ingestion-output__log-header">
+          <h2 className="ingestion-output__label">
+            {t("texts.ingestion.log_label")}
+          </h2>
+          <button
+            className="ingestion-output__switch"
+            role="switch"
+            aria-checked={announce}
+            onClick={() => setAnnounce(value => !value)}
+          >
+            <span className="ingestion-output__switch-label">
+              {t("texts.ingestion.announce_button_label")}
+            </span>
+            <Toggle
+              className="ingestion-output__switch-toggle"
+              $checked={announce}
+            />
+          </button>
+        </div>
+        <div
+          className="ingestion-output__log-value"
+          role="status"
+          ref={logRef}
+          aria-live={!announce ? "off" : undefined}
+          aria-atomic={false}
+        >
           {log.trim()}
         </div>
       </div>

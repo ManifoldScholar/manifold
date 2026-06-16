@@ -18,12 +18,11 @@ function Stylesheet({
   index,
   instanceId,
   stylesheetCount,
-  onKeyboardMove
+  onKeyboardMove,
+  onBeforeDestroy
 }) {
   const popoverDisclosureRef = useRef(null);
 
-  // `setElement` refs the whole row (draggable + drop target); `setHandle` refs
-  // the grabber icon, so the nested edit link stays clickable.
   const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
     {
       instanceId,
@@ -40,6 +39,7 @@ function Stylesheet({
 
   const confirmDestroy = event => {
     event.preventDefault();
+    if (onBeforeDestroy) onBeforeDestroy(stylesheet.id);
     callbacks.confirmDestroy(stylesheet);
   };
 
@@ -76,6 +76,7 @@ function Stylesheet({
         </Link>
         <div className={`${baseClass}__utility`}>
           <button
+            data-id="destroy"
             className={`${baseClass}__button ${baseClass}__button--notice`}
             onClick={confirmDestroy}
           >
@@ -165,7 +166,8 @@ Stylesheet.propTypes = {
   index: PropTypes.number,
   instanceId: PropTypes.symbol.isRequired,
   stylesheetCount: PropTypes.number,
-  onKeyboardMove: PropTypes.func
+  onKeyboardMove: PropTypes.func,
+  onBeforeDestroy: PropTypes.func
 };
 
 export default withTranslation()(Stylesheet);

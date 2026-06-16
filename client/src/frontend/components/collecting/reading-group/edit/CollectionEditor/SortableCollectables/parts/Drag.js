@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
+import { useTranslation } from "react-i18next";
 
 function Drag({ dragHandleRef, onFocus, onBlur }) {
+  const { t } = useTranslation();
+
   return (
     <Styled.Action
       as="span"
@@ -14,7 +17,9 @@ function Drag({ dragHandleRef, onFocus, onBlur }) {
       data-drag-handle
     >
       <IconComposer icon="grabber32" size="default" />
-      <span className="screen-reader-text">Drag item</span>
+      <span className="screen-reader-text">
+        {t("actions.dnd.drag_and_drop")}
+      </span>
     </Styled.Action>
   );
 }

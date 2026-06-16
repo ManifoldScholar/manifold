@@ -59,7 +59,7 @@ export default class PickerListComponent extends PureComponent {
             onClick={event => {
               event.stopPropagation();
               event.preventDefault();
-              this.callbacks.removeSelection(props.entity);
+              this.callbacks.removeSelection(props.entity, event.target);
             }}
             aria-label="Remove selection"
           >
