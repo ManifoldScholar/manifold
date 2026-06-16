@@ -126,8 +126,7 @@
   "img_alts": {
     "user_avatar": "User Avatar",
     "avatar_for_name": "{{name}}'s avatar",
-    "publisher_logo": "Publisher Logo: Click to return to the browse page",
-    "entity_cover": "Cover of {{entity}}"
+    "publisher_logo": "Publisher Logo: Click to return to the browse page"
   },
   "powered_by": {
     "reader_text": "Powered by <mlink><srtext>$t(external_links.opens_in_new)</srtext>Manifold Scholarship</mlink>. Discover more projects in the <dirlink><srtext>$t(external_links.opens_in_new)</srtext>Manifold Directory</dirlink>.",

@@ -3,6 +3,7 @@ import {
   buttonAvatar,
   listUnstyled,
   defaultHoverStyle,
+  defaultFocusStyle,
   buttonUnstyled,
   defaultTransitionProps
 } from "theme/styles/mixins";
@@ -127,11 +128,11 @@ export default `
 
     ${respond(`font-size: 20px;`, 40)}
 
-    &.active {
+    &[aria-current="page"]:not(:hover) {
       color: var(--color-header-foreground-active);
     }
 
-    .nested-nav--dark &.active {
+    .nested-nav--dark &[aria-current="page"]:not(:hover) {
       color: var(--color-base-neutral-white);
     }
 
@@ -156,6 +157,15 @@ export default `
   }
 
   &__link,
+  &__button {
+    &[aria-current="page"] {
+      text-decoration-line: var(--active-text-decoration-line);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: var(--active-text-decoration-offset);
+    }
+  }
+
+  &__link,
   &__button-text {
     display: block;
     grid-area: link;
@@ -166,9 +176,17 @@ export default `
   &__link,
   &__button,
   &__disclosure-button {
+    &:where(a) {
+      display: block;
+    }
+
+    &:hover {
+      ${defaultHoverStyle}
+    }
+
     &:focus-visible {
       ${defaultHoverStyle}
-      outline: 0;
+      ${defaultFocusStyle}
     }
   }
 

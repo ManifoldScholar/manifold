@@ -14,6 +14,7 @@ function JournalEditorRow({ entity, handleDelete, ...props }) {
 
   const utility = (
     <button
+      data-id="destroy"
       className="entity-row__utility-button"
       onClick={() => handleDelete(id)}
       title={t("actions.delete")}

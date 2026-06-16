@@ -1,4 +1,9 @@
-import { utilityPrimary, formInstructions, respond } from "theme/styles/mixins";
+import {
+  utilityPrimary,
+  formInstructions,
+  respond,
+  screenReaderText
+} from "theme/styles/mixins";
 
 export default `
   .ingestion-output {
@@ -6,10 +11,14 @@ export default `
       margin-bottom: 30px;
     }
 
-    &__label {
+    &__label,
+    &__switch-label {
       ${utilityPrimary}
-      margin-top: 20px;
       font-size: 12px;
+    }
+
+    &__label {
+      margin-top: 20px;
     }
 
     &__value {
@@ -52,6 +61,42 @@ export default `
 
     &__utility {
       margin-top: 20px;
+    }
+
+    &__log-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+
+    &__switch {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      border: none;
+      background-color: transparent;
+      color: inherit;
+
+      &:not(:focus-visible) {
+        ${screenReaderText}
+      }
+
+      &:hover {
+        border: none;
+        background-color: transparent;
+        color: inherit;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    &__switch:focus-visible &__switch-toggle {
+      outline: var(--outline-width) solid var(--focus-color);
+      outline-offset: var(--outline-width);
     }
   }
 `;

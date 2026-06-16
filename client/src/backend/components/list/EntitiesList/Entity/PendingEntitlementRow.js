@@ -43,6 +43,7 @@ export default function PendingEntitlementRow({
   const utility = (
     <div>
       <button
+        data-id="destroy"
         className="entity-row__utility-button"
         onClick={() => onDelete(entitlement.id)}
         title={t("actions.delete")}

@@ -1,6 +1,6 @@
 import { styledUnderline } from "../../../mixins/typography";
 import { annotationHighlightColors } from "../../../variables/colors";
-import { linkUnstyled } from "theme/styles/mixins";
+import { linkUnstyled, defaultFocusStyle } from "theme/styles/mixins";
 
 const underlineStyleKeys = ["solid", "dashes", "dots", "wavy"];
 
@@ -174,7 +174,7 @@ export default `
 
   .previous {
     &:focus-visible {
-      outline: 2px solid var(--focus-color);
+      ${defaultFocusStyle}
     }
   }
 `;

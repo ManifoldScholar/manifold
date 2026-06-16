@@ -10,7 +10,8 @@ import {
   useFetch,
   useApiCallback,
   useListQueryParams,
-  useNotification
+  useNotification,
+  useFocusAfterRemoval
 } from "hooks";
 import withFilteredLists, { annotationFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -66,11 +67,15 @@ function AnnotationsList({
 
   const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
 
+  /* Single deletes only, no bulk delete */
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(annotations);
+
   const onDelete = id => {
     const heading = t("modals.delete_annotation");
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
+        rememberRemoval(id);
         await destroyAnnotation(id);
         refresh();
       });
@@ -134,6 +139,8 @@ function AnnotationsList({
       <PageHeader type="list" title={t("titles.annotations")} />
       {!!annotations && (
         <EntitiesList
+          wrapperRef={listRef}
+          aria-label={t("titles.annotations")}
           entityComponent={AnnotationRow}
           entityComponentProps={{
             bulkActionsActive,

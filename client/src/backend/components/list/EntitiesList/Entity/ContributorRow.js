@@ -53,6 +53,7 @@ function ContributorRow({ entity, onDelete, onEdit, ...props }) {
         <Utility.IconComposer icon="annotate24" size={26} />
       </button>
       <button
+        data-id="destroy"
         className="entity-row__utility-button"
         style={{ marginInline: "4px" }}
         onClick={e => {

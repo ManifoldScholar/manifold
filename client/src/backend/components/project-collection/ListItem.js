@@ -167,12 +167,16 @@ class ProjectCollectionListItem extends PureComponent {
               )}
               {...dragHandleProps}
               tabIndex={-1}
+              aria-hidden
             >
               <Utility.IconComposer
                 size={30}
                 icon="grabber32"
                 className="project-collection-list-item__icon"
               />
+              <span className="screen-reader-text">
+                {this.props.t("actions.dnd.drag_and_drop")}
+              </span>
             </div>
             <div className="project-collection-list-item__keyboard-buttons">
               <PopoverMenu

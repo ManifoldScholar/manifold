@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams, useLocation, useNavigate, Outlet } from "react-router-dom";
 import Layout from "backend/components/layout";
@@ -18,6 +18,12 @@ function ProjectWrapperContainer({ confirm }) {
   const { id } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+
+  // since text deletion is backgrounded, we keep a ref here
+  // that survives as long as the user is viewing the project
+  // so we can filter the deleted text out of the project's
+  // texts list view
+  const textRemovedRef = useRef(null);
 
   const { data: project, response: projectResponse, refresh } = useFetch({
     request: [projectsAPI.show, id]
@@ -133,7 +139,13 @@ function ProjectWrapperContainer({ confirm }) {
       >
         <div>
           <Outlet
-            context={{ refresh, updateProject, project, projectResponse }}
+            context={{
+              refresh,
+              updateProject,
+              project,
+              projectResponse,
+              textRemovedRef
+            }}
           />
         </div>
       </Layout.BackendPanel>

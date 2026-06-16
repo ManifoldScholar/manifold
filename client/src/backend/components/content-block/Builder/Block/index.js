@@ -34,9 +34,6 @@ export default function ProjectContentBlock({
     return !typeComponent.isAvailable(currentBlocks);
   })();
 
-  // Palette (available) items are draggable only; current blocks are also
-  // closest-edge drop targets. The draggable and drop payloads differ (the
-  // monitor keys off `kind`), so they're passed separately.
   const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
     {
       instanceId,
@@ -58,45 +55,28 @@ export default function ProjectContentBlock({
   const ListContextBlock = inAvailableList ? Available : Current;
   const baseClass = "backend-content-block";
 
-  if (disabled) {
-    return (
-      <div
-        className={classNames(
-          baseClass,
-          `${baseClass}--${context} ${baseClass}--inactive`
-        )}
-      >
-        <ListContextBlock
-          entity={entity}
-          entityCallbacks={entityCallbacks}
-          typeComponent={TypeComponent}
-          onClickAdd={handleClickAdd}
-          disabled
-          index={index}
-          entityCount={entityCount}
-        />
-      </div>
-    );
-  }
-
   return (
     <div
-      ref={setElement}
+      ref={disabled ? undefined : setElement}
       className={classNames(baseClass, `${baseClass}--${context}`, {
-        [`${baseClass}--active`]: true,
+        [`${baseClass}--inactive`]: disabled,
+        [`${baseClass}--active`]: !disabled,
         [`${baseClass}--is-dragging`]: isDragging
       })}
     >
-      <DropEdgeIndicator
-        edge={closestEdge}
-        baseClass={`${baseClass}__drop-indicator`}
-      />
+      {!disabled && (
+        <DropEdgeIndicator
+          edge={closestEdge}
+          baseClass={`${baseClass}__drop-indicator`}
+        />
+      )}
       <ListContextBlock
         entity={entity}
         entityCallbacks={entityCallbacks}
-        dragHandleRef={setHandle}
+        dragHandleRef={disabled ? undefined : setHandle}
         typeComponent={TypeComponent}
         onClickAdd={handleClickAdd}
+        disabled={disabled}
         index={index}
         entityCount={entityCount}
         announce={announce}

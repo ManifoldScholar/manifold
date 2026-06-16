@@ -1,4 +1,4 @@
-import { listHorizontal, respond } from "theme/styles/mixins";
+import { listUnstyled, respond } from "theme/styles/mixins";
 import { headerLayout } from "theme/styles/variables/crossComponent";
 
 const { paddingVerticalMobile, paddingVerticalDesktop } = headerLayout;
@@ -8,17 +8,19 @@ export default `
     ${respond(`margin-left: 25px;`, 75)}
 
     &__list {
-      ${listHorizontal}
+      ${listUnstyled}
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(18px, 2.5vw, 25px);
+      transform: translateY(2px);
     }
 
     &__item {
       position: relative;
-      margin-right: 18px;
       margin-bottom: ${paddingVerticalMobile};
 
       ${respond(
         `
-          margin-right: min(2.5vw, 25px);
           margin-bottom: ${paddingVerticalDesktop};
         `,
         40
@@ -49,10 +51,6 @@ export default `
           height: 1.5px;
           content: "";
           background-color: currentColor;
-
-          .site-nav--backend & {
-            display: none;
-          }
         }
 
         &:focus-visible {

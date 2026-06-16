@@ -3,6 +3,7 @@ import * as Styled from "./styles";
 
 export default function BaseLabel({
   id,
+  labelId,
   as = "label",
   label,
   styleType = "primary",
@@ -21,6 +22,7 @@ export default function BaseLabel({
   return (
     <Label
       as={as}
+      id={labelId}
       htmlFor={id}
       $hasInstructions={hasInstructions}
       $isSelect={isSelect}

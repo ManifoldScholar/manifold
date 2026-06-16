@@ -28,8 +28,9 @@ const BaseSelect = styled.select`
   ${formInputSecondary}
   padding: var(--Select-padding);
 
-  &:focus {
+  &:focus-visible {
     border-color: var(--Select-focus-color);
+    box-shadow: 0 1px 0 var(--Select-focus-color);
   }
 
   &:-moz-focusring {

@@ -57,7 +57,7 @@
     "resolve_flags": "Are you sure you want to resolve all flags?",
     "set_password": "Set New Password",
     "set_password_body": "Set a custom password for this user. The new password will not be sent automatically to the user.",
-    "thumbnail_change": "Changing this will remove the {{label}}'s current avatar image",
+    "thumbnail_change": "The {{label}}'s current avatar image will be removed on save.",
     "thumbnail_change_body": "Do you wish to proceed?",
     "unsubscribe": "Are you sure?",
     "unsubscribe_body": "This user will be unsubscribed from all Manifold email notifications.",
