@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 import {
   defaultTransitionProps,
   filterSelectBase,
-  utilityPrimary
+  utilityPrimary,
+  defaultFocusStyle
 } from "theme/styles/mixins";
 import { entityFilterForm } from "theme/styles/variables/crossComponent";
 import IconComposer from "global/components/utility/IconComposer";
@@ -33,7 +34,7 @@ export const Select = styled.select`
   transition: border-color ${defaultTransitionProps};
 
   &:focus-visible {
-    outline: solid 2px var(--focus-color);
+    ${defaultFocusStyle}
   }
 
   option {

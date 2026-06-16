@@ -9,7 +9,12 @@ import EntitiesList, {
   EntitlementRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { keywordFilter } from "hoc/withFilteredLists";
-import { useFetch, useListQueryParams, useApiCallback } from "hooks";
+import {
+  useFetch,
+  useListQueryParams,
+  useApiCallback,
+  useFocusAfterRemoval
+} from "hooks";
 
 const PER_PAGE = 20;
 
@@ -42,7 +47,10 @@ function EntitlementsList({
 
   const deleteEntitlement = useApiCallback(entitlementsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(entitlements);
+
   const onDelete = entitlement => {
+    rememberRemoval(entitlement.id);
     deleteEntitlement(entitlement.id).then(() => {
       if (refresh) refresh();
     });
@@ -72,6 +80,7 @@ function EntitlementsList({
   return (
     <section>
       <EntitiesList
+        wrapperRef={listRef}
         title={t("entitlements.header", {
           entity: entity.type.slice(0, -1)
         })}

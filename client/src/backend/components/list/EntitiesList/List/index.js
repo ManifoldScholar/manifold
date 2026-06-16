@@ -101,6 +101,8 @@ export default class ListEntities extends PureComponent {
     search: ListEntities.validateSearch,
     pagination: PropTypes.object,
     paginationPadding: PropTypes.number,
+    wrapperRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    "aria-label": PropTypes.string,
     useDragHandle: PropTypes.bool,
     paginationStyle: PropTypes.oneOf(["compact", "normal"]),
     emptyMessage: PropTypes.node,
@@ -261,7 +263,13 @@ export default class ListEntities extends PureComponent {
     return (
       <UIDConsumer>
         {id => (
-          <div id={`${this.idPrefix}-${id}`} className={wrapperClassNames}>
+          <div
+            id={`${this.idPrefix}-${id}`}
+            className={wrapperClassNames}
+            ref={this.props.wrapperRef}
+            tabIndex={this.props.wrapperRef ? -1 : undefined}
+            aria-label={this.props["aria-label"]}
+          >
             {this.title && (
               <Title
                 title={this.title}

@@ -82,5 +82,7 @@ export const Link = styled(NavLink)`
 
   &.active {
     color: var(--color-neutral-text-extra-light);
+    text-decoration-line: var(--active-text-decoration-line);
+    text-underline-offset: var(--active-text-decoration-offset);
   }
 `;
