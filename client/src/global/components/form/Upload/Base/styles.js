@@ -43,11 +43,18 @@ export const Dropzone = styled(BaseDropzone)`
   }
 `;
 
+export const Fieldset = styled.fieldset`
+  > legend + ${Dropzone} {
+    margin-block-start: 0.75em;
+  }
+`;
+
 export const AvatarBuilderDropzone = styled(BaseDropzone)`
   --Dropzone-aspect-ratio: 275 / 200;
 
   position: relative;
   width: 100%;
+  max-block-size: 200px;
 `;
 
 export const Prompt = styled.span`

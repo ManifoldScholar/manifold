@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import Collapse from "global/components/Collapse";
-import { buttonUnstyled, utilityPrimary } from "theme/styles/mixins";
+import {
+  buttonUnstyled,
+  utilityPrimary,
+  defaultFocusStyle
+} from "theme/styles/mixins";
 
 export const Toggle = styled(Collapse.Toggle)`
   ${buttonUnstyled}
@@ -57,8 +61,7 @@ export const Content = styled(Collapse.Content)`
   position: relative;
 
   &:focus-visible {
-    outline: solid 2px var(--focus-color);
-    outline-offset: 2px;
+    ${defaultFocusStyle}
   }
 
   &.collapse__content--hidden {

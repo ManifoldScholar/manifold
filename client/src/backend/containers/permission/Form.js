@@ -96,7 +96,7 @@ export default function PermissionForm({ permission, showUserInput }) {
               value: "project_property_manager"
             },
             {
-              label: t("projects.permissions.author"),
+              label: t("projects.permissions.is_author"),
               value: "project_author"
             }
           ]}

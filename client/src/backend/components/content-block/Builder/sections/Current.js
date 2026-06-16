@@ -7,6 +7,7 @@ import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import { useFocusAfterRemoval } from "hooks";
 
 const isTopBlock = block =>
   resolver.typeToBlockComponent(block.attributes.type).top === true;
@@ -62,13 +63,29 @@ function ProjectContentSectionsCurrent({
     bottom: { blocks: bottomBlocks, visible: true }
   };
 
-  const bindEntityCallbacks = block =>
-    Object.keys(entityCallbacks).reduce((memo, key) => {
+  /* Blocks render as divs across two zones; the hook resolves neighbors by
+     document order, so the item list has to be zone-ordered too. */
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(
+    [...topBlocks, ...bottomBlocks],
+    { itemSelector: ".backend-content-block--current" }
+  );
+
+  const bindEntityCallbacks = block => {
+    const bound = Object.keys(entityCallbacks).reduce((memo, key) => {
       return {
         ...memo,
         [key]: addtlParams => entityCallbacks[key](block, addtlParams)
       };
     }, {});
+
+    return {
+      ...bound,
+      deleteBlock: addtlParams => {
+        rememberRemoval(block.id);
+        bound.deleteBlock(addtlParams);
+      }
+    };
+  };
 
   const showDropzone = zone => {
     if (activeDraggableType === zone.toUpperCase()) return true;
@@ -77,7 +94,7 @@ function ProjectContentSectionsCurrent({
 
   return (
     <>
-      <div>
+      <div ref={listRef} tabIndex={-1}>
         <Header subtitle={t("layout.layout")} />
         {Object.keys(zones).map(zone => (
           <Zone

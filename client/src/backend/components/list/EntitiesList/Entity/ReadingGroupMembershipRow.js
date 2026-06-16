@@ -42,6 +42,7 @@ function ReadingGroupMembershipRow({ active, entity, onDelete, ...props }) {
 
   const utility = (
     <button
+      data-id="destroy"
       className="entity-row__utility-button"
       title={t("reading_groups.remove_member")}
       onClick={() => onDelete(id, name, readingGroup.attributes.name)}

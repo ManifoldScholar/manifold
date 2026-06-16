@@ -89,8 +89,6 @@ function ProjectContent({ project, confirm, children }) {
     }
   };
 
-  // The window-level monitor is registered once but needs the current blocks
-  // and handlers on drop, so route them through a ref.
   const dropStateRef = useRef();
   dropStateRef.current = { blocks, updateBlock, newBlock };
 
@@ -126,7 +124,6 @@ function ProjectContent({ project, confirm, children }) {
 
     const isMove = source.data.kind === "current";
     if (isMove && source.data.zoneType === destinationZone) {
-      // Account for the source being removed before re-insertion.
       if (source.data.index < index) index -= 1;
       if (source.data.index === index) return;
     }

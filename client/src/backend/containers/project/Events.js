@@ -9,7 +9,12 @@ import EntitiesList, {
   EventRow
 } from "backend/components/list/EntitiesList";
 import withFilteredLists, { eventFilters } from "hoc/withFilteredLists";
-import { useListQueryParams, useFetch, useApiCallback } from "hooks";
+import {
+  useListQueryParams,
+  useFetch,
+  useApiCallback,
+  useFocusAfterRemoval
+} from "hooks";
 import Authorize from "hoc/Authorize";
 
 function ProjectEventsContainer({
@@ -33,16 +38,19 @@ function ProjectEventsContainer({
 
   const destroyEvent = useApiCallback(eventsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(events);
+
   const handleEventDestroy = useCallback(
     event => {
       const heading = t("modals.delete_event");
       const message = t("modals.confirm_body");
       confirm(heading, message, async () => {
+        rememberRemoval(event.id);
         await destroyEvent(event.id);
-        refresh();
+        await refresh();
       });
     },
-    [confirm, destroyEvent, refresh, t]
+    [confirm, destroyEvent, refresh, t, rememberRemoval]
   );
 
   if (!project || !events || !eventsMeta) return null;
@@ -54,7 +62,7 @@ function ProjectEventsContainer({
       failureNotification
       failureRedirect={lh.link("backendProjects")}
     >
-      <section>
+      <section ref={listRef} tabIndex={-1} aria-label={t("projects.activity")}>
         <EntitiesList
           entityComponent={EventRow}
           entityComponentProps={{
