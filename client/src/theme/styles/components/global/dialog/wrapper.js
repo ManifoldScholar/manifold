@@ -5,15 +5,16 @@ export default `
     position: fixed;
     top: 0;
     left: 0;
-    display: flex;
+    display: grid;
     align-items: center;
     width: 100%;
     height: 100%;
-    padding-right: var(--container-padding-inline-responsive);
-    padding-left: var(--container-padding-inline-responsive);
+    padding-inline: var(--container-padding-inline-responsive);
+    padding-block: 0.75rem;
     visibility: visible;
     opacity: 1;
     transition: opacity ${defaultTransitionProps};
+    overflow-y: auto;
 
     @starting-style {
       opacity: 0;

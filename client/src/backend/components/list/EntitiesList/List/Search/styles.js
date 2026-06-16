@@ -43,6 +43,8 @@ export const Select = styled.select`
 
   &:focus-visible {
     border-color: var(--highlight-color);
+    outline: 2px solid var(--highlight-color);
+    outline-offset: -2px;
   }
 `;
 

@@ -97,6 +97,7 @@
     "zoom": "Zoom",
     "expand_passage": "Expand passage",
     "collapse_passage": "Collapse passage",
+    "ingest": "Ingest",
     "dnd": {
       "move_up_position": "Move up one position",
       "move_down_position": "Move down one position",
@@ -108,7 +109,8 @@
       "moved_to_category": "{{title}} is now in category {{category}}, position {{position}}",
       "moved_to_group": "{{title}} is now in group {{group}}, position {{position}}",
       "reorder_category": "Reorder category",
-      "reorder": "Reorder"
+      "reorder": "Reorder",
+      "drag_and_drop": "Drag and drop to reorder"
     }
   }
 }

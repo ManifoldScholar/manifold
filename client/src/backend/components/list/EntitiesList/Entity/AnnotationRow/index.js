@@ -45,6 +45,7 @@ function AnnotationRow({
 
   const utility = !bulkActionsActive ? (
     <button
+      data-id="destroy"
       className="entity-row__utility-button"
       title={t("actions.delete")}
       onClick={() => onDelete(id)}

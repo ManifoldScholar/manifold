@@ -26,6 +26,12 @@ export const Link = styled.a`
     color: var(--color-base-neutral90);
     background-color: var(--color-base-neutral20);
     outline: 0;
+
+    [data-context="backend"] &,
+    .scheme-dark & {
+      color: var(--strong-color);
+      background-color: var(--background-color);
+    }
   }
 
   &:focus-visible {
@@ -43,6 +49,6 @@ export const Icon = styled(IconComposer)`
 
   ${Link}:hover &,
   ${Link}:focus-visible & {
-    color: var(--color-base-neutral90);
+    color: currentColor;
   }
 `;

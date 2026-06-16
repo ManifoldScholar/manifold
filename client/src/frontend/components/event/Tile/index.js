@@ -70,12 +70,10 @@ export default function EventTile({
         </Styled.Inner>
       </Styled.Tile>
       {destroyCallback && (
-        <div
+        <button
           className="utility-button"
           data-id={"destroy"}
           onClick={destroyCallback}
-          role="button"
-          tabIndex="0"
         >
           <Utility.IconComposer
             icon="delete32"
@@ -85,7 +83,7 @@ export default function EventTile({
           <span className="screen-reader-text">
             {t("actions.delete_event")}
           </span>
-        </div>
+        </button>
       )}
     </TileTag>
   );

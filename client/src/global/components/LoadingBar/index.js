@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
-export default class LoadingBar extends Component {
+class LoadingBar extends Component {
   static propTypes = {
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    t: PropTypes.func
   };
 
   constructor(props) {
@@ -42,9 +44,20 @@ export default class LoadingBar extends Component {
           }}
           className="loading-bar default"
         >
+          {/* ARC solution. Informational image for screen readers. */}
+          {/* Less noisy than role=status. Users can find this information if needed. */}
+          {this.props.loading && (
+            <div
+              className="screen-reader-text"
+              role="img"
+              aria-label={this.props.t("common.loading_page")}
+            />
+          )}
           <div className="progress" />
         </div>
       </div>
     );
   }
 }
+
+export default withTranslation()(LoadingBar);

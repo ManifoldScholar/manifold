@@ -1,7 +1,12 @@
 import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import isArray from "lodash/isArray";
-import { useFetch, useListQueryParams, useApiCallback } from "hooks";
+import {
+  useFetch,
+  useListQueryParams,
+  useApiCallback,
+  useFocusAfterRemoval
+} from "hooks";
 import {
   projectsAPI,
   exportTargetsAPI,
@@ -59,7 +64,12 @@ export default function ProjectExportations({
 
   const deleteExportation = useApiCallback(projectExportationsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(
+    projectExportations
+  );
+
   const onDelete = projectExportation => {
+    rememberRemoval(projectExportation.id);
     deleteExportation(projectExportation.id);
     refresh();
   };
@@ -143,6 +153,8 @@ export default function ProjectExportations({
       {hasExportTargets && (
         <div style={{ marginTop: 25 }}>
           <EntitiesList
+            wrapperRef={listRef}
+            aria-label={t("titles.exports")}
             entityComponent={ProjectExportationRow}
             entityComponentProps={{ active, onDelete }}
             showCount

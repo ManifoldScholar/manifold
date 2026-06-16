@@ -94,6 +94,7 @@ export default function AssetRow({
         <Styled.CopyLabelMobile>{t("actions.copy")}</Styled.CopyLabelMobile>
       </Styled.CopyButton>
       <button
+        data-id="destroy"
         className="entity-row__utility-button"
         onClick={() => onDelete(asset.id)}
         aria-label={t("actions.delete")}

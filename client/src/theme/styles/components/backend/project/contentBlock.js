@@ -63,7 +63,8 @@ export default `
 
       &:focus-visible {
         border-color: var(--color-accent-primary);
-        outline: 0;
+        outline: 2px solid var(--color-accent-primary);
+        outline-offset: -2px;
 
         .backend-content-block--available.backend-content-block--active & {
           .backend-content-block__heading {
@@ -164,8 +165,9 @@ export default `
         -webkit-touch-callout: none;
       }
 
-      &:disabled {
+      &[aria-disabled="true"] {
         cursor: not-allowed;
+        pointer-events: none;
 
         &:hover {
           color: inherit;
