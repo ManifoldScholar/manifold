@@ -1,5 +1,6 @@
-node_modules
-dist
-coverage
 *.log
 .eslintcache
+.yarn
+coverage
+dist
+node_modules
