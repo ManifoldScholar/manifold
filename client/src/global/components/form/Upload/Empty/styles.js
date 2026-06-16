@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
   height: 200px;
   padding: 15px;
   cursor: pointer;
+  text-align: center;
 
   &:hover {
     ${Prompt} {
@@ -34,7 +35,7 @@ export const Icon = styled(IconComposer)`
   }
 `;
 
-export const PrimaryText = styled.p`
+export const PrimaryText = styled.div`
   ${utilityPrimary}
   padding-bottom: 0;
   font-size: 13px;

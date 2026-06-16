@@ -6,7 +6,8 @@ import {
   useFetch,
   usePaginationState,
   useApiCallback,
-  useFromStore
+  useFromStore,
+  useFocusAfterRemoval
 } from "hooks";
 import Layout from "backend/components/layout";
 import EntitiesList, {
@@ -40,11 +41,17 @@ function UserActivityContainer({ confirm }) {
 
   const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
 
+  const {
+    listRef: annotationsListRef,
+    rememberRemoval: rememberAnnotationRemoval
+  } = useFocusAfterRemoval(annotations);
+
   const onDeleteAnnotation = id => {
     const heading = t("modals.delete_annotation");
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
+        rememberAnnotationRemoval(id);
         await deleteAnnotation(id);
         refreshAnnotations();
       });
@@ -62,11 +69,17 @@ function UserActivityContainer({ confirm }) {
 
   const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
 
+  const {
+    listRef: rgListRef,
+    rememberRemoval: rememberMembershipRemoval
+  } = useFocusAfterRemoval(rgMemberships);
+
   const onDeleteMembership = (id, name, rg) => {
     const heading = t("modals.delete_membership_group", { name, rg });
     const message = t("modals.delete_membership_body");
     if (confirm)
       confirm(heading, message, async () => {
+        rememberMembershipRemoval(id);
         await deleteMembership(id);
         refreshRgs();
       });
@@ -77,6 +90,7 @@ function UserActivityContainer({ confirm }) {
       {!!rgMemberships && (
         <Layout.BackendPanel flush>
           <EntitiesList
+            wrapperRef={rgListRef}
             entityComponent={ReadingGroupMembershipRow}
             entityComponentProps={{ onDelete: onDeleteMembership }}
             entities={rgMemberships}
@@ -99,6 +113,7 @@ function UserActivityContainer({ confirm }) {
       {!!annotations && (
         <Layout.BackendPanel flush={!rgMemberships}>
           <EntitiesList
+            wrapperRef={annotationsListRef}
             entityComponent={AnnotationRow}
             entityComponentProps={{
               hideCreator: true,

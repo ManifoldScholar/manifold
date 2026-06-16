@@ -278,17 +278,17 @@ export default `
       border: 1px solid;
     }
 
-    &:focus-visible:not([disabled]) {
-      color: var(--color-base-neutral90);
-      background-color: var(--color-accent-primary-pale);
-      outline: 0;
-    }
-
     &:hover:not([disabled]),
     &:active:not([disabled]) {
       color: var(--color-neutral-text-extra-dark);
       background-color: var(--color-interaction-light);
       border-color: var(--color-interaction-light);
+    }
+
+    &:focus-visible:not([disabled]) {
+      outline-offset: 2px;
+      color: var(--color-neutral-text-extra-dark);
+      background-color: var(--color-interaction-light);
     }
 
     &:focus-visible:disabled {
@@ -308,8 +308,10 @@ export default `
 
       &:focus-visible:not([disabled]) {
         color: var(--strong-color);
-        background-color: ${rgba("neutral70", 0.3)};
-        outline: 0;
+        // background-color: ${rgba("neutral70", 0.3)};
+        background-color: transparent;
+        outline-offset: 2px;
+        outline-color: var(--color);
       }
     }
 
@@ -466,6 +468,10 @@ export default `
         color: var(--color-base-neutral-white);
         background-color: var(--color-base-neutral20);
       }
+
+      &:focus-visible:not(:disabled) {
+        outline-offset: 2px;
+      }
     }
 
     &--outlined {
@@ -476,6 +482,11 @@ export default `
       &:hover:not(:disabled) {
         color: var(--color-neutral-text-extra-dark);
         background-color: var(--hover-color);
+      }
+
+      &:focus-visible:not(:disabled) {
+        outline-offset: 2px;
+        outline-color: var(--hover-color);
       }
 
       .bg-neutral90 &,
@@ -498,7 +509,6 @@ export default `
         &:focus-visible:not(:disabled) {
           color: var(--color-neutral-text-extra-dark);
           background-color: var(--highlight-color);
-          outline: 0;
         }
       }
     }

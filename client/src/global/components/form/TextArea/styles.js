@@ -9,11 +9,12 @@ const TextAreaBase = styled.textarea`
   width: 100%;
   resize: vertical;
   border: 1px solid var(--TextArea-border-color, transparent);
-  outline: none;
   transition: border-color ${defaultTransitionProps};
 
   &:focus-visible {
-    border-color: var(--TextArea-focus-color);
+    outline-color: var(--TextArea-focus-color);
+    outline-width: 2px;
+    outline-offset: -1px;
   }
 `;
 
@@ -23,7 +24,6 @@ export const TextAreaPrimary = styled(TextAreaBase)`
   ${formInputPrimary}
   padding: 1.2em 1.5em;
   background-color: var(--color-base-neutral05);
-  outline: none;
   transition: border-color ${defaultTransitionProps};
 
   .bg-neutral05 & {

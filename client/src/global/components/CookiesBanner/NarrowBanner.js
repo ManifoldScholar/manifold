@@ -30,8 +30,8 @@ export default function NarrowBanner({
               {t("messages.cookies_banner.accept_button_label")}
             </Styled.Button>
             <Styled.Button
-              $dull
-              className="button-secondary button-secondary--outlined"
+              // $dull
+              className="button-secondary button-secondary--outlined button-secondary--dull"
               onClick={onClickSettings}
               {...settingsLinkProps}
             >

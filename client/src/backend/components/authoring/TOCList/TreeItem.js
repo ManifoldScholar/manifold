@@ -16,8 +16,6 @@ import { useTreeContext } from "./TreeContext";
 import { isDescendant, getRowsForChildren } from "./treeHelpers";
 import * as Styled from "./styles";
 
-// Tree-item hitbox mode: an expanded parent prepends children, a group's last
-// item also offers reparenting (outdent), everything else is a plain reorder.
 const getDropMode = (isExpanded, isLastInGroup) => {
   if (isExpanded) return "expanded";
   if (isLastInGroup) return "last-in-group";
@@ -154,7 +152,7 @@ export default function TreeItem({
     <Styled.Item>
       {/* The draggable + drop target is the row only — NOT the <li>, so a
           parent's hitbox never encloses its nested children's hitboxes. */}
-      <Styled.Row ref={rowRef}>
+      <Styled.Row ref={rowRef} data-toc-row>
         <Entry
           entry={item}
           depth={level}

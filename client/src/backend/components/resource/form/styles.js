@@ -49,16 +49,19 @@ export const Item = styled.label`
     border-color ${defaultTransitionProps};
 
   &:hover,
-  &:focus-within {
+  &[data-active="true"] {
     border-color: var(--hover-color);
-    outline: 0;
   }
 
-  ${({ $active }) =>
-    $active &&
-    `color: var(--color-neutral-text-extra-light);
-  background-color: var(--color-base-neutral80);
-  border-color: var(--color-base-neutral80);`}
+  &:focus-within {
+    outline: 2px solid var(--hover-color);
+    outline-offset: -2px;
+  }
+
+  &[data-active="true"] {
+    color: var(--color-neutral-text-extra-light);
+    background-color: var(--color-base-neutral80);
+  }
 `;
 
 export const Input = styled.input`

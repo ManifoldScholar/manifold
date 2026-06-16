@@ -1,14 +1,6 @@
-import { config } from "ace-builds";
-import idleFingersUrl from "ace-builds/src-noconflict/theme-idle_fingers";
-
-config.setModuleUrl(
-  "ace-builds/src-noconflict/theme-idle_fingers",
-  idleFingersUrl
-);
-
 /* eslint-disable max-len, no-unused-vars */
 window.ace.define(
-  "ace-builds/src-noconflict/theme-idle_fingers",
+  "ace/theme/idle_fingers",
   ["require", "exports", "module", "ace/lib/dom"],
   (acequire, _exports, module) => {
     exports = _exports;
@@ -17,7 +9,7 @@ window.ace.define(
     exports.cssText = `
       .ace-idle-fingers .ace_gutter {
         background: #3b3b3b;
-        color: rgb(153,153,153);
+        color: var(--color-base-neutral30);
       }
 
       .ace-idle-fingers .ace_print-margin {

@@ -27,6 +27,7 @@ export default function TextTrackRow({
   const utility = [
     <button
       key="delete"
+      data-id="destroy"
       className="entity-row__utility-button"
       title={t("actions.delete")}
       onClick={() => onDelete(id)}

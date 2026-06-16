@@ -10,10 +10,16 @@ import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import Authorize from "hoc/Authorize";
 import Category from "backend/components/category";
 import cloneDeep from "lodash/cloneDeep";
-import classNames from "classnames";
-import IconComposer from "global/components/utility/IconComposer";
+import Button from "global/components/atomic/Button";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import { useApiCallback } from "hooks";
+
+const BUTTON_STYLE_PROPS = {
+  size: "sm",
+  shape: "lozenge",
+  background: "outline-accent",
+  lowercase: true
+};
 
 function ProjectTextsContainer({
   confirm,
@@ -22,7 +28,7 @@ function ProjectTextsContainer({
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { project, refresh } = useOutletContext() || {};
+  const { project, refresh, textRemovedRef } = useOutletContext() || {};
 
   const [categories, setCategories] = useState([]);
   const [texts, setTexts] = useState([]);
@@ -30,9 +36,13 @@ function ProjectTextsContainer({
   useEffect(() => {
     if (project) {
       setCategories(project.relationships.textCategories.slice(0));
-      setTexts(project.relationships.texts.slice(0));
+      setTexts(
+        project.relationships.texts
+          .filter(text => text.id !== textRemovedRef.current)
+          .slice(0)
+      );
     }
-  }, [project]);
+  }, [project, textRemovedRef]);
 
   const updateCategory = useApiCallback(textCategoriesAPI.update, {
     requestKey: requests.beTextCategoryUpdate,
@@ -62,12 +72,14 @@ function ProjectTextsContainer({
     });
   };
 
-  const handleTextDestroy = text => {
+  const handleTextDestroy = (text, onConfirmed) => {
     const heading = t("modals.delete_text");
     const message = t("modals.delete_text_body");
     confirm(heading, message, async () => {
+      if (onConfirmed) onConfirmed();
       await destroyText(text.id);
       if (refresh) refresh();
+      textRemovedRef.current = text.id;
       const notification = {
         level: 0,
         id: `TEXT_DESTROYED_${text.id}`,
@@ -158,15 +170,8 @@ function ProjectTextsContainer({
     updateTextCategoryAndPosition
   };
 
-  const buttonClasses = classNames(
-    "entity-list__button",
-    "button-lozenge-secondary"
-  );
   const closeUrl = lh.link("backendProjectTexts", project.id);
 
-  // Both drawer contexts stay mounted (off-screen via `inert`) so each keeps a
-  // stable focus trap across route changes. The active route's `handle.drawer`
-  // string selects which opens; "ingestion" requires an explicit close.
   const drawerProps = [
     {
       context: "backend",
@@ -198,63 +203,27 @@ function ProjectTextsContainer({
         />
 
         <div className="entity-list__button-set-flex">
-          <Link
+          <Button
+            as={Link}
             to={lh.link("backendProjectTextsIngestionsNew", project.id)}
-            className={buttonClasses}
-          >
-            <span className="screen-reader-text">
-              {t("texts.add_text_label")}
-            </span>
-            <IconComposer
-              icon="export24"
-              size={16}
-              className={classNames(
-                "button-icon-secondary__icon",
-                "button-icon-secondary__icon--large"
-              )}
-            />
-            <span className="full" aria-hidden="true">
-              {t("texts.ingest_button_label")}
-            </span>
-          </Link>
-          <Link
+            label={t("texts.ingest_button_label")}
+            preIcon="export24"
+            {...BUTTON_STYLE_PROPS}
+          />
+          <Button
+            as={Link}
             to={lh.link("backendProjectTextsCreate", project.id)}
-            className={buttonClasses}
-          >
-            <span className="screen-reader-text">
-              {t("texts.create_button_label")}
-            </span>
-            <IconComposer
-              icon="copy24"
-              size={16}
-              className={classNames(
-                "button-icon-secondary__icon",
-                "button-icon-secondary__icon--large"
-              )}
-            />
-            <span className="full" aria-hidden="true">
-              {t("texts.create_button_label")}
-            </span>
-          </Link>
-          <Link
+            label={t("texts.create_button_label")}
+            preIcon="copy24"
+            {...BUTTON_STYLE_PROPS}
+          />
+          <Button
+            as={Link}
             to={lh.link("backendProjectCategoriesNew", project.id)}
-            className={buttonClasses}
-          >
-            <span className="screen-reader-text">
-              {t("texts.create_category_button_label")}
-            </span>
-            <IconComposer
-              icon="circlePlus32"
-              size={18}
-              className={classNames(
-                "button-icon-secondary__icon",
-                "button-icon-secondary__icon--large"
-              )}
-            />
-            <span className="full" aria-hidden="true">
-              {t("texts.create_category_button_label")}
-            </span>
-          </Link>
+            label={t("texts.create_category_button_label")}
+            preIcon="circlePlus24"
+            {...BUTTON_STYLE_PROPS}
+          />
         </div>
 
         <Category.List

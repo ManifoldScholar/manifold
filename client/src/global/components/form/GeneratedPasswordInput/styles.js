@@ -37,7 +37,6 @@ export const BaseInput = styled.input`
   transition: border-color ${defaultTransitionProps};
   border-radius: 0;
   appearance: none;
-  outline: 0;
 
   &:focus,
   &:focus-visible {

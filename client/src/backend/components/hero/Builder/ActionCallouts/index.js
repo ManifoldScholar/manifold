@@ -67,8 +67,6 @@ function ActionCallouts(props) {
     slotActionCallouts(actionCallouts)
   );
 
-  // Re-derive the per-slot grouping when a new actionCallouts list comes down
-  // via props (e.g. after an API refresh), mirroring getDerivedStateFromProps.
   const [calloutsRef, setCalloutsRef] = useState(actionCallouts);
   if (calloutsRef !== actionCallouts) {
     setCalloutsRef(actionCallouts);
@@ -184,8 +182,6 @@ function ActionCallouts(props) {
     [moveToSlot, updateCallout, setScreenReaderStatus, t]
   );
 
-  // The window-level monitor is registered once but needs the current slot
-  // groupings and the move handlers on drop, so route it through a ref.
   const handleDrop = ({ source, location }) => {
     const sourceSlotId = source.data.slotId;
     const calloutId = source.data.calloutId;
@@ -214,7 +210,6 @@ function ActionCallouts(props) {
       destinationIndex = destinationList.length;
     }
 
-    // Account for the source being removed from the list before re-insertion.
     if (sourceSlotId === destinationSlotId && sourceIndex < destinationIndex) {
       destinationIndex -= 1;
     }

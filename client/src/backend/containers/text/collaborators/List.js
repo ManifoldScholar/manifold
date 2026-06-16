@@ -8,10 +8,13 @@ import EntitiesList, {
   ContributorRow
 } from "backend/components/list/EntitiesList";
 import Authorization from "helpers/authorization";
-import { useApiCallback } from "hooks";
+import { useApiCallback, useFocusAfterRemoval } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 
 const authorization = new Authorization();
+
+/* Rows are keyed by maker, not the flattened-collaborator id that `entity.id` returns */
+const getMakerId = collaborator => collaborator.relationships?.maker?.id;
 
 function TextCollaboratorsContainer({ confirm }) {
   const { t } = useTranslation();
@@ -28,10 +31,16 @@ function TextCollaboratorsContainer({ confirm }) {
   const destroyCollaborator = useApiCallback(collaboratorsAPI.destroy);
   const updateText = useApiCallback(textsAPI.update);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(
+    text?.relationships?.flattenedCollaborators,
+    { getId: getMakerId }
+  );
+
   const onDelete = makerId => {
     const heading = t("modals.remove_contributor");
     if (confirm)
       confirm(heading, null, async () => {
+        rememberRemoval(makerId);
         await destroyCollaborator("texts", text.id, { maker: makerId });
         if (refresh) refresh();
       });
@@ -71,6 +80,7 @@ function TextCollaboratorsContainer({ confirm }) {
       />
       <EntitiesList
         className="full-width"
+        wrapperRef={listRef}
         title={t("projects.contributors_header")}
         titleStyle="bar"
         titleTag="h2"

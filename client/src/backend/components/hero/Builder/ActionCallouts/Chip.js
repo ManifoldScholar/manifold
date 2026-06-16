@@ -30,8 +30,6 @@ export default function Chip({
   const id = actionCallout.id;
   const chipId = `chip-${id}`;
 
-  // `setElement` refs the whole chip (draggable + drop target); `setHandle` refs
-  // the grabber icon, so the edit button stays clickable.
   const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
     {
       instanceId,
@@ -95,6 +93,9 @@ export default function Chip({
             aria-hidden
           >
             <Utility.IconComposer icon="grabber32" size={24} />
+            <span className="screen-reader-text">
+              {t("actions.dnd.drag_and_drop")}
+            </span>
           </div>
           <div className="action-callout-slot__utility-keyboard-buttons">
             <PopoverMenu

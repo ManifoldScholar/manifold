@@ -44,7 +44,8 @@ class FormCodeArea extends Component {
       editorProps: { $blockScrolling: true },
       onChange: this.onChange,
       value: this.value,
-      width: "100%"
+      width: "100%",
+      setOptions: { enableKeyboardAccessibility: true }
     };
 
     return <CodeAreaInput {...props} />;

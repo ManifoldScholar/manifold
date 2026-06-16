@@ -53,6 +53,7 @@ export default class FormTextInput extends Component {
   render() {
     const inputType =
       this.props.inputType ?? (this.props.password ? "password" : "text");
+    const isRequired = this.props.validation?.includes("required");
 
     return (
       <UIDConsumer>
@@ -63,6 +64,7 @@ export default class FormTextInput extends Component {
             idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
             inputType={inputType}
             renderValue={this.renderValue}
+            ariaRequired={isRequired}
             {...this.props}
           />
         )}

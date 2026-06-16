@@ -104,7 +104,9 @@ export const ButtonText = styled.div`
   body:not(.backend) & {
     ${({ $active }) =>
       $active && `color: var(--color-header-foreground-active);`}
+  }
 
+  body & {
     span {
       display: inline-block;
       position: relative;

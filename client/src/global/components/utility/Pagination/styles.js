@@ -69,11 +69,8 @@ export const Link = styled.a`
   &[aria-current="page"] {
     pointer-events: none;
     color: var(--highlight-color);
-
-    .browse &,
-    .scheme-light & {
-      text-decoration-line: underline;
-    }
+    text-decoration-line: var(--active-text-decoration-line);
+    text-underline-offset: var(--active-text-decoration-offset);
   }
 `;
 

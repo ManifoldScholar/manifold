@@ -9,10 +9,13 @@ import EntitiesList, {
   ContributorRow
 } from "backend/components/list/EntitiesList";
 import Authorization from "helpers/authorization";
-import { useApiCallback } from "hooks";
+import { useApiCallback, useFocusAfterRemoval } from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 
 const authorization = new Authorization();
+
+/* Rows are keyed by maker, not the flattened-collaborator id that `entity.id` returns. */
+const getMakerId = collaborator => collaborator.relationships?.maker?.id;
 
 function ProjectCollaboratorsContainer({ confirm }) {
   const { t } = useTranslation();
@@ -28,16 +31,22 @@ function ProjectCollaboratorsContainer({ confirm }) {
 
   const destroyCollaborator = useApiCallback(collaboratorsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(
+    project?.relationships?.flattenedCollaborators,
+    { getId: getMakerId }
+  );
+
   const onDelete = useCallback(
     makerId => {
       const heading = t("modals.remove_contributor");
       if (confirm)
         confirm(heading, null, async () => {
+          rememberRemoval(makerId);
           await destroyCollaborator("projects", project.id, { maker: makerId });
           refresh();
         });
     },
-    [project?.id, confirm, destroyCollaborator, t, refresh]
+    [project?.id, confirm, destroyCollaborator, t, refresh, rememberRemoval]
   );
 
   const updateProject = useApiCallback(projectsAPI.update);
@@ -79,6 +88,7 @@ function ProjectCollaboratorsContainer({ confirm }) {
       />
       <EntitiesList
         className="full-width"
+        wrapperRef={listRef}
         title={t("projects.contributors_header")}
         titleStyle="bar"
         titleTag="h2"

@@ -19,6 +19,7 @@ class ProjectContentBlockInListPartsDelete extends PureComponent {
 
     return (
       <button
+        data-id="destroy"
         className={`${this.props.baseClass}__button ${this.props.baseClass}__button--delete`}
         onClick={this.props.clickHandler}
         aria-label={this.props.t("layout.delete_block", {
