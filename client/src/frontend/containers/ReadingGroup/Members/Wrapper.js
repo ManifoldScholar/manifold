@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { Navigate, useOutletContext, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import ReadingGroupMembersList from "./List";
 import withConfirmation from "hoc/withConfirmation";
 
@@ -47,7 +47,7 @@ function ReadingGroupsMembersContainer({ confirm }) {
         dispatch={dispatch}
         confirm={confirm}
       />
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           closeUrl: membersRoute,
           context: "frontend",

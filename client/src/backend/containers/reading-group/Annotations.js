@@ -3,7 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import Authorize from "hoc/Authorize";
 import PropTypes from "prop-types";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { readingGroupsAPI, bulkDeleteAPI, annotationsAPI } from "api";
 import {
   useFetch,
@@ -179,7 +179,7 @@ function ReadingGroupAnnotationsContainer({
           ]}
         />
       )}
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           lockScroll: "always",
           size: "default",

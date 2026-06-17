@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import lh from "helpers/linkHandler";
 import List from "./List";
 
@@ -19,7 +19,7 @@ export default function MyReadingGroupsContainer() {
   return (
     <>
       <List ref={refreshRef} />
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           context: "frontend",
           size: "wide",
