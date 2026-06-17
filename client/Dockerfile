@@ -14,8 +14,6 @@ FROM base AS development
 
 LABEL service=manifold-client
 
-RUN yarn build:dev
-
 EXPOSE 3010 3011 3012
 
 CMD ["yarn", "run", "watch"]
