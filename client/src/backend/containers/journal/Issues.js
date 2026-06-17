@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router-dom";
 import Authorize from "hoc/Authorize";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { journalsAPI } from "api";
 import { useFetch, useListQueryParams } from "hooks";
 import EntitiesList, {
@@ -59,7 +59,7 @@ export default function JournalIssuesContainer() {
           />
         ]}
       />
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           lockScroll: "always",
           wide: true,
