@@ -8,39 +8,46 @@ import {
   respond,
   fluidScale,
   formInputMessage,
-  defaultFocusStyle
+  defaultFocusStyle,
+  revealOnFocus
 } from "theme/styles/mixins";
 
 /* Styles here should be updated after FF implements the :has selector to remove the row-reverse in Inner and TitleWrapper. */
 
 export const Wrapper = styled.div`
-  overflow: visible;
   position: relative;
-  height: ${({ $count }) => `${$count * 68}px`};
+  ${({ $dragging }) => $dragging && `user-select: none;`}
 `;
 
 export const ScrollContainer = styled.div`
-  overflow: auto;
-  height: ${({ $count }) => `${$count * 68}px`};
+  position: relative;
 `;
 
-export const Dropzone = styled.div`
-  --Padding-inline: 10px;
-  ${respond(`--Padding-inline: 20px;`, 110)};
-
-  position: absolute;
-  top: -20px;
-  left: calc(-1 * var(--Padding-inline));
-  background-color: var(--box-weak-bg-color);
-  border-radius: var(--box-border-radius);
-  width: calc(100% + (2 * var(--Padding-inline)));
-  height: ${({ $count }) => `${$count * 68 + 20}px`};
+const listLayout = `
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `;
 
-export const Item = styled.div`
-  & + & {
-    margin-block-start: 16px;
-  }
+export const List = styled.ul`
+  ${listLayout}
+`;
+
+export const Group = styled.ul`
+  ${listLayout}
+`;
+
+export const Item = styled.li`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+export const Row = styled.div`
+  position: relative;
 `;
 
 export const TitleWrapper = styled.div`
@@ -84,11 +91,14 @@ export const BG = styled.div`
     $isDragging && `background-color: var(--drawer-bg-color)`}
 `;
 
+export const KeyboardButtons = styled.div``;
+
 export const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
   padding: 0;
   color: var(--color-neutral-ui-light);
+  ${revealOnFocus(KeyboardButtons)}
 
   &:hover ~ ${TitleWrapper} {
     color: var(--highlight-color);
@@ -121,7 +131,11 @@ export const Inner = styled.div`
       background-color: var(--drawer-bg-color);
     }
 
-  ${({ $isTarget }) => $isTarget && `border-color: var(--highlight-color);`}
+  ${({ $isTarget, $targetBlocked }) =>
+    $isTarget &&
+    `border-color: ${
+      $targetBlocked ? "var(--error-color)" : "var(--highlight-color)"
+    };`}
 `;
 
 export const Button = styled.button`
@@ -160,4 +174,41 @@ export const Error = styled.span`
   margin-block-end: 20px;
   color: var(--error-color);
   padding-inline: 0;
+`;
+
+export const DropLine = styled.div`
+  position: absolute;
+  inset-inline-start: ${({ $inset }) => `${$inset || 0}px`};
+  inset-inline-end: 0;
+  height: 2px;
+  border-radius: 1px;
+  pointer-events: none;
+  background-color: ${({ $blocked }) =>
+    $blocked ? "var(--error-color)" : "var(--highlight-color)"};
+  ${({ $edge }) => ($edge === "top" ? "top: -9px;" : "bottom: -9px;")}
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: -4px;
+    top: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: ${({ $blocked }) =>
+      $blocked ? "var(--error-color)" : "var(--highlight-color)"};
+  }
+`;
+
+export const Preview = styled.div`
+  ${textTruncate}
+  max-width: 320px;
+  padding: 8px 14px;
+  border-radius: var(--box-border-radius);
+  background-color: var(--drawer-bg-color);
+  color: var(--strong-color);
+  font-family: var(--font-family-sans);
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 `;
