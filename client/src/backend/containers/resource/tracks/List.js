@@ -9,7 +9,7 @@ import EntitiesList, {
 import { useFetch, useApiCallback } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import withConfirmation from "hoc/withConfirmation";
 
 function TextTracksListContainer({ confirm }) {
@@ -46,7 +46,7 @@ function TextTracksListContainer({ confirm }) {
 
   return (
     <>
-      <OutletWithDrawer drawerProps={drawerProps} context={context} />
+      <OutletWithDrawers drawerProps={drawerProps} context={context} />
       <PageHeader type="list" title={t("titles.tracks")} hideBreadcrumbs />
       {!!tracks && (
         <EntitiesList
