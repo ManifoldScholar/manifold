@@ -120,18 +120,28 @@ export const ResultsList = styled.ul`
 `;
 
 export const Result = styled.li`
-  --Result-bg-color: ${({ $active, $selected }) => {
-    if ($active && $selected) return "var(--color-base-neutral75);";
-    if ($active) return "var(--color-base-neutral80);";
-    if ($selected) return "var(--color-base-neutral85);";
-    return "inherit;";
-  }}
+  --Result-bg-color: inherit;
 
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   padding: 8px 17px;
   font-family: var(--font-family-sans);
   color: var(--color-base-neutral10);
   cursor: pointer;
   background: var(--Result-bg-color);
+
+  &[aria-selected="true"] {
+    --Result-bg-color: var(--color-base-neutral80);
+  }
+
+  &[data-selected="true"] {
+    --Result-bg-color: var(--color-base-neutral85);
+  }
+
+  &[aria-selected="true"][data-selected="true"] {
+    --Result-bg-color: var(--color-base-neutral75);
+  }
 
   & + & {
     border: 0;
@@ -139,6 +149,15 @@ export const Result = styled.li`
 
   &:hover {
     background: var(--color-base-neutral80);
+  }
+
+  svg {
+    position: absolute;
+    margin-block-start: 0.125rem;
+  }
+
+  span {
+    padding-inline-start: 1.25rem;
   }
 `;
 
