@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useParams, useMatches } from "react-router-dom";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { collectionProjectsAPI, projectCollectionsAPI, requests } from "api";
 import ProjectCollection from "backend/components/project-collection";
 import Manual from "./Manual";
@@ -91,7 +91,7 @@ export default function ProjectCollectionDetail() {
             projectCollection={projectCollection}
           />
         )}
-        <OutletWithDrawer
+        <OutletWithDrawers
           drawerProps={drawerProps}
           context={{ projectCollection }}
         />

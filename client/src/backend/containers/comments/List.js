@@ -16,7 +16,7 @@ import withFilteredLists, { commentFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import {
   useBulkActions,
   useClearBulkSelectionWithFilters,
@@ -124,7 +124,7 @@ function CommentsList({
       }}
       failureRedirect
     >
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           lockScroll: "always",
           closeUrl

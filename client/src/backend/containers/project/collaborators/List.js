@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import { collaboratorsAPI, projectsAPI } from "api";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
   Button,
@@ -70,7 +70,7 @@ function ProjectCollaboratorsContainer({ confirm }) {
 
   return (
     <section>
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{ closeUrl }}
         context={{
           refresh,

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { makersAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import withFilteredLists, { makerFilters } from "hoc/withFilteredLists";
 import { useParams } from "react-router-dom";
 import { useFetch, useListQueryParams } from "hooks";
@@ -50,7 +50,7 @@ function MakersListContainer({
       }}
       failureRedirect
     >
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={drawerProps}
         context={{ refetch: refresh }}
       />

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { exportTargetsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   ExportTargetRow
@@ -38,7 +38,7 @@ export default function ExportTargetsListContainer() {
 
   return (
     <>
-      <OutletWithDrawer drawerProps={drawerProps} />
+      <OutletWithDrawers drawerProps={drawerProps} />
       <EntitiesList
         entityComponent={ExportTargetRow}
         entityComponentProps={{ active }}
