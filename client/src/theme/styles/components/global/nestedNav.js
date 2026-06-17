@@ -3,10 +3,10 @@ import {
   buttonAvatar,
   listUnstyled,
   defaultHoverStyle,
+  defaultFocusStyle,
   buttonUnstyled,
   defaultTransitionProps
 } from "theme/styles/mixins";
-import { defaultFocusStyle } from "../../mixins/appearance";
 
 export default `
 .nested-nav {
@@ -128,11 +128,11 @@ export default `
 
     ${respond(`font-size: 20px;`, 40)}
 
-    &.active {
+    &[aria-current="page"]:not(:hover) {
       color: var(--color-header-foreground-active);
     }
 
-    .nested-nav--dark &.active {
+    .nested-nav--dark &[aria-current="page"]:not(:hover) {
       color: var(--color-base-neutral-white);
     }
 
@@ -158,10 +158,10 @@ export default `
 
   &__link,
   &__button {
-    --outline-width: 0px;
-
-    &:focus-visible {
-      text-decoration-line: underline;
+    &[aria-current="page"] {
+      text-decoration-line: var(--active-text-decoration-line);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: var(--active-text-decoration-offset);
     }
   }
 
@@ -176,8 +176,17 @@ export default `
   &__link,
   &__button,
   &__disclosure-button {
+    &:where(a) {
+      display: block;
+    }
+
+    &:hover {
+      ${defaultHoverStyle}
+    }
+
     &:focus-visible {
       ${defaultHoverStyle}
+      ${defaultFocusStyle}
     }
   }
 
@@ -203,9 +212,6 @@ export default `
 
   &__disclosure-button {
     height: 100%;
-    &:focus-visible {
-      ${defaultFocusStyle}
-    }
   }
 
   &__disclosure-icon {

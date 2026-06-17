@@ -23,6 +23,7 @@ export default `
 
     a {
       ${utilityPrimary}
+      position: relative;
       font-size: 14px;
       text-decoration: none;
       text-transform: none;
@@ -31,6 +32,17 @@ export default `
       &:hover,
       &.active {
         color: var(--color-neutral-text-extra-light);
+      }
+
+      &.active::before {
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 1.5px;
+        content: "";
+        background-color: currentColor;
       }
     }
 
