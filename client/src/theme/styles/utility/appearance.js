@@ -105,19 +105,4 @@ export default `
     width: 100%;
   }
 
-  .drag-placeholder {
-    opacity: .5;
-    pointer-events: none;
-  }
-
-  .rbd-migration-resets {
-    *[data-rbd-placeholder-context-id] {
-      display: none;
-    }
-
-    *[data-rbd-drop-indicator] {
-      height: 4px !important;
-      background-color: var(--color-accent-primary) !important;
-    }
-  }
 `;

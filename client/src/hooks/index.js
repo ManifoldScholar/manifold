@@ -4,6 +4,8 @@ export { default as usePaginationState } from "./api/usePaginationState";
 export { default as useFilterState } from "./api/useFilterState";
 export { default as useListQueryParams } from "./useListQueryParams";
 
+export { default as useReorderableItem } from "./useReorderableItem";
+
 export { default as useCurrentUser } from "./useCurrentUser";
 
 export { default as useAuthentication } from "./useAuthentication";

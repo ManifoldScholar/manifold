@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AvailableSection from "./sections/Available";
 import CurrentSection from "./sections/Current";
 import DraggableEventHelper from "../helpers/draggableEvent";
+import resolver from "../helpers/resolver";
 import { contentBlocksAPI, projectsAPI, requests } from "api";
-import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
+import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { autoScrollWindowForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
+import { extractClosestEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import withConfirmation from "hoc/withConfirmation";
 import lh from "helpers/linkHandler";
 import configHelper from "../helpers/configurations";
@@ -18,6 +22,13 @@ const cloneBlocks = contentBlocks => {
   const blocks = contentBlocks || [];
   return cloneDeep(blocks);
 };
+
+const isTopType = type => resolver.typeToBlockComponent(type).top === true;
+
+const zoneBlocks = (blocks, zoneType) =>
+  blocks.filter(
+    block => isTopType(block.attributes.type) === (zoneType === "TOP")
+  );
 
 function ProjectContent({ project, confirm, children }) {
   const { t } = useTranslation();
@@ -31,6 +42,7 @@ function ProjectContent({ project, confirm, children }) {
 
   const [blocks, setBlocks] = useState(() => cloneBlocks(contentBlocks || []));
   const [activeDraggableType, setActiveDraggableType] = useState(null);
+  const [instanceId] = useState(() => Symbol("contentBlockBuilder"));
 
   useEffect(() => {
     setBlocks(cloneBlocks(contentBlocks || []));
@@ -77,25 +89,90 @@ function ProjectContent({ project, confirm, children }) {
     }
   };
 
-  const onDragStart = ({ type }) => {
-    setActiveDraggableType(type);
-  };
+  // The window-level monitor is registered once but needs the current blocks
+  // and handlers on drop, so route them through a ref.
+  const dropStateRef = useRef();
+  dropStateRef.current = { blocks, updateBlock, newBlock };
 
-  const onDragEnd = draggable => {
+  // Translate a native drop into the rbd-shaped event DraggableEventHelper
+  // consumes, so the (top/bottom, insert/move) position math is preserved.
+  const handleDrop = ({ source, location }) => {
     setActiveDraggableType(null);
-    const draggableHelper = new DraggableEventHelper(draggable, blocks);
+
+    const {
+      blocks: currentBlocks,
+      updateBlock: update,
+      newBlock: insert
+    } = dropStateRef.current;
+    const targets = location.current.dropTargets;
+    const zoneTarget = targets.find(dt => dt.data.kind === "zone");
+    const blockTarget = targets.find(dt => dt.data.kind === "current-block");
+    const destinationZone =
+      zoneTarget?.data.zoneType ?? blockTarget?.data.zoneType;
+    if (!destinationZone) return;
+
+    const destZoneBlocks = zoneBlocks(currentBlocks, destinationZone);
+    let index;
+    if (blockTarget) {
+      const rawIndex = destZoneBlocks.findIndex(
+        b => b.id === blockTarget.data.id
+      );
+      if (rawIndex === -1) return;
+      const edge = extractClosestEdge(blockTarget.data);
+      index = edge === "bottom" ? rawIndex + 1 : rawIndex;
+    } else {
+      index = destZoneBlocks.length;
+    }
+
+    const isMove = source.data.kind === "current";
+    if (isMove && source.data.zoneType === destinationZone) {
+      // Account for the source being removed before re-insertion.
+      if (source.data.index < index) index -= 1;
+      if (source.data.index === index) return;
+    }
+
+    const zone = destinationZone.toLowerCase();
+    const draggable = isMove
+      ? {
+          type: source.data.zoneType,
+          draggableId: source.data.id,
+          source: {
+            droppableId: `current-${source.data.zoneType.toLowerCase()}`
+          },
+          destination: { droppableId: `current-${zone}`, index }
+        }
+      : {
+          type: source.data.zoneType,
+          draggableId: source.data.blockType,
+          source: { droppableId: `available-${source.data.blockType}` },
+          destination: { droppableId: `current-${zone}`, index }
+        };
+
+    const draggableHelper = new DraggableEventHelper(draggable, currentBlocks);
     if (!draggableHelper.actionable) return;
     const action = draggableHelper.action;
     const newBlocks = draggableHelper.blocks;
-    let callback;
-    if (action === "move") callback = () => updateBlock(draggableHelper.block);
+    setBlocks(newBlocks);
+    if (action === "move") update(draggableHelper.block);
     if (action === "insert") {
       const newPendingBlock = newBlocks.find(block => block.id === "pending");
-      callback = () => newBlock(newPendingBlock);
+      insert(newPendingBlock);
     }
-    setBlocks(newBlocks);
-    if (callback) callback();
   };
+  const handleDropRef = useRef(handleDrop);
+  handleDropRef.current = handleDrop;
+
+  useEffect(() => {
+    return combine(
+      monitorForElements({
+        canMonitor: ({ source }) => source.data.instanceId === instanceId,
+        onDragStart: ({ source }) =>
+          setActiveDraggableType(source.data.zoneType),
+        onDrop: args => handleDropRef.current(args)
+      }),
+      autoScrollWindowForElements()
+    );
+  }, [instanceId]);
 
   const onKeyboardMove = (block, addtlParams) => {
     const { index, direction, callback } = addtlParams;
@@ -170,7 +247,7 @@ function ProjectContent({ project, confirm, children }) {
   const onSave = refresh;
 
   return (
-    <section className="backend-project-content rbd-migration-resets">
+    <section className="backend-project-content">
       <UIDConsumer name={id => `content-block-builder-${id}`}>
         {id => (
           <div
@@ -179,19 +256,19 @@ function ProjectContent({ project, confirm, children }) {
             aria-labelledby={`${id}-header`}
             aria-describedby={`${id}-instructions`}
           >
-            <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
-              <AvailableSection
-                onClickAdd={handleAddEntity}
-                currentBlocks={blocks}
-                headerId={`${id}-header`}
-                instructionsId={`${id}-instructions`}
-              />
-              <CurrentSection
-                activeDraggableType={activeDraggableType}
-                entityCallbacks={entityCallbacks}
-                currentBlocks={blocks}
-              />
-            </DragDropContext>
+            <AvailableSection
+              onClickAdd={handleAddEntity}
+              currentBlocks={blocks}
+              instanceId={instanceId}
+              headerId={`${id}-header`}
+              instructionsId={`${id}-instructions`}
+            />
+            <CurrentSection
+              activeDraggableType={activeDraggableType}
+              entityCallbacks={entityCallbacks}
+              currentBlocks={blocks}
+              instanceId={instanceId}
+            />
             {children(closeWithoutSave, onSave, pendingBlock)}
           </div>
         )}
