@@ -10,9 +10,9 @@ export default class CategoryListCategories extends PureComponent {
     texts: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
     activeType: PropTypes.string,
+    instanceId: PropTypes.symbol.isRequired,
     callbacks: PropTypes.object.isRequired,
-    onTextKeyboardMove: PropTypes.func.isRequired,
-    dragging: PropTypes.string
+    onTextKeyboardMove: PropTypes.func.isRequired
   };
 
   get categories() {
@@ -51,6 +51,7 @@ export default class CategoryListCategories extends PureComponent {
     return this.props.categories.map((category, index) => (
       <Category
         activeType={this.activeType}
+        instanceId={this.props.instanceId}
         callbacks={this.callbacks}
         project={this.project}
         key={category.id}
@@ -60,7 +61,6 @@ export default class CategoryListCategories extends PureComponent {
         categoryCount={this.props.categories.length + 1}
         texts={this.categoryTexts(category)}
         onTextKeyboardMove={this.props.onTextKeyboardMove}
-        isDragging={this.props.dragging === category.id}
       />
     ));
   }
