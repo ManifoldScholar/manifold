@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { subjectsAPI, requests } from "api";
 import lh from "helpers/linkHandler";
 import EntitiesList, {
@@ -29,7 +29,7 @@ export default function SettingsSubjectsListContainer() {
 
   return (
     <>
-      <OutletWithDrawer drawerProps={drawerProps} />
+      <OutletWithDrawers drawerProps={drawerProps} />
       {subjects && (
         <EntitiesList
           entityComponent={SubjectRow}
