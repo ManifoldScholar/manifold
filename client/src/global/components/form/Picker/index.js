@@ -666,9 +666,12 @@ export class PickerComponent extends PureComponent {
                           this.callbacks.selectOrToggleOption(option.value);
                         }}
                         $active={active}
-                        $selected={selected}
+                        data-selected={selected}
                       >
-                        {option.label}
+                        {selected && (
+                          <IconComposer icon="checkmark16" size="default" />
+                        )}
+                        <span>{option.label}</span>
                       </Styled.Result>
                     );
                   })}
