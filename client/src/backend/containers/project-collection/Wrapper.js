@@ -1,13 +1,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Link,
-  Outlet,
-  useParams,
-  useNavigate,
-  useMatches
-} from "react-router-dom";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import { Link, useParams, useNavigate, useMatches } from "react-router-dom";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import classNames from "classnames";
 import { projectCollectionsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -199,27 +193,19 @@ function ProjectCollectionWrapperContainer({ setScreenReaderStatus }) {
                 />
               )}
               <div>
-                {isNewRoute ? (
-                  <OutletWithDrawer
-                    drawerProps={{
-                      size: "flexible",
-                      padding: "default",
-                      lockScroll: "always",
-                      closeUrl: lh.link("backendProjectCollections")
-                    }}
-                    context={{
-                      projectCollection,
-                      handleNewSuccess
-                    }}
-                  />
-                ) : (
-                  <Outlet
-                    context={{
-                      projectCollection,
-                      handleNewSuccess
-                    }}
-                  />
-                )}
+                <OutletWithDrawers
+                  drawerProps={{
+                    size: "flexible",
+                    padding: "default",
+                    lockScroll: "always",
+                    closeUrl: lh.link("backendProjectCollections")
+                  }}
+                  drawerCondition={isNewRoute}
+                  context={{
+                    projectCollection,
+                    handleNewSuccess
+                  }}
+                />
               </div>
             </div>
           </div>

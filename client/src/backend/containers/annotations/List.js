@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import { annotationsAPI, bulkDeleteAPI } from "api";
 import EntitiesList, {
   Search,
@@ -124,7 +124,7 @@ function AnnotationsList({
       }}
       failureRedirect
     >
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           lockScroll: "always",
           closeUrl

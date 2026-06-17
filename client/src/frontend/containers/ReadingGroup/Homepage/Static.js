@@ -5,7 +5,7 @@ import {
   CollectionPlaceholder
 } from "frontend/components/collecting/reading-group";
 import { getEntityCollection } from "frontend/components/collecting/helpers";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import lh from "helpers/linkHandler";
 
 function ReadingGroupHomepageStaticContainer() {
@@ -65,7 +65,7 @@ function ReadingGroupHomepageStaticContainer() {
           )}
         </>
       )}
-      <OutletWithDrawer
+      <OutletWithDrawers
         context={{
           readingGroup,
           closeDrawer,

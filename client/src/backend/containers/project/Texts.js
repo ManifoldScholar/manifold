@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useOutletContext, useMatches, Link } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import withConfirmation from "hoc/withConfirmation";
 import { notificationActions } from "actions";
 import { textsAPI, textCategoriesAPI, requests } from "api";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import Authorize from "hoc/Authorize";
 import Category from "backend/components/category";
 import cloneDeep from "lodash/cloneDeep";
@@ -23,7 +23,6 @@ function ProjectTextsContainer({
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { project, refresh } = useOutletContext() || {};
-  const matches = useMatches();
 
   const [categories, setCategories] = useState([]);
   const [texts, setTexts] = useState([]);
@@ -165,26 +164,25 @@ function ProjectTextsContainer({
   );
   const closeUrl = lh.link("backendProjectTexts", project.id);
 
-  const currentMatch = matches[matches.length - 1];
-  const isIngestRoute = currentMatch?.handle?.ingest;
-
-  const getDrawerProps = () => {
-    if (isIngestRoute) {
-      return {
-        lockScroll: "always",
-        wide: true,
-        lockScrollClickCloses: false,
-        closeUrl,
-        context: "ingestion"
-      };
-    }
-    return {
+  // Both drawer contexts stay mounted (off-screen via `inert`) so each keeps a
+  // stable focus trap across route changes. The active route's `handle.drawer`
+  // string selects which opens; "ingestion" requires an explicit close.
+  const drawerProps = [
+    {
+      context: "backend",
       lockScroll: "always",
       wide: true,
       lockScrollClickCloses: false,
       closeUrl
-    };
-  };
+    },
+    {
+      context: "ingestion",
+      lockScroll: "always",
+      wide: true,
+      lockScrollClickCloses: false,
+      closeUrl
+    }
+  ];
 
   return (
     <Authorize
@@ -194,8 +192,8 @@ function ProjectTextsContainer({
       failureRedirect={lh.link("backendProject", project.id)}
     >
       <>
-        <OutletWithDrawer
-          drawerProps={getDrawerProps()}
+        <OutletWithDrawers
+          drawerProps={drawerProps}
           context={{ project, refresh }}
         />
 

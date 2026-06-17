@@ -8,7 +8,7 @@ import EntitiesList, {
   UserGroupEntitlementRow
 } from "backend/components/list/EntitiesList";
 import { useFetch, useApiCallback } from "hooks";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import withConfirmation from "hoc/withConfirmation";
 
 function UserGroupEntitlements({ confirm }) {
@@ -43,7 +43,7 @@ function UserGroupEntitlements({ confirm }) {
 
   return (
     <>
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={drawerProps}
         context={{ refresh, userGroup }}
       />

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import TOCList from "backend/components/authoring/TOCList";
 import { formatTreeData } from "backend/components/authoring/TOCList/treeHelpers";
 import { textsAPI } from "api";
@@ -55,7 +55,7 @@ function TextTOCContainer({ confirm }) {
 
   return (
     <section>
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           lockScroll: "always",
           wide: true,

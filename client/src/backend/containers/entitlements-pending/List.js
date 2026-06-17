@@ -9,7 +9,7 @@ import EntitiesList, {
   PendingEntitlementRow
 } from "backend/components/list/EntitiesList";
 import { useFetch, useApiCallback, useListQueryParams } from "hooks";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
 import PageHeader from "backend/components/layout/PageHeader";
@@ -78,7 +78,7 @@ function PendingEntitlementsList({
       }}
       failureRedirect
     >
-      <OutletWithDrawer drawerProps={drawerProps} context={{ refresh }} />
+      <OutletWithDrawers drawerProps={drawerProps} context={{ refresh }} />
       {entitlements && (
         <>
           <PageHeader
