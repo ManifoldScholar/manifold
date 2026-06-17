@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Utility from "global/components/utility";
 import lh from "helpers/linkHandler";
 import classNames from "classnames";
-import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
+import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import Chip from "./Chip";
 
 export default function Slot({
@@ -12,6 +13,7 @@ export default function Slot({
   attributes,
   actionCallouts,
   id,
+  instanceId,
   model,
   actionCalloutEditRoute,
   actionCalloutNewRoute,
@@ -21,6 +23,21 @@ export default function Slot({
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [element, setElement] = useState(null);
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
+
+  useEffect(() => {
+    if (!element) return undefined;
+
+    return dropTargetForElements({
+      element,
+      canDrop: ({ source }) => source.data.instanceId === instanceId,
+      getData: () => ({ slotId: id, isSlot: true }),
+      onDragEnter: () => setIsDraggingOver(true),
+      onDragLeave: () => setIsDraggingOver(false),
+      onDrop: () => setIsDraggingOver(false)
+    });
+  }, [element, instanceId, id]);
 
   const openNewDrawer = () => {
     const actionCallout = { attributes };
@@ -30,49 +47,43 @@ export default function Slot({
   };
 
   return (
-    <Droppable droppableId={id} type="actionCallout">
-      {(provided, snapshot) => (
-        <div
-          className={classNames("action-callout-slot", {
-            "action-callout-slot--active": snapshot.isDraggingOver
-          })}
+    <div
+      className={classNames("action-callout-slot", {
+        "action-callout-slot--active": isDraggingOver
+      })}
+    >
+      <div className="action-callout-slot__content">
+        <button
+          type="button"
+          onClick={openNewDrawer}
+          className="action-callout-slot__button action-callout-slot__button--header"
         >
-          <div className="action-callout-slot__content">
-            <button
-              type="button"
-              onClick={openNewDrawer}
-              className="action-callout-slot__button action-callout-slot__button--header"
-            >
-              <Utility.IconComposer icon="circlePlus32" size={32} />
-              <span>
-                {t(title)}
-                <br />
-                {attributes.button ? t("layout.buttons") : t("layout.links")}
-              </span>
-            </button>
-            <div ref={provided.innerRef} className="action-callout-slot__chips">
-              {actionCallouts.map((actionCallout, chipIndex) => (
-                <Chip
-                  key={actionCallout.id}
-                  actionCalloutEditRoute={actionCalloutEditRoute}
-                  index={chipIndex}
-                  actionCallout={actionCallout}
-                  model={model}
-                  isDragging={
-                    snapshot.draggingFromThisWith === actionCallout.id
-                  }
-                  chipCount={actionCallouts.length}
-                  slotIndex={index}
-                  slotCount={slotCount}
-                  onKeyboardMove={onKeyboardMove}
-                />
-              ))}
-              {provided.placeholder}
-            </div>
-          </div>
+          <Utility.IconComposer icon="circlePlus32" size={32} />
+          <span>
+            {t(title)}
+            <br />
+            {attributes.button ? t("layout.buttons") : t("layout.links")}
+          </span>
+        </button>
+        <div ref={setElement} className="action-callout-slot__chips">
+          {actionCallouts.map((actionCallout, chipIndex) => (
+            <Chip
+              key={actionCallout.id}
+              actionCalloutEditRoute={actionCalloutEditRoute}
+              index={chipIndex}
+              actionCallout={actionCallout}
+              instanceId={instanceId}
+              slotId={id}
+              model={model}
+              chipCount={actionCallouts.length}
+              slotIndex={index}
+              slotCount={slotCount}
+              onKeyboardMove={onKeyboardMove}
+            />
+          ))}
         </div>
-      )}
-    </Droppable>
+      </div>
+    </div>
   );
 }
 
@@ -83,6 +94,7 @@ Slot.propTypes = {
   attributes: PropTypes.object.isRequired,
   actionCallouts: PropTypes.array.isRequired,
   id: PropTypes.string.isRequired,
+  instanceId: PropTypes.symbol.isRequired,
   model: PropTypes.object.isRequired,
   actionCalloutEditRoute: PropTypes.string.isRequired,
   actionCalloutNewRoute: PropTypes.string.isRequired,

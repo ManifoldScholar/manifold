@@ -14,7 +14,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
     entity: PropTypes.object.isRequired,
     entityCallbacks: PropTypes.object.isRequired,
     typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    dragHandleProps: PropTypes.object,
+    dragHandleRef: PropTypes.func,
     index: PropTypes.number,
     entityCount: PropTypes.number,
     announce: PropTypes.func
@@ -83,7 +83,7 @@ export default class ProjectContentBlockInListCurrent extends PureComponent {
                 <Drag
                   visible={this.orderable}
                   baseClass={baseClass}
-                  dragHandleProps={this.props.dragHandleProps}
+                  dragHandleRef={this.props.dragHandleRef}
                   entityCallbacks={this.props.entityCallbacks}
                   blockTitle={block.title}
                   entityId={this.entity.id}

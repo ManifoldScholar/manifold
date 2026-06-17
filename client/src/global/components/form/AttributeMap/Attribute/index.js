@@ -1,81 +1,63 @@
-import React, { PureComponent } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
+import { draggable } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
-class FormColumnMapAttribute extends PureComponent {
-  static displayName = "Form.ColumnMap.Attribute";
+function FormColumnMapAttribute({
+  name,
+  instanceId,
+  mapping,
+  unLink,
+  inWell,
+  t
+}) {
+  const [element, setElement] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
-    mapping: PropTypes.string,
-    unLink: PropTypes.func,
-    t: PropTypes.func,
-    inWell: PropTypes.bool,
-    isDragging: PropTypes.bool
-  };
+  useEffect(() => {
+    if (!element) return undefined;
 
-  handleCancel = event => {
+    return draggable({
+      element,
+      getInitialData: () => ({ instanceId, column: name }),
+      onDragStart: () => setIsDragging(true),
+      onDrop: () => setIsDragging(false)
+    });
+  }, [element, instanceId, name]);
+
+  const handleCancel = event => {
     event.preventDefault();
-    this.props.unLink(this.props.mapping, this.props.name);
+    unLink(mapping, name);
   };
 
-  render() {
-    return (
-      <>
-        <Draggable draggableId={this.props.name} index={this.props.index}>
-          {provided => {
-            return (
-              <>
-                <Styled.ColumnListing>
-                  <Styled.ColumnAvailable
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <Styled.ColumnName $matched={this.props.matched}>
-                      {this.props.name}
-                    </Styled.ColumnName>
-                  </Styled.ColumnAvailable>
-                  {this.props.mapping && (
-                    <Styled.Cancel
-                      onClick={this.handleCancel}
-                      $well={this.props.inWell}
-                    >
-                      <span className="screen-reader-text">
-                        {this.props.t("forms.attribute_map.cancel", {
-                          name: this.props.name,
-                          mapping: this.props.mapping
-                        })}
-                      </span>
-                      <IconComposer icon="close16" size="default" />
-                    </Styled.Cancel>
-                  )}
-                </Styled.ColumnListing>
-              </>
-            );
-          }}
-        </Draggable>
-        {this.props.isDragging && (
-          <Styled.ColumnListing className="drag-placeholder">
-            <Styled.ColumnAvailable>
-              <Styled.ColumnName $matched={this.props.matched}>
-                {this.props.name}
-              </Styled.ColumnName>
-            </Styled.ColumnAvailable>
-            {this.props.mapping && (
-              <Styled.Cancel as="div" $well={this.props.inWell}>
-                <IconComposer icon="close16" size="default" />
-              </Styled.Cancel>
-            )}
-          </Styled.ColumnListing>
-        )}
-      </>
-    );
-  }
+  return (
+    <Styled.ColumnListing style={isDragging ? { opacity: 0.5 } : undefined}>
+      <Styled.ColumnAvailable ref={setElement}>
+        <Styled.ColumnName>{name}</Styled.ColumnName>
+      </Styled.ColumnAvailable>
+      {mapping && (
+        <Styled.Cancel onClick={handleCancel} $well={inWell}>
+          <span className="screen-reader-text">
+            {t("forms.attribute_map.cancel", { name, mapping })}
+          </span>
+          <IconComposer icon="close16" size="default" />
+        </Styled.Cancel>
+      )}
+    </Styled.ColumnListing>
+  );
 }
+
+FormColumnMapAttribute.displayName = "Form.ColumnMap.Attribute";
+
+FormColumnMapAttribute.propTypes = {
+  name: PropTypes.string.isRequired,
+  instanceId: PropTypes.symbol.isRequired,
+  mapping: PropTypes.string,
+  unLink: PropTypes.func,
+  inWell: PropTypes.bool,
+  t: PropTypes.func
+};
 
 export default withTranslation()(FormColumnMapAttribute);

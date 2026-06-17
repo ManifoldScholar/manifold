@@ -1,108 +1,124 @@
-import React, { PureComponent } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Header from "./parts/Header";
 import resolver from "../../helpers/resolver";
 import Block from "../Block";
-import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
+import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 
-class ProjectContentSectionsCurrent extends PureComponent {
-  static displayName = "Project.Content.Sections.Current";
+const isTopBlock = block =>
+  resolver.typeToBlockComponent(block.attributes.type).top === true;
 
-  static propTypes = {
-    currentBlocks: PropTypes.array.isRequired,
-    entityCallbacks: PropTypes.object.isRequired,
-    activeDraggableType: PropTypes.string,
-    t: PropTypes.func
-  };
+function Zone({ zoneType, instanceId, showDropzone, children }) {
+  const [element, setElement] = useState(null);
 
-  static defaultProps = {
-    currentBlocks: []
-  };
+  useEffect(() => {
+    if (!element) return undefined;
 
-  get announce() {
-    return this.props.setScreenReaderStatus;
-  }
+    return dropTargetForElements({
+      element,
+      canDrop: ({ source }) =>
+        source.data.instanceId === instanceId &&
+        source.data.zoneType === zoneType,
+      getData: () => ({ kind: "zone", zoneType })
+    });
+  }, [element, instanceId, zoneType]);
 
-  get topBlocks() {
-    return this.props.currentBlocks.filter(
-      block => resolver.typeToBlockComponent(block.attributes.type).top === true
-    );
-  }
-
-  get bottomBlocks() {
-    return this.props.currentBlocks.filter(
-      block => resolver.typeToBlockComponent(block.attributes.type).top !== true
-    );
-  }
-
-  get zones() {
-    return {
-      top: { blocks: this.topBlocks, visible: false },
-      bottom: { blocks: this.bottomBlocks, visible: true }
-    };
-  }
-
-  bindEntityCallbacks(block) {
-    const callbacks = this.props.entityCallbacks;
-    /* eslint-disable no-param-reassign */
-    return Object.keys(callbacks).reduce((memo, key) => {
-      memo[key] = addtlParams => callbacks[key](block, addtlParams);
-      return memo;
-    }, {});
-    /* eslint-enable no-param-reassign */
-  }
-
-  showDropzone(zone) {
-    if (this.props.activeDraggableType === zone.toUpperCase()) return true;
-    return this.zones[zone].visible && this.zones[zone].blocks.length === 0;
-  }
-
-  render() {
-    return (
-      <>
-        <div>
-          <Header subtitle={this.props.t("layout.layout")} />
-          {Object.keys(this.zones).map(zone => (
-            <Droppable
-              key={zone}
-              type={zone.toUpperCase()}
-              droppableId={`current-${zone}`}
-            >
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  className={classNames("content-block-list full-width", {
-                    "content-block-list--show-dropzone": this.showDropzone(zone)
-                  })}
-                >
-                  {this.zones[zone].blocks.map((block, index) => (
-                    <Block
-                      entityCallbacks={this.bindEntityCallbacks(block)}
-                      currentBlocks={this.props.currentBlocks}
-                      key={block.id}
-                      context="current"
-                      entity={block}
-                      type={block.attributes.type}
-                      index={index}
-                      entityCount={this.zones[zone].blocks.length}
-                      isDragging={snapshot.draggingFromThisWith === block.id}
-                      announce={this.announce}
-                    />
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          ))}
-        </div>
-        {this.props.renderLiveRegion("alert")}
-      </>
-    );
-  }
+  return (
+    <div
+      ref={setElement}
+      className={classNames("content-block-list full-width", {
+        "content-block-list--show-dropzone": showDropzone
+      })}
+    >
+      {children}
+    </div>
+  );
 }
+
+Zone.propTypes = {
+  zoneType: PropTypes.string.isRequired,
+  instanceId: PropTypes.symbol.isRequired,
+  showDropzone: PropTypes.bool,
+  children: PropTypes.node
+};
+
+function ProjectContentSectionsCurrent({
+  currentBlocks = [],
+  entityCallbacks,
+  activeDraggableType,
+  instanceId,
+  setScreenReaderStatus,
+  renderLiveRegion,
+  t
+}) {
+  const topBlocks = currentBlocks.filter(isTopBlock);
+  const bottomBlocks = currentBlocks.filter(block => !isTopBlock(block));
+
+  const zones = {
+    top: { blocks: topBlocks, visible: false },
+    bottom: { blocks: bottomBlocks, visible: true }
+  };
+
+  const bindEntityCallbacks = block =>
+    Object.keys(entityCallbacks).reduce((memo, key) => {
+      return {
+        ...memo,
+        [key]: addtlParams => entityCallbacks[key](block, addtlParams)
+      };
+    }, {});
+
+  const showDropzone = zone => {
+    if (activeDraggableType === zone.toUpperCase()) return true;
+    return zones[zone].visible && zones[zone].blocks.length === 0;
+  };
+
+  return (
+    <>
+      <div>
+        <Header subtitle={t("layout.layout")} />
+        {Object.keys(zones).map(zone => (
+          <Zone
+            key={zone}
+            zoneType={zone.toUpperCase()}
+            instanceId={instanceId}
+            showDropzone={showDropzone(zone)}
+          >
+            {zones[zone].blocks.map((block, index) => (
+              <Block
+                entityCallbacks={bindEntityCallbacks(block)}
+                currentBlocks={currentBlocks}
+                key={block.id}
+                context="current"
+                entity={block}
+                type={block.attributes.type}
+                index={index}
+                entityCount={zones[zone].blocks.length}
+                instanceId={instanceId}
+                announce={setScreenReaderStatus}
+              />
+            ))}
+          </Zone>
+        ))}
+      </div>
+      {renderLiveRegion("alert")}
+    </>
+  );
+}
+
+ProjectContentSectionsCurrent.displayName = "Project.Content.Sections.Current";
+
+ProjectContentSectionsCurrent.propTypes = {
+  currentBlocks: PropTypes.array.isRequired,
+  entityCallbacks: PropTypes.object.isRequired,
+  activeDraggableType: PropTypes.string,
+  instanceId: PropTypes.symbol.isRequired,
+  setScreenReaderStatus: PropTypes.func,
+  renderLiveRegion: PropTypes.func,
+  t: PropTypes.func
+};
 
 export default withTranslation()(
   withScreenReaderStatus(ProjectContentSectionsCurrent, false)
