@@ -126,8 +126,8 @@ class AvatarBuilder extends Component {
           errors={this.props.errors}
           label="Avatar"
         >
-          <div className="avatar-builder">
-            <Form.Label label={t("projects.thumbnail.thumbnail")} />
+          <fieldset className="avatar-builder">
+            <Form.Label as="legend" label={t("projects.thumbnail.thumbnail")} />
             <div className="grid">
               <div className="section current">
                 <span className="label" aria-hidden="true">
@@ -169,7 +169,7 @@ class AvatarBuilder extends Component {
                 />
               </div>
             </div>
-          </div>
+          </fieldset>
         </GlobalForm.Errorable>
         {image && (
           <GlobalForm.TextInput

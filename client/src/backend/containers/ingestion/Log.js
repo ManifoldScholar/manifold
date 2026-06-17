@@ -21,9 +21,9 @@ export default function Log({ log, onReset, canReset }) {
   return (
     <>
       <div className="ingestion-output__log">
-        <p className="ingestion-output__label">
+        <h2 className="ingestion-output__label">
           {t("texts.ingestion.log_label")}
-        </p>
+        </h2>
         <div className="ingestion-output__log-value" ref={logRef}>
           {log.trim()}
         </div>
