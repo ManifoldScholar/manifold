@@ -118,7 +118,15 @@
       "anchor_link": "Anchor Link",
       "anchor_link_instructions": "If set, the TOC entry will link to the anchor rather than the start of the section.",
       "save_button_label": "Save Changes",
-      "drag_handle_instructions": "Press space bar to start a drag. When dragging you can use the arrow keys to move the item around and escape to cancel. Some screen readers may require you to be in focus mode or to use your pass through key."
+      "collapse_label": "Collapse",
+      "expand_label": "Expand",
+      "menu_nest": "Nest under previous entry",
+      "menu_unnest": "Move out one level",
+      "announce_moved_up": "Entry moved up.",
+      "announce_moved_down": "Entry moved down.",
+      "announce_nested": "Entry nested under {{title}}.",
+      "announce_unnested": "Entry moved out one level.",
+      "announce_dropped": "Moved {{title}}."
     },
     "stylesheets": {
       "add_button_label": "Add New Stylesheet",
