@@ -12,6 +12,7 @@ import { TreeContext } from "./TreeContext";
 import {
   INDENT_PER_LEVEL,
   getRowsForChildren,
+  getDeleteFocusTarget,
   formatTOCData,
   formatTreeData,
   getNestedTreeChildren,
@@ -33,6 +34,7 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
   const [dragging, setDragging] = useState(false);
 
   const scrollableRef = useRef(null);
+  const listRef = useRef(null);
 
   // Keep the latest tree available to dnd callbacks without re-binding effects.
   const treeRef = useRef(tree);
@@ -71,6 +73,7 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
     async entryId => {
       setError(null);
       const current = treeRef.current;
+      const focusTarget = getDeleteFocusTarget(current.items, entryId);
       const toDelete = [
         entryId,
         ...getNestedTreeChildren(entryId, current.items)
@@ -81,6 +84,14 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
       const res = await updateText(textId, { attributes: { toc: newToc } });
       if (res?.errors) return setError(res.errors);
       setTree(formatTreeData(newToc));
+      requestAnimationFrame(() => {
+        const el = focusTarget
+          ? document.querySelector(
+              `[data-disclosure-toggle-for="${focusTarget}"]`
+            )
+          : listRef.current;
+        if (el) el.focus();
+      });
     },
     [textId, updateText, setError, setTree]
   );
@@ -167,7 +178,11 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
       <Styled.Wrapper className="full-width" $dragging={dragging}>
         {error && <Styled.Error>{errorMessage}</Styled.Error>}
         <Styled.ScrollContainer ref={scrollableRef}>
-          <Styled.List aria-label={t("texts.toc_header")}>
+          <Styled.List
+            ref={listRef}
+            tabIndex={-1}
+            aria-label={t("texts.toc_header")}
+          >
             {rows.map(row => (
               <TreeItem
                 key={row.id}
