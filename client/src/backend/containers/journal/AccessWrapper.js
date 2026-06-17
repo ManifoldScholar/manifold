@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitlementsContainer from "backend/containers/entitlements";
 import Authorize from "hoc/Authorize";
 import Authorization from "helpers/authorization";
@@ -45,7 +45,7 @@ export default function JournalAccessWrapper() {
           />
         </Layout.BackendPanel>
       </Authorize>
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{ closeUrl, lockScroll: "always" }}
         context={{
           entity: journal,

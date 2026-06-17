@@ -1,57 +1,53 @@
 import Form from "global/components/form";
 import { useTranslation } from "react-i18next";
-import { Link, useOutletContext, useMatches } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import IconComposer from "global/components/utility/IconComposer";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import SectionsList from "backend/components/authoring/SectionsList";
 import * as Styled from "./styles";
 
 export default function TextSectionsContainer() {
   const { t } = useTranslation();
   const { text, refresh } = useOutletContext() || {};
-  const matches = useMatches();
 
   if (!text) return null;
 
   const closeUrl = lh.link("backendTextSections", text.id);
-  const currentMatch = matches[matches.length - 1];
-  const isEditorRoute = currentMatch?.handle?.editor;
-  const isIngestRoute = currentMatch?.handle?.ingest;
 
   const appliesToAllStylesheets = text.relationships.stylesheets
     ?.filter(s => s.attributes.appliesToAllTextSections)
     .map(s => s.id);
 
-  const getDrawerProps = () => {
-    if (isEditorRoute) {
-      return {
-        lockScroll: "always",
-        wide: true,
-        closeUrl,
-        padding: "xl",
-        context: "editor",
-        entrySide: "top",
-        fullScreenTitle: t("texts.edit_section"),
-        icon: "annotate32"
-      };
-    }
-    if (isIngestRoute) {
-      return {
-        lockScroll: "always",
-        closeUrl,
-        size: "default",
-        padding: "default",
-        context: "ingestion"
-      };
-    }
-    return {
+  // Each drawer context is mounted simultaneously (off-screen via `inert`) so
+  // its focus trap and enter/exit animation stay stable across route changes.
+  // The active route's `handle.drawer` string selects which one opens.
+  const drawerProps = [
+    {
+      context: "editor",
+      lockScroll: "always",
+      wide: true,
+      closeUrl,
+      padding: "xl",
+      entrySide: "top",
+      fullScreenTitle: t("texts.edit_section"),
+      icon: "annotate32"
+    },
+    {
+      context: "ingestion",
       lockScroll: "always",
       closeUrl,
       size: "default",
       padding: "default"
-    };
-  };
+    },
+    {
+      context: "backend",
+      lockScroll: "always",
+      closeUrl,
+      size: "default",
+      padding: "default"
+    }
+  ];
 
   const context = {
     textId: text.id,
@@ -64,7 +60,7 @@ export default function TextSectionsContainer() {
 
   return (
     <section>
-      <OutletWithDrawer drawerProps={getDrawerProps()} context={context} />
+      <OutletWithDrawers drawerProps={drawerProps} context={context} />
       <Styled.Form
         className="form-secondary"
         doNotWarn

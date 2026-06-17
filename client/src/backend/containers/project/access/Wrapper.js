@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router-dom";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import lh from "helpers/linkHandler";
 import PermissionsContainer from "backend/containers/permission";
 import EntitlementsContainer from "backend/containers/entitlements";
@@ -112,7 +112,7 @@ export default function ProjectAccessWrapper() {
           />
         </Layout.BackendPanel>
       </Authorize>
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           closeUrl,
           lockScroll: "always"
