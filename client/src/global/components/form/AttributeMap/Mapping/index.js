@@ -1,61 +1,62 @@
-import React, { PureComponent } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import { Droppable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
+import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import Attribute from "../Attribute";
 import isNil from "lodash/isNil";
 import * as Styled from "./styles";
 
-class FormColumnMapMapping extends PureComponent {
-  static displayName = "Form.ColumnMap.Mapping";
+function FormColumnMapMapping({ name, id, instanceId, match, unLink, t }) {
+  const [element, setElement] = useState(null);
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
 
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    index: PropTypes.number.isRequired,
-    match: PropTypes.string,
-    unLink: PropTypes.func,
-    t: PropTypes.func
-  };
+  useEffect(() => {
+    if (!element) return undefined;
 
-  render() {
-    const { match } = this.props;
+    return dropTargetForElements({
+      element,
+      // A well holds a single attribute, so it only accepts a drop while empty.
+      canDrop: ({ source }) =>
+        source.data.instanceId === instanceId && isNil(match),
+      getData: () => ({ position: id }),
+      onDragEnter: () => setIsDraggingOver(true),
+      onDragLeave: () => setIsDraggingOver(false),
+      onDrop: () => setIsDraggingOver(false)
+    });
+  }, [element, instanceId, id, match]);
 
-    return (
-      <Styled.Mapping>
-        <Styled.ColumnLabel>
-          <Styled.LabelTruncated>{this.props.name}</Styled.LabelTruncated>
-        </Styled.ColumnLabel>
-        <Droppable droppableId={this.props.id} isDropDisabled={!isNil(match)}>
-          {(provided, snapshot) => {
-            return (
-              <Styled.Well
-                ref={provided.innerRef}
-                $dragOver={snapshot.isDraggingOver}
-              >
-                {this.props.match ? (
-                  <Attribute
-                    name={this.props.match}
-                    index={this.props.index}
-                    unLink={this.props.unLink}
-                    mapping={this.props.name}
-                    isDragging={
-                      snapshot.draggingFromThisWith === this.props.match
-                    }
-                    inWell
-                  />
-                ) : null}
-                <Styled.Placeholder $matched={this.props.match}>
-                  {this.props.t("forms.attribute_map.placeholder")}
-                </Styled.Placeholder>
-                {provided.placeholder}
-              </Styled.Well>
-            );
-          }}
-        </Droppable>
-      </Styled.Mapping>
-    );
-  }
+  return (
+    <Styled.Mapping>
+      <Styled.ColumnLabel>
+        <Styled.LabelTruncated>{name}</Styled.LabelTruncated>
+      </Styled.ColumnLabel>
+      <Styled.Well ref={setElement} $dragOver={isDraggingOver}>
+        {match ? (
+          <Attribute
+            name={match}
+            instanceId={instanceId}
+            unLink={unLink}
+            mapping={name}
+            inWell
+          />
+        ) : null}
+        <Styled.Placeholder $matched={match}>
+          {t("forms.attribute_map.placeholder")}
+        </Styled.Placeholder>
+      </Styled.Well>
+    </Styled.Mapping>
+  );
 }
+
+FormColumnMapMapping.displayName = "Form.ColumnMap.Mapping";
+
+FormColumnMapMapping.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  instanceId: PropTypes.symbol.isRequired,
+  match: PropTypes.string,
+  unLink: PropTypes.func,
+  t: PropTypes.func
+};
 
 export default withTranslation()(FormColumnMapMapping);

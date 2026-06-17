@@ -11,6 +11,7 @@ class CategoryListUncategorized extends PureComponent {
     activeType: PropTypes.string,
     project: PropTypes.object.isRequired,
     category: PropTypes.object,
+    instanceId: PropTypes.symbol.isRequired,
     texts: PropTypes.array.isRequired,
     callbacks: PropTypes.object.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
@@ -56,6 +57,7 @@ class CategoryListUncategorized extends PureComponent {
         </header>
         <Texts
           activeType={this.props.activeType}
+          instanceId={this.props.instanceId}
           callbacks={this.callbacks}
           texts={this.texts}
           onTextKeyboardMove={this.props.onTextKeyboardMove}

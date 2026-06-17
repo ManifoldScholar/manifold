@@ -1,6 +1,7 @@
 import {
   defaultTransitionProps,
   dragging,
+  dropIndicator,
   subtitlePrimary,
   utilityPrimary,
   buttonUnstyled,
@@ -9,6 +10,7 @@ import {
 
 export default `
   .ordered-records-item {
+    position: relative;
     font-family: var(--font-family-sans);
     transition: border ${defaultTransitionProps};
 
@@ -19,6 +21,18 @@ export default `
     &--is-dragging {
       ${dragging}
       border: none;
+    }
+
+    &__drop-indicator {
+      ${dropIndicator()}
+
+      &--top {
+        top: 0;
+      }
+
+      &--bottom {
+        bottom: 0;
+      }
     }
 
     &--is-dragging ~ &,

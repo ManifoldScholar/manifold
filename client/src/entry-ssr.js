@@ -17,7 +17,6 @@ import manifoldBootstrap from "./bootstrap";
 import has from "lodash/has";
 import FatalError from "global/components/FatalError";
 import BodyClass from "hoc/BodyClass";
-import { resetServerContext as resetDndServerContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import { CacheProvider } from "@emotion/react";
 import createEmotionServer from "@emotion/server/create-instance";
 import createCache from "@emotion/cache";
@@ -130,8 +129,6 @@ const render = async (req, res, store) => {
     </ServerFetchDataContext>
   );
 
-  resetDndServerContext();
-
   let renderString = "";
   let isError = false;
 
@@ -143,7 +140,6 @@ const render = async (req, res, store) => {
     await isFetchingComplete();
     ch.notice("ResolveData completed.", "floppy_disk");
 
-    resetDndServerContext();
     renderString = renderComponentToBody(appComponent, stats, store);
   } catch (renderError) {
     // Handle redirect Response objects thrown by components

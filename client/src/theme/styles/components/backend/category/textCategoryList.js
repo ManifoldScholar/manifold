@@ -1,5 +1,6 @@
 import {
   dragging,
+  dropIndicator,
   panelRounded,
   utilityPrimary,
   buttonUnstyled,
@@ -15,11 +16,24 @@ export default `
 
     &__category {
       ${panelRounded}
+      position: relative;
       margin-bottom: 16px;
       background: var(--color-base-neutral95);
 
       &--is-dragging {
         ${dragging}
+      }
+    }
+
+    &__drop-indicator {
+      ${dropIndicator()}
+
+      &--top {
+        top: 0;
+      }
+
+      &--bottom {
+        bottom: 0;
       }
     }
 

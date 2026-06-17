@@ -1,4 +1,3 @@
-import React from "react";
 import loadable from "@loadable/component";
 import { ErrorBoundary, useErrorHandler } from "react-error-boundary";
 import * as Styled from "./styles";
