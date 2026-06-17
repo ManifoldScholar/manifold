@@ -49,10 +49,6 @@ export default `
           height: 1.5px;
           content: "";
           background-color: currentColor;
-
-          .site-nav--backend & {
-            display: none;
-          }
         }
 
         &:focus-visible {

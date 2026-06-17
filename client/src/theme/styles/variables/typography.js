@@ -38,4 +38,7 @@ export default `
   ${createCSSVariables("font-weight", fontWeight)}
   ${createCSSVariables("font-size", fontSize)}
   --line-height: ${lineHeight};
+  /* Active state */
+  --active-text-decoration-line: underline;
+  --active-text-decoration-offset: .4em;
 `;
