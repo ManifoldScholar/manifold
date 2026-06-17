@@ -2,7 +2,7 @@ import { readingGroupsAPI } from "api";
 import { useParams, useOutletContext, useNavigate } from "react-router-dom";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useListFilters, useListQueryParams } from "hooks";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import lh from "helpers/linkHandler";
 import * as Styled from "./styles";
 
@@ -37,7 +37,7 @@ export default function ReadingGroupAnnotationsContainer() {
 
   return readingGroup ? (
     <Styled.Body>
-      <OutletWithDrawer
+      <OutletWithDrawers
         context={{
           readingGroup,
           closeDrawer,

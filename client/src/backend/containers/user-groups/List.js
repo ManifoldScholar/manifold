@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { userGroupsAPI } from "api";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   UserGroupRow
@@ -29,7 +29,7 @@ function UserGroupsListContainer() {
 
   return (
     <>
-      <OutletWithDrawer drawerProps={drawerProps} context={{ refresh }} />
+      <OutletWithDrawers drawerProps={drawerProps} context={{ refresh }} />
       {userGroups && userGroupsMeta && (
         <EntitiesList
           title={t("records.user_groups.header")}

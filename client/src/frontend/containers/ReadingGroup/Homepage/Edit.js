@@ -3,7 +3,7 @@ import { useOutletContext, useNavigate } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import ActionBox from "frontend/components/reading-group/ActionBox";
 import { CollectionEditor } from "frontend/components/collecting/reading-group";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import * as Styled from "./styles";
 
 import Authorize from "hoc/Authorize";
@@ -58,7 +58,7 @@ function ReadingGroupHomepageEditContainer() {
             refresh={refresh}
           />
         </Styled.Body>
-        <OutletWithDrawer
+        <OutletWithDrawers
           context={{
             readingGroup,
             closeDrawer,
