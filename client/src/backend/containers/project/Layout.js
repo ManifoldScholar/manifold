@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import ContentBlock from "backend/components/content-block";
 import Hero from "backend/components/hero";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import lh from "helpers/linkHandler";
 import { projectsAPI, requests } from "api";
 import { useFetch } from "hooks";
@@ -38,7 +38,7 @@ export default function ProjectLayoutContainer() {
       <ContentBlock.Builder project={project}>
         {(closeWithoutSave, onSave, pendingBlock) => {
           return (
-            <OutletWithDrawer
+            <OutletWithDrawers
               drawerProps={{
                 closeUrl: lh.link("backendProjectLayout", project.id),
                 lockScroll: "always",

@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router-dom";
 import Authorize from "hoc/Authorize";
 import lh from "helpers/linkHandler";
 import { journalsAPI } from "api";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import Hero from "backend/components/hero";
 import { useFetch } from "hooks";
 import { useDispatch } from "react-redux";
@@ -49,7 +49,7 @@ export default function JournalLayoutContainer() {
         api={journalsAPI}
         withDarkMode={false}
       />
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={drawerProps}
         context={{
           calloutable: journal,

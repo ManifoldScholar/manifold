@@ -123,7 +123,7 @@ const routes = [
                     handle: {
                       name: "backendProjectTextsCreate",
                       helper: p => `/backend/projects/${p}/texts/create`,
-                      drawer: true
+                      drawer: "backend"
                     }
                   },
                   {
@@ -133,7 +133,7 @@ const routes = [
                       name: "backendProjectTextsIngestionsNew",
                       helper: p =>
                         `/backend/projects/${p}/texts/ingestions/new`,
-                      drawer: true
+                      drawer: "backend"
                     }
                   },
                   {
@@ -143,7 +143,7 @@ const routes = [
                       name: "backendProjectTextsIngestionEdit",
                       helper: (p, i) =>
                         `/backend/projects/${p}/texts/ingestion/${i}/edit`,
-                      drawer: true
+                      drawer: "backend"
                     }
                   },
                   {
@@ -153,8 +153,7 @@ const routes = [
                       name: "backendProjectTextsIngestionIngest",
                       helper: (p, i) =>
                         `/backend/projects/${p}/texts/ingestion/${i}/ingest`,
-                      drawer: true,
-                      ingest: true
+                      drawer: "ingestion"
                     }
                   },
                   {
@@ -168,7 +167,7 @@ const routes = [
                           name: "backendProjectCategoriesNew",
                           helper: p =>
                             `/backend/projects/${p}/texts/category/new`,
-                          drawer: true
+                          drawer: "backend"
                         }
                       },
                       {
@@ -178,7 +177,7 @@ const routes = [
                           name: "backendProjectCategory",
                           helper: (p, c) =>
                             `/backend/projects/${p}/texts/category/${c}/edit`,
-                          drawer: true
+                          drawer: "backend"
                         }
                       }
                     ]
@@ -508,7 +507,7 @@ const routes = [
                     handle: {
                       name: "backendTextSectionNew",
                       helper: t => `/backend/projects/text/${t}/sections/new`,
-                      drawer: true
+                      drawer: "backend"
                     }
                   },
                   {
@@ -518,8 +517,7 @@ const routes = [
                       name: "backendTextSectionEdit",
                       helper: (t, s) =>
                         `/backend/projects/text/${t}/sections/${s}/edit`,
-                      drawer: true,
-                      editor: true
+                      drawer: "editor"
                     }
                   },
                   {
@@ -529,8 +527,7 @@ const routes = [
                       name: "backendTextSectionIngest",
                       helper: t =>
                         `/backend/projects/text/${t}/sections/ingestions/new`,
-                      drawer: true,
-                      ingest: true
+                      drawer: "ingestion"
                     }
                   },
                   {
@@ -540,8 +537,7 @@ const routes = [
                       name: "backendTextSectionIngestNewEdit",
                       helper: (t, i) =>
                         `/backend/projects/text/${t}/sections/ingestions/${i}/edit`,
-                      drawer: true,
-                      ingest: true
+                      drawer: "ingestion"
                     }
                   },
                   {
@@ -551,8 +547,7 @@ const routes = [
                       name: "backendTextSectionIngestEdit",
                       helper: (t, s) =>
                         `/backend/projects/text/${t}/sections/${s}/ingestion`,
-                      drawer: true,
-                      ingest: true
+                      drawer: "ingestion"
                     }
                   },
                   {
@@ -561,8 +556,7 @@ const routes = [
                     handle: {
                       name: "backendTextSectionIngestIngest",
                       helper: (t, i) =>
-                        `/backend/projects/text/${t}/sections/ingestion/${i}/ingest`,
-                      ingest: true
+                        `/backend/projects/text/${t}/sections/ingestion/${i}/ingest`
                     }
                   },
                   {
@@ -572,7 +566,7 @@ const routes = [
                       name: "backendTextSectionProperties",
                       helper: (t, s) =>
                         `/backend/projects/text/${t}/sections/${s}/properties`,
-                      drawer: true
+                      drawer: "backend"
                     }
                   }
                 ]

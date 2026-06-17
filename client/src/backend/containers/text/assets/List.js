@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import Form from "global/components/form";
 import lh from "helpers/linkHandler";
-import OutletWithDrawer from "global/components/router/OutletWithDrawer";
+import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import EntitiesList, {
   Button,
   Search,
@@ -57,7 +57,7 @@ function TextAssetsContainer({
 
   return (
     <Styled.Wrapper>
-      <OutletWithDrawer
+      <OutletWithDrawers
         drawerProps={{
           lockScroll: "always",
           lockScrollClickCloses: false,
