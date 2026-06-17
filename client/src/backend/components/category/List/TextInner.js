@@ -13,7 +13,7 @@ class TextInner extends Component {
 
   static propTypes = {
     text: PropTypes.object.isRequired,
-    dragHandleProps: PropTypes.object.isRequired,
+    dragHandleRef: PropTypes.func.isRequired,
     callbacks: PropTypes.object.isRequired,
     onTextKeyboardMove: PropTypes.func.isRequired,
     category: PropTypes.object,
@@ -40,10 +40,6 @@ class TextInner extends Component {
 
   get callbacks() {
     return this.props.callbacks;
-  }
-
-  get dragHandleProps() {
-    return this.props.dragHandleProps;
   }
 
   get labels() {
@@ -169,8 +165,8 @@ class TextInner extends Component {
           </Link>
 
           <div
+            ref={this.props.dragHandleRef}
             className="texts-list__button texts-list__drag-handle"
-            {...this.dragHandleProps}
             tabIndex={-1}
           >
             <Utility.IconComposer icon="grabber32" size={26} />

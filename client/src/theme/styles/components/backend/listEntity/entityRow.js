@@ -2,6 +2,7 @@ import {
   respond,
   draggable,
   dragging,
+  dropIndicator,
   defaultHoverStyle,
   defaultFocusStyle,
   revealOnFocus,
@@ -69,6 +70,9 @@ export default `
 
       &--sortable {
         ${draggable}
+        /* Dragging is initiated from the grabber handle only, so the row
+           itself should not advertise a grab cursor. */
+        cursor: default;
         padding: 14px 9px 14px 11px;
         border-bottom: none;
 
@@ -120,6 +124,7 @@ export default `
     }
 
     &__drag-container {
+      position: relative;
       padding-top: 9px;
       padding-bottom: 9px;
 
@@ -130,6 +135,18 @@ export default `
           ${defaultFocusStyle}
           outline-offset: -2px;
         }
+      }
+    }
+
+    &__drop-indicator {
+      ${dropIndicator()}
+
+      &--top {
+        top: 2px;
+      }
+
+      &--bottom {
+        bottom: 2px;
       }
     }
 
