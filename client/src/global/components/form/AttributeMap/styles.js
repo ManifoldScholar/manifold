@@ -16,10 +16,6 @@ export const MappableList = styled.ul`
   li + li {
     margin-top: calc(0.8em - 2px);
   }
-
-  [data-rbd-placeholder-context-id] {
-    height: 0 !important;
-  }
 `;
 
 export const Available = styled.div`

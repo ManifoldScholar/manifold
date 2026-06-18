@@ -1,103 +1,176 @@
-import React, { PureComponent } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
+import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
+import {
+  draggable,
+  dropTargetForElements
+} from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import {
+  attachClosestEdge,
+  extractClosestEdge
+} from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
+import { useTranslation } from "react-i18next";
 import TextInner from "./TextInner";
-import TextInnerStatic from "./TextInnerStatic";
-import { withTranslation } from "react-i18next";
 
-class CategoryListTexts extends PureComponent {
-  static displayName = "Category.List.Texts";
+function TextRow({
+  text,
+  index,
+  itemCount,
+  category,
+  categoryId,
+  categoryIndex,
+  categoryCount,
+  instanceId,
+  callbacks,
+  onTextKeyboardMove
+}) {
+  const [element, setElement] = useState(null);
+  const [handle, setHandle] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [closestEdge, setClosestEdge] = useState(null);
 
-  static propTypes = {
-    texts: PropTypes.array.isRequired,
-    callbacks: PropTypes.object.isRequired,
-    onTextKeyboardMove: PropTypes.func.isRequired,
-    dragging: PropTypes.string,
-    t: PropTypes.func,
-    categoryIndex: PropTypes.number.isRequired,
-    categoryCount: PropTypes.number.isRequired
-  };
+  useEffect(() => {
+    if (!element) return undefined;
 
-  static defaultProps = {
-    texts: []
-  };
+    const cleanups = [
+      dropTargetForElements({
+        element,
+        canDrop: ({ source }) =>
+          source.data.instanceId === instanceId && source.data.type === "text",
+        getIsSticky: () => true,
+        getData: ({ input }) =>
+          attachClosestEdge(
+            { type: "text", id: text.id, index, categoryId },
+            { element, input, allowedEdges: ["top", "bottom"] }
+          ),
+        onDrag: ({ self, source }) => {
+          if (source.data.id === text.id) {
+            setClosestEdge(null);
+            return;
+          }
+          setClosestEdge(extractClosestEdge(self.data));
+        },
+        onDragLeave: () => setClosestEdge(null),
+        onDrop: () => setClosestEdge(null)
+      })
+    ];
 
-  get texts() {
-    return this.props.texts;
-  }
+    if (handle) {
+      cleanups.push(
+        draggable({
+          element,
+          dragHandle: handle,
+          getInitialData: () => ({
+            instanceId,
+            type: "text",
+            id: text.id,
+            index,
+            categoryId
+          }),
+          onDragStart: () => setIsDragging(true),
+          onDrop: () => setIsDragging(false)
+        })
+      );
+    }
 
-  get callbacks() {
-    return this.props.callbacks;
-  }
+    return combine(...cleanups);
+  }, [element, handle, text.id, index, categoryId, instanceId]);
 
-  get hasTexts() {
-    return this.texts.length > 0;
-  }
+  return (
+    <div
+      ref={setElement}
+      className={classNames("texts-list__text", {
+        "texts-list__text--is-dragging": isDragging
+      })}
+    >
+      {closestEdge && (
+        <span
+          aria-hidden
+          className={classNames(
+            "texts-list__drop-indicator",
+            `texts-list__drop-indicator--${closestEdge}`
+          )}
+        />
+      )}
+      <TextInner
+        text={text}
+        index={index}
+        itemCount={itemCount}
+        category={category}
+        categoryIndex={categoryIndex}
+        categoryCount={categoryCount}
+        callbacks={callbacks}
+        onTextKeyboardMove={onTextKeyboardMove}
+        dragHandleRef={setHandle}
+      />
+    </div>
+  );
+}
 
-  get hasCategory() {
-    return !!this.props.category;
-  }
+TextRow.propTypes = {
+  text: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  itemCount: PropTypes.number.isRequired,
+  category: PropTypes.object,
+  categoryId: PropTypes.string.isRequired,
+  categoryIndex: PropTypes.number.isRequired,
+  categoryCount: PropTypes.number.isRequired,
+  instanceId: PropTypes.symbol.isRequired,
+  callbacks: PropTypes.object.isRequired,
+  onTextKeyboardMove: PropTypes.func.isRequired
+};
 
-  renderEmpty() {
+export default function CategoryListTexts({
+  texts = [],
+  callbacks,
+  category,
+  categoryId,
+  instanceId,
+  categoryIndex,
+  categoryCount,
+  onTextKeyboardMove
+}) {
+  const { t } = useTranslation();
+
+  if (texts.length === 0) {
     return (
       <div className="texts-list__text texts-list__text--placeholder">
         <p>
-          {this.hasCategory
-            ? this.props.t("projects.category.empty_category")
-            : this.props.t("projects.category.all_texts_categorized")}
+          {category
+            ? t("projects.category.empty_category")
+            : t("projects.category.all_texts_categorized")}
         </p>
       </div>
     );
   }
 
-  renderTexts() {
-    return this.texts.map((text, index) => {
-      const isDragging = this.props.dragging === text.id;
-
-      return (
-        <React.Fragment key={text.id}>
-          <Draggable type="text" index={index} draggableId={text.id}>
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                className={classNames("texts-list__text", {
-                  "texts-list__text--is-dragging": snapshot.isDragging
-                })}
-              >
-                <TextInner
-                  text={text}
-                  index={index}
-                  itemCount={this.texts.length}
-                  category={this.props.category}
-                  categoryIndex={this.props.categoryIndex}
-                  categoryCount={this.props.categoryCount}
-                  callbacks={this.callbacks}
-                  onTextKeyboardMove={this.props.onTextKeyboardMove}
-                  dragHandleProps={provided.dragHandleProps}
-                />
-              </div>
-            )}
-          </Draggable>
-          {isDragging && (
-            <div className={classNames("texts-list__text", "drag-placeholder")}>
-              <TextInnerStatic text={text} category={this.props.category} />
-            </div>
-          )}
-        </React.Fragment>
-      );
-    });
-  }
-
-  render() {
-    return (
-      <>
-        {!this.hasTexts && this.renderEmpty()}
-        {this.hasTexts && this.renderTexts()}
-      </>
-    );
-  }
+  return texts.map((text, index) => (
+    <TextRow
+      key={text.id}
+      text={text}
+      index={index}
+      itemCount={texts.length}
+      category={category}
+      categoryId={categoryId}
+      categoryIndex={categoryIndex}
+      categoryCount={categoryCount}
+      instanceId={instanceId}
+      callbacks={callbacks}
+      onTextKeyboardMove={onTextKeyboardMove}
+    />
+  ));
 }
 
-export default withTranslation()(CategoryListTexts);
+CategoryListTexts.displayName = "Category.List.Texts";
+
+CategoryListTexts.propTypes = {
+  texts: PropTypes.array.isRequired,
+  callbacks: PropTypes.object.isRequired,
+  category: PropTypes.object,
+  categoryId: PropTypes.string.isRequired,
+  instanceId: PropTypes.symbol.isRequired,
+  onTextKeyboardMove: PropTypes.func.isRequired,
+  categoryIndex: PropTypes.number.isRequired,
+  categoryCount: PropTypes.number.isRequired
+};
