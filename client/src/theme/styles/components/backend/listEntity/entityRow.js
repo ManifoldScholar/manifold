@@ -69,6 +69,9 @@ export default `
 
       &--sortable {
         ${draggable}
+        /* Dragging is initiated from the grabber handle only, so the row
+           itself should not advertise a grab cursor. */
+        cursor: default;
         padding: 14px 9px 14px 11px;
         border-bottom: none;
 
@@ -120,6 +123,7 @@ export default `
     }
 
     &__drag-container {
+      position: relative;
       padding-top: 9px;
       padding-bottom: 9px;
 
@@ -130,6 +134,34 @@ export default `
           ${defaultFocusStyle}
           outline-offset: -2px;
         }
+      }
+    }
+
+    &__drop-indicator {
+      position: absolute;
+      inset-inline: 0;
+      height: 2px;
+      pointer-events: none;
+      background-color: var(--color-accent-primary);
+      z-index: 1;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: -2px;
+        top: -3px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--color-accent-primary);
+      }
+
+      &--top {
+        top: 2px;
+      }
+
+      &--bottom {
+        bottom: 2px;
       }
     }
 
