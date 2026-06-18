@@ -20,3 +20,5 @@ tmp/*
 
 dist/manifold/www/browser.config.js
 dist/manifold/ssr/ssr.config.js
+
+.env
