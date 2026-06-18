@@ -314,6 +314,10 @@ Rails.application.routes.draw do
         resource :reports, only: [:show]
       end
 
+      namespace :lti do
+        resource :deep_linking, only: %i[create], controller: "deep_linking"
+      end
+
       resources :passwords, only: [:create, :update]
       post "passwords/admin_reset_password" => "passwords#admin_reset_password"
 
