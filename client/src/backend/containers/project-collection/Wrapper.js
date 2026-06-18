@@ -40,8 +40,7 @@ function ProjectCollectionWrapperContainer({ setScreenReaderStatus }) {
       projectCollectionsAPI.index,
       PROJECT_COLLECTIONS_FILTERS,
       PROJECT_COLLECTIONS_PAGINATION
-    ],
-    options: { requestKey: requests.beProjectCollections }
+    ]
   });
 
   const { data: projectCollection } = useFetch({
