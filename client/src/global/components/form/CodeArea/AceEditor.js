@@ -1,3 +1,4 @@
+import { useId } from "react";
 import Editor from "react-ace";
 import { config } from "ace-builds";
 import Errorable from "../Errorable";
@@ -21,6 +22,8 @@ config.setModuleUrl("ace/mode/javascript_worker", jsWorkerUrl);
 
 /* eslint-disable react/prop-types */
 export default function AceEditor(props) {
+  const id = useId();
+
   return (
     <Errorable
       className="wide"
@@ -29,16 +32,27 @@ export default function AceEditor(props) {
       label={props.label}
     >
       {props.label && (
-        <BaseLabel
-          as="h4"
-          label={props.label}
-          hasInstructions={!!props.instructions}
-        />
+        <>
+          <BaseLabel
+            as="h4"
+            label={props.label}
+            hasInstructions={!!props.instructions}
+          />
+          <label className="screen-reader-text" htmlFor={id}>
+            {props.label}
+          </label>
+        </>
       )}
       {props.instructions ? (
         <Instructions instructions={props.instructions} />
       ) : null}
-      <Editor {...props} />
+      <Editor
+        {...props}
+        onLoad={editor => {
+          const input = editor.textInput.getElement();
+          input.id = id;
+        }}
+      />
     </Errorable>
   );
 }
