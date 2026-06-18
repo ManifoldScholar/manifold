@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Auth
-  module Lti
+module Lti
+  module DeepLinking
     # Extracts deep linking settings and contextual claims from a validated
     # OmniAuth LTI auth hash, finds-or-creates the LtiCourseContext for the
     # launch, and writes the full deep linking context to Rails.cache under
@@ -12,19 +12,20 @@ module Auth
     # OmniAuth::Strategies::Lti (signature, iss, aud, nonce, iat/exp,
     # deployment registration). This service performs NO further JWT
     # verification.
-    class DeepLinkingContext
-      CACHE_TTL        = 1.hour
+    class Context
+      CACHE_TTL = 1.hour
       CACHE_KEY_PREFIX = "lti/dl"
 
       class Error < StandardError; end
       class InvalidRequestError < Error; end
+      class IdempotencyError < Error; end
       class DeploymentNotRegisteredError < Error; end
 
       # @param omniauth_hash [OmniAuth::AuthHash, Hash] request.env["omniauth.auth"]
       # @param user [User] the authenticated instructor
       def initialize(omniauth_hash, user)
         @omniauth_hash = omniauth_hash
-        @user          = user
+        @user = user
       end
 
       # Generates an opaque token, writes the DL context to Rails.cache,
@@ -35,9 +36,12 @@ module Auth
       def cache!
         validate!
 
-        token = SecureRandom.hex(32)
-        Rails.cache.write(cache_key(token), context_payload, expires_in: CACHE_TTL)
-        token
+        raise IdempotencyError, "Context can only be cached once" if defined?(@token)
+
+        SecureRandom.hex(32).tap do |token|
+          @token = token
+          Rails.cache.write(cache_key(token), context_payload, expires_in: CACHE_TTL)
+        end
       end
 
       private
@@ -51,14 +55,14 @@ module Auth
 
       def context_payload
         {
-          "data"                  => dl_settings["data"],
-          "deep_link_return_url"  => dl_settings["deep_link_return_url"],
-          "accept_types"          => dl_settings["accept_types"],
-          "accept_multiple"       => dl_settings["accept_multiple"],
-          "deployment_id"         => deployment_id_claim,
-          "iss"                   => raw_info["iss"],
+          "data" => dl_settings["data"],
+          "deep_link_return_url" => dl_settings["deep_link_return_url"],
+          "accept_types" => dl_settings["accept_types"],
+          "accept_multiple" => dl_settings["accept_multiple"],
+          "deployment_id" => deployment_id_claim,
+          "iss" => raw_info["iss"],
           "lti_course_context_id" => course_context.id,
-          "user_id"               => user.id
+          "user_id" => user.id
         }
       end
 

@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-module Auth
-  module Lti
+module Lti
+  module DeepLinking
     # Orchestrates the controller-level deep linking response: caches the DL
-    # context via {DeepLinkingContext#cache!}, maps validation errors to
+    # context via {Context#cache!}, maps validation errors to
     # categorized messages, and logs structured entries. Returns a {Result}
     # value object that the controller uses to redirect or render — no branching
     # logic lives in the controller.
-    class DeepLinkingHandler
-      Result = Data.define(:ok, :token, :message, :log_level)
+    class RequestHandler
+      include Dry::Monads[:result]
 
       ERROR_MESSAGES = {
-        DeepLinkingContext::InvalidRequestError => "Invalid request",
-        DeepLinkingContext::DeploymentNotRegisteredError => "Deployment not registered"
+        Context::InvalidRequestError => "Invalid request",
+        Context::DeploymentNotRegisteredError => "Deployment not registered"
       }.freeze
       GENERIC_ERROR_MESSAGE = "Session expired or unrecognized"
 
@@ -20,20 +20,26 @@ module Auth
       # @param user [User] the authenticated instructor
       def initialize(omniauth_hash, user)
         @omniauth_hash = omniauth_hash
-        @user          = user
+        @user = user
       end
 
-      # @return [Result]
+      # @return [Dry::Monads::Result] Success carries the cached context
+      #   (token + DL settings); Failure carries a categorized :message and the
+      #   :status the controller renders the error template with.
       def call
-        token = DeepLinkingContext.new(omniauth_hash, user).cache!
-        Result.new(ok: true, token: token, message: nil, log_level: nil)
-      rescue DeepLinkingContext::Error => e
-        message = ERROR_MESSAGES.fetch(e.class, GENERIC_ERROR_MESSAGE)
+        token = Context.new(omniauth_hash, user).cache!
+        Success(
+          token:,
+          accept_types: Array(dl_settings["accept_types"]),
+          accept_multiple: dl_settings["accept_multiple"],
+          deep_link_return_url: dl_settings["deep_link_return_url"]
+        )
+      rescue Context::Error => e
         log_warn(e)
-        Result.new(ok: false, token: nil, message: message, log_level: :warn)
+        Failure(message: ERROR_MESSAGES.fetch(e.class, GENERIC_ERROR_MESSAGE), status: :bad_request)
       rescue StandardError => e
         log_error(e)
-        Result.new(ok: false, token: nil, message: GENERIC_ERROR_MESSAGE, log_level: :error)
+        Failure(message: GENERIC_ERROR_MESSAGE, status: :internal_server_error)
       end
 
       private
@@ -66,6 +72,10 @@ module Auth
 
       def message_type
         omniauth_hash&.dig("extra", "lti", "message_type")
+      end
+
+      def dl_settings
+        @dl_settings ||= omniauth_hash&.dig("extra", "lti", "deep_linking_settings") || {}
       end
     end
   end
