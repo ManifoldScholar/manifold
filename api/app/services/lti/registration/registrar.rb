@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Auth
-  module Lti
+module Lti
+  module Registration
     # Handles registration of a LMS platform via the LTI 1.3 standard
     class Registrar
       include Rails.application.routes.url_helpers
