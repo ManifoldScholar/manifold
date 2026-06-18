@@ -40,7 +40,9 @@ class EntitiesListRow extends PureComponent {
     dragHandleProps: PropTypes.object,
     draggableProps: PropTypes.object,
     isDragging: PropTypes.bool,
+    dropEdge: PropTypes.oneOf(["top", "bottom"]),
     innerRef: PropTypes.func,
+    dragHandleRef: PropTypes.func,
     t: PropTypes.func,
     index: PropTypes.number,
     entityCount: PropTypes.number,
@@ -305,7 +307,7 @@ class EntitiesListRow extends PureComponent {
   }
 
   wrapWithDragHandler(child) {
-    const { draggableProps, dragHandleProps, innerRef } = this.props;
+    const { draggableProps, dragHandleProps, innerRef, dropEdge } = this.props;
     return (
       <div
         ref={innerRef}
@@ -313,6 +315,15 @@ class EntitiesListRow extends PureComponent {
         {...dragHandleProps}
         className="entity-row__drag-container"
       >
+        {dropEdge && (
+          <span
+            aria-hidden
+            className={classNames(
+              "entity-row__drop-indicator",
+              `entity-row__drop-indicator--${dropEdge}`
+            )}
+          />
+        )}
         {child}
       </div>
     );
@@ -355,6 +366,7 @@ class EntitiesListRow extends PureComponent {
     return (
       <>
         <span
+          ref={this.props.dragHandleRef}
           className="entity-row__utility-button entity-row__utility-button--handle"
           aria-hidden
         >
