@@ -1,6 +1,6 @@
 
-module Auth
-  module Lti
+module Lti
+  module Registration
     class Consent
 
       attr_reader :errors, :openid_configuration_url, :registration_token, :referrer

@@ -91,13 +91,34 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
       post "/auth/lti/callback"
 
       expect(response).to have_http_status(:redirect)
-      expect(response.location).to start_with("#{manifold_url}/lti/picker?lti_context=")
+      expect(response.location).to start_with("#{manifold_url}/lti/deep_linking?")
+      parsed = Rack::Utils.parse_nested_query(URI.parse(response.location).query)
+      expect(parsed["lti_context"]).to match(/\A[0-9a-f]{64}\z/)
+    end
+
+    it "includes accept_types, accept_multiple, and deep_link_return_url in the redirect query string" do
+      post "/auth/lti/callback"
+
+      parsed = Rack::Utils.parse_nested_query(URI.parse(response.location).query)
+
+      # lti_context is the stable contract anchor from Phase 2
+      expect(parsed["lti_context"]).to match(/\A[0-9a-f]{64}\z/)
+
+      # accept_types serializes as bracket notation (accept_types[]=...) per Rails convention,
+      # parsed back to an array by parse_nested_query
+      expect(parsed["accept_types"]).to eq(["ltiResourceLink"])
+
+      # accept_multiple is a boolean in Ruby but build_nested_query coerces it to a string on the wire;
+      # the picker must treat "true"/"false" as the wire representation
+      expect(parsed["accept_multiple"]).to eq("true")
+
+      expect(parsed["deep_link_return_url"]).to eq("https://canvas.example.com/dl_return")
     end
 
     it "writes a DL context payload to Rails.cache that the picker can read back" do
       post "/auth/lti/callback"
 
-      token = response.location.split("lti_context=").last
+      token = Rack::Utils.parse_nested_query(URI.parse(response.location).query)["lti_context"]
       expect(token).to match(/\A[0-9a-f]{64}\z/)
 
       cached = Rails.cache.read("lti/dl/#{token}")
@@ -194,7 +215,7 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
 
   describe "unexpected StandardError raised by the deep linking service" do
     before do
-      allow(Auth::Lti::DeepLinkingContext).to receive(:new)
+      allow(Lti::DeepLinking::Context).to receive(:new)
         .and_raise(StandardError, "Rails.cache connection refused")
     end
 
