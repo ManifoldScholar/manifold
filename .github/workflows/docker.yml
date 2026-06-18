@@ -14,8 +14,6 @@ concurrency:
 env:
   GHCR_REGISTRY: ghcr.io
   GHCR_IMAGE_NAME: ${{ github.repository }}
-  MANAGED_REGISTRY: registry.digitalocean.com
-  MANAGED_IMAGE_NAME: manifold/manifold
 
 jobs:
   build-api:
@@ -32,19 +30,12 @@ jobs:
           registry: ${{ env.GHCR_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Login DOCR
-        uses: docker/login-action@v4
-        with:
-          registry: ${{ env.MANAGED_REGISTRY }}
-          username: docr
-          password: ${{ secrets.DOCR_TOKEN }}
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: |
             ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}-api
-            ${{ env.MANAGED_REGISTRY }}/${{ env.MANAGED_IMAGE_NAME }}-api
           tags: |
             type=raw,value=latest,enable=${{ github.ref_name == 'release' }}
             type=raw,value=preview,enable={{ is_default_branch }}
@@ -79,19 +70,12 @@ jobs:
           registry: ${{ env.GHCR_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Login DOCR
-        uses: docker/login-action@v4
-        with:
-          registry: ${{ env.MANAGED_REGISTRY }}
-          username: docr
-          password: ${{ secrets.DOCR_TOKEN }}
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: |
             ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}-client
-            ${{ env.MANAGED_REGISTRY }}/${{ env.MANAGED_IMAGE_NAME }}-client
           tags: |
             type=raw,value=latest,enable=${{ github.ref_name == 'release' }}
             type=raw,value=edge,enable={{ is_default_branch }}
