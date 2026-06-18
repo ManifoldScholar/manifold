@@ -73,7 +73,36 @@ export default `
     }
 
     &__chip {
+      position: relative;
       padding: 5px 0;
+    }
+
+    &__chip-drop-indicator {
+      position: absolute;
+      inset-inline: 0;
+      height: 2px;
+      pointer-events: none;
+      background-color: var(--color-accent-primary);
+      z-index: 1;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: -2px;
+        top: -3px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--color-accent-primary);
+      }
+
+      &--top {
+        top: 0;
+      }
+
+      &--bottom {
+        bottom: 0;
+      }
     }
 
     &__chip-inner {
