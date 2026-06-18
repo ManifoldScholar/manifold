@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import ProjectCollection from "backend/components/project-collection";
-import { projectsAPI, collectionProjectsAPI, requests } from "api";
+import { projectsAPI, collectionProjectsAPI } from "api";
 import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 import EntitiesList, {
@@ -32,19 +32,17 @@ function ProjectCollectionManageProjects({
   });
 
   const { data: collectionProjects, refresh } = useFetch({
-    request: [collectionProjectsAPI.index, projectCollection.id],
-    options: { requestKey: requests.beCollectionProjects }
+    request: [collectionProjectsAPI.index, projectCollection.id]
   });
 
   const { data: projects, meta: projectsMeta } = useFetch({
-    request: [projectsAPI.index, filters, pagination],
-    options: { requestKey: requests.beProjects }
+    request: [projectsAPI.index, filters, pagination]
   });
 
   const addCollectionProject = useApiCallback(collectionProjectsAPI.create);
   const removeCollectionProject = useApiCallback(collectionProjectsAPI.destroy);
 
-  if (!projectsMeta) return null;
+  if (!projectsMeta || !collectionProjects) return null;
 
   const projectAddMessage = project => {
     const title = project.attributes.title;
@@ -155,7 +153,7 @@ function ProjectCollectionManageProjects({
     );
   };
 
-  const selectedProjectIds = collectionProjects.map(
+  const selectedProjectIds = collectionProjects?.map(
     cp => cp.relationships.project.id
   );
 
