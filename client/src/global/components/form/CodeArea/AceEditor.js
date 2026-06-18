@@ -51,6 +51,7 @@ export default function AceEditor(props) {
         onLoad={editor => {
           const input = editor.textInput.getElement();
           input.id = id;
+          input.ariaLabel = props.label;
         }}
       />
     </Errorable>
