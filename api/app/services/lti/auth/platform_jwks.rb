@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Auth
-  module Lti
+module Lti
+  module Auth
     # Returns a callable suitable for passing to `JWT.decode` as the `jwks:`
     # option. Backed by Rails.cache with a 24h TTL on the JWKS fetch itself
     # and a short per-registration debounce on kid-miss refetches so that a
@@ -11,7 +11,7 @@ module Auth
     #   - { kid: kid }                                      (first attempt)
     #   - { invalidate: true, kid_not_found: true, kid: k } (second attempt,
     #                                                        on kid miss)
-    class PlatformJwksLoader
+    class PlatformJwks
       CACHE_TTL    = 24.hours
       DEBOUNCE_TTL = 30.seconds
 
