@@ -1,5 +1,15 @@
 # Changelog
 
+## [9.0.2](https://github.com/ManifoldScholar/manifold/compare/9.0.1...9.0.2) (2026-06-18)
+
+
+### Bug Fixes
+
+* add withOptionalRouter hoc ([8b684e5](https://github.com/ManifoldScholar/manifold/commit/8b684e5a4719d35e8441326a254b2a8d4dc34382))
+* ensure project restricted access errors persist across multiple failed fetches ([03068c1](https://github.com/ManifoldScholar/manifold/commit/03068c1c6134009cc43b0c234daf1f3aa94e23a2))
+* improve project restricted notification display in standalone mode ([8c01c0b](https://github.com/ManifoldScholar/manifold/commit/8c01c0b28c1e60cc4e001fb893b96bd96dd1e7dd))
+* show first 3 ordered collaborators on project thumbnails ([fd5665c](https://github.com/ManifoldScholar/manifold/commit/fd5665c6138798f320b6c8546aec6e52c36674db))
+
 ## [9.0.1](https://github.com/ManifoldScholar/manifold/compare/9.0.0...9.0.1) (2026-06-11)
 
 
