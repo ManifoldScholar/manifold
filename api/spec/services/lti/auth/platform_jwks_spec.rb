@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Auth::Lti::PlatformJwksLoader do
+RSpec.describe Lti::Auth::PlatformJwks do
   let(:registration) { FactoryBot.create(:lti_registration) }
   let(:loader)       { described_class.new(registration) }
   let(:callable)     { loader.to_proc }

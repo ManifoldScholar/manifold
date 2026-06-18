@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Auth::Lti::DeepLinkingContext do
+RSpec.describe Lti::DeepLinking::Context do
   let(:registration) do
     FactoryBot.create(:lti_registration,
                       issuer: "https://canvas.example.com",
@@ -118,7 +118,7 @@ RSpec.describe Auth::Lti::DeepLinkingContext do
       dl_settings.delete("deep_link_return_url")
 
       expect { service.cache! }.to raise_error(
-        Auth::Lti::DeepLinkingContext::InvalidRequestError,
+        Lti::DeepLinking::Context::InvalidRequestError,
         /Missing deep_link_return_url/
       )
     end
@@ -127,7 +127,7 @@ RSpec.describe Auth::Lti::DeepLinkingContext do
       lti_claim_hash.delete("deep_linking_settings")
 
       expect { service.cache! }.to raise_error(
-        Auth::Lti::DeepLinkingContext::InvalidRequestError,
+        Lti::DeepLinking::Context::InvalidRequestError,
         /Missing deep_link_return_url/
       )
     end
@@ -136,7 +136,7 @@ RSpec.describe Auth::Lti::DeepLinkingContext do
       lti_claim_hash["deployment_id"] = "deploy-not-registered"
 
       expect { service.cache! }.to raise_error(
-        Auth::Lti::DeepLinkingContext::DeploymentNotRegisteredError,
+        Lti::DeepLinking::Context::DeploymentNotRegisteredError,
         /not registered/
       )
     end
@@ -144,7 +144,7 @@ RSpec.describe Auth::Lti::DeepLinkingContext do
     it "writes nothing to the cache when validation fails" do
       dl_settings.delete("deep_link_return_url")
       expect(Rails.cache).not_to receive(:write)
-      expect { service.cache! }.to raise_error(Auth::Lti::DeepLinkingContext::Error)
+      expect { service.cache! }.to raise_error(Lti::DeepLinking::Context::Error)
     end
 
     it "uses the first element of the context type array (LTI spec returns an array)" do
@@ -187,15 +187,15 @@ RSpec.describe Auth::Lti::DeepLinkingContext do
 
   describe "Error class hierarchy (controller integration contract)" do
     it "InvalidRequestError is a subclass of Error" do
-      expect(Auth::Lti::DeepLinkingContext::InvalidRequestError.ancestors).to include(Auth::Lti::DeepLinkingContext::Error)
+      expect(Lti::DeepLinking::Context::InvalidRequestError.ancestors).to include(Lti::DeepLinking::Context::Error)
     end
 
     it "DeploymentNotRegisteredError is a subclass of Error" do
-      expect(Auth::Lti::DeepLinkingContext::DeploymentNotRegisteredError.ancestors).to include(Auth::Lti::DeepLinkingContext::Error)
+      expect(Lti::DeepLinking::Context::DeploymentNotRegisteredError.ancestors).to include(Lti::DeepLinking::Context::Error)
     end
 
     it "Error is a subclass of StandardError (rescuable)" do
-      expect(Auth::Lti::DeepLinkingContext::Error.ancestors).to include(StandardError)
+      expect(Lti::DeepLinking::Context::Error.ancestors).to include(StandardError)
     end
   end
 end

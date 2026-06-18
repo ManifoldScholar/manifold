@@ -21,22 +21,8 @@ require "dynamic_mailer/mailer"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# We're monkey patching dotenv's load method to load the .env file from the parent
-# directory.
-module Dotenv
-  # Monkey Patch
-  class Railtie < Rails::Railtie
-    def load
-      Dotenv.load(
-        root.join("./.env"),
-        root.join("../.env.local"),
-        root.join("../.env.#{Rails.env}"),
-        root.join("../.env")
-      )
-    end
-  end
-end
-Dotenv::Railtie.load
+require "dotenv/rails"
+Dotenv::Rails.overwrite = Rails.env.development?
 
 # Make sure this is included _after_ the environment is setup.
 require_relative "../lib/manifold_env"

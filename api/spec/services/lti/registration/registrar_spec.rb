@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Auth::Lti::Registrar do
+RSpec.describe Lti::Registration::Registrar do
   let(:issuer) { "https://canvas.example.com" }
   let(:registration_token) { "reg_token_123" }
   let(:openid_configuration_url) { "#{issuer}/.well-known/openid-configuration" }
@@ -124,7 +124,7 @@ RSpec.describe Auth::Lti::Registrar do
 
       expect(WebMock).to have_requested(:post, "#{issuer}/api/lti/registrations").with { |req|
         body = JSON.parse(req.body)
-        body["scope"] == Auth::Lti::Registrar::NRPS_READONLY_SCOPE
+        body["scope"] == Lti::Registration::Registrar::NRPS_READONLY_SCOPE
       }
     end
 
