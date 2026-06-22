@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import classnames from "classnames";
 import { FocusTrap } from "focus-trap-react";
 import isString from "lodash/isString";
 import IconComposer from "global/components/utility/IconComposer";
 import BodyClass from "hoc/BodyClass";
+import classNames from "classnames";
 
 export default function DialogWrapper({
   closeUrl,
@@ -116,7 +116,7 @@ export default function DialogWrapper({
             aria-modal
             aria-labelledby={labelledBy}
             aria-describedby={describedBy}
-            className={classnames("dialog", className, additionalClassNames)}
+            className={classNames("dialog", className, additionalClassNames)}
             style={style}
           >
             {showCloseButton ? (
