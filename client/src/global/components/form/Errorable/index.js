@@ -15,7 +15,8 @@ export default class Errorable extends PureComponent {
     name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     nameForError: PropTypes.string,
-    idForError: PropTypes.string
+    idForError: PropTypes.string,
+    as: PropTypes.string
   };
 
   static defaultProps = {
@@ -57,12 +58,12 @@ export default class Errorable extends PureComponent {
   }
 
   render() {
-    const { children, nameForError, className } = this.props;
+    const { children, nameForError, className, as = "div" } = this.props;
     const fieldErrors = this.fieldErrors();
     const hasErrors = fieldErrors.length > 0;
 
     return hasErrors || children ? (
-      <FieldWrapper className={className}>
+      <FieldWrapper className={className} as={as}>
         {children}
         {hasErrors ? (
           <InputError
