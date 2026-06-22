@@ -43,8 +43,8 @@ export default class SVGProjectPlaceholder extends Component {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 48 48"
           className={this.classes(className)}
-          aria-hidden={this.isResponsive}
           style={{ fill: "none" }}
+          aria-hidden
         >
           {this.ariaLabel && <title>{this.ariaLabel}</title>}
           <g fill="none" fillRule="evenodd">
@@ -106,6 +106,7 @@ export default class SVGProjectPlaceholder extends Component {
           height={134}
           className={this.classes(className)}
           role="img"
+          aria-hidden
         >
           {this.ariaLabel && <title>{this.ariaLabel}</title>}
           <g fill="none" fillRule="evenodd">
