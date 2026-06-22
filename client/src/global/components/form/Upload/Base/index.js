@@ -106,7 +106,7 @@ export default class FormUpload extends Component {
     const showAltTextInput = this.props.altTextName && valueIsImage;
 
     return (
-      <>
+      <fieldset>
         <Errorable
           className={this.props.wide ? "wide" : undefined}
           name={this.props.name}
@@ -116,7 +116,7 @@ export default class FormUpload extends Component {
         >
           {this.props.label ? (
             <BaseLabel
-              id={this.props.inputId}
+              as="legend"
               label={this.props.label}
               $hasInstructions={isString(this.props.instructions)}
               className={this.props.labelClass}
@@ -129,13 +129,19 @@ export default class FormUpload extends Component {
                   style: this.props.inlineStyle,
                   tabIndex: undefined
                 })}
+                // This has an inner input and should not be marked as presentation
+                role={undefined}
               >
                 <Styled.Input
                   {...getInputProps({
                     accept: this.props.accepts.accepts,
                     multiple: false,
                     id: this.props.inputId,
-                    "aria-describedby": `${this.props.idForError} ${this.props.idForInstructions}`,
+                    "aria-describedby": `${this.props.idForError} ${
+                      this.props.instructions
+                        ? this.props.idForInstructions
+                        : ""
+                    }`,
                     tabIndex: 0
                   })}
                 />
@@ -146,6 +152,7 @@ export default class FormUpload extends Component {
                     fileName={this.fileName}
                     isBuilder={this.props.isBuilder}
                     instructionsSingleLine={this.props.instructionsSingleLine}
+                    inputId={this.props.inputId}
                   />
                 ) : (
                   <Empty
@@ -154,6 +161,7 @@ export default class FormUpload extends Component {
                     uploadError={this.props.uploadError}
                     placeholder={this.props.placeholder}
                     instructionsSingleLine={this.props.instructionsSingleLine}
+                    inputId={this.props.inputId}
                   />
                 )}
               </InputWrapper>
@@ -173,7 +181,7 @@ export default class FormUpload extends Component {
             />
           )}
         </Errorable>
-      </>
+      </fieldset>
     );
   }
 }
