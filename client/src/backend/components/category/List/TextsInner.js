@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
-import {
-  draggable,
-  dropTargetForElements
-} from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import {
-  attachClosestEdge,
-  extractClosestEdge
-} from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import { useTranslation } from "react-i18next";
 import TextInner from "./TextInner";
+import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
+import { useReorderableItem } from "hooks";
 
 function TextRow({
   text,
@@ -25,57 +18,14 @@ function TextRow({
   callbacks,
   onTextKeyboardMove
 }) {
-  const [element, setElement] = useState(null);
-  const [handle, setHandle] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [closestEdge, setClosestEdge] = useState(null);
-
-  useEffect(() => {
-    if (!element) return undefined;
-
-    const cleanups = [
-      dropTargetForElements({
-        element,
-        canDrop: ({ source }) =>
-          source.data.instanceId === instanceId && source.data.type === "text",
-        getIsSticky: () => true,
-        getData: ({ input }) =>
-          attachClosestEdge(
-            { type: "text", id: text.id, index, categoryId },
-            { element, input, allowedEdges: ["top", "bottom"] }
-          ),
-        onDrag: ({ self, source }) => {
-          if (source.data.id === text.id) {
-            setClosestEdge(null);
-            return;
-          }
-          setClosestEdge(extractClosestEdge(self.data));
-        },
-        onDragLeave: () => setClosestEdge(null),
-        onDrop: () => setClosestEdge(null)
-      })
-    ];
-
-    if (handle) {
-      cleanups.push(
-        draggable({
-          element,
-          dragHandle: handle,
-          getInitialData: () => ({
-            instanceId,
-            type: "text",
-            id: text.id,
-            index,
-            categoryId
-          }),
-          onDragStart: () => setIsDragging(true),
-          onDrop: () => setIsDragging(false)
-        })
-      );
+  const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
+    {
+      instanceId,
+      itemId: text.id,
+      dragData: { type: "text", id: text.id, index, categoryId },
+      canDrop: source => source.data.type === "text"
     }
-
-    return combine(...cleanups);
-  }, [element, handle, text.id, index, categoryId, instanceId]);
+  );
 
   return (
     <div
@@ -84,15 +34,10 @@ function TextRow({
         "texts-list__text--is-dragging": isDragging
       })}
     >
-      {closestEdge && (
-        <span
-          aria-hidden
-          className={classNames(
-            "texts-list__drop-indicator",
-            `texts-list__drop-indicator--${closestEdge}`
-          )}
-        />
-      )}
+      <DropEdgeIndicator
+        edge={closestEdge}
+        baseClass="texts-list__drop-indicator"
+      />
       <TextInner
         text={text}
         index={index}

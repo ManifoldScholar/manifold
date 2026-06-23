@@ -8,16 +8,10 @@ import { extractClosestEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/clo
 import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge";
 import Stylesheet from "./Stylesheet";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import { setOrderByChange } from "helpers/dnd";
 import { withTranslation } from "react-i18next";
 
 const cloneStylesheets = stylesheets => (stylesheets || []).slice(0);
-
-const setOrderByChange = (list, oldPos, newPos) => {
-  const ordered = Array.from(list);
-  const [removed] = ordered.splice(oldPos, 1);
-  ordered.splice(newPos, 0, removed);
-  return ordered;
-};
 
 function StylesheetList({
   text,

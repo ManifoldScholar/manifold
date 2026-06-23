@@ -18,6 +18,8 @@ function SectionListItem(props) {
     startSectionId,
     draggableProps,
     dragHandleProps,
+    dragHandleRef,
+    dropEdge,
     isDragging,
     innerRef,
     confirm,
@@ -92,6 +94,7 @@ function SectionListItem(props) {
 
   return section ? (
     <Styled.Item ref={innerRef} {...draggableProps}>
+      {dropEdge && <Styled.DropLine $edge={dropEdge} aria-hidden />}
       <Styled.Inner $isDragging={isDragging}>
         <Styled.ButtonGroup>
           <Tooltip
@@ -139,7 +142,12 @@ function SectionListItem(props) {
               <Utility.IconComposer size={24} icon="export24" />
             </Styled.Button>
           </Tooltip>
-          <Styled.DragHandle as="div" {...dragHandleProps} tabIndex={-1}>
+          <Styled.DragHandle
+            as="div"
+            ref={dragHandleRef}
+            {...dragHandleProps}
+            tabIndex={-1}
+          >
             <Utility.IconComposer size={28} icon="grabber32" />
           </Styled.DragHandle>
           <Styled.KeyboardButtons>
@@ -189,6 +197,8 @@ SectionListItem.displayName = "Text.Sections.List.Item";
 SectionListItem.propTypes = {
   entity: PropTypes.object,
   dragHandleProps: PropTypes.object,
+  dragHandleRef: PropTypes.func,
+  dropEdge: PropTypes.oneOf(["top", "bottom"]),
   draggableProps: PropTypes.object,
   isDragging: PropTypes.bool,
   innerRef: PropTypes.func,
