@@ -6,22 +6,31 @@ module API
       class DeepLinkingController < ApplicationController
         before_action :authenticate_request!
 
+        def show
+          result = ::Lti::DeepLinking::ContextLookup.new(params[:context_token], current_user).call
+
+          render_result(result)
+        end
+
         def create
           result = ::Lti::DeepLinking::Submission.new(submission_params, current_user).call
 
-          result.either(
-            ->(_success) { head :accepted },
-            ->(failure) { render json: { errors: failure[:errors] }, status: failure[:status] }
-          )
+          render_result(result)
         end
 
         private
 
+        def render_result(result)
+          result.either(
+            ->(success) { render json: success },
+            ->(failure) { render json: { errors: failure[:errors] }, status: failure[:status] }
+          )
+        end
+
         def submission_params
           params.permit(
             :context_token,
-            :reading_group_id,
-            selection: [:type, :id, :title]
+            selection: [:url, :title]
           )
         end
       end

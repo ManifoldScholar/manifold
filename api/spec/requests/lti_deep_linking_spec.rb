@@ -86,39 +86,41 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
     Rails.application.env_config["omniauth.auth"] = nil
   end
 
+  # Extracts the picker query params nested inside /oauth?redirect_path=...
+  def picker_query_params
+    redirect_path = Rack::Utils.parse_nested_query(URI.parse(response.location).query)["redirect_path"]
+    Rack::Utils.parse_nested_query(URI.parse(redirect_path).query)
+  end
+
   describe "successful LtiDeepLinkingRequest" do
-    it "redirects to the picker on the React client with an lti_context token" do
+    it "redirects through /oauth carrying the picker path as redirect_path" do
       post "/auth/lti/callback"
 
       expect(response).to have_http_status(:redirect)
-      expect(response.location).to start_with("#{manifold_url}/lti/deep_linking?")
-      parsed = Rack::Utils.parse_nested_query(URI.parse(response.location).query)
-      expect(parsed["lti_context"]).to match(/\A[0-9a-f]{64}\z/)
+      expect(response.location).to start_with("#{manifold_url}/oauth?")
+      redirect_path = Rack::Utils.parse_nested_query(URI.parse(response.location).query)["redirect_path"]
+      expect(redirect_path).to start_with("/lti/deep_linking?")
     end
 
-    it "includes accept_types, accept_multiple, and deep_link_return_url in the redirect query string" do
+    it "carries only the opaque lti_context token to the picker, no constraints" do
       post "/auth/lti/callback"
 
-      parsed = Rack::Utils.parse_nested_query(URI.parse(response.location).query)
+      parsed = picker_query_params
 
       # lti_context is the stable contract anchor from Phase 2
       expect(parsed["lti_context"]).to match(/\A[0-9a-f]{64}\z/)
 
-      # accept_types serializes as bracket notation (accept_types[]=...) per Rails convention,
-      # parsed back to an array by parse_nested_query
-      expect(parsed["accept_types"]).to eq(["ltiResourceLink"])
-
-      # accept_multiple is a boolean in Ruby but build_nested_query coerces it to a string on the wire;
-      # the picker must treat "true"/"false" as the wire representation
-      expect(parsed["accept_multiple"]).to eq("true")
-
-      expect(parsed["deep_link_return_url"]).to eq("https://canvas.example.com/dl_return")
+      # Selection constraints are no longer leaked into the URL; the picker
+      # exchanges the token at GET /api/v1/lti/deep_linking instead.
+      expect(parsed).not_to have_key("accept_types")
+      expect(parsed).not_to have_key("accept_multiple")
+      expect(parsed).not_to have_key("deep_link_return_url")
     end
 
     it "writes a DL context payload to Rails.cache that the picker can read back" do
       post "/auth/lti/callback"
 
-      token = Rack::Utils.parse_nested_query(URI.parse(response.location).query)["lti_context"]
+      token = picker_query_params["lti_context"]
       expect(token).to match(/\A[0-9a-f]{64}\z/)
 
       cached = Rails.cache.read("lti/dl/#{token}")

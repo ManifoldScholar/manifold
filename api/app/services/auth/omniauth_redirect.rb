@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 module Auth
   # Determines the query parameters that should be sent along with an Omniauth redirect
   # All redirects go to POST_AUTH_REDIRECT_PATH with a token stored in a cookie, but the
   # redirect param(s) can vary based on context.
   class OmniauthRedirect
-
     POST_AUTH_REDIRECT_PATH = "/oauth"
     DEEP_LINKING_PATH = "/lti/deep_linking"
 
@@ -24,24 +25,20 @@ module Auth
       post_authorize_redirect_uri(error ? error_query_string : target_query_string)
     end
 
-    # Sends a successful deep linking launch to the React selection page,
-    # carrying the opaque context token and the platform's selection
-    # constraints so the client can render and validate before submitting.
+    # Sends a successful deep linking launch through /oauth so the client can
+    # complete the JWT exchange before landing on the picker. The picker path
+    # (carrying the opaque context token) rides along as redirect_path, the same
+    # mechanism a normal resource-link launch uses via {#target_path}.
     # @return [URI]
     def deep_linking_redirect_uri
-      URI.parse(Rails.configuration.manifold.url).tap do |uri|
-        uri.path = DEEP_LINKING_PATH
-        uri.query = deep_linking_query_string
-      end
+      post_authorize_redirect_uri(build_query_string(redirect_path: deep_linking_picker_path))
     end
 
-    def deep_linking_query_string
-      build_query_string(
-        lti_context: deep_linking_context[:token],
-        accept_types: Array(deep_linking_context[:accept_types]),
-        accept_multiple: deep_linking_context[:accept_multiple],
-        deep_link_return_url: deep_linking_context[:deep_link_return_url]
-      )
+    # The path the client forwards to after /oauth completes the JWT exchange.
+    # Carries only the opaque context token; the picker fetches its selection
+    # constraints by exchanging the token at GET /api/v1/lti/deep_linking.
+    def deep_linking_picker_path
+      "#{DEEP_LINKING_PATH}?#{build_query_string(lti_context: deep_linking_context[:token])}"
     end
 
     def error_query_string
@@ -84,16 +81,15 @@ module Auth
     # Parse LTI target_link_uri or relay_state for a redirect URI
     # @return [String, nil]
     def target_path
-      [omniauth.dig("extra", "target_link_uri"), relay_state].compact.find do |value|
-        URI.regexp.match? value
-      end.then do |url_string|
-        return if url_string.blank?
-
-        uri = URI.parse(url_string)
-        return unless uri.host == Rails.application.config.manifold.domain.gsub(/:\d+/, "")
-
-        { redirect_path: "#{uri.path}?#{uri.query}".delete_suffix("?") }
+      url_string = [omniauth.dig("extra", "target_link_uri"), relay_state].compact.find do |value|
+        URI::RFC2396_PARSER.make_regexp.match? value
       end
+      return if url_string.blank?
+
+      uri = URI.parse(url_string)
+      return unless uri.host == Rails.application.config.manifold.domain.gsub(/:\d+/, "")
+
+      { redirect_path: "#{uri.path}?#{uri.query}".delete_suffix("?") }
     rescue URI::BadURIError, URI::InvalidURIError
       nil
     end

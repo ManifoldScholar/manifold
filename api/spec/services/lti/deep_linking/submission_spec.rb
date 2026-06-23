@@ -6,16 +6,21 @@ RSpec.describe Lti::DeepLinking::Submission do
   let(:user) { FactoryBot.create(:user) }
   let(:context_token) { SecureRandom.hex(32) }
   let(:cache_key) { "#{Lti::DeepLinking::Context::CACHE_KEY_PREFIX}/#{context_token}" }
+  let(:manifold_url) { Rails.configuration.manifold.url }
 
   let(:payload) do
     {
-      "user_id"         => user.id,
-      "accept_types"    => ["ltiResourceLink"],
-      "accept_multiple" => true
+      "user_id"              => user.id,
+      "client_id"            => "tool-client-id",
+      "iss"                  => "https://canvas.example.com",
+      "deployment_id"        => "deploy-1",
+      "deep_link_return_url" => "https://canvas.example.com/dl_return",
+      "accept_types"         => ["ltiResourceLink"],
+      "accept_multiple"      => true
     }
   end
 
-  let(:selection) { [{ "type" => "ltiResourceLink", "id" => "abc" }] }
+  let(:selection) { [{ "url" => "#{manifold_url}/projects/intro", "title" => "Intro" }] }
   let(:params) { { context_token: context_token, selection: selection } }
 
   subject(:result) { described_class.new(params, user).call }
@@ -25,8 +30,10 @@ RSpec.describe Lti::DeepLinking::Submission do
     Rails.cache.write(cache_key, payload, expires_in: 1.hour)
   end
 
-  it "returns Success and consumes the token on a valid submission" do
+  it "returns the return url and a signed JWT, consuming the token" do
     expect(result).to be_success
+    expect(result.value!).to include(deep_link_return_url: "https://canvas.example.com/dl_return")
+    expect(result.value![:jwt]).to be_a(String)
     expect(Rails.cache.read(cache_key)).to be_nil
   end
 
@@ -49,18 +56,18 @@ RSpec.describe Lti::DeepLinking::Submission do
     end
   end
 
-  context "when a selection item is missing required keys" do
+  context "when a selection item is missing its url" do
     let(:selection) { [{ "title" => "x" }] }
 
-    it "fails as :unprocessable_entity with per-field pointers" do
+    it "fails as 422 with a per-field pointer" do
       expect(result.failure[:status]).to eq(422)
       pointers = result.failure[:errors].map { |e| e.dig(:source, :pointer) }
-      expect(pointers).to include("/data/attributes/selection/0/type", "/data/attributes/selection/0/id")
+      expect(pointers).to include("/data/attributes/selection/0/url")
     end
   end
 
-  context "when the selected type is not accepted" do
-    let(:selection) { [{ "type" => "file", "id" => "x" }] }
+  context "when the session does not accept resource links" do
+    before { Rails.cache.write(cache_key, payload.merge("accept_types" => ["file"]), expires_in: 1.hour) }
 
     it "fails as :bad_request with code 'invalid_selection'" do
       expect(result.failure[:status]).to eq(:bad_request)
@@ -68,11 +75,19 @@ RSpec.describe Lti::DeepLinking::Submission do
     end
   end
 
+  context "when a selection url is not on the Manifold domain" do
+    let(:selection) { [{ "url" => "https://evil.example.com/x", "title" => "X" }] }
+
+    it "fails as :bad_request" do
+      expect(result.failure[:status]).to eq(:bad_request)
+    end
+  end
+
   context "when accept_multiple is false and multiple items are submitted" do
     before { Rails.cache.write(cache_key, payload.merge("accept_multiple" => false), expires_in: 1.hour) }
 
     let(:selection) do
-      [{ "type" => "ltiResourceLink", "id" => "a" }, { "type" => "ltiResourceLink", "id" => "b" }]
+      [{ "url" => "#{manifold_url}/a", "title" => "A" }, { "url" => "#{manifold_url}/b", "title" => "B" }]
     end
 
     it "fails as :bad_request" do

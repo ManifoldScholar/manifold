@@ -61,6 +61,7 @@ module Lti
           "accept_multiple" => dl_settings["accept_multiple"],
           "deployment_id" => deployment_id_claim,
           "iss" => raw_info["iss"],
+          "client_id" => raw_info["aud"],
           "lti_course_context_id" => course_context.id,
           "user_id" => user.id
         }
