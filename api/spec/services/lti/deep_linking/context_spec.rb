@@ -83,6 +83,7 @@ RSpec.describe Lti::DeepLinking::Context do
         "accept_multiple"      => true,
         "deployment_id"        => deployment.deployment_id,
         "iss"                  => registration.issuer,
+        "client_id"            => registration.client_id,
         "user_id"              => user.id
       )
     end
