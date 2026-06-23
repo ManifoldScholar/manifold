@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import {
   draggable,
   dragging,
+  dropIndicator,
   buttonUnstyled,
   setHoverStyle,
   textTruncate,
@@ -177,27 +178,15 @@ export const Error = styled.span`
 `;
 
 export const DropLine = styled.div`
-  position: absolute;
-  inset-inline-start: ${({ $inset }) => `${$inset || 0}px`};
-  inset-inline-end: 0;
-  height: 2px;
-  border-radius: 1px;
-  pointer-events: none;
-  background-color: ${({ $blocked }) =>
-    $blocked ? "var(--error-color)" : "var(--highlight-color)"};
+  ${({ $blocked, $inset }) =>
+    dropIndicator({
+      color: $blocked ? "var(--error-color)" : "var(--highlight-color)",
+      startInset: `${$inset || 0}px`,
+      lineRadius: "1px",
+      dotInset: "-4px",
+      zIndex: "auto"
+    })}
   ${({ $edge }) => ($edge === "top" ? "top: -9px;" : "bottom: -9px;")}
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset-inline-start: -4px;
-    top: -3px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: ${({ $blocked }) =>
-      $blocked ? "var(--error-color)" : "var(--highlight-color)"};
-  }
 `;
 
 export const Preview = styled.div`

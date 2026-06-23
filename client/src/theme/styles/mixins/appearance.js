@@ -390,6 +390,36 @@ export const dragging = `
   box-shadow: 0 31px 26px -13px rgba(0 0 0 / 0.33);
 `;
 
+// A closest-edge drop indicator: a thin line with a leading dot. The caller is
+// responsible for positioning the edge (e.g. `top`/`bottom`) on the element.
+export const dropIndicator = ({
+  color = "var(--color-accent-primary)",
+  startInset = "0",
+  lineRadius = "0",
+  dotInset = "-2px",
+  zIndex = "1"
+} = {}) => `
+  position: absolute;
+  inset-inline-start: ${startInset};
+  inset-inline-end: 0;
+  height: 2px;
+  border-radius: ${lineRadius};
+  pointer-events: none;
+  background-color: ${color};
+  z-index: ${zIndex};
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: ${dotInset};
+    top: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: ${color};
+  }
+`;
+
 export function revealOnFocus(selector) {
   return `
     @supports selector(:has(a)) {

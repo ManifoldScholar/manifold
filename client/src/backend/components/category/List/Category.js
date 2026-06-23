@@ -1,21 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import Texts from "./Texts";
-import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
-import {
-  draggable,
-  dropTargetForElements
-} from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import {
-  attachClosestEdge,
-  extractClosestEdge
-} from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import Utility from "global/components/utility";
 import PopoverMenu from "global/components/popover/Menu";
+import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
 import classNames from "classnames";
+import { useReorderableItem } from "hooks";
 
 export default function CategoryListCategory({
   project,
@@ -31,58 +24,20 @@ export default function CategoryListCategory({
   const { t } = useTranslation();
   const popoverDisclosureRef = useRef(null);
 
-  // `element` is the whole category (draggable + drop target); `handle` is the
-  // grabber icon, so nested links/buttons stay clickable and never hijack the drag.
-  const [element, setElement] = useState(null);
-  const [handle, setHandle] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [closestEdge, setClosestEdge] = useState(null);
-
   const id = category.id;
   const title = category.attributes.title;
   const { updateCategoryPosition } = callbacks;
 
-  useEffect(() => {
-    if (!element) return undefined;
-
-    const cleanups = [
-      dropTargetForElements({
-        element,
-        canDrop: ({ source }) =>
-          source.data.instanceId === instanceId &&
-          source.data.type === "category",
-        getIsSticky: () => true,
-        getData: ({ input }) =>
-          attachClosestEdge(
-            { type: "category", id, index },
-            { element, input, allowedEdges: ["top", "bottom"] }
-          ),
-        onDrag: ({ self, source }) => {
-          if (source.data.id === id) {
-            setClosestEdge(null);
-            return;
-          }
-          setClosestEdge(extractClosestEdge(self.data));
-        },
-        onDragLeave: () => setClosestEdge(null),
-        onDrop: () => setClosestEdge(null)
-      })
-    ];
-
-    if (handle) {
-      cleanups.push(
-        draggable({
-          element,
-          dragHandle: handle,
-          getInitialData: () => ({ instanceId, type: "category", id, index }),
-          onDragStart: () => setIsDragging(true),
-          onDrop: () => setIsDragging(false)
-        })
-      );
+  // `setElement` refs the whole category (draggable + drop target); `setHandle`
+  // refs the grabber icon, so nested links/buttons stay clickable.
+  const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
+    {
+      instanceId,
+      itemId: id,
+      dragData: { type: "category", id, index },
+      canDrop: source => source.data.type === "category"
     }
-
-    return combine(...cleanups);
-  }, [element, handle, id, index, instanceId]);
+  );
 
   const onDelete = event => {
     event.preventDefault();
@@ -101,15 +56,10 @@ export default function CategoryListCategory({
         "text-categories__category--is-dragging": isDragging
       })}
     >
-      {closestEdge && (
-        <span
-          aria-hidden
-          className={classNames(
-            "text-categories__drop-indicator",
-            `text-categories__drop-indicator--${closestEdge}`
-          )}
-        />
-      )}
+      <DropEdgeIndicator
+        edge={closestEdge}
+        baseClass="text-categories__drop-indicator"
+      />
       <header className="text-categories__header">
         <h2 className="text-categories__label">
           <span className="text-categories__label-type--light">

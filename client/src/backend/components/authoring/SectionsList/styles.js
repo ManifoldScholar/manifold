@@ -9,7 +9,8 @@ import {
   blockLabelRound,
   fluidScale,
   defaultFocusStyle,
-  revealOnFocus
+  revealOnFocus,
+  dropIndicator
 } from "theme/styles/mixins";
 
 export const Wrapper = styled.div`
@@ -19,11 +20,17 @@ export const Wrapper = styled.div`
 `;
 
 export const Item = styled.li`
+  position: relative;
   color: var(--color-neutral-text-extra-light);
 
   &:first-child {
     margin-block-start: 16px;
   }
+`;
+
+export const DropLine = styled.span`
+  ${dropIndicator({ lineRadius: "1px", dotInset: "-4px" })}
+  ${({ $edge }) => ($edge === "top" ? "top: -8px;" : "bottom: -8px;")}
 `;
 
 export const Title = styled.div`

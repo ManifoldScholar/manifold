@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
-import {
-  draggable,
-  dropTargetForElements
-} from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import {
-  attachClosestEdge,
-  extractClosestEdge
-} from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import classNames from "classnames";
 import Current from "./in-list/Current";
 import Available from "./in-list/Available";
 import typeResolver from "../../helpers/resolver";
+import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
+import { useReorderableItem } from "hooks";
 import isFunction from "lodash/isFunction";
 
 export default function ProjectContentBlock({
@@ -27,11 +20,6 @@ export default function ProjectContentBlock({
   announce,
   type
 }) {
-  const [element, setElement] = useState(null);
-  const [handle, setHandle] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [closestEdge, setClosestEdge] = useState(null);
-
   const inAvailableList = context === "available";
   const inCurrentList = context === "current";
   const id = entity ? entity.id : null;
@@ -46,65 +34,21 @@ export default function ProjectContentBlock({
     return !typeComponent.isAvailable(currentBlocks);
   })();
 
-  useEffect(() => {
-    if (!element || disabled) return undefined;
-
-    const cleanups = [];
-
-    if (inCurrentList) {
-      cleanups.push(
-        dropTargetForElements({
-          element,
-          canDrop: ({ source }) =>
-            source.data.instanceId === instanceId &&
-            source.data.zoneType === zoneType,
-          getIsSticky: () => true,
-          getData: ({ input }) =>
-            attachClosestEdge(
-              { kind: "current-block", id, zoneType, index },
-              { element, input, allowedEdges: ["top", "bottom"] }
-            ),
-          onDrag: ({ self, source }) => {
-            if (source.data.id === id) {
-              setClosestEdge(null);
-              return;
-            }
-            setClosestEdge(extractClosestEdge(self.data));
-          },
-          onDragLeave: () => setClosestEdge(null),
-          onDrop: () => setClosestEdge(null)
-        })
-      );
+  // Palette (available) items are draggable only; current blocks are also
+  // closest-edge drop targets. The draggable and drop payloads differ (the
+  // monitor keys off `kind`), so they're passed separately.
+  const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
+    {
+      instanceId,
+      itemId: id,
+      isDropTarget: inCurrentList,
+      dragData: inAvailableList
+        ? { kind: "available", blockType: type, zoneType }
+        : { kind: "current", id, zoneType, index },
+      dropData: { kind: "current-block", id, zoneType, index },
+      canDrop: source => source.data.zoneType === zoneType
     }
-
-    if (handle) {
-      cleanups.push(
-        draggable({
-          element,
-          dragHandle: handle,
-          getInitialData: () =>
-            inAvailableList
-              ? { instanceId, kind: "available", blockType: type, zoneType }
-              : { instanceId, kind: "current", id, zoneType, index },
-          onDragStart: () => setIsDragging(true),
-          onDrop: () => setIsDragging(false)
-        })
-      );
-    }
-
-    return combine(...cleanups);
-  }, [
-    element,
-    handle,
-    disabled,
-    inAvailableList,
-    inCurrentList,
-    id,
-    type,
-    zoneType,
-    index,
-    instanceId
-  ]);
+  );
 
   const handleClickAdd = () => {
     onClickAdd(type);
@@ -143,15 +87,10 @@ export default function ProjectContentBlock({
         [`${baseClass}--is-dragging`]: isDragging
       })}
     >
-      {closestEdge && (
-        <span
-          aria-hidden
-          className={classNames(
-            `${baseClass}__drop-indicator`,
-            `${baseClass}__drop-indicator--${closestEdge}`
-          )}
-        />
-      )}
+      <DropEdgeIndicator
+        edge={closestEdge}
+        baseClass={`${baseClass}__drop-indicator`}
+      />
       <ListContextBlock
         entity={entity}
         entityCallbacks={entityCallbacks}
