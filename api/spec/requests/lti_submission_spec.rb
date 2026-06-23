@@ -10,6 +10,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
   let(:cached_payload) do
     {
       "user_id"               => reader.id,
+      "client_id"             => "tool-client-id",
       "accept_types"          => ["ltiResourceLink"],
       "accept_multiple"       => true,
       "deep_link_return_url"  => "https://canvas.example.com/dl_return",
@@ -20,7 +21,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
     }
   end
 
-  let(:valid_selection) { [{ type: "ltiResourceLink", id: "abc" }] }
+  let(:valid_selection) { [{ url: "#{Rails.configuration.manifold.url}/projects/intro", title: "Intro" }] }
 
   let(:valid_params) do
     { context_token: context_token, selection: valid_selection }.to_json
@@ -51,13 +52,15 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
 
     # Example 2: valid token + valid selection → 202 with empty body + cache consumed
     context "when the token is valid and the selection is well-formed" do
-      it "returns 202 Accepted with no body" do
+      it "returns 200 with the deep_link_return_url and a signed JWT" do
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
              params: valid_params
 
-        expect(response).to have_http_status(:accepted)
-        expect(response.body).to be_blank
+        expect(response).to have_http_status(:ok)
+        body = response.parsed_body
+        expect(body["deep_link_return_url"]).to eq("https://canvas.example.com/dl_return")
+        expect(body["jwt"]).to be_present
       end
 
       it "consumes the cache key (single-use token)" do
@@ -94,7 +97,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
              headers: reader_headers,
              params: valid_params
 
-        expect(response).to have_http_status(:accepted)
+        expect(response).to have_http_status(:ok)
 
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
@@ -161,7 +164,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         { context_token: context_token, selection: [{ title: "x" }] }.to_json
       end
 
-      it "returns 422 with per-field errors for each missing required key" do
+      it "returns 422 with a per-field error for the missing url" do
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
              params: bad_selection_params
@@ -169,21 +172,20 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         expect(response).to have_http_status(422)
         body = response.parsed_body
         pointers = body["errors"].map { |e| e.dig("source", "pointer") }
-        expect(pointers).to include("/data/attributes/selection/0/type")
-        expect(pointers).to include("/data/attributes/selection/0/id")
+        expect(pointers).to include("/data/attributes/selection/0/url")
       end
     end
 
     # Example 8: accept_types mismatch → 400 single message
-    context "when the selected type is not in the cached accept_types" do
-      let(:wrong_type_params) do
-        { context_token: context_token, selection: [{ type: "file", id: "x" }] }.to_json
+    context "when the session does not accept resource links" do
+      before do
+        Rails.cache.write(cache_key, cached_payload.merge("accept_types" => ["file"]), expires_in: 1.hour)
       end
 
       it "returns 400 with code 'invalid_selection'" do
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
-             params: wrong_type_params
+             params: valid_params
 
         expect(response).to have_http_status(:bad_request)
         body = response.parsed_body
@@ -200,8 +202,8 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         {
           context_token: context_token,
           selection: [
-            { type: "ltiResourceLink", id: "a" },
-            { type: "ltiResourceLink", id: "b" }
+            { url: "#{Rails.configuration.manifold.url}/a", title: "A" },
+            { url: "#{Rails.configuration.manifold.url}/b", title: "B" }
           ]
         }.to_json
       end
