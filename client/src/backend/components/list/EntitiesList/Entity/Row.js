@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 import PopoverMenu from "global/components/popover/Menu";
+import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
 import { withTranslation } from "react-i18next";
 
 class EntitiesListRow extends PureComponent {
@@ -315,15 +316,10 @@ class EntitiesListRow extends PureComponent {
         {...dragHandleProps}
         className="entity-row__drag-container"
       >
-        {dropEdge && (
-          <span
-            aria-hidden
-            className={classNames(
-              "entity-row__drop-indicator",
-              `entity-row__drop-indicator--${dropEdge}`
-            )}
-          />
-        )}
+        <DropEdgeIndicator
+          edge={dropEdge}
+          baseClass="entity-row__drop-indicator"
+        />
         {child}
       </div>
     );

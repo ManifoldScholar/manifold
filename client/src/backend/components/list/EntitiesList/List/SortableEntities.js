@@ -2,18 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
-import {
-  draggable,
-  dropTargetForElements,
-  monitorForElements
-} from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { autoScrollWindowForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
-import {
-  attachClosestEdge,
-  extractClosestEdge
-} from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
+import { extractClosestEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import { setOrderByChange } from "helpers/dnd";
+import { useReorderableItem } from "hooks";
 import { withTranslation } from "react-i18next";
 
 /* Non-empty prop bags preserve the row's `isSortable` gate (Entity/Row.js),
@@ -29,13 +24,6 @@ const getAdjustedPosition = (position, count) => {
   return position + 1;
 };
 
-const setOrderByChange = (list, oldPos, newPos) => {
-  const ordered = Array.from(list);
-  const [removed] = ordered.splice(oldPos, 1);
-  ordered.splice(newPos, 0, removed);
-  return ordered;
-};
-
 function SortableEntityRow({
   entity,
   index,
@@ -45,53 +33,16 @@ function SortableEntityRow({
   useDragHandle,
   entityComponentProps
 }) {
-  // `element` is the whole row (draggable + drop target); `handle` is the
-  // grabber icon, used as the drag handle so nested links/buttons stay
-  // clickable and never hijack the drag.
-  const [element, setElement] = useState(null);
-  const [handle, setHandle] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [closestEdge, setClosestEdge] = useState(null);
-
-  useEffect(() => {
-    if (!element) return undefined;
-
-    const cleanups = [
-      dropTargetForElements({
-        element,
-        canDrop: ({ source }) => source.data.instanceId === instanceId,
-        getIsSticky: () => true,
-        getData: ({ input }) =>
-          attachClosestEdge(
-            { id: entity.id, index },
-            { element, input, allowedEdges: ["top", "bottom"] }
-          ),
-        onDrag: ({ self, source }) => {
-          if (source.data.id === entity.id) {
-            setClosestEdge(null);
-            return;
-          }
-          setClosestEdge(extractClosestEdge(self.data));
-        },
-        onDragLeave: () => setClosestEdge(null),
-        onDrop: () => setClosestEdge(null)
-      })
-    ];
-
-    if (handle) {
-      cleanups.push(
-        draggable({
-          element,
-          dragHandle: handle,
-          getInitialData: () => ({ instanceId, id: entity.id, index }),
-          onDragStart: () => setIsDragging(true),
-          onDrop: () => setIsDragging(false)
-        })
-      );
+  // `setElement` refs the whole row (draggable + drop target); `setHandle` refs
+  // the grabber icon, so nested links/buttons stay clickable and never hijack
+  // the drag.
+  const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
+    {
+      instanceId,
+      itemId: entity.id,
+      dragData: { id: entity.id, index }
     }
-
-    return combine(...cleanups);
-  }, [element, handle, entity.id, index, instanceId]);
+  );
 
   return (
     <EntityComponent

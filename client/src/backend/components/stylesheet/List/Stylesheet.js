@@ -1,20 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
-import {
-  draggable,
-  dropTargetForElements
-} from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import {
-  attachClosestEdge,
-  extractClosestEdge
-} from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import classNames from "classnames";
 import Utility from "global/components/utility";
 import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import FormattedDate from "global/components/FormattedDate";
 import PopoverMenu from "global/components/popover/Menu";
+import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
+import { useReorderableItem } from "hooks";
 import { withTranslation } from "react-i18next";
 
 function Stylesheet({
@@ -29,53 +22,15 @@ function Stylesheet({
 }) {
   const popoverDisclosureRef = useRef(null);
 
-  // `element` is the whole row (draggable + drop target); `handle` is the
-  // grabber icon, used as the drag handle so the nested edit link stays
-  // clickable and never hijacks the drag.
-  const [element, setElement] = useState(null);
-  const [handle, setHandle] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [closestEdge, setClosestEdge] = useState(null);
-
-  useEffect(() => {
-    if (!element) return undefined;
-
-    const cleanups = [
-      dropTargetForElements({
-        element,
-        canDrop: ({ source }) => source.data.instanceId === instanceId,
-        getIsSticky: () => true,
-        getData: ({ input }) =>
-          attachClosestEdge(
-            { id: stylesheet.id, index },
-            { element, input, allowedEdges: ["top", "bottom"] }
-          ),
-        onDrag: ({ self, source }) => {
-          if (source.data.id === stylesheet.id) {
-            setClosestEdge(null);
-            return;
-          }
-          setClosestEdge(extractClosestEdge(self.data));
-        },
-        onDragLeave: () => setClosestEdge(null),
-        onDrop: () => setClosestEdge(null)
-      })
-    ];
-
-    if (handle) {
-      cleanups.push(
-        draggable({
-          element,
-          dragHandle: handle,
-          getInitialData: () => ({ instanceId, id: stylesheet.id, index }),
-          onDragStart: () => setIsDragging(true),
-          onDrop: () => setIsDragging(false)
-        })
-      );
+  // `setElement` refs the whole row (draggable + drop target); `setHandle` refs
+  // the grabber icon, so the nested edit link stays clickable.
+  const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
+    {
+      instanceId,
+      itemId: stylesheet.id,
+      dragData: { id: stylesheet.id, index }
     }
-
-    return combine(...cleanups);
-  }, [element, handle, stylesheet.id, index, instanceId]);
+  );
 
   const baseClass = "ordered-records-item";
   const editUrl = lh.link("BackendTextStylesheetEdit", text.id, stylesheet.id);
@@ -96,15 +51,10 @@ function Stylesheet({
         [`${baseClass}--is-dragging`]: isDragging
       })}
     >
-      {closestEdge && (
-        <span
-          aria-hidden
-          className={classNames(
-            `${baseClass}__drop-indicator`,
-            `${baseClass}__drop-indicator--${closestEdge}`
-          )}
-        />
-      )}
+      <DropEdgeIndicator
+        edge={closestEdge}
+        baseClass={`${baseClass}__drop-indicator`}
+      />
       <div className={`${baseClass}__inner`}>
         <Link className={`${baseClass}__details`} to={editUrl}>
           <div className={`${baseClass}__icon`}>

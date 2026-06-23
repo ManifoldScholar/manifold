@@ -18,6 +18,8 @@ function SectionListItem(props) {
     startSectionId,
     draggableProps,
     dragHandleProps,
+    dragHandleRef,
+    dropEdge,
     isDragging,
     innerRef,
     confirm,
@@ -92,6 +94,7 @@ function SectionListItem(props) {
 
   return section ? (
     <Styled.Item ref={innerRef} {...draggableProps}>
+      {dropEdge && <Styled.DropLine $edge={dropEdge} aria-hidden />}
       <Styled.Inner $isDragging={isDragging}>
         <Styled.ButtonGroup>
           <Tooltip
@@ -144,6 +147,7 @@ function SectionListItem(props) {
           </Tooltip>
           <Styled.DragHandle
             as="div"
+            ref={dragHandleRef}
             {...dragHandleProps}
             tabIndex={-1}
             aria-label={t("actions.dnd.drag_and_drop")}
@@ -197,6 +201,8 @@ SectionListItem.displayName = "Text.Sections.List.Item";
 SectionListItem.propTypes = {
   entity: PropTypes.object,
   dragHandleProps: PropTypes.object,
+  dragHandleRef: PropTypes.func,
+  dropEdge: PropTypes.oneOf(["top", "bottom"]),
   draggableProps: PropTypes.object,
   isDragging: PropTypes.bool,
   innerRef: PropTypes.func,
