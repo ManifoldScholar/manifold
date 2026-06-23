@@ -1,6 +1,7 @@
 import {
   defaultTransitionProps,
   dragging,
+  dropIndicator,
   subtitlePrimary,
   utilityPrimary,
   buttonUnstyled,
@@ -23,23 +24,7 @@ export default `
     }
 
     &__drop-indicator {
-      position: absolute;
-      inset-inline: 0;
-      height: 2px;
-      pointer-events: none;
-      background-color: var(--color-accent-primary);
-      z-index: 1;
-
-      &::before {
-        content: "";
-        position: absolute;
-        inset-inline-start: -2px;
-        top: -3px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: var(--color-accent-primary);
-      }
+      ${dropIndicator()}
 
       &--top {
         top: 0;

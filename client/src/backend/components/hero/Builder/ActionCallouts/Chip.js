@@ -1,20 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
-import {
-  draggable,
-  dropTargetForElements
-} from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import {
-  attachClosestEdge,
-  extractClosestEdge
-} from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import Utility from "global/components/utility";
 import PopoverMenu from "global/components/popover/Menu";
+import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
 import lh from "helpers/linkHandler";
 import classNames from "classnames";
+import { useReorderableItem } from "hooks";
 
 export default function Chip({
   actionCallout,
@@ -32,62 +25,22 @@ export default function Chip({
   const navigate = useNavigate();
   const popoverDisclosureRef = useRef(null);
 
-  // `element` is the whole chip (draggable + drop target); `handle` is the
-  // grabber icon, so the edit button stays clickable and never hijacks the drag.
-  const [element, setElement] = useState(null);
-  const [handle, setHandle] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [closestEdge, setClosestEdge] = useState(null);
-
   const modelId = model.id;
   const title = actionCallout.attributes.title;
   const id = actionCallout.id;
   const chipId = `chip-${id}`;
 
-  useEffect(() => {
-    if (!element) return undefined;
-
-    const cleanups = [
-      dropTargetForElements({
-        element,
-        canDrop: ({ source }) => source.data.instanceId === instanceId,
-        getIsSticky: () => true,
-        getData: ({ input }) =>
-          attachClosestEdge(
-            { type: "chip", calloutId: id, slotId, index },
-            { element, input, allowedEdges: ["top", "bottom"] }
-          ),
-        onDrag: ({ self, source }) => {
-          if (source.data.calloutId === id) {
-            setClosestEdge(null);
-            return;
-          }
-          setClosestEdge(extractClosestEdge(self.data));
-        },
-        onDragLeave: () => setClosestEdge(null),
-        onDrop: () => setClosestEdge(null)
-      })
-    ];
-
-    if (handle) {
-      cleanups.push(
-        draggable({
-          element,
-          dragHandle: handle,
-          getInitialData: () => ({
-            instanceId,
-            calloutId: id,
-            slotId,
-            index
-          }),
-          onDragStart: () => setIsDragging(true),
-          onDrop: () => setIsDragging(false)
-        })
-      );
+  // `setElement` refs the whole chip (draggable + drop target); `setHandle` refs
+  // the grabber icon, so the edit button stays clickable.
+  const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
+    {
+      instanceId,
+      itemId: id,
+      idKey: "calloutId",
+      dragData: { calloutId: id, slotId, index },
+      dropData: { type: "chip", calloutId: id, slotId, index }
     }
-
-    return combine(...cleanups);
-  }, [element, handle, id, slotId, index, instanceId]);
+  );
 
   const onEdit = event => {
     event.preventDefault();
@@ -122,15 +75,10 @@ export default function Chip({
         "action-callout-slot__chip--is-dragging": isDragging
       })}
     >
-      {closestEdge && (
-        <span
-          aria-hidden
-          className={classNames(
-            "action-callout-slot__chip-drop-indicator",
-            `action-callout-slot__chip-drop-indicator--${closestEdge}`
-          )}
-        />
-      )}
+      <DropEdgeIndicator
+        edge={closestEdge}
+        baseClass="action-callout-slot__chip-drop-indicator"
+      />
       <div className="action-callout-slot__chip-inner">
         <button
           onClick={onEdit}
