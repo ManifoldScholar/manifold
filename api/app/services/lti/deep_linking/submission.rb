@@ -20,9 +20,11 @@ module Lti
     # business-rule checks need the cached payload's accept_types/accept_multiple.
     class Submission
       include Dry::Monads[:result]
+      include ContextErrors
 
-      ALLOWED_SELECTION_KEYS = %w[type id title].freeze
-      REQUIRED_SELECTION_KEYS = %w[type id].freeze
+      RESOURCE_LINK_TYPE = "ltiResourceLink"
+      ALLOWED_SELECTION_KEYS = %w[url title].freeze
+      REQUIRED_SELECTION_KEYS = %w[url].freeze
 
       # @param params [Hash, ActionController::Parameters] expected keys: :context_token, :selection (Array<Hash>), optional :reading_group_id
       # @param user [User] current_user from authenticated request
@@ -44,8 +46,9 @@ module Lti
         business_error = validate_business_rules(payload)
         return business_failure(business_error) if business_error
 
+        jwt = ResponseToken.new(payload, Array(params[:selection])).call
         Rails.cache.delete(cache_key)
-        Success()
+        Success(deep_link_return_url: payload["deep_link_return_url"], jwt: jwt)
       rescue StandardError => e
         Rails.logger.error("Lti::DeepLinking::Submission failed: #{e.class.name}: #{e.message}")
         Failure(
@@ -60,30 +63,6 @@ module Lti
 
       def cache_key
         "#{Context::CACHE_KEY_PREFIX}/#{params[:context_token]}"
-      end
-
-      def expired_failure
-        Failure(
-          status: :unauthorized,
-          errors: [{
-            status: "401",
-            code: "expired",
-            title: "Context Expired",
-            detail: "The deep linking session has expired. Please relaunch from your LMS."
-          }]
-        )
-      end
-
-      def forbidden_failure
-        Failure(
-          status: :forbidden,
-          errors: [{
-            status: "403",
-            code: "unauthorized",
-            title: "Unauthorized",
-            detail: "You are not the instructor for this deep linking session."
-          }]
-        )
       end
 
       def validate_shape
@@ -120,17 +99,34 @@ module Lti
 
       def validate_business_rules(payload)
         selection = Array(params[:selection])
-        accept_types = Array(payload["accept_types"])
 
-        unless selection.all? { |item| accept_types.include?(item["type"]) }
-          return "The selected resource type is not accepted by this deep linking session."
+        unless Array(payload["accept_types"]).include?(RESOURCE_LINK_TYPE)
+          return "This deep linking session does not accept resource links."
         end
 
         if payload["accept_multiple"] == false && selection.length > 1
           return "Only a single resource may be selected for this deep linking session."
         end
 
+        unless selection.all? { |item| manifold_url?(item["url"]) }
+          return "Selected resources must be hosted on this Manifold instance."
+        end
+
         nil
+      end
+
+      # Guards against signing an off-domain URL into the tool's JWT, which the
+      # platform would trust — a signed open-redirect vector. Mirrors the host
+      # check in {Auth::OmniauthRedirect#target_path}.
+      def manifold_url?(url)
+        uri = URI.parse(url.to_s)
+        uri.host.present? && uri.host == manifold_domain
+      rescue URI::InvalidURIError
+        false
+      end
+
+      def manifold_domain
+        @manifold_domain ||= Rails.application.config.manifold.domain.to_s.gsub(/:\d+/, "")
       end
 
       def business_failure(message)

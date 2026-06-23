@@ -67,19 +67,10 @@ RSpec.describe Lti::DeepLinking::RequestHandler do
   describe "#call — success path" do
     subject(:result) { handler.call }
 
-    it "returns a Success carrying the token and DL settings" do
+    it "returns a Success carrying only the opaque context token" do
       expect(result).to be_success
-      expect(result.value!).to include(
-        accept_types: ["ltiResourceLink"],
-        accept_multiple: true,
-        deep_link_return_url: "https://canvas.example.com/dl_return"
-      )
+      expect(result.value!.keys).to eq([:token])
       expect(result.value![:token]).to match(/\A[0-9a-f]{64}\z/)
-    end
-
-    it "coerces a missing accept_types to an empty array" do
-      dl_settings.delete("accept_types")
-      expect(result.value![:accept_types]).to eq([])
     end
   end
 
