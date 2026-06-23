@@ -23,17 +23,12 @@ module Lti
         @user = user
       end
 
-      # @return [Dry::Monads::Result] Success carries the cached context
-      #   (token + DL settings); Failure carries a categorized :message and the
-      #   :status the controller renders the error template with.
+      # @return [Dry::Monads::Result] Success carries the opaque context token
+      #   the picker exchanges for its constraints; Failure carries a categorized
+      #   :message and the :status the controller renders the error template with.
       def call
         token = Context.new(omniauth_hash, user).cache!
-        Success(
-          token:,
-          accept_types: Array(dl_settings["accept_types"]),
-          accept_multiple: dl_settings["accept_multiple"],
-          deep_link_return_url: dl_settings["deep_link_return_url"]
-        )
+        Success(token:)
       rescue Context::Error => e
         log_warn(e)
         Failure(message: ERROR_MESSAGES.fetch(e.class, GENERIC_ERROR_MESSAGE), status: :bad_request)
@@ -72,10 +67,6 @@ module Lti
 
       def message_type
         omniauth_hash&.dig("extra", "lti", "message_type")
-      end
-
-      def dl_settings
-        @dl_settings ||= omniauth_hash&.dig("extra", "lti", "deep_linking_settings") || {}
       end
     end
   end
