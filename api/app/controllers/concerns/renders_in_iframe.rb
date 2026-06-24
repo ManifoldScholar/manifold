@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RendersInIframe
   extend ActiveSupport::Concern
 
@@ -28,7 +30,6 @@ module RendersInIframe
   end
 
   def set_frame_options
-    response.headers["X-Frame-Options"] = "ALLOW-FROM #{request.referrer}"
+    response.headers["X-Frame-Options"] = "ALLOW-FROM #{request.referer}"
   end
-
 end

@@ -36,7 +36,7 @@ class Identity < ApplicationRecord
 
   # @return [AbstractAuthProvider, nil]
   def provider_config
-    AuthConfig.providers.find { _1.provider_name == provider}
+    AuthConfig.providers.find { it.provider_name == provider }
   end
 
   def trust_email?

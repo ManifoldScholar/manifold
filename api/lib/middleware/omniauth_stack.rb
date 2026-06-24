@@ -50,7 +50,6 @@ class OmniauthStack
         AuthConfig.providers.each do |auth_provider|
           provider(*auth_provider.provider_args)
         end
-
       end
     end
   end

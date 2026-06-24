@@ -25,7 +25,7 @@ class AuthConfig < ApplicationConfig
 
   # @return [Array<AbstractOidcProviderConfig>]
   def oidc_providers
-    @oidc_providers ||= raw_oidc_providers.select { _1.valid? && _1.enabled? }
+    @oidc_providers ||= raw_oidc_providers.select { it.valid? && it.enabled? }
   end
 
   # @return [Array<AbstractOidcProviderConfig>]
@@ -35,7 +35,7 @@ class AuthConfig < ApplicationConfig
 
   # @return [Array<AbstractSamlProviderConfig>]
   def saml_providers
-    @saml_providers ||= raw_saml_providers.select { _1.valid? && _1.enabled? }
+    @saml_providers ||= raw_saml_providers.select { it.valid? && it.enabled? }
   end
 
   # @return [Array<AbstractSamlProviderConfig>]

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Lti::DeepLinking::Submission do
+RSpec.describe Lti::DeepLinking::HandleSubmission do
   let(:user) { FactoryBot.create(:user) }
   let(:context_token) { SecureRandom.hex(32) }
   let(:cache_key) { "#{Lti::DeepLinking::Context::CACHE_KEY_PREFIX}/#{context_token}" }
