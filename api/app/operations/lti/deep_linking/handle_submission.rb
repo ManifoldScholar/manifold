@@ -11,7 +11,8 @@ module Lti
     #   2. Validate user identity.    Failure -> :forbidden    (code: "unauthorized")
     #   3. Validate selection shape.  Failure -> :unprocessable_entity (per-field)
     #   4. Validate business rules.   Failure -> :bad_request  (single message)
-    #   5. Sign the response, then consume the context (single-use).
+    #   5. Provision the course reading group (create-or-reuse, attach resources).
+    #   6. Sign the response, then consume the context (single-use).
     #
     # Order matters because (a) consuming the context before validation would
     # let a wrong-instructor request burn the instructor's session, and (b)
@@ -42,6 +43,7 @@ module Lti
         business_error = validate_business_rules
         return business_failure(business_error) if business_error
 
+        provision_reading_group!
         sign_and_consume
       rescue StandardError => e
         internal_error(e)
@@ -61,6 +63,33 @@ module Lti
 
       def references
         @references ||= selection.map { |item| Lti::ResourceReference.new(type: item["type"], id: item["id"]) }
+      end
+
+      # Create-or-reuse the single reading group for this course and attach the
+      # selected resources. Setting `creator` enrolls the instructor as a
+      # moderator via ReadingGroup's after_save hook; collect_model! is idempotent.
+      def provision_reading_group!
+        ReadingGroup.transaction do
+          references.each { |reference| reading_group.collect_model!(reference.entity) }
+        end
+      end
+
+      def reading_group
+        @reading_group ||= course_context.reading_group || create_reading_group!
+      end
+
+      def create_reading_group!
+        ReadingGroup.create!(name: reading_group_name, privacy: "private", creator: user).tap do |group|
+          course_context.update!(reading_group: group)
+        end
+      end
+
+      def reading_group_name
+        course_context.context_title.presence || "Course #{course_context.context_id}"
+      end
+
+      def course_context
+        @course_context ||= LtiCourseContext.find(context.lti_course_context_id)
       end
 
       def sign_and_consume
