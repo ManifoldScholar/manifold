@@ -17,7 +17,7 @@ module Lti
       # @param omniauth_hash [OmniAuth::AuthHash, Hash] request.env["omniauth.auth"]
       # @param user [User] the authenticated launching user
       def initialize(omniauth_hash, user)
-        @omniauth_hash = omniauth_hash
+        @launch = Lti::Launch.new(omniauth_hash)
         @user = user
       end
 
@@ -34,7 +34,7 @@ module Lti
 
       private
 
-      attr_reader :omniauth_hash, :user
+      attr_reader :launch, :user
 
       def enroll!
         membership = reading_group.reading_group_memberships.find_or_initialize_by(user: user)
@@ -43,7 +43,7 @@ module Lti
       end
 
       def instructor?
-        Lti::ContextRole.new(roles).instructor?
+        Lti::ContextRole.new(launch.roles).instructor?
       end
 
       def reading_group
@@ -61,7 +61,7 @@ module Lti
       def resource_reference
         return @resource_reference if defined?(@resource_reference)
 
-        params = Rack::Utils.parse_nested_query(URI.parse(target_link_uri.to_s).query.to_s)
+        params = Rack::Utils.parse_nested_query(URI.parse(launch.target_link_uri.to_s).query.to_s)
         @resource_reference =
           if params["redirect_type"].present? && params["redirect_id"].present?
             Lti::ResourceReference.new(type: params["redirect_type"], id: params["redirect_id"])
@@ -73,39 +73,8 @@ module Lti
       def course_context
         return @course_context if defined?(@course_context)
 
-        @course_context = deployment && LtiCourseContext.find_by(lti_deployment: deployment, context_id: context_claim["id"])
-      end
-
-      def deployment
-        return @deployment if defined?(@deployment)
-
-        @deployment = registration && LtiDeployment.find_by(lti_registration: registration, deployment_id: lti_claims["deployment_id"])
-      end
-
-      def registration
-        return @registration if defined?(@registration)
-
-        @registration = LtiRegistration.find_by(issuer: raw_info["iss"], client_id: raw_info["aud"])
-      end
-
-      def roles
-        lti_claims["roles"]
-      end
-
-      def context_claim
-        lti_claims["context"] || {}
-      end
-
-      def lti_claims
-        @lti_claims ||= omniauth_hash&.dig("extra", "lti") || {}
-      end
-
-      def raw_info
-        @raw_info ||= omniauth_hash&.dig("extra", "raw_info") || {}
-      end
-
-      def target_link_uri
-        omniauth_hash&.dig("extra", "target_link_uri")
+        @course_context = launch.deployment &&
+          LtiCourseContext.find_by(lti_deployment: launch.deployment, context_id: launch.context_id)
       end
     end
   end
