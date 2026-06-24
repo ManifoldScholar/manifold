@@ -27,7 +27,7 @@ module Lti
       # @param omniauth_hash [OmniAuth::AuthHash, Hash] request.env["omniauth.auth"]
       # @param user [User] the authenticated instructor
       def self.from_launch(omniauth_hash, user)
-        new(omniauth_hash: omniauth_hash, user: user)
+        new(launch: Lti::Launch.new(omniauth_hash), user: user)
       end
 
       # Load a previously persisted context (read path).
@@ -45,8 +45,8 @@ module Lti
         "#{CACHE_KEY_PREFIX}/#{token}"
       end
 
-      def initialize(omniauth_hash: nil, user: nil, token: nil, payload: nil)
-        @omniauth_hash = omniauth_hash
+      def initialize(launch: nil, user: nil, token: nil, payload: nil)
+        @launch = launch
         @user = user
         @token = token
         @payload = payload
@@ -91,7 +91,7 @@ module Lti
 
       private
 
-      attr_reader :omniauth_hash, :user
+      attr_reader :launch, :user
 
       def payload
         @payload ||= {}
@@ -107,55 +107,29 @@ module Lti
           "deep_link_return_url" => dl_settings["deep_link_return_url"],
           "accept_types" => dl_settings["accept_types"],
           "accept_multiple" => dl_settings["accept_multiple"],
-          "deployment_id" => deployment_id_claim,
-          "iss" => raw_info["iss"],
-          "client_id" => raw_info["aud"],
+          "deployment_id" => launch.deployment_id,
+          "iss" => launch.issuer,
+          "client_id" => launch.client_id,
           "lti_course_context_id" => course_context.id,
           "user_id" => user.id
         }
       end
 
-      def lti_claims
-        @lti_claims ||= omniauth_hash.dig("extra", "lti") || {}
-      end
-
       def dl_settings
-        @dl_settings ||= lti_claims["deep_linking_settings"] || {}
-      end
-
-      def context_claim
-        @context_claim ||= lti_claims["context"] || {}
-      end
-
-      def deployment_id_claim
-        lti_claims["deployment_id"]
-      end
-
-      def raw_info
-        @raw_info ||= omniauth_hash.dig("extra", "raw_info") || {}
-      end
-
-      def registration
-        @registration ||= LtiRegistration.find_by!(issuer: raw_info["iss"], client_id: raw_info["aud"])
-      end
-
-      def deployment
-        return @deployment if defined?(@deployment)
-
-        @deployment = LtiDeployment.find_by(lti_registration: registration, deployment_id: deployment_id_claim)
+        launch.deep_linking_settings
       end
 
       def course_context
         @course_context ||= LtiCourseContext.find_or_create_by!(
-          lti_deployment: deployment,
-          context_id: context_claim["id"]
+          lti_deployment: launch.deployment,
+          context_id: launch.context_id
         ) do |ctx|
-          ctx.context_title = context_claim["title"]
-          ctx.context_label = context_claim["label"]
-          ctx.context_type  = Array(context_claim["type"]).first
+          ctx.context_title = launch.context_title
+          ctx.context_label = launch.context_label
+          ctx.context_type  = launch.context_type
         end
       rescue ActiveRecord::RecordNotUnique
-        @course_context = LtiCourseContext.find_by!(lti_deployment: deployment, context_id: context_claim["id"])
+        @course_context = LtiCourseContext.find_by!(lti_deployment: launch.deployment, context_id: launch.context_id)
       end
     end
   end
