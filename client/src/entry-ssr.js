@@ -154,9 +154,30 @@ const performBootstrap = (req, res, store) => {
   return manifoldBootstrap(store.getState, store.dispatch, cookie);
 };
 
+const maybeEnforceCanonicalDomain = (req, res) => {
+  const enforce = config.services.client.canonicalDomainEnforced;
+  if (!enforce) return false;
+
+  const hostUrl = `http://${req.headers.host}`;
+  const hostname = new URL(hostUrl).hostname;
+  const canonicalHost = new URL(config.services.client.url).hostname;
+
+  const match = hostname === canonicalHost;
+  if (match) return false;
+
+  ch.notice("Redirecting to canonical domain");
+
+  const redirectLocation = new URL(req.url, config.services.client.url).href;
+
+  respondWithRedirect(res, redirectLocation);
+  return true;
+};
+
 // Handle requests
 const requestHandler = (req, res) => {
   const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+  if (maybeEnforceCanonicalDomain(req, res)) return;
 
   requestContext.run({ clientIp }, () => {
     const store = createStore();
