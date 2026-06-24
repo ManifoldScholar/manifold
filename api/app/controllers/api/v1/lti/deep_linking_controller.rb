@@ -30,7 +30,7 @@ module API
         def submission_params
           params.permit(
             :context_token,
-            selection: [:url, :title]
+            selection: [:type, :id, :title]
           )
         end
       end
