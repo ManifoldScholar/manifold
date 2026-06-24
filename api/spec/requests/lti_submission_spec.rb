@@ -6,6 +6,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
   let(:context_token) { SecureRandom.hex(32) }
   let(:cache_key) { "#{Lti::DeepLinking::Context::CACHE_KEY_PREFIX}/#{context_token}" }
   let(:other_instructor) { FactoryBot.create(:user) }
+  let(:project) { FactoryBot.create(:project) }
 
   let(:cached_payload) do
     {
@@ -21,7 +22,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
     }
   end
 
-  let(:valid_selection) { [{ url: "#{Rails.configuration.manifold.url}/projects/intro", title: "Intro" }] }
+  let(:valid_selection) { [{ type: "Project", id: project.id, title: "Intro" }] }
 
   let(:valid_params) do
     { context_token: context_token, selection: valid_selection }.to_json
@@ -164,7 +165,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         { context_token: context_token, selection: [{ title: "x" }] }.to_json
       end
 
-      it "returns 422 with a per-field error for the missing url" do
+      it "returns 422 with per-field errors for the missing type and id" do
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
              params: bad_selection_params
@@ -172,7 +173,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         expect(response).to have_http_status(:unprocessable_entity)
         body = response.parsed_body
         pointers = body["errors"].map { |e| e.dig("source", "pointer") }
-        expect(pointers).to include("/data/attributes/selection/0/url")
+        expect(pointers).to include("/data/attributes/selection/0/type", "/data/attributes/selection/0/id")
       end
     end
 
@@ -202,8 +203,8 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         {
           context_token: context_token,
           selection: [
-            { url: "#{Rails.configuration.manifold.url}/a", title: "A" },
-            { url: "#{Rails.configuration.manifold.url}/b", title: "B" }
+            { type: "Project", id: project.id, title: "A" },
+            { type: "Project", id: FactoryBot.create(:project).id, title: "B" }
           ]
         }.to_json
       end
