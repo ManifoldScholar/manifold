@@ -2,58 +2,108 @@
 
 module Lti
   module DeepLinking
-    # Extracts deep linking settings and contextual claims from a validated
-    # OmniAuth LTI auth hash, finds-or-creates the LtiCourseContext for the
-    # launch, and writes the full deep linking context to Rails.cache under
-    # an opaque random token. The token is the only carrier the picker needs
-    # to resolve back to the cached context.
+    # Encapsulates an LTI Deep Linking context — the bundle of deep linking
+    # settings and contextual claims a launch produces — and is the sole
+    # interface for reading and writing that context in Rails.cache.
     #
-    # The auth hash is assumed to have already been validated by
-    # OmniAuth::Strategies::Lti (signature, iss, aud, nonce, iat/exp,
-    # deployment registration). This service performs NO further JWT
-    # verification.
+    # Build one from a launch with {.from_launch} and {#persist!} it to mint an
+    # opaque token; load one back with {.find}; consume it (single use) with
+    # {#consume!}. The launch auth hash is assumed already validated by
+    # OmniAuth::Strategies::Lti — this object performs no JWT verification.
     class Context
       CACHE_TTL = 1.hour
       CACHE_KEY_PREFIX = "lti/dl"
+
+      PAYLOAD_READERS = %w[
+        user_id client_id iss deployment_id accept_multiple
+        deep_link_return_url data lti_course_context_id
+      ].freeze
 
       class Error < StandardError; end
       class InvalidRequestError < Error; end
       class IdempotencyError < Error; end
       class DeploymentNotRegisteredError < Error; end
 
+      # Build a context from an LTI launch (write path).
       # @param omniauth_hash [OmniAuth::AuthHash, Hash] request.env["omniauth.auth"]
       # @param user [User] the authenticated instructor
-      def initialize(omniauth_hash, user)
-        @omniauth_hash = omniauth_hash
-        @user = user
+      def self.from_launch(omniauth_hash, user)
+        new(omniauth_hash: omniauth_hash, user: user)
       end
 
-      # Generates an opaque token, writes the DL context to Rails.cache,
-      # and returns the token. Raises a subclass of {Error} on validation
-      # failure; in that case nothing is written to the cache.
-      #
+      # Load a previously persisted context (read path).
+      # @param token [String] the opaque token returned by {#persist!}
+      # @return [Context, nil] nil when the token is unknown or expired
+      def self.find(token)
+        payload = Rails.cache.read(cache_key(token))
+        return if payload.blank?
+
+        new(token: token, payload: payload)
+      end
+
+      # @return [String]
+      def self.cache_key(token)
+        "#{CACHE_KEY_PREFIX}/#{token}"
+      end
+
+      def initialize(omniauth_hash: nil, user: nil, token: nil, payload: nil)
+        @omniauth_hash = omniauth_hash
+        @user = user
+        @token = token
+        @payload = payload
+      end
+      private_class_method :new
+
+      # Validate the launch, build the payload, write it to cache, and return
+      # the minted token. Raises an {Error} subclass on validation failure, in
+      # which case nothing is written.
       # @return [String] 64-character hex token
-      def cache!
+      def persist!
+        raise IdempotencyError, "Context can only be persisted once" if token
+
         validate!
+        @payload = build_payload
+        @token = SecureRandom.hex(32)
+        Rails.cache.write(self.class.cache_key(token), payload, expires_in: CACHE_TTL)
+        token
+      end
 
-        raise IdempotencyError, "Context can only be cached once" if defined?(@token)
+      # Delete the cached context (single-use consumption).
+      # @return [void]
+      def consume!
+        Rails.cache.delete(self.class.cache_key(token))
+      end
 
-        SecureRandom.hex(32).tap do |token|
-          @token = token
-          Rails.cache.write(cache_key(token), context_payload, expires_in: CACHE_TTL)
-        end
+      attr_reader :token
+
+      PAYLOAD_READERS.each do |field|
+        define_method(field) { payload[field] }
+      end
+
+      def accept_types
+        Array(payload["accept_types"])
+      end
+
+      # @param user [User]
+      # @return [Boolean]
+      def owned_by?(user)
+        user_id == user.id
       end
 
       private
 
       attr_reader :omniauth_hash, :user
 
+      def payload
+        @payload ||= {}
+      end
+
       def validate!
         raise InvalidRequestError, "Missing deep_link_return_url" if dl_settings["deep_link_return_url"].blank?
         raise DeploymentNotRegisteredError, "Deployment #{deployment_id_claim} is not registered" unless deployment
       end
 
-      def context_payload
+      def build_payload
         {
           "data" => dl_settings["data"],
           "deep_link_return_url" => dl_settings["deep_link_return_url"],
@@ -65,10 +115,6 @@ module Lti
           "lti_course_context_id" => course_context.id,
           "user_id" => user.id
         }
-      end
-
-      def cache_key(token)
-        "#{CACHE_KEY_PREFIX}/#{token}"
       end
 
       def lti_claims
@@ -92,19 +138,13 @@ module Lti
       end
 
       def registration
-        @registration ||= LtiRegistration.find_by!(
-          issuer: raw_info["iss"],
-          client_id: raw_info["aud"]
-        )
+        @registration ||= LtiRegistration.find_by!(issuer: raw_info["iss"], client_id: raw_info["aud"])
       end
 
       def deployment
         return @deployment if defined?(@deployment)
 
-        @deployment = LtiDeployment.find_by(
-          lti_registration: registration,
-          deployment_id: deployment_id_claim
-        )
+        @deployment = LtiDeployment.find_by(lti_registration: registration, deployment_id: deployment_id_claim)
       end
 
       def course_context
@@ -117,10 +157,7 @@ module Lti
           ctx.context_type  = Array(context_claim["type"]).first
         end
       rescue ActiveRecord::RecordNotUnique
-        @course_context = LtiCourseContext.find_by!(
-          lti_deployment: deployment,
-          context_id: context_claim["id"]
-        )
+        @course_context = LtiCourseContext.find_by!(lti_deployment: deployment, context_id: context_claim["id"])
       end
     end
   end

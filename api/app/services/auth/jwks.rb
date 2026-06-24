@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Auth
   # Generates a JWKS set for the Manifold private key
   # TODO: Caching
   class Jwks
-
     def initialize(private_key = Rails.application.config.manifold.private_key)
       @private_key = private_key
     end
@@ -24,6 +25,5 @@ module Auth
     end
     alias as_json jwks
     delegate :to_json, to: :jwks
-
   end
 end
