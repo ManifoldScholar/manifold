@@ -29,6 +29,8 @@ module Auth
 
       return handle_deep_linking_request if @current_user && lti_deep_linking_request?
 
+      enroll_in_reading_group if @current_user && lti?
+
       error = outcome.invalid? ? AUTH_ERROR_STRING : nil
       redirect = Auth::OmniauthRedirect.new(omniauth_hash, params, error:)
 
@@ -62,6 +64,12 @@ module Auth
     def render_deep_linking_error(failure)
       @error_message = failure[:message]
       render "auth/lti/deep_linking/error", status: failure[:status]
+    end
+
+    # JIT-enroll the launching user into the course's reading group when the
+    # launched resource belongs to it. Best-effort; never blocks the launch.
+    def enroll_in_reading_group
+      ::Lti::ResourceLink::Enroll.new(omniauth_hash, @current_user).call
     end
 
     def lti_deep_linking_request?
