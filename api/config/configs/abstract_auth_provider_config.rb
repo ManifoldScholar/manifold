@@ -78,5 +78,4 @@ class AbstractAuthProviderConfig < ApplicationConfig
       provider_options
     ]
   end
-
 end
