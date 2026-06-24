@@ -61,7 +61,26 @@ module Auth
     # LTI provides a `target_link_uri`, a full URL to the requested resource
     # SAML can provide a `RelayState`
     def target_query_string
-      build_query_string(**(target_path || target_resource || {}))
+      build_query_string(**(lti_redirect_resource || target_path || target_resource || {}))
+    end
+
+    # Parse redirect_type / redirect_id from an LTI launch's target_link_uri
+    # query. Deep-linked content items carry the resource identity there, letting
+    # the client build the destination URL (see {Lti::ResourceReference#launch_url}).
+    # @return [Hash, nil]
+    def lti_redirect_resource
+      return unless lti?
+
+      params = Rack::Utils.parse_nested_query(URI.parse(target_link_uri.to_s).query.to_s)
+      return if params["redirect_type"].blank? || params["redirect_id"].blank?
+
+      { redirect_type: params["redirect_type"], redirect_id: params["redirect_id"] }
+    rescue URI::InvalidURIError
+      nil
+    end
+
+    def target_link_uri
+      omniauth.dig("extra", "target_link_uri")
     end
 
     # Parse relay_state for an external identifier
