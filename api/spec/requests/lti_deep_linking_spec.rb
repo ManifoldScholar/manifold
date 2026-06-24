@@ -187,34 +187,6 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
     end
   end
 
-  describe "DeploymentNotRegisteredError when deployment_id does not match a deployment" do
-    before do
-      unregistered_extra = lti_extra.merge("deployment_id" => "deploy-not-registered")
-      prime_auth_hash(
-        OmniAuth::AuthHash.new(auth_hash.to_h.merge("extra" => auth_hash["extra"].to_h.merge("lti" => unregistered_extra)))
-      )
-    end
-
-    it "renders the DL error template with status 400 and the categorized message" do
-      post "/auth/lti/callback"
-
-      expect(response).to have_http_status(:bad_request)
-      expect(response.body).to include("Deep Linking Error")
-      expect(response.body).to include("Deployment not registered")
-    end
-
-    it "logs at warn level with deployment_id reflecting the unregistered value" do
-      allow(Rails.logger).to receive(:warn)
-      post "/auth/lti/callback"
-      expect(Rails.logger).to have_received(:warn).with(
-        a_string_including(
-          "deployment_id=\"deploy-not-registered\"",
-          "failure_reason=DeploymentNotRegisteredError"
-        )
-      )
-    end
-  end
-
   describe "unexpected StandardError raised by the deep linking service" do
     before do
       allow(Lti::DeepLinking::Context).to receive(:new)

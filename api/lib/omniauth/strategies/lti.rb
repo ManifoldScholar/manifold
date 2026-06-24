@@ -75,17 +75,24 @@ module OmniAuth
         raise OmniAuth::Error, "No enabled LTI registration found for issuer #{issuer} and client_id #{client_id}"
       end
 
+      # Ensure the launch's deployment is recorded under the (already signature-
+      # verified) registration, creating it on first sight — the registration is
+      # the trust anchor, so any deployment it asserts is accepted. Only an
+      # explicitly disabled deployment is rejected.
       def verify_deployment!(registration, claims)
         deployment_id = claims["https://purl.imsglobal.org/spec/lti/claim/deployment_id"]
         raise OmniAuth::Error, "Missing deployment_id claim" unless deployment_id
 
-        LtiDeployment.find_by(
-          lti_registration: registration,
-          deployment_id: deployment_id
-        )
+        deployment = find_or_create_deployment!(registration, deployment_id)
+        raise OmniAuth::Error, "Deployment #{deployment_id} is disabled" unless deployment.enabled?
 
-        # raise OmniAuth::Error, "Deployment #{deployment_id} is not registered" unless deployment
-        # raise OmniAuth::Error, "Deployment #{deployment_id} is disabled" unless deployment.enabled?
+        deployment
+      end
+
+      def find_or_create_deployment!(registration, deployment_id)
+        registration.lti_deployments.find_or_create_by!(deployment_id: deployment_id)
+      rescue ActiveRecord::RecordNotUnique
+        registration.lti_deployments.find_by!(deployment_id: deployment_id)
       end
 
       # Builds the authorization redirect URI with all required OIDC parameters.
@@ -110,9 +117,8 @@ module OmniAuth
       # audience, nonce, timing, and deployment.
       def decode_and_verify!(id_token, state)
         unverified = JWT.decode(id_token, nil, false).first
-        Rails.logger.debug unverified
         registration = find_registration!(unverified["iss"], unverified["aud"])
-        jwks_loader = Lti::Auth::PlatformJwks.new(registration)
+        jwks_loader = ::Lti::Auth::PlatformJwks.new(registration)
 
         claims = JWT.decode(
           id_token,
