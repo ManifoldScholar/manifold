@@ -7,13 +7,13 @@ module API
         before_action :authenticate_request!
 
         def show
-          result = ::Lti::DeepLinking::ContextLookup.new(params[:context_token], current_user).call
+          result = ::Lti::DeepLinking::FetchContext.new(params[:context_token], current_user).call
 
           render_result(result)
         end
 
         def create
-          result = ::Lti::DeepLinking::Submission.new(submission_params, current_user).call
+          result = ::Lti::DeepLinking::HandleSubmission.new(submission_params, current_user).call
 
           render_result(result)
         end

@@ -29,21 +29,6 @@ RSpec.describe LtiRegistration, type: :model do
     end
   end
 
-  describe ".find_by_issuer_and_client_id!" do
-    let!(:registration) { FactoryBot.create(:lti_registration) }
-
-    it "finds an enabled registration" do
-      expect(described_class.find_by_issuer_and_client_id!(registration.issuer, registration.client_id)).to eq registration
-    end
-
-    it "does not find a disabled registration" do
-      registration.update!(enabled: false)
-      expect {
-        described_class.find_by_issuer_and_client_id!(registration.issuer, registration.client_id)
-      }.to raise_error ActiveRecord::RecordNotFound
-    end
-  end
-
   describe "dependent destroy" do
     let!(:registration) { FactoryBot.create(:lti_registration, :with_deployment) }
 

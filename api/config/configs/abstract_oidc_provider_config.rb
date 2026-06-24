@@ -60,5 +60,4 @@ class AbstractOidcProviderConfig < AbstractAuthProviderConfig
   def redirect_uri
     "#{Rails.application.config.manifold.api_url}/auth/#{provider_name}/callback"
   end
-
 end

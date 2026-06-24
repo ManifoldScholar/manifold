@@ -2,12 +2,12 @@
 
 module Lti
   module DeepLinking
-    # Orchestrates the controller-level deep linking response: caches the DL
-    # context via {Context#cache!}, maps validation errors to
-    # categorized messages, and logs structured entries. Returns a {Result}
-    # value object that the controller uses to redirect or render — no branching
-    # logic lives in the controller.
-    class RequestHandler
+    # Orchestrates the controller-level deep linking response: persists the DL
+    # context via {Context#persist!}, maps validation errors to categorized
+    # messages, and logs structured entries. Returns a {Dry::Monads::Result}
+    # the controller uses to redirect or render — no branching logic lives in
+    # the controller.
+    class HandleRequest
       include Dry::Monads[:result]
 
       ERROR_MESSAGES = {
@@ -27,7 +27,7 @@ module Lti
       #   the picker exchanges for its constraints; Failure carries a categorized
       #   :message and the :status the controller renders the error template with.
       def call
-        token = Context.new(omniauth_hash, user).cache!
+        token = Context.from_launch(omniauth_hash, user).persist!
         Success(token:)
       rescue Context::Error => e
         log_warn(e)
