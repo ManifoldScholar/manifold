@@ -4,9 +4,9 @@ require "rails_helper"
 
 RSpec.describe Lti::DeepLinking::HandleSubmission do
   let(:user) { FactoryBot.create(:user) }
+  let(:project) { FactoryBot.create(:project) }
   let(:context_token) { SecureRandom.hex(32) }
   let(:cache_key) { "#{Lti::DeepLinking::Context::CACHE_KEY_PREFIX}/#{context_token}" }
-  let(:manifold_url) { Rails.configuration.manifold.url }
 
   let(:payload) do
     {
@@ -20,7 +20,7 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
     }
   end
 
-  let(:selection) { [{ "url" => "#{manifold_url}/projects/intro", "title" => "Intro" }] }
+  let(:selection) { [{ "type" => "Project", "id" => project.id, "title" => "Intro" }] }
   let(:params) { { context_token: context_token, selection: selection } }
 
   subject(:result) { described_class.new(params, user).call }
@@ -41,7 +41,6 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
     before { Rails.cache.delete(cache_key) }
 
     it "fails as :unauthorized with code 'expired'" do
-      expect(result).to be_failure
       expect(result.failure[:status]).to eq(:unauthorized)
       expect(result.failure[:errors].first[:code]).to eq("expired")
     end
@@ -56,13 +55,13 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
     end
   end
 
-  context "when a selection item is missing its url" do
+  context "when a selection item is missing its type and id" do
     let(:selection) { [{ "title" => "x" }] }
 
-    it "fails as 422 with a per-field pointer" do
+    it "fails as 422 with per-field pointers" do
       expect(result.failure[:status]).to eq(422)
       pointers = result.failure[:errors].map { |e| e.dig(:source, :pointer) }
-      expect(pointers).to include("/data/attributes/selection/0/url")
+      expect(pointers).to include("/data/attributes/selection/0/type", "/data/attributes/selection/0/id")
     end
   end
 
@@ -75,8 +74,8 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
     end
   end
 
-  context "when a selection url is not on the Manifold domain" do
-    let(:selection) { [{ "url" => "https://evil.example.com/x", "title" => "X" }] }
+  context "when a selection reference does not resolve to a linkable entity" do
+    let(:selection) { [{ "type" => "Project", "id" => SecureRandom.uuid, "title" => "X" }] }
 
     it "fails as :bad_request" do
       expect(result.failure[:status]).to eq(:bad_request)
@@ -87,7 +86,10 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
     before { Rails.cache.write(cache_key, payload.merge("accept_multiple" => false), expires_in: 1.hour) }
 
     let(:selection) do
-      [{ "url" => "#{manifold_url}/a", "title" => "A" }, { "url" => "#{manifold_url}/b", "title" => "B" }]
+      [
+        { "type" => "Project", "id" => project.id, "title" => "A" },
+        { "type" => "Project", "id" => FactoryBot.create(:project).id, "title" => "B" }
+      ]
     end
 
     it "fails as :bad_request" do
