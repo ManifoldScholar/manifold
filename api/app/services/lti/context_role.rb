@@ -12,7 +12,7 @@ module Lti
   #   - any sub-role .../membership/Instructor#<SubRole> (e.g. TeachingAssistant)
   class ContextRole
     MEMBERSHIP_VOCAB = "http://purl.imsglobal.org/vocab/lis/v2/membership"
-    INSTRUCTOR_REGEXP = %r((?:#{MEMBERSHIP_VOCAB}[#/]?)?).freeze
+    INSTRUCTOR_REGEXP = %r((?:#{MEMBERSHIP_VOCAB}[#/]?)?)
     INSTRUCTOR_VOCAB = "Instructor"
 
     # @param roles [Array<String>, nil] the LTI roles claim
