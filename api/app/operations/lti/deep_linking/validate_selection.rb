@@ -54,7 +54,7 @@ module Lti
       end
 
       def field_error(pointer, detail)
-        { status: "422", source: { pointer: pointer }, detail: detail }
+        JSONAPI::Helpers::Error.new(status: :unprocessable_entity, pointer: pointer, detail: detail)
       end
 
       def validate_business_rules
@@ -74,7 +74,7 @@ module Lti
       def business_failure(message)
         Failure(
           status: :bad_request,
-          errors: [{ status: "400", code: "invalid_selection", title: "Invalid Selection", detail: message }]
+          errors: [JSONAPI::Helpers::Error.new(status: :bad_request, title: "Invalid Selection", detail: message)]
         )
       end
     end
