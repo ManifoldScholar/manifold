@@ -5,18 +5,20 @@ require "rails_helper"
 RSpec.describe Lti::DeepLinking::HandleSubmission do
   let(:user) { FactoryBot.create(:user) }
   let(:project) { FactoryBot.create(:project) }
+  let(:course_context) { FactoryBot.create(:lti_course_context, context_title: "Intro to Ruby") }
   let(:context_token) { SecureRandom.hex(32) }
   let(:cache_key) { "#{Lti::DeepLinking::Context::CACHE_KEY_PREFIX}/#{context_token}" }
 
   let(:payload) do
     {
-      "user_id"              => user.id,
-      "client_id"            => "tool-client-id",
-      "iss"                  => "https://canvas.example.com",
-      "deployment_id"        => "deploy-1",
-      "deep_link_return_url" => "https://canvas.example.com/dl_return",
-      "accept_types"         => ["ltiResourceLink"],
-      "accept_multiple"      => true
+      "user_id"               => user.id,
+      "client_id"             => "tool-client-id",
+      "iss"                   => "https://canvas.example.com",
+      "deployment_id"         => "deploy-1",
+      "deep_link_return_url"  => "https://canvas.example.com/dl_return",
+      "accept_types"          => ["ltiResourceLink"],
+      "accept_multiple"       => true,
+      "lti_course_context_id" => course_context.id
     }
   end
 
@@ -94,6 +96,29 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
 
     it "fails as :bad_request" do
       expect(result.failure[:status]).to eq(:bad_request)
+    end
+  end
+
+  describe "reading group provisioning (on success)" do
+    it "creates a private group named from the course, with the instructor as moderator" do
+      expect { result }.to change(ReadingGroup, :count).by(1)
+
+      group = course_context.reload.reading_group
+      expect(group).to have_attributes(name: "Intro to Ruby", privacy: "private", creator: user)
+      expect(group.moderators).to include(user)
+    end
+
+    it "attaches the selected resource to the group" do
+      result
+      group = course_context.reload.reading_group
+      expect(ReadingGroupProject.exists?(reading_group: group, project: project)).to be(true)
+    end
+
+    it "reuses the existing group on a repeat submission rather than duplicating it" do
+      expect { result }.to change(ReadingGroup, :count).by(1)
+
+      Rails.cache.write(cache_key, payload, expires_in: 1.hour)
+      expect { described_class.new(params, user).call }.not_to change(ReadingGroup, :count)
     end
   end
 end
