@@ -70,7 +70,6 @@ module OmniAuth
       private
 
       def find_registration!(issuer, client_id)
-        return LtiRegistration.first
         LtiRegistration.find_by!(issuer: issuer, client_id: client_id)
       rescue ActiveRecord::RecordNotFound
         raise OmniAuth::Error, "No enabled LTI registration found for issuer #{issuer} and client_id #{client_id}"
@@ -80,7 +79,7 @@ module OmniAuth
         deployment_id = claims["https://purl.imsglobal.org/spec/lti/claim/deployment_id"]
         raise OmniAuth::Error, "Missing deployment_id claim" unless deployment_id
 
-        deployment = LtiDeployment.find_by(
+        LtiDeployment.find_by(
           lti_registration: registration,
           deployment_id: deployment_id
         )
@@ -111,7 +110,7 @@ module OmniAuth
       # audience, nonce, timing, and deployment.
       def decode_and_verify!(id_token, state)
         unverified = JWT.decode(id_token, nil, false).first
-        puts unverified
+        Rails.logger.debug unverified
         registration = find_registration!(unverified["iss"], unverified["aud"])
         jwks_loader = Lti::Auth::PlatformJwks.new(registration)
 

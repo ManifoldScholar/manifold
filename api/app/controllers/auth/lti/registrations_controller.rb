@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Auth
   module Lti
-    class RegistrationsController < ActionController::Base
+    class RegistrationsController < ActionController::Base # rubocop:disable Rails/ApplicationController
       include RendersInIframe
 
       layout "auth"
@@ -21,7 +23,6 @@ module Auth
 
         render :create, status: @registrar.valid? ? :ok : :bad_request
       end
-
     end
   end
 end

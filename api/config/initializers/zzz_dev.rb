@@ -20,6 +20,6 @@ if Rails.env.development?
 
   # Disable SSL verification for OpenIDConnect gem, allowing self-signed certificates for dev IDPs
   OpenIDConnect.http_config do |client|
-    client.ssl_config.verify_mode=OpenSSL::SSL::VERIFY_NONE
+    client.ssl_config.verify_mode = OpenSSL::SSL::VERIFY_NONE
   end
 end

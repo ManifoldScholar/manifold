@@ -169,7 +169,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
              headers: reader_headers,
              params: bad_selection_params
 
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
         body = response.parsed_body
         pointers = body["errors"].map { |e| e.dig("source", "pointer") }
         expect(pointers).to include("/data/attributes/selection/0/url")

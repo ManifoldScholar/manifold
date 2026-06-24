@@ -10,7 +10,7 @@ module Lti
     #
     # Signed RS256 with the Manifold tool key so the platform can verify it
     # against the tool's published JWKS (see {Auth::Jwks}).
-    class ResponseToken
+    class BuildResponseToken
       MESSAGE_TYPE       = "LtiDeepLinkingResponse"
       LTI_VERSION        = "1.3.0"
       RESOURCE_LINK_TYPE = "ltiResourceLink"
@@ -18,10 +18,10 @@ module Lti
       DL_CLAIM_PREFIX    = "https://purl.imsglobal.org/spec/lti-dl/claim"
       TOKEN_TTL          = 5.minutes
 
-      # @param payload [Hash] the cached deep linking context (string keys)
+      # @param context [Context] the persisted deep linking context
       # @param selection [Array<Hash>] validated items carrying "url" and "title"
-      def initialize(payload, selection)
-        @payload = payload
+      def initialize(context, selection)
+        @context = context
         @selection = Array(selection)
       end
 
@@ -32,19 +32,19 @@ module Lti
 
       private
 
-      attr_reader :payload, :selection
+      attr_reader :context, :selection
 
       def claims
         now = Time.now.to_i
         {
-          "iss"   => payload["client_id"],
-          "aud"   => payload["iss"],
+          "iss"   => context.client_id,
+          "aud"   => context.iss,
           "iat"   => now,
           "exp"   => now + TOKEN_TTL.to_i,
           "nonce" => SecureRandom.uuid,
           "#{CLAIM_PREFIX}/message_type"     => MESSAGE_TYPE,
           "#{CLAIM_PREFIX}/version"          => LTI_VERSION,
-          "#{CLAIM_PREFIX}/deployment_id"    => payload["deployment_id"],
+          "#{CLAIM_PREFIX}/deployment_id"    => context.deployment_id,
           "#{DL_CLAIM_PREFIX}/content_items" => content_items
         }.merge(data_claim)
       end
@@ -61,9 +61,9 @@ module Lti
 
       # The platform's opaque `data` must be echoed back verbatim when present.
       def data_claim
-        return {} if payload["data"].blank?
+        return {} if context.data.blank?
 
-        { "#{DL_CLAIM_PREFIX}/data" => payload["data"] }
+        { "#{DL_CLAIM_PREFIX}/data" => context.data }
       end
 
       def private_key
