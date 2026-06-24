@@ -44,18 +44,18 @@ RSpec.describe Lti::DeepLinking::FetchContext do
   context "when the token is missing or expired" do
     before { Rails.cache.delete(cache_key) }
 
-    it "fails as :unauthorized with code 'expired'" do
+    it "fails as :unauthorized" do
       expect(result.failure[:status]).to eq(:unauthorized)
-      expect(result.failure[:errors].first[:code]).to eq("expired")
+      expect(result.failure[:errors].first.title).to eq("Context Expired")
     end
   end
 
   context "when the requesting user does not own the session" do
     subject(:result) { described_class.new(context_token, FactoryBot.create(:user)).call }
 
-    it "fails as :forbidden with code 'unauthorized'" do
+    it "fails as :forbidden" do
       expect(result.failure[:status]).to eq(:forbidden)
-      expect(result.failure[:errors].first[:code]).to eq("unauthorized")
+      expect(result.failure[:errors].first.title).to eq("Unauthorized")
     end
   end
 end
