@@ -11,24 +11,22 @@ module Lti
       def expired_failure
         Failure(
           status: :unauthorized,
-          errors: [{
-            status: "401",
-            code: "expired",
+          errors: [JSONAPI::Helpers::Error.new(
+            status: :unauthorized,
             title: "Context Expired",
             detail: "The deep linking session has expired. Please relaunch from your LMS."
-          }]
+          )]
         )
       end
 
       def forbidden_failure
         Failure(
           status: :forbidden,
-          errors: [{
-            status: "403",
-            code: "unauthorized",
+          errors: [JSONAPI::Helpers::Error.new(
+            status: :forbidden,
             title: "Unauthorized",
             detail: "You are not the instructor for this deep linking session."
-          }]
+          )]
         )
       end
     end
