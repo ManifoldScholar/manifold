@@ -212,7 +212,7 @@ module Lti
       # Does the OIDC config exist and contain all necessary keys?
       def openid_configuration_valid?
         openid_configuration.present? &&
-          REQUIRED_OPENID_CONFIG_KEYS.all? { openid_configuration[_1].present? }
+          REQUIRED_OPENID_CONFIG_KEYS.all? { openid_configuration[it].present? }
       end
 
       # @return [URI::HTTP]
