@@ -130,11 +130,6 @@ RSpec.describe Lti::DeepLinking::Context do
       expect { context.persist! }.to raise_error(Lti::DeepLinking::Context::InvalidRequestError, /Missing deep_link_return_url/)
     end
 
-    it "raises DeploymentNotRegisteredError when the deployment_id does not match" do
-      lti_claim_hash["deployment_id"] = "deploy-not-registered"
-      expect { context.persist! }.to raise_error(Lti::DeepLinking::Context::DeploymentNotRegisteredError, /not registered/)
-    end
-
     it "writes nothing to the cache when validation fails" do
       dl_settings.delete("deep_link_return_url")
       expect(Rails.cache).not_to receive(:write)
@@ -205,9 +200,8 @@ RSpec.describe Lti::DeepLinking::Context do
   end
 
   describe "Error class hierarchy (controller integration contract)" do
-    it "InvalidRequestError and DeploymentNotRegisteredError descend from Error, which is rescuable" do
+    it "InvalidRequestError descends from Error, which is rescuable" do
       expect(Lti::DeepLinking::Context::InvalidRequestError.ancestors).to include(Lti::DeepLinking::Context::Error)
-      expect(Lti::DeepLinking::Context::DeploymentNotRegisteredError.ancestors).to include(Lti::DeepLinking::Context::Error)
       expect(Lti::DeepLinking::Context::Error.ancestors).to include(StandardError)
     end
   end

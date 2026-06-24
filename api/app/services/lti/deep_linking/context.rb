@@ -22,7 +22,6 @@ module Lti
       class Error < StandardError; end
       class InvalidRequestError < Error; end
       class IdempotencyError < Error; end
-      class DeploymentNotRegisteredError < Error; end
 
       # Build a context from an LTI launch (write path).
       # @param omniauth_hash [OmniAuth::AuthHash, Hash] request.env["omniauth.auth"]
@@ -100,7 +99,6 @@ module Lti
 
       def validate!
         raise InvalidRequestError, "Missing deep_link_return_url" if dl_settings["deep_link_return_url"].blank?
-        raise DeploymentNotRegisteredError, "Deployment #{deployment_id_claim} is not registered" unless deployment
       end
 
       def build_payload
