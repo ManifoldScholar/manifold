@@ -32,7 +32,9 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
     Rails.cache.write(cache_key, payload, expires_in: 1.hour)
   end
 
-  it "returns the return url and a signed JWT, consuming the token" do
+  it "validates, provisions the group, signs the response, and consumes the token" do
+    expect { result }.to change(ReadingGroup, :count).by(1)
+
     expect(result).to be_success
     expect(result.value!).to include(deep_link_return_url: "https://canvas.example.com/dl_return")
     expect(result.value![:jwt]).to be_a(String)
@@ -57,68 +59,12 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
     end
   end
 
-  context "when a selection item is missing its type and id" do
+  context "when the selection is invalid" do
     let(:selection) { [{ "title" => "x" }] }
 
-    it "fails as 422 with per-field pointers" do
+    it "propagates the validation failure and does not consume the token" do
       expect(result.failure[:status]).to eq(422)
-      pointers = result.failure[:errors].map { |e| e.dig(:source, :pointer) }
-      expect(pointers).to include("/data/attributes/selection/0/type", "/data/attributes/selection/0/id")
-    end
-  end
-
-  context "when the session does not accept resource links" do
-    before { Rails.cache.write(cache_key, payload.merge("accept_types" => ["file"]), expires_in: 1.hour) }
-
-    it "fails as :bad_request with code 'invalid_selection'" do
-      expect(result.failure[:status]).to eq(:bad_request)
-      expect(result.failure[:errors].first[:code]).to eq("invalid_selection")
-    end
-  end
-
-  context "when a selection reference does not resolve to a linkable entity" do
-    let(:selection) { [{ "type" => "Project", "id" => SecureRandom.uuid, "title" => "X" }] }
-
-    it "fails as :bad_request" do
-      expect(result.failure[:status]).to eq(:bad_request)
-    end
-  end
-
-  context "when accept_multiple is false and multiple items are submitted" do
-    before { Rails.cache.write(cache_key, payload.merge("accept_multiple" => false), expires_in: 1.hour) }
-
-    let(:selection) do
-      [
-        { "type" => "Project", "id" => project.id, "title" => "A" },
-        { "type" => "Project", "id" => FactoryBot.create(:project).id, "title" => "B" }
-      ]
-    end
-
-    it "fails as :bad_request" do
-      expect(result.failure[:status]).to eq(:bad_request)
-    end
-  end
-
-  describe "reading group provisioning (on success)" do
-    it "creates a private group named from the course, with the instructor as moderator" do
-      expect { result }.to change(ReadingGroup, :count).by(1)
-
-      group = course_context.reload.reading_group
-      expect(group).to have_attributes(name: "Intro to Ruby", privacy: "private", creator: user)
-      expect(group.moderators).to include(user)
-    end
-
-    it "attaches the selected resource to the group" do
-      result
-      group = course_context.reload.reading_group
-      expect(ReadingGroupProject.exists?(reading_group: group, project: project)).to be(true)
-    end
-
-    it "reuses the existing group on a repeat submission rather than duplicating it" do
-      expect { result }.to change(ReadingGroup, :count).by(1)
-
-      Rails.cache.write(cache_key, payload, expires_in: 1.hour)
-      expect { described_class.new(params, user).call }.not_to change(ReadingGroup, :count)
+      expect(Rails.cache.read(cache_key)).to be_present
     end
   end
 end
