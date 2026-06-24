@@ -7,6 +7,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
   let(:cache_key) { "#{Lti::DeepLinking::Context::CACHE_KEY_PREFIX}/#{context_token}" }
   let(:other_instructor) { FactoryBot.create(:user) }
   let(:project) { FactoryBot.create(:project) }
+  let(:course_context) { FactoryBot.create(:lti_course_context) }
 
   let(:cached_payload) do
     {
@@ -18,7 +19,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
       "data"                  => "opaque",
       "deployment_id"         => "d1",
       "iss"                   => "https://canvas.example.com",
-      "lti_course_context_id" => SecureRandom.uuid
+      "lti_course_context_id" => course_context.id
     }
   end
 
