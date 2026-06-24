@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Auth
-  class OmniauthController < ActionController::Base
+  class OmniauthController < ActionController::Base # rubocop:disable Rails/ApplicationController
     include ManagesOauthCookie
     include RendersInIframe
 
@@ -47,7 +47,7 @@ module Auth
     # instructor to the React selection page, or render the error template with
     # the status the handler categorized the failure as. Runs the handler once.
     def handle_deep_linking_request
-      result = ::Lti::DeepLinking::RequestHandler.new(omniauth_hash, @current_user).call
+      result = ::Lti::DeepLinking::HandleRequest.new(omniauth_hash, @current_user).call
 
       result.either(
         ->(context) { redirect_to deep_linking_redirect_url(context), allow_other_host: true },

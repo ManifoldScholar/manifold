@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Lti::DeepLinking::RequestHandler do
+RSpec.describe Lti::DeepLinking::HandleRequest do
   let(:registration) do
     FactoryBot.create(:lti_registration,
                       issuer: "https://canvas.example.com",
@@ -87,7 +87,7 @@ RSpec.describe Lti::DeepLinking::RequestHandler do
 
   describe "#call — unexpected StandardError failure path" do
     before do
-      allow(Lti::DeepLinking::Context).to receive(:new)
+      allow(Lti::DeepLinking::Context).to receive(:from_launch)
         .and_raise(StandardError, "simulated failure")
     end
 

@@ -1,9 +1,9 @@
+# frozen_string_literal: true
 
 module Lti
   module Registration
     class Consent
-
-      attr_reader :errors, :openid_configuration_url, :registration_token, :referrer
+      attr_reader :errors, :openid_configuration_url, :registration_token
 
       def initialize(request, params)
         @request = request
@@ -42,7 +42,6 @@ module Lti
       def referrer
         @referrer ||= @request.referrer
       end
-
     end
   end
 end

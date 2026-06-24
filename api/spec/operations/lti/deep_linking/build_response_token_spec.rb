@@ -2,20 +2,20 @@
 
 require "rails_helper"
 
-RSpec.describe Lti::DeepLinking::ResponseToken do
-  let(:payload) do
-    {
-      "client_id"            => "tool-client-id",
-      "iss"                  => "https://canvas.example.com",
-      "deployment_id"        => "deploy-1",
-      "deep_link_return_url" => "https://canvas.example.com/dl_return",
-      "data"                 => "opaque-platform-data"
-    }
+RSpec.describe Lti::DeepLinking::BuildResponseToken do
+  def context(data: "opaque-platform-data")
+    instance_double(
+      Lti::DeepLinking::Context,
+      client_id: "tool-client-id",
+      iss: "https://canvas.example.com",
+      deployment_id: "deploy-1",
+      data: data
+    )
   end
 
   let(:selection) { [{ "url" => "https://manifold.test/projects/intro", "title" => "Intro" }] }
 
-  subject(:jwt) { described_class.new(payload, selection).call }
+  subject(:jwt) { described_class.new(context, selection).call }
 
   def decoded
     public_key = Rails.application.config.manifold.private_key.public_key
@@ -46,10 +46,8 @@ RSpec.describe Lti::DeepLinking::ResponseToken do
   it "echoes the platform data claim when present and omits it otherwise" do
     expect(decoded["https://purl.imsglobal.org/spec/lti-dl/claim/data"]).to eq("opaque-platform-data")
 
-    payload.delete("data")
-    expect(described_class.new(payload, selection).call).to satisfy { |t|
-      JWT.decode(t, nil, false).first.exclude?("https://purl.imsglobal.org/spec/lti-dl/claim/data")
-    }
+    token = described_class.new(context(data: nil), selection).call
+    expect(JWT.decode(token, nil, false).first).not_to have_key("https://purl.imsglobal.org/spec/lti-dl/claim/data")
   end
 
   it "sets the tool key id in the JWT header so the platform can select the JWK" do
