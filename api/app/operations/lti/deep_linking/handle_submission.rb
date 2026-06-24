@@ -61,7 +61,7 @@ module Lti
         Rails.logger.error("Lti::DeepLinking::HandleSubmission failed: #{error.class.name}: #{error.message}")
         Failure(
           status: :internal_server_error,
-          errors: [{ status: "500", code: "internal_error", title: "Internal Error", detail: "An unexpected error occurred." }]
+          errors: [JSONAPI::Helpers::Error.new(status: :internal_server_error, title: "Internal Error", detail: "An unexpected error occurred.")]
         )
       end
     end

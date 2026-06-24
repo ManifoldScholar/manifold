@@ -47,14 +47,14 @@ RSpec.describe "GET /api/v1/lti/deep_linking", type: :request do
       get api_v1_lti_deep_linking_path(context_token: "missing"), headers: reader_headers
 
       expect(response).to have_http_status(:unauthorized)
-      expect(response.parsed_body["errors"].first["code"]).to eq("expired")
+      expect(response.parsed_body["errors"].first["title"]).to eq("Context Expired")
     end
 
     it "returns 403 when a different instructor reads the session" do
       get api_v1_lti_deep_linking_path(context_token: context_token), headers: another_reader_headers
 
       expect(response).to have_http_status(:forbidden)
-      expect(response.parsed_body["errors"].first["code"]).to eq("unauthorized")
+      expect(response.parsed_body["errors"].first["title"]).to eq("Unauthorized")
     end
   end
 end

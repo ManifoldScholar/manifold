@@ -80,21 +80,21 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         Rails.cache.delete(cache_key)
       end
 
-      it "returns 401 with code 'expired'" do
+      it "returns 401 when the token is expired" do
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
              params: valid_params
 
         expect(response).to have_http_status(:unauthorized)
         body = response.parsed_body
-        expect(body["errors"].first["code"]).to eq("expired")
+        expect(body["errors"].first["title"]).to eq("Context Expired")
         expect(body["errors"].first["status"]).to eq("401")
       end
     end
 
     # Example 4: double-submit locks out the token on the second call
     context "when the same token is submitted twice" do
-      it "returns 202 on first submission and 401 expired on second" do
+      it "returns 200 on first submission and 401 expired on second" do
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
              params: valid_params
@@ -107,7 +107,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
 
         expect(response).to have_http_status(:unauthorized)
         body = response.parsed_body
-        expect(body["errors"].first["code"]).to eq("expired")
+        expect(body["errors"].first["title"]).to eq("Context Expired")
       end
     end
 
@@ -121,14 +121,14 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         Rails.cache.write(cache_key, other_payload, expires_in: 1.hour)
       end
 
-      it "returns 403 with code 'unauthorized'" do
+      it "returns 403 when a different instructor owns the session" do
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
              params: valid_params
 
         expect(response).to have_http_status(:forbidden)
         body = response.parsed_body
-        expect(body["errors"].first["code"]).to eq("unauthorized")
+        expect(body["errors"].first["title"]).to eq("Unauthorized")
         expect(body["errors"].first["status"]).to eq("403")
       end
 
@@ -145,18 +145,18 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
     # A blank context_token always produces a cache miss (step 1 fires before shape validation).
     # The service computes "lti/dl/" (empty-suffix key) which is not in the cache; the outer
     # before block only writes to "lti/dl/#{context_token}" (the real token key).
-    # Per 03-02 deviation: missing context_token yields :unauthorized / code "expired", not 422.
+    # Per 03-02 deviation: missing context_token yields :unauthorized / "Context Expired", not 422.
     context "when context_token is missing" do
       let(:no_token_params) { { selection: valid_selection }.to_json }
 
-      it "returns 401 with code 'expired' (blank token cannot resolve a cache entry)" do
+      it "returns 401 expired (blank token cannot resolve a cache entry)" do
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
              params: no_token_params
 
         expect(response).to have_http_status(:unauthorized)
         body = response.parsed_body
-        expect(body["errors"].first["code"]).to eq("expired")
+        expect(body["errors"].first["title"]).to eq("Context Expired")
       end
     end
 
@@ -184,7 +184,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         Rails.cache.write(cache_key, cached_payload.merge("accept_types" => ["file"]), expires_in: 1.hour)
       end
 
-      it "returns 400 with code 'invalid_selection'" do
+      it "returns 400 as an invalid selection" do
         post api_v1_lti_deep_linking_path,
              headers: reader_headers,
              params: valid_params
@@ -192,7 +192,7 @@ RSpec.describe "POST /api/v1/lti/deep_linking", type: :request do
         expect(response).to have_http_status(:bad_request)
         body = response.parsed_body
         expect(body["errors"].length).to eq(1)
-        expect(body["errors"].first["code"]).to eq("invalid_selection")
+        expect(body["errors"].first["title"]).to eq("Invalid Selection")
         expect(body["errors"].first["status"]).to eq("400")
       end
     end
