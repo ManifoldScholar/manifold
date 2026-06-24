@@ -21,7 +21,7 @@ module Lti
       include ContextErrors
 
       RESOURCE_LINK_TYPE = "ltiResourceLink"
-      REQUIRED_SELECTION_KEYS = %w[url].freeze
+      REQUIRED_SELECTION_KEYS = %w[type id].freeze
 
       # @param params [Hash, ActionController::Parameters] keys: :context_token, :selection (Array<Hash>)
       # @param user [User] current_user from authenticated request
@@ -59,10 +59,18 @@ module Lti
         @selection ||= Array(params[:selection])
       end
 
+      def references
+        @references ||= selection.map { |item| Lti::ResourceReference.new(type: item["type"], id: item["id"]) }
+      end
+
       def sign_and_consume
-        jwt = BuildResponseToken.new(context, selection).call
+        jwt = BuildResponseToken.new(context, content_items).call
         context.consume!
         Success(deep_link_return_url: context.deep_link_return_url, jwt: jwt)
+      end
+
+      def content_items
+        selection.zip(references).map { |item, reference| { "url" => reference.launch_url, "title" => item["title"] } }
       end
 
       def validate_shape
@@ -94,23 +102,9 @@ module Lti
           return "Only a single resource may be selected for this deep linking session."
         end
 
-        return "Selected resources must be hosted on this Manifold instance." unless selection.all? { |item| manifold_url?(item["url"]) }
+        return "Selected resources could not be found or are not linkable." unless references.all?(&:valid?)
 
         nil
-      end
-
-      # Guards against signing an off-domain URL into the tool's JWT, which the
-      # platform would trust — a signed open-redirect vector. Mirrors the host
-      # check in {Auth::OmniauthRedirect#target_path}.
-      def manifold_url?(url)
-        uri = URI.parse(url.to_s)
-        uri.host.present? && uri.host == manifold_domain
-      rescue URI::InvalidURIError
-        false
-      end
-
-      def manifold_domain
-        @manifold_domain ||= Rails.application.config.manifold.domain.to_s.gsub(/:\d+/, "")
       end
 
       def business_failure(message)
