@@ -23,7 +23,7 @@ RSpec.describe Lti::DeepLinking::ValidateSelection do
 
     it "fails 422 with per-field pointers" do
       expect(result.failure[:status]).to eq(422)
-      pointers = result.failure[:errors].map { |e| e.dig(:source, :pointer) }
+      pointers = result.failure[:errors].map { |e| e.source[:pointer] }
       expect(pointers).to include("/data/attributes/selection/0/type", "/data/attributes/selection/0/id")
     end
   end
@@ -39,9 +39,9 @@ RSpec.describe Lti::DeepLinking::ValidateSelection do
   context "when the session does not accept resource links" do
     let(:accept_types) { ["file"] }
 
-    it "fails 400 with code 'invalid_selection'" do
+    it "fails 400 as an invalid selection" do
       expect(result.failure[:status]).to eq(:bad_request)
-      expect(result.failure[:errors].first[:code]).to eq("invalid_selection")
+      expect(result.failure[:errors].first.title).to eq("Invalid Selection")
     end
   end
 
