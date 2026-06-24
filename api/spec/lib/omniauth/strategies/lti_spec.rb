@@ -81,10 +81,8 @@ RSpec.describe OmniAuth::Strategies::Lti do
   end
 
   describe "#verify_deployment!" do
-    it "returns nil when the deployment is registered and enabled" do
-      expect do
-        strategy.send(:verify_deployment!, registration, base_claims)
-      end.not_to raise_error
+    it "accepts and returns a registered, enabled deployment" do
+      expect(strategy.send(:verify_deployment!, registration, base_claims)).to eq(deployment)
     end
 
     it "raises OmniAuth::Error when the deployment_id claim is missing" do
@@ -94,13 +92,11 @@ RSpec.describe OmniAuth::Strategies::Lti do
       end.to raise_error(OmniAuth::Error, /Missing deployment_id claim/)
     end
 
-    it "raises OmniAuth::Error when the deployment_id is not registered for the issuer" do
-      claims_with_unknown_deployment = base_claims.merge(
-        "https://purl.imsglobal.org/spec/lti/claim/deployment_id" => "deploy-not-registered"
-      )
+    it "auto-creates an unrecorded deployment under the verified registration" do
+      claims = base_claims.merge("https://purl.imsglobal.org/spec/lti/claim/deployment_id" => "deploy-new")
       expect do
-        strategy.send(:verify_deployment!, registration, claims_with_unknown_deployment)
-      end.to raise_error(OmniAuth::Error, /not registered/)
+        strategy.send(:verify_deployment!, registration, claims)
+      end.to change { registration.lti_deployments.where(deployment_id: "deploy-new").count }.from(0).to(1)
     end
 
     it "raises OmniAuth::Error when the deployment is disabled" do
@@ -108,14 +104,6 @@ RSpec.describe OmniAuth::Strategies::Lti do
       expect do
         strategy.send(:verify_deployment!, registration, base_claims)
       end.to raise_error(OmniAuth::Error, /is disabled/)
-    end
-
-    it "does not raise NameError (regression for the pre-Phase-2 bug)" do
-      # The old method body referenced an undefined `deployment` local. Any path
-      # reaching it would have raised NameError. Cover the regression explicitly.
-      expect do
-        strategy.send(:verify_deployment!, registration, base_claims)
-      end.not_to raise_error(NameError)
     end
   end
 end
