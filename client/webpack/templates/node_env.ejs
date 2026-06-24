@@ -18,6 +18,14 @@ process.env.CLIENT_SERVER_SOCKET = "<%= env.CLIENT_SERVER_SOCKET %>"
 process.env.CLIENT_SERVER_PROXIES = "<%= env.CLIENT_SERVER_PROXIES %>"
 <% } %>
 
+<% if (env.CLIENT_URL) { %>
+process.env.CLIENT_URL = "<%= env.CLIENT_URL %>"
+<% } %>
+
+<% if (env.ENFORCE_CANONICAL_DOMAIN) { %>
+process.env.ENFORCE_CANONICAL_DOMAIN = "<%= env.ENFORCE_CANONICAL_DOMAIN %>"
+<% } %>
+
 <% if (env.SSL_ENABLED) { %>
 process.env.SSL_ENABLED = "<%= env.SSL_ENABLED %>"
 <% } %>

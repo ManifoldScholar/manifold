@@ -23,13 +23,16 @@ const serverApiUrl =
   process.env.CLIENT_SERVER_API_URL ||
   `${secure ? "https" : "http"}://${domain}`;
 const url =
-  process.env.CLIENT_URL || secure ? `https://${domain}` : `http://${domain}`;
+  process.env.CLIENT_URL || (secure ? `https://${domain}` : `http://${domain}`);
+
+const canonicalDomainEnforced = toBoolean(process.env.ENFORCE_CANONICAL_DOMAIN);
 
 const serviceConfig = {
   api: isBrowser ? browserApiUrl : serverApiUrl,
   client: {
     domain,
-    url
+    url,
+    canonicalDomainEnforced
   }
 };
 
