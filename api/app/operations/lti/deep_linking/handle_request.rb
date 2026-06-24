@@ -11,8 +11,7 @@ module Lti
       include Dry::Monads[:result]
 
       ERROR_MESSAGES = {
-        Context::InvalidRequestError => "Invalid request",
-        Context::DeploymentNotRegisteredError => "Deployment not registered"
+        Context::InvalidRequestError => "Invalid request"
       }.freeze
       GENERIC_ERROR_MESSAGE = "Session expired or unrecognized"
 
