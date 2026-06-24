@@ -44,9 +44,9 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
   context "when the cache entry is missing" do
     before { Rails.cache.delete(cache_key) }
 
-    it "fails as :unauthorized with code 'expired'" do
+    it "fails as :unauthorized" do
       expect(result.failure[:status]).to eq(:unauthorized)
-      expect(result.failure[:errors].first[:code]).to eq("expired")
+      expect(result.failure[:errors].first.title).to eq("Context Expired")
     end
   end
 
