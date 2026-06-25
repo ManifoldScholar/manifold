@@ -18,7 +18,7 @@ module Auth
       end
 
       def create
-        @registrar = ::Lti::Registration::Registrar.new(params)
+        @registrar = ::Lti::Registration::Registrar.build(params)
         @registrar.register_platform! if @registrar.valid?
 
         render :create, status: @registrar.valid? ? :ok : :bad_request

@@ -158,6 +158,23 @@ RSpec.describe Lti::Registration::Registrar do
         dl_msg && dl_msg["target_link_uri"].present?
       }
     end
+
+    it "omits vendor-specific placements and extensions from the core payload" do
+      registrar.register_platform!
+
+      expect(WebMock).to have_requested(:post, "#{issuer}/api/lti/registrations").with { |req|
+        body = JSON.parse(req.body)
+        messages = body.dig("https://purl.imsglobal.org/spec/lti-tool-configuration", "messages")
+        messages.none? { |m| m.key?("placements") } &&
+          messages.none? { |m| m.keys.any? { |k| k.start_with?("https://canvas.instructure.com/lti/") } }
+      }
+    end
+  end
+
+  describe ".build" do
+    it "returns the base registrar for a platform with no known product family" do
+      expect(described_class.build(params)).to be_an_instance_of(described_class)
+    end
   end
 
   describe "#valid?" do
