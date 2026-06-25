@@ -17,7 +17,8 @@ module Lti
       NRPS_READONLY_SCOPE = "https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly"
       DL_MESSAGE_TYPE     = "LtiDeepLinkingRequest"
 
-      TOOL_CONFIGURATION_KEY = "https://purl.imsglobal.org/spec/lti-tool-configuration"
+      TOOL_CONFIGURATION_KEY     = "https://purl.imsglobal.org/spec/lti-tool-configuration"
+      PLATFORM_CONFIGURATION_KEY = "https://purl.imsglobal.org/spec/lti-platform-configuration"
 
       REQUIRED_OPENID_CONFIG_KEYS = %i[
         registration_endpoint
@@ -29,13 +30,36 @@ module Lti
 
       attr_reader :errors, :openid_configuration_url, :referrer, :registration_token
 
+      # Maps a platform's product_family_code to a vendor-specific registrar.
+      # Platforms without an entry register with LTI-core attributes only.
+      # @return [Hash{String=>Class}]
+      def self.vendor_registrars
+        { Registrars::Canvas::PRODUCT_FAMILY_CODE => Registrars::Canvas }
+      end
+
+      # Builds the registrar best suited to the registering platform, detected via
+      # the OIDC platform configuration's product_family_code. Falls back to this
+      # base (LTI-core only) for unknown platforms. The probe's fetched OIDC config
+      # is handed to the vendor registrar so discovery is not requested twice.
+      # @param params [#[]]
+      # @return [Registrar]
+      def self.build(params)
+        probe = new(params)
+        vendor = vendor_registrars[probe.product_family_code]
+        return probe unless vendor
+
+        vendor.new(params, openid_configuration: probe.openid_configuration)
+      end
+
       # Accepts params from an LTI 1.3 autoregistration flow
       # @param params [#[]] params containing keys :registration_token and :openid_configuration
-      def initialize(params)
+      # @param openid_configuration [Hash, nil] a pre-fetched OIDC config to reuse
+      def initialize(params, openid_configuration: nil)
         @registration_token = params[:registration_token]
         @openid_configuration_url = params[:openid_configuration]
         @options = params[:options]
         @errors = Set.new
+        @openid_configuration = openid_configuration
       end
 
       def register_platform!
@@ -73,9 +97,7 @@ module Lti
         errors.none?
       end
 
-      private
-
-      # Fetches the OIDC configuration from the LMS-provided URL
+      # Fetches (and memoizes) the OIDC configuration from the LMS-provided URL.
       # @return [Hash]
       def openid_configuration
         @openid_configuration ||= HTTParty.get(@openid_configuration_url).then do |response|
@@ -84,6 +106,17 @@ module Lti
           @errors << e.message
         end
       end
+
+      # The platform's product family code from its OIDC platform configuration,
+      # e.g. "canvas". Drives vendor registrar selection in {.build}.
+      # @return [String, nil]
+      def product_family_code
+        return nil unless openid_configuration.is_a?(Hash)
+
+        openid_configuration.dig(PLATFORM_CONFIGURATION_KEY.to_sym, :product_family_code)
+      end
+
+      private
 
       # @return [String, nil]
       def registration_endpoint
@@ -120,35 +153,56 @@ module Lti
           jwks_uri:,
           scope: NRPS_READONLY_SCOPE,
           logo_uri: settings.press_logo&.url,
-          TOOL_CONFIGURATION_KEY => {
-            domain: client_host,
-            target_link_uri: client_uri.to_s,
-            description: settings.general.installation_name,
-            claims: %w[iss sub name given_name family_name email],
-            messages: [
-              {
-                type: "LtiResourceLinkRequest",
-                target_link_uri: client_uri.to_s,
-                label: "Link to #{settings.general.installation_name}",
-                placements: ["link_selection", "course_navigation"],
-                icon_uri: settings.press_logo&.url
-              },
-              {
-                type: DL_MESSAGE_TYPE,
-                target_link_uri: client_uri.to_s,
-                label: "Select multiple resources from #{settings.general.installation_name}",
-                placements: [
-                  "link_selection",
-                  "editor_button",
-                  "assignment_selection",
-                  "course_assignments_menu",
-                  "module_index_menu_modal"
-                ],
-                icon_uri: settings.press_logo&.url
-              }
-            ]
-          }
+          TOOL_CONFIGURATION_KEY => tool_configuration
         }.compact
+      end
+
+      # The LTI tool configuration claim. Core fields only; vendor specifics are
+      # injected per message via {#message_placements} and {#message_extensions}.
+      # @return [Hash]
+      def tool_configuration
+        {
+          domain: client_host,
+          target_link_uri: client_uri.to_s,
+          description: settings.general.installation_name,
+          claims: %w[iss sub name given_name family_name email],
+          messages: tool_messages
+        }
+      end
+
+      # @return [Array<Hash>]
+      def tool_messages
+        [
+          build_message(type: "LtiResourceLinkRequest", label: "Link to #{settings.general.installation_name}"),
+          build_message(type: DL_MESSAGE_TYPE, label: "Select multiple resources from #{settings.general.installation_name}")
+        ]
+      end
+
+      # Builds a single tool-configuration message from core fields, then merges any
+      # vendor-specific placements and extensions a subclass provides.
+      # @return [Hash]
+      def build_message(type:, label:)
+        {
+          type: type,
+          target_link_uri: client_uri.to_s,
+          label: label,
+          icon_uri: settings.press_logo&.url
+        }.merge(message_placements(type)).merge(message_extensions(type)).compact
+      end
+
+      # Vendor-specific placements for a message type. Base offers none, as
+      # placement vocabularies are platform-defined.
+      # @param _type [String]
+      # @return [Hash]
+      def message_placements(_type)
+        {}
+      end
+
+      # Vendor-specific message extensions for a message type. Base offers none.
+      # @param _type [String]
+      # @return [Hash]
+      def message_extensions(_type)
+        {}
       end
 
       def persist_registration!
