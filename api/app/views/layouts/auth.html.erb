@@ -1,0 +1,57 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>A Manifold Page</title>
+  <link href="mail_styles.css" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .logos img {
+      max-height: 50px;
+    }
+
+    .press-logo {
+      height: auto;
+      max-width: 300px;
+    }
+
+    button, input[type='submit'] {
+      color: black;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: none;
+      padding: 0.875em;
+      border: 1px solid gray;
+      border-radius: 6px;
+      transition: background-color 0.1s linear, color 0.1s linear;
+    }
+
+    button:hover, input[type='submit']:hover {
+      background-color: gainsboro;
+    }
+  </style>
+</head>
+<body>
+  <img width="300px" src="<%= Rails.application.config.manifold.url %>/static/images/manifold-mail-logo-secondary.jpg" alt="Manifold logo and text: Manifold Scholarship."/>
+  <%= yield %>
+</body>
+</html>

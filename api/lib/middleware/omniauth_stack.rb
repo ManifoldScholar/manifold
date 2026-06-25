@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "omniauth/strategies/lti"
+
 # Selectively loads middleware required for OmniAuth
 # for any path outside of the `/api` namespace.
 class OmniauthStack
@@ -43,12 +45,10 @@ class OmniauthStack
           config.full_host = Rails.configuration.manifold.api_url
         end
 
-        SamlConfig.providers.each do |saml_provider|
-          provider(*saml_provider.provider_args)
-        end
+        provider OmniAuth::Strategies::Lti
 
-        ManifoldEnv.oauth.enabled.each do |enabled_provider|
-          provider(*enabled_provider.provider_args)
+        AuthConfig.providers.each do |auth_provider|
+          provider(*auth_provider.provider_args)
         end
       end
     end

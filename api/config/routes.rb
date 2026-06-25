@@ -22,14 +22,18 @@ Rails.application.routes.draw do
   get "up" => "health#show"
   get "api/up" => "health#show"
 
-  # SAML POST callbacks
-  # Omniauth
-  get "auth/:provider/redirect", to: "oauth#redirect"
-  post "auth/:provider/callback", to: "oauth#authorize"
+  namespace :auth do
+    get ":provider/redirect", to: "omniauth#redirect", as: :redirect
+    post ":provider/redirect", to: "omniauth#redirect"
+    post ":provider/callback", to: "omniauth#authorize", as: :callback
+    get ":provider/callback", to: "omniauth#authorize"
 
-  # Omniauth tests issue a redirect to the callback, and require a GET endpoint
-  # Real world callbacks will be POSTs
-  get "auth/:provider/callback", to: "oauth#authorize" if Rails.env.test?
+    get "jwks", to: "omniauth#jwks"
+
+    namespace :lti do
+      resource :registration
+    end
+  end
 
   namespace :api do
     mount Tus::Server => "/files"
@@ -306,6 +310,10 @@ Rails.application.routes.draw do
       namespace :analytics do
         resource :events, only: [:create]
         resource :reports, only: [:show]
+      end
+
+      namespace :lti do
+        resource :deep_linking, only: %i[show create], controller: "deep_linking"
       end
 
       resources :passwords, only: [:create, :update]

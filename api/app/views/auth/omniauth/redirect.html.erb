@@ -1,0 +1,43 @@
+<%
+  provider = strip_tags(params[:provider].to_s)
+  is_lti = provider == "lti"
+%>
+<h1>Redirecting, Please Wait</h1>
+<%= form_with id: "auth_redirect_form", url: "/auth/#{provider}", method: :post, data: { provider: provider } do |f| %>
+  <% params.except(:provider, :controller, :action, :authenticity_token).each do |k, v| %>
+    <%= f.hidden_field sanitize(k), value: sanitize(v) %>
+  <% end %>
+  <%= f.submit (is_lti ? "Continue" : "Click here if you're not automatically redirected"), id: "auth_redirect_submit" %>
+<% end %>
+
+<% if is_lti %>
+  <p>Your browser may ask permission to remember your sign-in inside the LMS. Choose "Allow" to continue.</p>
+<% end %>
+
+<script type="text/javascript">
+  (function () {
+    const form = document.getElementById("auth_redirect_form");
+    const submit = document.getElementById("auth_redirect_submit");
+    const isLti = form.dataset.provider === "lti";
+
+    if (isLti) {
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        try {
+          if (typeof document.requestStorageAccess === "function") {
+            await document.requestStorageAccess();
+          }
+        } catch (e) {
+          // User denied, sandbox blocks it, or API unavailable; submit anyway and let the server decide.
+        }
+        form.submit();
+      });
+    } else {
+      const params = new URLSearchParams(document.location.search);
+      if (params.get("autoredirect") !== "false") {
+        submit.style.visibility = "hidden";
+        form.submit();
+      }
+    }
+  })();
+</script>
