@@ -13,6 +13,8 @@ module Auth
     # LTI request forgery detection happens in the OmniAuth strategy
     # skip_before_action :verify_authenticity_token, only: :authorize, if: -> { lti? }
 
+    after_action :set_frame_options
+
     def redirect; end
 
     def authorize
