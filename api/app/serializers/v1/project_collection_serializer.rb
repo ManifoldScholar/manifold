@@ -49,8 +49,17 @@ module V1
       object.external_identifier&.identifier
     end
 
+    # Fallback cap for homepage projects when a collection's homepage_count is unset (nil/0).
+    HOMEPAGE_PROJECT_LIMIT_DEFAULT = 12
+
     typed_has_many :collection_projects do |object, params|
-      object.collection_projects.projects_with_read_ability(params[:current_user]).eager_load(:project_summary)
+      scope = object.collection_projects.projects_with_read_ability(params[:current_user])
+        .eager_load(:project_summary)
+
+      next scope unless params[:for_homepage]
+
+      limit = object.homepage_count.to_i.positive? ? object.homepage_count : HOMEPAGE_PROJECT_LIMIT_DEFAULT
+      scope.limit(limit)
     end
 
     when_full do

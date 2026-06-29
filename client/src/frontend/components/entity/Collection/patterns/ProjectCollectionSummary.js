@@ -42,6 +42,7 @@ function ProjectCollectionSummaryEntityCollection({
   const image = getHeroImage(headerLayout, projectCollection);
   const imageAlt = projectCollection.attributes.heroAltText;
   const totalprojectCount =
+    projectCollection.attributes.projectsCount ??
     projectCollection.relationships.collectionProjects?.length;
 
   return (
