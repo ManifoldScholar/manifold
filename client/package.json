@@ -132,7 +132,7 @@
     "wavesurfer.js": "^7.10.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
+    "@babel/core": "^7.29.6",
     "@babel/plugin-proposal-decorators": "^7.28.0",
     "@babel/plugin-proposal-export-default-from": "^7.27.1",
     "@babel/plugin-proposal-function-sent": "^7.27.1",
