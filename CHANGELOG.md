@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.1.0](https://github.com/ManifoldScholar/manifold/compare/9.0.2...9.1.0) (2026-06-29)
+
+
+### Features
+
+* add enforce canonical domain mechanism to client ([5090a17](https://github.com/ManifoldScholar/manifold/commit/5090a17c3fbe3cf6aa89f662e4d179054373d307))
+
+
+### Bug Fixes
+
+* only load necessary collection projects on home page ([0da4b24](https://github.com/ManifoldScholar/manifold/commit/0da4b2441cbff8278103b8cb7c7b52aa0c38bcc2))
+
 ## [9.0.2](https://github.com/ManifoldScholar/manifold/compare/9.0.1...9.0.2) (2026-06-18)
 
 
