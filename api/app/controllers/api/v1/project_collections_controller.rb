@@ -12,7 +12,7 @@ module API
       def index
         @project_collections = load_project_collections
         render_multiple_resources @project_collections,
-                                  paginate_for_homepage: filtering_for_home_page,
+                                  params: { for_homepage: filtering_for_home_page? },
                                   pagination: params[:page],
                                   include: includes
       end
@@ -55,7 +55,7 @@ module API
         [:subjects, :collection_projects, :"collection_projects.project"]
       end
 
-      def filtering_for_home_page
+      def filtering_for_home_page?
         return false unless project_collection_filter_params
 
         Utilities::Truthy.truthy? project_collection_filter_params[:visible_on_homepage]
