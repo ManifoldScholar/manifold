@@ -32,7 +32,7 @@ export default class InputError extends Component {
     return (
       <Styled.ErrorList
         id={this.props.idForError ? this.props.idForError : null}
-        for={this.props.idForInput}
+        htmlFor={this.props.idForInput}
         className={hasErrors ? this.props.className : "screen-reader-text"}
       >
         {hasErrors
