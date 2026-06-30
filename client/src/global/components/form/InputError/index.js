@@ -8,6 +8,7 @@ export default class InputError extends Component {
     errors: PropTypes.array,
     name: PropTypes.string,
     idForError: PropTypes.string,
+    idForInput: PropTypes.string,
     className: PropTypes.string
   };
 
@@ -27,12 +28,14 @@ export default class InputError extends Component {
 
   /* eslint-disable react/no-array-index-key */
   render() {
+      const hasErrors = this.hasErrors();
     return (
       <Styled.ErrorList
         id={this.props.idForError ? this.props.idForError : null}
-        className={this.props.className}
+        for={this.props.idForInput}
+        className={hasErrors ? this.props.className : "screen-reader-text"}
       >
-        {this.hasErrors()
+        {hasErrors
           ? this.props.errors.map((e, i) => {
               return <Styled.Error key={i}>{this.errorString(e)}</Styled.Error>;
             })

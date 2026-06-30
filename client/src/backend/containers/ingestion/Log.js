@@ -34,7 +34,9 @@ export default function Log({ log, onReset, canReset }) {
             aria-checked={announce}
             onClick={() => setAnnounce(value => !value)}
           >
-            <span className="ingestion-output__switch-label">{t("texts.ingestion.announce_button_label")}</span>
+            <span className="ingestion-output__switch-label">
+              {t("texts.ingestion.announce_button_label")}
+            </span>
             <Toggle
               className="ingestion-output__switch-toggle"
               $checked={announce}
