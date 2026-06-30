@@ -28,7 +28,7 @@ export default class InputError extends Component {
 
   /* eslint-disable react/no-array-index-key */
   render() {
-      const hasErrors = this.hasErrors();
+    const hasErrors = this.hasErrors();
     return (
       <Styled.ErrorList
         id={this.props.idForError ? this.props.idForError : null}
