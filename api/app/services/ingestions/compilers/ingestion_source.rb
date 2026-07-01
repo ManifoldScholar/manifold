@@ -34,6 +34,8 @@ module Ingestions
       end
 
       def update_or_create
+        preserve_original_filename
+
         # We can fail and continue in the case of a missing publication resource, which
         # could, for example, be an invalid image referenced from HTMl. Sections, however
         # must be backed by valid ingestion sources.
@@ -43,6 +45,18 @@ module Ingestions
 
         warn "services.ingestions.compiler.ingestion_source.log.invalid", source_path: ingestion_source.source_path
         false
+      end
+
+      # Ingested attachments arrive as bare files whose storage path does not
+      # carry the resource's real name, so Shrine cannot infer a filename or
+      # extension. Derive one from the source path so downstream metadata (and
+      # image derivative processing) has a reliable extension to work with.
+      def preserve_original_filename
+        attachment = attributes[:attachment]
+        return if attachment.blank? || attributes[:source_path].blank?
+
+        name = File.basename(CGI.unescape(attributes[:source_path]))
+        attachment.define_singleton_method(:original_filename) { name }
       end
 
       def report

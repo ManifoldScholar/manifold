@@ -34,6 +34,11 @@ RSpec.describe Ingestions::Compiler do
     it "returns an valid result" do
       expect(outcome.valid?).to be true
     end
+
+    it "preserves the original filename derived from the source path" do
+      outcome
+      expect(text.ingestion_sources.last.attachment.original_filename).to eq "stylesheet.css"
+    end
   end
 
   context "when the ingestion source is not a valid attachment" do
