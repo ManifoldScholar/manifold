@@ -465,11 +465,7 @@ export class PickerComponent extends PureComponent {
     if (!button) return null;
     const buttonClass = button.classList.value;
     const buttons = Array.from(
-      button
-        .closest("ul")
-        ?.querySelectorAll(
-          `button.${buttonClass}`
-        ) ?? []
+      button.closest("ul")?.querySelectorAll(`button.${buttonClass}`) ?? []
     );
     const index = buttons.indexOf(button);
     return buttons[index + 1] || buttons[index - 1] || null;
