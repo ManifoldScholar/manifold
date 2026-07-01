@@ -1,5 +1,13 @@
 # Changelog
 
+## [9.1.1](https://github.com/ManifoldScholar/manifold/compare/9.1.0...9.1.1) (2026-07-01)
+
+
+### Bug Fixes
+
+* DRY and fix MIME and extension check for image detection ([d712288](https://github.com/ManifoldScholar/manifold/commit/d712288f5808ac2616a659e30dcc87007d429dae))
+* preserve cover image and ingestion source original filenames ([b7098ab](https://github.com/ManifoldScholar/manifold/commit/b7098abbd5b088b04d2b43c9296ba016faa046ac))
+
 ## [9.1.0](https://github.com/ManifoldScholar/manifold/compare/9.0.2...9.1.0) (2026-06-29)
 
 
