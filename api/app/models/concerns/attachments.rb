@@ -115,10 +115,6 @@ module Attachments
     }
   }.freeze
 
-  TYPE_MATCHERS = CONFIG.each_with_object({}.with_indifferent_access) do |(type, defn), h|
-    h[type] = Attachments::TypeMatcher.new type, **defn.as_json.deep_symbolize_keys
-  end.freeze
-
   def has_present_shrine_attachment?(attachment_name)
     public_send(attachment_name).present?
   end
@@ -215,14 +211,16 @@ module Attachments
     end
   end
 
-  # Validates that the uploaded file matches the given type,
-  # currently based on extension.
+  # Validates that the uploaded file matches the given type, based on its mime
+  # type or extension.
   #
-  # @see Attachments::TypeMatcher#call
-  # @param [AttachmentUploader::UploadedFile] attachment
+  # @see SharedUploader::TypePredicates#matches_type?
+  # @param [AttachmentUploader::UploadedFile] uploaded_file
   # @param [Symbol] type
   def shrine_upload_matches_type?(uploaded_file, type:)
-    TYPE_MATCHERS.fetch(type).call(uploaded_file)
+    return false if uploaded_file.blank?
+
+    uploaded_file.matches_type?(type)
   end
 
   # @param [Symbol, String] attachment_name

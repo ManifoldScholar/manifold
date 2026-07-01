@@ -10,8 +10,6 @@ module Attachments
       boolean :no_styles, :validate_content_type
     end
 
-    CONFIG = Rails.configuration.manifold.attachments.validations
-
     def execute
       versions
       return versions unless can_process?
@@ -38,33 +36,13 @@ module Attachments
     end
 
     def styles
-      compose StyleConfigurer, inputs.merge(config: CONFIG)
+      compose StyleConfigurer, inputs
     end
 
     def can_process?
       return false if file_resource.size > 200_000_000
 
-      image? || pdf?
+      shrine_uploaded_file&.image? || shrine_uploaded_file&.pdf?
     end
-
-    def mime_and_extension?
-      shrine_uploaded_file&.mime_type && shrine_uploaded_file.extension
-    end
-
-    # rubocop:disable Lint/Void
-    def image?
-      return false unless mime_and_extension?
-
-      !shrine_uploaded_file.mime_type.match(Regexp.union(CONFIG[:image][:allowed_mime])).nil?
-      !shrine_uploaded_file.extension.match(Regexp.union(CONFIG[:image][:allowed_ext])).nil?
-    end
-
-    def pdf?
-      return false unless mime_and_extension?
-
-      !shrine_uploaded_file.mime_type.match(Regexp.union(CONFIG[:pdf][:allowed_mime])).nil?
-      !shrine_uploaded_file.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
-    end
-    # rubocop:enable Lint/Void
   end
 end

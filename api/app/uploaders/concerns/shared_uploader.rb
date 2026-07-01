@@ -20,7 +20,54 @@ module SharedUploader
     end
   end
 
+  # Type-detection predicates mixed into each uploader's +UploadedFile+ so that
+  # "is this an image / a pdf?" is answered once, on the object that actually
+  # holds the mime type and extension, rather than re-implemented per consumer.
+  #
+  # A file matches a type when its mime type OR its extension is allowed. The
+  # extension check preserves the historical +Regexp.union+ semantics; the mime
+  # branch is purely additive.
+  module TypePredicates
+    VALIDATIONS = MANIFOLD_CONFIG.dig(:attachments, :validations)
+
+    # @return [Boolean]
+    def image?
+      matches_type? :image
+    end
+
+    # @return [Boolean]
+    def pdf?
+      matches_type? :pdf
+    end
+
+    # @param [Symbol, String] type
+    # @return [Boolean]
+    def matches_type?(type)
+      validations = VALIDATIONS[type.to_sym]
+      return false if validations.blank?
+
+      mime_type_allowed?(validations[:allowed_mime]) ||
+        extension_allowed?(validations[:allowed_ext])
+    end
+
+    private
+
+    def mime_type_allowed?(allowed)
+      return false if allowed.blank? || mime_type.blank?
+
+      allowed.include? mime_type
+    end
+
+    def extension_allowed?(allowed)
+      return false if allowed.blank? || extension.blank?
+
+      extension.match? Regexp.union(allowed)
+    end
+  end
+
   included do
+    self::UploadedFile.include TypePredicates
+
     plugin :add_metadata
     plugin :url_options, cache: Storage::Factory.url_options, store: Storage::Factory.url_options
 
