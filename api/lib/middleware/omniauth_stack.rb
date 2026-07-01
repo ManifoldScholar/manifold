@@ -43,6 +43,18 @@ class OmniauthStack
       middleware.use OmniAuth::Builder do
         configure do |config|
           config.full_host = Rails.configuration.manifold.api_url
+
+          # The LTI login is platform-initiated inside an LMS iframe: it carries no
+          # Rails CSRF token and its session cookie is unavailable cross-site. The
+          # launch is instead CSRF-protected by the signed state parameter (see
+          # OmniAuth::Strategies::Lti#sign_state), so skip OmniAuth's session-based
+          # authenticity check for it. Every other provider keeps the default check.
+          config.request_validation_phase = lambda do |env|
+            strategy = env["omniauth.strategy"]
+            next if strategy.respond_to?(:name) && strategy.name == "lti"
+
+            OmniAuth::AuthenticityTokenProtection.call(env)
+          end
         end
 
         provider OmniAuth::Strategies::Lti
