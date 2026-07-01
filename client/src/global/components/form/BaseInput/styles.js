@@ -13,15 +13,15 @@ import { transientOptions } from "helpers/emotionHelpers";
 export const BaseInput = styled.input`
   ${formInputBase}
   width: 100%;
-  outline: 0;
   border: 1px solid;
   transition: border-color ${defaultTransitionProps};
   border-radius: 0;
   appearance: none;
-  outline: 0;
 
   &:focus-visible {
     outline: 0;
+    border-color: var(--focus-color);
+    box-shadow: 0 1px 0 var(--focus-color);
   }
 `;
 

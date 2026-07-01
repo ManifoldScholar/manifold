@@ -10,7 +10,8 @@ export default class FormUploadEmpty extends PureComponent {
     placeholder: PropTypes.string,
     progress: PropTypes.string,
     uploadError: PropTypes.string,
-    instructionsSingleLine: PropTypes.bool
+    instructionsSingleLine: PropTypes.bool,
+    inputId: PropTypes.string
   };
 
   static defaultProps = {
@@ -26,36 +27,40 @@ export default class FormUploadEmpty extends PureComponent {
     return (
       <Styled.Wrapper>
         <Styled.Icon icon="upload64" size={82} />
-        <div>
-          <Styled.PrimaryText>
-            {this.props.progress ? (
-              <span>
-                <Trans
-                  i18nKey="forms.upload.progress"
-                  values={{ percent: this.props.progress }}
-                  components={this.props.instructionsSingleLine ? [] : [<br />]}
-                />
-              </span>
-            ) : (
-              <>
-                <Trans
-                  i18nKey="forms.upload.instructions"
-                  components={
-                    this.props.instructionsSingleLine
-                      ? [<Prompt />]
-                      : [<Prompt />, <br />]
-                  }
-                />
-                {this.props.uploadError ? (
-                  <Styled.Error>{this.props.uploadError}</Styled.Error>
-                ) : null}
-              </>
-            )}
-          </Styled.PrimaryText>
-          {this.extensions ? (
-            <Styled.SecondaryText>{this.extensions}</Styled.SecondaryText>
+        <Styled.PrimaryText>
+          {/* Progress */}
+          <div
+            aria-live="polite"
+            className={this.props.progress ? "" : "screen-reader-text"}
+          >
+            <Trans
+              i18nKey="forms.upload.progress"
+              values={{ percent: this.props.progress }}
+              components={this.props.instructionsSingleLine ? [] : [<br />]}
+            />
+          </div>
+          {/* Label */}
+          <label
+            htmlFor={this.props.inputId}
+            className={this.props.progress ? "screen-reader-text" : ""}
+          >
+            <Trans
+              i18nKey="forms.upload.instructions"
+              components={
+                this.props.instructionsSingleLine
+                  ? [<Prompt />]
+                  : [<Prompt />, <br />]
+              }
+            />
+            {this.extensions ? (
+              <Styled.SecondaryText>{this.extensions}</Styled.SecondaryText>
+            ) : null}
+          </label>
+          {/* Error */}
+          {this.props.uploadError ? (
+            <Styled.Error>{this.props.uploadError}</Styled.Error>
           ) : null}
-        </div>
+        </Styled.PrimaryText>
       </Styled.Wrapper>
     );
   }

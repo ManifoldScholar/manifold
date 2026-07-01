@@ -5,8 +5,8 @@ import IconComposer from "global/components/utility/IconComposer";
 
 const Property = ({ label, value }) => (
   <div className="ingestion-output__item">
-    <p className="ingestion-output__label">{label}</p>
-    <p className="ingestion-output__value">{value}</p>
+    <dt className="ingestion-output__label">{label}</dt>
+    <dd className="ingestion-output__value">{value}</dd>
   </div>
 );
 
@@ -64,7 +64,7 @@ export default function IngestionHeader({ ingestion, sectionIngest, loading }) {
             <h1 className="ingest-header__title">{title}</h1>
           </div>
         </header>
-        <div
+        <dl
           aria-live="polite"
           aria-atomic
           className="ingest-header__body ingestion-output__properties"
@@ -78,7 +78,7 @@ export default function IngestionHeader({ ingestion, sectionIngest, loading }) {
             value={strategy}
           />
           <Property label={t(idLabelKey)} value={entityId} />
-        </div>
+        </dl>
       </div>
     </div>
   );

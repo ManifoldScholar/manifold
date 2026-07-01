@@ -60,6 +60,7 @@ export const MaskedInput = styled(BaseMaskedInput)`
 
   &:focus-visible {
     border-color: var(--focus-color);
+    box-shadow: 0 1px 0 var(--focus-color);
     outline: 0;
   }
 
