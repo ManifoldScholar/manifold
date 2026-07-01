@@ -447,9 +447,33 @@ export class PickerComponent extends PureComponent {
       this.makeListBoxHidden();
   };
 
-  removeSelection = selection => {
+  removeSelection = (selection, targetEl) => {
+    // Removing a selection unmounts its remove button, which drops focus to
+    // the document body. Capture where focus should land before deselecting,
+    // then move it there so keyboard users keep their place in the list.
+    const nextFocusEl = this.nextFocusAfterRemoval(targetEl);
     this.props.optionsHandlers.deselect(selection);
+    if (nextFocusEl) nextFocusEl.focus();
+    else this.focusOnSearchInput();
   };
+
+  // Returns the adjacent selection's remove button (the next one, or the
+  // previous one when removing the last selection), or null when no other
+  // selections remain.
+  nextFocusAfterRemoval(targetEl) {
+    const button = targetEl?.closest?.("button");
+    if (!button) return null;
+    const buttonClass = button.classList.value;
+    const buttons = Array.from(
+      button
+        .closest("ul")
+        ?.querySelectorAll(
+          `button.${buttonClass}`
+        ) ?? []
+    );
+    const index = buttons.indexOf(button);
+    return buttons[index + 1] || buttons[index - 1] || null;
+  }
 
   reorderSelection = (selection, newPosition) => {
     this.props.optionsHandlers.reorderSelection(selection, newPosition);
