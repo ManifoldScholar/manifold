@@ -143,6 +143,7 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
     end
 
     it "issues the auth code cookie so the React client can complete JWT exchange" do
+      https! # the auth code cookie is SameSite=None; Secure, so it is only set over TLS
       post "/auth/lti/callback"
 
       expect(response.cookies).to have_key(ManagesOauthCookie::OAUTH_COOKIE_NAME)
