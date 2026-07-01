@@ -8,7 +8,6 @@ module Attachments
       symbol :type
       boolean :no_styles, :validate_content_type
     end
-    hash :config, strip: false
 
     def execute
       style_configuration
@@ -32,11 +31,8 @@ module Attachments
       pdf? || shrine_uploaded_file.extension == "png" || shrine_uploaded_file.extension == "gif"
     end
 
-    # rubocop:disable Lint/Void
     def pdf?
-      !shrine_uploaded_file.mime_type.match(Regexp.union(CONFIG[:pdf][:allowed_mime])).nil?
-      !shrine_uploaded_file.extension.match(Regexp.union(CONFIG[:pdf][:allowed_ext])).nil?
+      shrine_uploaded_file.pdf?
     end
-    # rubocop:enable Lint/Void
   end
 end
