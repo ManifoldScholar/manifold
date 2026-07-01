@@ -45,6 +45,7 @@ export default function TOCEntry({
           </Styled.Button>
           <Styled.DragHandle
             aria-describedby="toc-drag-handle-instructions"
+            aria-label={t("actions.dnd.drag_and_drop")}
             {...dragHandleProps}
           >
             <Utility.IconComposer size={30} icon="grabber32" />
