@@ -20,6 +20,8 @@ module Lti
       TOOL_CONFIGURATION_KEY     = "https://purl.imsglobal.org/spec/lti-tool-configuration"
       PLATFORM_CONFIGURATION_KEY = "https://purl.imsglobal.org/spec/lti-platform-configuration"
 
+      REGISTRARS_ROOT = Rails.root.join("app/services/lti/registration/registrars")
+
       REQUIRED_OPENID_CONFIG_KEYS = %i[
         registration_endpoint
         issuer
@@ -30,11 +32,25 @@ module Lti
 
       attr_reader :errors, :openid_configuration_url, :referrer, :registration_token
 
-      # Maps a platform's product_family_code to a vendor-specific registrar.
-      # Platforms without an entry register with LTI-core attributes only.
+      # Maps a platform's product_family_code to the vendor registrar that handles
+      # it, discovered from the {Registrars} subclasses by their PRODUCT_FAMILY_CODE.
+      # A platform whose code matches no subclass registers with LTI-core attributes
+      # only (this base). Supporting a new LMS is therefore just adding one subclass.
       # @return [Hash{String=>Class}]
       def self.vendor_registrars
-        { Registrars::Canvas::PRODUCT_FAMILY_CODE => Registrars::Canvas }
+        load_vendor_registrars!
+
+        descendants.select { |klass| klass.const_defined?(:PRODUCT_FAMILY_CODE, false) }
+                   .index_by { |klass| klass::PRODUCT_FAMILY_CODE }
+      end
+
+      # Zeitwerk enumerates only already-loaded constants, so ensure the registrar
+      # files are loaded before reading descendants. Production eager-loads them.
+      # @return [void]
+      def self.load_vendor_registrars!
+        return if Rails.application.config.eager_load
+
+        Rails.autoloaders.main.eager_load_dir(REGISTRARS_ROOT)
       end
 
       # Builds the registrar best suited to the registering platform, detected via
