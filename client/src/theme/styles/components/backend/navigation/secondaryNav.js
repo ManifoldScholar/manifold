@@ -23,6 +23,7 @@ export default `
 
     a {
       ${utilityPrimary}
+      display: inline-block;
       position: relative;
       font-size: 14px;
       text-decoration: none;
