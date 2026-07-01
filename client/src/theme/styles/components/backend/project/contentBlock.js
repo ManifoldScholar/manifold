@@ -5,6 +5,7 @@ import {
   defaultTransitionProps,
   draggable,
   dragging,
+  dropIndicator,
   blockLabelRound,
   buttonUnstyled,
   revealOnFocus
@@ -12,6 +13,7 @@ import {
 
 export default `
   .backend-content-block {
+    position: relative;
     padding-top: 9px;
     padding-bottom: 9px;
 
@@ -23,10 +25,15 @@ export default `
       color: var(--color-neutral-text-light);
     }
 
-    &--available {
-      ~ [data-rbd-placeholder-context-id] {
-        /* hide placeholder in Available dropzone since dropping is disabled */
-        display: none !important;
+    &__drop-indicator {
+      ${dropIndicator()}
+
+      &--top {
+        top: 0;
+      }
+
+      &--bottom {
+        bottom: 0;
       }
     }
 
