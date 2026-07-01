@@ -94,6 +94,7 @@
       "content_label": "Content",
       "content_instructions": "HTML section content",
       "start_tag_label": "Start",
+      "start_tooltip_label": "Set as Starting Section",
       "start_tooltip_content": "Set the initial starting point for this text when viewed in the Manifold reader.",
       "ingest_button_label": "Ingest New Section",
       "reingest": "Reingest <0>{{title}}</0>",
