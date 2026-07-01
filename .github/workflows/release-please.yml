@@ -13,18 +13,25 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      released: ${{ steps.release.outputs.released }}
     steps:
       - uses: googleapis/release-please-action@v4
+        id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
-  docker:
+
+  reset-release-branch:
     needs: release-please
     if: ${{ needs.release-please.outputs.released == 'true' }}
+    runs-on: ubuntu-latest
     permissions:
-      contents: read
-    uses: ./.github/workflows/docker.yml
-    with:
-      release_tag: ${{ needs.release-please.outputs.tag_name }}
-    secrets: inherit
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reset release branch to main
+        run: git push origin ${{ github.sha }}:refs/heads/release --force
