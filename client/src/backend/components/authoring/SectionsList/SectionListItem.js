@@ -99,7 +99,10 @@ function SectionListItem(props) {
             xOffset="-100px"
             yOffset="43px"
           >
-            <Styled.Button onClick={() => onSetStart(section.id)}>
+            <Styled.Button
+              onClick={() => onSetStart(section.id)}
+              aria-label={t("texts.section.start_tooltip_label")}
+            >
               <Utility.IconComposer size={24} icon="playOutline24" />
             </Styled.Button>
           </Tooltip>
@@ -139,7 +142,12 @@ function SectionListItem(props) {
               <Utility.IconComposer size={24} icon="export24" />
             </Styled.Button>
           </Tooltip>
-          <Styled.DragHandle as="div" {...dragHandleProps} tabIndex={-1}>
+          <Styled.DragHandle
+            as="div"
+            {...dragHandleProps}
+            tabIndex={-1}
+            aria-label={t("actions.dnd.drag_and_drop")}
+          >
             <Utility.IconComposer size={28} icon="grabber32" />
           </Styled.DragHandle>
           <Styled.KeyboardButtons>

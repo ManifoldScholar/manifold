@@ -227,9 +227,7 @@ export default function NavigationMobile({ links, backendButton, mode }) {
             aria-expanded={expanded}
           >
             <span className="screen-reader-text">
-              {expanded
-                ? t("navigation.mobile.close_submenu")
-                : t("navigation.mobile.open_submenu")}
+              {t("navigation.mobile.submenu_label")}
             </span>
             <IconComposer
               icon="disclosureDown16"
