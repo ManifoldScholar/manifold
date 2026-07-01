@@ -24,7 +24,7 @@ export default class EventRow extends PureComponent {
     const event = this.props.entity;
     if (!event) return null;
     return (
-      <li className="event-entity-row">
+      <li className="event-entity-row" data-event-id={event.id}>
         <Event.Event
           itemTag="div"
           itemClass={this.itemClass}
