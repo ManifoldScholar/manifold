@@ -16,12 +16,18 @@ module ManagesOauthCookie
 
   def set_auth_code(user)
     code = SecureRandom.hex(32)
-    cookies[OAUTH_COOKIE_NAME] = {
-      value: code,
-      expires: 1.minute,
-      domain: cookie_domain
-    }
+    cookies[OAUTH_COOKIE_NAME] = { value: code, expires: 1.minute, domain: cookie_domain, **auth_code_cookie_scope }
     Rails.cache.write(auth_code_cache_key(code), user.id)
+  end
+
+  # The LTI launch finishes inside an LMS iframe (a cross-site context), so its
+  # auth code cookie must be set and read across sites: SameSite=None; Secure.
+  # It is intentionally not HttpOnly — the React client reads the code via JS to
+  # exchange it. Other providers keep the stricter SameSite=Lax default.
+  def auth_code_cookie_scope
+    return {} unless params[:provider] == "lti"
+
+    { same_site: :none, secure: true }
   end
 
   def get_user_id_for_auth_code(code = params[:auth_code])
