@@ -5,7 +5,7 @@ on:
     branches:
       - edge # Edge, tags as "edge"; next major version; deploys to edge.manifoldapp.org
       - main # Preview, tags as "preview"; bugfix/minor version preview; deploys to preview.manifoldapp.org
-      - release # Stable production build, tags as "latest"
+      - release # Stable production build, tags as "latest" and "<semver>" from MANIFOLD_VERSION
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
@@ -16,7 +16,28 @@ env:
   GHCR_IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  resolve-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      semver: ${{ steps.version.outputs.semver }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Resolve release version
+        id: version
+        if: ${{ github.ref_name == 'release' }}
+        run: |
+          version="$(tr -d '[:space:]' < MANIFOLD_VERSION)"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::release build requires a semver in MANIFOLD_VERSION, got '$version'"
+            exit 1
+          fi
+          echo "semver=$version" >> "$GITHUB_OUTPUT"
+
   build-api:
+    needs: resolve-version
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -37,9 +58,9 @@ jobs:
           images: |
             ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}-api
           tags: |
-            type=raw,value=latest,enable=${{ github.ref_name == 'release' || inputs.release_tag != '' }}
-            type=raw,value=${{ inputs.release_tag }},enable=${{ inputs.release_tag != '' }}
-            type=raw,value=preview,enable=${{ github.ref_name == 'main' && inputs.release_tag == '' }}
+            type=raw,value=latest,enable=${{ github.ref_name == 'release' }}
+            type=raw,value=${{ needs.resolve-version.outputs.semver }},enable=${{ github.ref_name == 'release' }}
+            type=raw,value=preview,enable=${{ github.ref_name == 'main' }}
             type=ref,event=branch
             type=sha
       - name: Set up Docker Buildx
@@ -59,6 +80,7 @@ jobs:
             "RAILS_ENV=production"
 
   build-client:
+    needs: resolve-version
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -80,6 +102,7 @@ jobs:
             ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}-client
           tags: |
             type=raw,value=latest,enable=${{ github.ref_name == 'release' }}
+            type=raw,value=${{ needs.resolve-version.outputs.semver }},enable=${{ github.ref_name == 'release' }}
             type=raw,value=edge,enable={{ is_default_branch }}
             type=ref,event=branch
       - name: Set up Docker Buildx
