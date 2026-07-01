@@ -19,3 +19,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+  docker:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.released == 'true' }}
+    permissions:
+      contents: read
+    uses: ./.github/workflows/docker.yml
+    with:
+      release_tag: ${{ needs.release-please.outputs.tag_name }}
+    secrets: inherit
