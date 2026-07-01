@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "google_drive"
+
 module Factory
   # Returns a drive session object; used by the drive_resource importer
   class DriveSession
@@ -48,7 +50,7 @@ module Factory
       fetched_config = config
       return unless fetched_config[:private_key]
 
-      GoogleDrive::Session.from_service_account_key(StringIO.new(config.to_json))
+      ::GoogleDrive::Session.from_service_account_key(StringIO.new(config.to_json))
     end
   end
 end
