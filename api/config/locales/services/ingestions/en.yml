@@ -8,6 +8,7 @@ en:
       fetcher:
         log:
           download_external: 'Downloading external resource: %{url}'
+          drive_failed_direct_fallback: 'Unable to fetch file directly from Google Drive; attempting direct download'
       conversion:
         log:
           perform: 'Converting source file "%{source}"'
