@@ -6,6 +6,7 @@ import setter from "global/components/form/setter";
 import GlobalForm from "global/components/form";
 import ColorPicker from "./ColorPicker";
 import UniqueIcons from "global/components/icon/unique";
+import InputError from "global/components/form/InputError";
 import classNames from "classnames";
 import { withTranslation } from "react-i18next";
 
@@ -26,13 +27,20 @@ class AvatarBuilder extends Component {
     confirm: (heading, message, callback) => callback()
   };
 
-  onColorChange = color => {
-    if (
+  constructor(props) {
+    super(props);
+    const hasImage = this.getImage();
+    this.state = { useDefault: !hasImage };
+  }
+
+  getImage() {
+    return (
       this.props.getModelValue("attributes[avatar][data]") ||
       this.props.getModelValue("attributes[avatarStyles][smallSquare]")
-    ) {
-      return this.handleColorChange(color);
-    }
+    );
+  }
+
+  onColorChange = color => {
     this.setAvatarColor(color);
   };
 
@@ -57,16 +65,12 @@ class AvatarBuilder extends Component {
     return this.props.t("glossary.project_one");
   }
 
-  handleColorChange = color => {
-    const t = this.props.t;
-    const heading = t("modals.thumbnail_change", {
-      label: this.label()
-    });
-    const message = t("modals.thumbnail_change_body");
-    this.props.confirm(heading, message, () => {
-      this.removeAvatar();
-      this.setAvatarColor(color);
-    });
+  handleDefaultClick = () => {
+    this.setState({ useDefault: true });
+  };
+
+  handleCustomClick = () => {
+    this.setState({ useDefault: false });
   };
 
   removeAvatar() {
@@ -102,19 +106,17 @@ class AvatarBuilder extends Component {
   }
 
   render() {
-    const image =
-      this.props.getModelValue("attributes[avatar][data]") ||
-      this.props.getModelValue("attributes[avatarStyles][smallSquare]");
+    const image = this.getImage();
 
     const uploadClasses = classNames({
       section: true,
       upload: true,
-      active: image
+      active: !this.state.useDefault
     });
     const pickerClasses = classNames({
       section: true,
       color: true,
-      active: !image
+      active: this.state.useDefault
     });
     const t = this.props.t;
 
@@ -131,30 +133,43 @@ class AvatarBuilder extends Component {
             <div className="grid">
               <div className="section current">
                 <span className="label" aria-hidden="true">
-                  {t("common.current")}
+                  {t("common.preview")}
                 </span>
                 <span className="label screen-reader-text">
                   {t("projects.thumbnail.current_thumbnail")}
                 </span>
-                {image
-                  ? this.renderCoverImage(image)
-                  : this.renderPlaceholderImage()}
+                {this.state.useDefault
+                  ? this.renderPlaceholderImage()
+                  : this.renderCoverImage(image)}
               </div>
               <div className={pickerClasses}>
-                <span className="label" aria-hidden="true">
+                <button
+                  className="label"
+                  aria-pressed={this.state.useDefault}
+                  onClick={this.handleDefaultClick}
+                  type="button"
+                >
+                  <span className="label__indicator" />
                   {t("common.default")}
-                </span>
+                </button>
                 <ColorPicker
                   onChange={this.onColorChange}
                   value={this.props.getModelValue("attributes[avatarColor]")}
                   label={t("projects.thumbnail.default_thumbnail")}
                   {...this.props}
+                  disabled={!this.state.useDefault || this.props.disabled}
                 />
               </div>
               <div className={uploadClasses}>
-                <span className="label" aria-hidden="true">
+                <button
+                  className="label"
+                  aria-pressed={!this.state.useDefault}
+                  type="button"
+                  onClick={this.handleCustomClick}
+                >
+                  <span className="label__indicator" />
                   {t("common.custom")}
-                </span>
+                </button>
                 <Form.Upload
                   set={this.onUploadChange}
                   initialValue={this.props.getModelValue(
@@ -165,13 +180,25 @@ class AvatarBuilder extends Component {
                   accepts="images"
                   label={t("projects.thumbnail.custom_thumbnail")}
                   labelClass="screen-reader-text"
+                  disabled={this.state.useDefault}
                   isBuilder
                 />
               </div>
             </div>
+            {this.state.useDefault && !!image && (
+              <InputError
+                errors={[
+                  {
+                    detail: t("modals.thumbnail_change", {
+                      label: this.label()
+                    })
+                  }
+                ]}
+              />
+            )}
           </fieldset>
         </GlobalForm.Errorable>
-        {image && (
+        {!this.state.useDefault && (
           <GlobalForm.TextInput
             label={t("projects.thumbnail.alt_label")}
             name="attributes[avatarAltText]"

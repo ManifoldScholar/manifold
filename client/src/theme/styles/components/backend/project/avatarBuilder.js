@@ -60,6 +60,7 @@ export default `
 
           &.active {
             border-color: var(--color-interaction-light);
+            box-shadow: inset 0 0 0 1px var(--color-interaction-light);
           }
         }
       }
@@ -68,7 +69,39 @@ export default `
         ${sectionLabel}
         display: block;
         margin-bottom: 1.625em;
+
+        &:where(button) {
+          display: flex;
+          gap: .25rem;
+          align-items: center;
+          justify-content: center;
+          background: transparent;
+          border-color: transparent;
+        }
       }
+
+      .label__indicator {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid currentColor;
+        border-radius: 100%;
+        inline-size: .75rem;
+        block-size: .75rem;
+        
+        &::after {
+          display: block;
+          content: "";
+          inline-size: 0.5rem;
+          block-size: 0.5rem;
+          border-radius: 100%;
+        }
+      }
+
+      button[aria-pressed="true"] > .label__indicator::after {
+        background-color: var(--color-interaction-light);
+      }
+    }
 
       .current {
         padding-bottom: 45px;

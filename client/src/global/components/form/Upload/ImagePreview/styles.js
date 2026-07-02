@@ -66,6 +66,11 @@ export const Button = styled.button`
   &:focus-visible {
     ${defaultFocusStyle}
   }
+
+  &[aria-disabled="true"] {
+    cursor: default;
+    pointer-events: none;
+  }
 `;
 
 export const Image = styled.img`
@@ -74,10 +79,18 @@ export const Image = styled.img`
   inline-size: 100%;
   aspect-ratio: var(--Dropzone-aspect-ratio);
   object-fit: contain;
+
+  &[data-disabled="true"] {
+    opacity: 0.7;
+  }
 `;
 
 export const ImageBuilder = styled.img`
   width: 120px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+
+  &[data-disabled="true"] {
+    opacity: 0.7;
+  }
 `;

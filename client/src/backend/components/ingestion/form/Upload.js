@@ -15,7 +15,8 @@ class IngestionFormUpload extends PureComponent {
     header: PropTypes.string,
     t: PropTypes.func,
     sectionIngest: PropTypes.bool,
-    sectionId: PropTypes.string
+    sectionId: PropTypes.string,
+    disabled: PropTypes.bool
   };
 
   onSourceChange = source => {
@@ -112,6 +113,7 @@ class IngestionFormUpload extends PureComponent {
             )}
             set={this.onSourceChange}
             accepts="any"
+            disabled={this.props.disabled}
           />
         </Form.FieldGroup>
         <Form.FieldGroup

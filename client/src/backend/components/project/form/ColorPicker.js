@@ -13,7 +13,8 @@ class ColorPicker extends Component {
     wrapperClass: PropTypes.string,
     getModelValue: PropTypes.func,
     label: PropTypes.string,
-    t: PropTypes.func
+    t: PropTypes.func,
+    disabled: PropTypes.bool
   };
 
   label() {
@@ -63,11 +64,8 @@ class ColorPicker extends Component {
     return (
       <UIDConsumer name={id => `${this.idForPrefix}-${id}`}>
         {id => (
-          <div
-            className="color-picker__list"
-            role="group"
-            aria-label={this.label()}
-          >
+          <fieldset className="color-picker__list">
+            <legend className="screen-reader-text">{this.label()}</legend>
             {avatarColors.map(color => {
               const checked =
                 this.props.getModelValue("attributes[avatarColor]") ===
@@ -92,8 +90,13 @@ class ColorPicker extends Component {
                     id={`${id}-${color.value}`}
                     name={id}
                     checked={checked}
-                    onChange={() => this.props.onChange(color)}
+                    onChange={
+                      this.props.disabled
+                        ? null
+                        : () => this.props.onChange(color)
+                    }
                     className="color-picker__input"
+                    aria-disabled={this.props.disabled}
                   />
                   <span className="color-picker__indicator" aria-hidden="true">
                     {checked && (
@@ -107,7 +110,7 @@ class ColorPicker extends Component {
                 </label>
               );
             })}
-          </div>
+          </fieldset>
         )}
       </UIDConsumer>
     );
