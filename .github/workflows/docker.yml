@@ -103,8 +103,9 @@ jobs:
           tags: |
             type=raw,value=latest,enable=${{ github.ref_name == 'release' }}
             type=raw,value=${{ needs.resolve-version.outputs.semver }},enable=${{ github.ref_name == 'release' }}
-            type=raw,value=edge,enable={{ is_default_branch }}
+            type=raw,value=preview,enable=${{ github.ref_name == 'main' }}
             type=ref,event=branch
+            type=sha
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build and push Docker
