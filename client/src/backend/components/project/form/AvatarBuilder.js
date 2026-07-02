@@ -67,10 +67,14 @@ class AvatarBuilder extends Component {
 
   handleDefaultClick = () => {
     this.setState({ useDefault: true });
+    // Flag the avatar for removal, but don't remove the image from the form
+    this.props.setOther(true, "attributes[removeAvatar]");
   };
 
   handleCustomClick = () => {
     this.setState({ useDefault: false });
+    // Make sure the removeAvatar flag is set to false
+    this.props.setOther(false, "attributes[removeAvatar]");
   };
 
   removeAvatar() {
