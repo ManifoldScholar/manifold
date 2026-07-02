@@ -1,25 +1,23 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
-export default class LoadingBar extends Component {
+class LoadingBar extends Component {
   static propTypes = {
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    t: PropTypes.func
   };
 
   constructor(props) {
     super(props);
     this.timer = null;
-    this.textTimer = null;
-    this.state = { status: 0, showLoadingText: false };
+    this.state = { status: 0 };
   }
 
   componentDidUpdate(prevProps) {
     if (!this.loader) return null;
     if (prevProps.loading) {
       if (this.props.loading) return null;
-      this.clearTextTimer();
-      this.setState({ showLoadingText: false });
       this.loader.className = "loading-bar complete";
       this.timer = setTimeout(() => {
         this.loader.className = "loading-bar default";
@@ -27,9 +25,6 @@ export default class LoadingBar extends Component {
     } else {
       if (!this.props.loading) return null;
       this.loader.className = "loading-bar loading";
-      this.textTimer = setTimeout(() => {
-        this.setState({ showLoadingText: true });
-      }, 1000);
     }
   }
 
@@ -37,14 +32,6 @@ export default class LoadingBar extends Component {
     if (this.timer) {
       clearTimeout(this.timer);
       this.timer = null;
-    }
-    this.clearTextTimer();
-  }
-
-  clearTextTimer() {
-    if (this.textTimer) {
-      clearTimeout(this.textTimer);
-      this.textTimer = null;
     }
   }
 
@@ -56,16 +43,21 @@ export default class LoadingBar extends Component {
             this.loader = loader;
           }}
           className="loading-bar default"
-          role="status"
         >
-          <div className="progress" />
-          {this.state.showLoadingText ? (
-            <Trans i18nKey="common.loading_page" />
-          ) : (
-            ""
+          {/* ARC solution. Informational image for screen readers. */}
+          {/* Less noisy than role=status. Users can find this information if needed. */}
+          {this.props.loading && (
+            <div
+              className="screen-reader-text"
+              role="img"
+              aria-label={this.props.t("common.loading_page")}
+            />
           )}
+          <div className="progress" />
         </div>
       </div>
     );
   }
 }
+
+export default withTranslation()(LoadingBar);
