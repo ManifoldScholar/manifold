@@ -39,7 +39,8 @@ export default class FormUpload extends Component {
     fileNameFrom: PropTypes.string,
     uploadError: PropTypes.string,
     getModelValue: PropTypes.func,
-    instructionsSingleLine: PropTypes.bool
+    instructionsSingleLine: PropTypes.bool,
+    disabled: PropTypes.bool
   };
 
   static defaultProps = {
@@ -144,6 +145,7 @@ export default class FormUpload extends Component {
                     }`,
                     tabIndex: 0
                   })}
+                  aria-disabled={this.props.disabled}
                 />
                 {this.previewable ? (
                   <Preview
@@ -153,6 +155,7 @@ export default class FormUpload extends Component {
                     isBuilder={this.props.isBuilder}
                     instructionsSingleLine={this.props.instructionsSingleLine}
                     inputId={this.props.inputId}
+                    disabled={this.props.disabled}
                   />
                 ) : (
                   <Empty

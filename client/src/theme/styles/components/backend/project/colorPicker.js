@@ -58,6 +58,11 @@ export default `
       margin-bottom: 13px;
       cursor: pointer;
 
+      &:has([aria-disabled="true"]) {
+        opacity: .5;
+        cursor: default;
+      }
+
       & + & {
         margin-top: 0;
       }

@@ -78,6 +78,11 @@ export const Input = styled.input`
       outline-color: var(--focus-color);
     }
   }
+
+  &[aria-disabled="true"] {
+    pointer-events: none;
+    cursor: default;
+  }
 `;
 
 export const AltTextInput = styled(BaseInput)`

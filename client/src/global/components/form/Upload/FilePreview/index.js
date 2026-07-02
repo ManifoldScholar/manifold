@@ -9,7 +9,8 @@ export default class FormUploadFilePreview extends PureComponent {
     fileName: PropTypes.string,
     handleRemove: PropTypes.func.isRequired,
     instructionsSingleLine: PropTypes.bool,
-    inputId: PropTypes.string.isRequired
+    inputId: PropTypes.string.isRequired,
+    disabled: PropTypes.bool
   };
 
   static defaultProps = {};
@@ -27,6 +28,7 @@ export default class FormUploadFilePreview extends PureComponent {
                 <Styled.Button
                   type="button"
                   onClick={this.props.handleRemove}
+                  aria-disabled={this.props.disabled}
                 />,
                 <Prompt as="label" htmlFor={this.props.inputId} />,
                 ...(this.props.instructionsSingleLine ? [] : [<br />])
