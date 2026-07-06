@@ -57,13 +57,13 @@ class ProjectRow extends PureComponent {
     return this.props.compact;
   }
 
-  get creatorNames() {
-    const namesArray = this.attr.creatorNames?.split(", ") ?? [];
+  get byLine() {
+    const namesArray = this.attr.orderedCollaboratorNames?.split(", ") ?? [];
     if (namesArray.length > 3) {
-      const firstSix = namesArray.slice(0, 3).join(", ");
-      return this.props.t("common.et_al", { names: firstSix });
+      const firstThree = namesArray.slice(0, 3).join(", ");
+      return this.props.t("common.et_al", { names: firstThree });
     }
-    return this.attr.creatorNames;
+    return this.attr.orderedCollaboratorNames;
   }
 
   get url() {
@@ -82,7 +82,7 @@ class ProjectRow extends PureComponent {
   }
 
   get meta() {
-    if (!this.compact) return this.creatorNames;
+    if (!this.compact) return this.byLine;
     return (
       <FormattedDate
         prefix={this.props.t("dates.updated_title_case")}
