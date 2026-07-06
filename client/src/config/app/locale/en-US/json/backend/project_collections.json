@@ -23,7 +23,7 @@
     "homepage_visible_start": "Homepage Visibility Start",
     "homepage_visible_end": "Homepage Visibility End",
     "projects_shown": "Projects Shown:",
-    "projects_shown_instructions": "Number of projects shown in homepage blade (0 - 40).  Will show all if none is set.",
+    "projects_shown_instructions": "Number of projects shown in homepage blade (0 - 40).  Default 12 if not set.",
     "custom_icon": "Custom Icon",
     "social_header": "Open Graph",
     "social_title": "Open Graph Title",
