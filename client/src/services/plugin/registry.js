@@ -1,12 +1,10 @@
-import { v1 as uuidv1 } from "uuid";
-
 class PluginRegistry {
   constructor() {
     this._registry = {};
   }
 
   add(component) {
-    const id = uuidv1();
+    const id = crypto.randomUUID();
     this._registry[id] = component;
     return id;
   }

@@ -1,7 +1,6 @@
 import { createAction } from "redux-actions";
 import isString from "lodash/isString";
 import isObject from "lodash/isObject";
-import { v1 as uuidv1 } from "uuid";
 
 export const flush = createAction("ENTITY_STORE_FLUSH", passedMetas => {
   let metas;
@@ -18,7 +17,7 @@ export const request = createAction(
     return { ...options, request: requestConfig, state: 0 };
   },
   (apiConfig, meta = null) => {
-    return meta || uuidv1();
+    return meta || crypto.randomUUID();
   }
 );
 /* eslint-enable no-unused-vars */
