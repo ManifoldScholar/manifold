@@ -7,14 +7,14 @@ module API
       resourceful! Project, authorize_options: { except: [:index, :show] } do
         Project.filtered(
           **with_pagination!(project_filter_params&.with_defaults(no_issues: true)),
-          scope: scope_visibility.includes(:creators),
+          scope: scope_visibility,
           user: current_user
         )
       end
 
       def index
         @projects = load_projects
-        render_multiple_resources @projects, include: [:creators]
+        render_multiple_resources @projects
       end
 
       def show
