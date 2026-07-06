@@ -10,7 +10,6 @@ import { formatDuration } from "date-fns/formatDuration";
 import { startOfDay } from "date-fns/startOfDay";
 import { endOfDay } from "date-fns/endOfDay";
 import { sub } from "date-fns/sub";
-import { v4 as uuidv4 } from "uuid";
 
 const { request } = entityStoreActions;
 
@@ -23,7 +22,7 @@ export default function withAnalyticsReport(WrappedComponent) {
     WrappedComponent
   )})`;
 
-  const requestUUID = uuidv4();
+  const requestUUID = crypto.randomUUID();
   const requestName = `${requests.beAnalyticsReport}-${requestUUID}`;
 
   class WithAnalyticsReport extends React.PureComponent {
