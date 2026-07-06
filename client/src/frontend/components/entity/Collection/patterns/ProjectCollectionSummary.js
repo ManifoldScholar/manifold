@@ -32,7 +32,7 @@ function ProjectCollectionSummaryEntityCollection({
   }, []);
 
   const getProjects = () => {
-    const adjustedLimit = limit && limit > 0 ? limit : 100;
+    const adjustedLimit = typeof limit === "number" && limit >= 0 ? limit : 12;
     const projects = mapProjects(projectCollection);
     return projects.slice(0, adjustedLimit);
   };
@@ -41,9 +41,7 @@ function ProjectCollectionSummaryEntityCollection({
   const headerLayout = getHeaderLayout(projectCollection);
   const image = getHeroImage(headerLayout, projectCollection);
   const imageAlt = projectCollection.attributes.heroAltText;
-  const totalprojectCount =
-    projectCollection.attributes.projectsCount ??
-    projectCollection.relationships.collectionProjects?.length;
+  const totalprojectCount = projectCollection.attributes.projectsCount;
 
   return (
     <EntityCollection
