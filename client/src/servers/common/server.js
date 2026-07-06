@@ -50,8 +50,14 @@ export default function webServer(
     };
   };
 
+  const wsUpgradeHandlers = app.wsUpgradeHandlers || [];
+  const attachUpgradeHandlers = server => {
+    wsUpgradeHandlers.forEach(handler => server.on("upgrade", handler));
+  };
+
   if (port) {
     const server = httpShutdown(new http.Server(app));
+    attachUpgradeHandlers(server);
     server.listen(port, makeListenCallback(port, "port"));
     servers.push(server);
   }
@@ -59,6 +65,7 @@ export default function webServer(
   if (socket) {
     unlinkSocket();
     const server = httpShutdown(new http.Server(app));
+    attachUpgradeHandlers(server);
     server.listen(socket, makeListenCallback(socket, "socket"));
     servers.push(server);
   }

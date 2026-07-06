@@ -1,5 +1,5 @@
 import ch from "../../helpers/consoleHelpers";
-import proxy from "http-proxy-middleware";
+import { createProxyMiddleware } from "http-proxy-middleware";
 import config from "config";
 import isRegExp from "lodash/isRegExp";
 import serveStatic from "serve-static";
@@ -13,6 +13,7 @@ class ProxyHelper {
     this.apiAssetTarget = config.services.api;
     this.assetTarget = `http://localhost:${config.services.client.assetPort}`;
     this.wwwTarget = path.join(__dirname, "..", "www");
+    this.upgradeHandlers = [];
   }
 
   proxyOptions(proxyPath, target, logLevel) {
@@ -91,14 +92,33 @@ class ProxyHelper {
   defineProxy(app, proxyPath, target, logLevel = "debug") {
     if (isRegExp(proxyPath))
       return this.defineRegExpProxy(app, proxyPath, target, logLevel);
+    if (proxyPath === "/ws")
+      return this.defineWebSocketProxy(app, proxyPath, target, logLevel);
     ch.background(
       `${this.name} server will proxy ${proxyPath} requests to ${target}.`
     );
-    app.use(proxyPath, proxy(this.proxyOptions(proxyPath, target, logLevel)));
+    app.use(
+      proxyPath,
+      createProxyMiddleware(this.proxyOptions(proxyPath, target, logLevel))
+    );
+  }
+
+  defineWebSocketProxy(app, proxyPath, target, logLevel = "debug") {
+    const wsProxy = createProxyMiddleware({
+      ...this.proxyOptions(proxyPath, target, logLevel),
+      ws: true
+    });
+    ch.background(
+      `${this.name} server will proxy ${proxyPath} WebSocket requests to ${target}.`
+    );
+    app.use(proxyPath, wsProxy);
+    this.upgradeHandlers.push(wsProxy.upgrade);
   }
 
   defineRegExpProxy(app, proxyPath, target, logLevel = "debug") {
-    const theProxy = proxy(this.proxyOptions(proxyPath, target, logLevel));
+    const theProxy = createProxyMiddleware(
+      this.proxyOptions(proxyPath, target, logLevel)
+    );
     ch.background(
       `${
         this.name

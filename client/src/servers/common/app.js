@@ -30,5 +30,7 @@ export default function webApp(
     proxyHelper.proxyBrowserPathsToDistDirectory(app);
   }
 
+  app.wsUpgradeHandlers = proxyHelper.upgradeHandlers;
+
   return app;
 }

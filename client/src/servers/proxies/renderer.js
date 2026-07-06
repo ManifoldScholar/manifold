@@ -1,5 +1,5 @@
 import config from "config";
-import proxy from "http-proxy-middleware";
+import { createProxyMiddleware } from "http-proxy-middleware";
 import ch from "../../helpers/consoleHelpers";
 import createStore from "../../store/createStore";
 import exceptionRenderer from "../../helpers/exceptionRenderer";
@@ -9,7 +9,7 @@ import CookieHelper from "helpers/cookie/Server";
 const ssrRenderUrl = `http://${config.services.client.domain}:${config.services.client.sparePort}`;
 
 export default function makeRendererProxy(requestHandler) {
-  const reactServerProxy = proxy({
+  const reactServerProxy = createProxyMiddleware({
     target: ssrRenderUrl,
     changeOrigin: true,
     logLevel: "silent",
