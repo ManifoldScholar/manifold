@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import Badge from "lti/components/atomics/Badge";
 import Button from "global/components/atomic/Button";
