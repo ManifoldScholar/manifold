@@ -5,7 +5,7 @@ import {
   defaultTransitionProps,
   defaultFocusStyle
 } from "theme/styles/mixins";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export const Button = styled(Link)`
   ${linkUnstyled}
