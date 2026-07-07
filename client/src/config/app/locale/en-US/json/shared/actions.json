@@ -15,6 +15,7 @@
     "bulk_delete": "Bulk Delete",
     "cancel": "Cancel",
     "cancel_delete": "$t(actions.cancel) $t(actions.delete)",
+    "clear": "Clear",
     "clear_selection": "Clear Selection",
     "close": "Close",
     "confirm": "Confirm",
