@@ -37,6 +37,7 @@ import BEResourcesBoxes64 from "./64/BEResourcesBoxes";
 import Bookmark24 from "./24/Bookmark";
 import Bookmark32 from "./32/Bookmark";
 import Calendar24 from "./24/Calendar";
+import CheckCircle16 from "./16/CheckCircle";
 import Checkmark16 from "./16/Checkmark";
 import CircleArrowDown64 from "./64/CircleArrowDown";
 import CircleArrowLeft64 from "./64/CircleArrowLeft";
@@ -91,6 +92,7 @@ import Journals64 from "./64/Journals";
 import Lamp64 from "./64/Lamp";
 import LanguageGlobe24 from "./24/LanguageGlobe";
 import Lightning24 from "./24/Lightning";
+import Link16 from "./16/Link";
 import Link24 from "./24/Link";
 import Lock16 from "./16/Lock";
 import Lock32 from "./32/Lock";
@@ -112,6 +114,7 @@ import PlaySolid24 from "./24/PlaySolid";
 import PlayOutline24 from "./24/PlayOutline";
 import Plus16 from "./16/Plus";
 import Plus24 from "./24/Plus";
+import PlusCircle16 from "./16/PlusCircle";
 import Privacy24 from "./24/Privacy";
 import ProjectCollections64 from "./64/ProjectCollections";
 import Projects64 from "./64/Projects";
@@ -232,6 +235,7 @@ export default {
   Bookmark24,
   Bookmark32,
   Calendar24,
+  CheckCircle16,
   Checkmark16,
   CircleArrowDown64,
   CircleArrowLeft64,
@@ -294,6 +298,7 @@ export default {
   LanguageGlobe24,
   LightMode16,
   Lightning24,
+  Link16,
   Link24,
   Lock16,
   Lock32,
@@ -316,6 +321,7 @@ export default {
   PlayOutline24,
   Plus16,
   Plus24,
+  PlusCircle16,
   Privacy24,
   ProjectCollections64,
   ProjectCollection32,
