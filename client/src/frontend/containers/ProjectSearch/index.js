@@ -1,29 +1,33 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext } from "react-router-dom";
 import lh from "helpers/linkHandler";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import { useSearchContext } from "hooks/useSearch/context";
+import { useSearchResults } from "hooks/useSearch/context";
+import useSearch from "hooks/useSearch";
 import CheckFrontendMode from "global/containers/CheckFrontendMode";
 import * as Styled from "./styles";
 
 const ProjectSearch = forwardRef((props, ref) => {
   const { project } = useOutletContext() || {};
-  const {
-    results,
-    resultsMeta,
-    searchQueryState,
-    setQueryState,
-    setPage
-  } = useSearchContext();
+  const { results, resultsMeta } = useSearchResults();
+  const { setPage, query, setQuery } = useSearch();
 
   const { t } = useTranslation();
 
+  const projectId = project?.id ?? null;
+
+  useEffect(() => {
+    if (projectId && query.project !== projectId) {
+      setQuery({ project: projectId });
+    }
+  }, [projectId, query.project, setQuery]);
+
   const facets = [
-    { label: t("glossary.resource_other"), value: "Resource" },
-    { label: t("glossary.text_other"), value: "Text" },
+    { label: t("glossary.resource_other"), value: "Resource", default: true },
+    { label: t("glossary.text_other"), value: "Text", default: true },
     { label: t("glossary.annotation_other"), value: "Annotation" },
     { label: t("glossary.full_text_one"), value: "TextSection" }
   ];
@@ -40,23 +44,21 @@ const ProjectSearch = forwardRef((props, ref) => {
       <CheckFrontendMode debugLabel="ProjectSearch" isProjectSubpage />
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <h1 className="screen-reader-text">{t("search.title")}</h1>
-      <Styled.FormWrapper>
-        <Styled.Inner>
-          <h2 className="screen-reader-text">{t("search.form")}</h2>
-          <SearchQuery.Form
-            projectId={project.id}
-            searchQueryState={searchQueryState}
-            setQueryState={setQueryState}
-            facets={facets}
-          />
-        </Styled.Inner>
-      </Styled.FormWrapper>
-      {results && (
+      <SearchQuery.Provider>
+        <Styled.FormWrapper>
+          <Styled.Inner>
+            <h2 className="screen-reader-text">{t("search.form")}</h2>
+            <SearchQuery.Form
+              action={`/projects/${project?.attributes?.slug}/search`}
+              facets={facets}
+            />
+          </Styled.Inner>
+        </Styled.FormWrapper>
         <Styled.ResultsWrapper>
           <Styled.Inner>
             <h2 className="screen-reader-text">{t("search.results")}</h2>
             <SearchResults.List
-              pagination={resultsMeta.pagination}
+              pagination={resultsMeta?.pagination}
               paginationClickHandler={setPage}
               results={results}
               hideParent
@@ -64,7 +66,7 @@ const ProjectSearch = forwardRef((props, ref) => {
             />
           </Styled.Inner>
         </Styled.ResultsWrapper>
-      )}
+      </SearchQuery.Provider>
     </div>
   ) : null;
 });
