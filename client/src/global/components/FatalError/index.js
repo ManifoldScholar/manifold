@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { Global as GlobalStyles } from "@emotion/react";
 import config from "config";
 import styles from "theme/styles/globalStyles";
-import withOptionalRouter from "hoc/withOptionalRouter";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
 import * as Styled from "./styles";
