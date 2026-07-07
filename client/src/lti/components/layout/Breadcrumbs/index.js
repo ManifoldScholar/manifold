@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
