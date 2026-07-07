@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import withSearchResultHelper from "../searchResultHelper";
 import Collapse from "global/components/Collapse";
+import useHasMounted from "hooks/useHasMounted";
 import { CollapseContext } from "helpers/contexts";
 import * as Styled from "./styles";
 
 function GenericExcerpts({ excerpts, joinHighlightedFragments }) {
   const scrollTarget = useRef();
+  const hasMounted = useHasMounted();
   const { t } = useTranslation();
   const { visible } = useContext(CollapseContext);
 
@@ -16,8 +18,10 @@ function GenericExcerpts({ excerpts, joinHighlightedFragments }) {
   const expandedExcerpts = excerpts.slice(3);
 
   useEffect(() => {
+    if (!hasMounted) return;
     if (!visible && scrollTarget.current)
       scrollTarget.current.scrollIntoView({ block: "center" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
   return excerpts.length ? (

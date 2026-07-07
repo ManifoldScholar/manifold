@@ -34,6 +34,27 @@ export default function Header({ text, scrollAware }) {
   const visibility = useFromStore({ path: "ui.transitory.visibility" });
   const appearance = useFromStore({ path: "ui.persistent.reader" });
 
+  const searchScopes = [
+    section?.id && {
+      label: t("glossary.chapter_one"),
+      value: "section",
+      paramName: "textSection",
+      paramValue: section.id
+    },
+    text?.id && {
+      label: t("glossary.text_one"),
+      value: "text",
+      paramName: "text",
+      paramValue: text.id
+    },
+    text?.relationships?.project?.id && {
+      label: t("glossary.project_one"),
+      value: "project",
+      paramName: "project",
+      paramValue: text.relationships.project.id
+    }
+  ].filter(Boolean);
+
   const actions = commonActions(dispatch);
 
   const handleContentsButtonClick = event => {
@@ -158,8 +179,10 @@ export default function Header({ text, scrollAware }) {
                 afterSubmit={panelToggleHandler("search")}
                 initialState={{
                   keyword: "",
-                  scope: "text"
+                  scope: "text",
+                  text: text?.id
                 }}
+                scopes={searchScopes}
                 projectId={text?.relationships?.project?.id}
                 textId={text?.id}
                 sectionId={section?.id}

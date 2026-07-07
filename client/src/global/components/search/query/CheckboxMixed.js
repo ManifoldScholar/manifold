@@ -1,111 +1,106 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useId } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 
-function CheckboxMixed({ label: groupLabel, checkboxes, onChange }) {
-  const initialState = checkboxes.map(checkbox => checkbox.value);
-  const [checked, setChecked] = useState(initialState);
-  const allChecked = checked.length === checkboxes.length;
+function CheckboxMixed({ label: groupLabel, checkboxes, value, onChange }) {
+  const allValues = checkboxes.map(c => c.value);
+  const allChecked = value.length === checkboxes.length;
+  const isIndeterminate = value.length > 0 && value.length < checkboxes.length;
 
   const inputRef = useRef(null);
-  const initializedRef = useRef(false);
-
   const { t } = useTranslation();
+  const id = useId();
 
   useEffect(() => {
-    if (initializedRef.current) {
-      onChange(checked);
-    } else {
-      initializedRef.current = true;
-    }
-
     if (inputRef.current) {
-      const isIndeterminate =
-        checked.length > 0 && checked.length < checkboxes.length;
       inputRef.current.indeterminate = isIndeterminate;
     }
-  }, [checked]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isIndeterminate]);
 
-  function updateChecked(key) {
-    setChecked(prevChecked => {
-      const index = prevChecked.indexOf(key);
-      return index === -1
-        ? [...prevChecked, key]
-        : prevChecked.slice(0, index).concat(prevChecked.slice(index + 1));
-    });
+  function toggle(key) {
+    const index = value.indexOf(key);
+    const next =
+      index === -1
+        ? [...value, key]
+        : value.slice(0, index).concat(value.slice(index + 1));
+    onChange(next);
   }
 
+  function toggleAll() {
+    onChange(allChecked ? [] : allValues);
+  }
+
+  const baseId = `search-facets-${id}`;
+
   return (
-    <UIDConsumer name={id => `search-facets-${id}`}>
-      {id => (
-        <fieldset className="search-query__filter-group">
-          <legend className="search-query__group-label">{groupLabel}</legend>
-          <div className="search-query__filter-group-list">
-            <div className="search-query__checkbox-controller">
-              <label
-                htmlFor={`${id}[all]`}
-                className="search-query__checkbox checkbox checkbox--gray"
-              >
-                <input
-                  ref={inputRef}
-                  id={`${id}[all]`}
-                  type="checkbox"
-                  checked={allChecked}
-                  aria-controls={checkboxes
-                    .map(checkbox => `${id}[${checkbox.value}]`)
-                    .join(" ")}
-                  onChange={() => setChecked(allChecked ? [] : initialState)}
-                />
-                <div className="checkbox__indicator" aria-hidden="true">
-                  <Utility.IconComposer
-                    icon="checkmark16"
-                    size="default"
-                    className="checkbox__icon"
-                  />
-                </div>
-                {t("search.everything")}
-              </label>
+    <fieldset className="search-query__filter-group">
+      <legend className="search-query__group-label">{groupLabel}</legend>
+      <div className="search-query__filter-group-list">
+        <div className="search-query__checkbox-controller">
+          <label
+            htmlFor={`${baseId}[all]`}
+            className="search-query__checkbox checkbox checkbox--gray"
+          >
+            <input
+              ref={inputRef}
+              id={`${baseId}[all]`}
+              type="checkbox"
+              checked={allChecked}
+              aria-controls={checkboxes
+                .map(c => `${baseId}[${c.value}]`)
+                .join(" ")}
+              onChange={toggleAll}
+            />
+            <div className="checkbox__indicator" aria-hidden="true">
+              <Utility.IconComposer
+                icon="checkmark16"
+                size="default"
+                className="checkbox__icon"
+              />
             </div>
-            <ul className="search-query__filter-group-list">
-              {checkboxes.map(({ label, value }) => {
-                const index = checked.indexOf(value);
-                return (
-                  <li key={value}>
-                    <label
-                      htmlFor={`${id}[${value}]`}
-                      className="search-query__checkbox checkbox checkbox--gray"
-                    >
-                      <input
-                        id={`${id}[${value}]`}
-                        type="checkbox"
-                        checked={index >= 0}
-                        onChange={() => updateChecked(value)}
-                      />
-                      <div className="checkbox__indicator" aria-hidden="true">
-                        <Utility.IconComposer
-                          icon="checkmark16"
-                          size="default"
-                          className="checkbox__icon"
-                        />
-                      </div>
-                      {label}
-                    </label>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </fieldset>
-      )}
-    </UIDConsumer>
+            {t("search.everything")}
+          </label>
+        </div>
+        <ul className="search-query__filter-group-list">
+          {checkboxes.map(({ label, value: optionValue }) => {
+            const checked = value.indexOf(optionValue) >= 0;
+            return (
+              <li key={optionValue}>
+                <label
+                  htmlFor={`${baseId}[${optionValue}]`}
+                  className="search-query__checkbox checkbox checkbox--gray"
+                >
+                  <input
+                    id={`${baseId}[${optionValue}]`}
+                    type="checkbox"
+                    name="facets"
+                    value={optionValue}
+                    checked={checked}
+                    onChange={() => toggle(optionValue)}
+                  />
+                  <div className="checkbox__indicator" aria-hidden="true">
+                    <Utility.IconComposer
+                      icon="checkmark16"
+                      size="default"
+                      className="checkbox__icon"
+                    />
+                  </div>
+                  {label}
+                </label>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </fieldset>
   );
 }
 
 CheckboxMixed.propTypes = {
   label: PropTypes.string.isRequired,
   checkboxes: PropTypes.array.isRequired,
+  value: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired
 };
 
