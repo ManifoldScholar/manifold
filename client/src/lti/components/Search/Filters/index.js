@@ -29,7 +29,7 @@ export default function Filters() {
   const renderToggle = facet => (
     <FilterToggle
       key={facet}
-      name="facet"
+      name="facets"
       value={facet}
       type={camelize(facet)}
       checked={value.includes(facet)}
