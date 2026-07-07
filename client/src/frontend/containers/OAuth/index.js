@@ -28,11 +28,11 @@ export default function OAuth() {
   const cookieHelper = new BrowserCookieHelper();
   const authCode = cookieHelper.read("_oauth_auth_code");
 
-  let redirectPath = params.get("redirect_path")
+  let redirectPath = params.get("redirect_path");
   const entityType = params.get("redirect_type");
   const entitySlug = params.get("redirect_id");
 
-  if(!redirectPath) {
+  if (!redirectPath) {
     switch (entityType) {
       case "Journal":
         redirectPath = lh.link("frontendJournal", entitySlug);
