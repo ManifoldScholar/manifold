@@ -9,6 +9,7 @@ import MarginIncrease from "./MarginIncrease";
 import StarFill from "./StarFill";
 import StarOutline from "./StarOutline";
 import Notes from "./Notes";
+import DeepLinkingLogo from "./DeepLinkingLogo";
 
 export default {
   CheckUnique: Check,
@@ -21,5 +22,6 @@ export default {
   MarginIncreaseUnique: MarginIncrease,
   StarFillUnique: StarFill,
   StarOutlineUnique: StarOutline,
-  NotesUnique: Notes
+  NotesUnique: Notes,
+  DeepLinkingLogoUnique: DeepLinkingLogo
 };
