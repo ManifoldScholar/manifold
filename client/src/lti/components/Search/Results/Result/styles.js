@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { linkUnstyled, defaultTransitionProps } from "theme/styles/mixins";
 
 export const Title = styled(Link)`
