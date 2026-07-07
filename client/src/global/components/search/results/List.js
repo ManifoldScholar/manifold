@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Empty from "./Empty";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
+import { useSearchQueryContext } from "../query/Context";
 import Types from "./Types";
 import * as Styled from "./styles";
 
@@ -28,7 +29,11 @@ export default function SearchResultsList(props) {
   } = props;
 
   const { t } = useTranslation();
+  const { facets, keyword } = useSearchQueryContext("SearchResults.List");
 
+  if (!keyword?.value?.trim())
+    return <Empty messageKey="search.no_search_term" />;
+  if (facets.cleared) return <Empty messageKey="search.no_facets_selected" />;
   if (!results) return null;
   if (!results.length) return <Empty />;
 
@@ -70,5 +75,6 @@ SearchResultsList.propTypes = {
   pagination: PropTypes.object,
   paginationClickHandler: PropTypes.func.isRequired,
   context: PropTypes.string,
-  hideParent: PropTypes.bool
+  hideParent: PropTypes.bool,
+  padding: PropTypes.number
 };
