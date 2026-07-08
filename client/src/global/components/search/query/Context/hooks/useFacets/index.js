@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { entityStoreActions } from "actions";
 import { requests } from "api";
-import useSearch from "hooks/useSearch";
+import useSearch from "hooks/search/useSearch";
 
 const { flush } = entityStoreActions;
 

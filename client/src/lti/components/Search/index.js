@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import useSearch from "hooks/useSearch";
+import useSearch from "hooks/search/useSearch";
 import SearchQuery from "global/components/search/query";
 import Filters from "./Filters";
 import SearchResults from "./Results";

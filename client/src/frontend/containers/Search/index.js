@@ -2,14 +2,9 @@ import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import { useSearchResults } from "hooks/useSearch/context";
-import useSearch from "hooks/useSearch";
 import * as Styled from "./styles";
 
 const SearchContainer = forwardRef((props, ref) => {
-  const { results, resultsMeta } = useSearchResults();
-  const { setPage } = useSearch();
-
   const { t } = useTranslation();
 
   const facets = [
@@ -34,12 +29,7 @@ const SearchContainer = forwardRef((props, ref) => {
         <Styled.ResultsWrapper>
           <Styled.Inner>
             <h2 className="screen-reader-text">{t("search.results")}</h2>
-            <SearchResults.List
-              pagination={resultsMeta?.pagination}
-              paginationClickHandler={setPage}
-              results={results}
-              context="frontend"
-            />
+            <SearchResults.List context="frontend" />
           </Styled.Inner>
         </Styled.ResultsWrapper>
       </SearchQuery.Provider>
