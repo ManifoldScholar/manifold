@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import useSearch from "hooks/useSearch";
 import SearchQuery from "global/components/search/query";
@@ -6,10 +5,11 @@ import Filters from "./Filters";
 import SearchResults from "./Results";
 import * as Styled from "./styles";
 
-export default function LtiSearchForm({ ...resultsProps }) {
+export default function LtiSearchForm() {
   const { t } = useTranslation();
-  const { query } = useSearch();
-  const { keyword } = query;
+  const {
+    query: { keyword }
+  } = useSearch();
 
   return (
     <SearchQuery.Provider>
@@ -20,14 +20,8 @@ export default function LtiSearchForm({ ...resultsProps }) {
         >
           <Filters />
         </SearchQuery.Form>
-        <SearchResults {...resultsProps} />
+        <SearchResults />
       </Styled.Wrapper>
     </SearchQuery.Provider>
   );
 }
-
-LtiSearchForm.propTypes = {
-  results: PropTypes.array,
-  meta: PropTypes.object,
-  keyword: PropTypes.string
-};

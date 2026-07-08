@@ -25,6 +25,14 @@ export default function Cart({ dialog }) {
     return acc;
   }, {});
 
+  const submitSelection = () => {
+    // eslint-disable-next-line no-console
+    console.warn(
+      "[lti] Add to course: deep-linking return not yet implemented.",
+      items
+    );
+  };
+
   return (
     <Styled.Cart ref={dialog.dialogRef}>
       <Styled.Header>
@@ -44,6 +52,7 @@ export default function Cart({ dialog }) {
             size="md"
             background="accent"
             label={t("lti.cart.add_to_course")}
+            onClick={submitSelection}
           />
         </>
       ) : (
