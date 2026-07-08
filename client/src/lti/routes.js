@@ -4,10 +4,15 @@ import Search from "lti/containers/Search";
 import ProjectDetail from "lti/containers/ProjectDetail";
 import ResourceCollectionDetail from "lti/containers/ResourceCollectionDetail";
 import TextDetail from "lti/containers/TextDetail";
+import { DeepLinkingProvider } from "lti/contexts";
 
 const routes = [
   {
-    element: <Layout />,
+    element: (
+      <DeepLinkingProvider>
+        <Layout />
+      </DeepLinkingProvider>
+    ),
     path: "lti/deep_linking",
     handle: { name: "lti" },
     children: [

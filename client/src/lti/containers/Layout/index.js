@@ -4,21 +4,22 @@ import useDialog from "@castiron/hooks/useDialog";
 import BodyClass from "hoc/BodyClass";
 import HeadContent from "global/components/HeadContent";
 import { SearchProvider } from "hooks/search/useSearchResults";
-import { SelectionProvider } from "lti/contexts";
+import { useDeepLinking } from "lti/contexts";
 import Cart from "lti/components/Cart";
 import Header from "lti/components/layout/Header";
+import NotReady from "lti/components/layout/NotReady";
 import * as Styled from "./styles";
 
 export default function LtiLayout() {
   const { t } = useTranslation();
-
+  const { status } = useDeepLinking();
   const dialog = useDialog({ modal: false, dismissalMode: "explicit" });
 
   return (
     <BodyClass className="browse">
-      <SelectionProvider>
+      <HeadContent title={t("lti.title")} appendDefaultTitle />
+      {status === "ready" ? (
         <SearchProvider>
-          <HeadContent title={t("lti.title")} appendDefaultTitle />
           <Styled.Wrapper>
             <Header dialog={dialog} />
             <Styled.Main $cartOpen={dialog.open}>
@@ -29,7 +30,9 @@ export default function LtiLayout() {
             <Cart dialog={dialog} />
           </Styled.Wrapper>
         </SearchProvider>
-      </SelectionProvider>
+      ) : (
+        <NotReady status={status} />
+      )}
     </BodyClass>
   );
 }
