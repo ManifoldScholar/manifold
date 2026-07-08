@@ -55,6 +55,15 @@ function readInitialToken(search) {
   }
 }
 
+function clearStoredToken() {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    // sessionStorage unavailable — nothing to clear
+  }
+}
+
 export function DeepLinkingProvider({ children }) {
   const { search } = useLocation();
   const [token] = useState(() => readInitialToken(search));
@@ -144,6 +153,9 @@ export function DeepLinkingProvider({ children }) {
 
     return ltiAPI.submit({ contextToken: token, selection, authToken }).then(
       data => {
+        // The token is consumed server-side now; drop our copy so a manual
+        // return to the route lands in a clean no-token state.
+        clearStoredToken();
         // Keep submitting=true: the return form takes over and posts to the LMS.
         setReturnData({
           deepLinkReturnUrl: data.deep_link_return_url,
