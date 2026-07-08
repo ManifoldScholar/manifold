@@ -1,8 +1,14 @@
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { entityStoreActions } from "actions";
+import { requests } from "api";
 import useSearch from "hooks/useSearch";
+
+const { flush } = entityStoreActions;
 
 export default function useFacets({ formRef }) {
   const { setQuery } = useSearch();
+  const dispatch = useDispatch();
   const [facetsCleared, setFacetsCleared] = useState(false);
   const pendingFacetsRef = useRef(null);
 
@@ -14,6 +20,7 @@ export default function useFacets({ formRef }) {
       const url = new URL(window.location.href);
       url.searchParams.delete("facets");
       window.history.replaceState(null, "", url);
+      dispatch(flush(requests.gSearchResults));
       return;
     }
     setFacetsCleared(false);
