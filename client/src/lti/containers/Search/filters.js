@@ -1,4 +1,4 @@
-import { parseQueryFromUrl } from "hooks/useSearch/helpers";
+import { parseQueryFromUrl } from "hooks/search/helpers";
 
 export const ALLOWED_FACETS = [
   "Project",
