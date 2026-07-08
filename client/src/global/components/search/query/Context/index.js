@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useRef } from "react";
 import PropTypes from "prop-types";
-import useSearch from "hooks/useSearch";
-import { scopeToPatch } from "hooks/useSearch/helpers";
+import useSearch from "hooks/search/useSearch";
+import { scopeToPatch } from "hooks/search/helpers";
 import useFacets from "./hooks/useFacets";
 import useControlled from "./hooks/useControlled";
 
@@ -11,7 +11,8 @@ export function SearchQueryProvider({ children }) {
   const formRef = useRef(null);
   const {
     query: { keyword, scope, facets },
-    setQuery
+    setQuery,
+    setPage
   } = useSearch();
   const { facetsCleared, setFacets, onSubmit } = useFacets({ formRef });
 
@@ -33,9 +34,19 @@ export function SearchQueryProvider({ children }) {
         cleared: facetsCleared,
         set: setFacets
       },
+      setPage,
       onSubmit
     }),
-    [keyword, scope, facets, setQuery, facetsCleared, setFacets, onSubmit]
+    [
+      keyword,
+      scope,
+      facets,
+      setQuery,
+      setPage,
+      facetsCleared,
+      setFacets,
+      onSubmit
+    ]
   );
 
   return (
@@ -88,6 +99,8 @@ export function SearchQueryControlledProvider({ query, setQuery, children }) {
         cleared: facetsCleared,
         set: setFacets
       },
+      setPage: page => () =>
+        setQuery({ ...query, page: { ...query?.page, number: page } }),
       onSubmit
     }),
     [

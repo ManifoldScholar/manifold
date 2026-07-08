@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import useSearch from "hooks/useSearch";
+import useSearch from "hooks/search/useSearch";
 import * as Styled from "./styles";
 
 export default function Count({ totalCount }) {

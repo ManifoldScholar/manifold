@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Dialog from "global/components/dialog";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
+import { SearchResultsControlledProvider } from "hooks/search/useSearchResults";
 import { useFetch } from "hooks";
 import { searchResultsAPI } from "api";
 
@@ -44,17 +45,15 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
           <SearchQuery.Form facets={facets} autoFocus />
         </div>
         {results && (
-          <div className="search-dialog__results">
-            <h2 className="screen-reader-text">{t("search.results")}</h2>
-            <SearchResults.List
-              pagination={resultsMeta.pagination}
-              paginationClickHandler={page => () =>
-                setQuery({ ...query, page: { ...query.page, number: page } })}
-              results={results}
-              context="frontend"
-              padding={1}
-            />
-          </div>
+          <SearchResultsControlledProvider
+            results={results}
+            resultsMeta={resultsMeta}
+          >
+            <div className="search-dialog__results">
+              <h2 className="screen-reader-text">{t("search.results")}</h2>
+              <SearchResults.List context="frontend" padding={1} />
+            </div>
+          </SearchResultsControlledProvider>
         )}
         <div className="search-dialog__footer">
           <button
