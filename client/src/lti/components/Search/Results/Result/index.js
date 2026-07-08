@@ -31,7 +31,9 @@ export default function Result({ entity, type, parents }) {
     return null;
   }
 
-  const linkState = { search: location.search };
+  // On a detail page location.search is empty, so fall back to the
+  // inherited search for the breadcrumb link.
+  const linkState = { search: location.search || location.state?.search };
 
   const { attributes } = entity ?? {};
   const {
@@ -72,7 +74,9 @@ export default function Result({ entity, type, parents }) {
           {parent ? (
             <Styled.Parent>
               {parent.to ? (
-                <Link to={parent.to}>{parent.label}</Link>
+                <Link to={parent.to} state={linkState}>
+                  {parent.label}
+                </Link>
               ) : (
                 parent.label
               )}

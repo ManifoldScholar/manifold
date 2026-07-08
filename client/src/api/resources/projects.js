@@ -65,8 +65,9 @@ export default {
     };
   },
 
-  resources(id, filter = {}, page = {}) {
+  resources(id, filter = {}, page = {}, eagerLoad = false) {
     return {
+      eagerLoad,
       endpoint: `/api/v1/projects/${id}/relationships/resources`,
       method: "GET",
       options: {
@@ -75,8 +76,9 @@ export default {
     };
   },
 
-  resourceCollections(id, filter = {}, page = {}) {
+  resourceCollections(id, filter = {}, page = {}, eagerLoad = false) {
     return {
+      eagerLoad,
       endpoint: `/api/v1/projects/${id}/relationships/resource_collections`,
       method: "GET",
       options: {
