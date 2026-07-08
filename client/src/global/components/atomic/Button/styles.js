@@ -29,6 +29,14 @@ function getSizeStyles(size) {
         --_padding: 6px 14px 8px;
         --_font-size: 12px;
       `;
+    case "xSm":
+      return `
+          --focus-color: var(--color-neutral-text-extra-dark);
+          --_padding: 7px 14px 7px 12px;
+          --_font-size: 14px;
+          --_hover-color: var(--color-base-neutral-white);
+          --_hover-background-color: var(--color-neutral-text-extra-dark);
+        `;
     default:
       return ``;
   }
@@ -85,9 +93,9 @@ function getColorStyles(background) {
 }
 
 export const Button = styled("button", transientOptions)`
-  ${({ $size }) => getSizeStyles($size)}
   ${({ $shape }) => getShapeStyles($shape)}
   ${({ $background }) => getColorStyles($background)}
+  ${({ $size }) => getSizeStyles($size)}
 
   ${buttonUnstyled}
   min-inline-size: var(--Button-min-inline-size);
@@ -128,6 +136,27 @@ export const Button = styled("button", transientOptions)`
     background-color: var(--_hover-background-color);
     border-color: var(--_hover-background-color);
   }
+
+  ${({ $size, $background }) => {
+    if ($size !== "xSm") return ``;
+    if ($background === "neutral")
+      return `
+      &:focus-visible {
+        background-color: var(--button-bg-color);
+        border-color: var(--button-bg-color);
+        color: var(--color-neutral-text-extra-dark);
+      }
+    `;
+    if ($background === "outline")
+      return `
+      &:focus-visible {
+        background-color: transparent;
+        border-color: transparent;
+        color: var(--color-neutral-text-extra-dark);
+      }
+    `;
+    return ``;
+  }}
 
   > span {
     min-block-size: var(--_min-block-size);
