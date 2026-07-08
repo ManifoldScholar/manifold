@@ -1,6 +1,11 @@
 {
   "lti": {
     "title": "Deep Linking",
+    "status": {
+      "loading": "Loading…",
+      "invalid_heading": "This deep-linking session has expired",
+      "invalid_body": "Your session is no longer valid. Please relaunch Manifold from your course to start again."
+    },
     "header": {
       "help": "Help",
       "my_links": "My Links"
