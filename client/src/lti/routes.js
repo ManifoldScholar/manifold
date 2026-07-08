@@ -8,7 +8,7 @@ import TextDetail from "lti/containers/TextDetail";
 const routes = [
   {
     element: <Layout />,
-    path: "lti",
+    path: "lti/deep_linking",
     handle: { name: "lti" },
     children: [
       {
