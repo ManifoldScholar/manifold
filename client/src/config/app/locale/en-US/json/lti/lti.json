@@ -46,7 +46,10 @@
       "heading": "My Links",
       "empty_heading": "No links selected.",
       "empty_body": "Search the list to find links to add to this collection.",
-      "add_to_course": "Save Links to [App]"
+      "add_to_course": "Save Links to [App]",
+      "saving": "Saving …",
+      "single_link_note": "Your LMS only accepts a single link. This content will be added to a Manifold Reading Group, and the link created will be to that group.",
+      "submit_error": "We couldn't save your links. Your session may have expired — please relaunch Manifold from your course and try again."
     },
     "breadcrumb": {
       "search": "Search Results",
