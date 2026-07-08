@@ -43,10 +43,10 @@ export default {
     };
   },
 
-  collectionResources(id, filterParams = {}, page = {}) {
-    const filter = filterParams;
-    filter.resource_collection = id;
+  collectionResources(id, filterParams = {}, page = {}, eagerLoad = false) {
+    const filter = { ...filterParams, resource_collection: id };
     return {
+      eagerLoad,
       endpoint: `/api/v1/resource_collections/${id}/relationships/resources`,
       method: "GET",
       options: {
