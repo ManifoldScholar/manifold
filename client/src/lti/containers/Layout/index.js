@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 import useDialog from "@castiron/hooks/useDialog";
 import BodyClass from "hoc/BodyClass";
 import HeadContent from "global/components/HeadContent";
-import { SearchProvider } from "hooks/useSearch/context";
+import { SearchProvider } from "hooks/search/useSearchResults";
 import { SelectionProvider } from "lti/contexts";
 import Cart from "lti/components/Cart";
 import Header from "lti/components/layout/Header";

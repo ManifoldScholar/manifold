@@ -10,7 +10,7 @@ import get from "lodash/get";
 import BodyClass from "hoc/BodyClass";
 import AppFatalError from "global/components/FatalError/AppWrapper";
 import redirectIfLibraryDisabled from "hoc/redirectIfLibraryDisabled";
-import { SearchProvider } from "hooks/useSearch/context";
+import { SearchProvider } from "hooks/search/useSearchResults";
 
 const SUBJECT_FILTERS = { used: true };
 const JOURNAL_SUBJECT_FILTERS = { usedJournal: true };

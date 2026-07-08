@@ -5,17 +5,15 @@ import lh from "helpers/linkHandler";
 import Overlay from "global/components/Overlay";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import { useSearchResults } from "hooks/useSearch/context";
-import useSearch from "hooks/useSearch";
-import { scopeToPatch } from "hooks/useSearch/helpers";
+import useSearch from "hooks/search/useSearch";
+import { scopeToPatch } from "hooks/search/helpers";
 
 export default function SearchContainer() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { textId: textIdParam, sectionId: sectionIdParam } = useParams();
   const { text, section } = useOutletContext() || {};
-  const { results, resultsMeta } = useSearchResults();
-  const { setPage, query, setQuery } = useSearch();
+  const { query, setQuery } = useSearch();
 
   const facets = [
     { label: t("reader.full_text"), value: "TextSection", default: true },
@@ -86,12 +84,7 @@ export default function SearchContainer() {
             scopes={scopes}
             className="search-query"
           />
-          <SearchResults.List
-            pagination={resultsMeta?.pagination}
-            paginationClickHandler={setPage}
-            results={results}
-            context="project"
-          />
+          <SearchResults.List context="project" />
         </SearchQuery.Provider>
       </div>
     </Overlay>

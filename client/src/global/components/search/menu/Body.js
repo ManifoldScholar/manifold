@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { serializeQueryToUrl } from "hooks/useSearch/helpers";
+import { serializeQueryToUrl } from "hooks/search/helpers";
 import lh from "helpers/linkHandler";
 import SearchQuery from "../query";
 

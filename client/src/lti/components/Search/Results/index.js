@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import useSearch from "hooks/useSearch";
-import { useSearchResults } from "hooks/useSearch/context";
+import useSearch from "hooks/search/useSearch";
+import { useSearchResults } from "hooks/search/useSearchResults";
 import { useSearchQueryContext } from "global/components/search/query/Context";
 import Pagination from "./Pagination";
 import Result from "./Result";

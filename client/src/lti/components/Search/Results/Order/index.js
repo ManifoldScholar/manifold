@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import IconComposer from "global/components/utility/IconComposer";
-import useSearch from "hooks/useSearch";
+import useSearch from "hooks/search/useSearch";
 import * as Styled from "./styles";
 
 export default function Order() {

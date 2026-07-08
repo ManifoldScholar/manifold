@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
-import useSearch from "hooks/useSearch";
+import useSearch from "hooks/search/useSearch";
 import SearchForm from "lti/components/Search";
 import { resolveFacets } from "./filters";
 
