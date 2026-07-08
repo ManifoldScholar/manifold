@@ -10,7 +10,7 @@ export default function Breadcrumbs({ project, entity, type }) {
 
   const searchCrumb = {
     label: t("lti.breadcrumb.search"),
-    to: `/lti/search${search ?? ""}`
+    to: `/lti/deep_linking/search${search ?? ""}`
   };
 
   const projectCrumb = project
@@ -18,7 +18,7 @@ export default function Breadcrumbs({ project, entity, type }) {
         label: t("lti.breadcrumb.project", {
           title: project.attributes.titlePlaintext
         }),
-        to: `/lti/projects/${project.id}`
+        to: `/lti/deep_linking/projects/${project.id}`
       }
     : undefined;
 
@@ -29,7 +29,7 @@ export default function Breadcrumbs({ project, entity, type }) {
           label: t("lti.breadcrumb.project", {
             title: entity.attributes.titlePlaintext
           }),
-          to: `/lti/projects/${entity.id}`,
+          to: `/lti/deep_linking/projects/${entity.id}`,
           current: true
         };
       case "text":
@@ -37,7 +37,7 @@ export default function Breadcrumbs({ project, entity, type }) {
           label: t("lti.breadcrumb.text", {
             title: entity.attributes.title
           }),
-          to: `/lti/texts/${entity.id}`,
+          to: `/lti/deep_linking/texts/${entity.id}`,
           current: true
         };
       case "resourceCollection":
@@ -45,7 +45,7 @@ export default function Breadcrumbs({ project, entity, type }) {
           label: t("lti.breadcrumb.resourceCollection", {
             title: entity.attributes.title
           }),
-          to: `/lti/resource-collections/${entity.id}`,
+          to: `/lti/deep_linking/resource-collections/${entity.id}`,
           current: true
         };
       default:

@@ -15,7 +15,7 @@ export default function LtiLanding() {
       <Styled.Search>
         <SearchQuery.Provider>
           <SearchQuery.Form
-            action="/lti/search"
+            action="/lti/deep_linking/search"
             placeholder={t("lti.landing.placeholder")}
           >
             {PRIMARY_FACETS.map(facet => (
