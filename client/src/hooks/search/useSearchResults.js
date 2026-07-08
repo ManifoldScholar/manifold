@@ -3,6 +3,7 @@ import {
   useContext,
   useCallback,
   useEffect,
+  useMemo,
   useRef
 } from "react";
 import PropTypes from "prop-types";
@@ -12,7 +13,7 @@ import { entityStoreActions } from "actions";
 import { searchResultsAPI, requests } from "api";
 import { select, meta } from "utils/entityUtils";
 import { hasSearchableQuery } from "./helpers";
-import useSearch from "./index";
+import useSearch from "./useSearch";
 
 const { request, flush } = entityStoreActions;
 
@@ -90,6 +91,30 @@ export function SearchProvider({ children }) {
 
 SearchProvider.propTypes = {
   children: PropTypes.node.isRequired
+};
+
+/* Controlled counterpart to SearchProvider, mirroring SearchQueryControlledProvider */
+export function SearchResultsControlledProvider({
+  results,
+  resultsMeta,
+  children
+}) {
+  const value = useMemo(() => ({ results, resultsMeta }), [
+    results,
+    resultsMeta
+  ]);
+
+  return (
+    <SearchResultsContext.Provider value={value}>
+      {children}
+    </SearchResultsContext.Provider>
+  );
+}
+
+SearchResultsControlledProvider.propTypes = {
+  results: PropTypes.array,
+  resultsMeta: PropTypes.object,
+  children: PropTypes.node
 };
 
 export function useSearchResults() {
