@@ -23,7 +23,7 @@ export default function DetailLayout({ type, entity, categories = [] }) {
       ))}
       <Button
         as={Link}
-        to={`/lti/search${search ?? ""}`}
+        to={`/lti/deep_linking/search${search ?? ""}`}
         state={{ search }}
         label={t("lti.actions.back_to_search")}
         preIcon="arrowLeft16"

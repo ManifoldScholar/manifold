@@ -1,7 +1,10 @@
 function projectParent(parents) {
   const project = parents?.project;
   if (!project?.id) return null;
-  return { label: project.title, to: `/lti/projects/${project.id}` };
+  return {
+    label: project.title,
+    to: `/lti/deep_linking/projects/${project.id}`
+  };
 }
 
 function pickStyle(styles, keys) {
@@ -42,7 +45,7 @@ const MAP = {
     const key = variants.find(v => attrs?.avatarStyles?.[v]) ?? null;
     const meta = key ? attrs?.avatarMeta?.[key] : null;
     return {
-      to: `/lti/projects/${entity.id}`,
+      to: `/lti/deep_linking/projects/${entity.id}`,
       parent: null,
       thumbnail: thumb(
         key ? attrs.avatarStyles[key] : null,
@@ -53,7 +56,7 @@ const MAP = {
     };
   },
   text: (entity, parents) => ({
-    to: `/lti/texts/${entity.id}`,
+    to: `/lti/deep_linking/texts/${entity.id}`,
     parent: projectParent(parents),
     thumbnail: thumb(
       pickStyle(entity.attributes?.coverStyles, TEXT_COVER_VARIANTS),
@@ -70,7 +73,7 @@ const MAP = {
     return {
       parent: {
         label: text.title,
-        to: `/lti/texts/${text.slug}`,
+        to: `/lti/deep_linking/texts/${text.slug}`,
         creatorNames: text.attributes?.creatorNames
       },
       thumbnail
@@ -81,7 +84,7 @@ const MAP = {
     thumbnail: resourceThumbnail(entity)
   }),
   resourceCollection: (entity, parents) => ({
-    to: `/lti/resource-collections/${entity.id}`,
+    to: `/lti/deep_linking/resource-collections/${entity.id}`,
     parent: projectParent(parents),
     thumbnail: thumb(
       pickStyle(entity.attributes?.thumbnailStyles, [

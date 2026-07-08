@@ -16,7 +16,7 @@ export default function LtiHeader({ dialog }) {
 
   return (
     <Styled.Header>
-      <Styled.Logo to="/lti">
+      <Styled.Logo to="/lti/deep_linking">
         <IconComposer icon="DeepLinkingLogoUnique" size={44} />
         <span>{t("lti.landing.title")}</span>
       </Styled.Logo>
