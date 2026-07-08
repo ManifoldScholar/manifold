@@ -19,6 +19,16 @@ import BrowserCookieHelper from "helpers/cookie/Browser";
 
 const STORAGE_KEY = "lti_deep_linking_token";
 
+// The UI keys selection types in camelCase; the API expects the PascalCase
+// model class name.
+const TYPE_MAP = {
+  project: "Project",
+  text: "Text",
+  textSection: "TextSection",
+  resource: "Resource",
+  resourceCollection: "ResourceCollection"
+};
+
 const DeepLinkingContext = createContext(null);
 
 function keyFor(item) {
@@ -113,6 +123,40 @@ export function DeepLinkingProvider({ children }) {
     };
   }, [token, authToken]);
 
+  // Submission
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  const [returnData, setReturnData] = useState(null);
+
+  const submit = useCallback(() => {
+    // The token is single-use; block re-entry once a submission is in flight or
+    // has succeeded (the return form is about to navigate away).
+    if (submitting || returnData || !items.length) return undefined;
+
+    setSubmitting(true);
+    setSubmitError(null);
+
+    const selection = items.map(item => ({
+      type: TYPE_MAP[item.type] ?? item.type,
+      id: item.id,
+      title: item.title
+    }));
+
+    return ltiAPI.submit({ contextToken: token, selection, authToken }).then(
+      data => {
+        // Keep submitting=true: the return form takes over and posts to the LMS.
+        setReturnData({
+          deepLinkReturnUrl: data.deep_link_return_url,
+          jwt: data.jwt
+        });
+      },
+      error => {
+        setSubmitting(false);
+        setSubmitError(error);
+      }
+    );
+  }, [submitting, returnData, items, token, authToken]);
+
   const value = useMemo(
     () => ({
       token,
@@ -122,9 +166,26 @@ export function DeepLinkingProvider({ children }) {
       items,
       add,
       remove,
-      has
+      has,
+      submit,
+      submitting,
+      submitError,
+      returnData
     }),
-    [token, status, acceptTypes, acceptMultiple, items, add, remove, has]
+    [
+      token,
+      status,
+      acceptTypes,
+      acceptMultiple,
+      items,
+      add,
+      remove,
+      has,
+      submit,
+      submitting,
+      submitError,
+      returnData
+    ]
   );
 
   return (
