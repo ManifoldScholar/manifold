@@ -16,24 +16,26 @@ export default function LtiLayout() {
   const dialog = useDialog({ modal: false, dismissalMode: "explicit" });
 
   return (
-    <BodyClass className="browse">
+    <>
       <HeadContent title={t("lti.title")} appendDefaultTitle />
-      {status === "ready" ? (
-        <SearchProvider>
-          <Styled.Wrapper>
-            <Header dialog={dialog} />
-            <Styled.Main $cartOpen={dialog.open}>
-              <Styled.List>
-                <Outlet />
-              </Styled.List>
-            </Styled.Main>
-            <Cart dialog={dialog} />
-          </Styled.Wrapper>
-        </SearchProvider>
-      ) : (
-        <NotReady status={status} />
-      )}
-    </BodyClass>
+      <BodyClass className="browse">
+        {status === "ready" ? (
+          <SearchProvider>
+            <Styled.Wrapper>
+              <Header dialog={dialog} />
+              <Styled.Main $cartOpen={dialog.open}>
+                <Styled.List>
+                  <Outlet />
+                </Styled.List>
+              </Styled.Main>
+              <Cart dialog={dialog} />
+            </Styled.Wrapper>
+          </SearchProvider>
+        ) : (
+          <NotReady status={status} />
+        )}
+      </BodyClass>
+    </>
   );
 }
 
