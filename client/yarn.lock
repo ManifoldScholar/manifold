@@ -9914,7 +9914,6 @@ __metadata:
     use-resize-observer: "npm:^9.1.0"
     usehooks-ts: "npm:^3.1.1"
     wait-on: "npm:^8.0.4"
-    wavesurfer.js: "npm:^7.10.1"
     webpack: "npm:^5.x"
     webpack-cli: "npm:^6.x"
     webpack-dev-server: "npm:^5.x"
@@ -14968,13 +14967,6 @@ __metadata:
     glob-to-regexp: "npm:^0.4.1"
     graceful-fs: "npm:^4.1.2"
   checksum: 10c0/dffbb483d1f61be90dc570630a1eb308581e2227d507d783b1d94a57ac7b705ecd9a1a4b73d73c15eab596d39874e5276a3d9cb88bbb698bafc3f8d08c34cf17
-  languageName: node
-  linkType: hard
-
-"wavesurfer.js@npm:^7.10.1":
-  version: 7.12.10
-  resolution: "wavesurfer.js@npm:7.12.10"
-  checksum: 10c0/ece78a38a8679d34395194f9eeca9fa2b5b9c772c1e66c81cd3103fbc62a1a365973ac9b31ceeb6448e5b9fa8c14da477eb7286ad28c42ce939998aa71e3af1f
   languageName: node
   linkType: hard
 
