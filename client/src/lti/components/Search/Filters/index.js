@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 import FilterToggle from "./FilterToggle";
@@ -17,6 +18,10 @@ export default function Filters() {
 
   const urlFacets = resolveFacets(location.search);
   const value = facets.cleared ? [] : urlFacets;
+
+  const [secondaryOpen, setSecondaryOpen] = useState(() =>
+    SECONDARY_FACETS.some(facet => value.includes(facet))
+  );
 
   const toggle = v => {
     if (value.includes(v)) {
@@ -42,9 +47,12 @@ export default function Filters() {
       <Styled.Legend>{t("lti.search.results_include")}</Styled.Legend>
       <Styled.Row>
         {PRIMARY_FACETS.map(renderToggle)}
-        <details>
+        <details
+          open={secondaryOpen}
+          onToggle={event => setSecondaryOpen(event.currentTarget.open)}
+        >
           <Styled.Disclosure
-            forwardedAs="summary"
+            as="summary"
             size="sm"
             background="neutral"
             postIcon="disclosureDown24"
