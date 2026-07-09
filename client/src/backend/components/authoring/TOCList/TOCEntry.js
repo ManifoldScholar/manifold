@@ -43,8 +43,16 @@ export default function TOCEntry({
         <Styled.Button as={Link} to={editUrl} aria-label={t("actions.edit")}>
           <Utility.IconComposer size={24} icon="annotate24" />
         </Styled.Button>
-        <Styled.DragHandle as="div" ref={dragHandleRef} tabIndex={-1}>
+        <Styled.DragHandle
+          as="div"
+          ref={dragHandleRef}
+          tabIndex={-1}
+          aria-hidden
+        >
           <Utility.IconComposer size={30} icon="grabber32" />
+          <span className="screen-reader-text">
+            {t("actions.dnd.drag_and_drop")}
+          </span>
         </Styled.DragHandle>
         <Styled.KeyboardButtons>
           <PopoverMenu

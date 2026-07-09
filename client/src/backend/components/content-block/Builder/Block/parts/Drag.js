@@ -50,12 +50,16 @@ class ProjectContentBlockInListPartsDrag extends PureComponent {
           ref={this.props.dragHandleRef}
           className={`${this.props.baseClass}__button ${this.props.baseClass}__button--draggable`}
           tabIndex={-1}
+          role="button"
         >
           <Utility.IconComposer
             icon="grabber32"
             size={26}
             className={className}
           />
+          <span className="screen-reader-text">
+            {this.props.t("actions.dnd.drag_and_drop")}
+          </span>
         </div>
         <div className={`${this.props.baseClass}__utility-keyboard-buttons`}>
           <PopoverMenu

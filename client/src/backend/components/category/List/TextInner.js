@@ -168,6 +168,7 @@ class TextInner extends Component {
             ref={this.props.dragHandleRef}
             className="texts-list__button texts-list__drag-handle"
             tabIndex={-1}
+            aria-hidden
           >
             <Utility.IconComposer icon="grabber32" size={26} />
             <span className="screen-reader-text">
