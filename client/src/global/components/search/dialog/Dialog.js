@@ -1,24 +1,19 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Dialog from "global/components/dialog";
 import SearchQuery from "global/components/search/query";
 import SearchResults from "global/components/search/results";
-import { useFetch, usePaginationState } from "hooks";
+import { SearchResultsControlledProvider } from "hooks/search/useSearchResults";
+import { useFetch } from "hooks";
 import { searchResultsAPI } from "api";
 
 function SearchDialog({ onClose, header, labelledBy, describedBy }) {
-  const [query, setQuery] = useState(null);
-  const [pagination, setPageNumber] = usePaginationState(1, 5);
-
-  const queryWithPagination = useMemo(() => {
-    if (!query) return null;
-    return { ...query, page: { number: pagination.number } };
-  }, [query, pagination.number]);
+  const [query, setQuery] = useState({ page: { number: 1, size: 5 } });
 
   const { data: results, meta: resultsMeta } = useFetch({
-    request: [searchResultsAPI.index, queryWithPagination],
-    condition: !!queryWithPagination
+    request: [searchResultsAPI.index, query],
+    condition: !!query.keyword
   });
 
   const { t } = useTranslation();
@@ -29,9 +24,9 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
   }
 
   const facets = [
-    { label: t("glossary.project_other"), value: "Project" },
-    { label: t("glossary.resource_other"), value: "Resource" },
-    { label: t("glossary.text_other"), value: "Text" },
+    { label: t("glossary.project_other"), value: "Project", default: true },
+    { label: t("glossary.resource_other"), value: "Resource", default: true },
+    { label: t("glossary.text_other"), value: "Text", default: true },
     { label: t("glossary.full_text_other"), value: "TextSection" }
   ];
 
@@ -43,36 +38,32 @@ function SearchDialog({ onClose, header, labelledBy, describedBy }) {
       maxWidth={950}
       className="search-dialog"
     >
-      {header}
-      <div className="search-dialog__form">
-        <h2 className="screen-reader-text">{t("search.form")}</h2>
-        <SearchQuery.Form
-          searchQueryState={query ?? {}}
-          setQueryState={setQuery}
-          facets={facets}
-          autoFocus
-        />
-      </div>
-      {results && (
-        <div className="search-dialog__results">
-          <h2 className="screen-reader-text">{t("search.results")}</h2>
-          <SearchResults.List
-            pagination={resultsMeta.pagination}
-            paginationClickHandler={page => () => setPageNumber(page)}
-            results={results}
-            context="frontend"
-            padding={1}
-          />
+      <SearchQuery.ControlledProvider query={query} setQuery={setQuery}>
+        {header}
+        <div className="search-dialog__form">
+          <h2 className="screen-reader-text">{t("search.form")}</h2>
+          <SearchQuery.Form facets={facets} autoFocus />
         </div>
-      )}
-      <div className="search-dialog__footer">
-        <button
-          onClick={handleCloseClick}
-          className="search-dialog__close-button button-secondary"
-        >
-          {t("actions.close")}
-        </button>
-      </div>
+        {results && (
+          <SearchResultsControlledProvider
+            results={results}
+            resultsMeta={resultsMeta}
+          >
+            <div className="search-dialog__results">
+              <h2 className="screen-reader-text">{t("search.results")}</h2>
+              <SearchResults.List context="frontend" padding={1} />
+            </div>
+          </SearchResultsControlledProvider>
+        )}
+        <div className="search-dialog__footer">
+          <button
+            onClick={handleCloseClick}
+            className="search-dialog__close-button button-secondary"
+          >
+            {t("actions.close")}
+          </button>
+        </div>
+      </SearchQuery.ControlledProvider>
     </Dialog.Wrapper>
   );
 }

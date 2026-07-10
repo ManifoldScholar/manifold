@@ -1,0 +1,92 @@
+{
+  "lti": {
+    "title": "Deep Linking",
+    "status": {
+      "loading": "Loading…",
+      "invalid_heading": "This deep-linking session has expired",
+      "invalid_body": "Your session is no longer valid. Please relaunch Manifold from your course to start again."
+    },
+    "header": {
+      "help": "Help",
+      "my_links": "My Links"
+    },
+    "actions": {
+      "back_to_search": "Back to Search Results",
+      "view_contents": "Contents"
+    },
+    "landing": {
+      "title": "$t(actions.add) $t(app.manifold) Links",
+      "subtitle": "Subhead description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "placeholder": "Search by title, author, keyword …",
+      "message_heading": "Additional information or instructions go here",
+      "message_body": "<0>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</0><0>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</0>"
+    },
+    "search": {
+      "title": "Search",
+      "title_with_keyword": "Search results for {{keyword}}",
+      "empty_prompt": "Enter a keyword in the search box above to find Manifold resources to link.",
+      "no_results": "No results for “{{keyword}}”.",
+      "no_facets_selected": "Select at least one result type to see results.",
+      "result_count_one": "{{count}} Item",
+      "result_count_other": "{{count}} Items",
+      "results_include": "Search results include:",
+      "more": "More",
+      "less": "Less"
+    },
+    "text_detail": {
+      "toc_empty": "This $t(glossary.text_one) does not have a table of contents."
+    },
+    "toggle": {
+      "link": "Add Link",
+      "linked": "Added",
+      "add_item": "$t(actions.add) {{title}}",
+      "remove_item": "$t(actions.remove) {{title}}"
+    },
+    "cart": {
+      "heading": "My Links",
+      "empty_heading": "No links selected.",
+      "empty_body": "Search the list to find links to add to this collection.",
+      "add_to_course": "Save Links to [App]",
+      "saving": "Saving …",
+      "single_link_note": "Your LMS only accepts a single link. This content will be added to a Manifold Reading Group, and the link created will be to that group.",
+      "submit_error": "We couldn't save your links. Your session may have expired — please relaunch Manifold from your course and try again."
+    },
+    "breadcrumb": {
+      "search": "Search Results",
+      "project": "$t(glossary.project_title_case_one): {{title}}",
+      "text": "$t(glossary.text_title_case_one): {{title}}",
+      "resourceCollection": "$t(glossary.resource_collection_title_case_one): {{title}}"
+    },
+    "types_one": {
+      "project": "$t(glossary.project_title_case_one)",
+      "text": "$t(glossary.text_title_case_one)",
+      "textSection": "$t(glossary.text_section_title_case_one)",
+      "resource": "$t(glossary.resource_title_case_one)",
+      "resourceCollection": "$t(glossary.resource_collection_title_case_one)"
+    },
+    "types_plural": {
+      "project": "$t(glossary.project_title_case_other)",
+      "text": "$t(glossary.text_title_case_other)",
+      "textSection": "$t(glossary.text_section_title_case_other)",
+      "resource": "$t(glossary.resource_title_case_other)",
+      "resourceCollection": "$t(glossary.resource_collection_title_case_other)"
+    },
+    "order": {
+      "label": "Sort by",
+      "recently_updated": "Recently Updated",
+      "recently_published": "Recently Published",
+      "alphabetical": "Alphabetical"
+    },
+    "pagination": {
+      "previous_page": "Previous page",
+      "next_page": "Next page",
+      "current_page": "Current page",
+      "of_total": "of {{totalPages}}",
+      "per_page_label": "Items per page:",
+      "count_one": "{{startItem}} - {{endItem}} of {{totalCount}} Item",
+      "count_other": "{{startItem}} - {{endItem}} of {{totalCount}} Items",
+      "screen_reader_count_one": "{{totalCount}} result. Showing items {{startItem}} through {{endItem}}.",
+      "screen_reader_count_other": "{{totalCount}} results. Showing items {{startItem}} through {{endItem}}."
+    }
+  }
+}

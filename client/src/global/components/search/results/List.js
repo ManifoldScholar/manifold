@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import Empty from "./Empty";
 import PropTypes from "prop-types";
 import Utility from "global/components/utility";
+import { useSearchQueryContext } from "../query/Context";
+import { useSearchResults } from "hooks/search/useSearchResults";
 import Types from "./Types";
 import * as Styled from "./styles";
 
@@ -18,17 +20,18 @@ const TYPE_COMPONENT_MAP = {
 };
 
 export default function SearchResultsList(props) {
-  const {
-    results,
-    pagination,
-    paginationClickHandler,
-    context = "frontend",
-    hideParent = false,
-    padding = 3
-  } = props;
+  const { context = "frontend", hideParent = false, padding = 3 } = props;
 
   const { t } = useTranslation();
+  const { facets, keyword, setPage } = useSearchQueryContext(
+    "SearchResults.List"
+  );
+  const { results, resultsMeta } = useSearchResults();
+  const pagination = resultsMeta?.pagination;
 
+  if (!keyword?.value?.trim())
+    return <Empty messageKey="search.no_search_term" />;
+  if (facets.cleared) return <Empty messageKey="search.no_facets_selected" />;
   if (!results) return null;
   if (!results.length) return <Empty />;
 
@@ -57,7 +60,7 @@ export default function SearchResultsList(props) {
       <Utility.Pagination
         pagination={pagination}
         padding={padding}
-        paginationClickHandler={paginationClickHandler}
+        paginationClickHandler={setPage}
       />
     </Styled.Wrapper>
   );
@@ -66,9 +69,7 @@ export default function SearchResultsList(props) {
 SearchResultsList.displayName = "Search.Results.List";
 
 SearchResultsList.propTypes = {
-  results: PropTypes.array,
-  pagination: PropTypes.object,
-  paginationClickHandler: PropTypes.func.isRequired,
   context: PropTypes.string,
-  hideParent: PropTypes.bool
+  hideParent: PropTypes.bool,
+  padding: PropTypes.number
 };

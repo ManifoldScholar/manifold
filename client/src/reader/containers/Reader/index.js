@@ -17,7 +17,7 @@ import Authorize from "hoc/Authorize";
 import { ReaderContext } from "helpers/contexts";
 import EventTracker, { EVENTS } from "global/components/EventTracker";
 import AppFatalError from "global/components/FatalError/AppWrapper";
-import { SearchProvider } from "hooks/useSearch/context";
+import { SearchProvider } from "hooks/search/useSearchResults";
 import { useFetch, useFromStore } from "hooks";
 
 export default function ReaderContainer() {
