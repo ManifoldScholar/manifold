@@ -14,8 +14,7 @@ function UserGroupsListContainer() {
   const { t } = useTranslation();
 
   const { data: userGroups, meta: userGroupsMeta, refresh } = useFetch({
-    request: [userGroupsAPI.index],
-    options: { requestKey: "backend-user-groups" }
+    request: [userGroupsAPI.index]
   });
 
   const drawerProps = {

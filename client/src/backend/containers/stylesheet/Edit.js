@@ -24,7 +24,6 @@ export default function StylesheetEditContainer() {
 
   const { data: fetchedStylesheet } = useFetch({
     request: [stylesheetsAPI.show, stylesheetId],
-    options: { requestKey: requests.beStylesheetShow },
     condition: !!stylesheetId
   });
 
