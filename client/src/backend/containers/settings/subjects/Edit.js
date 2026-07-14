@@ -21,13 +21,12 @@ function SettingsSubjectsEditContainer({ confirm }) {
 
   const { data: subject } = useFetch({
     request: [subjectsAPI.show, id],
-    condition: !!id,
-    options: { requestKey: requests.beSubject }
+    condition: !!id
   });
 
   useEffect(() => {
     return () => {
-      dispatch(flush([requests.beSubject, requests.beSubjectUpdate]));
+      dispatch(flush([requests.beSubjectUpdate]));
     };
   }, [dispatch]);
 
