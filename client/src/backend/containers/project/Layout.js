@@ -4,7 +4,7 @@ import ContentBlock from "backend/components/content-block";
 import Hero from "backend/components/hero";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import lh from "helpers/linkHandler";
-import { projectsAPI, requests } from "api";
+import { projectsAPI } from "api";
 import { useFetch } from "hooks";
 import Authorize from "hoc/Authorize";
 
@@ -14,7 +14,6 @@ export default function ProjectLayoutContainer() {
 
   const { data: actionCallouts, refresh: refreshActionCallouts } = useFetch({
     request: [projectsAPI.actionCallouts, project?.id],
-    options: { requestKey: requests.beActionCallouts },
     condition: !!project?.id
   });
 

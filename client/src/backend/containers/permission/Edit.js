@@ -1,14 +1,11 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useOutletContext, useParams, useNavigate } from "react-router-dom";
 import Form from "./Form";
 import { permissionsAPI, requests } from "api";
-import { entityStoreActions } from "actions";
 import Layout from "backend/components/layout";
 import withConfirmation from "hoc/withConfirmation";
 import { useFetch, useApiCallback } from "hooks";
-
-const { flush } = entityStoreActions;
 
 function PermissionEdit({ confirm }) {
   const { t } = useTranslation();
@@ -18,7 +15,6 @@ function PermissionEdit({ confirm }) {
 
   const { data: permission } = useFetch({
     request: [permissionsAPI.show, entity, permissionId],
-    options: { requestKey: requests.bePermission },
     condition: !!entity && !!permissionId
   });
 
@@ -26,12 +22,6 @@ function PermissionEdit({ confirm }) {
     requestKey: requests.bePermissionDestroy,
     removes: permission
   });
-
-  useEffect(() => {
-    return () => {
-      flush(requests.bePermission);
-    };
-  }, []);
 
   const handleRemoveAll = useCallback(() => {
     if (!permission) return;
