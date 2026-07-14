@@ -86,6 +86,7 @@ export class FormUpload extends Component {
     ]),
     placeholder: PropTypes.string, // Allows override of placeholder graphic
     remove: PropTypes.string, // name of the model remove field: attributes[removeAvatar]
+    altTextName: PropTypes.string, // name of the model alt-text field
     accepts: PropTypes.string,
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
@@ -113,8 +114,11 @@ export class FormUpload extends Component {
 
   updateValue = state => {
     const { attachment, removed } = state;
-    const { set, setOther, remove: removeName } = this.props;
+    const { set, setOther, remove: removeName, altTextName } = this.props;
     if (setOther && removeName) setOther(removed, removeName);
+    // The file just changed (new drop or removal), so any alt text describing
+    // the previous file is now stale.
+    if (setOther && altTextName) setOther("", altTextName);
     if (attachment) {
       const { type, name } = attachment;
       const reader = new FileReader();
