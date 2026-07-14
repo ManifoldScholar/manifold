@@ -12,8 +12,7 @@ export default function FeaturesList() {
   const { t } = useTranslation();
 
   const { data: features, refresh } = useFetch({
-    request: [featuresAPI.index],
-    options: { requestKey: requests.beFeatures }
+    request: [featuresAPI.index]
   });
 
   const updateFeature = useApiCallback(featuresAPI.update, {
