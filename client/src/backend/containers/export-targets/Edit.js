@@ -1,34 +1,21 @@
-import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import withConfirmation from "hoc/withConfirmation";
-import { entityStoreActions } from "actions";
-import { exportTargetsAPI, requests } from "api";
+import { exportTargetsAPI } from "api";
 import { useFetch, useApiCallback } from "hooks";
 import lh from "helpers/linkHandler";
 import Layout from "backend/components/layout";
 import Form from "./Form";
 
-const { flush } = entityStoreActions;
-
 function ExportTargetsEditContainer({ confirm }) {
   const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const { data: exportTarget } = useFetch({
     request: [exportTargetsAPI.show, id],
-    condition: !!id,
-    options: { requestKey: requests.beExportTarget }
+    condition: !!id
   });
-
-  useEffect(() => {
-    return () => {
-      dispatch(flush([requests.beExportTarget]));
-    };
-  }, [dispatch]);
 
   const destroyExportTarget = useApiCallback(exportTargetsAPI.destroy, {
     removes: exportTarget
