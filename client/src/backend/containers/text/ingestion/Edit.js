@@ -17,7 +17,6 @@ export default function IngestionEditContainer() {
 
   const { data: ingestion } = useFetch({
     request: [ingestionsAPI.show, ingestionId],
-    options: { requestKey: requests.beIngestionShow },
     condition: !!ingestionId
   });
 
