@@ -45,7 +45,6 @@ function ProjectCollectionWrapperContainer({ setScreenReaderStatus }) {
 
   const { data: projectCollection } = useFetch({
     request: [projectCollectionsAPI.show, id],
-    options: { requestKey: requests.beProjectCollection },
     condition: !!id && id !== "new"
   });
 
@@ -56,7 +55,6 @@ function ProjectCollectionWrapperContainer({ setScreenReaderStatus }) {
 
   useEffect(() => {
     return () => {
-      flush(requests.beProjectCollection);
       flush(requests.beProjectCollections);
       flush(requests.beProjects);
       flush(requests.beCollectionProjects);
