@@ -52,8 +52,7 @@ export default class FormUpload extends Component {
     super(props);
     this.state = {
       removed: false,
-      attachment: null,
-      clearAlt: false
+      attachment: null
     };
   }
 
@@ -63,9 +62,6 @@ export default class FormUpload extends Component {
       this.state.removed !== prevState.removed
     ) {
       this.props.updateValue(this.state);
-      this.setState({ clearAlt: true });
-    } else if (this.state.clearAlt) {
-      this.setState({ clearAlt: false });
     }
   }
 
@@ -174,8 +170,6 @@ export default class FormUpload extends Component {
               inputType="text"
               name={this.props.altTextName}
               label={this.props.altTextLabel}
-              reset={this.state.clearAlt}
-              resetOnMount
             />
           )}
         </Errorable>
