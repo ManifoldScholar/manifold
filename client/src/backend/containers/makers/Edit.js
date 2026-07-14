@@ -18,7 +18,6 @@ function MakersEdit({ confirm, afterDestroy, refetch }) {
 
   const { data: maker } = useFetch({
     request: [makersAPI.show, id],
-    options: { requestKey: requests.beMaker },
     condition: !!id
   });
 
