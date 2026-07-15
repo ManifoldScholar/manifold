@@ -112,7 +112,7 @@
     "redux": "^5.x",
     "redux-actions": "^2.0",
     "redux-promise": "^0.6",
-    "serialize-javascript": "^7.0.5",
+    "serialize-javascript": "^7.0.7",
     "serve-static": "^2.2.0",
     "slate": "^0.117.2",
     "slate-dom": "^0.117.4",
