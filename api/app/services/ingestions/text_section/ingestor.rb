@@ -4,16 +4,12 @@
 # returns a new TextSection record.
 module Ingestions
   module TextSection
-    class Ingestor < Ingestions::AbstractBaseInteraction
-      record :ingestion
+    class Ingestor < Ingestions::AbstractContextualIngestor
       record :text
-      object :logger, default: nil
 
-      def execute
-        @context = shared_inputs[:context] = build_context
+      private
 
-        report_start
-
+      def run_ingestion
         strategy = compose Ingestions::Pickers::Strategy
 
         set_ingestion_text
@@ -35,19 +31,8 @@ module Ingestions
         text_section
       end
 
-      private
-
-      def build_context
-        Ingestions::Context.new(ingestion, logger)
-      end
-
       def text_section
         shared_inputs[:text_section]
-      end
-
-      def report_start
-        @context.info "services.ingestions.logging.ingestion_start",
-                      name: @context.basename
       end
 
       def set_ingestion_text
@@ -60,11 +45,6 @@ module Ingestions
         return unless text_section.present?
 
         ingestion.update text_section: text_section
-      end
-
-      # Removes temporary dir
-      def clean_up
-        @context.teardown
       end
     end
   end

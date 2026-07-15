@@ -26,6 +26,26 @@ RSpec.describe Ingestions::Ingestor do
     end
   end
 
+  describe "temp file cleanup" do
+    let(:path) { Rails.root.join("spec", "data", "ingestion", "html", "minimal-single", "index.html") }
+    let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
+
+    it "tears down the context on success" do
+      expect_any_instance_of(Ingestions::Context).to receive(:teardown).and_call_original
+
+      described_class.run ingestion: ingestion
+    end
+
+    it "tears down the context when ingestion raises" do
+      allow_any_instance_of(Ingestions::Compilers::TextSection)
+        .to receive(:text_section).and_raise(::Ingestions::IngestionError)
+
+      expect_any_instance_of(Ingestions::Context).to receive(:teardown).and_call_original
+
+      described_class.run ingestion: ingestion
+    end
+  end
+
   describe "manifest ingestion" do
     let(:path) { Rails.root.join("spec", "data", "ingestion", "manifest", "all_local.zip") }
     let!(:ingestion) { FactoryBot.create :ingestion, :uningested, :file_source, source_path: path }
