@@ -31,7 +31,20 @@ module Ingestions
         end
       end
 
+      # Track and return a tempfile so it can be closed at teardown
+      #
+      # @param [Tempfile] file
+      # @return [Tempfile] the same file, for chaining
+      def track_tempfile(file)
+        return file if file.blank?
+        return file unless file.respond_to?(:close!) # If it quacks like a TempFile...
+
+        (@tracked_tempfiles ||= []) << file
+        file
+      end
+
       def teardown
+        maybe_close_tracked_tempfiles
         FileUtils.rm_rf(root_path)
       end
 
@@ -283,6 +296,19 @@ module Ingestions
         raise IngestionError, "Manifold could not locate one of the source files
             specified.  Make sure all assets referred to are included with the
             source file."
+      end
+
+      def maybe_close_tracked_tempfiles
+        return unless @tracked_tempfiles.present?
+
+        @tracked_tempfiles.reject! do |file|
+          file.close!
+        rescue SystemCallError => e
+          # A filesystem error we don't control must never block teardown. Log and
+          # drop the reference; Ruby's finalizer retries the unlink at GC.
+          Rails.logger.warn("Ingestion teardown could not remove tempfile #{file.path}: #{e.message}")
+          true
+        end
       end
     end
   end

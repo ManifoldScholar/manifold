@@ -12,7 +12,7 @@ module Ingestions
       @identifier = ingestion.id
       @creator = ingestion.creator
       source = ingestion_source_tempfile(ingestion)
-      @source = source[:file]
+      @source = track_tempfile(source[:file])
       @source_title = source[:title]
       @source_path = @source.path
       @loggable = loggable

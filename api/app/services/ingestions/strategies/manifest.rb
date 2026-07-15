@@ -28,7 +28,8 @@ module Ingestions
 
           filename = Digest::MD5.hexdigest(source["source_path"])
           inspector.update_source_map(source["source_path"], "#{filename}.html")
-          context.update_working_dirs(fetched[:file].path, filename)
+          file = context.track_tempfile(fetched[:file])
+          context.update_working_dirs(file.path, filename)
         end
         inspector.update_toc
       end
