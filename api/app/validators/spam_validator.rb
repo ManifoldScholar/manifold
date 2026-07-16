@@ -7,12 +7,13 @@
 # @see SpamMitigation::Check
 # @see SpamMitigation::Checker
 class SpamValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
+  def validate_each(record, attribute, value) # rubocop:disable Metrics/CyclomaticComplexity
     # :nocov:
     return if value.blank? || Settings.current.general.disable_spam_detection?
     # :nocov:
 
     user = RequestStore[:current_user] || record.try(:creator)
+    return if user&.trusted?
 
     type = options[:type].presence || "comment"
 
