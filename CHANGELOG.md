@@ -1,5 +1,13 @@
 # Changelog
 
+## [9.2.2](https://github.com/ManifoldScholar/manifold/compare/9.2.1...9.2.2) (2026-07-16)
+
+
+### Bug Fixes
+
+* clean up ingestion tempfiles proactively ([fbf31e7](https://github.com/ManifoldScholar/manifold/commit/fbf31e7b49a4400caf3336271a24ee27cd68f1ad))
+* do not check trusted user input for spam ([91396d0](https://github.com/ManifoldScholar/manifold/commit/91396d0a7989213cbc746539b1f5bace6579184e))
+
 ## [9.2.1](https://github.com/ManifoldScholar/manifold/compare/9.2.0...9.2.1) (2026-07-09)
 
 
