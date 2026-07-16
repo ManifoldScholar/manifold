@@ -102,7 +102,7 @@ export const ResultsList = styled.ul`
   overflow: auto;
   color: var(--color-base-neutral10);
   visibility: hidden;
-  background-color: var(--color-base-neutral90);
+  background-color: var(--color-base-neutral100);
   border-color: var(--color-base-neutral80);
   border-style: solid;
   border-width: 0 1px 1px;
@@ -130,17 +130,19 @@ export const Result = styled.li`
   color: var(--color-base-neutral10);
   cursor: pointer;
   background: var(--Result-bg-color);
+  outline: 1px solid var(--Result-outline-color, var(--Result-bg-color));
+  outline-offset: -1px;
 
   &[aria-selected="true"] {
-    --Result-bg-color: var(--color-base-neutral80);
+    --Result-outline-color: var(--focus-color);
   }
 
   &[data-selected="true"] {
-    --Result-bg-color: var(--color-base-neutral85);
-  }
+    --Result-bg-color: var(--color-base-neutral90);
 
-  &[aria-selected="true"][data-selected="true"] {
-    --Result-bg-color: var(--color-base-neutral75);
+    &:hover {
+      background: var(--color-base-neutral80);
+    }
   }
 
   & + & {
@@ -148,7 +150,7 @@ export const Result = styled.li`
   }
 
   &:hover {
-    background: var(--color-base-neutral80);
+    background: var(--color-base-neutral85);
   }
 
   svg {
