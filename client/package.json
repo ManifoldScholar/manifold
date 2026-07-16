@@ -71,7 +71,7 @@
     "focus-trap-react": "11.x",
     "he": "^1.2.0",
     "html-react-parser": "^5.2.6",
-    "http-proxy-middleware": "^2.0.10",
+    "http-proxy-middleware": "^3.0.7",
     "http-shutdown": "^1.2.2",
     "i18next": "^25.3.2",
     "immutability-helper": "^3.x",
