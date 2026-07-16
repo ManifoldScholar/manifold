@@ -223,7 +223,6 @@ export default function NavigationMobile({ links, backendButton, mode }) {
           <button
             onClick={createExpandToggleHandler(link.route)}
             className="nested-nav__disclosure-button"
-            aria-haspopup="true"
             aria-expanded={expanded}
           >
             <span className="screen-reader-text">
