@@ -48,6 +48,7 @@ export default function Log({ log, onReset, canReset }) {
           role="status"
           ref={logRef}
           aria-live={!announce ? "off" : undefined}
+          aria-atomic={false}
         >
           {log.trim()}
         </div>
