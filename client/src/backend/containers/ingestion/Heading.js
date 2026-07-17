@@ -4,7 +4,7 @@ import classNames from "classnames";
 import IconComposer from "global/components/utility/IconComposer";
 
 const Property = ({ label, value }) => (
-  <div className="ingestion-output__item">
+  <div aria-live="polite" aria-atomic className="ingestion-output__item">
     <dt className="ingestion-output__label">{label}</dt>
     <dd className="ingestion-output__value">{value}</dd>
   </div>
@@ -64,11 +64,7 @@ export default function IngestionHeader({ ingestion, sectionIngest, loading }) {
             <h1 className="ingest-header__title">{title}</h1>
           </div>
         </header>
-        <dl
-          aria-live="polite"
-          aria-atomic
-          className="ingest-header__body ingestion-output__properties"
-        >
+        <dl className="ingest-header__body ingestion-output__properties">
           <Property
             label={t("texts.ingestion.current_state_label")}
             value={currentState}
