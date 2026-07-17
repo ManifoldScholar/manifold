@@ -33,11 +33,13 @@ export default class FormUploadEmpty extends PureComponent {
             aria-live="polite"
             className={this.props.progress ? "" : "screen-reader-text"}
           >
-            <Trans
-              i18nKey="forms.upload.progress"
-              values={{ percent: this.props.progress }}
-              components={this.props.instructionsSingleLine ? [] : [<br />]}
-            />
+            <span aria-hidden={!this.props.progress}>
+              <Trans
+                i18nKey="forms.upload.progress"
+                values={{ percent: this.props.progress }}
+                components={this.props.instructionsSingleLine ? [] : [<br />]}
+              />
+            </span>
           </div>
           {/* Label */}
           <label

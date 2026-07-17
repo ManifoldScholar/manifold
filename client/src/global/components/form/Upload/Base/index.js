@@ -107,14 +107,14 @@ export default class FormUpload extends Component {
     const showAltTextInput = this.props.altTextName && valueIsImage;
 
     return (
-      <fieldset>
-        <Errorable
-          className={this.props.wide ? "wide" : undefined}
-          name={this.props.name}
-          errors={this.props.errors}
-          label={this.props.label}
-          idForError={this.props.idForError}
-        >
+      <Errorable
+        className={this.props.wide ? "wide" : undefined}
+        name={this.props.name}
+        errors={this.props.errors}
+        label={this.props.label}
+        idForError={this.props.idForError}
+      >
+        <Styled.Fieldset>
           {this.props.label ? (
             <BaseLabel
               as="legend"
@@ -183,8 +183,8 @@ export default class FormUpload extends Component {
               label={this.props.altTextLabel}
             />
           )}
-        </Errorable>
-      </fieldset>
+        </Styled.Fieldset>
+      </Errorable>
     );
   }
 }

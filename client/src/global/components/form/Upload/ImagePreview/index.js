@@ -51,7 +51,7 @@ class FormUploadImagePreview extends PureComponent {
           </Styled.SecondaryText>
         </Message>
         <Image
-          alt={this.props.t("image_preview_alt")}
+          alt={this.props.t("forms.upload.image_preview_alt")}
           src={this.imageUrl}
           data-disabled={this.props.disabled}
         />
