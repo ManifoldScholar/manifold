@@ -44,7 +44,7 @@ class Notification extends Component {
   render() {
     return (
       <div className={this.wrapperClass} key={this.props.id}>
-        <div className="notification__container" role="status">
+        <div className="notification__container">
           <div>
             <p className="notification__heading">{this.props.heading}</p>
           </div>
