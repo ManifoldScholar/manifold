@@ -172,7 +172,7 @@ class TextInner extends Component {
           >
             <Utility.IconComposer icon="grabber32" size={26} />
             <span className="screen-reader-text">
-              {this.props.t("projects.category.drag")}
+              {this.props.t("projects.category.drag_text")}
             </span>
           </div>
           <div className="texts-list__keyboard-buttons">
