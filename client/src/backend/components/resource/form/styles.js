@@ -48,7 +48,8 @@ export const Item = styled.label`
       var(--transition-timing-function),
     border-color ${defaultTransitionProps};
 
-  &:hover {
+  &:hover,
+  &[data-active="true"] {
     border-color: var(--hover-color);
   }
 
@@ -57,11 +58,10 @@ export const Item = styled.label`
     outline-offset: -2px;
   }
 
-  ${({ $active }) =>
-    $active &&
-    `color: var(--color-neutral-text-extra-light);
-  background-color: var(--color-base-neutral80);
-  border-color: var(--color-base-neutral80);`}
+  &[data-active="true"] {
+    color: var(--color-neutral-text-extra-light);
+    background-color: var(--color-base-neutral80);
+  }
 `;
 
 export const Input = styled.input`
