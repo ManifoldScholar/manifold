@@ -9,6 +9,7 @@ import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/r
 import Stylesheet from "./Stylesheet";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
 import { setOrderByChange } from "helpers/dnd";
+import { useFocusAfterRemoval } from "hooks";
 import { withTranslation } from "react-i18next";
 
 const cloneStylesheets = stylesheets => (stylesheets || []).slice(0);
@@ -24,6 +25,11 @@ function StylesheetList({
   const [instanceId] = useState(() => Symbol("stylesheetList"));
   const [ordered, setOrdered] = useState(() => cloneStylesheets(stylesheets));
   const [isListDragging, setIsListDragging] = useState(false);
+
+  // Rows are `ordered-records-item` divs rather than EntitiesList `li`s.
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(ordered, {
+    itemSelector: ".ordered-records-item"
+  });
 
   // Reset the internal ordering only when the parent text changes, mirroring
   // the old getDerivedStateFromProps (which keyed off props.text).
@@ -100,7 +106,8 @@ function StylesheetList({
 
   return (
     <>
-      <section className="ordered-records">
+      {/* The section holds focus after the last stylesheet is deleted. */}
+      <section className="ordered-records" ref={listRef} tabIndex={-1}>
         <div
           className={classNames({
             "ordered-records__dropzone": true,
@@ -117,6 +124,7 @@ function StylesheetList({
               instanceId={instanceId}
               stylesheetCount={ordered.length}
               onKeyboardMove={onKeyboardMove}
+              onBeforeDestroy={rememberRemoval}
             />
           ))}
         </div>

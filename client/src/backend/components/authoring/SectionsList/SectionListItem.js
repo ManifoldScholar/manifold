@@ -27,7 +27,8 @@ function SectionListItem(props) {
     setError,
     index,
     sectionCount,
-    onReorder
+    onReorder,
+    onBeforeDestroy
   } = props;
 
   const { t } = useTranslation();
@@ -58,6 +59,8 @@ function SectionListItem(props) {
 
   const doDelete = async () => {
     setError(null);
+    // Record where focus should land before the row unmounts.
+    if (onBeforeDestroy) onBeforeDestroy(section.id);
     const res = await deleteSection(section.id);
     if (res?.errors) setError(res.errors);
     refresh();
@@ -109,7 +112,11 @@ function SectionListItem(props) {
               <Utility.IconComposer size={24} icon="playOutline24" />
             </Styled.Button>
           </Tooltip>
-          <Styled.Button onClick={onDelete} aria-label={t("actions.delete")}>
+          <Styled.Button
+            data-id="destroy"
+            onClick={onDelete}
+            aria-label={t("actions.delete")}
+          >
             <Utility.IconComposer size={24} icon="delete24" />
           </Styled.Button>
           <Tooltip
@@ -212,7 +219,8 @@ SectionListItem.propTypes = {
   refresh: PropTypes.func,
   index: PropTypes.number,
   sectionCount: PropTypes.number,
-  onReorder: PropTypes.func
+  onReorder: PropTypes.func,
+  onBeforeDestroy: PropTypes.func
 };
 
 export default withConfirmation(SectionListItem);

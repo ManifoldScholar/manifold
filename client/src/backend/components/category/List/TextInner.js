@@ -144,6 +144,7 @@ class TextInner extends Component {
         </Link>
         <div className="texts-list__utility texts-list__utility--draggable">
           <button
+            data-id="destroy"
             className="texts-list__button texts-list__button--notice"
             onClick={event => {
               this.onDelete(event);

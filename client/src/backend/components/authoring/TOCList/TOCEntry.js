@@ -35,6 +35,7 @@ export default function TOCEntry({
     >
       <Styled.ButtonGroup>
         <Styled.Button
+          data-id="destroy"
           onClick={() => onDelete(entry.id)}
           aria-label={t("actions.delete")}
         >

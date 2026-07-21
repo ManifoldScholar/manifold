@@ -6,7 +6,7 @@ import EntitiesList, {
   Button,
   TextTrackRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, useApiCallback } from "hooks";
+import { useFetch, useApiCallback, useFocusAfterRemoval } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
 import lh from "helpers/linkHandler";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
@@ -24,11 +24,16 @@ function TextTracksListContainer({ confirm }) {
     return textTracksAPI.destroy(resource.id, id);
   });
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(tracks);
+
   const onDelete = async id => {
     const heading = t("modals.delete_track");
     const message = t("modals.confirm_body");
     if (confirm) {
       confirm(heading, message, async () => {
+        // Record where focus should land before the row unmounts. Cancelling
+        // the confirmation never reaches here, so focus is never moved.
+        rememberRemoval(id);
         await destroyTrack(id);
         refresh();
       });
@@ -50,6 +55,8 @@ function TextTracksListContainer({ confirm }) {
       <PageHeader type="list" title={t("titles.tracks")} hideBreadcrumbs />
       {!!tracks && (
         <EntitiesList
+          wrapperRef={listRef}
+          aria-label={t("titles.tracks")}
           entityComponent={TextTrackRow}
           entityComponentProps={{ onDelete, resourceId: resource.id }}
           entities={tracks}

@@ -101,6 +101,13 @@ export default class ListEntities extends PureComponent {
     search: ListEntities.validateSearch,
     pagination: PropTypes.object,
     paginationPadding: PropTypes.number,
+    /* Opt-in focus management: attach the ref returned by useFocusAfterRemoval
+       so it can find rows and, once the last one is deleted, take focus itself.
+       The wrapper is the right anchor because it outlives the rows — the empty
+       message renders inside it. Give it an `aria-label` when there's no
+       `title`, so focusing it announces something. */
+    wrapperRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    "aria-label": PropTypes.string,
     useDragHandle: PropTypes.bool,
     paginationStyle: PropTypes.oneOf(["compact", "normal"]),
     emptyMessage: PropTypes.node,
@@ -261,7 +268,13 @@ export default class ListEntities extends PureComponent {
     return (
       <UIDConsumer>
         {id => (
-          <div id={`${this.idPrefix}-${id}`} className={wrapperClassNames}>
+          <div
+            id={`${this.idPrefix}-${id}`}
+            className={wrapperClassNames}
+            ref={this.props.wrapperRef}
+            tabIndex={this.props.wrapperRef ? -1 : undefined}
+            aria-label={this.props["aria-label"]}
+          >
             {this.title && (
               <Title
                 title={this.title}

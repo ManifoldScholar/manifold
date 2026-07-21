@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import invariant from "tiny-invariant";
@@ -12,7 +12,7 @@ import { TreeContext } from "./TreeContext";
 import {
   INDENT_PER_LEVEL,
   getRowsForChildren,
-  getDeleteFocusTarget,
+  getVisibleRowIds,
   formatTOCData,
   formatTreeData,
   getNestedTreeChildren,
@@ -22,7 +22,7 @@ import {
   removeKeys
 } from "./treeHelpers";
 import { textsAPI } from "api";
-import { useApiCallback } from "hooks";
+import { useApiCallback, useFocusAfterRemoval } from "hooks";
 import * as Styled from "./styles";
 
 // Distinguishes this list's drags from any other pragmatic-dnd surface on the page.
@@ -34,11 +34,22 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
   const [dragging, setDragging] = useState(false);
 
   const scrollableRef = useRef(null);
-  const listRef = useRef(null);
 
   // Keep the latest tree available to dnd callbacks without re-binding effects.
   const treeRef = useRef(tree);
   treeRef.current = tree;
+
+  /* Deleting an entry takes its descendants with it, so whatever ends up at the
+     removed row's position is the next entry that survived — the next sibling,
+     or an ancestor's next sibling when the group empties. Memoized because the
+     hook's effect keys off this array: a fresh identity every render would
+     cancel the pending focus before it lands. */
+  const visibleRowIds = useMemo(() => getVisibleRowIds(tree?.items), [tree]);
+
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(visibleRowIds, {
+    getId: id => id,
+    itemSelector: "[data-toc-row]"
+  });
 
   const updateText = useApiCallback(textsAPI.update);
 
@@ -73,7 +84,9 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
     async entryId => {
       setError(null);
       const current = treeRef.current;
-      const focusTarget = getDeleteFocusTarget(current.items, entryId);
+      // Record where focus should land before the row unmounts. A failed
+      // request leaves the entry in place, so focus is never moved.
+      rememberRemoval(entryId);
       const toDelete = [
         entryId,
         ...getNestedTreeChildren(entryId, current.items)
@@ -84,16 +97,8 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
       const res = await updateText(textId, { attributes: { toc: newToc } });
       if (res?.errors) return setError(res.errors);
       setTree(formatTreeData(newToc));
-      requestAnimationFrame(() => {
-        const el = focusTarget
-          ? document.querySelector(
-              `[data-disclosure-toggle-for="${focusTarget}"]`
-            )
-          : listRef.current;
-        if (el) el.focus();
-      });
     },
-    [textId, updateText, setError, setTree]
+    [textId, updateText, setError, setTree, rememberRemoval]
   );
 
   const onKeyboardMove = useCallback(
