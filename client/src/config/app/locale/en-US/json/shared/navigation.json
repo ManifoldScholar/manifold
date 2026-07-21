@@ -39,8 +39,6 @@
     },
     "mobile": {
       "aria_label": "Mobile Navigation",
-      "toggle_open": "$t(actions.open) mobile navigation menu",
-      "toggle_closed": "$t(actions.close) mobile navigation menu",
       "submenu_label": "Submenu"
     },
     "backend": {

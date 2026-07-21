@@ -315,13 +315,10 @@ export default function NavigationMobile({ links, backendButton, mode }) {
       <button
         onClick={toggleOpen}
         className="mobile-nav-toggle"
-        aria-haspopup
         aria-expanded={state.open}
       >
         <span className="screen-reader-text">
-          {state.open
-            ? t("navigation.mobile.toggle_closed")
-            : t("navigation.mobile.toggle_open")}
+          {t("navigation.mobile.aria_label")}
         </span>
         <IconComposer
           icon={triggerIcon}
