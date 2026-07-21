@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import EntitiesList from "backend/components/list/EntitiesList";
 import Section from "./SectionListItem";
 import { sectionsAPI } from "api";
-import { useApiCallback } from "hooks";
+import { useApiCallback, useFocusAfterRemoval } from "hooks";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
@@ -19,6 +19,8 @@ function SectionsList({
   const { t } = useTranslation();
   const updateSection = useApiCallback(sectionsAPI.update);
   const [error, setError] = useState(null);
+
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(sections);
 
   /* eslint-disable no-nested-ternary */
   const errorMessage =
@@ -49,26 +51,36 @@ function SectionsList({
     refresh(callback);
   };
 
-  return sections.length ? (
-    <Styled.Wrapper className="full-width">
-      <EntitiesList
-        entities={sections}
-        entityComponent={Section}
-        entityComponentProps={{
-          startSectionId,
-          textId,
-          refresh,
-          setError,
-          sectionCount: sections.length,
-          onReorder
-        }}
-        listStyle="bare"
-        callbacks={{ onReorder }}
-        error={errorMessage}
-      />
+  /* The wrapper renders even with no sections so it can hold focus after the
+     last one is deleted — EntitiesList itself unmounts in that case. */
+  return (
+    <Styled.Wrapper
+      className="full-width"
+      ref={listRef}
+      tabIndex={-1}
+      aria-label={t("glossary.section_title_case_other")}
+    >
+      {sections.length > 0 && (
+        <EntitiesList
+          entities={sections}
+          entityComponent={Section}
+          entityComponentProps={{
+            startSectionId,
+            textId,
+            refresh,
+            setError,
+            sectionCount: sections.length,
+            onReorder,
+            onBeforeDestroy: rememberRemoval
+          }}
+          listStyle="bare"
+          callbacks={{ onReorder }}
+          error={errorMessage}
+        />
+      )}
       {renderLiveRegion("alert")}
     </Styled.Wrapper>
-  ) : null;
+  );
 }
 
 SectionsList.displayName = "Text.Sections.List";

@@ -62,10 +62,13 @@ function ProjectTextsContainer({
     });
   };
 
-  const handleTextDestroy = text => {
+  // `onConfirmed` runs only once the user commits, so callers can stash
+  // focus-restoration state without it going stale on cancel.
+  const handleTextDestroy = (text, onConfirmed) => {
     const heading = t("modals.delete_text");
     const message = t("modals.delete_text_body");
     confirm(heading, message, async () => {
+      if (onConfirmed) onConfirmed();
       await destroyText(text.id);
       if (refresh) refresh();
       const notification = {

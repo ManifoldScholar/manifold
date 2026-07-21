@@ -18,7 +18,8 @@ function Stylesheet({
   index,
   instanceId,
   stylesheetCount,
-  onKeyboardMove
+  onKeyboardMove,
+  onBeforeDestroy
 }) {
   const popoverDisclosureRef = useRef(null);
 
@@ -40,6 +41,9 @@ function Stylesheet({
 
   const confirmDestroy = event => {
     event.preventDefault();
+    // Record where focus should land before the row unmounts. Cancelling the
+    // confirmation leaves the row in place, so focus is never moved.
+    if (onBeforeDestroy) onBeforeDestroy(stylesheet.id);
     callbacks.confirmDestroy(stylesheet);
   };
 
@@ -76,6 +80,7 @@ function Stylesheet({
         </Link>
         <div className={`${baseClass}__utility`}>
           <button
+            data-id="destroy"
             className={`${baseClass}__button ${baseClass}__button--notice`}
             onClick={confirmDestroy}
           >
@@ -165,7 +170,8 @@ Stylesheet.propTypes = {
   index: PropTypes.number,
   instanceId: PropTypes.symbol.isRequired,
   stylesheetCount: PropTypes.number,
-  onKeyboardMove: PropTypes.func
+  onKeyboardMove: PropTypes.func,
+  onBeforeDestroy: PropTypes.func
 };
 
 export default withTranslation()(Stylesheet);

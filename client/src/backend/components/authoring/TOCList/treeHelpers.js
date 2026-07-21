@@ -177,18 +177,15 @@ export const getRowsForChildren = (items, childrenIds, level) =>
     };
   });
 
-// After deleting `id` (and its descendants), the id of the entry whose move
-// control should receive focus so focus is not lost to <body>: prefer the next
-// sibling, else the previous sibling, else the parent. Returns null when the
-// deletion empties the top level (caller should fall back to the list itself).
-export const getDeleteFocusTarget = (items, id) => {
-  const parentId = items[id]?.data?.parentId || "root";
-  const siblings = items[parentId]?.children || [];
-  const idx = siblings.indexOf(id);
-  if (idx < siblings.length - 1) return siblings[idx + 1];
-  if (idx > 0) return siblings[idx - 1];
-  return parentId === "root" ? null : parentId;
-};
+// The ids of the rows the tree actually renders, in document order: a
+// depth-first walk that descends only into expanded parents. Collapsed
+// children have no row, so they're skipped.
+export const getVisibleRowIds = (items, childrenIds) =>
+  (childrenIds ?? items?.root?.children ?? []).flatMap(id => {
+    const item = items[id];
+    const expanded = item?.hasChildren && item.isExpanded;
+    return [id, ...(expanded ? getVisibleRowIds(items, item.children) : [])];
+  });
 
 // Ids from the top-level ancestor down to (and including) `id`.
 export const getPathToItem = (items, id) => {

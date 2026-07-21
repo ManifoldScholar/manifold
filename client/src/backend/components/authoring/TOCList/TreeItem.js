@@ -174,7 +174,7 @@ export default function TreeItem({
     <Styled.Item>
       {/* The draggable + drop target is the row only — NOT the <li>, so a
           parent's hitbox never encloses its nested children's hitboxes. */}
-      <Styled.Row ref={rowRef}>
+      <Styled.Row ref={rowRef} data-toc-row>
         <Entry
           entry={item}
           depth={level}

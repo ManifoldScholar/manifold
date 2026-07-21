@@ -8,7 +8,12 @@ import EntitiesList, {
   Search,
   AssetRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, useApiCallback, useListQueryParams } from "hooks";
+import {
+  useFetch,
+  useApiCallback,
+  useListQueryParams,
+  useFocusAfterRemoval
+} from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import withFilteredLists, { assetFilters } from "hoc/withFilteredLists";
 import { ingestionSourcesAPI } from "api";
@@ -43,11 +48,16 @@ function TextAssetsContainer({
 
   const deleteAsset = useApiCallback(ingestionSourcesAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(assets);
+
   const onDelete = id => {
     const heading = t("modals.delete_asset");
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
+        // Record where focus should land before the row unmounts. Cancelling
+        // the confirmation never reaches here, so focus is never moved.
+        rememberRemoval(id);
         await deleteAsset(id);
         refresh();
       });
@@ -74,6 +84,8 @@ function TextAssetsContainer({
       {meta && (
         <EntitiesList
           className="full-width"
+          wrapperRef={listRef}
+          aria-label={t("texts.assets.header")}
           entityComponent={AssetRow}
           entityComponentProps={{ onEdit, onDelete }}
           entities={assets ?? []}

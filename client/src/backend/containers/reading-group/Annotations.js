@@ -9,7 +9,8 @@ import {
   useFetch,
   useApiCallback,
   useListQueryParams,
-  useNotification
+  useNotification,
+  useFocusAfterRemoval
 } from "hooks";
 import EntitiesList, {
   Search,
@@ -74,11 +75,18 @@ function ReadingGroupAnnotationsContainer({
 
   const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
 
+  /* Only covers single-row deletes; bulk delete removes an arbitrary set, which
+     `rememberRemoval` (one id) can't express. */
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(data);
+
   const onDelete = id => {
     const heading = t("modals.delete_annotation");
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
+        // Record where focus should land before the row unmounts. Cancelling
+        // the confirmation never reaches here, so focus is never moved.
+        rememberRemoval(id);
         await destroyAnnotation(id);
         refreshAnnotations();
       });
@@ -130,6 +138,8 @@ function ReadingGroupAnnotationsContainer({
     >
       {!!data && (
         <EntitiesList
+          wrapperRef={listRef}
+          aria-label={t("titles.annotations")}
           entityComponent={AnnotationRow}
           entityComponentProps={{
             bulkActionsActive,

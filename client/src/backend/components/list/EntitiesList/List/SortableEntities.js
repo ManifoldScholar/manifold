@@ -77,8 +77,8 @@ function SortableEntities(props) {
     entityComponent: EntityComponent,
     callbacks,
     listStyle,
-    sortableStyle,
-    useDragHandle,
+    sortableStyle = "spaced",
+    useDragHandle = false,
     className,
     t,
     setScreenReaderStatus,
@@ -221,11 +221,6 @@ SortableEntities.propTypes = {
   t: PropTypes.func,
   setScreenReaderStatus: PropTypes.func,
   renderLiveRegion: PropTypes.func
-};
-
-SortableEntities.defaultProps = {
-  useDragHandle: false,
-  sortableStyle: "spaced"
 };
 
 export default withTranslation()(

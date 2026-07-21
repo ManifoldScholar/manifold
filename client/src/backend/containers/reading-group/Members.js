@@ -5,7 +5,12 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import lh from "helpers/linkHandler";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
-import { useFetch, usePaginationState, useApiCallback } from "hooks";
+import {
+  useFetch,
+  usePaginationState,
+  useApiCallback,
+  useFocusAfterRemoval
+} from "hooks";
 import EntitiesList, {
   ReadingGroupMemberRow
 } from "backend/components/list/EntitiesList";
@@ -27,11 +32,16 @@ function ReadingGroupMembersContainer({ confirm }) {
 
   const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(data);
+
   const onDelete = (id, name) => {
     const heading = t("modals.delete_membership", { name });
     const message = t("modals.delete_membership_body");
     if (confirm)
       confirm(heading, message, async () => {
+        // Record where focus should land before the row unmounts. Cancelling
+        // the confirmation never reaches here, so focus is never moved.
+        rememberRemoval(id);
         await deleteMembership(id);
         refreshMembers();
       });
@@ -47,6 +57,7 @@ function ReadingGroupMembersContainer({ confirm }) {
       failureRedirect={lh.link("backendReadingGroups")}
     >
       <EntitiesList
+        wrapperRef={listRef}
         entityComponent={ReadingGroupMemberRow}
         entityComponentProps={{ readingGroup, onDelete }}
         title={t("reading_groups.members_header")}

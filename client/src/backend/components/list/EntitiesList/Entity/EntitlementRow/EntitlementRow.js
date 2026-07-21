@@ -105,6 +105,7 @@ class EntitlementRow extends PureComponent {
 
     return (
       <button
+        data-id="destroy"
         className="entity-row__utility-button"
         onClick={this.onDelete}
         title={this.props.t("actions.delete")}
