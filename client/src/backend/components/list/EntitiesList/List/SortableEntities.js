@@ -33,9 +33,6 @@ function SortableEntityRow({
   useDragHandle,
   entityComponentProps
 }) {
-  // `setElement` refs the whole row (draggable + drop target); `setHandle` refs
-  // the grabber icon, so nested links/buttons stay clickable and never hijack
-  // the drag.
   const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
     {
       instanceId,
@@ -89,16 +86,12 @@ function SortableEntities(props) {
   const [ordered, setOrdered] = useState(() => cloneEntities(entities));
   const [isListDragging, setIsListDragging] = useState(false);
 
-  // Adopt new orderings handed down via props (e.g. after an API refresh),
-  // mirroring the old getDerivedStateFromProps behavior.
   const [entitiesRef, setEntitiesRef] = useState(entities);
   if (entitiesRef !== entities) {
     setEntitiesRef(entities);
     setOrdered(cloneEntities(entities));
   }
 
-  // The window-level monitor is registered once but needs the current order
-  // and reorder callback on drop, so read them through refs.
   const orderedRef = useRef(ordered);
   orderedRef.current = ordered;
   const reorderCallbackRef = useRef(callbacks.onReorder);

@@ -34,9 +34,6 @@ export default function ProjectContentBlock({
     return !typeComponent.isAvailable(currentBlocks);
   })();
 
-  // Palette (available) items are draggable only; current blocks are also
-  // closest-edge drop targets. The draggable and drop payloads differ (the
-  // monitor keys off `kind`), so they're passed separately.
   const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
     {
       instanceId,

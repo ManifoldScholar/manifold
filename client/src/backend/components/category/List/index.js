@@ -29,8 +29,6 @@ function CategoryList({ project, categories, texts, callbacks }) {
       )
       .sort(sortByPosition);
 
-  // The window-level monitor is registered once but needs the current lists and
-  // callbacks on drop, so read them through a ref.
   const stateRef = useRef();
   stateRef.current = {
     categories,
@@ -92,7 +90,6 @@ function CategoryList({ project, categories, texts, callbacks }) {
       insertIndex = destList.length;
     }
 
-    // Account for the source being removed before re-insertion within a category.
     if (sourceCategoryId === destinationCategoryId) {
       if (sourceIndex < insertIndex) insertIndex -= 1;
       if (sourceIndex === insertIndex) return;

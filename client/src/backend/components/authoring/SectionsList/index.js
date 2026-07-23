@@ -51,8 +51,6 @@ function SectionsList({
     refresh(callback);
   };
 
-  /* The wrapper renders even with no sections so it can hold focus after the
-     last one is deleted — EntitiesList itself unmounts in that case. */
   return (
     <Styled.Wrapper
       className="full-width"

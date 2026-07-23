@@ -19,8 +19,6 @@ import { useTreeContext } from "./TreeContext";
 import { isDescendant, getRowsForChildren } from "./treeHelpers";
 import * as Styled from "./styles";
 
-// Tree-item hitbox mode: an expanded parent prepends children, a group's last
-// item also offers reparenting (outdent), everything else is a plain reorder.
 const getDropMode = (isExpanded, isLastInGroup) => {
   if (isExpanded) return "expanded";
   if (isLastInGroup) return "last-in-group";

@@ -62,8 +62,6 @@ function ProjectTextsContainer({
     });
   };
 
-  // `onConfirmed` runs only once the user commits, so callers can stash
-  // focus-restoration state without it going stale on cancel.
   const handleTextDestroy = (text, onConfirmed) => {
     const heading = t("modals.delete_text");
     const message = t("modals.delete_text_body");
@@ -167,9 +165,6 @@ function ProjectTextsContainer({
   );
   const closeUrl = lh.link("backendProjectTexts", project.id);
 
-  // Both drawer contexts stay mounted (off-screen via `inert`) so each keeps a
-  // stable focus trap across route changes. The active route's `handle.drawer`
-  // string selects which opens; "ingestion" requires an explicit close.
   const drawerProps = [
     {
       context: "backend",

@@ -42,8 +42,6 @@ function ProjectCollaboratorsContainer({ confirm }) {
       const heading = t("modals.remove_contributor");
       if (confirm)
         confirm(heading, null, async () => {
-          // Record where focus should land before the row unmounts. Cancelling
-          // the confirmation never reaches here, so focus is never moved.
           rememberRemoval(makerId);
           await destroyCollaborator("projects", project.id, { maker: makerId });
           refresh();

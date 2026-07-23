@@ -69,8 +69,6 @@ export default function ProjectExportations({
   );
 
   const onDelete = projectExportation => {
-    // Record where focus should land before the row unmounts. A failed request
-    // leaves the row in place, so focus is never moved.
     rememberRemoval(projectExportation.id);
     deleteExportation(projectExportation.id);
     refresh();

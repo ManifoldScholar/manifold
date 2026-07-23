@@ -23,8 +23,6 @@ function Stylesheet({
 }) {
   const popoverDisclosureRef = useRef(null);
 
-  // `setElement` refs the whole row (draggable + drop target); `setHandle` refs
-  // the grabber icon, so the nested edit link stays clickable.
   const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
     {
       instanceId,
@@ -41,8 +39,6 @@ function Stylesheet({
 
   const confirmDestroy = event => {
     event.preventDefault();
-    // Record where focus should land before the row unmounts. Cancelling the
-    // confirmation leaves the row in place, so focus is never moved.
     if (onBeforeDestroy) onBeforeDestroy(stylesheet.id);
     callbacks.confirmDestroy(stylesheet);
   };
