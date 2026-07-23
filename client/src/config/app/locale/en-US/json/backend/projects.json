@@ -106,6 +106,7 @@
       "delete": "$t(actions.delete) $t(glossary.category_title_case_one)",
       "edit": "$t(actions.edit) $t(glossary.category_title_case_one)",
       "drag": "Drag $t(glossary.category_title_case_one)",
+      "drag_text": "Drag $t(glossary.text_title_case_one)",
       "edit_text": "$t(actions.edit) $t(glossary.text_title_case_one)",
       "delete_text": "$t(actions.delete) $t(glossary.text_title_case_one)",
       "empty_category": "No texts have been added to this category",

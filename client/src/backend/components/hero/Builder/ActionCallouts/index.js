@@ -1,7 +1,10 @@
-import React, { PureComponent } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import Slot from "./Slot";
-import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
+import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { autoScrollWindowForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
+import { extractClosestEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import { actionCalloutsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
 import * as Styled from "./styles";
@@ -10,254 +13,266 @@ import { withTranslation } from "react-i18next";
 
 const { request } = entityStoreActions;
 
-class ActionCallouts extends PureComponent {
-  static displayName = "Project.Hero.Builder.ActionCallouts";
-
-  static propTypes = {
-    model: PropTypes.object.isRequired,
-    refreshActionCallouts: PropTypes.func,
-    actionCalloutEditRoute: PropTypes.string.isRequired,
-    actionCalloutNewRoute: PropTypes.string.isRequired,
-    actionCallouts: PropTypes.array,
-    actionCalloutSlots: PropTypes.array
-  };
-
-  static getDerivedStateFromProps(props, state) {
-    if (props.actionCallouts === state.actionCallouts) return null;
-
-    const slotCallouts = ActionCallouts.slotActionCallouts(
-      props.actionCallouts
-    );
-    return { slotCallouts, actionCallouts: props.actionCallouts };
+const SLOTS = {
+  "left-button": {
+    title: "layout.left_side",
+    attributes: { location: "left", button: true }
+  },
+  "right-button": {
+    title: "layout.right_side",
+    attributes: { location: "right", button: true }
+  },
+  "left-link": {
+    title: "layout.left_side",
+    attributes: { location: "left", button: false }
+  },
+  "right-link": {
+    title: "layout.right_side",
+    attributes: { location: "right", button: false }
   }
+};
 
-  static slotActionCallouts(actionCallouts) {
-    /* eslint-disable no-param-reassign */
-    const out = Object.keys(ActionCallouts.slots).reduce((map, id) => {
-      const attributes = ActionCallouts.slots[id].attributes;
-      const compareKeys = Object.keys(attributes);
-      map[id] = actionCallouts.filter(actionCallout =>
-        compareKeys.every(compareKey => {
-          const match =
-            attributes[compareKey] === actionCallout.attributes[compareKey];
-          return match;
-        })
-      );
-      return map;
-    }, {});
-    return out;
-    /* eslint-enable no-param-reassign */
-  }
+const SLOT_IDS = Object.keys(SLOTS);
 
-  static slots = {
-    "left-button": {
-      title: "layout.left_side",
-      attributes: { location: "left", button: true }
-    },
-    "right-button": {
-      title: "layout.right_side",
-      attributes: { location: "right", button: true }
-    },
-    "left-link": {
-      title: "layout.left_side",
-      attributes: { location: "left", button: false }
-    },
-    "right-link": {
-      title: "layout.right_side",
-      attributes: { location: "right", button: false }
-    }
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      slotCallouts: ActionCallouts.slotActionCallouts(props.actionCallouts),
-      response: props.actionCalloutsResponse
+const slotActionCallouts = actionCallouts =>
+  SLOT_IDS.reduce((map, id) => {
+    const attributes = SLOTS[id].attributes;
+    const compareKeys = Object.keys(attributes);
+    return {
+      ...map,
+      [id]: actionCallouts.filter(actionCallout =>
+        compareKeys.every(
+          compareKey =>
+            attributes[compareKey] === actionCallout.attributes[compareKey]
+        )
+      )
     };
+  }, {});
+
+function ActionCallouts(props) {
+  const {
+    model,
+    dispatch,
+    actionCalloutSlots,
+    actionCallouts,
+    actionCalloutEditRoute,
+    actionCalloutNewRoute,
+    t,
+    setScreenReaderStatus,
+    renderLiveRegion
+  } = props;
+
+  const [instanceId] = useState(() => Symbol("actionCallouts"));
+  const [slotCallouts, setSlotCallouts] = useState(() =>
+    slotActionCallouts(actionCallouts)
+  );
+
+  const [calloutsRef, setCalloutsRef] = useState(actionCallouts);
+  if (calloutsRef !== actionCallouts) {
+    setCalloutsRef(actionCallouts);
+    setSlotCallouts(slotActionCallouts(actionCallouts));
   }
 
-  onDragEnd = draggable => {
-    if (!draggable.source || !draggable.destination) return;
-    this.moveToSlot(
-      draggable.draggableId,
-      draggable.source.droppableId,
-      draggable.destination.droppableId,
-      draggable.destination.index
-    );
-    this.updateCallout(
-      draggable.draggableId,
-      draggable.destination.droppableId,
-      draggable.destination.index
-    );
-  };
+  const slotCalloutsRef = useRef(slotCallouts);
+  slotCalloutsRef.current = slotCallouts;
 
-  onDragStart = () => {};
+  const moveToSlot = useCallback(
+    (id, sourceSlotId, destinationSlotId, destinationIndex) => {
+      setSlotCallouts(prev => {
+        const source = prev[sourceSlotId].slice(0);
+        const sourceIndex = source.findIndex(ac => ac.id === id);
+        if (sourceIndex === -1) return prev;
+        const [callout] = source.splice(sourceIndex, 1);
+        const destination =
+          sourceSlotId === destinationSlotId
+            ? source
+            : prev[destinationSlotId].slice(0);
+        destination.splice(destinationIndex, 0, callout);
+        return {
+          ...prev,
+          [sourceSlotId]: source,
+          [destinationSlotId]: destination
+        };
+      });
+    },
+    []
+  );
 
-  onKeyboardMove = ({ callout, index, slotIndex, direction, ...rest }) => {
-    const id = callout.id;
-    const sourceSlotId = this.slotIds[slotIndex];
-    const title = callout.attributes.title;
-    const position = index + 1;
-    const slotPosition = slotIndex + 1;
+  const updateCallout = useCallback(
+    (id, slotId, index, callback) => {
+      const baseAttributes = SLOTS[slotId].attributes;
+      const attributes = {
+        ...baseAttributes,
+        position: index === 0 ? "top" : index + 1
+      };
+      const call = actionCalloutsAPI.update(id, { attributes });
+      const updateRequest = request(call, requests.beActionCalloutUpdate, {
+        noTouch: true
+      });
 
-    let destinationSlotIndex;
+      const refreshCallback = props.refreshActionCallouts || (() => {});
+      dispatch(updateRequest).promise.then(() => {
+        refreshCallback();
+        if (typeof callback === "function") callback();
+      });
+    },
+    [dispatch, props.refreshActionCallouts]
+  );
+
+  const onKeyboardMove = useCallback(
+    ({ callout, index, slotIndex, direction, callback }) => {
+      const id = callout.id;
+      const sourceSlotId = SLOT_IDS[slotIndex];
+      const title = callout.attributes.title;
+      const position = index + 1;
+      const slotPosition = slotIndex + 1;
+
+      let destinationSlotIndex;
+      let destinationIndex;
+      let announcement;
+      switch (direction) {
+        case "up":
+          destinationSlotIndex = slotIndex;
+          destinationIndex = index - 1;
+          announcement = t("actions.dnd.moved_to_position", {
+            title,
+            position: position - 1
+          });
+          break;
+        case "down":
+          destinationSlotIndex = slotIndex;
+          destinationIndex = index + 1;
+          announcement = t("actions.dnd.moved_to_position", {
+            title,
+            position: position + 1
+          });
+          break;
+        case "left":
+          destinationSlotIndex = slotIndex - 1;
+          destinationIndex = 0;
+          announcement = t("actions.dnd.moved_to_group", {
+            title,
+            group: slotPosition - 1,
+            position: 1
+          });
+          break;
+        case "right":
+          destinationSlotIndex = slotIndex + 1;
+          destinationIndex = 0;
+          announcement = t("actions.dnd.moved_to_group", {
+            title,
+            group: slotPosition + 1,
+            position: 1
+          });
+          break;
+        default:
+          break;
+      }
+
+      const destinationSlotId = SLOT_IDS[destinationSlotIndex];
+
+      moveToSlot(id, sourceSlotId, destinationSlotId, destinationIndex);
+
+      const done = () => {
+        if (typeof callback === "function") callback();
+        if (announcement) setScreenReaderStatus(announcement);
+      };
+      updateCallout(id, destinationSlotId, destinationIndex, done);
+    },
+    [moveToSlot, updateCallout, setScreenReaderStatus, t]
+  );
+
+  const handleDrop = ({ source, location }) => {
+    const sourceSlotId = source.data.slotId;
+    const calloutId = source.data.calloutId;
+    const sourceIndex = source.data.index;
+
+    const targets = location.current.dropTargets;
+    if (!targets.length) return;
+
+    const chipTarget = targets.find(target => target.data.type === "chip");
+    const slotTarget = targets.find(target => target.data.isSlot);
+    const destinationSlotId =
+      slotTarget?.data.slotId ?? chipTarget?.data.slotId;
+    if (!destinationSlotId) return;
+
+    const destinationList = slotCalloutsRef.current[destinationSlotId];
+
     let destinationIndex;
-    let announcement;
-    switch (direction) {
-      case "up":
-        destinationSlotIndex = slotIndex;
-        destinationIndex = index - 1;
-        announcement = this.props.t("actions.dnd.moved_to_position", {
-          title,
-          position: position - 1
-        });
-        break;
-      case "down":
-        destinationSlotIndex = slotIndex;
-        destinationIndex = index + 1;
-        announcement = this.props.t("actions.dnd.moved_to_position", {
-          title,
-          position: position + 1
-        });
-        break;
-      case "left":
-        destinationSlotIndex = slotIndex - 1;
-        destinationIndex = 0;
-        announcement = this.props.t("actions.dnd.moved_to_group", {
-          title,
-          group: slotPosition - 1,
-          position: 1
-        });
-        break;
-      case "right":
-        destinationSlotIndex = slotIndex + 1;
-        destinationIndex = 0;
-        announcement = this.props.t("actions.dnd.moved_to_group", {
-          title,
-          group: slotPosition + 1,
-          position: 1
-        });
-        break;
-      default:
-        break;
+    if (chipTarget) {
+      const rawIndex = destinationList.findIndex(
+        c => c.id === chipTarget.data.calloutId
+      );
+      if (rawIndex === -1) return;
+      const edge = extractClosestEdge(chipTarget.data);
+      destinationIndex = edge === "bottom" ? rawIndex + 1 : rawIndex;
+    } else {
+      destinationIndex = destinationList.length;
     }
 
-    const destinationSlotId = this.slotIds[destinationSlotIndex];
+    if (sourceSlotId === destinationSlotId && sourceIndex < destinationIndex) {
+      destinationIndex -= 1;
+    }
+    if (
+      sourceSlotId === destinationSlotId &&
+      sourceIndex === destinationIndex
+    ) {
+      return;
+    }
 
-    this.moveToSlot(id, sourceSlotId, destinationSlotId, destinationIndex);
-
-    const callback = () => {
-      if (rest.callback && typeof rest.callback === "function") {
-        rest.callback();
-      }
-      if (announcement) {
-        this.announce(announcement);
-      }
-    };
-    this.updateCallout(id, destinationSlotId, destinationIndex, callback);
+    moveToSlot(calloutId, sourceSlotId, destinationSlotId, destinationIndex);
+    updateCallout(calloutId, destinationSlotId, destinationIndex);
   };
+  const dropHandlerRef = useRef(handleDrop);
+  dropHandlerRef.current = handleDrop;
 
-  get model() {
-    return this.props.model;
-  }
-
-  get slotIds() {
-    return Object.keys(ActionCallouts.slots);
-  }
-
-  get announce() {
-    return this.props.setScreenReaderStatus;
-  }
-
-  updateCallout(id, slotId, index, callback) {
-    const baseAttributes = this.findSlot(slotId).attributes;
-    const attributes = {
-      ...baseAttributes,
-      position: index === 0 ? "top" : index + 1
-    };
-    const call = actionCalloutsAPI.update(id, { attributes });
-    const options = { noTouch: true };
-    const updateRequest = request(
-      call,
-      requests.beActionCalloutUpdate,
-      options
+  useEffect(() => {
+    return combine(
+      monitorForElements({
+        canMonitor: ({ source }) => source.data.instanceId === instanceId,
+        onDrop: args => dropHandlerRef.current(args)
+      }),
+      autoScrollWindowForElements()
     );
+  }, [instanceId]);
 
-    const { refreshActionCallouts } = this.props;
-    const refreshCallback = refreshActionCallouts || (() => {});
-    this.props.dispatch(updateRequest).promise.then(() => {
-      refreshCallback();
-      if (callback && typeof callback === "function") {
-        callback();
-      }
-    });
-  }
-
-  moveToSlot(id, sourceSlotId, destinationSlotId, destinationIndex) {
-    this.removeFromSlot(id, sourceSlotId, callout => {
-      this.addToSlot(callout, destinationSlotId, destinationIndex);
-    });
-  }
-
-  replaceSlotInState(slotId, slotCallouts, callback = null) {
-    const state = {
-      slotCallouts: { ...this.state.slotCallouts, [slotId]: slotCallouts }
-    };
-    this.setState(state, callback);
-  }
-
-  addToSlot(actionCallout, slotId, index) {
-    const slotCallouts = this.state.slotCallouts[slotId].slice(0);
-    slotCallouts.splice(index, 0, actionCallout);
-    this.replaceSlotInState(slotId, slotCallouts);
-  }
-
-  removeFromSlot(id, slotId, callback = null) {
-    const slotCallouts = this.state.slotCallouts[slotId].slice(0);
-    const index = slotCallouts.findIndex(ac => ac.id === id);
-    const callout = slotCallouts.splice(index, 1)[0];
-    this.replaceSlotInState(slotId, slotCallouts, () => callback(callout));
-  }
-
-  findSlot(slotId) {
-    return ActionCallouts.slots[slotId];
-  }
-
-  actionCalloutsBySlot(slotId) {
-    return this.state.slotCallouts[slotId];
-  }
-
-  render() {
-    return (
-      <Styled.CalloutsContainer className="rbd-migration-resets">
-        <DragDropContext
-          onDragStart={this.onDragStart}
-          onDragEnd={this.onDragEnd}
-        >
-          {this.slotIds
-            .filter(slot => this.props.actionCalloutSlots.includes(slot))
-            .map((slotId, index) => {
-              return (
-                <Slot
-                  key={slotId}
-                  id={slotId}
-                  {...this.findSlot(slotId)}
-                  model={this.model}
-                  actionCalloutEditRoute={this.props.actionCalloutEditRoute}
-                  actionCalloutNewRoute={this.props.actionCalloutNewRoute}
-                  actionCallouts={this.actionCalloutsBySlot(slotId)}
-                  index={index}
-                  slotCount={this.slotIds.length}
-                  onKeyboardMove={this.onKeyboardMove}
-                />
-              );
-            })}
-        </DragDropContext>
-        {this.props.renderLiveRegion("alert")}
-      </Styled.CalloutsContainer>
-    );
-  }
+  return (
+    <Styled.CalloutsContainer>
+      {SLOT_IDS.filter(slot => actionCalloutSlots.includes(slot)).map(
+        (slotId, index) => (
+          <Slot
+            key={slotId}
+            id={slotId}
+            {...SLOTS[slotId]}
+            instanceId={instanceId}
+            model={model}
+            actionCalloutEditRoute={actionCalloutEditRoute}
+            actionCalloutNewRoute={actionCalloutNewRoute}
+            actionCallouts={slotCallouts[slotId]}
+            index={index}
+            slotCount={SLOT_IDS.length}
+            onKeyboardMove={onKeyboardMove}
+          />
+        )
+      )}
+      {renderLiveRegion("alert")}
+    </Styled.CalloutsContainer>
+  );
 }
+
+ActionCallouts.displayName = "Project.Hero.Builder.ActionCallouts";
+
+ActionCallouts.propTypes = {
+  model: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  refreshActionCallouts: PropTypes.func,
+  actionCalloutEditRoute: PropTypes.string.isRequired,
+  actionCalloutNewRoute: PropTypes.string.isRequired,
+  actionCallouts: PropTypes.array,
+  actionCalloutSlots: PropTypes.array,
+  t: PropTypes.func,
+  setScreenReaderStatus: PropTypes.func,
+  renderLiveRegion: PropTypes.func
+};
 
 export default withTranslation()(withScreenReaderStatus(ActionCallouts, false));

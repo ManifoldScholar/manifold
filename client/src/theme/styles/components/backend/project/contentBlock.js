@@ -5,6 +5,7 @@ import {
   defaultTransitionProps,
   draggable,
   dragging,
+  dropIndicator,
   blockLabelRound,
   buttonUnstyled,
   revealOnFocus
@@ -12,6 +13,7 @@ import {
 
 export default `
   .backend-content-block {
+    position: relative;
     padding-top: 9px;
     padding-bottom: 9px;
 
@@ -23,10 +25,15 @@ export default `
       color: var(--color-neutral-text-light);
     }
 
-    &--available {
-      ~ [data-rbd-placeholder-context-id] {
-        /* hide placeholder in Available dropzone since dropping is disabled */
-        display: none !important;
+    &__drop-indicator {
+      ${dropIndicator()}
+
+      &--top {
+        top: 0;
+      }
+
+      &--bottom {
+        bottom: 0;
       }
     }
 
@@ -56,7 +63,8 @@ export default `
 
       &:focus-visible {
         border-color: var(--color-accent-primary);
-        outline: 0;
+        outline: 2px solid var(--color-accent-primary);
+        outline-offset: -2px;
 
         .backend-content-block--available.backend-content-block--active & {
           .backend-content-block__heading {
@@ -157,8 +165,9 @@ export default `
         -webkit-touch-callout: none;
       }
 
-      &:disabled {
+      &[aria-disabled="true"] {
         cursor: not-allowed;
+        pointer-events: none;
 
         &:hover {
           color: inherit;

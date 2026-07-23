@@ -1,170 +1,101 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { Draggable } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
 import Current from "./in-list/Current";
 import Available from "./in-list/Available";
 import typeResolver from "../../helpers/resolver";
+import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
+import { useReorderableItem } from "hooks";
 import isFunction from "lodash/isFunction";
 
-export default class ProjectContentBlock extends PureComponent {
-  static displayName = "Project.Content.Blocks.Block";
+export default function ProjectContentBlock({
+  currentBlocks = [],
+  index,
+  entity,
+  context,
+  onClickAdd,
+  entityCount,
+  entityCallbacks,
+  instanceId,
+  announce,
+  type
+}) {
+  const inAvailableList = context === "available";
+  const inCurrentList = context === "current";
+  const id = entity ? entity.id : null;
+  const pending = id === "pending";
+  const typeComponent = typeResolver.typeToBlockComponent(type);
+  const zoneType = typeComponent.top ? "TOP" : "BOTTOM";
 
-  static propTypes = {
-    currentBlocks: PropTypes.array.isRequired,
-    index: PropTypes.number,
-    entity: PropTypes.object,
-    context: PropTypes.oneOf(["available", "current"]),
-    disabled: PropTypes.func,
-    onClickAdd: PropTypes.func,
-    isDragging: PropTypes.bool,
-    entityCount: PropTypes.number,
-    announce: PropTypes.func
+  const disabled = (() => {
+    if (pending) return true;
+    if (inCurrentList) return false;
+    if (!isFunction(typeComponent.isAvailable)) return false;
+    return !typeComponent.isAvailable(currentBlocks);
+  })();
+
+  const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
+    {
+      instanceId,
+      itemId: id,
+      isDropTarget: inCurrentList,
+      dragData: inAvailableList
+        ? { kind: "available", blockType: type, zoneType }
+        : { kind: "current", id, zoneType, index },
+      dropData: { kind: "current-block", id, zoneType, index },
+      canDrop: source => source.data.zoneType === zoneType
+    }
+  );
+
+  const handleClickAdd = () => {
+    onClickAdd(type);
   };
 
-  static defaultProps = {
-    blocks: [],
-    placed: false,
-    available: true,
-    disabled: () => false
-  };
+  const TypeComponent = typeComponent;
+  const ListContextBlock = inAvailableList ? Available : Current;
+  const baseClass = "backend-content-block";
 
-  get listContext() {
-    return this.props.context;
-  }
-
-  get inAvailableList() {
-    return this.listContext === "available";
-  }
-
-  get inCurrentList() {
-    return this.listContext === "current";
-  }
-
-  get index() {
-    return this.props.index;
-  }
-
-  get id() {
-    if (!this.props.entity) return null;
-    return this.props.entity.id;
-  }
-
-  get orderable() {
-    if (!this.props.entity) return null;
-    return !this.props.entity.attributes.orderable;
-  }
-
-  get type() {
-    return this.props.type;
-  }
-
-  get draggableId() {
-    if (this.inAvailableList) return this.type;
-    return this.id;
-  }
-
-  get disabled() {
-    if (this.pending) return true;
-    if (this.inCurrentList) return false;
-    if (!isFunction(this.typeComponent.isAvailable)) return false;
-    return !this.typeComponent.isAvailable(this.props.currentBlocks);
-  }
-
-  get typeComponent() {
-    return typeResolver.typeToBlockComponent(this.type);
-  }
-
-  get pending() {
-    return this.id && this.id === "pending";
-  }
-
-  handleClickAdd = () => {
-    this.props.onClickAdd(this.type);
-  };
-
-  render() {
-    const TypeComponent = this.typeComponent;
-    const ListContextBlock = this.inAvailableList ? Available : Current;
-    const baseClass = "backend-content-block";
-
-    if (this.disabled)
-      return (
-        <div
-          className={classNames(
-            baseClass,
-            `${baseClass}--${this.props.context} ${baseClass}--inactive`
-          )}
-        >
-          <ListContextBlock
-            entity={this.props.entity}
-            entityCallbacks={this.props.entityCallbacks}
-            typeComponent={TypeComponent}
-            onClickAdd={this.handleClickAdd}
-            disabled
-            index={this.props.index}
-            entityCount={this.props.entityCount}
-          />
-        </div>
-      );
-
-    return (
-      <>
-        <Draggable
-          type={TypeComponent.top ? "TOP" : "BOTTOM"}
-          isDragDisabled={this.disabled}
-          draggableId={this.draggableId}
-          index={this.index}
-        >
-          {(provided, snapshot) => {
-            return (
-              <div
-                {...provided.draggableProps}
-                ref={provided.innerRef}
-                style={provided.draggableProps.style}
-                className={classNames(
-                  baseClass,
-                  `${baseClass}--${this.props.context}`,
-                  {
-                    [`${baseClass}--active`]: !this.disabled,
-                    [`${baseClass}--is-dragging`]: snapshot.isDragging
-                  }
-                )}
-              >
-                <ListContextBlock
-                  entity={this.props.entity}
-                  entityCallbacks={this.props.entityCallbacks}
-                  dragHandleProps={provided.dragHandleProps}
-                  typeComponent={TypeComponent}
-                  onClickAdd={this.handleClickAdd}
-                  index={this.props.index}
-                  entityCount={this.props.entityCount}
-                  announce={this.props.announce}
-                />
-              </div>
-            );
-          }}
-        </Draggable>
-        {this.props.isDragging && (
-          <div
-            className={classNames(
-              baseClass,
-              `${baseClass}--${this.props.context}`,
-              `${baseClass}--inactive`,
-              "drag-placeholder"
-            )}
-          >
-            <ListContextBlock
-              entity={this.props.entity}
-              entityCallbacks={this.props.entityCallbacks}
-              typeComponent={TypeComponent}
-              index={this.props.index}
-              entityCount={this.props.entityCount}
-              announce={this.props.announce}
-            />
-          </div>
-        )}
-      </>
-    );
-  }
+  return (
+    <div
+      ref={disabled ? undefined : setElement}
+      className={classNames(baseClass, `${baseClass}--${context}`, {
+        [`${baseClass}--inactive`]: disabled,
+        [`${baseClass}--active`]: !disabled,
+        [`${baseClass}--is-dragging`]: isDragging
+      })}
+    >
+      {!disabled && (
+        <DropEdgeIndicator
+          edge={closestEdge}
+          baseClass={`${baseClass}__drop-indicator`}
+        />
+      )}
+      <ListContextBlock
+        entity={entity}
+        entityCallbacks={entityCallbacks}
+        dragHandleRef={disabled ? undefined : setHandle}
+        typeComponent={TypeComponent}
+        onClickAdd={handleClickAdd}
+        disabled={disabled}
+        index={index}
+        entityCount={entityCount}
+        announce={announce}
+      />
+    </div>
+  );
 }
+
+ProjectContentBlock.displayName = "Project.Content.Blocks.Block";
+
+ProjectContentBlock.propTypes = {
+  currentBlocks: PropTypes.array.isRequired,
+  index: PropTypes.number,
+  entity: PropTypes.object,
+  context: PropTypes.oneOf(["available", "current"]),
+  onClickAdd: PropTypes.func,
+  entityCount: PropTypes.number,
+  entityCallbacks: PropTypes.object,
+  instanceId: PropTypes.symbol.isRequired,
+  announce: PropTypes.func,
+  type: PropTypes.string
+};

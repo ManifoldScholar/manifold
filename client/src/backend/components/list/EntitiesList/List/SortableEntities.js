@@ -1,239 +1,220 @@
-import React, { PureComponent } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import {
-  DragDropContext,
-  Droppable,
-  Draggable
-} from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import classNames from "classnames";
+import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { autoScrollWindowForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
+import { extractClosestEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
+import { reorderWithEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/util/reorder-with-edge";
 import withScreenReaderStatus from "hoc/withScreenReaderStatus";
+import { setOrderByChange } from "helpers/dnd";
+import { useReorderableItem } from "hooks";
 import { withTranslation } from "react-i18next";
 
-class SortableEntities extends PureComponent {
-  static displayName = "List.Entities.List.SortableEntities";
+/* Non-empty prop bags preserve the row's `isSortable` gate (Entity/Row.js),
+   which requires draggableProps + dragHandleProps to be non-empty objects.
+   `data-rbd-draggable-id` is still read by Row.js's keyboard-move handler. */
+const DRAG_HANDLE_PROPS = { "data-drag-handle": true };
 
-  static cloneEntities(entities) {
-    const source = entities || [];
-    return source.slice(0);
-  }
+const cloneEntities = entities => (entities || []).slice(0);
 
-  static propTypes = {
-    callbacks: PropTypes.object,
-    entities: PropTypes.array,
-    entityComponent: PropTypes.func.isRequired,
-    entityComponentProps: PropTypes.object,
-    listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
-    sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
-    useDragHandle: PropTypes.bool,
-    idForInstructions: PropTypes.string
-  };
+const getAdjustedPosition = (position, count) => {
+  if (position <= 0) return "top";
+  if (position >= count) return "bottom";
+  return position + 1;
+};
 
-  static defaultProps = {
-    useDragHandle: false,
-    sortableStyle: "spaced"
-  };
+function SortableEntityRow({
+  entity,
+  index,
+  entityCount,
+  instanceId,
+  EntityComponent,
+  useDragHandle,
+  entityComponentProps
+}) {
+  const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
+    {
+      instanceId,
+      itemId: entity.id,
+      dragData: { id: entity.id, index }
+    }
+  );
 
-  static getDerivedStateFromProps(props, prevState) {
-    if (props.entities === prevState.ref) return null;
-    const orderedEntities = SortableEntities.cloneEntities(props.entities);
-    return { orderedEntities, ref: props.entities };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      sorting: false,
-      orderedEntities: this.constructor.cloneEntities(props.entities),
-      ref: props.entities
-    };
-  }
-
-  findEntity(id) {
-    return this.state.orderedEntities.find(e => e.id === id);
-  }
-
-  onDragEnd = result => {
-    const { draggableId, source, destination } = result;
-    const entity = this.findEntity(draggableId);
-
-    if (!destination || !entity || source.index === destination.index)
-      return null;
-
-    this.setState(
-      {
-        orderedEntities: this.setOrderByChange(source.index, destination.index)
-      },
-      () => {
-        this.reorderCallback(
-          {
-            id: entity.id,
-            position: this.getAdjustedPosition(destination.index)
-          },
-          this.state.orderedEntities
-        );
-      }
-    );
-  };
-
-  onKeyboardMove = (draggableId, title, oldPos, newPos, callback) => {
-    if (oldPos === newPos) return;
-
-    const entity = this.findEntity(draggableId);
-
-    this.setState(
-      {
-        orderedEntities: this.setOrderByChange(oldPos, newPos)
-      },
-      () => {
-        this.reorderCallback(
-          {
-            id: entity.id,
-            position: this.getAdjustedPosition(newPos)
-          },
-          this.state.orderedEntities
-        );
-
-        const announcement = this.props.t("actions.dnd.moved_to_position", {
-          title,
-          position: newPos + 1
-        });
-        this.props.setScreenReaderStatus(announcement);
-
-        if (callback && typeof callback === "function") {
-          callback();
-        }
-      }
-    );
-  };
-
-  get entities() {
-    return this.state.orderedEntities;
-  }
-
-  get entityComponent() {
-    return this.props.entityComponent;
-  }
-
-  get listStyle() {
-    return this.props.listStyle;
-  }
-
-  get sortableStyle() {
-    return this.props.sortableStyle;
-  }
-
-  get useDragHandle() {
-    return this.props.useDragHandle;
-  }
-
-  get entityComponentProps() {
-    return {
-      ...this.props.entityComponentProps,
-      listStyle: this.listStyle,
-      sortableStyle: this.sortableStyle,
-      onKeyboardMove: this.onKeyboardMove
-    };
-  }
-
-  get reorderCallback() {
-    return this.props.callbacks.onReorder;
-  }
-
-  get idForInstructions() {
-    return this.props.idForInstructions;
-  }
-
-  getAdjustedPosition(position) {
-    const entityCount = this.state.orderedEntities.length;
-
-    if (position <= 0) return "top";
-    if (position >= entityCount) return "bottom";
-    return position + 1;
-  }
-
-  setOrderByChange(oldPos, newPos) {
-    const ordered = Array.from(this.state.orderedEntities);
-    const [removed] = ordered.splice(oldPos, 1);
-    ordered.splice(newPos, 0, removed);
-
-    return ordered;
-  }
-
-  entityKey(index) {
-    const entity = this.entities[index];
-    if (!entity || !entity.id) return index.toString();
-    return entity.id;
-  }
-
-  render() {
-    const EntityComponent = this.entityComponent;
-
-    return (
-      <>
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <div className="rbd-migration-resets">
-            <Droppable droppableId="sortableEntities">
-              {(provided, snapshot) => (
-                <ul
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  className={classNames(this.props.className, {
-                    "show-dropzone": snapshot.isDraggingOver
-                  })}
-                >
-                  {this.entities.map((entity, index) => (
-                    <>
-                      <Draggable
-                        key={this.entityKey(index)}
-                        draggableId={this.entityKey(index)}
-                        index={index}
-                      >
-                        {(draggableProvided, draggableSnapshot) => (
-                          <>
-                            <EntityComponent
-                              innerRef={draggableProvided.innerRef}
-                              entity={entity}
-                              dragHandleProps={
-                                draggableProvided.dragHandleProps
-                              }
-                              draggableProps={draggableProvided.draggableProps}
-                              useDragHandle={this.useDragHandle}
-                              isDragging={draggableSnapshot.isDragging}
-                              index={index}
-                              entityCount={this.entities.length}
-                              {...this.entityComponentProps}
-                            />
-                          </>
-                        )}
-                      </Draggable>
-                      {snapshot.draggingFromThisWith === entity.id && (
-                        <div
-                          className={classNames(
-                            "entity-row",
-                            "drag-placeholder"
-                          )}
-                        >
-                          <EntityComponent
-                            entity={entity}
-                            index={index}
-                            entityCount={this.entities.length}
-                            {...this.entityComponentProps}
-                          />
-                        </div>
-                      )}
-                    </>
-                  ))}
-                  {provided.placeholder}
-                </ul>
-              )}
-            </Droppable>
-          </div>
-        </DragDropContext>
-        {this.props.renderLiveRegion("alert")}
-      </>
-    );
-  }
+  return (
+    <EntityComponent
+      innerRef={setElement}
+      dragHandleRef={setHandle}
+      entity={entity}
+      draggableProps={{ "data-rbd-draggable-id": entity.id }}
+      dragHandleProps={DRAG_HANDLE_PROPS}
+      useDragHandle={useDragHandle}
+      isDragging={isDragging}
+      dropEdge={closestEdge}
+      index={index}
+      entityCount={entityCount}
+      {...entityComponentProps}
+    />
+  );
 }
+
+SortableEntityRow.propTypes = {
+  entity: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+  entityCount: PropTypes.number.isRequired,
+  instanceId: PropTypes.symbol.isRequired,
+  EntityComponent: PropTypes.elementType.isRequired,
+  useDragHandle: PropTypes.bool,
+  entityComponentProps: PropTypes.object
+};
+
+function SortableEntities(props) {
+  const {
+    entities,
+    entityComponent: EntityComponent,
+    callbacks,
+    listStyle,
+    sortableStyle = "spaced",
+    useDragHandle = false,
+    className,
+    t,
+    setScreenReaderStatus,
+    renderLiveRegion
+  } = props;
+
+  const [instanceId] = useState(() => Symbol("sortableEntities"));
+  const [ordered, setOrdered] = useState(() => cloneEntities(entities));
+  const [isListDragging, setIsListDragging] = useState(false);
+
+  const [entitiesRef, setEntitiesRef] = useState(entities);
+  if (entitiesRef !== entities) {
+    setEntitiesRef(entities);
+    setOrdered(cloneEntities(entities));
+  }
+
+  const orderedRef = useRef(ordered);
+  orderedRef.current = ordered;
+  const reorderCallbackRef = useRef(callbacks.onReorder);
+  reorderCallbackRef.current = callbacks.onReorder;
+
+  useEffect(() => {
+    return combine(
+      monitorForElements({
+        canMonitor: ({ source }) => source.data.instanceId === instanceId,
+        onDragStart: () => setIsListDragging(true),
+        onDrop({ source, location }) {
+          setIsListDragging(false);
+
+          const target = location.current.dropTargets[0];
+          if (!target) return;
+
+          const list = orderedRef.current;
+          const startIndex = list.findIndex(e => e.id === source.data.id);
+          const indexOfTarget = list.findIndex(e => e.id === target.data.id);
+          if (startIndex === -1 || indexOfTarget === -1) return;
+
+          const reordered = reorderWithEdge({
+            axis: "vertical",
+            list,
+            startIndex,
+            indexOfTarget,
+            closestEdgeOfTarget: extractClosestEdge(target.data)
+          });
+
+          const finalIndex = reordered.findIndex(e => e.id === source.data.id);
+          if (finalIndex === startIndex) return;
+
+          setOrdered(reordered);
+          reorderCallbackRef.current(
+            {
+              id: source.data.id,
+              position: getAdjustedPosition(finalIndex, reordered.length)
+            },
+            reordered
+          );
+        }
+      }),
+      autoScrollWindowForElements()
+    );
+  }, [instanceId]);
+
+  const onKeyboardMove = useCallback(
+    (draggableId, title, oldPos, newPos, callback) => {
+      if (oldPos === newPos) return;
+
+      const list = orderedRef.current;
+      const entity = list.find(e => e.id === draggableId);
+      if (!entity) return;
+
+      const reordered = setOrderByChange(list, oldPos, newPos);
+      setOrdered(reordered);
+
+      reorderCallbackRef.current(
+        {
+          id: entity.id,
+          position: getAdjustedPosition(newPos, reordered.length)
+        },
+        reordered
+      );
+
+      setScreenReaderStatus(
+        t("actions.dnd.moved_to_position", { title, position: newPos + 1 })
+      );
+
+      if (typeof callback === "function") callback();
+    },
+    [setScreenReaderStatus, t]
+  );
+
+  const entityComponentProps = {
+    ...props.entityComponentProps,
+    listStyle,
+    sortableStyle,
+    onKeyboardMove
+  };
+
+  return (
+    <>
+      <ul
+        className={classNames(className, {
+          "show-dropzone": isListDragging,
+          "entity-list--dragging": isListDragging
+        })}
+      >
+        {ordered.map((entity, index) => (
+          <SortableEntityRow
+            key={entity.id ?? index}
+            entity={entity}
+            index={index}
+            entityCount={ordered.length}
+            instanceId={instanceId}
+            EntityComponent={EntityComponent}
+            useDragHandle={useDragHandle}
+            entityComponentProps={entityComponentProps}
+          />
+        ))}
+      </ul>
+      {renderLiveRegion("alert")}
+    </>
+  );
+}
+
+SortableEntities.displayName = "List.Entities.List.SortableEntities";
+
+SortableEntities.propTypes = {
+  callbacks: PropTypes.object,
+  entities: PropTypes.array,
+  entityComponent: PropTypes.elementType.isRequired,
+  entityComponentProps: PropTypes.object,
+  className: PropTypes.string,
+  listStyle: PropTypes.oneOf(["rows", "tiles", "grid", "bare", "well"]),
+  sortableStyle: PropTypes.oneOf(["tight", "spaced"]),
+  useDragHandle: PropTypes.bool,
+  idForInstructions: PropTypes.string,
+  t: PropTypes.func,
+  setScreenReaderStatus: PropTypes.func,
+  renderLiveRegion: PropTypes.func
+};
 
 export default withTranslation()(
   withScreenReaderStatus(SortableEntities, false)

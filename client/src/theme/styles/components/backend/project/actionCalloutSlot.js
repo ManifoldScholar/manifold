@@ -5,6 +5,7 @@ import {
   defaultTransitionProps,
   lighten,
   dragging,
+  dropIndicator,
   revealOnFocus
 } from "theme/styles/mixins";
 
@@ -73,7 +74,20 @@ export default `
     }
 
     &__chip {
+      position: relative;
       padding: 5px 0;
+    }
+
+    &__chip-drop-indicator {
+      ${dropIndicator()}
+
+      &--top {
+        top: 0;
+      }
+
+      &--bottom {
+        bottom: 0;
+      }
     }
 
     &__chip-inner {

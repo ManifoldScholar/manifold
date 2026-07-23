@@ -18,6 +18,8 @@ function SectionListItem(props) {
     startSectionId,
     draggableProps,
     dragHandleProps,
+    dragHandleRef,
+    dropEdge,
     isDragging,
     innerRef,
     confirm,
@@ -25,7 +27,8 @@ function SectionListItem(props) {
     setError,
     index,
     sectionCount,
-    onReorder
+    onReorder,
+    onBeforeDestroy
   } = props;
 
   const { t } = useTranslation();
@@ -56,6 +59,7 @@ function SectionListItem(props) {
 
   const doDelete = async () => {
     setError(null);
+    if (onBeforeDestroy) onBeforeDestroy(section.id);
     const res = await deleteSection(section.id);
     if (res?.errors) setError(res.errors);
     refresh();
@@ -92,24 +96,32 @@ function SectionListItem(props) {
 
   return section ? (
     <Styled.Item ref={innerRef} {...draggableProps}>
+      {dropEdge && <Styled.DropLine $edge={dropEdge} aria-hidden />}
       <Styled.Inner $isDragging={isDragging}>
         <Styled.ButtonGroup>
           <Tooltip
             content={t("texts.section.start_tooltip_content")}
             xOffset="-100px"
-            yOffset="43px"
+            yOffset="36px"
           >
-            <Styled.Button onClick={() => onSetStart(section.id)}>
+            <Styled.Button
+              onClick={() => onSetStart(section.id)}
+              aria-label={t("texts.section.start_tooltip_label")}
+            >
               <Utility.IconComposer size={24} icon="playOutline24" />
             </Styled.Button>
           </Tooltip>
-          <Styled.Button onClick={onDelete} aria-label={t("actions.delete")}>
+          <Styled.Button
+            data-id="destroy"
+            onClick={onDelete}
+            aria-label={t("actions.delete")}
+          >
             <Utility.IconComposer size={24} icon="delete24" />
           </Styled.Button>
           <Tooltip
             content={"Edit section in Manifold editor."}
             xOffset="-100px"
-            yOffset="43px"
+            yOffset="36px"
           >
             <Styled.Button
               as={Link}
@@ -129,7 +141,7 @@ function SectionListItem(props) {
           <Tooltip
             content={"Reingest section from source document."}
             xOffset="-100px"
-            yOffset="43px"
+            yOffset="36px"
           >
             <Styled.Button
               as={Link}
@@ -139,7 +151,13 @@ function SectionListItem(props) {
               <Utility.IconComposer size={24} icon="export24" />
             </Styled.Button>
           </Tooltip>
-          <Styled.DragHandle as="div" {...dragHandleProps} tabIndex={-1}>
+          <Styled.DragHandle
+            as="div"
+            ref={dragHandleRef}
+            {...dragHandleProps}
+            tabIndex={-1}
+            aria-label={t("actions.dnd.drag_and_drop")}
+          >
             <Utility.IconComposer size={28} icon="grabber32" />
           </Styled.DragHandle>
           <Styled.KeyboardButtons>
@@ -189,6 +207,8 @@ SectionListItem.displayName = "Text.Sections.List.Item";
 SectionListItem.propTypes = {
   entity: PropTypes.object,
   dragHandleProps: PropTypes.object,
+  dragHandleRef: PropTypes.func,
+  dropEdge: PropTypes.oneOf(["top", "bottom"]),
   draggableProps: PropTypes.object,
   isDragging: PropTypes.bool,
   innerRef: PropTypes.func,
@@ -198,7 +218,8 @@ SectionListItem.propTypes = {
   refresh: PropTypes.func,
   index: PropTypes.number,
   sectionCount: PropTypes.number,
-  onReorder: PropTypes.func
+  onReorder: PropTypes.func,
+  onBeforeDestroy: PropTypes.func
 };
 
 export default withConfirmation(SectionListItem);

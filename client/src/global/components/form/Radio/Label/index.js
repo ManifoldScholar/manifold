@@ -5,7 +5,7 @@ import * as Styled from "./styles";
 export default function FormRadioLabel({ label, prompt }) {
   return (
     <Styled.Legend>
-      {label && <Styled.Title aria-hidden>{label}</Styled.Title>}
+      {label && <Styled.Title>{label}</Styled.Title>}
       {prompt && <Styled.Prompt>{prompt}</Styled.Prompt>}
     </Styled.Legend>
   );

@@ -223,13 +223,10 @@ export default function NavigationMobile({ links, backendButton, mode }) {
           <button
             onClick={createExpandToggleHandler(link.route)}
             className="nested-nav__disclosure-button"
-            aria-haspopup="true"
             aria-expanded={expanded}
           >
             <span className="screen-reader-text">
-              {expanded
-                ? t("navigation.mobile.close_submenu")
-                : t("navigation.mobile.open_submenu")}
+              {t("navigation.mobile.submenu_label")}
             </span>
             <IconComposer
               icon="disclosureDown16"
@@ -318,13 +315,10 @@ export default function NavigationMobile({ links, backendButton, mode }) {
       <button
         onClick={toggleOpen}
         className="mobile-nav-toggle"
-        aria-haspopup
         aria-expanded={state.open}
       >
         <span className="screen-reader-text">
-          {state.open
-            ? t("navigation.mobile.toggle_closed")
-            : t("navigation.mobile.toggle_open")}
+          {t("navigation.mobile.aria_label")}
         </span>
         <IconComposer
           icon={triggerIcon}

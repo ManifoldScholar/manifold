@@ -92,6 +92,7 @@ class ProjectExportationRow extends PureComponent {
           <Utility.IconComposer icon="arrowDown32" size={26} />
         </a>
         <button
+          data-id="destroy"
           className="entity-row__utility-button"
           onClick={this.onDelete}
           title={this.props.t("projects.exports.delete_export")}

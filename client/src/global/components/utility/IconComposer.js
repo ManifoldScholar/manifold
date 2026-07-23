@@ -10,7 +10,7 @@ import MissingIcon from "./MissingIcon";
 export default function IconComposer({
   icon = MissingIcon,
   fill = "currentColor",
-  svgProps = { "aria-hidden": true },
+  svgProps = {},
   className,
   size,
   stroke
@@ -21,7 +21,7 @@ export default function IconComposer({
   const adjustedclassName = classNames(className, `svg-icon--${icon}`);
 
   const props = {
-    svgProps,
+    svgProps: { "aria-hidden": true, ...svgProps },
     className: adjustedclassName,
     size,
     fill,

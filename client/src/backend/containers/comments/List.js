@@ -10,7 +10,8 @@ import {
   useFetch,
   useApiCallback,
   useListQueryParams,
-  useNotification
+  useNotification,
+  useFocusAfterRemoval
 } from "hooks";
 import withFilteredLists, { commentFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -66,11 +67,15 @@ function CommentsList({
 
   const destroyComment = useApiCallback(commentsAPI.destroy);
 
+  /* Single deletes only */
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(comments);
+
   const onDelete = id => {
     const heading = t("modals.delete_comment");
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
+        rememberRemoval(id);
         await destroyComment(id);
         refresh();
       });
@@ -134,6 +139,8 @@ function CommentsList({
       <PageHeader type="list" title={t("titles.comments")} />
       {!!comments && (
         <EntitiesList
+          wrapperRef={listRef}
+          aria-label={t("titles.comments")}
           entityComponent={CommentRow}
           entityComponentProps={{
             bulkActionsActive,

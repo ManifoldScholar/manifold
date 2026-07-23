@@ -8,7 +8,12 @@ import EntitiesList, {
   Search,
   PendingEntitlementRow
 } from "backend/components/list/EntitiesList";
-import { useFetch, useApiCallback, useListQueryParams } from "hooks";
+import {
+  useFetch,
+  useApiCallback,
+  useListQueryParams,
+  useFocusAfterRemoval
+} from "hooks";
 import OutletWithDrawers from "global/components/router/OutletWithDrawers";
 import withFilteredLists, { entitlementFilters } from "hoc/withFilteredLists";
 import withConfirmation from "hoc/withConfirmation";
@@ -49,11 +54,14 @@ function PendingEntitlementsList({
 
   const deleteEntitlement = useApiCallback(pendingEntitlementsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(entitlements);
+
   const onDelete = id => {
     const heading = t("modals.delete_entitlement");
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
+        rememberRemoval(id);
         await deleteEntitlement(id);
         refresh();
       });
@@ -87,6 +95,8 @@ function PendingEntitlementsList({
             actions={actions}
           />
           <EntitiesList
+            wrapperRef={listRef}
+            aria-label={t("entitlements.pending.header")}
             entityComponent={PendingEntitlementRow}
             entityComponentProps={{ onEdit, onDelete }}
             entities={entitlements}

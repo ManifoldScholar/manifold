@@ -1,15 +1,11 @@
-import React, { PureComponent } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import {
-  DragDropContext,
-  Droppable
-} from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import Mapping from "./Mapping";
 import Instructions from "../Instructions";
 import Attribute from "./Attribute";
 import setter from "../setter";
 import omitBy from "lodash/omitBy";
-import difference from "lodash/difference";
 import FieldWrapper from "../FieldWrapper";
 import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -28,144 +24,120 @@ const sortHeaders = props => {
   });
 };
 
-class FormColumnMap extends PureComponent {
-  static displayName = "Form.ColumnMap";
+function FormColumnMap(props) {
+  const { set, instructions, value, t } = props;
 
-  static propTypes = {
-    set: PropTypes.func.isRequired,
-    instructions: PropTypes.string.isRequired,
-    getModelValue: PropTypes.func.isRequired,
-    value: PropTypes.object.isRequired,
-    t: PropTypes.func
-  };
+  const [instanceId] = useState(() => Symbol("attributeMap"));
+  const [sortedHeaders] = useState(() => sortHeaders(props));
+  const sortedAttributes = sortAttributes(props);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      sortedHeaders: sortHeaders(props),
-      sortedAttributes: sortAttributes(props)
-    };
-  }
+  const valueRef = useRef(value);
+  valueRef.current = value;
+  const setRef = useRef(set);
+  setRef.current = set;
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (!prevState) return null;
-    const nextAttributes = sortAttributes(nextProps);
-    if (difference(prevState.sortedAttributes, nextAttributes)) {
-      return {
-        sortedAttributes: nextAttributes
-      };
-    }
+  useEffect(() => {
+    return monitorForElements({
+      canMonitor: ({ source }) => source.data.instanceId === instanceId,
+      onDrop({ source, location }) {
+        const target = location.current.dropTargets[0];
+        if (!target) return;
 
-    return null;
-  }
+        const position = target.data.position;
+        const column = source.data.column;
+        const updated = omitBy(valueRef.current, mapped => mapped === column);
+        updated[position] = column;
+        setRef.current(updated);
+      }
+    });
+  }, [instanceId]);
 
-  onDragEnd = result => {
-    if (!result.destination) return;
-    const currentMap = this.props.value;
-    const headerPosition = result.destination.droppableId;
-    const column = result.draggableId;
-    const updated = omitBy(currentMap, value => value === column);
-    updated[headerPosition] = column;
-    this.props.set(updated);
-  };
-
-  getHeaderPosition(header, props) {
+  const getHeaderPosition = header => {
     const headers = props.getModelValue(props.headers);
     return Object.keys(headers).find(key => headers[key] === header);
-  }
-
-  getCurrentMapping = position => {
-    return this.props.value[position] || null;
   };
 
-  autoMap = event => {
+  const getCurrentMapping = position => value[position] || null;
+
+  const autoMap = event => {
     event.preventDefault();
-    this.props.set(this.props.getModelValue("attributes[columnAutomap]"));
+    set(props.getModelValue("attributes[columnAutomap]"));
   };
 
-  unLinkMatch = (mapping, column) => {
-    const currentMap = this.props.value;
-    const updated = omitBy(currentMap, value => value === column);
-    this.props.set(updated);
+  const unLinkMatch = (mapping, column) => {
+    const updated = omitBy(value, mapped => mapped === column);
+    set(updated);
   };
 
   /* eslint-disable react/no-array-index-key */
-  render() {
-    const { sortedAttributes, sortedHeaders } = this.state;
-    const t = this.props.t;
-
-    return (
-      <>
-        <div>
-          <Instructions instructions={this.props.instructions} />
-        </div>
-        <div>
-          <button
-            onClick={this.autoMap}
-            className="button-secondary button-secondary--outlined"
-          >
-            {t("forms.attribute_map.auto_map")}
-          </button>
-        </div>
-        <DragDropContext
-          onDragStart={this.onDragStart}
-          onDragEnd={this.onDragEnd}
+  return (
+    <>
+      <div>
+        <Instructions instructions={instructions} />
+      </div>
+      <div>
+        <button
+          onClick={autoMap}
+          className="button-secondary button-secondary--outlined"
         >
-          <FieldWrapper>
-            <Styled.ColumnMap className="rbd-migration-resets">
-              <Styled.ColumnMappable>
-                <Styled.ColumnHeading>
-                  {t("forms.attribute_map.spreadsheet_cols")}
-                </Styled.ColumnHeading>
-                <Styled.MappableList>
-                  {sortedHeaders.map((header, index) => {
-                    const position = this.getHeaderPosition(header, this.props);
-                    const id = position || (index + 1).toString();
-                    return (
-                      <li key={index}>
-                        <Mapping
-                          index={index}
-                          name={header}
-                          id={id}
-                          match={this.getCurrentMapping(id)}
-                          unLink={this.unLinkMatch}
-                        />
-                      </li>
-                    );
-                  })}
-                </Styled.MappableList>
-              </Styled.ColumnMappable>
-              <Styled.Column>
-                <Styled.ColumnHeading>
-                  {t("forms.attribute_map.available")}
-                </Styled.ColumnHeading>
-                <Droppable droppableId="attributesAvailable" isDropDisabled>
-                  {(provided, snapshot) => (
-                    <Styled.Available ref={provided.innerRef}>
-                      {sortedAttributes.map((attribute, index) => {
-                        return (
-                          <Attribute
-                            key={attribute}
-                            name={attribute}
-                            index={index}
-                            isDragging={
-                              snapshot.draggingFromThisWith === attribute
-                            }
-                          />
-                        );
-                      })}
-                      {provided.placeholder}
-                    </Styled.Available>
-                  )}
-                </Droppable>
-              </Styled.Column>
-            </Styled.ColumnMap>
-          </FieldWrapper>
-        </DragDropContext>
-      </>
-    );
-  }
+          {t("forms.attribute_map.auto_map")}
+        </button>
+      </div>
+      <FieldWrapper>
+        <Styled.ColumnMap>
+          <Styled.ColumnMappable>
+            <Styled.ColumnHeading>
+              {t("forms.attribute_map.spreadsheet_cols")}
+            </Styled.ColumnHeading>
+            <Styled.MappableList>
+              {sortedHeaders.map((header, index) => {
+                const position = getHeaderPosition(header);
+                const id = position || (index + 1).toString();
+                return (
+                  <li key={index}>
+                    <Mapping
+                      name={header}
+                      id={id}
+                      instanceId={instanceId}
+                      match={getCurrentMapping(id)}
+                      unLink={unLinkMatch}
+                    />
+                  </li>
+                );
+              })}
+            </Styled.MappableList>
+          </Styled.ColumnMappable>
+          <Styled.Column>
+            <Styled.ColumnHeading>
+              {t("forms.attribute_map.available")}
+            </Styled.ColumnHeading>
+            <Styled.Available>
+              {sortedAttributes.map(attribute => (
+                <Attribute
+                  key={attribute}
+                  name={attribute}
+                  instanceId={instanceId}
+                />
+              ))}
+            </Styled.Available>
+          </Styled.Column>
+        </Styled.ColumnMap>
+      </FieldWrapper>
+    </>
+  );
   /* eslint-enable react/no-array-index-key */
 }
+
+FormColumnMap.displayName = "Form.ColumnMap";
+
+FormColumnMap.propTypes = {
+  set: PropTypes.func.isRequired,
+  instructions: PropTypes.string.isRequired,
+  getModelValue: PropTypes.func.isRequired,
+  value: PropTypes.object.isRequired,
+  attributes: PropTypes.string,
+  headers: PropTypes.string,
+  t: PropTypes.func
+};
 
 export default withTranslation()(setter(FormColumnMap));

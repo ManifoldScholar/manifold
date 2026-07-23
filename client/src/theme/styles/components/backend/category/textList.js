@@ -2,6 +2,7 @@ import {
   listUnstyled,
   utilityPrimary,
   dragging,
+  dropIndicator,
   defaultTransitionProps,
   blockLabelRound,
   buttonUnstyled,
@@ -39,9 +40,22 @@ export default `
       }
     }
 
+    &__drop-indicator {
+      ${dropIndicator()}
+
+      &--top {
+        top: 0;
+      }
+
+      &--bottom {
+        bottom: 0;
+      }
+    }
+
     &__text {
       --PopoverMenu-inset-block-start: calc(100% + 10px);
 
+      position: relative;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;

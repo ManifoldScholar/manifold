@@ -2,6 +2,12 @@ import styled from "@emotion/styled";
 import { defaultFocusStyle, setHoverStyle } from "theme/styles/mixins";
 import BaseInput from "../../BaseInput";
 
+export const Fieldset = styled.fieldset`
+  > legend + * {
+    margin-block-start: 0.75em;
+  }
+`;
+
 const BaseDropzone = styled.div`
   --Dropzone-aspect-ratio: 350 / 220;
 
@@ -77,6 +83,11 @@ export const Input = styled.input`
       ${defaultFocusStyle}
       outline-color: var(--focus-color);
     }
+  }
+
+  &[aria-disabled="true"] {
+    pointer-events: none;
+    cursor: default;
   }
 `;
 

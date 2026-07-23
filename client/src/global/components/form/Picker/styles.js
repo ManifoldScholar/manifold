@@ -4,6 +4,7 @@ import {
   listUnstyled,
   formInputBase,
   defaultTransitionProps,
+  defaultFocusStyle,
   fluidScale
 } from "theme/styles/mixins";
 import IconComposer from "global/components/utility/IconComposer";
@@ -58,6 +59,8 @@ export const TextInputSecondary = styled(TextInput)`
 
   &:focus-visible {
     border: 0;
+    ${defaultFocusStyle}
+    outline-offset: -1px;
   }
 
   &::placeholder {
@@ -99,7 +102,7 @@ export const ResultsList = styled.ul`
   overflow: auto;
   color: var(--color-base-neutral10);
   visibility: hidden;
-  background-color: var(--color-base-neutral90);
+  background-color: var(--color-base-neutral100);
   border-color: var(--color-base-neutral80);
   border-style: solid;
   border-width: 0 1px 1px;
@@ -117,25 +120,46 @@ export const ResultsList = styled.ul`
 `;
 
 export const Result = styled.li`
-  --Result-bg-color: ${({ $active, $selected }) => {
-    if ($active && $selected) return "var(--color-base-neutral75);";
-    if ($active) return "var(--color-base-neutral80);";
-    if ($selected) return "var(--color-base-neutral85);";
-    return "inherit;";
-  }}
+  --Result-bg-color: inherit;
 
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   padding: 8px 17px;
   font-family: var(--font-family-sans);
   color: var(--color-base-neutral10);
   cursor: pointer;
   background: var(--Result-bg-color);
+  outline: 1px solid var(--Result-outline-color, var(--Result-bg-color));
+  outline-offset: -1px;
+
+  &[aria-selected="true"] {
+    --Result-outline-color: var(--focus-color);
+  }
+
+  &[data-selected="true"] {
+    --Result-bg-color: var(--color-base-neutral90);
+
+    &:hover {
+      background: var(--color-base-neutral80);
+    }
+  }
 
   & + & {
     border: 0;
   }
 
   &:hover {
-    background: var(--color-base-neutral80);
+    background: var(--color-base-neutral85);
+  }
+
+  svg {
+    position: absolute;
+    margin-block-start: 0.125rem;
+  }
+
+  span {
+    padding-inline-start: 1.25rem;
   }
 `;
 

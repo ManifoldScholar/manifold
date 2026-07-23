@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { UIDConsumer } from "react-uid";
 import Utility from "global/components/utility";
 import PopoverMenu from "global/components/popover/Menu";
+import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
 import { withTranslation } from "react-i18next";
 
 class EntitiesListRow extends PureComponent {
@@ -40,7 +41,9 @@ class EntitiesListRow extends PureComponent {
     dragHandleProps: PropTypes.object,
     draggableProps: PropTypes.object,
     isDragging: PropTypes.bool,
+    dropEdge: PropTypes.oneOf(["top", "bottom"]),
     innerRef: PropTypes.func,
+    dragHandleRef: PropTypes.func,
     t: PropTypes.func,
     index: PropTypes.number,
     entityCount: PropTypes.number,
@@ -305,7 +308,7 @@ class EntitiesListRow extends PureComponent {
   }
 
   wrapWithDragHandler(child) {
-    const { draggableProps, dragHandleProps, innerRef } = this.props;
+    const { draggableProps, dragHandleProps, innerRef, dropEdge } = this.props;
     return (
       <div
         ref={innerRef}
@@ -313,6 +316,10 @@ class EntitiesListRow extends PureComponent {
         {...dragHandleProps}
         className="entity-row__drag-container"
       >
+        <DropEdgeIndicator
+          edge={dropEdge}
+          baseClass="entity-row__drop-indicator"
+        />
         {child}
       </div>
     );
@@ -355,7 +362,9 @@ class EntitiesListRow extends PureComponent {
     return (
       <>
         <span
+          ref={this.props.dragHandleRef}
           className="entity-row__utility-button entity-row__utility-button--handle"
+          tabIndex={-1}
           aria-hidden
         >
           <Utility.IconComposer icon="grabber32" size={26} />

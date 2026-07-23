@@ -11,6 +11,7 @@ class ProjectContentBlockInListAvailable extends PureComponent {
     typeComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     onClickAdd: PropTypes.func,
     disabled: PropTypes.bool,
+    dragHandleRef: PropTypes.func,
     t: PropTypes.func
   };
 
@@ -21,7 +22,7 @@ class ProjectContentBlockInListAvailable extends PureComponent {
       <TypeComponent>
         {block => (
           <div
-            {...this.props.dragHandleProps}
+            ref={this.props.dragHandleRef}
             className="backend-content-block__inner"
           >
             <Identity icon={block.icon} title={block.title} />
@@ -30,8 +31,10 @@ class ProjectContentBlockInListAvailable extends PureComponent {
               aria-label={this.props.t("layout.add_block", {
                 blockTitle: this.props.t(block.title)
               })}
-              onClick={this.props.onClickAdd}
-              disabled={this.props.disabled}
+              onClick={event => {
+                if (!this.props.disabled) this.props.onClickAdd(event);
+              }}
+              aria-disabled={this.props.disabled || undefined}
             >
               <Utility.IconComposer
                 icon="circlePlus32"
