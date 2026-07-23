@@ -7,7 +7,6 @@ import TextsInner from "./TextsInner";
 
 const UNCATEGORIZED = "uncategorized";
 
-/* Excludes the empty-category placeholder, which is not a row. */
 const TEXT_SELECTOR = ".texts-list__text:not(.texts-list__text--placeholder)";
 
 export default function CategoryListTexts({
@@ -27,9 +26,6 @@ export default function CategoryListTexts({
     itemSelector: TEXT_SELECTOR
   });
 
-  // One stable callback ref: the drop target needs the element in state, the
-  // focus hook needs it in a ref. An inline arrow would re-register the drop
-  // target on every render.
   const setListElement = useCallback(
     node => {
       setElement(node);

@@ -63,8 +63,7 @@ function ReadingGroupsList({
 
   const destroyRG = useApiCallback(readingGroupsAPI.destroy);
 
-  /* Only covers single-row deletes; bulk delete removes an arbitrary set, which
-     `rememberRemoval` (one id) can't express. */
+  /* Singled deletes only */
   const { listRef, rememberRemoval } = useFocusAfterRemoval(readingGroups);
 
   const onDelete = (id, name) => {

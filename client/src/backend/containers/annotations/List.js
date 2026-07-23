@@ -67,8 +67,7 @@ function AnnotationsList({
 
   const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
 
-  /* Only covers single-row deletes; bulk delete removes an arbitrary set, which
-     `rememberRemoval` (one id) can't express. */
+  /* Single deletes only, no bulk delete */
   const { listRef, rememberRemoval } = useFocusAfterRemoval(annotations);
 
   const onDelete = id => {

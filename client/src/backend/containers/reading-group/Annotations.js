@@ -75,8 +75,7 @@ function ReadingGroupAnnotationsContainer({
 
   const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
 
-  /* Only covers single-row deletes; bulk delete removes an arbitrary set, which
-     `rememberRemoval` (one id) can't express. */
+  /* Single deletes only */
   const { listRef, rememberRemoval } = useFocusAfterRemoval(data);
 
   const onDelete = id => {

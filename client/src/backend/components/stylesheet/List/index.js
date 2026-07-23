@@ -26,7 +26,6 @@ function StylesheetList({
   const [ordered, setOrdered] = useState(() => cloneStylesheets(stylesheets));
   const [isListDragging, setIsListDragging] = useState(false);
 
-  // Rows are `ordered-records-item` divs rather than EntitiesList `li`s.
   const { listRef, rememberRemoval } = useFocusAfterRemoval(ordered, {
     itemSelector: ".ordered-records-item"
   });

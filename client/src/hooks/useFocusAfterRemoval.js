@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
 
-/* Rows of an EntitiesList. Scoping to the inner `ul` keeps pagination's own
-   `li` elements out of the row query. */
 export const ENTITY_LIST_ITEM_SELECTOR = ".entity-list__list > li";
 
 const FOCUSABLE_SELECTOR = [
@@ -14,18 +12,6 @@ const FOCUSABLE_SELECTOR = [
 ].join(", ");
 
 /**
- * Keeps keyboard focus in place when a list item is deleted.
- *
- * Deleting a row unmounts the control that held focus, dropping focus to
- * `<body>`. Call `rememberRemoval(id)` just before the destroy request; once the
- * refreshed list commits without that id, focus moves to the equivalent control
- * on the next row (or the previous one, if the last row was removed).
- *
- * Neighbors are resolved positionally rather than by id: after the removal
- * commits, whatever now sits at the removed index *is* the next item. That way
- * rows need no per-row identifier, only the `focusSelector` marker on the
- * control worth landing on.
- *
  * @param {Array}    items           the list as currently rendered
  * @param {function} [getId]         id accessor, defaults to `item => item.id`
  * @param {string}   [itemSelector]  finds row elements within `listRef`
