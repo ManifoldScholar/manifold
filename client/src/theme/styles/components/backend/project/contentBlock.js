@@ -165,8 +165,9 @@ export default `
         -webkit-touch-callout: none;
       }
 
-      &:disabled {
+      &[aria-disabled="true"] {
         cursor: not-allowed;
+        pointer-events: none;
 
         &:hover {
           color: inherit;
