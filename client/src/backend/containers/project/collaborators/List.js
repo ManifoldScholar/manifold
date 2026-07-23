@@ -14,8 +14,7 @@ import withConfirmation from "hoc/withConfirmation";
 
 const authorization = new Authorization();
 
-/* Rows are keyed by maker, not by the flattened-collaborator id that `entity.id`
-   returns, and deletion is by maker — so focus tracking has to match on that. */
+/* Rows are keyed by maker, not the flattened-collaborator id that `entity.id` returns. */
 const getMakerId = collaborator => collaborator.relationships?.maker?.id;
 
 function ProjectCollaboratorsContainer({ confirm }) {

@@ -67,8 +67,7 @@ function CommentsList({
 
   const destroyComment = useApiCallback(commentsAPI.destroy);
 
-  /* Only covers single-row deletes; bulk delete removes an arbitrary set, which
-     `rememberRemoval` (one id) can't express. */
+  /* Single deletes only */
   const { listRef, rememberRemoval } = useFocusAfterRemoval(comments);
 
   const onDelete = id => {
