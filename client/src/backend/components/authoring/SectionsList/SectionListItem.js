@@ -100,7 +100,7 @@ function SectionListItem(props) {
           <Tooltip
             content={t("texts.section.start_tooltip_content")}
             xOffset="-100px"
-            yOffset="43px"
+            yOffset="36px"
           >
             <Styled.Button
               onClick={() => onSetStart(section.id)}
@@ -115,7 +115,7 @@ function SectionListItem(props) {
           <Tooltip
             content={"Edit section in Manifold editor."}
             xOffset="-100px"
-            yOffset="43px"
+            yOffset="36px"
           >
             <Styled.Button
               as={Link}
@@ -135,7 +135,7 @@ function SectionListItem(props) {
           <Tooltip
             content={"Reingest section from source document."}
             xOffset="-100px"
-            yOffset="43px"
+            yOffset="36px"
           >
             <Styled.Button
               as={Link}

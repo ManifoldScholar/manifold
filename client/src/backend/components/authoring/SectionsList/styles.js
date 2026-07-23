@@ -60,9 +60,11 @@ export const BG = styled.div`
   z-index: -10;
   background-color: var(--box-bg-color);
   border-radius: var(--box-border-radius);
+  transition: background-color var(--transition-duration-default)
+    var(--transition-timing-function);
 
   ${({ $isDragging }) =>
-    $isDragging && `background-color: var(--drawer-bg-color)`}
+    $isDragging && `background-color: var(--drawer-bg-color)`};
 `;
 
 export const KeyboardButtons = styled.div``;
@@ -83,10 +85,8 @@ export const ButtonGroup = styled.div`
 `;
 
 export const Inner = styled.div`
-  --item-background: var(--box-bg-color);
-
   ${draggable}
-  padding: 12px ${fluidScale("24px", "16px")};
+  padding: 6px ${fluidScale("24px", "16px")};
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -101,12 +101,20 @@ export const Inner = styled.div`
 export const Button = styled.button`
   ${buttonUnstyled}
 
-  padding-inline: 3px;
+  padding: 6px 3px;
 
   ${respond(`padding-inline: 6px;`, 30)};
 
   &:focus-visible {
     ${defaultFocusStyle}
+  }
+
+  &:hover {
+    color: var(--hover-color);
+  }
+
+  &:has(+ [role="tooltip"]:hover) {
+    color: var(--hover-color);
   }
 `;
 
