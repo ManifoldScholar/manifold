@@ -22,7 +22,7 @@ function ProjectTextsContainer({
 }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { project, refresh } = useOutletContext() || {};
+  const { project, refresh, textRemovedRef } = useOutletContext() || {};
 
   const [categories, setCategories] = useState([]);
   const [texts, setTexts] = useState([]);
@@ -30,9 +30,13 @@ function ProjectTextsContainer({
   useEffect(() => {
     if (project) {
       setCategories(project.relationships.textCategories.slice(0));
-      setTexts(project.relationships.texts.slice(0));
+      setTexts(
+        project.relationships.texts
+          .filter(text => text.id !== textRemovedRef.current)
+          .slice(0)
+      );
     }
-  }, [project]);
+  }, [project, textRemovedRef]);
 
   const updateCategory = useApiCallback(textCategoriesAPI.update, {
     requestKey: requests.beTextCategoryUpdate,
@@ -69,6 +73,7 @@ function ProjectTextsContainer({
       if (onConfirmed) onConfirmed();
       await destroyText(text.id);
       if (refresh) refresh();
+      textRemovedRef.current = text.id;
       const notification = {
         level: 0,
         id: `TEXT_DESTROYED_${text.id}`,
