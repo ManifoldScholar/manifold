@@ -21,6 +21,7 @@ export const Wrapper = styled.div`
 
 export const Item = styled.li`
   position: relative;
+  isolation: isolate;
   color: var(--color-neutral-text-extra-light);
 
   &:first-child {

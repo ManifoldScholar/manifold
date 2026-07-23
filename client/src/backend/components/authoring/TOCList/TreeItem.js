@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import invariant from "tiny-invariant";
 import {
   draggable,
   dropTargetForElements
 } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import { preserveOffsetOnSource } from "@atlaskit/pragmatic-drag-and-drop/element/preserve-offset-on-source";
-import { setCustomNativeDragPreview } from "@atlaskit/pragmatic-drag-and-drop/element/set-custom-native-drag-preview";
 import {
   attachInstruction,
   extractInstruction
@@ -50,7 +47,6 @@ export default function TreeItem({
 
   const [dragging, setDragging] = useState(false);
   const [instruction, setInstruction] = useState(null);
-  const [previewContainer, setPreviewContainer] = useState(null);
 
   const { id } = item;
   const { title } = item.data ?? {};
@@ -68,20 +64,6 @@ export default function TreeItem({
       onDragStart: () => setDragging(true),
       onDrop: () => {
         setDragging(false);
-        setPreviewContainer(null);
-      },
-      onGenerateDragPreview({ nativeSetDragImage, location }) {
-        setCustomNativeDragPreview({
-          nativeSetDragImage,
-          getOffset: preserveOffsetOnSource({
-            element,
-            input: location.current.input
-          }),
-          render({ container }) {
-            setPreviewContainer(container);
-            return () => setPreviewContainer(null);
-          }
-        });
       }
     });
   }, [id, title, level, uniqueContextId]);
@@ -132,8 +114,6 @@ export default function TreeItem({
     item.data
   ]);
 
-  // Dropping *onto* this row (make-child) highlights the row as the new parent;
-  // a blocked make-child (depth-9 cap) highlights it in the error color.
   const isBlocked = instruction?.type === "instruction-blocked";
   const isParentTarget = instruction?.type === "make-child" || isBlocked;
 
@@ -190,11 +170,6 @@ export default function TreeItem({
           instruction={instruction}
           indentPerLevel={indentPerLevel}
         />
-        {previewContainer &&
-          createPortal(
-            <Styled.Preview $depth={level}>{title}</Styled.Preview>,
-            previewContainer
-          )}
       </Styled.Row>
       {childRows.length > 0 && (
         <Styled.Group>
