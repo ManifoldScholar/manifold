@@ -39,8 +39,6 @@ function ReadingGroupMembersContainer({ confirm }) {
     const message = t("modals.delete_membership_body");
     if (confirm)
       confirm(heading, message, async () => {
-        // Record where focus should land before the row unmounts. Cancelling
-        // the confirmation never reaches here, so focus is never moved.
         rememberRemoval(id);
         await deleteMembership(id);
         refreshMembers();

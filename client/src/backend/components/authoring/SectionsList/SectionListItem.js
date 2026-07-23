@@ -59,7 +59,6 @@ function SectionListItem(props) {
 
   const doDelete = async () => {
     setError(null);
-    // Record where focus should land before the row unmounts.
     if (onBeforeDestroy) onBeforeDestroy(section.id);
     const res = await deleteSection(section.id);
     if (res?.errors) setError(res.errors);

@@ -28,13 +28,9 @@ function FormColumnMap(props) {
   const { set, instructions, value, t } = props;
 
   const [instanceId] = useState(() => Symbol("attributeMap"));
-  // Headers are fixed at mount (mirrors the old constructor-only state);
-  // available attributes are recomputed each render from the current value.
   const [sortedHeaders] = useState(() => sortHeaders(props));
   const sortedAttributes = sortAttributes(props);
 
-  // The window-level monitor is registered once but needs the current mapping
-  // and setter on drop, so read them through refs.
   const valueRef = useRef(value);
   valueRef.current = value;
   const setRef = useRef(set);

@@ -62,7 +62,6 @@ function ProjectEventsContainer({
       failureNotification
       failureRedirect={lh.link("backendProjects")}
     >
-      {/* Holds focus after the last event is deleted; see useFocusAfterRemoval. */}
       <section ref={listRef} tabIndex={-1} aria-label={t("projects.activity")}>
         <EntitiesList
           entityComponent={EventRow}

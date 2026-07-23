@@ -150,7 +150,6 @@ const removeKey = (k, { [k]: _, ...o }) => o;
 export const removeKeys = (keys, o) =>
   keys.reduce((r, k) => removeKey(k, r), o);
 
-// Toggle (or otherwise patch) a single item — replaces @atlaskit/tree's `mutateTree`.
 export const mutateTreeItem = (tree, id, patch) => ({
   ...tree,
   items: {
@@ -159,9 +158,6 @@ export const mutateTreeItem = (tree, id, patch) => ({
   }
 });
 
-// Metadata for one sibling group, used during the recursive (nested-ul) render.
-// Each entry carries what the tree-item hitbox, ARIA attributes, and keyboard
-// menu need; the renderer recurses into a child group with `level + 1`.
 export const getRowsForChildren = (items, childrenIds, level) =>
   (childrenIds || []).map((id, i) => {
     const positionInSet = i + 1;
@@ -171,15 +167,11 @@ export const getRowsForChildren = (items, childrenIds, level) =>
       level,
       positionInSet,
       isLastInGroup: positionInSet === childrenIds.length,
-      // Whether the keyboard menu's nest/un-nest actions are possible.
       canUnnest: level > 0,
       canNest: !!prevSibling && !!prevSibling.data?.isValidParent
     };
   });
 
-// The ids of the rows the tree actually renders, in document order: a
-// depth-first walk that descends only into expanded parents. Collapsed
-// children have no row, so they're skipped.
 export const getVisibleRowIds = (items, childrenIds) =>
   (childrenIds ?? items?.root?.children ?? []).flatMap(id => {
     const item = items[id];
@@ -187,7 +179,6 @@ export const getVisibleRowIds = (items, childrenIds) =>
     return [id, ...(expanded ? getVisibleRowIds(items, item.children) : [])];
   });
 
-// Ids from the top-level ancestor down to (and including) `id`.
 export const getPathToItem = (items, id) => {
   const path = [];
   let current = id;
@@ -255,9 +246,6 @@ const rebuild = items => {
   return next;
 };
 
-// Apply a tree-item instruction (from the pragmatic-dnd tree-item hitbox) to the
-// tree — replaces @atlaskit/tree's `moveItemOnTree`. Returns the original tree
-// unchanged when the move is a no-op or blocked.
 export const moveItemInTree = (tree, { itemId, targetId, instruction }) => {
   if (!instruction || !itemId || !targetId || itemId === targetId) return tree;
   if (isDescendant(tree.items, itemId, targetId)) return tree;
@@ -297,8 +285,6 @@ export const moveItemInTree = (tree, { itemId, targetId, instruction }) => {
   return rebuild(items);
 };
 
-// Keyboard-driven moves. `action` is one of "up" | "down" | "indent" | "outdent".
-// Returns { tree, announce, params } or null when the move is not possible.
 export const keyboardMove = (tree, id, action) => {
   const { items } = tree;
   const parentId = items[id]?.data?.parentId || "root";

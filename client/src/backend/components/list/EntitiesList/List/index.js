@@ -101,11 +101,6 @@ export default class ListEntities extends PureComponent {
     search: ListEntities.validateSearch,
     pagination: PropTypes.object,
     paginationPadding: PropTypes.number,
-    /* Opt-in focus management: attach the ref returned by useFocusAfterRemoval
-       so it can find rows and, once the last one is deleted, take focus itself.
-       The wrapper is the right anchor because it outlives the rows — the empty
-       message renders inside it. Give it an `aria-label` when there's no
-       `title`, so focusing it announces something. */
     wrapperRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     "aria-label": PropTypes.string,
     useDragHandle: PropTypes.bool,

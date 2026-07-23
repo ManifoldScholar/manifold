@@ -35,7 +35,6 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
 
   const scrollableRef = useRef(null);
 
-  // Keep the latest tree available to dnd callbacks without re-binding effects.
   const treeRef = useRef(tree);
   treeRef.current = tree;
 
@@ -84,8 +83,6 @@ export default function TOCList({ tree, setTree, textId, error, setError }) {
     async entryId => {
       setError(null);
       const current = treeRef.current;
-      // Record where focus should land before the row unmounts. A failed
-      // request leaves the entry in place, so focus is never moved.
       rememberRemoval(entryId);
       const toDelete = [
         entryId,

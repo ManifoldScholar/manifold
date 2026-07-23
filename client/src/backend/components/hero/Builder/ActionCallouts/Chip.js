@@ -30,8 +30,6 @@ export default function Chip({
   const id = actionCallout.id;
   const chipId = `chip-${id}`;
 
-  // `setElement` refs the whole chip (draggable + drop target); `setHandle` refs
-  // the grabber icon, so the edit button stays clickable.
   const { setElement, setHandle, isDragging, closestEdge } = useReorderableItem(
     {
       instanceId,

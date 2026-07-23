@@ -390,8 +390,6 @@ export const dragging = `
   box-shadow: 0 31px 26px -13px rgba(0 0 0 / 0.33);
 `;
 
-// A closest-edge drop indicator: a thin line with a leading dot. The caller is
-// responsible for positioning the edge (e.g. `top`/`bottom`) on the element.
 export const dropIndicator = ({
   color = "var(--color-accent-primary)",
   startInset = "0",

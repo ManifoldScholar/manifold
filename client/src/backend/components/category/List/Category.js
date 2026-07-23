@@ -116,7 +116,6 @@ export default function CategoryListCategory({
                 {
                   id: "up_category",
                   label: t("actions.dnd.move_up_category"),
-                  // index starts with 0, positions start with 1
                   onClick: () =>
                     updateCategoryPosition(
                       category,
@@ -129,7 +128,6 @@ export default function CategoryListCategory({
                 {
                   id: "down_category",
                   label: t("actions.dnd.move_down_category"),
-                  // index starts with 0, positions start with 1
                   onClick: () =>
                     updateCategoryPosition(
                       category,

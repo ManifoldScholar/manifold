@@ -80,8 +80,6 @@ function ProjectContentSectionsCurrent({
 
     return {
       ...bound,
-      // Record where focus should land before the block unmounts. Cancelling
-      // the confirmation leaves it in place, so focus is never moved.
       deleteBlock: addtlParams => {
         rememberRemoval(block.id);
         bound.deleteBlock(addtlParams);
@@ -96,7 +94,6 @@ function ProjectContentSectionsCurrent({
 
   return (
     <>
-      {/* This wrapper holds focus after the last block is deleted. */}
       <div ref={listRef} tabIndex={-1}>
         <Header subtitle={t("layout.layout")} />
         {Object.keys(zones).map(zone => (

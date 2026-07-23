@@ -31,16 +31,12 @@ function StylesheetList({
     itemSelector: ".ordered-records-item"
   });
 
-  // Reset the internal ordering only when the parent text changes, mirroring
-  // the old getDerivedStateFromProps (which keyed off props.text).
   const [textRef, setTextRef] = useState(text);
   if (textRef !== text) {
     setTextRef(text);
     setOrdered(cloneStylesheets(stylesheets));
   }
 
-  // The window-level monitor is registered once but needs the current order and
-  // persistence callback on drop, so read them through refs.
   const orderedRef = useRef(ordered);
   orderedRef.current = ordered;
   const updatePositionRef = useRef(callbacks.updatePosition);
@@ -106,7 +102,6 @@ function StylesheetList({
 
   return (
     <>
-      {/* The section holds focus after the last stylesheet is deleted. */}
       <section className="ordered-records" ref={listRef} tabIndex={-1}>
         <div
           className={classNames({

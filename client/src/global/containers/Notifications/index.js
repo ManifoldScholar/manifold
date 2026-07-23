@@ -84,8 +84,6 @@ export class NotificationsComponent extends Component {
       if (!currentIds.has(id)) this.announcedIds.delete(id);
     });
 
-    // Once every notification is gone, cancel any pending announcement and tidy
-    // the live region so stale text isn't left behind.
     if (current.length === 0) {
       if (this.announceTimer) {
         clearTimeout(this.announceTimer);

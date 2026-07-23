@@ -457,9 +457,6 @@ export class PickerComponent extends PureComponent {
     else this.focusOnSearchInput();
   };
 
-  // Returns the adjacent selection's remove button (the next one, or the
-  // previous one when removing the last selection), or null when no other
-  // selections remain.
   nextFocusAfterRemoval(targetEl) {
     const button = targetEl?.closest?.("button");
     if (!button) return null;

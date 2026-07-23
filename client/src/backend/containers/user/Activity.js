@@ -41,7 +41,6 @@ function UserActivityContainer({ confirm }) {
 
   const deleteAnnotation = useApiCallback(annotationsAPI.destroy);
 
-  // The two lists are independent, so each tracks its own focus.
   const {
     listRef: annotationsListRef,
     rememberRemoval: rememberAnnotationRemoval
@@ -52,8 +51,6 @@ function UserActivityContainer({ confirm }) {
     const message = t("modals.confirm_body");
     if (confirm)
       confirm(heading, message, async () => {
-        // Record where focus should land before the row unmounts. Cancelling
-        // the confirmation never reaches here, so focus is never moved.
         rememberAnnotationRemoval(id);
         await deleteAnnotation(id);
         refreshAnnotations();
@@ -82,8 +79,6 @@ function UserActivityContainer({ confirm }) {
     const message = t("modals.delete_membership_body");
     if (confirm)
       confirm(heading, message, async () => {
-        // Record where focus should land before the row unmounts. Cancelling
-        // the confirmation never reaches here, so focus is never moved.
         rememberMembershipRemoval(id);
         await deleteMembership(id);
         refreshRgs();

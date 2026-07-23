@@ -23,8 +23,6 @@ export default function CategoryListTexts({
   const categoryId = category?.id ?? UNCATEGORIZED;
   const [element, setElement] = useState(null);
 
-  // Neighbors are scoped to this category's texts, not the project-wide list
-  // the container holds, so the hook belongs here rather than in the container.
   const { listRef, rememberRemoval } = useFocusAfterRemoval(texts, {
     itemSelector: TEXT_SELECTOR
   });
@@ -43,8 +41,6 @@ export default function CategoryListTexts({
   const listCallbacks = useMemo(
     () => ({
       ...callbacks,
-      // Record the neighbor only once the confirm dialog is accepted, so a
-      // cancelled delete leaves no stale pending focus behind.
       destroyText: text =>
         callbacks.destroyText(text, () => rememberRemoval(text.id))
     }),
