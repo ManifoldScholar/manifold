@@ -28,8 +28,7 @@ export class FormTusUpload extends Component {
     value: PropTypes.any, // the current value of the field in the connected model
     initialValue: PropTypes.string, // the initial value of the input when it's rendered
     errors: PropTypes.array,
-    t: PropTypes.func,
-    disabled: PropTypes.bool
+    t: PropTypes.func
   };
 
   static defaultProps = {
@@ -128,7 +127,6 @@ export class FormTusUpload extends Component {
             inputId={`${this.idPrefix}-${id}`}
             idForError={`${this.idForErrorPrefix}-${id}`}
             idForInstructions={`${this.idForInstructionsPrefix}-${id}`}
-            disabled={this.props.disabled}
           />
         )}
       </UIDConsumer>

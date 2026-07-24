@@ -11,8 +11,7 @@ class FormUploadImagePreview extends PureComponent {
     handleRemove: PropTypes.func.isRequired,
     t: PropTypes.func,
     instructionsSingleLine: PropTypes.bool,
-    inputId: PropTypes.string.isRequired,
-    disabled: PropTypes.bool
+    inputId: PropTypes.string.isRequired
   };
 
   get imageUrl() {
@@ -42,7 +41,6 @@ class FormUploadImagePreview extends PureComponent {
                   type="button"
                   data-id="remove"
                   onClick={this.props.handleRemove}
-                  aria-disabled={this.props.disabled}
                 />,
                 <Prompt as="label" htmlFor={this.props.inputId} />,
                 ...(this.props.instructionsSingleLine ? [] : [<br />])
@@ -53,7 +51,6 @@ class FormUploadImagePreview extends PureComponent {
         <Image
           alt={this.props.t("forms.upload.image_preview_alt")}
           src={this.imageUrl}
-          data-disabled={this.props.disabled}
         />
       </Preview>
     );

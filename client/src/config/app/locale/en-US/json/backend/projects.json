@@ -116,6 +116,7 @@
     "thumbnail": {
       "thumbnail_label": "Thumbnail for {{title}}",
       "thumbnail": "Thumbnail",
+      "type_label": "Thumbnail Type",
       "current_thumbnail": "Current Project Thumbnail",
       "default_thumbnail": "Default Thumbnail Background Color",
       "custom_thumbnail": "Custom Thumbnail Image",
@@ -125,7 +126,7 @@
       "orange": "Orange",
       "violet": "Violet",
       "white": "White",
-      "color_instructions": "Select A Different Background Color",
+      "color_instructions": "Choose a Background Color",
       "alt_label": "Thumbnail Alt Text"
     },
     "permissions": {
@@ -138,7 +139,7 @@
       "user_placeholder": "Select a User",
       "modify_project": "Can modify project?",
       "modify_project_properties": "Can modify project resources and texts?",
-      "author": "Is a project author?",
+      "is_author": "Is a project author?",
       "submit_label": "Save Permissions",
       "project_editor": "Project Editor",
       "metadata_editor": "Project Collaborator",

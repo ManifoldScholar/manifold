@@ -1,4 +1,4 @@
-import { respond, fluidScale, defaultFocusStyle } from "theme/styles/mixins";
+import { fluidScale, defaultFocusStyle } from "theme/styles/mixins";
 
 export default `
   .color-picker {
@@ -9,36 +9,6 @@ export default `
     justify-content: space-between;
     padding: 15px;
 
-    &::after {
-      font-family: var(--font-family-sans);
-      position: absolute;
-      top: calc(100% - 13px);
-      left: calc(50% - 25px);
-      z-index: 1;
-      width: 50px;
-      height: 26px;
-      font-size: 14px;
-      font-weight: var(--font-weight-semibold);
-      line-height: 26px;
-      color: var(--color-neutral-text-extra-light);
-      text-transform: uppercase;
-      letter-spacing: 0.107em;
-      content: 'Or';
-      background-color: var(--color-base-neutral90);
-
-      ${respond(
-        `
-          top: calc(50% - 50px);
-          right: -13px;
-          left: auto;
-          width: 26px;
-          height: 100px;
-          line-height: 100px;
-        `,
-        95
-      )}
-    }
-
     &__inner {
       display: flex;
     }
@@ -47,7 +17,7 @@ export default `
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      width: ${fluidScale("138px", "83px")};
+      width: 138px;
     }
 
     &__item {

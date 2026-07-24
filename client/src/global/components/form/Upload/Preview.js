@@ -15,8 +15,7 @@ export default class FormUploadPreview extends PureComponent {
     preview: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     handleRemove: PropTypes.func,
     fileName: PropTypes.string,
-    inputId: PropTypes.string,
-    disabled: PropTypes.bool
+    inputId: PropTypes.string
   };
 
   get isImage() {
@@ -110,8 +109,7 @@ export default class FormUploadPreview extends PureComponent {
       handleRemove: this.props.handleRemove,
       isBuilder: this.props.isBuilder,
       instructionsSingleLine: this.props.instructionsSingleLine,
-      inputId: this.props.inputId,
-      disabled: this.props.disabled
+      inputId: this.props.inputId
     };
     if (this.isImage)
       return <ImagePreview image={this.currentPreview} {...childProps} />;

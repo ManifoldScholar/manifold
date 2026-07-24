@@ -2,12 +2,6 @@ import styled from "@emotion/styled";
 import { defaultFocusStyle, setHoverStyle } from "theme/styles/mixins";
 import BaseInput from "../../BaseInput";
 
-export const Fieldset = styled.fieldset`
-  > legend + * {
-    margin-block-start: 0.75em;
-  }
-`;
-
 const BaseDropzone = styled.div`
   --Dropzone-aspect-ratio: 350 / 220;
 
@@ -49,11 +43,18 @@ export const Dropzone = styled(BaseDropzone)`
   }
 `;
 
+export const Fieldset = styled.fieldset`
+  > legend + ${Dropzone} {
+    margin-block-start: 0.75em;
+  }
+`;
+
 export const AvatarBuilderDropzone = styled(BaseDropzone)`
   --Dropzone-aspect-ratio: 275 / 200;
 
   position: relative;
   width: 100%;
+  max-block-size: 200px;
 `;
 
 export const Prompt = styled.span`
@@ -83,11 +84,6 @@ export const Input = styled.input`
       ${defaultFocusStyle}
       outline-color: var(--focus-color);
     }
-  }
-
-  &[aria-disabled="true"] {
-    pointer-events: none;
-    cursor: default;
   }
 `;
 

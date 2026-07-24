@@ -13,8 +13,7 @@ class ColorPicker extends Component {
     wrapperClass: PropTypes.string,
     getModelValue: PropTypes.func,
     label: PropTypes.string,
-    t: PropTypes.func,
-    disabled: PropTypes.bool
+    t: PropTypes.func
   };
 
   label() {
@@ -90,13 +89,8 @@ class ColorPicker extends Component {
                     id={`${id}-${color.value}`}
                     name={id}
                     checked={checked}
-                    onChange={
-                      this.props.disabled
-                        ? null
-                        : () => this.props.onChange(color)
-                    }
+                    onChange={() => this.props.onChange(color)}
                     className="color-picker__input"
-                    aria-disabled={this.props.disabled}
                   />
                   <span className="color-picker__indicator" aria-hidden="true">
                     {checked && (
