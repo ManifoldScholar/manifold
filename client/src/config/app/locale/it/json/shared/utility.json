@@ -1,0 +1,126 @@
+{
+  "search": {
+    "title": "Ricerca",
+    "form": "Modulo di ricerca",
+    "results": "Risultati della ricerca",
+    "instructions": "Inserire i criteri di ricerca",
+    "placeholder": "Cerca...",
+    "no_results": "Non sono stati trovati risultati.",
+    "show_all_excerpts": "Mostra tutti gli estratti",
+    "show_only_relevant": "Mostra solo gli estratti pi� rilevanti",
+    "annotation_title": "{{name}} <0>annotato</0> {{entity}}",
+    "description_project_scope": "Ricerca in tutti i contenuti del progetto",
+    "description_full_scope": "Ricerca tra tutti i contenuti e i progetti",
+    "everything": "Tutto",
+    "scopes_label": "Ricerca all'interno:",
+    "result_types_label": "Mostra i risultati per:",
+    "execute": "Eseguire la ricerca",
+    "global_label": "Ricerca nel sito"
+  },
+  "filters": {
+    "featured_projects": "In primo piano $t(glossary.project_other)",
+    "reset_announcement": "Azzeramento della ricerca e dei filtri.",
+    "reset_search": "$t(actions.reset) Ricerca",
+    "reset_filters": "$t(actions.reset) Filtri",
+    "reset_search_and_filters": "$t(actions.reset) Ricerca + Filtri",
+    "show_all": "$t(actions.show) tutti",
+    "labels": {
+      "filter_results": "Filtrare i risultati",
+      "sort_results": "Ordinamento dei risultati",
+      "by_kind": "Filtrare per tipo",
+      "by_member": "Filtrare per membro",
+      "order_collection": "Ordinare la raccolta entro:",
+      "by_section": "Filtrare per sezione di testo",
+      "tag": "Tag",
+      "by_text": "Filtrare per testo",
+      "by_status": "Filtrare per stato",
+      "by_role": "Filtrare per ruolo",
+      "by_draft": "Filtrare per bozza",
+      "order_results": "Risultati dell'ordine:"
+    },
+    "default_options": {
+      "type": "Tipo",
+      "members": "Tutti i membri",
+      "sections": "Tutte le sezioni",
+      "tag": "Tag",
+      "text": "Tutti i testi"
+    },
+    "sort_options": {
+      "none_selected": "Ordina",
+      "alphabetical": "A-Z",
+      "reverse_alpha": "Z-A"
+    },
+    "group_sort_options": {
+      "newest_first": "Prima i gruppi pi� recenti",
+      "oldest_first": "Prima i gruppi pi� vecchi",
+      "earliest_start_date": "Data di inizio del corso",
+      "latest_start_date": "Ultima data di inizio del corso",
+      "earliest_end_date": "Data di fine corso",
+      "latest_end_date": "Ultima data di fine corso"
+    },
+    "group_status_options": {
+      "active": "Attivo",
+      "archived": "Archiviato"
+    },
+    "collection_sort_options": {
+      "created_at_desc": "Data di creazione (prima la pi� recente)",
+      "created_at_asc": "Data di creazione (prima la pi� vecchia)",
+      "updated_at_desc": "Ultimo aggiornamento (prima il pi� recente)",
+      "updated_at_asc": "Ultimo aggiornamento (prima il pi� vecchio)",
+      "title_asc": "Titolo dalla A alla Z",
+      "title_desc": "Titolo dalla Z alla A",
+      "publication_date_desc": "Data di pubblicazione (prima la più recente)",
+      "publication_date_asc": "Data di pubblicazione (prima la più vecchia)"
+    }
+  },
+  "pagination": {
+    "previous": "Precedente",
+    "previous_short": "Prev",
+    "previous_page": "$t(pagination.previous) pagina",
+    "next": "Avanti",
+    "next_page": "$t(pagination.next) pagina",
+    "go_to_page": "Vai alla pagina{{number}}",
+    "page_number": "Pagina {{number}}",
+    "next_slide": "Vai alla diapositiva successiva",
+    "previous_slide": "Vai alla diapositiva precedente",
+    "pagination": "Paginazione",
+    "compact": "Pagina {{current}} / {{total}}",
+    "aria_label": "Paginazione"
+  },
+  "dates": {
+    "added": "aggiunto",
+    "added_title_case": "Aggiunto",
+    "added_on": "Aggiunto il",
+    "created_title_case": "Creato",
+    "resource_added": "Risorse $t(dates.added)",
+    "type_of_resource_added": "{{kind}} $t(dates.added)",
+    "collection_created": "Collezione creata",
+    "published": "pubblicato",
+    "published_title_case": "Pubblicato",
+    "updated": "aggiornato",
+    "updated_title_case": "Aggiornato",
+    "ago": "fa",
+    "date": "{{val, datetime}}",
+    "start_date": "Data di inizio",
+    "end_date": "Data di fine",
+    "hours": "ore",
+    "hours_truncated": "ora",
+    "minutes": "minuti",
+    "minutes_truncated": "min",
+    "seconds": "secondi",
+    "seconds_truncated": "sec",
+    "expires": "Scade",
+    "expires_title_case": "Scadenza"
+  },
+  "img_alts": {
+    "user_avatar": "Avatar utente",
+    "avatar_for_name": "{{name}}avatar",
+    "publisher_logo": "Logo dell'editore: Fare clic per tornare alla pagina di navigazione",
+    "entity_cover": "Copertina di{{entity}}"
+  },
+  "powered_by": {
+    "reader_text": "Realizzato da Manifold Scholarship. Per saperne di pi�",
+    "frontend_text": "Supportato da",
+    "version": "v{{number}}"
+  }
+}

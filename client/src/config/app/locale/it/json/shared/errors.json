@@ -1,0 +1,40 @@
+{
+  "errors": {
+    "text_missing": "Testo mancante",
+    "content_block": {
+      "no_contents": "Specificare un testo da <0> correggere questo blocco </0>.",
+      "no_activity": "Non è stata registrata alcuna attività per questo progetto. Questo avviso scomparirà quando ci sarà un'attività del progetto.",
+      "no_markdown": "Aggiungere contenuti Markdown a <0> correggere questo blocco </0>.",
+      "no_texts": "<0> Aggiungere testi al progetto </0> o <1>regolare la configurazione del blocco </1> per risolvere questo blocco.",
+      "no_resources": "Aggiungi <0> resources </0> o <1> collezioni di risorse </1> al progetto per risolvere questo blocco.",
+      "no_metadata": "<0> Aggiungi i metadati del progetto </0> per risolvere questo blocco.",
+      "default": "<0> Correggere questo blocco di contenuti.</0>"
+    },
+    "no_content": "Nessun contenuto fornito",
+    "video_playback": {
+      "heading": "Impossibile riprodurre il video.",
+      "body": "Il browser non è in grado di riprodurre questo video.",
+      "download": "Potete scaricarlo e avviarlo in locale utilizzando il pulsante di download qui sotto."
+    },
+    "audio_playback": "{{ error }}<br/>Questo file audio non è riproducibile nel browser.<br/><br/>Fare clic sul pulsante di download per ascoltare il file sul proprio dispositivo.",
+    "unauthorized": {
+      "heading": "Accesso negato",
+      "body": "Per gestire le preferenze di notifica è necessario aver effettuato l'accesso.",
+      "privacy_body": "Per gestire le impostazioni sulla privacy è necessario aver effettuato l'accesso."
+    },
+    "no_collapse_context": "I componenti Collapse non possono essere resi al di fuori del componente wrapper Collapse..",
+    "color_scheme": "Errore nello schema dei colori Manifold!",
+    "fatal": {
+      "heading_line_one": "Siamo un po' in difficoltà..",
+      "heading_line_two": "Molto dispiaciuto.",
+      "dismiss_link": "Riprova."
+    },
+    "logo_styles": "Errore: Stili di logo stampa non validi",
+    "upload_failed": "Caricamento fallito. Riprovare",
+    "cookies_banner": "Ci dispiace! Si è verificato un errore nel salvataggio delle preferenze. Visitare le impostazioni per riprovare.",
+    "section_reorder": "Si è verificato un errore nell'aggiornamento dell'ordine delle sezioni. Questo elenco è stato ripristinato.",
+    "toc_reorder": "Si è verificato un errore nell'aggiornamento dell'ordine TOC. Questo elenco è stato ripristinato",
+    "invalid_html_save": "L'HTML non è valido. Correggere gli errori indicati nell'editor e riprovare a salvare.",
+    "invalid_html_switch": "L'HTML non è valido. Correggere gli errori indicati nell'editor prima di passare alla modalità RTE.."
+  }
+}
