@@ -7,6 +7,8 @@ module Lti
   # creates them — deployment creation is the strategy's single responsibility
   # (see {OmniAuth::Strategies::Lti#verify_deployment!}).
   class Launch
+    attr_reader :omniauth_hash
+
     # @param omniauth_hash [OmniAuth::AuthHash, Hash] request.env["omniauth.auth"]
     def initialize(omniauth_hash)
       @omniauth_hash = omniauth_hash
@@ -69,10 +71,6 @@ module Lti
 
       @deployment = registration && LtiDeployment.find_by(lti_registration: registration, deployment_id: deployment_id)
     end
-
-    private
-
-    attr_reader :omniauth_hash
 
     def lti_claims
       @lti_claims ||= omniauth_hash&.dig("extra", "lti") || {}
