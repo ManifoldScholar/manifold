@@ -7,7 +7,13 @@ module OmniAuth
 
       option :name, "lti"
 
-      LTI_CLAIM_PREFIX = "https://purl.imsglobal.org/spec/lti/claim/"
+      # Claims arrive under two IMS namespaces: the core LTI namespace and the
+      # Deep Linking (`lti-dl`) namespace that carries deep_linking_settings.
+      # Both are flattened into extra.lti by their short key.
+      LTI_CLAIM_PREFIXES = %w[
+        https://purl.imsglobal.org/spec/lti/claim/
+        https://purl.imsglobal.org/spec/lti-dl/claim/
+      ].freeze
 
       # The request phase handles the platform-initiated OIDC login.
       # The platform sends iss, client_id, login_hint, lti_message_hint,
@@ -167,10 +173,10 @@ module OmniAuth
 
       def extract_lti_claims(claims)
         claims.each_with_object({}) do |(key, value), memo|
-          if key.start_with?(LTI_CLAIM_PREFIX)
-            short_key = key.delete_prefix(LTI_CLAIM_PREFIX)
-            memo[short_key] = value
-          end
+          prefix = LTI_CLAIM_PREFIXES.find { |candidate| key.start_with?(candidate) }
+          next unless prefix
+
+          memo[key.delete_prefix(prefix)] = value
         end
       end
 
