@@ -58,7 +58,7 @@ RSpec.describe OmniAuth::Strategies::Lti do
     let(:dl_claims) do
       base_claims.merge(
         "https://purl.imsglobal.org/spec/lti/claim/message_type" => "LtiDeepLinkingRequest",
-        "https://purl.imsglobal.org/spec/lti/claim/deep_linking_settings" => {
+        "https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings" => {
           "deep_link_return_url" => "https://canvas.example.com/dl_return",
           "accept_types"         => ["ltiResourceLink"],
           "accept_multiple"      => true,
@@ -71,11 +71,28 @@ RSpec.describe OmniAuth::Strategies::Lti do
       id_token = signed_id_token(dl_claims)
       claims = strategy.send(:decode_and_verify!, id_token, state)
       expect(claims["https://purl.imsglobal.org/spec/lti/claim/message_type"]).to eq("LtiDeepLinkingRequest")
-      expect(claims["https://purl.imsglobal.org/spec/lti/claim/deep_linking_settings"]).to include(
+      expect(claims["https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings"]).to include(
         "deep_link_return_url" => "https://canvas.example.com/dl_return",
         "accept_types"         => ["ltiResourceLink"],
         "accept_multiple"      => true,
         "data"                 => "opaque-platform-data"
+      )
+    end
+  end
+
+  describe "#extract_lti_claims" do
+    it "flattens both the core and deep-linking namespaces to short keys" do
+      claims = {
+        "https://purl.imsglobal.org/spec/lti/claim/message_type" => "LtiDeepLinkingRequest",
+        "https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings" => { "deep_link_return_url" => "https://canvas.example.com/dl_return" },
+        "iss" => registration.issuer
+      }
+
+      extracted = strategy.send(:extract_lti_claims, claims)
+
+      expect(extracted).to eq(
+        "message_type" => "LtiDeepLinkingRequest",
+        "deep_linking_settings" => { "deep_link_return_url" => "https://canvas.example.com/dl_return" }
       )
     end
   end
