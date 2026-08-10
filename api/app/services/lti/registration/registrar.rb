@@ -30,42 +30,50 @@ module Lti
         jwks_uri
       ].freeze
 
+      class << self
+        # Maps a platform's product_family_code to the vendor registrar that handles
+        # it, discovered from the {Registrars} subclasses by their PRODUCT_FAMILY_CODE.
+        # A platform whose code matches no subclass registers with LTI-core attributes
+        # only (this base). Supporting a new LMS is therefore just adding one subclass.
+        # @return [Hash{String=>Class}]
+        def vendor_registrars
+          load_vendor_registrars!
+
+          descendants.select { |klass| klass.const_defined?(:PRODUCT_FAMILY_CODE, false) }
+                    .index_by { |klass| klass::PRODUCT_FAMILY_CODE }
+        end
+
+        # Zeitwerk enumerates only already-loaded constants, so ensure the registrar
+        # files are loaded before reading descendants. Production eager-loads them.
+        # @return [void]
+        def load_vendor_registrars!
+          return if Rails.application.config.eager_load
+
+          Rails.autoloaders.main.eager_load_dir(REGISTRARS_ROOT)
+        end
+
+        # Builds the registrar best suited to the registering platform, detected via
+        # the OIDC platform configuration's product_family_code. Falls back to this
+        # base (LTI-core only) for unknown platforms. The probe's fetched OIDC config
+        # is handed to the vendor registrar so discovery is not requested twice.
+        # @param params [#[]]
+        # @return [Registrar]
+        def build(params)
+          probe = new(params)
+          vendor = vendor_registrars[probe.product_family_code]
+          return probe unless vendor
+
+          vendor.new(params, openid_configuration: probe.openid_configuration)
+        end
+
+        def routes
+          @routes ||= RouterObject.new
+        end
+      end
+
       attr_reader :errors, :openid_configuration_url, :referrer, :registration_token
 
-      # Maps a platform's product_family_code to the vendor registrar that handles
-      # it, discovered from the {Registrars} subclasses by their PRODUCT_FAMILY_CODE.
-      # A platform whose code matches no subclass registers with LTI-core attributes
-      # only (this base). Supporting a new LMS is therefore just adding one subclass.
-      # @return [Hash{String=>Class}]
-      def self.vendor_registrars
-        load_vendor_registrars!
-
-        descendants.select { |klass| klass.const_defined?(:PRODUCT_FAMILY_CODE, false) }
-                   .index_by { |klass| klass::PRODUCT_FAMILY_CODE }
-      end
-
-      # Zeitwerk enumerates only already-loaded constants, so ensure the registrar
-      # files are loaded before reading descendants. Production eager-loads them.
-      # @return [void]
-      def self.load_vendor_registrars!
-        return if Rails.application.config.eager_load
-
-        Rails.autoloaders.main.eager_load_dir(REGISTRARS_ROOT)
-      end
-
-      # Builds the registrar best suited to the registering platform, detected via
-      # the OIDC platform configuration's product_family_code. Falls back to this
-      # base (LTI-core only) for unknown platforms. The probe's fetched OIDC config
-      # is handed to the vendor registrar so discovery is not requested twice.
-      # @param params [#[]]
-      # @return [Registrar]
-      def self.build(params)
-        probe = new(params)
-        vendor = vendor_registrars[probe.product_family_code]
-        return probe unless vendor
-
-        vendor.new(params, openid_configuration: probe.openid_configuration)
-      end
+      delegate :routes, to: :class
 
       # Accepts params from an LTI 1.3 autoregistration flow
       # @param params [#[]] params containing keys :registration_token and :openid_configuration
@@ -170,7 +178,7 @@ module Lti
           scope: NRPS_READONLY_SCOPE,
           logo_uri: settings.press_logo&.url,
           TOOL_CONFIGURATION_KEY => tool_configuration
-        }.compact
+        }.compact.tap { debugger; puts _1 }
       end
 
       # The LTI tool configuration claim. Core fields only; vendor specifics are
@@ -295,20 +303,19 @@ module Lti
         URI.parse(Rails.application.config.manifold.url)
       end
 
-      # TODO: Maybe set default_url_options
       # @return [String]
       def initiate_login_uri
-        auth_redirect_url(:lti, host: api_host)
+        routes.auth_redirect_url(:lti, host: api_host)
       end
 
       # @return [Array<String>]
       def redirect_uris
-        [auth_callback_url(:lti, host: api_host)]
+        [routes.auth_callback_url(:lti, host: api_host)]
       end
 
       # @return [String]
       def jwks_uri
-        auth_jwks_url(host: api_host)
+        routes.auth_jwks_url(host: api_host)
       end
 
       # @return [URI::HTTP]
