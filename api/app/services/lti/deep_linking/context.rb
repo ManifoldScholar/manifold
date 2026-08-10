@@ -23,26 +23,28 @@ module Lti
       class InvalidRequestError < Error; end
       class IdempotencyError < Error; end
 
-      # Build a context from an LTI launch (write path).
-      # @param omniauth_hash [OmniAuth::AuthHash, Hash] request.env["omniauth.auth"]
-      # @param user [User] the authenticated instructor
-      def self.from_launch(omniauth_hash, user)
-        new(launch: Lti::Launch.new(omniauth_hash), user: user)
-      end
+      class << self
+        # Build a context from an LTI launch (write path).
+        # @param omniauth_hash [OmniAuth::AuthHash, Hash] request.env["omniauth.auth"]
+        # @param user [User] the authenticated instructor
+        def from_launch(omniauth_hash, user)
+          new(launch: Lti::Launch.new(omniauth_hash), user: user)
+        end
 
-      # Load a previously persisted context (read path).
-      # @param token [String] the opaque token returned by {#persist!}
-      # @return [Context, nil] nil when the token is unknown or expired
-      def self.find(token)
-        payload = Rails.cache.read(cache_key(token))
-        return if payload.blank?
+        # Load a previously persisted context (read path).
+        # @param token [String] the opaque token returned by {#persist!}
+        # @return [Context, nil] nil when the token is unknown or expired
+        def find(token)
+          payload = Rails.cache.read(cache_key(token))
+          return if payload.blank?
 
-        new(token: token, payload: payload)
-      end
+          new(token: token, payload: payload)
+        end
 
-      # @return [String]
-      def self.cache_key(token)
-        "#{CACHE_KEY_PREFIX}/#{token}"
+        # @return [String]
+        def cache_key(token)
+          "#{CACHE_KEY_PREFIX}/#{token}"
+        end
       end
 
       def initialize(launch: nil, user: nil, token: nil, payload: nil)
