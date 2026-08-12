@@ -3006,8 +3006,8 @@ CREATE TABLE public.settings (
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     ingestion jsonb DEFAULT '{}'::jsonb,
     rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL,
-    oai jsonb DEFAULT '{"admin_email": "admin@manifold.app", "repository_name": "Manifold", "directory_enabled": true}'::jsonb,
-    lti jsonb DEFAULT '{}'::jsonb NOT NULL
+    lti jsonb DEFAULT '{}'::jsonb NOT NULL,
+    oai jsonb DEFAULT '{}'::jsonb
 );
 
 
@@ -8263,6 +8263,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20260406000002'),
 ('20260406000001'),
 ('20260305225814'),
+('20260209183815'),
 ('20260127185424'),
 ('20260127162821'),
 ('20260126221732'),
@@ -8640,3 +8641,4 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20151007162414'),
 ('20151005200105'),
 ('20151005200100');
+

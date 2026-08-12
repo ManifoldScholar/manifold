@@ -30,7 +30,7 @@ module Search
         text:,
         text_section:,
       }
-
+debugger
       results = PgSearch::Document.faceted_search_for(keyword, **options)
         .page(page_number).per(per_page)
 

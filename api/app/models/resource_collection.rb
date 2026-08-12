@@ -52,6 +52,8 @@ class ResourceCollection < ApplicationRecord
     }
   )
 
+  multisearches! :description_plaintext, secondary_from: :description
+
   multisearch_parent_name :project
 
   after_commit :trigger_creation_event, on: [:create]

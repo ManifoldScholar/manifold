@@ -14,6 +14,7 @@ module Search
       ::Text,
       ::TextSection,
       ::Resource,
+      ::ResourceCollection,
       ::Journal,
       ::Annotation
     ].freeze

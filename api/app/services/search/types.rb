@@ -12,6 +12,7 @@ module Search
       Journal
       Project
       Resource
+      ResourceCollection
       Text
       TextSection
     ].freeze
