@@ -91,10 +91,22 @@ module Auth
       resource = ExternalIdentifier.fetch(relay_state)&.identifiable
       return if resource.blank?
 
+      parent = get_parent_for(resource)
+
       {
         redirect_type: resource.class.name,
-        redirect_id: resource.try(:slug) || resource.id
-      }
+        redirect_id: resource.try(:slug) || resource.id,
+        parent: parent&.try(:slug) || parent&.id
+      }.compact
+    end
+
+    def get_parent_for(resource)
+      case resource
+      when Resource, ResourceCollection
+        resource.project
+      when TextSection
+        resource.text
+      end
     end
 
     # Parse LTI target_link_uri or relay_state for a redirect URI
