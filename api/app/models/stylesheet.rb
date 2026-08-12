@@ -33,6 +33,10 @@ class Stylesheet < ApplicationRecord
 
   # AR Callbacks
   before_save :beautify_raw, :revalidate, :set_hashed_content, if: :raw_styles_changed?
+  after_commit :text_recalculate_fingerprint!, if: :saved_change_to_raw_styles?
+
+  # Delegation
+  delegate :recalculate_fingerprint!, to: :text, prefix: true, allow_nil: true
 
   # Concerns
   acts_as_list scope: :text_id
