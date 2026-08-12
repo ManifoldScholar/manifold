@@ -58,5 +58,10 @@ export const Row = styled.div`
 
   details {
     display: contents;
+
+    /* Ensure more chips appear on second line no matter count/window size */
+    > div {
+      min-inline-size: calc(100vw - 48px);
+    }
   }
 `;
