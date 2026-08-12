@@ -16,10 +16,11 @@
     },
     "landing": {
       "title": "$t(actions.add) $t(app.manifold) Links",
-      "subtitle": "Subhead description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "subtitle": "Search content from your Manifold instance to add to your LMS syllabus",
       "placeholder": "Search by title, author, keyword …",
-      "message_heading": "Additional information or instructions go here",
-      "message_body": "<0>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</0><0>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</0>"
+      "message_heading": "How it works",
+      "message_body": "<0>Manifold Projects, Texts, Text Sections, Resource Collections, and Resources can be searched and selected in this interface. Both public materials and any private materials that you have access to on the Manifold instance are available.</0><0>When materials are added to a course, Manifold creates a Reading Group for the course in Manifold. This Reading Group manages access to any restricted materials you've added to the course, allowing any student or instructor who accesses Manifold via the LMS to access these resources.</0>",
+      "message_body_single": "<0>Manifold Projects, Texts, Text Sections, Resource Collections, and Resources can be searched and selected in this interface. Both public materials and any private materials that you have access to on the Manifold instance are available.</0><0>When materials are added to a course, Manifold creates a Reading Group for the course in Manifold. This Reading Group manages access to any restricted materials you've added to the course, allowing any student or instructor who accesses Manifold via the LMS to access these resources.</0><0>Your LMS only allows Manifold to return a single link, regardless of how many resources you select. The link you'll see in your syllabus will take you to the Manifold Reading Group where you can find all of the selected materials.</0>"
     },
     "search": {
       "title": "Search",

@@ -2,10 +2,13 @@ import { useTranslation, Trans } from "react-i18next";
 import SearchQuery from "global/components/search/query";
 import { PRIMARY_FACETS } from "lti/containers/Search/filters";
 import IconComposer from "global/components/utility/IconComposer";
+import { useDeepLinking } from "lti/contexts";
 import * as Styled from "./styles";
 
 export default function LtiLanding() {
   const { t } = useTranslation();
+
+  const { acceptMultiple } = useDeepLinking();
 
   return (
     <Styled.Landing>
@@ -25,7 +28,14 @@ export default function LtiLanding() {
         </SearchQuery.Provider>
       </Styled.Search>
       <Styled.Message title={t("lti.landing.message_heading")}>
-        <Trans i18nKey="lti.landing.message_body" components={[<p />]} />
+        <Trans
+          i18nKey={
+            acceptMultiple
+              ? "lti.landing.message_body"
+              : "lti.landing.message_body_single"
+          }
+          components={[<p />]}
+        />
       </Styled.Message>
     </Styled.Landing>
   );
