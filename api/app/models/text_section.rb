@@ -60,6 +60,7 @@ class TextSection < ApplicationRecord
   attribute :body_json, :indifferent_hash
 
   delegate :citation_parts, to: :text, prefix: true, allow_nil: true
+  delegate :recalculate_fingerprint!, to: :text, prefix: true, allow_nil: true
   delegate :source_path, to: :ingestion_source, allow_nil: true
   delegate :project, to: :text, allow_nil: true
   delegate :metadata, to: :text, prefix: true, allow_nil: true
@@ -80,6 +81,7 @@ class TextSection < ApplicationRecord
   after_destroy :remove_linked_toc_entries, unless: :skip_removal_of_toc_entries?
   after_save_commit :asynchronously_index_nodes!
   after_commit :maybe_adopt_or_orphan_annotations!, on: [:update, :destroy]
+  after_commit :text_recalculate_fingerprint!, if: :saved_change_to_body?
 
   scope :in_texts, ->(texts) { where(text: texts) }
   scope :ordered, -> { order(position: :asc) }
