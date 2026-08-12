@@ -4,7 +4,7 @@ export const ALLOWED_FACETS = [
   "Project",
   "Text",
   "TextSection",
-  "ResourceCollection",
+  // "ResourceCollection",
   "Resource"
 ];
 
@@ -12,7 +12,7 @@ export const PRIMARY_FACETS = ["Project", "Text"];
 
 export const SECONDARY_FACETS = [
   "TextSection",
-  "ResourceCollection",
+  // "ResourceCollection",
   "Resource"
 ];
 
