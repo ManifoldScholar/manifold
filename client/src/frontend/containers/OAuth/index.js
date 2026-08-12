@@ -31,6 +31,7 @@ export default function OAuth() {
   let redirectPath = params.get("redirect_path");
   const entityType = params.get("redirect_type");
   const entitySlug = params.get("redirect_id");
+  const parent = params.get("parent");
 
   if (!redirectPath) {
     switch (entityType) {
@@ -42,6 +43,22 @@ export default function OAuth() {
         break;
       case "ProjectCollection":
         redirectPath = lh.link("frontendProjectCollection", entitySlug);
+        break;
+      case "Text":
+        redirectPath = lh.link("reader", entitySlug);
+        break;
+      case "TextSection":
+        redirectPath = lh.link("readerSection", parent, entitySlug);
+        break;
+      case "Resource":
+        redirectPath = lh.link("frontendProjectResource", parent, entitySlug);
+        break;
+      case "ResourceCollection":
+        redirectPath = lh.link(
+          "frontendProjectResourceCollection",
+          parent,
+          entitySlug
+        );
         break;
       default:
         redirectPath = lh.link("frontend");
