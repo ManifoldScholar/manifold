@@ -32,12 +32,12 @@
         }
         form.submit();
       });
-    } else {
-      const params = new URLSearchParams(document.location.search);
-      if (params.get("autoredirect") !== "false") {
-        submit.style.visibility = "hidden";
-        form.submit();
-      }
+    }
+    
+    const params = new URLSearchParams(document.location.search);
+    if (params.get("autoredirect") !== "false") {
+      submit.style.visibility = "hidden";
+      form.submit();
     }
   })();
 </script>
