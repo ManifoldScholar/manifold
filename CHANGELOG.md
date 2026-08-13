@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.3](https://github.com/ManifoldScholar/manifold/compare/9.2.2...9.2.3) (2026-08-13)
+
+
+### Bug Fixes
+
+* recalculate text fingerprint on text section or stylesheet change ([33d65c3](https://github.com/ManifoldScholar/manifold/commit/33d65c371b4b531665f41df33ad0e205af195fad))
+
 ## [9.2.2](https://github.com/ManifoldScholar/manifold/compare/9.2.1...9.2.2) (2026-07-16)
 
 
