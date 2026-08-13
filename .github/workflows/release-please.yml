@@ -29,9 +29,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Reset release branch to main
         run: git push origin ${{ github.sha }}:refs/heads/release --force
+      - name: Trigger Docker build on release branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run docker.yml --ref release
