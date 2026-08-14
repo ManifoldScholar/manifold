@@ -7,6 +7,9 @@ jobs:
   build:
     name: Update Release Branch
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
     steps:
       - name: "checkout release-candidate"
         uses: actions/checkout@v6
@@ -20,3 +23,8 @@ jobs:
           git fetch
           git reset --hard origin/main
           git push --force origin release
+
+      - name: "Trigger Docker build on release branch"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run docker.yml --ref release
