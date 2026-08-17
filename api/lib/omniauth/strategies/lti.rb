@@ -24,6 +24,7 @@ module OmniAuth
         return fail!(:lti_disabled, OmniAuth::Error.new("LTI is not enabled")) unless lti_enabled?
 
         registration = find_registration!(request.params["iss"], request.params["client_id"])
+        ensure_registration_permitted!(registration)
 
         nonce = SecureRandom.uuid
         state = sign_state(nonce: nonce, target_link_uri: request.params["target_link_uri"])
@@ -81,6 +82,14 @@ module OmniAuth
         raise OmniAuth::Error, "No enabled LTI registration found for issuer #{issuer} and client_id #{client_id}"
       end
 
+      def ensure_registration_permitted!(registration)
+        raise OmniAuth::Error, "LTI registration #{registration.id} is disabled" unless registration.enabled?
+
+        return if ::Lti::IssuerPolicy.new.permits?(registration.issuer)
+
+        raise OmniAuth::Error, "Issuer #{registration.issuer} is not permitted"
+      end
+
       # Ensure the launch's deployment is recorded under the (already signature-
       # verified) registration, creating it on first sight — the registration is
       # the trust anchor, so any deployment it asserts is accepted. Only an
@@ -124,6 +133,7 @@ module OmniAuth
       def decode_and_verify!(id_token, state)
         unverified = JWT.decode(id_token, nil, false).first
         registration = find_registration!(unverified["iss"], unverified["aud"])
+        ensure_registration_permitted!(registration)
         jwks_loader = ::Lti::Auth::PlatformJwks.new(registration)
 
         claims = JWT.decode(

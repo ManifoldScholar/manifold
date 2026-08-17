@@ -8,5 +8,6 @@ module SettingSections
     attribute :enabled, :boolean, default: false
     attribute :autoregistration, :boolean, default: false
     attribute :issuer_allowlist, :string_array, default: -> { [] }
+    attribute :issuer_blocklist, :string_array, default: -> { [] }
   end
 end
