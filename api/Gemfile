@@ -19,6 +19,7 @@ gem "authority", "~>3.3.0"
 gem "aws-sdk-s3", "~> 1.146"
 gem "bagit", "~> 0.6.0"
 gem "bcrypt", "~> 3.0"
+gem "bootsnap", ">= 1.18", require: false
 gem "charlock_holmes", "~> 0.7.9"
 gem "csv"
 gem "chroma", "~> 0.2"
