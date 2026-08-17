@@ -4,12 +4,9 @@ module SystemUpgrades
   UPGRADES_ROOT = Rails.root.join("app", "services", "system_upgrades", "upgrades")
 
   class << self
-    # @return [<Class>]
-    def eager_load_upgrades!
+    def load_upgrade_classes!
       # :nocov:
       return upgrades if Rails.env.test?
-
-      Rails.application.eager_load!
 
       UPGRADES_ROOT.each_child do |child|
         next unless child.fnmatch("*.rb")

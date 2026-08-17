@@ -17,9 +17,13 @@ module SystemUpgrades
 
     # @return [String]
     def execute
+      pending = pending_upgrades
+
+      eager_load_application! if pending.any? && !noop
+
       applied = false
 
-      filtered_upgrades.each do |upgrade_interaction|
+      pending.each do |upgrade_interaction|
         result, upgrade_output = compose upgrade_interaction, inputs
         applied = true if result && !noop
         output.write upgrade_output
@@ -31,6 +35,26 @@ module SystemUpgrades
     end
 
     private
+
+    # Upgrades not yet recorded as applied. Forcing treats all as pending.
+    # @return [<Class>]
+    def pending_upgrades
+      return filtered_upgrades if force
+
+      filtered_upgrades.reject { |klass| applied_version_strings.include?(klass.version_string) }
+    end
+
+    # @return [Set<String>]
+    def applied_version_strings
+      @applied_version_strings ||= UpgradeResult.pluck(:version).to_set
+    end
+
+    # Rake tasks don't eager load by default
+    def eager_load_application!
+      return if Rails.env.test?
+
+      Rails.application.eager_load!
+    end
 
     def rebuild_pg_search_documents
       logger.info("[-ANY-]===================================================================")
@@ -52,7 +76,7 @@ module SystemUpgrades
     end
 
     def load_upgrades!
-      @upgrade_interactions = SystemUpgrades.eager_load_upgrades!
+      @upgrade_interactions = SystemUpgrades.load_upgrade_classes!
     end
   end
 end
