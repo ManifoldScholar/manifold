@@ -107,3 +107,6 @@ RUN apt-get update -qq && apt-get install -y -qq --no-install-recommends \
 RUN rm -rf /var/lib/apt/lists/*
 
 FROM base AS production
+
+# Precompile Bootsnap cache for faster production load times
+RUN bundle exec bootsnap precompile --gemfile app/ lib/
