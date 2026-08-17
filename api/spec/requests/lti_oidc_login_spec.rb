@@ -11,7 +11,7 @@ RSpec.describe "LTI OIDC login initiation", type: :request do
 
   before do
     OmniAuth.config.test_mode = false
-    allow(Settings).to receive_message_chain(:current, :lti, :enabled?).and_return(true)
+    Settings.instance.update!(lti: { enabled: true })
   end
 
   it "starts the OIDC flow without a session CSRF token" do
