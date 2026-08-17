@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class LtiRegistration < ApplicationRecord
+  include Authority::Abilities
+  include SerializedAbilitiesFor
+
   has_many :lti_deployments, dependent: :destroy
 
   validates :name, :issuer, :client_id, :authorization_endpoint, :token_endpoint, :jwks_uri,
