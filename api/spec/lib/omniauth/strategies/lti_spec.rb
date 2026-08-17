@@ -42,7 +42,7 @@ RSpec.describe OmniAuth::Strategies::Lti do
     deployment
     stub_request(:get, registration.jwks_uri)
       .to_return(status: 200, body: jwks_payload.to_json, headers: { "Content-Type" => "application/json" })
-    allow(Settings).to receive_message_chain(:current, :lti, :enabled?).and_return(true)
+    Settings.instance.update!(lti: { enabled: true })
   end
 
   describe "#decode_and_verify! with a valid LtiResourceLinkRequest" do
@@ -77,6 +77,22 @@ RSpec.describe OmniAuth::Strategies::Lti do
         "accept_multiple"      => true,
         "data"                 => "opaque-platform-data"
       )
+    end
+  end
+
+  describe "#decode_and_verify! rejecting revoked registrations" do
+    it "raises when the registration has been disabled" do
+      registration.update!(enabled: false)
+      expect do
+        strategy.send(:decode_and_verify!, signed_id_token(base_claims), state)
+      end.to raise_error(OmniAuth::Error, /is disabled/)
+    end
+
+    it "raises when the issuer has been blocklisted" do
+      Settings.instance.update!(lti: { enabled: true, issuer_blocklist: [registration.issuer] })
+      expect do
+        strategy.send(:decode_and_verify!, signed_id_token(base_claims), state)
+      end.to raise_error(OmniAuth::Error, /not permitted/)
     end
   end
 

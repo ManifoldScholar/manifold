@@ -316,6 +316,7 @@ Rails.application.routes.draw do
 
       namespace :lti do
         resource :deep_linking, only: %i[show create], controller: "deep_linking"
+        resources :registrations, only: %i[index show update destroy]
       end
 
       resources :passwords, only: [:create, :update]
