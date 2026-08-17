@@ -178,7 +178,7 @@ module Lti
           scope: NRPS_READONLY_SCOPE,
           logo_uri: settings.press_logo&.url,
           TOOL_CONFIGURATION_KEY => tool_configuration
-        }.compact.tap { debugger; puts _1 }
+        }.compact
       end
 
       # The LTI tool configuration claim. Core fields only; vendor specifics are
