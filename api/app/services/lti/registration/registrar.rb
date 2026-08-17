@@ -282,9 +282,7 @@ module Lti
       def issuer_allowed?
         return false if openid_configuration.blank?
 
-        allowlist = Settings.current.lti.issuer_allowlist
-
-        allowlist.blank? || allowlist.include?(openid_configuration[:issuer])
+        ::Lti::IssuerPolicy.new.permits?(openid_configuration[:issuer])
       end
 
       # Does the OIDC config exist and contain all necessary keys?
