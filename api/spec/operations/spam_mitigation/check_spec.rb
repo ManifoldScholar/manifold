@@ -83,6 +83,14 @@ RSpec.describe SpamMitigation::Check, type: :operation do
         end
       end
 
+      context "when the user is merely email-verified" do
+        let(:user) { FactoryBot.create(:user, :reader, :with_confirmed_email) }
+
+        it "is skipped without contacting akismet" do
+          expect_calling_the_operation.to monad_fail.with_key(:user_trusted)
+        end
+      end
+
       context "when spam detection has been disabled globally" do
         before do
           spam_detection_disabled!

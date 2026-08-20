@@ -13,7 +13,7 @@ class SpamValidator < ActiveModel::EachValidator
     # :nocov:
 
     user = RequestStore[:current_user] || record.try(:creator)
-    return if user&.trusted?
+    return if user&.spam_exempt?
 
     type = options[:type].presence || "comment"
 

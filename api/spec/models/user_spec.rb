@@ -96,6 +96,24 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#spam_exempt?" do
+    it "is false for an unverified reader" do
+      expect(FactoryBot.create(:user, :reader)).not_to be_spam_exempt
+    end
+
+    it "is true for an email-verified reader" do
+      expect(FactoryBot.create(:user, :reader, :with_confirmed_email)).to be_spam_exempt
+    end
+
+    it "is true for an admin-verified reader" do
+      expect(FactoryBot.create(:user, :reader, admin_verified: true)).to be_spam_exempt
+    end
+
+    it "is true for a privileged role without verification" do
+      expect(FactoryBot.create(:user, :admin)).to be_spam_exempt
+    end
+  end
+
   context "when changing a role" do
     let!(:user) { FactoryBot.create :user, :editor }
     let!(:project) { FactoryBot.create :project }

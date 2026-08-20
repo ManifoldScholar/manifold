@@ -32,5 +32,13 @@ RSpec.describe SpamMitigation::Submit, type: :operation do
         expect_calling_the_operation.to succeed.with(akismet: succeed.with(/thanks/i))
       end
     end
+
+    context "when the content belongs to a trusted user" do
+      let(:user) { FactoryBot.create(:user, :reader, :with_confirmed_email) }
+
+      it "is not reported to akismet" do
+        expect_calling_the_operation.to monad_fail.with_key(:user_trusted)
+      end
+    end
   end
 end

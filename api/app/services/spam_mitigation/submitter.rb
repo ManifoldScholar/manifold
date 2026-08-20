@@ -21,8 +21,12 @@ module SpamMitigation
 
     STRATEGIES = %i[akismet].freeze
 
-    # @return [Dry::Monads::Success({ Symbol => Dry::Monads::Result })]
+    delegate :spam_exempt?, to: :user, allow_nil: true, prefix: true
+
+    # @return [Dry::Monads::Result]
     def call
+      return Failure[:user_trusted] if user_spam_exempt?
+
       results = STRATEGIES.index_with do |strategy|
         __send__(:"submit_with_#{strategy}")
       end

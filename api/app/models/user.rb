@@ -131,6 +131,12 @@ class User < ApplicationRecord
 
   alias email_confirmed? email_confirmed
 
+  # Verified users and users explicitly given a role are exempt from spam checks
+  # @return [Boolean]
+  def spam_exempt?
+    established? || trusted?
+  end
+
   def email=(value)
     super(value.try(:strip))
   end
