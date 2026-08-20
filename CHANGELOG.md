@@ -1,5 +1,13 @@
 # Changelog
 
+## [9.2.4](https://github.com/ManifoldScholar/manifold/compare/9.2.3...9.2.4) (2026-08-20)
+
+
+### Bug Fixes
+
+* allow authors/editors to make resource annotations ([e207319](https://github.com/ManifoldScholar/manifold/commit/e207319cca7534faf1aaba856ec944b5c56a1d66))
+* do not submit spam checks for verified users ([edd444c](https://github.com/ManifoldScholar/manifold/commit/edd444cd8e6ab3a8a997ff890938e0a7b102fde3))
+
 ## [9.2.3](https://github.com/ManifoldScholar/manifold/compare/9.2.2...9.2.3) (2026-08-13)
 
 
