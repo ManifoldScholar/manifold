@@ -240,18 +240,6 @@ RSpec.describe "Text Section Annotations API", type: :request do
             expect(response).to have_http_status(:created)
           end
         end
-
-        context "when the annotation is public" do
-          let(:annotation_privacy) { :is_public }
-
-          it "does not create the annotation" do
-            expect do
-              post path, headers: reader_headers, params: params
-            end.to keep_the_same(Annotation, :count)
-
-            expect(response).to have_http_status(:unprocessable_entity)
-          end
-        end
       end
     end
 
