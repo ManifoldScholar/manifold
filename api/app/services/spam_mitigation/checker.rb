@@ -18,12 +18,11 @@ module SpamMitigation
       option :type, Types::String.optional, default: proc { "comment" }
     end
 
-    delegate :trusted?, to: :user, allow_nil: true, prefix: true
+    delegate :spam_exempt?, to: :user, allow_nil: true, prefix: true
 
     # @return [Dry::Monads::Success(Boolean)]
     def call
-      # Bypass detection entirely for users who have privileged access,
-      return Failure[:user_trusted] if user_trusted?
+      return Failure[:user_trusted] if user_spam_exempt?
 
       return Failure[:spam_detection_disabled] if Settings.current.general.disable_spam_detection?
 
