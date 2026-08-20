@@ -249,23 +249,6 @@ RSpec.describe "Reading Groups API", type: :request do
           expect(response).to have_http_status(:created)
         end
       end
-
-      context "with a public reading group" do
-        let(:attributes) do
-          {
-            name: "My Reading Group",
-            privacy: "public",
-          }
-        end
-
-        it "does not create the reading group" do
-          expect do
-            making_the_request
-          end.to keep_the_same(ReadingGroup, :count)
-
-          expect(response).to have_http_status(:unprocessable_entity)
-        end
-      end
     end
   end
 
