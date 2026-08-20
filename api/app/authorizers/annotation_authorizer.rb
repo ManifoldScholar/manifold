@@ -45,8 +45,9 @@ class AnnotationAuthorizer < ApplicationAuthorizer
 
   private
 
-  # Only public annotations need reputation to create.
+  # Only public annotations need reputation to create. Resource annotations are gated by role, not reputation.
   def requires_reputation_to_create?
+    return false if annotation_is_resource_annotation?
     return true if annotation_is_public? && !annotation_in_reading_group?
     return true if annotation_in_reading_group? && !reading_group_is_private?
 
