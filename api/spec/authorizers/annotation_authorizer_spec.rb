@@ -48,6 +48,27 @@ RSpec.describe "Annotation Abilities", :authorizer do
     end
   end
 
+  context "when the subject is a project author with an unverified email" do
+    let_it_be(:subject) do
+      FactoryBot.create(:user).tap do |user|
+        user.add_role :project_author, project
+      end
+    end
+
+    context "when the annotation is a text annotation created by another user" do
+      abilities = { create: false, read: true, update: false, delete: false }
+      the_subject_behaves_like "instance abilities", Annotation, abilities
+    end
+
+    context "when the annotation is a resource annotation created by another user" do
+      let_it_be(:object, refind: true) do
+        FactoryBot.create(:resource_annotation, :is_public, creator: creator, text: text)
+      end
+      abilities = { create: true, read: true, update: true, delete: true }
+      the_subject_behaves_like "instance abilities", Annotation, abilities
+    end
+  end
+
   context "when the subject is a reader" do
     context "when the annotation is a resource annotation created by another user" do
       let_it_be(:object, refind: true) do
