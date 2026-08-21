@@ -2,7 +2,9 @@ import {
   createContext,
   useContext,
   useCallback,
+  useMemo,
   useRef,
+  useState,
   useEffect
 } from "react";
 import { useBlocker } from "react-router";
@@ -14,6 +16,7 @@ const NavigationBlockerContext = createContext(null);
 export function NavigationBlockerProvider({ children }) {
   const { t } = useTranslation();
   const blockersRef = useRef(new Map());
+  const [confirmMessage, setConfirmMessage] = useState(null);
 
   const registerBlocker = useCallback((id, message) => {
     blockersRef.current.set(id, { message });
@@ -35,34 +38,38 @@ export function NavigationBlockerProvider({ children }) {
 
   const blocker = useBlocker(shouldBlock);
 
-  // Auto-proceed if no blockers remain while blocked
-  // Needed to prevent blocking on submit
+  /*
+  A component can unregister its blocker in the same commit that it navigates,
+  rendering the dialog for one commit, which moves focus into it. Use an
+  effect here to delay rendering long enough for unregistration.
+  */
   useEffect(() => {
-    if (blocker.state === "blocked" && blockersRef.current.size === 0) {
-      blocker.proceed();
+    if (blocker.state !== "blocked") {
+      setConfirmMessage(null);
+      return;
     }
-  }, [blocker.state, blocker]);
 
-  const message = () => {
-    const activeBlocker = Array.from(blockersRef.current.entries())[0];
-    if (activeBlocker) {
-      const [, { message: activeMessage }] = activeBlocker;
-      return activeMessage;
+    const activeBlocker = blockersRef.current.values().next().value;
+
+    if (!activeBlocker) {
+      blocker.proceed();
+      return;
     }
-    return null;
-  };
+
+    setConfirmMessage(activeBlocker.message);
+  }, [blocker]);
+
+  const value = useMemo(() => ({ registerBlocker, unregisterBlocker }), [
+    registerBlocker,
+    unregisterBlocker
+  ]);
 
   return (
-    <NavigationBlockerContext.Provider
-      value={{
-        registerBlocker,
-        unregisterBlocker
-      }}
-    >
+    <NavigationBlockerContext.Provider value={value}>
       {children}
-      {blocker.state === "blocked" && (
+      {blocker.state === "blocked" && confirmMessage && (
         <Dialog.Confirm
-          message={message()}
+          message={confirmMessage}
           heading={t("messages.confirm")}
           resolve={blocker.proceed}
           reject={blocker.reset}
