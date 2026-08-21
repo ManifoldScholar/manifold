@@ -1,5 +1,6 @@
-import { useId, useEffect, useMemo } from "react";
+import { useId, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useIsomorphicLayoutEffect } from "usehooks-ts";
 import { useNavigationBlocker } from "./NavigationBlockerContext";
 
 export default function NavigationBlocker({ when, message }) {
@@ -12,7 +13,8 @@ export default function NavigationBlocker({ when, message }) {
     [message, t]
   );
 
-  useEffect(() => {
+  /* Must be a layout effect, so the blocker is cleared before a navigation on form submit */
+  useIsomorphicLayoutEffect(() => {
     if (when) {
       registerBlocker(id, blockerMessage);
     } else {
