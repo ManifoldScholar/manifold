@@ -38,6 +38,7 @@ import JournalEditorRow from "./Entity/JournalEditorRow";
 import TextTrackRow from "./Entity/TextTrackRow";
 import UserGroupRow from "./Entity/UserGroupRow";
 import UserGroupEntitlementRow from "./Entity/UserGroupEntitlementRow";
+import LtiRegistrationRow from "./Entity/LtiRegistrationRow";
 
 export default List;
 export {
@@ -79,5 +80,6 @@ export {
   JournalEditorRow,
   TextTrackRow,
   UserGroupRow,
-  UserGroupEntitlementRow
+  UserGroupEntitlementRow,
+  LtiRegistrationRow
 };
