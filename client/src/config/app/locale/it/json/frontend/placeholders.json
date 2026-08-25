@@ -1,0 +1,116 @@
+{
+  "placeholders": {
+    "link": "Link",
+    "documentation_button_label": "Visita la nostra documentazione",
+    "reading_group": {
+      "customize": "<0>Siete pronti a personalizzare il vostro gruppo?</0><1>Congratulazioni, avete creato un gruppo di lettura. Ora potete iniziare ad aggiungere contenuti, a modificare l'ordine, il raggruppamento e le descrizioni sulla pagina iniziale e a inviare inviti ai nuovi membri.</1><2>Inizia ad aggiungere contenuti:</2><3>I gruppi di lettura possono contenere una varietà di contenuti: Progetti, testi, sezioni di testo, raccolte di risorse e risorse individuali possono essere aggiunti al gruppo. Per trovare e aggiungere contenuti, è possibile sfogliare la biblioteca o utilizzare la ricerca per parole chiave. Una volta trovato il contenuto che si desidera aggiungere, è sufficiente selezionare l'icona a forma di stella e assegnarlo a questo gruppo (o a qualsiasi altro gruppo di lettura che si sta gestendo).</3>",
+      "settings": "<0>Modificare le impostazioni e invitare i membri:</0><1>È possibile modificare le impostazioni del gruppo in qualsiasi momento. È possibile modificare il nome del gruppo, le impostazioni sulla privacy o le notifiche via e-mail. È inoltre possibile visualizzare il codice di invito del gruppo o utilizzare un URL di invito, che rende l'invito dei membri semplice come la condivisione dell'indirizzo della pagina web di invito.</1>"
+    },
+    "resource_collection": "Questa collezione non ha risorse.",
+    "table_of_contents": "Questo testo non ha un indice.",
+    "comments": {
+      "edit": "Modifica questo commento...",
+      "reply": "Rispondi a questo commento...",
+      "discuss_entity": "Discuti questo {{entity}}…",
+      "unauthenticated": "Accedi per inviare un commento",
+      "deleted": "Questo commento è stato cancellato."
+    },
+    "my_starred": {
+      "title": "Non hai ancora inserito le stelle in nessun articolo...ancora.",
+      "body": "Ma non preoccupatevi, abbiamo reso tutto più semplice. Ovunque si veda un'icona a forma di stella vuota, basta selezionarla per aggiungere quell'articolo alla propria collezione. Si possono mettere stelle tutti i tipi di oggetti, quindi iniziate a sfogliare i progetti e a metterle!",
+      "animation_label": "Una griglia di tessere con icone a forma di stella che sfumano."
+    },
+    "annotations_filtered": {
+      "title": "Nessuna annotazione corrisponde ai criteri di ricerca.",
+      "body": "Per visualizzare un maggior numero di annotazioni, provare a rimuovere il filtro del testo o dei membri."
+    },
+    "annotations_group": {
+      "no_user": {
+        "title": "Questo gruppo non ha ancora annotazioni.",
+        "body": "Iscriviti o accedi, poi unisciti a questo gruppo e sii il primo membro a creare un'annotazione!"
+      },
+      "user_not_member": {
+        "title": "Questo gruppo non ha ancora annotazioni.",
+        "body": "Unisciti e sii il primo membro a creare un'annotazione! Durante la lettura, è possibile associare un'annotazione nuova o esistente a questo gruppo."
+      },
+      "user_is_member": {
+        "title": "Sii il primo lettore ad annotare in questo gruppo!",
+        "body": "Durante la lettura, è possibile associare un'annotazione nuova o esistente a questo gruppo."
+      }
+    },
+    "annotations_my": {
+      "title": "Create la vostra prima annotazione!",
+      "body": "Durante la lettura, aggiungete le vostre note e annotazioni al testo. Salvatele privatamente o associatele a un gruppo di lettura."
+    },
+    "journal_issues": {
+      "authorized": {
+        "title": "Oh no. Non ci sono numeri di riviste in questa biblioteca.",
+        "body": "Ma è facile creare nuovi fascicoli con Ledibooks. Se si ha accesso al backend, <0>andare al backend</0> e selezionare prima <1>Aggiungi un nuovo giornale</1>. Una volta creato un giornale, è possibile aggiungervi nuovi numeri o trasformare progetti esistenti in numeri del giornale. Per ulteriori informazioni sulla creazione e la pubblicazione di Manifold Issues, consultare la <2>nostra documentazione</2>."
+      },
+      "unauthorized": {
+        "title": "Non ci sono numeri di riviste in questa biblioteca.",
+        "body": "Tornate a trovarci presto!"
+      }
+    },
+    "journals": {
+      "authorized": {
+        "title": "Oh no. Non ci sono riviste in questa biblioteca.",
+        "body": "Ma è facile creare nuovi diari con Ledibooks. Se si ha accesso al backend, <0>andare al backend</0> e selezionare <1>Aggiungi una nuova rivista</1>. Per ulteriori informazioni sulla creazione e la pubblicazione di fascicoli, consultare la <2>nostra documentazione</2>."
+      },
+      "unauthorized": {
+        "title": "Non ci sono riviste in questa biblioteca.",
+        "body": "Tornate a trovarci presto!"
+      }
+    },
+    "project_collections_admin": {
+      "title": "Siete pronti a creare una collana di libri?",
+      "body": "Con le collane di libri, è possibile controllare ciò che appare nella homepage della libreria. Create raggruppamenti personalizzati di progetti e modificatene l'ordine e la visibilità. Potete scegliere le vostre collezioni e ordinarle manualmente, oppure creare collezioni intelligenti che si aggiornano automaticamente in base ai vostri criteri di filtraggio."
+    },
+    "projects": {
+      "authorized": {
+        "title": "On no. Questa biblioteca è vuota.",
+        "body": "Ma è facile creare e pubblicare libri/progetti. Se si ha accesso al backend, <0>andare al backend</0> e selezionare <1>Aggiungi un nuovo libro/progetto</1>. Per ulteriori informazioni, potete imparare a creare e pubblicare libri/progetti <2>qui</2>."
+      },
+      "unauthorized": {
+        "title": "On no. Questa biblioteca è vuota.",
+        "body": "Tornate a trovarci presto!"
+      }
+    },
+    "project_collections": {
+      "authorized": {
+        "title": "Oh no. Non ci sono collane",
+        "body": "Ma è facile creare e pubblicare libri/progetti. Se si ha accesso al backend, <0>andare al backend</0> e selezionare <1>Aggiungi un nuovo libro/progetto</1>. Per ulteriori informazioni, potete imparare a creare e pubblicare libri/progetti <2>qui</2>."
+      },
+      "unauthorized": {
+        "title": "Oh no. Non ci sono collane",
+        "body": "Tornate a trovarci presto!"
+      }
+    },
+    "reading_groups": {
+      "no_user": {
+        "title": "Non ci sono ancora gruppi di lettura.",
+        "body": "Registratevi o accedete per creare il primo gruppo, oppure scoprite di più sui gruppi di lettura nella nostra documentazione."
+      },
+      "public": {
+        "title": "Non ci sono ancora gruppi di lettura.",
+        "body": "Siate i primi a crearne uno o scoprite di più sui gruppi di lettura nella nostra documentazione."
+      },
+      "user": {
+        "title": "Unitevi a un gruppo o createne uno nuovo.",
+        "body": "Per unirsi a un gruppo, inserire il codice di invito al gruppo qui sotto. È anche possibile creare il proprio gruppo o saperne di più sui gruppi di lettura nella nostra documentazione."
+      }
+    },
+    "resource_collections": {
+      "authorized": {
+        "title": "Oh no. Questo progetto non ha ancora collezioni.",
+        "body": "Le raccolte di risorse sono raggruppamenti di risorse che possono essere utilizzati per orientare il lettore su determinati temi o come mezzo per inserire una serie di risorse in un testo con un unico inserimento."
+      },
+      "unauthorized": {
+        "title": "Questo progetto non ha ancora collezioni.",
+        "body": "Tornate a trovarci presto!"
+      }
+    },
+    "volume_no_issues": "Questo volume non contiene ancora alcun numero.",
+    "journal_no_issues": "Questo giornale non contiene ancora alcun numero."
+  }
+}
