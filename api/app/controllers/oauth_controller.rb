@@ -12,8 +12,6 @@ class OauthController < ApplicationController
 
   # In order to prevent CSRF,
   def redirect
-    # Sets the CSRF token in session, which sets the cookie in the response
-    real_csrf_token(session)
     render html: redirect_body.html_safe, layout: false
   end
 
@@ -71,7 +69,7 @@ class OauthController < ApplicationController
           <div style="margin-top: 100px; text-align: center;">
             <h1>Redirecting, Please Wait</h1>
             <form id="auth_redirect_form" action="/auth/#{scrubbed_provider_name}" method="POST">
-              <input type="hidden" name="authenticity_token" value="#{session["_csrf_token"]}" />
+              <input type="hidden" name="authenticity_token" value="#{form_authenticity_token}" />
               <input type="submit" id="auth_redirect_submit" value="Click here if you're not automatically redirected" />
             </form>
           </div>
