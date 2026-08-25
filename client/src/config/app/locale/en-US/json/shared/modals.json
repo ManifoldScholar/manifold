@@ -23,6 +23,7 @@
     "delete_export_target": "Are you sure you want to delete this export target?",
     "delete_feature": "Are you sure you want to delete this feature?",
     "delete_journal": "Are you sure you want to delete this journal?",
+    "delete_lti_registration": "Are you sure you want to delete the registration for {{ name }}?",
     "delete_maker": "Are you sure you want to delete this maker?",
     "delete_membership": "Are you sure you want to remove {{ name }} from the group?",
     "delete_membership_group": "Are you sure you want to remove {{ name }} from {{ rg }}?",

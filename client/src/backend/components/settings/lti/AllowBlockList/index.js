@@ -1,4 +1,5 @@
 import { useState, useId } from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import List from "./List";
@@ -57,3 +58,12 @@ export default function AllowBlockListInput({
     </Styled.Wrapper>
   );
 }
+
+AllowBlockListInput.displayName = "Settings.LTI.AllowBlockListInput";
+
+AllowBlockListInput.propTypes = {
+  type: PropTypes.oneOf(["allow", "block"]).isRequired,
+  value: PropTypes.array.isRequired,
+  setValue: PropTypes.func.isRequired,
+  instructionsId: PropTypes.string
+};

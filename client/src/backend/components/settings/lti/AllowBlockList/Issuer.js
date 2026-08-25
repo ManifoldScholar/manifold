@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import IconComposer from "global/components/utility/IconComposer";
 import * as Styled from "./styles";
 
@@ -18,3 +19,11 @@ export default function Issuer({ label, index, onRemove }) {
     </Styled.Item>
   );
 }
+
+Issuer.displayName = "Settings.LTI.AllowBlockList.Issuer";
+
+Issuer.propTypes = {
+  label: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  onRemove: PropTypes.func.isRequired
+};
