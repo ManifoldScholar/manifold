@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.5](https://github.com/ManifoldScholar/manifold/compare/9.2.4...9.2.5) (2026-08-25)
+
+
+### Bug Fixes
+
+* **api:** remove repeated inclusion of cookie middleware ([cd3a31b](https://github.com/ManifoldScholar/manifold/commit/cd3a31baa83fa20095cee46d9e98340ddea8b5b9))
+
 ## [9.2.4](https://github.com/ManifoldScholar/manifold/compare/9.2.3...9.2.4) (2026-08-20)
 
 
