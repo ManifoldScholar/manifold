@@ -66,10 +66,12 @@ export default function Splash(props) {
     };
   };
 
+  const renderedMode = previewAttrs?.style ?? mode;
+
   return (
     <Styled.Wrapper
       $preview={preview}
-      $lightMode={mode === "light"}
+      $lightMode={renderedMode === "light"}
       $bgColor={previewAttrs?.backgroundColor ?? backgroundColor}
       $bgImage={backgroundStyles?.original}
     >
