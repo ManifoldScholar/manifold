@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import { useState, useId, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
@@ -6,7 +6,8 @@ import FormContainer from "global/containers/form";
 import { settingsAPI, requests } from "api";
 import { useFromStore } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
-import LtiAllowBlockListInput from "backend/components/settings/LtiAllowBlockList/index";
+import LtiAllowBlockListInput from "backend/components/settings/lti/AllowBlockList/index";
+import LtiRegistrations from "backend/components/settings/lti/Registrations";
 
 export default function SettingsIntegrationsContainer() {
   const { t } = useTranslation();
@@ -23,6 +24,12 @@ export default function SettingsIntegrationsContainer() {
   );
 
   const id = useId();
+
+  useEffect(() => {
+    const lti = settings?.attributes?.lti;
+    setAllowState(lti?.issuerAllowlist ?? []);
+    setBlockState(lti?.issuerBlocklist ?? []);
+  }, [settings]);
 
   if (!settings) return null;
 
@@ -145,6 +152,7 @@ export default function SettingsIntegrationsContainer() {
               instructionsId={id}
             />
           </Form.FieldGroup>
+          <LtiRegistrations />
           <Form.Save text={t("settings.save")} />
         </FormContainer.Form>
       </Layout.BackendPanel>
