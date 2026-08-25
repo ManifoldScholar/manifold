@@ -3,7 +3,9 @@
 class SamlConfig < ApplicationConfig
   PROVIDER_NAME_FORMAT = /[a-z]/
 
-  attr_config disable_password_auth: false,
+  attr_config :certificate,
+              :private_key,
+              disable_password_auth: false,
               disallow_email_change: false,
               provider_names: []
 

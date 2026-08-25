@@ -23,9 +23,9 @@ class AbstractSamlProviderConfig < ApplicationConfig
               :idp_cert,
               :idp_signing_cert,
               :idp_encryption_cert,
-              :certificate,
-              :private_key,
               :idp_cert_fingerprint,
+              certificate: SamlConfig.certificate,
+              private_key: SamlConfig.private_key,
               enabled: false,
               hidden: false,
               default: false,
@@ -59,6 +59,14 @@ class AbstractSamlProviderConfig < ApplicationConfig
 
   def display_name
     super || provider_name.titleize
+  end
+
+  def certificate
+    super || SamlConfig.certificate
+  end
+
+  def private_key
+    super || SamlConfig.private_key
   end
 
   def show?
