@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Menu as ReakitMenu, MenuItem as ReakitMenuItem } from "reakit/Menu";
 import { useSlate, ReactEditor } from "slate-react";
 import { Range, Node } from "slate";
@@ -54,10 +55,13 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
     <ReakitMenu as={Styled.Content} {...menu}>
       <ReakitMenuItem
         as={Styled.InnerButton}
+        aria-label={t("editor.controls.labels.alignment_left")}
         onClick={onClick("left")}
         data-active={activeAlignment === "manifold-rte-left"}
         {...menu}
@@ -66,6 +70,7 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
       </ReakitMenuItem>
       <ReakitMenuItem
         as={Styled.InnerButton}
+        aria-label={t("editor.controls.labels.alignment_center")}
         onClick={onClick("center")}
         data-active={activeAlignment === "manifold-rte-center"}
         {...menu}
@@ -74,6 +79,7 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
       </ReakitMenuItem>
       <ReakitMenuItem
         as={Styled.InnerButton}
+        aria-label={t("editor.controls.labels.alignment_right")}
         onClick={onClick("right")}
         data-active={activeAlignment === "manifold-rte-right"}
         {...menu}
@@ -82,6 +88,7 @@ export default function Submenu({ menu, activeAlignment, block, path }) {
       </ReakitMenuItem>
       <ReakitMenuItem
         as={Styled.InnerButton}
+        aria-label={t("editor.controls.labels.alignment_justify")}
         onClick={onClick("justify")}
         data-active={activeAlignment === "manifold-rte-justify"}
         {...menu}
