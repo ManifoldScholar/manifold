@@ -53,6 +53,11 @@ const FE_ROUTE_MAP = {
     link: `/backend/projects/project-collections`,
     hasAdminList: true
   },
+  issue: {
+    regex: /^\/journals\/issues/,
+    link: `/backend/journals`,
+    hasAdminList: true
+  },
   journal: {
     regex: /^\/journals/,
     link: `/backend/journals`,
