@@ -197,6 +197,36 @@ services:
       - rails-tmp:/srv/app/tmp
       - uploads:/srv/app/public/system
 
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    profiles:
+      - keycloak
+    command: start-dev
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: "password"
+      KC_HOSTNAME_URL: http://localhost:13120
+      KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME_STRICT_BACKCHANNEL: "false"
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "13120:8080"
+    healthcheck:
+      test: curl -s --fail localhost:8080/health/ready -o /dev/null
+      start_period: 30s
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
 volumes:
   bundle-cache:
     driver: local
