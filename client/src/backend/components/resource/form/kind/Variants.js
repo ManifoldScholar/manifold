@@ -9,7 +9,8 @@ export default class ResourceFormKindVariants extends PureComponent {
   static displayName = "Resource.Form.Kind.Variants";
 
   static propTypes = {
-    kind: PropTypes.string.isRequired
+    kind: PropTypes.string.isRequired,
+    externalVideo: PropTypes.bool
   };
 
   get component() {
