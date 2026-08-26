@@ -16,6 +16,13 @@ export const List = styled("ul", transientOptions)`
     ${$count >= 5 ? `${respond(`margin-inline: -26px;`, 120)}` : ``}
   `}
 
+  ${({ $isJournals }) =>
+    $isJournals &&
+    `
+    ${respond(`margin-inline: auto;`, 120)}
+    ${respond(`max-inline-size: 40rem;`, 120)}
+  `}
+
   > * {
     flex-basis: 100%;
 
@@ -32,6 +39,12 @@ export const List = styled("ul", transientOptions)`
           : `flex-basis: auto`,
         $count > 3 ? 120 : 75
       )}
+    `}
+
+    ${({ $isJournals }) =>
+      $isJournals &&
+      `
+      ${respond(`flex-grow: 0;`, 120)}
     `}
   }
 `;
