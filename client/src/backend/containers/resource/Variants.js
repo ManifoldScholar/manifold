@@ -9,6 +9,10 @@ function ResourceVariantsContainer() {
   const { t } = useTranslation();
   const { resource } = useOutletContext();
 
+  const kind = resource.attributes.kind;
+  const externalVideo =
+    kind === "video" ? resource.attributes.subKind === "external_video" : false;
+
   return (
     <section>
       <FormContainer.Form
@@ -18,7 +22,10 @@ function ResourceVariantsContainer() {
         create={resourcesAPI.create}
         className="form-secondary"
       >
-        <Resource.Form.Kind.Variants kind={resource.attributes.kind} />
+        <Resource.Form.Kind.Variants
+          kind={kind}
+          externalVideo={externalVideo}
+        />
         <Form.Save text={t("resources.properties.save")} />
       </FormContainer.Form>
     </section>

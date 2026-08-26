@@ -7,12 +7,8 @@ export default class ResourceFormKindVariantsVideo extends PureComponent {
 
   static propTypes = {
     kind: PropTypes.string,
-    resource: PropTypes.object.isRequired
+    externalVideo: PropTypes.bool.isRequired
   };
-
-  get externalVideo() {
-    return this.props.resource.attributes.subKind === "external_video";
-  }
 
   render() {
     return (
@@ -35,7 +31,7 @@ export default class ResourceFormKindVariantsVideo extends PureComponent {
           remove="attributes[removeVariantFormatTwo]"
           {...this.props}
         />
-        {!this.externalVideo && (
+        {!this.props.externalVideo && (
           <Form.Upload
             layout="landscape"
             label="Poster Image"
