@@ -8,8 +8,8 @@ import EntitiesList, {
   FeatureRow
 } from "components/backend/list/EntitiesList";
 
-export const loader = async ({ request, context }) => {
-  return loadList({ request, context, fetchFn: featuresAPI.index });
+export const loader = async ({ url, context }) => {
+  return loadList({ url, context, fetchFn: featuresAPI.index });
 };
 
 export default function FeaturesListRoute({ loaderData }) {

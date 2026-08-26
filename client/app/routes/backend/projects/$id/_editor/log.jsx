@@ -4,9 +4,9 @@ import loadList from "lib/react-router/loaders/loadList";
 import { useListQueryParams } from "hooks";
 import EntitiesList, { LogRow } from "components/backend/list/EntitiesList";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, url, context }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: (filters, pagination) =>
       projectsAPI.versions(params.id, filters, pagination),

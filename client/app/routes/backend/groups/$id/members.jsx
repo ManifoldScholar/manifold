@@ -9,9 +9,9 @@ import EntitiesList, {
   ReadingGroupMemberRow
 } from "components/backend/list/EntitiesList";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, url, context }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: (filters, pagination) =>
       readingGroupsAPI.members(params.id, filters, pagination),

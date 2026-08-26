@@ -6,9 +6,9 @@ import SearchResults from "components/global/search/results";
 import HeadContent from "components/global/HeadContent";
 import * as Styled from "./styles";
 
-export const loader = async ({ request, context }) => {
-  checkLibraryMode({ request, context });
-  return searchLoader({ request, context });
+export const loader = async ({ url, context }) => {
+  checkLibraryMode({ url, context });
+  return searchLoader({ url, context });
 };
 
 export default function SearchRoute({ loaderData: { results, meta } }) {

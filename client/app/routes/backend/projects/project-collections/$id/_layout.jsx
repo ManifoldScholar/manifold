@@ -9,7 +9,7 @@ import authorize from "lib/react-router/loaders/authorize";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 import loadList from "lib/react-router/loaders/loadList";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, request, url }) => {
   const projectCollection = await loadEntity({
     context,
     fetchFn: () => projectCollectionsAPI.show(params.id),
@@ -22,7 +22,7 @@ export const loader = async ({ params, context, request }) => {
     ability: "update"
   });
   const { data: collectionProjects } = await loadList({
-    request,
+    url,
     context,
     fetchFn: () => collectionProjectsAPI.index(params.id),
     options: { skipPagination: true, skipFilters: true }

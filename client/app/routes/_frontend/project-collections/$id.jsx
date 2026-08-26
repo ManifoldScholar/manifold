@@ -15,8 +15,8 @@ import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { FrontendContext } from "app/contexts";
 import { useListFilters, useListSearchParams } from "hooks";
 
-export const loader = async ({ params, request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ params, request, context, url }) => {
+  checkLibraryMode({ url, context });
 
   if (params.id === "all") {
     throw redirect("/project-collections");
@@ -26,7 +26,7 @@ export const loader = async ({ params, request, context }) => {
   const projectCollection = await loadEntity({ context, fetchFn, request });
 
   const projectsData = await loadList({
-    request,
+    url,
     context,
     fetchFn: projectsAPI.index,
     options: {

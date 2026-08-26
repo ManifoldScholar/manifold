@@ -18,7 +18,7 @@ import {
 } from "components/backend/list/EntitiesList/List/bulkActions";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ request, context, url }) => {
   await authorize({
     request,
     context,
@@ -26,7 +26,7 @@ export const loader = async ({ request, context }) => {
     entity: ["readingGroup"]
   });
   return loadList({
-    request,
+    url,
     context,
     fetchFn: readingGroupsAPI.index,
     options: {

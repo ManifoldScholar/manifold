@@ -15,9 +15,9 @@ import EntitiesList, {
 import { INIT_SEARCH_PROPS } from "./filters";
 import * as Styled from "./styles";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, url, context }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: (filters, pagination) =>
       ingestionSourcesAPI.index(params.id, filters, pagination),

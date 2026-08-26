@@ -16,9 +16,8 @@ export default function createListClientLoader({
   fetchFn,
   options = {}
 }) {
-  const clientLoader = async ({ request, serverLoader }) => {
+  const clientLoader = async ({ url, serverLoader }) => {
     try {
-      const url = new URL(request.url);
       const { filters, pagination } = parseListParams(url, options);
 
       // On initial hydration, use server data

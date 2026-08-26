@@ -13,5 +13,6 @@ declare module "virtual:react-router/server-build" {
   export const routeDiscovery: ServerBuild["routeDiscovery"];
   export const routes: ServerBuild["routes"];
   export const ssr: ServerBuild["ssr"];
+  export const allowedActionOrigins: ServerBuild["allowedActionOrigins"];
   export const unstable_getCriticalCss: ServerBuild["unstable_getCriticalCss"];
 }

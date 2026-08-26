@@ -6,8 +6,8 @@ import EntitiesList, {
   PageRow
 } from "components/backend/list/EntitiesList";
 
-export const loader = async ({ request, context }) => {
-  return loadList({ request, context, fetchFn: pagesAPI.index });
+export const loader = async ({ url, context }) => {
+  return loadList({ url, context, fetchFn: pagesAPI.index });
 };
 
 export default function PagesListRoute({ loaderData }) {

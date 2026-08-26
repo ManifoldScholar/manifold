@@ -6,12 +6,13 @@ import { routerContext } from "app/contexts";
  * If disabled, redirects to the appropriate URL (home redirect or library redirect).
  *
  * @param {Object} loaderArgs - Loader arguments from React Router
- * @param {Object} loaderArgs.request - Request object
+ * @param {URL} loaderArgs.url - Normalized request URL. Use this rather than
+ *   `new URL(request.url)` with `future.v8_passThroughRequests` on
  * @param {Object} loaderArgs.context - Router context (from middleware)
  * @returns {null} Returns null if library mode is enabled (allows route to render)
  * @throws {Response} Throws redirect Response if library mode is disabled
  */
-export default function checkLibraryMode({ request, context }) {
+export default function checkLibraryMode({ url, context }) {
   const { settings } = context.get(routerContext) ?? {};
 
   const libraryDisabled = settings?.attributes?.general?.libraryDisabled;
@@ -20,7 +21,6 @@ export default function checkLibraryMode({ request, context }) {
     return null;
   }
 
-  const url = new URL(request.url);
   const isHome = url.pathname === "/";
   const { general } = settings?.attributes;
 

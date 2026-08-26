@@ -8,23 +8,22 @@ import { hasSearchableQuery, parseQueryFromUrl } from "hooks/useSearch/helpers";
  * and returning formatted data.
  *
  * @param {Object} options - Configuration options
- * @param {Object} options.request - React Router request object
+ * @param {URL} options.url - Normalized request URL from the loader args
  * @param {Object} options.context - React Router context object
  * @param {Object} options.params - Optional extra fields to merge into searchQueryState
  * @param {Function} options.beforeLoad - Optional async function to run before processing (e.g., checkLibraryMode)
  * @returns {Promise<Object>} Object with results, meta, and optionally searchQueryState
  */
 export default async function searchLoader({
-  request,
+  url,
   context,
   params = null,
   beforeLoad = null
 }) {
   if (beforeLoad) {
-    await beforeLoad({ request, context });
+    await beforeLoad({ url, context });
   }
 
-  const url = new URL(request.url);
   const searchQueryState = {
     ...parseQueryFromUrl(url.search),
     ...params

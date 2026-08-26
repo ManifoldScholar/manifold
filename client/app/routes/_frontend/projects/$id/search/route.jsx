@@ -9,13 +9,13 @@ import SearchResults from "components/global/search/results";
 import HeadContent from "components/global/HeadContent";
 import * as Styled from "./styles";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, request, context, url }) => {
   // Load project to get its UUID (API expects UUID, not slug)
   const fetchFn = () => projectsAPI.show(params.id);
   const project = await loadEntity({ context, fetchFn, request });
 
   return searchLoader({
-    request,
+    url,
     context,
     params: { project: project.id }
   });

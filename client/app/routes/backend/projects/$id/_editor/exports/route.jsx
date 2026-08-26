@@ -17,17 +17,17 @@ import Form from "components/global/form";
 import Authorize from "components/hoc/Authorize";
 import { StyledForm } from "./styles";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, url, context }) => {
   const [listData, targetsResult] = await Promise.all([
     loadList({
-      request,
+      url,
       context,
       fetchFn: (filters, pagination) =>
         projectsAPI.project_exportations(params.id, filters, pagination),
       options: { defaultPagination: { page: 1, perPage: 20 } }
     }),
     loadList({
-      request,
+      url,
       context,
       fetchFn: exportTargetsAPI.index,
       options: { skipFilters: true, skipPagination: true }
