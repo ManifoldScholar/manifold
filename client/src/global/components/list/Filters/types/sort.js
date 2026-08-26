@@ -5,7 +5,10 @@ export const sortFilter = (filters, updateFilters, params, t) => {
     params?.entityType === "projectCollection" ||
     params?.entityType === "journalIssue";
   const alphaSort =
-    params?.entityType === "projectCollection" ? "title" : "sort_title";
+    params?.entityType === "projectCollection" ||
+    params?.entityType === "resourceCollection"
+      ? "title"
+      : "sort_title";
 
   return {
     label: t("filters.labels.sort_results"),
