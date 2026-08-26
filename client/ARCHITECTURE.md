@@ -327,6 +327,24 @@ revalidate();
 
 Every redirect in this codebase uses `throw redirect(...)`. This is consistent with how React Router models responses (loaders/actions throw `Response`-shaped values to short-circuit), and it unmounts the component cleanly so transitional UI doesn't flash.
 
+### CSRF: actions require a matching `Origin`
+
+Since React Router 7.12, every action request is origin-checked on the server. The check compares the `Origin` header's host against `new URL(request.url).host` — **including the port** — and returns a bare `400 Bad Request` on mismatch. A missing or `null` `Origin` skips the check entirely, so server-to-server and `curl` calls are unaffected.
+
+It applies to both document submissions and `.data` requests, which means it covers every route action in the app: `FormContainer.Form`, `useFetcher`, and `useSubmit` alike. Loaders are never checked. This is invisible in local development because the client is served directly by the React Router server with nothing in front of it, but if triggered in a deploy utilizing a proxy, the symptom presents as "login is broken," not as a proxy misconfiguration.
+
+Two ways to satisfy it, in order of preference:
+
+1. Have the proxy preserve the client's `Host` end-to-end (`proxy_set_header Host $host` and standard ports).
+2. Add the internal origin to `allowedActionOrigins` in [`react-router.config.js`](./react-router.config.js). It accepts exact hosts plus `*` (one domain segment) and `**` (remaining segments) wildcards.
+
+Verify with a single request against any action route — a matching `Origin` should return 200, a foreign one 400:
+
+```sh
+curl -s -o /dev/null -w "%{http_code}\n" -X POST "$CLIENT_URL/actions/login.data" \
+  -H "Origin: $CLIENT_URL" -H "Content-Type: application/json" -d '{}'
+```
+
 See [`backend_data_patterns.md` §5](./router-migration-guides/backend_data_patterns.md) for the full mutation matrix including `useSubmit` and direct `queryApi` patterns.
 
 ---
