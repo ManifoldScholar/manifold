@@ -20,10 +20,10 @@ import {
 import PageHeader from "components/backend/layout/PageHeader";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ request, context, url }) => {
   await authorize({ request, context, kind: "admin" });
   return loadList({
-    request,
+    url,
     context,
     fetchFn: annotationsAPI.index,
     options: {

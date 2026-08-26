@@ -38,14 +38,14 @@ const getBreadcrumbs = ({ journalBreadcrumbs, collection, project, t }) => {
     : [projectCrumb, resourcesCrumb, collectionCrumb].filter(Boolean);
 };
 
-export const loader = async ({ params, request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ params, context, url }) => {
+  checkLibraryMode({ url, context });
 
   const { resourceCollectionId } = params;
 
   const [resourcesResult, annotationsResult] = await Promise.allSettled([
     loadList({
-      request,
+      url,
       context,
       fetchFn: (filters, pagination) =>
         resourceCollectionsAPI.collectionResources(
@@ -78,7 +78,7 @@ export const loader = async ({ params, request, context }) => {
   };
 };
 
-export const clientLoader = async ({ params, request, serverLoader }) => {
+export const clientLoader = async ({ params, serverLoader, url }) => {
   const { resourceCollectionId } = params;
 
   const fetchFn = (filters, pagination) =>
@@ -96,7 +96,7 @@ export const clientLoader = async ({ params, request, serverLoader }) => {
     }
   });
 
-  return clientLoaderFn({ request, serverLoader });
+  return clientLoaderFn({ url, serverLoader });
 };
 
 export default function ResourceCollectionDetailRoute({ loaderData }) {

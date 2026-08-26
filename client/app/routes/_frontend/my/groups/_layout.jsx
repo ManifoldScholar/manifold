@@ -9,10 +9,10 @@ import List from "components/frontend/reading-group-list/List";
 
 const FILTERS_RESET = { sort_order: "created_at_asc", archived: "false" };
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ request, context, url }) => {
   requireLogin(request, context);
   return loadList({
-    request,
+    url,
     context,
     fetchFn: meAPI.readingGroups,
     options: { defaultFilters: FILTERS_RESET }

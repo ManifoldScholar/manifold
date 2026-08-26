@@ -8,9 +8,9 @@ import EntitiesList, {
   SubjectRow
 } from "components/backend/list/EntitiesList";
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ url, context }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: subjectsAPI.index,
     options: {

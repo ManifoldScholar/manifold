@@ -9,12 +9,12 @@ import * as Styled from "./styles";
 
 const DEFAULT_FILTERS = { formats: ["annotation"] };
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, context, url }) => {
   const fetchFn = (filters, pagination) =>
     readingGroupsAPI.annotations(params.id, filters, pagination);
 
   return loadList({
-    request,
+    url,
     context,
     fetchFn,
     options: {
@@ -24,7 +24,7 @@ export const loader = async ({ params, request, context }) => {
   });
 };
 
-export const clientLoader = ({ params, request, serverLoader }) => {
+export const clientLoader = ({ params, serverLoader, url }) => {
   const fetchFn = (filters, pagination) =>
     readingGroupsAPI.annotations(params.id, filters, pagination);
 
@@ -37,7 +37,7 @@ export const clientLoader = ({ params, request, serverLoader }) => {
     }
   });
 
-  return clientLoaderFn({ request, serverLoader });
+  return clientLoaderFn({ url, serverLoader });
 };
 
 export default function ReadingGroupAnnotationsRoute({ loaderData }) {

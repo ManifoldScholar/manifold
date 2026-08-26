@@ -12,18 +12,18 @@ import Permissions from "components/backend/journal/Permissions";
 
 const authorization = new Authorization();
 
-export const loader = async ({ request, context, params }) => {
+export const loader = async ({ context, params, url }) => {
   const entity = { type: "journals", id: params.id };
 
   const [permissions, entitlements] = await Promise.all([
     loadList({
-      request,
+      url,
       context,
       fetchFn: () => permissionsAPI.index(entity),
       options: { skipPagination: true, skipFilters: true }
     }),
     loadList({
-      request,
+      url,
       context,
       fetchFn: (filters, pagination) =>
         entitlementsAPI.index(entity, filters, pagination),

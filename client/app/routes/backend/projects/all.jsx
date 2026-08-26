@@ -9,9 +9,9 @@ import EntitiesList, {
 } from "components/backend/list/EntitiesList";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ url, context }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: projectsAPI.index,
     options: {

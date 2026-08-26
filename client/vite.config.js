@@ -27,7 +27,7 @@ function jsxInJsPlugin() {
   };
 }
 
-export default defineConfig(({ isSsrBuild }) => ({
+export default defineConfig(({ command }) => ({
   assetsInclude: ["**/*.woff", "**/*.woff2"],
   plugins: [
     jsxInJsPlugin(),
@@ -113,8 +113,18 @@ export default defineConfig(({ isSsrBuild }) => ({
       ]
     }
   },
-  ssr: {
-    noExternal: isSsrBuild ? true : ["styled-components"]
+  environments: {
+    ssr: {
+      resolve: {
+        // The server build must bundle its dependencies rather than leave them
+        // external: several (reakit/Menu among them) rely on directory imports
+        // that Node's ESM resolver rejects, so an externalized SSR build fails
+        // at request time on those routes while still building cleanly.
+        //
+        // `command` rather than `isSsrBuild`: under future.v8_viteEnvironmentApi
+        noExternal: command === "build" ? true : ["styled-components"]
+      }
+    }
   },
   build: {
     chunkSizeWarningLimit: 1500

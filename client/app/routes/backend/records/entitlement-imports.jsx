@@ -7,7 +7,7 @@ import EntitiesList, {
 } from "components/backend/list/EntitiesList";
 import PageHeader from "components/backend/layout/PageHeader";
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ request, context, url }) => {
   await authorize({
     request,
     context,
@@ -15,7 +15,7 @@ export const loader = async ({ request, context }) => {
     entity: ["pendingEntitlement"]
   });
   return loadList({
-    request,
+    url,
     context,
     fetchFn: entitlementImportsAPI.index,
     options: {

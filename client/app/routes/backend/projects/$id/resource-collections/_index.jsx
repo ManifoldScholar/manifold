@@ -10,9 +10,9 @@ import EntitiesList, {
 } from "components/backend/list/EntitiesList";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, url, context }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: (filters, pagination) =>
       projectsAPI.resourceCollections(params.id, filters, pagination),

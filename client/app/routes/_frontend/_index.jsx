@@ -31,8 +31,8 @@ const FEATURES_FILTERS = { home: true };
 
 export { shouldRevalidate } from "lib/react-router/loaders/shouldRevalidate";
 
-export const loader = async ({ request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ url, context }) => {
+  checkLibraryMode({ url, context });
 
   const { settings } = context.get(routerContext) ?? {};
 

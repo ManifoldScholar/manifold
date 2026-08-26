@@ -13,20 +13,20 @@ import { getJournalBreadcrumbs } from "helpers/breadcrumbs";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };
 
-export const loader = async ({ params, request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ params, context, url }) => {
+  checkLibraryMode({ url, context });
 
   const fetchFn = (filters, pagination) =>
     projectsAPI.events(params.id, filters, pagination);
 
   return loadList({
-    request,
+    url,
     context,
     fetchFn
   });
 };
 
-export const clientLoader = async ({ params, request, serverLoader }) => {
+export const clientLoader = async ({ params, serverLoader, url }) => {
   const fetchFn = (filters, pagination) =>
     projectsAPI.events(params.id, filters, pagination);
 
@@ -35,7 +35,7 @@ export const clientLoader = async ({ params, request, serverLoader }) => {
     fetchFn
   });
 
-  return clientLoaderFn({ request, serverLoader });
+  return clientLoaderFn({ url, serverLoader });
 };
 
 export default function EventListRoute({ loaderData }) {
