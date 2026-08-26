@@ -162,7 +162,6 @@ export default `
           color: var(--color-neutral-text-extra-light);
         }
       }
-    }
 
       .current {
         padding-bottom: 45px;
