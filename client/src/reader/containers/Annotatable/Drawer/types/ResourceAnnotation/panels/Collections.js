@@ -45,35 +45,37 @@ export default function CollectionsList({
       <Styled.Search>
         <Styled.Filters {...filterProps} />
       </Styled.Search>
-      <Styled.ListWrapper>
-        <Styled.Count>
-          {`${collectionsMeta?.pagination?.totalCount} ${t(
-            "glossary.resource_collection",
-            {
-              count: collectionsMeta?.pagination?.totalCount
-            }
-          )}`}
-        </Styled.Count>
-        <CollectionList
-          collections={collections}
-          setActive={setSelected}
-          active={selected?.id}
+      <form>
+        <Styled.ListWrapper>
+          <Styled.Count>
+            {`${collectionsMeta?.pagination?.totalCount} ${t(
+              "glossary.resource_collection",
+              {
+                count: collectionsMeta?.pagination?.totalCount
+              }
+            )}`}
+          </Styled.Count>
+          <CollectionList
+            collections={collections}
+            setActive={setSelected}
+            active={selected?.id}
+          />
+          {collectionsMeta?.pagination?.totalPages > 1 && (
+            <Styled.PaginationWrapper>
+              <Utility.Pagination
+                pagination={collectionsMeta?.pagination}
+                paginationClickHandler={onPageChange}
+                wide
+              />
+            </Styled.PaginationWrapper>
+          )}
+        </Styled.ListWrapper>
+        <ButtonGroup
+          handleSave={handleSave}
+          handleClose={handleClose}
+          selected={selected}
         />
-        {collectionsMeta?.pagination?.totalPages > 1 && (
-          <Styled.PaginationWrapper>
-            <Utility.Pagination
-              pagination={collectionsMeta?.pagination}
-              paginationClickHandler={onPageChange}
-              wide
-            />
-          </Styled.PaginationWrapper>
-        )}
-      </Styled.ListWrapper>
-      <ButtonGroup
-        handleSave={handleSave}
-        handleClose={handleClose}
-        selected={selected}
-      />
+      </form>
     </div>
   );
 }

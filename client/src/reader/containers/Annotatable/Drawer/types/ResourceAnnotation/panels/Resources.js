@@ -42,34 +42,39 @@ export default function ResourcesList({
   return (
     <div>
       <Styled.Search>
-        <Styled.Filters as="div" {...filterProps} />
+        <Styled.Filters {...filterProps} />
       </Styled.Search>
-      <Styled.ListWrapper>
-        <Styled.Count>
-          {`${resourcesMeta?.pagination?.totalCount} ${t("glossary.resource", {
-            count: resourcesMeta?.pagination?.totalCount
-          })}`}
-        </Styled.Count>
-        <ResourceList
-          resources={resources}
-          setActive={setSelected}
-          active={selected?.id}
+      <form>
+        <Styled.ListWrapper>
+          <Styled.Count>
+            {`${resourcesMeta?.pagination?.totalCount} ${t(
+              "glossary.resource",
+              {
+                count: resourcesMeta?.pagination?.totalCount
+              }
+            )}`}
+          </Styled.Count>
+          <ResourceList
+            resources={resources}
+            setActive={setSelected}
+            active={selected?.id}
+          />
+          {resourcesMeta?.pagination?.totalPages > 1 && (
+            <Styled.PaginationWrapper>
+              <Utility.Pagination
+                pagination={resourcesMeta?.pagination}
+                paginationClickHandler={onPageChange}
+                wide
+              />
+            </Styled.PaginationWrapper>
+          )}
+        </Styled.ListWrapper>
+        <ButtonGroup
+          handleSave={handleSave}
+          handleClose={handleClose}
+          selected={selected}
         />
-        {resourcesMeta?.pagination?.totalPages > 1 && (
-          <Styled.PaginationWrapper>
-            <Utility.Pagination
-              pagination={resourcesMeta?.pagination}
-              paginationClickHandler={onPageChange}
-              wide
-            />
-          </Styled.PaginationWrapper>
-        )}
-      </Styled.ListWrapper>
-      <ButtonGroup
-        handleSave={handleSave}
-        handleClose={handleClose}
-        selected={selected}
-      />
+      </form>
     </div>
   );
 }
