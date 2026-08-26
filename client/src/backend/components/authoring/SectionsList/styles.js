@@ -24,6 +24,11 @@ export const Item = styled.li`
   isolation: isolate;
   color: var(--color-neutral-text-extra-light);
 
+  &:hover,
+  &:focus-within {
+    z-index: 1;
+  }
+
   &:first-child {
     margin-block-start: 16px;
   }
