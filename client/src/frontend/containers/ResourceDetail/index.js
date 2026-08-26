@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useParams, useLocation, useOutletContext } from "react-router-dom";
 import ResourceDetail from "frontend/components/resource/Detail";
 import { fatalErrorActions } from "actions";
-import { resourcesAPI, resourceCollectionsAPI, requests } from "api";
+import { resourcesAPI, resourceCollectionsAPI } from "api";
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import { breadcrumbs } from "./breadcrumbs";
 import HeadContent from "global/components/HeadContent";
@@ -19,7 +19,6 @@ export default function ResourceDetailContainer() {
   const { resourceId, resourceCollectionId } = useParams();
   const { data: resource } = useFetch({
     request: [resourcesAPI.show, resourceId],
-    options: { requestKey: requests.feResource },
     refetchOnLogin: true
   });
   const { data: collection } = useFetch({
