@@ -14,9 +14,9 @@ import * as Styled from "./styles";
 
 const DEFAULT_PAGINATION = { page: 1, perPage: 10 };
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, context, url }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: (filters, pagination) =>
       readingGroupsAPI.members(params.id, filters, pagination),
@@ -24,7 +24,7 @@ export const loader = async ({ params, request, context }) => {
   });
 };
 
-export const clientLoader = ({ params, request, serverLoader }) => {
+export const clientLoader = ({ params, serverLoader, url }) => {
   const fetchFn = (filters, pagination) =>
     readingGroupsAPI.members(params.id, filters, pagination);
 
@@ -34,7 +34,7 @@ export const clientLoader = ({ params, request, serverLoader }) => {
     options: { defaultPagination: DEFAULT_PAGINATION }
   });
 
-  return clientLoaderFn({ request, serverLoader });
+  return clientLoaderFn({ url, serverLoader });
 };
 
 function ReadingGroupMembersRoute({ loaderData }) {

@@ -118,7 +118,11 @@ export default {
   appDirectory: "app",
   future: {
     v8_middleware: true,
-    unstable_optimizeDeps: true
+    unstable_optimizeDeps: true,
+    v8_splitRouteModules: true,
+    v8_trailingSlashAwareDataRequests: true,
+    v8_passThroughRequests: true,
+    v8_viteEnvironmentApi: true
   }
 };
 ```
@@ -126,6 +130,14 @@ export default {
 Every route renders on the server first. Opt-out is **per-component**, not per-route — components that can't SSR (Swagger UI, the Slate-based ContentEditor, the Ace CodeArea, drag-drop builders) are wrapped in `<ClientOnly>` ([`app/components/global/utility/ClientOnly`](./app/components/global/utility/)). The route still SSRs; the wrapped subtree skips the server render and mounts only after hydration.
 
 `v8_middleware: true` enables React Router's middleware-runs-before-loaders model, which is what makes the bootstrap pattern (next section) work.
+
+`v8_splitRouteModules: true` emits each route's `clientLoader` as its own chunk so it can load in parallel with the component. Leave it at `true`; `"enforce"` fails the build on unsplittable routes.
+
+`v8_trailingSlashAwareDataRequests: true` preserves trailing slashes in data-request URLs. The root data request is now `/_.data` (not `/_root.data`), so any cache or proxy rule keyed on `.data` must also match `_.data`.
+
+`v8_passThroughRequests: true` stops normalizing `request.url`, which on a data request carries a `.data` suffix and internal `_routes`/`index` params. **Loaders, actions, and middleware inspecting the URL must use the `url` argument, never `new URL(request.url)`.** `request` remains correct for headers, `request.json()`, and `request.signal`. Of the loader helpers, `loadList`, `checkLibraryMode`, and `searchLoader` take `url`; `loadEntity` takes `request`.
+
+`v8_viteEnvironmentApi: true` opts into Vite's Environment API, under which Vite no longer supplies `isSsrBuild`. [`vite.config.js`](./vite.config.js) therefore sets `noExternal` under `environments.ssr.resolve`, keyed on `command` instead. Keep the server build bundling its dependencies: several (`reakit/Menu` among them) use directory imports that Node's ESM resolver rejects when left external, which fails at request time while still building cleanly.
 
 ### `bootstrapMiddleware`
 
@@ -333,17 +345,7 @@ Since React Router 7.12, every action request is origin-checked on the server. T
 
 It applies to both document submissions and `.data` requests, which means it covers every route action in the app: `FormContainer.Form`, `useFetcher`, and `useSubmit` alike. Loaders are never checked. This is invisible in local development because the client is served directly by the React Router server with nothing in front of it, but if triggered in a deploy utilizing a proxy, the symptom presents as "login is broken," not as a proxy misconfiguration.
 
-Two ways to satisfy it, in order of preference:
-
-1. Have the proxy preserve the client's `Host` end-to-end (`proxy_set_header Host $host` and standard ports).
-2. Add the internal origin to `allowedActionOrigins` in [`react-router.config.js`](./react-router.config.js). It accepts exact hosts plus `*` (one domain segment) and `**` (remaining segments) wildcards.
-
-Verify with a single request against any action route — a matching `Origin` should return 200, a foreign one 400:
-
-```sh
-curl -s -o /dev/null -w "%{http_code}\n" -X POST "$CLIENT_URL/actions/login.data" \
-  -H "Origin: $CLIENT_URL" -H "Content-Type: application/json" -d '{}'
-```
+Preferred fix is to have the proxy preserve the client's `Host` end-to-end (`proxy_set_header Host $host`, standard ports); failing that, add the internal origin to `allowedActionOrigins` in [`react-router.config.js`](./react-router.config.js), which accepts exact hosts and `*`/`**` wildcards.
 
 See [`backend_data_patterns.md` §5](./router-migration-guides/backend_data_patterns.md) for the full mutation matrix including `useSubmit` and direct `queryApi` patterns.
 

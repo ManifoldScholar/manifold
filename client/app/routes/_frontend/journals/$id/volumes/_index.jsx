@@ -12,14 +12,14 @@ import { useTranslation } from "react-i18next";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };
 
-export const loader = async ({ params, request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ params, url, context }) => {
+  checkLibraryMode({ url, context });
 
   const fetchFn = (ignoredFilters, pagination) =>
     journalVolumesAPI.index(params.id, pagination);
 
   return loadList({
-    request,
+    url,
     context,
     fetchFn
   });

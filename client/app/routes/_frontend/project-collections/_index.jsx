@@ -25,10 +25,10 @@ const OPTIONS = {
   }
 };
 
-export const loader = async ({ request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ url, context }) => {
+  checkLibraryMode({ url, context });
   return loadList({
-    request,
+    url,
     context,
     fetchFn: projectCollectionsAPI.index,
     options: OPTIONS

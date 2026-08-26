@@ -8,7 +8,7 @@ import HeadContent from "components/global/HeadContent";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { GroupHeading } from "components/frontend/reading-group/headings";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, request, url }) => {
   const fetchFn = () => readingGroupsAPI.show(params.id);
   const readingGroup = await loadEntity({ context, fetchFn, request });
 
@@ -17,7 +17,6 @@ export const loader = async ({ params, context, request }) => {
   In such cases we'll just redirect to the annotations page (except for moderators,
   who have collecting privileges) rather than show the empty homepage.
   */
-  const url = new URL(request.url);
   const isIndexRoute =
     url.pathname === `/groups/${params.id}` ||
     url.pathname === `/groups/${params.id}/`;

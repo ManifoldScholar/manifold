@@ -15,11 +15,11 @@ const INIT_FILTER_STATE = {
   order: "created_at DESC"
 };
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ request, context, url }) => {
   requireLogin(request, context);
 
   const annotationsData = await loadList({
-    request,
+    url,
     context,
     fetchFn: (filters, pagination) => meAPI.annotations(filters, pagination),
     options: {
@@ -44,7 +44,7 @@ export const loader = async ({ request, context }) => {
   };
 };
 
-export const clientLoader = async ({ request, serverLoader }) => {
+export const clientLoader = async ({ serverLoader, url }) => {
   const serverData = await serverLoader();
 
   const fetchFn = (filters, pagination) =>
@@ -60,7 +60,7 @@ export const clientLoader = async ({ request, serverLoader }) => {
     }
   });
 
-  const listData = await clientLoaderFn({ request, serverLoader });
+  const listData = await clientLoaderFn({ url, serverLoader });
 
   return {
     ...serverData,

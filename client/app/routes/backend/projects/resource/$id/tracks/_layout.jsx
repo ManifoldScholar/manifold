@@ -13,9 +13,9 @@ import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import Dialog from "components/global/dialog";
 import loadList from "lib/react-router/loaders/loadList";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, url, context }) => {
   const result = await loadList({
-    request,
+    url,
     context,
     fetchFn: () => textTracksAPI.index(params.id),
     options: { skipFilters: true, skipPagination: true }

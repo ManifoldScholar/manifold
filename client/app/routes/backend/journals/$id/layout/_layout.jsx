@@ -4,9 +4,9 @@ import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
 import Hero from "components/backend/hero";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, url, context }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: () => journalsAPI.actionCallouts(params.id),
     options: { skipFilters: true, skipPagination: true }

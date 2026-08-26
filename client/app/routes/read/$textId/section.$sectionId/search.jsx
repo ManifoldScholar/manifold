@@ -6,8 +6,8 @@ import SearchResults from "components/global/search/results";
 import { useSearchContext } from "hooks/useSearch/context";
 import searchLoader from "lib/react-router/loaders/search";
 
-export const loader = async ({ request, context }) => {
-  return searchLoader({ request, context });
+export const loader = async ({ url, context }) => {
+  return searchLoader({ url, context });
 };
 
 export default function ReaderSearch({ loaderData }) {

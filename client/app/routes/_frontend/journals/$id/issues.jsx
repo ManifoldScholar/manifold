@@ -15,14 +15,14 @@ export const handle = { frontendMode: { isProjectSubpage: true } };
 
 const FILTER_RESET = { order: "sort_title DESC" };
 
-export const loader = async ({ params, request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ params, context, url }) => {
+  checkLibraryMode({ url, context });
 
   const fetchFn = (filters, pagination) =>
     journalIssuesAPI.journalIndex(params.id, filters, pagination);
 
   return loadList({
-    request,
+    url,
     context,
     fetchFn,
     options: {
@@ -31,7 +31,7 @@ export const loader = async ({ params, request, context }) => {
   });
 };
 
-export const clientLoader = async ({ params, request, serverLoader }) => {
+export const clientLoader = async ({ params, serverLoader, url }) => {
   const fetchFn = (filters, pagination) =>
     journalIssuesAPI.journalIndex(params.id, filters, pagination);
 
@@ -43,7 +43,7 @@ export const clientLoader = async ({ params, request, serverLoader }) => {
     }
   });
 
-  return clientLoaderFn({ request, serverLoader });
+  return clientLoaderFn({ url, serverLoader });
 };
 
 export default function JournalIssuesListRoute({ loaderData }) {

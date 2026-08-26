@@ -10,7 +10,7 @@ import { fluidScale } from "theme/styles/mixins";
 import authorize from "lib/react-router/loaders/authorize";
 import loadList from "lib/react-router/loaders/loadList";
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ request, context, url }) => {
   await authorize({
     request,
     context,
@@ -19,7 +19,7 @@ export const loader = async ({ request, context }) => {
     failureMessage: "project_collections.unauthorized"
   });
   return loadList({
-    request,
+    url,
     context,
     fetchFn: projectCollectionsAPI.index,
     options: {

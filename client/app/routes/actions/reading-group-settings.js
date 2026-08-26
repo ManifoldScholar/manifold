@@ -15,7 +15,7 @@ import unauthorizedError from "lib/react-router/helpers/unauthorizedError";
  * @param {Object} params.params - Route params
  * @returns {Promise<Object>} Action result with success/errors or redirect
  */
-export async function action({ request, context, params }) {
+export async function action({ request, context, params, url }) {
   const { auth } = context.get(routerContext) ?? {};
   if (!auth?.authToken) return unauthorizedError();
 
@@ -25,7 +25,6 @@ export async function action({ request, context, params }) {
   // The action is mounted at /groups/$id/<section>/settings for each drawer.
   // Extract <section> to pick the post-submit redirect; unknown sections fall
   // back to the group root.
-  const url = new URL(request.url);
   const segmentMatch = url.pathname.match(
     /\/groups\/[^/]+\/([^/]+)\/settings\/?$/
   );

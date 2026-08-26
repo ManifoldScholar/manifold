@@ -16,10 +16,10 @@ const FILTER_RESET = {
   order: "sort_title DESC"
 };
 
-export const loader = async ({ request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ url, context }) => {
+  checkLibraryMode({ url, context });
   return loadList({
-    request,
+    url,
     context,
     fetchFn: journalIssuesAPI.index,
     options: { defaultFilters: FILTER_RESET }

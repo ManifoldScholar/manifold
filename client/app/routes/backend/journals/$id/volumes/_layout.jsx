@@ -8,9 +8,9 @@ import EntitiesList, {
   JournalVolumeRow
 } from "components/backend/list/EntitiesList";
 
-export const loader = async ({ request, context, params }) => {
+export const loader = async ({ url, context, params }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: (_filters, pagination) =>
       journalVolumesAPI.index(params.id, pagination),

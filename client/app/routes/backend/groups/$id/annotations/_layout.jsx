@@ -18,9 +18,9 @@ import {
 } from "components/backend/list/EntitiesList/List/bulkActions";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, url, context }) => {
   return loadList({
-    request,
+    url,
     context,
     fetchFn: (filters, pagination) =>
       readingGroupsAPI.annotations(params.id, filters, pagination),

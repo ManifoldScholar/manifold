@@ -16,14 +16,13 @@ import ReaderOverlay from "components/reader/ReaderOverlay";
 
 export { ErrorBoundary };
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, request, context, url }) => {
   const text = await loadEntity({
     context,
     fetchFn: () => textsAPI.show(params.textId),
     request
   });
 
-  const url = new URL(request.url);
   const isBaseRoute =
     url.pathname === `/read/${params.textId}` ||
     url.pathname === `/read/${params.textId}/`;

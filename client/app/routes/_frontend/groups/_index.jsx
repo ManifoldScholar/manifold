@@ -8,10 +8,10 @@ import List from "components/frontend/reading-group-list/List";
 
 const FILTERS_RESET = { sort_order: "created_at_asc" };
 
-export const loader = async ({ request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ url, context }) => {
+  checkLibraryMode({ url, context });
   return loadList({
-    request,
+    url,
     context,
     fetchFn: readingGroupsAPI.publicIndex,
     options: { defaultFilters: FILTERS_RESET }

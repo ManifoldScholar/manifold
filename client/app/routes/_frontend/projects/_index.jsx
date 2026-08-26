@@ -13,10 +13,10 @@ import { useListFilters, useListSearchParams } from "hooks";
 
 const FILTER_RESET = { standaloneModeEnforced: "false" };
 
-export const loader = async ({ request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ url, context }) => {
+  checkLibraryMode({ url, context });
   return loadList({
-    request,
+    url,
     context,
     fetchFn: projectsAPI.index,
     options: { defaultFilters: FILTER_RESET }

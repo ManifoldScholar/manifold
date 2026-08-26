@@ -4,8 +4,8 @@ import loadEntity from "lib/react-router/loaders/loadEntity";
 import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
 import EventTracker, { EVENTS } from "components/global/EventTracker";
 
-export const loader = async ({ params, request, context }) => {
-  checkLibraryMode({ request, context });
+export const loader = async ({ params, request, context, url }) => {
+  checkLibraryMode({ url, context });
 
   const fetchFn = () =>
     resourceCollectionsAPI.show(params.resourceCollectionId);
