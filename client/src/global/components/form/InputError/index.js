@@ -6,7 +6,6 @@ import * as Styled from "./styles";
 export default class InputError extends Component {
   static propTypes = {
     errors: PropTypes.array,
-    name: PropTypes.string,
     idForError: PropTypes.string,
     idForInput: PropTypes.string,
     className: PropTypes.string
