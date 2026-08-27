@@ -52,11 +52,7 @@ class FormSwitchArray extends Component {
   render() {
     return (
       <Styled.Wrapper>
-        <Errorable
-          name={this.props.name}
-          nameForError={this.props.label}
-          errors={this.props.errors}
-        >
+        <Errorable name={this.props.name} errors={this.props.errors}>
           {this.props.options.map((option, index) => {
             return this.renderSwitch(option, index);
           })}
