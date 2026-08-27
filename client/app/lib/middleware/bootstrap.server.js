@@ -1,11 +1,18 @@
 import { ApiClient, settingsAPI, meAPI, pagesAPI } from "api";
 import { routerContext } from "contexts";
 
+const CLEAR_TOKEN_STATUSES = [401, 419];
+
 const getCookie = (request, name) => {
   const cookieHeader = request.headers.get("cookie") || "";
   const match = cookieHeader.match(new RegExp(`${name}=([^;]+)`));
   return match ? match[1] : null;
 };
+
+const describeFailure = reason =>
+  reason?.body?.errors?.[0]?.detail
+    ? `${reason.status} ${reason.body.errors[0].detail}`
+    : reason;
 
 export const bootstrapMiddleware = async ({ request, context }, next) => {
   const authToken = getCookie(request, "authToken");
@@ -28,13 +35,14 @@ export const bootstrapMiddleware = async ({ request, context }, next) => {
   let settings = null;
   let auth = null;
   let pages = [];
+  let clearAuthToken = false;
 
   if (settingsResult.status === "fulfilled") {
     settings = settingsResult.value?.data;
   } else {
     console.error(
       "[Middleware] Failed to load settings:",
-      settingsResult.reason
+      describeFailure(settingsResult.reason)
     );
   }
 
@@ -63,16 +71,39 @@ export const bootstrapMiddleware = async ({ request, context }, next) => {
       readingGroups
     };
   } else if (authToken && userResult.status === "rejected") {
-    console.error("[Middleware] Failed to authenticate:", userResult.reason);
+    clearAuthToken = CLEAR_TOKEN_STATUSES.includes(userResult.reason?.status);
+
+    if (clearAuthToken) {
+      console.warn(
+        `[Middleware] Rejected authToken (${userResult.reason.status}); clearing the cookie.`
+      );
+    } else {
+      console.error(
+        "[Middleware] Failed to authenticate:",
+        describeFailure(userResult.reason)
+      );
+    }
   }
 
   if (pagesResult.status === "fulfilled" && pagesResult.value) {
     pages = pagesResult.value?.data ?? [];
   } else if (pagesResult.status === "rejected") {
-    console.error("[Middleware] Failed to load pages:", pagesResult.reason);
+    console.error(
+      "[Middleware] Failed to load pages:",
+      describeFailure(pagesResult.reason)
+    );
   }
 
   context.set(routerContext, { settings, auth, pages });
 
-  return next();
+  const response = await next();
+
+  if (clearAuthToken && response?.headers) {
+    response.headers.append(
+      "Set-Cookie",
+      "authToken=; Path=/; Max-Age=0; SameSite=Lax"
+    );
+  }
+
+  return response;
 };

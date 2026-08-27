@@ -147,6 +147,7 @@ Every route renders on the server first. Opt-out is **per-component**, not per-r
 2. Builds an `ApiClient` with that token.
 3. Fetches in parallel via `Promise.allSettled`: settings (always), pages (always), current user + reading groups (if authed).
 4. Stashes the result on `routerContext` as `{ settings, auth: { user, authToken, readingGroups }, pages }`.
+5. Clears the `authToken` cookie on the way out if the API rejected it (401 unverifiable / 419 expired), so a dead token isn't retried on every subsequent request. Other failures leave the cookie alone.
 
 The middleware is exported from [`app/root.jsx`](./app/root.jsx):
 
