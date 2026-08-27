@@ -293,11 +293,7 @@ export class FormContainer extends PureComponent {
     if (props.groupErrors || !props.errors || props.suppressModelErrors)
       return null;
     return (
-      <GlobalForm.Errorable
-        name="attributes[base]"
-        errors={props.errors}
-        nameForError={props.modelName}
-      />
+      <GlobalForm.Errorable name="attributes[base]" errors={props.errors} />
     );
   }
 
