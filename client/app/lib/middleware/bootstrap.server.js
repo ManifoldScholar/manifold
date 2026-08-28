@@ -1,13 +1,8 @@
 import { ApiClient, settingsAPI, meAPI, pagesAPI } from "api";
 import { routerContext } from "contexts";
+import getRequestCookie from "helpers/cookie/request";
 
 const CLEAR_TOKEN_STATUSES = [401, 419];
-
-const getCookie = (request, name) => {
-  const cookieHeader = request.headers.get("cookie") || "";
-  const match = cookieHeader.match(new RegExp(`${name}=([^;]+)`));
-  return match ? match[1] : null;
-};
 
 const describeFailure = reason =>
   reason?.body?.errors?.[0]?.detail
@@ -15,7 +10,7 @@ const describeFailure = reason =>
     : reason;
 
 export const bootstrapMiddleware = async ({ request, context }, next) => {
-  const authToken = getCookie(request, "authToken");
+  const authToken = getRequestCookie(request, "authToken");
   const client = new ApiClient(authToken);
 
   const [

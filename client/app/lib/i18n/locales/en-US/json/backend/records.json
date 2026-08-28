@@ -77,7 +77,9 @@
         "new_header": "New User Group"
       },
       "users": {
-        "header": "Manage Users"
+        "header": "Manage Users",
+        "add_members_label": "Add Members",
+        "show_members_label": "Show Members Only"
       },
       "entitlements": {
         "header": "Manage Entitlements",

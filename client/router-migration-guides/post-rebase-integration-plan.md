@@ -61,7 +61,7 @@ Priority clusters (by last-touch commit):
 
 Containers whose route equivalents exist (journal/project/records/settings/groups/etc.) — port behavior changes into the route module, don't resurrect the container.
 
-## Phase 3 — User-groups admin
+## Phase 3 — User-groups admin — ✅ done 2026-08-28 (needs logged-in manual check)
 
 Model on `app/routes/backend/records/makers/` and `records/entitlements/`. API resources (`userGroups`, `userGroupMemberships`, `userGroupEntitlements`) and row components (`UserGroupRow`, `UserGroupEntitlementRow`) are already in `app/`; `app/lib/helpers/navigation.js:109,401,455-475` already names the routes (uncomment the `entity: "userGroup"` bits).
 
@@ -72,7 +72,7 @@ New files under `app/routes/backend/records/user-groups/`:
 - `$id/_index.jsx` → redirect to properties; `$id/properties.jsx` (form; component from `src/backend/components/user-group/Properties.js` → `app/components/backend/user-group/Properties.js`); `$id/users.jsx` (memberships list + add/remove); `$id/entitlements/_layout.jsx`, `entitlements/new.jsx` (from `user-group/entitlements/{List,New,Form}.js`).
 - i18n: confirm `records.user_groups.*`, `modals.delete_user_group`, `notifications.user_group_delete` exist in `app/lib/i18n/locales/en-US/json/`.
 
-## Phase 4 — OAuth redirect route
+## Phase 4 — OAuth redirect route — ✅ done 2026-08-28 (needs a real provider round-trip to verify Set-Cookie)
 
 New `app/routes/_frontend/oauth.jsx` (upstream: `src/frontend/containers/OAuth/index.js`, path `oauth`). Do it as a **loader**, not a client effect: read `_oauth_auth_code` from the request cookie header, `queryApi(tokensAPI.createToken({ authCode }), context)`, then `throw redirect(path)` with the `authToken` cookie set the same way the login flow does — trace `app/routes/_frontend/login.jsx` → `actions/login.jsx` → wherever `{ authToken }` becomes a cookie, and reuse that helper (server-side `Set-Cookie` vs `BrowserCookieHelper`). Redirect map `redirect_type` → literal paths (`/journals/:slug`, `/projects/:slug`, `/project-collections/:slug`, `/read/:slug`, `/read/:parent/section/:slug`, `/projects/:parent/resource/:slug`, `/projects/:parent/resource-collection/:slug`, default `/`), `redirect_path` override, `error` param → render `FatalError` (keep styles from `OAuth/styles.js`, convert to styled-components). Delete `store/middleware/currentUserMiddleware.js` dependency.
 

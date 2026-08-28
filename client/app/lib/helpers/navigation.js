@@ -106,9 +106,9 @@ class Navigation {
           },
           {
             label: "titles.user_groups",
-            route: "backendRecordsUserGroups"
-            // entity: "userGroup",
-            // ability: "update"
+            path: "/backend/records/user-groups",
+            entity: "userGroup",
+            ability: "update"
           },
           {
             label: "titles.pages",
@@ -398,9 +398,9 @@ class Navigation {
       },
       {
         label: "titles.user_groups",
-        route: "backendRecordsUserGroups"
-        // entity: "userGroup",
-        // ability: "update"
+        path: "/backend/records/user-groups",
+        entity: "userGroup",
+        ability: "update"
       },
       {
         label: "titles.pages",
@@ -453,28 +453,24 @@ class Navigation {
   });
 
   static userGroup = memoize(userGroup => {
-    const args = [userGroup.id];
     return [
       {
         label: "titles.properties",
-        route: "backendRecordsUserGroupProperties",
+        path: `/backend/records/user-groups/${userGroup.id}/properties`,
         entity: userGroup,
-        // ability: "update",
-        args
+        ability: "update"
       },
       {
         label: "titles.users",
-        route: "backendRecordsUserGroupUsers",
+        path: `/backend/records/user-groups/${userGroup.id}/users`,
         entity: userGroup,
-        // ability: "update",
-        args
+        ability: "update"
       },
       {
         label: "titles.entitlements",
-        route: "backendRecordsUserGroupEntitlements",
+        path: `/backend/records/user-groups/${userGroup.id}/entitlements`,
         entity: userGroup,
-        // ability: "update",
-        args
+        ability: "update"
       }
     ];
   });

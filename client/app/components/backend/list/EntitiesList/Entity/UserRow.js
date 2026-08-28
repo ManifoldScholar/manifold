@@ -63,7 +63,7 @@ function UserRow({
       ...(isMember && !membersView
         ? [
             {
-              text: t("member"),
+              text: t("glossary.member_title_case_one"),
               level: "notice"
             }
           ]

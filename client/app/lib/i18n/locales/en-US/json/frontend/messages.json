@@ -68,6 +68,9 @@
       "accept_button_label": "Accept all",
       "accept_label_truncated": "Accept",
       "decline_button_label": "Decline all"
+    },
+    "oauth": {
+      "logging_in": "Logging you in..."
     }
   }
 }

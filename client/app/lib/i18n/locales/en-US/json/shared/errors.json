@@ -46,6 +46,9 @@
       "authorization_admin": "You are not authorized to manage the requested resource.",
       "authorization_admin_type": "You are not authorized to manage {{type}}.",
       "authorization_admin_reading_group": "You are not authorized to manage reading groups."
+    },
+    "oauth": {
+      "heading": "Unable to Authenticate"
     }
   }
 }
