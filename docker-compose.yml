@@ -8,7 +8,7 @@ services:
     environment:
       PGUSER: postgres
       PGPASSWORD: password
-      POSTGRES_DB: 'manifold_development'
+      POSTGRES_DB: "manifold_development"
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     logging:
@@ -80,22 +80,22 @@ services:
     restart: "no"
     volumes:
       - ./docker/minio/client:/root/.mc
-  client:
-    tty: true
-    stdin_open: true
-    build:
-      context: client
-      target: development
-    ports:
-      - "13100:13100" # Rescue
-      - "13101:13101" # SSR
-      - "13102:13102" # Webpack dev server
-    env_file:
-      - ./docker/client/client.env
-    restart: unless-stopped
-    volumes:
-      - ./client:/srv/app
-      - node_modules:/srv/app/node_modules
+  # client:
+  #   tty: true
+  #   stdin_open: true
+  #   build:
+  #     context: client
+  #     target: development
+  #   ports:
+  #     - "13100:13100" # Rescue
+  #     - "13101:13101" # SSR
+  #     - "13102:13102" # Webpack dev server
+  #   env_file:
+  #     - ./docker/client/client.env
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./client:/srv/app
+  #     - node_modules:/srv/app/node_modules
   web:
     tty: true
     stdin_open: true
@@ -114,7 +114,16 @@ services:
     environment:
       PUMA_APPLICATION: API
     healthcheck:
-      test: ["CMD", "curl", "-f", "-s", "-o", "/dev/null", "http://localhost:13110/api/v1/ping"]
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "-s",
+          "-o",
+          "/dev/null",
+          "http://localhost:13110/api/v1/ping",
+        ]
       interval: 1m30s
       timeout: 10s
       retries: 3
@@ -162,7 +171,16 @@ services:
       - rails-tmp:/srv/app/tmp
       - uploads:/srv/app/public/system
     healthcheck:
-      test: ["CMD", "curl", "-f", "-s", "-o", "/dev/null", "http://localhost:7001/status/started"]
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "-s",
+          "-o",
+          "/dev/null",
+          "http://localhost:7001/status/started",
+        ]
       interval: 10s
       timeout: 10s
       retries: 3
