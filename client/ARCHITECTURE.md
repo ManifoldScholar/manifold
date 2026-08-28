@@ -30,6 +30,8 @@ The rest of `router-migration-guides/` is kept for reference but describes work 
 | [`reader_migration.md`](./router-migration-guides/reader_migration.md), [`reader.md`](./router-migration-guides/reader.md) | Reader-section migration plan and component assessment. |
 | [`frontend_cleanup.md`](./router-migration-guides/frontend_cleanup.md) | Post-migration cleanup checklist for the public frontend. |
 | [`to_v6.md`](./router-migration-guides/to_v6.md), [`to_v5_compat_and_functional_components.md`](./router-migration-guides/to_v5_compat_and_functional_components.md), [`initial_v6_plan.md`](./router-migration-guides/initial_v6_plan.md) | Earlier migration phases (v5→v6 compat, original v6 plan). |
+| [`post-rebase-integration-plan.md`](./router-migration-guides/post-rebase-integration-plan.md) | Reconciling the migration branch with upstream after the rebase: search on loaders, user groups, OAuth, LTI. |
+| [`deep-linking-port-plan.md`](./router-migration-guides/deep-linking-port-plan.md) | The reverse port of LTI + search work onto the old data-mode client. Describes the pre-rebase direction only. |
 
 ---
 
@@ -70,6 +72,7 @@ app/routes/
 ├── _frontend/               # public pages (SSR-first, SEO-relevant)
 ├── backend/                 # admin (auth-gated, server-only loaders)
 ├── read/$textId/            # reader (one text per URL, custom state model)
+├── lti/deep_linking/        # LTI deep-linking picker (LMS-embedded mini-app)
 └── actions/                 # standalone action endpoints (no UI)
 ```
 
@@ -440,9 +443,9 @@ Behaviour notes:
 
 ---
 
-## 9. Section conventions: frontend / backend / reader
+## 9. Section conventions: frontend / backend / reader / lti
 
-The three sections look similar at the file level but have meaningfully different data strategies. Pick the right one before you start writing.
+The sections look similar at the file level but have meaningfully different data strategies. Pick the right one before you start writing.
 
 ### `_frontend/` — public pages
 
@@ -450,6 +453,7 @@ The three sections look similar at the file level but have meaningfully differen
 - List routes use `createListClientLoader` so filter/pagination changes don't round-trip to the server after hydration.
 - Auth is mostly read-only — checks for personalization (favorites, joined groups) but doesn't gate access.
 - Outlet context typically a single entity or a paired (project + collection).
+- Search keeps its query in the URL (`hooks/search/useSearch`, form-native submission) and its results in the route loader (`searchLoader` → `SearchResultsProvider`). The header dialog and reader menu use the `Controlled` providers with client-side fetches instead.
 
 ### `backend/` — admin
 
@@ -463,6 +467,12 @@ The three sections look similar at the file level but have meaningfully differen
 - One text per URL, with section/annotation routes nested under it.
 - Loaders fetch text and section data server-side, often in parallel via `loadParallelLists` (e.g. section + annotations + resources + resource collections together).
 - Per-user UI state — typography, color scheme, and other reading preferences — lives in `ReaderContext` (a reducer-based context backed by user preferences).
+
+### `lti/deep_linking/` — LTI picker
+
+- Runs inside an LMS iframe with no frontend chrome; the layout mounts `DeepLinkingProvider`, which owns the session token (captured from `?lti_context` and kept in sessionStorage), its validation status, and the selection cart.
+- Initial render is identical on server and client (`status: "loading"`); the token is validated against the API after mount.
+- Search reuses the frontend search components; the loader injects the LTI default facets (`filters.js`). Detail routes load all pages of child collections up front.
 
 ---
 

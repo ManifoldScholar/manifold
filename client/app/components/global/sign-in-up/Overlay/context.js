@@ -4,8 +4,6 @@ import Overlay from "./index";
 
 export const SignInUpOverlayContext = createContext(null);
 
-// TODO: When migrating backend routes / Authorize HOC, add handling for
-// location.state?.showLogin here (the old Manifold container handled this).
 export function SignInUpOverlayProvider({ children }) {
   const dialog = useDialog({ modal: true, scrollLockClassName: "no-scroll" });
 

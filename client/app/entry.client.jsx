@@ -2,6 +2,7 @@ import { startTransition } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { HydratedRouter } from "react-router/dom";
 import { StyleSheetManager } from "styled-components";
+import { HelmetProvider } from "react-helmet-async";
 import { shouldForwardProp } from "lib/styled-components/shouldForwardProp";
 
 import "utils/i18n";
@@ -12,8 +13,10 @@ import "utils/i18n";
 startTransition(() => {
   hydrateRoot(
     document,
-    <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-      <HydratedRouter />
-    </StyleSheetManager>
+    <HelmetProvider>
+      <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+        <HydratedRouter />
+      </StyleSheetManager>
+    </HelmetProvider>
   );
 });

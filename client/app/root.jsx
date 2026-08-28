@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
-import { HelmetProvider } from "react-helmet-async";
 import GlobalStyles from "theme/styles/globalStyles";
 import { get } from "lodash-es";
 import Analytics from "contexts/Analytics";
@@ -96,22 +95,20 @@ export default function Root({ loaderData }) {
         <div id="content">
           <AppContext.Provider value={appContextValue}>
             <NotificationProvider>
-              <HelmetProvider>
-                <Analytics>
-                  <div role="presentation" className="global-container">
-                    <Utility.SkipLink />
-                    <div id="global-notification-container" />
-                    <div id="global-overlay-container" />
-                    <NavigationBlockerProvider>
-                      <SignInUpOverlayProvider>
-                        <LoadingBar />
-                        <Outlet />
-                        <CookiesBanner />
-                      </SignInUpOverlayProvider>
-                    </NavigationBlockerProvider>
-                  </div>
-                </Analytics>
-              </HelmetProvider>
+              <Analytics>
+                <div role="presentation" className="global-container">
+                  <Utility.SkipLink />
+                  <div id="global-notification-container" />
+                  <div id="global-overlay-container" />
+                  <NavigationBlockerProvider>
+                    <SignInUpOverlayProvider>
+                      <LoadingBar />
+                      <Outlet />
+                      <CookiesBanner />
+                    </SignInUpOverlayProvider>
+                  </NavigationBlockerProvider>
+                </div>
+              </Analytics>
             </NotificationProvider>
           </AppContext.Provider>
         </div>

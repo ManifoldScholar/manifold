@@ -2,8 +2,9 @@ import { isRouteErrorResponse } from "react-router";
 
 function formatAuthError(error, pathname) {
   const { data, body } = error ?? {};
+  const apiErrors = data?.errors ?? body?.errors;
 
-  const formattedBody = body?.errors?.[0].detail ?? "";
+  const formattedBody = apiErrors?.[0]?.detail ?? "";
   const title =
     formattedBody
       ?.replace("You are not authorized to read ", "")
@@ -60,7 +61,7 @@ function formatHttpError(error, pathname) {
     };
 
   const { body, data } = error ?? {};
-  const apiErrors = body?.errors || data?.body?.errors;
+  const apiErrors = data?.errors ?? body?.errors ?? data?.body?.errors;
 
   return {
     fatalError: {

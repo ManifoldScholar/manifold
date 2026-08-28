@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import ApiTrace from "./ApiTrace";
 import ClientTrace from "./ClientTrace";
@@ -24,7 +24,7 @@ export default function FatalError(props) {
   };
 
   return (
-    <HelmetProvider>
+    <>
       <Helmet title={`${error.status} Error: ${error.heading}`} />
       <Styled.Wrapper $contained={contained}>
         <Styled.Inner>
@@ -88,7 +88,7 @@ export default function FatalError(props) {
           ) : null}
         </Styled.Inner>
       </Styled.Wrapper>
-    </HelmetProvider>
+    </>
   );
 }
 

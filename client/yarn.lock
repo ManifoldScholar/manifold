@@ -3272,13 +3272,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:1.0.2":
-  version: 1.0.2
-  resolution: "cookie@npm:1.0.2"
-  checksum: 10c0/fd25fe79e8fbcfcaf6aa61cd081c55d144eeeba755206c058682257cb38c4bd6795c6620de3f064c740695bb65b7949ebb1db7a95e4636efb8357a335ad3f54b
-  languageName: node
-  linkType: hard
-
 "cookie@npm:^1.0.1":
   version: 1.1.1
   resolution: "cookie@npm:1.1.1"
@@ -6422,7 +6415,6 @@ __metadata:
     babel-plugin-styled-components: "npm:^2.1.4"
     buffer: "npm:^6.0.3"
     classnames: "npm:^2.5.1"
-    cookie: "npm:1.0.2"
     date-fns: "npm:^4.1.0"
     depcheck: "npm:^1.4.7"
     eslint: "npm:^6.x"
@@ -6477,7 +6469,6 @@ __metadata:
     tus-js-client: "npm:^4.3.1"
     use-resize-observer: "npm:^9.1.0"
     usehooks-ts: "npm:^3.1.1"
-    uuid: "npm:^11.x"
     vite: "npm:^7.2.7"
     vite-plugin-babel: "npm:^1.6.0"
   languageName: unknown
@@ -9753,15 +9744,6 @@ __metadata:
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
   checksum: 10c0/02ba649de1b7ca8854bfe20a82f1dfbdda3fb57a22ab4a8972a63a34553cf7aa51bc9081cf7e001b035b88186d23689d69e71b510e610a09a4c66f68aa95b672
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^11.x":
-  version: 11.1.1
-  resolution: "uuid@npm:11.1.1"
-  bin:
-    uuid: dist/esm/bin/uuid
-  checksum: 10c0/9e3af58eba872ece5a5e76f4773a94fc78a0ef2c2444c38dbe6b42f41dadf76c01850fd783604f27986f6195e6286aef064d45987d401b2a33127b98ddf7c0c5
   languageName: node
   linkType: hard
 

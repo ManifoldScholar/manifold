@@ -3,6 +3,7 @@ import { createReadableStreamFromReadable } from "@react-router/node";
 import { ServerRouter } from "react-router";
 import { renderToPipeableStream, renderToString } from "react-dom/server";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+import { HelmetProvider } from "react-helmet-async";
 import FatalError from "components/global/FatalError";
 import formatError from "lib/react-router/helpers/formatError";
 import GlobalStyles, {
@@ -24,11 +25,16 @@ export default async function handleRequest(
     let shellRendered = false;
     let currentStatusCode = responseStatusCode;
     const sheet = new ServerStyleSheet();
+    // Populated synchronously during render by every <Helmet> in the shell;
+    // read at head-injection time below so titles/meta are in the SSR html.
+    const helmetContext = {};
 
     const jsx = sheet.collectStyles(
-      <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-        <ServerRouter context={routerContext} url={request.url} />
-      </StyleSheetManager>
+      <HelmetProvider context={helmetContext}>
+        <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+          <ServerRouter context={routerContext} url={request.url} />
+        </StyleSheetManager>
+      </HelmetProvider>
     );
 
     const { pipe, abort } = renderToPipeableStream(jsx, {
@@ -58,7 +64,14 @@ export default async function handleRequest(
               return;
             }
             const styleTags = sheet.getStyleTags();
+            const { helmet } = helmetContext;
+            const helmetTags = helmet
+              ? [helmet.title, helmet.meta, helmet.link]
+                  .map(tag => tag.toString())
+                  .join("")
+              : "";
             this.push(buffer.slice(0, headCloseIdx));
+            this.push(helmetTags);
             this.push(styleTags);
             this.push(buffer.slice(headCloseIdx));
             buffer = "";
@@ -122,7 +135,9 @@ export default async function handleRequest(
                   <body className="browse">
                     <GlobalStyles />
                     <div id="content">
-                      <FatalError {...errorProps} />
+                      <HelmetProvider>
+                        <FatalError {...errorProps} />
+                      </HelmetProvider>
                     </div>
                   </body>
                 </html>

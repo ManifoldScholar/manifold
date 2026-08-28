@@ -86,7 +86,7 @@ Upstream route tree (`src/lti/routes.js`): `lti/deep_linking` layout (`DeepLinki
 - API + i18n (`app/lib/api/resources/lti.js`, `json/lti/lti.json`) and `DeepLinkingLogo` icon already exist.
 - OAuth redirect types for LTI (`17e96b409`) are covered by Phase 4's map.
 
-## Phase 6 — Cleanup
+## Phase 6 — Cleanup — ✅ done 2026-08-28
 
 - `git rm -r src/` (after each phase's port is verified; can be done incrementally per area).
 - `.eslintrc:195` — drop `"src"` from `import/resolve.moduleDirectory`; run `yarn lint` and fix newly-surfaced unresolved imports.

@@ -50,12 +50,12 @@ function ReaderNotesContainer({ children }) {
 
   const initPageParam = useMemo(() => ({ size: 20, number: 1 }), []);
 
-  const { data: myAnnotations, meta: myMeta, loaded: myLoaded } = useFetch(
+  const { data: myAnnotations, meta: myMeta } = useFetch(
     () => meAPI.annotations(fetchFilters, initPageParam),
     [fetchFilters, initPageParam],
     { condition: showMyAnnotations, loadAll: true }
   );
-  const { data: rgAnnotations, meta: rgMeta, loaded: rgLoaded } = useFetch(
+  const { data: rgAnnotations, meta: rgMeta } = useFetch(
     () => readingGroupsAPI.annotations(groupId, fetchFilters, initPageParam),
     [groupId, fetchFilters, initPageParam],
     { condition: !showMyAnnotations, loadAll: true }
