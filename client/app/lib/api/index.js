@@ -54,3 +54,4 @@ export { default as ingestionSourcesAPI } from "./resources/ingestionSources";
 export { default as emailConfirmationsAPI } from "./resources/emailConfirmations";
 export { default as bulkDeleteAPI } from "./resources/bulkDelete";
 export { default as collaboratorsAPI } from "./resources/collaborators";
+export { default as ltiAPI } from "./resources/lti";

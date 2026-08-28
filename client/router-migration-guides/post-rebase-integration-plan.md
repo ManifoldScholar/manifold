@@ -76,7 +76,7 @@ New files under `app/routes/backend/records/user-groups/`:
 
 New `app/routes/_frontend/oauth.jsx` (upstream: `src/frontend/containers/OAuth/index.js`, path `oauth`). Do it as a **loader**, not a client effect: read `_oauth_auth_code` from the request cookie header, `queryApi(tokensAPI.createToken({ authCode }), context)`, then `throw redirect(path)` with the `authToken` cookie set the same way the login flow does — trace `app/routes/_frontend/login.jsx` → `actions/login.jsx` → wherever `{ authToken }` becomes a cookie, and reuse that helper (server-side `Set-Cookie` vs `BrowserCookieHelper`). Redirect map `redirect_type` → literal paths (`/journals/:slug`, `/projects/:slug`, `/project-collections/:slug`, `/read/:slug`, `/read/:parent/section/:slug`, `/projects/:parent/resource/:slug`, `/projects/:parent/resource-collection/:slug`, default `/`), `redirect_path` override, `error` param → render `FatalError` (keep styles from `OAuth/styles.js`, convert to styled-components). Delete `store/middleware/currentUserMiddleware.js` dependency.
 
-## Phase 5 — LTI deep-linking mini-app
+## Phase 5 — LTI deep-linking mini-app — ✅ done 2026-08-28 (needs an LMS launch to verify end-to-end)
 
 Upstream route tree (`src/lti/routes.js`): `lti/deep_linking` layout (`DeepLinkingProvider` + `Layout`) with `index` (Landing), `search`, `projects/:id`, `resource-collections/:id`, `texts/:id`. Handle `{ name: "lti" }`.
 
