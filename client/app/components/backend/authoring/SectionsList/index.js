@@ -38,18 +38,16 @@ function SectionsList({
     const res = await updateSection(id, { attributes: { position } });
     if (res?.errors) {
       setError("reorder");
-      revalidate();
     } else {
-      const announcement = t("actions.dnd.moved_to_position", {
-        title,
-        position
-      });
-      setScreenReaderStatus(announcement);
+      setScreenReaderStatus(
+        t("actions.dnd.moved_to_position", { title, position })
+      );
     }
+    // Drag reorders update the list locally; keyboard reorders rely on the
+    // refetched order to move the item.
+    await revalidate();
 
-    if (rest.callback && typeof rest.callback === "function") {
-      rest.callback();
-    }
+    if (typeof rest.callback === "function") rest.callback();
   };
 
   return (
