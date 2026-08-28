@@ -1,17 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useRevalidator } from "react-router";
 import { textsAPI, textCategoriesAPI } from "api";
 import Category from "components/backend/category";
 import { cloneDeep } from "lodash-es";
-import classNames from "classnames";
-import IconComposer from "components/global/utility/IconComposer";
+import Button from "components/global/atomic/Button";
 import { useApiCallback, useNotifications } from "hooks";
+
+const BUTTON_STYLE_PROPS = {
+  size: "sm",
+  shape: "lozenge",
+  background: "outline-accent",
+  lowercase: true
+};
 
 export default function TextsList({ project, confirm, setScreenReaderStatus }) {
   const { t } = useTranslation();
   const { revalidate } = useRevalidator();
   const { addNotification } = useNotifications();
+
+  // Text deletion is backgrounded on the API side, so the project may still
+  // include the deleted text after revalidation. Remember it here so we can
+  // filter it out of the list.
+  const textRemovedRef = useRef(null);
 
   const [categories, setCategories] = useState([]);
   const [texts, setTexts] = useState([]);
@@ -19,7 +30,11 @@ export default function TextsList({ project, confirm, setScreenReaderStatus }) {
   useEffect(() => {
     if (project) {
       setCategories(project.relationships.textCategories.slice(0));
-      setTexts(project.relationships.texts.slice(0));
+      setTexts(
+        project.relationships.texts.filter(
+          text => text.id !== textRemovedRef.current
+        )
+      );
     }
   }, [project]);
 
@@ -43,12 +58,14 @@ export default function TextsList({ project, confirm, setScreenReaderStatus }) {
     });
   };
 
-  const handleTextDestroy = text => {
+  const handleTextDestroy = (text, onConfirmed) => {
     confirm({
       heading: t("modals.delete_text"),
       message: t("modals.delete_text_body"),
       callback: async closeDialog => {
+        if (onConfirmed) onConfirmed();
         await destroyText(text.id);
+        textRemovedRef.current = text.id;
         closeDialog();
         revalidate();
         addNotification({
@@ -139,71 +156,30 @@ export default function TextsList({ project, confirm, setScreenReaderStatus }) {
     updateTextCategoryAndPosition
   };
 
-  const buttonClasses = classNames(
-    "entity-list__button",
-    "button-lozenge-secondary"
-  );
-
   return (
     <>
       <div className="entity-list__button-set-flex">
-        <Link
+        <Button
+          as={Link}
           to={`/backend/projects/${project.id}/texts/ingestions/new`}
-          className={buttonClasses}
-        >
-          <span className="screen-reader-text">
-            {t("texts.add_text_label")}
-          </span>
-          <IconComposer
-            icon="export24"
-            size={16}
-            className={classNames(
-              "button-icon-secondary__icon",
-              "button-icon-secondary__icon--large"
-            )}
-          />
-          <span className="full" aria-hidden="true">
-            {t("texts.ingest_button_label")}
-          </span>
-        </Link>
-        <Link
+          label={t("texts.ingest_button_label")}
+          preIcon="export24"
+          {...BUTTON_STYLE_PROPS}
+        />
+        <Button
+          as={Link}
           to={`/backend/projects/${project.id}/texts/create`}
-          className={buttonClasses}
-        >
-          <span className="screen-reader-text">
-            {t("texts.create_button_label")}
-          </span>
-          <IconComposer
-            icon="copy24"
-            size={16}
-            className={classNames(
-              "button-icon-secondary__icon",
-              "button-icon-secondary__icon--large"
-            )}
-          />
-          <span className="full" aria-hidden="true">
-            {t("texts.create_button_label")}
-          </span>
-        </Link>
-        <Link
+          label={t("texts.create_button_label")}
+          preIcon="copy24"
+          {...BUTTON_STYLE_PROPS}
+        />
+        <Button
+          as={Link}
           to={`/backend/projects/${project.id}/texts/category/new`}
-          className={buttonClasses}
-        >
-          <span className="screen-reader-text">
-            {t("texts.create_category_button_label")}
-          </span>
-          <IconComposer
-            icon="circlePlus32"
-            size={18}
-            className={classNames(
-              "button-icon-secondary__icon",
-              "button-icon-secondary__icon--large"
-            )}
-          />
-          <span className="full" aria-hidden="true">
-            {t("texts.create_category_button_label")}
-          </span>
-        </Link>
+          label={t("texts.create_category_button_label")}
+          preIcon="circlePlus24"
+          {...BUTTON_STYLE_PROPS}
+        />
       </div>
 
       <Category.List

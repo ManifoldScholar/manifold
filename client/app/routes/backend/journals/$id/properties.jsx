@@ -65,6 +65,17 @@ export default function JournalProperties() {
                 name="attributes[pendingSlug]"
                 placeholder={t("journals.forms.properties.slug_placeholder")}
               />
+              <Form.TextInput
+                wide
+                label={t("journals.forms.properties.external_id_label")}
+                name="attributes[externalIdentifier]"
+                placeholder={t(
+                  "journals.forms.properties.external_id_placeholder"
+                )}
+                instructions={t(
+                  "journals.forms.properties.external_id_instructions"
+                )}
+              />
               <Project.Form.AvatarBuilder wide />
             </Form.FieldGroup>
             <Form.FieldGroup
@@ -78,6 +89,32 @@ export default function JournalProperties() {
                   "journals.forms.properties.draft_mode_instructions"
                 )}
               />
+              {!getModelValue("attributes[draft]") && (
+                <>
+                  <Form.Switch
+                    wide
+                    label={t(
+                      "journals.forms.properties.exclude_from_oai_label"
+                    )}
+                    name="attributes[excludeFromOAI]"
+                    instructions={t(
+                      "journals.forms.properties.exclude_from_oai_instructions"
+                    )}
+                  />
+                  {!getModelValue("attributes[excludeFromOAI]") && (
+                    <Form.Switch
+                      wide
+                      label={t(
+                        "journals.forms.properties.exclude_from_directory_label"
+                      )}
+                      name="attributes[excludeFromDirectory]"
+                      instructions={t(
+                        "journals.forms.properties.exclude_from_directory_instructions"
+                      )}
+                    />
+                  )}
+                </>
+              )}
               <Form.Switch
                 wide
                 label={t("journals.forms.properties.show_home_label")}

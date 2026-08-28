@@ -68,7 +68,7 @@ function CollectionNavigation() {
     <nav aria-label={t("navigation.library_links")} className="container">
       <Styled.List
         $count={filteredLinks.length}
-        $isJournals={location.pathname === lh.link("frontendJournalsList")}
+        $isJournals={location.pathname === "/journals"}
       >
         {filteredLinks.map(link => (
           <li key={link.to}>

@@ -2,8 +2,11 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import PropTypes from "prop-types";
 import { useRevalidator } from "react-router";
 import { useTranslation } from "react-i18next";
+import { combine } from "@atlaskit/pragmatic-drag-and-drop/combine";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { autoScrollWindowForElements } from "@atlaskit/pragmatic-drag-and-drop-auto-scroll/element";
+import { extractClosestEdge } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import Slot from "./Slot";
-import { DragDropContext } from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
 import { actionCalloutsAPI } from "api";
 import { useApiCallback } from "hooks";
 import ClientOnly from "components/global/utility/ClientOnly";
@@ -54,17 +57,19 @@ export default function ActionCallouts({
   const { revalidate } = useRevalidator();
   const updateCallout = useApiCallback(actionCalloutsAPI.update);
 
+  const [instanceId] = useState(() => Symbol("actionCallouts"));
   const [slotCallouts, setSlotCallouts] = useState(() =>
     computeSlotCallouts(actionCallouts)
   );
-  const prevCalloutsRef = useRef(actionCallouts);
 
-  useEffect(() => {
-    if (actionCallouts !== prevCalloutsRef.current) {
-      prevCalloutsRef.current = actionCallouts;
-      setSlotCallouts(computeSlotCallouts(actionCallouts));
-    }
-  }, [actionCallouts]);
+  const [calloutsRef, setCalloutsRef] = useState(actionCallouts);
+  if (calloutsRef !== actionCallouts) {
+    setCalloutsRef(actionCallouts);
+    setSlotCallouts(computeSlotCallouts(actionCallouts));
+  }
+
+  const slotCalloutsRef = useRef(slotCallouts);
+  slotCalloutsRef.current = slotCallouts;
 
   // Screen reader announcements
   const [srMessage, setSrMessage] = useState(null);
@@ -82,31 +87,26 @@ export default function ActionCallouts({
     };
   }, []);
 
-  const addToSlot = useCallback((actionCallout, slotId, index) => {
-    setSlotCallouts(prev => {
-      const arr = prev[slotId].slice(0);
-      arr.splice(index, 0, actionCallout);
-      return { ...prev, [slotId]: arr };
-    });
-  }, []);
-
-  const removeFromSlot = useCallback((id, slotId, callback) => {
-    setSlotCallouts(prev => {
-      const arr = prev[slotId].slice(0);
-      const index = arr.findIndex(ac => ac.id === id);
-      const callout = arr.splice(index, 1)[0];
-      setTimeout(() => callback(callout), 0);
-      return { ...prev, [slotId]: arr };
-    });
-  }, []);
-
   const moveToSlot = useCallback(
     (id, sourceSlotId, destinationSlotId, destinationIndex) => {
-      removeFromSlot(id, sourceSlotId, callout => {
-        addToSlot(callout, destinationSlotId, destinationIndex);
+      setSlotCallouts(prev => {
+        const source = prev[sourceSlotId].slice(0);
+        const sourceIndex = source.findIndex(ac => ac.id === id);
+        if (sourceIndex === -1) return prev;
+        const [callout] = source.splice(sourceIndex, 1);
+        const destination =
+          sourceSlotId === destinationSlotId
+            ? source
+            : prev[destinationSlotId].slice(0);
+        destination.splice(destinationIndex, 0, callout);
+        return {
+          ...prev,
+          [sourceSlotId]: source,
+          [destinationSlotId]: destination
+        };
       });
     },
-    [removeFromSlot, addToSlot]
+    []
   );
 
   const doUpdateCallout = useCallback(
@@ -118,32 +118,14 @@ export default function ActionCallouts({
       };
       updateCallout(id, { attributes }).then(() => {
         revalidate();
-        if (callback && typeof callback === "function") callback();
+        if (typeof callback === "function") callback();
       });
     },
     [updateCallout, revalidate]
   );
 
-  const onDragEnd = useCallback(
-    draggable => {
-      if (!draggable.source || !draggable.destination) return;
-      moveToSlot(
-        draggable.draggableId,
-        draggable.source.droppableId,
-        draggable.destination.droppableId,
-        draggable.destination.index
-      );
-      doUpdateCallout(
-        draggable.draggableId,
-        draggable.destination.droppableId,
-        draggable.destination.index
-      );
-    },
-    [moveToSlot, doUpdateCallout]
-  );
-
   const onKeyboardMove = useCallback(
-    ({ callout, index, slotIndex, direction, ...rest }) => {
+    ({ callout, index, slotIndex, direction, callback }) => {
       const id = callout.id;
       const sourceSlotId = slotIds[slotIndex];
       const title = callout.attributes.title;
@@ -196,58 +178,95 @@ export default function ActionCallouts({
 
       moveToSlot(id, sourceSlotId, destinationSlotId, destinationIndex);
 
-      const callback = () => {
-        if (rest.callback && typeof rest.callback === "function") {
-          rest.callback();
-        }
-        if (announcement) {
-          announce(announcement);
-        }
+      const done = () => {
+        if (typeof callback === "function") callback();
+        if (announcement) announce(announcement);
       };
-      doUpdateCallout(id, destinationSlotId, destinationIndex, callback);
+      doUpdateCallout(id, destinationSlotId, destinationIndex, done);
     },
     [moveToSlot, doUpdateCallout, announce, t]
   );
 
-  const renderLiveRegion = useCallback(
-    (role = "alert") => {
-      const roleProps =
-        role === "alert"
-          ? { role: "alert" }
-          : { role: "status", "aria-live": "polite" };
-      return (
-        <div {...roleProps} aria-atomic className="screen-reader-text">
-          {srMessage}
-        </div>
+  // The window-level monitor is registered once but needs the current slot
+  // groupings and the move handlers on drop, so route it through a ref.
+  const handleDrop = ({ source, location }) => {
+    const sourceSlotId = source.data.slotId;
+    const calloutId = source.data.calloutId;
+    const sourceIndex = source.data.index;
+
+    const targets = location.current.dropTargets;
+    if (!targets.length) return;
+
+    const chipTarget = targets.find(target => target.data.type === "chip");
+    const slotTarget = targets.find(target => target.data.isSlot);
+    const destinationSlotId =
+      slotTarget?.data.slotId ?? chipTarget?.data.slotId;
+    if (!destinationSlotId) return;
+
+    const destinationList = slotCalloutsRef.current[destinationSlotId];
+
+    let destinationIndex;
+    if (chipTarget) {
+      const rawIndex = destinationList.findIndex(
+        c => c.id === chipTarget.data.calloutId
       );
-    },
-    [srMessage]
-  );
+      if (rawIndex === -1) return;
+      const edge = extractClosestEdge(chipTarget.data);
+      destinationIndex = edge === "bottom" ? rawIndex + 1 : rawIndex;
+    } else {
+      destinationIndex = destinationList.length;
+    }
+
+    // Account for the source being removed from the list before re-insertion.
+    if (sourceSlotId === destinationSlotId && sourceIndex < destinationIndex) {
+      destinationIndex -= 1;
+    }
+    if (
+      sourceSlotId === destinationSlotId &&
+      sourceIndex === destinationIndex
+    ) {
+      return;
+    }
+
+    moveToSlot(calloutId, sourceSlotId, destinationSlotId, destinationIndex);
+    doUpdateCallout(calloutId, destinationSlotId, destinationIndex);
+  };
+  const dropHandlerRef = useRef(handleDrop);
+  dropHandlerRef.current = handleDrop;
+
+  useEffect(() => {
+    return combine(
+      monitorForElements({
+        canMonitor: ({ source }) => source.data.instanceId === instanceId,
+        onDrop: args => dropHandlerRef.current(args)
+      }),
+      autoScrollWindowForElements()
+    );
+  }, [instanceId]);
 
   return (
     <ClientOnly>
-      <Styled.CalloutsContainer className="rbd-migration-resets">
-        <DragDropContext onDragStart={() => {}} onDragEnd={onDragEnd}>
-          {slotIds
-            .filter(slot => actionCalloutSlots.includes(slot))
-            .map((slotId, index) => {
-              return (
-                <Slot
-                  key={slotId}
-                  id={slotId}
-                  {...slots[slotId]}
-                  model={model}
-                  actionCalloutEditRoute={actionCalloutEditRoute}
-                  actionCalloutNewRoute={actionCalloutNewRoute}
-                  actionCallouts={slotCallouts[slotId]}
-                  index={index}
-                  slotCount={slotIds.length}
-                  onKeyboardMove={onKeyboardMove}
-                />
-              );
-            })}
-        </DragDropContext>
-        {renderLiveRegion("alert")}
+      <Styled.CalloutsContainer>
+        {slotIds
+          .filter(slot => actionCalloutSlots.includes(slot))
+          .map((slotId, index) => (
+            <Slot
+              key={slotId}
+              id={slotId}
+              {...slots[slotId]}
+              instanceId={instanceId}
+              model={model}
+              actionCalloutEditRoute={actionCalloutEditRoute}
+              actionCalloutNewRoute={actionCalloutNewRoute}
+              actionCallouts={slotCallouts[slotId]}
+              index={index}
+              slotCount={slotIds.length}
+              onKeyboardMove={onKeyboardMove}
+            />
+          ))}
+        <div role="alert" aria-atomic className="screen-reader-text">
+          {srMessage}
+        </div>
       </Styled.CalloutsContainer>
     </ClientOnly>
   );
@@ -257,7 +276,6 @@ ActionCallouts.displayName = "Project.Hero.Builder.ActionCallouts";
 
 ActionCallouts.propTypes = {
   model: PropTypes.object.isRequired,
-  refreshActionCallouts: PropTypes.func,
   actionCalloutEditRoute: PropTypes.func.isRequired,
   actionCalloutNewRoute: PropTypes.func.isRequired,
   actionCallouts: PropTypes.array,

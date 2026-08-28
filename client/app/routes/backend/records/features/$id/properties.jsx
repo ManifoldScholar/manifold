@@ -12,11 +12,11 @@ import PageHeader from "components/backend/layout/PageHeader";
 import Properties from "components/backend/feature/Properties";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => featuresAPI.show(params.id),
-    request
+    url
   });
 };
 

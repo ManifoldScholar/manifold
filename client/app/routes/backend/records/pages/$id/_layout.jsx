@@ -7,11 +7,11 @@ import Dialog from "components/global/dialog";
 import PageHeader from "components/backend/layout/PageHeader";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => pagesAPI.show(params.id),
-    request
+    url
   });
 };
 

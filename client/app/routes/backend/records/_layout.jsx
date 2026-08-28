@@ -5,9 +5,9 @@ import navigation from "helpers/navigation";
 import HeadContent from "components/global/HeadContent";
 import authorize from "lib/react-router/loaders/authorize";
 
-export const loader = ({ request, context }) => {
+export const loader = ({ context, url }) => {
   return authorize({
-    request,
+    url,
     context,
     ability: "update",
     entity: ["user", "userGroup", "maker", "page", "feature", "exportTarget"]

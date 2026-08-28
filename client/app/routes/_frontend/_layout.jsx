@@ -9,7 +9,6 @@ import { BreadcrumbsProvider } from "components/global/atomic/Breadcrumbs";
 import Layout from "components/frontend/layout";
 import { useSettings, useBodyClass, useScrollToTop } from "hooks";
 import { get } from "lodash-es";
-import { SearchProvider } from "hooks/useSearch/context";
 import { ErrorBoundary } from "./ErrorBoundary";
 
 export { shouldRevalidate } from "lib/react-router/loaders/shouldRevalidate";
@@ -54,21 +53,19 @@ export default function FrontendLayout({ loaderData }) {
   return (
     <FrontendContext.Provider value={frontendContextValue}>
       <BreadcrumbsProvider>
-        <SearchProvider>
-          <Layout.Header />
-          <main
-            id="skip-to-main"
-            tabIndex={-1}
-            className={classNames({
-              "main-content": true,
-              "flex-viewport": true,
-              "extra-top": hasPressLogo
-            })}
-          >
-            <Outlet />
-          </main>
-          <Footers.FrontendFooter />
-        </SearchProvider>
+        <Layout.Header />
+        <main
+          id="skip-to-main"
+          tabIndex={-1}
+          className={classNames({
+            "main-content": true,
+            "flex-viewport": true,
+            "extra-top": hasPressLogo
+          })}
+        >
+          <Outlet />
+        </main>
+        <Footers.FrontendFooter />
       </BreadcrumbsProvider>
     </FrontendContext.Provider>
   );

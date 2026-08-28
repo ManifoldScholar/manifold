@@ -15,7 +15,7 @@ import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { FrontendContext } from "app/contexts";
 import { useListFilters, useListSearchParams } from "hooks";
 
-export const loader = async ({ params, request, context, url }) => {
+export const loader = async ({ params, context, url }) => {
   checkLibraryMode({ url, context });
 
   if (params.id === "all") {
@@ -23,7 +23,7 @@ export const loader = async ({ params, request, context, url }) => {
   }
 
   const fetchFn = () => projectCollectionsAPI.show(params.id);
-  const projectCollection = await loadEntity({ context, fetchFn, request });
+  const projectCollection = await loadEntity({ context, fetchFn, url });
 
   const projectsData = await loadList({
     url,

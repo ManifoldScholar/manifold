@@ -8,9 +8,9 @@ import HeadContent from "components/global/HeadContent";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 import { GroupHeading } from "components/frontend/reading-group/headings";
 
-export const loader = async ({ params, context, request, url }) => {
+export const loader = async ({ params, context, url }) => {
   const fetchFn = () => readingGroupsAPI.show(params.id);
-  const readingGroup = await loadEntity({ context, fetchFn, request });
+  const readingGroup = await loadEntity({ context, fetchFn, url });
 
   /*
   Some RGs may choose to only use annotation features and not do any collecting.

@@ -7,6 +7,7 @@ export default function ResourceAnnotationDialog({
   resource,
   textId,
   destroyAnnotation,
+  open,
   ...dialog
 }) {
   const resources = useLoaderCollection("resources");
@@ -31,8 +32,8 @@ export default function ResourceAnnotationDialog({
     );
 
   return (
-    <Dialog title={resourceEntity?.attributes.title} {...dialog}>
-      {resourceEntity ? renderPreview : null}
+    <Dialog title={resourceEntity?.attributes.title} open={open} {...dialog}>
+      {open && renderPreview}
     </Dialog>
   );
 }

@@ -9,14 +9,14 @@ import { getResourceBreadcrumbs } from "helpers/breadcrumbs";
 import authorize from "lib/react-router/loaders/authorize";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   const project = await loadEntity({
     context,
     fetchFn: () => projectsAPI.show(params.pId),
-    request
+    url
   });
   await authorize({
-    request,
+    url,
     context,
     entity: project,
     ability: "update"
@@ -24,7 +24,7 @@ export const loader = async ({ params, context, request }) => {
   const resourceImport = await loadEntity({
     context,
     fetchFn: () => resourceImportsAPI.show(params.pId, params.id),
-    request
+    url
   });
   return { project, resourceImport };
 };

@@ -8,11 +8,11 @@ import { AddEditForm } from "components/backend/pending-entitlements";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => pendingEntitlementsAPI.show(params.id),
-    request
+    url
   });
 };
 

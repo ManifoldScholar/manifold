@@ -4,7 +4,7 @@ import classNames from "classnames";
 import Current from "./in-list/Current";
 import Available from "./in-list/Available";
 import typeResolver from "../../helpers/resolver";
-import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
+import DropEdgeIndicator from "components/global/dnd/DropEdgeIndicator";
 import { useReorderableItem } from "hooks";
 import { isFunction } from "lodash-es";
 

@@ -12,7 +12,7 @@ const authorization = new Authorization();
  *
  * @param {Object} options
  * @param {Object} options.context - Router context (from middleware)
- * @param {Object} options.request - Request object
+ * @param {URL} options.url - Normalized request URL from the loader args
  * @param {string|Array} options.ability - Ability to check
  * @param {string|Array} options.kind - Kind to check
  * @param {Object|string|Array} options.entity - Entity to check
@@ -20,14 +20,14 @@ const authorization = new Authorization();
  * @throws {Response} Throws redirect Response if unauthorized
  */
 export default async function authorizeLoader({
-  request,
+  url,
   context,
   ability,
   kind,
   entity,
   failureMessage
 }) {
-  await requireLogin(request, context);
+  await requireLogin(url, context);
 
   // Get user from middleware context
   const { auth } = context.get(routerContext) ?? {};

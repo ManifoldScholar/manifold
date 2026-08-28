@@ -3,7 +3,12 @@ import { useOutletContext, useRevalidator } from "react-router";
 import { readingGroupsAPI, bulkDeleteAPI, annotationsAPI } from "api";
 import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
-import { useListQueryParams, useApiCallback, useNotifications } from "hooks";
+import {
+  useListQueryParams,
+  useApiCallback,
+  useNotifications,
+  useFocusAfterRemoval
+} from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "components/global/dialog";
 import EntitiesList, {
@@ -69,11 +74,14 @@ export default function GroupAnnotationsLayout({ loaderData }) {
   const destroyAnnotation = useApiCallback(annotationsAPI.destroy);
   const bulkDelete = useApiCallback(bulkDeleteAPI.annotations);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(annotations);
+
   const onDelete = id => {
     confirm({
       heading: t("modals.delete_annotation"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
+        rememberRemoval(id);
         await destroyAnnotation(id);
         closeDialog();
         revalidate();
@@ -128,6 +136,8 @@ export default function GroupAnnotationsLayout({ loaderData }) {
         }}
       />
       <EntitiesList
+        wrapperRef={listRef}
+        aria-label={t("titles.annotations")}
         entityComponent={AnnotationRow}
         entityComponentProps={{
           bulkActionsActive,

@@ -21,6 +21,7 @@ export default function ContactRoute() {
     <>
       <HeadContent title={t("titles.contact")} appendDefaultTitle />
       <section>
+        <h1 className="screen-reader-text">{t("titles.contact")}</h1>
         <div className="container">
           <GlobalForm.Form
             fetcher={fetcher}

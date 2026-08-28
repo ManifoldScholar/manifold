@@ -68,6 +68,7 @@ const UPLOAD_TYPES = {
 export function FormUpload({
   name,
   remove,
+  altTextName,
   readFrom,
   accepts: acceptsKey = "any",
   layout = "square",
@@ -84,6 +85,9 @@ export function FormUpload({
     state => {
       const { attachment, removed } = state;
       if (remove) set(removed, true, remove);
+      // The file just changed (new drop or removal), so any alt text describing
+      // the previous file is now stale.
+      if (altTextName) set("", true, altTextName);
       if (attachment) {
         const { type, name: fileName } = attachment;
         const reader = new FileReader();
@@ -95,7 +99,7 @@ export function FormUpload({
         set(null);
       }
     },
-    [set, remove]
+    [set, remove, altTextName]
   );
 
   const acceptsConfig = get(UPLOAD_TYPES, acceptsKey) || UPLOAD_TYPES.any;
@@ -149,6 +153,7 @@ FormUpload.propTypes = {
   ]),
   placeholder: PropTypes.string,
   remove: PropTypes.string,
+  altTextName: PropTypes.string,
   readFrom: PropTypes.string,
   accepts: PropTypes.string,
   fileNameFrom: PropTypes.string,

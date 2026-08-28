@@ -15,11 +15,11 @@ import {
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => commentsAPI.show(params.id),
-    request
+    url
   });
 };
 

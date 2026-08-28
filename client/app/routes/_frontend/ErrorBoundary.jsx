@@ -10,7 +10,6 @@ import { FrontendContext } from "app/contexts";
 import Footers from "components/global/Footers";
 import { BreadcrumbsProvider } from "components/global/atomic/Breadcrumbs";
 import Layout from "components/frontend/layout";
-import { SearchProvider } from "hooks/useSearch/context";
 import { useScrollToTop } from "hooks";
 import FatalError from "components/global/FatalError";
 import formatError from "lib/react-router/helpers/formatError";
@@ -41,20 +40,18 @@ export function ErrorBoundary() {
     return (
       <FrontendContext.Provider value={frontendContextValue}>
         <BreadcrumbsProvider>
-          <SearchProvider>
-            <Layout.Header />
-            <main
-              id="skip-to-main"
-              tabIndex={-1}
-              className={classNames({
-                "main-content": true,
-                "flex-viewport": true
-              })}
-            >
-              <FatalError {...errorProps} contained />
-            </main>
-            <Footers.FrontendFooter />
-          </SearchProvider>
+          <Layout.Header />
+          <main
+            id="skip-to-main"
+            tabIndex={-1}
+            className={classNames({
+              "main-content": true,
+              "flex-viewport": true
+            })}
+          >
+            <FatalError {...errorProps} contained />
+          </main>
+          <Footers.FrontendFooter />
         </BreadcrumbsProvider>
       </FrontendContext.Provider>
     );

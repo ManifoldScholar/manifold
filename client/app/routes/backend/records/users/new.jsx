@@ -7,8 +7,8 @@ import Layout from "components/backend/layout";
 import PageHeader from "components/backend/layout/PageHeader";
 import Properties from "components/backend/user/Properties";
 
-export const loader = ({ request, context }) => {
-  return authorize({ request, context, ability: "create", entity: "user" });
+export const loader = ({ context, url }) => {
+  return authorize({ url, context, ability: "create", entity: "user" });
 };
 
 export const action = formAction({
@@ -48,7 +48,7 @@ export default function UsersNewRoute() {
               }
             ]}
             panel
-            ariaLabel={t("users.settings")}
+            ariaLabel={t("records.users.settings")}
           />
         }
       >

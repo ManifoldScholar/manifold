@@ -136,7 +136,13 @@ export default function BaseInput({
       className={buttons ? undefined : fieldClasses}
       {...(buttons
         ? {}
-        : { name: errorName ?? name, errors, label, idForError })}
+        : {
+            name: errorName ?? name,
+            errors,
+            label,
+            idForError,
+            idForInput: id
+          })}
     >
       <BaseLabel
         id={id}

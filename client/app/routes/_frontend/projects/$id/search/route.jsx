@@ -6,13 +6,14 @@ import loadEntity from "lib/react-router/loaders/loadEntity";
 import searchLoader from "lib/react-router/loaders/search";
 import SearchQuery from "components/global/search/query";
 import SearchResults from "components/global/search/results";
+import { SearchResultsProvider } from "hooks/search/useSearchResults";
 import HeadContent from "components/global/HeadContent";
 import * as Styled from "./styles";
 
-export const loader = async ({ params, request, context, url }) => {
+export const loader = async ({ params, context, url }) => {
   // Load project to get its UUID (API expects UUID, not slug)
   const fetchFn = () => projectsAPI.show(params.id);
-  const project = await loadEntity({ context, fetchFn, request });
+  const project = await loadEntity({ context, fetchFn, url });
 
   return searchLoader({
     url,
@@ -48,21 +49,23 @@ export default function ProjectSearch({ loaderData }) {
       <RegisterBreadcrumbs breadcrumbs={breadcrumbs} />
       <h1 className="screen-reader-text">{t("search.title")}</h1>
       <SearchQuery.Provider>
-        <Styled.FormWrapper>
-          <Styled.Inner>
-            <h2 className="screen-reader-text">{t("search.form")}</h2>
-            <SearchQuery.Form
-              action={`/projects/${project?.attributes?.slug}/search`}
-              facets={facets}
-            />
-          </Styled.Inner>
-        </Styled.FormWrapper>
-        <Styled.ResultsWrapper>
-          <Styled.Inner>
-            <h2 className="screen-reader-text">{t("search.results")}</h2>
-            <SearchResults.List hideParent context="frontend" />
-          </Styled.Inner>
-        </Styled.ResultsWrapper>
+        <SearchResultsProvider results={results} resultsMeta={meta}>
+          <Styled.FormWrapper>
+            <Styled.Inner>
+              <h2 className="screen-reader-text">{t("search.form")}</h2>
+              <SearchQuery.Form
+                action={`/projects/${project?.attributes?.slug}/search`}
+                facets={facets}
+              />
+            </Styled.Inner>
+          </Styled.FormWrapper>
+          <Styled.ResultsWrapper>
+            <Styled.Inner>
+              <h2 className="screen-reader-text">{t("search.results")}</h2>
+              <SearchResults.List hideParent context="frontend" />
+            </Styled.Inner>
+          </Styled.ResultsWrapper>
+        </SearchResultsProvider>
       </SearchQuery.Provider>
     </>
   );

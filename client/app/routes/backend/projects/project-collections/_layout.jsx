@@ -10,9 +10,9 @@ import { fluidScale } from "theme/styles/mixins";
 import authorize from "lib/react-router/loaders/authorize";
 import loadList from "lib/react-router/loaders/loadList";
 
-export const loader = async ({ request, context, url }) => {
+export const loader = async ({ context, url }) => {
   await authorize({
-    request,
+    url,
     context,
     ability: "update",
     entity: ["projectCollection"],

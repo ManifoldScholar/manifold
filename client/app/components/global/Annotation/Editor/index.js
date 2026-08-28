@@ -70,8 +70,11 @@ export default function AnnotationEditor({
           errors={errors}
           idForError="annotation-textarea-error"
         >
-          <label htmlFor={textareaId} className="screen-reader-text">
-            {t("reader.actions.annotate_passage")}
+          <label
+            htmlFor={textareaId}
+            className="annotation-editor__textarea-label"
+          >
+            {t("glossary.annotation_title_case_one")}
           </label>
           <textarea
             ref={textareaRef}
@@ -79,7 +82,7 @@ export default function AnnotationEditor({
             aria-describedby="annotation-textarea-error"
             aria-required="true"
             style={{ width: "100%" }}
-            placeholder={`${t("reader.actions.annotate_passage")}...`}
+            placeholder={`${t("reader.actions.annotate_passage")}…`}
             onChange={handleBodyChange}
             value={body}
             className="annotation-editor__textarea"

@@ -12,11 +12,21 @@ const errorString = error => {
   return `${out}.`;
 };
 
-export default function InputError({ errors = [], idForError, className }) {
+export default function InputError({
+  errors = [],
+  idForError,
+  idForInput,
+  className
+}) {
   const hasErrors = errors.length > 0;
 
   return (
-    <Styled.ErrorList id={idForError || null} className={className}>
+    <Styled.ErrorList
+      id={idForError || null}
+      htmlFor={idForInput}
+      role="status"
+      className={hasErrors ? className : "screen-reader-text"}
+    >
       {hasErrors
         ? errors.map(e => {
             return <Styled.Error key={e}>{errorString(e)}</Styled.Error>;
@@ -28,7 +38,7 @@ export default function InputError({ errors = [], idForError, className }) {
 
 InputError.propTypes = {
   errors: PropTypes.array,
-  name: PropTypes.string,
   idForError: PropTypes.string,
+  idForInput: PropTypes.string,
   className: PropTypes.string
 };

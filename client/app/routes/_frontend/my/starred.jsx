@@ -18,8 +18,8 @@ const fetchFns = {
   journalIssues: () => meAPI.myCollected("journal_issues")
 };
 
-export const loader = async ({ request, context }) => {
-  requireLogin(request, context);
+export const loader = async ({ context, url }) => {
+  requireLogin(url, context);
   return loadParallelLists({ context, fetchFns });
 };
 

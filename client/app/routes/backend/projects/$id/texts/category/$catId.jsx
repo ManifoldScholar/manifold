@@ -8,11 +8,11 @@ import Category from "components/backend/category";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => textCategoriesAPI.show(params.catId),
-    request
+    url
   });
 };
 

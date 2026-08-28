@@ -1,7 +1,7 @@
 import { useEffect, useRef, useId } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Utility from "global/components/utility";
+import Utility from "components/global/utility";
 
 function CheckboxMixed({ label: groupLabel, checkboxes, value, onChange }) {
   const allValues = checkboxes.map(c => c.value);

@@ -7,9 +7,9 @@ import Layout from "components/backend/layout";
 import HeadContent from "components/global/HeadContent";
 import navigation from "helpers/navigation";
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ context, url }) => {
   await authorize({
-    request,
+    url,
     context,
     entity: "settings",
     ability: "update"
@@ -18,7 +18,7 @@ export const loader = async ({ request, context }) => {
   return loadEntity({
     context,
     fetchFn: () => settingsAPI.show(),
-    request
+    url
   });
 };
 

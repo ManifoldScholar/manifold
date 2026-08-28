@@ -1,5 +1,4 @@
 import { useReducer, useCallback, useRef, useMemo } from "react";
-import { v1 as uuidv1 } from "uuid";
 import { NotificationContext } from "./index";
 
 function reducer(state, action) {
@@ -53,7 +52,7 @@ export default function NotificationProvider({ children }) {
   const addNotification = useCallback(
     notification => {
       const n = { ...notification };
-      if (!n.id) n.id = uuidv1();
+      if (!n.id) n.id = crypto.randomUUID();
       if (!n.scope) n.scope = "global";
 
       dispatch({ type: "ADD", payload: n });

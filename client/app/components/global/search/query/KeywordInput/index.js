@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import IconComposer from "global/components/utility/IconComposer";
+import IconComposer from "components/global/utility/IconComposer";
 import * as Styled from "./styles";
 
 export default function KeywordInput({

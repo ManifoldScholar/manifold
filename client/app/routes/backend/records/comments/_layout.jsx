@@ -4,7 +4,12 @@ import { commentsAPI, bulkDeleteAPI } from "api";
 import authorize from "lib/react-router/loaders/authorize";
 import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
-import { useListQueryParams, useApiCallback, useNotifications } from "hooks";
+import {
+  useListQueryParams,
+  useApiCallback,
+  useNotifications,
+  useFocusAfterRemoval
+} from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "components/global/dialog";
 import EntitiesList, {
@@ -20,8 +25,8 @@ import {
 import PageHeader from "components/backend/layout/PageHeader";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
-export const loader = async ({ request, context, url }) => {
-  await authorize({ request, context, kind: "admin" });
+export const loader = async ({ context, url }) => {
+  await authorize({ url, context, kind: "admin" });
   return loadList({
     url,
     context,
@@ -70,11 +75,14 @@ export default function CommentsLayout({ loaderData }) {
   const destroyComment = useApiCallback(commentsAPI.destroy);
   const bulkDelete = useApiCallback(bulkDeleteAPI.comments);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(comments);
+
   const onDelete = annotationId => {
     confirm({
       heading: t("modals.delete_comment"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
+        rememberRemoval(annotationId);
         await destroyComment(annotationId);
         closeDialog();
         revalidate();
@@ -129,6 +137,8 @@ export default function CommentsLayout({ loaderData }) {
       />
       <PageHeader type="list" title={t("titles.comments")} />
       <EntitiesList
+        wrapperRef={listRef}
+        aria-label={t("titles.comments")}
         entityComponent={CommentRow}
         entityComponentProps={{
           bulkActionsActive,

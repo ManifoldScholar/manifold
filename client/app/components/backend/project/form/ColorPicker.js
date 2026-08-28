@@ -46,11 +46,8 @@ function ColorPicker({ onChange, getModelValue, label }) {
   return (
     <div className="color-picker">
       <div className="color-picker__inner">
-        <div
-          className="color-picker__list"
-          role="group"
-          aria-label={groupLabel}
-        >
+        <fieldset className="color-picker__list">
+          <legend className="screen-reader-text">{groupLabel}</legend>
           {avatarColors.map(color => {
             const checked =
               getModelValue("attributes[avatarColor]") === color.value;
@@ -89,7 +86,7 @@ function ColorPicker({ onChange, getModelValue, label }) {
               </label>
             );
           })}
-        </div>
+        </fieldset>
       </div>
       <div className="color-picker__description" aria-hidden="true">
         {t("projects.thumbnail.color_instructions")}

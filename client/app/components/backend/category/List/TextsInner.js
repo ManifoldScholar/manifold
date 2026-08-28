@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import TextInner from "./TextInner";
-import DropEdgeIndicator from "global/components/dnd/DropEdgeIndicator";
+import DropEdgeIndicator from "components/global/dnd/DropEdgeIndicator";
 import { useReorderableItem } from "hooks";
 
 function TextRow({

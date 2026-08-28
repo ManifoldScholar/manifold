@@ -120,9 +120,8 @@ window.ace.define(
         background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMwMjLyZYiPj/8PAAreAwAI1g0AAAAAElFTkSuQmCC) right repeat-y
       }
     `;
-      const dom = acequire("../lib/dom");
-      dom.importCssString(exports.cssText, exports.cssClass);
-    }
-  );
-  /* eslint-enable max-len, no-unused-vars */
-}
+    const dom = acequire("../lib/dom");
+    dom.importCssString(exports.cssText, exports.cssClass);
+  }
+);
+/* eslint-enable max-len, no-unused-vars */

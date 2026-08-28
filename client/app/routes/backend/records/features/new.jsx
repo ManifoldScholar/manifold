@@ -7,8 +7,8 @@ import PageHeader from "components/backend/layout/PageHeader";
 import Layout from "components/backend/layout";
 import Properties from "components/backend/feature/Properties";
 
-export const loader = ({ request, context }) => {
-  return authorize({ request, context, ability: "create", entity: "feature" });
+export const loader = ({ context, url }) => {
+  return authorize({ url, context, ability: "create", entity: "feature" });
 };
 
 export const action = formAction({

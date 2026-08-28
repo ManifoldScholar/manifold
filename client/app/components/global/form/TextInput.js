@@ -8,9 +8,11 @@ export default function FormTextInput({
   inputType,
   join = array => array.join(", "),
   hideValue,
+  validation,
   ...rest
 }) {
   const id = useId();
+  const isRequired = validation?.includes("required");
 
   const renderValue = value => {
     if (!value) return "";
@@ -28,6 +30,7 @@ export default function FormTextInput({
       idForInstructions={`text-input-instructions-${id}`}
       inputType={resolvedInputType}
       renderValue={renderValue}
+      ariaRequired={isRequired}
       {...rest}
     />
   );
@@ -47,5 +50,6 @@ FormTextInput.propTypes = {
   wide: PropTypes.bool,
   disabled: PropTypes.bool,
   buttons: PropTypes.array,
-  hideValue: PropTypes.func
+  hideValue: PropTypes.func,
+  validation: PropTypes.array
 };

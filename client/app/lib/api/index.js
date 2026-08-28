@@ -7,6 +7,7 @@ export { default as entitlementTargetsAPI } from "./resources/entitlementTargets
 export { default as entitlementImportsAPI } from "./resources/entitlementImports";
 export { default as pendingEntitlementsAPI } from "./resources/entitlementsPending";
 export { default as eventsAPI } from "./resources/events";
+export { default as licensesAPI } from "./resources/licenses";
 export { default as makersAPI } from "./resources/makers";
 export { default as meAPI } from "./resources/me";
 export { default as pagesAPI } from "./resources/pages";

@@ -16,14 +16,14 @@ const LIST_OPTIONS = {
   defaultPagination: { page: 1, perPage: 5 }
 };
 
-export const loader = async ({ params, request, context, url }) => {
+export const loader = async ({ params, context, url }) => {
   // The parent layout already fetches the resource collection and provides
   // it via outlet context, but the project id isn't in the URL, so we have
   // to re-fetch here to look it up before we can hit projectsAPI.resources.
   const resourceCollection = await loadEntity({
     context,
     fetchFn: () => resourceCollectionsAPI.show(params.id),
-    request
+    url
   });
   const projectId = resourceCollection.relationships.project.id;
 
@@ -31,7 +31,7 @@ export const loader = async ({ params, request, context, url }) => {
     loadEntity({
       context,
       fetchFn: () => projectsAPI.show(projectId),
-      request
+      url
     }),
     loadList({
       url,

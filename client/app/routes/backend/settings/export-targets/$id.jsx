@@ -11,11 +11,11 @@ import ExportTargetForm from "components/backend/export-targets/Form";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => exportTargetsAPI.show(params.id),
-    request
+    url
   });
 };
 

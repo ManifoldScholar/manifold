@@ -8,7 +8,6 @@ import Layout from "components/reader/layout";
 import Footers from "components/global/Footers";
 import Header from "components/reader/Header";
 import { useBodyClass } from "hooks";
-import { SearchProvider } from "hooks/useSearch/context";
 import FatalError from "components/global/FatalError";
 import formatError from "lib/react-router/helpers/formatError";
 
@@ -29,16 +28,14 @@ export function ErrorBoundary() {
 
     return (
       <>
-        <SearchProvider>
-          <Header text={text} />
-          <main
-            id="skip-to-main"
-            tabIndex={-1}
-            className="main-content flex-viewport"
-          >
-            <FatalError {...errorProps} contained />
-          </main>
-        </SearchProvider>
+        <Header text={text} />
+        <main
+          id="skip-to-main"
+          tabIndex={-1}
+          className="main-content flex-viewport"
+        >
+          <FatalError {...errorProps} contained />
+        </main>
         <Footers.ReaderFooter text={text} />
         <Layout.PostFooter />
       </>

@@ -8,11 +8,11 @@ import formAction from "lib/react-router/helpers/formAction";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => ingestionSourcesAPI.show(params.assetId),
-    request
+    url
   });
 };
 

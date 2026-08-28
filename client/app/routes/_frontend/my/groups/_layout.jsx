@@ -9,8 +9,8 @@ import List from "components/frontend/reading-group-list/List";
 
 const FILTERS_RESET = { sort_order: "created_at_asc", archived: "false" };
 
-export const loader = async ({ request, context, url }) => {
-  requireLogin(request, context);
+export const loader = async ({ context, url }) => {
+  requireLogin(url, context);
   return loadList({
     url,
     context,

@@ -8,11 +8,11 @@ import formAction from "lib/react-router/helpers/formAction";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => textTracksAPI.show(params.id, params.trackId),
-    request
+    url
   });
 };
 

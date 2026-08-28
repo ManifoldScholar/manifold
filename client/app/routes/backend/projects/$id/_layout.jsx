@@ -13,17 +13,17 @@ import navigation from "helpers/navigation";
 import { useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   const project = await loadEntity({
     context,
     fetchFn: () => projectsAPI.show(params.id),
-    request
+    url
   });
   // in this root project layout we check that the user has some access
   // the grouped child route layouts use useAuthorizeRoute to narrow
   // this check without refetching the project
   await authorize({
-    request,
+    url,
     context,
     entity: project,
     ability: [

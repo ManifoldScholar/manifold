@@ -15,23 +15,15 @@ function classes(className, type, color) {
   );
 }
 
-function Small({
-  type,
-  className,
-  color,
-  ariaLabel,
-  borderless,
-  icon,
-  isResponsive
-}) {
+function Small({ type, className, color, ariaLabel, borderless, icon }) {
   return (
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 48 48"
         className={classes(className, type, color)}
-        aria-hidden={isResponsive}
         style={{ fill: "none" }}
+        aria-hidden
       >
         {ariaLabel && <title>Default Project Thumbnail</title>}
         <g fill="none" fillRule="evenodd">
@@ -93,6 +85,7 @@ function Large({ type, className, color, ariaLabel, icon }) {
         height={134}
         className={classes(className, type, color)}
         role="img"
+        aria-hidden
       >
         {ariaLabel && <title>Default Project Thumbnail</title>}
         <g fill="none" fillRule="evenodd">
@@ -166,7 +159,6 @@ export default function ProjectPlaceholder({
   borderless = false,
   icon
 }) {
-  const isResponsive = mode === "responsive";
   const ariaLabelText = ariaLabel ? "Default Project Thumbnail" : null;
   const shared = { className, color, ariaLabel: ariaLabelText, icon };
 
@@ -174,24 +166,12 @@ export default function ProjectPlaceholder({
     case "large":
       return <Large type="all" {...shared} />;
     case "small":
-      return (
-        <Small
-          type="all"
-          {...shared}
-          borderless={borderless}
-          isResponsive={false}
-        />
-      );
+      return <Small type="all" {...shared} borderless={borderless} />;
     default:
       return (
         <>
           <Large type="desktop" {...shared} />
-          <Small
-            type="mobile"
-            {...shared}
-            borderless={borderless}
-            isResponsive={isResponsive}
-          />
+          <Small type="mobile" {...shared} borderless={borderless} />
         </>
       );
   }

@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useOutletContext, useRevalidator } from "react-router";
 import { readingGroupsAPI, readingGroupMembershipsAPI } from "api";
 import loadList from "lib/react-router/loaders/loadList";
-import { useApiCallback } from "hooks";
+import { useApiCallback, useFocusAfterRemoval } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "components/global/dialog";
 import EntitiesList, {
@@ -32,11 +32,14 @@ export default function GroupMembers({ loaderData }) {
 
   const deleteMembership = useApiCallback(readingGroupMembershipsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(data);
+
   const onDelete = (id, name) => {
     confirm({
       heading: t("modals.delete_membership", { name }),
       message: t("modals.delete_membership_body"),
       callback: async closeDialog => {
+        rememberRemoval(id);
         await deleteMembership(id);
         closeDialog();
         revalidate();
@@ -48,6 +51,7 @@ export default function GroupMembers({ loaderData }) {
     <>
       {confirmation && <Dialog.Confirm {...confirmation} />}
       <EntitiesList
+        wrapperRef={listRef}
         entityComponent={ReadingGroupMemberRow}
         entityComponentProps={{ readingGroup, onDelete }}
         title={t("reading_groups.members_header")}

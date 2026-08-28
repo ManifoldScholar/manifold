@@ -4,7 +4,11 @@ import { pendingEntitlementsAPI } from "api";
 import authorize from "lib/react-router/loaders/authorize";
 import loadList from "lib/react-router/loaders/loadList";
 import OutletWithDrawers from "components/global/router/OutletWithDrawers";
-import { useListQueryParams, useApiCallback } from "hooks";
+import {
+  useListQueryParams,
+  useApiCallback,
+  useFocusAfterRemoval
+} from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "components/global/dialog";
 import EntitiesList, {
@@ -15,9 +19,9 @@ import EntitiesList, {
 import PageHeader from "components/backend/layout/PageHeader";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
-export const loader = async ({ request, context, url }) => {
+export const loader = async ({ context, url }) => {
   await authorize({
-    request,
+    url,
     context,
     ability: "update",
     entity: ["pendingEntitlement"]
@@ -50,6 +54,8 @@ export default function PendingEntitlementsLayout({ loaderData }) {
   const navigate = useNavigate();
   const deleteEntitlement = useApiCallback(pendingEntitlementsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(entitlements);
+
   const onEdit = id => {
     navigate(`/backend/records/entitlements/edit/${id}`);
   };
@@ -59,6 +65,7 @@ export default function PendingEntitlementsLayout({ loaderData }) {
       heading: t("modals.delete_entitlement"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
+        rememberRemoval(id);
         await deleteEntitlement(id);
         closeDialog();
         revalidate();
@@ -93,6 +100,8 @@ export default function PendingEntitlementsLayout({ loaderData }) {
             actions={actions}
           />
           <EntitiesList
+            wrapperRef={listRef}
+            aria-label={t("entitlements.pending.header")}
             entityComponent={PendingEntitlementRow}
             entityComponentProps={{ onEdit, onDelete }}
             entities={entitlements}

@@ -2,7 +2,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useOutletContext, useRevalidator } from "react-router";
 import { ingestionSourcesAPI } from "api";
 import loadList from "lib/react-router/loaders/loadList";
-import { useListQueryParams, useApiCallback } from "hooks";
+import {
+  useListQueryParams,
+  useApiCallback,
+  useFocusAfterRemoval
+} from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Form from "components/global/form";
 import Dialog from "components/global/dialog";
@@ -44,12 +48,15 @@ export default function TextAssetsLayout({ loaderData }) {
 
   const deleteAsset = useApiCallback(ingestionSourcesAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(assets);
+
   const onDelete = id => {
     confirm({
       heading: t("modals.delete_asset"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
         try {
+          rememberRemoval(id);
           await deleteAsset(id);
           revalidate();
           closeDialog();
@@ -79,6 +86,8 @@ export default function TextAssetsLayout({ loaderData }) {
         instructions={t("texts.assets.instructions")}
       />
       <EntitiesList
+        wrapperRef={listRef}
+        aria-label={t("texts.assets.header")}
         className="full-width"
         entityComponent={AssetRow}
         entityComponentProps={{ onEdit, onDelete }}

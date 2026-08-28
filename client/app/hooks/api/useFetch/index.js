@@ -1,8 +1,17 @@
 import { useEffect, useCallback, useState, useRef } from "react";
 import { queryApi } from "api";
+import loadAllPages from "lib/react-router/loaders/loadAllPages";
 
+/**
+ * @param {function} fetchFn   returns an api request descriptor
+ * @param {Array}    deps      re-fetch when these change
+ * @param {object}   [options]
+ * @param {boolean}  [options.condition=true]  skip the fetch when false
+ * @param {boolean}  [options.loadAll=false]   follow pagination and merge every
+ *   page into `data` (see loaders/loadAllPages)
+ */
 export default function useFetch(fetchFn, deps = [], options = {}) {
-  const { condition = true } = options;
+  const { condition = true, loadAll = false } = options;
   const controllerRef = useRef(null);
   const [result, setResult] = useState(null);
   const [loaded, setLoaded] = useState(false);
@@ -30,7 +39,9 @@ export default function useFetch(fetchFn, deps = [], options = {}) {
 
     try {
       const request = fetchFnRef.current();
-      const response = await queryApi(request, null, signal);
+      const response = loadAll
+        ? await loadAllPages({ request, signal })
+        : await queryApi(request, null, signal);
       if (signal.aborted) return;
       setResult(response);
       setLoaded(true);
@@ -42,7 +53,7 @@ export default function useFetch(fetchFn, deps = [], options = {}) {
       setLoaded(true);
       throw err;
     }
-  }, [...deps, condition]);
+  }, [...deps, condition, loadAll]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
   useEffect(() => {

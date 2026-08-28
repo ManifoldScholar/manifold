@@ -9,9 +9,9 @@ import formAction from "lib/react-router/helpers/formAction";
 
 export const handle = { drawer: true };
 
-export const loader = ({ request, context }) => {
+export const loader = ({ context, url }) => {
   return authorize({
-    request,
+    url,
     context,
     ability: "create",
     entity: ["projectCollection"]

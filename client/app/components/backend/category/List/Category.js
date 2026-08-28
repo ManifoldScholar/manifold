@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import Texts from "./Texts";
 import DropEdgeIndicator from "components/global/dnd/DropEdgeIndicator";
 import { Link } from "react-router";
@@ -80,7 +79,7 @@ export default function CategoryListCategory({
 
           <Link
             className="text-categories__button"
-            to={lh.link("backendProjectCategory", project.id, category.id)}
+            to={`/backend/projects/${project.id}/texts/category/${category.id}`}
           >
             <Utility.IconComposer icon="annotate32" size={26} />
             <span className="screen-reader-text">

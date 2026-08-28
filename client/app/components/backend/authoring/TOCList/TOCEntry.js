@@ -4,7 +4,7 @@ import Utility from "components/global/utility";
 import { Link } from "react-router";
 
 import { useTranslation } from "react-i18next";
-import PopoverMenu from "global/components/popover/Menu";
+import PopoverMenu from "components/global/popover/Menu";
 import * as Styled from "./styles";
 
 export default function TOCEntry({

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Avatar from "components/global/avatar";
-import { useAuthentication, useLogout } from "hooks";
+import { useAuthentication, useLogout, useSettings } from "hooks";
 import { useSignInUpOverlay } from "components/global/sign-in-up/Overlay/context";
 import Link from "./Link";
 
@@ -9,10 +9,17 @@ import Link from "./Link";
 export default function UserLinks({ backendButton, closeNavigation }) {
   const { t } = useTranslation();
   const authentication = useAuthentication();
+  const settings = useSettings();
   const logout = useLogout();
   const { toggle: toggleSignInUpOverlay } = useSignInUpOverlay();
 
   const { currentUser } = authentication;
+
+  const { defaultIdentityProvider, identityProviders = [] } =
+    settings?.attributes?.authentication ?? {};
+  const defaultIdpUrl = identityProviders.find(
+    idp => idp.name === defaultIdentityProvider
+  )?.url;
 
   const canAccessReadingGroups =
     currentUser?.attributes.classAbilities.readingGroup.read;
@@ -36,21 +43,29 @@ export default function UserLinks({ backendButton, closeNavigation }) {
     return (
       <ul className="nested-nav__list nested-nav__list--user-links">
         <li className="nested-nav__item">
-          <button
-            className="nested-nav__button"
-            onClick={handleLoginClick}
-            aria-describedby="user-menu-login-mobile"
-          >
-            <div className="nested-nav__grid-item">
-              <Avatar />
-              <span className="nested-nav__button-text">
-                {t("navigation.user.log_in")}
+          {defaultIdpUrl && !currentUser ? (
+            <a className="mode-button" href={defaultIdpUrl}>
+              {t("forms.signin_overlay.log_in")}
+            </a>
+          ) : (
+            <>
+              <button
+                className="nested-nav__button"
+                onClick={handleLoginClick}
+                aria-describedby="user-menu-login-mobile"
+              >
+                <div className="nested-nav__grid-item">
+                  <Avatar />
+                  <span className="nested-nav__button-text">
+                    {t("navigation.user.log_in")}
+                  </span>
+                </div>
+              </button>
+              <span id="user-menu-login-mobile" className="screen-reader-text">
+                {t("navigation.user.log_in_to_manifold")}
               </span>
-            </div>
-          </button>
-          <span id="user-menu-login-mobile" className="screen-reader-text">
-            {t("navigation.user.log_in_to_manifold")}
-          </span>
+            </>
+          )}
         </li>
       </ul>
     );
@@ -79,14 +94,14 @@ export default function UserLinks({ backendButton, closeNavigation }) {
           onClick={closeNavigation}
         />
       )}
+      <Link
+        to="/my/notes"
+        title={t("pages.my_notes")}
+        icon="notes24"
+        onClick={closeNavigation}
+      />
       {canAccessReadingGroups && (
         <>
-          <Link
-            to="/my/notes"
-            title={t("pages.my_notes")}
-            icon="notes24"
-            onClick={closeNavigation}
-          />
           <Link
             to="/my/groups"
             title={t("pages.my_groups")}

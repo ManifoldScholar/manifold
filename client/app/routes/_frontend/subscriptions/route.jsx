@@ -10,8 +10,8 @@ import { useAuthentication, useNotifications } from "hooks";
 import HeadContent from "components/global/HeadContent";
 import * as Styled from "./styles";
 
-export const loader = async ({ request, context }) => {
-  requireLogin(request, context);
+export const loader = async ({ context, url }) => {
+  requireLogin(url, context);
   return null;
 };
 

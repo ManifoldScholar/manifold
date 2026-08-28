@@ -12,11 +12,11 @@ import Dialog from "components/global/dialog";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => subjectsAPI.show(params.id),
-    request
+    url
   });
 };
 

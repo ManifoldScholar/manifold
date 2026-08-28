@@ -7,11 +7,11 @@ import EditSectionForm from "components/backend/authoring/EditSectionForm";
 
 export const handle = { drawer: "editor" };
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => sectionsAPI.show(params.sectionId, params.id),
-    request
+    url
   });
 };
 

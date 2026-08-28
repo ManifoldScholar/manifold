@@ -2,13 +2,13 @@ import { Outlet, useOutletContext } from "react-router";
 import { sectionsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   const { textId, sectionId } = params;
 
   return loadEntity({
     context,
     fetchFn: () => sectionsAPI.show(sectionId, textId),
-    request
+    url
   });
 };
 

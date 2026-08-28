@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Utility from "components/global/utility";
 import { useTranslation } from "react-i18next";
-import { Toggle } from "global/components/form/Switch/ToggleOnly";
+import { Toggle } from "components/global/form/Switch/ToggleOnly";
 import { throttle } from "lodash-es";
 
 export default function Log({ log, onReset, canReset }) {

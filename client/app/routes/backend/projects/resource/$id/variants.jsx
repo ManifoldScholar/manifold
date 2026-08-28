@@ -15,6 +15,10 @@ export default function ResourceVariants() {
   const fetcher = useFetcher();
   const resource = useOutletContext();
 
+  const kind = resource.attributes.kind;
+  const externalVideo =
+    kind === "video" ? resource.attributes.subKind === "external_video" : false;
+
   return (
     <section>
       <FormContainer.Form
@@ -24,7 +28,8 @@ export default function ResourceVariants() {
         notifyOnSuccess
       >
         <Resource.Form.Kind.Variants
-          kind={resource.attributes.kind}
+          kind={kind}
+          externalVideo={externalVideo}
           resource={resource}
         />
         <Form.Save text={t("resources.properties.save")} />

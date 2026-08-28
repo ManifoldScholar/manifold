@@ -3,6 +3,8 @@ import InputError from "../InputError";
 import { brackets2dots } from "utils/string";
 import FieldWrapper from "../FieldWrapper";
 
+const ERROR_GROUP_NAMES = ["*", "attributes[base]"];
+
 const pointerFor = name => {
   const dotNotation = brackets2dots(name);
   const jsonPointer = dotNotation
@@ -16,8 +18,12 @@ export default function Errorable({
   className,
   name,
   children,
-  idForError
+  idForError,
+  idForInput,
+  as = "div"
 }) {
+  const noInput = ERROR_GROUP_NAMES.includes(name);
+
   const fieldErrors = () => {
     if (!errors) return [];
     // Wildcard renders every error passed in, including ones without a
@@ -40,14 +46,23 @@ export default function Errorable({
   };
 
   const fieldErrorsList = fieldErrors();
-  const hasErrors = fieldErrorsList.length > 0;
 
-  return hasErrors || children ? (
-    <FieldWrapper className={className}>
-      {children}
-      {hasErrors ? (
+  if (noInput) {
+    return (
+      <FieldWrapper className={className} as={as}>
         <InputError errors={fieldErrorsList} idForError={idForError || null} />
-      ) : null}
+      </FieldWrapper>
+    );
+  }
+
+  return children ? (
+    <FieldWrapper className={className} as={as}>
+      {children}
+      <InputError
+        errors={fieldErrorsList}
+        idForError={idForError || null}
+        idForInput={idForInput}
+      />
     </FieldWrapper>
   ) : null;
 }
@@ -58,6 +73,7 @@ Errorable.propTypes = {
   className: PropTypes.string,
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  nameForError: PropTypes.string,
-  idForError: PropTypes.string
+  idForError: PropTypes.string,
+  idForInput: PropTypes.string,
+  as: PropTypes.string
 };

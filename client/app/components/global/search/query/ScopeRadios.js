@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Option from "global/components/form/Radio/Option";
+import Option from "components/global/form/Radio/Option";
 
 export default function ScopeRadios({
   label,

@@ -35,6 +35,7 @@ export default function FormCodeArea({
           mode={mode}
           theme="idle_fingers"
           editorProps={{ $blockScrolling: true }}
+          setOptions={{ enableKeyboardAccessibility: true }}
           onChange={onChange}
           value={value || ""}
           width="100%"

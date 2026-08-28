@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { Menu as ReakitMenu, MenuItem as ReakitMenuItem } from "reakit/Menu";
-import { useTranslation } from "react-i18next";
 import { useSlate, ReactEditor } from "slate-react";
 import { Range, Node } from "slate";
 import Utility from "components/global/utility";
@@ -13,7 +12,6 @@ import {
 import * as Styled from "./styles";
 
 export default function Submenu({ menu, activeAlignment, block, path }) {
-  const { t } = useTranslation();
   const editor = useSlate();
   const { selection } = editor ?? {};
 

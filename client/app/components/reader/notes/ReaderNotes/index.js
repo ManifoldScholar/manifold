@@ -48,35 +48,17 @@ function ReaderNotesContainer({ children }) {
   }, [filters]);
   const showMyAnnotations = groupId === "me";
 
-  // TODO: Add load all pages handler for useFetch
-  // const initPageParam = useMemo(() => ({ size: 20, number: 1 }), []);
-  //
-  // const { data: myAnnotations, meta: myMeta } = useFetch({
-  //   request: [meAPI.annotations, fetchFilters, initPageParam, true],
-  //   condition: showMyAnnotations,
-  //   options: { fetchKey: requests.rMyFilteredAnnotationsForText }
-  // });
-  // const { data: rgAnnotations, meta: rgMeta } = useFetch({
-  //   request: [
-  //     readingGroupsAPI.annotations,
-  //     groupId,
-  //     fetchFilters,
-  //     initPageParam,
-  //     true
-  //   ],
-  //   condition: !showMyAnnotations,
-  //   options: { fetchKey: requests.rReadingGroupFilteredAnnotationsForText }
-  // });
+  const initPageParam = useMemo(() => ({ size: 20, number: 1 }), []);
 
   const { data: myAnnotations, meta: myMeta, loaded: myLoaded } = useFetch(
-    () => meAPI.annotations(fetchFilters),
-    [fetchFilters],
-    { condition: showMyAnnotations }
+    () => meAPI.annotations(fetchFilters, initPageParam),
+    [fetchFilters, initPageParam],
+    { condition: showMyAnnotations, loadAll: true }
   );
   const { data: rgAnnotations, meta: rgMeta, loaded: rgLoaded } = useFetch(
-    () => readingGroupsAPI.annotations(groupId, fetchFilters),
-    [groupId, fetchFilters],
-    { condition: !showMyAnnotations }
+    () => readingGroupsAPI.annotations(groupId, fetchFilters, initPageParam),
+    [groupId, fetchFilters, initPageParam],
+    { condition: !showMyAnnotations, loadAll: true }
   );
 
   const annotations = showMyAnnotations ? myAnnotations : rgAnnotations;

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useFetch } from "hooks";
+import { useFetch, useAuthentication } from "hooks";
 import { annotationsAPI } from "api";
 import Annotation from "components/global/Annotation";
 
@@ -15,6 +15,10 @@ export default function ViewAnnotations({
     [sectionId, textId, annotationIds]
   );
 
+  const { authenticated, currentUser } = useAuthentication();
+  const { trusted, established } = currentUser?.attributes ?? {};
+  const showUnverifiedWarning = !!authenticated && !trusted && !established;
+
   const saveAnnotation = (model, group) => {
     const attributes = { ...group.selection, ...model.attributes };
     const newModel = { ...model, attributes };
@@ -28,6 +32,7 @@ export default function ViewAnnotations({
       loginHandler={actions.showLogin}
       focusHandler={actions.focusHandler}
       closeDrawer={closeDrawer}
+      showUnverifiedWarning={showUnverifiedWarning}
     />
   );
 }

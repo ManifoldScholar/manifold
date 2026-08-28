@@ -12,9 +12,9 @@ import { useSettings } from "hooks";
 
 export const handle = { frontendMode: { isProjectSubpage: true } };
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, context, url }) => {
   const fetchFn = () => resourcesAPI.show(params.resourceId);
-  return loadEntity({ context, fetchFn, request });
+  return loadEntity({ context, fetchFn, url });
 };
 
 export default function ResourceDetailRoute({ loaderData: resource }) {

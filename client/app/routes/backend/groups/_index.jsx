@@ -3,7 +3,12 @@ import { useRevalidator } from "react-router";
 import { readingGroupsAPI, bulkDeleteAPI } from "api";
 import authorize from "lib/react-router/loaders/authorize";
 import loadList from "lib/react-router/loaders/loadList";
-import { useListQueryParams, useApiCallback, useNotifications } from "hooks";
+import {
+  useListQueryParams,
+  useApiCallback,
+  useNotifications,
+  useFocusAfterRemoval
+} from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "components/global/dialog";
 import EntitiesList, {
@@ -18,9 +23,9 @@ import {
 } from "components/backend/list/EntitiesList/List/bulkActions";
 import { INIT_FILTERS, INIT_SEARCH_PROPS } from "./filters";
 
-export const loader = async ({ request, context, url }) => {
+export const loader = async ({ context, url }) => {
   await authorize({
-    request,
+    url,
     context,
     ability: "update",
     entity: ["readingGroup"]
@@ -72,11 +77,14 @@ export default function GroupsLayout({ loaderData }) {
   const destroyRG = useApiCallback(readingGroupsAPI.destroy);
   const bulkDelete = useApiCallback(bulkDeleteAPI.readingGroups);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(readingGroups);
+
   const onDelete = (id, name) => {
     confirm({
       heading: t("modals.delete_reading_group", { name }),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
+        rememberRemoval(id);
         await destroyRG(id);
         closeDialog();
         revalidate();
@@ -124,6 +132,8 @@ export default function GroupsLayout({ loaderData }) {
     <main id="skip-to-main" tabIndex={-1} className="backend-detail">
       {confirmation && <Dialog.Confirm {...confirmation} />}
       <EntitiesList
+        wrapperRef={listRef}
+        aria-label={t("titles.groups")}
         entityComponent={ReadingGroupRow}
         entityComponentProps={{
           onDelete,

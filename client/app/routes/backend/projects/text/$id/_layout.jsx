@@ -15,14 +15,14 @@ import navigation from "helpers/navigation";
 import { useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   const text = await loadEntity({
     context,
     fetchFn: () => textsAPI.show(params.id),
-    request
+    url
   });
   await authorize({
-    request,
+    url,
     context,
     entity: text,
     ability: "update"

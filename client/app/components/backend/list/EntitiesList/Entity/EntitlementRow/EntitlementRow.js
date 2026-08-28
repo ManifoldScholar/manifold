@@ -1,20 +1,12 @@
-import React, { PureComponent } from "react";
-import { Link } from "react-router-dom";
+import { PureComponent } from "react";
+import { Link } from "react-router";
 import PropTypes from "prop-types";
-<<<<<<<< HEAD:client/app/components/backend/list/EntitiesList/Entity/EntitlementRow/EntitlementRow.js
-import { get } from "lodash";
-import EntityThumbnail from "global/components/entity-thumbnail";
-import Utility from "global/components/utility";
-import EntityRow from "../Row";
-import Authorize from "hoc/Authorize";
-========
+import Authorize from "components/hoc/Authorize";
 import { get } from "lodash-es";
 import EntityThumbnail from "components/global/entity-thumbnail";
 import Utility from "components/global/utility";
-import EntityRow from "./Row";
->>>>>>>> 77c5f9034 (feat: framework mode migration):client/app/components/backend/list/EntitiesList/Entity/EntitlementRow.js
+import EntityRow from "../Row";
 import { withTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 import { isUserGroupEntitlement, getEntitlementUserGroup } from "./helpers";
 
 class EntitlementRow extends PureComponent {
@@ -100,10 +92,9 @@ class EntitlementRow extends PureComponent {
         <Authorize entity="userGroup" ability="update">
           <Link
             className="entity-row__utility-button"
-            to={lh.link(
-              "backendRecordsUserGroupEntitlements",
+            to={`/backend/records/user-groups/${
               getEntitlementUserGroup(this.entitlement).id
-            )}
+            }/entitlements`}
           >
             <Utility.IconComposer icon="annotate32" size={26} />
           </Link>
@@ -144,7 +135,7 @@ class EntitlementRow extends PureComponent {
       <Authorize entity="userGroup" ability="update">
         <Link
           className="entity-row__utility-button"
-          to={lh.link("backendRecordsUserGroupEntitlements", group.id)}
+          to={`/backend/records/user-groups/${group.id}/entitlements`}
         >
           <Utility.IconComposer icon="annotate32" size={26} />
         </Link>

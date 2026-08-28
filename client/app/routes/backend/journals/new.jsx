@@ -9,9 +9,9 @@ import PageHeader from "components/backend/layout/PageHeader";
 import Layout from "components/backend/layout";
 import { RegisterBreadcrumbs } from "components/global/atomic/Breadcrumbs";
 
-export const loader = ({ request, context }) => {
+export const loader = ({ context, url }) => {
   return authorize({
-    request,
+    url,
     context,
     ability: "create",
     entity: "journal"

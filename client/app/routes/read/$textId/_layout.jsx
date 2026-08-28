@@ -7,7 +7,6 @@ import { textsAPI } from "api";
 import { useBodyClass } from "hooks";
 import { ReaderContext } from "app/contexts";
 import EventTracker, { EVENTS } from "components/global/EventTracker";
-import { SearchProvider } from "hooks/useSearch/context";
 import { useAuthentication, useReaderLocationChange } from "hooks";
 import { readerReducer, initialReaderState } from "app/contexts/readerReducer";
 import loadEntity from "lib/react-router/loaders/loadEntity";
@@ -16,11 +15,11 @@ import ReaderOverlay from "components/reader/ReaderOverlay";
 
 export { ErrorBoundary };
 
-export const loader = async ({ params, request, context, url }) => {
+export const loader = async ({ params, context, url }) => {
   const text = await loadEntity({
     context,
     fetchFn: () => textsAPI.show(params.textId),
-    request
+    url
   });
 
   const isBaseRoute =
@@ -66,17 +65,15 @@ export default function ReaderRoute({ loaderData: text }) {
   return (
     <ReaderContext.Provider value={contextValue}>
       <EventTracker event={EVENTS.VIEW_RESOURCE} resource={text} />
-      <SearchProvider>
-        <Header />
-        <ReaderOverlay />
-        <main
-          id="skip-to-main"
-          tabIndex={-1}
-          className="main-content flex-viewport"
-        >
-          <Outlet context={text} />
-        </main>
-      </SearchProvider>
+      <Header />
+      <ReaderOverlay />
+      <main
+        id="skip-to-main"
+        tabIndex={-1}
+        className="main-content flex-viewport"
+      >
+        <Outlet context={text} />
+      </main>
       <Footers.ReaderFooter text={text} />
       <Layout.PostFooter />
     </ReaderContext.Provider>

@@ -4,6 +4,7 @@ import requireLogin from "lib/react-router/loaders/requireLogin";
 import createListClientLoader from "lib/react-router/loaders/createListClientLoader";
 import loadList from "lib/react-router/loaders/loadList";
 import loadParallelLists from "lib/react-router/loaders/loadParallelLists";
+import { routerContext } from "app/contexts";
 import HeadContent from "components/global/HeadContent";
 import MyAnnotationsEntityCollection from "components/frontend/entity/Collection/patterns/MyAnnotations";
 import CollectionNavigation from "components/frontend/CollectionNavigation";
@@ -15,8 +16,8 @@ const INIT_FILTER_STATE = {
   order: "created_at DESC"
 };
 
-export const loader = async ({ request, context, url }) => {
-  requireLogin(request, context);
+export const loader = async ({ context, url }) => {
+  requireLogin(url, context);
 
   const annotationsData = await loadList({
     url,
@@ -29,18 +30,21 @@ export const loader = async ({ request, context, url }) => {
     }
   });
 
+  const { settings } = context.get(routerContext) ?? {};
+  const rgsDisabled = !!settings?.attributes?.general?.disableReadingGroups;
+
   const { annotatedTexts, readingGroups } = await loadParallelLists({
     context,
     fetchFns: {
       annotatedTexts: () => meAPI.annotatedTexts(),
-      readingGroups: () => meAPI.readingGroups()
+      ...(rgsDisabled ? {} : { readingGroups: () => meAPI.readingGroups() })
     }
   });
 
   return {
     ...annotationsData,
     annotatedTexts: annotatedTexts.data,
-    readingGroups: readingGroups.data
+    readingGroups: readingGroups?.data ?? null
   };
 };
 
@@ -93,8 +97,8 @@ export default function MyAnnotationsRoute({ loaderData }) {
     resetState: INIT_FILTER_STATE,
     options: {
       texts: annotatedTexts ?? [],
-      readingGroup: readingGroups ?? [],
-      privacy: true
+      privacy: true,
+      ...(readingGroups ? { readingGroup: readingGroups } : {})
     }
   });
 

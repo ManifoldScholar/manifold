@@ -4,11 +4,11 @@ import loadEntity from "lib/react-router/loaders/loadEntity";
 import formAction from "lib/react-router/helpers/formAction";
 import Ingestion from "components/backend/ingestion";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => ingestionsAPI.show(params.ingestionId),
-    request
+    url
   });
 };
 

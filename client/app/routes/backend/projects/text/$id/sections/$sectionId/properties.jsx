@@ -8,11 +8,11 @@ import SectionPropertiesForm from "components/backend/authoring/SectionPropertie
 
 export const handle = { drawer: "backend" };
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => sectionsAPI.show(params.sectionId, params.id),
-    request
+    url
   });
 };
 

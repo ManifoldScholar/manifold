@@ -96,6 +96,8 @@ function ListEntities({
   unit,
   error,
   className,
+  wrapperRef,
+  "aria-label": ariaLabel,
   ...rest
 }) {
   const id = useId();
@@ -151,7 +153,13 @@ function ListEntities({
   };
 
   return (
-    <div id={`${idPrefix}-${id}`} className={wrapperClassNames}>
+    <div
+      id={`${idPrefix}-${id}`}
+      className={wrapperClassNames}
+      ref={wrapperRef}
+      tabIndex={wrapperRef ? -1 : undefined}
+      aria-label={ariaLabel}
+    >
       {title && (
         <Title
           title={title}
@@ -246,6 +254,8 @@ ListEntities.propTypes = {
   search: validateSearch,
   pagination: PropTypes.object,
   paginationPadding: PropTypes.number,
+  wrapperRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  "aria-label": PropTypes.string,
   useDragHandle: PropTypes.bool,
   paginationStyle: PropTypes.oneOf(["compact", "normal"]),
   emptyMessage: PropTypes.node,

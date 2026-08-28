@@ -7,9 +7,9 @@ import EntitiesList, {
 } from "components/backend/list/EntitiesList";
 import PageHeader from "components/backend/layout/PageHeader";
 
-export const loader = async ({ request, context, url }) => {
+export const loader = async ({ context, url }) => {
   await authorize({
-    request,
+    url,
     context,
     ability: "update",
     entity: ["pendingEntitlement"]

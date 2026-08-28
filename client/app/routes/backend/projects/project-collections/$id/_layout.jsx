@@ -9,14 +9,14 @@ import authorize from "lib/react-router/loaders/authorize";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 import loadList from "lib/react-router/loaders/loadList";
 
-export const loader = async ({ params, context, request, url }) => {
+export const loader = async ({ params, context, url }) => {
   const projectCollection = await loadEntity({
     context,
     fetchFn: () => projectCollectionsAPI.show(params.id),
-    request
+    url
   });
   await authorize({
-    request,
+    url,
     context,
     entity: projectCollection,
     ability: "update"

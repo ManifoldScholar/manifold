@@ -4,11 +4,11 @@ import AnnotationDetail from "components/backend/annotation/detail";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => annotationsAPI.show(params.id),
-    request
+    url
   });
 };
 

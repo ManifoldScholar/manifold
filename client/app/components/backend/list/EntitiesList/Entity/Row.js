@@ -222,6 +222,7 @@ function EntitiesListRow({
     <>
       <span
         className="entity-row__utility-button entity-row__utility-button--handle"
+        tabIndex={-1}
         aria-hidden
       >
         <Utility.IconComposer icon="grabber32" size={26} />

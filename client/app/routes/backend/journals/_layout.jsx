@@ -1,9 +1,9 @@
 import { Outlet } from "react-router";
 import authorize from "lib/react-router/loaders/authorize";
 
-export const loader = ({ request, context }) => {
+export const loader = ({ context, url }) => {
   return authorize({
-    request,
+    url,
     context,
     ability: "update",
     entity: ["journal"]

@@ -6,11 +6,11 @@ import ActionCalloutForm from "components/backend/action-callout/Form";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => actionCalloutsAPI.show(params.calloutId),
-    request
+    url
   });
 };
 

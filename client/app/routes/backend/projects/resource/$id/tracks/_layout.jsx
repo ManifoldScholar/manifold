@@ -5,7 +5,7 @@ import EntitiesList, {
   Button,
   TextTrackRow
 } from "components/backend/list/EntitiesList";
-import { useApiCallback, useNotifications } from "hooks";
+import { useApiCallback, useNotifications, useFocusAfterRemoval } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import { useRevalidator } from "react-router";
 import PageHeader from "components/backend/layout/PageHeader";
@@ -34,12 +34,15 @@ export default function TracksLayout({ loaderData: tracks }) {
     return textTracksAPI.destroy(resource.id, id);
   });
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(tracks);
+
   const onDelete = id => {
     confirm({
       heading: t("modals.delete_track"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
         try {
+          rememberRemoval(id);
           await destroyTrack(id);
           revalidate();
           closeDialog();
@@ -73,6 +76,8 @@ export default function TracksLayout({ loaderData: tracks }) {
       <PageHeader type="list" title={t("titles.tracks")} hideBreadcrumbs />
       {!!tracks && (
         <EntitiesList
+          wrapperRef={listRef}
+          aria-label={t("titles.tracks")}
           entityComponent={TextTrackRow}
           entityComponentProps={{ onDelete, resourceId: resource.id }}
           entities={tracks}

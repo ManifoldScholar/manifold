@@ -12,11 +12,11 @@ import { useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import { capitalize } from "lodash-es";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => readingGroupsAPI.show(params.id),
-    request
+    url
   });
 };
 

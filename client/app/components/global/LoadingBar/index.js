@@ -1,7 +1,9 @@
 import { useRef, useEffect } from "react";
 import { useNavigation, useRevalidator, useFetchers } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function LoadingBar() {
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const revalidator = useRevalidator();
   const fetchers = useFetchers();
@@ -54,6 +56,15 @@ export default function LoadingBar() {
   return (
     <div>
       <div ref={loaderRef} className="loading-bar default">
+        {/* Informational image for screen readers. Less noisy than */}
+        {/* role=status; users can find this information if needed. */}
+        {loading && (
+          <div
+            className="screen-reader-text"
+            role="img"
+            aria-label={t("common.loading_page")}
+          />
+        )}
         <div className="progress" />
       </div>
     </div>

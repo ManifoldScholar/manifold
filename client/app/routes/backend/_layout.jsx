@@ -17,8 +17,8 @@ const ADMIN_ROLES = [
   "journal_editor"
 ];
 
-export const loader = async ({ request, context }) => {
-  await authorize({ request, context, kind: ADMIN_ROLES });
+export const loader = async ({ context, url }) => {
+  await authorize({ url, context, kind: ADMIN_ROLES });
   return null;
 };
 

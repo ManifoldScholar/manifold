@@ -41,10 +41,10 @@ const getBreadcrumbs = ({
     : [projectCrumb, resourcesCrumb, collectionCrumb, currentCrumb];
 };
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, context, url }) => {
   const { resourceId } = params;
   const fetchFn = () => resourcesAPI.show(resourceId);
-  return loadEntity({ context, fetchFn, request });
+  return loadEntity({ context, fetchFn, url });
 };
 
 export default function ResourceDetailRoute({ loaderData: resource }) {

@@ -1,10 +1,14 @@
-import { useState, useCallback, useContext, useEffect, useMemo } from "react";
+import {
+  useState,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef
+} from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import {
-  DragDropContext,
-  Droppable
-} from "@atlaskit/pragmatic-drag-and-drop-react-beautiful-dnd-migration";
+import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { useFormField } from "hooks";
 import { FormContext } from "contexts";
 import Mapping from "./Mapping";
@@ -39,6 +43,8 @@ export default function FormColumnMap({
   const { value, set } = useFormField(name);
   const { getModelValue } = useContext(FormContext);
 
+  const [instanceId] = useState(() => Symbol("attributeMap"));
+
   const sortedHeaders = useMemo(
     () => sortHeaders(getModelValue, headersPath, t),
     [getModelValue, headersPath, t]
@@ -55,6 +61,29 @@ export default function FormColumnMap({
     );
   }, [getModelValue, attributesPath, value]);
 
+  // The window-level monitor is registered once but needs the current mapping
+  // and setter on drop, so read them through refs.
+  const valueRef = useRef(value);
+  valueRef.current = value;
+  const setRef = useRef(set);
+  setRef.current = set;
+
+  useEffect(() => {
+    return monitorForElements({
+      canMonitor: ({ source }) => source.data.instanceId === instanceId,
+      onDrop({ source, location }) {
+        const target = location.current.dropTargets[0];
+        if (!target) return;
+
+        const position = target.data.position;
+        const column = source.data.column;
+        const updated = omitBy(valueRef.current, mapped => mapped === column);
+        updated[position] = column;
+        setRef.current(updated);
+      }
+    });
+  }, [instanceId]);
+
   const getHeaderPosition = header => {
     const headers = getModelValue(headersPath);
     return Object.keys(headers).find(key => headers[key] === header);
@@ -63,18 +92,6 @@ export default function FormColumnMap({
   const getCurrentMapping = position => {
     return value?.[position] || null;
   };
-
-  const onDragEnd = useCallback(
-    result => {
-      if (!result.destination) return;
-      const headerPosition = result.destination.droppableId;
-      const column = result.draggableId;
-      const updated = omitBy(value, v => v === column);
-      updated[headerPosition] = column;
-      set(updated);
-    },
-    [value, set]
-  );
 
   const autoMap = useCallback(
     event => {
@@ -105,58 +122,46 @@ export default function FormColumnMap({
           {t("forms.attribute_map.auto_map")}
         </button>
       </div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <FieldWrapper>
-          <Styled.ColumnMap className="rbd-migration-resets">
-            <Styled.ColumnMappable>
-              <Styled.ColumnHeading>
-                {t("forms.attribute_map.spreadsheet_cols")}
-              </Styled.ColumnHeading>
-              <Styled.MappableList>
-                {sortedHeaders.map((header, index) => {
-                  const position = getHeaderPosition(header);
-                  const id = position || (index + 1).toString();
-                  return (
-                    <li key={id}>
-                      <Mapping
-                        index={index}
-                        name={header}
-                        id={id}
-                        match={getCurrentMapping(id)}
-                        unLink={unLinkMatch}
-                      />
-                    </li>
-                  );
-                })}
-              </Styled.MappableList>
-            </Styled.ColumnMappable>
-            <Styled.Column>
-              <Styled.ColumnHeading>
-                {t("forms.attribute_map.available")}
-              </Styled.ColumnHeading>
-              <Droppable droppableId="attributesAvailable" isDropDisabled>
-                {(provided, snapshot) => (
-                  <Styled.Available ref={provided.innerRef}>
-                    {sortedAttributes.map((attribute, index) => {
-                      return (
-                        <Attribute
-                          key={attribute}
-                          name={attribute}
-                          index={index}
-                          isDragging={
-                            snapshot.draggingFromThisWith === attribute
-                          }
-                        />
-                      );
-                    })}
-                    {provided.placeholder}
-                  </Styled.Available>
-                )}
-              </Droppable>
-            </Styled.Column>
-          </Styled.ColumnMap>
-        </FieldWrapper>
-      </DragDropContext>
+      <FieldWrapper>
+        <Styled.ColumnMap>
+          <Styled.ColumnMappable>
+            <Styled.ColumnHeading>
+              {t("forms.attribute_map.spreadsheet_cols")}
+            </Styled.ColumnHeading>
+            <Styled.MappableList>
+              {sortedHeaders.map((header, index) => {
+                const position = getHeaderPosition(header);
+                const id = position || (index + 1).toString();
+                return (
+                  <li key={id}>
+                    <Mapping
+                      name={header}
+                      id={id}
+                      instanceId={instanceId}
+                      match={getCurrentMapping(id)}
+                      unLink={unLinkMatch}
+                    />
+                  </li>
+                );
+              })}
+            </Styled.MappableList>
+          </Styled.ColumnMappable>
+          <Styled.Column>
+            <Styled.ColumnHeading>
+              {t("forms.attribute_map.available")}
+            </Styled.ColumnHeading>
+            <Styled.Available>
+              {sortedAttributes.map(attribute => (
+                <Attribute
+                  key={attribute}
+                  name={attribute}
+                  instanceId={instanceId}
+                />
+              ))}
+            </Styled.Available>
+          </Styled.Column>
+        </Styled.ColumnMap>
+      </FieldWrapper>
     </ClientOnly>
   );
 }

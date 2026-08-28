@@ -4,7 +4,7 @@ import IconComposer from "components/global/utility/IconComposer";
 import Partial from "./partial";
 import EmptyMessage from "./EmptyMessage";
 import { useTranslation } from "react-i18next";
-import { useFromStore } from "hooks";
+import { useSettings } from "hooks";
 
 export default function FilteredList({
   section,
@@ -18,7 +18,7 @@ export default function FilteredList({
   setAnnotationOverlayReadingGroup
 }) {
   const { t } = useTranslation();
-  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const settings = useSettings();
 
   const readingGroupsDisabled =
     settings?.attributes?.general.disableReadingGroups;

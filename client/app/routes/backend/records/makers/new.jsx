@@ -9,8 +9,8 @@ import Layout from "components/backend/layout";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ request, context }) => {
-  await authorize({ request, context, ability: "create", entity: "maker" });
+export const loader = async ({ context, url }) => {
+  await authorize({ url, context, ability: "create", entity: "maker" });
   return null;
 };
 

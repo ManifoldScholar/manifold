@@ -16,6 +16,7 @@ export { default as useNotifications } from "./useNotifications";
 
 export { default as useListFilters } from "./useListFilters";
 export { default as useListSearchParams } from "./useListSearchParams";
+export { default as useSearch } from "./search/useSearch";
 
 export { default as usePreventBodyScroll } from "./usePreventBodyScroll";
 
@@ -37,6 +38,8 @@ export { default as useAfterRevalidate } from "./useAfterRevalidate";
 export { default as useFrontendMode } from "./useFrontendMode";
 
 export { default as useReadingGroups } from "./useReadingGroups";
+export { default as useFocusAfterRemoval } from "./useFocusAfterRemoval";
+export { default as useReorderableItem } from "./useReorderableItem";
 
 export { default as useLoaderEntity } from "./useLoaderEntity";
 export { default as useLoaderCollection } from "./useLoaderCollection";

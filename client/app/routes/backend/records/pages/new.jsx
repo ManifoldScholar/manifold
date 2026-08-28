@@ -12,9 +12,9 @@ const DEFAULT_PAGE = {
   attributes: { isExternalLink: false, kind: "default" }
 };
 
-export const loader = ({ request, context }) => {
+export const loader = ({ context, url }) => {
   return authorize({
-    request,
+    url,
     context,
     ability: "create",
     entity: "page"

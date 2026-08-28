@@ -2,7 +2,11 @@ import { useTranslation } from "react-i18next";
 import { useRevalidator } from "react-router";
 import { projectsAPI, eventsAPI } from "api";
 import loadList from "lib/react-router/loaders/loadList";
-import { useListQueryParams, useApiCallback } from "hooks";
+import {
+  useListQueryParams,
+  useApiCallback,
+  useFocusAfterRemoval
+} from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 import Dialog from "components/global/dialog";
 import EntitiesList, {
@@ -34,11 +38,14 @@ export default function ProjectEvents({ loaderData }) {
 
   const destroyEvent = useApiCallback(eventsAPI.destroy);
 
+  const { listRef, rememberRemoval } = useFocusAfterRemoval(events);
+
   const handleEventDestroy = event => {
     confirm({
       heading: t("modals.delete_event"),
       message: t("modals.confirm_body"),
       callback: async closeDialog => {
+        rememberRemoval(event.id);
         await destroyEvent(event.id);
         closeDialog();
         revalidate();
@@ -50,6 +57,7 @@ export default function ProjectEvents({ loaderData }) {
     <>
       {confirmation && <Dialog.Confirm {...confirmation} />}
       <EntitiesList
+        wrapperRef={listRef}
         entityComponent={EventRow}
         entityComponentProps={{
           destroyHandler: handleEventDestroy

@@ -124,6 +124,7 @@ export default function FormPicker({
   beforeGetValue = v => v,
   showAddRemoveAll,
   instructions,
+  instructionsBelow = false,
   belongsTo = false,
   reorderable = false,
   options: optionsProp = [],
@@ -722,9 +723,26 @@ export default function FormPicker({
   );
 
   // Remove/reorder callbacks for list
+  const nextFocusAfterRemoval = targetEl => {
+    const button = targetEl?.closest?.("button");
+    if (!button) return null;
+    const buttonClass = button.classList.value;
+    const buttons = Array.from(
+      button.closest("ul")?.querySelectorAll(`button.${buttonClass}`) ?? []
+    );
+    const index = buttons.indexOf(button);
+    return buttons[index + 1] || buttons[index - 1] || null;
+  };
+
   const removeSelection = useCallback(
-    selection => {
+    (selection, targetEl) => {
+      const nextFocusEl = nextFocusAfterRemoval(targetEl);
       deselect(selection);
+      if (nextFocusEl) {
+        nextFocusEl.focus();
+      } else if (searchInputRef.current) {
+        searchInputRef.current.focus();
+      }
     },
     [deselect]
   );
@@ -750,8 +768,11 @@ export default function FormPicker({
     [id]
   );
 
+  const formatOptionId = optionKey =>
+    `${ids.option}-${String(optionKey).replace(/\s/g, "-")}`;
+
   const activeOptionId = activeOptionFromState
-    ? `${ids.option}-${activeOptionFromState.key}`
+    ? formatOptionId(activeOptionFromState.key)
     : null;
 
   // Callbacks for list component
@@ -840,19 +861,13 @@ export default function FormPicker({
       <Styled.Wrapper>
         <BaseLabel
           id={ids.textBox}
+          labelId={ids.label}
           label={label}
           styleType={context?.styleType}
         />
-        <Instructions instructions={instructions} />
+        {!instructionsBelow && <Instructions instructions={instructions} />}
         <Styled.InputWrapper>
-          <Styled.ComboBox
-            ref={inputWrapperRef}
-            // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
-            role="combobox"
-            aria-expanded={listBoxVisible}
-            aria-owns={ids.listBox}
-            aria-haspopup="listbox"
-          >
+          <Styled.ComboBox ref={inputWrapperRef}>
             <TextInput
               ref={searchInputRef}
               id={ids.textBox}
@@ -865,7 +880,8 @@ export default function FormPicker({
               placeholder={placeholder}
               onKeyDown={listenForListBoxNavigation}
               onKeyUp={stopEscapePropagation}
-              aria-labelledby={ids.label}
+              role="combobox"
+              aria-expanded={listBoxVisible}
               aria-autocomplete="list"
               aria-controls={ids.listBox}
               aria-activedescendant={activeOptionId}
@@ -891,6 +907,7 @@ export default function FormPicker({
             </Styled.Button>
           </Styled.ButtonGroup>
         </Styled.InputWrapper>
+        {instructionsBelow && <Instructions instructions={instructions} />}
         <Styled.ResultsList
           aria-labelledby={ids.label}
           ref={optionsRef}
@@ -912,15 +929,16 @@ export default function FormPicker({
               <Styled.Result
                 key={option.key}
                 role="option"
-                id={`${ids.option}-${option.key}`}
+                id={formatOptionId(option.key)}
                 aria-selected={active}
                 onClick={() => {
                   selectOrToggleOption(option.value);
                 }}
                 $active={active}
-                $selected={selected}
+                data-selected={selected}
               >
-                {option.label}
+                {selected && <IconComposer icon="checkmark16" size="default" />}
+                <span>{option.label}</span>
               </Styled.Result>
             );
           })}
@@ -1004,6 +1022,7 @@ FormPicker.propTypes = {
   beforeGetValue: PropTypes.func,
   showAddRemoveAll: PropTypes.bool,
   instructions: PropTypes.string,
+  instructionsBelow: PropTypes.bool,
   belongsTo: PropTypes.bool,
   reorderable: PropTypes.bool,
   options: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),

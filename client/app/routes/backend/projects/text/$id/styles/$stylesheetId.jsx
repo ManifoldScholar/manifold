@@ -4,11 +4,11 @@ import loadEntity from "lib/react-router/loaders/loadEntity";
 import formAction from "lib/react-router/helpers/formAction";
 import StylesheetForm from "components/backend/stylesheet/Form";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => stylesheetsAPI.show(params.stylesheetId),
-    request
+    url
   });
 };
 

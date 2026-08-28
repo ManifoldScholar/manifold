@@ -135,7 +135,7 @@ Every route renders on the server first. Opt-out is **per-component**, not per-r
 
 `v8_trailingSlashAwareDataRequests: true` preserves trailing slashes in data-request URLs. The root data request is now `/_.data` (not `/_root.data`), so any cache or proxy rule keyed on `.data` must also match `_.data`.
 
-`v8_passThroughRequests: true` stops normalizing `request.url`, which on a data request carries a `.data` suffix and internal `_routes`/`index` params. **Loaders, actions, and middleware inspecting the URL must use the `url` argument, never `new URL(request.url)`.** `request` remains correct for headers, `request.json()`, and `request.signal`. Of the loader helpers, `loadList`, `checkLibraryMode`, and `searchLoader` take `url`; `loadEntity` takes `request`.
+`v8_passThroughRequests: true` stops normalizing `request.url`, which on a data request carries a `.data` suffix and internal `_routes`/`index` params. **Loaders, actions, and middleware inspecting the URL must use the `url` argument, never `new URL(request.url)`.** `request` remains correct for headers, `request.json()`, and `request.signal`. Every loader helper (`loadList`, `loadEntity`, `authorize`, `requireLogin`, `checkLibraryMode`, `searchLoader`) takes `url`.
 
 `v8_viteEnvironmentApi: true` opts into Vite's Environment API, under which Vite no longer supplies `isSsrBuild`. [`vite.config.js`](./vite.config.js) therefore sets `noExternal` under `environments.ssr.resolve`, keyed on `command` instead. Keep the server build bundling its dependencies: several (`reakit/Menu` among them) use directory imports that Node's ESM resolver rejects when left external, which fails at request time while still building cleanly.
 

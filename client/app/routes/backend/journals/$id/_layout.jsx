@@ -12,13 +12,13 @@ import navigation from "helpers/navigation";
 import { useApiCallback, useNotifications } from "hooks";
 import useConfirmation from "hooks/useConfirmation";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   const journal = await loadEntity({
     context,
     fetchFn: () => journalsAPI.show(params.id),
-    request
+    url
   });
-  await authorize({ request, context, entity: journal, ability: "update" });
+  await authorize({ url, context, entity: journal, ability: "update" });
   return journal;
 };
 

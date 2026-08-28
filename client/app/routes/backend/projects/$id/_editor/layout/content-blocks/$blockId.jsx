@@ -13,11 +13,11 @@ import ContentBlock from "components/backend/content-block";
 
 export const handle = { drawer: true };
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => contentBlocksAPI.show(params.blockId),
-    request
+    url
   });
 };
 

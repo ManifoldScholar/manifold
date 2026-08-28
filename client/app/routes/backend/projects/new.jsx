@@ -20,9 +20,9 @@ const DEFAULT_PROJECT = {
   }
 };
 
-export const loader = ({ request, context }) => {
+export const loader = ({ context, url }) => {
   return authorize({
-    request,
+    url,
     context,
     ability: "create",
     entity: "project"

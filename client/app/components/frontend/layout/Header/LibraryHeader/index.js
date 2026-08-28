@@ -47,9 +47,7 @@ export default function LibraryHeader() {
       projectsLink.dropdown = false;
     }
 
-    const routesWithDropdown = routes.filter(
-      l => l.route !== "frontendProjects" && l.route !== "frontendProjectsAll"
-    );
+    const routesWithDropdown = routes.filter(l => l.path !== "/projects");
     routesWithDropdown.splice(1, 0, projectsLink);
 
     if (!pages) {

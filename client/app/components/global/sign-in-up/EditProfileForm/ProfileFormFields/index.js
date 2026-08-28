@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import Form from "components/global/form";
 import PropTypes from "prop-types";
-import { FormContext } from "helpers/contexts";
+import { FormContext } from "contexts";
 import { useSettings } from "hooks";
 import * as Styled from "./styles";
 

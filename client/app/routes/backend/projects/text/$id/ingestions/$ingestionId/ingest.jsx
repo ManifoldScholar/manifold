@@ -2,11 +2,11 @@ import { ingestionsAPI } from "api";
 import loadEntity from "lib/react-router/loaders/loadEntity";
 import IngestContainer from "components/backend/ingestion/ingest";
 
-export const loader = async ({ params, request, context }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => ingestionsAPI.show(params.ingestionId),
-    request
+    url
   });
 };
 

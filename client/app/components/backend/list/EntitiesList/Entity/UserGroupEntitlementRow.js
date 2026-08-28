@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
-import EntityThumbnail from "global/components/entity-thumbnail";
-import Utility from "global/components/utility";
+import EntityThumbnail from "components/global/entity-thumbnail";
+import Utility from "components/global/utility";
 import EntityRow from "./Row";
-import FormattedDate from "global/components/FormattedDate";
+import FormattedDate from "components/global/FormattedDate";
 import { useTranslation } from "react-i18next";
-import lh from "helpers/linkHandler";
 
 export default function PendingEntitlementRow({
   entity: entitlement,
@@ -48,8 +47,8 @@ export default function PendingEntitlementRow({
 
   const onRowClick =
     entitleable.type === "journals"
-      ? lh.link("backendJournal", entitleable.id)
-      : lh.link("backendProject", entitleable.id);
+      ? `/backend/journals/${entitleable.id}`
+      : `/backend/projects/${entitleable.id}`;
 
   const rowProps = {
     title: titlePlaintext,

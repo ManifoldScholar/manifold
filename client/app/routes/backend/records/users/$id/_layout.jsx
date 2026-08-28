@@ -9,11 +9,11 @@ import Dialog from "components/global/dialog";
 import navigation from "helpers/navigation";
 import { useApiCallback, useConfirmation, useNotifications } from "hooks";
 
-export const loader = async ({ params, context, request }) => {
+export const loader = async ({ params, context, url }) => {
   return loadEntity({
     context,
     fetchFn: () => usersAPI.show(params.id),
-    request
+    url
   });
 };
 
@@ -141,7 +141,7 @@ export default function UserDetailLayout({ loaderData: user }) {
           <Layout.SecondaryNav
             links={navigation.user(user)}
             panel
-            ariaLabel={t("users.settings")}
+            ariaLabel={t("records.users.settings")}
           />
         }
       >

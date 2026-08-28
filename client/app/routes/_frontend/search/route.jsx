@@ -3,6 +3,7 @@ import checkLibraryMode from "lib/react-router/loaders/checkLibraryMode";
 import searchLoader from "lib/react-router/loaders/search";
 import SearchQuery from "components/global/search/query";
 import SearchResults from "components/global/search/results";
+import { SearchResultsProvider } from "hooks/search/useSearchResults";
 import HeadContent from "components/global/HeadContent";
 import * as Styled from "./styles";
 
@@ -28,18 +29,20 @@ export default function SearchRoute({ loaderData: { results, meta } }) {
       <HeadContent title={t("search.title")} appendDefaultTitle />
       <h1 className="screen-reader-text">{t("search.title")}</h1>
       <SearchQuery.Provider>
-        <Styled.FormWrapper>
-          <Styled.Inner>
-            <h2 className="screen-reader-text">{t("search.form")}</h2>
-            <SearchQuery.Form action="/search" facets={facets} />
-          </Styled.Inner>
-        </Styled.FormWrapper>
-        <Styled.ResultsWrapper>
-          <Styled.Inner>
-            <h2 className="screen-reader-text">{t("search.results")}</h2>
-            <SearchResults.List context="frontend" />
-          </Styled.Inner>
-        </Styled.ResultsWrapper>
+        <SearchResultsProvider results={results} resultsMeta={meta}>
+          <Styled.FormWrapper>
+            <Styled.Inner>
+              <h2 className="screen-reader-text">{t("search.form")}</h2>
+              <SearchQuery.Form action="/search" facets={facets} />
+            </Styled.Inner>
+          </Styled.FormWrapper>
+          <Styled.ResultsWrapper>
+            <Styled.Inner>
+              <h2 className="screen-reader-text">{t("search.results")}</h2>
+              <SearchResults.List context="frontend" />
+            </Styled.Inner>
+          </Styled.ResultsWrapper>
+        </SearchResultsProvider>
       </SearchQuery.Provider>
     </>
   );

@@ -8,7 +8,6 @@ import * as Styled from "./styles";
 export default function FormSwitchArray({
   name,
   options,
-  label,
   focusOnMount = false
 }) {
   const { value = [], set, errors } = useFormField(name);
@@ -25,7 +24,7 @@ export default function FormSwitchArray({
 
   return (
     <Styled.Wrapper>
-      <Errorable name={name} nameForError={label} errors={errors}>
+      <Errorable name={name} errors={errors}>
         {options.map((option, index) => (
           <Switch
             key={option.value}

@@ -1,4 +1,4 @@
-import partition from "lodash/partition";
+import { partition } from "lodash-es";
 
 export const isUserGroupEntitlement = e =>
   !!e?.relationships?.entitler?.attributes.metadata?.user_group;

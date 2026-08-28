@@ -1,18 +1,19 @@
-import { searchResultsAPI } from "api";
-import { queryApi } from "api";
+import { searchResultsAPI, queryApi } from "api";
 import handleLoaderError from "lib/react-router/helpers/handleLoaderError";
-import { hasSearchableQuery, parseQueryFromUrl } from "hooks/useSearch/helpers";
+import { hasSearchableQuery, parseQueryFromUrl } from "hooks/search/helpers";
 
 /**
- * Loader for search routes. Handles parsing query params, fetching search results,
- * and returning formatted data.
+ * Loader for search routes. Parses the search query from the URL (the URL is
+ * the source of truth for query state — see hooks/search/useSearch), fetches
+ * results, and returns { results, meta } for the route to hand to
+ * SearchResultsProvider.
  *
- * @param {Object} options - Configuration options
+ * @param {Object} options
  * @param {URL} options.url - Normalized request URL from the loader args
  * @param {Object} options.context - React Router context object
- * @param {Object} options.params - Optional extra fields to merge into searchQueryState
- * @param {Function} options.beforeLoad - Optional async function to run before processing (e.g., checkLibraryMode)
- * @returns {Promise<Object>} Object with results, meta, and optionally searchQueryState
+ * @param {Object} [options.params] - Extra query fields to merge (e.g. route-scoped project id)
+ * @param {Function} [options.beforeLoad] - Optional async hook run first (e.g. checkLibraryMode)
+ * @returns {Promise<{results: Array|null, meta: Object|null}>}
  */
 export default async function searchLoader({
   url,
@@ -24,25 +25,20 @@ export default async function searchLoader({
     await beforeLoad({ url, context });
   }
 
-  const searchQueryState = {
-    ...parseQueryFromUrl(url.search),
-    ...params
-  };
+  const query = { ...parseQueryFromUrl(url.search), ...params };
 
-  if (!hasSearchableQuery(searchQueryState)) {
-    return {
-      results: null,
-      meta: null
-    };
+  if (!hasSearchableQuery(query)) {
+    return { results: null, meta: null };
   }
 
-  const pagination = { number: searchQueryState.page || 1 };
-  const query = { ...searchQueryState };
-  query.page = pagination;
+  const { page, perPage, ...rest } = query;
+  const apiQuery = {
+    ...rest,
+    page: { number: page || 1, size: perPage || 20 }
+  };
 
   try {
-    const response = await queryApi(searchResultsAPI.index(query), context);
-
+    const response = await queryApi(searchResultsAPI.index(apiQuery), context);
     return {
       results: response?.data ?? null,
       meta: response?.meta ?? null

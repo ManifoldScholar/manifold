@@ -59,7 +59,7 @@ export default function KindPicker({ name, includeButtons }) {
             <Styled.Item
               key={safeKind}
               htmlFor={`${id}-${safeKind}`}
-              $active={isActive}
+              data-active={isActive}
             >
               <Styled.Input
                 type="radio"
