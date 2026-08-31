@@ -56,3 +56,4 @@ export userGroupMembershipsAPI from "./resources/userGroupMemberships";
 export userGroupEntitlementsAPI from "./resources/userGroupEntitlements";
 export licensesAPI from "./resources/licenses";
 export ltiAPI from "./resources/lti";
+export ltiRegistrationsAPI from "./resources/ltiRegistrations";

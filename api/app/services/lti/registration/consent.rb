@@ -30,13 +30,12 @@ module Lti
 
       def autoregistration_allowed?
         return false unless lti_settings.enabled? && lti_settings.autoregistration?
-        return true if lti_settings.issuer_allowlist.blank?
 
-        lti_settings.issuer_allowlist.include?(referrer_uri.host)
+        issuer_policy.permits?(referrer)
       end
 
-      def referrer_uri
-        @referrer_uri ||= URI.parse(referrer)
+      def issuer_policy
+        @issuer_policy ||= ::Lti::IssuerPolicy.new(lti_settings)
       end
 
       def referrer

@@ -49,6 +49,8 @@ export default function ConfirmModalBody({
 
       {isString(message) ? <p id={`${id}-description`}>{message}</p> : message}
 
+      {options?.slot && <>{options.slot}</>}
+
       <div className="dialog__body">
         <div className="buttons-icon-horizontal">
           {typeof resolve === "function" && (

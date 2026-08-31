@@ -111,7 +111,9 @@ module SettingSections
 
       # @return [<String>]
       def compile_strong_params
-        attribute_names.map(&:to_sym) - skipped_strong_params
+        params = attribute_names.map(&:to_sym) - skipped_strong_params
+        scalars, arrays = params.partition { |name| !attribute_types[name.to_s].is_a?(GlobalTypes::AnyArray) }
+        arrays.empty? ? scalars : scalars << arrays.index_with { [] }
       end
 
       # @return [void]
