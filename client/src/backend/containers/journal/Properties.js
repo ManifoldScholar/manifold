@@ -7,12 +7,19 @@ import FormContainer from "global/containers/form";
 import { subjectsAPI, tagsAPI, journalsAPI } from "api";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
-import { useApiCallback } from "hooks";
+import { useApiCallback, useFromStore } from "hooks";
 
 function JournalPropertiesContainer() {
   const { journal } = useOutletContext() || {};
   const { t } = useTranslation();
   const createSubject = useApiCallback(subjectsAPI.create);
+
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const { identityProviders } = settings?.attributes?.authentication;
+
+  // Maybe extract to a global setting in the future when set of features is enabled/disabled
+  // based on the instance's external IDP
+  const showExternalId = !!identityProviders.length;
 
   const createSubjectFromValue = useCallback(
     name => {
@@ -80,17 +87,19 @@ function JournalPropertiesContainer() {
                   name="attributes[pendingSlug]"
                   placeholder={t("journals.forms.properties.slug_placeholder")}
                 />
-                <Form.TextInput
-                  wide
-                  label={t("journals.forms.properties.external_id_label")}
-                  name="attributes[externalIdentifier]"
-                  placeholder={t(
-                    "journals.forms.properties.external_id_placeholder"
-                  )}
-                  instructions={t(
-                    "journals.forms.properties.external_id_instructions"
-                  )}
-                />
+                {showExternalId && (
+                  <Form.TextInput
+                    wide
+                    label={t("journals.forms.properties.external_id_label")}
+                    name="attributes[externalIdentifier]"
+                    placeholder={t(
+                      "journals.forms.properties.external_id_placeholder"
+                    )}
+                    instructions={t(
+                      "journals.forms.properties.external_id_instructions"
+                    )}
+                  />
+                )}
                 <Project.Form.AvatarBuilder wide />
               </Form.FieldGroup>
               <Form.FieldGroup
