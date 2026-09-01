@@ -110,9 +110,9 @@ class Navigation {
           },
           {
             label: "titles.user_groups",
-            route: "backendRecordsUserGroups"
-            // entity: "userGroup",
-            // ability: "update"
+            route: "backendRecordsUserGroups",
+            entity: "userGroup",
+            ability: "update"
           },
           {
             label: "titles.pages",
@@ -429,9 +429,9 @@ class Navigation {
       },
       {
         label: "titles.user_groups",
-        route: "backendRecordsUserGroups"
-        // entity: "userGroup",
-        // ability: "update"
+        route: "backendRecordsUserGroups",
+        entity: "userGroup",
+        ability: "update"
       },
       {
         label: "titles.pages",
@@ -446,7 +446,7 @@ class Navigation {
         ability: "update"
       },
       {
-        label: "Entitlements",
+        label: "titles.entitlements",
         route: "backendRecordsEntitlements",
         entity: "entitlementImport",
         ability: "update"
