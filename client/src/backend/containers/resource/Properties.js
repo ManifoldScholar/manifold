@@ -117,13 +117,6 @@ function ResourcePropertiesContainer() {
             wide
           />
           <Resource.Form.KindAttributes wide />
-          {resource.attributes.downloadableKind ? (
-            <Form.Switch
-              label={t("resources.properties.download_label")}
-              name="attributes[allowDownload]"
-              wide
-            />
-          ) : null}
         </Form.FieldGroup>
         {resource.attributes.kind !== "image" && (
           <Form.FieldGroup label={t("resources.properties.thumbnail")}>
