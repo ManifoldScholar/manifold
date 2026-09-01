@@ -13,25 +13,32 @@ class ResourceFormKindAudio extends PureComponent {
 
   render() {
     return (
-      <Styled.Group>
-        <Form.Upload
-          layout="square"
-          label={this.props.t("resources.new.audio_file")}
-          accepts="audio"
-          readFrom="attributes[attachmentFileName]"
-          name="attributes[attachment]"
-          remove="attributes[removeAttachment]"
-          {...this.props}
+      <>
+        <Styled.Group>
+          <Form.Upload
+            layout="square"
+            label={this.props.t("resources.new.audio_file")}
+            accepts="audio"
+            readFrom="attributes[attachmentFileName]"
+            name="attributes[attachment]"
+            remove="attributes[removeAttachment]"
+            {...this.props}
+          />
+          <Form.Upload
+            layout="landscape"
+            label={this.props.t("resources.new.transcript")}
+            readFrom="attributes[transcriptFileName]"
+            name="attributes[transcript]"
+            remove="attributes[removeTranscript]"
+            {...this.props}
+          />
+        </Styled.Group>
+        <Form.Switch
+          label={this.props.t("resources.properties.download_label")}
+          name="attributes[allowDownload]"
+          wide
         />
-        <Form.Upload
-          layout="landscape"
-          label={this.props.t("resources.new.transcript")}
-          readFrom="attributes[transcriptFileName]"
-          name="attributes[transcript]"
-          remove="attributes[removeTranscript]"
-          {...this.props}
-        />
-      </Styled.Group>
+      </>
     );
   }
 }
