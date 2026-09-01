@@ -12,17 +12,26 @@ class ResourceFormKindImage extends PureComponent {
 
   render() {
     return (
-      <Form.Upload
-        layout="square"
-        label={this.props.t("resources.new.image_file")}
-        accepts="images"
-        readFrom="attributes[attachmentStyles][small]"
-        name="attributes[attachment]"
-        remove="attributes[removeAttachment]"
-        altTextName={"attributes[attachmentAltText]"}
-        altTextLabel={this.props.t("resources.properties.attachment_alt_label")}
-        {...this.props}
-      />
+      <>
+        <Form.Upload
+          layout="square"
+          label={this.props.t("resources.new.image_file")}
+          accepts="images"
+          readFrom="attributes[attachmentStyles][small]"
+          name="attributes[attachment]"
+          remove="attributes[removeAttachment]"
+          altTextName={"attributes[attachmentAltText]"}
+          altTextLabel={this.props.t(
+            "resources.properties.attachment_alt_label"
+          )}
+          {...this.props}
+        />
+        <Form.Switch
+          label={this.props.t("resources.properties.download_label")}
+          name="attributes[allowDownload]"
+          wide
+        />
+      </>
     );
   }
 }
