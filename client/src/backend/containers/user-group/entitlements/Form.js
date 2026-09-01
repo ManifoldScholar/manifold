@@ -3,13 +3,20 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Form from "global/components/form";
 import FormContainer from "global/containers/form";
-import { journalsAPI, projectsAPI, userGroupEntitlementsAPI } from "api";
+import { userGroupEntitlementsAPI } from "api";
 import { useNavigate } from "react-router-dom";
+import { useEntitlementSubjectTypeahead } from "hooks";
 import lh from "helpers/linkHandler";
 
 export default function UserGroupEntitlementForm({ userGroup, refresh }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const {
+    options,
+    updateOptions,
+    optionToLabel,
+    optionToValue
+  } = useEntitlementSubjectTypeahead();
 
   const onSuccess = useCallback(() => {
     if (refresh) refresh();
@@ -28,51 +35,24 @@ export default function UserGroupEntitlementForm({ userGroup, refresh }) {
         className="form-secondary"
         notificationScope="drawer"
       >
-        {getValue => {
-          const type = getValue("entityType");
-          const options =
-            type === "journal" ? journalsAPI.index : projectsAPI.index;
-          return (
-            <>
-              <Form.Select
-                label={t("entitlements.pending.type_label")}
-                instructions={t("entitlements.pending.type_instructions")}
-                name="entityType"
-                options={[
-                  {
-                    label: t("glossary.project_title_case_one"),
-                    value: "project"
-                  },
-                  {
-                    label: t("glossary.journal_title_case_one"),
-                    value: "journal"
-                  }
-                ]}
-                value="project"
-              />
-              <Form.Picker
-                name="attributes[targetUrl]"
-                label={
-                  type ? t(`glossary.${type}_one`) : t(`glossary.project_one`)
-                }
-                options={options}
-                optionToLabel={entity => entity.attributes.titlePlaintext}
-                optionToValue={entity =>
-                  entity.attributes.entitlementSubjectUrl
-                }
-                listStyle="rows"
-              />
-              <Form.DrawerButtons
-                showCancel
-                cancelUrl={lh.link(
-                  "backendRecordsUserGroupEntitlements",
-                  userGroup.id
-                )}
-                submitLabel="entitlements.new.submit_label"
-              />
-            </>
-          );
-        }}
+        <Form.Picker
+          name="attributes[targetUrl]"
+          label={t("entitlements.pending.target_label")}
+          placeholder={t("entitlements.pending.target_placeholder")}
+          options={options}
+          updateOptions={updateOptions}
+          optionToLabel={optionToLabel}
+          optionToValue={optionToValue}
+          listStyle="rows"
+        />
+        <Form.DrawerButtons
+          showCancel
+          cancelUrl={lh.link(
+            "backendRecordsUserGroupEntitlements",
+            userGroup.id
+          )}
+          submitLabel="entitlements.new.submit_label"
+        />
       </FormContainer.Form>
     </section>
   );
