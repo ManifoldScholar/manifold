@@ -12,15 +12,22 @@ class ResourceFormKindPresentation extends PureComponent {
 
   render() {
     return (
-      <Form.Upload
-        layout="square"
-        label={this.props.t("resources.new.presentation_file")}
-        accepts="presentation"
-        readFrom="attributes[attachmentFileName]"
-        name="attributes[attachment]"
-        remove="attributes[removeAttachment]"
-        {...this.props}
-      />
+      <>
+        <Form.Upload
+          layout="square"
+          label={this.props.t("resources.new.presentation_file")}
+          accepts="presentation"
+          readFrom="attributes[attachmentFileName]"
+          name="attributes[attachment]"
+          remove="attributes[removeAttachment]"
+          {...this.props}
+        />
+        <Form.Switch
+          label={this.props.t("resources.properties.download_label")}
+          name="attributes[allowDownload]"
+          wide
+        />
+      </>
     );
   }
 }
