@@ -36,3 +36,5 @@ export { default as useShowJournalsActive } from "./useShowJournalsActive";
 
 export { default as useShare } from "./useShare";
 export { default as useCopyLinkToSelection } from "./useCopyLinkToSelection";
+
+export { default as useEntitlementSubjectTypeahead } from "./useEntitlementSubjectTypeahead";

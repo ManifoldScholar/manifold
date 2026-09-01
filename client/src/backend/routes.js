@@ -1292,7 +1292,7 @@ const routes = [
             },
             children: [
               {
-                element: <EntitlementsPending.AddEdit />,
+                element: <EntitlementsPending.Add />,
                 path: "new",
                 handle: {
                   name: "backendRecordsEntitlementsNew",
@@ -1301,7 +1301,7 @@ const routes = [
                 }
               },
               {
-                element: <EntitlementsPending.AddEdit />,
+                element: <EntitlementsPending.Add />,
                 path: "edit/:id",
                 handle: {
                   name: "backendRecordsEntitlementsEdit",
