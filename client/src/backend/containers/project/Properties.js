@@ -6,12 +6,19 @@ import FormContainer from "global/containers/form";
 import { subjectsAPI, journalVolumesAPI, projectsAPI, tagsAPI } from "api";
 import lh from "helpers/linkHandler";
 import Authorize from "hoc/Authorize";
-import { useApiCallback } from "hooks";
+import { useApiCallback, useFromStore } from "hooks";
 
 export default function ProjectPropertiesContainer() {
   const { t } = useTranslation();
   const { project } = useOutletContext() || {};
   const createSubject = useApiCallback(subjectsAPI.create);
+
+  const settings = useFromStore({ requestKey: "settings", action: "select" });
+  const { identityProviders } = settings?.attributes?.authentication;
+
+  // Maybe extract to a global setting in the future when set of features is enabled/disabled
+  // based on the instance's external IDP
+  const showExternalId = !!identityProviders.length;
 
   if (!project) return null;
 
@@ -125,17 +132,19 @@ export default function ProjectPropertiesContainer() {
                   name="attributes[pendingSlug]"
                   placeholder={t("projects.forms.properties.slug_placeholder")}
                 />
-                <Form.TextInput
-                  wide
-                  label={t("projects.forms.properties.external_id_label")}
-                  name="attributes[externalIdentifier]"
-                  placeholder={t(
-                    "projects.forms.properties.external_id_placeholder"
-                  )}
-                  instructions={t(
-                    "projects.forms.properties.external_id_instructions"
-                  )}
-                />
+                {showExternalId && (
+                  <Form.TextInput
+                    wide
+                    label={t("projects.forms.properties.external_id_label")}
+                    name="attributes[externalIdentifier]"
+                    placeholder={t(
+                      "projects.forms.properties.external_id_placeholder"
+                    )}
+                    instructions={t(
+                      "projects.forms.properties.external_id_instructions"
+                    )}
+                  />
+                )}
                 <Project.Form.AvatarBuilder wide project={project} />
               </Form.FieldGroup>
               <Form.FieldGroup
