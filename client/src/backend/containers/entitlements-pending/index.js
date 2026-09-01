@@ -1,11 +1,11 @@
 import List from "./List";
-import AddEdit from "./AddEdit";
+import Add from "./Add";
 import Import from "./Import";
 import { List as CSVImports } from "./imports";
 
 export default {
   List,
-  AddEdit,
+  Add,
   Import,
   CSVImports
 };
