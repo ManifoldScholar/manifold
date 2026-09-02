@@ -10,8 +10,6 @@ module Auth
     layout "auth"
 
     skip_before_action :verify_authenticity_token, if: :lti?
-    # LTI request forgery detection happens in the OmniAuth strategy
-    # skip_before_action :verify_authenticity_token, only: :authorize, if: -> { lti? }
 
     after_action :set_frame_options
 
@@ -89,7 +87,7 @@ module Auth
     end
 
     content_security_policy do |policy|
-      policy.frame_ancestors :self, "https://web.canvas.orb.local"
+      policy.frame_ancestors :self, omniauth_hash.extra.raw_info.iss if lti? && omniauth_hash.present?
     end
   end
 end

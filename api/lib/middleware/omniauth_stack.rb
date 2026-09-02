@@ -50,7 +50,7 @@ class OmniauthStack
             strategy = env["omniauth.strategy"]
             next if strategy.respond_to?(:name) && strategy.name == "lti"
 
-            OmniAuth::AuthenticityTokenProtection.call(env)
+            OmniAuth::AuthenticityTokenProtection.new(key: :_csrf_token).call(env)
           end
         end
 
