@@ -40,7 +40,7 @@ export const loader = async ({ params, context, url }) => {
   };
 };
 
-export const clientLoader = async ({ request, serverLoader, params }) => {
+export const clientLoader = async ({ url, serverLoader, params }) => {
   const clientFetch = createListClientLoader({
     hydrateKey: "__projectCollectionProjectsHydrated",
     fetchFn: projectsAPI.index,
@@ -49,7 +49,7 @@ export const clientLoader = async ({ request, serverLoader, params }) => {
     }
   });
 
-  const projectsData = await clientFetch({ request, serverLoader });
+  const projectsData = await clientFetch({ url, serverLoader });
 
   // Get the projectCollection from serverLoader (it doesn't change with filters)
   const { projectCollection } = await serverLoader();
