@@ -4,7 +4,7 @@ export default {
       endpoint: `/api/v1/passwords`,
       method: "POST",
       options: {
-        params: { email }
+        body: JSON.stringify({ email })
       }
     };
   },
@@ -14,11 +14,11 @@ export default {
       endpoint: `/api/v1/passwords/update`,
       method: "PUT",
       options: {
-        params: {
+        body: JSON.stringify({
           password,
           password_confirmation: passwordConfirmation,
           reset_token: resetToken
-        }
+        })
       }
     };
   },

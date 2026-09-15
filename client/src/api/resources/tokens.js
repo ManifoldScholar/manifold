@@ -4,7 +4,9 @@ export default {
   createToken({ email, password, authCode }) {
     const lowLevelApiClient = new LowLevelApiClient();
     const results = lowLevelApiClient
-      .call("/api/v1/tokens", "POST", { params: { email, password, authCode } })
+      .call("/api/v1/tokens", "POST", {
+        body: JSON.stringify({ email, password, authCode })
+      })
       .then(response => {
         if (!response.ok) {
           return Promise.reject(response);
@@ -28,7 +30,7 @@ export default {
     return {
       endpoint: "/api/v1/tokens",
       method: "POST",
-      options: { params: { email, password } }
+      options: { body: JSON.stringify({ email, password }) }
     };
   }
 };
