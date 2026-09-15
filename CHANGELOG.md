@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.6](https://github.com/ManifoldScholar/manifold/compare/9.2.5...9.2.6) (2026-09-15)
+
+
+### Bug Fixes
+
+* move API request params to body ([2d306a2](https://github.com/ManifoldScholar/manifold/commit/2d306a26e6376736e11ff256b1c0509521337486))
+
 ## [9.2.5](https://github.com/ManifoldScholar/manifold/compare/9.2.4...9.2.5) (2026-08-25)
 
 
