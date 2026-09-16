@@ -6,6 +6,7 @@
       "moderator": "Moderator",
       "member": "Member"
     },
+    "add_member": "Add to group",
     "remove_member": "Remove from group"
   }
 }
