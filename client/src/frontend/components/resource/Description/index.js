@@ -7,15 +7,17 @@ function ResourceDescription({ resource, captionOnly = false, className }) {
 
   const { captionFormatted, descriptionFormatted } = resource.attributes;
 
-  if (captionOnly && !captionFormatted) return null;
-  if (!captionFormatted || !descriptionFormatted) return null;
+  const hasCaption = !!captionFormatted;
+  const hasDescription = !captionOnly && !!descriptionFormatted;
+
+  if (!hasCaption && !hasDescription) return null;
 
   return (
     <Styled.Content className={className}>
-      {!!captionFormatted && (
+      {hasCaption && (
         <div dangerouslySetInnerHTML={{ __html: captionFormatted }} />
       )}
-      {!captionOnly && !!descriptionFormatted && (
+      {hasDescription && (
         <>
           <Styled.DescriptionHeader>
             {t("pages.subheaders.full_description")}
