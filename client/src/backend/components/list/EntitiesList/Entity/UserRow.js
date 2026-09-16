@@ -33,7 +33,11 @@ function UserRow({
   const utility = (
     <button
       className="entity-row__utility-button"
-      title={t("reading_groups.remove_member")}
+      title={
+        membersView
+          ? t("reading_groups.remove_member")
+          : t("reading_groups.add_member")
+      }
       onClick={() =>
         groupAction(actionId, `${attributes.firstName} ${attributes.lastName}`)
       }
