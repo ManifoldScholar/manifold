@@ -3,8 +3,8 @@
 module ReadingGroups
   class JoinPublic
     # @return [Dry::Monads::Result]
-    def call(options)
-      Operation.new(options).call
+    def call(**options)
+      Operation.new(**options).call
     end
 
     class Operation
