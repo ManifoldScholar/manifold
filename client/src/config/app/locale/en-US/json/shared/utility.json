@@ -51,6 +51,7 @@
       "none_selected": "Sort…",
       "alphabetical": "A-Z",
       "reverse_alpha": "Z-A",
+      "featured_then_newest": "Featured, then Newest",
       "published_asc": "Date Published (Oldest First)",
       "published_desc": "Date Published (Newest First)"
     },

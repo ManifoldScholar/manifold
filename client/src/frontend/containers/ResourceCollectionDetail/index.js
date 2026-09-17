@@ -21,6 +21,7 @@ import {
   usePaginationState
 } from "hooks";
 import config from "config";
+import { RESOURCE_DEFAULT_ORDER } from "frontend/components/resource/constants";
 import * as Styled from "./styles";
 
 export default function ResourceCollectionDetailContainer({
@@ -85,6 +86,7 @@ export default function ResourceCollectionDetailContainer({
     resetState: { resource_collection: resourceCollectionId },
     options: {
       sort: true,
+      defaultOrder: RESOURCE_DEFAULT_ORDER,
       kinds: collection?.attributes.resourceKinds,
       tags: collection?.attributes.resourceTags
     }
