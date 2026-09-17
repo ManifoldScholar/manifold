@@ -1,11 +1,20 @@
 export const sortFilter = (filters, updateFilters, params, t) => {
   const includePublished = params?.entityType === "project";
+  const { defaultOrder } = params ?? {};
 
   return {
     label: t("filters.labels.sort_results"),
-    value: filters.order || "",
+    value: filters.order || defaultOrder || "",
     onChange: e => updateFilters(e, "order"),
     options: [
+      ...(defaultOrder
+        ? [
+            {
+              label: t("filters.sort_options.featured_then_newest"),
+              value: defaultOrder
+            }
+          ]
+        : []),
       {
         label: t("filters.sort_options.alphabetical"),
         value: "sort_title ASC"

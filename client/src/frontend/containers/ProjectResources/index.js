@@ -11,6 +11,7 @@ import useEntityHeadContent from "frontend/components/entity/useEntityHeadConten
 import { RegisterBreadcrumbs } from "global/components/atomic/Breadcrumbs";
 import EntityCollection from "frontend/components/entity/Collection";
 import { useFetch, useListFilters, useListQueryParams } from "hooks";
+import { RESOURCE_DEFAULT_ORDER } from "frontend/components/resource/constants";
 
 export default function ProjectResourcesContainer({
   project,
@@ -42,6 +43,7 @@ export default function ProjectResourcesContainer({
     resetState: null,
     options: {
       sort: true,
+      defaultOrder: RESOURCE_DEFAULT_ORDER,
       kinds: resourceKinds,
       tags: resourceTags
     }
