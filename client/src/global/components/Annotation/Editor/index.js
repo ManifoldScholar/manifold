@@ -9,7 +9,6 @@ import RGMenuItem from "reader/components/annotation/popup/parts/RGMenuItem";
 import { ReaderContext } from "helpers/contexts";
 import withCurrentUser from "hoc/withCurrentUser";
 import withReadingGroups from "hoc/withReadingGroups";
-import * as Styled from "./styles";
 
 class AnnotationEditor extends PureComponent {
   static displayName = "Annotation.Editor";
@@ -121,24 +120,8 @@ class AnnotationEditor extends PureComponent {
     return currentGroup.attributes.name;
   }
 
-  get showUnverifiedMessage() {
-    const established = this.props.currentUser?.attributes.established;
-    const trusted = this.props.currentUser?.attributes.trusted;
-
-    if (established || trusted) return false;
-
-    const currentGroup = this.props.currentAnnotatingReadingGroup;
-
-    if (currentGroup === "private") return false;
-    if (currentGroup === "public") return true;
-
-    return this.currentGroupObject?.attributes.privacy === "public";
-  }
-
   get disableSubmit() {
-    if (/^\s*$/.test(this.state.body)) return true;
-
-    return this.showUnverifiedMessage;
+    return /^\s*$/.test(this.state.body);
   }
 
   setReadingGroupFromAnnotationEdit() {
@@ -384,11 +367,6 @@ class AnnotationEditor extends PureComponent {
             </div>
           </div>
         </form>
-        {this.showUnverifiedMessage && (
-          <Styled.UnverifiedMessage>
-            {t("reader.menus.notes.unverified_message")}
-          </Styled.UnverifiedMessage>
-        )}
       </div>
     );
   }
