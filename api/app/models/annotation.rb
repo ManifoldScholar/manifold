@@ -190,6 +190,8 @@ class Annotation < ApplicationRecord
 
   scope :by_keyword, ->(value) { build_keyword_scope(value) if value.present? }
 
+  scope :in_default_order, -> { order(created_at: :desc) }
+
   scope :with_order, ->(by = nil) do
     case by
     when "created_at ASC"
@@ -199,7 +201,7 @@ class Annotation < ApplicationRecord
     when "created_by"
       joins(:creator).order(User.arel_table[:last_name].asc)
     else
-      order(created: :desc)
+      in_default_order
     end
   end
 

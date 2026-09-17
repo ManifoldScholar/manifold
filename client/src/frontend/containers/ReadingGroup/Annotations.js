@@ -13,7 +13,8 @@ function ReadingGroupAnnotationsContainer({
 }) {
   const { pagination, filters, setFilters } = useListQueryParams({
     initFilters: {
-      formats: ["annotation"]
+      formats: ["annotation"],
+      order: "created_at DESC"
     }
   });
 
