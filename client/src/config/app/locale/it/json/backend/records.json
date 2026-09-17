@@ -1,0 +1,140 @@
+{
+  "records": {
+    "unauthorized": "Non siete autorizzati a gestire i record.",
+    "makers": {
+      "header": "Gestire i creatori",
+      "button_label": "Aggiungi un nuovo produttore",
+      "title": "$t(common.title)",
+      "first_name": "Nome",
+      "middle_name": "Secondo nome",
+      "last_name": "Cognome",
+      "suffix": "Suffisso",
+      "avatar": "Immagine avatar",
+      "submit_label": "Salva il produttore",
+      "new_header": "Nuovo Creatore"
+    },
+    "users": {
+      "header": "Gestione degli utenti",
+      "button_label": "Aggiungi nuovo utente",
+      "new_header": "Nuovo utente",
+      "email": "Email",
+      "role_label": "Ruolo",
+      "role_options": {
+        "admin": "Admin",
+        "editor": "Editor",
+        "creator": "Creatore del progetto",
+        "project_creator": "$t(records.users.role_options.creator)",
+        "marketeer": "Commerciante",
+        "reader": "Lettore"
+      },
+      "first_name": "$t(records.makers.first_name)",
+      "last_name": "$t(records.makers.last_name)",
+      "submit_label": "Salva utente",
+      "unsubscribe": "Annullamento dell'iscrizione",
+      "reset_password": "Reimpostare la password",
+      "verify": "Admin Verifica",
+      "block": "Revocare la verifica dell'amministratore",
+      "not_established_warning": "Questo utente non ha ancora verificato la propria e-mail e non potrà partecipare ai progetti pubblici e ai gruppi di lettura",
+      "email_verified_at": "Email confermata{{date}}",
+      "email_not_verified": "Email non confermata",
+      "trusted": "Conto fidato",
+      "no_public_engagement": "Impegno pubblico disabilitato",
+      "admin_verified": "Admin verificato"
+    },
+    "pages": {
+      "header": "Gestione delle pagine",
+      "button_label": "Aggiungi nuova pagina",
+      "back_label": "Tutte le pagine",
+      "title_label": "Titolo della pagina",
+      "title_placeholder": "Inserire il titolo della pagina",
+      "switch_label": "Pagina esterna?",
+      "external_label": "URL esterno",
+      "external_placeholder": "Inserisci esternoURL",
+      "external_instructions": "L'URL assoluto della pagina",
+      "slug_label": "Slug",
+      "slug_placeholder": "Inserire lo slug dell'URL",
+      "slug_instructions": "L'URL della pagina si basa sullo slug.",
+      "submit_label": "Salva la pagina",
+      "new_header": "Nuova pagina",
+      "new_instructions": "Inserire il nome della pagina e, facoltativamente, uno slug. Premere Salva per continuare.",
+      "settings": "Impostazioni della pagina",
+      "unauthorized_create": "Non sei autorizzato a creare pagine",
+      "unauthorized_update": "Non sei autorizzato ad aggiornare le pagine",
+      "body_label": "Corpo",
+      "body_placeholder": "Inserire il contenuto del corpo",
+      "body_instructions": "In questo campo è possibile utilizzare il markdown di base per formattare i contenuti",
+      "new_tab_label": "Aprire la pagina in una nuova scheda?",
+      "properties_label": "Proprietà",
+      "navigation_label": "Titolo della navigazione",
+      "navigation_placeholder": "Titolo di navigazione alternativo",
+      "navigation_instructions": "Se impostato, questo titolo sarà utilizzato nella navigazione dell'intestazione e del piè di pagina",
+      "purpose_label": "Scopo",
+      "purpose_options": {
+        "supplemental": "Contenuto supplementare",
+        "privacy_policy": "Informativa sulla privacy",
+        "terms": "Termini e condizioni"
+      },
+      "states_label": "Stati della pagina",
+      "states_instructions": "Gestire la visibilità e la visualizzazione o meno della pagina nella navigazione",
+      "states_options": {
+        "hide": "Nascondi pagina",
+        "footer": "Mostra nel più di pagina",
+        "header": "Mostra nell'intestazione"
+      }
+    },
+    "features": {
+      "header": "Gestione delle funzioni",
+      "button_label": "Aggiungi una nuova funzione",
+      "back_label": "Tutte le caratteristiche",
+      "publish": "Funzione di pubblicazione",
+      "unpublish": "Funzione rimuovi dalla pubblicazione",
+      "preview": {
+        "section_title": "Anteprima della funzione",
+        "no_title": "Senza titolo #{{position}}",
+        "unauthorized_create": "Non è consentito creare funzioni",
+        "unauthorized_update": "Non è consentito aggiornare le funzioni",
+        "instructions": "Questa è un'anteprima approssimativa della funzione. Primo piano, sfondo e markdown non saranno visualizzati finchè la funzione non sarà salvata"
+      },
+      "untitled_record": "Senza titolo #{{number}}",
+      "new_header": "Nuova funzione",
+      "new_instructions": "Compilare il modulo sottostante per creare una nuova funzione. Premere Salva per continuare",
+      "properties_label": "Proprietà",
+      "published_label": "Pubblicato",
+      "published_instructions": "Solo le caratteristiche pubblicate appariranno sulla home page",
+      "header_label": "Intestazione",
+      "header_placeholder": "Inserire l'intestazione della caratteristica",
+      "subheader_label": "Sottovoce",
+      "subheader_placeholder": "Opzionalmente, inserire un sottotitolo",
+      "body_label": "corpo",
+      "body_placeholder": "Un paio di frasi sulla funzione",
+      "link_label": "Testo del collegamento",
+      "link_placeholder": "Inserire il testo del link",
+      "url_label": "Link URL",
+      "url_placeholder": "Inserire l'URL del link",
+      "sign_up_label": "Includere il pulsante di iscrizione",
+      "sign_up_instructions": "Se abilitato, un pulsante di iscrizione verrà visualizzato sopra la funzione per gli utenti non autenticati.",
+      "style_label": "Stile",
+      "style_options": {
+        "dark": "Dark Background (default)",
+        "light": "Light Background"
+      },
+      "background_label": "Colore di sfondo",
+      "foreground_label": "Colore di primo piano",
+      "header_color_label": "Colore della testata",
+      "background_image_label": "Immagine di sfondo",
+      "background_image_instructions": "Lo sfondo della caratteristica",
+      "foreground_image_label": "Immagine in primo piano",
+      "foreground_image_instructions": "Un'immagine da visualizzare in primo piano",
+      "foreground_image_position": {
+        "top": "Immagine in primo piano Posizione superiore",
+        "left": "Posizione sinistra dell'immagine in primo piano",
+        "mode": {
+          "label": "Modalità di posizione dell'immagine in primo piano",
+          "relative": "Relativo(default)",
+          "absolute": "Assoluto"
+        }
+      },
+      "submit_label": "Funzione di salvataggio"
+    }
+  }
+}

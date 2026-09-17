@@ -45,15 +45,11 @@ function LanguageSelect({ authentication, language }) {
       options={[
         {
           value: "en",
-          label: t(`locales.en`)
+          label: t(`locales.en-US`)
         },
         {
-          value: "es",
-          label: t(`locales.es`)
-        },
-        {
-          value: "nl",
-          label: t(`locales.nl`)
+          value: "it",
+          label: t(`locales.it`)
         }
       ]}
       onChange={handleChange}

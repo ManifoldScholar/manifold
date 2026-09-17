@@ -1,0 +1,24 @@
+{
+  "resource_collections": {
+    "add_button_label": "Aggiungi una nuova raccolta di risorse",
+    "settings": "Impostazioni di raccolta delle risorse",
+    "unauthorized": "Non sei autorizzato a modificare questa raccolta di risorse",
+    "show_all_projects": "Mostra tutti",
+    "show_collection_projects": "Solo per la collezione Show",
+    "add_resource": "Aggiungere una risorsa alla raccolta",
+    "remove_resource": "Rimuovere una risorsa dalla raccolta",
+    "forms": {
+      "title_label": "Titolo",
+      "title_placeholder": "Inserire un titolo",
+      "descript_label": "Descrizione",
+      "descript_placeholder": "Inserire una descrizione",
+      "slug_label": "Slug",
+      "slug_placeholder": "Inserire lo slug dell'URL",
+      "image_label": "Immagine di copertina",
+      "save": "Salva la collezione",
+      "new_title": "Nuova collezione",
+      "new_instructions": "Inserire un nome e una breve descrizione. Premere Salva per continuare",
+      "new_save": "Salva e continua"
+    }
+  }
+}
