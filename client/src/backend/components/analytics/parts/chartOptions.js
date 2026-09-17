@@ -49,7 +49,7 @@ const rechartsOptions = ({ tooltipLabel, t }) => ({
         locale: t("date_fns", { returnObjects: true })
       }),
     interval: "preserveStartEnd",
-    minTickGap: 0,
+    minTickGap: 16,
     tickSize: 10,
     tickLine: {
       transform: "translate(0, -10)"
