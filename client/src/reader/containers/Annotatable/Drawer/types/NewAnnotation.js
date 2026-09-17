@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import AnnotationEditor from "global/components/Annotation/Editor/index";
 import AnnotationSelectionWrapper from "global/components/Annotation/Annotation/TextContent/index";
+import UnverifiedWarning from "global/components/Annotation/UnverifiedWarning";
 
 export default function NewAnnotation({ pendingAnnotation, actions }) {
   const saveAnnotation = annotation => {
@@ -14,6 +15,7 @@ export default function NewAnnotation({ pendingAnnotation, actions }) {
 
   return (
     <div className="annotation-selection">
+      <UnverifiedWarning />
       <AnnotationSelectionWrapper
         selection={pendingAnnotation.subject}
         annotation={{ attributes: pendingAnnotation }}
