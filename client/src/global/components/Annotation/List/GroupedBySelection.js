@@ -1,23 +1,19 @@
 import React, { PureComponent } from "react";
-import { Trans } from "react-i18next";
 import PropTypes from "prop-types";
 import GroupBySubject from "../GroupBy/Subject";
 import Editor from "../Editor";
 import TextContent from "../Annotation/TextContent";
 import UserContent from "../Annotation/UserContent";
-import { uiVisibilityActions } from "actions";
-import * as Styled from "./styles";
+import UnverifiedWarning from "../UnverifiedWarning";
 
 export default class GroupedList extends PureComponent {
   static displayName = "Annotation.List.GroupedBySelection";
 
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
     loginHandler: PropTypes.func.isRequired,
     focusHandler: PropTypes.func,
     annotations: PropTypes.array,
-    closeDrawer: PropTypes.func,
-    showUnverifiedWarning: PropTypes.bool
+    closeDrawer: PropTypes.func
   };
 
   constructor(props) {
@@ -45,33 +41,17 @@ export default class GroupedList extends PureComponent {
     );
   };
 
-  onProfileClick = () =>
-    this.props.dispatch(uiVisibilityActions.visibilityShow("signInUpOverlay"));
-
   render() {
     const {
       annotations,
       saveAnnotation,
       loginHandler,
-      showUnverifiedWarning,
       closeDrawer
     } = this.props;
 
     return (
       <div className="annotation-selection">
-        {showUnverifiedWarning && (
-          <Styled.UnverifiedMessage>
-            <Trans
-              i18nKey="messages.unverified_to_comment"
-              components={[
-                <Styled.ProfileButton
-                  type="button"
-                  onClick={this.onProfileClick}
-                />
-              ]}
-            />
-          </Styled.UnverifiedMessage>
-        )}
+        <UnverifiedWarning />
         <ul className="selection-list">
           <GroupBySubject
             annotations={annotations}
