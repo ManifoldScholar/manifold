@@ -6,7 +6,11 @@ import CollectionList from "./panels/Collections";
 import CreateForm from "./panels/Create";
 import IconComposer from "global/components/utility/IconComposer";
 import Tabs from "frontend/components/layout/Tabs";
+import Authorization from "helpers/authorization";
+import { useFromStore } from "hooks";
 import * as Styled from "./styles";
+
+const authorization = new Authorization();
 
 export default function NewResourceAnnotation({
   projectId,
@@ -16,8 +20,21 @@ export default function NewResourceAnnotation({
   readerDisplayFormat
 }) {
   const { t } = useTranslation();
+  const authentication = useFromStore({ path: "authentication" });
+  const project = useFromStore({
+    action: "grab",
+    entityType: "projects",
+    id: projectId,
+    allowPartial: true
+  });
 
   const [selected, setSelected] = useState(null);
+
+  const canCreateResources = authorization.authorizeAbility({
+    entity: project,
+    ability: "createResources",
+    authentication
+  });
 
   const handleCreateAnnotation = resource => {
     const attributes = {
@@ -67,7 +84,7 @@ export default function NewResourceAnnotation({
         />
       )
     },
-    {
+    canCreateResources && {
       label: t("reader.resource_drawer.create_tab_label"),
       id: "create",
       icon: "circlePlus24",
@@ -79,7 +96,7 @@ export default function NewResourceAnnotation({
         />
       )
     }
-  ];
+  ].filter(Boolean);
 
   return (
     <Styled.Wrapper>
@@ -122,5 +139,7 @@ NewResourceAnnotation.drawerProps = {
 NewResourceAnnotation.propTypes = {
   projectId: PropTypes.string,
   actions: PropTypes.object,
-  close: PropTypes.func
+  close: PropTypes.func,
+  pendingAnnotation: PropTypes.object,
+  readerDisplayFormat: PropTypes.string
 };
