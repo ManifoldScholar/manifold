@@ -196,8 +196,6 @@ class Annotation < ApplicationRecord
     case by
     when "created_at ASC"
       order(created_at: :asc)
-    when "created_at DESC"
-      order(created_at: :desc)
     when "created_by"
       joins(:creator).order(User.arel_table[:last_name].asc)
     else
