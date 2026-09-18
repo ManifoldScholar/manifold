@@ -1,5 +1,15 @@
 # Changelog
 
+## [9.2.7](https://github.com/ManifoldScholar/manifold/compare/9.2.6...9.2.7) (2026-09-18)
+
+
+### Bug Fixes
+
+* fix resource sort order UX ([653ae1f](https://github.com/ManifoldScholar/manifold/commit/653ae1fe5bbaec192a9e783e08d3ab8204c4ee40))
+* give annotation lists a default sort order ([5f30237](https://github.com/ManifoldScholar/manifold/commit/5f30237bacfc9456fd40aedd25e7dad4885adf3a))
+* pass keyword options to Dry::Initializer operations and errors ([6e667c2](https://github.com/ManifoldScholar/manifold/commit/6e667c26258e4b7139ccdcb8a140b6a141d315b6))
+* set min gap between analytics chart ticks ([8a807f4](https://github.com/ManifoldScholar/manifold/commit/8a807f42098b7c73e8db8acb8b342e183b6bc198))
+
 ## [9.2.6](https://github.com/ManifoldScholar/manifold/compare/9.2.5...9.2.6) (2026-09-15)
 
 
