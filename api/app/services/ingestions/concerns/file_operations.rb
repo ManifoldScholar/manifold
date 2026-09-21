@@ -231,6 +231,11 @@ module Ingestions
 
         Zip::File.open(path) do |zip_file|
           zip_file.each do |f|
+            if f.symlink? || !f.name_safe?
+              logger.warn("Skipped unsafe archive entry: #{f.name}")
+              next
+            end
+
             zip_path = Pathname.new(f.name).cleanpath
             next if reject_extracted?(zip_path)
 
