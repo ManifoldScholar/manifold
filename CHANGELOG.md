@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.8](https://github.com/ManifoldScholar/manifold/compare/9.2.7...9.2.8) (2026-09-21)
+
+
+### Bug Fixes
+
+* check name safety of extracted files; skip on failure ([0a657ae](https://github.com/ManifoldScholar/manifold/commit/0a657aeba8398daf4e32c969836935da79243ef8))
+
 ## [9.2.7](https://github.com/ManifoldScholar/manifold/compare/9.2.6...9.2.7) (2026-09-18)
 
 
