@@ -82,4 +82,44 @@ RSpec.describe Ingestions::Concerns::FileOperations do
       expect(file_names).not_to include(/^[._~].*/)
     end
   end
+
+  describe "rejecting unsafe archive entries" do
+    let(:logger) { instance_spy(ActiveSupport::Logger) }
+    let(:host) do
+      Class.new do
+        include Ingestions::Concerns::FileOperations
+
+        attr_reader :logger
+
+        def initialize(logger) = (@logger = logger)
+      end.new(logger)
+    end
+
+    let(:extract_dir) { Dir.mktmpdir }
+    let(:zip_file) { instance_spy(Zip::File) }
+
+    let(:symlink_entry) { instance_double(Zip::Entry, name: "evil-link", symlink?: true, name_safe?: true) }
+    let(:traversal_entry) { instance_double(Zip::Entry, name: "../../escape.txt", symlink?: false, name_safe?: false) }
+    let(:safe_entry) { instance_double(Zip::Entry, name: "chapter1.txt", symlink?: false, name_safe?: true) }
+
+    before do
+      allow(Zip::File).to receive(:open).and_yield(zip_file)
+      allow(zip_file).to receive(:each)
+        .and_yield(symlink_entry).and_yield(traversal_entry).and_yield(safe_entry)
+      allow(zip_file).to receive(:extract) { |_entry, dest| FileUtils.touch(dest) }
+
+      host.send(:extract, "archive.zip", extract_dir)
+    end
+
+    after { FileUtils.remove_entry(extract_dir) }
+
+    it "extracts safe entries while skipping symlink and unsafe entries" do
+      expect(zip_file).to have_received(:extract).with(safe_entry, anything).once
+    end
+
+    it "warns about each skipped entry" do
+      expect(logger).to have_received(:warn).with(a_string_including("evil-link"))
+      expect(logger).to have_received(:warn).with(a_string_including("escape.txt"))
+    end
+  end
 end
