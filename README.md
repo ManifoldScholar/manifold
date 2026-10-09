@@ -145,6 +145,8 @@ Manifold is released under the Gnu Public License, version 3. See the [LICENSE.m
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ManifoldScholar/manifold/tags).
 
+Prerelease beta or release-candidate versions are sometimes available, and are tagged with their prerelease type (i.e. X.Y.Z-beta.N). We strongly recommend using untagged release versions for production use.
+
 #### Documentation
 
 Visit [our website](https://manifoldscholar.github.io/manifold-docusaurus/docs) for current documentation. Be sure to check out the [installation instructions](https://manifoldscholar.github.io/manifold-docusaurus/docs/administering/installation).

@@ -1,6 +1,9 @@
+name: release-please
+
 on:
   push:
     branches:
+      - beta
       - main
 
 permissions:
@@ -8,35 +11,58 @@ permissions:
   issues: write
   pull-requests: write
 
-name: release-please
+concurrency:
+  group: release-please-${{ github.ref_name }}
 
 jobs:
-  release-please:
+  beta:
+    if: github.ref_name == 'beta'
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: googleapis/release-please-action@v4
-        id: release
+      - id: release
+        uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          config-file: release-please-config.json
-          manifest-file: .release-please-manifest.json
+          config-file: ".release-please/beta-config.json"
+          manifest-file: ".release-please/beta-manifest.json"
 
-  reset-release-branch:
-    needs: release-please
-    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+  main:
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      actions: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: actions/checkout@v4
+      - id: release
+        uses: googleapis/release-please-action@v4
         with:
-          fetch-depth: 0
-      - name: Reset release branch to main
-        run: git push origin ${{ github.sha }}:refs/heads/release --force
-      - name: Trigger Docker build on release branch
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run docker.yml --ref release
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: ".release-please/main-config.json"
+          manifest-file: ".release-please/main-manifest.json"
+
+  build-beta:
+    needs: beta
+    if: needs.beta.outputs.release_created == 'true'
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/docker.yml
+    with:
+      channel_tag: beta
+      semver: ${{ needs.beta.outputs.tag_name }}
+    secrets: inherit
+
+  build-main:
+    needs: main
+    if: needs.main.outputs.release_created == 'true'
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/docker.yml
+    with:
+      channel_tag: ${{ contains(needs.main.outputs.tag_name, '-') && 'preview' || 'latest' }}
+      semver: ${{ needs.main.outputs.tag_name }}
+    secrets: inherit
