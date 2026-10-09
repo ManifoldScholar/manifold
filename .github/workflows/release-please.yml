@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
+      version: ${{ steps.release.outputs.version }}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
@@ -40,3 +41,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh workflow run docker.yml --ref release
+
+  update-manifold-version:
+    needs: release-please
+    # Run on stable releases only; prerelease versions (e.g. 10.0.0-rc.1, 9.3.0-beta.2) contain a hyphen
+    if: ${{ needs.release-please.outputs.release_created == 'true' && !contains(needs.release-please.outputs.version, '-') }}
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Trigger Manifold version update in related repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          gh workflow run update-manifold-version.yml
+          --repo "${{ github.repository }}"
+          -f version="${{ needs.release-please.outputs.version }}"

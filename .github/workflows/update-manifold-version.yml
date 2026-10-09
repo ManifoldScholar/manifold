@@ -1,0 +1,82 @@
+name: Update Manifold version
+
+# Opens PRs bumping MANIFOLD_VERSION in other related repositories.
+# Dispatched by release-please.yml after a release; can also be run manually.
+# To add a repo: add a matrix entry and grant VERSION_SYNC_TOKEN access to it.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Manifold version, e.g. 9.2.8"
+        required: true
+        type: string
+      repo:
+        description: "Only update this repo, e.g. ManifoldScholar/manifold-docusaurus (blank = all)"
+        required: false
+        type: string
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # one repo failing shouldn't block the others
+      matrix:
+        include:
+          - repo: ManifoldScholar/manifold-docusaurus
+            base: master
+          - repo: ManifoldScholar/manifold-marketing-client
+            base: main
+    env:
+      GH_TOKEN: ${{ secrets.VERSION_SYNC_TOKEN }}  # fine-grained PAT: contents + pull-requests write on every repo in the matrix
+      VERSION: ${{ inputs.version }}
+      BASE: ${{ matrix.base }}
+    steps:
+      - name: Checkout ${{ matrix.repo }}
+        if: ${{ inputs.repo == '' || inputs.repo == matrix.repo }}
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ matrix.repo }}
+          token: ${{ secrets.VERSION_SYNC_TOKEN }}
+          ref: ${{ matrix.base }}
+          path: target
+      - name: Update MANIFOLD_VERSION and open PR
+        if: ${{ inputs.repo == '' || inputs.repo == matrix.repo }}
+        working-directory: target
+        run: |
+          # release-please versions have no "v" prefix; MANIFOLD_VERSION files use "v9.2.8"
+          version="${VERSION#v}"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::version must be semver, got '$VERSION'"
+            exit 1
+          fi
+          new="v${version}"
+          # A repo that doesn't track MANIFOLD_VERSION yet gets the file created
+          current="$(tr -d '[:space:]' 2>/dev/null < MANIFOLD_VERSION || true)"
+          if [[ "$current" == "$new" ]]; then
+            echo "MANIFOLD_VERSION already at $new; nothing to do"
+            exit 0
+          fi
+
+          branch="update-manifold-version-${new}"
+          # A re-run may find the branch already pushed by an earlier attempt
+          if git ls-remote --exit-code --heads origin "$branch" > /dev/null; then
+            echo "Branch $branch already exists; skipping push"
+          else
+            git config user.name "gh-actions"
+            git config user.email "actions@github.com"
+            git checkout -b "$branch"
+            printf '%s\n' "$new" > MANIFOLD_VERSION
+            git add MANIFOLD_VERSION
+            git commit -m "chore: update Manifold version to ${new}"
+            git push origin "$branch"
+          fi
+
+          if [[ -n "$(gh pr list --head "$branch" --state open --json number --jq '.[].number')" ]]; then
+            echo "PR for $branch already open; nothing to do"
+            exit 0
+          fi
+          gh pr create \
+            --base "$BASE" \
+            --head "$branch" \
+            --title "chore: update Manifold version to ${new}" \
+            --body "Automated: Manifold ${new} was released. Update \`MANIFOLD_VERSION\` in this repo."
