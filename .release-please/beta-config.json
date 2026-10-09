@@ -3,6 +3,9 @@
   "packages": {
     ".": {
       "release-type": "simple",
+      "versioning": "prerelease",
+      "prerelease": true,
+      "prerelease-type": "beta",
       "version-file": "MANIFOLD_VERSION",
       "include-component-in-tag": false,
       "include-v-in-tag": false,

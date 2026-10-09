@@ -1,0 +1,64 @@
+# When a push is made to `main`, create a release candidate.
+# For production releases, you must provide a commit with a "Release-As" footer to override the prerelease tag.
+
+name: Promote release candidate to release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Stable version to release (defaults to MANIFOLD_VERSION)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: release-please-main
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Resolve versions
+        id: versions
+        run: |
+          current="$(tr -d '[:space:]' < MANIFOLD_VERSION)"
+          target="${{ inputs.version }}"
+          if [[ -z "$target" ]]; then
+            if [[ "$current" != *-* ]]; then
+              echo "::error::MANIFOLD_VERSION '$current' is not a prerelease; pass an explicit version input."
+              exit 1
+            fi
+            target="${current%%-*}"
+          fi
+          if [[ ! "$target" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::target must be a stable semver, got '$target'"
+            exit 1
+          fi
+          echo "current=$current" >> "$GITHUB_OUTPUT"
+          echo "target=$target" >> "$GITHUB_OUTPUT"
+
+      - name: Push promotion commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty \
+            -m "chore: promote ${{ steps.versions.outputs.current }} to ${{ steps.versions.outputs.target }}" \
+            -m "Release-As: ${{ steps.versions.outputs.target }}"
+          git push origin main
+
+      - name: Rewrite release PR to the stable version
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: ".release-please/main-config.json"
+          manifest-file: ".release-please/main-manifest.json"
