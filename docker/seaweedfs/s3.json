@@ -1,0 +1,15 @@
+{
+  "identities": [
+    {
+      "name": "manifold",
+      "credentials": [
+        { "accessKey": "manifold", "secretKey": "manifold-dev-secret" }
+      ],
+      "actions": ["Admin", "Read", "Write", "List", "Tagging"]
+    },
+    {
+      "name": "anonymous",
+      "actions": ["Read"]
+    }
+  ]
+}
