@@ -8,17 +8,17 @@ default: &default
 
 development:
   <<: *default
-  endpoint: http://minio:9000
-  access_key_id: minio
-  secret_access_key: minio123
+  endpoint: http://seaweedfs:8333
+  access_key_id: manifold
+  secret_access_key: manifold-dev-secret
   region: "us-east-1"
   force_path_style: true
   public: true
 
 test:
   <<: *default
-  access_key_id: minio
-  secret_access_key: minio123
+  access_key_id: manifold
+  secret_access_key: manifold-dev-secret
   region: "us-east-1"
 
 production:

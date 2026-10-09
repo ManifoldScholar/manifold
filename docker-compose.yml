@@ -47,39 +47,21 @@ services:
       - rails-log:/srv/app/log
       - rails-tmp:/srv/app/tmp
       - uploads:/srv/app/public/system
-  minio:
-    image: "minio/minio:RELEASE.2022-09-25T15-44-53Z"
+  seaweedfs:
+    image: "chrislusf/seaweedfs:sha256-cfdf9a581c0e1f80bb91a87c72b9d66a90b325c646ced598d065a7afb1d68aad.sig"
+    entrypoint: ["/bin/sh", "/etc/seaweedfs/entrypoint.sh"]
     restart: unless-stopped
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "10"
     ports:
-      - "13115:9000"
-      - "13116:9001"
+      - "13115:8333"
     volumes:
-      - minio-storage:/data
-    env_file:
-      - ./docker/minio/minio.env
-    command: server --console-address ":9001" /data
+      - seaweedfs-storage:/data
+      - ./docker/seaweedfs/s3.json:/etc/seaweedfs/s3.json:ro
+      - ./docker/seaweedfs/entrypoint.sh:/etc/seaweedfs/entrypoint.sh:ro
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
-  minio-client:
-    entrypoint: "/root/.mc/initialize.sh"
-    image: "minio/mc:RELEASE.2022-09-16T09-16-47Z"
-    depends_on:
-      minio:
-        condition: service_healthy
-    env_file:
-      - ./docker/api/api.env
-      - ./docker/minio/minio.env
-    restart: "no"
-    volumes:
-      - ./docker/minio/client:/root/.mc
+      test: ["CMD-SHELL", "echo 's3.bucket.list' | weed shell 2>/dev/null | grep -q manifold-storage"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   client:
     tty: true
     stdin_open: true
@@ -107,8 +89,8 @@ services:
         condition: service_healthy
       migrations:
         condition: service_completed_successfully
-      minio-client:
-        condition: service_completed_successfully
+      seaweedfs:
+        condition: service_healthy
     env_file:
       - ./docker/api/api.env
     environment:
@@ -230,7 +212,7 @@ services:
 volumes:
   bundle-cache:
     driver: local
-  minio-storage:
+  seaweedfs-storage:
     driver: local
   postgres-data:
     driver: local

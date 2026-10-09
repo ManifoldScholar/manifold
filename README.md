@@ -38,7 +38,7 @@ Our ultimate goal is to build an open source tool that other university presses 
 ## Local Development
 
 Manifold uses Docker Compose to run all services locally. The API (Rails), background worker,
-PostgreSQL, and MinIO (S3-compatible storage) all run in containers. The client application can
+PostgreSQL, and SeaweedFS (S3-compatible storage) all run in containers. The client application can
 run in Docker as well, though most frontend developers prefer to run it locally.
 
 ### Prerequisites
@@ -59,7 +59,6 @@ This starts all services including the client. Once running:
 * **Client**: http://localhost:13100
 * **API**: http://localhost:13110
 * **GoodJob Dashboard**: http://localhost:13110/api/good_job
-* **MinIO Console**: http://localhost:13116
 
 ### Creating an Admin User
 
