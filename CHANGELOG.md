@@ -1,5 +1,13 @@
 # Changelog
 
+## [9.2.9-rc](https://github.com/ManifoldScholar/manifold/compare/9.2.8...9.2.9-rc) (2026-10-12)
+
+
+### Bug Fixes
+
+* replace minio with seaweedfs in dev ([870f843](https://github.com/ManifoldScholar/manifold/commit/870f84320d1bcd85016f42d19b39580f7c30152d))
+* update pinned seaweedfs version ([1dc179b](https://github.com/ManifoldScholar/manifold/commit/1dc179b8f5a69387557fcad4b168459c7a96c800))
+
 ## [9.2.8](https://github.com/ManifoldScholar/manifold/compare/9.2.7...9.2.8) (2026-09-21)
 
 
