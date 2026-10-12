@@ -60,6 +60,16 @@ This starts all services including the client. Once running:
 * **API**: http://localhost:13110
 * **GoodJob Dashboard**: http://localhost:13110/api/good_job
 
+#### Note on migration to SeaweedFS
+
+Prior to Manifold v9.2.9, the default storage strategy for development was `file`, meaning that files were written directly to the disk at `public/system`. As of 9.2.9, the default file storage strategy changed to `s3` using the `seaweedfs` Docker compose service. If you hadn't explicitly set an override and have files uploaded previously in `public/system`, Manifold will no longer be able to find those files after a container rebuild.
+
+If possible, we recommend using SeaweedFS in dev, especially if your production environment(s) use an S3-compatible service. However if you'd prefer to continue using local filesystem storage, simply add the following to `api/.env` (you may need to create this file yourself, it's gitignored):
+
+```
+MANIFOLD_SETTINGS_STORAGE_PRIMARY=file
+```
+
 ### Creating an Admin User
 
 Once the services are running, create an admin user:
