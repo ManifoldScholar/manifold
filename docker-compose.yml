@@ -48,7 +48,7 @@ services:
       - rails-tmp:/srv/app/tmp
       - uploads:/srv/app/public/system
   seaweedfs:
-    image: "chrislusf/seaweedfs:sha256-cfdf9a581c0e1f80bb91a87c72b9d66a90b325c646ced598d065a7afb1d68aad.sig"
+    image: "chrislusf/seaweedfs:4.48"
     entrypoint: ["/bin/sh", "/etc/seaweedfs/entrypoint.sh"]
     restart: unless-stopped
     ports:
