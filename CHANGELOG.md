@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.9-rc.1](https://github.com/ManifoldScholar/manifold/compare/9.2.9-rc...9.2.9-rc.1) (2026-10-13)
+
+
+### Bug Fixes
+
+* proxy robots.txt request ([592d900](https://github.com/ManifoldScholar/manifold/commit/592d900f7a2aaf0aaf6921d4ec74acf70a54a448))
+
 ## [9.2.9-rc](https://github.com/ManifoldScholar/manifold/compare/9.2.8...9.2.9-rc) (2026-10-12)
 
 
