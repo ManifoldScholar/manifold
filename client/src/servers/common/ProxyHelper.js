@@ -62,6 +62,7 @@ class ProxyHelper {
     this.defineProxy(app, "/browser.config.js", this.assetTarget);
     this.defineProxy(app, "/build", this.assetTarget);
     this.defineProxy(app, "/static", this.assetTarget);
+    this.defineRootFileProxy(app, "robots.txt", this.assetTarget);
     this.defineProxy(app, "/ws", this.assetTarget);
     this.defineProxy(app, /.*hot-update.*$/, this.assetTarget);
   }
@@ -79,6 +80,25 @@ class ProxyHelper {
     });
     this.defineStaticProxy(app, "/static", `${this.wwwTarget}/static`, {
       maxAge: "1h"
+    });
+    this.defineRootStaticFile(app, "robots.txt", `${this.wwwTarget}/static`, {
+      maxAge: "1h"
+    });
+  }
+
+  /**
+   * Serve a file from the built static directory at the site root, e.g.
+   * /robots.txt, even though it lives under /static.
+   */
+  defineRootStaticFile(app, filename, directory, serveStaticOptions = {}) {
+    ch.background(
+      `${this.name} server will serve /${filename} from ${directory}.`
+    );
+    const serve = serveStatic(directory, serveStaticOptions);
+    app.use(`/${filename}`, (req, res, next) => {
+      // connect strips the mount path; restore it for serve-static.
+      req.url = `/${filename}`;
+      serve(req, res, next);
     });
   }
 
@@ -100,6 +120,19 @@ class ProxyHelper {
     app.use(
       proxyPath,
       createProxyMiddleware(this.proxyOptions(proxyPath, target, logLevel))
+    );
+  }
+
+  defineRootFileProxy(app, filename, target) {
+    ch.background(
+      `${this.name} server will proxy /${filename} requests to ${target}/static/${filename}.`
+    );
+    app.use(
+      `/${filename}`,
+      createProxyMiddleware({
+        ...this.proxyOptions(`/${filename}`, target, "debug"),
+        pathRewrite: () => `/static/${filename}`
+      })
     );
   }
 
