@@ -32,8 +32,7 @@ function defaultParams({ snapshotState = false } = {}) {
         name: "order",
         value: "",
         options: [
-          { label: "In default order", value: "" },
-          { label: "Alphabetical by title", value: "sort_title ASC" },
+          { label: "Alphabetical by title", value: "" },
           { label: "Newest resources first", value: "created_at DESC" }
         ]
       }
