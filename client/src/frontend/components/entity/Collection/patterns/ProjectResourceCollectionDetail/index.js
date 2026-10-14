@@ -19,7 +19,7 @@ function ProjectResourceCollectionDetail({
   meta,
   filterProps,
   paginationProps,
-  dispatch,
+  onSlideshowPageChange,
   listHeaderId,
   ...passThroughProps
 }) {
@@ -45,7 +45,7 @@ function ProjectResourceCollectionDetail({
             slideshowResourcesMeta={slideshowResourcesMeta}
             resourceCollection={resourceCollection}
             slideshowResources={slideshowResources}
-            dispatch={dispatch}
+            onPageChange={onSlideshowPageChange}
             {...props}
           />
           <Styled.SectionHeader id={listHeaderId}>
@@ -101,7 +101,7 @@ ProjectResourceCollectionDetail.propTypes = {
   slideshowResourcesMeta: PropTypes.object,
   filterProps: shapes.filters,
   paginationProps: shapes.pagination,
-  dispatch: PropTypes.func,
+  onSlideshowPageChange: PropTypes.func,
   listHeaderId: PropTypes.string
 };
 

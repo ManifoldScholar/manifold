@@ -76,12 +76,20 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
     });
   };
 
+  handleSlideshowPageChange = pageNumber => {
+    const fetch = resourceCollectionsAPI.collectionResources(
+      this.props.resourceCollection.id,
+      {},
+      { number: pageNumber, size: perPage }
+    );
+    this.props.dispatch(request(fetch, requests.feSlideshow));
+  };
+
   render() {
     const {
       resourceCollection,
       slideshowResources,
-      slideshowResourcesMeta,
-      dispatch
+      slideshowResourcesMeta
     } = this.props;
 
     if (!resourceCollection || !slideshowResources) return null;
@@ -97,7 +105,7 @@ export class NotationResourceCollectionDetailContainer extends PureComponent {
             resourceCollection={resourceCollection}
             slideshowResources={slideshowResources}
             slideshowResourcesMeta={slideshowResourcesMeta}
-            dispatch={dispatch}
+            onPageChange={this.handleSlideshowPageChange}
             handleClose={this.handleClose}
           />
         </div>

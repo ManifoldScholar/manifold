@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -24,6 +24,8 @@ import config from "config";
 import { RESOURCE_DEFAULT_ORDER } from "frontend/components/resource/constants";
 import * as Styled from "./styles";
 
+const SLIDESHOW_PER_PAGE = 20;
+
 export default function ResourceCollectionDetailContainer({
   project,
   journalBreadcrumbs
@@ -48,8 +50,22 @@ export default function ResourceCollectionDetailContainer({
       pagination
     ]
   });
+  /* The slideshow requests pages beyond the first through onSlideshowPageChange.
+  Each response replaces the same keyed store slot, and the slideshow merges
+  pages by pagination.currentPage. The filter argument is left undefined so the
+  API helper receives a fresh object; it mutates the one it is given. */
+  const [slideshowPage, setSlideshowPage] = useState(1);
+  const slideshowPagination = useMemo(
+    () => ({ number: slideshowPage, size: SLIDESHOW_PER_PAGE }),
+    [slideshowPage]
+  );
   const { data: slideshowResources, meta: slideshowMeta } = useFetch({
-    request: [resourceCollectionsAPI.collectionResources, resourceCollectionId]
+    request: [
+      resourceCollectionsAPI.collectionResources,
+      resourceCollectionId,
+      undefined,
+      slideshowPagination
+    ]
   });
 
   const [annotationsPagination, setAnnotationsPage] = usePaginationState(1, 5);
@@ -125,6 +141,7 @@ export default function ResourceCollectionDetailContainer({
         meta={meta}
         slideshowResources={slideshowResources}
         slideshowResourcesMeta={slideshowMeta}
+        onSlideshowPageChange={setSlideshowPage}
         filterProps={filterProps}
       />
       <Styled.Annotations>

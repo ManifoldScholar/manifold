@@ -13,7 +13,7 @@ function ProjectResourceCollectionSlideshow({
   slideshowResources,
   slideshowResourcesMeta,
   resourceCollectionUrl,
-  dispatch,
+  onPageChange,
   handleClose,
   ...passThroughProps
 }) {
@@ -65,7 +65,7 @@ function ProjectResourceCollectionSlideshow({
             resourceCollection={resourceCollection}
             collectionResources={slideshowResources}
             pagination={slideshowResourcesMeta?.pagination}
-            dispatch={dispatch}
+            onPageChange={onPageChange}
             slideOptions={{ enableZoom: false }}
           />
         </div>
@@ -113,7 +113,7 @@ ProjectResourceCollectionSlideshow.propTypes = {
   resourceCollection: PropTypes.object.isRequired,
   slideshowResources: PropTypes.array,
   slideshowResourcesMeta: PropTypes.object,
-  dispatch: PropTypes.func,
+  onPageChange: PropTypes.func,
   resourceCollectionUrl: PropTypes.string,
   handleClose: PropTypes.func
 };

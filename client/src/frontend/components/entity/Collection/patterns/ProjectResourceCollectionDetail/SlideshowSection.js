@@ -5,7 +5,7 @@ export default function SlideshowSection({
   slideshowResourcesMeta,
   resourceCollection,
   slideshowResources,
-  dispatch
+  onPageChange
 }) {
   const { t } = useTranslation();
 
@@ -18,7 +18,7 @@ export default function SlideshowSection({
         resourceCollection={resourceCollection}
         collectionResources={slideshowResources}
         pagination={slideshowResourcesMeta.pagination}
-        dispatch={dispatch}
+        onPageChange={onPageChange}
         slideOptions={{ enableZoom: false }}
       />
     </>

@@ -3,14 +3,10 @@ import PropTypes from "prop-types";
 import includes from "lodash/includes";
 import debounce from "lodash/debounce";
 import ResourceSlide from "frontend/components/resource-slide";
-import { resourceCollectionsAPI } from "api";
-import { entityStoreActions } from "actions";
 import DirectionalButton from "./DirectionalButton";
 import capitalize from "lodash/capitalize";
 import { withTranslation } from "react-i18next";
 import * as Styled from "./styles";
-
-const { request } = entityStoreActions;
 
 class ResourceSlideshow extends PureComponent {
   static displayName = "ResourceSlideshow";
@@ -18,7 +14,7 @@ class ResourceSlideshow extends PureComponent {
   static propTypes = {
     collectionResources: PropTypes.array,
     pagination: PropTypes.object,
-    dispatch: PropTypes.func,
+    onPageChange: PropTypes.func,
     resourceCollection: PropTypes.object.isRequired,
     hideDetailUrl: PropTypes.bool,
     hideDownload: PropTypes.bool,
@@ -143,12 +139,7 @@ class ResourceSlideshow extends PureComponent {
   handleUnloadedSlide = position => {
     const page = this.positionToPage(position, this.props.pagination.perPage);
     if (!this.isPageLoaded(page)) {
-      const fetch = resourceCollectionsAPI.collectionResources(
-        this.props.resourceCollection.id,
-        {},
-        { number: page, size: this.props.pagination.perPage }
-      );
-      this.props.dispatch(request(fetch));
+      if (this.props.onPageChange) this.props.onPageChange(page);
     }
   };
 
