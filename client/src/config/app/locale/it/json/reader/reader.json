@@ -1,0 +1,95 @@
+{
+  "reader": {
+    "actions": {
+      "copy": "Copia",
+      "cite": "Citazione",
+      "select_reading_group": "Seleziona $t(glossary.reading_group_one)",
+      "annotate_passage": "$t(actions.annotate) questo passaggio",
+      "visit_resource_page": "$t(actions.visit) $t(glossary.resource_title_case_one) $t(glossary.page_title_case_one)",
+      "return_to_reader": "Ritorno al lettore",
+      "manage_highlight": "Inizio evidenziazione; {{chunk}}; fine evidenziazione.",
+      "view_annotations": "Inizio annotazione; {{chunk}}; fine annotazione."
+    },
+    "menus": {
+      "appearance": {
+        "reset_to_defaults": "Ripristino delle impostazioni predefinite",
+        "adjust_appearance": "Regola l'aspetto",
+        "decrease_margin": "Riduci i margini del testo",
+        "increase_margin": "Aumenta i margini del testo",
+        "adjust_margin": "Regolare i margini del testo",
+        "increase_font": "Aumenta la dimensione dei caratteri",
+        "decrease_font": "Diminuisci la dimensione dei caratteri",
+        "adjust_font": "Regola la dimensione dei caratteri",
+        "color_scheme": "Schema colori",
+        "margins": "Margini",
+        "font": "Font",
+        "font_style": "Stile del carattere",
+        "appearance_reset": "Schema di colori e tipografia del lettore reimpostati sulle impostazioni predefinite.",
+        "font_size_decreased": "Dimensione dei caratteri del lettore diminuita.",
+        "font_size_increased": "Dimensione dei caratteri del lettore aumentata.",
+        "font_size_decreased_min": "Dimensione dei caratteri del lettore ridotta alla dimensione minima",
+        "font_size_increased_max": "Dimensione dei caratteri del lettore aumentata alla dimensione massima",
+        "margin_size_decreased": "I margini dei lettori sono diminuiti.",
+        "margin_size_increased": "I margini dei lettori sono aumentati",
+        "margin_size_decreased_min": "Margini del lettore ridotti alla dimensione minima",
+        "margin_size_increased_max": "Margini del lettore aumentati alla dimensione massima",
+        "reset_option_message": "Il lettore {{appearanceType}} è impostato su{{option}}.",
+        "citation": {
+          "citation_style": "Stile citazione:",
+          "copied": "Copiato!"
+        },
+        "popup": {
+          "cite": "Citazione",
+          "cite_selection": "$t(reader.actions.cite) $t(glossary.selection_one)",
+          "current_group": "Gruppo attuale",
+          "manage_groups": "Gestione dei gruppi",
+          "current_visibility": "Attuale $t(common.visibility)",
+          "annotate_selection": "Annota $t(glossary.selection_one)",
+          "log_in_annotate": "Accedi a$t(actions.annotate)",
+          "highlight": "In evidenza",
+          "highlight_selection": "$t(reader.menus.popup.highlight) $t(glossary.selection_one)",
+          "unhighlight_selection": "Rimuovere l'evidenziazione",
+          "you_highlighted": "Hai messo in evidenza",
+          "reader_highlighted": "Il lettore ha evidenziato",
+          "attach_resource": "Collegare la risorsa a$t(glossary.selection_one)",
+          "share_selection": "$t(actions.share) $t(glossary.selection_one)",
+          "follow_link": "Segui il link"
+        },
+        "visibility": {
+          "all_reading_groups": "Tutti $t(glossary.reading_group_title_case_other)",
+          "show_the_following": "Mostrare quanto segue:"
+        },
+        "notes": {
+          "delete_notation": "$t(actions.delete) $t(glossary.notation_title_case_other)",
+          "no_annotations": "Non $t(glossary.annotation_other) trovato",
+          "no_matches_with_filters": "Nessuna annotazione corrisponde ai filtri impostati sopra. Regolare i filtri per visualizzare più risultati.",
+          "this_group": "Questo gruppo",
+          "no_group_annotations_message": "Una volta che qualcuno del gruppo ha evidenziato o annotato un passaggio di questo testo, questo apparirà qui. Per annotare o evidenziare, selezionare un passaggio del testo e fare clic sul pulsante appropriato nel menu a comparsa",
+          "no_group_annotations": "{{name}} non ha ancora annotato questo testo",
+          "no_annotations_by_me": "Non hai ancora annotato questo testo",
+          "no_annotations_by_me_message": "Una volta evidenziato o annotato un passaggio di questo testo, esso apparirà qui. Per annotare o evidenziare, selezionare un passaggio dal testo e fare clic sul pulsante appropriato nel menu a comparsa",
+          "my_notes": "Le mie $t(glossary.note_title_case_other)",
+          "all_notes": "Le mie $t(glossary.note_other) per gruppo:",
+          "orphaned_notes": "Le mie note sulle versioni precedenti",
+          "no_orphans_message": "Quando un testo viene modificato, Manifold cerca di inserire le annotazioni nel testo aggiornato. Se il passaggio annotato non esiste più nel testo, le annotazioni appariranno qui",
+          "unverified_message": "Per annotare pubblicamente i testi è necessario verificare il proprio indirizzo e-mail"
+        },
+        "return": {
+          "project_home": "$t(glossary.project_title_case_one) Home",
+          "issue_home": "$t(glossary.issue_truncated_title_case_one) Home",
+          "learn_more_about_manifold": "Per saperne di più<0>$t(app.manifold)</0>"
+        }
+      },
+      "header": {
+        "contents": "Contenuti",
+        "reader_settings_search": "Impostazioni del lettore e ricerca",
+        "reader_appearance": "Aspetto del lettore"
+      },
+      "my_private_annotations": "Il mio privato$t(glossary.annotation_title_case_other)",
+      "my_public_annotations": "Il mio pubblico$t(glossary.annotation_title_case_other)",
+      "full_text": "Testo completo",
+      "section_description": "Iniziare a leggere questo testo su{{appName}}",
+      "section_label": "Sezione testo"
+    }
+  }
+}

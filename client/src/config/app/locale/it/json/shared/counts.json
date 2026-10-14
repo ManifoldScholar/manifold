@@ -1,0 +1,26 @@
+{
+  "counts": {
+    "categorized_and_uncategorized_issues": "$t(counts.categorized_issues, {{count}}) {{uncategorized}}",
+    "categorized_issues_one": "C'è <strong>{{count}}</strong> un problema in<strong>{{categoryCount}}</strong> {{volume}}",
+    "categorized_issues_other": "Ci sono <strong>{{count}}</strong> dei problemi in <strong>{{categoryCount}}</strong> {{volume}}",
+    "comment_one": "{{count}} commento",
+    "comment_other": "{{count}} commenti",
+    "default_issues_one": "C'è<0>{{count}}</0> {{unit}}",
+    "default_issues_other": "Ci sono <0>{{count}}</0> {{unit}}",
+    "empty_volume_and_issues": "$t(counts.empty_volume, {{count}}) {{uncategorized}}",
+    "empty_volume_one": "C'è <0>{{count}}</0> volume vuoto",
+    "empty_volume_other": "Ci sono <1>{{count}}</1> volumi vuoti",
+    "entity_total": "Totale {{entity}}",
+    "flag_one": "{{count}} selezione",
+    "flag_other": "{{count}} selezioni",
+    "my_starred": "I miei preferiti <0>{{count}}</0> {{ unit }}",
+    "range": "Mostra <0>{{start}}-{{end}}</0> of <0>{{total}}</0> {{unit}}:",
+    "range_sr": "{{total}} {{unit}}. Mostra risultati{{start}} attraverso {{end}}.",
+    "text_annotations_one": "Questo testo ha {{count}} un'annotazione",
+    "text_annotations_other": "Questo testo ha {{count}} delle annotazioni",
+    "text_highlights_one": "Questo testo ha{{count}} un'edividenziatura",
+    "text_highlights_other": "Questo testo ha{{count}} delle evidenziature",
+    "uncategorized_issues_one": " e <strong>{{count}}</strong> problema aggiuntivo",
+    "uncategorized_issues_other": " e <strong>{{count}}</strong> problemi aggiuntivi"
+  }
+}
