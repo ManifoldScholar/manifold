@@ -7,14 +7,6 @@ export const sortFilter = (filters, updateFilters, params, t) => {
     value: filters.order || defaultOrder || "",
     onChange: e => updateFilters(e, "order"),
     options: [
-      ...(defaultOrder
-        ? [
-            {
-              label: t("filters.sort_options.featured_then_newest"),
-              value: defaultOrder
-            }
-          ]
-        : []),
       {
         label: t("filters.sort_options.alphabetical"),
         value: "sort_title ASC"

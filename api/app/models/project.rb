@@ -295,7 +295,7 @@ class Project < ApplicationRecord
     featured = resources_block&.featured_resources
     return featured if featured.present?
 
-    resources.limit(10)
+    resources.in_featured_order.limit(10)
   end
 
   def events_for_project_detail_ids
