@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.2.9](https://github.com/ManifoldScholar/manifold/compare/9.2.9-rc.1...9.2.9) (2026-10-15)
+
+
+### Features
+
+* change resource lists to display alphabetically by default ([402d8ec](https://github.com/ManifoldScholar/manifold/commit/402d8ec042fd91a0b7c38c4cd71a066cb63a8834))
+
+
+### Miscellaneous Chores
+
+* release 9.2.9 ([8c7a9b5](https://github.com/ManifoldScholar/manifold/commit/8c7a9b54dd976cc7e80f871fedf603d58d9c426c))
+
 ## [9.2.9-rc.1](https://github.com/ManifoldScholar/manifold/compare/9.2.9-rc...9.2.9-rc.1) (2026-10-13)
 
 
