@@ -2,12 +2,18 @@
 
 class TextExport < ApplicationRecord
   include HasExportKind
+  include HasStateMachine
   include ExportUploader::Attachment.new(:asset)
 
   belongs_to :text, inverse_of: :text_exports
   has_many_readonly :text_export_statuses, inverse_of: :text_export
 
   classy_enum_attr :export_kind, allow_blank: false, default: :unknown
+
+  has_state_machine! initial_state: :pending
+
+  delegate :last_transition, to: :state_machine, allow_nil: true
+  delegate :metadata, to: :last_transition, allow_nil: true
 
   upsert_keys %i[text_id fingerprint]
 
