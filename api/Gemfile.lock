@@ -187,7 +187,7 @@ GEM
     crack (1.0.1)
       bigdecimal
       rexml
-    crass (1.0.6)
+    crass (1.0.7)
     csl (1.6.0)
       namae (~> 1.0)
       rexml
@@ -953,7 +953,7 @@ DEPENDENCIES
   classy_enum (~> 4.0.0)
   cleanroom
   closure_tree (~> 7.0)
-  crass (~> 1.0.5)
+  crass (~> 1.0.7)
   csl-styles (~> 1.0)
   css_parser (~> 1.0)
   cssbeautify
