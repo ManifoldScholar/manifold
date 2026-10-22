@@ -211,6 +211,18 @@ RSpec.describe Lti::Registration::Registrar do
         expect(registrar).to be_valid
       end
     end
+
+    context "when the issuer is on the blocklist" do
+      before do
+        Settings.instance.update!(lti: { enabled: true, autoregistration: true, issuer_blocklist: [issuer] })
+      end
+
+      it "rejects the issuer even with an empty allowlist" do
+        registrar.ensure_valid_configuration!
+        expect(registrar).not_to be_valid
+        expect(registrar.errors).to include("Autoregistration for this platform is not allowed")
+      end
+    end
   end
 
   describe "scope normalization" do

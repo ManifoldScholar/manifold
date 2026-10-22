@@ -203,6 +203,31 @@
       "admin_email_label": "Admin Email",
       "directory_enabled_label": "Enable Directory Feed",
       "directory_enabled_instructions": "Expose content from this instance for publication in the Manifold Directory on manifoldapp.org"
+    },
+    "lti": {
+      "header": "Learning Tools Interoperability (LTI v1.3)",
+      "enabled": "Enabled",
+      "enabled_instructions": "Allow Learning Management Systems (LMSes) to connect to this instance via LTI tools",
+      "autoregistration": "Allow Autoregistration",
+      "autoregistration_instructions": "LMSes register Manifold as an LTI tool dynamically using a registration URL",
+      "allow_list_placeholder": "Enter a domain to allowlist",
+      "block_list_placeholder": "Enter a domain to block",
+      "allow_list_label": "Allowed LMS Domains",
+      "block_list_label": "Blocked LMS Domains",
+      "domains_instructions": "Manage the LMS domains that can connect to this instance below. Typically, only one of the allowlist and blocklist would be used. If allowlist is empty, all registrations except those on the blocklist are allowed. If the allowlist is set, only registrations from the allowlist are valid.",
+      "domains_label": "LMS Domains",
+      "registrations": {
+        "header": "Current LMS Registrations",
+        "instructions": "Learning Management Systems that are registered with this instance. Registrations can be disabled or removed. When removing a registration, select Add to Blocklist to prevent the LMS from re-registering.",
+        "empty": "No Learning Management Systems have registered with this instance.",
+        "enable": "Enable registration",
+        "disable": "Disable registration",
+        "disabled": "Disabled",
+        "client_id": "Client ID: {{ clientId }}",
+        "blocklist_option": "Also add to blocklist?",
+        "deployment_count_one": "{{ count }} deployment",
+        "deployment_count_other": "{{ count }} deployments"
+      }
     }
   }
 }
