@@ -1,5 +1,51 @@
 # Changelog
 
+## [9.2.9](https://github.com/ManifoldScholar/manifold/compare/10.0.0-beta.0...9.2.9) (2026-10-22)
+
+
+### Features
+
+* add enforce canonical domain mechanism to client ([5090a17](https://github.com/ManifoldScholar/manifold/commit/5090a17c3fbe3cf6aa89f662e4d179054373d307))
+* add fallback direct download for Google Doc ingestion ([8839897](https://github.com/ManifoldScholar/manifold/commit/883989735df98ebf17ef8624cfa395d81c90bd7e))
+* change resource lists to display alphabetically by default ([402d8ec](https://github.com/ManifoldScholar/manifold/commit/402d8ec042fd91a0b7c38c4cd71a066cb63a8834))
+
+
+### Bug Fixes
+
+* add instructions + correct UI for user group entitlements on entity access pages ([9e429e0](https://github.com/ManifoldScholar/manifold/commit/9e429e09e7d0eb2f21eff4ae40cab340866e380d))
+* add maker full name to collaborator; show in project hero ([762309a](https://github.com/ManifoldScholar/manifold/commit/762309af8cb4daf1da2137f5df291c27d06dacae))
+* add withOptionalRouter hoc ([8b684e5](https://github.com/ManifoldScholar/manifold/commit/8b684e5a4719d35e8441326a254b2a8d4dc34382))
+* adjust see all logic on project collection homepage blade ([dd9c233](https://github.com/ManifoldScholar/manifold/commit/dd9c2331c48b735ce7f2f04a9a8c8b0b737fc5ff))
+* allow authors/editors to make resource annotations ([e207319](https://github.com/ManifoldScholar/manifold/commit/e207319cca7534faf1aaba856ec944b5c56a1d66))
+* **api:** remove repeated inclusion of cookie middleware ([cd3a31b](https://github.com/ManifoldScholar/manifold/commit/cd3a31baa83fa20095cee46d9e98340ddea8b5b9))
+* check name safety of extracted files; skip on failure ([0a657ae](https://github.com/ManifoldScholar/manifold/commit/0a657aeba8398daf4e32c969836935da79243ef8))
+* clean up ingestion tempfiles proactively ([fbf31e7](https://github.com/ManifoldScholar/manifold/commit/fbf31e7b49a4400caf3336271a24ee27cd68f1ad))
+* do not check trusted user input for spam ([91396d0](https://github.com/ManifoldScholar/manifold/commit/91396d0a7989213cbc746539b1f5bace6579184e))
+* do not submit spam checks for verified users ([edd444c](https://github.com/ManifoldScholar/manifold/commit/edd444cd8e6ab3a8a997ff890938e0a7b102fde3))
+* DRY and fix MIME and extension check for image detection ([d712288](https://github.com/ManifoldScholar/manifold/commit/d712288f5808ac2616a659e30dcc87007d429dae))
+* ensure project restricted access errors persist across multiple failed fetches ([03068c1](https://github.com/ManifoldScholar/manifold/commit/03068c1c6134009cc43b0c234daf1f3aa94e23a2))
+* fix resource sort order UX ([653ae1f](https://github.com/ManifoldScholar/manifold/commit/653ae1fe5bbaec192a9e783e08d3ab8204c4ee40))
+* give annotation lists a default sort order ([5f30237](https://github.com/ManifoldScholar/manifold/commit/5f30237bacfc9456fd40aedd25e7dad4885adf3a))
+* improve project restricted notification display in standalone mode ([8c01c0b](https://github.com/ManifoldScholar/manifold/commit/8c01c0b28c1e60cc4e001fb893b96bd96dd1e7dd))
+* match admin project list collaborator names to frontend ([ab2cbf4](https://github.com/ManifoldScholar/manifold/commit/ab2cbf44349e4f0ae034270a7aa8d8e6a7179d43))
+* move API request params to body ([2d306a2](https://github.com/ManifoldScholar/manifold/commit/2d306a26e6376736e11ff256b1c0509521337486))
+* only load necessary collection projects on home page ([0da4b24](https://github.com/ManifoldScholar/manifold/commit/0da4b2441cbff8278103b8cb7c7b52aa0c38bcc2))
+* pass keyword options to Dry::Initializer operations and errors ([6e667c2](https://github.com/ManifoldScholar/manifold/commit/6e667c26258e4b7139ccdcb8a140b6a141d315b6))
+* pin swagger react version to 18.3 ([e043228](https://github.com/ManifoldScholar/manifold/commit/e043228c61a129655b7536297d62f50dceb5305c))
+* preserve cover image and ingestion source original filenames ([b7098ab](https://github.com/ManifoldScholar/manifold/commit/b7098abbd5b088b04d2b43c9296ba016faa046ac))
+* proxy robots.txt request ([592d900](https://github.com/ManifoldScholar/manifold/commit/592d900f7a2aaf0aaf6921d4ec74acf70a54a448))
+* recalculate text fingerprint on text section or stylesheet change ([33d65c3](https://github.com/ManifoldScholar/manifold/commit/33d65c371b4b531665f41df33ad0e205af195fad))
+* replace minio with seaweedfs in dev ([870f843](https://github.com/ManifoldScholar/manifold/commit/870f84320d1bcd85016f42d19b39580f7c30152d))
+* set min gap between analytics chart ticks ([8a807f4](https://github.com/ManifoldScholar/manifold/commit/8a807f42098b7c73e8db8acb8b342e183b6bc198))
+* show first 3 ordered collaborators on project thumbnails ([fd5665c](https://github.com/ManifoldScholar/manifold/commit/fd5665c6138798f320b6c8546aec6e52c36674db))
+* update pinned seaweedfs version ([1dc179b](https://github.com/ManifoldScholar/manifold/commit/1dc179b8f5a69387557fcad4b168459c7a96c800))
+* use full url for video track ([07fa613](https://github.com/ManifoldScholar/manifold/commit/07fa613a85b74fd21d181a293b57a4ee08ebabde))
+
+
+### Miscellaneous Chores
+
+* release 9.2.9 ([8c7a9b5](https://github.com/ManifoldScholar/manifold/commit/8c7a9b54dd976cc7e80f871fedf603d58d9c426c))
+
 ## [9.2.9](https://github.com/ManifoldScholar/manifold/compare/9.2.9-rc.1...9.2.9) (2026-10-15)
 
 
