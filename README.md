@@ -16,9 +16,8 @@
 <p align="center">
     Learn more at <a href="https://manifoldapp.org">manifoldapp.org</a>.<br />
     See it in action at <a href="https://manifold.umn.edu">manifold.umn.edu</a>.<br />
-    Join our <a href="https://manifold-slackin.herokuapp.com/">Slack Channel</a><br />
-    <a href="https://github.com/ManifoldScholar/manifold/issues/new?template=bugs.md">Report a bug</a>.<br />
-    <a href="https://github.com/ManifoldScholar/manifold/issues/new?template=features.md">Request a feature</a>.
+    Join our <a href="https://join.slack.com/t/manifold-community/shared_invite/zt-3u7lmti9w-AsT2O4XCoraN~3xvZ7PG7Q/">Slack Channel</a><br />
+    Participate in <a href="https://github.com/ManifoldScholar/manifold/discussions">discussions about Manifold on GitHub</a>.
 </p>
 
 ## Watch the Video
@@ -33,7 +32,7 @@ The [University of Minnesota Press](https://www.upress.umn.edu) in partnership w
 
 #### Manifold is Open Source
 
-Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us on our [Building Manifold Development Blog](https://manifoldscholar.github.io/manifold-docusaurus/blog). Early adopters of Manifold are encouraged to download the source code, experiment, and submit fixes and features in the form of pull requests.
+Our ultimate goal is to build an open source tool that other university presses will use. To that end, we want to hear from our prospective users throughout the design and development process. To participate in the discussion, join us through any of the supported [Manifold Community](https://manifoldapp.org/community) routes. Adopters of Manifold are encouraged to download the source code, experiment, and submit fixes and features in the form of pull requests.
 
 ## Local Development
 
@@ -64,10 +63,16 @@ This starts all services including the client. Once running:
 
 Prior to Manifold v9.2.9, the default storage strategy for development was `file`, meaning that files were written directly to the disk at `public/system`. As of 9.2.9, the default file storage strategy changed to `s3` using the `seaweedfs` Docker compose service. If you hadn't explicitly set an override and have files uploaded previously in `public/system`, Manifold will no longer be able to find those files after a container rebuild.
 
-If possible, we recommend using SeaweedFS in dev, especially if your production environment(s) use an S3-compatible service. However if you'd prefer to continue using local filesystem storage, simply add the following to `api/.env` (you may need to create this file yourself, it's gitignored):
+If possible, we recommend using SeaweedFS in dev, especially if your production environment(s) use an S3-compatible service. However if you'd prefer to continue using local filesystem storage, add the following to a `docker-compose.override.yml` file in the project root:
 
-```
-MANIFOLD_SETTINGS_STORAGE_PRIMARY=file
+```yaml
+services:
+  web:
+    environment:
+      MANIFOLD_SETTINGS_STORAGE_PRIMARY: file
+  worker:
+    environment:
+      MANIFOLD_SETTINGS_STORAGE_PRIMARY: file
 ```
 
 ### Creating an Admin User
@@ -89,7 +94,7 @@ this, start the backend services without the client container:
 docker compose up -d --scale client=0
 ```
 
-To avoid passing `--scale client=0` every time, create a `docker-compose.override.yml` file in
+To avoid passing `--scale client=0` every time, add the following to a `docker-compose.override.yml` file in
 the project root:
 
 ```yaml
@@ -152,13 +157,13 @@ Manifold is released under the Gnu Public License, version 3. See the [LICENSE.m
 
 #### Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ManifoldScholar/manifold/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [releases in this repository](https://github.com/ManifoldScholar/manifold/releases).
 
-Prerelease beta or release-candidate versions are sometimes available, and are tagged with their prerelease type (i.e. X.Y.Z-beta.N). We strongly recommend using untagged release versions for production use.
+Prerelease beta or release-candidate versions are sometimes available, and are tagged with their prerelease type (i.e. X.Y.Z-rc.N). We strongly recommend using the latest stable (i.e. untagged) release version for production use.
 
 #### Documentation
 
-Visit [our website](https://manifoldscholar.github.io/manifold-docusaurus/docs) for current documentation. Be sure to check out the [installation instructions](https://manifoldscholar.github.io/manifold-docusaurus/docs/administering/installation).
+Visit [our website](https://manifoldscholar.github.io/manifold-docusaurus/docs) for current documentation. If you plan to self-host your own Manifold instance, be sure to check out the [installation instructions](https://manifoldscholar.github.io/manifold-docusaurus/docs/administering/installation).
 
 #### News
 
