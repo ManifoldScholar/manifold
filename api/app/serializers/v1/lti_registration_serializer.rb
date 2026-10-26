@@ -6,10 +6,13 @@ module V1
 
     abilities
 
+    STATE_OPTIONS = LtiRegistrationState.map(&:to_s)
+    CURRENT_STATE = Types::Coercible::String.enum(*STATE_OPTIONS).meta(example: "pending", read_only: true)
+
     typed_attribute :name, Types::String
     typed_attribute :issuer, Types::String
     typed_attribute :client_id, Types::String
-    typed_attribute :enabled, Types::Bool
+    typed_attribute :current_state, CURRENT_STATE
     typed_attribute :lti_deployments_count, Types::Integer.meta(read_only: true) do |object|
       object.lti_deployments.size
     end

@@ -2069,6 +2069,22 @@ CREATE TABLE public.lti_deployments (
 
 
 --
+-- Name: lti_registration_transitions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lti_registration_transitions (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    lti_registration_id uuid NOT NULL,
+    most_recent boolean DEFAULT false NOT NULL,
+    sort_key integer NOT NULL,
+    to_state character varying NOT NULL,
+    metadata jsonb,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
 -- Name: lti_registrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2084,9 +2100,9 @@ CREATE TABLE public.lti_registrations (
     grant_types public.lti_grant_type[] DEFAULT '{}'::public.lti_grant_type[] NOT NULL,
     scopes public.lti_scope[] DEFAULT '{}'::public.lti_scope[] NOT NULL,
     registration_access_token text,
-    enabled boolean DEFAULT true NOT NULL,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    host text NOT NULL
 );
 
 
@@ -3006,8 +3022,8 @@ CREATE TABLE public.settings (
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     ingestion jsonb DEFAULT '{}'::jsonb,
     rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL,
-    oai jsonb DEFAULT '{"admin_email": "admin@manifold.app", "repository_name": "Manifold", "directory_enabled": true}'::jsonb,
-    lti jsonb DEFAULT '{}'::jsonb NOT NULL
+    lti jsonb DEFAULT '{}'::jsonb NOT NULL,
+    oai jsonb DEFAULT '{}'::jsonb
 );
 
 
@@ -3145,6 +3161,22 @@ ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
 
 
 --
+-- Name: text_export_transitions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.text_export_transitions (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    to_state text NOT NULL,
+    metadata jsonb DEFAULT '{}'::jsonb,
+    sort_key integer NOT NULL,
+    text_export_id uuid NOT NULL,
+    most_recent boolean NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: text_exports; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3218,9 +3250,11 @@ CREATE VIEW public.text_export_statuses AS
     te.fingerprint AS export_fingerprint,
     (t.fingerprint = te.fingerprint) AS current,
     (t.fingerprint <> te.fingerprint) AS stale,
+    COALESCE(tr.to_state, 'pending'::text) AS state,
     te.created_at AS exported_at
-   FROM (public.texts t
-     JOIN public.text_exports te ON ((t.id = te.text_id)));
+   FROM ((public.texts t
+     JOIN public.text_exports te ON ((t.id = te.text_id)))
+     LEFT JOIN public.text_export_transitions tr ON (((tr.text_export_id = te.id) AND tr.most_recent)));
 
 
 --
@@ -4162,6 +4196,14 @@ ALTER TABLE ONLY public.lti_deployments
 
 
 --
+-- Name: lti_registration_transitions lti_registration_transitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_registration_transitions
+    ADD CONSTRAINT lti_registration_transitions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: lti_registrations lti_registrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4495,6 +4537,14 @@ ALTER TABLE ONLY public.taggings
 
 ALTER TABLE ONLY public.tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: text_export_transitions text_export_transitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.text_export_transitions
+    ADD CONSTRAINT text_export_transitions_pkey PRIMARY KEY (id);
 
 
 --
@@ -5727,6 +5777,20 @@ CREATE UNIQUE INDEX index_lti_deployments_on_registration_and_deployment ON publ
 
 
 --
+-- Name: index_lti_registration_transitions_parent_most_recent; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lti_registration_transitions_parent_most_recent ON public.lti_registration_transitions USING btree (lti_registration_id, most_recent) WHERE most_recent;
+
+
+--
+-- Name: index_lti_registration_transitions_parent_sort; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lti_registration_transitions_parent_sort ON public.lti_registration_transitions USING btree (lti_registration_id, sort_key);
+
+
+--
 -- Name: index_lti_registrations_on_issuer_and_client_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -6686,6 +6750,27 @@ CREATE UNIQUE INDEX index_tags_on_name ON public.tags USING btree (name);
 
 
 --
+-- Name: index_text_export_transitions_on_text_export_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_export_transitions_on_text_export_id ON public.text_export_transitions USING btree (text_export_id);
+
+
+--
+-- Name: index_text_export_transitions_parent_most_recent; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_text_export_transitions_parent_most_recent ON public.text_export_transitions USING btree (text_export_id, most_recent) WHERE most_recent;
+
+
+--
+-- Name: index_text_export_transitions_parent_sort; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_text_export_transitions_parent_sort ON public.text_export_transitions USING btree (text_export_id, sort_key);
+
+
+--
 -- Name: index_text_exports_on_asset_data; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7387,6 +7472,14 @@ ALTER TABLE ONLY public.entitlement_user_links
 
 
 --
+-- Name: text_export_transitions fk_rails_08379f239c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.text_export_transitions
+    ADD CONSTRAINT fk_rails_08379f239c FOREIGN KEY (text_export_id) REFERENCES public.text_exports(id) ON DELETE CASCADE;
+
+
+--
 -- Name: user_collected_resource_collections fk_rails_09910abb51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7560,6 +7653,14 @@ ALTER TABLE ONLY public.reading_group_resources
 
 ALTER TABLE ONLY public.reading_group_memberships
     ADD CONSTRAINT fk_rails_33ca518faf FOREIGN KEY (reading_group_id) REFERENCES public.reading_groups(id) ON DELETE CASCADE;
+
+
+--
+-- Name: lti_registration_transitions fk_rails_33d894e819; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_registration_transitions
+    ADD CONSTRAINT fk_rails_33d894e819 FOREIGN KEY (lti_registration_id) REFERENCES public.lti_registrations(id) ON DELETE CASCADE;
 
 
 --
@@ -8257,12 +8358,17 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261023230025'),
+('20261021172201'),
+('20261013234117'),
+('20261013234017'),
 ('20260507182648'),
 ('20260507182640'),
 ('20260420000001'),
 ('20260406000002'),
 ('20260406000001'),
 ('20260305225814'),
+('20260209183815'),
 ('20260127185424'),
 ('20260127162821'),
 ('20260126221732'),
@@ -8640,3 +8746,4 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20151007162414'),
 ('20151005200105'),
 ('20151005200100');
+
