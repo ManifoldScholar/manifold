@@ -8,47 +8,50 @@ module API
           LtiRegistration.includes(:lti_deployments).order(created_at: :desc)
         end
 
+        authority_actions approve: :update, deny: :update, block: :update
+
         def index
-          @registrations = load_lti_registrations
-          render_multiple_resources(@registrations)
+          render_multiple_resources(load_lti_registrations)
         end
 
         def show
-          @registration = load_and_authorize_lti_registration
-          render_single_resource(@registration)
-        end
-
-        def update
-          @registration = load_and_authorize_lti_registration
-          ::Updaters::Default.new(registration_params).update(@registration)
-          render_single_resource(@registration)
+          render_single_resource(lti_registration)
         end
 
         def destroy
-          @registration = load_and_authorize_lti_registration
-          blocklist_issuer!(@registration) if truthy?(params[:blocklist])
-          render_destruction_of(@registration)
+          render_destruction_of(lti_registration)
+        end
+
+        def approve
+          perform_transition(:approved)
+        end
+
+        def deny
+          perform_transition(:denied)
+        end
+
+        def block
+          perform_transition(:blocked)
         end
 
         private
 
-        def registration_params
-          params.permit(data: { attributes: [:enabled] })
+        def perform_transition(state)
+          lti_registration.transition_to!(state)
+
+          render_single_resource(lti_registration)
+        rescue Statesman::TransitionFailedError, Statesman::GuardFailedError => e
+          render_transition_error(e)
         end
 
-        def blocklist_issuer!(registration)
-          host = ::Lti::IssuerPolicy.normalize_host(registration.issuer)
-          return if host.blank?
+        def render_transition_error(error)
+          errors = [{ code: :invalid_lti_registration_transition, title: "Cannot Transition Registration", detail: error.message }]
 
-          settings = Settings.instance
-          blocklist = settings.lti.issuer_blocklist
-          return if blocklist.include?(host)
-
-          settings.update!(lti: settings.lti.attributes.merge("issuer_blocklist" => blocklist + [host]))
+          render json: { errors: errors }, status: :unprocessable_entity
         end
 
-        def truthy?(value)
-          ActiveModel::Type::Boolean.new.cast(value)
+        def lti_registration
+          @lti_registration ||= load_and_authorize_lti_registration
         end
       end
     end

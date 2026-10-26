@@ -141,9 +141,7 @@ module V1
 
     typed_section_attribute :lti, Types::Hash.schema(
       enabled: Types::Bool,
-      autoregistration: Types::Bool,
-      issuer_allowlist: Types::Array.of(Types::String),
-      issuer_blocklist: Types::Array.of(Types::String)
+      autoregistration: Types::Bool
     )
 
     typed_section_attribute :secrets, Types::Hash.schema(
