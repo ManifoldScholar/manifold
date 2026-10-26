@@ -1,7 +1,7 @@
 <h1><%= Settings.current.general.installation_name %> LTI Tool Registration</h1>
 
 <% if @consent.valid? %>
-  <!-- LTI options can go here -->
+  <p>This registration will be submitted for review and must be approved by an administrator before it can be used.</p>
 
   <%= form_with do |f| %>
     <%= f.hidden_field :issuer, value: @consent.referrer %>

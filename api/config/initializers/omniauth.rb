@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+OmniAuth.config.logger = Rails.logger
+
 ManifoldEnv.oauth.configure do |config|
   config.provider :facebook do |provider|
     provider.strategy_options do |hsh|

@@ -7,6 +7,5 @@ module SettingSections
   class Lti < Base
     attribute :enabled, :boolean, default: false
     attribute :autoregistration, :boolean, default: false
-    attribute :issuer_allowlist, :string_array, default: -> { [] }
   end
 end

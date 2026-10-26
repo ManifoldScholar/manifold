@@ -15,7 +15,9 @@ module Lti
       def valid?
         return false if @errors.any?
 
-        @errors << "LTI registration is disabled or blocked for this domain" unless autoregistration_allowed?
+        @errors << "LTI registration is disabled" unless autoregistration_allowed?
+        @errors << "Invalid or missing referer header" if referrer_host.blank?
+        @errors << "LTI registration is not permitted from your domain" if registration_blocked?
 
         @errors.none?
       end
@@ -29,18 +31,27 @@ module Lti
       end
 
       def autoregistration_allowed?
-        return false unless lti_settings.enabled? && lti_settings.autoregistration?
-        return true if lti_settings.issuer_allowlist.blank?
-
-        lti_settings.issuer_allowlist.include?(referrer_uri.host)
+        lti_settings.enabled? && lti_settings.autoregistration?
       end
 
-      def referrer_uri
-        @referrer_uri ||= URI.parse(referrer)
+      def registration_blocked?
+        referrer_host.present? && LtiRegistration.blocked?(referrer_host)
       end
 
       def referrer
-        @referrer ||= @request.referrer
+        @request.referrer
+      end
+
+      private
+
+      def referrer_uri
+        @referrer_uri ||= URI.parse(referrer) if referrer.present?
+      rescue URI::InvalidURIError
+        nil
+      end
+
+      def referrer_host
+        referrer_uri&.host
       end
     end
   end
