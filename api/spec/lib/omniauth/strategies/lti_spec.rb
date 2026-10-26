@@ -81,18 +81,11 @@ RSpec.describe OmniAuth::Strategies::Lti do
   end
 
   describe "#decode_and_verify! rejecting revoked registrations" do
-    it "raises when the registration has been disabled" do
-      registration.update!(enabled: false)
+    it "raises when the registration has been revoked" do
+      registration.transition_to!(:denied)
       expect do
         strategy.send(:decode_and_verify!, signed_id_token(base_claims), state)
-      end.to raise_error(OmniAuth::Error, /is disabled/)
-    end
-
-    it "raises when the issuer has been blocklisted" do
-      Settings.instance.update!(lti: { enabled: true, issuer_blocklist: [registration.issuer] })
-      expect do
-        strategy.send(:decode_and_verify!, signed_id_token(base_claims), state)
-      end.to raise_error(OmniAuth::Error, /not permitted/)
+      end.to raise_error(OmniAuth::Error, /not approved/)
     end
   end
 
@@ -110,6 +103,20 @@ RSpec.describe OmniAuth::Strategies::Lti do
         "message_type" => "LtiDeepLinkingRequest",
         "deep_linking_settings" => { "deep_link_return_url" => "https://canvas.example.com/dl_return" }
       )
+    end
+  end
+
+  describe "#find_registration!" do
+    it "returns an approved registration" do
+      expect(strategy.send(:find_registration!, registration.issuer, registration.client_id)).to eq(registration)
+    end
+
+    it "raises when the registration is not approved" do
+      pending_registration = FactoryBot.create(:lti_registration, :pending, issuer: "https://pending.example.com", client_id: "pending-client")
+
+      expect do
+        strategy.send(:find_registration!, pending_registration.issuer, pending_registration.client_id)
+      end.to raise_error(OmniAuth::Error, /not approved/)
     end
   end
 

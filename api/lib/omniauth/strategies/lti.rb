@@ -7,24 +7,17 @@ module OmniAuth
 
       option :name, "lti"
 
-      # Claims arrive under two IMS namespaces: the core LTI namespace and the
-      # Deep Linking (`lti-dl`) namespace that carries deep_linking_settings.
-      # Both are flattened into extra.lti by their short key.
+      # The core LTI namespace and the Deep Linking (`lti-dl`) namespace are flattened into extra.lti by their short key
       LTI_CLAIM_PREFIXES = %w[
         https://purl.imsglobal.org/spec/lti/claim/
         https://purl.imsglobal.org/spec/lti-dl/claim/
       ].freeze
 
-      # The request phase handles the platform-initiated OIDC login.
-      # The platform sends iss, client_id, login_hint, lti_message_hint,
-      # and target_link_uri. We generate a nonce and state, store them
-      # in the session, and redirect to the platform's authorization
-      # endpoint.
+      # Find the registration, generate nonce/state, and redirect to the LTI provider
       def request_phase
         return fail!(:lti_disabled, OmniAuth::Error.new("LTI is not enabled")) unless lti_enabled?
 
         registration = find_registration!(request.params["iss"], request.params["client_id"])
-        ensure_registration_permitted!(registration)
 
         nonce = SecureRandom.uuid
         state = sign_state(nonce: nonce, target_link_uri: request.params["target_link_uri"])
@@ -32,9 +25,7 @@ module OmniAuth
         redirect authorization_uri(registration, nonce, state)
       end
 
-      # The callback phase receives the id_token from the platform
-      # as a form POST. We validate the JWT signature, issuer, audience,
-      # nonce, timing, and deployment, then build the OmniAuth auth hash.
+      # Validate the JWT, then build the OmniAuth auth hash
       def callback_phase
         return fail!(:lti_disabled, OmniAuth::Error.new("LTI is not enabled")) unless lti_enabled?
 
@@ -76,34 +67,27 @@ module OmniAuth
 
       private
 
+      # @raise [OmniAuth::Error]
       def find_registration!(issuer, client_id)
-        LtiRegistration.find_by!(issuer: issuer, client_id: client_id)
-      rescue ActiveRecord::RecordNotFound
-        raise OmniAuth::Error, "No enabled LTI registration found for issuer #{issuer} and client_id #{client_id}"
+        LtiRegistration.find_by(issuer: issuer, client_id: client_id).tap do |registration|
+          raise OmniAuth::Error, "No LTI registration found for issuer #{issuer} and client_id #{client_id}" unless registration.present?
+          raise OmniAuth::Error, "LTI registration for issuer #{issuer} and client_id #{client_id} is not approved" unless registration.approved?
+        end
       end
 
-      def ensure_registration_permitted!(registration)
-        raise OmniAuth::Error, "LTI registration #{registration.id} is disabled" unless registration.enabled?
-
-        return if ::Lti::IssuerPolicy.new.permits?(registration.issuer)
-
-        raise OmniAuth::Error, "Issuer #{registration.issuer} is not permitted"
-      end
-
-      # Ensure the launch's deployment is recorded under the (already signature-
-      # verified) registration, creating it on first sight — the registration is
-      # the trust anchor, so any deployment it asserts is accepted. Only an
-      # explicitly disabled deployment is rejected.
+      # Find or create a deployment for this registration, and ensure it's enabled.
+      # @raise [OmniAuth::Error]
+      # @return [LtiDeployment]
       def verify_deployment!(registration, claims)
         deployment_id = claims["https://purl.imsglobal.org/spec/lti/claim/deployment_id"]
         raise OmniAuth::Error, "Missing deployment_id claim" unless deployment_id
 
-        deployment = find_or_create_deployment!(registration, deployment_id)
-        raise OmniAuth::Error, "Deployment #{deployment_id} is disabled" unless deployment.enabled?
-
-        deployment
+        find_or_create_deployment!(registration, deployment_id).tap do |deployment|
+          raise OmniAuth::Error, "Deployment #{deployment_id} is disabled" unless deployment.enabled?
+        end
       end
 
+      # @return [LtiDeployment]
       def find_or_create_deployment!(registration, deployment_id)
         registration.lti_deployments.find_or_create_by!(deployment_id: deployment_id)
       rescue ActiveRecord::RecordNotUnique
@@ -111,6 +95,10 @@ module OmniAuth
       end
 
       # Builds the authorization redirect URI with all required OIDC parameters.
+      # @param registration [LtiRegistration]
+      # @param nonce [String]
+      # @param state [String]
+      # @return [String]
       def authorization_uri(registration, nonce, state)
         params = {
           scope: "openid",
@@ -128,15 +116,13 @@ module OmniAuth
         "#{registration.authorization_endpoint}?#{Rack::Utils.build_query(params)}"
       end
 
-      # Decodes the JWT id_token and verifies its signature, issuer,
-      # audience, nonce, timing, and deployment.
+      # Decodes and verifies the JWT id_token
       def decode_and_verify!(id_token, state)
         unverified = JWT.decode(id_token, nil, false).first
         registration = find_registration!(unverified["iss"], unverified["aud"])
-        ensure_registration_permitted!(registration)
         jwks_loader = ::Lti::Auth::PlatformJwks.new(registration)
 
-        claims = JWT.decode(
+        JWT.decode(
           id_token,
           nil,
           true,
@@ -146,15 +132,14 @@ module OmniAuth
           iss: registration.issuer,
           verify_aud: true,
           aud: registration.client_id
-        ).first
-
-        verify_nonce!(claims, state)
-        verify_timing!(claims)
-        verify_deployment!(registration, claims)
-
-        claims
+        ).first.tap do |claims|
+          verify_nonce!(claims, state)
+          verify_timing!(claims)
+          verify_deployment!(registration, claims)
+        end
       end
 
+      # @raise [OmniAuth::Error]
       def verify_nonce!(claims, state)
         raise OmniAuth::Error, "Nonce mismatch" unless claims["nonce"] == state["nonce"]
       end
@@ -163,6 +148,7 @@ module OmniAuth
         message_verifier.generate(payload, purpose: :lti_state)
       end
 
+      # @raise [OmniAuth::Error]
       def verify_state!(state)
         raise OmniAuth::Error, "Missing state parameter" unless state.present?
 
@@ -175,6 +161,7 @@ module OmniAuth
         ActiveSupport::MessageVerifier.new(Rails.application.secret_key_base, digest: "SHA256")
       end
 
+      # @raise [OmniAuth::Error]
       def verify_timing!(claims)
         now = Time.now.to_i
         raise OmniAuth::Error, "Token is not yet valid (iat)" if claims["iat"] && claims["iat"] > now + 5
