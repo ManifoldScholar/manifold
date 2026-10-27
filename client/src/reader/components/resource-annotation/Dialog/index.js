@@ -20,7 +20,7 @@ export default function ResourceAnnotationDialog({
     resource.type === "resourceCollection" ? (
       <ResourceCollectionSlideshow
         resourceCollection={resourceEntity}
-        fetchKey={`reader-collection-slideshow-${resource.id}`}
+        requestKey={`reader-collection-slideshow-${resource.id}`}
       />
     ) : (
       <ResourcePreview

@@ -2,6 +2,7 @@ import { resourceCollectionsAPI } from "api";
 import { useFetch, usePaginationState } from "hooks";
 import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow";
 import ResourceCollectionEmpty from "frontend/components/resource-collection/Preview/Empty";
+import PropTypes from "prop-types";
 
 export default function ResourceSlideshowFetcher({
   resourceCollection,
@@ -32,3 +33,8 @@ export default function ResourceSlideshowFetcher({
     />
   );
 }
+
+ResourceSlideshowFetcher.propTypes = {
+  resourceCollection: PropTypes.object.isRequired,
+  requestKey: PropTypes.string
+};

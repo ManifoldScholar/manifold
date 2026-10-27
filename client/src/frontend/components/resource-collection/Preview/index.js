@@ -20,7 +20,7 @@ function ResourceCollectionPreview({
       />
       <Slideshow
         resourceCollection={resourceCollection}
-        fetchKey={`reader-collection-slideshow-${resourceCollection.id}`}
+        requestKey={`reader-collection-slideshow-${resourceCollection.id}`}
       />
       <Styled.Footer>
         <UserActions resourceCollection={resourceCollection} />
