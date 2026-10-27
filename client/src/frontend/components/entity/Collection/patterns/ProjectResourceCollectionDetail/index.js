@@ -48,7 +48,7 @@ function ProjectResourceCollectionDetail({
         <>
           <SlideShow
             resourceCollection={resourceCollection}
-            fetchKey={requests.feSlideshow}
+            requestKey={requests.feSlideshow}
           />
           <Styled.SectionHeader id={listHeaderId}>
             {t("pages.subheaders.resource_list")}
