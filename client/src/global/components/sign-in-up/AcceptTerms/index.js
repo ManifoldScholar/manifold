@@ -66,12 +66,12 @@ export default function AcceptTerms({ handleViewChange }) {
         />
       </Styled.CheckboxWrapper>
       <Styled.Button
-        className="button-secondary button-secondary--with-room"
+        size="md"
+        background="accent"
+        label={t("actions.continue")}
         disabled={!accepted}
         onClick={() => handleViewChange("create")}
-      >
-        {t("actions.continue")}
-      </Styled.Button>
+      />
     </>
   ) : null;
 }
