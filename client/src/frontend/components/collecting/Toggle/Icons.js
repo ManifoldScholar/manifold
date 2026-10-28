@@ -1,35 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import IconComposer from "global/components/utility/IconComposer";
+import * as Styled from "./styles";
 
 function Icons({ useOutline }) {
   return (
-    <div className="collecting-toggle__icons" aria-hidden="true">
-      <IconComposer
-        icon="MinusUnique"
-        size={28}
-        className="collecting-toggle__icon collecting-toggle__icon--remove"
-      />
-      <IconComposer
-        icon="CheckUnique"
-        size={28}
-        className="collecting-toggle__icon collecting-toggle__icon--confirm"
-      />
+    <Styled.Icons aria-hidden="true">
+      <Styled.Icon icon="MinusUnique" size={28} $type="remove" />
+      <Styled.Icon icon="CheckUnique" size={28} $type="confirm" />
       {!useOutline && (
-        <IconComposer
-          icon="StarFillUnique"
-          size="default"
-          className="collecting-toggle__icon collecting-toggle__icon--add"
-        />
+        <Styled.Icon icon="StarFillUnique" size="default" $type="add" />
       )}
       {useOutline && (
-        <IconComposer
-          icon="StarOutlineUnique"
-          size="default"
-          className="collecting-toggle__icon collecting-toggle__icon--add"
-        />
+        <Styled.Icon icon="StarOutlineUnique" size="default" $type="add" />
       )}
-    </div>
+    </Styled.Icons>
   );
 }
 
