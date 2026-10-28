@@ -100,7 +100,7 @@ export default `
 
   &__title-bar-collecting-toggle {
     margin-inline-start: 12px;
-    transform: translateY(-3px);
+    transform: translateY(-1px);
   }
 
   &__button {

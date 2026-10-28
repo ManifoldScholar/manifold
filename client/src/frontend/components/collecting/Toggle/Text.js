@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 function determineText(view, t) {
   switch (view) {
@@ -12,6 +13,7 @@ function determineText(view, t) {
       };
     case "add":
     case "add-active":
+    case "collected-active":
       return {
         key: "add",
         text: t("actions.add")
@@ -24,22 +26,24 @@ function determineText(view, t) {
   }
 }
 
-function ToggleText({ view }) {
+function ToggleText({ view, disclosure = false }) {
   const { t } = useTranslation();
 
   const { key, text } = determineText(view, t);
 
   return (
-    <span key={key} className="collecting-toggle__text">
-      {text}
-    </span>
+    <Styled.Text key={key}>
+      <span>{text}</span>
+      {disclosure && <Styled.Disclosure icon="disclosureDown16" size={16} />}
+    </Styled.Text>
   );
 }
 
 ToggleText.displayName = "Collecting.Toggle.Text";
 
 ToggleText.propTypes = {
-  view: PropTypes.string
+  view: PropTypes.string,
+  disclosure: PropTypes.bool
 };
 
 export default ToggleText;
