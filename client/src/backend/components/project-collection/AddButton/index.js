@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import startsWith from "lodash/startsWith";
-import classNames from "classnames";
-import IconComposer from "global/components/utility/IconComposer";
 import { withTranslation } from "react-i18next";
+import * as ToggleStyles from "frontend/components/collecting/Toggle/styles";
+import * as Styled from "./styles";
 
 class ProjectCollectionAddButton extends Component {
   static displayName = "ProjectCollection.AddButton";
@@ -132,60 +132,53 @@ class ProjectCollectionAddButton extends Component {
   renderButtonGroup() {
     const { key, text } = this.determineText();
 
-    return (
-      <span key={key} className="collecting-toggle__text">
-        {text}
-      </span>
-    );
+    return <ToggleStyles.Text key={key}>{text}</ToggleStyles.Text>;
   }
 
   render() {
     return (
       <>
-        <button
-          className="sr-collecting-toggle screen-reader-text"
-          onClick={this.toggleInclude}
-        >
+        <Styled.ScreenReaderToggle onClick={this.toggleInclude}>
           {this.screenReaderButtonText()}
-        </button>
-        <button
+        </Styled.ScreenReaderToggle>
+        <ToggleStyles.Toggle
           onClick={this.handleClick}
           onMouseEnter={this.activate}
           onMouseLeave={this.deactivate}
-          className={classNames({
-            "collecting-toggle": true,
-            "collecting-toggle--small-project-cover": true
-          })}
+          $variant="small-project-cover"
           aria-hidden="true"
           tabIndex={-1}
         >
-          <div
-            className={classNames({
-              "collecting-toggle__inner": true,
-              [`collecting-toggle__inner--${this.state.view}`]: true
-            })}
-            aria-hidden="true"
-          >
-            <div className="collecting-toggle__icons">
-              <IconComposer
+          <ToggleStyles.Inner $view={this.state.view} aria-hidden="true">
+            <ToggleStyles.Icons>
+              {/*
+                The plain `collecting-toggle__icon` class on each icon is a
+                hook for the `svg:not(.collecting-toggle__icon)` selectors in
+                theme/styles/components/backend/listEntity/entityRow.js. It
+                is not a styling class.
+              */}
+              <ToggleStyles.Icon
                 icon="MinusUnique"
                 size={28}
-                className="collecting-toggle__icon collecting-toggle__icon--remove"
+                $type="remove"
+                className="collecting-toggle__icon"
               />
-              <IconComposer
+              <ToggleStyles.Icon
                 icon="CheckUnique"
                 size={28}
-                className="collecting-toggle__icon collecting-toggle__icon--confirm"
+                $type="confirm"
+                className="collecting-toggle__icon"
               />
-              <IconComposer
+              <ToggleStyles.Icon
                 icon="PlusUnique"
                 size={28}
-                className="collecting-toggle__icon collecting-toggle__icon--add"
+                $type="add"
+                className="collecting-toggle__icon"
               />
-            </div>
+            </ToggleStyles.Icons>
             {this.renderButtonGroup()}
-          </div>
-        </button>
+          </ToggleStyles.Inner>
+        </ToggleStyles.Toggle>
       </>
     );
   }

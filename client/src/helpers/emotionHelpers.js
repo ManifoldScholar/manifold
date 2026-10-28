@@ -9,7 +9,10 @@ const ALLOWED_PROPS = [
   "placeholderAttributes",
   "aria-expanded",
   "aria-controls",
-  "aria-labelledby"
+  "aria-labelledby",
+  // native Popover API attributes; not yet in @emotion/is-prop-valid
+  "popover",
+  "popovertarget"
 ];
 
 // styled-components-style transient prop support (`$someProp`)
