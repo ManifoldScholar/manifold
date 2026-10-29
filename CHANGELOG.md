@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.10-rc](https://github.com/ManifoldScholar/manifold/compare/9.2.9...9.2.10-rc) (2026-10-29)
+
+
+### Bug Fixes
+
+* fix RC slideshow pagination dispatch error ([55bf7a3](https://github.com/ManifoldScholar/manifold/commit/55bf7a31b067def10b2231d6c9383c38123363e7))
+
 ## [9.2.9](https://github.com/ManifoldScholar/manifold/compare/9.2.9-rc.1...9.2.9) (2026-10-15)
 
 
