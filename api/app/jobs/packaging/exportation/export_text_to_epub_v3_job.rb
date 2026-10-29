@@ -3,7 +3,7 @@
 module Packaging
   module Exportation
     class ExportTextToEpubV3Job < ApplicationJob
-      discard_on ActiveJob::DeserializationError, ActiveRecord::RecordNotFound, Utility::IndexMap::AlreadyStoredObjectError, StandardError
+      discard_on ActiveJob::DeserializationError, ActiveRecord::RecordNotFound, Utility::IndexMap::AlreadyStoredObjectError
 
       around_perform :advisory_locked!
 

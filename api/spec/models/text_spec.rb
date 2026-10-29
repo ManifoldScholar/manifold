@@ -3,6 +3,33 @@
 require "rails_helper"
 
 RSpec.describe Text, type: :model do
+  describe ".pending_epub_v3_export", packaging: true do
+    let!(:text) { FactoryBot.create :text, :exports_as_epub_v3 }
+
+    def export_in_state(state)
+      FactoryBot.create(:text_export, :epub_v3, text: text, fingerprint: text.fingerprint).tap do |export|
+        export.transition_to! :processing
+        export.transition_to! state unless state == :processing
+      end
+    end
+
+    it "includes a text with no export" do
+      expect(described_class.pending_epub_v3_export).to include text
+    end
+
+    it "includes a text whose current export failed" do
+      export_in_state :failure
+
+      expect(described_class.pending_epub_v3_export).to include text
+    end
+
+    it "excludes a text whose current export succeeded" do
+      export_in_state :success
+
+      expect(described_class.pending_epub_v3_export).not_to include text
+    end
+  end
+
   describe "#section_at" do
     let!(:text) { FactoryBot.create :text }
 
