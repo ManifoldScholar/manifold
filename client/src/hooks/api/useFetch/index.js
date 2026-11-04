@@ -14,6 +14,15 @@ import config from "config";
 import ch from "helpers/consoleHelpers";
 import { isFunction } from "lodash";
 
+/**
+ * Fetches that occur more than this many milliseconds apart are treated as
+ * independent (for example, a user paginating a list) rather than as part of
+ * a refetch loop. Only fetches within this window count toward the loop guard.
+ */
+const FETCH_LOOP_WINDOW_MS = 1000;
+// The number of fetches within the window that is treated as a refetch loop.
+const FETCH_LOOP_LIMIT = 25;
+
 function log(type, key) {
   if (config.environment.isDevelopment) {
     ch.notice(`${type}: ${key}`, "floppy_disk");
@@ -32,7 +41,8 @@ export default function useFetch({
   const firstClientRun = useRef(true);
   const uid = `fetch_${useUID()}`;
   const [requestKey] = useState(options.requestKey ?? `fetch_${useUID()}`);
-  const count = useRef(1);
+  const count = useRef(0);
+  const lastFetchAt = useRef(0);
   const store = useStore();
   const getState = store.getState;
   const dispatch = useDispatch();
@@ -49,16 +59,20 @@ export default function useFetch({
 
   const [apiCall, ...apiCallArgs] = request;
 
-  if (count.current > 25)
+  if (count.current > FETCH_LOOP_LIMIT)
     throw new Error(
-      `useFetch tried to fetch data more than 25 times. This suggests that an input to
-      useFetch needs to be memoized.`
+      `useFetch tried to fetch data more than ${FETCH_LOOP_LIMIT} times within
+      ${FETCH_LOOP_WINDOW_MS}ms. This suggests that an input to useFetch needs to be
+      memoized.`
     );
 
   /* eslint-disable react-hooks/exhaustive-deps */
   const triggerFetchData = useCallback(() => {
     if (!condition) return Promise.resolve();
     log("useFetch", requestKey);
+    const now = Date.now();
+    if (now - lastFetchAt.current > FETCH_LOOP_WINDOW_MS) count.current = 0;
+    lastFetchAt.current = now;
     count.current += 1;
     const apiFetch = apiCall(...apiCallArgs);
     const action = entityStoreActions.request(apiFetch, requestKey, options);
