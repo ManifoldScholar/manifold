@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.10-rc.1](https://github.com/ManifoldScholar/manifold/compare/9.2.10-rc...9.2.10-rc.1) (2026-11-05)
+
+
+### Bug Fixes
+
+* scope useFetch loop guard to a time window ([5563a42](https://github.com/ManifoldScholar/manifold/commit/5563a429da6f0bf26e15da739463d2d09080d601))
+
 ## [9.2.10-rc](https://github.com/ManifoldScholar/manifold/compare/9.2.9...9.2.10-rc) (2026-10-29)
 
 
