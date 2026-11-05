@@ -10,7 +10,7 @@ export default `
     }
   }
 
-  body {
+  body, option {
     color: var(--color);
     background-color: var(--background-color);
   }
