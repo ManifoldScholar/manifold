@@ -11,7 +11,10 @@ export default function ResourceAnnotationDialog({
   ...dialog
 }) {
   const resourceEntity = useFromStore({
-    path: `entityStore.entities.${resource.type}s.${resource.id}`
+    action: "grab",
+    entityType: `${resource.type}s`,
+    id: resource.id,
+    allowPartial: true
   });
 
   if (!resourceEntity) return null;
