@@ -1,5 +1,5 @@
-# When a push is made to `main`, create a release candidate.
-# For production releases, you must provide a commit with a "Release-As" footer to override the prerelease tag.
+# Promote the current release candidate to a stable release
+# Opens a release PR that must be manually merged.
 
 name: Promote release candidate to release
 
@@ -28,7 +28,7 @@ jobs:
         with:
           ref: main
 
-      - name: Resolve versions
+      - name: Resolve target version
         id: versions
         run: |
           current="$(tr -d '[:space:]' < MANIFOLD_VERSION)"
@@ -44,17 +44,7 @@ jobs:
             echo "::error::target must be a stable semver, got '$target'"
             exit 1
           fi
-          echo "current=$current" >> "$GITHUB_OUTPUT"
           echo "target=$target" >> "$GITHUB_OUTPUT"
-
-      - name: Push promotion commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit --allow-empty \
-            -m "chore: promote ${{ steps.versions.outputs.current }} to ${{ steps.versions.outputs.target }}" \
-            -m "Release-As: ${{ steps.versions.outputs.target }}"
-          git push origin main
 
       - name: Rewrite release PR to the stable version
         uses: googleapis/release-please-action@v4
@@ -62,3 +52,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: ".release-please/main-config.json"
           manifest-file: ".release-please/main-manifest.json"
+          target-branch: main
+          release-as: ${{ steps.versions.outputs.target }}

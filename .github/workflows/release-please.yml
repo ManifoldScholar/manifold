@@ -1,7 +1,8 @@
 name: release-please
 
 on:
-  push:
+  pull_request_target:
+    types: [closed]
     branches:
       - beta
       - main
@@ -16,7 +17,9 @@ concurrency:
 
 jobs:
   beta:
-    if: github.ref_name == 'beta'
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'beta'
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
@@ -31,12 +34,34 @@ jobs:
           manifest-file: ".release-please/beta-manifest.json"
 
   main:
-    if: github.ref_name == 'main'
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
+      # A beta merge resets the prerelease line to rc.1 off the merged base version;
+      # all other merges let release-please compute the version normally.
+      - name: Checkout main
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'beta'
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Resolve rc target
+        id: versions
+        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'beta'
+        run: |
+          current="$(tr -d '[:space:]' < MANIFOLD_VERSION)"
+          base="${current%%-*}"
+          if [[ ! "$base" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::could not derive a base version from MANIFOLD_VERSION '$current'"
+            exit 1
+          fi
+          echo "target=${base}-rc.1" >> "$GITHUB_OUTPUT"
+
       - id: release
         uses: googleapis/release-please-action@v4
         with:
@@ -44,6 +69,7 @@ jobs:
           target-branch: main
           config-file: ".release-please/main-config.json"
           manifest-file: ".release-please/main-manifest.json"
+          release-as: ${{ steps.versions.outputs.target }}
 
   build-beta:
     needs: beta
