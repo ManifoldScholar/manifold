@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.10-rc.2](https://github.com/ManifoldScholar/manifold/compare/9.2.10-rc.1...9.2.10-rc.2) (2026-11-06)
+
+
+### Bug Fixes
+
+* ensure select elements are visible ([5c7ff0f](https://github.com/ManifoldScholar/manifold/commit/5c7ff0f4f3be3e19dd879d806573d75656623995))
+
 ## [9.2.10-rc.1](https://github.com/ManifoldScholar/manifold/compare/9.2.10-rc...9.2.10-rc.1) (2026-11-05)
 
 
