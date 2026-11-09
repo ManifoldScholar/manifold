@@ -1,0 +1,32 @@
+name: Prune GHCR untagged cache
+
+on:
+  schedule:
+    - cron: "0 4 * * 0"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Report only"
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  packages: write
+
+concurrency:
+  group: prune-ghcr-cache
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: snok/container-retention-policy@v3
+        with:
+          account: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          image-names: "manifold-api manifold-client"
+          tag-selection: untagged
+          cut-off: 1d
+          keep-n-most-recent: 0
+          dry-run: ${{ github.event_name == 'schedule' && false || inputs.dry_run }}
