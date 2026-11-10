@@ -33,6 +33,7 @@ RSpec.describe "LTI resource-link launch", type: :request do
           "context"       => { "id" => course_context.context_id },
           "roles"         => roles
         },
+        "lti_registration" => registration,
         "target_link_uri" => "#{Rails.configuration.manifold.url}/lti/launch?redirect_type=Project&redirect_id=#{project.id}"
       }
     )

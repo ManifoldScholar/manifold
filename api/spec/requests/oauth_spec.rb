@@ -124,6 +124,7 @@ RSpec.describe "External auth (OIDC / SAML) callback", type: :request do
         "extra"    => {
           "raw_info" => { "iss" => registration.issuer, "aud" => registration.client_id, "email" => user.email },
           "lti"      => { "message_type" => "LtiResourceLinkRequest", "deployment_id" => deployment.deployment_id },
+          "lti_registration" => registration,
           "target_link_uri" => Rails.configuration.manifold.url
         }
       )
