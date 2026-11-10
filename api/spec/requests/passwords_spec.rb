@@ -24,6 +24,52 @@ RSpec.describe "Passwords API", type: :request do
     end
   end
 
+  describe "account-link password reset" do
+    let(:omniauth_hash) do
+      OmniAuth::AuthHash.new(
+        "provider" => "lti",
+        "uid" => "https://canvas.example.com|user-1",
+        "info" => { "email" => user.email },
+        "extra" => { "target_link_uri" => "https://manifold.test/" }
+      )
+    end
+    let(:account_link_token) { ExternalAuth::PendingIdentityLink.build(omniauth_hash, user).persist! }
+
+    before { Rails.cache.clear }
+
+    it "derives the account from the token, ignoring a mismatched email" do
+      other = FactoryBot.create(:user)
+      post api_v1_passwords_path, params: { email: other.email, account_link_token: account_link_token }
+
+      expect(response).to have_http_status(:no_content)
+      expect(user.reload.reset_password_token).to be_present
+      expect(other.reload.reset_password_token).to be_nil
+    end
+
+    it "keeps the parked link alive past its original TTL" do
+      token = account_link_token
+
+      Timecop.travel(14.minutes.from_now) { post api_v1_passwords_path, params: { account_link_token: token } }
+
+      Timecop.travel(20.minutes.from_now) do
+        expect(ExternalAuth::PendingIdentityLink.find(token)).to be_present
+      end
+    end
+
+    it "shortens the reset window to the account-link TTL" do
+      user.generate_reset_token
+
+      Timecop.travel(16.minutes.from_now) do
+        put "/api/v1/passwords/update", params: {
+          password: "testtest1234", password_confirmation: "testtest1234",
+          reset_token: user.reset_password_token, account_link_token: account_link_token
+        }
+      end
+
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+  end
+
   describe "update password request" do
     let(:update_params) do
       {

@@ -4,17 +4,19 @@ require "rails_helper"
 
 RSpec.describe "GET /api/v1/lti/deep_linking", type: :request do
   let(:context_token) { SecureRandom.hex(32) }
-  let(:cache_key) { "#{Lti::DeepLinking::Context::CACHE_KEY_PREFIX}/#{context_token}" }
+  let(:cache_key) { Lti::DeepLinking::Context.cache_key(context_token) }
 
   let(:cached_payload) do
     {
-      "user_id"              => reader.id,
-      "accept_types"         => ["ltiResourceLink"],
-      "accept_multiple"      => true,
+      "user_id" => reader.id,
+      "accept_types" => ["ltiResourceLink"],
+      "accept_multiple" => true,
       "deep_link_return_url" => "https://canvas.example.com/dl_return",
-      "data"                 => "opaque",
-      "iss"                  => "https://canvas.example.com",
-      "client_id"            => "tool-client-id"
+      "data" => "opaque",
+      "iss" => "https://canvas.example.com",
+      "client_id" => "tool-client-id",
+      "deployment_id" => "deploy-1",
+      "lti_course_context_id" => SecureRandom.uuid
     }
   end
 

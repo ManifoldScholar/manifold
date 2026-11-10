@@ -11,12 +11,25 @@ module API
 
       def create
         authenticated_user = user_by_credentials || user_by_auth_code
+        return finalize_identity_link(authenticated_user) if authenticated_user && account_link_token.present?
+
         render_authenticated_user(authenticated_user)
       rescue StandardError => e
         render_error_response e
       end
 
       private
+
+      def finalize_identity_link(user)
+        link = Auth::IdentityLinker.new.finalize(account_link_token, user)
+        return render json: { errors: [link.error] }, status: :unprocessable_entity unless link.success?
+
+        render_authenticated_user(link.user, meta: { redirect: link.redirect_query })
+      end
+
+      def account_link_token
+        params[:account_link_token].presence
+      end
 
       def user_by_credentials
         return if token_params[:email].blank?

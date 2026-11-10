@@ -16,21 +16,21 @@ RSpec.describe Lti::DeepLinking::Context do
   let(:dl_settings) do
     {
       "deep_link_return_url" => "https://canvas.example.com/dl_return",
-      "accept_types"         => ["ltiResourceLink"],
-      "accept_multiple"      => true,
-      "data"                 => "opaque-platform-data"
+      "accept_types" => ["ltiResourceLink"],
+      "accept_multiple" => true,
+      "data" => "opaque-platform-data"
     }
   end
 
   let(:lti_claim_hash) do
     {
-      "message_type"          => "LtiDeepLinkingRequest",
-      "deployment_id"         => deployment.deployment_id,
-      "context"               => {
-        "id"    => context_id,
+      "message_type" => "LtiDeepLinkingRequest",
+      "deployment_id" => deployment.deployment_id,
+      "context" => {
+        "id" => context_id,
         "title" => "Intro to Ruby",
         "label" => "CS101",
-        "type"  => ["http://purl.imsglobal.org/vocab/lis/v2/course#CourseSection"]
+        "type" => ["http://purl.imsglobal.org/vocab/lis/v2/course#CourseSection"]
       },
       "deep_linking_settings" => dl_settings
     }
@@ -38,22 +38,22 @@ RSpec.describe Lti::DeepLinking::Context do
 
   let(:raw_info_claims) do
     {
-      "iss"   => registration.issuer,
-      "aud"   => registration.client_id,
-      "sub"   => "user-1",
+      "iss" => registration.issuer,
+      "aud" => registration.client_id,
+      "sub" => "user-1",
       "nonce" => "abc",
-      "iat"   => Time.now.to_i,
-      "exp"   => Time.now.to_i + 300
+      "iat" => Time.now.to_i,
+      "exp" => Time.now.to_i + 300
     }
   end
 
   let(:omniauth_hash) do
     {
       "provider" => "lti",
-      "uid"      => "#{registration.issuer}|user-1",
-      "extra"    => {
-        "raw_info"        => raw_info_claims,
-        "lti"             => lti_claim_hash,
+      "uid" => "#{registration.issuer}|user-1",
+      "extra" => {
+        "raw_info" => raw_info_claims,
+        "lti" => lti_claim_hash,
         "target_link_uri" => "https://manifold.test/"
       }
     }
@@ -75,14 +75,14 @@ RSpec.describe Lti::DeepLinking::Context do
       token = context.persist!
 
       expect(Rails.cache.read("lti/dl/#{token}")).to include(
-        "data"                 => "opaque-platform-data",
-        "deep_link_return_url" => "https://canvas.example.com/dl_return",
-        "accept_types"         => ["ltiResourceLink"],
-        "accept_multiple"      => true,
-        "deployment_id"        => deployment.deployment_id,
-        "iss"                  => registration.issuer,
-        "client_id"            => registration.client_id,
-        "user_id"              => user.id
+        data: "opaque-platform-data",
+        deep_link_return_url: "https://canvas.example.com/dl_return",
+        accept_types: ["ltiResourceLink"],
+        accept_multiple: true,
+        deployment_id: deployment.deployment_id,
+        iss: registration.issuer,
+        client_id: registration.client_id,
+        user_id: user.id
       )
     end
 
@@ -91,7 +91,7 @@ RSpec.describe Lti::DeepLinking::Context do
       cached = Rails.cache.read("lti/dl/#{token}")
       course_context = LtiCourseContext.find_by!(lti_deployment: deployment, context_id: context_id)
 
-      expect(cached["lti_course_context_id"]).to eq(course_context.id)
+      expect(cached[:lti_course_context_id]).to eq(course_context.id)
       expect(course_context).to have_attributes(
         context_title: "Intro to Ruby",
         context_label: "CS101",
@@ -155,7 +155,7 @@ RSpec.describe Lti::DeepLinking::Context do
       allow(LtiCourseContext).to receive(:find_by!).and_call_original
 
       token = context.persist!
-      expect(Rails.cache.read("lti/dl/#{token}")["lti_course_context_id"]).to eq(existing.id)
+      expect(Rails.cache.read("lti/dl/#{token}")[:lti_course_context_id]).to eq(existing.id)
       expect(LtiCourseContext).to have_received(:find_by!).with(lti_deployment: deployment, context_id: context_id)
     end
   end
