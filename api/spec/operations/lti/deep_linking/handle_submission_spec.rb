@@ -7,17 +7,17 @@ RSpec.describe Lti::DeepLinking::HandleSubmission do
   let(:project) { FactoryBot.create(:project) }
   let(:course_context) { FactoryBot.create(:lti_course_context, context_title: "Intro to Ruby") }
   let(:context_token) { SecureRandom.hex(32) }
-  let(:cache_key) { "#{Lti::DeepLinking::Context::CACHE_KEY_PREFIX}/#{context_token}" }
+  let(:cache_key) { Lti::DeepLinking::Context.cache_key(context_token) }
 
   let(:payload) do
     {
-      "user_id"               => user.id,
-      "client_id"             => "tool-client-id",
-      "iss"                   => "https://canvas.example.com",
-      "deployment_id"         => "deploy-1",
-      "deep_link_return_url"  => "https://canvas.example.com/dl_return",
-      "accept_types"          => ["ltiResourceLink"],
-      "accept_multiple"       => true,
+      "user_id" => user.id,
+      "client_id" => "tool-client-id",
+      "iss" => "https://canvas.example.com",
+      "deployment_id" => "deploy-1",
+      "deep_link_return_url" => "https://canvas.example.com/dl_return",
+      "accept_types" => ["ltiResourceLink"],
+      "accept_multiple" => true,
       "lti_course_context_id" => course_context.id
     }
   end
