@@ -64,6 +64,7 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
       "extra" => {
         "raw_info" => raw_info,
         "lti" => lti_extra,
+        "lti_registration" => registration,
         "target_link_uri" => Rails.configuration.manifold.url
       }
     )
