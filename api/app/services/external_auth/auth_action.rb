@@ -15,5 +15,14 @@ module ExternalAuth
 
       delegate :info, to: :auth_hash, prefix: :auth
     end
+
+    def account_linking_required?
+      case provider.to_sym
+      when :lti
+        auth_hash.extra.lti_registration.require_account_linking?
+      else
+        AuthConfig.provider_for(provider)&.require_account_linking? || false
+      end
+    end
   end
 end
