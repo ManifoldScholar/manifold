@@ -21,6 +21,7 @@ RSpec.describe "LTI account-link confirmation", type: :request do
           "iss" => registration.issuer, "aud" => registration.client_id,
           "sub" => uid.split("|").last, "email" => email
         },
+        "lti_registration" => registration,
         "lti" => {
           "message_type" => "LtiResourceLinkRequest",
           "deployment_id" => deployment.deployment_id,
