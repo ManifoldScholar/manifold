@@ -2102,7 +2102,8 @@ CREATE TABLE public.lti_registrations (
     registration_access_token text,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    host text NOT NULL
+    host text NOT NULL,
+    require_account_linking boolean DEFAULT true NOT NULL
 );
 
 
@@ -8358,6 +8359,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261110043020'),
 ('20261023230025'),
 ('20261021172201'),
 ('20261013234117'),

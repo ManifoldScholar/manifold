@@ -20,9 +20,10 @@ class AbstractAuthProviderConfig < ApplicationConfig
               enabled: false,
               hidden: false,
               default: false,
+              require_account_linking: false,
               trust_email: true
 
-  coerce_types enabled: :boolean, hidden: :boolean, default: :boolean
+  coerce_types default: :boolean, enabled: :boolean, hidden: :boolean, require_account_linking: :boolean
 
   delegate :provider_name, :strategy_name, to: :class
 
