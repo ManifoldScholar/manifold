@@ -21,21 +21,21 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
   let(:dl_settings) do
     {
       "deep_link_return_url" => "https://canvas.example.com/dl_return",
-      "accept_types"         => ["ltiResourceLink"],
-      "accept_multiple"      => true,
-      "data"                 => "opaque-platform-data"
+      "accept_types" => ["ltiResourceLink"],
+      "accept_multiple" => true,
+      "data" => "opaque-platform-data"
     }
   end
 
   let(:lti_extra) do
     {
-      "message_type"          => "LtiDeepLinkingRequest",
-      "deployment_id"         => deployment.deployment_id,
-      "context"               => {
-        "id"    => "course-ctx-42",
+      "message_type" => "LtiDeepLinkingRequest",
+      "deployment_id" => deployment.deployment_id,
+      "context" => {
+        "id" => "course-ctx-42",
         "title" => "Intro to Ruby",
         "label" => "CS101",
-        "type"  => ["http://purl.imsglobal.org/vocab/lis/v2/course#CourseSection"]
+        "type" => ["http://purl.imsglobal.org/vocab/lis/v2/course#CourseSection"]
       },
       "deep_linking_settings" => dl_settings
     }
@@ -43,13 +43,13 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
 
   let(:raw_info) do
     {
-      "iss"   => registration.issuer,
-      "aud"   => registration.client_id,
-      "sub"   => "user-1",
+      "iss" => registration.issuer,
+      "aud" => registration.client_id,
+      "sub" => "user-1",
       "email" => user.email,
       "nonce" => "abc",
-      "iat"   => Time.now.to_i,
-      "exp"   => Time.now.to_i + 300
+      "iat" => Time.now.to_i,
+      "exp" => Time.now.to_i + 300
     }
   end
 
@@ -59,11 +59,11 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
   let(:auth_hash) do
     OmniAuth::AuthHash.new(
       "provider" => "lti",
-      "uid"      => "https://canvas.example.com|user-1",
-      "info"     => { "email" => user.email },
-      "extra"    => {
-        "raw_info"        => raw_info,
-        "lti"             => lti_extra,
+      "uid" => "https://canvas.example.com|user-1",
+      "info" => { "email" => user.email },
+      "extra" => {
+        "raw_info" => raw_info,
+        "lti" => lti_extra,
         "target_link_uri" => Rails.configuration.manifold.url
       }
     )
@@ -125,15 +125,15 @@ RSpec.describe "LTI Deep Linking callback", type: :request do
 
       cached = Rails.cache.read("lti/dl/#{token}")
       expect(cached).to include(
-        "data"                 => "opaque-platform-data",
-        "deep_link_return_url" => "https://canvas.example.com/dl_return",
-        "accept_types"         => ["ltiResourceLink"],
-        "accept_multiple"      => true,
-        "deployment_id"        => deployment.deployment_id,
-        "iss"                  => registration.issuer,
-        "user_id"              => user.id
+        data: "opaque-platform-data",
+        deep_link_return_url: "https://canvas.example.com/dl_return",
+        accept_types: ["ltiResourceLink"],
+        accept_multiple: true,
+        deployment_id: deployment.deployment_id,
+        iss: registration.issuer,
+        user_id: user.id
       )
-      expect(cached["lti_course_context_id"]).to be_present
+      expect(cached[:lti_course_context_id]).to be_present
     end
 
     it "does NOT set X-Frame-Options: DENY on the redirect response (iframe-safe)" do

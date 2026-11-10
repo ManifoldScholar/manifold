@@ -16,25 +16,17 @@ module Auth
     def redirect; end
 
     def authorize
-      outcome = ExternalAuth::FindUser.run(
-        provider: params[:provider],
-        auth_hash: omniauth_hash
-      )
+      outcome = ExternalAuth::FindUser.run(provider: params[:provider], auth_hash: omniauth_hash)
 
-      if outcome.valid?
-        @current_user = outcome.user
-        Identities::HandleExternalAuth.new.call(outcome.identity, omniauth_hash)
-        set_auth_code(@current_user)
+      if outcome.requires_link?
+        return redirect_to identity_linker.divert_url(outcome.linkable_user), allow_other_host: true
       end
 
-      return handle_deep_linking_request if @current_user && lti_deep_linking_request?
+      establish_current_user(outcome)
 
-      enroll_in_reading_group if @current_user && lti?
+      return finalize_identity_link if @current_user && account_link_token.present?
 
-      error = outcome.invalid? ? AUTH_ERROR_STRING : nil
-      redirect = Auth::OmniauthRedirect.new(omniauth_hash, params, error:)
-
-      redirect_to redirect.redirect_url, allow_other_host: true
+      complete_authorization
     end
 
     def jwks
@@ -45,37 +37,47 @@ module Auth
 
     private
 
-    # Handle an LTI Deep Linking request: cache the context and redirect the
-    # instructor to the React selection page, or render the error template with
-    # the status the handler categorized the failure as. Runs the handler once.
-    def handle_deep_linking_request
-      result = ::Lti::DeepLinking::HandleRequest.new(omniauth_hash, @current_user).call
+    def establish_current_user(outcome)
+      return unless outcome.valid?
 
-      result.either(
-        ->(context) { redirect_to deep_linking_redirect_url(context), allow_other_host: true },
-        ->(failure) { render_deep_linking_error(failure) }
-      )
+      @current_user = outcome.user
+      Identities::HandleExternalAuth.new.call(outcome.identity, omniauth_hash) if @current_user
     end
 
-    def deep_linking_redirect_url(context)
-      Auth::OmniauthRedirect.new(omniauth_hash, params, deep_linking_context: context).redirect_url
+    def complete_authorization
+      return redirect_to(error_redirect_url, allow_other_host: true) unless @current_user
+
+      set_auth_code(@current_user)
+
+      resolver = ExternalAuth::Resolver.new(omniauth_hash, @current_user, params)
+      return render_deep_linking_error(resolver.failure) if resolver.failure
+
+      redirect_to resolver.redirect_url, allow_other_host: true
+    end
+
+    def error_redirect_url
+      Auth::OmniauthRedirect.new(omniauth_hash, params, error: AUTH_ERROR_STRING).redirect_url
+    end
+
+    def finalize_identity_link
+      link = identity_linker.finalize(account_link_token, @current_user)
+      set_auth_code(link.user) if link.success?
+      redirect_to link.redirect_url, allow_other_host: true
+    end
+
+    def identity_linker
+      @identity_linker ||= Auth::IdentityLinker.new(omniauth_hash, params)
+    end
+
+    # Set only on the return OAuth login (OmniAuth carries it through as a param), never on the first
+    # LTI launch.
+    def account_link_token
+      request.env.dig("omniauth.params", "account_link_token").presence || params[:account_link_token].presence
     end
 
     def render_deep_linking_error(failure)
       @error_message = failure[:message]
       render "auth/lti/deep_linking/error", status: failure[:status]
-    end
-
-    # JIT-enroll the launching user into the course's reading group when the
-    # launched resource belongs to it. Best-effort; never blocks the launch.
-    def enroll_in_reading_group
-      ::Lti::ResourceLink::Enroll.new(omniauth_hash, @current_user).call
-    end
-
-    def lti_deep_linking_request?
-      return false unless lti?
-
-      omniauth_hash&.dig("extra", "lti", "message_type") == ::Lti::Registration::Registrar::DL_MESSAGE_TYPE
     end
 
     def omniauth_hash
