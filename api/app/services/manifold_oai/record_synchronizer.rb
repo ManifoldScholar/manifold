@@ -116,7 +116,7 @@ module ManifoldOAI
     # @return [void]
     def maybe_link_project!
       # :nocov:
-      return unless source.kind_of?(Project)
+      return unless source.kind_of?(Project) && !source.journal_issue?
       # :nocov:
 
       @projects_set.link! record
