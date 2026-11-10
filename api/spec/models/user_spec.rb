@@ -209,6 +209,13 @@ RSpec.describe User, type: :model do
       end
     end
 
+    it "honors a shortened TTL" do
+      user.generate_reset_token
+      Timecop.travel(DateTime.now + 16.minutes) do
+        expect(user.valid_token?(15.minutes)).to be false
+      end
+    end
+
     it "can be generated automatically" do
       user.force_reset_password
       expect(user.password).not_to eq("password")

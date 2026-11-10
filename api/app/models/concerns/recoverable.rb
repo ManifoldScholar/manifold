@@ -11,14 +11,14 @@ module Recoverable
     end
   end
 
-  def generate_reset_token
+  def generate_reset_token(account_link_token: nil)
     self.reset_password_token = SecureRandom.uuid
     self.reset_password_sent_at = Time.now.utc
-    send_reset_password_email if save
+    send_reset_password_email(account_link_token: account_link_token) if save
   end
 
-  def send_reset_password_email
-    AccountMailer.reset_password(self).deliver
+  def send_reset_password_email(account_link_token: nil)
+    AccountMailer.reset_password(self, account_link_token: account_link_token).deliver
   end
 
   def update_password(new_password, new_password_confirmation)
@@ -32,9 +32,9 @@ module Recoverable
     self.password_confirmation = nil
   end
 
-  def valid_token?
+  def valid_token?(ttl = 1.hour)
     return false unless reset_password_token && reset_password_sent_at
 
-    reset_password_sent_at > Time.now.utc - 1.hour
+    reset_password_sent_at > Time.now.utc - ttl
   end
 end

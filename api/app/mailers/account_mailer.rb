@@ -7,8 +7,9 @@ class AccountMailer < ApplicationMailer
     mail(to: @user.email, subject: "Confirm Your Email")
   end
 
-  def reset_password(user)
+  def reset_password(user, account_link_token: nil)
     @user = user
+    @account_link_token = account_link_token
     mail(to: @user.email, subject: "Password reset requested")
   end
 
