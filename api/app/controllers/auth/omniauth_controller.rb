@@ -18,7 +18,7 @@ module Auth
     def authorize
       outcome = ExternalAuth::FindUser.run(provider: params[:provider], auth_hash: omniauth_hash)
 
-      if outcome.requires_link?
+      if outcome.account_linking_required?
         return redirect_to identity_linker.divert_url(outcome.linkable_user), allow_other_host: true
       end
 

@@ -61,7 +61,8 @@ module OmniAuth
         {
           raw_info: @claims,
           lti: extract_lti_claims(@claims),
-          target_link_uri: @target_link_uri
+          target_link_uri: @target_link_uri,
+          lti_registration: @lti_registration
         }.compact
       end
 
@@ -91,6 +92,7 @@ module OmniAuth
       def find_or_create_deployment!(registration, deployment_id)
         registration.lti_deployments.find_or_create_by!(deployment_id: deployment_id)
       rescue ActiveRecord::RecordNotUnique
+        # Handles case where multiple concurrent requests cause duplicate creates in quick succession
         registration.lti_deployments.find_by!(deployment_id: deployment_id)
       end
 
@@ -119,8 +121,8 @@ module OmniAuth
       # Decodes and verifies the JWT id_token
       def decode_and_verify!(id_token, state)
         unverified = JWT.decode(id_token, nil, false).first
-        registration = find_registration!(unverified["iss"], unverified["aud"])
-        jwks_loader = ::Lti::Auth::PlatformJwks.new(registration)
+        @lti_registration = find_registration!(unverified["iss"], unverified["aud"])
+        jwks_loader = ::Lti::Auth::PlatformJwks.new(@lti_registration)
 
         JWT.decode(
           id_token,
@@ -129,13 +131,13 @@ module OmniAuth
           algorithms: ["RS256"],
           jwks: jwks_loader.to_proc,
           verify_iss: true,
-          iss: registration.issuer,
+          iss: @lti_registration.issuer,
           verify_aud: true,
-          aud: registration.client_id
+          aud: @lti_registration.client_id
         ).first.tap do |claims|
           verify_nonce!(claims, state)
           verify_timing!(claims)
-          verify_deployment!(registration, claims)
+          verify_deployment!(@lti_registration, claims)
         end
       end
 
