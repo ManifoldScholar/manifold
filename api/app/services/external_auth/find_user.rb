@@ -3,12 +3,11 @@
 module ExternalAuth
   class FindUser < ActiveInteraction::Base
     include AuthAction
-    include HandlesAccountLinking
 
     attr_reader :user
 
     def execute
-      return if requires_link?
+      return if account_linking_required?
 
       @user = find_user
     end
@@ -18,8 +17,8 @@ module ExternalAuth
     end
 
     # Does a new identity's email match an existing account?
-    def requires_link?
-      identity.new_record? && linkable_user.present? && account_linking_required_for?(provider)
+    def account_linking_required?
+      super && identity.new_record? && linkable_user.present?
     end
 
     def linkable_user
