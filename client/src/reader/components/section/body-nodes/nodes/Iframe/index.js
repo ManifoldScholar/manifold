@@ -48,18 +48,21 @@ class IframeNode extends Component {
     return filteredAttributes;
   }
 
+  // Inline styles to pass through to the iframe. Width and height are omitted
+  // because the responsive wrapper controls the frame's dimensions.
   get style() {
-    let base = this.props.attributes.styles || {};
-    base = { ...base };
-    delete base.width;
-    delete base.height;
-    return base;
+    const { width: widthIgnored, height: heightIgnored, ...filteredStyle } =
+      this.props.attributes.style || {};
+    return filteredStyle;
   }
 
+  // Sets the wrapper's aspect ratio from the frame's specified dimensions. When
+  // either dimension is missing or invalid, no inline style is set and the
+  // stylesheet's default ratio for .responsive-iframe applies.
   get wrapperStyle() {
-    let paddingTop = "56.25%";
-    if (!this.height || !this.width > 0) paddingTop = this.height / this.width;
-    return { paddingTop };
+    const { width, height } = this;
+    if (!(width > 0) || !(height > 0)) return {};
+    return { aspectRatio: `${width} / ${height}` };
   }
 
   styleOrAttr(key) {

@@ -9,7 +9,9 @@ function Video({ attributes, children }) {
   const h = parseInt(styleH ?? height, 10);
   const w = parseInt(styleW ?? width, 10);
 
-  const paddingTop = !h || !w ? undefined : "56.25%";
+  // Set the wrapper's aspect ratio from the specified dimensions. When either
+  // is missing or invalid, fall back to the stylesheet's default ratio.
+  const aspectRatio = h > 0 && w > 0 ? `${w} / ${h}` : undefined;
 
   const controls = controlsAttr || controlsAttr === "true" ? true : undefined;
 
@@ -22,7 +24,7 @@ function Video({ attributes, children }) {
   );
 
   return (
-    <span style={{ paddingTop }} className="responsive-iframe">
+    <span style={{ aspectRatio }} className="responsive-iframe">
       {renderVideo}
     </span>
   );
