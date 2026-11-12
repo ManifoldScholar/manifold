@@ -5,8 +5,7 @@ export default `
     position: relative;
     display: block;
     max-width: 100%;
-    height: 0;
-    padding-top: 56.25%;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
 
     iframe,
