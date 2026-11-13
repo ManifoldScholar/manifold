@@ -41,6 +41,7 @@ jobs:
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.version }}
     steps:
       # A beta merge resets the prerelease line to rc.1 off the merged base version;
       # all other merges let release-please compute the version normally.
@@ -94,3 +95,19 @@ jobs:
       channel_tag: ${{ contains(needs.main.outputs.tag_name, '-') && 'preview' || 'latest' }}
       semver: ${{ needs.main.outputs.tag_name }}
     secrets: inherit
+
+  update-manifold-version:
+    needs: main
+    # Run on stable releases only; prerelease versions (e.g. 10.0.0-rc.1, 9.3.0-beta.2) contain a hyphen
+    if: ${{ needs.main.outputs.release_created == 'true' && !contains(needs.main.outputs.version, '-') }}
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Trigger Manifold version update in related repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >-
+          gh workflow run update-manifold-version.yml
+          --repo "${{ github.repository }}"
+          -f version="${{ needs.main.outputs.version }}"
