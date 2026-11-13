@@ -1,6 +1,7 @@
 {
   "locales": {
-    "en-US": "English - United States"
+    "en-US": "English",
+    "it": "Italian"
   },
   "app": {
     "manifold": "Manifold",

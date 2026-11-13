@@ -3,7 +3,7 @@ import FooterParts from "./Parts";
 import { withRouter } from "react-router-dom";
 import withPluginReplacement from "hoc/withPluginReplacement";
 import links from "./Parts/helpers/links";
-// import LanguageSelect from "global/components/LanguageSelect";
+import LanguageSelect from "global/components/LanguageSelect";
 import * as Styled from "./styles";
 
 class BrandedFooter extends Component {
@@ -29,7 +29,7 @@ class BrandedFooter extends Component {
                 withTopMargin
                 push={this.props.history.push}
               />
-              {/* <LanguageSelect /> */}
+              <LanguageSelect />
             </Styled.Actions>
           </FooterParts.Column>
         </FooterParts.Columns>
