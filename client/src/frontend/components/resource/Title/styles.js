@@ -42,6 +42,7 @@ export const TitleAndToggle = styled.div`
 export const Title = styled.h1`
   inline-size: fit-content;
   margin: 0;
+  text-align: start;
   font-variant: none;
   font-size: 26px;
   font-family: var(--font-family-heading);

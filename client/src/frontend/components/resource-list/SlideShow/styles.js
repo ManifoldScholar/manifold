@@ -18,6 +18,7 @@ export const SlidesWrapper = styled.div`
   scrollbar-width: none;
   overflow-x: auto;
   overflow-y: hidden;
+  margin-block-start: var(--SlidesWrapper-margin-block-start);
   color: var(--color-neutral-text-extra-light);
   background-color: var(--color-base-neutral-black);
   border-top-left-radius: 8px;

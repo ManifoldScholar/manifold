@@ -17,8 +17,8 @@ export const Container = styled.header`
   }
 
   + * {
-    --Media-margin-block-start: 12px;
-    --Media-margin-block-start: min(1.5cqi, 12px);
+    --SlidesWrapper-margin-block-start: 12px;
+    --SlidesWrapper-margin-block-start: min(1.5cqi, 12px);
   }
 `;
 
