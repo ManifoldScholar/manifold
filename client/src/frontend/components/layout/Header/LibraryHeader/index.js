@@ -82,7 +82,7 @@ export default function LibraryHeader() {
     : {};
 
   return (
-    <header>
+    <>
       <div className="library-header library-header--light">
         <SetCSSProperty
           measurement="height"
@@ -112,7 +112,7 @@ export default function LibraryHeader() {
       </div>
       <div className="header-border" />
       {breadcrumbs && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-    </header>
+    </>
   );
 }
 
