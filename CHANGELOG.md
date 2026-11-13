@@ -1,5 +1,15 @@
 # Changelog
 
+## [9.2.10](https://github.com/ManifoldScholar/manifold/compare/9.2.9...9.2.10) (2026-11-12)
+
+
+### Bug Fixes
+
+* fix RC slideshow pagination dispatch error ([55bf7a3](https://github.com/ManifoldScholar/manifold/commit/55bf7a31b067def10b2231d6c9383c38123363e7))
+* scope useFetch loop guard to a time window ([5563a42](https://github.com/ManifoldScholar/manifold/commit/5563a429da6f0bf26e15da739463d2d09080d601))
+* ensure select elements are visible ([5c7ff0f](https://github.com/ManifoldScholar/manifold/commit/5c7ff0f4f3be3e19dd879d806573d75656623995))
+* **reader:** correctly derive iframe and video aspect ratio ([6e19951](https://github.com/ManifoldScholar/manifold/commit/6e199517a066d4148aa6f9e6796782d59b679d2f))
+
 ## [9.2.10-rc.2](https://github.com/ManifoldScholar/manifold/compare/9.2.10-rc.1...9.2.10-rc.2) (2026-11-12)
 
 
