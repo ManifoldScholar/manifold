@@ -7,8 +7,9 @@ function ResourceMediaImage({ resource, fixedAspectRatio }) {
     attachmentStyles,
     attachmentMeta
   } = resource.attributes;
-  const src = attachmentStyles.large ?? attachmentStyles.medium;
-  const { width, height } = attachmentMeta.large ?? attachmentMeta.medium;
+  const src = attachmentStyles?.large ?? attachmentStyles?.medium;
+  const { width, height } =
+    attachmentMeta?.large ?? attachmentMeta?.medium ?? {};
 
   return (
     <Styled.Image
