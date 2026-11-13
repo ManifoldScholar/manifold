@@ -3,6 +3,9 @@ import { headerLayout } from "theme/styles/variables/crossComponent";
 
 export default `
   .library-header {
+    position: relative;
+    z-index: 1;
+
     &--light {
       color: var(--color-header-foreground);
       background-color: var(--color-header-background);
