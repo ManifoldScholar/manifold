@@ -15,6 +15,11 @@ export const Form = styled(GlobalForm.Form)`
   input[type="password"],
   input[type="email"] {
     color: var(--color-neutral-text-dark);
+
+    &:disabled {
+      color: hsl(from var(--color-neutral-text-dark) h s l / 70%);
+      pointer-events: none;
+    }
   }
 
   .button-secondary {
