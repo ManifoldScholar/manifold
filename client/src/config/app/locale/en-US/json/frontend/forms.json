@@ -177,6 +177,8 @@
       "oauth_instructions": "You can also create a {{appName}} account using your {{providers, list(style: long; type: conjunction;)}} credentials.",
       "have_account": "Already have an account?",
       "need_account": "Need to sign up?",
+      "account_link_instructions": "An account with the email address {{email}} already exists. Log in to confirm that this account is yours and link it to your learning management system.",
+      "account_link_error": "We could not verify that this account is yours.",
       "log_in": "Log In",
       "log_in_with_provider": "Log in with {{provider}}",
       "log_out": "Log Out",

@@ -1,15 +1,22 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { passwordsAPI } from "api";
 import Form from "global/components/form";
-import { useNotification } from "hooks";
+import { useNotification, useAccountLink } from "hooks";
 import * as SharedStyles from "../styles";
 
 export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
   const { t } = useTranslation();
 
+  const { email: linkEmail, token: linkToken, isLinking } = useAccountLink();
+
   const emailRef = useRef("");
+  // The form session reopens when the model identity changes, so memoize it.
+  const model = useMemo(() => (isLinking ? { email: linkEmail } : undefined), [
+    isLinking,
+    linkEmail
+  ]);
 
   const notifySuccess = useNotification(email => ({
     level: 0,
@@ -20,10 +27,26 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
     expiration: 3000
   }));
 
-  const formatData = useCallback(data => {
-    emailRef.current = data.email;
-    return data.email;
-  }, []);
+  const formatData = useCallback(
+    data => {
+      // In link mode the API sources the email from the pending link, and the
+      // email is fixed rather than user-supplied.
+      emailRef.current = isLinking ? linkEmail : data.email;
+      return isLinking
+        ? { email: linkEmail, accountLinkToken: linkToken }
+        : data.email;
+    },
+    [isLinking, linkEmail, linkToken]
+  );
+
+  // `create` receives the return value of formatData as a single argument.
+  const create = useCallback(
+    data =>
+      isLinking
+        ? passwordsAPI.create(data.email, data.accountLinkToken)
+        : passwordsAPI.create(data),
+    [isLinking]
+  );
 
   const onSuccess = useCallback(() => {
     notifySuccess(emailRef.current ?? "your email");
@@ -34,9 +57,10 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
     <div>
       <SharedStyles.Form
         name="global-password-request"
-        create={passwordsAPI.create}
+        create={create}
         onSuccess={onSuccess}
         formatData={formatData}
+        model={model}
       >
         <Form.Header
           styleType="primary"
@@ -44,6 +68,7 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
         />
         <Form.TextInput
           focusOnMount
+          isDisabled={isLinking}
           name="email"
           inputType="email"
           id="password-forgot-email"
@@ -62,9 +87,11 @@ export default function ForgotPasswordForm({ handleViewChange, hideOverlay }) {
         <SharedStyles.ViewLink onClick={e => handleViewChange("login", e)}>
           {t("forms.signin_overlay.remember_password")}
         </SharedStyles.ViewLink>
-        <SharedStyles.ViewLink onClick={e => handleViewChange("terms", e)}>
-          {t("forms.signin_overlay.need_account")}
-        </SharedStyles.ViewLink>
+        {!isLinking && (
+          <SharedStyles.ViewLink onClick={e => handleViewChange("terms", e)}>
+            {t("forms.signin_overlay.need_account")}
+          </SharedStyles.ViewLink>
+        )}
       </SharedStyles.LinksWrapper>
     </div>
   );
