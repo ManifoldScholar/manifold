@@ -6,6 +6,7 @@ class ProjectCollection < ApplicationRecord
   include Entitleable
   include Filterable
   include HasFormattedAttributes
+  include ManifoldOAIRecordSource
   include ManifoldOAISetSource
   include ProjectOrdering
   include SerializedAbilitiesFor
@@ -87,6 +88,13 @@ class ProjectCollection < ApplicationRecord
                               allow_nil: true
   validate :valid_homepage_start_date!, :valid_homepage_end_date!
 
+  oai_set category: "projects",
+          name: -> { "Projects in #{title}" },
+          description: -> {
+            ManifoldOAI::DublinCoreDocument.minimal title: set_name,
+                                                    description: description_plaintext.presence || "Projects in the collection #{title}."
+          }
+
   # Introspection helper
   #
   # @api private
@@ -109,8 +117,17 @@ class ProjectCollection < ApplicationRecord
     end
   end
 
-  def set_description
-    description
+  def oai_dc_document
+    ManifoldOAI::DublinCoreDocument.envelope do |xml|
+      xml["dc"].identifier(canonical_url)
+      xml["dc"].type(model_name.name)
+      xml["dc"].title(title)
+      xml["dc"].description(description_plaintext) if description_plaintext.present?
+
+      subjects.each do |subject|
+        xml["dc"].subject(subject.name)
+      end
+    end
   end
 
   private

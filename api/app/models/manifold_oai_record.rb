@@ -23,7 +23,7 @@ class ManifoldOAIRecord < ApplicationRecord
     def by_set(spec = nil)
       return all if spec.blank?
 
-      where(id: ManifoldOAISetLink.by_spec(spec).select(:manifold_oai_record_id))
+      where(id: ManifoldOAISetLink.within_spec(spec).select(:manifold_oai_record_id))
     end
 
     # @param [String] selector
