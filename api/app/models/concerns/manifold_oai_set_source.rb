@@ -3,10 +3,37 @@
 module ManifoldOAISetSource
   extend ActiveSupport::Concern
 
+  include ManifoldOAI::DeclarativeAttributes
+
+  ABSTRACT_ATTRIBUTES = %i[set_name set_description set_category].freeze
+
   included do
     has_one :manifold_oai_set, as: :source, inverse_of: :source, dependent: :nullify
 
     after_save :manage_oai_set!
+  end
+
+  class_methods do
+    # @param [Object, Proc, Symbol] category
+    # @param [Object, Proc, Symbol] name
+    # @param [Object, Proc, Symbol] description
+    # @param [Object, Proc, Symbol] spec
+    # @option options [Object, Proc, Symbol] :if condition gating the set's existence
+    # @return [void]
+    def oai_set(category: nil, name: nil, description: nil, spec: nil, **options)
+      define_oai_attributes(set_category: category, set_name: name, set_description: description, set_spec: spec)
+
+      return unless options.key?(:if)
+
+      condition = options[:if]
+      define_method(:should_have_oai_set?) { !exclude_from_oai && resolve_oai_attribute(condition) }
+    end
+  end
+
+  ABSTRACT_ATTRIBUTES.each do |attribute|
+    define_method(attribute) do
+      raise NotImplementedError, "#{self.class} must declare `#{attribute}` via `oai_set` (ManifoldOAISetSource)"
+    end
   end
 
   # @api private
@@ -28,19 +55,7 @@ module ManifoldOAISetSource
   end
 
   def set_spec
-    title.gsub(/[^a-z\\s+]/i, "").camelize(:lower)
-  end
-
-  def set_name
-    title
-  end
-
-  def set_description
-    ""
-  end
-
-  def set_category
-    self.class.name.camelize(:lower)
+    slug.tr("-", "_").camelize(:lower)
   end
 
   # @see ManifoldOAI::SetSynchronizer
