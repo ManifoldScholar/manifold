@@ -7,26 +7,35 @@ export default {
     };
   },
 
-  update(id, ltiRegistration) {
+  approve(id) {
     return {
-      endpoint: `/api/v1/lti/registrations/${id}`,
+      endpoint: `/api/v1/lti/registrations/${id}/approve`,
       method: "PUT",
-      options: {
-        body: JSON.stringify({
-          type: "lti_registrations",
-          data: ltiRegistration
-        })
-      }
+      options: {}
     };
   },
 
-  destroy(id, blocklist = false) {
+  deny(id) {
+    return {
+      endpoint: `/api/v1/lti/registrations/${id}/deny`,
+      method: "PUT",
+      options: {}
+    };
+  },
+
+  block(id) {
+    return {
+      endpoint: `/api/v1/lti/registrations/${id}/block`,
+      method: "PUT",
+      options: {}
+    };
+  },
+
+  destroy(id) {
     return {
       endpoint: `/api/v1/lti/registrations/${id}`,
       method: "DELETE",
-      options: {
-        params: { blocklist }
-      }
+      options: {}
     };
   }
 };

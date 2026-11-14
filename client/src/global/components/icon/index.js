@@ -47,6 +47,7 @@ import CircleMinus24 from "./24/CircleMinus";
 import CircleMinus32 from "./32/CircleMinus";
 import CirclePlus24 from "./24/CirclePlus";
 import CirclePlus32 from "./32/CirclePlus";
+import CircleSlash32 from "./32/CircleSlash";
 import Close16 from "./16/Close";
 import Close24 from "./24/Close";
 import Close32 from "./32/Close";
@@ -245,6 +246,7 @@ export default {
   CircleMinus32,
   CirclePlus24,
   CirclePlus32,
+  CircleSlash32,
   Close16,
   Close24,
   Close32,
