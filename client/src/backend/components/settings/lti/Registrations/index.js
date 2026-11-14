@@ -1,15 +1,16 @@
-import { useRef } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { entityStoreActions } from "actions";
-import { ltiRegistrationsAPI, settingsAPI, requests } from "api";
-import { useFetch, useApiCallback, useFocusAfterRemoval } from "hooks";
+import { ltiRegistrationsAPI } from "api";
+import {
+  useFetch,
+  useApiCallback,
+  useFocusAfterRemoval,
+  useNotification
+} from "hooks";
 import withConfirmation from "hoc/withConfirmation";
 import EntitiesList, {
   LtiRegistrationRow
 } from "backend/components/list/EntitiesList";
-import BlocklistOption from "./BlocklistOption";
 
 function Registrations({ confirm }) {
   const { t } = useTranslation();
@@ -18,51 +19,54 @@ function Registrations({ confirm }) {
     request: [ltiRegistrationsAPI.index]
   });
 
-  const updateRegistration = useApiCallback(ltiRegistrationsAPI.update);
+  const approveRegistration = useApiCallback(ltiRegistrationsAPI.approve);
+  const denyRegistration = useApiCallback(ltiRegistrationsAPI.deny);
+  const blockRegistration = useApiCallback(ltiRegistrationsAPI.block);
   const destroyRegistration = useApiCallback(ltiRegistrationsAPI.destroy);
 
   const { listRef, rememberRemoval } = useFocusAfterRemoval(registrations);
 
-  const dispatch = useDispatch();
-  const refreshSettings = () =>
-    dispatch(entityStoreActions.request(settingsAPI.show(), requests.settings));
+  const notifyTransitionError = useNotification(detail => ({
+    id: "LTI_REGISTRATION_TRANSITION_ERROR",
+    level: 2,
+    heading: t("settings.lti.registrations.transition_error_heading"),
+    body: detail || t("settings.lti.registrations.transition_error"),
+    expiration: 5000
+  }));
 
-  const onToggleEnabled = async registration => {
-    await updateRegistration(registration.id, {
-      attributes: { enabled: !registration.attributes.enabled }
-    });
-    refresh();
+  // Failed requests reject with the parsed response in `body`. The API
+  // explains invalid transitions in `errors[0].detail`.
+  const transition = callback => async registration => {
+    try {
+      await callback(registration.id);
+    } catch (error) {
+      notifyTransitionError(error?.body?.errors?.[0]?.detail);
+    } finally {
+      // Refresh on failure too, in case the state changed elsewhere.
+      refresh();
+    }
   };
 
-  const blocklistRef = useRef(false);
+  const onApprove = transition(approveRegistration);
+  const onDeny = transition(denyRegistration);
+  const onBlock = transition(blockRegistration);
 
   const onDelete = registration => {
+    const { name, issuer } = registration.attributes;
     const heading = t("modals.delete_lti_registration", {
-      name: registration.attributes.name || registration.attributes.issuer
+      name: name || issuer
     });
-    const message = t("modals.confirm_body");
-    blocklistRef.current = false;
+    // Blocks are stored on the registration, so deleting it lifts the block.
+    const message =
+      registration.attributes.currentState === "blocked"
+        ? t("modals.delete_lti_registration_blocked_body")
+        : t("modals.confirm_body");
     if (confirm)
-      confirm(
-        heading,
-        message,
-        async () => {
-          const blocklist = blocklistRef.current;
-          rememberRemoval(registration.id);
-          await destroyRegistration(registration.id, blocklist);
-          refresh();
-          if (blocklist) refreshSettings();
-        },
-        {
-          slot: (
-            <BlocklistOption
-              onChange={checked => {
-                blocklistRef.current = checked;
-              }}
-            />
-          )
-        }
-      );
+      confirm(heading, message, async () => {
+        rememberRemoval(registration.id);
+        await destroyRegistration(registration.id);
+        refresh();
+      });
   };
 
   if (!registrations) return null;
@@ -75,7 +79,7 @@ function Registrations({ confirm }) {
       title={t("settings.lti.registrations.header")}
       titleStyle="section"
       entityComponent={LtiRegistrationRow}
-      entityComponentProps={{ onToggleEnabled, onDelete }}
+      entityComponentProps={{ onApprove, onDeny, onBlock, onDelete }}
       entities={registrations}
       emptyMessage={t("settings.lti.registrations.empty")}
     />

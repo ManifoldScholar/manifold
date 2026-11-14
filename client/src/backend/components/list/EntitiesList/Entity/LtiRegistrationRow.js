@@ -4,48 +4,86 @@ import FormattedDate from "global/components/FormattedDate";
 import Utility from "global/components/utility";
 import EntityRow from "./Row";
 
-function LtiRegistrationRow({ entity, onToggleEnabled, onDelete, ...props }) {
+// Transitions available from each state. Keep in sync with the API state
+// machine: api/app/services/lti_registrations/state_machine.rb
+const VALID_TRANSITIONS = {
+  pending: ["approve", "deny", "block"],
+  approved: ["deny", "block"],
+  denied: ["approve", "block"],
+  blocked: ["approve", "deny"]
+};
+
+const TRANSITION_ICONS = {
+  approve: "circlePlus32",
+  deny: "circleMinus32",
+  block: "circleSlash32"
+};
+
+// Only approved registrations can launch, so they need no label.
+const STATE_LABEL_LEVELS = {
+  pending: "notice",
+  denied: "warning",
+  blocked: "error"
+};
+
+function LtiRegistrationRow({
+  entity,
+  onApprove,
+  onDeny,
+  onBlock,
+  onDelete,
+  ...props
+}) {
   const { t } = useTranslation();
+  const handlers = { approve: onApprove, deny: onDeny, block: onBlock };
 
   const { attributes } = entity;
   const {
     name,
     issuer,
     clientId,
-    enabled,
+    currentState,
     ltiDeploymentsCount,
     createdAt
   } = attributes;
 
+  const transitionButtons = (VALID_TRANSITIONS[currentState] ?? []).map(
+    transition => {
+      const label = t(`settings.lti.registrations.actions.${transition}`);
+
+      return (
+        <button
+          key={transition}
+          type="button"
+          data-id={transition}
+          className="entity-row__utility-button"
+          title={label}
+          aria-label={label}
+          onClick={() => handlers[transition](entity)}
+        >
+          <Utility.IconComposer icon={TRANSITION_ICONS[transition]} size={26} />
+        </button>
+      );
+    }
+  );
+
   const utility = (
     <>
-      <button
-        type="button"
-        data-id="toggle-enabled"
-        className="entity-row__utility-button"
-        title={
-          enabled
-            ? t("settings.lti.registrations.disable")
-            : t("settings.lti.registrations.enable")
-        }
-        onClick={() => onToggleEnabled(entity)}
-      >
-        <Utility.IconComposer
-          icon={enabled ? "circleMinus32" : "circlePlus32"}
-          size={26}
-        />
-      </button>
+      {transitionButtons}
       <button
         type="button"
         data-id="destroy"
         className="entity-row__utility-button"
         title={t("actions.delete")}
+        aria-label={t("actions.delete")}
         onClick={() => onDelete(entity)}
       >
         <Utility.IconComposer icon="delete32" size={26} />
       </button>
     </>
   );
+
+  const level = STATE_LABEL_LEVELS[currentState];
 
   return (
     <EntityRow
@@ -69,9 +107,12 @@ function LtiRegistrationRow({ entity, onToggleEnabled, onDelete, ...props }) {
         </>
       }
       label={
-        enabled
-          ? null
-          : { text: t("settings.lti.registrations.disabled"), level: "warning" }
+        level
+          ? {
+              text: t(`settings.lti.registrations.states.${currentState}`),
+              level
+            }
+          : null
       }
       utility={utility}
     />
@@ -82,7 +123,9 @@ LtiRegistrationRow.displayName = "EntitiesList.Entity.LtiRegistrationRow";
 
 LtiRegistrationRow.propTypes = {
   entity: PropTypes.object.isRequired,
-  onToggleEnabled: PropTypes.func.isRequired,
+  onApprove: PropTypes.func.isRequired,
+  onDeny: PropTypes.func.isRequired,
+  onBlock: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired
 };
 
