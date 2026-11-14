@@ -27,6 +27,7 @@ class Journal < ApplicationRecord
   include HasKeywordSearch
   include ExternallyIdentifiable
   include ManifoldOAIRecordSource
+  include ManifoldOAISetSource
 
   multisearch_draftable true
 
@@ -109,6 +110,13 @@ class Journal < ApplicationRecord
     }
   )
 
+  oai_record if: -> { !draft? }
+
+  oai_set category: "issues",
+          name: -> { "Issues of #{title_plaintext}" },
+          description: -> { ManifoldOAI::DublinCoreDocument.minimal(title: set_name, description: "Issues of the journal #{title_plaintext}.") },
+          if: -> { !draft? }
+
   def multisearch_full_text
     description_plaintext
   end
@@ -135,12 +143,6 @@ class Journal < ApplicationRecord
 
   def journal_issues_without_volume_count
     journal_issues.where(journal_volume: nil).count
-  end
-
-  def should_have_oai_record?
-    return false if draft?
-
-    super
   end
 
   # This method is named a little oddly, as it actually returns references to projects.
