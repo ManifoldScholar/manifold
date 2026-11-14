@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker compose exec spec bin/rspec "$@" --tag="~integration" --tag="~slow"
+docker compose run --rm spec bin/rspec "$@" --tag="~integration" --tag="~slow"
