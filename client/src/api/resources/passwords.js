@@ -1,15 +1,15 @@
 export default {
-  create(email) {
+  create(email, accountLinkToken) {
     return {
       endpoint: `/api/v1/passwords`,
       method: "POST",
       options: {
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, account_link_token: accountLinkToken })
       }
     };
   },
 
-  update(password, passwordConfirmation, resetToken) {
+  update(password, passwordConfirmation, resetToken, accountLinkToken) {
     return {
       endpoint: `/api/v1/passwords/update`,
       method: "PUT",
@@ -17,7 +17,8 @@ export default {
         body: JSON.stringify({
           password,
           password_confirmation: passwordConfirmation,
-          reset_token: resetToken
+          reset_token: resetToken,
+          account_link_token: accountLinkToken
         })
       }
     };

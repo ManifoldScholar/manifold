@@ -2,8 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
-import { useApiCallback } from "hooks";
-import { passwordsAPI } from "api";
+import { useApiCallback, useAccountLink } from "hooks";
+import { passwordsAPI, tokensAPI } from "api";
+import lh from "helpers/linkHandler";
+import { resolveAuthRedirect } from "helpers/router/authRedirect";
+import { handleAuthenticationSuccess } from "store/middleware/currentUserMiddleware";
 import Form, { Unwrapped } from "global/components/form";
 import { currentUserActions } from "actions";
 
@@ -12,6 +15,7 @@ export default function PasswordResetContainer() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { resetToken } = useParams();
+  const { token: accountLinkToken, isLinking } = useAccountLink();
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
@@ -27,6 +31,45 @@ export default function PasswordResetContainer() {
     );
   };
 
+  // The reset token is spent by now, so a failed link can't be retried here.
+  // Send the user to the login view with their new password to try again.
+  const redirectToLinkRetry = async (email, response) => {
+    let message = t("forms.signin_overlay.account_link_error");
+    try {
+      const body = await response.json();
+      const first = body?.errors?.[0];
+      if (typeof first === "string") message = first;
+      else if (typeof first?.detail === "string") message = first.detail;
+    } catch (e) {
+      // Keep the generic message.
+    }
+    const params = new URLSearchParams({
+      account_link: email,
+      account_link_token: accountLinkToken,
+      account_link_error: message
+    });
+    navigate(`${lh.link("frontendLogin")}?${params.toString()}`);
+  };
+
+  const linkAccount = async user => {
+    const email = user.attributes.email;
+    try {
+      const res = await tokensAPI.createToken({
+        email,
+        password,
+        accountLinkToken
+      });
+      await handleAuthenticationSuccess(dispatch, {
+        authToken: res.meta.authToken,
+        user: res,
+        setCookie: true
+      });
+      navigate(resolveAuthRedirect(res.meta.redirect), { replace: true });
+    } catch (response) {
+      await redirectToLinkRetry(email, response);
+    }
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
     setErrors([]);
@@ -34,8 +77,13 @@ export default function PasswordResetContainer() {
       const res = await updatePassword(
         password,
         passwordConfirmation,
-        resetToken
+        resetToken,
+        accountLinkToken
       );
+      if (isLinking) {
+        await linkAccount(res.data);
+        return;
+      }
       loginUser(res.data);
       navigate("/");
     } catch (error) {

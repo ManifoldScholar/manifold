@@ -12,6 +12,7 @@ export {
 
 export { default as useCurrentUser } from "./useCurrentUser";
 
+export { default as useAccountLink } from "./useAccountLink";
 export { default as useAuthentication } from "./useAuthentication";
 
 export { default as useFromStore } from "./useFromStore";
