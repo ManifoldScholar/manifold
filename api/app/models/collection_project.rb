@@ -32,15 +32,7 @@ class CollectionProject < ApplicationRecord
 
   alias_attribute :project_summary_id, :project_id
 
-  def should_have_oai_set_link?
-    project.should_have_oai_record? && project_collection.should_have_oai_set?
-  end
-
-  def oai_set
-    project_collection.manifold_oai_set
-  end
-
-  def oai_record
-    project.manifold_oai_record
-  end
+  oai_set_link set: -> { project_collection.manifold_oai_set },
+               record: -> { project.manifold_oai_record },
+               if: -> { project.should_have_oai_record? && project_collection.should_have_oai_set? }
 end
