@@ -136,7 +136,7 @@ RSpec.describe ProjectCollection, type: :model do
       collections = []
       expect do
         collections = FactoryBot.create_list :project_collection, 5
-      end.to change(ManifoldOAISet, :count).by(5)
+      end.to change { ManifoldOAISet.where.not(source_id: nil).count }.by(5)
       expect(collections.any? { |c| c.manifold_oai_set.nil? }).to be false
     end
 

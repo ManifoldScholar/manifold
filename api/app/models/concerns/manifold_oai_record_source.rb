@@ -3,11 +3,24 @@
 module ManifoldOAIRecordSource
   extend ActiveSupport::Concern
 
+  include ManifoldOAI::DeclarativeAttributes
+
   included do
     has_one :manifold_oai_record, as: :source, inverse_of: :source, dependent: :nullify
 
     after_save :manage_oai_record!
     around_destroy :mark_oai_record_deleted!
+  end
+
+  class_methods do
+    # @option options [Object, Proc, Symbol] :if condition gating the record's existence
+    # @return [void]
+    def oai_record(**options)
+      return unless options.key?(:if)
+
+      condition = options[:if]
+      define_method(:should_have_oai_record?) { !exclude_from_oai && resolve_oai_attribute(condition) }
+    end
   end
 
   # @api private
@@ -44,5 +57,11 @@ module ManifoldOAIRecordSource
     client_url = Rails.configuration.manifold.url
     route = model_name.plural
     "#{client_url}/#{route}/#{slug}"
+  end
+
+  # @see ManifoldOAI::DublinCoreDocument
+  # @return [String]
+  def oai_dc_document
+    ManifoldOAI::DublinCoreDocument.from_record_source(self)
   end
 end

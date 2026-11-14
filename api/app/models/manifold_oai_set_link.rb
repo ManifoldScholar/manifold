@@ -6,4 +6,6 @@ class ManifoldOAISetLink < ApplicationRecord
   belongs_to :source, optional: true, polymorphic: true, inverse_of: :manifold_oai_set_link
 
   scope :by_spec, ->(spec) { joins(:manifold_oai_set).merge(ManifoldOAISet.by_spec(spec)) }
+
+  scope :within_spec, ->(spec) { joins(:manifold_oai_set).merge(ManifoldOAISet.within_spec(spec)) }
 end
