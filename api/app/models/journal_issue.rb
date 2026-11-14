@@ -15,6 +15,7 @@ class JournalIssue < ApplicationRecord
   include SearchIndexable
   include HasSortTitle
   include HasKeywordSearch
+  include ManifoldOAISetLinkSource
 
   belongs_to :journal, counter_cache: true, inverse_of: :journal_issues
   belongs_to :journal_volume, optional: true, counter_cache: true, inverse_of: :journal_issues
@@ -132,6 +133,10 @@ class JournalIssue < ApplicationRecord
   multisearch_parent_name :journal
 
   multisearch_secondary_attr :description_plaintext
+
+  oai_set_link set: -> { journal.manifold_oai_set },
+               record: -> { project.manifold_oai_record },
+               if: -> { project.present? && journal.present? && project.should_have_oai_record? && journal.should_have_oai_set? }
 
   def sort_title_candidate
     pending_sort_title.blank? ? number.to_i : pending_sort_title.to_i
