@@ -11,7 +11,7 @@ class ManifoldOAIRecord < ApplicationRecord
 
   scope :in_provider_order, -> { order(id: :asc) }
 
-  scope :since_identifier, ->(identifier) { where(arel_table[:identifier].gt(identifier)) if identifier.present? }
+  scope :since_identifier, ->(identifier) { where(arel_table[primary_key].gt(identifier)) if identifier.present? }
 
   def to_oai_dc
     oai_dc_content
