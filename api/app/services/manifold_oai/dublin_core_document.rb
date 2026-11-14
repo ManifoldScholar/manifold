@@ -71,7 +71,7 @@ module ManifoldOAI
 
         unless source.editor_names_array.empty?
           source.editor_names_array.each do |editor|
-            xml["dc"].collaborator(editor)
+            xml["dc"].contributor(editor)
           end
         end
 
