@@ -1,11 +1,16 @@
 import LowLevelApiClient from "api/LowLevelApiClient";
 
 export default {
-  createToken({ email, password, authCode }) {
+  createToken({ email, password, authCode, accountLinkToken }) {
     const lowLevelApiClient = new LowLevelApiClient();
     const results = lowLevelApiClient
       .call("/api/v1/tokens", "POST", {
-        body: JSON.stringify({ email, password, authCode })
+        body: JSON.stringify({
+          email,
+          password,
+          authCode,
+          account_link_token: accountLinkToken
+        })
       })
       .then(response => {
         if (!response.ok) {
@@ -26,11 +31,17 @@ export default {
     return results;
   },
 
-  loginForm({ email, password }) {
+  loginForm({ email, password, accountLinkToken }) {
     return {
       endpoint: "/api/v1/tokens",
       method: "POST",
-      options: { body: JSON.stringify({ email, password }) }
+      options: {
+        body: JSON.stringify({
+          email,
+          password,
+          account_link_token: accountLinkToken
+        })
+      }
     };
   }
 };

@@ -36,4 +36,34 @@ RSpec.describe LtiRegistration, type: :model do
       expect { registration.destroy }.to change(LtiDeployment, :count).by(-1)
     end
   end
+
+  describe "state machine" do
+    let(:registration) { FactoryBot.create(:lti_registration, :pending) }
+
+    it "starts pending" do
+      expect(registration).to be_pending
+    end
+
+    it "transitions pending to approved" do
+      expect { registration.transition_to!(:approved) }.to change(registration, :approved?).from(false).to(true)
+    end
+
+    it "rejects an undefined transition" do
+      registration.transition_to!(:approved)
+
+      expect { registration.transition_to!(:pending) }.to raise_error(Statesman::TransitionFailedError)
+    end
+
+    it "scopes to approved registrations" do
+      approved = FactoryBot.create(:lti_registration, :approved)
+
+      expect(described_class.approved).to contain_exactly(approved)
+    end
+
+    it "allows an admin to override a denial" do
+      registration.transition_to!(:denied)
+
+      expect { registration.transition_to!(:approved) }.to change(registration, :approved?).from(false).to(true)
+    end
+  end
 end

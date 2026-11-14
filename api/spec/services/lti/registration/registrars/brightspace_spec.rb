@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Lti::Registration::Registrars::Brightspace do
+  include_context "lti platform registration"
+
   let(:issuer) { "https://brightspace.example.com" }
-  let(:openid_configuration_url) { "#{issuer}/.well-known/openid-configuration" }
 
   let(:openid_config_response) do
     {
@@ -24,28 +25,6 @@ RSpec.describe Lti::Registration::Registrars::Brightspace do
       grant_types: %w[implicit client_credentials],
       "https://purl.imsglobal.org/spec/lti-tool-configuration": {}
     }
-  end
-
-  let(:params) do
-    { registration_token: "reg_token_123", openid_configuration: openid_configuration_url }
-  end
-
-  let(:registrar) { described_class.new(params) }
-
-  before do
-    stub_request(:get, openid_configuration_url)
-      .to_return(status: 200, body: openid_config_response.to_json, headers: { "Content-Type" => "application/json" })
-    stub_request(:post, "#{issuer}/d2l/api/lti/registration")
-      .to_return(status: 200, body: platform_registration_response.to_json, headers: { "Content-Type" => "application/json" })
-  end
-
-  def posted_messages
-    body = nil
-    expect(WebMock).to have_requested(:post, "#{issuer}/d2l/api/lti/registration").with { |req|
-      body = JSON.parse(req.body)
-      true
-    }
-    body.dig("https://purl.imsglobal.org/spec/lti-tool-configuration", "messages")
   end
 
   describe "#platform_registration_payload" do

@@ -106,14 +106,22 @@ module Lti
 
       # @return [void]
       def ensure_valid_configuration!
-        unless issuer_allowed?
-          errors << "Autoregistration for this platform is not allowed"
+        unless autoregistration_enabled?
+          errors << "Autoregistration is not enabled"
           return false
         end
 
-        errors << "Unable to fetch openid configuration" unless openid_configuration_valid?
+        if registration_blocked?
+          errors << "Registration from this domain is blocked"
+          return false
+        end
 
-        errors << "Invalid issuer" if openid_configuration.present? && openid_uri.host != URI.parse(openid_configuration[:issuer]).host
+        unless openid_configuration_valid?
+          errors << "Unable to fetch openid configuration"
+          return false
+        end
+
+        errors << "Invalid issuer" if openid_uri.host != issuer_host
       end
 
       # @return [Boolean]
@@ -145,6 +153,10 @@ module Lti
       # @return [String, nil]
       def registration_endpoint
         @registration_endpoint ||= openid_configuration[:registration_endpoint]
+      end
+
+      def registration_blocked?
+        LtiRegistration.blocked? issuer_host
       end
 
       # POSTs Manifold's tool configuration to the LMS Platform and returns the memoized response JSON
@@ -236,14 +248,14 @@ module Lti
         lti_deployment if deployment_id.present?
       end
 
-      # Finds or creates an LTI registration for the issuer and client
+      # Finds or creates the registration for the issuer and client
       # @return [LtiRegistration, nil]
       def lti_registration
         @lti_registration ||= LtiRegistration.find_or_create_by!(
           issuer: openid_configuration[:issuer],
           client_id: platform_configuration[:client_id]
         ) do |registration|
-          registration.name = URI.parse(openid_configuration[:issuer]).host
+          registration.name = issuer_host
           registration.authorization_endpoint = openid_configuration[:authorization_endpoint]
           registration.token_endpoint = openid_configuration[:token_endpoint]
           registration.jwks_uri = openid_configuration[:jwks_uri]
@@ -253,7 +265,7 @@ module Lti
           registration.registration_access_token = platform_configuration[:registration_access_token]
         end
       rescue ActiveRecord::RecordInvalid => e
-        @errors.concat(e.record.errors.full_messages)
+        @errors.merge(e.record.errors.full_messages)
       end
 
       # Finds or creates an LTI deployment for the registration
@@ -278,13 +290,19 @@ module Lti
         scope_string.to_s.split.filter_map { |uri| SCOPE_MAP[uri] }
       end
 
-      # Is the issuer allowed to register according to settings?
-      def issuer_allowed?
-        return false if openid_configuration.blank?
+      # @return [Boolean]
+      def autoregistration_enabled?
+        lti_settings.enabled? && lti_settings.autoregistration?
+      end
 
-        allowlist = Settings.current.lti.issuer_allowlist
+      # @return [SettingSections::Lti]
+      def lti_settings
+        @lti_settings ||= Settings.current.lti
+      end
 
-        allowlist.blank? || allowlist.include?(openid_configuration[:issuer])
+      # @return [String, nil]
+      def issuer_host
+        @issuer_host ||= URI.parse(openid_configuration[:issuer]).host
       end
 
       # Does the OIDC config exist and contain all necessary keys?

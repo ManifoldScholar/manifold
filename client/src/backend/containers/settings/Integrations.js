@@ -1,3 +1,4 @@
+import { useState, useId, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
 import Form from "global/components/form";
@@ -5,6 +6,8 @@ import FormContainer from "global/containers/form";
 import { settingsAPI, requests } from "api";
 import { useFromStore } from "hooks";
 import PageHeader from "backend/components/layout/PageHeader";
+import LtiAllowBlockListInput from "backend/components/settings/lti/AllowBlockList/index";
+import LtiRegistrations from "backend/components/settings/lti/Registrations";
 
 export default function SettingsIntegrationsContainer() {
   const { t } = useTranslation();
@@ -13,7 +16,37 @@ export default function SettingsIntegrationsContainer() {
     action: "select"
   });
 
+  const [issuerAllowState, setAllowState] = useState(
+    settings?.attributes.lti.issuerAllowlist ?? []
+  );
+  const [issuerBlockState, setBlockState] = useState(
+    settings?.attributes.lti.issuerBlocklist ?? []
+  );
+
+  const id = useId();
+
+  useEffect(() => {
+    const lti = settings?.attributes?.lti;
+    setAllowState(lti?.issuerAllowlist ?? []);
+    setBlockState(lti?.issuerBlocklist ?? []);
+  }, [settings]);
+
   if (!settings) return null;
+
+  const formatData = data => {
+    const lti = data.attributes.lti;
+    return {
+      attributes: {
+        ...data.attributes,
+        lti: {
+          ...lti,
+          issuerAllowlist: issuerAllowState,
+          issuerBlocklist: issuerBlockState
+        }
+      }
+    };
+  };
+
   return (
     <div>
       <PageHeader title={t("settings.integrations.header")} type="settings" />
@@ -23,6 +56,7 @@ export default function SettingsIntegrationsContainer() {
           name="backend-settings"
           update={settingsAPI.update}
           create={settingsAPI.update}
+          formatData={formatData}
           className="form-secondary"
         >
           <Form.FieldGroup label={t("settings.integrations.google_header")}>
@@ -82,6 +116,43 @@ export default function SettingsIntegrationsContainer() {
               instructions={t("settings.oai.directory_enabled_instructions")}
             />
           </Form.FieldGroup>
+          <Form.FieldGroup label={t("settings.lti.header")}>
+            <Form.Switch
+              label={t("settings.lti.enabled")}
+              name="attributes[lti][enabled]"
+              instructions={t("settings.lti.enabled_instructions")}
+            />
+            <Form.Switch
+              label={t("settings.lti.autoregistration")}
+              name="attributes[lti][autoregistration]"
+              instructions={t("settings.lti.autoregistration_instructions")}
+            />
+            <div>
+              <Form.Label
+                as="h3"
+                label={t(`settings.lti.domains_label`)}
+                styleType="secondary"
+              />
+              <Form.Instructions
+                wide
+                id={id}
+                instructions={t("settings.lti.domains_instructions")}
+              />
+            </div>
+            <LtiAllowBlockListInput
+              type="allow"
+              value={issuerAllowState}
+              setValue={setAllowState}
+              instructionsId={id}
+            />
+            <LtiAllowBlockListInput
+              type="block"
+              value={issuerBlockState}
+              setValue={setBlockState}
+              instructionsId={id}
+            />
+          </Form.FieldGroup>
+          <LtiRegistrations />
           <Form.Save text={t("settings.save")} />
         </FormContainer.Form>
       </Layout.BackendPanel>

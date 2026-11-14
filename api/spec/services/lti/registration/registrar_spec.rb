@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Lti::Registration::Registrar do
+  include_context "lti platform registration"
+
   let(:issuer) { "https://canvas.example.com" }
-  let(:registration_token) { "reg_token_123" }
-  let(:openid_configuration_url) { "#{issuer}/.well-known/openid-configuration" }
 
   let(:openid_config_response) do
     {
@@ -28,23 +28,6 @@ RSpec.describe Lti::Registration::Registrar do
     }
   end
 
-  let(:params) do
-    {
-      registration_token: registration_token,
-      openid_configuration: openid_configuration_url
-    }
-  end
-
-  let(:registrar) { described_class.new(params) }
-
-  before do
-    stub_request(:get, openid_configuration_url)
-      .to_return(status: 200, body: openid_config_response.to_json, headers: { "Content-Type" => "application/json" })
-
-    stub_request(:post, "#{issuer}/api/lti/registrations")
-      .to_return(status: 200, body: platform_registration_response.to_json, headers: { "Content-Type" => "application/json" })
-  end
-
   describe "#register_platform!" do
     it "creates an LtiRegistration" do
       expect { registrar.register_platform! }.to change(LtiRegistration, :count).by(1)
@@ -64,6 +47,12 @@ RSpec.describe Lti::Registration::Registrar do
         scopes: %w[nrps_membership_readonly ags_lineitem],
         registration_access_token: "access_token_456"
       )
+    end
+
+    it "creates the registration in a pending state awaiting approval" do
+      registrar.register_platform!
+
+      expect(LtiRegistration.last).to be_pending
     end
 
     context "when the OIDC issuer host does not match the openid_configuration URL host" do
@@ -178,37 +167,36 @@ RSpec.describe Lti::Registration::Registrar do
   end
 
   describe "#valid?" do
-    context "when the issuer allowlist is defined" do
-      before do
-        Settings.instance.update!(lti: { enabled: true, autoregistration: true, issuer_allowlist: [issuer] })
-      end
-
-      it "allows an issuer in the allowlist" do
+    context "when autoregistration is enabled" do
+      it "permits the registration" do
         registrar.ensure_valid_configuration!
         expect(registrar).to be_valid
       end
     end
 
-    context "when the issuer is not in the allowlist" do
+    context "when autoregistration is disabled" do
       before do
-        Settings.instance.update!(lti: { enabled: true, autoregistration: true, issuer_allowlist: ["https://other.example.com"] })
+        Settings.instance.update!(lti: { enabled: true, autoregistration: false })
       end
 
-      it "rejects the issuer" do
+      it "refuses the registration" do
         registrar.ensure_valid_configuration!
         expect(registrar).not_to be_valid
-        expect(registrar.errors).to include("Autoregistration for this platform is not allowed")
+        expect(registrar.errors).to include("Autoregistration is not enabled")
       end
     end
 
-    context "when the allowlist is empty" do
-      before do
-        Settings.instance.update!(lti: { enabled: true, autoregistration: true, issuer_allowlist: [] })
+    context "when a blocked registration exists for the issuer host" do
+      before { FactoryBot.create(:lti_registration, :blocked, issuer: issuer) }
+
+      it "refuses the registration" do
+        registrar.ensure_valid_configuration!
+        expect(registrar).not_to be_valid
+        expect(registrar.errors).to include("Registration from this domain is blocked")
       end
 
-      it "allows any issuer" do
-        registrar.ensure_valid_configuration!
-        expect(registrar).to be_valid
+      it "does not create a new registration" do
+        expect { registrar.register_platform! }.not_to change(LtiRegistration, :count)
       end
     end
   end

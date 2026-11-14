@@ -5,7 +5,7 @@ import Logout from "../Logout";
 import Update from "../EditProfileForm";
 import Create from "../CreateUserForm";
 import Terms from "../AcceptTerms";
-import { useFromStore } from "hooks";
+import { useFromStore, useAccountLink } from "hooks";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -26,6 +26,7 @@ export default function SignInUpInterface({
 }) {
   const authentication = useFromStore({ path: "authentication" });
   const location = useLocation();
+  const { isLinking } = useAccountLink();
 
   const [view, setView] = useState(defaultView);
 
@@ -36,12 +37,16 @@ export default function SignInUpInterface({
 
   const updateView = (newView, e) => {
     if (e) e.preventDefault();
+    // Account linking requires logging in to an existing account.
+    if (isLinking && (newView === "terms" || newView === "create")) return;
     setView(newView);
   };
 
   useEffect(() => {
     if (authentication.authenticated) {
-      if (showLogout && view !== "logout") {
+      // A logged-in user must still re-authenticate to link; a successful
+      // login replaces the session.
+      if (showLogout && !isLinking && view !== "logout") {
         return setView("logout");
       }
       /* This condition isn't quite right. Figure out what it's trying to do. */
@@ -54,7 +59,8 @@ export default function SignInUpInterface({
     hideOverlay,
     view,
     showLogout,
-    willRedirect
+    willRedirect,
+    isLinking
   ]);
 
   /* eslint-disable no-nested-ternary */

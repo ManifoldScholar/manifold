@@ -63,7 +63,7 @@ module Authentication
   end
 
   # Returns user with auth token
-  def render_authenticated_user(user, include_token: true, status: :ok)
+  def render_authenticated_user(user, include_token: true, status: :ok, meta: {})
     if user
       @current_user = user
 
@@ -72,7 +72,7 @@ module Authentication
       render_jsonapi user,
                      serializer: ::V1::CurrentUserSerializer,
                      params: { include_private_data: true },
-                     meta: include_token ? { authToken: AuthToken.encode(user_id: user.id) } : {},
+                     meta: include_token ? { authToken: AuthToken.encode(user_id: user.id) }.merge(meta) : meta,
                      override_current_user: user,
                      include: %w(collection),
                      status: status
