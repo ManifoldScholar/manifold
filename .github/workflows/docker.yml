@@ -3,13 +3,14 @@ name: "Build & Push Docker"
 on:
   workflow_call:
     inputs:
-      channel_tag:
-        description: "Channel tag to publish (beta, preview, or latest)"
+      channel_tags:
+        description: "Space-separated channel tags to publish (e.g. 'beta preview' or 'latest')"
         required: true
         type: string
       semver:
-        description: "Full semver to tag the image with (e.g. 9.2.3-rc.1)"
-        required: true
+        description: "Full semver to tag the image with (e.g. 9.2.3-rc.1); omit for HEAD builds"
+        required: false
+        default: ""
         type: string
 
 env:
@@ -17,7 +18,27 @@ env:
   GHCR_IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  prep:
+    runs-on: ubuntu-latest
+    outputs:
+      tags: ${{ steps.tags.outputs.tags }}
+    steps:
+      - id: tags
+        run: |
+          {
+            echo 'tags<<TAGS_EOF'
+            for channel in ${{ inputs.channel_tags }}; do
+              echo "type=raw,value=$channel"
+            done
+            if [[ -n "${{ inputs.semver }}" ]]; then
+              echo "type=raw,value=${{ inputs.semver }}"
+            fi
+            echo "type=sha"
+            echo TAGS_EOF
+          } >> "$GITHUB_OUTPUT"
+
   build-api:
+    needs: prep
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -37,10 +58,7 @@ jobs:
         with:
           images: |
             ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}-api
-          tags: |
-            type=raw,value=${{ inputs.channel_tag }}
-            type=raw,value=${{ inputs.semver }}
-            type=sha
+          tags: ${{ needs.prep.outputs.tags }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build and push Docker
@@ -58,6 +76,7 @@ jobs:
             "RAILS_ENV=production"
 
   build-client:
+    needs: prep
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -77,10 +96,7 @@ jobs:
         with:
           images: |
             ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}-client
-          tags: |
-            type=raw,value=${{ inputs.channel_tag }}
-            type=raw,value=${{ inputs.semver }}
-            type=sha
+          tags: ${{ needs.prep.outputs.tags }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build and push Docker
