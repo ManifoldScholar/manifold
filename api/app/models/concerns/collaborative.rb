@@ -53,6 +53,13 @@ module Collaborative
     editors.map(&:full_name)
   end
 
+  def other_collaborator_names_array
+    collaborators.where.not(role: [CollaboratorRole::Author, CollaboratorRole::Editor])
+                 .includes(:maker)
+                 .map { |collaborator| collaborator.maker.full_name }
+                 .uniq
+  end
+
   def collaborator_packaging_metadata
     collaborators.map(&:packaging_metadata)
   end

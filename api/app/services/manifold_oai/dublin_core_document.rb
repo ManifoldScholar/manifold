@@ -75,6 +75,10 @@ module ManifoldOAI
           end
         end
 
+        source.other_collaborator_names_array.each do |contributor|
+          xml["dc"].contributor(contributor)
+        end
+
         xml["dc"].identifier("info:eu-repo/semantics/altIdentifier/isbn/#{metadata[:isbn]}") if metadata[:isbn].present?
         xml["dc"].relation("info:eu-repo/semantics/reference/issn/#{metadata[:issn]}") if metadata[:issn].present?
 
