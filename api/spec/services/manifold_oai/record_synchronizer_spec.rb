@@ -84,6 +84,20 @@ RSpec.describe ManifoldOAI::RecordSynchronizer do
     end
   end
 
+  describe "restoring a soft-deleted record" do
+    let(:project) { FactoryBot.create(:project) }
+
+    before do
+      described_class.new(project).call
+      project.manifold_oai_record.update!(deleted_at: Time.current)
+    end
+
+    it "clears deleted_at when the source is synchronized again" do
+      result = described_class.new(project).call
+      expect(result.success.deleted_at).to be_nil
+    end
+  end
+
   describe "linking projects to sets" do
     let(:project) { FactoryBot.create(:project) }
     subject(:result) { described_class.new(project).call }
