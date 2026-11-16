@@ -5,6 +5,12 @@ import Utility from "global/components/utility";
 import * as Styled from "./styles";
 import withSettings from "hoc/withSettings";
 
+/**
+ * Temporarily hides links to the Manifold Directory in all footer variants.
+ * Set to `true` to restore them once the directory is ready to be promoted.
+ */
+const SHOW_DIRECTORY_LINK = false;
+
 function PoweredBy({
   type = "library",
   dull = false,
@@ -46,7 +52,11 @@ function PoweredBy({
         {children}
         <Styled.LogoText as="div" $tiny>
           <Trans
-            i18nKey="powered_by.reader_text"
+            i18nKey={
+              SHOW_DIRECTORY_LINK
+                ? "powered_by.reader_text"
+                : "powered_by.reader_text_without_directory"
+            }
             components={{
               mlink: <a {...manifoldLinkProps}>#</a>,
               docslink: <a {...docsLinkProps}>#</a>,
@@ -83,12 +93,14 @@ function PoweredBy({
                   />
                 </span>
                 <Styled.AddtlLinks>
-                  <Styled.LogoText $dull $tiny as="a" {...directoryLinkProps}>
-                    <span className="screen-reader-text">
-                      {t("external_links.opens_in_new")}
-                    </span>
-                    {t("app.manifold_directory")}
-                  </Styled.LogoText>
+                  {SHOW_DIRECTORY_LINK && (
+                    <Styled.LogoText $dull $tiny as="a" {...directoryLinkProps}>
+                      <span className="screen-reader-text">
+                        {t("external_links.opens_in_new")}
+                      </span>
+                      {t("app.manifold_directory")}
+                    </Styled.LogoText>
+                  )}
                   <Styled.LogoText $dull $tiny as="a" {...docsLinkProps}>
                     <span className="screen-reader-text">
                       {t("external_links.opens_in_new")}

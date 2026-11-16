@@ -133,6 +133,7 @@
   },
   "powered_by": {
     "reader_text": "Powered by <mlink><srtext>$t(external_links.opens_in_new)</srtext>Manifold Scholarship</mlink>. Discover more projects in the <dirlink><srtext>$t(external_links.opens_in_new)</srtext>Manifold Directory</dirlink>.",
+    "reader_text_without_directory": "Powered by <mlink><srtext>$t(external_links.opens_in_new)</srtext>Manifold Scholarship</mlink>.",
     "frontend_text": "<neutral>Powered by</neutral> <mlink><srtext>$t(external_links.opens_in_new)</srtext>Manifold</mlink> <version>v{{number}}</version>"
   }
 }
