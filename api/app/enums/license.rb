@@ -52,12 +52,6 @@ class License::Cco < License
   end
 end
 
-class License::Ocl < License
-  def label
-    to_s.upcase
-  end
-end
-
 class License::AllRightsReserved < License
 end
 
