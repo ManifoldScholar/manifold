@@ -34,6 +34,7 @@ module ManifoldOAI
     # @return [void]
     def assign_metadata!
       @record.oai_dc_content = source.oai_dc_document
+      @record.deleted_at = nil
     end
 
     # @return [void]
