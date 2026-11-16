@@ -1,8 +1,7 @@
 name: release-please
 
 on:
-  pull_request_target:
-    types: [closed]
+  push:
     branches:
       - beta
       - main
@@ -16,10 +15,7 @@ concurrency:
   group: release-please-${{ github.ref_name }}
 
 jobs:
-  beta:
-    if: >-
-      github.event.pull_request.merged == true &&
-      github.event.pull_request.base.ref == 'beta'
+  release:
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
@@ -29,68 +25,77 @@ jobs:
         uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          target-branch: beta
-          config-file: ".release-please/beta-config.json"
-          manifest-file: ".release-please/beta-manifest.json"
+          target-branch: ${{ github.ref_name }}
+          config-file: ${{ github.ref_name == 'main' && '.release-please/main-config.json' || '.release-please/beta-config.json' }}
+          manifest-file: ${{ github.ref_name == 'main' && '.release-please/main-manifest.json' || '.release-please/beta-manifest.json' }}
 
-  main:
-    if: >-
-      github.event.pull_request.merged == true &&
-      github.event.pull_request.base.ref == 'main'
+  plan:
+    needs: release
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
+      build: ${{ steps.plan.outputs.build }}
+      channel_tags: ${{ steps.plan.outputs.channel_tags }}
+      semver: ${{ steps.plan.outputs.semver }}
     steps:
-      # A beta merge resets the prerelease line to rc.1 off the merged base version;
-      # all other merges let release-please compute the version normally.
-      - name: Checkout main
-        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'beta'
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Resolve rc target
-        id: versions
-        if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'beta'
+      - name: Plan build
+        id: plan
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }}
+          RELEASE_CREATED: ${{ needs.release.outputs.release_created }}
+          TAG: ${{ needs.release.outputs.tag_name }}
         run: |
-          current="$(tr -d '[:space:]' < MANIFOLD_VERSION)"
-          base="${current%%-*}"
-          if [[ ! "$base" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "::error::could not derive a base version from MANIFOLD_VERSION '$current'"
-            exit 1
+          build=false
+          channel_tags=""
+          semver=""
+
+          if [[ "$BRANCH" == "beta" ]]; then
+            if [[ "$RELEASE_CREATED" == "true" ]]; then
+              build=true
+              semver="$TAG"
+              case "$TAG" in
+                *-rc*) channel_tags="beta preview" ;;
+                *)     channel_tags="beta" ;;
+              esac
+            fi
+          else
+            # RC mode is the committed prerelease-type on the beta branch.
+            beta_type="$(gh api "repos/$REPO/contents/.release-please/beta-config.json?ref=beta" \
+              -H "Accept: application/vnd.github.raw" 2>/dev/null \
+              | jq -r '.packages["."]["prerelease-type"] // empty')"
+
+            if [[ "$beta_type" == "rc" ]]; then
+              if [[ "$RELEASE_CREATED" == "true" ]]; then
+                build=true
+                channel_tags="latest"
+                semver="$TAG"
+              fi
+            else
+              # Outside RC mode preview tracks main HEAD, so every push builds it.
+              build=true
+              if [[ "$RELEASE_CREATED" == "true" ]]; then
+                channel_tags="latest preview"
+                semver="$TAG"
+              else
+                channel_tags="preview"
+              fi
+            fi
           fi
-          echo "target=${base}-rc.1" >> "$GITHUB_OUTPUT"
 
-      - id: release
-        uses: googleapis/release-please-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          target-branch: main
-          config-file: ".release-please/main-config.json"
-          manifest-file: ".release-please/main-manifest.json"
-          release-as: ${{ steps.versions.outputs.target }}
+          echo "build=$build" >> "$GITHUB_OUTPUT"
+          echo "channel_tags=$channel_tags" >> "$GITHUB_OUTPUT"
+          echo "semver=$semver" >> "$GITHUB_OUTPUT"
+          echo "Plan: branch=$BRANCH release=$RELEASE_CREATED build=$build tags='$channel_tags' semver='$semver'"
 
-  build-beta:
-    needs: beta
-    if: needs.beta.outputs.release_created == 'true'
+  build:
+    needs: plan
+    if: needs.plan.outputs.build == 'true'
     permissions:
       contents: read
       packages: write
     uses: ./.github/workflows/docker.yml
     with:
-      channel_tag: beta
-      semver: ${{ needs.beta.outputs.tag_name }}
-    secrets: inherit
-
-  build-main:
-    needs: main
-    if: needs.main.outputs.release_created == 'true'
-    permissions:
-      contents: read
-      packages: write
-    uses: ./.github/workflows/docker.yml
-    with:
-      channel_tag: ${{ contains(needs.main.outputs.tag_name, '-') && 'preview' || 'latest' }}
-      semver: ${{ needs.main.outputs.tag_name }}
+      channel_tags: ${{ needs.plan.outputs.channel_tags }}
+      semver: ${{ needs.plan.outputs.semver }}
     secrets: inherit

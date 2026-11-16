@@ -1,0 +1,58 @@
+name: Exit RC mode
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-please-beta
+
+jobs:
+  exit-rc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decide whether to switch
+        id: decide
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT: ${{ github.event_name }}
+          SHA: ${{ github.sha }}
+        run: |
+          if [[ "$EVENT" == "workflow_dispatch" ]]; then
+            echo "switch=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          heads="$(gh api "repos/$REPO/commits/$SHA/pulls" --jq '[.[].head.ref] | join(",")' 2>/dev/null)"
+          if [[ ",$heads," == *",beta,"* ]]; then
+            echo "switch=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "switch=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout beta
+        if: steps.decide.outputs.switch == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: beta
+
+      - name: Set prerelease-type to beta
+        if: steps.decide.outputs.switch == 'true'
+        run: |
+          config=".release-please/beta-config.json"
+          if [[ "$(jq -r '.packages["."]["prerelease-type"]' "$config")" == "beta" ]]; then
+            echo "beta is already in beta mode; nothing to do."
+            exit 0
+          fi
+          tmp="$(mktemp)"
+          jq '.packages["."]["prerelease-type"] = "beta"' "$config" > "$tmp"
+          mv "$tmp" "$config"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore: exit release candidate mode"
+          git push origin beta

@@ -1,0 +1,48 @@
+name: Enter RC mode
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: release-please-beta
+
+jobs:
+  enter-rc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout beta
+        uses: actions/checkout@v4
+        with:
+          ref: beta
+
+      - name: Set prerelease-type to rc
+        id: flip
+        run: |
+          config=".release-please/beta-config.json"
+          if [[ "$(jq -r '.packages["."]["prerelease-type"]' "$config")" == "rc" ]]; then
+            echo "beta is already in RC mode; nothing to do."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          tmp="$(mktemp)"
+          jq '.packages["."]["prerelease-type"] = "rc"' "$config" > "$tmp"
+          mv "$tmp" "$config"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore: enter release candidate mode"
+          git push origin beta
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Refresh release PR as rc
+        if: steps.flip.outputs.changed == 'true'
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target-branch: beta
+          config-file: ".release-please/beta-config.json"
+          manifest-file: ".release-please/beta-manifest.json"
