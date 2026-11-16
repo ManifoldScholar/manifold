@@ -52,6 +52,20 @@ RSpec.describe ManifoldOAI::RecordSynchronizer do
       expect(result.success.oai_dc_content).to include("<dc:creator>Test Creator</dc:creator>")
     end
 
+    it "has editors as contributors" do
+      maker = FactoryBot.create(:maker, name: "Test Editor")
+      FactoryBot.create(:collaborator, collaboratable: project, maker:, role: CollaboratorRole::Editor)
+      result = described_class.new(project.reload).call
+      expect(result.success.oai_dc_content).to include("<dc:contributor>Test Editor</dc:contributor>")
+    end
+
+    it "has non-creator, non-editor collaborators as contributors" do
+      maker = FactoryBot.create(:maker, name: "Test Translator")
+      FactoryBot.create(:collaborator, collaboratable: project, maker:, role: CollaboratorRole::Translator)
+      result = described_class.new(project.reload).call
+      expect(result.success.oai_dc_content).to include("<dc:contributor>Test Translator</dc:contributor>")
+    end
+
     it "has subjects" do
       subject_obj = FactoryBot.create(:subject, name: "Test Subject")
       project.subjects << subject_obj
