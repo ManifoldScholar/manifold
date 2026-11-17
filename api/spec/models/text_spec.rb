@@ -3,6 +3,25 @@
 require "rails_helper"
 
 RSpec.describe Text, type: :model do
+  describe "#effective_license" do
+    let(:project) { FactoryBot.create :project, license: "cc_by" }
+    let(:text) { FactoryBot.create :text, project: project }
+
+    it "returns its own license when set" do
+      text.license = "public_domain"
+      expect(text.effective_license.to_s).to eq "public_domain"
+    end
+
+    it "inherits the project's license when its own is blank" do
+      expect(text.effective_license.to_s).to eq "cc_by"
+    end
+
+    it "is nil when neither the text nor its project has a license" do
+      licenseless = FactoryBot.create :text, project: FactoryBot.create(:project)
+      expect(licenseless.effective_license).to be_nil
+    end
+  end
+
   describe "#section_at" do
     let!(:text) { FactoryBot.create :text }
 
