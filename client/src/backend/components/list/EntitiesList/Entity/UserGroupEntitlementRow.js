@@ -4,11 +4,13 @@ import Utility from "global/components/utility";
 import EntityRow from "./Row";
 import FormattedDate from "global/components/FormattedDate";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import lh from "helpers/linkHandler";
 
 export default function PendingEntitlementRow({
   entity: entitlement,
   onDelete,
+  userGroupId,
   ...rest
 }) {
   const { t } = useTranslation();
@@ -26,15 +28,41 @@ export default function PendingEntitlementRow({
     undefined
   );
 
-  const meta = attributes?.createdAt && (
-    <FormattedDate
-      prefix={t("dates.added_title_case")}
-      date={new Date(attributes.createdAt)}
-    />
+  const meta = (attributes?.createdAt || attributes?.expiration) && (
+    <>
+      {attributes.createdAt && (
+        <div>
+          <FormattedDate
+            prefix={t("dates.added_title_case")}
+            date={new Date(attributes.createdAt)}
+          />
+        </div>
+      )}
+      {attributes.expiration && (
+        <div>
+          <FormattedDate
+            prefix={t("dates.expires_title_case")}
+            date={attributes.expiration}
+          />
+        </div>
+      )}
+    </>
   );
 
   const utility = (
-    <div>
+    <>
+      <Link
+        className="entity-row__utility-button"
+        to={lh.link(
+          "backendRecordsUserGroupEntitlementsEdit",
+          userGroupId,
+          entitlement.id
+        )}
+        title={t("actions.edit")}
+        aria-label={t("actions.edit")}
+      >
+        <Utility.IconComposer icon="annotate32" size={26} />
+      </Link>
       <button
         data-id="destroy"
         className="entity-row__utility-button"
@@ -43,7 +71,7 @@ export default function PendingEntitlementRow({
       >
         <Utility.IconComposer icon="delete32" size={26} />
       </button>
-    </div>
+    </>
   );
 
   const onRowClick =
@@ -75,5 +103,5 @@ PendingEntitlementRow.displayName = "EntitiesList.Entity.PendingEntitlementRow";
 PendingEntitlementRow.propTypes = {
   entity: PropTypes.object,
   onDelete: PropTypes.func,
-  onEdit: PropTypes.func
+  userGroupId: PropTypes.string
 };

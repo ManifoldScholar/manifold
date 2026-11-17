@@ -1431,6 +1431,16 @@ const routes = [
                         `/backend/records/user-groups/${ug}/entitlements/new`,
                       drawer: true
                     }
+                  },
+                  {
+                    element: <UserGroup.Entitlements.Edit />,
+                    path: ":entitlementId",
+                    handle: {
+                      name: "backendRecordsUserGroupEntitlementsEdit",
+                      helper: (ug, id) =>
+                        `/backend/records/user-groups/${ug}/entitlements/${id}`,
+                      drawer: true
+                    }
                   }
                 ]
               }
