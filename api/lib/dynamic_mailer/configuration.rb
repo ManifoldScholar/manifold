@@ -6,10 +6,6 @@ module DynamicMailer
       @settings = settings
     end
 
-    def use_sendmail?
-      @settings.email[:delivery_method] == "sendmail"
-    end
-
     def use_smtp?
       @settings.email[:delivery_method] == "smtp"
     end
@@ -24,13 +20,6 @@ module DynamicMailer
       reply_name = email_config(:reply_to_name, "Manifold Scholarship")
       reply_address = email_config(:reply_to_address, "do-not-reply@manifoldapp.org")
       "#{reply_name} <#{reply_address}>"
-    end
-
-    def sendmail_config
-      {
-        location: email_config(:sendmail_settings_location, "/usr/sbin/sendmail"),
-        arguments: email_config(:sendmail_settings_arguments, "-i")
-      }
     end
 
     def smtp_config

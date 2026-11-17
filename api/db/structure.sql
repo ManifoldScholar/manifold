@@ -3232,7 +3232,8 @@ CREATE TABLE public.texts (
     marked_for_purge_at timestamp without time zone,
     social_image_data jsonb,
     social_description text,
-    social_title text
+    social_title text,
+    license character varying
 );
 
 
@@ -3646,7 +3647,8 @@ CREATE TABLE public.user_group_entitleables (
     entitleable_type character varying NOT NULL,
     entitleable_id uuid NOT NULL,
     created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    expires_on date
 );
 
 
@@ -8359,8 +8361,8 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261116232802'),
 ('20261110043020'),
-('20261023230025'),
 ('20261021172201'),
 ('20261013234117'),
 ('20261013234017'),

@@ -17,25 +17,10 @@ RSpec.describe DynamicMailer::Configuration do
       }
     )
   end
-  let(:sendmail_settings) do
-    Settings.new(
-      email: {
-        delivery_method: "sendmail",
-        sendmail_settings_location: "/foo/bar",
-        sendmail_settings_arguments: "-glorp"
-      }
-    )
-  end
-
   let(:smtp_instance) { described_class.new(smtp_settings) }
-  let(:sendmail_instance) { described_class.new(sendmail_settings) }
 
   it "uses smtp when the settings delivery_method is 'smtp'" do
     expect(smtp_instance.use_smtp?).to be true
-  end
-
-  it "uses sendmail when the settings delivery_method is 'sendmail'" do
-    expect(sendmail_instance.use_sendmail?).to be true
   end
 
   it "correctly reports smtp settings" do
@@ -53,20 +38,6 @@ RSpec.describe DynamicMailer::Configuration do
       tls: nil,
       open_timeout: nil,
       read_timeout: nil
-    )
-  end
-
-  it "correctly reports sendmail settings" do
-    expect(sendmail_instance.sendmail_config).to eq(
-      location: "/foo/bar",
-      arguments: "-glorp"
-    )
-  end
-
-  it "correctly reports default sendmail settings" do
-    expect(smtp_instance.sendmail_config).to eq(
-      location: "/usr/sbin/sendmail",
-      arguments: "-i"
     )
   end
 end

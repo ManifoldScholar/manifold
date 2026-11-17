@@ -12,7 +12,6 @@ module DynamicMailer
       add_defaults!(mail)
       return deliver_test!(mail) if Rails.env.test?
       return deliver_smtp!(mail) if @config.use_smtp?
-      return deliver_sendmail!(mail) if @config.use_sendmail?
 
       handle_send_failure(mail)
     rescue StandardError => e
@@ -56,11 +55,6 @@ module DynamicMailer
 
     def deliver_smtp!(mail)
       mailer = Mail::SMTP.new(@config.smtp_config)
-      mailer.deliver!(mail)
-    end
-
-    def deliver_sendmail!(mail)
-      mailer = Mail::Sendmail.new(@config.sendmail_config)
       mailer.deliver!(mail)
     end
   end
