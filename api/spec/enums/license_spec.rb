@@ -31,10 +31,6 @@ RSpec.describe License, type: :enum do
     its(:label) { is_expected.to eq "CCO" }
   end
 
-  describe License::Ocl do
-    its(:label) { is_expected.to eq "OCL" }
-  end
-
   describe License::AllRightsReserved do
     its(:label) { is_expected.to eq "All Rights Reserved" }
   end
