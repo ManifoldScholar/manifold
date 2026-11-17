@@ -28,6 +28,14 @@ module API
                                    include: [:entitleable]
           end
 
+          def update
+            @user_group_entitleable = load_and_authorize_user_group_entitleable
+            ::Updaters::UserGroupEntitleable.new(user_group_entitleable_params)
+                                            .update(@user_group_entitleable)
+            render_single_resource @user_group_entitleable,
+                                   include: [:entitleable]
+          end
+
           def destroy
             @user_group_entitleable = load_and_authorize_user_group_entitleable
             @user_group_entitleable.destroy

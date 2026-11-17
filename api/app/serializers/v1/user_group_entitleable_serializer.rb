@@ -8,6 +8,7 @@ module V1
 
     typed_attribute :id, Types::Serializer::ID
     typed_attribute :created_at, Types::DateTime.meta(read_only: true)
+    typed_attribute :expiration, Types::String.optional.meta(example: "2025-01-01")
 
     typed_has_one :entitleable,
                    serializer: ::V1::EntitlementSubjectSerializer,

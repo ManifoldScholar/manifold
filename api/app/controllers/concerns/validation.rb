@@ -538,7 +538,7 @@ module Validation
 
   def user_group_entitleable_params
     params.require(:data)
-    attributes = [:target_url]
+    attributes = [:target_url, :expiration]
     relationships = []
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

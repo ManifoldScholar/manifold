@@ -20,13 +20,15 @@ module UserGroupMemberships
     end
 
     def create_missing_entitlements
-      subjects = entitlements_to_create.map { it[:subject_type].constantize.find it[:subject_id] }
-      subjects.each do |subject|
+      entitlements_to_create.each do |entitlement_hash|
+        subject = entitlement_hash[:subject_type].constantize.find entitlement_hash[:subject_id]
+
         Entitlements::Create.run(
           subject:,
           target: user,
           entitling_entity: membership,
-          scoped_roles: { read_access: true }
+          scoped_roles: { read_access: true },
+          expiration: expected_expirations[entitlement_hash]&.to_s
         )
       end
     end
@@ -57,9 +59,13 @@ module UserGroupMemberships
     end
 
     def expected_entitlements
-      @expected_entitlements ||= user_group.entitleables.reload.map do |entitleable|
+      expected_expirations.keys
+    end
+
+    def expected_expirations
+      @expected_expirations ||= user_group.entitleables.reload.index_by do |entitleable|
         { subject_type: entitleable.entitleable_type, subject_id: entitleable.entitleable_id }
-      end
+      end.transform_values(&:expires_on)
     end
   end
 end
