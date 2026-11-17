@@ -157,7 +157,6 @@
       "closing_label": "Email closing",
       "closing_placeholder": "Sincerely,<br/>The Manifold Team",
       "closing_instructions": "How do you want to close emails sent by Manifold?",
-      "delivery_header": "Email Delivery Method",
       "config_header": "{{method}} Configuration",
       "smtp_address_label": "SMTP Address",
       "smtp_address_instructions": "Allows you to use a remote mail server.",
@@ -167,10 +166,6 @@
       "smtp_user_instructions": "If your mail server requires authentication, set the username in this setting.",
       "smtp_password_label": "SMTP Password",
       "smtp_password_instructions": "If your mail server requires authentication, set the password in this setting.",
-      "sendmail_loc_label": "Sendmail Location",
-      "sendmail_loc_instructions": "The location of the sendmail executable. Defaults to /usr/sbin/sendmail.",
-      "sendmail_args_label": "Sendmail Arguments",
-      "sendmail_args_instructions": "The command line arguments. Defaults to -i with -f sender@address added automatically before the message is sent.",
       "send_test": "Send test email"
     },
     "export_targets": {
