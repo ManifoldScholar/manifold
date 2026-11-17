@@ -48,7 +48,7 @@ function UserGroupEntitlements({ confirm }) {
     <>
       <OutletWithDrawers
         drawerProps={drawerProps}
-        context={{ refresh, userGroup }}
+        context={{ refresh, userGroup, entitlements }}
       />
       {entitlements && (
         <div>
@@ -59,7 +59,8 @@ function UserGroupEntitlements({ confirm }) {
             entities={entitlements}
             entityComponent={UserGroupEntitlementRow}
             entityComponentProps={{
-              onDelete
+              onDelete,
+              userGroupId: userGroup.id
             }}
             buttons={[
               <Button

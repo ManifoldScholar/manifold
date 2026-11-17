@@ -83,7 +83,8 @@
         "header": "Manage Entitlements",
         "add_button_label": "Add Entitlement",
         "add_header": "Add Entitlement",
-        "add_instructions": "Grant an entitlement to a user for this user group."
+        "add_instructions": "Grant an entitlement to a user for this user group.",
+        "edit_instructions": "Change or remove the expiration date for this entitlement."
       }
     },
     "pages": {

@@ -8,7 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { useEntitlementSubjectTypeahead } from "hooks";
 import lh from "helpers/linkHandler";
 
-export default function UserGroupEntitlementForm({ userGroup, refresh }) {
+export default function UserGroupEntitlementForm({
+  userGroup,
+  refresh,
+  entitlement
+}) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const {
@@ -23,27 +27,49 @@ export default function UserGroupEntitlementForm({ userGroup, refresh }) {
     navigate(lh.link("backendRecordsUserGroupEntitlements", userGroup.id));
   }, [navigate, refresh, userGroup]);
 
+  const isEdit = !!entitlement;
+
   const create = data =>
     userGroupEntitlementsAPI.create({ data, userGroupId: userGroup.id });
+
+  // Only the dirty attributes are sent on update. The picker is not rendered
+  // in edit mode, so targetUrl is never included and the entitled subject
+  // cannot change. A cleared date is sent as null, which removes the expiration.
+  const update = (id, data) =>
+    userGroupEntitlementsAPI.update({ id, data, userGroupId: userGroup.id });
+
+  const formProps = isEdit
+    ? {
+        name: "backend-user-group-entitlement-update",
+        model: entitlement,
+        update
+      }
+    : { name: "backend-user-group-entitlement-create", create };
 
   return (
     <section>
       <FormContainer.Form
-        name="backend-user-group-entitlement-create"
-        create={create}
+        {...formProps}
         onSuccess={onSuccess}
         className="form-secondary"
         notificationScope="drawer"
       >
-        <Form.Picker
-          name="attributes[targetUrl]"
-          label={t("entitlements.pending.target_label")}
-          placeholder={t("entitlements.pending.target_placeholder")}
-          options={options}
-          updateOptions={updateOptions}
-          optionToLabel={optionToLabel}
-          optionToValue={optionToValue}
-          listStyle="rows"
+        {!isEdit && (
+          <Form.Picker
+            name="attributes[targetUrl]"
+            label={t("entitlements.pending.target_label")}
+            placeholder={t("entitlements.pending.target_placeholder")}
+            options={options}
+            updateOptions={updateOptions}
+            optionToLabel={optionToLabel}
+            optionToValue={optionToValue}
+            listStyle="rows"
+          />
+        )}
+        <Form.DatePicker
+          label={t("entitlements.pending.expiration")}
+          instructions={t("entitlements.pending.expiration_instructions")}
+          name="attributes[expiration]"
         />
         <Form.DrawerButtons
           showCancel
@@ -51,7 +77,9 @@ export default function UserGroupEntitlementForm({ userGroup, refresh }) {
             "backendRecordsUserGroupEntitlements",
             userGroup.id
           )}
-          submitLabel="entitlements.new.submit_label"
+          submitLabel={
+            isEdit ? "actions.save" : "entitlements.new.submit_label"
+          }
         />
       </FormContainer.Form>
     </section>
@@ -62,5 +90,6 @@ UserGroupEntitlementForm.displayName = "UserGroupEntitlements.Form";
 
 UserGroupEntitlementForm.propTypes = {
   userGroup: PropTypes.object.isRequired,
-  refresh: PropTypes.func
+  refresh: PropTypes.func,
+  entitlement: PropTypes.object
 };

@@ -9,6 +9,16 @@ export default {
     };
   },
 
+  update({ id, userGroupId, data }) {
+    return {
+      endpoint: `/api/v1/user_groups/${userGroupId}/relationships/user_group_entitleables/${id}`,
+      method: "PUT",
+      options: {
+        body: JSON.stringify({ type: "userGroupEntitlements", data })
+      }
+    };
+  },
+
   destroy({ id, userGroupId }) {
     return {
       endpoint: `/api/v1/user_groups/${userGroupId}/relationships/user_group_entitleables/${id}`,
