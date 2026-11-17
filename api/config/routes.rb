@@ -304,7 +304,7 @@ Rails.application.routes.draw do
         scope module: :user_groups do
           namespace :relationships do
             resources :user_group_memberships, only: %i[index create destroy]
-            resources :user_group_entitleables, only: %i[index create destroy]
+            resources :user_group_entitleables, only: %i[index create update destroy]
           end
         end
       end
