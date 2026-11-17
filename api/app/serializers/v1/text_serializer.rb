@@ -111,6 +111,17 @@ module V1
         'Values might be, for example, "chapter" or "unit"'
       )
 
+      typed_attribute :license, Types::String.optional
+      typed_attribute :license_label, Types::String.optional do |object|
+        object.license.presence&.label
+      end
+      typed_attribute :effective_license, Types::String.optional do |object|
+        object.effective_license&.to_s
+      end
+      typed_attribute :effective_license_label, Types::String.optional do |object|
+        object.effective_license&.label
+      end
+
       typed_belongs_to :project
       typed_has_many :stylesheets
       typed_has_many :creators, serializer: MakerSerializer, record_type: "maker"

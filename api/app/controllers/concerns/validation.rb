@@ -388,7 +388,7 @@ module Validation
                   :pending_slug, attachment(:cover), :remove_cover,
                   :ignore_access_restrictions, :start_text_section_id, { toc: nested_toc },
                   { section_names: [] }, :social_title, attachment(:social_image),
-                  :remove_social_image, :social_description]
+                  :remove_social_image, :social_description, :license]
     relationships = [:category, :contributors, :creators, :collaborators]
     param_config = structure_params(attributes: attributes, relationships: relationships)
     params.permit(param_config)

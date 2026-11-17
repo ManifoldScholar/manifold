@@ -129,6 +129,8 @@ class Text < ApplicationRecord
   manifold_has_attached_file :cover, :image
   manifold_has_attached_file :social_image, :image
 
+  classy_enum_attr :license, class_name: "License", allow_nil: true
+
   after_commit :trigger_text_added_event, on: [:create, :update]
   after_commit :inject_global_stylesheet, on: :create
 
@@ -144,6 +146,10 @@ class Text < ApplicationRecord
 
   def age
     (Time.zone.today - created_at.to_date).to_i
+  end
+
+  def effective_license
+    license.presence || project&.license
   end
 
   def multisearch_full_text
