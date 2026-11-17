@@ -83,12 +83,9 @@ module V1
       from_address: Types::Serializer::Email,
       from_name: Types::String,
       closing: Types::String,
-      delivery_method: Types::String.enum("sendmail"),
+      delivery_method: Types::String.enum("smtp"),
       reply_to_address: Types::Serializer::Email,
       reply_to_name: Types::String,
-
-      sendmail_settings_location: Types::String.optional,
-      sendmail_settings_arguments: Types::String.optional,
 
       smtp_settings_address: Types::String.optional,
       smtp_settings_port: Types::Integer.optional,
