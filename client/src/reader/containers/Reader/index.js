@@ -87,6 +87,7 @@ export default function ReaderContainer() {
             title={text.attributes.titlePlaintext}
             subtitle={text.attributes.subtitle}
             meta={text.attributes.metadataFormatted}
+            license={text.attributes.effectiveLicenseLabel}
           />
         </Overlay>
       );

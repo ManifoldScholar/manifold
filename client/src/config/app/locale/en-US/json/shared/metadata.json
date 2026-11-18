@@ -18,6 +18,7 @@
       "citation": "Citation"
     },
     "license": "License",
+    "license_inherited_instructions": "Inherits {{license}} from the project unless a license is selected.",
     "license_placeholder": "Select a license if applicable",
     "citation": "Citation",
     "citation_override": "Citation override",
