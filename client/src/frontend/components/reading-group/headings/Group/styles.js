@@ -49,3 +49,16 @@ export const Summary = styled(Container)`
     outline: none;
   }
 `;
+
+export const MembershipActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 8px;
+  max-height: none;
+  margin-block-start: 20px;
+
+  .utility-button__text {
+    display: block;
+  }
+`;

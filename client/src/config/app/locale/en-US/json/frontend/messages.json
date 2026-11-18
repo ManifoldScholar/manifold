@@ -40,15 +40,15 @@
       },
       "destroy_heading": "Are you sure you want to delete this reading group?",
       "destroy_message": "If the reading group is anonymous or private, all annotations within the group will be made private and only visible to the annotation creator. If the group is public, annotations will be public. This action can not be undone.",
-      "archive_heading": "Are you sure you want to archive this group?",
-      "archive_message": "This group’s annotations will be hidden for you in the reader. Groups can be reactivated at any time.",
+      "archive_heading": "Archive your membership in this group?",
+      "archive_message": "The group will move to your archived groups and its annotations will be hidden for you in the reader. Annotations you made in this group will be hidden from other members. You can reactivate your membership at any time.",
       "admin_warning": "Your admin privileges allow you to edit this group, but you are not a member."
     },
     "membership": {
       "destroy_heading": "Are you sure you want to remove this user from the group?",
-      "destroy_message": "Pressing yes will remove the user from this group. The user's annotations will remain in the group.",
+      "destroy_message": "The user’s annotations will remain in the group.",
       "leave_heading": "Are you sure you want to leave this reading group?",
-      "leave_message": "Pressing yes will remove you from this group. Your annotations will remain in the group until you edit and save them.",
+      "leave_message": "Annotations you made in the group will stay visible to its members, but if you later edit one, it will be removed from the group and become private.",
       "role_change": {
         "heading": "Confirm Role Change",
         "member_to_moderator": "Moderators can manage members and change group settings. Are you sure you want to do this?",

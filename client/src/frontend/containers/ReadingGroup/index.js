@@ -58,12 +58,6 @@ export default function ReadingGroup() {
       const { pathname, search = "" } = location;
       const url = `${pathname}${search}`;
       navigate(url);
-    },
-    onArchive: () => {
-      setFetchVersion(prev => prev + 1);
-      const { pathname, search = "" } = location;
-      const url = `${pathname}${search}`;
-      navigate(url);
     }
   };
 

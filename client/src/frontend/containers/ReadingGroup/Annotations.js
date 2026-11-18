@@ -41,11 +41,7 @@ export default function ReadingGroupAnnotationsContainer() {
       <OutletWithDrawers
         context={{
           readingGroup,
-          closeDrawer,
-          onArchive: () => {
-            refresh();
-            closeDrawer();
-          }
+          closeDrawer
         }}
         drawerProps={{
           context: "frontend",

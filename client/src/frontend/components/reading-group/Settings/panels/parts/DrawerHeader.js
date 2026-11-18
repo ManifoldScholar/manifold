@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Layout from "backend/components/layout";
-import { useArchiveOrActivateGroup } from "frontend/components/reading-group/hooks";
 import useCollapseContext from "global/components/Collapse/useCollapseContext";
 import { readingGroupsAPI, requests } from "api";
 import { entityStoreActions } from "actions";
@@ -11,21 +10,10 @@ import lh from "helpers/linkHandler";
 
 const { request } = entityStoreActions;
 
-export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
+export default function DrawerHeader({ readingGroup, confirm }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const membership =
-    readingGroup.relationships.currentUserReadingGroupMembership;
-  const {
-    onClick: onArchiveClick,
-    label: archiveLabel
-  } = useArchiveOrActivateGroup({
-    membership,
-    confirm,
-    callback: onArchive
-  });
 
   function handleDelete() {
     const heading = t("messages.reading_group.destroy_heading");
@@ -57,16 +45,6 @@ export default function DrawerHeader({ readingGroup, confirm, onArchive }) {
           }
         ]
       : []),
-    ...(membership
-      ? [
-          {
-            onClick: onArchiveClick,
-            icon: "archive24",
-            label: archiveLabel,
-            className: "utility-button__icon"
-          }
-        ]
-      : []),
     {
       onClick: handleDelete,
       icon: "delete24",
@@ -89,6 +67,5 @@ DrawerHeader.displayName = "ReadingGroup.Settings.DrawerHeader";
 
 DrawerHeader.propTypes = {
   readingGroup: PropTypes.object.isRequired,
-  confirm: PropTypes.func.isRequired,
-  onArchive: PropTypes.func
+  confirm: PropTypes.func.isRequired
 };

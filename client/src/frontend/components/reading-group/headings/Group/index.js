@@ -6,6 +6,7 @@ import { Title } from "../parts";
 import ChildNav from "./ChildNav";
 import ManageGroup from "./ManageGroup";
 import GroupSummaryBox from "./GroupSummaryBox";
+import MembershipActions from "./MembershipActions";
 import * as Styled from "./styles";
 
 function GroupHeading({ readingGroup, location, refresh }) {
@@ -44,6 +45,7 @@ function GroupHeading({ readingGroup, location, refresh }) {
               {t("navigation.reading_group.details")}
             </Collapse.Toggle>
           </Styled.Flex>
+          <MembershipActions readingGroup={readingGroup} refresh={refresh} />
         </Styled.Container>
         <Styled.NavContainer>
           <ChildNav readingGroup={readingGroup} />

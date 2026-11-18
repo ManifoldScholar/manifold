@@ -2,6 +2,7 @@
   "actions": {
     "actions": "Actions",
     "activate": "Activate",
+    "activate_membership": "$t(actions.activate) membership",
     "add": "Add",
     "add_comment": "$t(actions.add) comment",
     "add_comment_title_case": "$t(actions.add) Comment",
@@ -10,6 +11,7 @@
     "annotate_passage": "$t(actions.annotate) this passage",
     "go_to_passage": "Go to passage",
     "archive": "Archive",
+    "archive_membership": "$t(actions.archive) membership",
     "back": "Back",
     "browse": "Browse",
     "bulk_delete": "Bulk Delete",
@@ -45,6 +47,7 @@
     "join": "Join",
     "join_group": "$t(actions.join) this group",
     "leave": "Leave",
+    "leave_group": "$t(actions.leave) group",
     "login_to_annotate": "Login to annotate",
     "login_to_reply": "Login to reply",
     "manage": "Manage",

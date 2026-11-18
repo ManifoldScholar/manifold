@@ -89,6 +89,9 @@
       "view_homepage": "View group homepage",
       "edit_settings": "Edit settings"
     },
+    "manage_membership": {
+      "title": "Manage membership:"
+    },
     "join_group": {
       "title": "Join a group:",
       "instructions": "To join a group, enter the code and select Join.",
@@ -105,7 +108,7 @@
         "instructions": "This will create a copy of your reading group. Once copied, you will need to add users to the group.",
         "group_name": "Reading Group Name",
         "copy_annotations": "Copy my annotations",
-        "archive": "Archive copied group",
+        "archive": "Archive membership in copied group",
         "open_after": "Open new group after duplication"
       }
     },

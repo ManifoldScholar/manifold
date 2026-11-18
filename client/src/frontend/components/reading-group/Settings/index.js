@@ -15,7 +15,7 @@ const { request } = entityStoreActions;
 function ReadingGroupSettings({ confirm }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { readingGroup, closeDrawer, onArchive } = useOutletContext() || {};
+  const { readingGroup, closeDrawer } = useOutletContext() || {};
 
   function doDuplicate({ name, copyAnnotations, archive, openOnProceed }) {
     const options = {
@@ -52,11 +52,7 @@ function ReadingGroupSettings({ confirm }) {
   return (
     <Collapse>
       <section>
-        <DrawerHeader
-          readingGroup={readingGroup}
-          confirm={confirm}
-          onArchive={onArchive}
-        />
+        <DrawerHeader readingGroup={readingGroup} confirm={confirm} />
         <DuplicatePanel readingGroup={readingGroup} onProceed={doDuplicate} />
         <GroupSettingsForm
           mode="edit"

@@ -68,11 +68,7 @@ function ReadingGroupHomepageStaticContainer() {
       <OutletWithDrawers
         context={{
           readingGroup,
-          closeDrawer,
-          onArchive: () => {
-            refresh();
-            closeDrawer();
-          }
+          closeDrawer
         }}
         drawerProps={{
           context: "frontend",

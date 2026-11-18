@@ -59,13 +59,7 @@ function ReadingGroupsMembersContainer({ confirm }) {
           readingGroup,
           confirm,
           onEditSuccess: handleEditSuccess,
-          closeDrawer,
-          onArchive: () => {
-            if (refreshRef.current?.refresh) {
-              refreshRef.current.refresh();
-            }
-            closeDrawer();
-          }
+          closeDrawer
         }}
       />
     </>
