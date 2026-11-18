@@ -7,6 +7,25 @@ RSpec.describe Resource, type: :model do
     expect(FactoryBot.build(:resource)).to be_valid
   end
 
+  describe "#effective_license" do
+    let(:project) { FactoryBot.create :project, license: "cc_by" }
+    let(:resource) { FactoryBot.create :resource, project: project }
+
+    it "returns its own license when set" do
+      resource.license = "public_domain"
+      expect(resource.effective_license.to_s).to eq "public_domain"
+    end
+
+    it "inherits the project's license when its own is blank" do
+      expect(resource.effective_license.to_s).to eq "cc_by"
+    end
+
+    it "is nil when neither the resource nor its project has a license" do
+      licenseless = FactoryBot.create :resource, project: FactoryBot.create(:project)
+      expect(licenseless.effective_license).to be_nil
+    end
+  end
+
   it "belongs to a project" do
     resource = FactoryBot.create(:resource)
     expect(resource.project).to be_a Project

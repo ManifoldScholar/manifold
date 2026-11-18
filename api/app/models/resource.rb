@@ -69,6 +69,8 @@ class Resource < ApplicationRecord
                            include_wrap: false
   has_formatted_attribute :description
 
+  classy_enum_attr :license, class_name: "License", allow_nil: true
+
   validates :title, presence: true
   validates :kind, inclusion: { in: ALLOWED_KINDS }, presence: true
   validates :sub_kind,
@@ -123,6 +125,10 @@ class Resource < ApplicationRecord
   multisearches! :description_plaintext, secondary_from: :caption
 
   has_keyword_search! against: %i[title description]
+
+  def effective_license
+    license.presence || project&.license
+  end
 
   def multisearch_full_text
     [description_plaintext, caption].compact_blank.join("\n")

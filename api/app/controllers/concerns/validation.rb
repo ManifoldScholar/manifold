@@ -260,7 +260,7 @@ module Validation
                   attachment(:variant_poster), :remove_variant_poster,
                   attachment(:transcript), :remove_transcript,
                   :title, :caption, :description, { tag_list: [] }, :kind, :sub_kind,
-                  :alt_text, :copyright_status, :credit,
+                  :alt_text, :copyright_status, :credit, :license,
                   :allow_download, :external_type, :external_url, :external_id,
                   :embed_code, :minimum_width, :minimum_height, { iframe_allows: [] },
                   metadata(Resource),
