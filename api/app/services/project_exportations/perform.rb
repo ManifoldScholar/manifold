@@ -2,8 +2,6 @@
 
 module ProjectExportations
   class Perform < ActiveInteraction::Base
-    include ProjectExportations::Import[upload_pipeline: "pipelines.upload"]
-
     isolatable!
 
     transactional!
@@ -29,6 +27,10 @@ module ProjectExportations
       end
     rescue StandardError => e
       handle_uncaught_exception! e
+    end
+
+    def upload_pipeline
+      @upload_pipeline ||= ProjectExportations::Container["pipelines.upload"]
     end
 
     private
