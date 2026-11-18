@@ -27,6 +27,15 @@ export default function ReadingGroupMemberRow({
     count: attributes.commentsCount
   })}`;
 
+  const labels = [
+    ...(attributes.role
+      ? [t(`reading_groups.role_options.${attributes.role}`)]
+      : []),
+    ...(attributes.state === "archived"
+      ? [{ text: t("common.archived"), level: "notice" }]
+      : [])
+  ];
+
   const utility = (
     <button
       data-id="destroy"
@@ -48,11 +57,7 @@ export default function ReadingGroupMemberRow({
       figure={<EntityThumbnail.User entity={user} />}
       figureSize="small"
       figureShape="circle"
-      label={
-        attributes.role
-          ? t(`reading_groups.role_options.${attributes.role}`)
-          : null
-      }
+      label={labels}
       active={active === id}
       utility={utility}
     />
