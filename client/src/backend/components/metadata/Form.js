@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import FormContainer from "global/containers/form";
@@ -9,6 +10,36 @@ import concat from "lodash/concat";
 import has from "lodash/has";
 import difference from "lodash/difference";
 import { licensesAPI } from "api";
+import { FormContext } from "helpers/contexts";
+
+// Reads the live form value so the inherited-license hint tracks the picker.
+function LicensePicker({ model }) {
+  const { t } = useTranslation();
+  const { getModelValue } = useContext(FormContext);
+  const inheritedLabel = model.attributes.effectiveLicenseLabel;
+  const showInherited =
+    !!inheritedLabel && !getModelValue("attributes.license");
+
+  return (
+    <Form.Picker
+      label={t("metadata.license")}
+      name="attributes.license"
+      options={licensesAPI.index}
+      placeholder={t("metadata.license_placeholder")}
+      instructions={
+        showInherited
+          ? t("metadata.license_inherited_instructions", {
+              license: inheritedLabel
+            })
+          : undefined
+      }
+    />
+  );
+}
+
+LicensePicker.propTypes = {
+  model: PropTypes.object.isRequired
+};
 
 export default function MetadataForm({ model, ...restProps }) {
   const { t } = useTranslation();
@@ -156,12 +187,7 @@ export default function MetadataForm({ model, ...restProps }) {
                 );
               })}
               {group.label === "Copyright" && showLicense && (
-                <Form.Picker
-                  label={t("metadata.license")}
-                  name="attributes.license"
-                  options={licensesAPI.index}
-                  placeholder={t("metadata.license_placeholder")}
-                />
+                <LicensePicker model={model} />
               )}
             </Form.FieldGroup>
           );

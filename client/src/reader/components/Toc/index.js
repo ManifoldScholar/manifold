@@ -31,7 +31,10 @@ export default function Toc({ text, showMeta }) {
 
   if (!text) return null;
 
-  const { toc, slug, metadata } = text.attributes;
+  const { toc, slug, metadata, effectiveLicenseLabel } = text.attributes;
+  // The license (the text's own or one inherited from its project) is shown
+  // in the metadata overlay even when no other metadata is set.
+  const hasMeta = !isEmpty(metadata) || !!effectiveLicenseLabel;
 
   const hideTocDrawer = () => {
     if (tocDrawerVisible) {
@@ -111,7 +114,7 @@ export default function Toc({ text, showMeta }) {
     <Styled.TocDrawer {...drawerProps}>
       <Styled.Toc>
         {renderContents()}
-        {!isEmpty(metadata) ? (
+        {hasMeta ? (
           <Styled.Footer>
             <Styled.FooterButton onClick={showMeta}>
               <Styled.FooterIcon icon="info16" size={32} />
