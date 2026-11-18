@@ -5,12 +5,14 @@ class RemoveSendmailFromEmailSettings < ActiveRecord::Migration[7.0]
     execute(<<~SQL.squish)
       UPDATE settings
       SET email = jsonb_set(
-        email - 'sendmail_settings_location' - 'sendmail_settings_arguments',
+        COALESCE(email, '{}'::jsonb) - 'sendmail_settings_location' - 'sendmail_settings_arguments',
         '{delivery_method}',
         '"smtp"'
       )
-      WHERE email ->> 'delivery_method' = 'sendmail'
+      WHERE COALESCE(email, '{}'::jsonb) ->> 'delivery_method' IS DISTINCT FROM 'smtp'
     SQL
+
+    change_column_null :settings, :email, false
   end
 
   def down
