@@ -10,6 +10,10 @@ module DynamicMailer
       @settings.email[:delivery_method] == "smtp"
     end
 
+    def smtp_configured?
+      email_config(:smtp_settings_address).present?
+    end
+
     def from
       from_name = email_config(:from_name, "Manifold Scholarship")
       from_address = email_config(:from_address, "do-not-reply@manifoldapp.org")

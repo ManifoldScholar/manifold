@@ -3007,7 +3007,7 @@ CREATE TABLE public.settings (
     press_logo_updated_at_deprecated timestamp without time zone,
     integrations jsonb DEFAULT '{}'::jsonb,
     secrets jsonb DEFAULT '{}'::jsonb,
-    email jsonb DEFAULT '{}'::jsonb,
+    email jsonb DEFAULT '{}'::jsonb NOT NULL,
     press_logo_footer_file_name_deprecated character varying,
     press_logo_footer_content_type_deprecated character varying,
     press_logo_footer_file_size_deprecated integer,

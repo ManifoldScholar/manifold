@@ -23,6 +23,16 @@ RSpec.describe DynamicMailer::Configuration do
     expect(smtp_instance.use_smtp?).to be true
   end
 
+  it "reports smtp as configured when an address is present" do
+    expect(smtp_instance.smtp_configured?).to be true
+  end
+
+  it "reports smtp as unconfigured when the address is blank" do
+    instance = described_class.new(Settings.new(email: { delivery_method: "smtp" }))
+
+    expect(instance.smtp_configured?).to be false
+  end
+
   it "correctly reports smtp settings" do
     expect(smtp_instance.smtp_config).to eq(
       address: "server.com",
