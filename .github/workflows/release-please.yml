@@ -21,6 +21,46 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
+      - if: github.ref_name == 'beta'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Beta will be regularly rebased on main, defeating release-please's SHA lookups for changelogs.
+      # This goes back and looks for the latest merged release PR on the branch and bases the changelog off of that
+      - name: Re-anchor beta release after rebase
+        if: github.ref_name == 'beta'
+        run: |
+          set -euo pipefail
+
+          version="$(jq -r '.["."]' .release-please/beta-manifest.json)"
+          if [[ -z "$version" || "$version" == "null" ]]; then
+            echo "No beta version in manifest; nothing to re-anchor."
+            exit 0
+          fi
+
+          if ! git rev-parse -q --verify "refs/tags/${version}" >/dev/null; then
+            echo "Tag ${version} does not exist yet; release-please will bootstrap."
+            exit 0
+          fi
+
+          anchor="$(git rev-list -n1 "refs/tags/${version}")"
+          if git merge-base --is-ancestor "$anchor" HEAD; then
+            echo "Anchor ${anchor} for ${version} is reachable; no re-anchor needed."
+            exit 0
+          fi
+
+          echo "Anchor ${anchor} for ${version} unreachable (branch was rebased); relocating."
+          rebased="$(git log HEAD --grep "^chore(beta): release ${version}$" --format=%H -n1 || true)"
+          if [[ -z "$rebased" ]]; then
+            echo "::warning::No rebased 'chore(beta): release ${version}' commit found; leaving tag unchanged. release-please may regenerate the full changelog."
+            exit 0
+          fi
+
+          echo "Re-pointing tag ${version}: ${anchor} -> ${rebased}"
+          git tag -f "$version" "$rebased"
+          git push -f origin "refs/tags/${version}"
+
       - id: release
         uses: googleapis/release-please-action@v4
         with:
