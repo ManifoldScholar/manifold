@@ -13,5 +13,5 @@ runs:
       with:
         bundler: 2.6.2
         bundler-cache: true
-        ruby-version: 3.4.9
+        ruby-version: 3.4.13
         working-directory: api

@@ -2,6 +2,8 @@
 
 source "https://rubygems.org"
 
+ruby "3.4.13"
+
 gem "aasm", "~> 4.0"
 gem "absolute_time", "~> 1.0.0"
 gem "base64"
