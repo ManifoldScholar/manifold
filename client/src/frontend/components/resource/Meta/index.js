@@ -21,9 +21,13 @@ export default class ResourceMeta extends Component {
   };
 
   generateResourceMetadataMap(baseMeta, resource) {
-    const keys = Object.keys(baseMeta).sort();
-    const metadata = { ...baseMeta };
     const attr = resource.attributes;
+    const keys = Object.keys(baseMeta);
+    // Meta.List adds the license to its metadata under the "license" key, but
+    // only renders the keys in the map, so the key must be listed here.
+    if (attr.effectiveLicenseLabel) keys.push("license");
+    keys.sort();
+    const metadata = { ...baseMeta };
 
     if (attr.attachmentFileSize) {
       metadata.fileSize = `${filesize(attr.attachmentFileSize, { round: 0 })}`;
@@ -63,6 +67,7 @@ export default class ResourceMeta extends Component {
         <Meta.List
           map={keys}
           metadata={metadata}
+          license={attr.effectiveLicenseLabel}
           level={this.props.layout}
           sortByLength={false}
         />

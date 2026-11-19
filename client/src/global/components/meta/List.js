@@ -13,6 +13,7 @@ class List extends Component {
 
   static propTypes = {
     metadata: PropTypes.object,
+    license: PropTypes.string,
     level: PropTypes.string,
     map: PropTypes.array,
     sortByLength: PropTypes.bool,
