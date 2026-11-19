@@ -1,5 +1,29 @@
 # Changelog
 
+## [10.0.0-beta.1](https://github.com/ManifoldScholar/manifold/compare/10.0.0-beta...10.0.0-beta.1) (2026-11-19)
+
+
+### Features
+
+* add all collaborators to OAI-PMH records ([c3bf05b](https://github.com/ManifoldScholar/manifold/commit/c3bf05b0bd801f87fe5896bcc97e3fac2c606b68))
+* add rake task to refresh OAI records ([9439351](https://github.com/ManifoldScholar/manifold/commit/9439351f5ff6fc0cbbe4d6c8ce82a558a9088001))
+* **api:** allow project collections to build nested description metadata ([a2453c2](https://github.com/ManifoldScholar/manifold/commit/a2453c22a08be7a54b93f32c7ecd85f31781e3a6))
+* refactor OAI-PMH inclusion to use declarative class methods ([32fd51f](https://github.com/ManifoldScholar/manifold/commit/32fd51f7d98342c69b1e10418704c03a5eac1cd7))
+* set journals as OAI set sources and issues as set links ([c49e732](https://github.com/ManifoldScholar/manifold/commit/c49e7323757a920d1f375ea4b0b6714b3808cdc7))
+
+
+### Bug Fixes
+
+* **api:** exclude journal issues from OAI-PMH projects set ([66a2760](https://github.com/ManifoldScholar/manifold/commit/66a2760041984f05712429d6c2f917fa45b64c17))
+* fix header subnav stacking order ([e83fcc8](https://github.com/ManifoldScholar/manifold/commit/e83fcc829a07a3791d9fbedfe4c1f45a3c5ce469))
+* fix OAI-PMH resumption (pagination) ([71c2fc4](https://github.com/ManifoldScholar/manifold/commit/71c2fc4af4d972c37af89923639a8eb4650e198d))
+* **reader:** hydrate resource in annotation dialog ([3089b3d](https://github.com/ManifoldScholar/manifold/commit/3089b3dc0dbf58dd04a9d01fd6e12400573b2442))
+* **reading-groups:** improve archive UX ([e2bcded](https://github.com/ManifoldScholar/manifold/commit/e2bcdedbcec120f9b9527dce31ccbc3585cd63bc))
+* **reading-groups:** show archived status in admin members list ([4d67d1e](https://github.com/ManifoldScholar/manifold/commit/4d67d1e27fafab93bfa75181e0414e7f2c4597e6))
+* **resources:** add null guard to render of image resource while processing ([03fea90](https://github.com/ManifoldScholar/manifold/commit/03fea90eae9a5473a42c16242ca5c20cef1e8336))
+* **resources:** fix RC slideshow margin bug ([7542dc9](https://github.com/ManifoldScholar/manifold/commit/7542dc9311f0c02f381b556d4a958882fa4b491d))
+* restore OAI record from deletion if appropriate ([8e95de4](https://github.com/ManifoldScholar/manifold/commit/8e95de4020ebc303474bdc62c6fdceaa45c408ca))
+
 ## [10.0.0-beta](https://github.com/ManifoldScholar/manifold/compare/9.2.9...10.0.0-beta) (2026-10-28)
 
 
