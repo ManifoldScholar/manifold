@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.2.11](https://github.com/ManifoldScholar/manifold/compare/9.2.10...9.2.11) (2026-11-19)
+
+
+### Bug Fixes
+
+* **api:** upgrade to Ruby 3.4.13 ([725522e](https://github.com/ManifoldScholar/manifold/commit/725522ed7cf8c1b4ad5152665f85c33dbff99794))
+
 ## [9.2.10](https://github.com/ManifoldScholar/manifold/compare/9.2.9...9.2.10) (2026-11-12)
 
 
