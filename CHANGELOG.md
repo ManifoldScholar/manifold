@@ -1,5 +1,36 @@
 # Changelog
 
+## [10.0.0-beta.2](https://github.com/ManifoldScholar/manifold/compare/10.0.0-beta.1...10.0.0-beta.2) (2026-11-20)
+
+
+### Features
+
+* add expiration to user_group_entitleables ([3b1c1e4](https://github.com/ManifoldScholar/manifold/commit/3b1c1e4804b6b92962b9201d2ccd4d3e332fb6b1))
+* add license field to text ([509d1e7](https://github.com/ManifoldScholar/manifold/commit/509d1e75dcffa79d0d52e609c3afb520d16cb9cf))
+* add license UI for resources ([8a785d5](https://github.com/ManifoldScholar/manifold/commit/8a785d5ec2281bcc367de20fae65ddf0f8592ada))
+* add license UI for texts ([dc0f796](https://github.com/ManifoldScholar/manifold/commit/dc0f7964d17912b5badb32c844e8be4aeb6e59b6))
+* **api:** add admin LTI registrations endpoints ([90d01f0](https://github.com/ManifoldScholar/manifold/commit/90d01f0d1ce3b42ecfe36137e5d3d9c5dd7a23fd))
+* **api:** add license fields to Resource ([00f2c74](https://github.com/ManifoldScholar/manifold/commit/00f2c746247d7d67f6bd67c75586e3e72970c96c))
+* **api:** add LTI blocklist; DRY LTI authorization logic ([6a43a95](https://github.com/ManifoldScholar/manifold/commit/6a43a957338978971b1fbde2cb4cff1249943322))
+* **api:** quietly noop email requests with no SMTP address ([67b37fa](https://github.com/ManifoldScholar/manifold/commit/67b37faeaa32fd3ae421a2e1b4308e938137a7aa))
+* **auth:** add per-provider account linking toggle ([ed0fc13](https://github.com/ManifoldScholar/manifold/commit/ed0fc13c4c0579faeec0c25a04e9a4d01d459976))
+* build allow/blocklist input ([3fbc3a3](https://github.com/ManifoldScholar/manifold/commit/3fbc3a3ae7e816bf599d9afc92399ce57231e99f))
+* build lti registraions interface ([fa2f0f4](https://github.com/ManifoldScholar/manifold/commit/fa2f0f452b178d67f1fde36105ed432c891cca5d))
+* **client:** remove sendmail fields from admin settings ([d6da494](https://github.com/ManifoldScholar/manifold/commit/d6da494b0a5177c0cb9706b13b8c2639527c4aad))
+* implement account linking for LTI ([6f7ffc1](https://github.com/ManifoldScholar/manifold/commit/6f7ffc1ec15d20b9f94dfe6925afc79f9d6444f3))
+* **lti:** implement LTI registration approval flow and state machine ([556a853](https://github.com/ManifoldScholar/manifold/commit/556a8531948aa8c4bcb2974e84cc1c2c9d3e8002))
+* **lti:** support LTI account linking in client ([6c7ba30](https://github.com/ManifoldScholar/manifold/commit/6c7ba3051377641e87f8238841e1b082cd4b5f87))
+* support user group entiteables expiration in client ([7d7b4f6](https://github.com/ManifoldScholar/manifold/commit/7d7b4f6ffb69a203325dadda1972f72070fc1929))
+* wire up lti settings ([3c8e500](https://github.com/ManifoldScholar/manifold/commit/3c8e5004cebad6b0422bd13a96a05f658d4cd7e9))
+
+
+### Bug Fixes
+
+* add license to has_metadata check ([0bd1182](https://github.com/ManifoldScholar/manifold/commit/0bd118220aa9fc3df903723dd1a972543c60b281))
+* handle array params in SettingSections ([7b2c453](https://github.com/ManifoldScholar/manifold/commit/7b2c453d1e7491bf9090a44c0068373099c63901))
+* remove OCL license type ([e29d974](https://github.com/ManifoldScholar/manifold/commit/e29d974eb17280ab95149ea2d3fb734fb73edca2))
+* update structure.sql ([329db03](https://github.com/ManifoldScholar/manifold/commit/329db03a0f93785742a6f9580c542d9888b846da))
+
 ## [10.0.0-beta.1](https://github.com/ManifoldScholar/manifold/compare/10.0.0-beta...10.0.0-beta.1) (2026-11-19)
 
 
