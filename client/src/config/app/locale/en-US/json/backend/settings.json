@@ -204,7 +204,8 @@
       "directory_enabled_instructions": "Expose content from this instance for publication in the Manifold Directory on manifoldapp.org"
     },
     "lti": {
-      "header": "Learning Tools Interoperability (LTI v1.3)",
+      "header": "Learning Tools Interoperability (LTI v1.3) (Experimental)",
+      "instructions": "LTI support is an experimental feature. You may encounter issues when using Manifold with your Learning Management System (LMS).",
       "enabled": "Enabled",
       "enabled_instructions": "Allow Learning Management Systems (LMSes) to connect to this instance via LTI tools",
       "autoregistration": "Allow Autoregistration",

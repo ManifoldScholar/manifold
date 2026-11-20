@@ -84,7 +84,10 @@ export default function SettingsIntegrationsContainer() {
               instructions={t("settings.oai.directory_enabled_instructions")}
             />
           </Form.FieldGroup>
-          <Form.FieldGroup label={t("settings.lti.header")}>
+          <Form.FieldGroup
+            label={t("settings.lti.header")}
+            instructions={t("settings.lti.instructions")}
+          >
             <Form.Switch
               label={t("settings.lti.enabled")}
               name="attributes[lti][enabled]"
