@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.0-rc.1](https://github.com/ManifoldScholar/manifold/compare/10.0.0-beta.2...10.0.0-rc.1) (2026-11-20)
+
+
+### Miscellaneous Chores
+
+* release 10.0.0-rc-1 ([e1c8a05](https://github.com/ManifoldScholar/manifold/commit/e1c8a05a661517c028bf85e85c6ee82a1a44d4a1))
+
 ## [10.0.0-beta.2](https://github.com/ManifoldScholar/manifold/compare/10.0.0-beta.1...10.0.0-beta.2) (2026-11-20)
 
 
