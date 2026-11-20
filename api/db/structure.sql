@@ -2977,7 +2977,8 @@ CREATE TABLE public.resources (
     pending_sort_title character varying,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     iframe_allows character varying[] DEFAULT '{fullscreen}'::character varying[] NOT NULL,
-    sort_order integer
+    sort_order integer,
+    license character varying
 );
 
 
@@ -3007,7 +3008,7 @@ CREATE TABLE public.settings (
     press_logo_updated_at_deprecated timestamp without time zone,
     integrations jsonb DEFAULT '{}'::jsonb,
     secrets jsonb DEFAULT '{}'::jsonb,
-    email jsonb DEFAULT '{}'::jsonb NOT NULL,
+    email jsonb DEFAULT '{}'::jsonb,
     press_logo_footer_file_name_deprecated character varying,
     press_logo_footer_content_type_deprecated character varying,
     press_logo_footer_file_size_deprecated integer,
@@ -8363,6 +8364,7 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20261116232802'),
 ('20261110043020'),
+('20261023230025'),
 ('20261021172201'),
 ('20261013234117'),
 ('20261013234017'),
