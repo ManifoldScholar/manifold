@@ -14,6 +14,15 @@
     "content_block_warning_heading": "This content block needs your attention before it can be displayed.",
     "content_block_warning_note": "Note: This message is only visible to project editors.",
     "showing_resource": "Showing {{type}} resource: {{title}}",
+    "pdf_viewer": {
+      "view": "View PDF",
+      "previous_page": "Previous page",
+      "next_page": "Next page",
+      "page_status": "Page {{page}} of {{total}}",
+      "page_label": "{{title}}, page {{page}}",
+      "loading": "Loading PDF…",
+      "error": "This PDF could not be displayed."
+    },
     "unsaved_changes": "You may have unsaved changes. Do you want to leave without saving your changes?",
     "no_results": "Sorry, no results were found.",
     "no_sections": "This text doesn’t contain any sections.",

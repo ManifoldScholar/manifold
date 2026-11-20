@@ -113,6 +113,19 @@ export default function buildWebpackConfiguration(
           generator: {
             filename: `build/[name][ext]`
           }
+        },
+
+        // The pdf.js worker is referenced via `new URL(..., import.meta.url)`
+        // and must be emitted as a standalone file rather than bundled. It is
+        // given a .js extension because module workers are rejected unless
+        // served with a JavaScript MIME type, which some servers do not map
+        // for .mjs.
+        {
+          test: /pdfjs-dist.*\/pdf\.worker\.min\.mjs$/,
+          type: "asset/resource",
+          generator: {
+            filename: `build/${nameTemplate}.js`
+          }
         }
       ]
     },
