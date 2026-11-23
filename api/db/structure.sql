@@ -8362,6 +8362,7 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261123172839'),
 ('20261118204603'),
 ('20261117001157'),
 ('20261116234733'),

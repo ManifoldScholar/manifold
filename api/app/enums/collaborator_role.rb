@@ -30,7 +30,7 @@ class CollaboratorRole::Preface < CollaboratorRole
   config.priority = 4000
 end
 
-class CollaboratorRole::Foreward < CollaboratorRole
+class CollaboratorRole::Foreword < CollaboratorRole
   config.priority = 5000
 end
 
