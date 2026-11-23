@@ -46,7 +46,8 @@ function ResourceMediaFactory({
 ResourceMediaFactory.displayName = "Resource.Factory";
 
 ResourceMediaFactory.propTypes = {
-  resource: PropTypes.object.isRequired,
+  /* Not available while `loading` */
+  resource: PropTypes.object,
   loading: PropTypes.bool,
   aspectRatio: PropTypes.string,
   roundedCorners: PropTypes.bool,

@@ -186,20 +186,25 @@ class ResourceSlideshow extends PureComponent {
     const { map, position } = this.state;
     const slides = Object.values(map);
 
-    return slides.map((slide, index) => (
-      <Styled.Slide
-        key={slide.id ?? index}
-        id={slide.id}
-        data-active={index === position - 1}
-      >
-        <ResourceMediaFactory
-          resource={slide}
-          aspectRatio="16 / 9"
-          loading={!this.isLoaded(index)}
-          active={index === position - 1}
-        />
-      </Styled.Slide>
-    ));
+    return slides.map((slide, index) => {
+      // Unloaded slots hold a numeric placeholder rather than a resource.
+      const loaded = this.isLoaded(index);
+
+      return (
+        <Styled.Slide
+          key={slide.id ?? index}
+          id={slide.id}
+          data-active={index === position - 1}
+        >
+          <ResourceMediaFactory
+            resource={loaded ? slide : undefined}
+            aspectRatio="16 / 9"
+            loading={!loaded}
+            active={index === position - 1}
+          />
+        </Styled.Slide>
+      );
+    });
   }
 
   renderPlaceholder() {
@@ -213,7 +218,10 @@ class ResourceSlideshow extends PureComponent {
   render() {
     const position = this.state.position;
     const totalCount = this.state.totalCount;
-    const collectionResource = this.state.map[position - 1];
+    const loaded = this.isLoaded(position - 1);
+    const collectionResource = loaded
+      ? this.state.map[position - 1]
+      : undefined;
     const collectionResourcesCount = this.props.collectionResources?.length;
 
     return (
@@ -229,7 +237,7 @@ class ResourceSlideshow extends PureComponent {
           position={position}
           resourceCount={collectionResourcesCount}
           totalCount={totalCount}
-          loaded={this.isLoaded(position - 1)}
+          loaded={loaded}
           handleSlidePrev={this.handleSlidePrev}
           handleSlideNext={this.handleSlideNext}
         />
