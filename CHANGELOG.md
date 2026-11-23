@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.0-rc.2](https://github.com/ManifoldScholar/manifold/compare/10.0.0-rc.1...10.0.0-rc.2) (2026-11-23)
+
+
+### Bug Fixes
+
+* rename "foreward" collab role to "foreword"; migrate existing ([013e1e0](https://github.com/ManifoldScholar/manifold/commit/013e1e0a670fd3a764558c4b9f6799423ceb4e4a))
+
 ## [10.0.0-rc.1](https://github.com/ManifoldScholar/manifold/compare/10.0.0-beta.2...10.0.0-rc.1) (2026-11-20)
 
 
