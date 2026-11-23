@@ -76,7 +76,7 @@ export default function Text({
     );
     if (!hiddenMatch) return;
 
-    history.replace({ hash: "", state: { noScroll: true } });
+    history.replace({ hash: "" }, { noScroll: true });
   }, [history, filteredAnnotations, annotations, location]);
 
   const resourceDisplayFormatDialog = useDialog({
