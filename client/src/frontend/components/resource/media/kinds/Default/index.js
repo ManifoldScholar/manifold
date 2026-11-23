@@ -22,7 +22,9 @@ function ResourceMediaDefault({ resource, loading }) {
 ResourceMediaDefault.displayName = "Resource.Media.Default";
 
 ResourceMediaDefault.propTypes = {
-  resource: PropTypes.object.isRequired,
+  /* Not available while `loading` */
+  resource: PropTypes.object,
+  loading: PropTypes.bool,
   fixedAspectRatio: PropTypes.bool
 };
 

@@ -213,9 +213,12 @@ function CollectingToggle({
     if (popoverOpen && popoverEl) popoverEl.focus();
   }, [popoverOpen, popoverEl]);
 
+  // The collectable can be missing while its owner is still loading (e.g. the
+  // reader header renders before the text has been fetched).
   if (
     !currentUser ||
-    COLLECTABLE_TYPE_RESTRICTED_LIST.includes(collectable?.type)
+    !collectable ||
+    COLLECTABLE_TYPE_RESTRICTED_LIST.includes(collectable.type)
   )
     return null;
 
