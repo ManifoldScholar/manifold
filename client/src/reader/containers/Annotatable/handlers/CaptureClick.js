@@ -9,6 +9,7 @@ export default class AnnotatableCaptureClick extends Component {
     activeAnnotation: PropTypes.string,
     updateActiveAnnotation: PropTypes.func.isRequired,
     actions: PropTypes.object.isRequired,
+    addAnnotationHashToUrl: PropTypes.func.isRequired,
     children: PropTypes.node
   };
 
@@ -102,13 +103,16 @@ export default class AnnotatableCaptureClick extends Component {
     const hashRegex = /#annotation-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/g;
     const isAnnotationClick = hashRegex.test(link.hash);
 
-    if (!isAnnotationClick) event.preventDefault();
+    // Prevent native fragment navigation; annotation hashes are pushed
+    // through the router instead.
+    event.preventDefault();
 
     const annotationIds = this.elementAnnotationIds(el);
 
     if (!isAnnotationClick)
       return this.showLinkMenu(event, el, annotationIds, link);
 
+    this.props.addAnnotationHashToUrl(link.hash);
     this.props.actions.openViewAnnotationsDrawer(annotationIds);
   }
 

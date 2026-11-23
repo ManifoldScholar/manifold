@@ -379,6 +379,12 @@ export class Annotatable extends Component {
     this.props.history.push({ hash: "" }, { noScroll: true });
   }
 
+  maybeAddAnnotationHashToUrl = hash => {
+    if (!this.props.history) return;
+    if (!hash || this.props.location.hash === hash) return;
+    this.props.history.push({ hash });
+  };
+
   openDrawer = (drawerState, event = null, lock = true) => {
     if (event) event.preventDefault();
     if (lock) this.setState({ annotationState: "locked" });
@@ -566,6 +572,7 @@ export class Annotatable extends Component {
             activeAnnotation={this.state.annotation}
             updateActiveAnnotation={this.setActiveAnnotation}
             actions={this.actions}
+            addAnnotationHashToUrl={this.maybeAddAnnotationHashToUrl}
           >
             <div
               id="annotatableRef"
