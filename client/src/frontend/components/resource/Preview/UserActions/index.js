@@ -24,6 +24,7 @@ function ResourcePreviewUserActions({
   const {
     kind,
     title,
+    titlePlaintext,
     transcriptUrl,
     transcriptFileName,
     slug,
@@ -71,7 +72,11 @@ function ResourcePreviewUserActions({
         </li>
       )}
       <li>
-        <Share title={title} uri={detailUrl} {...BUTTON_STYLE_PROPS} />
+        <Share
+          title={titlePlaintext ?? title}
+          uri={detailUrl}
+          {...BUTTON_STYLE_PROPS}
+        />
       </li>
     </Styled.List>
   );

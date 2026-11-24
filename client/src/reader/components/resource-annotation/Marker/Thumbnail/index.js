@@ -130,6 +130,7 @@ export default function Thumbnail({
 
   const {
     title,
+    titleFormatted,
     kind,
     variantThumbnailStyles,
     thumbnailStyles,
@@ -182,7 +183,14 @@ export default function Thumbnail({
             <Styled.Image {...imgProps} />
           </Styled.ImageWrapper>
         )}
-        <Styled.Title>{title}</Styled.Title>
+        {/* Only resource titles support markdown formatting. */}
+        {resource ? (
+          <Styled.Title
+            dangerouslySetInnerHTML={{ __html: titleFormatted ?? title }}
+          />
+        ) : (
+          <Styled.Title>{title}</Styled.Title>
+        )}
       </Styled.Content>
     </WrapperComponent>
   );

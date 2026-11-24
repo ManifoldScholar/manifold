@@ -15,6 +15,7 @@ function ResourcePlayerAudio({ resource, active = true }) {
   const {
     attachmentStyles,
     title,
+    titlePlaintext,
     allowDownload,
     variantThumbnailStyles,
     variantThumbnailAltText
@@ -51,7 +52,7 @@ function ResourcePlayerAudio({ resource, active = true }) {
       )}
       <Styled.PlayerWrapper>
         <LoadablePlayer
-          title={title}
+          title={titlePlaintext ?? title}
           src={src}
           tracks={tracks}
           download={
