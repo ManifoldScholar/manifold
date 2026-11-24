@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import ResourceMediaDefault from "../Default";
 import * as Styled from "./styles";
 
 function ResourceMediaPDF({ resource, fixedAspectRatio }) {
@@ -14,6 +15,8 @@ function ResourceMediaPDF({ resource, fixedAspectRatio }) {
         alt: variantThumbnailAltText
       }
     : { src: attachmentStyles?.largeLandscape, alt: altText || "" };
+
+  if (!imgProps.src) return <ResourceMediaDefault resource={resource} />;
 
   // TODO get dimensions from API
   return (
