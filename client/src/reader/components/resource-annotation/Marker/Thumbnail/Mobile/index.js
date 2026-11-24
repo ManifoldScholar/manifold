@@ -27,6 +27,7 @@ export default function ThumbnailMobile({
   const {
     kind,
     title,
+    titleFormatted,
     variantThumbnailStyles,
     thumbnailStyles,
     attachmentStyles,
@@ -62,7 +63,14 @@ export default function ThumbnailMobile({
             <Styled.Icon icon="resourceLink64" size={28} />
           )}
         </Styled.ImageWrapper>
-        <Styled.Title>{title}</Styled.Title>
+        {/* Only resource titles support markdown formatting. */}
+        {resource ? (
+          <Styled.Title
+            dangerouslySetInnerHTML={{ __html: titleFormatted ?? title }}
+          />
+        ) : (
+          <Styled.Title>{title}</Styled.Title>
+        )}
         <Styled.ViewButton
           label="View"
           size="sm"

@@ -16,6 +16,7 @@ export default function ResourceListItem({
 }) {
   const {
     title,
+    titleFormatted,
     variantThumbnailStyles,
     attachmentStyles,
     kind,
@@ -67,11 +68,17 @@ export default function ResourceListItem({
                     )
               }
             >
-              <Styled.Title as={`h${headingLevel}`}>{title}</Styled.Title>
+              <Styled.Title
+                as={`h${headingLevel}`}
+                dangerouslySetInnerHTML={{ __html: titleFormatted ?? title }}
+              />
             </Styled.Link>
           ) : (
             <Styled.Button onClick={handleClick}>
-              <Styled.Title as={`h${headingLevel}`}>{title}</Styled.Title>
+              <Styled.Title
+                as={`h${headingLevel}`}
+                dangerouslySetInnerHTML={{ __html: titleFormatted ?? title }}
+              />
             </Styled.Button>
           )}
           <Styled.Metadata>

@@ -26,7 +26,10 @@ export default function ResourceListSlideZoom({ resource, label }) {
         label={label ?? t("actions.zoom")}
         postIcon="zoomIn16"
       />
-      <Styled.Dialog title={resource.attributes.title} {...dialog}>
+      <Styled.Dialog
+        title={resource.attributes.titlePlaintext ?? resource.attributes.title}
+        {...dialog}
+      >
         <Styled.DialogInner>
           <KindComponent resource={resource} fixedAspectRatio={false} />
         </Styled.DialogInner>

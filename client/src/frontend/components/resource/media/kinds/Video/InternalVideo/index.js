@@ -9,6 +9,7 @@ function ResourceMediaVideoInternal({ resource, active = true }) {
     variantThumbnailStyles,
     attachmentStyles,
     title,
+    titlePlaintext,
     allowDownload
   } = resource.attributes;
 
@@ -45,7 +46,7 @@ function ResourceMediaVideoInternal({ resource, active = true }) {
 
   return (
     <LoadablePlayer
-      title={title}
+      title={titlePlaintext ?? title}
       src={src}
       poster={poster}
       tracks={tracks}

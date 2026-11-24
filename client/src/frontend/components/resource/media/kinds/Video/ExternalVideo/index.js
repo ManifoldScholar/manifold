@@ -27,12 +27,12 @@ export default function ExternalVideo({ resource, active = true }) {
 
   if (!src || !active) return null;
 
-  const { title, externalType } = resource.attributes;
+  const { title, titlePlaintext, externalType } = resource.attributes;
 
   return (
     <Styled.Iframe
       src={src}
-      title={title}
+      title={titlePlaintext ?? title}
       allowFullScreen
       type={externalType === "youtube" ? "text/html" : undefined}
       loading="lazy"

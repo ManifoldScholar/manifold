@@ -49,7 +49,14 @@ export default function ResourceAnnotationDialog({
     );
 
   return (
-    <Dialog title={resourceEntity?.attributes.title} open={open} {...dialog}>
+    <Dialog
+      title={
+        resourceEntity?.attributes.titlePlaintext ??
+        resourceEntity?.attributes.title
+      }
+      open={open}
+      {...dialog}
+    >
       {(open || renderContent) && renderPreview}
     </Dialog>
   );
