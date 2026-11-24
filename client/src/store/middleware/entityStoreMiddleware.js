@@ -6,6 +6,7 @@ import has from "lodash/has";
 import set from "lodash/set";
 import property from "lodash/property";
 import { entityStoreActions } from "actions";
+import config from "config";
 
 function sendRequest(request, tokens) {
   const client = new ApiClient();
@@ -64,6 +65,10 @@ function buildAddsAction(meta, entity) {
 const getNextPage = property("meta.pagination.nextPage");
 const canEagerLoad = property("payload.request.eagerLoad");
 const willEagerLoad = (action, response) => {
+  // Follow-up pages are not awaited by the server render, so the server only
+  // fetches the first page. The client resumes the chain after hydration (see
+  // useFetch).
+  if (config.environment.isServer) return false;
   if (canEagerLoad(action)) {
     const nextPage = getNextPage(response);
     return nextPage && nextPage > 1;
