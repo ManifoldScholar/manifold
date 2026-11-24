@@ -73,7 +73,7 @@
     "html-react-parser": "^5.2.6",
     "http-proxy-middleware": "^2.0.10",
     "http-shutdown": "^1.2.2",
-    "i18next": "^25.3.2",
+    "i18next": "^26.3.4",
     "immutability-helper": "^3.x",
     "js-beautify": "^1.15.4",
     "js-cookie": "^3.0.7",
