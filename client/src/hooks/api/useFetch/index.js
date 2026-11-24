@@ -12,7 +12,8 @@ import entityUtils from "utils/entityUtils";
 import { useUID } from "react-uid";
 import config from "config";
 import ch from "helpers/consoleHelpers";
-import { isFunction } from "lodash";
+import { isFunction, set } from "lodash";
+import copy from "fast-copy";
 
 /**
  * Fetches that occur more than this many milliseconds apart are treated as
@@ -146,11 +147,34 @@ export default function useFetch({
   const response = getState()?.entityStore.responses[requestKey];
 
   /* eslint-disable react-hooks/exhaustive-deps */
+  /**
+   * The server render only awaits the first page of an eager-loaded request.
+   * If there are addtl pages, continue requesting them in the browser.
+   */
+  const resumeEagerLoad = useCallback(() => {
+    if (!condition) return;
+    const apiFetch = apiCall(...apiCallArgs);
+    if (!apiFetch?.eagerLoad) return;
+    const nextPage = meta?.pagination?.nextPage;
+    if (!nextPage || nextPage <= 1) return;
+    const nextRequest = copy(apiFetch);
+    set(nextRequest, "options.params.page.number", nextPage);
+    dispatch(
+      entityStoreActions.request(nextRequest, requestKey, {
+        ...options,
+        appends: requestKey
+      })
+    );
+  }, [apiCall, ...apiCallArgs, dispatch, requestKey, condition, meta]);
+  /* eslint-enable react-hooks/exhaustive-deps */
+
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     // if first run on client, only fetch if data isn't already in redux store
     if (firstClientRun.current) {
       firstClientRun.current = false;
       if (loaded) {
+        resumeEagerLoad();
         if (isFunction(afterFetch)) afterFetch();
         return;
       }
