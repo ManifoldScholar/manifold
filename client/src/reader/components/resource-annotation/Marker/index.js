@@ -31,7 +31,8 @@ export default function Marker({ annotation }) {
 
   const { width } = useWindowSize();
 
-  const { thumbCount, openDialog } = useContext(ResourceMarkerContext) ?? {};
+  const { thumbCount, openDialog, layoutVersion } =
+    useContext(ResourceMarkerContext) ?? {};
 
   const markerRef = useCallback(node => {
     if (node !== null) {
@@ -45,7 +46,15 @@ export default function Marker({ annotation }) {
       const rect = markerEl.getBoundingClientRect();
       setLeft(rect.left);
     }
-  }, [markerEl, width, font, fontSize.current, margins.current, thumbCount]);
+  }, [
+    markerEl,
+    width,
+    font,
+    fontSize.current,
+    margins.current,
+    thumbCount,
+    layoutVersion
+  ]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
   const { id, resourceId, resourceCollectionId } = annotation;

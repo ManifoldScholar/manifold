@@ -39,3 +39,4 @@ export { default as useShare } from "./useShare";
 export { default as useCopyLinkToSelection } from "./useCopyLinkToSelection";
 
 export { default as useEntitlementSubjectTypeahead } from "./useEntitlementSubjectTypeahead";
+export { default as useLayoutVersion } from "./useLayoutVersion";

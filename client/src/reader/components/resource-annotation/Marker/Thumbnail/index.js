@@ -31,7 +31,12 @@ export default function Thumbnail({
 
   const entity = resource ?? collection;
 
-  const { setResourceThumbs, thumbCount } = useContext(ResourceMarkerContext);
+  const {
+    setResourceThumbs,
+    thumbCount,
+    layoutVersion,
+    fontsReady
+  } = useContext(ResourceMarkerContext);
 
   const [visible, setVisible] = useState(false);
   const [el, setEl] = useState(null);
@@ -100,7 +105,8 @@ export default function Thumbnail({
     fontSize.current,
     margins.current,
     width,
-    thumbCount
+    thumbCount,
+    layoutVersion
   ]);
   /* eslint-enable react-hooks/exhaustive-deps */
 
@@ -153,7 +159,8 @@ export default function Thumbnail({
   const wrapperProps = hidden
     ? { "aria-hidden": true }
     : {
-        $visible: visible,
+        // Only an explicit false hides; undefined without the provider.
+        $visible: visible && fontsReady !== false,
         $active: active,
         onMouseEnter,
         onMouseLeave,
