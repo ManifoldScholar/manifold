@@ -1,5 +1,14 @@
 # Changelog
 
+## [10.0.0-rc.4](https://github.com/ManifoldScholar/manifold/compare/10.0.0-rc.3...10.0.0-rc.4) (2026-11-24)
+
+
+### Bug Fixes
+
+* **resources:** show placeholder when PDF resources have no image ([c443063](https://github.com/ManifoldScholar/manifold/commit/c44306347c1b518198381884061bab09b889c7c9))
+* resume eager-loaded requests after hydration ([7819f6e](https://github.com/ManifoldScholar/manifold/commit/7819f6e29ae721a338da6e884c6722584390f1b4))
+* **router:** read location from react-router not global ([8f0c4e4](https://github.com/ManifoldScholar/manifold/commit/8f0c4e4e343bb502f8dc09677b8081d4bf0eb438))
+
 ## [10.0.0-rc.3](https://github.com/ManifoldScholar/manifold/compare/10.0.0-rc.2...10.0.0-rc.3) (2026-11-24)
 
 
