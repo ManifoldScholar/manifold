@@ -36,6 +36,7 @@ export default function Text({
     [navigate]
   );
 
+  const [bodyEl, setBodyEl] = useState(null);
   const [filteredAnnotations, setFilteredAnnotations] = useState(
     filterAnnotations(annotations, visibility?.visibilityFilters)
   );
@@ -139,11 +140,13 @@ export default function Text({
             ) => (
               <div className={containerClass}>
                 <div
+                  ref={setBodyEl}
                   data-id="body"
                   id="manifold-text-section"
                   className={textSectionClass}
                 >
                   <Body
+                    bodyEl={bodyEl}
                     location={location}
                     pendingAnnotation={pendingAnnotation}
                     annotations={adjustedAnnotations}

@@ -9,7 +9,8 @@ export default function Body(props) {
     annotations,
     pendingAnnotation,
     location,
-    destroyAnnotation
+    destroyAnnotation,
+    bodyEl
   } = props;
   const deps = [
     section.attributes.bodyJSON,
@@ -32,6 +33,7 @@ export default function Body(props) {
     <ResourceMarkerContextProvider
       annotations={annotations}
       destroyAnnotation={destroyAnnotation}
+      containerEl={bodyEl}
     >
       {elements}
     </ResourceMarkerContextProvider>
@@ -42,7 +44,8 @@ Body.propTypes = {
   section: PropTypes.object,
   annotations: PropTypes.array,
   pendingAnnotation: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  bodyEl: PropTypes.object
 };
 
 Body.displayName = "Reader.Section.Body";

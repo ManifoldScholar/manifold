@@ -1,14 +1,18 @@
 import { createContext, useState, useMemo, useCallback } from "react";
 import Dialog from "../Dialog";
 import useDialog from "@castiron/hooks/useDialog";
+import { useLayoutVersion } from "hooks";
 
 export const ResourceMarkerContext = createContext({});
 
 export default function ResourceMarkerContextProvider({
   annotations,
   children,
-  destroyAnnotation
+  destroyAnnotation,
+  containerEl
 }) {
+  const { version: layoutVersion, fontsReady } = useLayoutVersion(containerEl);
+
   const thumbCount = useMemo(
     () =>
       annotations
@@ -118,7 +122,9 @@ export default function ResourceMarkerContextProvider({
         setResourceThumbs,
         thumbCount,
         openDialog,
-        destroyAnnotation
+        destroyAnnotation,
+        layoutVersion,
+        fontsReady
       }}
     >
       {children}
