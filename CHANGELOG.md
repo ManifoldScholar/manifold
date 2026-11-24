@@ -1,5 +1,17 @@
 # Changelog
 
+## [10.0.0-rc.3](https://github.com/ManifoldScholar/manifold/compare/10.0.0-rc.2...10.0.0-rc.3) (2026-11-24)
+
+
+### Bug Fixes
+
+* fix invalid proptype warnings ([d31281e](https://github.com/ManifoldScholar/manifold/commit/d31281e58ec8645f5ee92cf62f718881a5e133e8))
+* **reader:** fix history.replace call argument ([dea5ac5](https://github.com/ManifoldScholar/manifold/commit/dea5ac50e87c829cdb98e3165620239d2e30e6b1))
+* **reader:** prevent native fragment navigation ([14cd9b1](https://github.com/ManifoldScholar/manifold/commit/14cd9b156030385ddcaab9ef7e75a848b2ab9937))
+* **resources:** fit resource dialogs to content not viewport ([f5b3a6f](https://github.com/ManifoldScholar/manifold/commit/f5b3a6fb30fafb9cac634a17ae0c47699ce940f1))
+* **resources:** render formatted resource titles ([4444603](https://github.com/ManifoldScholar/manifold/commit/44446035847b73e9cef73e7bd4bdcd4f34cc3d09))
+* update marker position on text content reflow ([28c7814](https://github.com/ManifoldScholar/manifold/commit/28c781476399133c24c4ce009b73c55c9f9a498b))
+
 ## [10.0.0-rc.2](https://github.com/ManifoldScholar/manifold/compare/10.0.0-rc.1...10.0.0-rc.2) (2026-11-23)
 
 
