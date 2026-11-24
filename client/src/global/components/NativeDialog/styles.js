@@ -6,7 +6,7 @@ import {
 } from "theme/styles/mixins";
 
 export const Dialog = styled.dialog`
-  block-size: var(--Dialog-block-size);
+  block-size: var(--Dialog-block-size, fit-content);
   // fallback if dvh units not supported
   max-block-size: 85vh;
   max-block-size: 85dvh;

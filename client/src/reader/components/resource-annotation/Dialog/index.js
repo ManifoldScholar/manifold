@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
 import { useFromStore } from "hooks";
 import Dialog from "global/components/NativeDialog";
 import ResourcePreview from "frontend/components/resource/Preview";
 import ResourceCollectionSlideshow from "frontend/components/resource-list/SlideShow/Fetcher";
+
+const EXIT_TRANSITION_MS = 200;
 
 export default function ResourceAnnotationDialog({
   resource,
@@ -16,6 +19,18 @@ export default function ResourceAnnotationDialog({
     id: resource.id,
     allowPartial: true
   });
+
+  const [renderContent, setRenderContent] = useState(open);
+
+  useEffect(() => {
+    if (open) {
+      setRenderContent(true);
+      return undefined;
+    }
+
+    const timer = setTimeout(() => setRenderContent(false), EXIT_TRANSITION_MS);
+    return () => clearTimeout(timer);
+  }, [open]);
 
   if (!resourceEntity) return null;
 
@@ -35,7 +50,7 @@ export default function ResourceAnnotationDialog({
 
   return (
     <Dialog title={resourceEntity?.attributes.title} open={open} {...dialog}>
-      {open && renderPreview}
+      {(open || renderContent) && renderPreview}
     </Dialog>
   );
 }
