@@ -102,6 +102,10 @@ module V1
       typed_attribute :epub_v3_export_url, Types::Serializer::URL.optional.meta(read_only: true), if: ->(object, _params) {
         object.has_epub_v3_export_url?
       }
+      typed_attribute :epub_v3_export_state, Types::String.optional.meta(read_only: true)
+      typed_attribute :epub_v3_export_failure, Types::String.optional.meta(read_only: true), if: ->(object, _params) {
+        object.epub_v3_export_failure.present?
+      }
 
       typed_attribute :citations, Types::Serializer::Citations
       typed_attribute :spine, Types::Array.of(Types::Serializer::ID).meta(read_only: true)

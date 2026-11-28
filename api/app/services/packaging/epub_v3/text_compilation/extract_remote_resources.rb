@@ -23,7 +23,7 @@ module Packaging
               end
 
               m.failure do |code, reason|
-                return Failure([code, reason])
+                return Failure([code, { url: remote_resource.url, cause: reason }])
               end
             end
           end

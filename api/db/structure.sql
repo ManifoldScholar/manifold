@@ -150,6 +150,39 @@ CREATE TYPE public.ingestion_message_severity AS ENUM (
 
 
 --
+-- Name: lti_grant_type; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.lti_grant_type AS ENUM (
+    'implicit',
+    'client_credentials'
+);
+
+
+--
+-- Name: lti_scope; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.lti_scope AS ENUM (
+    'nrps_membership_readonly',
+    'ags_lineitem',
+    'ags_lineitem_readonly',
+    'ags_result_readonly',
+    'ags_score'
+);
+
+
+--
+-- Name: lti_token_endpoint_auth_method; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.lti_token_endpoint_auth_method AS ENUM (
+    'private_key_jwt',
+    'client_secret_post'
+);
+
+
+--
 -- Name: manifold_lang; Type: TYPE; Schema: public; Owner: -
 --
 
@@ -789,7 +822,8 @@ CREATE TABLE public.project_collections (
     social_description text,
     social_title text,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
-    short_description text
+    short_description text,
+    exclude_from_oai boolean DEFAULT false
 );
 
 
@@ -863,7 +897,10 @@ CREATE TABLE public.projects (
     social_description text,
     social_title text,
     orphaned_journal_issue_id uuid,
-    orphaned_journal_issue boolean DEFAULT false NOT NULL
+    orphaned_journal_issue boolean DEFAULT false NOT NULL,
+    exclude_from_oai boolean DEFAULT false,
+    exclude_from_directory boolean DEFAULT false,
+    license character varying
 );
 
 
@@ -1978,7 +2015,10 @@ CREATE TABLE public.journals (
     logo_data jsonb,
     hero_background_color character varying,
     show_on_homepage boolean DEFAULT false NOT NULL,
-    home_page_priority integer DEFAULT 0 NOT NULL
+    home_page_priority integer DEFAULT 0 NOT NULL,
+    exclude_from_oai boolean DEFAULT false,
+    exclude_from_directory boolean DEFAULT false,
+    license character varying
 );
 
 
@@ -1993,6 +2033,60 @@ CREATE TABLE public.legacy_favorites (
     user_id uuid,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: lti_course_contexts; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lti_course_contexts (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    lti_deployment_id uuid NOT NULL,
+    context_id text NOT NULL,
+    reading_group_id uuid,
+    context_title text,
+    context_label text,
+    context_type text,
+    last_synced_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: lti_deployments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lti_deployments (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    lti_registration_id uuid NOT NULL,
+    deployment_id text NOT NULL,
+    enabled boolean DEFAULT true NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: lti_registrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.lti_registrations (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name text NOT NULL,
+    issuer text NOT NULL,
+    client_id text NOT NULL,
+    authorization_endpoint text NOT NULL,
+    token_endpoint text NOT NULL,
+    jwks_uri text NOT NULL,
+    token_endpoint_auth_method public.lti_token_endpoint_auth_method DEFAULT 'private_key_jwt'::public.lti_token_endpoint_auth_method NOT NULL,
+    grant_types public.lti_grant_type[] DEFAULT '{}'::public.lti_grant_type[] NOT NULL,
+    scopes public.lti_scope[] DEFAULT '{}'::public.lti_scope[] NOT NULL,
+    registration_access_token text,
+    enabled boolean DEFAULT true NOT NULL,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -2016,6 +2110,52 @@ CREATE TABLE public.makers (
     avatar_data jsonb,
     prefix character varying,
     cached_full_name character varying
+);
+
+
+--
+-- Name: manifold_oai_records; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_records (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    oai_dc_content text,
+    deleted_at timestamp without time zone,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: manifold_oai_set_links; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_set_links (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    manifold_oai_set_id uuid NOT NULL,
+    manifold_oai_record_id uuid NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: manifold_oai_sets; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.manifold_oai_sets (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    source_type character varying,
+    source_id uuid,
+    spec public.citext NOT NULL,
+    name text NOT NULL,
+    description text,
+    created_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp(6) without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
@@ -2865,7 +3005,9 @@ CREATE TABLE public.settings (
     favicon_data jsonb,
     fa_cache jsonb DEFAULT '{}'::jsonb NOT NULL,
     ingestion jsonb DEFAULT '{}'::jsonb,
-    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL
+    rate_limiting jsonb DEFAULT '{}'::jsonb NOT NULL,
+    oai jsonb DEFAULT '{}'::jsonb,
+    lti jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 
@@ -3003,6 +3145,22 @@ ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
 
 
 --
+-- Name: text_export_transitions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.text_export_transitions (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    to_state text NOT NULL,
+    metadata jsonb DEFAULT '{}'::jsonb,
+    sort_key integer NOT NULL,
+    text_export_id uuid NOT NULL,
+    most_recent boolean NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: text_exports; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3076,9 +3234,11 @@ CREATE VIEW public.text_export_statuses AS
     te.fingerprint AS export_fingerprint,
     (t.fingerprint = te.fingerprint) AS current,
     (t.fingerprint <> te.fingerprint) AS stale,
+    COALESCE(tr.to_state, 'pending'::text) AS state,
     te.created_at AS exported_at
-   FROM (public.texts t
-     JOIN public.text_exports te ON ((t.id = te.text_id)));
+   FROM ((public.texts t
+     JOIN public.text_exports te ON ((t.id = te.text_id)))
+     LEFT JOIN public.text_export_transitions tr ON (((tr.text_export_id = te.id) AND tr.most_recent)));
 
 
 --
@@ -4004,11 +4164,59 @@ ALTER TABLE ONLY public.legacy_favorites
 
 
 --
+-- Name: lti_course_contexts lti_course_contexts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_course_contexts
+    ADD CONSTRAINT lti_course_contexts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lti_deployments lti_deployments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_deployments
+    ADD CONSTRAINT lti_deployments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lti_registrations lti_registrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_registrations
+    ADD CONSTRAINT lti_registrations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: makers makers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.makers
     ADD CONSTRAINT makers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: manifold_oai_records manifold_oai_records_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_records
+    ADD CONSTRAINT manifold_oai_records_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: manifold_oai_set_links manifold_oai_set_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_set_links
+    ADD CONSTRAINT manifold_oai_set_links_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: manifold_oai_sets manifold_oai_sets_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_sets
+    ADD CONSTRAINT manifold_oai_sets_pkey PRIMARY KEY (id);
 
 
 --
@@ -4305,6 +4513,14 @@ ALTER TABLE ONLY public.taggings
 
 ALTER TABLE ONLY public.tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: text_export_transitions text_export_transitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.text_export_transitions
+    ADD CONSTRAINT text_export_transitions_pkey PRIMARY KEY (id);
 
 
 --
@@ -5502,10 +5718,87 @@ CREATE INDEX index_legacy_favorites_on_user_id ON public.legacy_favorites USING 
 
 
 --
+-- Name: index_lti_course_contexts_on_deployment_and_context; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lti_course_contexts_on_deployment_and_context ON public.lti_course_contexts USING btree (lti_deployment_id, context_id);
+
+
+--
+-- Name: index_lti_course_contexts_on_lti_deployment_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lti_course_contexts_on_lti_deployment_id ON public.lti_course_contexts USING btree (lti_deployment_id);
+
+
+--
+-- Name: index_lti_course_contexts_on_reading_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lti_course_contexts_on_reading_group_id ON public.lti_course_contexts USING btree (reading_group_id);
+
+
+--
+-- Name: index_lti_deployments_on_lti_registration_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_lti_deployments_on_lti_registration_id ON public.lti_deployments USING btree (lti_registration_id);
+
+
+--
+-- Name: index_lti_deployments_on_registration_and_deployment; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lti_deployments_on_registration_and_deployment ON public.lti_deployments USING btree (lti_registration_id, deployment_id);
+
+
+--
+-- Name: index_lti_registrations_on_issuer_and_client_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_lti_registrations_on_issuer_and_client_id ON public.lti_registrations USING btree (issuer, client_id);
+
+
+--
 -- Name: index_makers_sort_by_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_makers_sort_by_name ON public.makers USING btree ((((COALESCE(last_name, ''::character varying))::text || (COALESCE(first_name, ''::character varying))::text)));
+
+
+--
+-- Name: index_manifold_oai_records_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_records_on_source ON public.manifold_oai_records USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_set_links_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_set_links_on_source ON public.manifold_oai_set_links USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_set_links_uniqueness; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_set_links_uniqueness ON public.manifold_oai_set_links USING btree (manifold_oai_set_id, manifold_oai_record_id);
+
+
+--
+-- Name: index_manifold_oai_sets_on_source; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_sets_on_source ON public.manifold_oai_sets USING btree (source_type, source_id);
+
+
+--
+-- Name: index_manifold_oai_sets_on_spec; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_manifold_oai_sets_on_spec ON public.manifold_oai_sets USING btree (spec);
 
 
 --
@@ -6419,6 +6712,27 @@ CREATE UNIQUE INDEX index_tags_on_name ON public.tags USING btree (name);
 
 
 --
+-- Name: index_text_export_transitions_on_text_export_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_text_export_transitions_on_text_export_id ON public.text_export_transitions USING btree (text_export_id);
+
+
+--
+-- Name: index_text_export_transitions_parent_most_recent; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_text_export_transitions_parent_most_recent ON public.text_export_transitions USING btree (text_export_id, most_recent) WHERE most_recent;
+
+
+--
+-- Name: index_text_export_transitions_parent_sort; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_text_export_transitions_parent_sort ON public.text_export_transitions USING btree (text_export_id, sort_key);
+
+
+--
 -- Name: index_text_exports_on_asset_data; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7120,6 +7434,14 @@ ALTER TABLE ONLY public.entitlement_user_links
 
 
 --
+-- Name: text_export_transitions fk_rails_08379f239c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.text_export_transitions
+    ADD CONSTRAINT fk_rails_08379f239c FOREIGN KEY (text_export_id) REFERENCES public.text_exports(id) ON DELETE CASCADE;
+
+
+--
 -- Name: user_collected_resource_collections fk_rails_09910abb51; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7141,6 +7463,14 @@ ALTER TABLE ONLY public.reading_group_journal_issues
 
 ALTER TABLE ONLY public.reading_group_texts
     ADD CONSTRAINT fk_rails_0cfbd9d8a7 FOREIGN KEY (reading_group_category_id) REFERENCES public.reading_group_categories(id) ON DELETE SET NULL;
+
+
+--
+-- Name: manifold_oai_set_links fk_rails_0dab76c54d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_set_links
+    ADD CONSTRAINT fk_rails_0dab76c54d FOREIGN KEY (manifold_oai_set_id) REFERENCES public.manifold_oai_sets(id) ON DELETE CASCADE;
 
 
 --
@@ -7253,6 +7583,14 @@ ALTER TABLE ONLY public.pending_entitlement_transitions
 
 ALTER TABLE ONLY public.projects
     ADD CONSTRAINT fk_rails_2a006842be FOREIGN KEY (journal_issue_id) REFERENCES public.journal_issues(id) ON DELETE RESTRICT;
+
+
+--
+-- Name: lti_deployments fk_rails_30a6d7195c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_deployments
+    ADD CONSTRAINT fk_rails_30a6d7195c FOREIGN KEY (lti_registration_id) REFERENCES public.lti_registrations(id);
 
 
 --
@@ -7440,6 +7778,14 @@ ALTER TABLE ONLY public.import_selection_matches
 
 
 --
+-- Name: manifold_oai_set_links fk_rails_61f6bce33f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.manifold_oai_set_links
+    ADD CONSTRAINT fk_rails_61f6bce33f FOREIGN KEY (manifold_oai_record_id) REFERENCES public.manifold_oai_records(id) ON DELETE CASCADE;
+
+
+--
 -- Name: reading_group_resource_collections fk_rails_6886eb29f2; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7533,6 +7879,14 @@ ALTER TABLE ONLY public.entitlement_grants
 
 ALTER TABLE ONLY public.project_exportations
     ADD CONSTRAINT fk_rails_8bd0a6e3f6 FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE SET NULL;
+
+
+--
+-- Name: lti_course_contexts fk_rails_8c9393d274; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_course_contexts
+    ADD CONSTRAINT fk_rails_8c9393d274 FOREIGN KEY (reading_group_id) REFERENCES public.reading_groups(id) ON DELETE SET NULL;
 
 
 --
@@ -7848,6 +8202,14 @@ ALTER TABLE ONLY public.user_collected_text_sections
 
 
 --
+-- Name: lti_course_contexts fk_rails_e6398a50a9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.lti_course_contexts
+    ADD CONSTRAINT fk_rails_e6398a50a9 FOREIGN KEY (lti_deployment_id) REFERENCES public.lti_deployments(id) ON DELETE CASCADE;
+
+
+--
 -- Name: project_exportations fk_rails_e7048bd40f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7950,8 +8312,17 @@ ALTER TABLE ONLY public.reading_group_composite_entries
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20261013234117'),
+('20261013234017'),
 ('20260507182648'),
 ('20260507182640'),
+('20260420000001'),
+('20260406000002'),
+('20260406000001'),
+('20260305225814'),
+('20260127185424'),
+('20260127162821'),
+('20260126221732'),
 ('20251203231940'),
 ('20251203230443'),
 ('20251121202033'),
@@ -7966,7 +8337,12 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20251017211501'),
 ('20251017174417'),
 ('20251016204352'),
+('20250729212944'),
 ('20250723210143'),
+('20250721212242'),
+('20250718201018'),
+('20250718200409'),
+('20250715233614'),
 ('20250609192241'),
 ('20250609191642'),
 ('20250603192547'),
@@ -8321,3 +8697,4 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20151007162414'),
 ('20151005200105'),
 ('20151005200100');
+

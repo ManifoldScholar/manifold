@@ -122,8 +122,8 @@ class Text < ApplicationRecord
   scope :uncategorized, -> { where(category: nil) }
   scope :categorized, -> { where.not(category: nil) }
   scope :exports_as_epub_v3, -> { export_configuration_where(exports_as_epub_v3: true) }
-  scope :sans_current_epub_v3_export, -> { where.not(id: TextExportStatus.current_text_ids) }
-  scope :with_current_epub_v3_export, -> { where(id: TextExportStatus.current_text_ids) }
+  scope :sans_current_epub_v3_export, -> { where.not(id: TextExportStatus.current_successful_text_ids) }
+  scope :with_current_epub_v3_export, -> { where(id: TextExportStatus.current_successful_text_ids) }
   scope :pending_epub_v3_export, -> { exports_as_epub_v3.sans_current_epub_v3_export }
 
   manifold_has_attached_file :cover, :image
@@ -405,9 +405,24 @@ class Text < ApplicationRecord
     exports_as_epub_v3? && current_text_export&.asset.present?
   end
 
+  # @return [String, nil] lifecycle state of the current-fingerprint export, if one exists
+  def epub_v3_export_state
+    current_text_export&.current_state&.to_s
+  end
+
+  # @return [String, nil] admin-facing failure reason when the current export failed
+  def epub_v3_export_failure
+    current_text_export.metadata&.dig("reason") if current_text_export&.failure?
+  end
+
   # @return [void]
   def toggle_exports_as_epub_v3!
     update_attribute :exports_as_epub_v3, !exports_as_epub_v3
+  end
+
+  # @return [void]
+  def disable_epub_v3_export!
+    update_attribute :exports_as_epub_v3, false
   end
 
   def titles_packaging_metadata
