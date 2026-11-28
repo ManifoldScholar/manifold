@@ -1,0 +1,257 @@
+{
+  "forms": {
+    "add_to": "Aggiungere questo a",
+    "my_starred_label": "I miei preferiti",
+    "category": {
+      "create": "Creare una nuova categoria",
+      "edit": "Modifica categoria",
+      "name": "Nome della categoria",
+      "delete": "Cancellare la categoria",
+      "name_placeholder": "Inserire il nome della categoria",
+      "description": "Categoria Descrizione",
+      "description_placeholder": "Inserire la descrizione della categoria",
+      "description_instructions": "Inserire una breve descrizione della categoria. Questo campo accetta il Markdown di base.",
+      "empty_placeholder": "Trascinare qui per aggiungere"
+    },
+    "reading_group": {
+      "drawer_title": "Nuovo gruppo di lettura",
+      "name": "Nome del gruppo",
+      "name_placeholder": "Scegli il nome del gruppo",
+      "privacy": "Privacy",
+      "privacy_instructions": "Le annotazioni nei gruppi pubblici possono essere visualizzate da tutti. Le annotazioni nei gruppi privati possono essere visualizzate solo dai membri del gruppo. Nei gruppi anonimi, i commenti sono privati e solo il creatore del gruppo può vedere l'identità dell'autore di ogni annotazione.",
+      "privacy_options": {
+        "public": "Pubblico",
+        "private": "Privato",
+        "anonymous": "Anonimo"
+      },
+      "invitation_code": "Codice invito",
+      "invitation_code_buttons": {
+        "regenerate": "rigenerare",
+        "copy": "copia"
+      },
+      "invitation_code_instructions": "Gli utenti possono inserire il codice di invito sul sito \"Gestire i gruppi di lettura\" per unirsi a questo gruppo. È possibile modificare questo codice in qualsiasi momento, ma i codici precedenti non funzioneranno più.",
+      "invitation_url": "URL dell'invito",
+      "invitation_url_instructions": "L'URL sopra riportato si basa sul codice di invito. I lettori possono anche unirsi al gruppo visitando questo URL.",
+      "invitation_url_button_label": "copia",
+      "course": "Corso",
+      "course_instructions": "Le informazioni sul corso vengono utilizzate per scopi interni di monitoraggio e rendicontazione.",
+      "course_options": {
+        "yes": "Si",
+        "no": "No"
+      },
+      "course_start_date": "Data di inizio del corso:",
+      "course_end_date": "Data di fine corso:",
+      "notifications": "Notifiche",
+      "notifications_instructions": "Inviami un'e-mail quando qualcuno si unisce a questo gruppo"
+    },
+    "reading_group_member": {
+      "title": "Modifica del membro del gruppo",
+      "name": "Nome del membro",
+      "role": "Ruolo",
+      "role_instructions": "I membri possono vedere le annotazioni del gruppo e annotare all'interno del gruppo. I moderatori possono gestire i membri e aggiornare le impostazioni del gruppo.",
+      "role_options": {
+        "member": "Membro",
+        "moderator": "Moderator"
+      },
+      "label": "Etichetta",
+      "label_placeholder": "Inserire un'etichetta",
+      "label_instructions": "Le etichette sono utilizzate per descrivere membri specifici all'interno del gruppo e appaiono accanto al nome nell'elenco dei membri.",
+      "annotation_style": "Stile di annotazione",
+      "annotation_style_instructions": "Gli stili di annotazione vengono visualizzati nell'interfaccia di lettura e possono essere utilizzati per differenziare le annotazioni di un utente dalle altre annotazioni del gruppo di lettura.",
+      "annotation_style_options": {
+        "dashed": "Tratteggiato",
+        "dotted": "Punti",
+        "solid": "Solido",
+        "wavy": "Ondulato"
+      },
+      "style_preview": "Questo è l'aspetto dello stile di annotazione selezionato quando viene visualizzato nel lettore. Lo stile e il dimensionamento dei caratteri possono essere diversi a seconda delle impostazioni del pannello di controllo della visibilità"
+    },
+    "manage_group": {
+      "title": "Gestire il gruppo:",
+      "instructions": "Modificare la pagina iniziale o le impostazioni del gruppo di lettura.",
+      "edit_homepage": "Modifica della pagina iniziale:",
+      "edit_homepage_sr": "Modifica della homepage del gruppo",
+      "view_homepage": "Visualizza la homepage del gruppo",
+      "edit_settings": "Modifica delle impostazioni"
+    },
+    "join_group": {
+      "title": "Partecipa a un gruppo:",
+      "instructions": "Per unirsi a un gruppo, inserire il codice e selezionare Partecipa.",
+      "join_code": "Codice per partecipare",
+      "code_placeholder": "Inserire il codice",
+      "button_label": "Partecipa",
+      "confirm_button_label": "OK"
+    },
+    "edit_group": {
+      "title": "Gruppo di lettura Edit",
+      "duplicate": {
+        "label": "Duplica",
+        "heading": "Creare una copia di {{group}}",
+        "instructions": "In questo modo si crea una copia del gruppo di lettura. Una volta copiato, è necessario aggiungere utenti al gruppo.",
+        "group_name": "Nome del gruppo di lettura",
+        "copy_annotations": "Copiare le mie annotazioni",
+        "archive": "Archivio gruppo copiato",
+        "open_after": "Aprire un nuovo gruppo dopo la duplicazione"
+      }
+    },
+    "contact": {
+      "title": "Invia un messaggio",
+      "email": "Email",
+      "email_placeholder": "Email",
+      "name": "Nome",
+      "name_placeholder": "Nome",
+      "message": "Messaggio",
+      "message_placeholder": "Messaggio",
+      "button_label": "Invia un messaggio"
+    },
+    "password_reset": {
+      "password": "Password",
+      "title": "Reimpostare la password",
+      "new": "Nuova password",
+      "new_placeholder": "$t(forms.password_reset.password)",
+      "confirm": "Confirm Password",
+      "confirm_placeholder": "Conferma la password",
+      "submit_reset": "Reimpostare la password",
+      "generate_password": "Generare una nuova password",
+      "set_password": "Impostare una nuova password",
+      "show": "Mostra password",
+      "hide": "Nascondere la password",
+      "enter_password": "Inserire una password"
+    },
+    "notifications": {
+      "title": "Impostazioni di notifica",
+      "instructions": "Modificare le notifiche e le sottoscrizioni via e-mail.",
+      "submit_label": "Salva le modifiche",
+      "project_activity": "Attività del progetto",
+      "project_activity_instructions": "Possiamo inviare un'e-mail giornaliera o settimanale con informazioni su testi, risorse e raccolte di risorse aggiunte ai progetti",
+      "other_activity": "Other Activity",
+      "unsubscribe": "Cancellazione da tutti",
+      "project_preferences": {
+        "frequency_label": "Con quale frequenza desidera essere informato?",
+        "never": "Mai",
+        "daily": "Giornaliero",
+        "weekly": "Settimanale",
+        "digest_projects_label": "Quali sono i progetti da includere?",
+        "all_projects": "All $t(glossary.project_title_case_other)",
+        "only_starred": "Solo i progetti che ho messo fra i preferiti",
+        "digest_comments_label": "Includere nuovi commenti e annotazioni?"
+      },
+      "activity_preferences": {
+        "replies_to_me_label": "Notificarvi quando qualcuno vi risponde?",
+        "replies_to_me_instructions": "Invieremo un'e-mail quando viene pubblicata una risposta alle vostre annotazioni o commenti.",
+        "project_comments_and_annotations_label": "Notificare tutti i commenti e le annotazioni?",
+        "project_comments_and_annotations_instructions": "Invieremo un'e-mail ogni volta che viene creato un commento o un'annotazione.",
+        "flagged_resources_label": "Avvisatemi quando i commenti vengono segnalati.",
+        "flagged_resources_instructions": "Ogni volta che un utente segnala un commento, riceverete una notifica via e-mail."
+      }
+    },
+    "signin_overlay": {
+      "terms_and_conditions": "Creando questo account, si accettano i <0>termini e condizioni</0> di {{appName}}.",
+      "create_account": "$t(actions.create) Account",
+      "email": "Email",
+      "name": "Nome",
+      "password": "Password",
+      "confirm_password": "Conferma $t(forms.signin_overlay.password)",
+      "confirm_new_password": "Confermare il nuovo $t(forms.signin_overlay.password)",
+      "reset_password": "Reset $t(forms.signin_overlay.password)",
+      "new_password": "Nuovo $t(forms.signin_overlay.password)",
+      "forgot_password": "Avete dimenticato la password?",
+      "remember_password": "Ricordate la vostra password?",
+      "send_password_reset": "Inviare l'e-mail di reimpostazione della password",
+      "send_reset_success": "Email inviata a {{email}} con le istruzioni per reimpostare la password.",
+      "oauth_instructions": "Puoi anche creare un {{appName}} account utilizzando le tue {{providers, list(style: long; type: conjunction;)}} credenziali.",
+      "have_account": "Avete già un account?",
+      "need_account": "Avete bisogno di iscrivervi?",
+      "log_in": "Log In",
+      "log_in_with_provider": "Log in con {{provider}}",
+      "log_out": "Esci",
+      "current_user": "L'utente ha effettuato l'accesso come {{name}}.",
+      "sr_title": "Creare/gestire un account",
+      "update_nickname": "Vuoi aggiornare il tuo nickname?",
+      "nickname": "Nickname",
+      "familiar_name": "Vuole che la chiami in un altro modo?",
+      "profile_img": "Immagine del profilo",
+      "profile_img_instructions": "Già che ci sei, perché non caricare un'immagine del profilo?",
+      "remove_avatar": "Rimuovere l'avatar corrente",
+      "upload_avatar_instructions": "<0>Caricare un file</0> o <br/> trascinare e rilasciare",
+      "edit_account": "Volete modificare le informazioni del vostro account?",
+      "first_name": "Nome",
+      "last_name": "Cognome",
+      "update_sr_title": "Aggiornamento del conto",
+      "submit_update_label": "Salva le modifiche",
+      "notification_settings": "Impostazioni di notifica",
+      "subscriptions__label": "Regolare le impostazioni per le notifiche e-mail:",
+      "create_success_message": "<0>Congratulazioni! </0><1>Il tuo account è stato creato con successo e ora sei connesso. D'ora in poi, ti chiamerò </1><2>{{nome}}</h4>",
+      "greeting": "Ciao, <0>{{name}}</0>.",
+      "update_notification_header": "Profilo aggiornato con successo!",
+      "terms_header": "Prima di tutto...",
+      "accept_checkbox_label": "Accetto {{installationName}}'s <privacyLink>privacy policy</privacyLink> e <termsLink>termini e condizioni.</termsLink>",
+      "accept_checkbox_label_truncated": "Accetto {{installationName}}'s <termsLink>termini e condizioni</termsLink>",
+      "not_verified_warning": "Sembra che tu non abbia verificato la tua email. Non potrai partecipare pubblicamente ai progetti o ai gruppi di lettura finché non lo farai",
+      "trusted_not_verified_warning": "Sembra che non abbiate verificato la vostra e-mail.",
+      "resend_verification": "Reinvio dell'e-mail di verifica",
+      "email_success_notification": "Email di verifica inviata!",
+      "email_failure_notiication": "Non è stato possibile inviare l'e-mail di verifica. Si prega di riprovare."
+    },
+    "attribute_map": {
+      "cancel": "Annullare la mappatura di {{name}} a {{mapping}}",
+      "placeholder": "Trascinare la colonna...",
+      "auto_map": "Mappare automaticamente gli attributi",
+      "spreadsheet_cols": "Colonne del foglio di calcolo",
+      "col_header_placeholder": "Column #{{num}}",
+      "available": "Attributi disponibili",
+      "instructions": "La colonna a sinistra elenca le intestazioni di colonna presenti nel foglio di calcolo. La colonna a destra elenca gli attributi che possono essere impostati sulle risorse. Trascinare gli attributi a destra nelle colonne corrispondenti a sinistra. Premendo il pulsante ´mappa automaticamente gli attributi´, si cercherà di far corrispondere automaticamente gli attributi alle colonne del foglio di calcolo."
+    },
+    "picker": {
+      "remove_all": "Rimuovi tutto",
+      "add_all": "Aggiungi tutti",
+      "no_options": "Nessuna opzione",
+      "clear_selection": "Cancella la selezione",
+      "reset": "Reset"
+    },
+    "upload": {
+      "instructions": "<0>Caricare un file</0> o <br/> trascinare e rilasciare qui <br/>",
+      "instructions_with_existing": "<0>Rimuovere questo file</0><br/>o <1>Caricare un nuovo file</1>",
+      "progress": "Sto caricando il file. <br/>{{percent}}% Complete.",
+      "image_preview": "<0>Rimuovere questa immagine</0><br/>o <1>Caricare un nuovo file</1>",
+      "image_preview_alt": "Anteprima di caricamento"
+    },
+    "date_picker": {
+      "date_change_sr_status": "Hai immesso {{date}}.",
+      "date_clear_sr_status": "Hai cancellato la data."
+    },
+    "privacy": {
+      "title": "Impostazioni sulla privacy",
+      "instructions": "Modificare le impostazioni della privacy.",
+      "cookies": "Cookies",
+      "no_analytics_message": "{{name}} non utilizza cookie per tracciare la vostra attività.",
+      "internal_analytics": {
+        "label": "Internal Analytics",
+        "description": "Selezionando sì, questo sito potrà impostare un VISIT_TOKEN & VISITOR_TOKEN per le sue analisi interne anonime."
+      },
+      "google_analytics": {
+        "label": "Google Analytics",
+        "description": "Selezionando sì, Google Analytics registrerà le vostre interazioni anonime con il sito. Questo ci aiuta a capire come viene utilizzato il sito."
+      },
+      "submit_button": "Salva le modifiche",
+      "account_data": "Dati del conto",
+      "download": {
+        "header": "Scarica i tuoi dati",
+        "description": "Esportare una copia dei dati del proprio account. La piattaforma invierà un link via e-mail quando l'esportazione sarà pronta per il download.",
+        "button_label": "Avviare l'esportazione"
+      },
+      "delete": {
+        "header": "Cancellare il proprio account",
+        "description": "Questa operazione cancellerà dal nostro database l'intero account e tutte le annotazioni create. I progetti e i testi creati non verranno cancellati. Non è possibile recuperare gli account cancellati, quindi procedete con cautela.",
+        "button_label": "Cancellare il mio account",
+        "confirm_header": "Sei sicuro di voler cancellare il tuo account?",
+        "confirm_instructions": "Inserisci il tuo indirizzo e-mail per continuare.",
+        "email_placeholder": "Indirizzo e-mail",
+        "email_mismatch_error": "L'email inserita non corrisponde all'email del proprio account",
+        "confirm_button_label": "Sì, cancella il mio account",
+        "confirmation_body": "{{name}} e tutti i suoi dati sono stati rimossi.",
+        "confirmation_header": "Ci dispiace vederti andare via!"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "notifications": {
+    "delete_entity_body": "{{title}} è passato nella notte senza fine.",
+    "delete_record_body": "E ci dispiace che te ne vada.",
+    "email_failure": "Manifold non è riuscito a inviare un'e-mail di prova.",
+    "email_failure_body": "Verifica che la configurazione dell'e-mail sia corretta.",
+    "email_success": "L'e-mail di prova sembra essere stata inviata.",
+    "email_success_body": "Ci aspettiamo di riceverlo a breve.",
+    "entitlement_import_success": "Importazione riuscita!",
+    "entitlement_import_success_body": "Manifold sta elaborando il vostro caricamento. I diritti degli utenti esistenti saranno aggiunti direttamente al progetto o al giornale. Le abilitazioni per gli utenti in attesa appariranno qui a breve. Aggiornate l'elenco o tornate su questa pagina tra qualche minuto per visualizzarli",
+    "feature_delete": "La funzione è stata eliminata.",
+    "journal_delete": "Il giornale è stato distrutto.",
+    "page_delete": "La pagina è stata cancellata",
+    "resource_collection_delete": "La collezione di risorse è stata distrutta",
+    "resource_delete": "La risorsa è stata distrutta.",
+    "text_delete": "Il testo è stato distrutto.",
+    "volume_body": "Volume #{{number}} è passato nella notte senza fine",
+    "volume_delete": "Il volume è stato distrutto."
+  }
+}
